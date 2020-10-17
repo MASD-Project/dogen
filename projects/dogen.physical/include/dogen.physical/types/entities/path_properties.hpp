@@ -45,6 +45,7 @@ public:
     path_properties(
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
+        const boost::filesystem::path& inclusion_path,
         const std::list<std::string>& inclusion_dependencies,
         const std::string& primary_inclusion_directive,
         const std::list<std::string>& secondary_inclusion_directives,
@@ -70,6 +71,18 @@ public:
     std::string& header_guard();
     void header_guard(const std::string& v);
     void header_guard(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Path for inclusion for this artefact, computed from the path.
+     *
+     * Note that this is will not necessarily be used for the inclusion directive.
+     */
+    /**@{*/
+    const boost::filesystem::path& inclusion_path() const;
+    boost::filesystem::path& inclusion_path();
+    void inclusion_path(const boost::filesystem::path& v);
+    void inclusion_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -125,6 +138,7 @@ public:
 private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
+    boost::filesystem::path inclusion_path_;
     std::list<std::string> inclusion_dependencies_;
     std::string primary_inclusion_directive_;
     std::list<std::string> secondary_inclusion_directives_;

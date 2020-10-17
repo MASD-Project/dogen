@@ -2767,13 +2767,13 @@ Used to obtain the default archetype for referencing.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="98,-102"/>
+        <dia:point val="97,-102"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,-102.05;109.395,-98.35"/>
+        <dia:rectangle val="96.95,-102.05;108.395,-98.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="98,-102"/>
+        <dia:point val="97,-102"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.345000000000001"/>
@@ -3154,7 +3154,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="107.062,-105.95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.622,-106;107.912,-101.95"/>
+        <dia:rectangle val="102.623,-106;107.912,-101.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3162,8 +3162,8 @@ Used to obtain the default archetype for referencing.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="107.062,-105.95"/>
         <dia:point val="107.062,-103"/>
-        <dia:point val="103.672,-103"/>
-        <dia:point val="103.672,-102"/>
+        <dia:point val="102.672,-103"/>
+        <dia:point val="102.672,-102"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15414,13 +15414,13 @@ element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O115">
       <dia:attribute name="obj_pos">
-        <dia:point val="123,-76"/>
+        <dia:point val="120,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.95,-76.05;131.635,-70.75"/>
+        <dia:rectangle val="119.95,-69.05;128.635,-63.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="123,-76"/>
+        <dia:point val="120,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -15598,13 +15598,13 @@ element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="123,-84"/>
+        <dia:point val="100,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.95,-84.05;140.105,-77.15"/>
+        <dia:rectangle val="99.95,-69.05;117.105,-62.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="123,-84"/>
+        <dia:point val="100,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -17079,13 +17079,13 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O126">
       <dia:attribute name="obj_pos">
-        <dia:point val="135,-76"/>
+        <dia:point val="132,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,-76.05;146.84,-72.35"/>
+        <dia:rectangle val="131.95,-69.05;143.84,-65.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135,-76"/>
+        <dia:point val="132,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.790000000000001"/>
@@ -19121,169 +19121,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O138">
-      <dia:attribute name="obj_pos">
-        <dia:point val="120.135,-81.3"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.385,-82.05;123.05,-78.045"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="120.135,-81.3"/>
-        <dia:point val="122,-81.3"/>
-        <dia:point val="122,-78.9"/>
-        <dia:point val="123,-78.9"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O30" connection="9"/>
-        <dia:connection handle="1" to="O116" connection="16"/>
-      </dia:connections>
-      <dia:childnode parent="O3"/>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O139">
-      <dia:attribute name="obj_pos">
-        <dia:point val="120.135,-74.9"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.385,-75.65;123.05,-72.445"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="120.135,-74.9"/>
-        <dia:point val="122,-74.9"/>
-        <dia:point val="122,-73.3"/>
-        <dia:point val="123,-73.3"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O30" connection="25"/>
-        <dia:connection handle="1" to="O115" connection="8"/>
-      </dia:connections>
-      <dia:childnode parent="O3"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O140">
+    <dia:object type="UML - Class" version="0" id="O138">
       <dia:attribute name="obj_pos">
         <dia:point val="118,-15"/>
       </dia:attribute>
@@ -19463,7 +19301,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O141">
+    <dia:object type="UML - Association" version="2" id="O139">
       <dia:attribute name="obj_pos">
         <dia:point val="136,-13.9"/>
       </dia:attribute>
@@ -19540,25 +19378,25 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O117" connection="3"/>
-        <dia:connection handle="1" to="O140" connection="4"/>
+        <dia:connection handle="1" to="O138" connection="4"/>
       </dia:connections>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O142">
+    <dia:object type="UML - Class" version="0" id="O140">
       <dia:attribute name="obj_pos">
-        <dia:point val="101,-69"/>
+        <dia:point val="123,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,-69.05;122.725,-61.35"/>
+        <dia:rectangle val="122.95,-84.05;144.725,-75.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="101,-69"/>
+        <dia:point val="123,-84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.5999999999999996"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#path_properties#</dia:string>
@@ -19699,6 +19537,31 @@ Only required when the part is located outside of the component directory.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#inclusion_path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Path for inclusion for this artefact, computed from the path.
+
+Note that this is will not necessarily be used for the inclusion directive.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#inclusion_dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -19820,88 +19683,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O143">
-      <dia:attribute name="obj_pos">
-        <dia:point val="110.067,-73.2"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.317,-73.95;112.038,-68.2"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="110.067,-73.2"/>
-        <dia:point val="110.067,-71"/>
-        <dia:point val="111.838,-71"/>
-        <dia:point val="111.838,-69"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O30" connection="6"/>
-        <dia:connection handle="1" to="O142" connection="1"/>
-      </dia:connections>
-      <dia:childnode parent="O3"/>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O144">
+    <dia:object type="UML - Association" version="2" id="O141">
       <dia:attribute name="obj_pos">
         <dia:point val="158.19,-97"/>
       </dia:attribute>
@@ -19982,7 +19764,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O145">
+    <dia:object type="UML - Class" version="0" id="O142">
       <dia:attribute name="obj_pos">
         <dia:point val="94,-22"/>
       </dia:attribute>
@@ -20162,7 +19944,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O146">
+    <dia:object type="UML - Association" version="2" id="O143">
       <dia:attribute name="obj_pos">
         <dia:point val="75.83,-15"/>
       </dia:attribute>
@@ -20239,11 +20021,11 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O56" connection="2"/>
-        <dia:connection handle="1" to="O145" connection="10"/>
+        <dia:connection handle="1" to="O142" connection="10"/>
       </dia:connections>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O147">
+    <dia:object type="UML - Generalization" version="1" id="O144">
       <dia:attribute name="obj_pos">
         <dia:point val="114.03,-118.4"/>
       </dia:attribute>
@@ -20294,7 +20076,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O148">
+    <dia:object type="UML - Class" version="0" id="O145">
       <dia:attribute name="obj_pos">
         <dia:point val="260,-105"/>
       </dia:attribute>
@@ -20438,7 +20220,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O149">
+    <dia:object type="UML - Association" version="2" id="O146">
       <dia:attribute name="obj_pos">
         <dia:point val="158.19,-88.6"/>
       </dia:attribute>
@@ -20519,7 +20301,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O150">
+    <dia:object type="UML - Association" version="2" id="O147">
       <dia:attribute name="obj_pos">
         <dia:point val="56,-107.9"/>
       </dia:attribute>
@@ -20600,88 +20382,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O151">
-      <dia:attribute name="obj_pos">
-        <dia:point val="135,-75.3"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.535,-76.05;135.75,-72.445"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="135,-75.3"/>
-        <dia:point val="133,-75.3"/>
-        <dia:point val="133,-73.3"/>
-        <dia:point val="131.585,-73.3"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O126" connection="3"/>
-        <dia:connection handle="1" to="O115" connection="9"/>
-      </dia:connections>
-      <dia:childnode parent="O3"/>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O152">
+    <dia:object type="UML - Association" version="2" id="O148">
       <dia:attribute name="obj_pos">
         <dia:point val="141,-97"/>
       </dia:attribute>
@@ -20762,7 +20463,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O153">
+    <dia:object type="UML - Class" version="0" id="O149">
       <dia:attribute name="obj_pos">
         <dia:point val="167,-70"/>
       </dia:attribute>
@@ -21130,7 +20831,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O154">
+    <dia:object type="UML - Class" version="0" id="O150">
       <dia:attribute name="obj_pos">
         <dia:point val="239,-99"/>
       </dia:attribute>
@@ -21499,7 +21200,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O155">
+    <dia:object type="UML - Association" version="2" id="O151">
       <dia:attribute name="obj_pos">
         <dia:point val="195.545,-84"/>
       </dia:attribute>
@@ -21580,7 +21281,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O156">
+    <dia:object type="UML - Association" version="2" id="O152">
       <dia:attribute name="obj_pos">
         <dia:point val="198,-97"/>
       </dia:attribute>
@@ -21661,7 +21362,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O157">
+    <dia:object type="UML - Association" version="2" id="O153">
       <dia:attribute name="obj_pos">
         <dia:point val="205.757,-97"/>
       </dia:attribute>
@@ -21742,7 +21443,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O158">
+    <dia:object type="UML - Association" version="2" id="O154">
       <dia:attribute name="obj_pos">
         <dia:point val="213.515,-97"/>
       </dia:attribute>
@@ -21823,7 +21524,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O159">
+    <dia:object type="UML - Class" version="0" id="O155">
       <dia:attribute name="obj_pos">
         <dia:point val="159,-122"/>
       </dia:attribute>
@@ -21961,7 +21662,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O160">
+    <dia:object type="UML - Association" version="2" id="O156">
       <dia:attribute name="obj_pos">
         <dia:point val="172.773,-84"/>
       </dia:attribute>
@@ -22042,7 +21743,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O161">
+    <dia:object type="UML - Association" version="2" id="O157">
       <dia:attribute name="obj_pos">
         <dia:point val="172.773,-73.9497"/>
       </dia:attribute>
@@ -22119,11 +21820,11 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O136" connection="28"/>
-        <dia:connection handle="1" to="O153" connection="1"/>
+        <dia:connection handle="1" to="O149" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O162">
+    <dia:object type="UML - Class" version="0" id="O158">
       <dia:attribute name="obj_pos">
         <dia:point val="157,-15"/>
       </dia:attribute>
@@ -22303,7 +22004,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O163">
+    <dia:object type="UML - Association" version="2" id="O159">
       <dia:attribute name="obj_pos">
         <dia:point val="153.055,-13.9"/>
       </dia:attribute>
@@ -22380,11 +22081,11 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O117" connection="4"/>
-        <dia:connection handle="1" to="O162" connection="3"/>
+        <dia:connection handle="1" to="O158" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O28"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O164">
+    <dia:object type="UML - Class" version="0" id="O160">
       <dia:attribute name="obj_pos">
         <dia:point val="199,-84"/>
       </dia:attribute>
@@ -22796,6 +22497,330 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O161">
+      <dia:attribute name="obj_pos">
+        <dia:point val="120.135,-82.9"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="119.385,-83.65;123.05,-78.1"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="120.135,-82.9"/>
+        <dia:point val="122,-82.9"/>
+        <dia:point val="122,-79.7"/>
+        <dia:point val="123,-79.7"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="text_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O30" connection="4"/>
+        <dia:connection handle="1" to="O140" connection="14"/>
+      </dia:connections>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O162">
+      <dia:attribute name="obj_pos">
+        <dia:point val="100,-73.2"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="99.25,-73.95;108.728,-67.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="100,-73.2"/>
+        <dia:point val="100,-71"/>
+        <dia:point val="108.528,-71"/>
+        <dia:point val="108.528,-69"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="text_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O30" connection="5"/>
+        <dia:connection handle="1" to="O116" connection="1"/>
+      </dia:connections>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O163">
+      <dia:attribute name="obj_pos">
+        <dia:point val="120.135,-73.2"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="119.385,-73.95;124.493,-67.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="120.135,-73.2"/>
+        <dia:point val="120.135,-71"/>
+        <dia:point val="124.293,-71"/>
+        <dia:point val="124.293,-69"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="text_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O30" connection="7"/>
+        <dia:connection handle="1" to="O115" connection="1"/>
+      </dia:connections>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O164">
+      <dia:attribute name="obj_pos">
+        <dia:point val="128.585,-67.9"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="127.835,-68.65;132.05,-64.7"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="128.585,-67.9"/>
+        <dia:point val="131,-67.9"/>
+        <dia:point val="131,-66.3"/>
+        <dia:point val="132,-66.3"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="text_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O115" connection="4"/>
+        <dia:connection handle="1" to="O126" connection="10"/>
+      </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
   </dia:layer>

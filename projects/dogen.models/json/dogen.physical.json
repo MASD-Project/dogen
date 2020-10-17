@@ -1654,6 +1654,11 @@
           "documentation": "C++ header guard for this artefact, if any,\n"
         },
         {
+          "name": "inclusion_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Path for inclusion for this artefact, computed from the path.\n\nNote that this is will not necessarily be used for the inclusion directive.\n"
+        },
+        {
           "name": "inclusion_dependencies",
           "type": "std::list<std::string>",
           "documentation": "C++ Inlusion dependencies for this artefact.\n"

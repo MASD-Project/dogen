@@ -51,6 +51,7 @@ std::ostream& operator<<(std::ostream& s, const path_properties& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::path_properties\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
+      << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"primary_inclusion_directive\": " << "\"" << tidy_up_string(v.primary_inclusion_directive()) << "\"" << ", "
       << "\"secondary_inclusion_directives\": " << v.secondary_inclusion_directives() << ", "
