@@ -131,7 +131,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
          } else if (fs == formatting_styles::stitch) {
              BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
-             stitch_formatter_.apply(fmt, ctx, e, a);
+             stitch_formatter_.apply(fmt, e, a);
 
              const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

@@ -46,7 +46,7 @@ private:
 
 public:
     void apply(const model_to_text_transform& stock_transform,
-        const context& ctx, const logical::entities::element& e,
+        const logical::entities::element& e,
         physical::entities::artefact& a) const;
 
 private:
