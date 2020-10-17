@@ -27,19 +27,25 @@ path_properties::path_properties(path_properties&& rhs)
       header_guard_(std::move(rhs.header_guard_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
       primary_inclusion_directive_(std::move(rhs.primary_inclusion_directive_)),
-      secondary_inclusion_directives_(std::move(rhs.secondary_inclusion_directives_)) { }
+      secondary_inclusion_directives_(std::move(rhs.secondary_inclusion_directives_)),
+      using_dependencies_(std::move(rhs.using_dependencies_)),
+      relative_path_(std::move(rhs.relative_path_)) { }
 
 path_properties::path_properties(
     const boost::filesystem::path& file_path,
     const std::string& header_guard,
     const std::list<std::string>& inclusion_dependencies,
     const std::string& primary_inclusion_directive,
-    const std::list<std::string>& secondary_inclusion_directives)
+    const std::list<std::string>& secondary_inclusion_directives,
+    const std::list<std::string>& using_dependencies,
+    const boost::filesystem::path& relative_path)
     : file_path_(file_path),
       header_guard_(header_guard),
       inclusion_dependencies_(inclusion_dependencies),
       primary_inclusion_directive_(primary_inclusion_directive),
-      secondary_inclusion_directives_(secondary_inclusion_directives) { }
+      secondary_inclusion_directives_(secondary_inclusion_directives),
+      using_dependencies_(using_dependencies),
+      relative_path_(relative_path) { }
 
 void path_properties::swap(path_properties& other) noexcept {
     using std::swap;
@@ -48,6 +54,8 @@ void path_properties::swap(path_properties& other) noexcept {
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
     swap(primary_inclusion_directive_, other.primary_inclusion_directive_);
     swap(secondary_inclusion_directives_, other.secondary_inclusion_directives_);
+    swap(using_dependencies_, other.using_dependencies_);
+    swap(relative_path_, other.relative_path_);
 }
 
 bool path_properties::operator==(const path_properties& rhs) const {
@@ -55,7 +63,9 @@ bool path_properties::operator==(const path_properties& rhs) const {
         header_guard_ == rhs.header_guard_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
         primary_inclusion_directive_ == rhs.primary_inclusion_directive_ &&
-        secondary_inclusion_directives_ == rhs.secondary_inclusion_directives_;
+        secondary_inclusion_directives_ == rhs.secondary_inclusion_directives_ &&
+        using_dependencies_ == rhs.using_dependencies_ &&
+        relative_path_ == rhs.relative_path_;
 }
 
 path_properties& path_properties::operator=(path_properties other) {
@@ -142,6 +152,38 @@ void path_properties::secondary_inclusion_directives(const std::list<std::string
 
 void path_properties::secondary_inclusion_directives(const std::list<std::string>&& v) {
     secondary_inclusion_directives_ = std::move(v);
+}
+
+const std::list<std::string>& path_properties::using_dependencies() const {
+    return using_dependencies_;
+}
+
+std::list<std::string>& path_properties::using_dependencies() {
+    return using_dependencies_;
+}
+
+void path_properties::using_dependencies(const std::list<std::string>& v) {
+    using_dependencies_ = v;
+}
+
+void path_properties::using_dependencies(const std::list<std::string>&& v) {
+    using_dependencies_ = std::move(v);
+}
+
+const boost::filesystem::path& path_properties::relative_path() const {
+    return relative_path_;
+}
+
+boost::filesystem::path& path_properties::relative_path() {
+    return relative_path_;
+}
+
+void path_properties::relative_path(const boost::filesystem::path& v) {
+    relative_path_ = v;
+}
+
+void path_properties::relative_path(const boost::filesystem::path&& v) {
+    relative_path_ = std::move(v);
 }
 
 }

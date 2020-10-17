@@ -47,7 +47,9 @@ public:
         const std::string& header_guard,
         const std::list<std::string>& inclusion_dependencies,
         const std::string& primary_inclusion_directive,
-        const std::list<std::string>& secondary_inclusion_directives);
+        const std::list<std::string>& secondary_inclusion_directives,
+        const std::list<std::string>& using_dependencies,
+        const boost::filesystem::path& relative_path);
 
 public:
     /**
@@ -100,6 +102,16 @@ public:
     void secondary_inclusion_directives(const std::list<std::string>&& v);
     /**@}*/
 
+    const std::list<std::string>& using_dependencies() const;
+    std::list<std::string>& using_dependencies();
+    void using_dependencies(const std::list<std::string>& v);
+    void using_dependencies(const std::list<std::string>&& v);
+
+    const boost::filesystem::path& relative_path() const;
+    boost::filesystem::path& relative_path();
+    void relative_path(const boost::filesystem::path& v);
+    void relative_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const path_properties& rhs) const;
     bool operator!=(const path_properties& rhs) const {
@@ -116,6 +128,8 @@ private:
     std::list<std::string> inclusion_dependencies_;
     std::string primary_inclusion_directive_;
     std::list<std::string> secondary_inclusion_directives_;
+    std::list<std::string> using_dependencies_;
+    boost::filesystem::path relative_path_;
 };
 
 }

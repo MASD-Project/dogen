@@ -1667,6 +1667,14 @@
           "name": "secondary_inclusion_directives",
           "type": "std::list<std::string>",
           "documentation": "Any other directives that are also needed for this element.\n"
+        },
+        {
+          "name": "using_dependencies",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "relative_path",
+          "type": "boost::filesystem::path"
         }
       ]
     },

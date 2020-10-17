@@ -53,7 +53,9 @@ std::ostream& operator<<(std::ostream& s, const path_properties& v) {
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"primary_inclusion_directive\": " << "\"" << tidy_up_string(v.primary_inclusion_directive()) << "\"" << ", "
-      << "\"secondary_inclusion_directives\": " << v.secondary_inclusion_directives()
+      << "\"secondary_inclusion_directives\": " << v.secondary_inclusion_directives() << ", "
+      << "\"using_dependencies\": " << v.using_dependencies() << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
       << " }";
     return(s);
 }
