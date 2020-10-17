@@ -69,11 +69,6 @@ boost::filesystem::path backend_class_implementation_transform_transform::inclus
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path backend_class_implementation_transform_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> backend_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {

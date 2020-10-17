@@ -75,11 +75,6 @@ boost::filesystem::path include_cmakelists_transform::inclusion_path(
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path include_cmakelists_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path_for_include_cmakelists(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const logical::entities::element& /*e*/) const {

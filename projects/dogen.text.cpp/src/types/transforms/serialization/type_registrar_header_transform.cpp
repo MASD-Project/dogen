@@ -61,11 +61,6 @@ boost::filesystem::path type_registrar_header_transform::inclusion_path(
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
-boost::filesystem::path type_registrar_header_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> type_registrar_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const logical::entities::element& /*e*/) const {

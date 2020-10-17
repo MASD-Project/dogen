@@ -37655,10 +37655,6 @@ public:
         const formattables::locator&amp; l,
         const identification::entities::logical_name&amp; n) const override;
 
-    boost::filesystem::path full_path(
-        const formattables::locator&amp; l,
-        const identification::entities::logical_name&amp; n) const override;
-
 public:
     void apply(const context&amp; ctx, const logical::entities::element&amp; e,
         physical::entities::artefact&amp; a) const override;
@@ -37830,11 +37826,6 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 
     BOOST_LOG_SEV(lg, error) &lt;&lt; not_supported &lt;&lt; n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -37997,11 +37988,6 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const {
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -44986,10 +44972,6 @@ public:
     boost::filesystem::path inclusion_path(
         const formattables::locator&amp; l,
         const identification::entities::logical_name&amp; n) const override;
-
-    boost::filesystem::path full_path(
-        const formattables::locator&amp; l,
-        const identification::entities::logical_name&amp; n) const override;
 &lt;#+
             } else if (o.major_technical_space() == technical_space::csharp) {
 #&gt;
@@ -45018,20 +45000,7 @@ public:
 
 }
 
-#&gt;
-#DOGEN masd.physical.constant_relation=dogen.utility.io.shared_ptr,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.utility.log.logger,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.tracing.scoped_tracer,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.logical.entities.element,archetype:masd.cpp.io.class_header
-#DOGEN masd.physical.constant_relation=dogen.physical.entities.artefact,archetype:masd.cpp.io.class_header
-#DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.logical.entities.physical.archetype,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.logical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.assistant,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.archetype_class_header_transform_transform,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.archetype_class_header_transform_factory,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.text.cpp.traits,archetype:masd.cpp.types.class_header
-#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.traits,archetype:masd.cpp.types.class_header#</dia:string>
+#&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -60,11 +60,6 @@ boost::filesystem::path archetype_class_header_transform_transform::inclusion_pa
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
-boost::filesystem::path archetype_class_header_transform_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> archetype_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {
@@ -112,10 +107,6 @@ ast.stream() << std::endl;
 ast.stream() << "    inclusion_support_types inclusion_support_type() const override;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    boost::filesystem::path inclusion_path(" << std::endl;
-ast.stream() << "        const formattables::locator& l," << std::endl;
-ast.stream() << "        const identification::entities::logical_name& n) const override;" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    boost::filesystem::path full_path(" << std::endl;
 ast.stream() << "        const formattables::locator& l," << std::endl;
 ast.stream() << "        const identification::entities::logical_name& n) const override;" << std::endl;
             } else if (o.major_technical_space() == technical_space::csharp) {
