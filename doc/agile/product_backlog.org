@@ -16344,6 +16344,9 @@ generated content with Wt.
 Links:
 
 - [[https://lwn.net/Articles/825507/][Hugo: a static-site generator]]
+- [[https://blog.getpelican.com/][Pelican Static Site Generator, Powered by Python]]: Pelican is a
+  static site generator that requires no database or server-side
+  logic.
 
 *** Consider adding support for cpprouter                             :story:
 
