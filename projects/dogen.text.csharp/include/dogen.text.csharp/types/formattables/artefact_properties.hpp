@@ -43,16 +43,10 @@ public:
 
 public:
     artefact_properties(
-        const boost::filesystem::path& file_path,
         const boost::filesystem::path& relative_path,
         const std::list<std::string>& using_dependencies);
 
 public:
-    const boost::filesystem::path& file_path() const;
-    boost::filesystem::path& file_path();
-    void file_path(const boost::filesystem::path& v);
-    void file_path(const boost::filesystem::path&& v);
-
     const boost::filesystem::path& relative_path() const;
     boost::filesystem::path& relative_path();
     void relative_path(const boost::filesystem::path& v);
@@ -74,7 +68,6 @@ public:
     artefact_properties& operator=(artefact_properties other);
 
 private:
-    boost::filesystem::path file_path_;
     boost::filesystem::path relative_path_;
     std::list<std::string> using_dependencies_;
 };

@@ -23,28 +23,23 @@
 namespace dogen::text::csharp::formattables {
 
 artefact_properties::artefact_properties(artefact_properties&& rhs)
-    : file_path_(std::move(rhs.file_path_)),
-      relative_path_(std::move(rhs.relative_path_)),
+    : relative_path_(std::move(rhs.relative_path_)),
       using_dependencies_(std::move(rhs.using_dependencies_)) { }
 
 artefact_properties::artefact_properties(
-    const boost::filesystem::path& file_path,
     const boost::filesystem::path& relative_path,
     const std::list<std::string>& using_dependencies)
-    : file_path_(file_path),
-      relative_path_(relative_path),
+    : relative_path_(relative_path),
       using_dependencies_(using_dependencies) { }
 
 void artefact_properties::swap(artefact_properties& other) noexcept {
     using std::swap;
-    swap(file_path_, other.file_path_);
     swap(relative_path_, other.relative_path_);
     swap(using_dependencies_, other.using_dependencies_);
 }
 
 bool artefact_properties::operator==(const artefact_properties& rhs) const {
-    return file_path_ == rhs.file_path_ &&
-        relative_path_ == rhs.relative_path_ &&
+    return relative_path_ == rhs.relative_path_ &&
         using_dependencies_ == rhs.using_dependencies_;
 }
 
@@ -52,22 +47,6 @@ artefact_properties& artefact_properties::operator=(artefact_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const boost::filesystem::path& artefact_properties::file_path() const {
-    return file_path_;
-}
-
-boost::filesystem::path& artefact_properties::file_path() {
-    return file_path_;
-}
-
-void artefact_properties::file_path(const boost::filesystem::path& v) {
-    file_path_ = v;
-}
-
-void artefact_properties::file_path(const boost::filesystem::path&& v) {
-    file_path_ = std::move(v);
 }
 
 const boost::filesystem::path& artefact_properties::relative_path() const {
