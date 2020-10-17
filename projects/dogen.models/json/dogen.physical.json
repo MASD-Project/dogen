@@ -1963,6 +1963,13 @@
           "type": "relation_status"
         }
       ]
+    },
+    {
+      "name": "transforms::relations_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
