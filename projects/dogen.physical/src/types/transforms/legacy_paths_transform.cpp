@@ -1153,7 +1153,7 @@ get_archetye_kind(const std::string& archetype_name, const bool is_tests) {
 }
 
 boost::filesystem::path legacy_paths_transform::
-get_path_for_archetype(const identification::entities::logical_name& ln,
+get_full_path_for_archetype(const identification::entities::logical_name& ln,
     const identification::entities::physical_meta_name& pmn,
     const locator& l) {
 
@@ -1202,6 +1202,17 @@ get_path_for_archetype(const identification::entities::logical_name& ln,
     } }
 }
 
+boost::filesystem::path
+legacy_paths_transform::get_relative_path_for_archetype(
+    const identification::entities::logical_name& ln,
+    const identification::entities::physical_meta_name& pmn,
+    const locator& l) {
+
+
+
+    return l.make_inclusion_path_for_cpp_header(ln, pmn.id().value());
+}
+
 void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "legacy paths",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
@@ -1212,7 +1223,7 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
             auto& a(artefact_pair.second);
             const auto& ln(region.provenance().logical_name());
-            const auto fp(get_path_for_archetype(ln, a->meta_name(), l));
+            const auto fp(get_full_path_for_archetype(ln, a->meta_name(), l));
             a->path_properties().file_path(fp);
         }
     }

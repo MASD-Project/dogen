@@ -43,11 +43,25 @@ class locator;
  */
 class legacy_paths_transform final {
 private:
+    /**
+     * @brief Returns the enumeration for the given archetype.
+     */
     static entities::legacy_archetype_kind
     get_archetye_kind(const std::string& archetype_name, const bool is_tests);
 
-    static boost::filesystem::path
-    get_path_for_archetype(const identification::entities::logical_name& ln,
+    /**
+     * @brief Returns the full path for a given archetype.
+     */
+    static boost::filesystem::path get_full_path_for_archetype(
+        const identification::entities::logical_name& ln,
+        const identification::entities::physical_meta_name& pmn,
+        const locator& l);
+
+    /**
+     * @brief Computes the inclusion path for an archetype.
+     */
+    static boost::filesystem::path get_relative_path_for_archetype(
+        const identification::entities::logical_name& ln,
         const identification::entities::physical_meta_name& pmn,
         const locator& l);
 

@@ -68,20 +68,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesy
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const artefact& v) {
@@ -95,7 +81,6 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"path_properties\": " << v.path_properties() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
-      << "\"relations\": " << v.relations() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "
       << "\"enablement_properties\": " << v.enablement_properties() << ", "

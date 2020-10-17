@@ -544,11 +544,6 @@
           "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
         },
         {
-          "name": "relations",
-          "type": "std::list<std::string>",
-          "documentation": "Artefacts that this artefact depends on.\n\nThe format used is dependent on the technical space the artefact belongs to.\n"
-        },
-        {
           "name": "unified_diff",
           "type": "std::string",
           "documentation": "Unified diff between the in-memory artefact and the file in the filesystem.\n"
@@ -1951,6 +1946,21 @@
         {
           "name": "csharp_implementation",
           "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::relation_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "relations",
+          "type": "std::list<std::string>",
+          "documentation": "Artefacts that this artefact depends on.\n\nThe format used is dependent on the technical space the artefact belongs to.\n"
+        },
+        {
+          "name": "relation_status",
+          "type": "relation_status"
         }
       ]
     }

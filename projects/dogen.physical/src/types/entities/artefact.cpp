@@ -44,7 +44,6 @@ artefact::artefact(artefact&& rhs)
       content_(std::move(rhs.content_)),
       path_properties_(std::move(rhs.path_properties_)),
       dependencies_(std::move(rhs.dependencies_)),
-      relations_(std::move(rhs.relations_)),
       unified_diff_(std::move(rhs.unified_diff_)),
       operation_(std::move(rhs.operation_)),
       enablement_properties_(std::move(rhs.enablement_properties_)),
@@ -60,7 +59,6 @@ artefact::artefact(
     const std::string& content,
     const dogen::physical::entities::path_properties& path_properties,
     const std::vector<boost::filesystem::path>& dependencies,
-    const std::list<std::string>& relations,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::enablement_properties& enablement_properties,
@@ -74,7 +72,6 @@ artefact::artefact(
       content_(content),
       path_properties_(path_properties),
       dependencies_(dependencies),
-      relations_(relations),
       unified_diff_(unified_diff),
       operation_(operation),
       enablement_properties_(enablement_properties),
@@ -91,7 +88,6 @@ void artefact::swap(artefact& other) noexcept {
     swap(content_, other.content_);
     swap(path_properties_, other.path_properties_);
     swap(dependencies_, other.dependencies_);
-    swap(relations_, other.relations_);
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_properties_, other.enablement_properties_);
@@ -108,7 +104,6 @@ bool artefact::operator==(const artefact& rhs) const {
         content_ == rhs.content_ &&
         path_properties_ == rhs.path_properties_ &&
         dependencies_ == rhs.dependencies_ &&
-        relations_ == rhs.relations_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
         enablement_properties_ == rhs.enablement_properties_ &&
@@ -248,22 +243,6 @@ void artefact::dependencies(const std::vector<boost::filesystem::path>& v) {
 
 void artefact::dependencies(const std::vector<boost::filesystem::path>&& v) {
     dependencies_ = std::move(v);
-}
-
-const std::list<std::string>& artefact::relations() const {
-    return relations_;
-}
-
-std::list<std::string>& artefact::relations() {
-    return relations_;
-}
-
-void artefact::relations(const std::list<std::string>& v) {
-    relations_ = v;
-}
-
-void artefact::relations(const std::list<std::string>&& v) {
-    relations_ = std::move(v);
 }
 
 const std::string& artefact::unified_diff() const {
