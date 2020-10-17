@@ -27,6 +27,7 @@
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 #include "dogen.physical/types/transforms/legacy_paths_transform.hpp"
+#include "dogen.physical/types/transforms/relations_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
 #include "dogen.physical/types/transforms/model_population_chain.hpp"
 
@@ -50,6 +51,12 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      * meta-model. These are in effect, its configuration.
      */
     meta_model_properties_transform::apply(ctx, m);
+
+    /*
+     * The relations transform must be executed prior to the path
+     * related transforms.
+     */
+    relations_transform::apply(ctx, m);
 
     /*
      * The paths and enablement transforms must be done after the

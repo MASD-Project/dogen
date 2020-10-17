@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class relations_transform final {
 public:
-    relations_transform() = default;
-    relations_transform(const relations_transform&) = default;
-    relations_transform(relations_transform&&) = default;
-    ~relations_transform() = default;
-    relations_transform& operator=(const relations_transform&) = default;
-
-public:
-    bool operator==(const relations_transform& rhs) const;
-    bool operator!=(const relations_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

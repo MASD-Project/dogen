@@ -18,12 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/relations_transform.hpp"
+
+namespace {
+
+const std::string transform_id("physical.transforms.relations_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool relations_transform::operator==(const relations_transform& /*rhs*/) const {
-    return true;
+void relations_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "relations",
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }
