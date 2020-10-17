@@ -26,10 +26,7 @@
 #endif
 
 #include <algorithm>
-#include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.identification/types/entities/physical_meta_id.hpp"
-#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::physical::entities {
 
@@ -43,9 +40,7 @@ public:
     path_properties(path_properties&& rhs);
 
 public:
-    path_properties(
-        const boost::filesystem::path& file_path,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& relative_paths);
+    explicit path_properties(const boost::filesystem::path& file_path);
 
 public:
     /**
@@ -56,16 +51,6 @@ public:
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Paths relative to the part's root directory.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& relative_paths() const;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& relative_paths();
-    void relative_paths(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& v);
-    void relative_paths(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>&& v);
     /**@}*/
 
 public:
@@ -80,7 +65,6 @@ public:
 
 private:
     boost::filesystem::path file_path_;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path> relative_paths_;
 };
 
 }

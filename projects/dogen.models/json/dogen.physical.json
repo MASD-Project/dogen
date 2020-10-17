@@ -1647,11 +1647,6 @@
           "name": "file_path",
           "type": "boost::filesystem::path",
           "documentation": "Full path to the file corresponding to this artefact.\n"
-        },
-        {
-          "name": "relative_paths",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, boost::filesystem::path>",
-          "documentation": "Paths relative to the part's root directory.\n"
         }
       ]
     },

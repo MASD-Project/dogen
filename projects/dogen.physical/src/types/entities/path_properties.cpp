@@ -23,24 +23,18 @@
 namespace dogen::physical::entities {
 
 path_properties::path_properties(path_properties&& rhs)
-    : file_path_(std::move(rhs.file_path_)),
-      relative_paths_(std::move(rhs.relative_paths_)) { }
+    : file_path_(std::move(rhs.file_path_)) { }
 
-path_properties::path_properties(
-    const boost::filesystem::path& file_path,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& relative_paths)
-    : file_path_(file_path),
-      relative_paths_(relative_paths) { }
+path_properties::path_properties(const boost::filesystem::path& file_path)
+    : file_path_(file_path) { }
 
 void path_properties::swap(path_properties& other) noexcept {
     using std::swap;
     swap(file_path_, other.file_path_);
-    swap(relative_paths_, other.relative_paths_);
 }
 
 bool path_properties::operator==(const path_properties& rhs) const {
-    return file_path_ == rhs.file_path_ &&
-        relative_paths_ == rhs.relative_paths_;
+    return file_path_ == rhs.file_path_;
 }
 
 path_properties& path_properties::operator=(path_properties other) {
@@ -63,22 +57,6 @@ void path_properties::file_path(const boost::filesystem::path& v) {
 
 void path_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
-}
-
-const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& path_properties::relative_paths() const {
-    return relative_paths_;
-}
-
-std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& path_properties::relative_paths() {
-    return relative_paths_;
-}
-
-void path_properties::relative_paths(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& v) {
-    relative_paths_ = v;
-}
-
-void path_properties::relative_paths(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>&& v) {
-    relative_paths_ = std::move(v);
 }
 
 }

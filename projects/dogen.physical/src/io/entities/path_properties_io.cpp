@@ -20,33 +20,13 @@
  */
 #include <ostream>
 #include "dogen.physical/io/entities/path_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::filesystem::path>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << i->second.generic_string() << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
 
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const path_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::path_properties\"" << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"relative_paths\": " << v.relative_paths()
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
       << " }";
     return(s);
 }

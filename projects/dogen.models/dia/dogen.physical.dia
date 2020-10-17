@@ -19549,16 +19549,16 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="100,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.95,-69.05;140.59,-65.35"/>
+        <dia:rectangle val="99.95,-69.05;114.025,-66.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="100,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="40.539999999999999"/>
+        <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#path_properties#</dia:string>
@@ -19674,29 +19674,6 @@ Only required when the part is located outside of the component directory.#</dia
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#relative_paths#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, boost::filesystem::path&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Paths relative to the part's root directory.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -19710,7 +19687,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="110.067,-73.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.317,-73.95;120.47,-68.2"/>
+        <dia:rectangle val="106.938,-73.95;110.817,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19718,8 +19695,8 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="110.067,-73.2"/>
         <dia:point val="110.067,-70"/>
-        <dia:point val="120.27,-70"/>
-        <dia:point val="120.27,-69"/>
+        <dia:point val="106.987,-70"/>
+        <dia:point val="106.987,-69"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
