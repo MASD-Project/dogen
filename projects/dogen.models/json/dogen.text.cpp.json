@@ -750,10 +750,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "file_path",
-          "type": "boost::filesystem::path"
-        },
-        {
           "name": "header_guard",
           "type": "std::string"
         },

@@ -110,8 +110,8 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
 
 void assistant::validate() const {
     const auto& fn(physical_meta_name_.id());
-    const auto& fp(artefact_properties_);
-    if (fp.file_path().empty()) {
+    const auto fp(artefact_.path_properties().file_path());
+    if (fp.empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(
             formatting_error(file_path_not_set + fn.value()));
@@ -120,7 +120,8 @@ void assistant::validate() const {
     if (!requires_header_guard_)
         return;
 
-    if (fp.header_guard().empty()) {
+    const auto& ap(artefact_properties_);
+    if (ap.header_guard().empty()) {
         BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
         BOOST_THROW_EXCEPTION(
             formatting_error(header_guard_not_set + fn.value()));

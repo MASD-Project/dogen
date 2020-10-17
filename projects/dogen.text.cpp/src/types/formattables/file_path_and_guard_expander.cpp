@@ -71,16 +71,10 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
             }
 
             /*
-             * Ask the formatter to generate the full path for the
-             * artefact.
-             */
-            const auto& fmt(i->second);
-            art_props.file_path(fmt->full_path(l, n));
-
-            /*
              * If the formatter supports inclusion, we need to compute
              * the header guard as well.
              */
+            const auto& fmt(i->second);
             const auto ns(transforms::inclusion_support_types::not_supported);
             if (fmt->inclusion_support_type() != ns) {
                 const auto ip(fmt->inclusion_path(l, n));

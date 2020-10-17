@@ -59,7 +59,7 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
 
     assistant ast(ctx, e, pn, needs_guard, a);
-    const auto& fp(ast.artefact_properties().file_path());
+    const auto fp(a.path_properties().file_path());
     auto stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);
 

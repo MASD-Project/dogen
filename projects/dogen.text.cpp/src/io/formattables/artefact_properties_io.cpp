@@ -49,7 +49,6 @@ namespace dogen::text::cpp::formattables {
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::cpp::formattables::artefact_properties\"" << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
