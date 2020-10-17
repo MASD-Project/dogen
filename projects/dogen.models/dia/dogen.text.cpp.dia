@@ -44977,9 +44977,6 @@ public:
 #&gt;
     std::list&lt;std::string&gt; inclusion_dependencies(
         const logical::entities::element&amp; e) const override;
-
-    boost::filesystem::path full_path(
-        const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const override;
 &lt;#+
             }
 #&gt;

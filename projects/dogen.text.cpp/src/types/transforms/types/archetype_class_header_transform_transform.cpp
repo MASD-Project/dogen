@@ -112,9 +112,6 @@ ast.stream() << "        const identification::entities::logical_name& n) const 
             } else if (o.major_technical_space() == technical_space::csharp) {
 ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
 ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    boost::filesystem::path full_path(" << std::endl;
-ast.stream() << "        const formattables::locator& l, const identification::entities::logical_name& n) const override;" << std::endl;
             }
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;

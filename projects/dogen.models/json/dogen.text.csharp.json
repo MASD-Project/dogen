@@ -934,7 +934,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "class {{class.simple_name}} final : public model_to_text_transform {\npublic:\n    physical::entities::archetype static_archetype() const;\n    physical::entities::archetype archetype() const override;\n\npublic:\n    std::list<std::string> inclusion_dependencies(\n        const logical::entities::element& e) const override;\n\n    boost::filesystem::path full_path(\n        const formattables::locator& l, const identification::entities::logical_name& n) const override;\n\npublic:\n    void apply(const context& ctx, const logical::entities::element& e,\n        physical::entities::artefact& a) const override;\n};\n"
+          "documentation": "class {{class.simple_name}} final : public model_to_text_transform {\npublic:\n    physical::entities::archetype static_archetype() const;\n    physical::entities::archetype archetype() const override;\n\npublic:\n    std::list<std::string> inclusion_dependencies(\n        const logical::entities::element& e) const override;\n\npublic:\n    void apply(const context& ctx, const logical::entities::element& e,\n        physical::entities::artefact& a) const override;\n};\n"
         }
       ]
     },
@@ -951,7 +951,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "namespace {\n\nconst std::string transform_id(\"{{containing_namespace}}.{{class.simple_name}}\");\n\nusing namespace dogen::utility::log;\nauto lg(logger_factory(transform_id));\n\n}\n\nconst physical::entities::archetype& {{class.simple_name}}::static_archetype() {\n    static auto r({{archetype.simple_name}}_factory::make());\n    return r;\n}\n\nconst physical::entities::archetype& {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const identification::entities::logical_name& n) const {\n    return l.{{locator_function}}(n, archetype().meta_name().id().value());\n}\n\nstd::list<std::string> {{class.simple_name}}::\ninclusion_dependencies(const logical::entities::element& /*e*/) const {\n    std::list<std::string> r;\n    return r;\n}\n"
+          "documentation": "namespace {\n\nconst std::string transform_id(\"{{containing_namespace}}.{{class.simple_name}}\");\n\nusing namespace dogen::utility::log;\nauto lg(logger_factory(transform_id));\n\n}\n\nconst physical::entities::archetype& {{class.simple_name}}::static_archetype() {\n    static auto r({{archetype.simple_name}}_factory::make());\n    return r;\n}\n\nconst physical::entities::archetype& {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\nstd::list<std::string> {{class.simple_name}}::\ninclusion_dependencies(const logical::entities::element& /*e*/) const {\n    std::list<std::string> r;\n    return r;\n}\n"
         }
       ]
     },

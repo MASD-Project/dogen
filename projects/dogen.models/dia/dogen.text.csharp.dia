@@ -15591,14 +15591,10 @@ public:
     std::list&lt;std::string&gt; inclusion_dependencies(
         const logical::entities::element&amp; e) const override;
 
-    boost::filesystem::path full_path(
-        const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const override;
-
 public:
     void apply(const context&amp; ctx, const logical::entities::element&amp; e,
         physical::entities::artefact&amp; a) const override;
-};
-#</dia:string>
+};#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15751,11 +15747,6 @@ const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype
 
 const physical::entities::archetype&amp; {{class.simple_name}}::archetype() const {
     return static_archetype();
-}
-
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator&amp; l, const identification::entities::logical_name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 std::list&lt;std::string&gt; {{class.simple_name}}::

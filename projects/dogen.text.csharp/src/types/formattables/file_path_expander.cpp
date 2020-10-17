@@ -56,8 +56,9 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
             const auto arch(pair.first);
             auto& art_props(pair.second);
 
-            const auto i(safba.find(arch));
-            if (i == safba.end()) {
+            const auto& aba(formattable.artefacts().artefacts_by_archetype());
+            const auto i(aba.find(arch));
+            if (i == aba.end()) {
                 BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                 BOOST_THROW_EXCEPTION(
                     expansion_error(missing_archetype + arch.value()));
@@ -67,10 +68,8 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
              * Ask the formatter to generate the full path for the
              * artefact.
              */
-            const auto& fmt(i->second);
-            art_props.file_path(fmt->full_path(l, n));
-
-            const auto rp(l.make_relative_path(art_props.file_path()));
+            const auto& a(*i->second);
+            const auto rp(l.make_relative_path(a.path_properties().file_path()));
             art_props.relative_path(rp);
         }
     }

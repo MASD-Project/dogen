@@ -52,11 +52,6 @@ const physical::entities::archetype& primitive_transform::archetype() const {
     return static_archetype();
 }
 
-boost::filesystem::path primitive_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> primitive_transform::
 inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;

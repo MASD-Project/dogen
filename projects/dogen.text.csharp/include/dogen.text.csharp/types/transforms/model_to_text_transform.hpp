@@ -46,12 +46,6 @@ public:
 
 public:
     /**
-     * @brief Provides the full path.
-     */
-    virtual boost::filesystem::path full_path(const formattables::locator& l,
-        const identification::entities::logical_name& n) const = 0;
-
-    /**
      * @brief Creates the inclusion dependencies for this formatter
      * against the supplied element.
      */

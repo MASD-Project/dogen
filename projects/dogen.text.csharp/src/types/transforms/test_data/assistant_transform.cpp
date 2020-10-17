@@ -52,11 +52,6 @@ const physical::entities::archetype& assistant_transform::archetype() const {
     return static_archetype();
 }
 
-boost::filesystem::path assistant_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> assistant_transform::
 inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;

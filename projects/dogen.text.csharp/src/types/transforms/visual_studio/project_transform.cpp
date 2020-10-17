@@ -54,11 +54,6 @@ const physical::entities::archetype& project_transform::archetype() const {
     return static_archetype();
 }
 
-boost::filesystem::path project_transform::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().id().value());
-}
-
 std::list<std::string> project_transform::
 inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
