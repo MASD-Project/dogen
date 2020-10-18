@@ -106,6 +106,9 @@ private:
         const identification::entities::physical_meta_name& pmn,
         const locator& l);
 
+private:
+    static void process_artefact(const locator& l, entities::artefact& a);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };

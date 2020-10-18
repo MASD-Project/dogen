@@ -1321,6 +1321,14 @@ legacy_paths_transform::get_relative_path_for_archetype(
     return l.make_inclusion_path_for_cpp_header(ln, pmn.id().value());
 }
 
+void legacy_paths_transform::
+process_artefact(const locator& l, entities::artefact& a) {
+    const auto& ln(a.provenance().logical_name());
+    const auto& pmn(a.meta_name());
+    const auto fp(get_full_path_for_archetype(ln, pmn, l));
+    a.path_properties().file_path(fp);
+}
+
 void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "legacy paths",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
@@ -1332,11 +1340,8 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     for (auto& region_pair : m.regions_by_logical_id()) {
         auto& region(region_pair.second);
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
-            auto& a(artefact_pair.second);
-            const auto& ln(region.provenance().logical_name());
-            const auto fp(get_full_path_for_archetype(ln, a->meta_name(), l));
-            a->path_properties().file_path(fp);
-
+            auto& a(*artefact_pair.second);
+            process_artefact(l, a);
         }
     }
 
