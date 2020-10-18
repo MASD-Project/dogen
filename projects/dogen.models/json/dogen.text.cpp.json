@@ -1900,13 +1900,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::header_guard_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::test_data_properties",
       "fallback_element_type": "masd::object",
       "attributes": [

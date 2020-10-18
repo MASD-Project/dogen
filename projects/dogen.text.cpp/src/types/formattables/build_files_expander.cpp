@@ -35,7 +35,6 @@
 #include "dogen.text.cpp/types/transforms/odb/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.text.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.text.cpp/types/formattables/build_files_expander.hpp"
 
 namespace {

@@ -30,7 +30,7 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text.cpp/types/formattables/adapter.hpp"
-#include "dogen.text.cpp/types/formattables/header_guard_factory.hpp"
+#include "dogen.physical/types/helpers/header_guard_factory.hpp"
 #include "dogen.text.cpp/types/transforms/odb/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/formattables/odb_expander.hpp"
@@ -100,6 +100,7 @@ updator::make_options(const identification::entities::logical_name& n) {
     os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
        << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
     r.include_regexes().push_back(os.str());
+    using physical::helpers::header_guard_factory;
     r.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
     return r;
 }
