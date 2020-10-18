@@ -22,38 +22,8 @@
 
 namespace dogen::text::csharp::formattables {
 
-artefact_properties::artefact_properties(const std::list<std::string>& using_dependencies)
-    : using_dependencies_(using_dependencies) { }
-
-void artefact_properties::swap(artefact_properties& other) noexcept {
-    using std::swap;
-    swap(using_dependencies_, other.using_dependencies_);
-}
-
-bool artefact_properties::operator==(const artefact_properties& rhs) const {
-    return using_dependencies_ == rhs.using_dependencies_;
-}
-
-artefact_properties& artefact_properties::operator=(artefact_properties other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const std::list<std::string>& artefact_properties::using_dependencies() const {
-    return using_dependencies_;
-}
-
-std::list<std::string>& artefact_properties::using_dependencies() {
-    return using_dependencies_;
-}
-
-void artefact_properties::using_dependencies(const std::list<std::string>& v) {
-    using_dependencies_ = v;
-}
-
-void artefact_properties::using_dependencies(const std::list<std::string>&& v) {
-    using_dependencies_ = std::move(v);
+bool artefact_properties::operator==(const artefact_properties& /*rhs*/) const {
+    return true;
 }
 
 }

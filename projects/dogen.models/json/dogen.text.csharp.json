@@ -449,13 +449,7 @@
     },
     {
       "name": "formattables::artefact_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "using_dependencies",
-          "type": "std::list<std::string>"
-        }
-      ]
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::model_expander",

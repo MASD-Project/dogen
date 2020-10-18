@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
-#include <string>
 #include <algorithm>
 
 namespace dogen::text::csharp::formattables {
@@ -37,15 +35,7 @@ public:
     artefact_properties(const artefact_properties&) = default;
     artefact_properties(artefact_properties&&) = default;
     ~artefact_properties() = default;
-
-public:
-    explicit artefact_properties(const std::list<std::string>& using_dependencies);
-
-public:
-    const std::list<std::string>& using_dependencies() const;
-    std::list<std::string>& using_dependencies();
-    void using_dependencies(const std::list<std::string>& v);
-    void using_dependencies(const std::list<std::string>&& v);
+    artefact_properties& operator=(const artefact_properties&) = default;
 
 public:
     bool operator==(const artefact_properties& rhs) const;
@@ -53,24 +43,7 @@ public:
         return !this->operator==(rhs);
     }
 
-public:
-    void swap(artefact_properties& other) noexcept;
-    artefact_properties& operator=(artefact_properties other);
-
-private:
-    std::list<std::string> using_dependencies_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::text::csharp::formattables::artefact_properties& lhs,
-    dogen::text::csharp::formattables::artefact_properties& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

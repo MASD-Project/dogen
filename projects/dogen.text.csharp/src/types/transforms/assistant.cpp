@@ -107,8 +107,6 @@ make_scoped_boilerplate_formatter(const logical::entities::element& e,
     const identification::entities::technical_space ts) {
     text::formatters::boilerplate_properties bp;
 
-    const auto& art_props(artefact_properties_);
-    bp.dependencies(art_props.using_dependencies());
     bp.technical_space(ts);
     const auto i(e.decoration().find(ts));
     if (i != e.decoration().end() && i->second) {

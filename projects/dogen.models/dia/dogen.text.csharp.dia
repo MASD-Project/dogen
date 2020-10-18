@@ -6697,16 +6697,16 @@ using System;
         <dia:point val="-16,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,-79.05;1.105,-76.15"/>
+        <dia:rectangle val="-16.05,-79.05;-6.7425,-76.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-16,-79"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.055"/>
+        <dia:real val="9.2074999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.7999999999999998"/>
+        <dia:real val="2.1999999999999997"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_properties#</dia:string>
@@ -6798,31 +6798,7 @@ using System;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#using_dependencies#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -7325,7 +7301,7 @@ using System;
         <dia:point val="0,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.5225,-76.25;0.75,-67.2"/>
+        <dia:rectangle val="-11.4463,-76.85;0.75,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7333,8 +7309,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="0,-68"/>
         <dia:point val="0,-71"/>
-        <dia:point val="-7.4725,-71"/>
-        <dia:point val="-7.4725,-76.2"/>
+        <dia:point val="-11.3963,-71"/>
+        <dia:point val="-11.3963,-76.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
