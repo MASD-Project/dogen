@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Creates valid C++ header guards.
+ */
 class header_guard_factory final {
 public:
-    header_guard_factory() = default;
-    header_guard_factory(const header_guard_factory&) = default;
-    header_guard_factory(header_guard_factory&&) = default;
-    ~header_guard_factory() = default;
-    header_guard_factory& operator=(const header_guard_factory&) = default;
-
-public:
-    bool operator==(const header_guard_factory& rhs) const;
-    bool operator!=(const header_guard_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string make(const boost::filesystem::path& p);
 };
 
 }

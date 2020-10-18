@@ -18,12 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <string_view>
+#include <boost/algorithm/string.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/header_guard_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger
+lg(logger_factory("physical.helpers.header_guard_factory"));
+
+constexpr std::string_view empty;
+constexpr std::string_view dot(".");
+constexpr std::string_view separator("_");
+
+}
 
 namespace dogen::physical::helpers {
 
-bool header_guard_factory::operator==(const header_guard_factory& /*rhs*/) const {
-    return true;
+std::string header_guard_factory::make(const boost::filesystem::path& p) {
+    BOOST_LOG_SEV(lg, debug) << "Creating header guard from path: "
+                             << p.generic();
+
+    bool is_first(true);
+    std::ostringstream ss;
+    for (const auto& token : p) {
+        std::string s(token.string());
+        BOOST_LOG_SEV(lg, trace) << "Original token: " << s;
+
+        boost::replace_all(s, dot, separator);
+        boost::to_upper(s);
+        BOOST_LOG_SEV(lg, trace) << "Processed token: " << s;
+
+        ss << (is_first ? empty : separator) << s;
+        is_first = false;
+    }
+
+    const auto r(ss.str());
+    BOOST_LOG_SEV(lg, debug) << "Header guard: " << r;
+    return r;
 }
 
 }
