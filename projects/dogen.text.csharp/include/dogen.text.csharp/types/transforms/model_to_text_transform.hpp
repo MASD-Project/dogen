@@ -31,7 +31,6 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.text.csharp/types/formattables/locator.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
 

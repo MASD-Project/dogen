@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 
 namespace dogen::text::csharp::formattables {
 
@@ -36,22 +35,13 @@ class artefact_properties final {
 public:
     artefact_properties() = default;
     artefact_properties(const artefact_properties&) = default;
+    artefact_properties(artefact_properties&&) = default;
     ~artefact_properties() = default;
 
 public:
-    artefact_properties(artefact_properties&& rhs);
+    explicit artefact_properties(const std::list<std::string>& using_dependencies);
 
 public:
-    artefact_properties(
-        const boost::filesystem::path& relative_path,
-        const std::list<std::string>& using_dependencies);
-
-public:
-    const boost::filesystem::path& relative_path() const;
-    boost::filesystem::path& relative_path();
-    void relative_path(const boost::filesystem::path& v);
-    void relative_path(const boost::filesystem::path&& v);
-
     const std::list<std::string>& using_dependencies() const;
     std::list<std::string>& using_dependencies();
     void using_dependencies(const std::list<std::string>& v);
@@ -68,7 +58,6 @@ public:
     artefact_properties& operator=(artefact_properties other);
 
 private:
-    boost::filesystem::path relative_path_;
     std::list<std::string> using_dependencies_;
 };
 

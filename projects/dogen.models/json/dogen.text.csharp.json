@@ -427,35 +427,6 @@
       ]
     },
     {
-      "name": "formattables::locator",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::locator_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "facet_configurations",
-          "type": "std::unordered_map<std::string, formattables::locator_facet_configuration>"
-        },
-        {
-          "name": "archetype_configurations",
-          "type": "std::unordered_map<std::string, formattables::locator_archetype_configuration>"
-        },
-        {
-          "name": "disable_facet_directories",
-          "type": "bool"
-        },
-        {
-          "name": "backend_directory_name",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "formattables::adapter",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -481,10 +452,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "relative_path",
-          "type": "boost::filesystem::path"
-        },
-        {
           "name": "using_dependencies",
           "type": "std::list<std::string>"
         }
@@ -492,13 +459,6 @@
     },
     {
       "name": "formattables::model_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::file_path_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -563,46 +523,6 @@
       "name": "formattables::project_items_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::locator_archetype_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "facet_directory",
-          "type": "std::string"
-        },
-        {
-          "name": "facet_postfix",
-          "type": "std::string"
-        },
-        {
-          "name": "archetype_postfix",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "formattables::locator_facet_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory",
-          "type": "std::string"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "formattables::location_error",
-      "documentation": "An error occurred while the locator was creating a path.\n",
-      "stereotypes": [
-        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     },

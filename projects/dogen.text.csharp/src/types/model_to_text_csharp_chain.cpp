@@ -19,13 +19,14 @@
  *
  */
 #include <boost/algorithm/string/join.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/formattables/workflow.hpp"
 #include "dogen.text.csharp/types/transforms/workflow.hpp"
-#include "dogen.text.csharp/types/formattables/locator.hpp"
 #include "dogen.text.csharp/types/model_to_text_csharp_chain.hpp"
 
 namespace {
@@ -51,10 +52,9 @@ model_to_text_csharp_chain::
 formattables::model
 model_to_text_csharp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
-    const transforms::repository& frp, const formattables::locator& l,
-    const text::entities::model& m) const {
+    const transforms::repository& frp, const text::entities::model& m) const {
     formattables::workflow fw;
-    return fw.execute(feature_model, frp, l, m);
+    return fw.execute(feature_model, frp, m);
 }
 
 identification::entities::physical_meta_id
@@ -80,28 +80,28 @@ model_to_text_csharp_chain::technical_space() const {
 }
 
 void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
-    const bool enable_backend_directories,  text::entities::model& m) const {
+    const bool /*enable_backend_directories*/, text::entities::model& m) const {
     const auto id(m.provenance().logical_name().id());
     tracing::scoped_chain_tracer stp(lg, "C# M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    /*
-     * Create the locator.
-     */
-    const auto mn(m.logical().name());
-    const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& feature_model(*ctx.feature_model());
-    const auto odp(ctx.output_directory_path());
     const auto& frp(transforms::workflow::registrar().formatter_repository());
-    const bool ekd(enable_backend_directories);
-    const formattables::locator l(odp, feature_model, frp, rcfg, mn, ekd);
 
     /*
      * Generate the formattables model.
      */
-    auto fm(create_formattables_model(feature_model, frp, l, m));
+    auto fm(create_formattables_model(feature_model, frp, m));
     apply(ctx.tracer(), fm);
-    m.physical().managed_directories().push_back(l.project_path());
+
+    using identification::entities::physical_meta_id;
+    const auto beid(physical_meta_id("masd.csharp"));
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto i(mmp.backend_properties().find(beid));
+    if (i != mmp.backend_properties().end()) {
+        const auto& be(i->second);
+        m.physical().managed_directories().push_back(be.file_path());
+    }
 }
 
 }

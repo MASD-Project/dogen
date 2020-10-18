@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <boost/pointer_cast.hpp>
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -84,15 +85,21 @@ void project_items_expander::expand(model& fm) const {
         } else if (!is_project_item(mt))
             continue;
 
-        const auto& eprops(formattable.element_properties());
-        for (const auto& art_pair : eprops.artefact_properties()) {
-            const auto art_props(art_pair.second);
+        const auto& aba(formattable.artefacts().artefacts_by_archetype());
+        for (const auto& pair : aba) {
+            const auto& a(*pair.second);
+
+            /*
+             * Ignore non-csharp archetypes.
+             */
+            if (a.meta_name().location().backend() != "csharp")
+                continue;
 
             /*
              * Ensure the item path uses backslashes for compatibility
              * with Visual Studio and MonoDevelop.
              */
-            auto rp(art_props.relative_path().generic_string());
+            auto rp(a.path_properties().relative_path().generic_string());
             std::replace(rp.begin(), rp.end(), '/', '\\');
             set.insert(rp);
         }

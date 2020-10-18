@@ -27,16 +27,12 @@
 
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.text.csharp/types/transforms/repository.hpp"
-#include "dogen.text.csharp/types/formattables/locator.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 
 namespace dogen::text::csharp::formattables {
 
 class model_expander final {
 private:
-    void expand_file_paths(const transforms::repository& frp,
-        const locator& l, model& fm) const;
-
     void expand_aspect_properties(
         const variability::entities::feature_model& feature_model,
         model& fm) const;
@@ -54,7 +50,7 @@ private:
 
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const transforms::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, model& fm) const;
 };
 
 }

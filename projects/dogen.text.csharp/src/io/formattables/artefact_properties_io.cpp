@@ -49,7 +49,6 @@ namespace dogen::text::csharp::formattables {
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::artefact_properties\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
       << "\"using_dependencies\": " << v.using_dependencies()
       << " }";
     return(s);

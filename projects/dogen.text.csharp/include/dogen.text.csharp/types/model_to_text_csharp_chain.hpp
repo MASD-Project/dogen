@@ -37,7 +37,6 @@
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.text.csharp/types/transforms/repository.hpp"
-#include "dogen.text.csharp/types/formattables/locator.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 
 namespace dogen::text::csharp {
@@ -60,7 +59,7 @@ public:
 private:
     formattables::model create_formattables_model(
         const variability::entities::feature_model& feature_model,
-        const transforms::repository& frp, const formattables::locator & l,
+        const transforms::repository& frp,
         const text::entities::model& m) const;
 
     void apply(boost::shared_ptr<tracing::tracer> tracer,

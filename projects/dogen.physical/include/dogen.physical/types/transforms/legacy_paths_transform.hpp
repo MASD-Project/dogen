@@ -92,14 +92,6 @@ private:
         const identification::entities::physical_meta_name& pmn,
         const locator& l);
 
-    /**
-     * @brief Computes the inclusion path for an archetype.
-     */
-    static boost::filesystem::path get_relative_path_for_archetype(
-        const identification::entities::logical_name& ln,
-        const identification::entities::physical_meta_name& pmn,
-        const locator& l);
-
 private:
     static void process_artefact(const feature_group& fg,
         const locator& l, entities::artefact& a);

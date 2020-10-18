@@ -405,6 +405,13 @@ public:
         const std::string& archetype, const bool is_csharp) const;
 
     /**
+     * @brief Makes a relative path.
+     */
+    boost::filesystem::path
+    make_relative_path(const boost::filesystem::path& full_path,
+        const bool is_csharp = false) const;
+
+    /**
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(
@@ -770,6 +777,17 @@ std::string locator::templates_directory_name() const {
     const auto& mmp(physical_model_.meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
     return ppp.templates_directory_name();
+}
+
+boost::filesystem::path locator::make_relative_path(
+    const boost::filesystem::path& full_path,
+    const bool is_csharp) const {
+    const std::string fp(full_path.generic_string());
+    std::string pp(is_csharp ?
+        csharp_project_path_.generic_string() :
+        cpp_project_path_.generic_string());
+    pp += "/";
+    return boost::replace_first_copy(fp, pp, empty);
 }
 
 boost::filesystem::path locator::
@@ -1315,16 +1333,6 @@ get_full_path_for_archetype(const identification::entities::logical_name& ln,
     } }
 }
 
-boost::filesystem::path
-legacy_paths_transform::get_relative_path_for_archetype(
-    const identification::entities::logical_name& ln,
-    const identification::entities::physical_meta_name& pmn,
-    const locator& l) {
-
-
-
-    return l.make_inclusion_path_for_cpp_header(ln, pmn.id().value());
-}
 std::string legacy_paths_transform::
 to_inclusion_directive(const boost::filesystem::path& p) {
     std::ostringstream ss;
@@ -1342,6 +1350,9 @@ void legacy_paths_transform::process_artefact(const feature_group& fg,
 
     const auto fp(get_full_path_for_archetype(ln, pmn, l));
     a.path_properties().file_path(fp);
+
+    const bool is_csharp(pmn.location().backend() == "csharp");
+    a.path_properties().relative_path(l.make_relative_path(fp, is_csharp));
 
     /*
      * If the archetype cannot be involved in a relation there is no

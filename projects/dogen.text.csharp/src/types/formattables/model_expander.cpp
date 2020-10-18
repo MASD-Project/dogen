@@ -22,17 +22,10 @@
 #include "dogen.text.csharp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.csharp/types/formattables/assistant_expander.hpp"
 #include "dogen.text.csharp/types/formattables/reducer.hpp"
-#include "dogen.text.csharp/types/formattables/file_path_expander.hpp"
 #include "dogen.text.csharp/types/formattables/helper_expander.hpp"
 #include "dogen.text.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::csharp::formattables {
-
-void model_expander::expand_file_paths(
-    const transforms::repository& frp, const locator& l, model& fm) const {
-    file_path_expander ex;
-    ex.expand(frp, l, fm);
-}
 
 void model_expander::expand_aspect_properties(
     const variability::entities::feature_model& feature_model,
@@ -68,7 +61,7 @@ expand_helpers(const variability::entities::feature_model& feature_model,
 
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const transforms::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
 
     /*
      * We must expand the aspect and assistant properties before
@@ -86,8 +79,6 @@ void model_expander::expand(
     expand_helpers(feature_model, frp, fm);
 
     reduce(fm);
-
-    expand_file_paths(frp, l, fm);
     expand_project_items(fm);
 }
 
