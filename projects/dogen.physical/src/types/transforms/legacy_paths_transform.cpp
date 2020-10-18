@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen.physical/types/entities/relation_status.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -56,11 +57,12 @@ const std::string separator("_");
 const std::string override_postfix("_inclusion_directive");
 const physical_meta_id cpp_backend_id("masd.cpp");
 const physical_meta_id csharp_backend_id("masd.csharp");
+const std::string canonical_archetype_postfix(".canonical_archetype");
 
 const std::string missing_facet_configuration(
     "Could not find configuration for facet: ");
-const std::string missing_archetype_configuration(
-    "Could not find configuration for archetype: ");
+const std::string missing_archetype_properties(
+    "Could not find properties for archetype: ");
 const std::string missing_backend("Could not locate backend: ");
 const std::string missing_archetype("Could not locate archetype: ");
 const std::string missing_backend_directory(
@@ -77,7 +79,6 @@ const std::string empty_archetype("Formatter name is empty.");
 const std::string secondary_without_primary(
     "Element contains secondary directives but no primary directives."
     "Archetype: ");
-
 
 const std::string archetype_class_header_factory_ak(
     "archetype_class_header_factory");
@@ -453,6 +454,7 @@ private:
     const bool split_mode_;
 };
 
+using identification::entities::physical_meta_id;
 using identification::entities::logical_name;
 
 locator::locator(const physical::entities::model& pm)
@@ -531,10 +533,10 @@ archetype_properties_for_archetype(const std::string& archetype) const {
     physical_meta_id id(archetype);
     const auto i(ap.find(id));
     if (i == ap.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_archetype_configuration
+        BOOST_LOG_SEV(lg, error) << missing_archetype_properties
                                  << archetype;
         BOOST_THROW_EXCEPTION(
-            transform_exception(missing_archetype_configuration + archetype));
+            transform_exception(missing_archetype_properties + archetype));
     }
     return i->second;
 }
@@ -1115,7 +1117,7 @@ make_feature_group(const variability::entities::feature_model& fm,
             afg.secondary_inclusion_directive =
                 s.get_by_name(arch.value(), sid);
 
-            r.formattaters_feature_groups[arch] = afg;
+            r.archetype_feature_groups[arch] = afg;
         }
     }
 
@@ -1140,10 +1142,11 @@ legacy_paths_transform::make_directive_group(const feature_group& fg,
         BOOST_THROW_EXCEPTION(transform_exception(empty_archetype));
     }
 
-    const auto i(fg.formattaters_feature_groups.find(archetype));
-    if (i == fg.formattaters_feature_groups.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_archetype;
-        BOOST_THROW_EXCEPTION(transform_exception(missing_archetype));
+    const auto i(fg.archetype_feature_groups.find(archetype));
+    if (i == fg.archetype_feature_groups.end()) {
+        const auto id(archetype.value());
+        BOOST_LOG_SEV(lg, trace) << missing_archetype << id;
+        return boost::optional<directive_group>();
     }
 
     const auto& ft(i->second);
@@ -1164,7 +1167,6 @@ legacy_paths_transform::make_directive_group(const feature_group& fg,
             BOOST_THROW_EXCEPTION(transform_exception(
                     secondary_without_primary + archetype.value()));
         }
-
         r.secondary = s.get_text_collection_content(sid);
     }
 
@@ -1320,13 +1322,98 @@ legacy_paths_transform::get_relative_path_for_archetype(
 
     return l.make_inclusion_path_for_cpp_header(ln, pmn.id().value());
 }
+std::string legacy_paths_transform::
+to_inclusion_directive(const boost::filesystem::path& p) {
+    std::ostringstream ss;
+    ss << double_quote << p.generic_string() << double_quote;
+    return ss.str();
+}
 
-void legacy_paths_transform::
-process_artefact(const locator& l, entities::artefact& a) {
+void legacy_paths_transform::process_artefact(const feature_group& fg,
+    const locator& l, entities::artefact& a) {
     const auto& ln(a.provenance().logical_name());
     const auto& pmn(a.meta_name());
+
+    const auto pmid(pmn.id());
+    BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
     const auto fp(get_full_path_for_archetype(ln, pmn, l));
     a.path_properties().file_path(fp);
+
+    /*
+     * If the archetype cannot be involved in a relation there is no
+     * point in computing the relation paths.
+     */
+    const auto rs(a.relations().status());
+    if (rs != entities::relation_status::relatable &&
+        rs != entities::relation_status::facet_default)
+        return;
+
+    /*
+     * First we extract the data required to generated include
+     * directives for this element. Note that we generate this setting
+     * for _all elements_ even if the user did not specify any
+     * meta-data (we do so via defaults).
+     *
+     * The question we are asking is: "does this element require any
+     * inclusion directives at all, across all facets?". Not all
+     * elements do; for example bool, int and so on don't require any
+     * inclusions at all across all facets. If the user did not
+     * override this, we default it to true because normally elements
+     * require inclusion.
+     */
+    const auto& cfg(*a.configuration());
+    const bool required(make_top_level_inclusion_required(fg, cfg));
+    if (!required) {
+        BOOST_LOG_SEV(lg, trace) << "Inclusion not required for element.";
+        return;
+    } else
+        BOOST_LOG_SEV(lg, trace) << "Inclusion directive required for element.";
+
+    /*
+     * Find out if this element has any inclusion directive overrides
+     * at all. If it has at least one override, we know we don't need
+     * to generate inclusion directives manually.
+     */
+    const bool has_overrides(has_inclusion_directive_overrides(cfg));
+    const auto arch(pmn.id());
+    BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
+
+    /*
+     * If the user has not provided any overrides at all, we can
+     * safely compute the inclusion directive according to a
+     * well-defined heuristic, slot it in and get on our way. It's
+     * basically a dogen generated model.
+     */
+    auto& pp(a.path_properties());
+    if (!has_overrides) {
+        const auto p(l.make_inclusion_path_for_cpp_header(ln, arch.value()));
+        pp.inclusion_path(p);
+
+        pp.primary_inclusion_directive(to_inclusion_directive(p));
+        BOOST_LOG_SEV(lg, trace) << "Computed primary directive: "
+                                 << pp.primary_inclusion_directive();
+    } else {
+        /*
+         * Now we need to fetch the overrides from meta-data. They may
+         * not exist - i.e. the question we're asking is "does the
+         * archetype require an inclusion directive for this specific
+         * formatter?" Some elements require inclusion directives for
+         * some archetypes, but not for others. For example, we may
+         * need an include for serialising a std::list, but in test
+         * data we make use of helpers and thus not require an
+         * include.
+         */
+        const auto dg(make_directive_group(fg, arch, cfg));
+        if (dg) {
+            pp.primary_inclusion_directive(dg->primary);
+            pp.secondary_inclusion_directives(dg->secondary);
+            BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
+                                     << "meta-data: " << dg->primary;
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished computing inclusion directives.";
 }
 
 void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
@@ -1339,9 +1426,14 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     const auto fg(make_feature_group(fm, pmm.indexed_names()));
     for (auto& region_pair : m.regions_by_logical_id()) {
         auto& region(region_pair.second);
+
+        const auto ln(region.provenance().logical_name());
+        BOOST_LOG_SEV(lg, debug) << "Processing region for logical element: "
+                                 << ln.id().value();
+
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
             auto& a(*artefact_pair.second);
-            process_artefact(l, a);
+            process_artefact(fg, l, a);
         }
     }
 

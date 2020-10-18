@@ -62,7 +62,7 @@ private:
         variability::entities::feature inclusion_required;
         std::unordered_map<identification::entities::physical_meta_id,
                            archetype_feature_group>
-        formattaters_feature_groups;
+        archetype_feature_groups;
     };
 
     static feature_group make_feature_group(
@@ -107,7 +107,8 @@ private:
         const locator& l);
 
 private:
-    static void process_artefact(const locator& l, entities::artefact& a);
+    static void process_artefact(const feature_group& fg,
+        const locator& l, entities::artefact& a);
 
 public:
     static void apply(const context& ctx, entities::model& m);
