@@ -2017,6 +2017,13 @@
           }
         }
       ]
+    },
+    {
+      "name": "helpers::header_guard_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
