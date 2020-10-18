@@ -24,7 +24,6 @@
 #include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
-#include "dogen.text.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen.text.cpp/types/formattables/odb_expander.hpp"
 #include "dogen.text.cpp/types/formattables/facet_directory_expander.hpp"
 #include "dogen.text.cpp/types/formattables/build_files_expander.hpp"
@@ -73,12 +72,6 @@ void model_expander::expand_helpers(
 void model_expander::reduce(model& fm) const {
     reducer rd;
     rd.reduce(fm);
-}
-
-void model_expander::expand_file_paths_and_guards(
-    const transforms::repository& frp, const locator& l, model& fm) const {
-    file_path_and_guard_expander ex;
-    ex.expand(frp, l, fm);
 }
 
 void model_expander::expand_odb(const locator& l, model& fm) const {
@@ -143,7 +136,6 @@ void model_expander::expand(
      */
     reduce(fm);
 
-    expand_file_paths_and_guards(frp, l, fm);
     expand_odb(l, fm);
     expand_facet_directories(l, fm);
     expand_build_files(l, fm);

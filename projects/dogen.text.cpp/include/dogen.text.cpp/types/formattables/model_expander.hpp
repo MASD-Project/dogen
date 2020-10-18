@@ -63,9 +63,6 @@ private:
 
     void reduce(model& fm) const;
 
-    void expand_file_paths_and_guards(const transforms::repository& frp,
-        const locator& l, model& fm) const;
-
     void expand_odb(const locator& l, model& fm) const;
 
     void expand_facet_directories(const locator& l, model& fm) const;

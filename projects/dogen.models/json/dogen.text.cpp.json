@@ -1170,13 +1170,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::file_path_and_guard_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::aspect_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
