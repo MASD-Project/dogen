@@ -22,7 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.csharp/types/formattables/adaptation_error.hpp"
 #include "dogen.text.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.csharp/types/formattables/adapter.hpp"
@@ -64,20 +63,6 @@ adapter::adapt(const transforms::repository& frp,
             continue;
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
-
-        /*
-         * Perform the artefact expansion by looking at all the
-         * archetypes available via the formatters.
-         */
-        auto& art_props(fbl.element_properties().artefact_properties());
-        for (const auto& fmt : j->second) {
-            const auto pmn(fmt->archetype().meta_name());
-            const auto arch(pmn.id());
-            art_props[arch] = artefact_properties();
-
-            BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch
-                                     << " to element: " << id;
-        }
 
         r[id.value()] = fbl;
     }

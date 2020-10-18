@@ -44,8 +44,6 @@ const bool documenting_previous_identifier(true);
 
 const std::string default_family("Default");
 const std::string static_reference_equals("object");
-const std::string artefact_properties_missing(
-    "Could not find formatter configuration for formatter: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string helpless_family("No registered helpers found for family: ");
 const std::string attribute_with_no_simple_name(
@@ -60,8 +58,7 @@ assistant(const context& ctx, const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
     physical::entities::artefact& a) :
     element_id_(e.name().qualified().dot()), artefact_(a), context_(ctx),
-    artefact_properties_(
-        obtain_artefact_properties(pmn.id())), physical_meta_name_(pmn) {
+    physical_meta_name_(pmn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: "
@@ -87,19 +84,6 @@ make_inheritance_keyword_text(const logical::entities::structural::object& o) {
         return abstract_keyword_text;
 
     return o.is_final() ? sealed_keyword_text : empty;
-}
-
-const formattables::artefact_properties& assistant::obtain_artefact_properties(
-    const identification::entities::physical_meta_id& archetype) const {
-    const auto& eprops(context_.element_properties());
-    const auto i(eprops.artefact_properties().find(archetype));
-    if (i == eprops.artefact_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << archetype;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype.value()));
-    }
-    return i->second;
 }
 
 text::formatters::scoped_boilerplate_formatter assistant::

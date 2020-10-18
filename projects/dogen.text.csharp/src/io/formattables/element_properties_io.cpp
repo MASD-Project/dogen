@@ -20,29 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/element_properties_io.hpp"
-#include "dogen.text.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/attribute_properties_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
 
 namespace std {
 
@@ -89,7 +69,6 @@ namespace dogen::text::csharp::formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::element_properties\"" << ", "
-      << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"attribute_properties\": " << v.attribute_properties()
       << " }";

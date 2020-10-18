@@ -23,23 +23,19 @@
 namespace dogen::text::csharp::formattables {
 
 element_properties::element_properties(
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties)
-    : artefact_properties_(artefact_properties),
-      helper_properties_(helper_properties),
+    : helper_properties_(helper_properties),
       attribute_properties_(attribute_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
-    swap(artefact_properties_, other.artefact_properties_);
     swap(helper_properties_, other.helper_properties_);
     swap(attribute_properties_, other.attribute_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return artefact_properties_ == rhs.artefact_properties_ &&
-        helper_properties_ == rhs.helper_properties_ &&
+    return helper_properties_ == rhs.helper_properties_ &&
         attribute_properties_ == rhs.attribute_properties_;
 }
 
@@ -47,22 +43,6 @@ element_properties& element_properties::operator=(element_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& element_properties::artefact_properties() const {
-    return artefact_properties_;
-}
-
-std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& element_properties::artefact_properties() {
-    return artefact_properties_;
-}
-
-void element_properties::artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& v) {
-    artefact_properties_ = v;
-}
-
-void element_properties::artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>&& v) {
-    artefact_properties_ = std::move(v);
 }
 
 const std::list<dogen::text::csharp::formattables::helper_properties>& element_properties::helper_properties() const {

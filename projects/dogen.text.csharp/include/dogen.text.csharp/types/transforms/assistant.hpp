@@ -50,10 +50,6 @@ public:
         const identification::entities::physical_meta_name& pmn,
         physical::entities::artefact& a);
 
-private:
-    const formattables::artefact_properties& obtain_artefact_properties(
-        const identification::entities::physical_meta_id& archetype) const;
-
 public:
     template<typename T>
         static const T& as(const std::string& /*archetype*/,
@@ -153,7 +149,6 @@ private:
     const std::string element_id_;
     physical::entities::artefact& artefact_;
     const context& context_;
-    formattables::artefact_properties artefact_properties_;
     const identification::entities::physical_meta_name physical_meta_name_;
 };
 

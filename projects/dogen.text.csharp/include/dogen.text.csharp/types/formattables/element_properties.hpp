@@ -29,10 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
-#include "dogen.text.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.csharp/types/formattables/attribute_properties.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -49,16 +46,10 @@ public:
 
 public:
     element_properties(
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties);
 
 public:
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& artefact_properties() const;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties>&& v);
-
     const std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties() const;
     std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties();
     void helper_properties(const std::list<dogen::text::csharp::formattables::helper_properties>& v);
@@ -80,7 +71,6 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::csharp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::text::csharp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties> attribute_properties_;
 };
