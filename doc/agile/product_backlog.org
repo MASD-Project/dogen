@@ -822,8 +822,6 @@ automatically generated without any manual intervention. Similarly,
 deleting formatters will delete all traces of it from the code
 generator.
 
-
-
 *** Injector types with regards to containment                        :story:
 
 It seems we have two models for injectors:
