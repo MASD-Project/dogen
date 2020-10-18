@@ -34,6 +34,7 @@
 #include "dogen.physical/types/entities/path_properties.hpp"
 #include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
+#include "dogen.physical/types/entities/relation_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
@@ -69,7 +70,8 @@ public:
         const dogen::physical::entities::operation& operation,
         const dogen::physical::entities::enablement_properties& enablement_properties,
         const dogen::physical::entities::formatting_styles formatting_style,
-        const std::string& formatting_input);
+        const std::string& formatting_input,
+        const dogen::physical::entities::relation_properties& relations);
 
 public:
     /**
@@ -200,6 +202,11 @@ public:
     void formatting_input(const std::string&& v);
     /**@}*/
 
+    const dogen::physical::entities::relation_properties& relations() const;
+    dogen::physical::entities::relation_properties& relations();
+    void relations(const dogen::physical::entities::relation_properties& v);
+    void relations(const dogen::physical::entities::relation_properties&& v);
+
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -224,6 +231,7 @@ private:
     dogen::physical::entities::enablement_properties enablement_properties_;
     dogen::physical::entities::formatting_styles formatting_style_;
     std::string formatting_input_;
+    dogen::physical::entities::relation_properties relations_;
 };
 
 }

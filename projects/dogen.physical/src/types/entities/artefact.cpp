@@ -48,7 +48,8 @@ artefact::artefact(artefact&& rhs)
       operation_(std::move(rhs.operation_)),
       enablement_properties_(std::move(rhs.enablement_properties_)),
       formatting_style_(std::move(rhs.formatting_style_)),
-      formatting_input_(std::move(rhs.formatting_input_)) { }
+      formatting_input_(std::move(rhs.formatting_input_)),
+      relations_(std::move(rhs.relations_)) { }
 
 artefact::artefact(
     const dogen::identification::entities::physical_meta_name& meta_name,
@@ -63,7 +64,8 @@ artefact::artefact(
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::enablement_properties& enablement_properties,
     const dogen::physical::entities::formatting_styles formatting_style,
-    const std::string& formatting_input)
+    const std::string& formatting_input,
+    const dogen::physical::entities::relation_properties& relations)
     : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
@@ -76,7 +78,8 @@ artefact::artefact(
       operation_(operation),
       enablement_properties_(enablement_properties),
       formatting_style_(formatting_style),
-      formatting_input_(formatting_input) { }
+      formatting_input_(formatting_input),
+      relations_(relations) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -93,6 +96,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(enablement_properties_, other.enablement_properties_);
     swap(formatting_style_, other.formatting_style_);
     swap(formatting_input_, other.formatting_input_);
+    swap(relations_, other.relations_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -108,7 +112,8 @@ bool artefact::operator==(const artefact& rhs) const {
         operation_ == rhs.operation_ &&
         enablement_properties_ == rhs.enablement_properties_ &&
         formatting_style_ == rhs.formatting_style_ &&
-        formatting_input_ == rhs.formatting_input_;
+        formatting_input_ == rhs.formatting_input_ &&
+        relations_ == rhs.relations_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -315,6 +320,22 @@ void artefact::formatting_input(const std::string& v) {
 
 void artefact::formatting_input(const std::string&& v) {
     formatting_input_ = std::move(v);
+}
+
+const dogen::physical::entities::relation_properties& artefact::relations() const {
+    return relations_;
+}
+
+dogen::physical::entities::relation_properties& artefact::relations() {
+    return relations_;
+}
+
+void artefact::relations(const dogen::physical::entities::relation_properties& v) {
+    relations_ = v;
+}
+
+void artefact::relations(const dogen::physical::entities::relation_properties&& v) {
+    relations_ = std::move(v);
 }
 
 }

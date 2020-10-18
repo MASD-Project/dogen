@@ -50,8 +50,8 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const relation_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::relation_properties\"" << ", "
-      << "\"relations\": " << v.relations() << ", "
-      << "\"relation_status\": " << v.relation_status()
+      << "\"status\": " << v.status() << ", "
+      << "\"relations\": " << v.relations()
       << " }";
     return(s);
 }

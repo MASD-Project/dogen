@@ -43,10 +43,13 @@ public:
 
 public:
     relation_properties(
-        const std::list<std::string>& relations,
-        const dogen::physical::entities::relation_status relation_status);
+        const dogen::physical::entities::relation_status status,
+        const std::list<std::string>& relations);
 
 public:
+    dogen::physical::entities::relation_status status() const;
+    void status(const dogen::physical::entities::relation_status v);
+
     /**
      * @brief Artefacts that this artefact depends on.
      *
@@ -59,9 +62,6 @@ public:
     void relations(const std::list<std::string>&& v);
     /**@}*/
 
-    dogen::physical::entities::relation_status relation_status() const;
-    void relation_status(const dogen::physical::entities::relation_status v);
-
 public:
     bool operator==(const relation_properties& rhs) const;
     bool operator!=(const relation_properties& rhs) const {
@@ -73,8 +73,8 @@ public:
     relation_properties& operator=(relation_properties other);
 
 private:
+    dogen::physical::entities::relation_status status_;
     std::list<std::string> relations_;
-    dogen::physical::entities::relation_status relation_status_;
 };
 
 }

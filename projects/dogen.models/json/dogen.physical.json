@@ -567,6 +567,10 @@
           "name": "formatting_input",
           "type": "std::string",
           "documentation": "Template used as input in order to generate the artefact's content, if any.\n"
+        },
+        {
+          "name": "relations",
+          "type": "relation_properties"
         }
       ]
     },
@@ -1954,13 +1958,13 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "status",
+          "type": "relation_status"
+        },
+        {
           "name": "relations",
           "type": "std::list<std::string>",
           "documentation": "Artefacts that this artefact depends on.\n\nThe format used is dependent on the technical space the artefact belongs to.\n"
-        },
-        {
-          "name": "relation_status",
-          "type": "relation_status"
         }
       ]
     },

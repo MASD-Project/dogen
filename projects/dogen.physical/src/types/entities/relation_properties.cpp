@@ -23,29 +23,37 @@
 namespace dogen::physical::entities {
 
 relation_properties::relation_properties()
-    : relation_status_(static_cast<dogen::physical::entities::relation_status>(0)) { }
+    : status_(static_cast<dogen::physical::entities::relation_status>(0)) { }
 
 relation_properties::relation_properties(
-    const std::list<std::string>& relations,
-    const dogen::physical::entities::relation_status relation_status)
-    : relations_(relations),
-      relation_status_(relation_status) { }
+    const dogen::physical::entities::relation_status status,
+    const std::list<std::string>& relations)
+    : status_(status),
+      relations_(relations) { }
 
 void relation_properties::swap(relation_properties& other) noexcept {
     using std::swap;
+    swap(status_, other.status_);
     swap(relations_, other.relations_);
-    swap(relation_status_, other.relation_status_);
 }
 
 bool relation_properties::operator==(const relation_properties& rhs) const {
-    return relations_ == rhs.relations_ &&
-        relation_status_ == rhs.relation_status_;
+    return status_ == rhs.status_ &&
+        relations_ == rhs.relations_;
 }
 
 relation_properties& relation_properties::operator=(relation_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+dogen::physical::entities::relation_status relation_properties::status() const {
+    return status_;
+}
+
+void relation_properties::status(const dogen::physical::entities::relation_status v) {
+    status_ = v;
 }
 
 const std::list<std::string>& relation_properties::relations() const {
@@ -62,14 +70,6 @@ void relation_properties::relations(const std::list<std::string>& v) {
 
 void relation_properties::relations(const std::list<std::string>&& v) {
     relations_ = std::move(v);
-}
-
-dogen::physical::entities::relation_status relation_properties::relation_status() const {
-    return relation_status_;
-}
-
-void relation_properties::relation_status(const dogen::physical::entities::relation_status v) {
-    relation_status_ = v;
 }
 
 }
