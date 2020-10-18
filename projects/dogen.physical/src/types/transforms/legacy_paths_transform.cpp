@@ -26,6 +26,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
@@ -52,6 +53,7 @@ const std::string underscore("_");
 const std::string double_quote("\"");
 const std::string dot(".");
 const std::string separator("_");
+const std::string override_postfix("_inclusion_directive");
 const physical_meta_id cpp_backend_id("masd.cpp");
 const physical_meta_id csharp_backend_id("masd.csharp");
 
@@ -65,6 +67,17 @@ const std::string missing_backend_directory(
     "Enable backend directory is on but backend directory is empty.");
 const std::string invalid_archetype("Archetype does not have a kind: ");
 const std::string invalid_archetype_kind("Archetype kind is not supported: ");
+
+const std::string duplicate_element_name("Duplicate delement name: ");
+const std::string empty_primary_directive(
+    "Primary include directive is empty.");
+const std::string formatter_not_found_for_type(
+    "Formatter not found for type: ");
+const std::string empty_archetype("Formatter name is empty.");
+const std::string secondary_without_primary(
+    "Element contains secondary directives but no primary directives."
+    "Archetype: ");
+
 
 const std::string archetype_class_header_factory_ak(
     "archetype_class_header_factory");
@@ -1075,6 +1088,101 @@ locator::facet_directories() const {
 
 using entities::legacy_archetype_kind;
 
+legacy_paths_transform::feature_group legacy_paths_transform::
+make_feature_group(const variability::entities::feature_model& fm,
+    const identification::entities::physical_meta_name_indices& in) {
+    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+
+    feature_group r;
+    const variability::helpers::feature_selector s(fm);
+    const std::string ir("masd.cpp.inclusion_required");
+    r.inclusion_required = s.get_by_name(ir);
+
+    for (const auto& pair : in.archetype_names_by_logical_meta_name()) {
+        const auto& archetype_name_set(pair.second);
+        for (const auto& pmn : archetype_name_set.meta_names()) {
+            const auto arch(pmn.id());
+
+            archetype_feature_group afg;
+            const std::string pid("primary_inclusion_directive");
+            const auto o = s.try_get_by_name(arch.value(), pid);
+            if (!o)
+                continue;
+
+            afg.primary_inclusion_directive = *o;
+
+            const std::string sid("secondary_inclusion_directive");
+            afg.secondary_inclusion_directive =
+                s.get_by_name(arch.value(), sid);
+
+            r.formattaters_feature_groups[arch] = afg;
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group. ";
+    return r;
+}
+
+bool legacy_paths_transform::
+make_top_level_inclusion_required(const feature_group& fg,
+    const variability::entities::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    return s.get_boolean_content_or_default(fg.inclusion_required);
+}
+
+boost::optional<legacy_paths_transform::directive_group>
+legacy_paths_transform::make_directive_group(const feature_group& fg,
+    const identification::entities::physical_meta_id& archetype,
+    const variability::entities::configuration& cfg) {
+
+    if (archetype.value().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(transform_exception(empty_archetype));
+    }
+
+    const auto i(fg.formattaters_feature_groups.find(archetype));
+    if (i == fg.formattaters_feature_groups.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_archetype;
+        BOOST_THROW_EXCEPTION(transform_exception(missing_archetype));
+    }
+
+    const auto& ft(i->second);
+    const variability::helpers::configuration_selector s(cfg);
+    directive_group r;
+
+    bool found(false);
+    const auto pid(ft.primary_inclusion_directive);
+    if (s.has_configuration_point(pid)) {
+        found = true;
+        r.primary = s.get_text_content(pid);
+    }
+
+    const auto sid(ft.secondary_inclusion_directive);
+    if (s.has_configuration_point(sid)) {
+        if (!found) {
+            BOOST_LOG_SEV(lg, error) << secondary_without_primary << archetype;
+            BOOST_THROW_EXCEPTION(transform_exception(
+                    secondary_without_primary + archetype.value()));
+        }
+
+        r.secondary = s.get_text_collection_content(sid);
+    }
+
+    if (!found)
+        return boost::optional<directive_group>();
+
+    return r;
+}
+
+bool legacy_paths_transform::has_inclusion_directive_overrides(
+    const variability::entities::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    const auto r(s.has_configuration_point_ending_with((override_postfix)));
+    BOOST_LOG_SEV(lg, debug) << "Found entries with keys ending with "
+                             << override_postfix << ": " << r;
+    return r;
+}
+
 legacy_archetype_kind legacy_paths_transform::
 get_archetye_kind(const std::string& archetype_name, const bool is_tests) {
     if (archetype_name == archetype_class_header_factory_ak ||
@@ -1218,6 +1326,9 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const locator l(m);
+    const auto& pmm(*ctx.meta_model());
+    const auto& fm(*ctx.feature_model());
+    const auto fg(make_feature_group(fm, pmm.indexed_names()));
     for (auto& region_pair : m.regions_by_logical_id()) {
         auto& region(region_pair.second);
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
@@ -1225,6 +1336,7 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
             const auto& ln(region.provenance().logical_name());
             const auto fp(get_full_path_for_archetype(ln, a->meta_name(), l));
             a->path_properties().file_path(fp);
+
         }
     }
 

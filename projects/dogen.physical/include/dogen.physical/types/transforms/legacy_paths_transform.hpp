@@ -21,6 +21,7 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 
+#include "dogen.physical/types/entities/artefact.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -29,6 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
@@ -45,6 +47,41 @@ class locator;
  */
 class legacy_paths_transform final {
 private:
+    struct directive_group {
+        std::string primary;
+        std::list<std::string> secondary;
+    };
+
+private:
+    struct archetype_feature_group {
+        variability::entities::feature primary_inclusion_directive;
+        variability::entities::feature secondary_inclusion_directive;
+    };
+
+    struct feature_group {
+        variability::entities::feature inclusion_required;
+        std::unordered_map<identification::entities::physical_meta_id,
+                           archetype_feature_group>
+        formattaters_feature_groups;
+    };
+
+    static feature_group make_feature_group(
+        const variability::entities::feature_model& fm,
+        const identification::entities::physical_meta_name_indices& in);
+
+    static bool make_top_level_inclusion_required(const feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    static boost::optional<directive_group>
+    make_directive_group(const feature_group& fg,
+        const identification::entities::physical_meta_id& archetype,
+        const variability::entities::configuration& cfg);
+
+    static bool has_inclusion_directive_overrides(
+        const variability::entities::configuration& cfg);
+
+private:
+    static std::string to_inclusion_directive(const boost::filesystem::path& p);
 
 private:
     /**
