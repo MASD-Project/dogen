@@ -12510,19 +12510,19 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O78">
       <dia:attribute name="obj_pos">
-        <dia:point val="58,98"/>
+        <dia:point val="58,100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.95,97.95;76.645,101.65"/>
+        <dia:rectangle val="57.95,99.95;76.645,102.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="58,98"/>
+        <dia:point val="58,100"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_properties#</dia:string>
@@ -12615,29 +12615,6 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#header_guard#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#inclusion_dependencies#</dia:string>
@@ -17395,7 +17372,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="80,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.545,91.25;80.75,98.8"/>
+        <dia:rectangle val="76.545,91.25;80.75,100.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17404,7 +17381,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="80,92"/>
         <dia:point val="80,95"/>
         <dia:point val="76.595,95"/>
-        <dia:point val="76.595,98"/>
+        <dia:point val="76.595,100"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -18883,7 +18860,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="62.8375,108.214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.0875,101.55;67.4975,109.014"/>
+        <dia:rectangle val="62.0875,102.75;67.4975,109.014"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18892,7 +18869,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="62.8375,108.214"/>
         <dia:point val="62.8375,106"/>
         <dia:point val="67.2975,106"/>
-        <dia:point val="67.2975,101.6"/>
+        <dia:point val="67.2975,102.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -34691,7 +34668,7 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:point val="14.365,106.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.615,99.955;58.05,106.955"/>
+        <dia:rectangle val="13.615,101.155;58.05,106.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34699,8 +34676,8 @@ BOOST_AUTO_TEST_SUITE_END()
       <dia:attribute name="orth_points">
         <dia:point val="14.365,106.1"/>
         <dia:point val="16,106.1"/>
-        <dia:point val="16,100.7"/>
-        <dia:point val="58,100.7"/>
+        <dia:point val="16,101.9"/>
+        <dia:point val="58,101.9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -34763,7 +34740,7 @@ BOOST_AUTO_TEST_SUITE_END()
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O107" connection="4"/>
-        <dia:connection handle="1" to="O78" connection="10"/>
+        <dia:connection handle="1" to="O78" connection="8"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

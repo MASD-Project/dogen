@@ -110,7 +110,8 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
 
 void assistant::validate() const {
     const auto& fn(physical_meta_name_.id());
-    const auto fp(artefact_.path_properties().file_path());
+    const auto& pp(artefact_.path_properties());
+    const auto fp(pp.file_path());
     if (fp.empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
         BOOST_THROW_EXCEPTION(
@@ -120,8 +121,8 @@ void assistant::validate() const {
     if (!requires_header_guard_)
         return;
 
-    const auto& ap(artefact_properties_);
-    if (ap.header_guard().empty()) {
+    const auto& hg(pp.header_guard());
+    if (hg.empty()) {
         BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
         BOOST_THROW_EXCEPTION(
             formatting_error(header_guard_not_set + fn.value()));
@@ -393,7 +394,9 @@ make_scoped_boilerplate_formatter(const logical::entities::element& e,
 
     const auto& art_props(artefact_properties_);
     bp.dependencies(art_props.inclusion_dependencies());
-    bp.header_guard(art_props.header_guard());
+
+    const auto& pp(artefact_.path_properties());
+    bp.header_guard(pp.header_guard());
     bp.technical_space(ts);
     const auto i(e.decoration().find(ts));
     if (i != e.decoration().end() && i->second) {

@@ -22,43 +22,22 @@
 
 namespace dogen::text::cpp::formattables {
 
-artefact_properties::artefact_properties(
-    const std::string& header_guard,
-    const std::list<std::string>& inclusion_dependencies)
-    : header_guard_(header_guard),
-      inclusion_dependencies_(inclusion_dependencies) { }
+artefact_properties::artefact_properties(const std::list<std::string>& inclusion_dependencies)
+    : inclusion_dependencies_(inclusion_dependencies) { }
 
 void artefact_properties::swap(artefact_properties& other) noexcept {
     using std::swap;
-    swap(header_guard_, other.header_guard_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
 }
 
 bool artefact_properties::operator==(const artefact_properties& rhs) const {
-    return header_guard_ == rhs.header_guard_ &&
-        inclusion_dependencies_ == rhs.inclusion_dependencies_;
+    return inclusion_dependencies_ == rhs.inclusion_dependencies_;
 }
 
 artefact_properties& artefact_properties::operator=(artefact_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& artefact_properties::header_guard() const {
-    return header_guard_;
-}
-
-std::string& artefact_properties::header_guard() {
-    return header_guard_;
-}
-
-void artefact_properties::header_guard(const std::string& v) {
-    header_guard_ = v;
-}
-
-void artefact_properties::header_guard(const std::string&& v) {
-    header_guard_ = std::move(v);
 }
 
 const std::list<std::string>& artefact_properties::inclusion_dependencies() const {

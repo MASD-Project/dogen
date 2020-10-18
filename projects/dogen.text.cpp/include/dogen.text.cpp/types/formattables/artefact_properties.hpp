@@ -39,16 +39,9 @@ public:
     ~artefact_properties() = default;
 
 public:
-    artefact_properties(
-        const std::string& header_guard,
-        const std::list<std::string>& inclusion_dependencies);
+    explicit artefact_properties(const std::list<std::string>& inclusion_dependencies);
 
 public:
-    const std::string& header_guard() const;
-    std::string& header_guard();
-    void header_guard(const std::string& v);
-    void header_guard(const std::string&& v);
-
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
     void inclusion_dependencies(const std::list<std::string>& v);
@@ -65,7 +58,6 @@ public:
     artefact_properties& operator=(artefact_properties other);
 
 private:
-    std::string header_guard_;
     std::list<std::string> inclusion_dependencies_;
 };
 

@@ -61,7 +61,7 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
          */
         for (auto& pair : eprops.artefact_properties()) {
             const auto arch(pair.first);
-            auto& art_props(pair.second);
+            // auto& art_props(pair.second);
 
             const auto i(safba.find(arch));
             if (i == safba.end()) {
@@ -78,7 +78,8 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
             const auto ns(transforms::inclusion_support_types::not_supported);
             if (fmt->inclusion_support_type() != ns) {
                 const auto ip(fmt->inclusion_path(l, n));
-                art_props.header_guard(header_guard_factory::make(ip));
+                header_guard_factory::make(ip);
+                // art_props.header_guard(header_guard_factory::make(ip));
             }
         }
     }

@@ -750,10 +750,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "header_guard",
-          "type": "std::string"
-        },
-        {
           "name": "inclusion_dependencies",
           "type": "std::list<std::string>"
         }
