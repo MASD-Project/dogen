@@ -25,12 +25,27 @@
 #pragma once
 #endif
 
+#include <unordered_map>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.physical/types/entities/relations.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Updates the relation information in the physical model.
+ */
 class relations_transform final {
+private:
+    /**
+     * @brief Indexes relations per archetypes.
+     */
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              entities::relations>
+    obtain_relations_for_archetype(const entities::meta_model& pmm);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
