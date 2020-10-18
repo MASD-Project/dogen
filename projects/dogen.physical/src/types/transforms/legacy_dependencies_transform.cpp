@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/legacy_dependencies_transform.hpp"
 
 namespace {
@@ -31,13 +34,49 @@ transform_id("physical.transforms.legacy_dependencies_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string duplicate_id("Duplicate logical-physical ID: ");
+
 }
 
 namespace dogen::physical::transforms {
 
-void legacy_dependencies_transform::apply(const context& ctx, entities::model& m) {
+using entities::inclusion_directives;
+using identification::entities::logical_meta_physical_id;
+
+std::unordered_map<logical_meta_physical_id, inclusion_directives>
+legacy_dependencies_transform::
+get_inclusion_directives(const entities::model& m) {
+    std::unordered_map<logical_meta_physical_id, inclusion_directives> r;
+    for (const auto& region_pair : m.regions_by_logical_id()) {
+        const auto& region(region_pair.second);
+        for (const auto& arch_pair : region.artefacts_by_archetype()) {
+            const auto& a(*arch_pair.second);
+
+            logical_meta_physical_id id;
+            id.logical_id(a.provenance().logical_name().id());
+            id.physical_meta_id(a.meta_name().id());
+
+            const auto& dir(a.path_properties().inclusion_directives());
+            const auto inserted(r.insert(std::make_pair(id, dir)).second);
+            if (!inserted) {
+                std::ostringstream os;
+                os << duplicate_id << id.logical_id().value() << "-"
+                   << id.physical_meta_id().value();
+                const auto s(os.str());
+                BOOST_LOG_SEV(lg, error) << s;
+                BOOST_THROW_EXCEPTION(transform_exception(s));
+            }
+        }
+    }
+    return r;
+}
+
+void
+legacy_dependencies_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "legacy dependencies",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
+
+    const auto ids(get_inclusion_directives(m));
 
     stp.end_transform(m);
 }

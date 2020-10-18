@@ -25,12 +25,24 @@
 #pragma once
 #endif
 
+#include <unordered_map>
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.physical/types/entities/inclusion_directives.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Computes dependencies in the legacy format.
+ */
 class legacy_dependencies_transform final {
+private:
+    static
+    std::unordered_map<identification::entities::logical_meta_physical_id,
+                       entities::inclusion_directives>
+    get_inclusion_directives(const entities::model& m);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
