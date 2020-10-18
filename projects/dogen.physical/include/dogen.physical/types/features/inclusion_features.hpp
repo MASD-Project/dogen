@@ -27,37 +27,10 @@
 
 #include <list>
 #include "dogen.variability/types/entities/feature.hpp"
-#include "dogen.variability/types/entities/configuration.hpp"
-#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::physical::features {
 
 class inclusion_features final {
-public:
-    struct feature_group {
-        variability::entities::feature inclusion_required;
-    };
-
-    static feature_group
-    make_feature_group(const variability::entities::feature_model& fm);
-
-public:
-    struct static_configuration {
-        bool inclusion_required;
-
-        static_configuration() :
-            inclusion_required() {}
-    };
-
-    static static_configuration make_static_configuration(
-        const feature_group& fg,
-        const variability::entities::configuration& cfg);
-
-    template<typename Configurable>
-    static static_configuration make_static_configuration(
-        const feature_group& fg, const Configurable& c) {
-        return make_static_configuration(fg, *c.configuration());
-    }
 
 public:
     static std::list<dogen::variability::entities::feature>

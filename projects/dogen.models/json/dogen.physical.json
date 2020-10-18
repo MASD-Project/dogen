@@ -2002,6 +2002,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
+        "masd.variability.generate_static_configuration": "false",
         "masd.variability.key_prefix": "masd.cpp"
       },
       "fallback_element_type": "masd::object",

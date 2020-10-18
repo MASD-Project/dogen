@@ -21,15 +21,17 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 
-#include "dogen.identification/types/entities/logical_name.hpp"
-#include "dogen.identification/types/entities/physical_meta_id.hpp"
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
-#include <boost/filesystem/path.hpp>
-#include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <boost/filesystem/path.hpp>
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/legacy_archetype_kind.hpp"
@@ -42,6 +44,8 @@ class locator;
  * @brief Populates the include and full paths in artefacts.
  */
 class legacy_paths_transform final {
+private:
+
 private:
     /**
      * @brief Returns the enumeration for the given archetype.

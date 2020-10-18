@@ -23511,7 +23511,8 @@ The format used is dependent on the technical space the artefact belongs to.#</d
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.key_prefix=masd.cpp#</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.key_prefix=masd.cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

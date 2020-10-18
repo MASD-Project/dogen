@@ -20,8 +20,6 @@
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.physical/types/features/inclusion_features.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::physical::features {
 
@@ -46,25 +44,6 @@ make_masd_cpp_inclusion_required() {
 
 }
 
-inclusion_features::feature_group
-inclusion_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
-    feature_group r;
-    const dogen::variability::helpers::feature_selector s(fm);
-
-    r.inclusion_required = s.get_by_name("masd.cpp.inclusion_required");
-
-    return r;
-}
-
-inclusion_features::static_configuration inclusion_features::make_static_configuration(
-    const feature_group& fg,
-    const dogen::variability::entities::configuration& cfg) {
-
-    static_configuration r;
-    const dogen::variability::helpers::configuration_selector s(cfg);
-    r.inclusion_required = s.get_boolean_content_or_default(fg.inclusion_required);
-    return r;
-}
 
 std::list<dogen::variability::entities::feature>
 inclusion_features::make_features() {
