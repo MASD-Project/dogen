@@ -2035,6 +2035,13 @@
           "documentation": "Any other directives that are also needed for this element.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::legacy_dependencies_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
