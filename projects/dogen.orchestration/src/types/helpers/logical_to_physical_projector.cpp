@@ -222,6 +222,7 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
         auto a(boost::make_shared<physical::entities::artefact>());
         a->name().simple(e->name().simple());
         a->meta_name(pmn);
+        a->configuration(pr.configuration());
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
