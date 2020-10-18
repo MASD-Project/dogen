@@ -1658,19 +1658,13 @@
           "documentation": "Path for inclusion for this artefact, computed from the path.\n\nNote that this is will not necessarily be used for the inclusion directive.\n"
         },
         {
+          "name": "inclusion_directives",
+          "type": "inclusion_directives"
+        },
+        {
           "name": "inclusion_dependencies",
           "type": "std::list<std::string>",
           "documentation": "C++ Inlusion dependencies for this artefact.\n"
-        },
-        {
-          "name": "primary_inclusion_directive",
-          "type": "std::string",
-          "documentation": "The main inclusion directive needed for this element.\n"
-        },
-        {
-          "name": "secondary_inclusion_directives",
-          "type": "std::list<std::string>",
-          "documentation": "Any other directives that are also needed for this element.\n"
         },
         {
           "name": "using_dependencies",
@@ -2024,6 +2018,23 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::inclusion_directives",
+      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "primary",
+          "type": "std::string",
+          "documentation": "The main inclusion directive needed for this element.\n"
+        },
+        {
+          "name": "secondary",
+          "type": "std::list<std::string>",
+          "documentation": "Any other directives that are also needed for this element.\n"
+        }
+      ]
     }
   ]
 }

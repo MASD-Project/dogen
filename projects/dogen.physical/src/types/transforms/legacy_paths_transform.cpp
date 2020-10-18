@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen.physical/types/entities/inclusion_directives.hpp"
 #include "dogen.physical/types/entities/relation_status.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
@@ -1133,8 +1134,8 @@ make_top_level_inclusion_required(const feature_group& fg,
     return s.get_boolean_content_or_default(fg.inclusion_required);
 }
 
-boost::optional<legacy_paths_transform::directive_group>
-legacy_paths_transform::make_directive_group(const feature_group& fg,
+boost::optional<entities::inclusion_directives>
+legacy_paths_transform::read_inclusion_directives(const feature_group& fg,
     const identification::entities::physical_meta_id& archetype,
     const variability::entities::configuration& cfg) {
 
@@ -1143,22 +1144,23 @@ legacy_paths_transform::make_directive_group(const feature_group& fg,
         BOOST_THROW_EXCEPTION(transform_exception(empty_archetype));
     }
 
+    using entities::inclusion_directives;
     const auto i(fg.archetype_feature_groups.find(archetype));
     if (i == fg.archetype_feature_groups.end()) {
         const auto id(archetype.value());
         BOOST_LOG_SEV(lg, trace) << missing_archetype << id;
-        return boost::optional<directive_group>();
+        return boost::optional<inclusion_directives>();
     }
 
     const auto& ft(i->second);
     const variability::helpers::configuration_selector s(cfg);
-    directive_group r;
+    inclusion_directives r;
 
     bool found(false);
     const auto pid(ft.primary_inclusion_directive);
     if (s.has_configuration_point(pid)) {
         found = true;
-        r.primary = s.get_text_content(pid);
+        r.primary(s.get_text_content(pid));
     }
 
     const auto sid(ft.secondary_inclusion_directive);
@@ -1168,11 +1170,11 @@ legacy_paths_transform::make_directive_group(const feature_group& fg,
             BOOST_THROW_EXCEPTION(transform_exception(
                     secondary_without_primary + archetype.value()));
         }
-        r.secondary = s.get_text_collection_content(sid);
+        r.secondary(s.get_text_collection_content(sid));
     }
 
     if (!found)
-        return boost::optional<directive_group>();
+        return boost::optional<inclusion_directives>();
 
     return r;
 }
@@ -1394,26 +1396,27 @@ void legacy_paths_transform::process_artefact(const feature_group& fg,
         using helpers::header_guard_factory;
         pp.header_guard(header_guard_factory::make(p));
 
-        pp.primary_inclusion_directive(to_inclusion_directive(p));
+        entities::inclusion_directives id;
+        id.primary(to_inclusion_directive(p));
+        pp.inclusion_directives(id);
         BOOST_LOG_SEV(lg, trace) << "Computed primary directive: "
-                                 << pp.primary_inclusion_directive();
+                                 << id.primary();
     } else {
         /*
          * Now we need to fetch the overrides from meta-data. They may
          * not exist - i.e. the question we're asking is "does the
          * archetype require an inclusion directive for this specific
-         * formatter?" Some elements require inclusion directives for
+         * archetype?" Some elements require inclusion directives for
          * some archetypes, but not for others. For example, we may
          * need an include for serialising a std::list, but in test
          * data we make use of helpers and thus not require an
          * include.
          */
-        const auto dg(make_directive_group(fg, arch, cfg));
-        if (dg) {
-            pp.primary_inclusion_directive(dg->primary);
-            pp.secondary_inclusion_directives(dg->secondary);
+        const auto id(read_inclusion_directives(fg, arch, cfg));
+        if (id) {
+            pp.inclusion_directives(*id);
             BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
-                                     << "meta-data: " << dg->primary;
+                                     << "meta-data: " << id->primary();
         }
     }
 

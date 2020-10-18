@@ -21,7 +21,6 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 
-#include "dogen.physical/types/entities/artefact.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -34,6 +33,7 @@
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/legacy_archetype_kind.hpp"
@@ -46,12 +46,6 @@ class locator;
  * @brief Populates the include and full paths in artefacts.
  */
 class legacy_paths_transform final {
-private:
-    struct directive_group {
-        std::string primary;
-        std::list<std::string> secondary;
-    };
-
 private:
     struct archetype_feature_group {
         variability::entities::feature primary_inclusion_directive;
@@ -72,8 +66,8 @@ private:
     static bool make_top_level_inclusion_required(const feature_group& fg,
         const variability::entities::configuration& cfg);
 
-    static boost::optional<directive_group>
-    make_directive_group(const feature_group& fg,
+    static boost::optional<entities::inclusion_directives>
+    read_inclusion_directives(const feature_group& fg,
         const identification::entities::physical_meta_id& archetype,
         const variability::entities::configuration& cfg);
 

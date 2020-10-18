@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "dogen.physical/types/entities/inclusion_directives.hpp"
 
 namespace dogen::physical::entities {
 
@@ -46,9 +47,8 @@ public:
         const boost::filesystem::path& file_path,
         const std::string& header_guard,
         const boost::filesystem::path& inclusion_path,
+        const dogen::physical::entities::inclusion_directives& inclusion_directives,
         const std::list<std::string>& inclusion_dependencies,
-        const std::string& primary_inclusion_directive,
-        const std::list<std::string>& secondary_inclusion_directives,
         const std::list<std::string>& using_dependencies,
         const boost::filesystem::path& relative_path);
 
@@ -85,6 +85,11 @@ public:
     void inclusion_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    const dogen::physical::entities::inclusion_directives& inclusion_directives() const;
+    dogen::physical::entities::inclusion_directives& inclusion_directives();
+    void inclusion_directives(const dogen::physical::entities::inclusion_directives& v);
+    void inclusion_directives(const dogen::physical::entities::inclusion_directives&& v);
+
     /**
      * @brief C++ Inlusion dependencies for this artefact.
      */
@@ -93,26 +98,6 @@ public:
     std::list<std::string>& inclusion_dependencies();
     void inclusion_dependencies(const std::list<std::string>& v);
     void inclusion_dependencies(const std::list<std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief The main inclusion directive needed for this element.
-     */
-    /**@{*/
-    const std::string& primary_inclusion_directive() const;
-    std::string& primary_inclusion_directive();
-    void primary_inclusion_directive(const std::string& v);
-    void primary_inclusion_directive(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Any other directives that are also needed for this element.
-     */
-    /**@{*/
-    const std::list<std::string>& secondary_inclusion_directives() const;
-    std::list<std::string>& secondary_inclusion_directives();
-    void secondary_inclusion_directives(const std::list<std::string>& v);
-    void secondary_inclusion_directives(const std::list<std::string>&& v);
     /**@}*/
 
     const std::list<std::string>& using_dependencies() const;
@@ -139,9 +124,8 @@ private:
     boost::filesystem::path file_path_;
     std::string header_guard_;
     boost::filesystem::path inclusion_path_;
+    dogen::physical::entities::inclusion_directives inclusion_directives_;
     std::list<std::string> inclusion_dependencies_;
-    std::string primary_inclusion_directive_;
-    std::list<std::string> secondary_inclusion_directives_;
     std::list<std::string> using_dependencies_;
     boost::filesystem::path relative_path_;
 };

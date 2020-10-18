@@ -26,9 +26,8 @@ path_properties::path_properties(path_properties&& rhs)
     : file_path_(std::move(rhs.file_path_)),
       header_guard_(std::move(rhs.header_guard_)),
       inclusion_path_(std::move(rhs.inclusion_path_)),
+      inclusion_directives_(std::move(rhs.inclusion_directives_)),
       inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
-      primary_inclusion_directive_(std::move(rhs.primary_inclusion_directive_)),
-      secondary_inclusion_directives_(std::move(rhs.secondary_inclusion_directives_)),
       using_dependencies_(std::move(rhs.using_dependencies_)),
       relative_path_(std::move(rhs.relative_path_)) { }
 
@@ -36,17 +35,15 @@ path_properties::path_properties(
     const boost::filesystem::path& file_path,
     const std::string& header_guard,
     const boost::filesystem::path& inclusion_path,
+    const dogen::physical::entities::inclusion_directives& inclusion_directives,
     const std::list<std::string>& inclusion_dependencies,
-    const std::string& primary_inclusion_directive,
-    const std::list<std::string>& secondary_inclusion_directives,
     const std::list<std::string>& using_dependencies,
     const boost::filesystem::path& relative_path)
     : file_path_(file_path),
       header_guard_(header_guard),
       inclusion_path_(inclusion_path),
+      inclusion_directives_(inclusion_directives),
       inclusion_dependencies_(inclusion_dependencies),
-      primary_inclusion_directive_(primary_inclusion_directive),
-      secondary_inclusion_directives_(secondary_inclusion_directives),
       using_dependencies_(using_dependencies),
       relative_path_(relative_path) { }
 
@@ -55,9 +52,8 @@ void path_properties::swap(path_properties& other) noexcept {
     swap(file_path_, other.file_path_);
     swap(header_guard_, other.header_guard_);
     swap(inclusion_path_, other.inclusion_path_);
+    swap(inclusion_directives_, other.inclusion_directives_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
-    swap(primary_inclusion_directive_, other.primary_inclusion_directive_);
-    swap(secondary_inclusion_directives_, other.secondary_inclusion_directives_);
     swap(using_dependencies_, other.using_dependencies_);
     swap(relative_path_, other.relative_path_);
 }
@@ -66,9 +62,8 @@ bool path_properties::operator==(const path_properties& rhs) const {
     return file_path_ == rhs.file_path_ &&
         header_guard_ == rhs.header_guard_ &&
         inclusion_path_ == rhs.inclusion_path_ &&
+        inclusion_directives_ == rhs.inclusion_directives_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
-        primary_inclusion_directive_ == rhs.primary_inclusion_directive_ &&
-        secondary_inclusion_directives_ == rhs.secondary_inclusion_directives_ &&
         using_dependencies_ == rhs.using_dependencies_ &&
         relative_path_ == rhs.relative_path_;
 }
@@ -127,6 +122,22 @@ void path_properties::inclusion_path(const boost::filesystem::path&& v) {
     inclusion_path_ = std::move(v);
 }
 
+const dogen::physical::entities::inclusion_directives& path_properties::inclusion_directives() const {
+    return inclusion_directives_;
+}
+
+dogen::physical::entities::inclusion_directives& path_properties::inclusion_directives() {
+    return inclusion_directives_;
+}
+
+void path_properties::inclusion_directives(const dogen::physical::entities::inclusion_directives& v) {
+    inclusion_directives_ = v;
+}
+
+void path_properties::inclusion_directives(const dogen::physical::entities::inclusion_directives&& v) {
+    inclusion_directives_ = std::move(v);
+}
+
 const std::list<std::string>& path_properties::inclusion_dependencies() const {
     return inclusion_dependencies_;
 }
@@ -141,38 +152,6 @@ void path_properties::inclusion_dependencies(const std::list<std::string>& v) {
 
 void path_properties::inclusion_dependencies(const std::list<std::string>&& v) {
     inclusion_dependencies_ = std::move(v);
-}
-
-const std::string& path_properties::primary_inclusion_directive() const {
-    return primary_inclusion_directive_;
-}
-
-std::string& path_properties::primary_inclusion_directive() {
-    return primary_inclusion_directive_;
-}
-
-void path_properties::primary_inclusion_directive(const std::string& v) {
-    primary_inclusion_directive_ = v;
-}
-
-void path_properties::primary_inclusion_directive(const std::string&& v) {
-    primary_inclusion_directive_ = std::move(v);
-}
-
-const std::list<std::string>& path_properties::secondary_inclusion_directives() const {
-    return secondary_inclusion_directives_;
-}
-
-std::list<std::string>& path_properties::secondary_inclusion_directives() {
-    return secondary_inclusion_directives_;
-}
-
-void path_properties::secondary_inclusion_directives(const std::list<std::string>& v) {
-    secondary_inclusion_directives_ = v;
-}
-
-void path_properties::secondary_inclusion_directives(const std::list<std::string>&& v) {
-    secondary_inclusion_directives_ = std::move(v);
 }
 
 const std::list<std::string>& path_properties::using_dependencies() const {

@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/path_properties_io.hpp"
 #include "dogen.physical/io/entities/inclusion_directives_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -47,16 +46,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const path_properties& v) {
+std::ostream& operator<<(std::ostream& s, const inclusion_directives& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::path_properties\"" << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"inclusion_path\": " << "\"" << v.inclusion_path().generic_string() << "\"" << ", "
-      << "\"inclusion_directives\": " << v.inclusion_directives() << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"using_dependencies\": " << v.using_dependencies() << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
+      << "\"__type__\": " << "\"dogen::physical::entities::inclusion_directives\"" << ", "
+      << "\"primary\": " << "\"" << tidy_up_string(v.primary()) << "\"" << ", "
+      << "\"secondary\": " << v.secondary()
       << " }";
     return(s);
 }
