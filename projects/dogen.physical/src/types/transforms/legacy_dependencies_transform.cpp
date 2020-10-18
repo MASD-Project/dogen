@@ -18,12 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/legacy_dependencies_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("physical.transforms.legacy_dependencies_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool legacy_dependencies_transform::operator==(const legacy_dependencies_transform& /*rhs*/) const {
-    return true;
+void legacy_dependencies_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "legacy dependencies",
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }

@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class legacy_dependencies_transform final {
 public:
-    legacy_dependencies_transform() = default;
-    legacy_dependencies_transform(const legacy_dependencies_transform&) = default;
-    legacy_dependencies_transform(legacy_dependencies_transform&&) = default;
-    ~legacy_dependencies_transform() = default;
-    legacy_dependencies_transform& operator=(const legacy_dependencies_transform&) = default;
-
-public:
-    bool operator==(const legacy_dependencies_transform& rhs) const;
-    bool operator!=(const legacy_dependencies_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
