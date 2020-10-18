@@ -26,23 +26,6 @@ namespace dogen::text::cpp::transforms {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_cpp_inclusion_required() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("inclusion_required");
-    r.name().qualified("masd.cpp.inclusion_required");
-    r.description(R"(If true, inclusion is required for this modeling element.
-
-)");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-    return r;
-}
-
-dogen::variability::entities::feature
 make_masd_cpp_aspect_requires_manual_default_constructor() {
     using namespace dogen::variability::entities;
     feature r;
@@ -185,7 +168,6 @@ std::list<dogen::variability::entities::feature>
 global_features::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_cpp_inclusion_required());
     r.push_back(make_masd_cpp_aspect_requires_manual_default_constructor());
     r.push_back(make_masd_cpp_aspect_requires_manual_move_constructor());
     r.push_back(make_masd_cpp_aspect_requires_stream_manipulators());

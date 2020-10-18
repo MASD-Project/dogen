@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_ARCHETYPE_FEATURES_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_ARCHETYPE_FEATURES_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_FEATURES_DIRECTIVE_FEATURES_HPP
+#define DOGEN_PHYSICAL_TYPES_FEATURES_DIRECTIVE_FEATURES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,9 +32,9 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/feature_template.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::physical::features {
 
-class archetype_features final {
+class directive_features final {
 public:
     struct feature_group {
         variability::entities::feature primary_inclusion_directive;

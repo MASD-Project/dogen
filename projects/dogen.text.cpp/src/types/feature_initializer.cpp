@@ -20,13 +20,11 @@
  */
 #include "dogen.text.cpp/types/feature_initializer.hpp"
 #include "dogen.text.cpp/types/transforms/global_features.hpp"
-#include "dogen.text.cpp/types/transforms/archetype_features.hpp"
 
 namespace dogen::text::cpp {
 
 void feature_initializer::
 register_entities(variability::helpers::registrar& rg) {
-    rg.register_templates(dogen::text::cpp::transforms::archetype_features::make_templates());
     rg.register_features(dogen::text::cpp::transforms::global_features::make_features());
 }
 

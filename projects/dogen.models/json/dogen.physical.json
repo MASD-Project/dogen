@@ -1974,6 +1974,48 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::directive_features",
+      "stereotypes": [
+        "masd::variability::feature_template_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.instantiation_domain_name": "masd.cpp.archetype"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "primary_inclusion_directive",
+          "type": "masd::variability::text"
+        },
+        {
+          "name": "secondary_inclusion_directive",
+          "type": "masd::variability::text_collection"
+        }
+      ]
+    },
+    {
+      "name": "features::inclusion_features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "inclusion_required",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, inclusion is required for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
     }
   ]
 }

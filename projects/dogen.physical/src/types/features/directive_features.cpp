@@ -19,11 +19,11 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.physical/types/features/directive_features.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.text.cpp/types/transforms/archetype_features.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::physical::features {
 
 namespace {
 
@@ -57,8 +57,8 @@ make_secondary_inclusion_directive() {
 
 }
 
-archetype_features::feature_group
-archetype_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
+directive_features::feature_group
+directive_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -68,7 +68,7 @@ archetype_features::make_feature_group(const dogen::variability::entities::featu
     return r;
 }
 
-archetype_features::static_configuration archetype_features::make_static_configuration(
+directive_features::static_configuration directive_features::make_static_configuration(
     const feature_group& fg,
     const dogen::variability::entities::configuration& cfg) {
 
@@ -80,7 +80,7 @@ archetype_features::static_configuration archetype_features::make_static_configu
 }
 
 std::list<dogen::variability::entities::feature_template>
-archetype_features::make_templates() {
+directive_features::make_templates() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_primary_inclusion_directive());
