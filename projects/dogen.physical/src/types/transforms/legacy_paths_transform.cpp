@@ -38,6 +38,7 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/legacy_archetype_kind_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
+#include "dogen.physical/types/helpers/header_guard_factory.hpp"
 #include "dogen.physical/types/transforms/legacy_paths_transform.hpp"
 
 using dogen::identification::entities::physical_meta_id;
@@ -1389,6 +1390,9 @@ void legacy_paths_transform::process_artefact(const feature_group& fg,
     if (!has_overrides) {
         const auto p(l.make_inclusion_path_for_cpp_header(ln, arch.value()));
         pp.inclusion_path(p);
+
+        using helpers::header_guard_factory;
+        pp.header_guard(header_guard_factory::make(p));
 
         pp.primary_inclusion_directive(to_inclusion_directive(p));
         BOOST_LOG_SEV(lg, trace) << "Computed primary directive: "
