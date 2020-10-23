@@ -16068,8 +16068,9 @@ Links:
 - [[https://github.com/microsoft/vcpkg][vcpkg GH]]
 - [[https://github.com/microsoft/vcpkg/issues/9258][vcpkg #9258: Add ability to export .deb and .rpm]]
 - [[https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard][Filesystem Hierarchy Standard (FHS)]]
+- [[https://learn.hashicorp.com/waypoint][hashicorp's waypoint]]
 
-*** Investigate build time library configuration post
+*** Investigate build time library configuration post                 :story:
 
 #+begin_quote
 Why do libraries offer these build-time switches? What do they
@@ -16087,7 +16088,7 @@ Links:
 
 - [[https://vector-of-bool.github.io/2020/10/04/lib-configuration.html][A New Approach to Build-Time Library Configuration]]
 
-*** Investigate CG-SQL
+*** Investigate CG-SQL                                                :story:
 
 #+begin_quote
 CG/SQL is a code generation system for the popular SQLite library that
