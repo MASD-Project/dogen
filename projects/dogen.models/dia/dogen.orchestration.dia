@@ -6261,13 +6261,13 @@ needed by the remaining chains.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
-        <dia:point val="95,45"/>
+        <dia:point val="90,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,44.95;116.725,48.65"/>
+        <dia:rectangle val="89.95,44.95;111.725,48.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="95,45"/>
+        <dia:point val="90,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.675000000000001"/>
@@ -6444,7 +6444,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="109.985,39.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.788,38.85;110.735,46.5496"/>
+        <dia:rectangle val="100.788,38.85;110.735,46.5496"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6452,8 +6452,8 @@ needed by the remaining chains.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="109.985,39.6"/>
         <dia:point val="109.985,43"/>
-        <dia:point val="105.838,43"/>
-        <dia:point val="105.838,44.9496"/>
+        <dia:point val="100.838,43"/>
+        <dia:point val="100.838,44.9496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6667,17 +6667,17 @@ needed by the remaining chains.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O58">
       <dia:attribute name="obj_pos">
-        <dia:point val="105.838,48.6"/>
+        <dia:point val="100.838,48.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.088,47.85;108.61,59.5528"/>
+        <dia:rectangle val="100.088,47.85;108.61,59.5528"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="105.838,48.6"/>
-        <dia:point val="105.838,52"/>
+        <dia:point val="100.838,48.6"/>
+        <dia:point val="100.838,52"/>
         <dia:point val="108.41,52"/>
         <dia:point val="108.41,57.9528"/>
       </dia:attribute>
