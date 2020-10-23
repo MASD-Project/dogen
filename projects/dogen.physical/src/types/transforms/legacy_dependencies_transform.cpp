@@ -47,24 +47,23 @@ std::unordered_map<logical_meta_physical_id, inclusion_directives>
 legacy_dependencies_transform::
 get_inclusion_directives(const entities::model& m) {
     std::unordered_map<logical_meta_physical_id, inclusion_directives> r;
+
     for (const auto& region_pair : m.regions_by_logical_id()) {
         const auto& region(region_pair.second);
-        for (const auto& arch_pair : region.artefacts_by_archetype()) {
-            const auto& a(*arch_pair.second);
+        for (const auto& artefact_pair  : region.artefacts_by_archetype()) {
+            const auto& a(*artefact_pair.second);
 
-            logical_meta_physical_id id;
-            id.logical_id(a.provenance().logical_name().id());
-            id.physical_meta_id(a.meta_name().id());
-
-            const auto& dir(a.path_properties().inclusion_directives());
-            const auto inserted(r.insert(std::make_pair(id, dir)).second);
+            const auto& directives(a.path_properties().inclusion_directives());
+            const auto pair(std::make_pair(a.id(), directives));
+            const bool inserted(r.insert(pair).second);
             if (!inserted) {
                 std::ostringstream os;
-                os << duplicate_id << id.logical_id().value() << "-"
-                   << id.physical_meta_id().value();
-                const auto s(os.str());
-                BOOST_LOG_SEV(lg, error) << s;
-                BOOST_THROW_EXCEPTION(transform_exception(s));
+                os << duplicate_id
+                   << a.id().logical_id().value() << "-"
+                   << a.id().physical_meta_id().value();
+                const auto msg(os.str());
+                BOOST_LOG_SEV(lg, error) << msg;
+                BOOST_THROW_EXCEPTION(transform_exception(msg));
             }
         }
     }

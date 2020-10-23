@@ -38,6 +38,10 @@ namespace dogen::physical::transforms {
  */
 class legacy_dependencies_transform final {
 private:
+    /**
+     * @brief Finds all inclusion directives in the model, and indexes
+     * them to logical-physical points.
+     */
     static
     std::unordered_map<identification::entities::logical_meta_physical_id,
                        entities::inclusion_directives>
