@@ -9864,7 +9864,7 @@ Once we have interfaces, there are at least two very useful
 transformations we could do:
 
 - remotable transformation: take a service and convert it into a set
-  of messages - possibly in an IDL (e.g. protocol buffers, grpc,
+  of messages - possibly in an IDL (e.g. protocol buffers, grpc, brpc,
   thrift), possibly in a c++ representation. For this we could have a
   meta-model element (=dogen::remotable=?) and a meta-data parameter
   pointing to the interface to make remotable, as well as the
@@ -9887,6 +9887,12 @@ transformations we could do:
   allowing us to invoke remote services. However, this is probably not
   important because we can either use HTTP or protobuf etc from the
   scripting languages.
+
+  Links:
+
+  [[https://github.com/apache/incubator-brpc][brpc GH]]: An industrial-grade RPC framework used throughout Baidu,
+  with 1,000,000+ instances(not counting clients) and thousands kinds
+  of services. "brpc" means "better RPC".
 
 *** Add support for "ad-hoc" tracing                                  :story:
 
@@ -15936,6 +15942,133 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Product based operations                                          :story:
+
+It would be interesting to provide a "product API" which is closer to
+how we develop in practice. At present we are forced to think at the
+level of git (feature branches, master, etc) and associated tools
+(docker, kubernetes, etc=. In reality, we have a very small set of
+simple operations we do with products. It would be nice if dogen could
+provide a wrapper around these. In order to do so we need to force
+structural patterns on how these are implemented (i.e. do not allow
+for variation outside of a narrow set of well-defined use cases). This
+story attempts to capture these use cases. The basic ideas are coming
+from several existing tools such as =dotnet=, =cargo=, etc.
+
+When we start working on a product, it would be nice to be able to do
+something like:
+
+: dogen product new
+
+or
+
+: dogen new product
+
+It would require some additional parameters such as:
+
+: --name abc
+: --forge https://github.com/ORGANISATION
+
+Note that a dogen product maps to a forge organisation (e.g. github,
+etc). This may be different for other forges. It assumes some
+top-level config with all of the authentication setup. Presumably
+there could be an =--add-forge= command or just edit files manually.
+
+The new product command would a top-level directory for the product
+and create the organisation.
+
+: dogen component new
+
+This would create a new git repo with some standard components. There
+could be a =--template= command to choose the template for the
+component. The approach should be similar to =dotnet=. Note that these
+templates are models inside of dogen. Also, when creating the repo, it
+would perform the initial git commit, create the repository remotely
+and push it. It would also do the worktree setup:
+
+- =PRODUCT.COMPONENT.git.remote=: points to remote master and should always be
+  kept clean for pushes and pulls.
+- =PRODUCT.COMPONENT.git.local=: local checkout to do work. Further locals can be
+  created, e.g. =local0=, etc.
+
+Links:
+
+- [[https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates][Custom templates for dotnet new]]
+
+*** Integration of =vcpkg= and =build2=                               :story:
+
+There are two types of dependencies that we need to worry about:
+
+- those external to dogen; these we call "the platform".
+- those "internal" to dogen; these are the user models.
+
+As it turns out, there are two different ways of managing these two
+types of dependencies. The best package managers for C++, such as
+conan and vcpkg, have a very large number of packages
+available. These are great for the first kind of dependencies because
+they have large coverage of C++ libraries. In addition, vcpkg is
+written in c++, making integration easier - though perhaps a "vcpkg
+lib" would have to be created.
+
+Build2, on the other hand, would be very suitable to manage the dogen
+created artefacts because it is a "modern" package manager with an
+understanding of versions etc. It has some limitations (does not
+support binaries, etc), but these are not too taxing if its only for a
+small set of models.
+
+The trick would be for dogen to orchestrate these two package managers
+in a way that is transparent to the user somehow; e.g. you can declare
+a vcpkg dependency on your product and it would result in vcpkg doing
+the right thing. You can also build a docker image with all the vcpkg
+dependencies at a given version and then use that for the build
+machines, deployments etc. We would require some conceptual framework
+around vcpkg: snapshots, versioning, publishing, etc. Note also that
+we should be able to rely on system packages if available. vcpkg
+should be seen as the override, used only when we cannot find the
+package at that version.
+
+We may also want products to share their vcpkg setup so that we don't
+have to build core libraries multiple times. Or perhaps we need the
+concept of a product family with its associated vcpkg directory setup,
+and then the products with their own setup. Libraries can be installed
+at the family level or at the product level - or even at the component
+level? we need to look for use cases for this.
+
+For extra bonus points, it would be nice if we could create a DEB
+package for each of these vcpkg exports, so that the src package of
+the product and components could depend on the vcpkg, and similarly
+the binary package could depend on the vcpkg binary package. One could
+then install the platform and then install the product. You could
+create dependency trees between the platform and the product. And
+these should ideally be side-by-side installable, so that multiple
+versions of the platform and the product can coexist. However, note
+that we have platform packages at the different levels:
+
+- family
+- product
+- component
+
+These are placed in the path accordingly, so that the component takes
+priority, then the product and finally the family. Note that the
+packages themselves have versions, which are not at all related with
+the individual libraries they contain. As an example, say we have:
+
+- masd: family
+- dogen: product
+- dogen: component
+
+We could create a =masd.platform_1.0.0.deb= package, which installs
+into a well known hierarchy. The directory name should have the
+family, product etc as well as the version:
+
+: /usr/local/masd.platform/1.0.0
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg][vcpkg GH]]
+- [[https://github.com/microsoft/vcpkg/issues/9258][vcpkg #9258: Add ability to export .deb and .rpm]]
+- [[https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard][Filesystem Hierarchy Standard (FHS)]]
+
 *** Investigate build time library configuration post
 
 #+begin_quote
@@ -19952,6 +20085,12 @@ Links:
 - [[https://github.com/datatechnology/cornerstone][cornerstone GitHub]]: A very lightweight but complete Raft Consensus
   C++ implementation, the original implementation was published by
   Andy Chen.
+- [[https://github.com/typesense/braft][brcp GH]]: "An industrial-grade C++ implementation of RAFT consensus
+  algorithm and replicated state machine based on brpc. braft is
+  designed and implemented for scenarios demanding for high workload
+  and low overhead of latency, with the consideration for
+  easy-to-understand concepts so that engineers inside Baidu can build
+  their own distributed systems individually and correctly."
 
 *** Consider adding support for static site generators                :story:
 
