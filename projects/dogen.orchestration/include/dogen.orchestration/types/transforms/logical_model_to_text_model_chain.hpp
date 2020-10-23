@@ -21,11 +21,11 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_CHAIN_HPP
 #define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_CHAIN_HPP
 
-#include "dogen.identification/types/entities/logical_provenance.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/output_model_set.hpp"
 #include "dogen.text/types/entities/model_set.hpp"

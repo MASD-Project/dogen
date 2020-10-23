@@ -43,6 +43,7 @@
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/helpers/logical_to_physical_projector.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
+#include "dogen.orchestration/types/transforms/legacy_dependencies_transform.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_text_model_chain.hpp"
 
 namespace {
@@ -117,11 +118,17 @@ apply(const context& ctx, const logical::entities::model& lm) {
     auto pm(create_physical_model(lm, prov, r.logical_physical_regions()));
 
     /*
-     * Finally, execute the physical model population chain.
+     * Execute the physical model population chain.
      */
     using physical::transforms::model_population_chain;
     model_population_chain::apply(ctx.physical_context(), pm);
     r.physical(pm);
+
+    /*
+     * Finally run the legacy dependencies transform to update the
+     * include directives.
+     */
+    legacy_dependencies_transform::apply(ctx.text_context(), r);
 
     return r;
 }
