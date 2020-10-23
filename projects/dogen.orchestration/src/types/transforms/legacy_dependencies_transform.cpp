@@ -18,12 +18,67 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.text/io/entities/model_io.hpp"
+#include "dogen.text/types/transforms/context.hpp"
+#include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/legacy_dependencies_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("orchestration.transforms.legacy_dependencies_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string duplicate_id("Duplicate logical-physical ID: ");
+
+}
 
 namespace dogen::orchestration::transforms {
 
-bool legacy_dependencies_transform::operator==(const legacy_dependencies_transform& /*rhs*/) const {
-    return true;
+using physical::entities::inclusion_directives;
+using identification::entities::logical_meta_physical_id;
+
+std::unordered_map<logical_meta_physical_id, inclusion_directives>
+legacy_dependencies_transform::
+get_inclusion_directives(const physical::entities::model& m) {
+    std::unordered_map<logical_meta_physical_id, inclusion_directives> r;
+
+    for (const auto& region_pair : m.regions_by_logical_id()) {
+        const auto& region(region_pair.second);
+        for (const auto& artefact_pair  : region.artefacts_by_archetype()) {
+            const auto& a(*artefact_pair.second);
+
+            const auto& directives(a.path_properties().inclusion_directives());
+            const auto pair(std::make_pair(a.id(), directives));
+            const bool inserted(r.insert(pair).second);
+            if (!inserted) {
+                std::ostringstream os;
+                os << duplicate_id
+                   << a.id().logical_id().value() << "-"
+                   << a.id().physical_meta_id().value();
+                const auto msg(os.str());
+                BOOST_LOG_SEV(lg, error) << msg;
+                BOOST_THROW_EXCEPTION(transform_exception(msg));
+            }
+        }
+    }
+    return r;
+}
+
+void legacy_dependencies_transform::apply(const text::transforms::context& ctx,
+    text::entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "legacy dependencies",
+        transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
+
+    const auto ids(get_inclusion_directives(m.physical()));
+
+    stp.end_transform(m);
 }
 
 }

@@ -25,24 +25,29 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_map>
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.physical/types/entities/inclusion_directives.hpp"
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
 class legacy_dependencies_transform final {
-public:
-    legacy_dependencies_transform() = default;
-    legacy_dependencies_transform(const legacy_dependencies_transform&) = default;
-    legacy_dependencies_transform(legacy_dependencies_transform&&) = default;
-    ~legacy_dependencies_transform() = default;
-    legacy_dependencies_transform& operator=(const legacy_dependencies_transform&) = default;
+private:
+    /**
+     * @brief Finds all inclusion directives in the model, and indexes
+     * them to logical-physical points.
+     */
+    static
+    std::unordered_map<identification::entities::logical_meta_physical_id,
+                       physical::entities::inclusion_directives>
+    get_inclusion_directives(const physical::entities::model& m);
 
 public:
-    bool operator==(const legacy_dependencies_transform& rhs) const;
-    bool operator!=(const legacy_dependencies_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const text::transforms::context& ctx,
+        text::entities::model& m);
 };
 
 }
