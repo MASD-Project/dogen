@@ -40,6 +40,7 @@ artefact::artefact(artefact&& rhs)
       configuration_(std::move(rhs.configuration_)),
       provenance_(std::move(rhs.provenance_)),
       name_(std::move(rhs.name_)),
+      id_(std::move(rhs.id_)),
       file_path_(std::move(rhs.file_path_)),
       content_(std::move(rhs.content_)),
       path_properties_(std::move(rhs.path_properties_)),
@@ -56,6 +57,7 @@ artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
+    const dogen::identification::entities::logical_meta_physical_id& id,
     const boost::filesystem::path& file_path,
     const std::string& content,
     const dogen::physical::entities::path_properties& path_properties,
@@ -70,6 +72,7 @@ artefact::artefact(
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
+      id_(id),
       file_path_(file_path),
       content_(content),
       path_properties_(path_properties),
@@ -87,6 +90,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
+    swap(id_, other.id_);
     swap(file_path_, other.file_path_);
     swap(content_, other.content_);
     swap(path_properties_, other.path_properties_);
@@ -104,6 +108,7 @@ bool artefact::operator==(const artefact& rhs) const {
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
+        id_ == rhs.id_ &&
         file_path_ == rhs.file_path_ &&
         content_ == rhs.content_ &&
         path_properties_ == rhs.path_properties_ &&
@@ -184,6 +189,22 @@ void artefact::name(const dogen::identification::entities::physical_name& v) {
 
 void artefact::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
+}
+
+const dogen::identification::entities::logical_meta_physical_id& artefact::id() const {
+    return id_;
+}
+
+dogen::identification::entities::logical_meta_physical_id& artefact::id() {
+    return id_;
+}
+
+void artefact::id(const dogen::identification::entities::logical_meta_physical_id& v) {
+    id_ = v;
+}
+
+void artefact::id(const dogen::identification::entities::logical_meta_physical_id&& v) {
+    id_ = std::move(v);
 }
 
 const boost::filesystem::path& artefact::file_path() const {

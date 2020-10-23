@@ -31,6 +31,7 @@
 #include "dogen.physical/io/entities/outputting_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace boost {
 
@@ -133,6 +134,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"id\": " << v.id() << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "

@@ -39,6 +39,7 @@
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 
 namespace dogen::physical::entities {
 
@@ -62,6 +63,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
+        const dogen::identification::entities::logical_meta_physical_id& id,
         const boost::filesystem::path& file_path,
         const std::string& content,
         const dogen::physical::entities::path_properties& path_properties,
@@ -112,6 +114,16 @@ public:
     dogen::identification::entities::physical_name& name();
     void name(const dogen::identification::entities::physical_name& v);
     void name(const dogen::identification::entities::physical_name&& v);
+    /**@}*/
+
+    /**
+     * @brief Point in logical-physical space represented by this element.
+     */
+    /**@{*/
+    const dogen::identification::entities::logical_meta_physical_id& id() const;
+    dogen::identification::entities::logical_meta_physical_id& id();
+    void id(const dogen::identification::entities::logical_meta_physical_id& v);
+    void id(const dogen::identification::entities::logical_meta_physical_id&& v);
     /**@}*/
 
     /**
@@ -222,6 +234,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
+    dogen::identification::entities::logical_meta_physical_id id_;
     boost::filesystem::path file_path_;
     std::string content_;
     dogen::physical::entities::path_properties path_properties_;

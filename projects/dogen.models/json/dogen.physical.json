@@ -620,12 +620,27 @@
       ]
     },
     {
+      "name": "entities::LogicalPhysicalSpaceIdentity",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "identification::entities::logical_meta_physical_id",
+          "documentation": "Point in logical-physical space represented by this element.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::Element",
       "parents": [
         "entities::MetaNameable",
         "entities::Configurable",
         "entities::Provenance",
-        "entities::Nameable"
+        "entities::Nameable",
+        "entities::LogicalPhysicalSpaceIdentity"
       ],
       "stereotypes": [
         "masd::object_template"
