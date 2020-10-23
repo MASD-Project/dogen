@@ -29,7 +29,6 @@
 #include "dogen.physical/types/transforms/legacy_paths_transform.hpp"
 #include "dogen.physical/types/transforms/relations_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
-#include "dogen.physical/types/transforms/legacy_dependencies_transform.hpp"
 #include "dogen.physical/types/transforms/model_population_chain.hpp"
 
 namespace {
@@ -66,7 +65,6 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      */
     paths_transform::apply(ctx, m);
     legacy_paths_transform::apply(ctx, m);
-    legacy_dependencies_transform::apply(ctx, m);
 
     /*
      * Update enablement for all artefacts.
