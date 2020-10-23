@@ -217,17 +217,20 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
 
         /*
          * Populate the provenance properties for both the logical and
-         * physical dimensions of the artefact.
+         * physical dimensions of the artefact - name, identity, etc.
          */
         auto a(boost::make_shared<physical::entities::artefact>());
         a->name().simple(e->name().simple());
         a->meta_name(pmn);
         a->configuration(pr.configuration());
 
+        const auto& lid(e->name().id());
+        const auto& pmid(pmn.id());
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
-        const logical_id id(e->name().id());
-        a->name().id(f.make(id, pmn.id()));
+        a->name().id(f.make(lid, pmid));
+        a->id().logical_id(lid);
+        a->id().physical_meta_id(pmid);
         a->provenance(pr.provenance());
 
         /*
