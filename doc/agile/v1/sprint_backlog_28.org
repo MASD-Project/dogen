@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-23 Fri 12:34]
+#+CAPTION: Clock summary at [2020-10-23 Fri 15:05]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *53:56* |       |       | 100.0 |
+| *Total time*                                                | *55:19* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 53:56   |       |       | 100.0 |
-| Active                                                      |         | 53:56 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   6.9 |
+| Stories                                                     | 55:19   |       |       | 100.0 |
+| Active                                                      |         | 55:19 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   6.7 |
 | Create a demo and presentation for previous sprint          |         |       |  0:39 |   1.2 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   8.1 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |  10.1 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   7.9 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   9.9 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.6 |
-| Analysis on a formatables refactor                          |         |       |  0:31 |   1.0 |
-| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.9 |
-| Presentation for APA                                        |         |       |  5:11 |   9.6 |
+| Analysis on a formatables refactor                          |         |       |  0:31 |   0.9 |
+| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.8 |
+| Presentation for APA                                        |         |       |  5:11 |   9.4 |
 | Issues with emacs                                           |         |       |  1:09 |   2.1 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.6 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   4.5 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |  10.2 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   4.4 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   9.9 |
 | Create a video series on the formatables refactor           |         |       |  0:37 |   1.1 |
-| Move C++ locator into physical model                        |         |       | 22:39 |  42.0 |
+| Move C++ locator into physical model                        |         |       | 24:02 |  43.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,7 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-10-23 Fri 13:42]--[2020-10-23 Fri 15:05] =>  1:23
     CLOCK: [2020-10-23 Fri 10:45]--[2020-10-23 Fri 12:24] =>  1:49
     CLOCK: [2020-10-18 Sun 16:32]--[2020-10-18 Sun 18:38] =>  2:06
     CLOCK: [2020-10-18 Sun 14:00]--[2020-10-18 Sun 16:31] =>  2:31
@@ -559,7 +560,6 @@ from a coding perspective (video uploads, etc).
 - JQ query to obtain file paths:
 
 : jq .models[0].physical.regions_by_logical_id[0][1].data.artefacts_by_archetype[][1].data.data.file_path
-:
 
 - locator is now creating a dense representation of paths rather than
   a sparse one. We probably need to understand why that is.
@@ -569,6 +569,10 @@ from a coding perspective (video uploads, etc).
 - locator assumes a single backend. In reality it could be either c++
   or c# so we need multiple project directories, depending on the
   current backend.
+- archetype needs to have a technical space. It is then propagated to
+  artefact during projection. Backend has a major technical space and
+  minor TSs. These are the sum of all archetypes in the backend which
+  are not of the same TS as the major TS.
 
 *** Consider renaming =text= to =logical_physical=                    :story:
 
