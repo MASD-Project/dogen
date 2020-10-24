@@ -24,7 +24,9 @@ Provides the C++ backend for the default physical meta-model.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.physical.backend_name: cpp
+:masd.physical.directory_name: cpp
 :masd.physical.major_technical_space: cpp
+:masd.physical.technical_space: cpp
 :masd.label.test: lbl
 :masd.codec.stereotypes: masd::physical::backend
 :END:
@@ -39,6 +41,7 @@ grammar of the C++ technical space.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.label.test: some_label
+:masd.physical.directory_name: types
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -2579,6 +2582,7 @@ register_entities(variability::helpers::registrar& rg) {
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
+:masd.physical.postfix: fwd
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -2651,6 +2655,7 @@ class <#= o.name().simple() #>;
 :masd.wale.kvp.meta_element: visitor
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
+:masd.physical.postfix: fwd
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -2723,6 +2728,7 @@ class <#= o.name().simple() #>;
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
+:masd.physical.postfix: fwd
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -3260,28 +3266,13 @@ std::list<dogen::variability::entities::feature>
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.physical.constant_relation: dogen.text.cpp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:cpp
 :masd.physical.constant_relation: dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for archetypes.
 
 **** stitch_template_content
-:PROPERTIES:
-:masd.physical.constant_relation: dogen.utility.io.shared_ptr,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.tracing.scoped_tracer,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.logical.entities.element,archetype:masd.cpp.io.class_header
-:masd.physical.constant_relation: dogen.physical.entities.artefact,archetype:masd.cpp.io.class_header
-:masd.physical.constant_relation: dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.logical.entities.physical.archetype,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.logical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.text.cpp.transforms.assistant,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.text.cpp.transforms.types.archetype_class_header_transform_transform,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.text.cpp.transforms.types.archetype_class_header_transform_factory,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.text.cpp.traits,archetype:masd.cpp.types.class_header
-:masd.physical.constant_relation: dogen.text.cpp.transforms.types.traits,archetype:masd.cpp.types.class_header
-:END:
-
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
@@ -3353,18 +3344,11 @@ public:
     boost::filesystem::path inclusion_path(
         const formattables::locator& l,
         const identification::entities::logical_name& n) const override;
-
-    boost::filesystem::path full_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const override;
 <#+
             } else if (o.major_technical_space() == technical_space::csharp) {
 #>
     std::list<std::string> inclusion_dependencies(
         const logical::entities::element& e) const override;
-
-    boost::filesystem::path full_path(
-        const formattables::locator& l, const identification::entities::logical_name& n) const override;
 <#+
             }
 #>
@@ -3395,6 +3379,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: archetype_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_archetype
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -3454,6 +3439,7 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
 :masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.cpp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:cpp
 :masd.physical.constant_relation: dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
@@ -3550,6 +3536,7 @@ public:
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -3657,6 +3644,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
 :masd.wale.kvp.archetype.simple_name: backend_class_header_transform
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
@@ -3748,6 +3736,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: backend_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -3876,6 +3865,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 :masd.wale.kvp.archetype.simple_name: part_class_header_transform
 :masd.wale.kvp.meta_element: physical_part
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
@@ -3945,6 +3935,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: part_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_part
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -3993,130 +3984,6 @@ void part_class_implementation_transform_transform::apply(const context& ctx, co
 #>
 
 #+end_src
-*** transforms::types::archetype_kind_class_header_transform
-:PROPERTIES:
-:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
-:masd.wale.kvp.class.simple_name: archetype_kind_class_header_transform_transform
-:masd.wale.kvp.archetype.simple_name: archetype_kind_class_header_transform
-:masd.wale.kvp.meta_element: physical_archetype_kind
-:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
-:END:
-
-Generates header files for archetypes.
-
-**** stitch_template_content
-#+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
-<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_transform.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#$ stitch.wale.template_instantiation_result #>
-<#+
-
-std::list<std::string> archetype_kind_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
-void archetype_kind_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "archetype kind class header",
-        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-
-    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
-    const auto& o(ast.as<logical::entities::physical::archetype_kind>(e));
-
-    {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(ast.make_namespaces(o.name()));
-            auto snf(ast.make_scoped_namespace_formatter(ns));
-#>
-
-class <#= o.name().simple() #> final : public model_to_text_transform {
-public:
-<#+
-        } // snf
-#>
-
-<#+
-    } // sbf
-    ast.update_artefact();
-    stp.end_transform(a);
-}
-
-#>
-
-#+end_src
-*** transforms::types::archetype_kind_class_implementation_transform
-:PROPERTIES:
-:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
-:masd.wale.kvp.class.simple_name: archetype_kind_class_implementation_transform_transform
-:masd.wale.kvp.archetype.simple_name: archetype_kind_class_implementation_transform
-:masd.wale.kvp.meta_element: physical_archetype_kind
-:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
-:END:
-
-Generates implementation files for archetypes.
-
-**** stitch_template_content
-#+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
-<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_transform.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#$ stitch.wale.template_instantiation_result #>
-<#+
-
-std::list<std::string> archetype_kind_class_implementation_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
-void archetype_kind_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "archetype kind class implementation",
-        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    ast.update_artefact();
-    stp.end_transform(a);
-}
-
-#>
-
-#+end_src
 *** transforms::types::archetype_class_header_factory
 :PROPERTIES:
 :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype
@@ -4128,6 +3995,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 :masd.physical.relation_status: relatable
 :masd.label.role: type_declaration
 :masd.physical.constant_relation: dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -4212,6 +4080,7 @@ public:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
 :masd.physical.variable_relation: self,archetype:masd.cpp.types.archetype_class_header_factory
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4273,7 +4142,12 @@ physical::entities::archetype <#= sn #>::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("<#= arch.backend_name() #>", "<#= arch.facet_name() #>", "<#= arch.name().simple() #>"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("<#= arch.logical_meta_element_id().value() #>"));
+    r.technical_space(identification::entities::technical_space::<#= arch.technical_space() #>);
     r.relations().status(physical::entities::relation_status::<#= arch.relations().status() #>);
+<#+
+            if (!arch.postfix().empty())
+#>
+    r.postfix("<#= arch.postfix() #>");
 <#+
             for(const auto& l : arch.labels()) {
 #>
@@ -4355,6 +4229,7 @@ physical::entities::archetype <#= sn #>::make() {
 :masd.label.role: type_declaration
 :masd.physical.relation_status: relatable
 :masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -4439,6 +4314,7 @@ public:
 :masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4518,6 +4394,14 @@ physical::entities::facet <#= sn #>::make() {
     physical::entities::facet r;
     r.meta_name(b.build());
 <#+
+            if (!fct.directory_name().empty())
+#>
+    r.directory_name("<#= fct.directory_name() #>");
+<#+
+            if (!fct.postfix().empty())
+#>
+    r.postfix("<#= fct.postfix() #>");
+<#+
             for(const auto& l : fct.labels()) {
 #>
     r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
@@ -4570,6 +4454,7 @@ physical::entities::facet <#= sn #>::make() {
 :masd.wale.kvp.class.inclusion_support_type: regular_support
 :masd.physical.relation_status: relatable
 :masd.label.role: type_declaration
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -4650,6 +4535,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: backend_class_implementation_factory
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: factory
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4687,8 +4573,14 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const auto be_ch_arch(traits::backend_class_header_factory_archetype_qn());
     builder.add(be.name(), be_ch_arch);
 
-    const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
-    builder.add(be.facets(), ch_arch);
+    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
+    builder.add(be.facets(), fct_ch_arch);
+
+    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
+    builder.add(be.archetype_kinds(), ak_ch_arch);
+
+    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
+    builder.add(be.parts(), part_ch_arch);
 
     builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
@@ -4729,14 +4621,20 @@ physical::entities::backend <#= sn #>::make() {
     physical::entities::backend r;
     r.meta_name(b.build());
 <#+
+            if (!be.directory_name().empty())
+#>
+    r.directory_name("<#= be.directory_name() #>");
+<#+
             for(const auto& l : be.labels()) {
 #>
     r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
+
+            if (!be.facets().empty()) {
 #>
 
-    const auto lambda([&](const auto& fct) {
+    const auto fct_inserter([&](const auto& fct) {
         const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
@@ -4749,10 +4647,55 @@ physical::entities::backend <#= sn #>::make() {
     });
 
 <#+
-            for (const auto& n : be.facets()) {
+                for (const auto& n : be.facets()) {
+                    // Bit of a hack: facets work as namespaces.
 #>
-    lambda(<#= n.simple() #>::<#= n.simple() #>_factory::make());
+    fct_inserter(<#= n.simple() #>::<#= n.simple() #>_factory::make());
 <#+
+                }
+            }
+
+            if (!be.archetype_kinds().empty()) {
+#>
+
+    const auto ak_inserter([&](const auto& ak) {
+        const auto pair(std::make_pair(ak.id(), ak));
+        const auto inserted(r.archetype_kinds().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate archetype kind: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << ak.id();
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + ak.id()));
+        }
+    });
+<#+
+                for (const auto& n : be.archetype_kinds()) {
+#>
+    ak_inserter(<#= n.simple() #>_factory::make());
+<#+
+                }
+            }
+
+            if (!be.parts().empty()) {
+#>
+
+    const auto part_inserter([&](const auto& part) {
+        const auto id(part.meta_name().id());
+        const auto pair(std::make_pair(id, part));
+        const auto inserted(r.parts().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate part: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
+        }
+    });
+<#+
+                for (const auto& n : be.parts()) {
+#>
+    part_inserter(<#= n.simple() #>_factory::make());
+<#+
+                }
             }
 #>
     return r;
@@ -4771,6 +4714,382 @@ physical::entities::backend <#= sn #>::make() {
 #>
 
 #+end_src
+*** transforms::types::part_class_header_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
+:masd.wale.kvp.class.simple_name: part_class_header_factory_transform
+:masd.wale.kvp.archetype.simple_name: part_class_header_factory
+:masd.wale.kvp.meta_element: physical_part
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.wale.kvp.class.inclusion_support_type: regular_support
+:masd.physical.relation_status: relatable
+:masd.label.role: type_declaration
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
+:END:
+
+Generates header files for backend factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> part_class_header_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& /*e*/) const {
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/part.hpp");
+    const auto ch_arch(traits::class_header_archetype_qn());
+    return builder.build();
+}
+
+void part_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "part class header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto& part(ast.as<logical::entities::physical::part>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(part));
+        {
+            const auto ns(ast.make_namespaces(part.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+/**
+ * @brief Creates a physical representation for the part
+ * <#= part.name().simple() #>.
+ *
+ * Part documentation: <#= part.documentation() #>
+ */
+ class <#= part.name().simple() #>_factory final {
+public:
+    static physical::entities::part make();
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+
+#>
+
+#+end_src
+*** transforms::types::part_class_implementation_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
+:masd.wale.kvp.class.simple_name: part_class_implementation_factory_transform
+:masd.wale.kvp.archetype.simple_name: part_class_implementation_factory
+:masd.wale.kvp.meta_element: physical_part
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:END:
+
+Generates implementation files for part factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> part_class_implementation_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    auto builder(f.make());
+    const auto& part(assistant::as<logical::entities::physical::part>(e));
+    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
+    builder.add(part.name(), part_ch_arch);
+
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+
+    return builder.build();
+}
+
+void part_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "part class implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto& part(ast.as<logical::entities::physical::part>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(part));
+        {
+            const auto ns(ast.make_namespaces(part.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(part.name().simple() + "_factory");
+#>
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("<#= part.name().qualified().dot() #>"));
+
+}
+
+physical::entities::part <#= sn #>::make() {
+    identification::helpers::physical_meta_name_builder b;
+    b.meta_model("<#= part.meta_model_name() #>");
+    b.backend("<#= part.backend_name() #>");
+    b.part("<#= part.name().simple() #>");
+
+    physical::entities::part r;
+    r.meta_name(b.build());
+<#+
+             if (!part.directory_name().empty())
+#>
+    r.directory_name("<#= part.directory_name() #>");
+<#+
+             for(const auto& l : part.labels()) {
+#>
+    r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
+<#+
+            }
+#>
+
+    return r;
+}
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
+#>
+
+#+end_src
+*** transforms::types::archetype_kind_class_header_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
+:masd.wale.kvp.class.simple_name: archetype_kind_class_header_factory_transform
+:masd.wale.kvp.archetype.simple_name: archetype_kind_class_header_factory
+:masd.wale.kvp.meta_element: physical_archetype_kind
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.wale.kvp.class.inclusion_support_type: regular_support
+:masd.physical.relation_status: relatable
+:masd.label.role: type_declaration
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
+:END:
+
+Generates header files for archetype_kind factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> archetype_kind_class_header_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& /*e*/) const {
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/archetype_kind.hpp");
+    const auto ch_arch(traits::class_header_archetype_qn());
+    return builder.build();
+}
+
+void archetype_kind_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "archetype_kind class header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto& be(ast.as<logical::entities::physical::archetype_kind>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(be));
+        {
+            const auto ns(ast.make_namespaces(be.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+/**
+ * @brief Creates a physical representation for the archetype_kind
+ * <#= be.name().simple() #>.
+ *
+ * Archetype_Kind documentation: <#= be.documentation() #>
+ */
+class <#= be.name().simple() #>_factory final {
+public:
+    static physical::entities::archetype_kind make();
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+
+#>
+
+#+end_src
+*** transforms::types::archetype_kind_class_implementation_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
+:masd.wale.kvp.class.simple_name: archetype_kind_class_implementation_factory_transform
+:masd.wale.kvp.archetype.simple_name: archetype_kind_class_implementation_factory
+:masd.wale.kvp.meta_element: physical_archetype_kind
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:END:
+
+Generates implementation files for archetype_kind factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> archetype_kind_class_implementation_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    auto builder(f.make());
+    const auto& ak(assistant::as<logical::entities::physical::archetype_kind>(e));
+    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
+    builder.add(ak.name(), ak_ch_arch);
+
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+
+    return builder.build();
+}
+
+void archetype_kind_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "archetype_kind class implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto& ak(ast.as<logical::entities::physical::archetype_kind>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(ak));
+        {
+            const auto ns(ast.make_namespaces(ak.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(ak.name().simple() + "_factory");
+#>
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("<#= ak.name().qualified().dot() #>"));
+
+}
+
+physical::entities::archetype_kind <#= sn #>::make() {
+    physical::entities::archetype_kind r;
+    r.id("<#= ak.name().simple() #>");
+    r.file_extension("<#= ak.file_extension() #>");
+    return r;
+}
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
+
+#>
+
+#+end_src
 ** transforms::model_to_text_transform
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
@@ -4779,6 +5098,8 @@ physical::entities::backend <#= sn #>::make() {
 ** transforms::hash
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: hash
+:masd.physical.postfix: hash
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -5387,6 +5708,8 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 ** transforms::io
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: io
+:masd.physical.postfix: io
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -6039,6 +6362,8 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 ** transforms::serialization
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: serialization
+:masd.physical.postfix: ser
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -6688,6 +7013,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 :masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
+:masd.physical.postfix: fwd
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -6770,6 +7096,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 :masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
+:masd.physical.postfix: fwd
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -7060,6 +7387,8 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 ** transforms::test_data
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: test_data
+:masd.physical.postfix: td
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -7950,6 +8279,8 @@ populate(const unsigned int position, result_type& v) {
 ** transforms::odb
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: odb
+:masd.physical.postfix: odb
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -8322,6 +8653,7 @@ void primitive_header_transform::apply(const context& ctx, const logical::entiti
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: odb
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -8425,6 +8757,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: odb
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -8528,6 +8861,7 @@ void primitive_odb_options_transform::apply(const context& ctx, const logical::e
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: odb
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -8779,6 +9113,7 @@ and element.
 ** transforms::tests
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.postfix: tests
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -9806,6 +10141,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: cmake
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -9939,104 +10275,6 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 :masd.variability.key_prefix: masd.cpp
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** headers_output_directory
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:END:
-
-Override location of public c++ headers.
-
-*** directory
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "cpp"
-:END:
-
-Directory in which to place code for the C++ backend.
-
-*** inclusion_required
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "true"
-:END:
-
-If true, inclusion is required for this modeling element.
-
-*** source_directory_name
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "src"
-:END:
-
-Directory in which to place C++ source files.
-
-*** include_directory_name
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "include"
-:END:
-
-Directory in which to place include headers.
-
-*** tests_directory_name
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "generated_tests"
-:END:
-
-Directory in which to place c++ tests.
-
-*** templates_directory_name
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "templates"
-:END:
-
-Directory in which to place text templates.
-
-*** header_file_extension
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "hpp"
-:END:
-
-Extension to use for C++ header files.
-
-*** implementation_file_extension
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "cpp"
-:END:
-
-Extension to use for C++ implementation files.
-
-*** templates_file_extension
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "wale"
-:END:
-
-Extension to use for text templates.
-
-*** enable_unique_file_names
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "true"
-:END:
-
-If true, make all file names unique within a model.
-
 *** aspect.requires_manual_default_constructor
 :PROPERTIES:
 :masd.variability.binding_point: element
@@ -10063,15 +10301,6 @@ If true, the modeling element requires a manual move constructor.
 :END:
 
 If true, the modeling element requires stream manipulators.
-
-*** disable_facet_directories
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, facet directories will not be used.
 
 *** standard
 :PROPERTIES:
@@ -10118,23 +10347,11 @@ If true, streaming this type must be preceeded by quoting.
 
 If true, streaming this type requires removing unprintable characters.
 
-** transforms::archetype_features
-:PROPERTIES:
-:masd.variability.default_binding_point: element
-:masd.variability.instantiation_domain_name: masd.cpp.archetype
-:masd.codec.stereotypes: masd::variability::feature_template_bundle
-:END:
-*** primary_inclusion_directive
-:PROPERTIES:
-:masd.codec.type: masd::variability::text
-:END:
-*** secondary_inclusion_directive
-:PROPERTIES:
-:masd.codec.type: masd::variability::text_collection
-:END:
 ** transforms::lexical_cast
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: lexical_cast
+:masd.physical.postfix: lc
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -10306,6 +10523,7 @@ Formatters related to templating.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.templates
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: mustache
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10349,11 +10567,13 @@ void logic_less_template_transform::apply(const context& ctx, const logical::ent
     tracing::scoped_transform_tracer stp(lg, "logic less template",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const bool requires_header_guard(false);
+    assistant ast(ctx, e, archetype().meta_name(), requires_header_guard, a);
     ast.update_artefact();
-    a.overwrite(false);
+    a.enablement_properties().overwrite(false);
     stp.end_transform(a);
 }
+
 #>
 
 #+end_src
@@ -10385,6 +10605,7 @@ Formatters related to Visual Studio support.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: xml
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10497,6 +10718,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: sln
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10594,6 +10816,7 @@ EndGlobal
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: xml
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10729,6 +10952,7 @@ Formatters related to build files.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: cmake
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10882,6 +11106,7 @@ endif()
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: cmake
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -10993,6 +11218,10 @@ Contains the header files that are publicly visible.
 :PROPERTIES:
 :masd.codec.value: true
 :END:
+*** directory_name
+:PROPERTIES:
+:masd.codec.value: include
+:END:
 ** transforms::standard_header_file
 :PROPERTIES:
 :masd.codec.stereotypes: masd::physical::archetype_kind
@@ -11027,6 +11256,10 @@ Contains the implementation files.
 :PROPERTIES:
 :masd.codec.value: false
 :END:
+*** directory_name
+:PROPERTIES:
+:masd.codec.value: src
+:END:
 ** transforms::testing
 :PROPERTIES:
 :masd.codec.stereotypes: masd::physical::part
@@ -11050,6 +11283,10 @@ Contains the test files.
 :PROPERTIES:
 :masd.codec.value: false
 :END:
+*** directory_name
+:PROPERTIES:
+:masd.codec.value: generated_tests
+:END:
 ** transforms::base_archetype_configuration
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::profile
@@ -11057,6 +11294,10 @@ Contains the test files.
 
 Contains the configuration common to all archetypes.
 
+*** masd.physical.technical_space
+:PROPERTIES:
+:masd.codec.value: cpp
+:END:
 ** transforms::tests_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
@@ -11296,29 +11537,6 @@ Contains the configuration common to all built header archetypes.
 :PROPERTIES:
 :masd.codec.value: primitive
 :END:
-** transforms::project
-:PROPERTIES:
-:masd.codec.stereotypes: masd::physical::part
-:END:
-
-Top-level project part.
-
-*** external_modules_path_contribution
-:PROPERTIES:
-:masd.codec.value: none
-:END:
-*** model_modules_path_contribution
-:PROPERTIES:
-:masd.codec.value: none
-:END:
-*** facet_path_contribution
-:PROPERTIES:
-:masd.codec.value: none
-:END:
-*** requires_relative_path
-:PROPERTIES:
-:masd.codec.value: false
-:END:
 ** transforms::enumeration_implementation_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
@@ -11362,6 +11580,10 @@ Top-level project part.
 :PROPERTIES:
 :masd.codec.value: false
 :END:
+*** directory_name
+:PROPERTIES:
+:masd.codec.value: templates
+:END:
 ** transforms::transformation_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
@@ -11369,6 +11591,29 @@ Top-level project part.
 
 An error occurred whilst applying a transform.
 
+** transforms::project
+:PROPERTIES:
+:masd.codec.stereotypes: masd::physical::part
+:END:
+
+FIXME: to be removed.
+
+*** external_modules_path_contribution
+:PROPERTIES:
+:masd.codec.value: none
+:END:
+*** model_modules_path_contribution
+:PROPERTIES:
+:masd.codec.value: none
+:END:
+*** facet_path_contribution
+:PROPERTIES:
+:masd.codec.value: none
+:END:
+*** requires_relative_path
+:PROPERTIES:
+:masd.codec.value: false
+:END:
 * model_to_text_cpp_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -11409,14 +11654,6 @@ and those used to generate them.
 An error occurred while the factory was building.
 
 ** formattables::artefact_properties
-*** file_path
-:PROPERTIES:
-:masd.codec.type: boost::filesystem::path
-:END:
-*** header_guard
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
 *** inclusion_dependencies
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
@@ -11548,10 +11785,6 @@ All of the properties associated with an element.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::file_path_and_guard_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::aspect_expander
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -11650,73 +11883,6 @@ An error occurred during adaptation.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::locator_configuration
-*** facet_configurations
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::locator_facet_configuration>
-:END:
-*** archetype_configurations
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::locator_archetype_configuration>
-:END:
-*** include_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** source_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** disable_facet_directories
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** header_file_extension
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** implementation_file_extension
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** backend_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** tests_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** templates_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** templates_file_extension
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-** formattables::locator_facet_configuration
-*** directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-** formattables::locator_archetype_configuration
-*** facet_directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** facet_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** archetype_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
 ** formattables::location_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
@@ -11775,10 +11941,6 @@ Any other directives that are also needed for this element.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::header_guard_factory
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::test_data_properties
 *** maximum_size
 :PROPERTIES:
@@ -11820,10 +11982,6 @@ public:
     inclusion_support_types inclusion_support_type() const override;
 
     boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const override;
-
-    boost::filesystem::path full_path(
         const formattables::locator& l,
         const identification::entities::logical_name& n) const override;
 
@@ -11873,11 +12031,6 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
-}
-
 #+end_src
 * cpp_artefact_transform_implementation_header
 :PROPERTIES:
@@ -11911,11 +12064,6 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 #+end_src

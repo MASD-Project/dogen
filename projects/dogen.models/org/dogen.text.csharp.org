@@ -35,7 +35,9 @@ Provides the C# backend for the defaul physical meta-model.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.physical.backend_name: csharp
+:masd.physical.directory_name: cs
 :masd.physical.major_technical_space: csharp
+:masd.physical.technical_space: csharp
 :masd.codec.stereotypes: masd::physical::backend
 :END:
 
@@ -88,6 +90,7 @@ of the C# Technical Space.
 ** transforms::types
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: Types
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -766,6 +769,8 @@ using System;
 ** transforms::io
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: Dumpers
+:masd.physical.postfix: Dumper
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -1682,6 +1687,8 @@ using System.Collections;
 ** transforms::test_data
 :PROPERTIES:
 :masd.codec.dia.comment: true
+:masd.physical.directory_name: SequenceGenerators
+:masd.physical.postfix: SequenceGenerator
 :masd.codec.stereotypes: masd::physical::facet
 :END:
 
@@ -2530,12 +2537,6 @@ An error occurred whilst formatting.
 :masd.variability.key_prefix: masd.csharp
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** directory
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "cs"
-:END:
 *** aspect.requires_static_reference_equals
 :PROPERTIES:
 :masd.variability.binding_point: element
@@ -2588,6 +2589,7 @@ facet of the C# Technical Space.
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: xml
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -2691,6 +2693,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
 :masd.physical.relation_status: not_relatable
+:masd.physical.technical_space: sln
 :masd.codec.stereotypes: masd::physical::archetype
 :END:
 
@@ -2791,6 +2794,10 @@ Contains the configuration common to all archetypes.
 *** masd.physical.relation_status
 :PROPERTIES:
 :masd.codec.value: facet_default
+:END:
+*** masd.physical.technical_space
+:PROPERTIES:
+:masd.codec.value: csharp
 :END:
 ** transforms::object_configuration
 :PROPERTIES:
@@ -2987,10 +2994,6 @@ Contains the configuration common to all archetypes.
 ** formattables::element_properties
 All of the properties associated with an element.
 
-*** artefact_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>
-:END:
 *** helper_properties
 :PROPERTIES:
 :masd.codec.type: std::list<formattables::helper_properties>
@@ -2998,27 +3001,6 @@ All of the properties associated with an element.
 *** attribute_properties
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, formattables::attribute_properties>
-:END:
-** formattables::locator
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::locator_configuration
-*** facet_configurations
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::locator_facet_configuration>
-:END:
-*** archetype_configurations
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::locator_archetype_configuration>
-:END:
-*** disable_facet_directories
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** backend_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
 :END:
 ** formattables::adapter
 :PROPERTIES:
@@ -3032,24 +3014,7 @@ All of the properties associated with an element.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::artefact_properties
-*** file_path
-:PROPERTIES:
-:masd.codec.type: boost::filesystem::path
-:END:
-*** relative_path
-:PROPERTIES:
-:masd.codec.type: boost::filesystem::path
-:END:
-*** using_dependencies
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
 ** formattables::model_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::file_path_expander
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -3072,35 +3037,6 @@ An error occurred whilst performing model expansion.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::locator_archetype_configuration
-*** facet_directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** facet_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** archetype_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-** formattables::locator_facet_configuration
-*** directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-** formattables::location_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-
-An error occurred while the locator was creating a path.
-
 ** formattables::aspect_properties
 *** is_floating_point
 :PROPERTIES:
@@ -3232,9 +3168,6 @@ public:
     std::list<std::string> inclusion_dependencies(
         const logical::entities::element& e) const override;
 
-    boost::filesystem::path full_path(
-        const formattables::locator& l, const identification::entities::logical_name& n) const override;
-
 public:
     void apply(const context& ctx, const logical::entities::element& e,
         physical::entities::artefact& a) const override;
@@ -3264,11 +3197,6 @@ const physical::entities::archetype& {{class.simple_name}}::static_archetype() {
 
 const physical::entities::archetype& {{class.simple_name}}::archetype() const {
     return static_archetype();
-}
-
-boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> {{class.simple_name}}::

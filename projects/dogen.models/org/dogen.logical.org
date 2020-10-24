@@ -46,6 +46,7 @@ together into a bigger model - called the @e merged model.
 
 @li to ensure the consistency of the merged model via validation
 rules (such as verifying that all types have a definitions,
+etc.).
 
 * entities
 :PROPERTIES:
@@ -2327,7 +2328,7 @@ Logical representation of elements in the physical dimension.
 :END:
 *** entities::physical::archetype
 :PROPERTIES:
-:masd.codec.stereotypes: logical::meta_element, PhysicalElement
+:masd.codec.stereotypes: logical::meta_element, PhysicalElement, HasTechnicalSpace
 :END:
 
 Represents an archetype within a facet.
@@ -2381,9 +2382,16 @@ Relation information for this archetype.
 
 Properties related to the text templating for this archetype.
 
+**** postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default postfix to use for this archetype.
+
 *** entities::physical::backend
 :PROPERTIES:
-:masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container
+:masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container, HasTechnicalSpace
 :END:
 
 Represents a physical backend, targetting a major technical space such as C++ or C#.
@@ -2423,6 +2431,13 @@ Kinds of archetypes defined in this backend.
 
 FIXME: temporary attribute until we can rename the top-level namespaces.
 
+**** directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default directory name to use for this backend.
+
 *** entities::physical::facet
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container
@@ -2450,6 +2465,20 @@ Name of the backend containing this element.
 :END:
 
 All archetypes in this facet.
+
+**** directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default directory name to use for this facet.
+
+**** postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default postfix to use for this facet.
 
 *** entities::physical::part
 :PROPERTIES:
@@ -2513,6 +2542,13 @@ If true, a relative path should be generated for this part.
 :END:
 
 All archetypes in this part.
+
+**** directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default directory name to use for this part.
 
 *** entities::physical::archetype_kind
 :PROPERTIES:
@@ -2663,6 +2699,17 @@ Contains the result of the stitch template after rendering.
 :END:
 
 Relation information for this archetype.
+
+*** entities::physical::HasTechnicalSpace
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+**** technical_space
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Technical space to which this physical element belongs to.
 
 ** entities::output_model_set
 :PROPERTIES:
@@ -3777,6 +3824,14 @@ FIXME: optional for now.
 
 Major technical space to which this element belongs to.
 
+*** technical_space
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text
+:END:
+
+Technical space to which this element belongs to.
+
 *** wale_template_reference
 :PROPERTIES:
 :masd.variability.is_optional: true
@@ -3784,6 +3839,22 @@ Major technical space to which this element belongs to.
 :END:
 
 Name of the wale template that the archetype uses.
+
+*** directory_name
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text
+:END:
+
+Name of the directory to use for this physical element.
+
+*** postfix
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text
+:END:
+
+Postfix to use for this physical element.
 
 ** features::wale
 :PROPERTIES:
@@ -3942,3 +4013,4 @@ Contains formatting classes for the logical model.
 :END:
 
 An error has occurred while formatting.
+

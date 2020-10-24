@@ -345,21 +345,28 @@ The meta-model is always expected to be  @e masd.
 :masd.codec.type: std::string
 :END:
 
-Name of the backend that owns this field, if any.
+Name of the backend where this element is located, if any.
+
+*** part
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the part where this element is located, if any.
 
 *** facet
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Name of the facet that owns this field, if any.
+Name of the facet where this element is located, if any.
 
 *** archetype
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Name of the archetype that owns this field, if any.
+Name of the archetype for this element, if applicable.
 
 ** entities::physical_meta_name
 :PROPERTIES:
@@ -429,15 +436,15 @@ ODB options.
 *** sln
 Visual studio solution.
 
-** entities::physical_name
-Name of a physical model element.
+*** mustache
+Mustache templates.
 
-*** simple
+** entities::physical_name
 :PROPERTIES:
-:masd.codec.type: std::string
+:masd.codec.stereotypes: Nameable
 :END:
 
-File or directory simple name.
+Name of a physical model element.
 
 *** id
 :PROPERTIES:
@@ -637,6 +644,13 @@ Physical meta-names by logical meta-names.
 :END:
 
 Archetype names by qualified backend and facet names
+
+*** technical_space_for_archetype
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<physical_meta_id, technical_space>
+:END:
+
+Resolves a given physical meta-model element ID into its technical space.
 
 * helpers
 :PROPERTIES:

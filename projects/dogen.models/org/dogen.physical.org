@@ -77,6 +77,10 @@ An error occurred while the field factory was building.
 
 An error occurred during validation.
 
+** helpers::header_guard_factory
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
 * entities
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -89,7 +93,7 @@ Defines the MASD physical space.
 :masd.codec.stereotypes: ContainingMetaElement
 :END:
 
-Describes the geomtry of physical space.
+Describes the geometry of physical space.
 
 Provides details of the backends available in the current instance of Dogen.
 
@@ -120,31 +124,48 @@ Repository with all the meta-names in this meta-model, indexed appropriately.
 
 ** entities::backend
 :PROPERTIES:
-:masd.codec.stereotypes: ContainingMetaElement
+:masd.codec.stereotypes: ContainingMetaElement, HasTechnicalSpace
 :END:
 
-Code generation backend, targeting a given technical space.
+Represents a meta-region in physical space with archetypes for a primary technical
+space, and associated secondary technical spaces.
 
 *** parts
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part>
 :END:
+
+Parts by part ID.
+
 *** facets
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet>
 :END:
+
+Facets by facet ID.
+
 *** archetypes
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
+
+Archetypes by archetype ID.
+
 *** archetype_kinds
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind>
+:masd.codec.type: std::unordered_map<std::string, archetype_kind>
 :END:
+
+Archetype kinds by ID.
+
 ** entities::part
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement
 :END:
+
+Represents a meta-region in physical space with archetypes for a given part of a
+component in a backend.
+
 *** path_configuration
 :PROPERTIES:
 :masd.codec.type: path_configuration
@@ -215,6 +236,9 @@ The item contributes a single folder to the path, as a delimited string.
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement, Postfixable
 :END:
+
+Represents a meta-region in physical space with archetypes for a given theme.
+
 *** archetypes
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
@@ -230,7 +254,7 @@ Used to obtain the default archetype for referencing.
 
 ** entities::archetype
 :PROPERTIES:
-:masd.codec.stereotypes: MetaElement, Postfixable, Associatable
+:masd.codec.stereotypes: MetaElement, Postfixable, Associatable, HasTechnicalSpace
 :END:
 
 Represents a meta-artefact.
@@ -267,6 +291,9 @@ Properties of this archetype with regards to relations.
 :PROPERTIES:
 :masd.codec.stereotypes: Describable
 :END:
+
+Represents a type of archetypes.
+
 *** id
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -374,58 +401,33 @@ All labels associated with this element.
 :masd.codec.parent: entities::MetaElement
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** default_directory_name
+
+The meta-element can contain other meta-elements.
+
+*** directory_name
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Default directory name.
-
-*** override_directory_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Override directory name, if any.
+Default name to use for the directory in the file-system representing this element.
 
 ** entities::Postfixable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** default_postfix
+*** postfix
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Default postfix for the element.
-
-*** override_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Overridden postfix, if any.
+Postfix to apply to artefacts within this element, if any.
 
 ** entities::artefact
 :PROPERTIES:
-:masd.codec.stereotypes: Element
+:masd.codec.stereotypes: Element, HasTechnicalSpace
 :END:
 
 Represents an entity in physical space.
-
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, the artefact is enabled and its content will be computed.
-
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, the artefact will be expressed to the filesystem if there are changes.
 
 *** file_path
 :PROPERTIES:
@@ -456,15 +458,6 @@ Properties related to paths in the filesystem.
 :END:
 
 Files in the project directory that this file depends on, but which are not generated.
-
-*** relations
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-
-Artefacts that this artefact depends on.
-
-The format used is dependent on the technical space the artefact belongs to.
 
 *** unified_diff
 :PROPERTIES:
@@ -501,6 +494,10 @@ What type of M2T transform to use in order to generate the artefact's content.
 
 Template used as input in order to generate the artefact's content, if any.
 
+*** relations
+:PROPERTIES:
+:masd.codec.type: relation_properties
+:END:
 ** entities::Configurable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
@@ -543,9 +540,20 @@ Ability to have a name.
 
 Name of the physical element.
 
+** entities::LogicalPhysicalSpaceIdentity
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+*** id
+:PROPERTIES:
+:masd.codec.type: identification::entities::logical_meta_physical_id
+:END:
+
+Point in logical-physical space represented by this element.
+
 ** entities::Element
 :PROPERTIES:
-:masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable
+:masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable, entities::LogicalPhysicalSpaceIdentity
 :masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::outputting_properties
@@ -843,7 +851,25 @@ If false, the entire artefact set is not generatable.
 *** wale
 *** stitch
 ** entities::enablement_properties
-Stores the properties related to the enablement, as read out from configuration.
+Stores the properties related to the enablement.
+
+*** enabled
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the artefact is enabled and its content will be computed.
+
+The enabled flag is computed from the configuration read out.
+
+*** overwrite
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the artefact will be expressed to the filesystem if there are changes.
+
+The overwrite flag is computed from the configuration read out.
 
 *** facet_enabled
 :PROPERTIES:
@@ -873,37 +899,6 @@ If supplied and true, the facet will have overwrite on.
 
 If supplied and true, the archetype will have overwrite on.
 
-** entities::extraction_properties
-Properties related to extraction.
-
-*** cpp_headers_output_directory
-:PROPERTIES:
-:masd.codec.type: boost::filesystem::path
-:END:
-
-Directory in which to place C++ header files. Must be a relative path.
-
-** entities::denormalised_archetype_properties
-*** backend_enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** facet_enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** facet_overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** archetype_enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** archetype_overwrite
-:PROPERTIES:
-:masd.codec.type: boost::optional<bool>
-:END:
 ** entities::formatting_configuration
 *** styles
 :PROPERTIES:
@@ -914,6 +909,10 @@ Directory in which to place C++ header files. Must be a relative path.
 :masd.codec.type: std::string
 :END:
 ** entities::backend_properties
+:PROPERTIES:
+:masd.codec.stereotypes: MetaIdentifiable
+:END:
+
 Properties related to the backend.
 
 *** enabled
@@ -937,17 +936,27 @@ Full path to the backend.
 
 Technical space version to use.
 
-*** directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the directory to use for the backend.
-
 *** enable_backend_directories
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
+Copy of the component level configuration for backend directory enablement.
+
+*** directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Directory name as read out from the configuration.
+
+*** computed_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the directory to use for the backend, computed from configuration.
+
 ** entities::archetype_kind_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaNameable
@@ -957,6 +966,10 @@ Name of the directory to use for the backend.
 :masd.codec.type: std::string
 :END:
 ** entities::facet_properties
+:PROPERTIES:
+:masd.codec.stereotypes: MetaIdentifiable
+:END:
+
 Properties related to the facet.
 
 *** enabled
@@ -973,21 +986,39 @@ If true, the facet is enabled.
 
 If true, all archetypes in this facet will be set to overwrite.
 
-*** directory
+*** directory_name
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Name of the directory to use for the facet.
+Directory name as read out from the configuration.
+
+*** computed_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Computed name of the directory to use for the facet.
 
 *** postfix
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
-Postfix to apply to all artefacts in this facet.
+Postfix as read out from the configuration, if any.
+
+*** computed_postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Computed postfix to apply to all artefacts in this facet.
 
 ** entities::archetype_properties
+:PROPERTIES:
+:masd.codec.stereotypes: MetaIdentifiable
+:END:
+
 Properties related to the archetype.
 
 *** enabled
@@ -1009,10 +1040,40 @@ If true, all artefacts for this archetype will be set to overwrite.
 :masd.codec.type: std::string
 :END:
 
-Postfix to apply to all artefacts of this archetype.
+Postfix as read out from the configuration.
 
+*** computed_postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Computed postfix to apply to all artefacts of this archetype.
+
+*** backend_properties
+:PROPERTIES:
+:masd.codec.type: backend_properties
+:END:
+*** facet_properties
+:PROPERTIES:
+:masd.codec.type: facet_properties
+:END:
+*** part_properties
+:PROPERTIES:
+:masd.codec.type: part_properties
+:END:
 ** entities::meta_model_properties
 Meta-model configuration supplied by this model.
+
+The meta-model properties represent a set of variability overrides supplied on top
+of the existing physical meta-model. In addition, the properties also contain 
+computed values on the back of physical transforms.
+
+*** output_directory_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the output directory chosen by the user.
 
 *** file_path
 :PROPERTIES:
@@ -1041,10 +1102,6 @@ Full path to the component.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part_properties>
 :END:
-*** denormalised_archetype_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
-:END:
 *** enabled_backends
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::physical_meta_id>
@@ -1052,22 +1109,19 @@ Full path to the component.
 
 Contains the IDs of all of the backends which are enabled.
 
-*** enable_backend_directories
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, backends should have backend-specific directories to store their artefacts.
-
-*** extraction_properties
-:PROPERTIES:
-:masd.codec.type: extraction_properties
-:END:
 *** enabled_archetype_for_element
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
 :END:
+*** project_path_properties
+:PROPERTIES:
+:masd.codec.type: project_path_properties
+:END:
 ** entities::part_properties
+:PROPERTIES:
+:masd.codec.stereotypes: MetaIdentifiable
+:END:
+
 Properties related to the part.
 
 *** file_path
@@ -1076,13 +1130,6 @@ Properties related to the part.
 :END:
 
 Full path to the facet.
-
-*** directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the directory to use for the part.
 
 *** relative_path
 :PROPERTIES:
@@ -1093,6 +1140,20 @@ Path to the part, relative to the component directory.
 
 Only required when the part is located outside of the component directory.
 
+*** directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Directory name as read out from the configuration.
+
+*** computed_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Computed name of the directory to use for the part.
+
 ** entities::path_properties
 *** file_path
 :PROPERTIES:
@@ -1101,12 +1162,166 @@ Only required when the part is located outside of the component directory.
 
 Full path to the file corresponding to this artefact.
 
-*** relative_paths
+*** header_guard
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, boost::filesystem::path>
+:masd.codec.type: std::string
 :END:
 
-Paths relative to the part's root directory.
+C++ header guard for this artefact, if any,
+
+*** inclusion_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Path for inclusion for this artefact, computed from the path.
+
+Note that this is will not necessarily be used for the inclusion directive.
+
+*** inclusion_directives
+:PROPERTIES:
+:masd.codec.type: inclusion_directives
+:END:
+*** inclusion_dependencies
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+
+C++ Inlusion dependencies for this artefact.
+
+*** using_dependencies
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+*** relative_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+** entities::project_path_properties
+Legacy type containing all proprties related to paths.
+
+*** include_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** source_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** disable_facet_directories
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** header_file_extension
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** implementation_file_extension
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** tests_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** templates_directory_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** templates_file_extension
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** enable_unique_file_names
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** headers_output_directory
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Directory in which to place C++ header files. Must be a relative path.
+
+*** enable_backend_directories
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, backends should have backend-specific directories to store their artefacts.
+
+** entities::MetaIdentifiable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+*** meta_id
+:PROPERTIES:
+:masd.codec.type: identification::entities::physical_meta_id
+:END:
+
+Meta-id of the physical meta-element.
+
+** entities::legacy_archetype_kind
+:PROPERTIES:
+:masd.codec.stereotypes: masd::enumeration
+:END:
+
+Kinds of archetypes available across all technical spaces.
+
+*** visual_studio_solution
+*** visual_studio_project
+*** odb_options
+*** msbuild_targets
+*** tests_cmakelists
+*** source_cmakelists
+*** include_cmakelists
+*** cpp_header
+*** cpp_implementation
+*** tests_cpp_main
+*** tests_cpp_implementation
+*** templates
+*** csharp_implementation
+** entities::relation_properties
+*** status
+:PROPERTIES:
+:masd.codec.type: relation_status
+:END:
+*** relations
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+
+Artefacts that this artefact depends on.
+
+The format used is dependent on the technical space the artefact belongs to.
+
+** entities::inclusion_directives
+Represents the group of inclusion directives associated with a name and an archetype.
+
+*** primary
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+The main inclusion directive needed for this element.
+
+*** secondary
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+
+Any other directives that are also needed for this element.
+
+** entities::HasTechnicalSpace
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+*** technical_space
+:PROPERTIES:
+:masd.codec.type: identification::entities::technical_space
+:END:
+
+Technical space to which this physical element belongs to.
 
 * features
 :PROPERTIES:
@@ -1123,7 +1338,7 @@ Features for the MASD physical model.
 
 Physical features common to all facets.
 
-*** directory
+*** directory_name
 :PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.default_value_override.cpp.types: "types"
@@ -1307,6 +1522,153 @@ Style of formatting to use for this archetype.
 
 If the formatting style requires a template, the name of the template to use.
 
+** features::backend_features
+:PROPERTIES:
+:masd.variability.instantiation_domain_name: masd.backend
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
+:END:
+
+Physical features common to all backends.
+
+*** directory_name
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.variability.default_value_override.cpp: "cpp"
+:masd.variability.default_value_override.csharp: "cs"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
+:END:
+
+Directory in which to place this backend.
+
+** features::path_features
+:PROPERTIES:
+:masd.variability.generate_static_configuration: true
+:masd.variability.key_prefix: masd.cpp
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+
+Set of features related to path processing.
+
+*** headers_output_directory
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text
+:END:
+
+Override location of public c++ headers.
+
+*** source_directory_name
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "src"
+:END:
+
+Directory in which to place C++ source files.
+
+*** include_directory_name
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "include"
+:END:
+
+Directory in which to place include headers.
+
+*** tests_directory_name
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "generated_tests"
+:END:
+
+Directory in which to place c++ tests.
+
+*** templates_directory_name
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "templates"
+:END:
+
+Directory in which to place text templates.
+
+*** header_file_extension
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "hpp"
+:END:
+
+Extension to use for C++ header files.
+
+*** implementation_file_extension
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "cpp"
+:END:
+
+Extension to use for C++ implementation files.
+
+*** templates_file_extension
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "wale"
+:END:
+
+Extension to use for text templates.
+
+*** enable_unique_file_names
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
+:END:
+
+If true, make all file names unique within a model.
+
+*** disable_facet_directories
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, facet directories will not be used.
+
+** features::directive_features
+:PROPERTIES:
+:masd.variability.default_binding_point: element
+:masd.variability.instantiation_domain_name: masd.cpp.archetype
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
+:END:
+*** primary_inclusion_directive
+:PROPERTIES:
+:masd.codec.type: masd::variability::text
+:END:
+*** secondary_inclusion_directive
+:PROPERTIES:
+:masd.codec.type: masd::variability::text_collection
+:END:
+** features::inclusion_features
+:PROPERTIES:
+:masd.variability.generate_static_configuration: false
+:masd.variability.key_prefix: masd.cpp
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+*** inclusion_required
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
+:END:
+
+If true, inclusion is required for this modeling element.
+
 * transforms
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -1453,15 +1815,19 @@ Smallest possible context required for bootstrapping purposes.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::extraction_properties_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** transforms::paths_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::remove_regions_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::legacy_paths_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::relations_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

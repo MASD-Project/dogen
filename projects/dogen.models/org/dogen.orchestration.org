@@ -82,7 +82,7 @@ An error occurred in the factory whilst making.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** transforms::logical_model_to_text_model_transform
+** transforms::logical_model_to_text_model_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -99,6 +99,10 @@ An error occurred in the factory whilst making.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::text_model_production_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::legacy_dependencies_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -138,6 +142,14 @@ Helpers for the orchestration model.
 
 An error ocurred whilst projecting elements from one space into another.
 
+** helpers::dependencies_builder
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::building_error
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
 * features
 :PROPERTIES:
 :masd.codec.dia.comment: true
