@@ -124,7 +124,7 @@ masd.csharp.visual_studio.project, masd.csharp.visual_studio.solution
 
 namespace dogen::orchestration::transforms {
 
-// using identification::entities::technical_space;
+using identification::entities::technical_space;
 using identification::entities::logical_name;
 using identification::entities::logical_meta_physical_id;
 using physical::entities::inclusion_directives;
@@ -163,33 +163,29 @@ public:
     void visit(const logical::entities::structural::visitor& v);
 
 private:
-    const helpers::dependencies_builder builder_;
+    helpers::dependencies_builder builder_;
     logical_physical_region& region_;
 };
 
 void region_processor::
 visit(const logical::entities::physical::archetype& /*v*/) {
-    /*
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_class_header_transform") {
-
-            if (a.major_technical_space() == technical_space::cpp) {
+            const auto ts(a.technical_space());
+            if (ts == technical_space::cpp) {
                 builder_.add_as_user(
                     "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
-            } else if (arch.major_technical_space() == technical_space::csharp) {
-                builder.add_as_user(
+            } else if (ts == technical_space::csharp) {
+                builder_.add_as_user(
                     "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
             }
 
-            return builder.build();
-
-
+            a.path_properties().inclusion_dependencies(builder_.build());
         }
     }
-    */
 }
 
 void region_processor::visit(const logical::entities::structural::object& /*v*/) {
