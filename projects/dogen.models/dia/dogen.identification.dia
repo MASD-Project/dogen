@@ -13953,7 +13953,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#technical_space_for_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;physical_meta_id,  technical_space&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, technical_space&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
