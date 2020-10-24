@@ -874,6 +874,11 @@
           "name": "archetype_names_by_backend_by_facet",
           "type": "std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>",
           "documentation": "Archetype names by qualified backend and facet names\n"
+        },
+        {
+          "name": "technical_space_for_archetype",
+          "type": "std::unordered_map<physical_meta_id,  technical_space>",
+          "documentation": "Resolves a given physical meta-model element ID into its technical space.\n"
         }
       ]
     },

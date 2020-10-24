@@ -90,7 +90,7 @@
         <dia:point val="-16,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,-16.05;69.05,48.05"/>
+        <dia:rectangle val="-16.05,-16.05;69.05,50.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -102,7 +102,7 @@
         <dia:real val="85"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="63"/>
+        <dia:real val="65"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#entities#</dia:string>
@@ -1742,7 +1742,7 @@ identification within Dogen.
         <dia:point val="40.895,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.145,-9.45;47.4163,-5.2"/>
+        <dia:rectangle val="40.145,-9.45;46.7662,-5.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1750,8 +1750,8 @@ identification within Dogen.
       <dia:attribute name="orth_points">
         <dia:point val="40.895,-6"/>
         <dia:point val="40.895,-8"/>
-        <dia:point val="47.2163,-8"/>
-        <dia:point val="47.2163,-9.4"/>
+        <dia:point val="46.5662,-8"/>
+        <dia:point val="46.5662,-9.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4878,7 +4878,7 @@ of Dogen elements.
         <dia:point val="72,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,-16.05;200.05,48.05"/>
+        <dia:rectangle val="71.95,-16.05;200.05,50.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4890,7 +4890,7 @@ of Dogen elements.
         <dia:real val="128"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="63"/>
+        <dia:real val="65"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#helpers#</dia:string>
@@ -13754,7 +13754,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="10,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,40.95;64.835,46.25"/>
+        <dia:rectangle val="9.95,40.95;64.835,47.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,41"/>
@@ -13763,7 +13763,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="54.785000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#physical_meta_name_indices#</dia:string>
@@ -13937,6 +13937,29 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Archetype names by qualified backend and facet names#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#technical_space_for_archetype#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;physical_meta_id,  technical_space&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Resolves a given physical meta-model element ID into its technical space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

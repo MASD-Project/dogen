@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/archetype_name_set_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
@@ -139,6 +140,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::identification::entities {
 
 std::ostream& operator<<(std::ostream& s, const physical_meta_name_indices& v) {
@@ -147,7 +166,8 @@ std::ostream& operator<<(std::ostream& s, const physical_meta_name_indices& v) {
       << "\"all\": " << v.all() << ", "
       << "\"facet_names_by_backend_name\": " << v.facet_names_by_backend_name() << ", "
       << "\"archetype_names_by_logical_meta_name\": " << v.archetype_names_by_logical_meta_name() << ", "
-      << "\"archetype_names_by_backend_by_facet\": " << v.archetype_names_by_backend_by_facet()
+      << "\"archetype_names_by_backend_by_facet\": " << v.archetype_names_by_backend_by_facet() << ", "
+      << "\"technical_space_for_archetype\": " << v.technical_space_for_archetype()
       << " }";
     return(s);
 }

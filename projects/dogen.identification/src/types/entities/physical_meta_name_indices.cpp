@@ -26,11 +26,13 @@ physical_meta_name_indices::physical_meta_name_indices(
     const std::list<dogen::identification::entities::physical_meta_name>& all,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& facet_names_by_backend_name,
     const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>& technical_space_for_archetype)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       archetype_names_by_logical_meta_name_(archetype_names_by_logical_meta_name),
-      archetype_names_by_backend_by_facet_(archetype_names_by_backend_by_facet) { }
+      archetype_names_by_backend_by_facet_(archetype_names_by_backend_by_facet),
+      technical_space_for_archetype_(technical_space_for_archetype) { }
 
 void physical_meta_name_indices::swap(physical_meta_name_indices& other) noexcept {
     using std::swap;
@@ -38,13 +40,15 @@ void physical_meta_name_indices::swap(physical_meta_name_indices& other) noexcep
     swap(facet_names_by_backend_name_, other.facet_names_by_backend_name_);
     swap(archetype_names_by_logical_meta_name_, other.archetype_names_by_logical_meta_name_);
     swap(archetype_names_by_backend_by_facet_, other.archetype_names_by_backend_by_facet_);
+    swap(technical_space_for_archetype_, other.technical_space_for_archetype_);
 }
 
 bool physical_meta_name_indices::operator==(const physical_meta_name_indices& rhs) const {
     return all_ == rhs.all_ &&
         facet_names_by_backend_name_ == rhs.facet_names_by_backend_name_ &&
         archetype_names_by_logical_meta_name_ == rhs.archetype_names_by_logical_meta_name_ &&
-        archetype_names_by_backend_by_facet_ == rhs.archetype_names_by_backend_by_facet_;
+        archetype_names_by_backend_by_facet_ == rhs.archetype_names_by_backend_by_facet_ &&
+        technical_space_for_archetype_ == rhs.technical_space_for_archetype_;
 }
 
 physical_meta_name_indices& physical_meta_name_indices::operator=(physical_meta_name_indices other) {
@@ -115,6 +119,22 @@ void physical_meta_name_indices::archetype_names_by_backend_by_facet(const std::
 
 void physical_meta_name_indices::archetype_names_by_backend_by_facet(const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >&& v) {
     archetype_names_by_backend_by_facet_ = std::move(v);
+}
+
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>& physical_meta_name_indices::technical_space_for_archetype() const {
+    return technical_space_for_archetype_;
+}
+
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>& physical_meta_name_indices::technical_space_for_archetype() {
+    return technical_space_for_archetype_;
+}
+
+void physical_meta_name_indices::technical_space_for_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>& v) {
+    technical_space_for_archetype_ = v;
+}
+
+void physical_meta_name_indices::technical_space_for_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::technical_space>&& v) {
+    technical_space_for_archetype_ = std::move(v);
 }
 
 }
