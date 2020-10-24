@@ -43,6 +43,8 @@ static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string duplicate_id("Duplicate ID for element: ");
+const std::string missing_archetype(
+    "Archetype not found in technical space index: ");
 const std::string duplicate_physical_name("Duplicate physical name: ");
 const std::string expected_archetypes("Expected archetypes for: ");
 const std::string unexpected_archetypes("Unexpected archetypes for: ");
@@ -232,6 +234,18 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
         a->id().logical_id(lid);
         a->id().physical_meta_id(pmid);
         a->provenance(pr.provenance());
+
+        /*
+         * Populate technical space.
+         */
+        const auto& tsfa(in.technical_space_for_archetype());
+        const auto j(tsfa.find(pmid));
+        if (j == tsfa.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_archetype << pmid;
+            BOOST_THROW_EXCEPTION(
+                projection_error(missing_archetype + pmid.value()));
+        }
+        a->technical_space(j->second);
 
         /*
          * Add the archetype to the region. For any position in
