@@ -168,7 +168,7 @@ private:
 };
 
 void region_processor::
-visit(const logical::entities::physical::archetype& /*v*/) {
+visit(const logical::entities::physical::archetype& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
@@ -185,9 +185,12 @@ visit(const logical::entities::physical::archetype& /*v*/) {
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_transform") {
             // no deps
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/archetype.hpp");
+            builder_.add(v.name(),
+                "masd.cpp.types.archetype_class_header_factory");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_factory.hpp");
         } else if (pmid.value() == "masd.cpp.types.archetype_class_header_factory") {
-            builder_.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
+            builder_.add_as_user("dogen.physical/types/entities/archetype.hpp");
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
