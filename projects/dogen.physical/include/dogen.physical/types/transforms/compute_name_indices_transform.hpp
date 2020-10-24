@@ -56,6 +56,14 @@ private:
     obtain_physical_meta_names_by_logical_meta_name(
         const physical::entities::meta_model& mm);
 
+    /**
+     * @brief Indexes technical spaces for archetype.
+     */
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              identification::entities::technical_space>
+    obtain_technical_space_for_archetype(
+        const physical::entities::meta_model& mm);
+
 public:
     /**
      * @brief Apply the transform to the meta-model.

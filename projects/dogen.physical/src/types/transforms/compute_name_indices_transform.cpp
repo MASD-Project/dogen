@@ -111,6 +111,36 @@ compute_name_indices_transform::obtain_physical_meta_names_by_logical_meta_name(
     return r;
 }
 
+std::unordered_map<identification::entities::physical_meta_id,
+                   identification::entities::technical_space>
+compute_name_indices_transform::obtain_technical_space_for_archetype(
+    const physical::entities::meta_model& mm) {
+
+    std::unordered_map<identification::entities::physical_meta_id,
+                       identification::entities::technical_space> r;
+    for (const auto& be : mm.backends()) {
+        for (const auto& fct_pair : be.facets()) {
+            auto& fct(fct_pair.second);
+            for (const auto& arch_pair : fct.archetypes()) {
+                const auto& arch(arch_pair.second);
+                const auto& id(arch.meta_name().id());
+                const auto ts(arch.technical_space());
+                const auto pair(std::make_pair(id, ts));
+                const auto inserted(r.insert(pair).second);
+                if (!inserted) {
+                    std::ostringstream os;
+                    os << duplicate_archetype << id.value();
+                    const auto msg(os.str());
+
+                    BOOST_LOG_SEV(lg, error) << msg;
+                    BOOST_THROW_EXCEPTION(transform_exception(msg));
+                }
+            }
+        }
+    }
+    return r;
+}
+
 void compute_name_indices_transform::
 apply(const physical::transforms::minimal_context& ctx,
     physical::entities::meta_model& mm) {
@@ -129,6 +159,12 @@ apply(const physical::transforms::minimal_context& ctx,
     identification::helpers::meta_name_index_builder b;
     b.add(pmn_by_lmn);
     mm.indexed_names(b.build());
+
+    /*
+     * Finally index technical spaces by archetype.
+     */
+    const auto tsfa(obtain_technical_space_for_archetype(mm));
+    mm.indexed_names().technical_space_for_archetype(tsfa);
 
     stp.end_transform(mm);
 }
