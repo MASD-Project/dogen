@@ -22,6 +22,9 @@
 
 namespace dogen::physical::entities {
 
+archetype::archetype()
+    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+
 archetype::archetype(
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
@@ -30,6 +33,7 @@ archetype::archetype(
     const std::list<std::string>& depends,
     const std::list<std::string>& generates,
     const std::string& generated_by,
+    const dogen::identification::entities::technical_space technical_space,
     const std::string& archetype_kind_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::identification::entities::physical_meta_id& part,
@@ -41,6 +45,7 @@ archetype::archetype(
       depends_(depends),
       generates_(generates),
       generated_by_(generated_by),
+      technical_space_(technical_space),
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
@@ -55,6 +60,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(depends_, other.depends_);
     swap(generates_, other.generates_);
     swap(generated_by_, other.generated_by_);
+    swap(technical_space_, other.technical_space_);
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
@@ -69,6 +75,7 @@ bool archetype::operator==(const archetype& rhs) const {
         depends_ == rhs.depends_ &&
         generates_ == rhs.generates_ &&
         generated_by_ == rhs.generated_by_ &&
+        technical_space_ == rhs.technical_space_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
@@ -191,6 +198,14 @@ void archetype::generated_by(const std::string& v) {
 
 void archetype::generated_by(const std::string&& v) {
     generated_by_ = std::move(v);
+}
+
+dogen::identification::entities::technical_space archetype::technical_space() const {
+    return technical_space_;
+}
+
+void archetype::technical_space(const dogen::identification::entities::technical_space v) {
+    technical_space_ = v;
 }
 
 const std::string& archetype::archetype_kind_id() const {

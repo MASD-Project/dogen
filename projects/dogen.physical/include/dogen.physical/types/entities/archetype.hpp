@@ -31,6 +31,7 @@
 #include "dogen.physical/types/entities/relations.hpp"
 #include "dogen.identification/types/entities/label.hpp"
 #include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 
@@ -41,10 +42,12 @@ namespace dogen::physical::entities {
  */
 class archetype final {
 public:
-    archetype() = default;
     archetype(const archetype&) = default;
     archetype(archetype&&) = default;
     ~archetype() = default;
+
+public:
+    archetype();
 
 public:
     archetype(
@@ -55,6 +58,7 @@ public:
         const std::list<std::string>& depends,
         const std::list<std::string>& generates,
         const std::string& generated_by,
+        const dogen::identification::entities::technical_space technical_space,
         const std::string& archetype_kind_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
         const dogen::identification::entities::physical_meta_id& part,
@@ -132,6 +136,14 @@ public:
     /**@}*/
 
     /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
+    /**@}*/
+
+    /**
      * @brief ID for the archetype kind that this archetype is an instance of.
      */
     /**@{*/
@@ -189,6 +201,7 @@ private:
     std::list<std::string> depends_;
     std::list<std::string> generates_;
     std::string generated_by_;
+    dogen::identification::entities::technical_space technical_space_;
     std::string archetype_kind_id_;
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
     dogen::identification::entities::physical_meta_id part_;

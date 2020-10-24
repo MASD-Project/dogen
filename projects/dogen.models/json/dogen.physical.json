@@ -92,7 +92,8 @@
       "name": "entities::backend",
       "documentation": "Represents a meta-region in physical space with archetypes for a primary technical\nspace, and associated secondary technical spaces.\n",
       "stereotypes": [
-        "ContainingMetaElement"
+        "ContainingMetaElement",
+        "HasTechnicalSpace"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -223,7 +224,8 @@
       "stereotypes": [
         "MetaElement",
         "Postfixable",
-        "Associatable"
+        "Associatable",
+        "HasTechnicalSpace"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2048,6 +2050,20 @@
           "name": "secondary",
           "type": "std::list<std::string>",
           "documentation": "Any other directives that are also needed for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::HasTechnicalSpace",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Technical space to which this physical element belongs to.\n"
         }
       ]
     }

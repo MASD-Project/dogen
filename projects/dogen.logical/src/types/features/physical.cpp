@@ -94,6 +94,21 @@ make_masd_physical_major_technical_space() {
 }
 
 dogen::variability::entities::feature
+make_masd_physical_technical_space() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("technical_space");
+    r.name().qualified("masd.physical.technical_space");
+    r.description(R"(Technical space to which this element belongs to.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
+dogen::variability::entities::feature
 make_masd_physical_wale_template_reference() {
     using namespace dogen::variability::entities;
     feature r;
@@ -149,6 +164,7 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
     r.part_id = s.get_by_name("masd.physical.part_id");
     r.logical_meta_element_id = s.get_by_name("masd.physical.logical_meta_element_id");
     r.major_technical_space = s.get_by_name("masd.physical.major_technical_space");
+    r.technical_space = s.get_by_name("masd.physical.technical_space");
     r.wale_template_reference = s.get_by_name("masd.physical.wale_template_reference");
     r.directory_name = s.get_by_name("masd.physical.directory_name");
     r.postfix = s.get_by_name("masd.physical.postfix");
@@ -170,6 +186,8 @@ physical::static_configuration physical::make_static_configuration(
         r.logical_meta_element_id = s.get_text_content(fg.logical_meta_element_id);
     if (s.has_configuration_point(fg.major_technical_space))
         r.major_technical_space = s.get_text_content(fg.major_technical_space);
+    if (s.has_configuration_point(fg.technical_space))
+        r.technical_space = s.get_text_content(fg.technical_space);
     if (s.has_configuration_point(fg.wale_template_reference))
         r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
     if (s.has_configuration_point(fg.directory_name))
@@ -187,6 +205,7 @@ physical::make_features() {
     r.push_back(make_masd_physical_part_id());
     r.push_back(make_masd_physical_logical_meta_element_id());
     r.push_back(make_masd_physical_major_technical_space());
+    r.push_back(make_masd_physical_technical_space());
     r.push_back(make_masd_physical_wale_template_reference());
     r.push_back(make_masd_physical_directory_name());
     r.push_back(make_masd_physical_postfix());

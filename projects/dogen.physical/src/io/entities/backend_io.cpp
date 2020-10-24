@@ -26,6 +26,7 @@
 #include "dogen.physical/io/entities/archetype_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
 #include "dogen.physical/io/entities/archetype_kind_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
@@ -132,6 +133,7 @@ std::ostream& operator<<(std::ostream& s, const backend& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
+      << "\"technical_space\": " << v.technical_space() << ", "
       << "\"parts\": " << v.parts() << ", "
       << "\"facets\": " << v.facets() << ", "
       << "\"archetypes\": " << v.archetypes() << ", "

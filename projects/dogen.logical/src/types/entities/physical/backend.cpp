@@ -66,7 +66,8 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
 namespace dogen::logical::entities::physical {
 
 backend::backend()
-    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
+      technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 backend::backend(
     const dogen::identification::entities::logical_name& name,
@@ -84,6 +85,7 @@ backend::backend(
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
     const std::list<dogen::identification::entities::logical_id>& contains,
+    const dogen::identification::entities::technical_space technical_space,
     const std::string& meta_model_name,
     const std::list<dogen::identification::entities::logical_name>& facets,
     const std::list<dogen::identification::entities::logical_name>& parts,
@@ -106,6 +108,7 @@ backend::backend(
       id_(id),
       major_technical_space_(major_technical_space),
       contains_(contains),
+      technical_space_(technical_space),
       meta_model_name_(meta_model_name),
       facets_(facets),
       parts_(parts),
@@ -138,6 +141,7 @@ void backend::to_stream(std::ostream& s) const {
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"contains\": " << contains_ << ", "
+      << "\"technical_space\": " << technical_space_ << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
@@ -154,6 +158,7 @@ void backend::swap(backend& other) noexcept {
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
     swap(contains_, other.contains_);
+    swap(technical_space_, other.technical_space_);
     swap(meta_model_name_, other.meta_model_name_);
     swap(facets_, other.facets_);
     swap(parts_, other.parts_);
@@ -173,6 +178,7 @@ bool backend::operator==(const backend& rhs) const {
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
         contains_ == rhs.contains_ &&
+        technical_space_ == rhs.technical_space_ &&
         meta_model_name_ == rhs.meta_model_name_ &&
         facets_ == rhs.facets_ &&
         parts_ == rhs.parts_ &&
@@ -225,6 +231,14 @@ void backend::contains(const std::list<dogen::identification::entities::logical_
 
 void backend::contains(const std::list<dogen::identification::entities::logical_id>&& v) {
     contains_ = std::move(v);
+}
+
+dogen::identification::entities::technical_space backend::technical_space() const {
+    return technical_space_;
+}
+
+void backend::technical_space(const dogen::identification::entities::technical_space v) {
+    technical_space_ = v;
 }
 
 const std::string& backend::meta_model_name() const {

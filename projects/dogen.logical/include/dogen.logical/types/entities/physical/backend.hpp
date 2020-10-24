@@ -66,6 +66,7 @@ public:
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
         const std::list<dogen::identification::entities::logical_id>& contains,
+        const dogen::identification::entities::technical_space technical_space,
         const std::string& meta_model_name,
         const std::list<dogen::identification::entities::logical_name>& facets,
         const std::list<dogen::identification::entities::logical_name>& parts,
@@ -110,6 +111,14 @@ public:
     std::list<dogen::identification::entities::logical_id>& contains();
     void contains(const std::list<dogen::identification::entities::logical_id>& v);
     void contains(const std::list<dogen::identification::entities::logical_id>&& v);
+    /**@}*/
+
+    /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -189,6 +198,7 @@ private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
     std::list<dogen::identification::entities::logical_id> contains_;
+    dogen::identification::entities::technical_space technical_space_;
     std::string meta_model_name_;
     std::list<dogen::identification::entities::logical_name> facets_;
     std::list<dogen::identification::entities::logical_name> parts_;

@@ -39,7 +39,8 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::logical::entities::physical {
 
 archetype::archetype()
-    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
+      technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 archetype::archetype(
     const dogen::identification::entities::logical_name& name,
@@ -56,6 +57,7 @@ archetype::archetype(
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
+    const dogen::identification::entities::technical_space technical_space,
     const std::string& meta_model_name,
     const std::string& backend_name,
     const std::string& facet_name,
@@ -79,6 +81,7 @@ archetype::archetype(
       decoration),
       id_(id),
       major_technical_space_(major_technical_space),
+      technical_space_(technical_space),
       meta_model_name_(meta_model_name),
       backend_name_(backend_name),
       facet_name_(facet_name),
@@ -112,6 +115,7 @@ void archetype::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
+      << "\"technical_space\": " << technical_space_ << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
@@ -129,6 +133,7 @@ void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
+    swap(technical_space_, other.technical_space_);
     swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
     swap(facet_name_, other.facet_name_);
@@ -149,6 +154,7 @@ bool archetype::operator==(const archetype& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
+        technical_space_ == rhs.technical_space_ &&
         meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
         facet_name_ == rhs.facet_name_ &&
@@ -187,6 +193,14 @@ dogen::identification::entities::technical_space archetype::major_technical_spac
 
 void archetype::major_technical_space(const dogen::identification::entities::technical_space v) {
     major_technical_space_ = v;
+}
+
+dogen::identification::entities::technical_space archetype::technical_space() const {
+    return technical_space_;
+}
+
+void archetype::technical_space(const dogen::identification::entities::technical_space v) {
+    technical_space_ = v;
 }
 
 const std::string& archetype::meta_model_name() const {

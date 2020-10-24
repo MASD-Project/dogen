@@ -34,6 +34,7 @@
 #include "dogen.physical/types/entities/archetype.hpp"
 #include "dogen.identification/types/entities/label.hpp"
 #include "dogen.physical/types/entities/archetype_kind.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
@@ -46,10 +47,12 @@ namespace dogen::physical::entities {
  */
 class backend final {
 public:
-    backend() = default;
     backend(const backend&) = default;
     backend(backend&&) = default;
     ~backend() = default;
+
+public:
+    backend();
 
 public:
     backend(
@@ -57,6 +60,7 @@ public:
         const std::string& description,
         const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
+        const dogen::identification::entities::technical_space technical_space,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
@@ -101,6 +105,14 @@ public:
     std::list<dogen::identification::entities::label>& labels();
     void labels(const std::list<dogen::identification::entities::label>& v);
     void labels(const std::list<dogen::identification::entities::label>&& v);
+    /**@}*/
+
+    /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -158,6 +170,7 @@ private:
     std::string description_;
     dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
+    dogen::identification::entities::technical_space technical_space_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part> parts_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet> facets_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;

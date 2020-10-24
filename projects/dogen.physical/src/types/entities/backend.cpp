@@ -22,11 +22,15 @@
 
 namespace dogen::physical::entities {
 
+backend::backend()
+    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+
 backend::backend(
     const std::string& directory_name,
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
+    const dogen::identification::entities::technical_space technical_space,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
@@ -35,6 +39,7 @@ backend::backend(
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
+      technical_space_(technical_space),
       parts_(parts),
       facets_(facets),
       archetypes_(archetypes),
@@ -46,6 +51,7 @@ void backend::swap(backend& other) noexcept {
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
+    swap(technical_space_, other.technical_space_);
     swap(parts_, other.parts_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -57,6 +63,7 @@ bool backend::operator==(const backend& rhs) const {
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
+        technical_space_ == rhs.technical_space_ &&
         parts_ == rhs.parts_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -131,6 +138,14 @@ void backend::labels(const std::list<dogen::identification::entities::label>& v)
 
 void backend::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
+}
+
+dogen::identification::entities::technical_space backend::technical_space() const {
+    return technical_space_;
+}
+
+void backend::technical_space(const dogen::identification::entities::technical_space v) {
+    technical_space_ = v;
 }
 
 const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& backend::parts() const {

@@ -3539,7 +3539,8 @@
       "documentation": "Represents an archetype within a facet.\n",
       "stereotypes": [
         "logical::meta_element",
-        "PhysicalElement"
+        "PhysicalElement",
+        "HasTechnicalSpace"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3591,7 +3592,8 @@
       "stereotypes": [
         "logical::meta_element",
         "PhysicalElement",
-        "Container"
+        "Container",
+        "HasTechnicalSpace"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3792,6 +3794,14 @@
           "name": "major_technical_space",
           "type": "masd::variability::text",
           "documentation": "Major technical space to which this element belongs to.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Technical space to which this element belongs to.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
@@ -4322,6 +4332,20 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::HasTechnicalSpace",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Technical space to which this physical element belongs to.\n"
+        }
+      ]
     }
   ]
 }

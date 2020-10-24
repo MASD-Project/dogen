@@ -124,6 +124,7 @@ masd.csharp.visual_studio.project, masd.csharp.visual_studio.solution
 
 namespace dogen::orchestration::transforms {
 
+// using identification::entities::technical_space;
 using identification::entities::logical_name;
 using identification::entities::logical_meta_physical_id;
 using physical::entities::inclusion_directives;
@@ -166,14 +167,15 @@ private:
     logical_physical_region& region_;
 };
 
-void region_processor::visit(const logical::entities::physical::archetype& /*v*/) {
+void region_processor::
+visit(const logical::entities::physical::archetype& /*v*/) {
     /*
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_class_header_transform") {
-            using identification::entities::technical_space;
+
             if (a.major_technical_space() == technical_space::cpp) {
                 builder_.add_as_user(
                     "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
