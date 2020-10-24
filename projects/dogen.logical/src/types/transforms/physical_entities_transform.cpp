@@ -88,10 +88,15 @@ const std::string invalid_variable_relation(
     "Variable relations must have 2 parameters. Found: ");
 const std::string invalid_label("Label must have a key and a value. Found: ");
 const std::string invalid_relation_type("Invalid relation type: ");
+const std::string missing_technical_space(
+    "Expected technical space to be supplied.");
 
 }
 
 namespace dogen::logical::transforms {
+
+using boost::lexical_cast;
+using identification::entities::technical_space;
 
 void physical_entities_transform::
 process_backends(const context& ctx, entities::model& m) {
@@ -146,11 +151,19 @@ process_backends(const context& ctx, entities::model& m) {
         /*
          * Read the technical space.
          */
-        using boost::lexical_cast;
-        using identification::entities::technical_space;
         const auto mts(scfg.major_technical_space);
         BOOST_LOG_SEV(lg, debug) << "Major technical space: " << mts;
         b.major_technical_space(lexical_cast<technical_space>(mts));
+
+        const auto ts(scfg.technical_space);
+        if (ts.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_technical_space;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_technical_space));
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Technical space: " << ts;
+        b.technical_space(lexical_cast<technical_space>(ts));
 
         bool found(false);
         for (const auto& qn : b.contains()) {
@@ -454,6 +467,18 @@ process_archetypes(const context& ctx, entities::model& m) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(uncontained_archetype + id.value()));
         }
+
+        /*
+         * Read the technical space.
+         */
+        const auto ts(scfg.technical_space);
+        if (ts.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_technical_space;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_technical_space));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Technical space: " << ts;
+        arch.technical_space(lexical_cast<technical_space>(ts));
 
         /*
          * Generate the ID for this archetype.

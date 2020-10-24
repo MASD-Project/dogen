@@ -14592,7 +14592,8 @@ std::string {{class.simple_name}}::helper_name() const {
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
-#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable
+#DOGEN masd.physical.technical_space=xml#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14822,7 +14823,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
-#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable
+#DOGEN masd.physical.technical_space=sln#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16290,7 +16292,7 @@ using System.Collections.Specialized;
         <dia:point val="10,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,9.95;38.27,16.05"/>
+        <dia:rectangle val="9.95,9.95;38.27,16.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,10"/>
@@ -16299,7 +16301,7 @@ using System.Collections.Specialized;
         <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_configuration#</dia:string>
@@ -16487,6 +16489,29 @@ using System.Collections.Specialized;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.physical.technical_space#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -16500,7 +16525,7 @@ using System.Collections.Specialized;
         <dia:point val="-15,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,7.95;7.125,16.95"/>
+        <dia:rectangle val="-15.05,7.95;7.125,17.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16512,7 +16537,7 @@ using System.Collections.Specialized;
         <dia:real val="22.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.9000000000000004"/>
+        <dia:real val="9.7000000000000011"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -16526,7 +16551,8 @@ of the C# Technical Space.
 #DOGEN masd.codec.dia.comment=true
 #DOGEN masd.physical.backend_name=csharp
 #DOGEN masd.physical.directory_name=cs
-#DOGEN masd.physical.major_technical_space=csharp#</dia:string>
+#DOGEN masd.physical.major_technical_space=csharp
+#DOGEN masd.physical.technical_space=csharp#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -16824,16 +16850,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O114">
       <dia:attribute name="obj_pos">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.325,15.95;24.96,21.05"/>
+        <dia:rectangle val="-1.325,16.75;24.96,21.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
         <dia:point val="24.11,19"/>
         <dia:point val="-1.275,19"/>
         <dia:point val="-1.275,21"/>
@@ -17292,16 +17318,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.26,15.95;30.7375,21.0001"/>
+        <dia:rectangle val="23.26,16.75;30.7375,21.0001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
         <dia:point val="24.11,19"/>
         <dia:point val="30.6875,19"/>
         <dia:point val="30.6875,20.9501"/>
@@ -17553,16 +17579,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O119">
       <dia:attribute name="obj_pos">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.2525,15.95;24.96,29.05"/>
+        <dia:rectangle val="14.2525,16.75;24.96,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
         <dia:point val="24.11,19"/>
         <dia:point val="14.3025,19"/>
         <dia:point val="14.3025,29"/>
@@ -17814,16 +17840,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O121">
       <dia:attribute name="obj_pos">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.26,15.95;47.3525,29.05"/>
+        <dia:rectangle val="23.26,16.75;47.3525,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
         <dia:point val="24.11,19"/>
         <dia:point val="47.3025,19"/>
         <dia:point val="47.3025,29"/>
@@ -18075,16 +18101,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O123">
       <dia:attribute name="obj_pos">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.26,15.95;62.9675,21.05"/>
+        <dia:rectangle val="23.26,16.75;62.9675,21.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="24.11,16"/>
+        <dia:point val="24.11,16.8"/>
         <dia:point val="24.11,19"/>
         <dia:point val="62.9175,19"/>
         <dia:point val="62.9175,21"/>

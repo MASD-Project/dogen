@@ -48,7 +48,8 @@
         "masd.codec.dia.comment": "true",
         "masd.physical.backend_name": "csharp",
         "masd.physical.directory_name": "cs",
-        "masd.physical.major_technical_space": "csharp"
+        "masd.physical.major_technical_space": "csharp",
+        "masd.physical.technical_space": "csharp"
       },
       "fallback_element_type": "masd::module"
     },
@@ -939,7 +940,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_project",
         "masd.wale.kvp.containing_namespace": "text.csharp.transforms.visual_studio",
         "masd.physical.wale_template_reference": "csharp_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "xml"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -966,7 +968,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_solution",
         "masd.wale.kvp.containing_namespace": "text.csharp.transforms.visual_studio",
         "masd.physical.wale_template_reference": "csharp_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "sln"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1070,6 +1073,11 @@
           "name": "masd.physical.relation_status",
           "type": "",
           "value": "facet_default"
+        },
+        {
+          "name": "masd.physical.technical_space",
+          "type": "",
+          "value": "csharp"
         }
       ]
     },

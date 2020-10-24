@@ -29,6 +29,7 @@
         "masd.physical.backend_name": "cpp",
         "masd.physical.directory_name": "cpp",
         "masd.physical.major_technical_space": "cpp",
+        "masd.physical.technical_space": "cpp",
         "masd.label.test": "lbl"
       },
       "fallback_element_type": "masd::module"
@@ -2372,7 +2373,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_templates",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.templates",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "mustache"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2610,7 +2612,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_project",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.visual_studio",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "xml"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2637,7 +2640,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_solution",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.visual_studio",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "sln"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2687,7 +2691,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_odb_options",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.odb",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "odb"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2714,7 +2719,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_odb_options",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.odb",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "odb"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2772,7 +2778,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_odb_options",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.odb",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "odb"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2799,7 +2806,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_msbuild_targets",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.visual_studio",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "xml"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2837,7 +2845,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_source_cmakelists",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.build",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "cmake"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2864,7 +2873,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_include_cmakelists",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.build",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "cmake"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2905,7 +2915,8 @@
         "masd.wale.kvp.locator_function": "make_full_path_for_tests_cmakelists",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.tests",
         "masd.physical.wale_template_reference": "cpp_artefact_transform_implementation",
-        "masd.physical.relation_status": "not_relatable"
+        "masd.physical.relation_status": "not_relatable",
+        "masd.physical.technical_space": "cmake"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3150,7 +3161,14 @@
       "stereotypes": [
         "masd::variability::profile"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.technical_space",
+          "type": "",
+          "value": "cpp"
+        }
+      ]
     },
     {
       "name": "transforms::tests_configuration",
