@@ -45,78 +45,78 @@ static logger lg(logger_factory(transform_id));
 const std::string duplicate_id("Duplicate logical-physical ID: ");
 
 /*
-masd.cpp.build.include_cmakelists,
-masd.cpp.build.source_cmakelists, masd.cpp.hash.builtin_header,
-masd.cpp.hash.class_header, masd.cpp.hash.class_implementation,
-masd.cpp.hash.enum_header, masd.cpp.hash.primitive_header,
-masd.cpp.hash.primitive_implementation, masd.cpp.io.builtin_header,
-masd.cpp.io.class_header, masd.cpp.io.class_implementation,
-masd.cpp.io.enum_header, masd.cpp.io.enum_implementation,
-masd.cpp.io.primitive_header, masd.cpp.io.primitive_implementation,
-masd.cpp.lexical_cast.enum_header, masd.cpp.odb.builtin_header,
-masd.cpp.odb.class_header, masd.cpp.odb.common_odb_options,
-masd.cpp.odb.enum_header, masd.cpp.odb.object_odb_options,
-masd.cpp.odb.primitive_header, masd.cpp.odb.primitive_odb_options,
-masd.cpp.serialization.builtin_header,
-masd.cpp.serialization.class_forward_declarations,
-masd.cpp.serialization.class_header,
-masd.cpp.serialization.class_implementation,
-masd.cpp.serialization.enum_header,
-masd.cpp.serialization.primitive_forward_declarations,
-masd.cpp.serialization.primitive_header,
-masd.cpp.serialization.primitive_implementation,
-masd.cpp.serialization.type_registrar_header,
-masd.cpp.serialization.type_registrar_implementation,
-masd.cpp.templates.logic_less_template,
-masd.cpp.test_data.builtin_header, masd.cpp.test_data.class_header,
-masd.cpp.test_data.class_implementation, masd.cpp.test_data.enum_header,
-masd.cpp.test_data.enum_implementation,
-masd.cpp.test_data.primitive_header,
-masd.cpp.test_data.primitive_implementation,
-masd.cpp.tests.class_implementation, masd.cpp.tests.cmakelists,
-masd.cpp.tests.enum_implementation, masd.cpp.tests.main,
-masd.cpp.types.archetype_class_header_factory,
+masd.cpp.build.include_cmakelists
+masd.cpp.build.source_cmakelists masd.cpp.hash.builtin_header
+masd.cpp.hash.class_header masd.cpp.hash.class_implementation
+masd.cpp.hash.enum_header masd.cpp.hash.primitive_header
+masd.cpp.hash.primitive_implementation masd.cpp.io.builtin_header
+masd.cpp.io.class_header masd.cpp.io.class_implementation
+masd.cpp.io.enum_header masd.cpp.io.enum_implementation
+masd.cpp.io.primitive_header masd.cpp.io.primitive_implementation
+masd.cpp.lexical_cast.enum_header masd.cpp.odb.builtin_header
+masd.cpp.odb.class_header masd.cpp.odb.common_odb_options
+masd.cpp.odb.enum_header masd.cpp.odb.object_odb_options
+masd.cpp.odb.primitive_header masd.cpp.odb.primitive_odb_options
+masd.cpp.serialization.builtin_header
+masd.cpp.serialization.class_forward_declarations
+masd.cpp.serialization.class_header
+masd.cpp.serialization.class_implementation
+masd.cpp.serialization.enum_header
+masd.cpp.serialization.primitive_forward_declarations
+masd.cpp.serialization.primitive_header
+masd.cpp.serialization.primitive_implementation
+masd.cpp.serialization.type_registrar_header
+masd.cpp.serialization.type_registrar_implementation
+masd.cpp.templates.logic_less_template
+masd.cpp.test_data.builtin_header masd.cpp.test_data.class_header
+masd.cpp.test_data.class_implementation masd.cpp.test_data.enum_header
+masd.cpp.test_data.enum_implementation
+masd.cpp.test_data.primitive_header
+masd.cpp.test_data.primitive_implementation
+masd.cpp.tests.class_implementation masd.cpp.tests.cmakelists
+masd.cpp.tests.enum_implementation masd.cpp.tests.main
 
-masd.cpp.types.archetype_class_implementation_factory,
-masd.cpp.types.archetype_class_implementation_transform,
-masd.cpp.types.archetype_kind_class_header_factory,
-masd.cpp.types.archetype_kind_class_implementation_factory,
-masd.cpp.types.backend_class_header_factory,
-masd.cpp.types.backend_class_header_transform,
-masd.cpp.types.backend_class_implementation_factory,
-masd.cpp.types.backend_class_implementation_transform,
-masd.cpp.types.builtin_header,
-masd.cpp.types.class_forward_declarations, masd.cpp.types.class_header,
-masd.cpp.types.class_implementation, masd.cpp.types.enum_header,
-masd.cpp.types.exception_header,
-masd.cpp.types.facet_class_header_factory,
-masd.cpp.types.facet_class_header_transform,
-masd.cpp.types.facet_class_implementation_factory,
-masd.cpp.types.facet_class_implementation_transform,
-masd.cpp.types.feature_bundle_header,
-masd.cpp.types.feature_bundle_implementation,
-masd.cpp.types.feature_template_bundle_header,
-masd.cpp.types.feature_template_bundle_implementation,
-masd.cpp.types.main, masd.cpp.types.namespace_header,
-masd.cpp.types.part_class_header_factory,
-masd.cpp.types.part_class_header_transform,
-masd.cpp.types.part_class_implementation_factory,
-masd.cpp.types.part_class_implementation_transform,
-masd.cpp.types.primitive_forward_declarations,
-masd.cpp.types.primitive_header,
-masd.cpp.types.primitive_implementation,
-masd.cpp.types.variability_initializer_header,
-masd.cpp.types.variability_initializer_implementation,
-masd.cpp.types.visitor_forward_declarations,
-masd.cpp.types.visitor_header, masd.cpp.visual_studio.msbuild_targets,
-masd.cpp.visual_studio.project, masd.cpp.visual_studio.solution,
-masd.csharp.io.assistant, masd.csharp.io.class, masd.csharp.io.enum,
-masd.csharp.io.primitive, masd.csharp.test_data.assistant,
-masd.csharp.test_data.class, masd.csharp.test_data.enum,
-masd.csharp.test_data.primitive, masd.csharp.types.builtin,
-masd.csharp.types.class, masd.csharp.types.enum,
-masd.csharp.types.exception, masd.csharp.types.primitive,
-masd.csharp.visual_studio.project, masd.csharp.visual_studio.solution
+
+
+
+masd.cpp.types.archetype_kind_class_header_factory
+masd.cpp.types.archetype_kind_class_implementation_factory
+masd.cpp.types.backend_class_header_factory
+masd.cpp.types.backend_class_header_transform
+masd.cpp.types.backend_class_implementation_factory
+masd.cpp.types.backend_class_implementation_transform
+masd.cpp.types.builtin_header
+masd.cpp.types.class_forward_declarations masd.cpp.types.class_header
+masd.cpp.types.class_implementation masd.cpp.types.enum_header
+masd.cpp.types.exception_header
+masd.cpp.types.facet_class_header_factory
+
+masd.cpp.types.facet_class_implementation_factory
+masd.cpp.types.facet_class_implementation_transform
+masd.cpp.types.feature_bundle_header
+masd.cpp.types.feature_bundle_implementation
+masd.cpp.types.feature_template_bundle_header
+masd.cpp.types.feature_template_bundle_implementation
+masd.cpp.types.main masd.cpp.types.namespace_header
+masd.cpp.types.part_class_header_factory
+masd.cpp.types.part_class_header_transform
+masd.cpp.types.part_class_implementation_factory
+masd.cpp.types.part_class_implementation_transform
+masd.cpp.types.primitive_forward_declarations
+masd.cpp.types.primitive_header
+masd.cpp.types.primitive_implementation
+masd.cpp.types.variability_initializer_header
+masd.cpp.types.variability_initializer_implementation
+masd.cpp.types.visitor_forward_declarations
+masd.cpp.types.visitor_header masd.cpp.visual_studio.msbuild_targets
+masd.cpp.visual_studio.project masd.cpp.visual_studio.solution
+masd.csharp.io.assistant masd.csharp.io.class masd.csharp.io.enum
+masd.csharp.io.primitive masd.csharp.test_data.assistant
+masd.csharp.test_data.class masd.csharp.test_data.enum
+masd.csharp.test_data.primitive masd.csharp.types.builtin
+masd.csharp.types.class masd.csharp.types.enum
+masd.csharp.types.exception masd.csharp.types.primitive
+masd.csharp.visual_studio.project masd.csharp.visual_studio.solution
 
 */
 
@@ -182,9 +182,14 @@ visit(const logical::entities::physical::archetype& /*v*/) {
                 builder_.add_as_user(
                     "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
             }
-
-            a.path_properties().inclusion_dependencies(builder_.build());
+        } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_transform") {
+            // no deps
+        } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_factory") {
+            builder_.add_as_user("dogen.physical/types/entities/archetype.hpp");
+        } else if (pmid.value() == "masd.cpp.types.archetype_class_header_factory") {
+            builder_.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
         }
+        a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
 
