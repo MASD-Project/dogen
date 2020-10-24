@@ -28,6 +28,7 @@ physical::entities::archetype solution_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "visual_studio", "solution"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.visual_studio_solution"));
+    r.technical_space(identification::entities::technical_space::sln);
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;

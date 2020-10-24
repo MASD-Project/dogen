@@ -28,6 +28,7 @@ physical::entities::archetype archetype_kind_class_header_factory_factory::make(
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "archetype_kind_class_header_factory"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.physical_archetype_kind"));
+    r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(identification::entities::label("role", "type_declaration"));
 

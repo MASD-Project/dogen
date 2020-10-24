@@ -28,6 +28,7 @@ physical::entities::archetype enum_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("csharp", "test_data", "enum"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
+    r.technical_space(identification::entities::technical_space::csharp);
     r.relations().status(physical::entities::relation_status::facet_default);
 
     return r;

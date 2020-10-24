@@ -28,6 +28,7 @@ physical::entities::archetype feature_template_bundle_implementation_factory::ma
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "feature_template_bundle_implementation"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.variability_feature_template_bundle"));
+    r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;

@@ -28,6 +28,7 @@ physical::entities::archetype facet_class_implementation_transform_factory::make
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "facet_class_implementation_transform"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.physical_facet"));
+    r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     r.relations().constant().push_back(

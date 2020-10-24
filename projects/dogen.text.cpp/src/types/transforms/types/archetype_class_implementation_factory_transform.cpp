@@ -101,6 +101,7 @@ ast.stream() << "    physical::entities::archetype r;" << std::endl;
 ast.stream() << "    using pmnf = identification::helpers::physical_meta_name_factory;" << std::endl;
 ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
 ast.stream() << "    r.logical_meta_element_id(identification::entities::logical_meta_id(\"" << arch.logical_meta_element_id().value() << "\"));" << std::endl;
+ast.stream() << "    r.technical_space(identification::entities::technical_space::" << arch.technical_space() << ");" << std::endl;
 ast.stream() << "    r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
             if (!arch.postfix().empty())
 ast.stream() << "    r.postfix(\"" << arch.postfix() << "\");" << std::endl;

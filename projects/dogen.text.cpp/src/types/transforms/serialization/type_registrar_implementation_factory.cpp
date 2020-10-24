@@ -28,6 +28,7 @@ physical::entities::archetype type_registrar_implementation_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "serialization", "type_registrar_implementation"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.serialization_type_registrar"));
+    r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;

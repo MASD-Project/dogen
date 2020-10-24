@@ -28,6 +28,7 @@ physical::entities::archetype primitive_header_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "odb", "primitive_header"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.primitive"));
+    r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::facet_default);
 
     return r;

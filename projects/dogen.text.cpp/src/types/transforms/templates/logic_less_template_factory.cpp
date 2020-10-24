@@ -28,6 +28,7 @@ physical::entities::archetype logic_less_template_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "templates", "logic_less_template"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.templating_logic_less_templates"));
+    r.technical_space(identification::entities::technical_space::mustache);
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;

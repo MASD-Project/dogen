@@ -50319,6 +50319,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
     r.logical_meta_element_id(identification::entities::logical_meta_id("&lt;#= arch.logical_meta_element_id().value() #&gt;"));
+    r.technical_space(identification::entities::technical_space::&lt;#= arch.technical_space() #&gt;);
     r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
 &lt;#+
             if (!arch.postfix().empty())
