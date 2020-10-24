@@ -163,7 +163,7 @@ process_backends(const context& ctx, entities::model& m) {
         }
 
         BOOST_LOG_SEV(lg, debug) << "Technical space: " << ts;
-        b.technical_space(lexical_cast<technical_space>(ts));
+        b.technical_space(ts);
 
         bool found(false);
         for (const auto& qn : b.contains()) {
@@ -478,7 +478,7 @@ process_archetypes(const context& ctx, entities::model& m) {
                 transformation_error(missing_technical_space));
         }
         BOOST_LOG_SEV(lg, debug) << "Technical space: " << ts;
-        arch.technical_space(lexical_cast<technical_space>(ts));
+        arch.technical_space(ts);
 
         /*
          * Generate the ID for this archetype.

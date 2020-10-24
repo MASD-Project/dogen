@@ -65,7 +65,7 @@ public:
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
-        const dogen::identification::entities::technical_space technical_space,
+        const std::string& technical_space,
         const std::string& meta_model_name,
         const std::string& backend_name,
         const std::string& facet_name,
@@ -108,8 +108,10 @@ public:
      * @brief Technical space to which this physical element belongs to.
      */
     /**@{*/
-    dogen::identification::entities::technical_space technical_space() const;
-    void technical_space(const dogen::identification::entities::technical_space v);
+    const std::string& technical_space() const;
+    std::string& technical_space();
+    void technical_space(const std::string& v);
+    void technical_space(const std::string&& v);
     /**@}*/
 
     /**
@@ -208,7 +210,7 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
-    dogen::identification::entities::technical_space technical_space_;
+    std::string technical_space_;
     std::string meta_model_name_;
     std::string backend_name_;
     std::string facet_name_;

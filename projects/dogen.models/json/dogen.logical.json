@@ -4342,7 +4342,7 @@
       "attributes": [
         {
           "name": "technical_space",
-          "type": "identification::entities::technical_space",
+          "type": "std::string",
           "documentation": "Technical space to which this physical element belongs to.\n"
         }
       ]

@@ -66,8 +66,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
 namespace dogen::logical::entities::physical {
 
 backend::backend()
-    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
-      technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 backend::backend(
     const dogen::identification::entities::logical_name& name,
@@ -85,7 +84,7 @@ backend::backend(
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
     const std::list<dogen::identification::entities::logical_id>& contains,
-    const dogen::identification::entities::technical_space technical_space,
+    const std::string& technical_space,
     const std::string& meta_model_name,
     const std::list<dogen::identification::entities::logical_name>& facets,
     const std::list<dogen::identification::entities::logical_name>& parts,
@@ -141,7 +140,7 @@ void backend::to_stream(std::ostream& s) const {
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"contains\": " << contains_ << ", "
-      << "\"technical_space\": " << technical_space_ << ", "
+      << "\"technical_space\": " << "\"" << tidy_up_string(technical_space_) << "\"" << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
@@ -233,12 +232,20 @@ void backend::contains(const std::list<dogen::identification::entities::logical_
     contains_ = std::move(v);
 }
 
-dogen::identification::entities::technical_space backend::technical_space() const {
+const std::string& backend::technical_space() const {
     return technical_space_;
 }
 
-void backend::technical_space(const dogen::identification::entities::technical_space v) {
+std::string& backend::technical_space() {
+    return technical_space_;
+}
+
+void backend::technical_space(const std::string& v) {
     technical_space_ = v;
+}
+
+void backend::technical_space(const std::string&& v) {
+    technical_space_ = std::move(v);
 }
 
 const std::string& backend::meta_model_name() const {

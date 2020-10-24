@@ -39,8 +39,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::logical::entities::physical {
 
 archetype::archetype()
-    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
-      technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 archetype::archetype(
     const dogen::identification::entities::logical_name& name,
@@ -57,7 +56,7 @@ archetype::archetype(
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
-    const dogen::identification::entities::technical_space technical_space,
+    const std::string& technical_space,
     const std::string& meta_model_name,
     const std::string& backend_name,
     const std::string& facet_name,
@@ -115,7 +114,7 @@ void archetype::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
-      << "\"technical_space\": " << technical_space_ << ", "
+      << "\"technical_space\": " << "\"" << tidy_up_string(technical_space_) << "\"" << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
@@ -195,12 +194,20 @@ void archetype::major_technical_space(const dogen::identification::entities::tec
     major_technical_space_ = v;
 }
 
-dogen::identification::entities::technical_space archetype::technical_space() const {
+const std::string& archetype::technical_space() const {
     return technical_space_;
 }
 
-void archetype::technical_space(const dogen::identification::entities::technical_space v) {
+std::string& archetype::technical_space() {
+    return technical_space_;
+}
+
+void archetype::technical_space(const std::string& v) {
     technical_space_ = v;
+}
+
+void archetype::technical_space(const std::string&& v) {
+    technical_space_ = std::move(v);
 }
 
 const std::string& archetype::meta_model_name() const {
