@@ -51,6 +51,8 @@ inline std::string lexical_cast(const dogen::identification::entities::technical
         return "technical_space::odb";
     case technical_space::sln:
         return "technical_space::sln";
+    case technical_space::mustache:
+        return "technical_space::mustache";
     default:
         throw boost::bad_lexical_cast();
     }
@@ -76,6 +78,8 @@ inline dogen::identification::entities::technical_space lexical_cast(const std::
         return technical_space::odb;
     if (s == "sln" || s == "technical_space::sln")
         return technical_space::sln;
+    if (s == "mustache" || s == "technical_space::mustache")
+        return technical_space::mustache;
     throw boost::bad_lexical_cast();
 }
 

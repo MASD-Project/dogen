@@ -38,7 +38,8 @@ enum class technical_space : unsigned int {
     cmake = 4, ///< CMake meta build system.
     xml = 5, ///< Extensible Markup Language.
     odb = 6, ///< ODB options.
-    sln = 7 ///< Visual studio solution.
+    sln = 7, ///< Visual studio solution.
+    mustache = 8 ///< Mustache templates.
 };
 
 }

@@ -423,6 +423,11 @@
           "name": "sln",
           "type": "",
           "documentation": "Visual studio solution.\n"
+        },
+        {
+          "name": "mustache",
+          "type": "",
+          "documentation": "Mustache templates.\n"
         }
       ]
     },

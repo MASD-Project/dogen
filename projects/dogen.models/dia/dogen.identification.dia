@@ -3726,7 +3726,7 @@ can only have one and only one name.#</dia:string>
         <dia:point val="-14,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,-6.05;2.335,2.45"/>
+        <dia:rectangle val="-14.05,-6.05;2.335,3.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,-6"/>
@@ -3735,7 +3735,7 @@ can only have one and only one name.#</dia:string>
         <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#technical_space#</dia:string>
@@ -3980,6 +3980,29 @@ can only have one and only one name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Visual studio solution.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#mustache#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Mustache templates.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

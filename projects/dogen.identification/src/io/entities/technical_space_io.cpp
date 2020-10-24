@@ -54,6 +54,9 @@ std::ostream& operator<<(std::ostream& s, const technical_space& v) {
     case technical_space::sln:
         attr = "\"sln\"";
         break;
+    case technical_space::mustache:
+        attr = "\"mustache\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for technical_space");
     }
