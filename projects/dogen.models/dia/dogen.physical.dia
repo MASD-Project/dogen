@@ -4140,7 +4140,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:string>#artefact#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Element#</dia:string>
+        <dia:string>#Element, HasTechnicalSpace#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents an entity in physical space.#</dia:string>

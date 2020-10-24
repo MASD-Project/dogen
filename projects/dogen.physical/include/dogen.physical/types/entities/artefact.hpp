@@ -36,6 +36,7 @@
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.physical/types/entities/relation_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
@@ -64,6 +65,7 @@ public:
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
         const dogen::identification::entities::logical_meta_physical_id& id,
+        const dogen::identification::entities::technical_space technical_space,
         const boost::filesystem::path& file_path,
         const std::string& content,
         const dogen::physical::entities::path_properties& path_properties,
@@ -124,6 +126,14 @@ public:
     dogen::identification::entities::logical_meta_physical_id& id();
     void id(const dogen::identification::entities::logical_meta_physical_id& v);
     void id(const dogen::identification::entities::logical_meta_physical_id&& v);
+    /**@}*/
+
+    /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -235,6 +245,7 @@ private:
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
     dogen::identification::entities::logical_meta_physical_id id_;
+    dogen::identification::entities::technical_space technical_space_;
     boost::filesystem::path file_path_;
     std::string content_;
     dogen::physical::entities::path_properties path_properties_;

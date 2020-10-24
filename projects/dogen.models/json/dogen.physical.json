@@ -521,7 +521,8 @@
       "name": "entities::artefact",
       "documentation": "Represents an entity in physical space.\n",
       "stereotypes": [
-        "Element"
+        "Element",
+        "HasTechnicalSpace"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

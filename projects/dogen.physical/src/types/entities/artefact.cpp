@@ -33,7 +33,8 @@ const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
 namespace dogen::physical::entities {
 
 artefact::artefact()
-    : formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
+    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
+      formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
 
 artefact::artefact(artefact&& rhs)
     : meta_name_(std::move(rhs.meta_name_)),
@@ -41,6 +42,7 @@ artefact::artefact(artefact&& rhs)
       provenance_(std::move(rhs.provenance_)),
       name_(std::move(rhs.name_)),
       id_(std::move(rhs.id_)),
+      technical_space_(std::move(rhs.technical_space_)),
       file_path_(std::move(rhs.file_path_)),
       content_(std::move(rhs.content_)),
       path_properties_(std::move(rhs.path_properties_)),
@@ -58,6 +60,7 @@ artefact::artefact(
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
     const dogen::identification::entities::logical_meta_physical_id& id,
+    const dogen::identification::entities::technical_space technical_space,
     const boost::filesystem::path& file_path,
     const std::string& content,
     const dogen::physical::entities::path_properties& path_properties,
@@ -73,6 +76,7 @@ artefact::artefact(
       provenance_(provenance),
       name_(name),
       id_(id),
+      technical_space_(technical_space),
       file_path_(file_path),
       content_(content),
       path_properties_(path_properties),
@@ -91,6 +95,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
     swap(id_, other.id_);
+    swap(technical_space_, other.technical_space_);
     swap(file_path_, other.file_path_);
     swap(content_, other.content_);
     swap(path_properties_, other.path_properties_);
@@ -109,6 +114,7 @@ bool artefact::operator==(const artefact& rhs) const {
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
         id_ == rhs.id_ &&
+        technical_space_ == rhs.technical_space_ &&
         file_path_ == rhs.file_path_ &&
         content_ == rhs.content_ &&
         path_properties_ == rhs.path_properties_ &&
@@ -205,6 +211,14 @@ void artefact::id(const dogen::identification::entities::logical_meta_physical_i
 
 void artefact::id(const dogen::identification::entities::logical_meta_physical_id&& v) {
     id_ = std::move(v);
+}
+
+dogen::identification::entities::technical_space artefact::technical_space() const {
+    return technical_space_;
+}
+
+void artefact::technical_space(const dogen::identification::entities::technical_space v) {
+    technical_space_ = v;
 }
 
 const boost::filesystem::path& artefact::file_path() const {
