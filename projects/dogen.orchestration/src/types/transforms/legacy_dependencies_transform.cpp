@@ -24,6 +24,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 #include "dogen.physical/io/entities/inclusion_directives_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -56,8 +57,6 @@ transform_id("orchestration.transforms.legacy_dependencies_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
-
-const std::string duplicate_id("Duplicate logical-physical ID: ");
 
 const std::string std_list("<list>");
 const std::string std_string("<string>");
@@ -107,11 +106,65 @@ const std::string boost_test_unit_test(
     "<boost/test/unit_test.hpp>");
 const std::string boost_test_unit_test_monitor(
     "<boost/test/unit_test_monitor.hpp>");
+const char angle_bracket('<');
+const std::string double_quote("\"");
+const std::string boost_name("boost");
+const std::string boost_serialization_gregorian("greg_serialize.hpp");
+
+const std::string duplicate_id("Duplicate logical-physical ID: ");
+const std::string empty_include_directive("Include directive is empty.");
+
+bool include_directive_comparer(
+    const std::string& lhs, const std::string& rhs) {
+
+    if (lhs.empty() || rhs.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_include_directive;
+        using dogen::orchestration::transforms::transform_exception;
+        BOOST_THROW_EXCEPTION(transform_exception(empty_include_directive));
+    }
+
+    const bool lhs_has_angle_brackets(lhs[0] == angle_bracket);
+    const bool rhs_has_angle_brackets(rhs[0] == angle_bracket);
+
+    if (lhs_has_angle_brackets && !rhs_has_angle_brackets)
+        return true;
+
+    if (!lhs_has_angle_brackets && rhs_has_angle_brackets)
+        return false;
+
+    if (lhs_has_angle_brackets && rhs_has_angle_brackets) {
+        const auto npos(std::string::npos);
+        const bool lhs_is_boost(lhs.find_first_of(boost_name) != npos);
+        const bool rhs_is_boost(rhs.find_first_of(boost_name) != npos);
+        if (!lhs_is_boost && rhs_is_boost)
+            return false;
+
+        if (lhs_is_boost && !rhs_is_boost)
+            return true;
+
+        // FIXME: hacks for headers that must be last
+        const bool lhs_is_gregorian(
+            lhs.find_first_of(boost_serialization_gregorian) != npos);
+        const bool rhs_is_gregorian(
+            rhs.find_first_of(boost_serialization_gregorian) != npos);
+        if (lhs_is_gregorian && !rhs_is_gregorian)
+            return true;
+
+        if (!lhs_is_gregorian && rhs_is_gregorian)
+            return false;
+    }
+
+    if (lhs.size() != rhs.size())
+        return lhs.size() < rhs.size();
+
+    return lhs < rhs;
+}
 
 }
 
 namespace dogen::orchestration::transforms {
 
+using helpers::dependencies_builder;
 using identification::entities::technical_space;
 using identification::entities::logical_name;
 using identification::entities::logical_meta_physical_id;
@@ -124,7 +177,8 @@ public:
         inclusion_directives>& ids,
         const std::unordered_set<logical_meta_physical_id>&
         enabled_archetype_for_element, logical_physical_region& region) :
-        builder_(ids, enabled_archetype_for_element),
+        inclusion_directives_(ids),
+        enabled_archetype_for_element_(enabled_archetype_for_element),
         region_(region) {}
 
 private:
@@ -136,6 +190,9 @@ private:
      */
     boost::optional<inclusion_directives> get_directive_group(
         const logical_name& n, const std::string& archetype) const;
+
+private:
+    void build(dependencies_builder builder, physical::entities::artefact& a);
 
 public:
     using logical::entities::element_visitor::visit;
@@ -156,9 +213,37 @@ public:
     void visit(const logical::entities::structural::entry_point& v);
 
 private:
-    helpers::dependencies_builder builder_;
+    const std::unordered_map<identification::entities::logical_meta_physical_id,
+                             physical::entities::inclusion_directives>&
+    inclusion_directives_;
+    const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
+    enabled_archetype_for_element_;
     logical_physical_region& region_;
 };
+
+void region_processor::build(dependencies_builder builder,
+    physical::entities::artefact& a) {
+    /*
+     * First, we generate the list of dependencies as setup previously
+     * by the caller.
+     */
+    auto deps(builder.build());
+
+    /*
+     * Now, we ensure the dependencies are sorted according to a well
+     * defined order and all duplicates are removed. Duplicates arise
+     * because an element may refer to another element more than once
+     * - e.g. std::list<T> as well as std::vector<T>.
+     */
+    deps.sort(include_directive_comparer);
+    deps.unique();
+
+    /*
+     * Finally, we slot in the results in the archetype.
+     */
+    a.path_properties().inclusion_dependencies(deps);
+}
 
 void region_processor::
 visit(const logical::entities::physical::archetype& v) {
@@ -167,27 +252,29 @@ visit(const logical::entities::physical::archetype& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_class_header_transform") {
             const auto ts(a.technical_space());
             if (ts == technical_space::cpp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
             } else if (ts == technical_space::csharp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
             }
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_transform") {
             // no deps
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_factory") {
-            builder_.add(v.name(),
+            b.add(v.name(),
                 "masd.cpp.types.archetype_class_header_factory");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_factory.hpp");
         } else if (pmid.value() == "masd.cpp.types.archetype_class_header_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/archetype.hpp");
+            b.add_as_user("dogen.physical/types/entities/archetype.hpp");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -198,48 +285,50 @@ visit(const logical::entities::physical::facet& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.facet_class_header_transform") {
-            builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
+            b.add_as_user("dogen.physical/types/entities/facet.hpp");
             using identification::entities::technical_space;
             if (v.major_technical_space() == technical_space::cpp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.cpp/types/transforms/registrar.hpp");
             } else if (v.major_technical_space() == technical_space::csharp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.csharp/types/transforms/registrar.hpp");
             }
         } else if (pmid.value() == "masd.cpp.types.facet_class_implementation_transform") {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.name(), ch_arch);
-            builder_.add(v.archetypes(), ch_arch);
-            builder_.add_as_user(
+            b.add(v.name(), ch_arch);
+            b.add(v.archetypes(), ch_arch);
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user("dogen.utility/types/log/logger.hpp");
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         } else if (pmid.value() == "masd.cpp.types.facet_class_header_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
+            b.add_as_user("dogen.physical/types/entities/facet.hpp");
         } else if (pmid.value() == "masd.cpp.types.facet_class_implementation_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
+            b.add_as_user("dogen.physical/types/entities/facet.hpp");
 
             const auto fct_ch_arch("masd.cpp.types.facet_class_header_factory");
-            builder_.add(v.name(), fct_ch_arch);
+            b.add(v.name(), fct_ch_arch);
 
             const auto ch_arch("masd.cpp.types.archetype_class_header_transform");
-            builder_.add(v.archetypes(), ch_arch);
-            builder_.add_as_user(
+            b.add(v.archetypes(), ch_arch);
+            b.add_as_user(
                 "dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -249,52 +338,54 @@ void region_processor::visit(const logical::entities::physical::backend& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.backend_class_header_transform") {
-            builder_.add_as_user("dogen.physical/types/entities/backend.hpp");
+            b.add_as_user("dogen.physical/types/entities/backend.hpp");
             using identification::entities::technical_space;
             if (v.major_technical_space() == technical_space::cpp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.cpp/types/transforms/registrar.hpp");
             } else if (v.major_technical_space() == technical_space::csharp) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.text.csharp/types/transforms/registrar.hpp");
             }
         } else if (pmid.value() == "masd.cpp.types.backend_class_implementation_transform") {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.name(), ch_arch);
-            builder_.add(v.facets(), ch_arch);
-            builder_.add_as_user(
+            b.add(v.name(), ch_arch);
+            b.add(v.facets(), ch_arch);
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user("dogen.utility/types/log/logger.hpp");
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         } else if (pmid.value() == "masd.cpp.types.backend_class_header_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/backend.hpp");
+            b.add_as_user("dogen.physical/types/entities/backend.hpp");
         } else if (pmid.value() == "masd.cpp.types.backend_class_implementation_factory") {
             const auto be_ch_arch("masd.cpp.types.backend_class_header_factory");
-            builder_.add(v.name(), be_ch_arch);
+            b.add(v.name(), be_ch_arch);
 
             const auto fct_ch_arch("masd.cpp.types.facet_class_header_factory");
-            builder_.add(v.facets(), fct_ch_arch);
+            b.add(v.facets(), fct_ch_arch);
 
             const auto ak_ch_arch("masd.cpp.types.archetype_kind_class_header_factory");
-            builder_.add(v.archetype_kinds(), ak_ch_arch);
+            b.add(v.archetype_kinds(), ak_ch_arch);
 
             const auto part_ch_arch("masd.cpp.types.part_class_header_factory");
-            builder_.add(v.parts(), part_ch_arch);
-            builder_.add_as_user(
+            b.add(v.parts(), part_ch_arch);
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -304,23 +395,25 @@ void region_processor::visit(const logical::entities::physical::part& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.part_class_header_factory") {
-            builder_.add_as_user("dogen.physical/types/entities/part.hpp");
+            b.add_as_user("dogen.physical/types/entities/part.hpp");
         } else if (pmid.value() == "masd.cpp.types.part_class_implementation_factory") {
             const auto part_ch_arch("masd.cpp.types.part_class_header_factory");
-            builder_.add(v.name(), part_ch_arch);
+            b.add(v.name(), part_ch_arch);
 
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -330,22 +423,24 @@ void region_processor::visit(const logical::entities::physical::archetype_kind& 
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_kind_class_header_factory") {
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.physical/types/entities/archetype_kind.hpp");
 
         } else if (pmid.value() == "masd.cpp.types.archetype_kind_class_implementation_factory") {
             const auto ak_ch_arch(
                 "masd.cpp.types.archetype_kind_class_header_factory");
-            builder_.add(v.name(), ak_ch_arch);
-            builder_.add_as_user(
+            b.add(v.name(), ak_ch_arch);
+            b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
-            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
-            builder_.add_as_user(
+            b.add_as_user("dogen.utility/types/log/logger.hpp");
+            b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -355,30 +450,32 @@ void region_processor::visit(const logical::entities::serialization::type_regist
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.serialization.type_registrar_implementation") {
             const auto rh_fn("masd.cpp.serialization.type_registrar_header");
-            builder_.add(v.name(), rh_fn);
+            b.add(v.name(), rh_fn);
 
-            builder_.add(boost_archive_text_iarchive);
-            builder_.add(boost_archive_text_oarchive);
-            builder_.add(boost_archive_binary_iarchive);
-            builder_.add(boost_archive_binary_oarchive);
-            builder_.add(boost_archive_polymorphic_iarchive);
-            builder_.add(boost_archive_polymorphic_oarchive);
+            b.add(boost_archive_text_iarchive);
+            b.add(boost_archive_text_oarchive);
+            b.add(boost_archive_binary_iarchive);
+            b.add(boost_archive_binary_oarchive);
+            b.add(boost_archive_polymorphic_iarchive);
+            b.add(boost_archive_polymorphic_oarchive);
 
             // XML serialisation
-            builder_.add(boost_archive_xml_iarchive);
-            builder_.add(boost_archive_xml_oarchive);
+            b.add(boost_archive_xml_iarchive);
+            b.add(boost_archive_xml_oarchive);
 
             const auto ch_fn("masd.cpp.serialization.class_header");
-            builder_.add(v.leaves(), ch_fn);
+            b.add(v.leaves(), ch_fn);
 
             const std::string
                 carch("masd.cpp.serialization.canonical_archetype");
-            builder_.add(v.registrar_dependencies(), carch);
+            b.add(v.registrar_dependencies(), carch);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -389,38 +486,40 @@ visit(const logical::entities::variability::feature_bundle& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.feature_bundle_header") {
-            builder_.add(std_list);
-            builder_.add_as_user(
+            b.add(std_list);
+            b.add_as_user(
                 "dogen.variability/types/entities/feature.hpp");
 
             if (v.generate_static_configuration()) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/entities/feature_model.hpp");
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/entities/configuration.hpp");
 
                 const auto ch_arch("masd.cpp.types.class_header");
-                builder_.add(v.transparent_associations(), ch_arch);
+                b.add(v.transparent_associations(), ch_arch);
 
                 const auto fwd_arch(
                     "masd.cpp.types.class_forward_declarations");
-                builder_.add(v.opaque_associations(), fwd_arch);
+                b.add(v.opaque_associations(), fwd_arch);
             }
         } else if (pmid.value() == "masd.cpp.types.feature_bundle_implementation") {
             const auto ch_arch("masd.cpp.types.feature_bundle_header");
-            builder_.add(v.name(), ch_arch);
-            builder_.add_as_user(
+            b.add(v.name(), ch_arch);
+            b.add_as_user(
                 "dogen.variability/types/helpers/value_factory.hpp");
 
             if (v.generate_static_configuration()) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/helpers/feature_selector.hpp");
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/helpers/configuration_selector.hpp");            }
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -431,42 +530,44 @@ visit(const logical::entities::variability::feature_template_bundle& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.feature_template_bundle_header") {
-            builder_.add(std_list);
-            builder_.add_as_user(
+            b.add(std_list);
+            b.add_as_user(
                 "dogen.variability/types/entities/feature_template.hpp");
 
             if (v.generate_static_configuration()) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/entities/feature_model.hpp");
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/entities/configuration.hpp");
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/entities/feature.hpp");
 
                 const auto ch_arch("masd.cpp.types.class_header");
-                builder_.add(v.transparent_associations(), ch_arch);
+                b.add(v.transparent_associations(), ch_arch);
 
                 const auto fwd_arch(
                     "masd.cpp.types.class_forward_declarations");
-                builder_.add(v.opaque_associations(), fwd_arch);
+                b.add(v.opaque_associations(), fwd_arch);
             }
         } else if (pmid.value() == "masd.cpp.types.feature_template_bundle_implementation") {
             const auto ch_arch(
                 "masd.cpp.types.feature_template_bundle_header");
-            builder_.add(v.name(), ch_arch);
-            builder_.add_as_user(
+            b.add(v.name(), ch_arch);
+            b.add_as_user(
                 "dogen.variability/types/helpers/value_factory.hpp");
 
             if (v.generate_static_configuration()) {
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/helpers/feature_selector.hpp");
-                builder_.add_as_user(
+                b.add_as_user(
                     "dogen.variability/types/helpers/configuration_selector.hpp");
             }
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -476,24 +577,26 @@ void region_processor::visit(const logical::entities::variability::initializer& 
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.variability_initializer_header") {
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.variability/types/entities/feature_template.hpp");
-            builder_.add_as_user(
+            b.add_as_user(
                 "dogen.variability/types/helpers/registrar.hpp");
         } else if (pmid.value() == "masd.cpp.types.variability_initializer_implementation") {
             const auto ch_arch("masd.cpp.types.variability_initializer_header");
-            builder_.add(v.name(), ch_arch);
+            b.add(v.name(), ch_arch);
 
             const auto
                 ftb_arch("masd.cpp.types.feature_template_bundle_header");
-            builder_.add(v.feature_template_bundles(), ftb_arch);
+            b.add(v.feature_template_bundles(), ftb_arch);
 
             const auto fb_arch("masd.cpp.types.feature_template_bundle_header");
-            builder_.add(v.feature_bundles(), fb_arch);
+            b.add(v.feature_bundles(), fb_arch);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -503,36 +606,38 @@ void region_processor::visit(const logical::entities::structural::object& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.class_header") {
             // algorithm: domain headers need it for the swap function.
-            builder_.add(std_algorithm);
+            b.add(std_algorithm);
 
             const auto io_arch("masd.cpp.io.class_header");
             const bool in_inheritance(v.is_parent() || v.is_child());
-            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool io_enabled(b.is_enabled(v.name(), io_arch));
             const bool requires_io(io_enabled && in_inheritance);
 
             const auto ios(std_iosfwd);
             if (requires_io)
-                builder_.add(ios);
+                b.add(ios);
 
             const auto ser_fwd_arch(
                 "masd.cpp.serialization.class_forward_declarations");
-            builder_.add(v.name(), ser_fwd_arch);
+            b.add(v.name(), ser_fwd_arch);
 
             const identification::entities::physical_meta_id
                 carch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.transparent_associations(), carch);
+            b.add(v.transparent_associations(), carch);
 
             const auto fwd_arch("masd.cpp.types.class_forward_declarations");
-            builder_.add(v.opaque_associations(), fwd_arch);
+            b.add(v.opaque_associations(), fwd_arch);
 
             const auto self_arch("masd.cpp.types.class_header");
-            builder_.add(v.parents(), self_arch);
+            b.add(v.parents(), self_arch);
 
             const auto hash_carch("masd.cpp.hash.canonical_archetype");
-            builder_.add(v.associative_container_keys(), hash_carch);
+            b.add(v.associative_container_keys(), hash_carch);
 
             if (v.is_visitation_root()) {
                 /*
@@ -544,26 +649,26 @@ void region_processor::visit(const logical::entities::structural::object& v) {
                  */
                 const auto visitor_fwd_arch(
                     "masd.cpp.types.visitor_forward_declarations");
-                builder_.add(*v.base_visitor(), visitor_fwd_arch);
+                b.add(*v.base_visitor(), visitor_fwd_arch);
             }
         } else if (pmid.value() == "masd.cpp.types.class_implementation") {
             const auto ch_arch("masd.cpp.types.class_header");
-            builder_.add(v.name(), ch_arch);
-            builder_.add(v.opaque_associations(), ch_arch);
+            b.add(v.name(), ch_arch);
+            b.add(v.opaque_associations(), ch_arch);
 
             const auto io_arch("masd.cpp.io.class_header");
             const bool in_inheritance(v.is_parent() || v.is_child());
-            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool io_enabled(b.is_enabled(v.name(), io_arch));
             const bool requires_io(io_enabled && in_inheritance);
 
             if (requires_io) {
                 const auto os(std_ostream);
-                builder_.add(os);
+                b.add(os);
 
                 const auto io_carch("masd.cpp.io.canonical_archetype");
-                builder_.add(v.transparent_associations(), io_carch);
-                builder_.add(v.opaque_associations(), io_carch);
-                builder_.add(v.parents(), io_carch);
+                b.add(v.transparent_associations(), io_carch);
+                b.add(v.opaque_associations(), io_carch);
+                b.add(v.parents(), io_carch);
 
                 if (v.is_visitation_leaf()) {
                     /*
@@ -574,137 +679,137 @@ void region_processor::visit(const logical::entities::structural::object& v) {
                      */
                     const auto v_arch("masd.cpp.types.visitor_header");
                     if (v.derived_visitor())
-                        builder_.add(*v.derived_visitor(), v_arch);
+                        b.add(*v.derived_visitor(), v_arch);
                     else
-                        builder_.add(*v.base_visitor(), v_arch);
+                        b.add(*v.base_visitor(), v_arch);
                 }
             }
         } else if (pmid.value() == "masd.cpp.hash.class_header") {
-            builder_.add(std_functional);
-            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+            b.add(std_functional);
+            b.add(v.name(), "masd.cpp.types.canonical_archetype");
         } else if (pmid.value() == "masd.cpp.hash.class_implementation") {
             const std::string carch("masd.cpp.io.canonical_archetype");
-            builder_.add(v.name(), carch);
-            builder_.add(v.transparent_associations(), carch);
-            builder_.add(v.opaque_associations(), carch);
-            builder_.add(v.parents(), carch);
+            b.add(v.name(), carch);
+            b.add(v.transparent_associations(), carch);
+            b.add(v.opaque_associations(), carch);
+            b.add(v.parents(), carch);
         } else if (pmid.value() == "masd.cpp.io.class_header") {
-            builder_.add(std_iosfwd);
-            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+            b.add(std_iosfwd);
+            b.add(v.name(), "masd.cpp.types.class_header");
         } else if (pmid.value() == "masd.cpp.io.class_implementation") {
             const auto ch_fn("masd.cpp.io.class_header");
-            builder_.add(v.name(), ch_fn);
-            builder_.add(v.opaque_associations(), ch_fn);
+            b.add(v.name(), ch_fn);
+            b.add(v.opaque_associations(), ch_fn);
 
             const auto io_carch("masd.cpp.io.canonical_archetype");
             const auto self_fn("masd.cpp.io.class_implementation");
-            const bool io_enabled(builder_.is_enabled(v.name(), self_fn));
+            const bool io_enabled(b.is_enabled(v.name(), self_fn));
 
             if (io_enabled) {
-                builder_.add(std_ostream);
-                builder_.add(v.transparent_associations(), io_carch);
-                builder_.add(v.opaque_associations(), io_carch);
-                builder_.add(v.parents(), io_carch);
+                b.add(std_ostream);
+                b.add(v.transparent_associations(), io_carch);
+                b.add(v.opaque_associations(), io_carch);
+                b.add(v.parents(), io_carch);
             }
         } else if (pmid.value() == "masd.cpp.serialization.class_header") {
-            builder_.add(v.name(), "masd.cpp.types.class_header");
-            builder_.add(boost_serialization_split_free);
+            b.add(v.name(), "masd.cpp.types.class_header");
+            b.add(boost_serialization_split_free);
 
             if (v.is_parent())
-                builder_.add(boost_serialization_assume_abstract);
+                b.add(boost_serialization_assume_abstract);
 
             if (!v.is_parent() && v.is_child())
-                builder_.add(boost_type_traits_is_virtual_base_of);
+                b.add(boost_type_traits_is_virtual_base_of);
         } else if (pmid.value() == "masd.cpp.serialization.class_implementation") {
             const auto ch_fn("masd.cpp.serialization.class_header");
-            builder_.add(v.name(), ch_fn);
+            b.add(v.name(), ch_fn);
 
-            builder_.add(boost_archive_text_iarchive);
-            builder_.add(boost_archive_text_oarchive);
-            builder_.add(boost_archive_binary_iarchive);
-            builder_.add(boost_archive_binary_oarchive);
-            builder_.add(boost_archive_polymorphic_iarchive);
-            builder_.add(boost_archive_polymorphic_oarchive);
+            b.add(boost_archive_text_iarchive);
+            b.add(boost_archive_text_oarchive);
+            b.add(boost_archive_binary_iarchive);
+            b.add(boost_archive_binary_oarchive);
+            b.add(boost_archive_polymorphic_iarchive);
+            b.add(boost_archive_polymorphic_oarchive);
 
             // XML serialisation
-            builder_.add(boost_serialization_nvp);
-            builder_.add(boost_archive_xml_iarchive);
-            builder_.add(boost_archive_xml_oarchive);
+            b.add(boost_serialization_nvp);
+            b.add(boost_archive_xml_iarchive);
+            b.add(boost_archive_xml_oarchive);
 
             const std::string carch("masd.cpp.io.canonical_archetype");
-            builder_.add(v.transparent_associations(), carch);
-            builder_.add(v.opaque_associations(), carch);
-            builder_.add(v.parents(), carch);
-            builder_.add(v.leaves(), carch);
+            b.add(v.transparent_associations(), carch);
+            b.add(v.opaque_associations(), carch);
+            b.add(v.parents(), carch);
+            b.add(v.leaves(), carch);
         } else if (pmid.value() == "masd.cpp.serialization.class_forward_declarations") {
             const auto tp_fn("masd.cpp.types.class_forward_declarations");
-            builder_.add(v.name(), tp_fn);
+            b.add(v.name(), tp_fn);
         } else if (pmid.value() == "masd.cpp.test_data.class_header") {
-            builder_.add(v.name(), "masd.cpp.types.class_header");
+            b.add(v.name(), "masd.cpp.types.class_header");
         } else if (pmid.value() == "masd.cpp.test_data.class_implementation") {
-            builder_.add(v.name(), "masd.cpp.test_data.class_header");
+            b.add(v.name(), "masd.cpp.test_data.class_header");
 
             const std::string carch("masd.cpp.test_data.canonical_archetype");
-            builder_.add(v.transparent_associations(), carch);
-            builder_.add(v.opaque_associations(), carch);
-            builder_.add(v.parents(), carch);
-            builder_.add(v.leaves(), carch);
+            b.add(v.transparent_associations(), carch);
+            b.add(v.opaque_associations(), carch);
+            b.add(v.parents(), carch);
+            b.add(v.leaves(), carch);
         } else if (pmid.value() == "masd.cpp.odb.class_header") {
-            builder_.add(v.name(), "masd.cpp.types.class_header");
+            b.add(v.name(), "masd.cpp.types.class_header");
             const std::string carch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.transparent_associations(), carch);
-            builder_.add(v.opaque_associations(), carch);
+            b.add(v.transparent_associations(), carch);
+            b.add(v.opaque_associations(), carch);
 
             const auto self_fn("masd.cpp.odb.class_header");
-            builder_.add(v.parents(), self_fn);
+            b.add(v.parents(), self_fn);
         } else if (pmid.value() == "masd.cpp.tests.class_implementation") {
-            builder_.add(v.name(), "masd.cpp.types.class_header");
-            builder_.add(v.name(), "masd.cpp.test_data.class_header");
+            b.add(v.name(), "masd.cpp.types.class_header");
+            b.add(v.name(), "masd.cpp.test_data.class_header");
 
-            builder_.add(std_string);
-            builder_.add(boost_test_unit_test);
+            b.add(std_string);
+            b.add(boost_test_unit_test);
 
             if (v.is_parent())
-                builder_.add(boost_shared_ptr);
+                b.add(boost_shared_ptr);
 
             const auto io_arch("masd.cpp.io.class_header");
-            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool io_enabled(b.is_enabled(v.name(), io_arch));
             if (io_enabled) {
-                builder_.add(v.name(), io_arch);
-                builder_.add(std_sstream);
-                builder_.add(boost_property_tree_ptree);
-                builder_.add(boost_property_tree_json_parser);
+                b.add(v.name(), io_arch);
+                b.add(std_sstream);
+                b.add(boost_property_tree_ptree);
+                b.add(boost_property_tree_json_parser);
             }
 
             const auto ser_arch("masd.cpp.serialization.class_header");
-            const bool ser_enabled(builder_.is_enabled(v.name(), ser_arch));
+            const bool ser_enabled(b.is_enabled(v.name(), ser_arch));
             if (ser_enabled) {
-                builder_.add(v.name(), ser_arch);
+                b.add(v.name(), ser_arch);
 
                 if (v.type_registrar())
-                    builder_.add(v.type_registrar(),
+                    b.add(v.type_registrar(),
                         "masd.cpp.serialization.type_registrar_header");
 
-                builder_.add(boost_archive_text_iarchive);
-                builder_.add(boost_archive_text_oarchive);
-                builder_.add(boost_archive_binary_iarchive);
-                builder_.add(boost_archive_binary_oarchive);
-                builder_.add(boost_archive_polymorphic_iarchive);
-                builder_.add(boost_archive_polymorphic_oarchive);
-                builder_.add(boost_serialization_nvp);
-                builder_.add(boost_archive_xml_iarchive);
-                builder_.add(boost_archive_xml_oarchive);
+                b.add(boost_archive_text_iarchive);
+                b.add(boost_archive_text_oarchive);
+                b.add(boost_archive_binary_iarchive);
+                b.add(boost_archive_binary_oarchive);
+                b.add(boost_archive_polymorphic_iarchive);
+                b.add(boost_archive_polymorphic_oarchive);
+                b.add(boost_serialization_nvp);
+                b.add(boost_archive_xml_iarchive);
+                b.add(boost_archive_xml_oarchive);
 
                 if (v.is_parent())
-                    builder_.add(boost_serialization_shared_ptr);
+                    b.add(boost_serialization_shared_ptr);
             }
 
             const auto hash_arch("masd.cpp.serialization.class_header");
-            const bool hash_enabled(builder_.is_enabled(v.name(), hash_arch));
+            const bool hash_enabled(b.is_enabled(v.name(), hash_arch));
             if (hash_enabled)
-                builder_.add(v.name(), hash_arch);
+                b.add(v.name(), hash_arch);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -714,12 +819,14 @@ void region_processor::visit(const logical::entities::structural::exception& /*v
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.exception_header") {
-            builder_.add(std_string);
-            builder_.add(boost_exception_info);
+            b.add(std_string);
+            b.add(boost_exception_info);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -729,83 +836,85 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.enum_header") {
             const std::string arch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.underlying_element(), arch);
+            b.add(v.underlying_element(), arch);
         } else if (pmid.value() == "masd.cpp.hash.enum_header") {
-            builder_.add(std_functional);
-            builder_.add(v.name(), "masd.cpp.types.enum_header");
+            b.add(std_functional);
+            b.add(v.name(), "masd.cpp.types.enum_header");
         } else if (pmid.value() == "masd.cpp.io.enum_header") {
-            builder_.add(std_iosfwd);
+            b.add(std_iosfwd);
             const auto eh_fn("masd.cpp.types.enum_header");
-            builder_.add(v.name(), eh_fn);
+            b.add(v.name(), eh_fn);
         } else if (pmid.value() == "masd.cpp.io.enum_implementation") {
-            builder_.add(std_ostream);
-            builder_.add(std_stdexcept);
-            builder_.add(std_string);
+            b.add(std_ostream);
+            b.add(std_stdexcept);
+            b.add(std_string);
 
-            const auto eh_fn("masd.cpp.types.enum_header");
-            builder_.add(v.name(), eh_fn);
+            const auto eh_fn("masd.cpp.io.enum_header");
+            b.add(v.name(), eh_fn);
         } else if (pmid.value() == "masd.cpp.serialization.enum_header") {
-            builder_.add(v.name(), "masd.cpp.types.enum_header");
-            builder_.add(boost_serialization_nvp);
+            b.add(v.name(), "masd.cpp.types.enum_header");
+            b.add(boost_serialization_nvp);
         } else if (pmid.value() == "masd.cpp.test_data.enum_header") {
-            builder_.add(v.name(), "masd.cpp.types.enum_header");
+            b.add(v.name(), "masd.cpp.types.enum_header");
         } else if (pmid.value() == "masd.cpp.test_data.enum_implementation") {
-            builder_.add(v.name(),"masd.cpp.test_data.enum_header");
+            b.add(v.name(),"masd.cpp.test_data.enum_header");
         } else if (pmid.value() == "masd.cpp.odb.enum_header") {
-            builder_.add(v.name(), "masd.cpp.types.enum_header");
+            b.add(v.name(), "masd.cpp.types.enum_header");
         } else if (pmid.value() == "masd.cpp.lexical_cast.enum_header") {
             const auto eh_fn("masd.cpp.types.enum_header");
-            builder_.add(v.name(), eh_fn);
-            builder_.add(boost_lexical_cast);
+            b.add(v.name(), eh_fn);
+            b.add(boost_lexical_cast);
         } else if (pmid.value() == "masd.cpp.tests.enum_implementation") {
-            builder_.add(v.name(), "masd.cpp.types.enum_header");
-            builder_.add(v.name(), "masd.cpp.test_data.enum_header");
+            b.add(v.name(), "masd.cpp.types.enum_header");
+            b.add(v.name(), "masd.cpp.test_data.enum_header");
 
-            builder_.add(std_string);
-            builder_.add(boost_test_unit_test);
-            builder_.add(boost_predef);
+            b.add(std_string);
+            b.add(boost_test_unit_test);
+            b.add(boost_predef);
 
             const auto io_arch("masd.cpp.io.enum_header");
-            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool io_enabled(b.is_enabled(v.name(), io_arch));
             if (io_enabled) {
-                builder_.add(v.name(), io_arch);
-                builder_.add(std_sstream);
-                builder_.add(boost_property_tree_ptree);
-                builder_.add(boost_property_tree_json_parser);
+                b.add(v.name(), io_arch);
+                b.add(std_sstream);
+                b.add(boost_property_tree_ptree);
+                b.add(boost_property_tree_json_parser);
             }
 
             const auto lc_arch("masd.cpp.lexical_cast.enum_header");
-            const bool lc_enabled(builder_.is_enabled(v.name(), lc_arch));
+            const bool lc_enabled(b.is_enabled(v.name(), lc_arch));
             if (lc_enabled) {
-                builder_.add(v.name(), lc_arch);
-                builder_.add(boost_lexical_cast);
+                b.add(v.name(), lc_arch);
+                b.add(boost_lexical_cast);
             }
 
             const auto ser_arch("masd.cpp.serialization.enum_header");
-            const bool ser_enabled(builder_.is_enabled(v.name(), ser_arch));
+            const bool ser_enabled(b.is_enabled(v.name(), ser_arch));
             if (ser_enabled) {
-                builder_.add(v.name(), ser_arch);
+                b.add(v.name(), ser_arch);
 
-                builder_.add(boost_archive_text_iarchive);
-                builder_.add(boost_archive_text_oarchive);
-                builder_.add(boost_archive_binary_iarchive);
-                builder_.add(boost_archive_binary_oarchive);
-                builder_.add(boost_archive_polymorphic_iarchive);
-                builder_.add(boost_archive_polymorphic_oarchive);
-                builder_.add(boost_serialization_nvp);
-                builder_.add(boost_archive_xml_iarchive);
-                builder_.add(boost_archive_xml_oarchive);
+                b.add(boost_archive_text_iarchive);
+                b.add(boost_archive_text_oarchive);
+                b.add(boost_archive_binary_iarchive);
+                b.add(boost_archive_binary_oarchive);
+                b.add(boost_archive_polymorphic_iarchive);
+                b.add(boost_archive_polymorphic_oarchive);
+                b.add(boost_serialization_nvp);
+                b.add(boost_archive_xml_iarchive);
+                b.add(boost_archive_xml_oarchive);
             }
 
             const auto hash_arch("masd.cpp.hash.enum_header");
-            const bool hash_enabled(builder_.is_enabled(v.name(), hash_arch));
+            const bool hash_enabled(b.is_enabled(v.name(), hash_arch));
             if (hash_enabled)
-                builder_.add(v.name(), hash_arch);
+                b.add(v.name(), hash_arch);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -815,78 +924,80 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.primitive_header") {
             // algorithm: domain headers need it for the swap function.
-            builder_.add(std_algorithm);
+            b.add(std_algorithm);
 
             const auto ser_fwd_arch(
                 "masd.cpp.serialization.primitive_forward_declarations");
-            builder_.add(v.name(), ser_fwd_arch);
+            b.add(v.name(), ser_fwd_arch);
 
             const std::string carch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.value_attribute().parsed_type().current(), carch);
+            b.add(v.value_attribute().parsed_type().current(), carch);
         } else if (pmid.value() == "masd.cpp.types.primitive_implementation") {
             const auto ch_arch("masd.cpp.types.primitive_header");
-            builder_.add(v.name(), ch_arch);
+            b.add(v.name(), ch_arch);
         } else if (pmid.value() == "masd.cpp.hash.primitive_header") {
-            builder_.add(std_functional);
-            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+            b.add(std_functional);
+            b.add(v.name(), "masd.cpp.types.canonical_archetype");
         } else if (pmid.value() == "masd.cpp.hash.primitive_implementation") {
             const std::string carch("masd.cpp.types.canonical_archetype");
-            builder_.add(v.name(), carch);
+            b.add(v.name(), carch);
         } else if (pmid.value() == "masd.cpp.io.primitive_header") {
-            builder_.add(std_iosfwd);
-            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+            b.add(std_iosfwd);
+            b.add(v.name(), "masd.cpp.types.canonical_archetype");
         } else if (pmid.value() == "masd.cpp.io.primitive_implementation") {
             const auto ph_fn("masd.cpp.io.primitive_header");
-            builder_.add(v.name(), ph_fn);
+            b.add(v.name(), ph_fn);
 
             const auto io_carch("masd.cpp.io.canonical_archetype");
             const auto self_fn("masd.cpp.io.primitive_implementation");
-            const bool io_enabled(builder_.is_enabled(v.name(), self_fn));
+            const bool io_enabled(b.is_enabled(v.name(), self_fn));
 
             if (io_enabled) {
-                builder_.add(std_ostream);
+                b.add(std_ostream);
                 const auto& va(v.value_attribute());
-                builder_.add(va.parsed_type().current(), io_carch);
+                b.add(va.parsed_type().current(), io_carch);
             }
         } else if (pmid.value() == "masd.cpp.serialization.primitive_header") {
-            builder_.add(v.name(), "masd.cpp.types.primitive_header");
-            builder_.add(boost_serialization_split_free);
+            b.add(v.name(), "masd.cpp.types.primitive_header");
+            b.add(boost_serialization_split_free);
 
         } else if (pmid.value() == "masd.cpp.serialization.primitive_implementation") {
             const auto ph_fn("masd.cpp.types.primitive_header");
-            builder_.add(v.name(), ph_fn);
+            b.add(v.name(), ph_fn);
 
-            builder_.add(boost_archive_text_iarchive);
-            builder_.add(boost_archive_text_oarchive);
-            builder_.add(boost_archive_binary_iarchive);
-            builder_.add(boost_archive_binary_oarchive);
-            builder_.add(boost_archive_polymorphic_iarchive);
-            builder_.add(boost_archive_polymorphic_oarchive);
+            b.add(boost_archive_text_iarchive);
+            b.add(boost_archive_text_oarchive);
+            b.add(boost_archive_binary_iarchive);
+            b.add(boost_archive_binary_oarchive);
+            b.add(boost_archive_polymorphic_iarchive);
+            b.add(boost_archive_polymorphic_oarchive);
 
             // XML serialisation
-            builder_.add(boost_serialization_nvp);
-            builder_.add(boost_archive_xml_iarchive);
-            builder_.add(boost_archive_xml_oarchive);
+            b.add(boost_serialization_nvp);
+            b.add(boost_archive_xml_iarchive);
+            b.add(boost_archive_xml_oarchive);
 
             const std::string
                 carch("masd.cpp.serialization.canonical_archetype");
-            builder_.add(v.value_attribute().parsed_type().current(), carch);
+            b.add(v.value_attribute().parsed_type().current(), carch);
         } else if (pmid.value() == "masd.cpp.serialization.primitive_forward_declarations") {
             const auto tp_fn("masd.cpp.types.primitive_forward_declarations");
-            builder_.add(v.name(), tp_fn);
+            b.add(v.name(), tp_fn);
         } else if (pmid.value() == "masd.cpp.test_data.primitive_header") {
-            builder_.add(v.name(), "masd.cpp.types.primitive_header");
+            b.add(v.name(), "masd.cpp.types.primitive_header");
         } else if (pmid.value() == "masd.cpp.test_data.primitive_implementation") {
-            builder_.add(v.name(), "masd.cpp.test_data.primitive_header");
+            b.add(v.name(), "masd.cpp.test_data.primitive_header");
             const std::string carch("masd.cpp.test_data.canonical_archetype");
-            builder_.add(v.value_attribute().parsed_type().current(), carch);
+            b.add(v.value_attribute().parsed_type().current(), carch);
         } else if (pmid.value() == "masd.cpp.odb.primitive_header") {
-            builder_.add(v.name(), "masd.cpp.types.primitive_header");
+            b.add(v.name(), "masd.cpp.types.primitive_header");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -896,15 +1007,17 @@ void region_processor::visit(const logical::entities::structural::visitor& v) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.visitor_header") {
             const auto fwd_arch("masd.cpp.types.class_forward_declarations");
-            builder_.add(v.visits(), fwd_arch);
+            b.add(v.visits(), fwd_arch);
 
             if (v.parent())
-                builder_.add(*v.parent(), "masd.cpp.types.visitor_header");
+                b.add(*v.parent(), "masd.cpp.types.visitor_header");
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -916,14 +1029,17 @@ visit(const logical::entities::structural::entry_point& /*v*/) {
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
 
         auto& a(*pair.second);
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
+
         if (pmid.value() == "masd.cpp.tests.main") {
-            builder_.add(boost_test_unit_test);
-            builder_.add(boost_test_unit_test_monitor);
-            builder_.add(boost_exception_info);
-            builder_.add(std_iostream);
-            builder_.add(boost_exception_diagnostic_information);
+            b.add(boost_test_unit_test);
+            b.add(boost_test_unit_test_monitor);
+            b.add(boost_exception_info);
+            b.add(std_iostream);
+            b.add(boost_exception_diagnostic_information);
         }
-        a.path_properties().inclusion_dependencies(builder_.build());
+        build(b, a);
     }
 }
 
@@ -964,6 +1080,30 @@ get_inclusion_directives(const physical::entities::model& m) {
                 const auto msg(os.str());
                 BOOST_LOG_SEV(lg, error) << msg;
                 BOOST_THROW_EXCEPTION(transform_exception(msg));
+            }
+
+            const auto rs(a.relations().status());
+            using physical::entities::relation_status;
+            if (rs == relation_status::facet_default) {
+                using identification::helpers::physical_meta_id_builder;
+                physical_meta_id_builder b;
+                const auto& l(a.meta_name().location());
+
+                logical_meta_physical_id lmpid;
+                lmpid.logical_id(a.id().logical_id());
+                lmpid.physical_meta_id(b.build_facet(l, true/*add_canonical*/));
+
+                const auto pair(std::make_pair(lmpid, directives));
+                const bool inserted(r.insert(pair).second);
+                if (!inserted) {
+                    std::ostringstream os;
+                    os << duplicate_id
+                       << a.id().logical_id().value() << "-"
+                       << a.id().physical_meta_id().value();
+                    const auto msg(os.str());
+                    BOOST_LOG_SEV(lg, error) << msg;
+                    BOOST_THROW_EXCEPTION(transform_exception(msg));
+                }
             }
         }
     }
