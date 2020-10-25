@@ -150,16 +150,6 @@ private:
         const identification::entities::logical_id& element_id) const;
 
     /**
-     * @brief Obtains the artefact properties for the supplied
-     * archetype.
-     *
-     * @pre Artefact properties must exist for the archetype.
-     */
-    const formattables::artefact_properties& obtain_artefact_properties(
-        const identification::entities::logical_id& element_id,
-        const identification::entities::physical_meta_id& archetype) const;
-
-    /**
      * @brief Obtains the facet configuration for the facet
      * identified by facet name.
      *
@@ -383,9 +373,6 @@ public:
         const std::list<identification::entities::logical_name> names) const;
 
 public:
-    const formattables::artefact_properties& artefact_properties() const;
-
-public:
     /**
      * @brief Returns the stream that is currently being populated.
      */
@@ -403,7 +390,6 @@ private:
     const logical::entities::element& element_;
     const context& context_;
     physical::entities::artefact& artefact_;
-    formattables::artefact_properties artefact_properties_;
     const identification::entities::physical_meta_name physical_meta_name_;
     const bool requires_header_guard_;
 };

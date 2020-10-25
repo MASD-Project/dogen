@@ -950,10 +950,6 @@
           "type": "formattables::aspect_properties"
         },
         {
-          "name": "artefact_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>"
-        },
-        {
           "name": "helper_properties",
           "type": "std::list<formattables::helper_properties>"
         },

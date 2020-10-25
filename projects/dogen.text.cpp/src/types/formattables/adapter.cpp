@@ -167,29 +167,6 @@ model adapter::adapt(const transforms::repository& frp,
             continue;
         }
         BOOST_LOG_SEV(lg, debug) << "Element has formatters " << id;
-
-        /*
-         * Perform the artefact expansion by looking at all the
-         * archetypes available via the formatters. Note that we check
-         * for duplicates on insertion because of the element
-         * segmentation scenario. Its there just to ensure we don't
-         * have a formatter processing both a master and an extension.
-         */
-        auto& art_props(fbl.element_properties().artefact_properties());
-        for (const auto& fmt : j->second) {
-            const auto pmn(fmt->archetype().meta_name());
-            const auto arch(pmn.id());
-            const auto pair(std::make_pair(arch, artefact_properties()));
-            const auto inserted(art_props.insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
-                BOOST_THROW_EXCEPTION(
-                    adaptation_error(duplicate_archetype + arch.value()));
-            }
-
-            BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch
-                                     << " to element: " << id;
-        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished adapting logical to formattables."

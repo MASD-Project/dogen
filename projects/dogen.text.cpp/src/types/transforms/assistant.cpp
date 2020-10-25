@@ -71,8 +71,6 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
-const std::string artefact_properties_missing(
-    "Could not find formatter configuration for formatter: ");
 const std::string facet_properties_missing(
     "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
@@ -93,8 +91,6 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
     const bool requires_header_guard,
     physical::entities::artefact& a)
     : element_(e), context_(ctx), artefact_(a),
-      artefact_properties_(obtain_artefact_properties(element_.name().id(),
-              pmn.id())),
       physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
@@ -228,21 +224,6 @@ const formattables::element_properties& assistant::obtain_element_properties(
             formatting_error(element_not_found + element_id.value()));
     }
     return i->second.element_properties();
-}
-
-const formattables::artefact_properties& assistant::obtain_artefact_properties(
-    const identification::entities::logical_id& element_id,
-    const identification::entities::physical_meta_id& archetype) const {
-
-    const auto& eprops(obtain_element_properties(element_id));
-    const auto i(eprops.artefact_properties().find(archetype));
-    if (i == eprops.artefact_properties().end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << archetype;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype.value()));
-    }
-    return i->second;
 }
 
 formattables::facet_properties assistant::obtain_facet_properties(
@@ -673,11 +654,6 @@ assistant::names_with_enabled_archetype(
         r.push_back(n);
     }
     return r;
-}
-
-const formattables::artefact_properties&
-assistant::artefact_properties() const {
-    return artefact_properties_;
 }
 
 std::ostream& assistant::stream() {
