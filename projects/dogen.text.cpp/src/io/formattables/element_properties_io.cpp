@@ -49,24 +49,6 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -90,7 +72,6 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"__type__\": " << "\"dogen::text::cpp::formattables::element_properties\"" << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
-      << "\"canonical_archetype_to_archetype\": " << v.canonical_archetype_to_archetype() << ", "
       << "\"attribute_level_test_data_properties\": " << v.attribute_level_test_data_properties()
       << " }";
     return(s);

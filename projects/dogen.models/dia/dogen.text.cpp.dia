@@ -15237,7 +15237,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
         <dia:point val="82,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,85.95;117.97,91.25"/>
+        <dia:rectangle val="81.95,85.95;117.97,90.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="82,86"/>
@@ -15246,7 +15246,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
         <dia:real val="35.920000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element_properties#</dia:string>
@@ -15368,29 +15368,6 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;formattables::helper_properties&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#canonical_archetype_to_archetype#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17209,16 +17186,16 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O101">
       <dia:attribute name="obj_pos">
-        <dia:point val="117.92,91.2"/>
+        <dia:point val="117.92,90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.17,90.45;137.535,125.8"/>
+        <dia:rectangle val="117.17,89.65;137.535,125.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="117.92,91.2"/>
+        <dia:point val="117.92,90.4"/>
         <dia:point val="117.92,96"/>
         <dia:point val="137.335,96"/>
         <dia:point val="137.335,125"/>
@@ -17290,16 +17267,16 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O102">
       <dia:attribute name="obj_pos">
-        <dia:point val="99.96,91.2"/>
+        <dia:point val="99.96,90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.3275,90.45;100.71,98.8"/>
+        <dia:rectangle val="91.3275,89.65;100.71,98.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="99.96,91.2"/>
+        <dia:point val="99.96,90.4"/>
         <dia:point val="99.96,96"/>
         <dia:point val="91.3775,96"/>
         <dia:point val="91.3775,98"/>

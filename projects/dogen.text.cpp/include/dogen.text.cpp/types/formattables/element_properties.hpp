@@ -49,7 +49,6 @@ public:
     element_properties(
         const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
         const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties,
-        const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
         const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
 
 public:
@@ -62,11 +61,6 @@ public:
     std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties();
     void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& v);
     void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>&& v);
-
-    const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype() const;
-    std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype();
-    void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>& v);
-    void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v);
 
     const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
     std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
@@ -86,7 +80,6 @@ public:
 private:
     dogen::text::cpp::formattables::aspect_properties aspect_properties_;
     std::list<dogen::text::cpp::formattables::helper_properties> helper_properties_;
-    std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
     std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 

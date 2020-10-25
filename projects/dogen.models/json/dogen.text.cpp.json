@@ -944,10 +944,6 @@
           "type": "std::list<formattables::helper_properties>"
         },
         {
-          "name": "canonical_archetype_to_archetype",
-          "type": "std::unordered_map<std::string, std::string>"
-        },
-        {
           "name": "attribute_level_test_data_properties",
           "type": "std::unordered_map<std::string, test_data_properties>"
         }
