@@ -41,13 +41,10 @@ model workflow::make_model(const transforms::repository& frp,
 void workflow::expand_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element,
     const transforms::repository& frp, const locator& l,
     model& fm) const {
     model_expander ex;
-    ex.expand(feature_model, rcfg, enabled_archetype_for_element, frp, l, fm);
+    ex.expand(feature_model, rcfg, frp, l, fm);
 }
 
 model
@@ -57,9 +54,7 @@ workflow::execute(const variability::entities::feature_model& feature_model,
     const text::entities::model& m) const {
 
     auto r(make_model(frp, m));
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto& eafe(mmp.enabled_archetype_for_element());
-    expand_model(feature_model, rcfg, eafe, frp, l, r);
+    expand_model(feature_model, rcfg, frp, l, r);
 
     return r;
 }

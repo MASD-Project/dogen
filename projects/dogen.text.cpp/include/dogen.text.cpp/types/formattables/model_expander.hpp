@@ -69,9 +69,6 @@ private:
 public:
     void expand(const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l, model& fm) const;
 };
 

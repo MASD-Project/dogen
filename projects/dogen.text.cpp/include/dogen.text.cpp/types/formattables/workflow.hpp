@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_set>
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
@@ -44,9 +45,6 @@ private:
     void expand_model(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l,
         model& fm) const;
 
