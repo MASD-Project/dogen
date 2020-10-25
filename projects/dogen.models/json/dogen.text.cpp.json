@@ -1150,13 +1150,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::inclusion_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::reducer",
       "stereotypes": [
         "dogen::handcrafted::typeable"

@@ -20,7 +20,6 @@
  */
 #include "dogen.text.cpp/types/formattables/streaming_expander.hpp"
 #include "dogen.text.cpp/types/formattables/canonical_archetype_expander.hpp"
-#include "dogen.text.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
@@ -43,16 +42,6 @@ void model_expander::expand_canonical_archetypes(
     const transforms::repository& frp, model& fm) const {
     canonical_archetype_expander ex;
     ex.expand(frp, fm);
-}
-
-void model_expander::expand_inclusion(
-    const variability::entities::feature_model& feature_model,
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element, const transforms::repository& frp,
-    const locator& l, model& fm) const {
-    inclusion_expander ex;
-    ex.expand(feature_model, enabled_archetype_for_element, frp, l, fm);
 }
 
 void model_expander::expand_aspects(
@@ -103,7 +92,7 @@ void model_expander::expand(
     const variability::entities::configuration& rcfg,
     const std::unordered_set<
     identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element,
+    /*enabled_archetype_for_element*/,
     const transforms::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -126,7 +115,6 @@ void model_expander::expand(
      */
     expand_canonical_archetypes(frp, fm);
 
-    expand_inclusion(feature_model, enabled_archetype_for_element, frp, l, fm);
     expand_aspects(feature_model, fm);
     expand_helpers(feature_model, frp, fm);
 

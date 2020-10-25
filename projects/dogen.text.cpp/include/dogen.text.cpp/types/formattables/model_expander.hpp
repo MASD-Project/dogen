@@ -46,13 +46,6 @@ private:
     void expand_canonical_archetypes(const transforms::repository& frp,
         model& fm) const;
 
-    void expand_inclusion(
-        const variability::entities::feature_model& feature_model,
-        const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element,
-        const transforms::repository& frp, const locator& l, model& fm) const;
-
     void expand_aspects(
         const variability::entities::feature_model& feature_model,
         model& fm) const;
