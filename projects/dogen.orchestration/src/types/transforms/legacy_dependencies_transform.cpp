@@ -21,8 +21,11 @@
 #include <string>
 #include <sstream>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
+#include "dogen.physical/io/entities/inclusion_directives_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
@@ -162,6 +165,8 @@ visit(const logical::entities::physical::archetype& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_class_header_transform") {
             const auto ts(a.technical_space());
@@ -191,6 +196,8 @@ visit(const logical::entities::physical::facet& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.facet_class_header_transform") {
             builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
@@ -240,6 +247,8 @@ void region_processor::visit(const logical::entities::physical::backend& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.backend_class_header_transform") {
             builder_.add_as_user("dogen.physical/types/entities/backend.hpp");
@@ -293,6 +302,8 @@ void region_processor::visit(const logical::entities::physical::part& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.part_class_header_factory") {
             builder_.add_as_user("dogen.physical/types/entities/part.hpp");
@@ -317,6 +328,8 @@ void region_processor::visit(const logical::entities::physical::archetype_kind& 
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_kind_class_header_factory") {
             builder_.add_as_user(
@@ -340,6 +353,8 @@ void region_processor::visit(const logical::entities::serialization::type_regist
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.serialization.type_registrar_implementation") {
             const auto rh_fn("masd.cpp.serialization.type_registrar_header");
@@ -372,6 +387,8 @@ visit(const logical::entities::variability::feature_bundle& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.feature_bundle_header") {
             builder_.add(std_list);
@@ -412,6 +429,8 @@ visit(const logical::entities::variability::feature_template_bundle& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.feature_template_bundle_header") {
             builder_.add(std_list);
@@ -455,6 +474,8 @@ void region_processor::visit(const logical::entities::variability::initializer& 
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.variability_initializer_header") {
             builder_.add_as_user(
@@ -480,6 +501,8 @@ void region_processor::visit(const logical::entities::structural::object& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.class_header") {
             // algorithm: domain headers need it for the swap function.
@@ -689,6 +712,8 @@ void region_processor::visit(const logical::entities::structural::exception& /*v
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.exception_header") {
             builder_.add(std_string);
@@ -702,6 +727,8 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.enum_header") {
             const std::string arch("masd.cpp.types.canonical_archetype");
@@ -786,6 +813,8 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.primitive_header") {
             // algorithm: domain headers need it for the swap function.
@@ -865,6 +894,8 @@ void region_processor::visit(const logical::entities::structural::visitor& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.visitor_header") {
             const auto fwd_arch("masd.cpp.types.class_forward_declarations");
@@ -882,6 +913,8 @@ visit(const logical::entities::structural::entry_point& /*v*/) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.tests.main") {
             builder_.add(boost_test_unit_test);
@@ -897,14 +930,30 @@ visit(const logical::entities::structural::entry_point& /*v*/) {
 std::unordered_map<logical_meta_physical_id, inclusion_directives>
 legacy_dependencies_transform::
 get_inclusion_directives(const physical::entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Gathering inclusion directives.";
+
     std::unordered_map<logical_meta_physical_id, inclusion_directives> r;
 
     for (const auto& region_pair : m.regions_by_logical_id()) {
         const auto& region(region_pair.second);
+        const auto& ln(region.provenance().logical_name());
+        BOOST_LOG_SEV(lg, trace) << "Processing element: "
+                                 << ln.id().value();
+
         for (const auto& artefact_pair  : region.artefacts_by_archetype()) {
             const auto& a(*artefact_pair.second);
+            BOOST_LOG_SEV(lg, trace) << "Processing archetype: "
+                                     << a.meta_name().id().value();
 
+            /*
+             * Skip any artefact without a primary directive.
+             */
             const auto& directives(a.path_properties().inclusion_directives());
+            if (directives.primary().empty()) {
+                BOOST_LOG_SEV(lg, trace) << "Empty primary directive.";
+                continue;
+            }
+
             const auto pair(std::make_pair(a.id(), directives));
             const bool inserted(r.insert(pair).second);
             if (!inserted) {
@@ -918,6 +967,8 @@ get_inclusion_directives(const physical::entities::model& m) {
             }
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Result: " << r;
     return r;
 }
 
@@ -930,9 +981,16 @@ void legacy_dependencies_transform::apply(const text::transforms::context& ctx,
     const auto& mmp(m.physical().meta_model_properties());
     const auto& eafe(mmp.enabled_archetype_for_element());
     for (auto& region : m.logical_physical_regions()) {
-        auto& e(*region.logical_element());
-        region_processor rp(ids, eafe, region);
-        e.accept(rp);
+        const auto& e(*region.logical_element());
+        BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                                 << e.name().id().value();
+
+        using logical::entities::generability_status;
+        if (e.generability_status() == generability_status::generatable) {
+            region_processor rp(ids, eafe, region);
+            e.accept(rp);
+        } else
+            BOOST_LOG_SEV(lg, debug) << "Element is not generatable.";
     }
 
     stp.end_transform(m);
