@@ -43,9 +43,6 @@ private:
         const variability::entities::feature_model& feature_model,
         model& fm) const;
 
-    void expand_canonical_archetypes(const transforms::repository& frp,
-        model& fm) const;
-
     void expand_aspects(
         const variability::entities::feature_model& feature_model,
         model& fm) const;

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.text.cpp/types/formattables/streaming_expander.hpp"
-#include "dogen.text.cpp/types/formattables/canonical_archetype_expander.hpp"
 #include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
@@ -36,12 +35,6 @@ expand_streaming(const variability::entities::feature_model& feature_model,
     model& fm) const {
     streaming_expander ex;
     ex.expand(feature_model, fm);
-}
-
-void model_expander::expand_canonical_archetypes(
-    const transforms::repository& frp, model& fm) const {
-    canonical_archetype_expander ex;
-    ex.expand(frp, fm);
 }
 
 void model_expander::expand_aspects(
@@ -104,13 +97,6 @@ void model_expander::expand(
      * with the C++ standard (e.g. hash is not available for C++ 98).
      */
     expand_cpp_standard(feature_model, rcfg, fm);
-
-    /*
-     * Canonical formatter expansion must be done before inclusion
-     * because we use the canonical formatter notation to find
-     * inclusion directives.
-     */
-    expand_canonical_archetypes(frp, fm);
 
     expand_aspects(feature_model, fm);
     expand_helpers(feature_model, frp, fm);

@@ -1252,13 +1252,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::canonical_archetype_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::resolution_error",
       "stereotypes": [
         "masd::exception"
