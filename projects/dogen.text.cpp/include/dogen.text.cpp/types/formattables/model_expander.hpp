@@ -55,8 +55,6 @@ private:
 
     void expand_odb(const locator& l, model& fm) const;
 
-    void expand_facet_directories(const locator& l, model& fm) const;
-
     void expand_build_files(const locator& l, model& fm) const;
 
     void expand_cpp_standard(
