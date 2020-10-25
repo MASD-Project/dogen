@@ -35,17 +35,6 @@ public:
     const physical::entities::archetype& archetype() const override;
 
 public:
-    std::list<std::string> inclusion_dependencies(
-        const formattables::dependencies_builder_factory& f,
-        const logical::entities::element& e) const override;
-
-    inclusion_support_types inclusion_support_type() const override;
-
-    boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const override;
-
-public:
     void apply(const context& ctx, const logical::entities::element& e,
         physical::entities::artefact& a) const override;
 };

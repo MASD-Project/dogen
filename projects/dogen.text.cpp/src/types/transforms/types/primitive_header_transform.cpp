@@ -54,36 +54,6 @@ const physical::entities::archetype& primitive_header_transform::archetype() con
     return static_archetype();
 }
 
-inclusion_support_types primitive_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path primitive_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
-
-    using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
-    builder.add(p.name(), ser_fwd_arch);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(p.value_attribute().parsed_type().current(), carch);
-
-    return builder.build();
-}
-
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive header",

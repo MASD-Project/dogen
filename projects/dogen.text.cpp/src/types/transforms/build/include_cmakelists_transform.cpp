@@ -60,28 +60,6 @@ const physical::entities::archetype& include_cmakelists_transform::archetype() c
     return static_archetype();
 }
 
-inclusion_support_types include_cmakelists_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path include_cmakelists_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void include_cmakelists_transform::apply(const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "include cmakelists",

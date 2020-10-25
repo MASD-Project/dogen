@@ -54,27 +54,6 @@ const physical::entities::archetype& primitive_forward_declarations_transform::a
     return static_archetype();
 }
 
-inclusion_support_types primitive_forward_declarations_transform::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
-}
-
-boost::filesystem::path primitive_forward_declarations_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    using tp = transforms::types::traits;
-    const auto tp_fn(tp::primitive_forward_declarations_archetype_qn());
-    builder.add(e.name(), tp_fn);
-
-    return builder.build();
-}
-
 void primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive forward declarations",

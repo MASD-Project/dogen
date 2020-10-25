@@ -51,33 +51,6 @@ const physical::entities::archetype& archetype_class_header_transform_transform:
     return static_archetype();
 }
 
-inclusion_support_types archetype_class_header_transform_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path archetype_class_header_transform_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> archetype_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
-
-    auto builder(f.make());
-    using identification::entities::technical_space;
-    if (arch.major_technical_space() == technical_space::cpp) {
-        builder.add_as_user(
-            "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
-    } else if (arch.major_technical_space() == technical_space::csharp) {
-        builder.add_as_user(
-            "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
-    }
-
-    return builder.build();
-}
-
 void archetype_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header",
@@ -97,23 +70,13 @@ ast.stream() << "public:" << std::endl;
 ast.stream() << "    static const physical::entities::archetype& static_archetype();" << std::endl;
 ast.stream() << "    const physical::entities::archetype& archetype() const override;" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "public:" << std::endl;
             using identification::entities::technical_space;
-            if (o.major_technical_space() == technical_space::cpp) {
-ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
-ast.stream() << "        const formattables::dependencies_builder_factory& f," << std::endl;
-ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    inclusion_support_types inclusion_support_type() const override;" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    boost::filesystem::path inclusion_path(" << std::endl;
-ast.stream() << "        const formattables::locator& l," << std::endl;
-ast.stream() << "        const identification::entities::logical_name& n) const override;" << std::endl;
-            } else if (o.major_technical_space() == technical_space::csharp) {
+            if (o.major_technical_space() == technical_space::csharp) {
+ast.stream() << "public:" << std::endl;
 ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
 ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
+ast.stream() << std::endl;
             }
-ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    void apply(const context& ctx, const logical::entities::element& e," << std::endl;
 ast.stream() << "        physical::entities::artefact& a) const override;" << std::endl;

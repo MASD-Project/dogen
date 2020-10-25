@@ -59,38 +59,6 @@ const physical::entities::archetype& main_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types main_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path main_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> main_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-
-    using logical::entities::structural::object;
-    auto builder(f.make());
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::test::unit_test());
-    builder.add(ic::boost::test::unit_test_monitor());
-    builder.add(ic::boost::exception::info());
-    builder.add(ic::std::iostream());
-    builder.add(ic::boost::exception::diagnostic_information());
-
-    return builder.build();
-}
-
 void main_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "main",

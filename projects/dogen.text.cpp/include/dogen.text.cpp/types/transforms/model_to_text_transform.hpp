@@ -48,30 +48,6 @@ public:
 
 public:
     /**
-     * @brief Returns the level of support of inclusions by this
-     * formatter.
-     */
-    virtual inclusion_support_types inclusion_support_type() const = 0;
-
-    /**
-     * @brief Provide the inclusion path.
-     *
-     * @pre supports_inclusion must be true.
-     */
-    virtual boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const = 0;
-
-    /**
-     * @brief Creates the inclusion dependencies for this formatter
-     * against the supplied element.
-     */
-    virtual std::list<std::string> inclusion_dependencies(
-        const formattables::dependencies_builder_factory& f,
-        const logical::entities::element& e) const = 0;
-
-public:
-    /**
      * @brief Generate a physical representation of the logical
      * element.
      */

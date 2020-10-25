@@ -58,51 +58,6 @@ const physical::entities::archetype& type_registrar_implementation_transform::ar
     return static_archetype();
 }
 
-inclusion_support_types type_registrar_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path type_registrar_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> type_registrar_implementation_transform::
-inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& rg(assistant::as<logical::entities::serialization::type_registrar>(e));
-    auto builder(f.make());
-
-    const auto rh_fn(traits::type_registrar_header_archetype_qn());
-    builder.add(rg.name(), rh_fn);
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::archive::text_iarchive());
-    builder.add(ic::boost::archive::text_oarchive());
-    builder.add(ic::boost::archive::binary_iarchive());
-    builder.add(ic::boost::archive::binary_oarchive());
-    builder.add(ic::boost::archive::polymorphic_iarchive());
-    builder.add(ic::boost::archive::polymorphic_oarchive());
-
-    // XML serialisation
-    builder.add(ic::boost::archive::xml_iarchive());
-    builder.add(ic::boost::archive::xml_oarchive());
-
-    const auto ch_fn(traits::class_header_archetype_qn());
-    builder.add(rg.leaves(), ch_fn);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(rg.registrar_dependencies(), carch);
-    return builder.build();
-}
-
 void type_registrar_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
    physical::entities::artefact& a) const {
    tracing::scoped_transform_tracer stp(lg, "type registrar implementation",

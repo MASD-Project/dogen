@@ -54,37 +54,6 @@ const physical::entities::archetype& archetype_kind_class_implementation_factory
     return static_archetype();
 }
 
-inclusion_support_types archetype_kind_class_implementation_factory_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path archetype_kind_class_implementation_factory_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> archetype_kind_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    const auto& ak(assistant::as<logical::entities::physical::archetype_kind>(e));
-    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
-    builder.add(ak.name(), ak_ch_arch);
-
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
-
 void archetype_kind_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype_kind class implementation",

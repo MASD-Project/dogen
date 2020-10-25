@@ -59,40 +59,6 @@ const physical::entities::archetype& variability_initializer_implementation_tran
     return static_archetype();
 }
 
-inclusion_support_types variability_initializer_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path variability_initializer_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> variability_initializer_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::initializer;
-    const auto& o(assistant::as<initializer>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::variability_initializer_header_archetype_qn());
-    builder.add(o.name(), ch_arch);
-
-    const auto ftb_arch(traits::feature_template_bundle_header_archetype_qn());
-    builder.add(o.feature_template_bundles(), ftb_arch);
-
-    const auto fb_arch(traits::feature_bundle_header_archetype_qn());
-    builder.add(o.feature_bundles(), fb_arch);
-
-    return builder.build();
-}
-
 void variability_initializer_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "variability initializer implementation",

@@ -57,66 +57,6 @@ const physical::entities::archetype& class_header_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types class_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path class_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
-
-    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
-    const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
-    const bool requires_io(io_enabled && in_inheritance);
-
-    const auto ios(inclusion_constants::std::iosfwd());
-    if (requires_io)
-        builder.add(ios);
-
-    using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
-    builder.add(o.name(), ser_fwd_arch);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-
-    const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
-    builder.add(o.opaque_associations(), fwd_arch);
-
-    const auto self_arch(class_header_transform::static_archetype().meta_name().id().value());
-    builder.add(o.parents(), self_arch);
-
-    using hash = transforms::hash::traits;
-    const auto hash_carch(hash::traits::canonical_archetype());
-    builder.add(o.associative_container_keys(), hash_carch);
-
-    if (o.is_visitation_root()) {
-        /*
-         * On the header files of the visitation root we only care
-         * about the base visitor; as such we can get away with a
-         * forward declaration. For the visitation leaves, since we
-         * must include the parent we do not need any additional
-         * includes.
-         */
-        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype_qn());
-        builder.add(*o.base_visitor(), visitor_fwd_arch);
-    }
-    return builder.build();
-}
-
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class header",

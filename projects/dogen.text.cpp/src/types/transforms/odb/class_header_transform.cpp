@@ -55,33 +55,6 @@ const physical::entities::archetype& class_header_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types class_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path class_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype_qn());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-
-    const auto self_fn(class_header_transform::static_archetype().meta_name().id().value());
-    builder.add(o.parents(), self_fn);
-
-    return builder.build();
-}
-
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class header",

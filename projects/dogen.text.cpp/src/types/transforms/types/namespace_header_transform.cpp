@@ -52,22 +52,6 @@ const physical::entities::archetype& namespace_header_transform::archetype() con
     return static_archetype();
 }
 
-inclusion_support_types namespace_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path namespace_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> namespace_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void namespace_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "namespace header",

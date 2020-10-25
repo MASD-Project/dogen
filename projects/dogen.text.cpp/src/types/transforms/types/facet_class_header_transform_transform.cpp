@@ -51,35 +51,6 @@ const physical::entities::archetype& facet_class_header_transform_transform::arc
     return static_archetype();
 }
 
-inclusion_support_types facet_class_header_transform_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path facet_class_header_transform_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> facet_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
-
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
-    using identification::entities::technical_space;
-    if (fct.major_technical_space() == technical_space::cpp) {
-        builder.add_as_user(
-            "dogen.text.cpp/types/transforms/registrar.hpp");
-    } else if (fct.major_technical_space() == technical_space::csharp) {
-        builder.add_as_user(
-            "dogen.text.csharp/types/transforms/registrar.hpp");
-    }
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
-
 void facet_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "facet class header",

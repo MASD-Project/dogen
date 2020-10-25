@@ -61,47 +61,6 @@ const physical::entities::archetype& class_implementation_transform::archetype()
     return static_archetype();
 }
 
-inclusion_support_types class_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path class_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& o(assistant::as<logical::entities::structural::object>(e));
-    auto builder(f.make());
-    const auto ch_fn(traits::class_header_archetype_qn());
-    builder.add(o.name(), ch_fn);
-
-    builder.add(o.opaque_associations(), ch_fn);
-
-    const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(class_implementation_transform::static_archetype().meta_name().id().value());
-    const bool io_enabled(builder.is_enabled(o.name(), self_fn));
-
-    if (!io_enabled)
-        return builder.build();
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
-    builder.add(o.transparent_associations(), io_carch);
-    builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parents(), io_carch);
-
-    return builder.build();
-}
-
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class implementation",

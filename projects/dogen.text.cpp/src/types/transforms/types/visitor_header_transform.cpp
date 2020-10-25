@@ -56,29 +56,6 @@ const physical::entities::archetype& visitor_header_transform::archetype() const
     return static_archetype();
 }
 
-inclusion_support_types visitor_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path visitor_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> visitor_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::visitor;
-    const auto& v(assistant::as<visitor>(e));
-    auto builder(f.make());
-    builder.add(v.visits(), traits::class_forward_declarations_archetype_qn());
-
-    if (v.parent())
-        builder.add(*v.parent(), traits::visitor_header_archetype_qn());
-
-    return builder.build();
-}
-
 void visitor_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "visitor header",

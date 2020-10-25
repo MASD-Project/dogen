@@ -61,40 +61,6 @@ const physical::entities::archetype& feature_bundle_implementation_transform::ar
     return static_archetype();
 }
 
-inclusion_support_types feature_bundle_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path feature_bundle_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> feature_bundle_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_bundle;
-    const auto& fb(assistant::as<feature_bundle>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::feature_bundle_header_archetype_qn());
-    builder.add(fb.name(), ch_arch);
-    builder.add_as_user("dogen.variability/types/helpers/value_factory.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/helpers/feature_selector.hpp");
-        builder.add_as_user("dogen.variability/types/helpers/configuration_selector.hpp");
-    }
-
-    return builder.build();
-}
-
 void feature_bundle_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "feature bundle implementation",

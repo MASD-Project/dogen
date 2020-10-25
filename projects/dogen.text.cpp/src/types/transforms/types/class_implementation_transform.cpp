@@ -59,64 +59,6 @@ const physical::entities::archetype& class_implementation_transform::archetype()
     return static_archetype();
 }
 
-inclusion_support_types class_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path class_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::class_header_archetype_qn());
-    builder.add(o.name(), ch_arch);
-    builder.add(o.opaque_associations(), ch_arch);
-
-    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
-    const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
-    const bool requires_io(io_enabled && in_inheritance);
-
-    if (!requires_io)
-        return builder.build();
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
-
-    const auto io_carch(io::traits::canonical_archetype());
-    builder.add(o.transparent_associations(), io_carch);
-    builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parents(), io_carch);
-
-    if (o.is_visitation_leaf()) {
-        /*
-         * Only leaves have a visitation implementation. Note that we
-         * don't bother including the base if we are already including
-         * the derived visitor.
-         */
-        const auto v_arch(traits::visitor_header_archetype_qn());
-        if (o.derived_visitor())
-            builder.add(*o.derived_visitor(), v_arch);
-        else
-            builder.add(*o.base_visitor(), v_arch);
-    }
-
-    return builder.build();
-}
-
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class implementation",

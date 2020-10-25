@@ -55,39 +55,6 @@ const physical::entities::archetype& facet_class_implementation_factory_transfor
     return static_archetype();
 }
 
-inclusion_support_types facet_class_implementation_factory_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path facet_class_implementation_factory_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> facet_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
-    auto builder(f.make());
-    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
-    builder.add(fct.name(), fct_ch_arch);
-
-    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
-    builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-
-    return builder.build();
-}
-
 void facet_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "facet class implementation",

@@ -60,40 +60,6 @@ const physical::entities::archetype& feature_bundle_header_transform::archetype(
     return static_archetype();
 }
 
-inclusion_support_types feature_bundle_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::canonical_support;
-}
-
-boost::filesystem::path feature_bundle_header_transform::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
-}
-
-std::list<std::string> feature_bundle_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_bundle;
-
-    const auto& fb(assistant::as<feature_bundle>(e));
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::list());
-    builder.add_as_user("dogen.variability/types/entities/feature.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/entities/feature_model.hpp");
-        builder.add_as_user("dogen.variability/types/entities/configuration.hpp");
-
-        const auto ch_arch(traits::class_header_archetype_qn());
-        builder.add(fb.transparent_associations(), ch_arch);
-
-        const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
-        builder.add(fb.opaque_associations(), fwd_arch);
-    }
-
-    return builder.build();
-}
-
 void feature_bundle_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "feature bundle header",

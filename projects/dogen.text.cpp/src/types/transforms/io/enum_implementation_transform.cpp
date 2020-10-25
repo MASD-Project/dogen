@@ -58,35 +58,6 @@ const physical::entities::archetype& enum_implementation_transform::archetype() 
     return static_archetype();
 }
 
-inclusion_support_types enum_implementation_transform::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path enum_implementation_transform::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
-std::list<std::string> enum_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::ostream());
-    builder.add(inclusion_constants::std::stdexcept());
-    builder.add(inclusion_constants::std::string());
-
-    const auto eh_fn(traits::enum_header_archetype_qn());
-    builder.add(e.name(), eh_fn);
-    return builder.build();
-}
-
 void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "enum implementation",
