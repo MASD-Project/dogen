@@ -24,26 +24,21 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/entities/variability/initializer.hpp"
-
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
-
 #include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.logical/types/entities/structural/entry_point.hpp"
-
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
-
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/context.hpp"
@@ -60,21 +55,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_id("Duplicate logical-physical ID: ");
-
-/*
-
-masd.csharp.io.assistant masd.csharp.io.class masd.csharp.io.enum
-masd.csharp.io.primitive masd.csharp.test_data.assistant
-masd.csharp.test_data.class masd.csharp.test_data.enum
-masd.csharp.test_data.primitive
-masd.csharp.types.builtin
-masd.csharp.types.class
-masd.csharp.types.enum
-masd.csharp.types.exception
-masd.csharp.types.primitive
-masd.csharp.visual_studio.project masd.csharp.visual_studio.solution
-
-*/
 
 const std::string std_list("<list>");
 const std::string std_string("<string>");
@@ -161,17 +141,11 @@ public:
     void visit(const logical::entities::physical::backend& v);
     void visit(const logical::entities::physical::part& v);
     void visit(const logical::entities::physical::archetype_kind& v);
-
     void visit(const logical::entities::serialization::type_registrar& v);
-
     void visit(const logical::entities::variability::feature_bundle& v);
     void visit(const logical::entities::variability::feature_template_bundle& v);
     void visit(const logical::entities::variability::initializer& v);
-
     void visit(const logical::entities::structural::object& v);
-    void visit(const logical::entities::structural::module& v);
-    void visit(const logical::entities::structural::object_template& v);
-    void visit(const logical::entities::structural::builtin& v);
     void visit(const logical::entities::structural::enumeration& v);
     void visit(const logical::entities::structural::primitive& v);
     void visit(const logical::entities::structural::exception& v);
@@ -258,7 +232,6 @@ visit(const logical::entities::physical::facet& v) {
             builder_.add_as_user(
                 "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
         }
-
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
@@ -312,8 +285,6 @@ void region_processor::visit(const logical::entities::physical::backend& v) {
             builder_.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
         }
-
-
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
@@ -395,7 +366,6 @@ void region_processor::visit(const logical::entities::serialization::type_regist
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
-
 
 void region_processor::
 visit(const logical::entities::variability::feature_bundle& v) {
@@ -724,21 +694,8 @@ void region_processor::visit(const logical::entities::structural::exception& /*v
             builder_.add(std_string);
             builder_.add(boost_exception_info);
         }
-
         a.path_properties().inclusion_dependencies(builder_.build());
     }
-}
-
-void region_processor::visit(const logical::entities::structural::module& /*v*/) {
-
-}
-
-void region_processor::visit(const logical::entities::structural::object_template& /*v*/) {
-
-}
-
-void region_processor::visit(const logical::entities::structural::builtin& /*v*/) {
-
 }
 
 void region_processor::visit(const logical::entities::structural::enumeration& v) {
@@ -821,7 +778,6 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
             if (hash_enabled)
                 builder_.add(v.name(), hash_arch);
         }
-
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
