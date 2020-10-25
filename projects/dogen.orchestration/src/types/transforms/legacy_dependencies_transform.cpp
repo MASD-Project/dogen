@@ -62,13 +62,6 @@ const std::string duplicate_id("Duplicate logical-physical ID: ");
 
 masd.cpp.build.include_cmakelists
 masd.cpp.build.source_cmakelists
-masd.cpp.io.builtin_header
-masd.cpp.io.class_header
-masd.cpp.io.class_implementation
-masd.cpp.io.enum_header
-masd.cpp.io.enum_implementation
-masd.cpp.io.primitive_header
-masd.cpp.io.primitive_implementation
 masd.cpp.lexical_cast.enum_header
 masd.cpp.odb.builtin_header
 masd.cpp.odb.class_header
@@ -596,6 +589,24 @@ void region_processor::visit(const logical::entities::structural::object& v) {
             builder_.add(v.transparent_associations(), carch);
             builder_.add(v.opaque_associations(), carch);
             builder_.add(v.parents(), carch);
+        } else if (pmid.value() == "masd.cpp.io.class_header") {
+            builder_.add(std_iosfwd);
+            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+        } else if (pmid.value() == "masd.cpp.io.class_implementation") {
+            const auto ch_fn("masd.cpp.io.class_header");
+            builder_.add(v.name(), ch_fn);
+            builder_.add(v.opaque_associations(), ch_fn);
+
+            const auto io_carch("masd.cpp.io.canonical_archetype");
+            const auto self_fn("masd.cpp.io.class_implementation");
+            const bool io_enabled(builder_.is_enabled(v.name(), self_fn));
+
+            if (io_enabled) {
+                builder_.add(std_ostream);
+                builder_.add(v.transparent_associations(), io_carch);
+                builder_.add(v.opaque_associations(), io_carch);
+                builder_.add(v.parents(), io_carch);
+            }
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
@@ -638,6 +649,17 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
         } else if (pmid.value() == "masd.cpp.hash.enum_header") {
             builder_.add(std_functional);
             builder_.add(v.name(), "masd.cpp.types.enum_header");
+        } else if (pmid.value() == "masd.cpp.io.enum_header") {
+            builder_.add(std_iosfwd);
+            const auto eh_fn("masd.cpp.types.enum_header");
+            builder_.add(v.name(), eh_fn);
+        } else if (pmid.value() == "masd.cpp.io.enum_implementation") {
+            builder_.add(std_ostream);
+            builder_.add(std_stdexcept);
+            builder_.add(std_string);
+
+            const auto eh_fn("masd.cpp.types.enum_header");
+            builder_.add(v.name(), eh_fn);
         }
 
         a.path_properties().inclusion_dependencies(builder_.build());
@@ -668,8 +690,23 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
         } else if (pmid.value() == "masd.cpp.hash.primitive_implementation") {
             const std::string carch("masd.cpp.types.canonical_archetype");
             builder_.add(v.name(), carch);
-        }
+        } else if (pmid.value() == "masd.cpp.io.primitive_header") {
+            builder_.add(std_iosfwd);
+            builder_.add(v.name(), "masd.cpp.types.canonical_archetype");
+        } else if (pmid.value() == "masd.cpp.io.primitive_implementation") {
+            const auto ph_fn("masd.cpp.io.primitive_header");
+            builder_.add(v.name(), ph_fn);
 
+            const auto io_carch("masd.cpp.io.canonical_archetype");
+            const auto self_fn("masd.cpp.io.primitive_implementation");
+            const bool io_enabled(builder_.is_enabled(v.name(), self_fn));
+
+            if (io_enabled) {
+                builder_.add(std_ostream);
+                const auto& va(v.value_attribute());
+                builder_.add(va.parsed_type().current(), io_carch);
+            }
+        }
 
         a.path_properties().inclusion_dependencies(builder_.build());
     }
