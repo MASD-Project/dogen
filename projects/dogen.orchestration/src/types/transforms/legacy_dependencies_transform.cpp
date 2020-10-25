@@ -41,6 +41,8 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 
+#include "dogen.logical/types/entities/serialization/type_registrar.hpp"
+
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/context.hpp"
@@ -70,24 +72,24 @@ masd.cpp.odb.enum_header
 masd.cpp.odb.object_odb_options
 masd.cpp.odb.primitive_header
 masd.cpp.odb.primitive_odb_options
-masd.cpp.serialization.builtin_header
-masd.cpp.serialization.class_forward_declarations
-masd.cpp.serialization.class_header
-masd.cpp.serialization.class_implementation
-masd.cpp.serialization.enum_header
-masd.cpp.serialization.primitive_forward_declarations
-masd.cpp.serialization.primitive_header
-masd.cpp.serialization.primitive_implementation
-masd.cpp.serialization.type_registrar_header
-masd.cpp.serialization.type_registrar_implementation
+
+
+
+
+
+
+
+
+
+
 masd.cpp.templates.logic_less_template
-masd.cpp.test_data.builtin_header
-masd.cpp.test_data.class_header
-masd.cpp.test_data.class_implementation
-masd.cpp.test_data.enum_header
-masd.cpp.test_data.enum_implementation
-masd.cpp.test_data.primitive_header
-masd.cpp.test_data.primitive_implementation
+
+
+
+
+
+
+
 masd.cpp.tests.class_implementation masd.cpp.tests.cmakelists
 masd.cpp.tests.enum_implementation masd.cpp.tests.main
 masd.cpp.visual_studio.msbuild_targets
@@ -190,6 +192,8 @@ public:
     void visit(const logical::entities::physical::backend& v);
     void visit(const logical::entities::physical::part& v);
     void visit(const logical::entities::physical::archetype_kind& v);
+
+    void visit(const logical::entities::serialization::type_registrar& v);
 
     void visit(const logical::entities::variability::feature_bundle& v);
     void visit(const logical::entities::variability::feature_template_bundle& v);
@@ -390,6 +394,39 @@ void region_processor::visit(const logical::entities::physical::archetype_kind& 
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
+
+void region_processor::visit(const logical::entities::serialization::type_registrar& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.serialization.type_registrar_implementation") {
+            const auto rh_fn("masd.cpp.serialization.type_registrar_header");
+            builder_.add(v.name(), rh_fn);
+
+            builder_.add(boost_archive_text_iarchive);
+            builder_.add(boost_archive_text_oarchive);
+            builder_.add(boost_archive_binary_iarchive);
+            builder_.add(boost_archive_binary_oarchive);
+            builder_.add(boost_archive_polymorphic_iarchive);
+            builder_.add(boost_archive_polymorphic_oarchive);
+
+            // XML serialisation
+            builder_.add(boost_archive_xml_iarchive);
+            builder_.add(boost_archive_xml_oarchive);
+
+            const auto ch_fn("masd.cpp.serialization.class_header");
+            builder_.add(v.leaves(), ch_fn);
+
+            const std::string
+                carch("masd.cpp.serialization.canonical_archetype");
+            builder_.add(v.registrar_dependencies(), carch);
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+
+    }
+}
+
 
 void region_processor::
 visit(const logical::entities::variability::feature_bundle& v) {
@@ -607,6 +644,49 @@ void region_processor::visit(const logical::entities::structural::object& v) {
                 builder_.add(v.opaque_associations(), io_carch);
                 builder_.add(v.parents(), io_carch);
             }
+        } else if (pmid.value() == "masd.cpp.serialization.class_header") {
+            builder_.add(v.name(), "masd.cpp.types.class_header");
+            builder_.add(boost_serialization_split_free);
+
+            if (v.is_parent())
+                builder_.add(boost_serialization_assume_abstract);
+
+            if (!v.is_parent() && v.is_child())
+                builder_.add(boost_type_traits_is_virtual_base_of);
+        } else if (pmid.value() == "masd.cpp.serialization.class_implementation") {
+            const auto ch_fn("masd.cpp.serialization.class_header");
+            builder_.add(v.name(), ch_fn);
+
+            builder_.add(boost_archive_text_iarchive);
+            builder_.add(boost_archive_text_oarchive);
+            builder_.add(boost_archive_binary_iarchive);
+            builder_.add(boost_archive_binary_oarchive);
+            builder_.add(boost_archive_polymorphic_iarchive);
+            builder_.add(boost_archive_polymorphic_oarchive);
+
+            // XML serialisation
+            builder_.add(boost_serialization_nvp);
+            builder_.add(boost_archive_xml_iarchive);
+            builder_.add(boost_archive_xml_oarchive);
+
+            const std::string carch("masd.cpp.io.canonical_archetype");
+            builder_.add(v.transparent_associations(), carch);
+            builder_.add(v.opaque_associations(), carch);
+            builder_.add(v.parents(), carch);
+            builder_.add(v.leaves(), carch);
+        } else if (pmid.value() == "masd.cpp.serialization.class_forward_declarations") {
+            const auto tp_fn("masd.cpp.types.class_forward_declarations");
+            builder_.add(v.name(), tp_fn);
+        } else if (pmid.value() == "masd.cpp.test_data.class_header") {
+            builder_.add(v.name(), "masd.cpp.types.class_header");
+        } else if (pmid.value() == "masd.cpp.test_data.class_implementation") {
+            builder_.add(v.name(), "masd.cpp.test_data.class_header");
+
+            const std::string carch("masd.cpp.test_data.canonical_archetype");
+            builder_.add(v.transparent_associations(), carch);
+            builder_.add(v.opaque_associations(), carch);
+            builder_.add(v.parents(), carch);
+            builder_.add(v.leaves(), carch);
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
@@ -660,6 +740,13 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
 
             const auto eh_fn("masd.cpp.types.enum_header");
             builder_.add(v.name(), eh_fn);
+        } else if (pmid.value() == "masd.cpp.serialization.enum_header") {
+            builder_.add(v.name(), "masd.cpp.types.enum_header");
+            builder_.add(boost_serialization_nvp);
+        } else if (pmid.value() == "masd.cpp.test_data.enum_header") {
+            builder_.add(v.name(), "masd.cpp.types.enum_header");
+        } else if (pmid.value() == "masd.cpp.test_data.enum_implementation") {
+            builder_.add(v.name(),"masd.cpp.test_data.enum_header");
         }
 
         a.path_properties().inclusion_dependencies(builder_.build());
@@ -706,11 +793,41 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
                 const auto& va(v.value_attribute());
                 builder_.add(va.parsed_type().current(), io_carch);
             }
-        }
+        } else if (pmid.value() == "masd.cpp.serialization.primitive_header") {
+            builder_.add(v.name(), "masd.cpp.types.primitive_header");
+            builder_.add(boost_serialization_split_free);
 
+        } else if (pmid.value() == "masd.cpp.serialization.primitive_implementation") {
+            const auto ph_fn("masd.cpp.types.primitive_header");
+            builder_.add(v.name(), ph_fn);
+
+            builder_.add(boost_archive_text_iarchive);
+            builder_.add(boost_archive_text_oarchive);
+            builder_.add(boost_archive_binary_iarchive);
+            builder_.add(boost_archive_binary_oarchive);
+            builder_.add(boost_archive_polymorphic_iarchive);
+            builder_.add(boost_archive_polymorphic_oarchive);
+
+            // XML serialisation
+            builder_.add(boost_serialization_nvp);
+            builder_.add(boost_archive_xml_iarchive);
+            builder_.add(boost_archive_xml_oarchive);
+
+            const std::string
+                carch("masd.cpp.serialization.canonical_archetype");
+            builder_.add(v.value_attribute().parsed_type().current(), carch);
+        } else if (pmid.value() == "masd.cpp.serialization.primitive_forward_declarations") {
+            const auto tp_fn("masd.cpp.types.primitive_forward_declarations");
+            builder_.add(v.name(), tp_fn);
+        } else if (pmid.value() == "masd.cpp.test_data.primitive_header") {
+            builder_.add(v.name(), "masd.cpp.types.primitive_header");
+        } else if (pmid.value() == "masd.cpp.test_data.primitive_implementation") {
+            builder_.add(v.name(), "masd.cpp.test_data.primitive_header");
+            const std::string carch("masd.cpp.test_data.canonical_archetype");
+            builder_.add(v.value_attribute().parsed_type().current(), carch);
+        }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
-
 }
 
 void region_processor::visit(const logical::entities::structural::visitor& v) {
