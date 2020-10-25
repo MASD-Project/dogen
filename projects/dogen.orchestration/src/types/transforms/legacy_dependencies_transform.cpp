@@ -72,7 +72,7 @@ const std::string boost_lexical_cast("<boost/lexical_cast.hpp>");
 const std::string boost_predef("<boost/predef.h>");
 const std::string boost_property_tree_ptree("<boost/property_tree/ptree.hpp>");
 const std::string boost_property_tree_json_parser(
-    "<boost/property_tree/json_parser.hpp");
+    "<boost/property_tree/json_parser.hpp>");
 const std::string boost_type_traits_is_virtual_base_of(
     "<boost/type_traits/is_virtual_base_of.hpp>");
 const std::string boost_archive_xml_iarchive(
@@ -84,7 +84,7 @@ const std::string boost_archive_text_iarchive(
 const std::string boost_archive_text_oarchive(
     "<boost/archive/text_oarchive.hpp>");
 const std::string boost_archive_binary_iarchive(
-    "<boost/archive/binary_iarchive.hpp");
+    "<boost/archive/binary_iarchive.hpp>");
 const std::string boost_archive_binary_oarchive(
     "<boost/archive/binary_oarchive.hpp>");
 const std::string boost_archive_polymorphic_iarchive(
@@ -312,12 +312,10 @@ visit(const logical::entities::physical::facet& v) {
         } else if (pmid.value() == "masd.cpp.types.facet_class_header_factory") {
             b.add_as_user("dogen.physical/types/entities/facet.hpp");
         } else if (pmid.value() == "masd.cpp.types.facet_class_implementation_factory") {
-            b.add_as_user("dogen.physical/types/entities/facet.hpp");
-
             const auto fct_ch_arch("masd.cpp.types.facet_class_header_factory");
             b.add(v.name(), fct_ch_arch);
 
-            const auto ch_arch("masd.cpp.types.archetype_class_header_transform");
+            const auto ch_arch("masd.cpp.types.archetype_class_header_factory");
             b.add(v.archetypes(), ch_arch);
             b.add_as_user(
                 "dogen.utility/types/log/logger.hpp");
@@ -593,7 +591,7 @@ void region_processor::visit(const logical::entities::variability::initializer& 
                 ftb_arch("masd.cpp.types.feature_template_bundle_header");
             b.add(v.feature_template_bundles(), ftb_arch);
 
-            const auto fb_arch("masd.cpp.types.feature_template_bundle_header");
+            const auto fb_arch("masd.cpp.types.feature_bundle_header");
             b.add(v.feature_bundles(), fb_arch);
         }
         build(b, a);
@@ -688,7 +686,7 @@ void region_processor::visit(const logical::entities::structural::object& v) {
             b.add(std_functional);
             b.add(v.name(), "masd.cpp.types.canonical_archetype");
         } else if (pmid.value() == "masd.cpp.hash.class_implementation") {
-            const std::string carch("masd.cpp.io.canonical_archetype");
+            const std::string carch("masd.cpp.hash.canonical_archetype");
             b.add(v.name(), carch);
             b.add(v.transparent_associations(), carch);
             b.add(v.opaque_associations(), carch);
@@ -736,7 +734,8 @@ void region_processor::visit(const logical::entities::structural::object& v) {
             b.add(boost_archive_xml_iarchive);
             b.add(boost_archive_xml_oarchive);
 
-            const std::string carch("masd.cpp.io.canonical_archetype");
+            const std::string
+                carch("masd.cpp.serialization.canonical_archetype");
             b.add(v.transparent_associations(), carch);
             b.add(v.opaque_associations(), carch);
             b.add(v.parents(), carch);
@@ -756,7 +755,7 @@ void region_processor::visit(const logical::entities::structural::object& v) {
             b.add(v.leaves(), carch);
         } else if (pmid.value() == "masd.cpp.odb.class_header") {
             b.add(v.name(), "masd.cpp.types.class_header");
-            const std::string carch("masd.cpp.types.canonical_archetype");
+            const std::string carch("masd.cpp.odb.canonical_archetype");
             b.add(v.transparent_associations(), carch);
             b.add(v.opaque_associations(), carch);
 
@@ -804,7 +803,7 @@ void region_processor::visit(const logical::entities::structural::object& v) {
                     b.add(boost_serialization_shared_ptr);
             }
 
-            const auto hash_arch("masd.cpp.serialization.class_header");
+            const auto hash_arch("masd.cpp.hash.class_header");
             const bool hash_enabled(b.is_enabled(v.name(), hash_arch));
             if (hash_enabled)
                 b.add(v.name(), hash_arch);
@@ -944,7 +943,7 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
             b.add(std_functional);
             b.add(v.name(), "masd.cpp.types.canonical_archetype");
         } else if (pmid.value() == "masd.cpp.hash.primitive_implementation") {
-            const std::string carch("masd.cpp.types.canonical_archetype");
+            const std::string carch("masd.cpp.hash.canonical_archetype");
             b.add(v.name(), carch);
         } else if (pmid.value() == "masd.cpp.io.primitive_header") {
             b.add(std_iosfwd);
@@ -967,7 +966,7 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
             b.add(boost_serialization_split_free);
 
         } else if (pmid.value() == "masd.cpp.serialization.primitive_implementation") {
-            const auto ph_fn("masd.cpp.types.primitive_header");
+            const auto ph_fn("masd.cpp.serialization.primitive_header");
             b.add(v.name(), ph_fn);
 
             b.add(boost_archive_text_iarchive);
