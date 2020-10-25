@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
 #include <sstream>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
+#include "dogen.logical/types/entities/variability/initializer.hpp"
+
+#include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+
+#include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/context.hpp"
@@ -86,29 +97,29 @@ masd.cpp.types.backend_class_header_transform
 masd.cpp.types.backend_class_implementation_factory
 masd.cpp.types.backend_class_implementation_transform
 masd.cpp.types.builtin_header
-masd.cpp.types.class_forward_declarations masd.cpp.types.class_header
-masd.cpp.types.class_implementation masd.cpp.types.enum_header
-masd.cpp.types.exception_header
+masd.cpp.types.class_forward_declarations
+masd.cpp.types.enum_header
+
 masd.cpp.types.facet_class_header_factory
 
 masd.cpp.types.facet_class_implementation_factory
 masd.cpp.types.facet_class_implementation_transform
-masd.cpp.types.feature_bundle_header
-masd.cpp.types.feature_bundle_implementation
-masd.cpp.types.feature_template_bundle_header
-masd.cpp.types.feature_template_bundle_implementation
+
+
+
+
 masd.cpp.types.main masd.cpp.types.namespace_header
 masd.cpp.types.part_class_header_factory
 masd.cpp.types.part_class_header_transform
 masd.cpp.types.part_class_implementation_factory
 masd.cpp.types.part_class_implementation_transform
 masd.cpp.types.primitive_forward_declarations
-masd.cpp.types.primitive_header
-masd.cpp.types.primitive_implementation
-masd.cpp.types.variability_initializer_header
-masd.cpp.types.variability_initializer_implementation
+
+
+
+
 masd.cpp.types.visitor_forward_declarations
-masd.cpp.types.visitor_header masd.cpp.visual_studio.msbuild_targets
+masd.cpp.visual_studio.msbuild_targets
 masd.cpp.visual_studio.project masd.cpp.visual_studio.solution
 masd.csharp.io.assistant masd.csharp.io.class masd.csharp.io.enum
 masd.csharp.io.primitive masd.csharp.test_data.assistant
@@ -119,6 +130,55 @@ masd.csharp.types.exception masd.csharp.types.primitive
 masd.csharp.visual_studio.project masd.csharp.visual_studio.solution
 
 */
+
+const std::string std_list("<list>");
+const std::string std_string("<string>");
+const std::string std_iosfwd("<iosfwd>");
+const std::string std_algorithm("<algorithm>");
+const std::string std_ostream("<ostream>");
+const std::string std_iostream("<iostream>");
+const std::string std_sstream("<sstream>");
+const std::string std_functional("<functional>");
+const std::string std_stdexcept("<stdexcept>");
+const std::string boost_shared_ptr("<boost/shared_ptr.hpp>");
+const std::string boost_lexical_cast("<boost/lexical_cast.hpp>");
+const std::string boost_predef("<boost/predef.h>");
+const std::string boost_property_tree_ptree("<boost/property_tree/ptree.hpp>");
+const std::string boost_property_tree_json_parser(
+    "<boost/property_tree/json_parser.hpp");
+const std::string boost_type_traits_is_virtual_base_of(
+    "<boost/type_traits/is_virtual_base_of.hpp>");
+const std::string boost_archive_xml_iarchive(
+    "<boost/archive/xml_iarchive.hpp>");
+const std::string boost_archive_xml_oarchive(
+    "<boost/archive/xml_oarchive.hpp>");
+const std::string boost_archive_text_iarchive(
+    "<boost/archive/text_iarchive.hpp>");
+const std::string boost_archive_text_oarchive(
+    "<boost/archive/text_oarchive.hpp>");
+const std::string boost_archive_binary_iarchive(
+    "<boost/archive/binary_iarchive.hpp");
+const std::string boost_archive_binary_oarchive(
+    "<boost/archive/binary_oarchive.hpp>");
+const std::string boost_archive_polymorphic_iarchive(
+    "<boost/archive/polymorphic_iarchive.hpp>");
+const std::string boost_archive_polymorphic_oarchive(
+    "<boost/archive/polymorphic_oarchive.hpp>");
+const std::string boost_serialization_nvp(
+    "<boost/serialization/nvp.hpp>");
+const std::string boost_serialization_split_free(
+    "<boost/serialization/split_free.hpp>");
+const std::string boost_serialization_assume_abstract(
+    "<boost/serialization/assume_abstract.hpp>");
+const std::string boost_serialization_shared_ptr(
+    "<boost/serialization/shared_ptr.hpp>");
+const std::string boost_exception_info("<boost/exception/info.hpp>");
+const std::string boost_exception_diagnostic_information(
+    "<boost/exception/diagnostic_information.hpp>");
+const std::string boost_test_unit_test(
+    "<boost/test/unit_test.hpp>");
+const std::string boost_test_unit_test_monitor(
+    "<boost/test/unit_test_monitor.hpp>");
 
 }
 
@@ -152,6 +212,10 @@ private:
 public:
     using logical::entities::element_visitor::visit;
     void visit(const logical::entities::physical::archetype& v);
+
+    void visit(const logical::entities::variability::feature_bundle& v);
+    void visit(const logical::entities::variability::feature_template_bundle& v);
+    void visit(const logical::entities::variability::initializer& v);
 
     void visit(const logical::entities::structural::object& v);
     void visit(const logical::entities::structural::module& v);
@@ -196,7 +260,212 @@ visit(const logical::entities::physical::archetype& v) {
     }
 }
 
-void region_processor::visit(const logical::entities::structural::object& /*v*/) {
+void region_processor::
+visit(const logical::entities::variability::feature_bundle& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.feature_bundle_header") {
+            builder_.add(std_list);
+            builder_.add_as_user(
+                "dogen.variability/types/entities/feature.hpp");
+
+            if (v.generate_static_configuration()) {
+                builder_.add_as_user(
+                    "dogen.variability/types/entities/feature_model.hpp");
+                builder_.add_as_user(
+                    "dogen.variability/types/entities/configuration.hpp");
+
+                const auto ch_arch("masd.cpp.types.class_header");
+                builder_.add(v.transparent_associations(), ch_arch);
+
+                const auto fwd_arch(
+                    "masd.cpp.types.class_forward_declarations");
+                builder_.add(v.opaque_associations(), fwd_arch);
+            }
+        } else if (pmid.value() == "masd.cpp.types.feature_bundle_implementation") {
+            const auto ch_arch("masd.cpp.types.feature_bundle_header");
+            builder_.add(v.name(), ch_arch);
+            builder_.add_as_user(
+                "dogen.variability/types/helpers/value_factory.hpp");
+
+            if (v.generate_static_configuration()) {
+                builder_.add_as_user(
+                    "dogen.variability/types/helpers/feature_selector.hpp");
+                builder_.add_as_user(
+                    "dogen.variability/types/helpers/configuration_selector.hpp");            }
+        }
+
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::
+visit(const logical::entities::variability::feature_template_bundle& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.feature_template_bundle_header") {
+            builder_.add(std_list);
+            builder_.add_as_user(
+                "dogen.variability/types/entities/feature_template.hpp");
+
+            if (v.generate_static_configuration()) {
+                builder_.add_as_user(
+                    "dogen.variability/types/entities/feature_model.hpp");
+                builder_.add_as_user(
+                    "dogen.variability/types/entities/configuration.hpp");
+                builder_.add_as_user(
+                    "dogen.variability/types/entities/feature.hpp");
+
+                const auto ch_arch("masd.cpp.types.class_header");
+                builder_.add(v.transparent_associations(), ch_arch);
+
+                const auto fwd_arch(
+                    "masd.cpp.types.class_forward_declarations");
+                builder_.add(v.opaque_associations(), fwd_arch);
+            }
+        } else if (pmid.value() == "masd.cpp.types.feature_template_bundle_implementation") {
+            const auto ch_arch(
+                "masd.cpp.types.feature_template_bundle_header");
+            builder_.add(v.name(), ch_arch);
+            builder_.add_as_user(
+                "dogen.variability/types/helpers/value_factory.hpp");
+
+            if (v.generate_static_configuration()) {
+                builder_.add_as_user(
+                    "dogen.variability/types/helpers/feature_selector.hpp");
+                builder_.add_as_user(
+                    "dogen.variability/types/helpers/configuration_selector.hpp");
+            }
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::variability::initializer& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.variability_initializer_header") {
+            builder_.add_as_user(
+                "dogen.variability/types/entities/feature_template.hpp");
+            builder_.add_as_user(
+                "dogen.variability/types/helpers/registrar.hpp");
+        } else if (pmid.value() == "masd.cpp.types.variability_initializer_implementation") {
+            const auto ch_arch("masd.cpp.types.variability_initializer_header");
+            builder_.add(v.name(), ch_arch);
+
+            const auto
+                ftb_arch("masd.cpp.types.feature_template_bundle_header");
+            builder_.add(v.feature_template_bundles(), ftb_arch);
+
+            const auto fb_arch("masd.cpp.types.feature_template_bundle_header");
+            builder_.add(v.feature_bundles(), fb_arch);
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::structural::object& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.class_header") {
+            // algorithm: domain headers need it for the swap function.
+            builder_.add(std_algorithm);
+
+            const auto io_arch("masd.cpp.io.class_header");
+            const bool in_inheritance(v.is_parent() || v.is_child());
+            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool requires_io(io_enabled && in_inheritance);
+
+            const auto ios(std_iosfwd);
+            if (requires_io)
+                builder_.add(ios);
+
+            const auto ser_fwd_arch(
+                "masd.cpp.serialization.class_forward_declarations");
+            builder_.add(v.name(), ser_fwd_arch);
+
+            const identification::entities::physical_meta_id
+                carch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.transparent_associations(), carch);
+
+            const auto fwd_arch("masd.cpp.types.class_forward_declarations");
+            builder_.add(v.opaque_associations(), fwd_arch);
+
+            const auto self_arch("masd.cpp.types.class_header");
+            builder_.add(v.parents(), self_arch);
+
+            const auto hash_carch("masd.cpp.hash.canonical_archetype");
+            builder_.add(v.associative_container_keys(), hash_carch);
+
+            if (v.is_visitation_root()) {
+                /*
+                 * On the header files of the visitation root we only care
+                 * about the base visitor; as such we can get away with a
+                 * forward declaration. For the visitation leaves, since we
+                 * must include the parent we do not need any additional
+                 * includes.
+                 */
+                const auto visitor_fwd_arch(
+                    "masd.cpp.types.visitor_forward_declarations");
+                builder_.add(*v.base_visitor(), visitor_fwd_arch);
+            }
+        } else if (pmid.value() == "masd.cpp.types.class_implementation") {
+            const auto ch_arch("masd.cpp.types.class_header");
+            builder_.add(v.name(), ch_arch);
+            builder_.add(v.opaque_associations(), ch_arch);
+
+            const auto io_arch("masd.cpp.io.class_header");
+            const bool in_inheritance(v.is_parent() || v.is_child());
+            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            const bool requires_io(io_enabled && in_inheritance);
+
+            if (requires_io) {
+                const auto os(std_ostream);
+                builder_.add(os);
+
+                const auto io_carch("masd.cpp.io.canonical_archetype");
+                builder_.add(v.transparent_associations(), io_carch);
+                builder_.add(v.opaque_associations(), io_carch);
+                builder_.add(v.parents(), io_carch);
+
+                if (v.is_visitation_leaf()) {
+                    /*
+                     * Only leaves have a visitation
+                     * implementation. Note that we don't bother
+                     * including the base if we are already including
+                     * the derived visitor.
+                     */
+                    const auto v_arch("masd.cpp.types.visitor_header");
+                    if (v.derived_visitor())
+                        builder_.add(*v.derived_visitor(), v_arch);
+                    else
+                        builder_.add(*v.base_visitor(), v_arch);
+                }
+            }
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::structural::exception& /*v*/) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.exception_header") {
+            builder_.add(std_string);
+            builder_.add(boost_exception_info);
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
 }
 
 void region_processor::visit(const logical::entities::structural::module& /*v*/) {
@@ -211,20 +480,62 @@ void region_processor::visit(const logical::entities::structural::builtin& /*v*/
 
 }
 
-void region_processor::visit(const logical::entities::structural::enumeration& /*v*/) {
+void region_processor::visit(const logical::entities::structural::enumeration& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.exception_header") {
+            const identification::entities::physical_meta_id
+                arch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.underlying_element(), arch);
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::structural::primitive& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.primitive_header") {
+            // algorithm: domain headers need it for the swap function.
+            builder_.add(std_algorithm);
+
+            const auto ser_fwd_arch(
+                "masd.cpp.serialization.primitive_forward_declarations");
+            builder_.add(v.name(), ser_fwd_arch);
+
+            const identification::entities::physical_meta_id
+                carch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.value_attribute().parsed_type().current(), carch);
+        } else if (pmid.value() == "masd.cpp.types.primitive_implementation") {
+            const auto ch_arch("masd.cpp.types.primitive_header");
+            builder_.add(v.name(), ch_arch);
+
+        }
+
+
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
 
 }
 
-void region_processor::visit(const logical::entities::structural::primitive& /*v*/) {
+void region_processor::visit(const logical::entities::structural::visitor& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.visitor_header") {
+            const auto fwd_arch("masd.cpp.types.class_forward_declarations");
+            builder_.add(v.visits(), fwd_arch);
 
-}
-
-void region_processor::visit(const logical::entities::structural::exception& /*v*/) {
-
-}
-
-void region_processor::visit(const logical::entities::structural::visitor& /*v*/) {
-
+            if (v.parent())
+                builder_.add(*v.parent(), "masd.cpp.types.visitor_header");
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
 }
 
 std::unordered_map<logical_meta_physical_id, inclusion_directives>
