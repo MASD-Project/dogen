@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-24 Sat 17:23]
+#+CAPTION: Clock summary at [2020-10-25 Sun 12:56]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *57:50* |       |       | 100.0 |
+| *Total time*                                                | *59:45* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 57:50   |       |       | 100.0 |
-| Active                                                      |         | 57:50 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   6.5 |
+| Stories                                                     | 59:45   |       |       | 100.0 |
+| Active                                                      |         | 59:45 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   6.2 |
 | Create a demo and presentation for previous sprint          |         |       |  0:39 |   1.1 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   7.6 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   9.4 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   7.3 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   9.1 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.5 |
 | Analysis on a formatables refactor                          |         |       |  0:31 |   0.9 |
 | Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.7 |
-| Presentation for APA                                        |         |       |  5:11 |   9.0 |
-| Issues with emacs                                           |         |       |  1:09 |   2.0 |
+| Presentation for APA                                        |         |       |  5:11 |   8.7 |
+| Issues with emacs                                           |         |       |  1:09 |   1.9 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.6 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   4.2 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   9.5 |
-| Create a video series on the formatables refactor           |         |       |  0:37 |   1.1 |
-| Move C++ locator into physical model                        |         |       | 26:33 |  45.9 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   4.1 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   9.2 |
+| Create a video series on the formatables refactor           |         |       |  0:37 |   1.0 |
+| Move C++ locator into physical model                        |         |       | 28:28 |  47.6 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,8 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-10-25 Sun 12:27]--[2020-10-25 Sun 12:56] =>  0:29
+    CLOCK: [2020-10-25 Sun 11:00]--[2020-10-25 Sun 12:26] =>  1:26
     CLOCK: [2020-10-24 Sat 16:41]--[2020-10-24 Sat 17:23] =>  0:42
     CLOCK: [2020-10-24 Sat 13:50]--[2020-10-24 Sat 15:39] =>  1:49
     CLOCK: [2020-10-23 Fri 13:42]--[2020-10-23 Fri 15:05] =>  1:23
