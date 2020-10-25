@@ -40,6 +40,7 @@
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/entry_point.hpp"
 
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 
@@ -62,38 +63,6 @@ const std::string duplicate_id("Duplicate logical-physical ID: ");
 
 /*
 
-masd.cpp.build.include_cmakelists
-masd.cpp.build.source_cmakelists
-masd.cpp.lexical_cast.enum_header
-masd.cpp.odb.builtin_header
-masd.cpp.odb.class_header
-masd.cpp.odb.common_odb_options
-masd.cpp.odb.enum_header
-masd.cpp.odb.object_odb_options
-masd.cpp.odb.primitive_header
-masd.cpp.odb.primitive_odb_options
-
-
-
-
-
-
-
-
-
-
-masd.cpp.templates.logic_less_template
-
-
-
-
-
-
-
-masd.cpp.tests.class_implementation masd.cpp.tests.cmakelists
-masd.cpp.tests.enum_implementation masd.cpp.tests.main
-masd.cpp.visual_studio.msbuild_targets
-masd.cpp.visual_studio.project masd.cpp.visual_studio.solution
 masd.csharp.io.assistant masd.csharp.io.class masd.csharp.io.enum
 masd.csharp.io.primitive masd.csharp.test_data.assistant
 masd.csharp.test_data.class masd.csharp.test_data.enum
@@ -207,6 +176,7 @@ public:
     void visit(const logical::entities::structural::primitive& v);
     void visit(const logical::entities::structural::exception& v);
     void visit(const logical::entities::structural::visitor& v);
+    void visit(const logical::entities::structural::entry_point& v);
 
 private:
     helpers::dependencies_builder builder_;
@@ -423,7 +393,6 @@ void region_processor::visit(const logical::entities::serialization::type_regist
             builder_.add(v.registrar_dependencies(), carch);
         }
         a.path_properties().inclusion_dependencies(builder_.build());
-
     }
 }
 
@@ -687,6 +656,60 @@ void region_processor::visit(const logical::entities::structural::object& v) {
             builder_.add(v.opaque_associations(), carch);
             builder_.add(v.parents(), carch);
             builder_.add(v.leaves(), carch);
+        } else if (pmid.value() == "masd.cpp.odb.class_header") {
+            builder_.add(v.name(), "masd.cpp.types.class_header");
+            const std::string carch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.transparent_associations(), carch);
+            builder_.add(v.opaque_associations(), carch);
+
+            const auto self_fn("masd.cpp.odb.class_header");
+            builder_.add(v.parents(), self_fn);
+        } else if (pmid.value() == "masd.cpp.tests.class_implementation") {
+            builder_.add(v.name(), "masd.cpp.types.class_header");
+            builder_.add(v.name(), "masd.cpp.test_data.class_header");
+
+            builder_.add(std_string);
+            builder_.add(boost_test_unit_test);
+
+            if (v.is_parent())
+                builder_.add(boost_shared_ptr);
+
+            const auto io_arch("masd.cpp.io.class_header");
+            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            if (io_enabled) {
+                builder_.add(v.name(), io_arch);
+                builder_.add(std_sstream);
+                builder_.add(boost_property_tree_ptree);
+                builder_.add(boost_property_tree_json_parser);
+            }
+
+            const auto ser_arch("masd.cpp.serialization.class_header");
+            const bool ser_enabled(builder_.is_enabled(v.name(), ser_arch));
+            if (ser_enabled) {
+                builder_.add(v.name(), ser_arch);
+
+                if (v.type_registrar())
+                    builder_.add(v.type_registrar(),
+                        "masd.cpp.serialization.type_registrar_header");
+
+                builder_.add(boost_archive_text_iarchive);
+                builder_.add(boost_archive_text_oarchive);
+                builder_.add(boost_archive_binary_iarchive);
+                builder_.add(boost_archive_binary_oarchive);
+                builder_.add(boost_archive_polymorphic_iarchive);
+                builder_.add(boost_archive_polymorphic_oarchive);
+                builder_.add(boost_serialization_nvp);
+                builder_.add(boost_archive_xml_iarchive);
+                builder_.add(boost_archive_xml_oarchive);
+
+                if (v.is_parent())
+                    builder_.add(boost_serialization_shared_ptr);
+            }
+
+            const auto hash_arch("masd.cpp.serialization.class_header");
+            const bool hash_enabled(builder_.is_enabled(v.name(), hash_arch));
+            if (hash_enabled)
+                builder_.add(v.name(), hash_arch);
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
@@ -747,6 +770,56 @@ void region_processor::visit(const logical::entities::structural::enumeration& v
             builder_.add(v.name(), "masd.cpp.types.enum_header");
         } else if (pmid.value() == "masd.cpp.test_data.enum_implementation") {
             builder_.add(v.name(),"masd.cpp.test_data.enum_header");
+        } else if (pmid.value() == "masd.cpp.odb.enum_header") {
+            builder_.add(v.name(), "masd.cpp.types.enum_header");
+        } else if (pmid.value() == "masd.cpp.lexical_cast.enum_header") {
+            const auto eh_fn("masd.cpp.types.enum_header");
+            builder_.add(v.name(), eh_fn);
+            builder_.add(boost_lexical_cast);
+        } else if (pmid.value() == "masd.cpp.tests.enum_implementation") {
+            builder_.add(v.name(), "masd.cpp.types.enum_header");
+            builder_.add(v.name(), "masd.cpp.test_data.enum_header");
+
+            builder_.add(std_string);
+            builder_.add(boost_test_unit_test);
+            builder_.add(boost_predef);
+
+            const auto io_arch("masd.cpp.io.enum_header");
+            const bool io_enabled(builder_.is_enabled(v.name(), io_arch));
+            if (io_enabled) {
+                builder_.add(v.name(), io_arch);
+                builder_.add(std_sstream);
+                builder_.add(boost_property_tree_ptree);
+                builder_.add(boost_property_tree_json_parser);
+            }
+
+            const auto lc_arch("masd.cpp.lexical_cast.enum_header");
+            const bool lc_enabled(builder_.is_enabled(v.name(), lc_arch));
+            if (lc_enabled) {
+                builder_.add(v.name(), lc_arch);
+                builder_.add(boost_lexical_cast);
+            }
+
+            const auto ser_arch("masd.cpp.serialization.enum_header");
+            const bool ser_enabled(builder_.is_enabled(v.name(), ser_arch));
+            if (ser_enabled) {
+                builder_.add(v.name(), ser_arch);
+
+                builder_.add(boost_archive_text_iarchive);
+                builder_.add(boost_archive_text_oarchive);
+                builder_.add(boost_archive_binary_iarchive);
+                builder_.add(boost_archive_binary_oarchive);
+                builder_.add(boost_archive_polymorphic_iarchive);
+                builder_.add(boost_archive_polymorphic_oarchive);
+                builder_.add(boost_serialization_nvp);
+                builder_.add(boost_archive_xml_iarchive);
+                builder_.add(boost_archive_xml_oarchive);
+            }
+
+            const auto hash_arch("masd.cpp.hash.enum_header");
+            const bool hash_enabled(builder_.is_enabled(v.name(), hash_arch));
+            if (hash_enabled)
+                builder_.add(v.name(), hash_arch);
         }
 
         a.path_properties().inclusion_dependencies(builder_.build());
@@ -825,6 +898,8 @@ void region_processor::visit(const logical::entities::structural::primitive& v) 
             builder_.add(v.name(), "masd.cpp.test_data.primitive_header");
             const std::string carch("masd.cpp.test_data.canonical_archetype");
             builder_.add(v.value_attribute().parsed_type().current(), carch);
+        } else if (pmid.value() == "masd.cpp.odb.primitive_header") {
+            builder_.add(v.name(), "masd.cpp.types.primitive_header");
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
@@ -841,6 +916,23 @@ void region_processor::visit(const logical::entities::structural::visitor& v) {
 
             if (v.parent())
                 builder_.add(*v.parent(), "masd.cpp.types.visitor_header");
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::
+visit(const logical::entities::structural::entry_point& /*v*/) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.tests.main") {
+            builder_.add(boost_test_unit_test);
+            builder_.add(boost_test_unit_test_monitor);
+            builder_.add(boost_exception_info);
+            builder_.add(std_iostream);
+            builder_.add(boost_exception_diagnostic_information);
         }
         a.path_properties().inclusion_dependencies(builder_.build());
     }
