@@ -35,7 +35,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("text.cpp.formattables.dependencies_builder"));
+static logger lg(logger_factory("orchestration.helpers.dependencies_builder"));
 
 const auto empty_list = std::list<std::string> {};
 const std::string pair_type("pair");
