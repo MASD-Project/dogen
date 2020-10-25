@@ -1238,20 +1238,6 @@
       ]
     },
     {
-      "name": "formattables::canonical_archetype_resolver",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::resolution_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::streaming_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
