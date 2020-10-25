@@ -30,7 +30,6 @@
 #include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
-#include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms {

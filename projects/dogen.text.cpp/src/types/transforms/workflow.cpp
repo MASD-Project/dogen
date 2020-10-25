@@ -27,7 +27,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
 #include "dogen.physical/io/entities/formatting_styles_io.hpp"
-#include "dogen.text.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/wale_transform.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"

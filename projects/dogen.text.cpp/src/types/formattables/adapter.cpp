@@ -25,7 +25,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/io/entities/orm/letter_case_io.hpp"
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
-#include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.cpp/types/formattables/adaptation_error.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.cpp/types/formattables/adapter.hpp"

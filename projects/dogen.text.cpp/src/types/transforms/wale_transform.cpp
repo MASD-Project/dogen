@@ -22,7 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.templating/types/wale/instantiator.hpp"
-#include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/wale_transform.hpp"

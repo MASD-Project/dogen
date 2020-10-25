@@ -747,16 +747,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::artefact_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "inclusion_dependencies",
-          "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
       "name": "formattables::dependencies_builder_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
