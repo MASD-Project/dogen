@@ -29,8 +29,11 @@
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/entities/variability/initializer.hpp"
 
-#include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/types/entities/physical/facet.hpp"
+#include "dogen.logical/types/entities/physical/backend.hpp"
+#include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 
 #include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -90,28 +93,27 @@ masd.cpp.tests.enum_implementation masd.cpp.tests.main
 
 
 
-masd.cpp.types.archetype_kind_class_header_factory
-masd.cpp.types.archetype_kind_class_implementation_factory
-masd.cpp.types.backend_class_header_factory
-masd.cpp.types.backend_class_header_transform
-masd.cpp.types.backend_class_implementation_factory
-masd.cpp.types.backend_class_implementation_transform
+
+
+
+
+
+
 masd.cpp.types.builtin_header
 masd.cpp.types.class_forward_declarations
 masd.cpp.types.enum_header
 
-masd.cpp.types.facet_class_header_factory
 
 masd.cpp.types.facet_class_implementation_factory
-masd.cpp.types.facet_class_implementation_transform
+
 
 
 
 
 masd.cpp.types.main masd.cpp.types.namespace_header
-masd.cpp.types.part_class_header_factory
-masd.cpp.types.part_class_header_transform
-masd.cpp.types.part_class_implementation_factory
+
+
+
 masd.cpp.types.part_class_implementation_transform
 masd.cpp.types.primitive_forward_declarations
 
@@ -212,6 +214,10 @@ private:
 public:
     using logical::entities::element_visitor::visit;
     void visit(const logical::entities::physical::archetype& v);
+    void visit(const logical::entities::physical::facet& v);
+    void visit(const logical::entities::physical::backend& v);
+    void visit(const logical::entities::physical::part& v);
+    void visit(const logical::entities::physical::archetype_kind& v);
 
     void visit(const logical::entities::variability::feature_bundle& v);
     void visit(const logical::entities::variability::feature_template_bundle& v);
@@ -261,6 +267,157 @@ visit(const logical::entities::physical::archetype& v) {
 }
 
 void region_processor::
+visit(const logical::entities::physical::facet& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.facet_class_header_transform") {
+            builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
+            using identification::entities::technical_space;
+            if (v.major_technical_space() == technical_space::cpp) {
+                builder_.add_as_user(
+                    "dogen.text.cpp/types/transforms/registrar.hpp");
+            } else if (v.major_technical_space() == technical_space::csharp) {
+                builder_.add_as_user(
+                    "dogen.text.csharp/types/transforms/registrar.hpp");
+            }
+        } else if (pmid.value() == "masd.cpp.types.facet_class_implementation_transform") {
+            const auto ch_arch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.name(), ch_arch);
+            builder_.add(v.archetypes(), ch_arch);
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+        } else if (pmid.value() == "masd.cpp.types.facet_class_header_factory") {
+            builder_.add_as_user("dogen.physical/types/entities/facet.hpp");
+
+            const auto fct_ch_arch("masd.cpp.types.facet_class_header_factory");
+            builder_.add(v.name(), fct_ch_arch);
+
+            const auto ch_arch("masd.cpp.types.archetype_class_header_transform");
+            builder_.add(v.archetypes(), ch_arch);
+            builder_.add_as_user(
+                "dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+        }
+
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::physical::backend& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.backend_class_header_transform") {
+            builder_.add_as_user("dogen.physical/types/entities/backend.hpp");
+            using identification::entities::technical_space;
+            if (v.major_technical_space() == technical_space::cpp) {
+                builder_.add_as_user(
+                    "dogen.text.cpp/types/transforms/registrar.hpp");
+            } else if (v.major_technical_space() == technical_space::csharp) {
+                builder_.add_as_user(
+                    "dogen.text.csharp/types/transforms/registrar.hpp");
+            }
+        } else if (pmid.value() == "masd.cpp.types.backend_class_implementation_transform") {
+            const auto ch_arch("masd.cpp.types.canonical_archetype");
+            builder_.add(v.name(), ch_arch);
+            builder_.add(v.facets(), ch_arch);
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+        } else if (pmid.value() == "masd.cpp.types.backend_class_header_factory") {
+            builder_.add_as_user("dogen.physical/types/entities/backend.hpp");
+        } else if (pmid.value() == "masd.cpp.types.backend_class_implementation_factory") {
+            const auto be_ch_arch("masd.cpp.types.backend_class_header_factory");
+            builder_.add(v.name(), be_ch_arch);
+
+            const auto fct_ch_arch("masd.cpp.types.facet_class_header_factory");
+            builder_.add(v.facets(), fct_ch_arch);
+
+            const auto ak_ch_arch("masd.cpp.types.archetype_kind_class_header_factory");
+            builder_.add(v.archetype_kinds(), ak_ch_arch);
+
+            const auto part_ch_arch("masd.cpp.types.part_class_header_factory");
+            builder_.add(v.parts(), part_ch_arch);
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+            builder_.add_as_user(
+                "dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+        }
+
+
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::physical::part& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.part_class_header_factory") {
+            builder_.add_as_user("dogen.physical/types/entities/part.hpp");
+        } else if (pmid.value() == "masd.cpp.types.part_class_implementation_factory") {
+            const auto part_ch_arch("masd.cpp.types.part_class_header_factory");
+            builder_.add(v.name(), part_ch_arch);
+
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_builder.hpp");
+            builder_.add_as_user(
+                "dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::visit(const logical::entities::physical::archetype_kind& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.archetype_kind_class_header_factory") {
+            builder_.add_as_user(
+                "dogen.physical/types/entities/archetype_kind.hpp");
+
+        } else if (pmid.value() == "masd.cpp.types.archetype_kind_class_implementation_factory") {
+            const auto ak_ch_arch(
+                "masd.cpp.types.archetype_kind_class_header_factory");
+            builder_.add(v.name(), ak_ch_arch);
+            builder_.add_as_user(
+                "dogen.identification/io/entities/physical_meta_id_io.hpp");
+            builder_.add_as_user("dogen.utility/types/log/logger.hpp");
+            builder_.add_as_user(
+                "dogen.text/types/transforms/transformation_error.hpp");
+        }
+        a.path_properties().inclusion_dependencies(builder_.build());
+    }
+}
+
+void region_processor::
 visit(const logical::entities::variability::feature_bundle& v) {
     auto& pr(region_.physical_region());
     for (auto& pair : pr.artefacts_by_archetype()) {
@@ -296,7 +453,6 @@ visit(const logical::entities::variability::feature_bundle& v) {
                 builder_.add_as_user(
                     "dogen.variability/types/helpers/configuration_selector.hpp");            }
         }
-
         a.path_properties().inclusion_dependencies(builder_.build());
     }
 }
