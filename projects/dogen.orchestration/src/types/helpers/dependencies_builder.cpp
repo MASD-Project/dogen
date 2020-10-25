@@ -28,7 +28,6 @@
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.physical/io/entities/inclusion_directives_io.hpp"
-#include "dogen.text.cpp/io/formattables/directive_group_io.hpp"
 #include "dogen.orchestration/types/helpers/building_error.hpp"
 #include "dogen.orchestration/types/helpers/dependencies_builder.hpp"
 

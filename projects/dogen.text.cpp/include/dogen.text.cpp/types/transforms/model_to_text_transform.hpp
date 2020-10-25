@@ -33,7 +33,6 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
-#include "dogen.text.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.text.cpp/types/transforms/inclusion_support_types.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 
