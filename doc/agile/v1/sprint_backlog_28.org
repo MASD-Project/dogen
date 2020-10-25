@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-25 Sun 19:40]
+#+CAPTION: Clock summary at [2020-10-25 Sun 22:03]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *64:22* |       |       | 100.0 |
+| *Total time*                                                | *65:50* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 64:22   |       |       | 100.0 |
-| Active                                                      |         | 64:22 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   5.8 |
+| Stories                                                     | 65:50   |       |       | 100.0 |
+| Active                                                      |         | 65:50 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   5.7 |
 | Create a demo and presentation for previous sprint          |         |       |  0:39 |   1.0 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   6.8 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   8.5 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   6.7 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   8.3 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.5 |
 | Analysis on a formatables refactor                          |         |       |  0:31 |   0.8 |
-| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.6 |
-| Presentation for APA                                        |         |       |  5:11 |   8.1 |
-| Issues with emacs                                           |         |       |  1:09 |   1.8 |
+| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.5 |
+| Presentation for APA                                        |         |       |  5:11 |   7.9 |
+| Issues with emacs                                           |         |       |  1:09 |   1.7 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.5 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   3.8 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   8.5 |
-| Create a video series on the formatables refactor           |         |       |  0:37 |   1.0 |
-| Move C++ locator into physical model                        |         |       | 33:05 |  51.4 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   3.7 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   8.4 |
+| Create a video series on the formatables refactor           |         |       |  0:37 |   0.9 |
+| Move C++ locator into physical model                        |         |       | 34:33 |  52.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,7 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-10-25 Sun 20:33]--[2020-10-25 Sun 22:01] =>  1:28
     CLOCK: [2020-10-25 Sun 19:01]--[2020-10-25 Sun 19:40] =>  0:39
     CLOCK: [2020-10-25 Sun 18:09]--[2020-10-25 Sun 18:42] =>  0:33
     CLOCK: [2020-10-25 Sun 14:25]--[2020-10-25 Sun 17:50] =>  3:25
@@ -580,6 +581,7 @@ from a coding perspective (video uploads, etc).
   artefact during projection. Backend has a major technical space and
   minor TSs. These are the sum of all archetypes in the backend which
   are not of the same TS as the major TS.
+- cannot delete locator because odb expander still relies on it.
 
 *** Add method to check if string is valid enum                       :story:
 
