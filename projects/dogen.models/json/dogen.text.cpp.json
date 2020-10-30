@@ -1761,13 +1761,6 @@
       ]
     },
     {
-      "name": "formattables::build_files_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::cpp_standards",
       "stereotypes": [
         "masd::enumeration"
