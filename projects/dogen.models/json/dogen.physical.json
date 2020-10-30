@@ -1783,6 +1783,10 @@
         {
           "name": "include_directory_full_path",
           "type": "boost::filesystem::path"
+        },
+        {
+          "name": "templates_directory_full_path",
+          "type": "boost::filesystem::path"
         }
       ]
     },

@@ -59,7 +59,8 @@ public:
         const std::string& headers_output_directory,
         const bool enable_backend_directories,
         const boost::filesystem::path& implementation_directory_full_path,
-        const boost::filesystem::path& include_directory_full_path);
+        const boost::filesystem::path& include_directory_full_path,
+        const boost::filesystem::path& templates_directory_full_path);
 
 public:
     const std::string& include_directory_name() const;
@@ -131,6 +132,11 @@ public:
     void include_directory_full_path(const boost::filesystem::path& v);
     void include_directory_full_path(const boost::filesystem::path&& v);
 
+    const boost::filesystem::path& templates_directory_full_path() const;
+    boost::filesystem::path& templates_directory_full_path();
+    void templates_directory_full_path(const boost::filesystem::path& v);
+    void templates_directory_full_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const project_path_properties& rhs) const;
     bool operator!=(const project_path_properties& rhs) const {
@@ -155,6 +161,7 @@ private:
     bool enable_backend_directories_;
     boost::filesystem::path implementation_directory_full_path_;
     boost::filesystem::path include_directory_full_path_;
+    boost::filesystem::path templates_directory_full_path_;
 };
 
 }
