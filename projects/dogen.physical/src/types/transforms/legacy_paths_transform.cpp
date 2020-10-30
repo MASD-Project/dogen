@@ -1446,6 +1446,8 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     auto& ppp(m.meta_model_properties().project_path_properties());
     ppp.implementation_directory_full_path(
         l.make_full_path_to_implementation_directory());
+    ppp.include_directory_full_path(
+        l.make_full_path_to_include_directory());
 
     const auto& pmm(*ctx.meta_model());
     const auto& fm(*ctx.feature_model());
