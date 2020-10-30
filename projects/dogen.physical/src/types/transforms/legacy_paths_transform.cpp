@@ -1438,7 +1438,15 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "legacy paths",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
+    /*
+     * Obtain the full path to the implementation directory and update
+     * the physical model with it.
+     */
     const locator l(m);
+    auto& ppp(m.meta_model_properties().project_path_properties());
+    ppp.implementation_directory_full_path(
+        l.make_full_path_to_implementation_directory());
+
     const auto& pmm(*ctx.meta_model());
     const auto& fm(*ctx.feature_model());
     const auto fg(make_feature_group(fm, pmm.indexed_names()));
