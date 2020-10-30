@@ -53,8 +53,6 @@ private:
 
     void reduce(model& fm) const;
 
-    void expand_odb(const locator& l, model& fm) const;
-
     void expand_cpp_standard(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg, model& fm) const;

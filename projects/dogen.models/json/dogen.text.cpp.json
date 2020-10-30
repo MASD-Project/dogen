@@ -1161,13 +1161,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::odb_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::model",
       "fallback_element_type": "masd::object",
       "attributes": [
