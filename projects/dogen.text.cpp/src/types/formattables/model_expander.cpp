@@ -101,7 +101,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_odb(l, fm);
-    expand_build_files(l, fm);
+    // expand_build_files(l, fm);
 }
 
 }
