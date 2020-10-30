@@ -718,13 +718,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::locator",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::building_error",
       "documentation": "An error occurred while the factory was building.\n",
       "stereotypes": [
@@ -1519,14 +1512,6 @@
         "masd.cpp.types.class_implementation.formatting_style": "stitch",
         "masd.cpp.types.class_implementation.overwrite": "true"
       },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::location_error",
-      "documentation": "An error occurred while the locator was creating a path.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
       "fallback_element_type": "masd::object"
     },
     {
