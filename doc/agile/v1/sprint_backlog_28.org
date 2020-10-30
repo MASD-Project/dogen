@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-25 Sun 22:03]
+#+CAPTION: Clock summary at [2020-10-30 Fri 18:44]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *65:50* |       |       | 100.0 |
+| *Total time*                                                | *71:32* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 65:50   |       |       | 100.0 |
-| Active                                                      |         | 65:50 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   5.7 |
-| Create a demo and presentation for previous sprint          |         |       |  0:39 |   1.0 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   6.7 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   8.3 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.5 |
-| Analysis on a formatables refactor                          |         |       |  0:31 |   0.8 |
-| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.5 |
-| Presentation for APA                                        |         |       |  5:11 |   7.9 |
-| Issues with emacs                                           |         |       |  1:09 |   1.7 |
+| Stories                                                     | 71:32   |       |       | 100.0 |
+| Active                                                      |         | 71:32 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   5.2 |
+| Create a demo and presentation for previous sprint          |         |       |  0:39 |   0.9 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   6.1 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.6 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.4 |
+| Analysis on a formatables refactor                          |         |       |  0:31 |   0.7 |
+| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.4 |
+| Presentation for APA                                        |         |       |  5:11 |   7.2 |
+| Move C++ locator into physical model                        |         |       | 40:15 |  56.3 |
+| Issues with emacs                                           |         |       |  1:09 |   1.6 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.5 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   3.7 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   8.4 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   3.4 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.7 |
 | Create a video series on the formatables refactor           |         |       |  0:37 |   0.9 |
-| Move C++ locator into physical model                        |         |       | 34:33 |  52.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -423,6 +423,66 @@ página no facebook :
 https://facebook.com/Confer%C3%AAncia-APA-105017044613068
 #+end_quote
 
+*** COMPLETED Move C++ locator into physical model                    :story:
+    CLOSED: [2020-10-30 Fri 18:44]
+    :LOGBOOK:
+    CLOCK: [2020-10-30 Fri 16:33]--[2020-10-30 Fri 18:44] =>  2:11
+    CLOCK: [2020-10-30 Fri 14:27]--[2020-10-30 Fri 16:13] =>  2:06
+    CLOCK: [2020-10-30 Fri 10:25]--[2020-10-30 Fri 12:10] =>  1:45
+    CLOCK: [2020-10-25 Sun 20:33]--[2020-10-25 Sun 22:01] =>  1:28
+    CLOCK: [2020-10-25 Sun 19:01]--[2020-10-25 Sun 19:40] =>  0:39
+    CLOCK: [2020-10-25 Sun 18:09]--[2020-10-25 Sun 18:42] =>  0:33
+    CLOCK: [2020-10-25 Sun 14:25]--[2020-10-25 Sun 17:50] =>  3:25
+    CLOCK: [2020-10-25 Sun 12:27]--[2020-10-25 Sun 12:56] =>  0:29
+    CLOCK: [2020-10-25 Sun 11:00]--[2020-10-25 Sun 12:26] =>  1:26
+    CLOCK: [2020-10-24 Sat 16:41]--[2020-10-24 Sat 17:23] =>  0:42
+    CLOCK: [2020-10-24 Sat 13:50]--[2020-10-24 Sat 15:39] =>  1:49
+    CLOCK: [2020-10-23 Fri 13:42]--[2020-10-23 Fri 15:05] =>  1:23
+    CLOCK: [2020-10-23 Fri 10:45]--[2020-10-23 Fri 12:24] =>  1:49
+    CLOCK: [2020-10-18 Sun 16:32]--[2020-10-18 Sun 18:38] =>  2:06
+    CLOCK: [2020-10-18 Sun 14:00]--[2020-10-18 Sun 16:31] =>  2:31
+    CLOCK: [2020-10-17 Sat 17:01]--[2020-10-17 Sat 18:20] =>  1:19
+    CLOCK: [2020-10-17 Sat 12:00]--[2020-10-17 Sat 13:30] =>  1:38
+    CLOCK: [2020-10-16 Fri 09:01]--[2020-10-16 Fri 13:00] =>  3:59
+    CLOCK: [2020-10-03 Sat 16:11]--[2020-10-03 Sat 17:52] =>  1:41
+    CLOCK: [2020-10-02 Fri 16:01]--[2020-10-02 Fri 18:07] =>  2:06
+    CLOCK: [2020-10-02 Fri 12:16]--[2020-10-02 Fri 13:05] =>  0:49
+    CLOCK: [2020-10-02 Fri 09:52]--[2020-10-02 Fri 11:15] =>  1:23
+    CLOCK: [2020-10-02 Fri 09:01]--[2020-10-02 Fri 09:51] =>  0:50
+    CLOCK: [2020-10-01 Thu 15:22]--[2020-10-01 Thu 16:25] =>  1:03
+    CLOCK: [2020-10-01 Thu 10:52]--[2020-10-01 Thu 12:35] =>  1:43
+    :END:
+
+- move locator configuration to physical model, reusing meta-model
+  properties as required.
+- merge extraction properties with =project_path_properties=.
+- create a locator helper in physical model.
+- create a legacy full path transform in physical model. Have a set of
+  simple functions that return the archetype kind given an
+  archetype. Then use the kind to determine the locator function to
+  call.
+- region configuration is null after text transform execution for
+  cmakelists.
+- JQ query to obtain file paths:
+
+: jq .models[0].physical.regions_by_logical_id[0][1].data.artefacts_by_archetype[][1].data.data.file_path
+
+- locator is now creating a dense representation of paths rather than
+  a sparse one. We probably need to understand why that is.
+- namespaces are being incorrectly generated. This is because the
+  logical name is not correctly annotated with the =is_container=
+  flag.
+- locator assumes a single backend. In reality it could be either c++
+  or c# so we need multiple project directories, depending on the
+  current backend.
+- archetype needs to have a technical space. It is then propagated to
+  artefact during projection. Backend has a major technical space and
+  minor TSs. These are the sum of all archetypes in the backend which
+  are not of the same TS as the major TS.
+- cannot delete locator because odb expander still relies on it. Same
+  with =build_files_expander=.
+- c# still has inclusion deps properties in interface.
+
 *** STARTED Issues with emacs                                         :story:
     :LOGBOOK:
     CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
@@ -528,60 +588,6 @@ Notes:
 
 Story to clock time spent on video work which would not be required
 from a coding perspective (video uploads, etc).
-
-*** STARTED Move C++ locator into physical model                      :story:
-    :LOGBOOK:
-    CLOCK: [2020-10-25 Sun 20:33]--[2020-10-25 Sun 22:01] =>  1:28
-    CLOCK: [2020-10-25 Sun 19:01]--[2020-10-25 Sun 19:40] =>  0:39
-    CLOCK: [2020-10-25 Sun 18:09]--[2020-10-25 Sun 18:42] =>  0:33
-    CLOCK: [2020-10-25 Sun 14:25]--[2020-10-25 Sun 17:50] =>  3:25
-    CLOCK: [2020-10-25 Sun 12:27]--[2020-10-25 Sun 12:56] =>  0:29
-    CLOCK: [2020-10-25 Sun 11:00]--[2020-10-25 Sun 12:26] =>  1:26
-    CLOCK: [2020-10-24 Sat 16:41]--[2020-10-24 Sat 17:23] =>  0:42
-    CLOCK: [2020-10-24 Sat 13:50]--[2020-10-24 Sat 15:39] =>  1:49
-    CLOCK: [2020-10-23 Fri 13:42]--[2020-10-23 Fri 15:05] =>  1:23
-    CLOCK: [2020-10-23 Fri 10:45]--[2020-10-23 Fri 12:24] =>  1:49
-    CLOCK: [2020-10-18 Sun 16:32]--[2020-10-18 Sun 18:38] =>  2:06
-    CLOCK: [2020-10-18 Sun 14:00]--[2020-10-18 Sun 16:31] =>  2:31
-    CLOCK: [2020-10-17 Sat 17:01]--[2020-10-17 Sat 18:20] =>  1:19
-    CLOCK: [2020-10-17 Sat 12:00]--[2020-10-17 Sat 13:30] =>  1:38
-    CLOCK: [2020-10-16 Fri 09:01]--[2020-10-16 Fri 13:00] =>  3:59
-    CLOCK: [2020-10-03 Sat 16:11]--[2020-10-03 Sat 17:52] =>  1:41
-    CLOCK: [2020-10-02 Fri 16:01]--[2020-10-02 Fri 18:07] =>  2:06
-    CLOCK: [2020-10-02 Fri 12:16]--[2020-10-02 Fri 13:05] =>  0:49
-    CLOCK: [2020-10-02 Fri 09:52]--[2020-10-02 Fri 11:15] =>  1:23
-    CLOCK: [2020-10-02 Fri 09:01]--[2020-10-02 Fri 09:51] =>  0:50
-    CLOCK: [2020-10-01 Thu 15:22]--[2020-10-01 Thu 16:25] =>  1:03
-    CLOCK: [2020-10-01 Thu 10:52]--[2020-10-01 Thu 12:35] =>  1:43
-    :END:
-
-- move locator configuration to physical model, reusing meta-model
-  properties as required.
-- merge extraction properties with =project_path_properties=.
-- create a locator helper in physical model.
-- create a legacy full path transform in physical model. Have a set of
-  simple functions that return the archetype kind given an
-  archetype. Then use the kind to determine the locator function to
-  call.
-- region configuration is null after text transform execution for
-  cmakelists.
-- JQ query to obtain file paths:
-
-: jq .models[0].physical.regions_by_logical_id[0][1].data.artefacts_by_archetype[][1].data.data.file_path
-
-- locator is now creating a dense representation of paths rather than
-  a sparse one. We probably need to understand why that is.
-- namespaces are being incorrectly generated. This is because the
-  logical name is not correctly annotated with the =is_container=
-  flag.
-- locator assumes a single backend. In reality it could be either c++
-  or c# so we need multiple project directories, depending on the
-  current backend.
-- archetype needs to have a technical space. It is then propagated to
-  artefact during projection. Backend has a major technical space and
-  minor TSs. These are the sum of all archetypes in the backend which
-  are not of the same TS as the major TS.
-- cannot delete locator because odb expander still relies on it.
 
 *** Add method to check if string is valid enum                       :story:
 
