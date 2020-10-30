@@ -36,6 +36,10 @@ namespace dogen::orchestration::transforms {
  * physical dimension.
  */
 class physical_to_logical_population_transform final {
+private:
+    static std::list<std::string>
+    make_odb_databases(const text::entities::model& m);
+
 public:
     static void apply(const text::transforms::context& ctx,
         text::entities::model& m);
