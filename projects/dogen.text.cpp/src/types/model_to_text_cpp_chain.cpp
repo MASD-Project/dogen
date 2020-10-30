@@ -58,10 +58,9 @@ formattables::model
 model_to_text_cpp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const transforms::repository& frp, const formattables::locator& l,
-    const text::entities::model& m) const {
+    const transforms::repository& frp, const text::entities::model& m) const {
     formattables::workflow fw;
-    return fw.execute(feature_model, rcfg, l, frp, m);
+    return fw.execute(feature_model, rcfg, frp, m);
 }
 
 identification::entities::physical_meta_id
@@ -77,22 +76,13 @@ std::string model_to_text_cpp_chain::description() const {
 void model_to_text_cpp_chain::
 apply(boost::shared_ptr<tracing::tracer> tracer, const std::unordered_set<
     identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element, const formattables::locator& l,
+    enabled_archetype_for_element,
     const variability::entities::feature_model& feature_model,
+    const boost::filesystem::path& templates_directory,
     const variability::helpers::configuration_factory& cf,
     formattables::model& fm) const {
-    transforms::workflow wf(l, feature_model, cf);
+    transforms::workflow wf(templates_directory, feature_model, cf);
     wf.execute(tracer, enabled_archetype_for_element, fm);
-}
-
-std::list<boost::filesystem::path> model_to_text_cpp_chain::
-managed_directories(const formattables::locator& l) const {
-    std::list<boost::filesystem::path> r;
-    r.push_back(l.project_path());
-    if (l.project_path() != l.headers_project_path())
-        r.push_back(l.headers_model_path());
-
-    return r;
 }
 
 identification::entities::technical_space
@@ -106,24 +96,21 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C++ M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    /*
-     * Create the locator.
-     */
     const auto& feature_model(*ctx.feature_model());
     const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& frp(formatters_repository());
-    const formattables::locator l(m.physical());
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& ppp(mmp.project_path_properties());
+    const auto templates_directory(ppp.templates_directory_full_path());
 
     /*
      * Generate the formattables model.
      */
-    auto fm(create_formattables_model(feature_model, rcfg, frp, l, m));
-    const auto& mmp(m.physical().meta_model_properties());
+    auto fm(create_formattables_model(feature_model, rcfg, frp, m));
     const auto& eafe(mmp.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
-    apply(ctx.tracer(), eafe, l, feature_model, cf, fm);
-    m.physical().managed_directories(managed_directories(l));
+    apply(ctx.tracer(), eafe, feature_model, templates_directory, cf, fm);
 }
 
 }

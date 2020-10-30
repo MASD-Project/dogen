@@ -25,18 +25,18 @@
 #pragma once
 #endif
 
+#include <boost/filesystem/path.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
-#include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
 
 class stitch_transform final {
 public:
-    stitch_transform(const formattables::locator& l,
+    stitch_transform(const boost::filesystem::path& templates_directory,
         const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 

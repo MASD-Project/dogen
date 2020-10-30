@@ -40,7 +40,6 @@
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
-#include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 
 namespace dogen::text::cpp {
@@ -72,7 +71,7 @@ private:
     formattables::model create_formattables_model(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const transforms::repository& frp, const formattables::locator& l,
+        const transforms::repository& frp,
         const text::entities::model& m) const;
 
     /**
@@ -81,16 +80,11 @@ private:
     void apply(boost::shared_ptr<tracing::tracer> tracer,
         const std::unordered_set<
         identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element, const formattables::locator& l,
+        enabled_archetype_for_element,
         const variability::entities::feature_model& feature_model,
+        const boost::filesystem::path& templates_directory,
         const variability::helpers::configuration_factory& cf,
         formattables::model& fm) const;
-
-    /**
-     * @brief Creates a list of all the managed directories.
-     */
-    std::list<boost::filesystem::path>
-    managed_directories(const formattables::locator& l) const;
 
 public:
     identification::entities::physical_meta_id id() const override;

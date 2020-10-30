@@ -31,7 +31,6 @@
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
-#include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 
@@ -45,14 +44,13 @@ private:
     void expand_model(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const transforms::repository& frp, const locator& l,
-        model& fm) const;
+        const transforms::repository& frp, model& fm) const;
 
 public:
     model execute(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const locator& l, const transforms::repository& frp,
+        const transforms::repository& frp,
         const text::entities::model& m) const;
 };
 

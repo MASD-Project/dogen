@@ -41,20 +41,18 @@ model workflow::make_model(const transforms::repository& frp,
 void workflow::expand_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const transforms::repository& frp, const locator& l,
-    model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     model_expander ex;
-    ex.expand(feature_model, rcfg, frp, l, fm);
+    ex.expand(feature_model, rcfg, frp, fm);
 }
 
 model
 workflow::execute(const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const locator& l, const transforms::repository& frp,
-    const text::entities::model& m) const {
+    const transforms::repository& frp, const text::entities::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(feature_model, rcfg, frp, l, r);
+    expand_model(feature_model, rcfg, frp, r);
 
     return r;
 }

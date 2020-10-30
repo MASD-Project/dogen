@@ -31,15 +31,14 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
-#include "dogen.text.cpp/types/transforms/stitch_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
 
@@ -48,7 +47,7 @@ namespace dogen::text::cpp::transforms {
  */
 class workflow final {
 public:
-    workflow(const formattables::locator& l,
+    workflow(const boost::filesystem::path& templates_directory,
         const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
@@ -81,8 +80,9 @@ public:
 
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;
-    const stitch_transform stitch_formatter_;
-    const formattables::locator& locator_;
+    const boost::filesystem::path templates_directory_;
+    const variability::entities::feature_model& feature_model_;
+    const variability::helpers::configuration_factory& configuration_factory_;
 };
 
 }

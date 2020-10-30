@@ -27,7 +27,6 @@
 
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
-#include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -37,7 +36,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    void apply(const formattables::locator& l,
+    void apply(const boost::filesystem::path& templates_directory,
         const model_to_text_transform& stock_transform,
         const context& ctx, const logical::entities::element& e,
         physical::entities::artefact& a) const;

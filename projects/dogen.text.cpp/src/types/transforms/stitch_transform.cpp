@@ -41,10 +41,10 @@ const std::string decoration_postamble_key(
 namespace dogen::text::cpp::transforms {
 
 stitch_transform::stitch_transform(
-    const formattables::locator& l,
+    const boost::filesystem::path& templates_directory,
     const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : instantiator_(l.templates_project_path(), fm, cf) {}
+    : instantiator_(templates_directory, fm, cf) {}
 
 bool stitch_transform::is_header(const inclusion_support_types ist) const {
     return

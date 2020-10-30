@@ -43,7 +43,7 @@ bool wale_transform::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-void wale_transform::apply(const formattables::locator& l,
+void wale_transform::apply(const boost::filesystem::path& templates_directory,
     const model_to_text_transform& stock_transform, const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
     const auto pn(stock_transform.archetype().meta_name());
@@ -69,7 +69,7 @@ void wale_transform::apply(const formattables::locator& l,
                 BOOST_THROW_EXCEPTION(formatting_error(missing_input));
             }
 
-            const auto p(l.templates_project_path() / fi);
+            const auto p(templates_directory / fi);
             BOOST_LOG_SEV(lg, debug) << "Using template path: "
                                      << p.generic_string();
 

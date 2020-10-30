@@ -29,6 +29,7 @@
 #include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/wale_transform.hpp"
+#include "dogen.text.cpp/types/transforms/stitch_transform.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
 
@@ -46,10 +47,11 @@ namespace dogen::text::cpp::transforms {
 
 std::shared_ptr<cpp::transforms::registrar> workflow::registrar_;
 
-workflow::workflow(const formattables::locator& l,
+workflow::workflow(const boost::filesystem::path& templates_directory,
     const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : stitch_formatter_(l, fm, cf), locator_(l) { }
+    : templates_directory_(templates_directory), feature_model_(fm),
+      configuration_factory_(cf) { }
 
 cpp::transforms::registrar& workflow::registrar() {
     if (!registrar_)
@@ -124,13 +126,15 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
          } else if (fs == formatting_styles::wale) {
              BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
              wale_transform f;
-             f.apply(locator_, fmt, ctx, e, a);
+             f.apply(templates_directory_, fmt, ctx, e, a);
 
              const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
          } else if (fs == formatting_styles::stitch) {
              BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
-             stitch_formatter_.apply(fmt, e, a);
+             stitch_transform f(templates_directory_, feature_model_,
+                 configuration_factory_);
+             f.apply(fmt, e, a);
 
              const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

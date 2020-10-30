@@ -64,7 +64,7 @@ model_expander::expand_cpp_standard(
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const transforms::repository& frp, const locator& /*l*/, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
 
     /*
      * Streaming expansion must be done before helper expansion as the
