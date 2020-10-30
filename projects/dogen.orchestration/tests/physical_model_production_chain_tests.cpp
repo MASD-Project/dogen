@@ -707,7 +707,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_lam_model_dia_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_northwind_dia_produces_expected_model) {
-    SETUP_TEST_LOG_DEBUG("cpp_ref_impl_northwind_dia_produces_expected_model");
+    SETUP_TEST_LOG("cpp_ref_impl_northwind_dia_produces_expected_model");
     using dogen::utility::test_data::cpp_ref_impl_product;
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_northwind_dia());
     const auto od(cpp_ref_impl_product::project_directory());

@@ -27,6 +27,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/io/entities/project_path_properties_io.hpp"
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/orm/odb_target.hpp"
@@ -109,7 +110,7 @@ private:
     const std::list<std::string> databases_;
     const physical::entities::region& region_;
     const project_path_properties project_path_properties_;
-    logical::entities::orm::odb_targets result_;
+    logical::entities::orm::odb_targets& result_;
 };
 
 odb_targets_factory::odb_targets_factory(const std::string& target_name,
@@ -131,7 +132,7 @@ odb_targets_factory::get_path_for_artefact(const std::string& archetype) {
     }
 
     const auto& a(*i->second);
-    return a.path_properties().file_path().parent_path();
+    return a.path_properties().file_path();
 }
 
 logical::entities::orm::odb_target odb_targets_factory::
@@ -146,16 +147,29 @@ generate_targets(const logical_name& n, const archetype_ids& ids) {
      */
     const auto src_dir(
         project_path_properties_.implementation_directory_full_path());
-    const auto odb_fp(get_path_for_artefact(ids.odb)
-        .parent_path());
+    BOOST_LOG_SEV(lg, debug) << "Implementation directory full path: "
+                             << src_dir.generic_string();
+
+    const auto odb_fp(get_path_for_artefact(ids.odb).parent_path());
+    BOOST_LOG_SEV(lg, debug) << "ODB full path: "
+                             << odb_fp.generic_string();
     const auto rp(odb_fp.lexically_relative(src_dir));
+    BOOST_LOG_SEV(lg, debug) << "Output directory: " << rp.generic_string();
+
     r.output_directory(rp.generic_string());
 
     const auto tp(get_path_for_artefact(ids.types));
-    r.types_file(tp.lexically_relative(src_dir).generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Types directory: " << tp.generic_string();
 
-    const auto odb_options_rp(get_path_for_artefact(ids.odb_option));
+    r.types_file(tp.lexically_relative(src_dir).generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Types file: " << r.types_file();
+
+    const auto odb_options(get_path_for_artefact(ids.odb_option));
+    BOOST_LOG_SEV(lg, debug) << "ODB options: "
+                             << odb_options.generic_string();
+    const auto odb_options_rp(odb_options.lexically_relative(src_dir));
     r.object_odb_options(odb_options_rp.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Types file: " << r.object_odb_options();
 
     BOOST_LOG_SEV(lg, debug) << "Databases: " << databases_;
     const auto odb_rp(odb_options_rp.parent_path().generic_string());
@@ -182,12 +196,18 @@ generate_targets(const logical_name& n, const archetype_ids& ids) {
 
 void odb_targets_factory::
 visit(const logical::entities::orm::common_odb_options& /*coo*/) {
-    const auto p(get_path_for_artefact("masd.cpp.odb.common_odb_options"));
-    result_.common_odb_options(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Element is common odb options.";
+    const auto src_dir(
+        project_path_properties_.implementation_directory_full_path());
+    const auto fp(get_path_for_artefact("masd.cpp.odb.common_odb_options"));
+    const auto rp(fp.lexically_relative(src_dir));
+    result_.common_odb_options(rp.generic_string());
 }
 
 void odb_targets_factory::
 visit(const logical::entities::structural::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Element is object.";
+
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -204,6 +224,8 @@ visit(const logical::entities::structural::object& o) {
 
 void odb_targets_factory::
 visit(const logical::entities::structural::primitive& p) {
+    BOOST_LOG_SEV(lg, debug) << "Element is primitive.";
+
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -238,7 +260,10 @@ build_files_updater::build_files_updater(const project_path_properties& ppp,
     : project_path_properties_(ppp), targets_(targets) {}
 
 void build_files_updater::visit(logical::entities::build::cmakelists& c) {
+    BOOST_LOG_SEV(lg, debug) << "Element is cmakelists.";
     c.odb_targets(targets_);
+
+    BOOST_LOG_SEV(lg, debug) << "Path properties: " << project_path_properties_;
     c.include_directory_path(project_path_properties_.include_directory_name());
     c.source_directory_name(project_path_properties_.source_directory_name());
     c.tests_directory_name(project_path_properties_.tests_directory_name());
@@ -334,7 +359,7 @@ apply(const text::transforms::context& ctx,
     build_files_updater u(ppp, ots);
 
     for (auto& region : m.logical_physical_regions()) {
-        const auto& e(*region.logical_element());
+        auto& e(*region.logical_element());
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id.value();
 
