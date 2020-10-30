@@ -284,6 +284,13 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::physical_to_logical_population_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
