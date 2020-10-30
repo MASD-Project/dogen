@@ -21,28 +21,24 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_TO_LOGICAL_POPULATION_TRANSFORM_HPP
 #define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_TO_LOGICAL_POPULATION_TRANSFORM_HPP
 
+#include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Populate logical elements that require information from the
+ * physical dimension.
+ */
 class physical_to_logical_population_transform final {
 public:
-    physical_to_logical_population_transform() = default;
-    physical_to_logical_population_transform(const physical_to_logical_population_transform&) = default;
-    physical_to_logical_population_transform(physical_to_logical_population_transform&&) = default;
-    ~physical_to_logical_population_transform() = default;
-    physical_to_logical_population_transform& operator=(const physical_to_logical_population_transform&) = default;
-
-public:
-    bool operator==(const physical_to_logical_population_transform& rhs) const;
-    bool operator!=(const physical_to_logical_population_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const text::transforms::context& ctx,
+        text::entities::model& m);
 };
 
 }

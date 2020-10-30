@@ -44,6 +44,7 @@
 #include "dogen.orchestration/types/helpers/logical_to_physical_projector.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/legacy_dependencies_transform.hpp"
+#include "dogen.orchestration/types/transforms/physical_to_logical_population_transform.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_text_model_chain.hpp"
 
 namespace {
@@ -125,10 +126,17 @@ apply(const context& ctx, const logical::entities::model& lm) {
     r.physical(pm);
 
     /*
-     * Finally run the legacy dependencies transform to update the
-     * include directives.
+     * Run the legacy dependencies transform to update the include
+     * directives.
      */
     legacy_dependencies_transform::apply(ctx.text_context(), r);
+
+    /*
+     * Update all logical elements that require data available in the
+     * physical dimension. Must be done after the physical model
+     * population chain.
+     */
+    physical_to_logical_population_transform::apply(ctx.text_context(), r);
 
     return r;
 }
