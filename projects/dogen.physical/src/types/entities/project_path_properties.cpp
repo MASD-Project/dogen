@@ -27,6 +27,20 @@ project_path_properties::project_path_properties()
       enable_unique_file_names_(static_cast<bool>(0)),
       enable_backend_directories_(static_cast<bool>(0)) { }
 
+project_path_properties::project_path_properties(project_path_properties&& rhs)
+    : include_directory_name_(std::move(rhs.include_directory_name_)),
+      source_directory_name_(std::move(rhs.source_directory_name_)),
+      disable_facet_directories_(std::move(rhs.disable_facet_directories_)),
+      header_file_extension_(std::move(rhs.header_file_extension_)),
+      implementation_file_extension_(std::move(rhs.implementation_file_extension_)),
+      tests_directory_name_(std::move(rhs.tests_directory_name_)),
+      templates_directory_name_(std::move(rhs.templates_directory_name_)),
+      templates_file_extension_(std::move(rhs.templates_file_extension_)),
+      enable_unique_file_names_(std::move(rhs.enable_unique_file_names_)),
+      headers_output_directory_(std::move(rhs.headers_output_directory_)),
+      enable_backend_directories_(std::move(rhs.enable_backend_directories_)),
+      implementation_directory_full_path_(std::move(rhs.implementation_directory_full_path_)) { }
+
 project_path_properties::project_path_properties(
     const std::string& include_directory_name,
     const std::string& source_directory_name,
@@ -38,7 +52,8 @@ project_path_properties::project_path_properties(
     const std::string& templates_file_extension,
     const bool enable_unique_file_names,
     const std::string& headers_output_directory,
-    const bool enable_backend_directories)
+    const bool enable_backend_directories,
+    const boost::filesystem::path& implementation_directory_full_path)
     : include_directory_name_(include_directory_name),
       source_directory_name_(source_directory_name),
       disable_facet_directories_(disable_facet_directories),
@@ -49,7 +64,8 @@ project_path_properties::project_path_properties(
       templates_file_extension_(templates_file_extension),
       enable_unique_file_names_(enable_unique_file_names),
       headers_output_directory_(headers_output_directory),
-      enable_backend_directories_(enable_backend_directories) { }
+      enable_backend_directories_(enable_backend_directories),
+      implementation_directory_full_path_(implementation_directory_full_path) { }
 
 void project_path_properties::swap(project_path_properties& other) noexcept {
     using std::swap;
@@ -64,6 +80,7 @@ void project_path_properties::swap(project_path_properties& other) noexcept {
     swap(enable_unique_file_names_, other.enable_unique_file_names_);
     swap(headers_output_directory_, other.headers_output_directory_);
     swap(enable_backend_directories_, other.enable_backend_directories_);
+    swap(implementation_directory_full_path_, other.implementation_directory_full_path_);
 }
 
 bool project_path_properties::operator==(const project_path_properties& rhs) const {
@@ -77,7 +94,8 @@ bool project_path_properties::operator==(const project_path_properties& rhs) con
         templates_file_extension_ == rhs.templates_file_extension_ &&
         enable_unique_file_names_ == rhs.enable_unique_file_names_ &&
         headers_output_directory_ == rhs.headers_output_directory_ &&
-        enable_backend_directories_ == rhs.enable_backend_directories_;
+        enable_backend_directories_ == rhs.enable_backend_directories_ &&
+        implementation_directory_full_path_ == rhs.implementation_directory_full_path_;
 }
 
 project_path_properties& project_path_properties::operator=(project_path_properties other) {
@@ -236,6 +254,22 @@ bool project_path_properties::enable_backend_directories() const {
 
 void project_path_properties::enable_backend_directories(const bool v) {
     enable_backend_directories_ = v;
+}
+
+const boost::filesystem::path& project_path_properties::implementation_directory_full_path() const {
+    return implementation_directory_full_path_;
+}
+
+boost::filesystem::path& project_path_properties::implementation_directory_full_path() {
+    return implementation_directory_full_path_;
+}
+
+void project_path_properties::implementation_directory_full_path(const boost::filesystem::path& v) {
+    implementation_directory_full_path_ = v;
+}
+
+void project_path_properties::implementation_directory_full_path(const boost::filesystem::path&& v) {
+    implementation_directory_full_path_ = std::move(v);
 }
 
 }

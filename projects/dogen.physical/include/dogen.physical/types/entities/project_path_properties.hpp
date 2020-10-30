@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 
 namespace dogen::physical::entities {
 
@@ -36,11 +37,13 @@ namespace dogen::physical::entities {
 class project_path_properties final {
 public:
     project_path_properties(const project_path_properties&) = default;
-    project_path_properties(project_path_properties&&) = default;
     ~project_path_properties() = default;
 
 public:
     project_path_properties();
+
+public:
+    project_path_properties(project_path_properties&& rhs);
 
 public:
     project_path_properties(
@@ -54,7 +57,8 @@ public:
         const std::string& templates_file_extension,
         const bool enable_unique_file_names,
         const std::string& headers_output_directory,
-        const bool enable_backend_directories);
+        const bool enable_backend_directories,
+        const boost::filesystem::path& implementation_directory_full_path);
 
 public:
     const std::string& include_directory_name() const;
@@ -116,6 +120,11 @@ public:
     void enable_backend_directories(const bool v);
     /**@}*/
 
+    const boost::filesystem::path& implementation_directory_full_path() const;
+    boost::filesystem::path& implementation_directory_full_path();
+    void implementation_directory_full_path(const boost::filesystem::path& v);
+    void implementation_directory_full_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const project_path_properties& rhs) const;
     bool operator!=(const project_path_properties& rhs) const {
@@ -138,6 +147,7 @@ private:
     bool enable_unique_file_names_;
     std::string headers_output_directory_;
     bool enable_backend_directories_;
+    boost::filesystem::path implementation_directory_full_path_;
 };
 
 }

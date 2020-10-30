@@ -1775,6 +1775,10 @@
           "name": "enable_backend_directories",
           "type": "bool",
           "documentation": "If true, backends should have backend-specific directories to store their artefacts.\n"
+        },
+        {
+          "name": "implementation_directory_full_path",
+          "type": "boost::filesystem::path"
         }
       ]
     },
