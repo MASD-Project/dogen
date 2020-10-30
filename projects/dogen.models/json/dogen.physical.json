@@ -1779,6 +1779,10 @@
         {
           "name": "implementation_directory_full_path",
           "type": "boost::filesystem::path"
+        },
+        {
+          "name": "include_directory_full_path",
+          "type": "boost::filesystem::path"
         }
       ]
     },

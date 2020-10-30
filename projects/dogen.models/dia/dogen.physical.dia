@@ -20362,7 +20362,7 @@ Note that this is will not necessarily be used for the inclusion directive.#</di
         <dia:point val="167,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.95,-72.05;190.65,-60.35"/>
+        <dia:rectangle val="166.95,-72.05;190.65,-59.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="167,-72"/>
@@ -20371,7 +20371,7 @@ Note that this is will not necessarily be used for the inclusion directive.#</di
         <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.600000000000001"/>
+        <dia:real val="12.400000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_path_properties#</dia:string>
@@ -20720,6 +20720,29 @@ Note that this is will not necessarily be used for the inclusion directive.#</di
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#implementation_directory_full_path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#include_directory_full_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>

@@ -53,7 +53,8 @@ std::ostream& operator<<(std::ostream& s, const project_path_properties& v) {
       << "\"enable_unique_file_names\": " << v.enable_unique_file_names() << ", "
       << "\"headers_output_directory\": " << "\"" << tidy_up_string(v.headers_output_directory()) << "\"" << ", "
       << "\"enable_backend_directories\": " << v.enable_backend_directories() << ", "
-      << "\"implementation_directory_full_path\": " << "\"" << v.implementation_directory_full_path().generic_string() << "\""
+      << "\"implementation_directory_full_path\": " << "\"" << v.implementation_directory_full_path().generic_string() << "\"" << ", "
+      << "\"include_directory_full_path\": " << "\"" << v.include_directory_full_path().generic_string() << "\""
       << " }";
     return(s);
 }
