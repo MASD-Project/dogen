@@ -27,6 +27,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/helpers/header_guard_factory.hpp"
 #include "dogen.physical/io/entities/project_path_properties_io.hpp"
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
@@ -94,6 +95,9 @@ public:
         logical::entities::orm::odb_targets& ots);
 
 private:
+    logical::entities::orm::odb_options
+    make_options(const archetype_ids& ids);
+
     boost::filesystem::path get_path_for_artefact(const std::string& archetype);
 
     logical::entities::orm::odb_target
@@ -101,9 +105,9 @@ private:
 
 public:
     using element_visitor::visit;
-    void visit(const logical::entities::orm::common_odb_options& coo);
-    void visit(const logical::entities::structural::object& o);
-    void visit(const logical::entities::structural::primitive& p);
+    void visit(logical::entities::orm::common_odb_options& coo);
+    void visit(logical::entities::structural::object& o);
+    void visit(logical::entities::structural::primitive& p);
 
 private:
     const std::string target_name_;
@@ -133,6 +137,52 @@ odb_targets_factory::get_path_for_artefact(const std::string& archetype) {
 
     const auto& a(*i->second);
     return a.path_properties().file_path();
+}
+
+logical::entities::orm::odb_options odb_targets_factory::
+make_options(const archetype_ids& ids) {
+    logical::entities::orm::odb_options r;
+
+    const auto inc_dir(
+        project_path_properties_.include_directory_full_path());
+    BOOST_LOG_SEV(lg, debug) << "Include directory full path: "
+                             << inc_dir.generic_string();
+
+    const auto odb_fp(get_path_for_artefact(ids.odb));
+    BOOST_LOG_SEV(lg, debug) << "ODB full path: "
+                             << odb_fp.generic_string();
+    const auto odb_rp(odb_fp.lexically_relative(inc_dir));
+    BOOST_LOG_SEV(lg, debug) << "Output directory: " << odb_rp.generic_string();
+
+    std::ostringstream os;
+    os << "'#include \"" << odb_rp.generic_string() << "\"'";
+    r.epilogue(os.str());
+    os.str("");
+
+    const auto tp(get_path_for_artefact(ids.types));
+    BOOST_LOG_SEV(lg, debug) << "Types directory: " << tp.generic_string();
+
+    const auto ip(tp.lexically_relative(inc_dir));
+    BOOST_LOG_SEV(lg, debug) << "Types file: " << ip.generic_string();
+    // const auto ip(locator_.make_inclusion_path_for_cpp_header(n, types_arch));
+    const auto types_rp(ip.parent_path());
+
+    os << "'%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%'";
+    r.include_regexes().push_back(os.str());
+
+    os.str("");
+    os << "'%(^[a-zA-Z0-9_]+)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
+    r.include_regexes().push_back(os.str());
+
+    os.str("");
+    os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
+    r.include_regexes().push_back(os.str());
+
+    using physical::helpers::header_guard_factory;
+    r.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
+    return r;
 }
 
 logical::entities::orm::odb_target odb_targets_factory::
@@ -195,7 +245,7 @@ generate_targets(const logical_name& n, const archetype_ids& ids) {
 }
 
 void odb_targets_factory::
-visit(const logical::entities::orm::common_odb_options& /*coo*/) {
+visit(logical::entities::orm::common_odb_options& /*coo*/) {
     BOOST_LOG_SEV(lg, debug) << "Element is common odb options.";
     const auto src_dir(
         project_path_properties_.implementation_directory_full_path());
@@ -205,7 +255,7 @@ visit(const logical::entities::orm::common_odb_options& /*coo*/) {
 }
 
 void odb_targets_factory::
-visit(const logical::entities::structural::object& o) {
+visit(logical::entities::structural::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Element is object.";
 
     /*
@@ -220,10 +270,12 @@ visit(const logical::entities::structural::object& o) {
     ids.odb = "masd.cpp.odb.class_header";
     ids.odb_option = "masd.cpp.odb.object_odb_options";
     result_.targets().push_back(generate_targets(n, ids));
+    o.orm_properties()->odb_options(make_options(ids));
+
 }
 
 void odb_targets_factory::
-visit(const logical::entities::structural::primitive& p) {
+visit(logical::entities::structural::primitive& p) {
     BOOST_LOG_SEV(lg, debug) << "Element is primitive.";
 
     /*
@@ -238,6 +290,7 @@ visit(const logical::entities::structural::primitive& p) {
     ids.odb = "masd.cpp.odb.primitive_header";
     ids.odb_option = "masd.cpp.odb.primitive_odb_options";
     result_.targets().push_back(generate_targets(n, ids));
+    p.orm_properties()->odb_options(make_options(ids));
 }
 
 class build_files_updater : public element_visitor {
@@ -332,7 +385,7 @@ apply(const text::transforms::context& ctx,
 
     const auto ott(identification::entities::model_type::target);
     for (auto& region : m.logical_physical_regions()) {
-        const auto& e(*region.logical_element());
+        auto& e(*region.logical_element());
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id.value();
 
