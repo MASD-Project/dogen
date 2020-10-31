@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Reads streaming properties from configuration and generates
+ * the correct streaming incantation for each type.
+ */
 class streaming_properties_transform final {
 public:
-    streaming_properties_transform() = default;
-    streaming_properties_transform(const streaming_properties_transform&) = default;
-    streaming_properties_transform(streaming_properties_transform&&) = default;
-    ~streaming_properties_transform() = default;
-    streaming_properties_transform& operator=(const streaming_properties_transform&) = default;
-
-public:
-    bool operator==(const streaming_properties_transform& rhs) const;
-    bool operator!=(const streaming_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

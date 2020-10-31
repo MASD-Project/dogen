@@ -18,12 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("logical.transforms.streaming_properties_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::logical::transforms {
 
-bool streaming_properties_transform::operator==(const streaming_properties_transform& /*rhs*/) const {
-    return true;
+void streaming_properties_transform::
+apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "streaming properties",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }
