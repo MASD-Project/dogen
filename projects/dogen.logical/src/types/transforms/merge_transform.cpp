@@ -23,7 +23,9 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
+#include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -33,22 +35,34 @@ const std::string transform_id("logical.transforms.merge_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-/**
- * @brief Copies the associative container across.
- */
-template<typename ElementAssociativeContainer>
-void copy(const ElementAssociativeContainer& src,
-    ElementAssociativeContainer& dst) {
-    for (const auto& pair : src)
-        dst.insert(pair);
-}
+const std::string duplicate_id("Duplicate ID: ");
 
 }
 
 namespace dogen::logical::transforms {
 
-void
-merge_transform::merge(const entities::model& src, entities::model& dst) {
+namespace {
+
+/**
+ * @brief Copies the associative container across.
+ */
+template<typename ElementAssociativeContainer>
+inline void copy(const ElementAssociativeContainer& src,
+    ElementAssociativeContainer& dst) {
+    for (const auto& pair : src) {
+        const auto id(pair.first);
+        const auto inserted(dst.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_id + id.value()));
+        }
+    }
+}
+
+}
+
+void merge_transform::merge(const entities::model& src, entities::model& dst) {
     /*
      * Skip any reference models for which the input technical_space
      * does not match.
@@ -107,7 +121,9 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         << " physical parts: "
         << src.physical_elements().parts().size()
         << " logic-less templates: "
-        << src.templating_elements().logic_less_templates().size();
+        << src.templating_elements().logic_less_templates().size()
+        << " streaming properties: "
+        << src.streaming_properties().size();;
 
     /*
      * Note that we are ignoring some elements, which do not require
@@ -169,6 +185,7 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         dst.physical_elements().parts());
     copy(src.templating_elements().logic_less_templates(),
         dst.templating_elements().logic_less_templates());
+    copy(src.streaming_properties(), dst.streaming_properties());
 
     /*
      * Update the references of the merged model.
