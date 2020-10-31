@@ -72,8 +72,8 @@
           "documentation": "Name to use for getter and setter.\n"
         },
         {
-          "name": "streaming_properties",
-          "type": "boost::optional<streaming_properties>"
+          "name": "streaming_for_type",
+          "type": "std::string"
         }
       ]
     },
@@ -395,8 +395,8 @@
           "documentation": "All meta-names by qualified name.\n"
         },
         {
-          "name": "streaming_properties",
-          "type": "std::unordered_map<identification::entities::logical_id, streaming_properties>"
+          "name": "streaming_for_type",
+          "type": "std::unordered_map<identification::entities::logical_id, std::string>"
         }
       ]
     },
@@ -4356,29 +4356,50 @@
       ]
     },
     {
-      "name": "entities::streaming_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "requires_quoting",
-          "type": "bool"
-        },
-        {
-          "name": "string_conversion_method",
-          "type": "std::string"
-        },
-        {
-          "name": "remove_unprintable_characters",
-          "type": "bool"
-        }
-      ]
-    },
-    {
       "name": "transforms::streaming_properties_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::streaming",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp.streaming"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "string_conversion_method",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Which conversion method to use to convert strings.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "requires_quoting",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, streaming this type must be preceeded by quoting.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, streaming this type requires removing unprintable characters.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
     }
   ]
 }

@@ -29879,7 +29879,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="-48,185"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,184.95;-16.265,194.25"/>
+        <dia:rectangle val="-48.05,184.95;-16.265,191.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,185"/>
@@ -29888,7 +29888,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -30094,81 +30094,6 @@ register_entities(variability::helpers::registrar&amp; rg) {
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Which family of helpers to use for this modeling element.
-
-#DOGEN masd.variability.binding_point=element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#streaming.string_conversion_method#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which conversion method to use to convert strings.
-
-#DOGEN masd.variability.binding_point=element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#streaming.requires_quoting#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::boolean#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"false"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, streaming this type must be preceeded by quoting.
-
-#DOGEN masd.variability.binding_point=element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#streaming.remove_unprintable_characters#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::boolean#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"false"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, streaming this type requires removing unprintable characters.
 
 #DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>

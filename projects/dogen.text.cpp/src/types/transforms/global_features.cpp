@@ -110,57 +110,6 @@ make_masd_cpp_helper_family() {
     return r;
 }
 
-dogen::variability::entities::feature
-make_masd_cpp_streaming_string_conversion_method() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("string_conversion_method");
-    r.name().qualified("masd.cpp.streaming.string_conversion_method");
-    r.description(R"(Which conversion method to use to convert strings.
-
-)");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-    return r;
-}
-
-dogen::variability::entities::feature
-make_masd_cpp_streaming_requires_quoting() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("requires_quoting");
-    r.name().qualified("masd.cpp.streaming.requires_quoting");
-    r.description(R"(If true, streaming this type must be preceeded by quoting.
-
-)");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-    return r;
-}
-
-dogen::variability::entities::feature
-make_masd_cpp_streaming_remove_unprintable_characters() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("remove_unprintable_characters");
-    r.name().qualified("masd.cpp.streaming.remove_unprintable_characters");
-    r.description(R"(If true, streaming this type requires removing unprintable characters.
-
-)");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-    return r;
-}
-
 }
 
 
@@ -173,9 +122,6 @@ global_features::make_features() {
     r.push_back(make_masd_cpp_aspect_requires_stream_manipulators());
     r.push_back(make_masd_cpp_standard());
     r.push_back(make_masd_cpp_helper_family());
-    r.push_back(make_masd_cpp_streaming_string_conversion_method());
-    r.push_back(make_masd_cpp_streaming_requires_quoting());
-    r.push_back(make_masd_cpp_streaming_remove_unprintable_characters());
     return r;
 }
 

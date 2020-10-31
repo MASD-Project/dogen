@@ -25,7 +25,6 @@
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_name_tree_io.hpp"
 #include "dogen.logical/io/entities/orm/attribute_properties_io.hpp"
 
@@ -68,21 +67,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::streaming_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
@@ -105,7 +89,7 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"member_variable_name\": " << "\"" << tidy_up_string(v.member_variable_name()) << "\"" << ", "
       << "\"getter_setter_name\": " << "\"" << tidy_up_string(v.getter_setter_name()) << "\"" << ", "
-      << "\"streaming_properties\": " << v.streaming_properties()
+      << "\"streaming_for_type\": " << "\"" << tidy_up_string(v.streaming_for_type()) << "\""
       << " }";
     return(s);
 }

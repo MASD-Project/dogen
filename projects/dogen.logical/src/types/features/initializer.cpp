@@ -25,6 +25,7 @@
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/labelling.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
+#include "dogen.logical/types/features/streaming.hpp"
 #include "dogen.logical/types/features/decoration.hpp"
 #include "dogen.logical/types/features/enumerator.hpp"
 #include "dogen.logical/types/features/enumeration.hpp"
@@ -54,6 +55,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::logical::features::physical::make_features());
     rg.register_features(dogen::logical::features::physical_relations::make_features());
     rg.register_features(dogen::logical::features::primitive::make_features());
+    rg.register_features(dogen::logical::features::streaming::make_features());
     rg.register_features(dogen::logical::features::type_parameters::make_features());
     rg.register_features(dogen::logical::features::variability_bundle::make_features());
     rg.register_features(dogen::logical::features::variability_templates::make_features());

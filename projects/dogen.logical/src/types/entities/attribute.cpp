@@ -48,7 +48,7 @@ attribute::attribute(attribute&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       member_variable_name_(std::move(rhs.member_variable_name_)),
       getter_setter_name_(std::move(rhs.getter_setter_name_)),
-      streaming_properties_(std::move(rhs.streaming_properties_)) { }
+      streaming_for_type_(std::move(rhs.streaming_for_type_)) { }
 
 attribute::attribute(
     const std::string& documentation,
@@ -62,7 +62,7 @@ attribute::attribute(
     const boost::optional<dogen::logical::entities::orm::attribute_properties>& orm_properties,
     const std::string& member_variable_name,
     const std::string& getter_setter_name,
-    const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties)
+    const std::string& streaming_for_type)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -74,7 +74,7 @@ attribute::attribute(
       orm_properties_(orm_properties),
       member_variable_name_(member_variable_name),
       getter_setter_name_(getter_setter_name),
-      streaming_properties_(streaming_properties) { }
+      streaming_for_type_(streaming_for_type) { }
 
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
@@ -89,7 +89,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(orm_properties_, other.orm_properties_);
     swap(member_variable_name_, other.member_variable_name_);
     swap(getter_setter_name_, other.getter_setter_name_);
-    swap(streaming_properties_, other.streaming_properties_);
+    swap(streaming_for_type_, other.streaming_for_type_);
 }
 
 bool attribute::operator==(const attribute& rhs) const {
@@ -104,7 +104,7 @@ bool attribute::operator==(const attribute& rhs) const {
         orm_properties_ == rhs.orm_properties_ &&
         member_variable_name_ == rhs.member_variable_name_ &&
         getter_setter_name_ == rhs.getter_setter_name_ &&
-        streaming_properties_ == rhs.streaming_properties_;
+        streaming_for_type_ == rhs.streaming_for_type_;
 }
 
 attribute& attribute::operator=(attribute other) {
@@ -273,20 +273,20 @@ void attribute::getter_setter_name(const std::string&& v) {
     getter_setter_name_ = std::move(v);
 }
 
-const boost::optional<dogen::logical::entities::streaming_properties>& attribute::streaming_properties() const {
-    return streaming_properties_;
+const std::string& attribute::streaming_for_type() const {
+    return streaming_for_type_;
 }
 
-boost::optional<dogen::logical::entities::streaming_properties>& attribute::streaming_properties() {
-    return streaming_properties_;
+std::string& attribute::streaming_for_type() {
+    return streaming_for_type_;
 }
 
-void attribute::streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>& v) {
-    streaming_properties_ = v;
+void attribute::streaming_for_type(const std::string& v) {
+    streaming_for_type_ = v;
 }
 
-void attribute::streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>&& v) {
-    streaming_properties_ = std::move(v);
+void attribute::streaming_for_type(const std::string&& v) {
+    streaming_for_type_ = std::move(v);
 }
 
 }

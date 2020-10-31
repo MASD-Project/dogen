@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -35,7 +36,6 @@
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
-#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.identification/types/entities/logical_meta_id.hpp"
@@ -95,7 +95,7 @@ public:
         const dogen::logical::entities::build::element_repository& build_elements,
         const dogen::logical::entities::physical::element_repository& physical_elements,
         const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties);
+        const std::unordered_map<dogen::identification::entities::logical_id, std::string>& streaming_for_type);
 
 public:
     /**
@@ -283,10 +283,10 @@ public:
     void meta_names(const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>&& v);
     /**@}*/
 
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties() const;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, std::string>& streaming_for_type() const;
+    std::unordered_map<dogen::identification::entities::logical_id, std::string>& streaming_for_type();
+    void streaming_for_type(const std::unordered_map<dogen::identification::entities::logical_id, std::string>& v);
+    void streaming_for_type(const std::unordered_map<dogen::identification::entities::logical_id, std::string>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -320,7 +320,7 @@ private:
     dogen::logical::entities::build::element_repository build_elements_;
     dogen::logical::entities::physical::element_repository physical_elements_;
     std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name> meta_names_;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties> streaming_properties_;
+    std::unordered_map<dogen::identification::entities::logical_id, std::string> streaming_for_type_;
 };
 
 }

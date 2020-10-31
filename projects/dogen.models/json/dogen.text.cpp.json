@@ -1994,33 +1994,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
-        },
-        {
-          "name": "streaming.string_conversion_method",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which conversion method to use to convert strings.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        },
-        {
-          "name": "streaming.requires_quoting",
-          "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "documentation": "If true, streaming this type must be preceeded by quoting.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        },
-        {
-          "name": "streaming.remove_unprintable_characters",
-          "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "documentation": "If true, streaming this type requires removing unprintable characters.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
         }
       ]
     },
