@@ -38,16 +38,14 @@ namespace dogen::text::cpp::formattables {
 
 class model_expander {
 private:
-    void expand_streaming(
-        const variability::entities::feature_model& feature_model,
-        model& fm) const;
-
     void expand_aspects(
         const variability::entities::feature_model& feature_model,
         model& fm) const;
 
     void expand_helpers(
         const variability::entities::feature_model& feature_model,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
@@ -59,6 +57,8 @@ private:
 public:
     void expand(const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp, model& fm) const;
 };
 

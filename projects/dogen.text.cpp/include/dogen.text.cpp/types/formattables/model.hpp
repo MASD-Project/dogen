@@ -31,7 +31,6 @@
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.text.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
-#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -48,7 +47,6 @@ public:
 public:
     model(
         const dogen::identification::entities::logical_name& name,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
         const dogen::text::cpp::formattables::cpp_standards cpp_standard);
 
@@ -57,11 +55,6 @@ public:
     dogen::identification::entities::logical_name& name();
     void name(const dogen::identification::entities::logical_name& v);
     void name(const dogen::identification::entities::logical_name&& v);
-
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties() const;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v);
 
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables() const;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables();
@@ -83,7 +76,6 @@ public:
 
 private:
     dogen::identification::entities::logical_name name_;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties> streaming_properties_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable> formattables_;
     dogen::text::cpp::formattables::cpp_standards cpp_standard_;
 };

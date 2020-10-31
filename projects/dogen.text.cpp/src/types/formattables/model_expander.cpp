@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/formattables/streaming_expander.hpp"
 #include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
@@ -26,13 +25,6 @@
 #include "dogen.text.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::cpp::formattables {
-
-void model_expander::
-expand_streaming(const variability::entities::feature_model& feature_model,
-    model& fm) const {
-    streaming_expander ex;
-    ex.expand(feature_model, fm);
-}
 
 void model_expander::expand_aspects(
     const variability::entities::feature_model& feature_model,
@@ -43,9 +35,11 @@ void model_expander::expand_aspects(
 
 void model_expander::expand_helpers(
     const variability::entities::feature_model& feature_model,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
     helper_expander ex;
-    ex.expand(feature_model, frp, fm);
+    ex.expand(feature_model, streaming_properties, frp, fm);
 }
 
 void model_expander::reduce(model& fm) const {
@@ -64,13 +58,9 @@ model_expander::expand_cpp_standard(
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
-
-    /*
-     * Streaming expansion must be done before helper expansion as the
-     * helpers need the streaminging properties.
-     */
-    expand_streaming(feature_model, fm);
 
     /*
      * C++ standard expansion must be done before enablement because
@@ -80,7 +70,7 @@ void model_expander::expand(
     expand_cpp_standard(feature_model, rcfg, fm);
 
     expand_aspects(feature_model, fm);
-    expand_helpers(feature_model, frp, fm);
+    expand_helpers(feature_model, streaming_properties, frp, fm);
 
     /*
      * All of the above expansions must be performed prior to

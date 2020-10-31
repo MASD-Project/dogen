@@ -1162,10 +1162,6 @@
           "type": "identification::entities::logical_name"
         },
         {
-          "name": "streaming_properties",
-          "type": "std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>"
-        },
-        {
           "name": "formattables",
           "type": "std::unordered_map<identification::entities::logical_id, formattables::formattable>"
         },
@@ -1174,13 +1170,6 @@
           "type": "formattables::cpp_standards"
         }
       ]
-    },
-    {
-      "name": "formattables::streaming_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::wale_transform",

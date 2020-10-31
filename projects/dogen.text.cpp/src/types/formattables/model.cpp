@@ -27,25 +27,21 @@ model::model()
 
 model::model(
     const dogen::identification::entities::logical_name& name,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard)
     : name_(name),
-      streaming_properties_(streaming_properties),
       formattables_(formattables),
       cpp_standard_(cpp_standard) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
-    swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(cpp_standard_, other.cpp_standard_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
-        streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
         cpp_standard_ == rhs.cpp_standard_;
 }
@@ -70,22 +66,6 @@ void model::name(const dogen::identification::entities::logical_name& v) {
 
 void model::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
-}
-
-const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() const {
-    return streaming_properties_;
-}
-
-std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() {
-    return streaming_properties_;
-}
-
-void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
-    streaming_properties_ = v;
-}
-
-void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v) {
-    streaming_properties_ = std::move(v);
 }
 
 const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& model::formattables() const {
