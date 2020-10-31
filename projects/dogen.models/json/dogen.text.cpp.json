@@ -1170,10 +1170,6 @@
           "type": "std::unordered_map<identification::entities::logical_id, formattables::formattable>"
         },
         {
-          "name": "facet_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, formattables::facet_properties>"
-        },
-        {
           "name": "cpp_standard",
           "type": "formattables::cpp_standards"
         },
@@ -1188,20 +1184,6 @@
         {
           "name": "project_items",
           "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": "formattables::facet_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory",
-          "type": "std::string"
-        },
-        {
-          "name": "enabled",
-          "type": "bool"
         }
       ]
     },

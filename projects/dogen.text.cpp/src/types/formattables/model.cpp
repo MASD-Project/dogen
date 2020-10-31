@@ -29,7 +29,6 @@ model::model(
     const dogen::identification::entities::logical_name& name,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
     const std::string& odb_sql_name_case,
@@ -37,7 +36,6 @@ model::model(
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
-      facet_properties_(facet_properties),
       cpp_standard_(cpp_standard),
       odb_databases_(odb_databases),
       odb_sql_name_case_(odb_sql_name_case),
@@ -48,7 +46,6 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
-    swap(facet_properties_, other.facet_properties_);
     swap(cpp_standard_, other.cpp_standard_);
     swap(odb_databases_, other.odb_databases_);
     swap(odb_sql_name_case_, other.odb_sql_name_case_);
@@ -59,7 +56,6 @@ bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
-        facet_properties_ == rhs.facet_properties_ &&
         cpp_standard_ == rhs.cpp_standard_ &&
         odb_databases_ == rhs.odb_databases_ &&
         odb_sql_name_case_ == rhs.odb_sql_name_case_ &&
@@ -118,22 +114,6 @@ void model::formattables(const std::unordered_map<dogen::identification::entitie
 
 void model::formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
-}
-
-const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() const {
-    return facet_properties_;
-}
-
-std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() {
-    return facet_properties_;
-}
-
-void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& v) {
-    facet_properties_ = v;
-}
-
-void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>&& v) {
-    facet_properties_ = std::move(v);
 }
 
 dogen::text::cpp::formattables::cpp_standards model::cpp_standard() const {

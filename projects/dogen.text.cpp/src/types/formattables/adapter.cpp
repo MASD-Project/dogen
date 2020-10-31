@@ -106,14 +106,6 @@ model adapter::adapt(const transforms::repository& frp,
 
     model r;
     r.name(m.logical().name());
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto& fp(mmp.facet_properties());
-    for (const auto& pair : fp) {
-        facet_properties fp;
-        fp.enabled(pair.second.enabled());
-        r.facet_properties().insert(std::make_pair(pair.first, fp));
-    }
-
     if (m.logical().orm_properties()) {
         const auto op(*m.logical().orm_properties());
         r.odb_databases(make_databases(op));

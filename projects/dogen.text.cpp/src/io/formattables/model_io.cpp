@@ -25,8 +25,6 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.text.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.text.cpp/io/formattables/facet_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
 
 namespace std {
@@ -50,24 +48,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -113,7 +93,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"cpp_standard\": " << v.cpp_standard() << ", "
       << "\"odb_databases\": " << v.odb_databases() << ", "
       << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\"" << ", "
