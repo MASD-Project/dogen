@@ -110,7 +110,8 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 
         using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
-        context ctx(ep, physical_model_, fm, frp.helper_formatters(), tracer);
+        context ctx(ep, physical_model_, fm, frp.helper_formatters(),
+            fm.streaming_properties(), tracer);
 
         auto& a(*aptr);
         const auto fs(aptr->formatting_style());

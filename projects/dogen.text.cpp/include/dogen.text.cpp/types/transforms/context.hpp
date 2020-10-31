@@ -35,6 +35,7 @@
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.physical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
@@ -53,6 +54,8 @@ public:
         std::unordered_map<identification::entities::physical_meta_id,
         std::list<std::shared_ptr<
         helper_transform>>>>& helpers,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
@@ -67,6 +70,10 @@ public:
 
     const physical::entities::model& physical_model() const;
 
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::streaming_properties>&
+    streaming_properties() const;
+
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
@@ -77,6 +84,9 @@ private:
         std::unordered_map<identification::entities::physical_meta_id,
                            std::list<std::shared_ptr<helper_transform>>>>&
     helpers_;
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::streaming_properties>&
+    streaming_properties_;
     boost::shared_ptr<tracing::tracer> tracer_;
 };
 

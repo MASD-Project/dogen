@@ -603,7 +603,7 @@ streaming_for_type(const logical::entities::streaming_properties& sp,
 std::string assistant::streaming_for_type(const logical_name& n,
     const std::string& s) const {
 
-    const auto str_propss(context_.model().streaming_properties());
+    const auto str_propss(context_.streaming_properties());
     const auto i(str_propss.find(n.id()));
     if (i == str_propss.end())
         return s;
