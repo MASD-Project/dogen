@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
@@ -30,6 +31,7 @@
 #include "dogen.logical/types/features/streaming.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/entities/streaming_properties.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
 
@@ -89,6 +91,7 @@ void gatherer::process(const entities::element& e) {
     if (!s.has_configuration_point(fg.requires_quoting) &&
         !s.has_configuration_point(fg.string_conversion_method) &&
         !s.has_configuration_point(fg.remove_unprintable_characters)) {
+        BOOST_LOG_SEV(lg, debug) << "No streaming properties found.";
         return;
     }
 
@@ -99,6 +102,7 @@ void gatherer::process(const entities::element& e) {
     const auto scfg(features::streaming::make_static_configuration(fg, cfg));
     sp.requires_quoting(scfg.requires_quoting);
     sp.string_conversion_method(scfg.string_conversion_method);
+    sp.remove_unprintable_characters(scfg.remove_unprintable_characters);
 
     const auto pair(std::make_pair(id, sp));
     const auto inserted(result_.insert(pair).second);
@@ -107,6 +111,7 @@ void gatherer::process(const entities::element& e) {
         BOOST_THROW_EXCEPTION(
             transformation_error(duplicate_id + id.value()));
     }
+    BOOST_LOG_SEV(lg, debug) << "Created streaming properties: " << sp;
 }
 
 }
@@ -121,6 +126,7 @@ apply(const context& ctx, entities::model& m) {
 
     gatherer g(fg);
     entities::elements_traversal(m, g);
+    BOOST_LOG_SEV(lg, debug) << "Streaming properties: " << g.result();
     m.streaming_properties(g.result());
 
     stp.end_transform(m);
