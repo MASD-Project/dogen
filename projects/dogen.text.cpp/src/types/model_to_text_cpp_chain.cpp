@@ -105,9 +105,9 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
      */
     auto fm(create_formattables_model(feature_model, rcfg, frp, m));
     using variability::helpers::configuration_factory;
-    const configuration_factory cf(feature_model, false/*compatibility_model*/);
+    const configuration_factory cf(feature_model, false/*compatibility_mode*/);
     apply(ctx.tracer(), m.physical(), feature_model, cf,
-        fm.streaming_properties(), fm);
+        m.logical().streaming_properties(), fm);
 }
 
 }
