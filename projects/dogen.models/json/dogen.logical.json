@@ -70,10 +70,6 @@
           "name": "getter_setter_name",
           "type": "std::string",
           "documentation": "Name to use for getter and setter.\n"
-        },
-        {
-          "name": "streaming_for_type",
-          "type": "std::string"
         }
       ]
     },
@@ -395,8 +391,8 @@
           "documentation": "All meta-names by qualified name.\n"
         },
         {
-          "name": "streaming_for_type",
-          "type": "std::unordered_map<identification::entities::logical_id, std::string>"
+          "name": "streaming_properties",
+          "type": "std::unordered_map<identification::entities::logical_id, streaming_properties>"
         }
       ]
     },
@@ -4398,6 +4394,24 @@
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
+        }
+      ]
+    },
+    {
+      "name": "entities::streaming_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_quoting",
+          "type": "bool"
+        },
+        {
+          "name": "string_conversion_method",
+          "type": "std::string"
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "bool"
         }
       ]
     }

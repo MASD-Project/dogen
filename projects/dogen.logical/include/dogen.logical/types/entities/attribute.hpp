@@ -63,8 +63,7 @@ public:
         const bool is_fluent,
         const boost::optional<dogen::logical::entities::orm::attribute_properties>& orm_properties,
         const std::string& member_variable_name,
-        const std::string& getter_setter_name,
-        const std::string& streaming_for_type);
+        const std::string& getter_setter_name);
 
 public:
     /**
@@ -177,11 +176,6 @@ public:
     void getter_setter_name(const std::string&& v);
     /**@}*/
 
-    const std::string& streaming_for_type() const;
-    std::string& streaming_for_type();
-    void streaming_for_type(const std::string& v);
-    void streaming_for_type(const std::string&& v);
-
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -204,7 +198,6 @@ private:
     boost::optional<dogen::logical::entities::orm::attribute_properties> orm_properties_;
     std::string member_variable_name_;
     std::string getter_setter_name_;
-    std::string streaming_for_type_;
 };
 
 }

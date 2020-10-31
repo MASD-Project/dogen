@@ -57,7 +57,7 @@ model::model(model&& rhs)
       build_elements_(std::move(rhs.build_elements_)),
       physical_elements_(std::move(rhs.physical_elements_)),
       meta_names_(std::move(rhs.meta_names_)),
-      streaming_for_type_(std::move(rhs.streaming_for_type_)) { }
+      streaming_properties_(std::move(rhs.streaming_properties_)) { }
 
 model::model(
     const dogen::identification::entities::logical_name& name,
@@ -81,7 +81,7 @@ model::model(
     const dogen::logical::entities::build::element_repository& build_elements,
     const dogen::logical::entities::physical::element_repository& physical_elements,
     const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
-    const std::unordered_map<dogen::identification::entities::logical_id, std::string>& streaming_for_type)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -103,7 +103,7 @@ model::model(
       build_elements_(build_elements),
       physical_elements_(physical_elements),
       meta_names_(meta_names),
-      streaming_for_type_(streaming_for_type) { }
+      streaming_properties_(streaming_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -128,7 +128,7 @@ void model::swap(model& other) noexcept {
     swap(build_elements_, other.build_elements_);
     swap(physical_elements_, other.physical_elements_);
     swap(meta_names_, other.meta_names_);
-    swap(streaming_for_type_, other.streaming_for_type_);
+    swap(streaming_properties_, other.streaming_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -153,7 +153,7 @@ bool model::operator==(const model& rhs) const {
         build_elements_ == rhs.build_elements_ &&
         physical_elements_ == rhs.physical_elements_ &&
         meta_names_ == rhs.meta_names_ &&
-        streaming_for_type_ == rhs.streaming_for_type_;
+        streaming_properties_ == rhs.streaming_properties_;
 }
 
 model& model::operator=(model other) {
@@ -490,20 +490,20 @@ void model::meta_names(const std::unordered_map<dogen::identification::entities:
     meta_names_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::logical_id, std::string>& model::streaming_for_type() const {
-    return streaming_for_type_;
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() const {
+    return streaming_properties_;
 }
 
-std::unordered_map<dogen::identification::entities::logical_id, std::string>& model::streaming_for_type() {
-    return streaming_for_type_;
+std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() {
+    return streaming_properties_;
 }
 
-void model::streaming_for_type(const std::unordered_map<dogen::identification::entities::logical_id, std::string>& v) {
-    streaming_for_type_ = v;
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
+    streaming_properties_ = v;
 }
 
-void model::streaming_for_type(const std::unordered_map<dogen::identification::entities::logical_id, std::string>&& v) {
-    streaming_for_type_ = std::move(v);
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v) {
+    streaming_properties_ = std::move(v);
 }
 
 }
