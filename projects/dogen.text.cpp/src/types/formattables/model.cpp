@@ -31,15 +31,13 @@ model::model(
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
-    const std::string& odb_sql_name_case,
-    const std::list<std::string>& project_items)
+    const std::string& odb_sql_name_case)
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
       cpp_standard_(cpp_standard),
       odb_databases_(odb_databases),
-      odb_sql_name_case_(odb_sql_name_case),
-      project_items_(project_items) { }
+      odb_sql_name_case_(odb_sql_name_case) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -49,7 +47,6 @@ void model::swap(model& other) noexcept {
     swap(cpp_standard_, other.cpp_standard_);
     swap(odb_databases_, other.odb_databases_);
     swap(odb_sql_name_case_, other.odb_sql_name_case_);
-    swap(project_items_, other.project_items_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -58,8 +55,7 @@ bool model::operator==(const model& rhs) const {
         formattables_ == rhs.formattables_ &&
         cpp_standard_ == rhs.cpp_standard_ &&
         odb_databases_ == rhs.odb_databases_ &&
-        odb_sql_name_case_ == rhs.odb_sql_name_case_ &&
-        project_items_ == rhs.project_items_;
+        odb_sql_name_case_ == rhs.odb_sql_name_case_;
 }
 
 model& model::operator=(model other) {
@@ -154,22 +150,6 @@ void model::odb_sql_name_case(const std::string& v) {
 
 void model::odb_sql_name_case(const std::string&& v) {
     odb_sql_name_case_ = std::move(v);
-}
-
-const std::list<std::string>& model::project_items() const {
-    return project_items_;
-}
-
-std::list<std::string>& model::project_items() {
-    return project_items_;
-}
-
-void model::project_items(const std::list<std::string>& v) {
-    project_items_ = v;
-}
-
-void model::project_items(const std::list<std::string>&& v) {
-    project_items_ = std::move(v);
 }
 
 }

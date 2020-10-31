@@ -95,8 +95,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"formattables\": " << v.formattables() << ", "
       << "\"cpp_standard\": " << v.cpp_standard() << ", "
       << "\"odb_databases\": " << v.odb_databases() << ", "
-      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\"" << ", "
-      << "\"project_items\": " << v.project_items()
+      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\""
       << " }";
     return(s);
 }

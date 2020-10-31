@@ -1180,10 +1180,6 @@
         {
           "name": "odb_sql_name_case",
           "type": "std::string"
-        },
-        {
-          "name": "project_items",
-          "type": "std::list<std::string>"
         }
       ]
     },

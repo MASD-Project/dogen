@@ -54,8 +54,7 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
         const dogen::text::cpp::formattables::cpp_standards cpp_standard,
         const std::list<std::string>& odb_databases,
-        const std::string& odb_sql_name_case,
-        const std::list<std::string>& project_items);
+        const std::string& odb_sql_name_case);
 
 public:
     const dogen::identification::entities::logical_name& name() const;
@@ -86,11 +85,6 @@ public:
     void odb_sql_name_case(const std::string& v);
     void odb_sql_name_case(const std::string&& v);
 
-    const std::list<std::string>& project_items() const;
-    std::list<std::string>& project_items();
-    void project_items(const std::list<std::string>& v);
-    void project_items(const std::list<std::string>&& v);
-
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -108,7 +102,6 @@ private:
     dogen::text::cpp::formattables::cpp_standards cpp_standard_;
     std::list<std::string> odb_databases_;
     std::string odb_sql_name_case_;
-    std::list<std::string> project_items_;
 };
 
 }
