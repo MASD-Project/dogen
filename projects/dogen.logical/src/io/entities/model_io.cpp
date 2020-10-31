@@ -20,10 +20,12 @@
  */
 #include <ostream>
 #include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/orm/element_repository_io.hpp"
@@ -148,6 +150,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -173,7 +193,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"orm_elements\": " << v.orm_elements() << ", "
       << "\"build_elements\": " << v.build_elements() << ", "
       << "\"physical_elements\": " << v.physical_elements() << ", "
-      << "\"meta_names\": " << v.meta_names()
+      << "\"meta_names\": " << v.meta_names() << ", "
+      << "\"streaming_properties\": " << v.streaming_properties()
       << " }";
     return(s);
 }

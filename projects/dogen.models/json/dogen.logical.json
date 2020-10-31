@@ -70,6 +70,10 @@
           "name": "getter_setter_name",
           "type": "std::string",
           "documentation": "Name to use for getter and setter.\n"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "boost::optional<streaming_properties>"
         }
       ]
     },
@@ -389,6 +393,10 @@
           "name": "meta_names",
           "type": "std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>",
           "documentation": "All meta-names by qualified name.\n"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<identification::entities::logical_id, streaming_properties>"
         }
       ]
     },
@@ -4346,6 +4354,31 @@
           "documentation": "Technical space to which this physical element belongs to.\n"
         }
       ]
+    },
+    {
+      "name": "entities::streaming_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_quoting",
+          "type": "bool"
+        },
+        {
+          "name": "string_conversion_method",
+          "type": "std::string"
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "transforms::streaming_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

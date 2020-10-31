@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/orm/attribute_properties.hpp"
@@ -63,7 +64,8 @@ public:
         const bool is_fluent,
         const boost::optional<dogen::logical::entities::orm::attribute_properties>& orm_properties,
         const std::string& member_variable_name,
-        const std::string& getter_setter_name);
+        const std::string& getter_setter_name,
+        const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties);
 
 public:
     /**
@@ -176,6 +178,11 @@ public:
     void getter_setter_name(const std::string&& v);
     /**@}*/
 
+    const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties() const;
+    boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties();
+    void streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>& v);
+    void streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>&& v);
+
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -198,6 +205,7 @@ private:
     boost::optional<dogen::logical::entities::orm::attribute_properties> orm_properties_;
     std::string member_variable_name_;
     std::string getter_setter_name_;
+    boost::optional<dogen::logical::entities::streaming_properties> streaming_properties_;
 };
 
 }
