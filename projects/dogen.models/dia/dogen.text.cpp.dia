@@ -17176,7 +17176,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="149,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.95,74.95;193.825,81.85"/>
+        <dia:rectangle val="148.95,74.95;193.825,81.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="149,75"/>
@@ -17185,7 +17185,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="44.774999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -17353,29 +17353,6 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#formattables::cpp_standards#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#odb_databases#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17591,7 +17568,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="43.065,141.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.315,81.75;149.2,144.055"/>
+        <dia:rectangle val="42.315,80.95;149.2,144.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17600,7 +17577,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="43.065,141.4"/>
         <dia:point val="43.065,144"/>
         <dia:point val="149,144"/>
-        <dia:point val="149,81.8"/>
+        <dia:point val="149,81"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

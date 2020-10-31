@@ -54,23 +54,6 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 namespace dogen::text::cpp::formattables {
 
-std::string
-adapter::to_odb_database(const logical::entities::orm::database_system ds) {
-    using logical::entities::orm::database_system;
-
-    switch (ds) {
-    case database_system::mysql: return mysql;
-    case database_system::postgresql: return postgresql;
-    case database_system::oracle: return oracle;
-    case database_system::sql_server: return sql_server;
-    case database_system::sqlite: return sqlite;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(ds));
-        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-        BOOST_THROW_EXCEPTION(adaptation_error(invalid_daatabase_system + s));
-    } }
-}
-
 std::string adapter::
 to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const {
     using logical::entities::orm::letter_case;
@@ -85,19 +68,6 @@ to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const {
     } }
 }
 
-std::list<std::string> adapter::
-make_databases(const logical::entities::orm::model_properties& omp) const {
-    std::list<std::string> r;
-
-    if (omp.database_systems().size() > 1)
-        r.push_back("common");
-
-    for (const auto ds : omp.database_systems())
-        r.push_back(to_odb_database(ds));
-
-    return r;
-}
-
 model adapter::adapt(const transforms::repository& frp,
     const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting logical model to formattables."
@@ -108,7 +78,6 @@ model adapter::adapt(const transforms::repository& frp,
     r.name(m.logical().name());
     if (m.logical().orm_properties()) {
         const auto op(*m.logical().orm_properties());
-        r.odb_databases(make_databases(op));
         if (op.letter_case())
             r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
     }

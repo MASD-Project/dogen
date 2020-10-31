@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -53,7 +52,6 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
         const dogen::text::cpp::formattables::cpp_standards cpp_standard,
-        const std::list<std::string>& odb_databases,
         const std::string& odb_sql_name_case);
 
 public:
@@ -75,11 +73,6 @@ public:
     dogen::text::cpp::formattables::cpp_standards cpp_standard() const;
     void cpp_standard(const dogen::text::cpp::formattables::cpp_standards v);
 
-    const std::list<std::string>& odb_databases() const;
-    std::list<std::string>& odb_databases();
-    void odb_databases(const std::list<std::string>& v);
-    void odb_databases(const std::list<std::string>&& v);
-
     const std::string& odb_sql_name_case() const;
     std::string& odb_sql_name_case();
     void odb_sql_name_case(const std::string& v);
@@ -100,7 +93,6 @@ private:
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable> formattables_;
     dogen::text::cpp::formattables::cpp_standards cpp_standard_;
-    std::list<std::string> odb_databases_;
     std::string odb_sql_name_case_;
 };
 

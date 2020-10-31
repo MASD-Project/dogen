@@ -1174,10 +1174,6 @@
           "type": "formattables::cpp_standards"
         },
         {
-          "name": "odb_databases",
-          "type": "std::list<std::string>"
-        },
-        {
           "name": "odb_sql_name_case",
           "type": "std::string"
         }

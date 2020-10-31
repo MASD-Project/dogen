@@ -42,16 +42,9 @@ namespace dogen::text::cpp::formattables {
  * formattables space.
  */
 class adapter {
-public:
-    static std::string
-    to_odb_database(const logical::entities::orm::database_system ds);
-
 private:
     std::string
     to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const;
-
-    std::list<std::string>
-    make_databases(const logical::entities::orm::model_properties& omp) const;
 
 public:
     /**
