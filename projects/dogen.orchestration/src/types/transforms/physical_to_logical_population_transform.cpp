@@ -370,8 +370,7 @@ make_odb_databases(const text::entities::model& m) {
 }
 
 void physical_to_logical_population_transform::
-apply(const text::transforms::context& ctx,
-    text::entities::model& m) {
+apply(const text::transforms::context& ctx, text::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "physical to logical population",
         transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
 
