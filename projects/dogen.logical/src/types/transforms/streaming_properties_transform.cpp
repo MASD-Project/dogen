@@ -29,6 +29,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/features/streaming.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
 
