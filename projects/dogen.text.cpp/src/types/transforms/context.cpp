@@ -22,24 +22,14 @@
 
 namespace dogen::text::cpp::transforms {
 
-context::context(
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element,
-    const formattables::element_properties& element_properties,
-    const formattables::model& fm,
+context::context(const formattables::element_properties& element_properties,
+    const physical::entities::model& pm, const formattables::model& fm,
     const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
     boost::shared_ptr<tracing::tracer> tracer)
-    : enabled_archetype_for_element_(enabled_archetype_for_element),
-      element_properties_(element_properties), model_(fm),
-      helpers_(helpers), tracer_(tracer) { }
-
-const std::unordered_set<identification::entities::logical_meta_physical_id>&
-context::enabled_archetype_for_element() const {
-    return enabled_archetype_for_element_;
-}
+    : element_properties_(element_properties), physical_model_(pm),
+      model_(fm), helpers_(helpers), tracer_(tracer) { }
 
 const formattables::element_properties&
 context::element_properties() const {
@@ -55,6 +45,10 @@ const std::unordered_map<std::string,
                        std::list<std::shared_ptr<helper_transform>>>>&
 context::helpers() const {
     return helpers_;
+}
+
+const physical::entities::model& context::physical_model() const {
+    return physical_model_;
 }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {

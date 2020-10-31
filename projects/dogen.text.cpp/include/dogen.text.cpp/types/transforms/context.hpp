@@ -34,6 +34,7 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
@@ -45,10 +46,8 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element,
-        const formattables::element_properties& element_properties,
+    context(const formattables::element_properties& element_properties,
+        const physical::entities::model& pm,
         const formattables::model& fm,
         const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
@@ -57,10 +56,6 @@ public:
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element() const;
-
     const formattables::element_properties& element_properties() const;
 
     const formattables::model& model() const;
@@ -68,15 +63,15 @@ public:
     const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
             std::list<std::shared_ptr<helper_transform>>>>&
-        helpers() const;
+    helpers() const;
+
+    const physical::entities::model& physical_model() const;
 
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element_;
     const formattables::element_properties& element_properties_;
+    const physical::entities::model& physical_model_;
     const formattables::model& model_;
     const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,

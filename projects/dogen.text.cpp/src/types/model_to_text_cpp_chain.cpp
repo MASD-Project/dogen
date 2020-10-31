@@ -74,15 +74,13 @@ std::string model_to_text_cpp_chain::description() const {
 }
 
 void model_to_text_cpp_chain::
-apply(boost::shared_ptr<tracing::tracer> tracer, const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element,
+apply(boost::shared_ptr<tracing::tracer> tracer,
+    const physical::entities::model& pm,
     const variability::entities::feature_model& feature_model,
-    const boost::filesystem::path& templates_directory,
     const variability::helpers::configuration_factory& cf,
     formattables::model& fm) const {
-    transforms::workflow wf(templates_directory, feature_model, cf);
-    wf.execute(tracer, enabled_archetype_for_element, fm);
+    transforms::workflow wf(pm, feature_model, cf);
+    wf.execute(tracer, fm);
 }
 
 identification::entities::technical_space
@@ -99,18 +97,14 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
     const auto& feature_model(*ctx.feature_model());
     const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& frp(formatters_repository());
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto& ppp(mmp.project_path_properties());
-    const auto templates_directory(ppp.templates_directory_full_path());
 
     /*
      * Generate the formattables model.
      */
     auto fm(create_formattables_model(feature_model, rcfg, frp, m));
-    const auto& eafe(mmp.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
-    apply(ctx.tracer(), eafe, feature_model, templates_directory, cf, fm);
+    apply(ctx.tracer(), m.physical(), feature_model, cf, fm);
 }
 
 }

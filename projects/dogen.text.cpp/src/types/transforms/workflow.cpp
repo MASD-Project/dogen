@@ -47,11 +47,10 @@ namespace dogen::text::cpp::transforms {
 
 std::shared_ptr<cpp::transforms::registrar> workflow::registrar_;
 
-workflow::workflow(const boost::filesystem::path& templates_directory,
+workflow::workflow(const physical::entities::model& pm,
     const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
-    : templates_directory_(templates_directory), feature_model_(fm),
-      configuration_factory_(cf) { }
+    : physical_model_(pm), feature_model_(fm), configuration_factory_(cf) { }
 
 cpp::transforms::registrar& workflow::registrar() {
     if (!registrar_)
@@ -75,12 +74,8 @@ workflow::get_artefact(const std::unordered_map<
     return i->second;
 }
 
-void
-workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element, const formattables::model& fm,
-    formattables::formattable& fbl) const {
+void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+    const formattables::model& fm, formattables::formattable& fbl) const {
 
     const auto& e(*fbl.element());
     const auto id(e.name().qualified().dot());
@@ -95,6 +90,10 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         BOOST_LOG_SEV(lg, debug) << "No formatters for meta name: " << mn;
         return;
     }
+
+    const auto& mmp(physical_model_.meta_model_properties());
+    const auto& ppp(mmp.project_path_properties());
+    const auto templates_directory(ppp.templates_directory_full_path());
 
     const auto& ep(fbl.element_properties());
     const auto& fmts(i->second);
@@ -111,8 +110,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 
         using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
-        context ctx(enabled_archetype_for_element, ep, fm,
-            frp.helper_formatters(), tracer);
+        context ctx(ep, physical_model_, fm, frp.helper_formatters(), tracer);
 
         auto& a(*aptr);
         const auto fs(aptr->formatting_style());
@@ -126,13 +124,13 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
          } else if (fs == formatting_styles::wale) {
              BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
              wale_transform f;
-             f.apply(templates_directory_, fmt, ctx, e, a);
+             f.apply(templates_directory, fmt, ctx, e, a);
 
              const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
          } else if (fs == formatting_styles::stitch) {
              BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
-             stitch_transform f(templates_directory_, feature_model_,
+             stitch_transform f(templates_directory, feature_model_,
                  configuration_factory_);
              f.apply(fmt, e, a);
 
@@ -151,15 +149,13 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element, formattables::model& fm) const {
+    formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
 
     for (auto& pair : fm.formattables()) {
         auto& fbl(pair.second);
-        execute(tracer, enabled_archetype_for_element, fm, fbl);
+        execute(tracer, fm, fbl);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
 }

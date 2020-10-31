@@ -34,6 +34,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
@@ -47,7 +48,7 @@ namespace dogen::text::cpp::transforms {
  */
 class workflow final {
 public:
-    workflow(const boost::filesystem::path& templates_directory,
+    workflow(const physical::entities::model& pm,
         const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
@@ -67,20 +68,15 @@ private:
 
 private:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element, const formattables::model& fm,
-        formattables::formattable& fbl) const;
+        const formattables::model& fm, formattables::formattable& fbl) const;
 
 public:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<
-        identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element, formattables::model& fm) const;
+        formattables::model& fm) const;
 
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;
-    const boost::filesystem::path templates_directory_;
+    const physical::entities::model& physical_model_;
     const variability::entities::feature_model& feature_model_;
     const variability::helpers::configuration_factory& configuration_factory_;
 };

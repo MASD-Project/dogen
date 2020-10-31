@@ -34,6 +34,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
@@ -155,7 +156,7 @@ private:
      *
      * @pre Facet configuration must exist for the facet.
      */
-    formattables::facet_properties obtain_facet_properties(
+    physical::entities::facet_properties obtain_facet_properties(
         const identification::entities::physical_meta_id& facet_name) const;
 
     /**

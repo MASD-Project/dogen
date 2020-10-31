@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/types/entities/meta_model_properties.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
@@ -226,9 +227,10 @@ const formattables::element_properties& assistant::obtain_element_properties(
     return i->second.element_properties();
 }
 
-formattables::facet_properties assistant::obtain_facet_properties(
+physical::entities::facet_properties assistant::obtain_facet_properties(
     const identification::entities::physical_meta_id& facet_name) const {
-    const auto& fct_props(context_.model().facet_properties());
+    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& fct_props(mmp.facet_properties());
     const auto i(fct_props.find(facet_name));
     if (i == fct_props.end()) {
         BOOST_LOG_SEV(lg, error) << facet_properties_missing
@@ -250,7 +252,8 @@ bool assistant::is_archetype_enabled(
     const identification::entities::physical_meta_id& archetype) const {
     identification::entities::logical_id lid(element_.name().qualified().dot());
     identification::entities::logical_meta_physical_id ea(lid, archetype);
-    const auto& eafe(context_.enabled_archetype_for_element());
+    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
     return !is_disabled;
@@ -265,12 +268,12 @@ bool assistant::is_facet_enabled(
 std::string assistant::get_facet_directory_for_facet(
     const identification::entities::physical_meta_id& facet_name) const {
     const auto& fct_props(obtain_facet_properties(facet_name));
-    if (fct_props.directory().empty()) {
+    if (fct_props.directory_name().empty()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
             formatting_error(facet_directory_missing + facet_name.value()));
     }
-    return fct_props.directory();
+    return fct_props.directory_name();
 }
 
 bool assistant::is_cpp_standard_98() const {
@@ -634,18 +637,16 @@ bool assistant::requires_hashing_helper_method(
     return false;
 }
 
-std::list<logical_name>
-assistant::names_with_enabled_archetype(
+std::list<logical_name> assistant::names_with_enabled_archetype(
     const identification::entities::physical_meta_id& archetype,
     const std::list<logical_name> names) const {
     std::list<logical_name> r;
+    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
     for (const auto& n : names) {
         const identification::entities::logical_id lid(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << lid;
-
-
         identification::entities::logical_meta_physical_id ea(lid, archetype);
-        const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());
         if (is_disabled)
