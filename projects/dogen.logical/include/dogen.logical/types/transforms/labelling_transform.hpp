@@ -30,6 +30,9 @@
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Populates all labels.
+ */
 class labelling_transform final {
 public:
     static void apply(const context& ctx, entities::model& m);
