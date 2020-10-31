@@ -34,7 +34,7 @@
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
 #include "dogen.text.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -70,7 +70,7 @@ private:
     std::string helper_family_for_id(const helper_configuration& cfg,
         const identification::entities::logical_id& id) const;
 
-    boost::optional<streaming_properties>
+    boost::optional<logical::entities::streaming_properties>
     streaming_properties_for_id(const helper_configuration& cfg,
         const identification::entities::logical_id& id) const;
 
@@ -149,14 +149,14 @@ helper_family_for_id(const helper_configuration& cfg,
     return i->second;
 }
 
-boost::optional<formattables::streaming_properties>
+boost::optional<logical::entities::streaming_properties>
 helper_properties_generator::
 streaming_properties_for_id(const helper_configuration& cfg,
     const identification::entities::logical_id& id) const {
 
     const auto i(cfg.streaming_properties().find(id));
     if (i == cfg.streaming_properties().end())
-        return boost::optional<formattables::streaming_properties>();
+        return boost::optional<logical::entities::streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
                              << ". Configuration: " << i->second;

@@ -334,7 +334,8 @@ private:
     std::list<std::shared_ptr<transforms::helper_transform>>
     get_helpers(const formattables::helper_properties& hp) const;
 
-    std::string streaming_for_type(const formattables::streaming_properties& sp,
+    std::string
+    streaming_for_type(const logical::entities::streaming_properties& sp,
         const std::string& s) const;
 
 public:

@@ -34,7 +34,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
-#include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/traits.hpp"
@@ -577,7 +577,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
 }
 
 std::string assistant::
-streaming_for_type(const formattables::streaming_properties& sp,
+streaming_for_type(const logical::entities::streaming_properties& sp,
     const std::string& s) const {
 
     std::ostringstream stream;

@@ -25,7 +25,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.text.cpp/types/formattables/streaming_expander.hpp"
 
 namespace {
@@ -60,14 +60,14 @@ streaming_expander::make_feature_group(
     return r;
 }
 
-boost::optional<streaming_properties>
+boost::optional<logical::entities::streaming_properties>
 streaming_expander::
 make_streaming_properties(const feature_group& fg,
     const variability::entities::configuration& cfg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
     bool found_any(false);
-    streaming_properties r;
+    logical::entities::streaming_properties r;
     const variability::helpers::configuration_selector s(cfg);
 
     const auto& rq(fg.requires_quoting);
@@ -89,7 +89,7 @@ make_streaming_properties(const feature_group& fg,
     }
 
     if (!found_any)
-        return boost::optional<streaming_properties>();
+        return boost::optional<logical::entities::streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Created streaming properties. "
                              << "Result: " << r;

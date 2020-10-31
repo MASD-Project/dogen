@@ -871,7 +871,7 @@
         },
         {
           "name": "streaming_properties",
-          "type": "boost::optional<formattables::streaming_properties>"
+          "type": "boost::optional<logical::entities::streaming_properties>"
         },
         {
           "name": "is_simple_type",
@@ -1163,7 +1163,7 @@
         },
         {
           "name": "streaming_properties",
-          "type": "std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>"
+          "type": "std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>"
         },
         {
           "name": "formattables",
@@ -1172,24 +1172,6 @@
         {
           "name": "cpp_standard",
           "type": "formattables::cpp_standards"
-        }
-      ]
-    },
-    {
-      "name": "formattables::streaming_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "requires_quoting",
-          "type": "bool"
-        },
-        {
-          "name": "string_conversion_method",
-          "type": "std::string"
-        },
-        {
-          "name": "remove_unprintable_characters",
-          "type": "bool"
         }
       ]
     },
@@ -1494,7 +1476,7 @@
         },
         {
           "name": "streaming_properties",
-          "type": "std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>"
+          "type": "std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>"
         }
       ]
     },

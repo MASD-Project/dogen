@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::text::cpp::formattables::streaming_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::streaming_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.text.cpp/types/formattables/streaming_properties.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
 
@@ -52,7 +52,7 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const boost::optional<dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
+        const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties,
         const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
@@ -89,10 +89,10 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const boost::optional<dogen::text::cpp::formattables::streaming_properties>& streaming_properties() const;
-    boost::optional<dogen::text::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const boost::optional<dogen::text::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const boost::optional<dogen::text::cpp::formattables::streaming_properties>&& v);
+    const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties() const;
+    boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties();
+    void streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>& v);
+    void streaming_properties(const boost::optional<dogen::logical::entities::streaming_properties>&& v);
 
     bool is_simple_type() const;
     void is_simple_type(const bool v);
@@ -123,7 +123,7 @@ private:
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    boost::optional<dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
+    boost::optional<dogen::logical::entities::streaming_properties> streaming_properties_;
     bool is_simple_type_;
     bool requires_hashing_helper_;
     bool is_circular_dependency_;

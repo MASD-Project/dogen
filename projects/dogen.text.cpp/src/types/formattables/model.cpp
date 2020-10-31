@@ -27,7 +27,7 @@ model::model()
 
 model::model(
     const dogen::identification::entities::logical_name& name,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard)
     : name_(name),
@@ -72,19 +72,19 @@ void model::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() const {
     return streaming_properties_;
 }
 
-std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& model::streaming_properties() {
     return streaming_properties_;
 }
 
-void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& v) {
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
     streaming_properties_ = v;
 }
 
-void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>&& v) {
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
 }
 

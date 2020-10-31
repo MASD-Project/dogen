@@ -29,7 +29,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.text.cpp/types/formattables/streaming_properties.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -45,7 +45,7 @@ private:
     feature_group
     make_feature_group(const variability::entities::feature_model& fm) const;
 
-    boost::optional<streaming_properties>
+    boost::optional<logical::entities::streaming_properties>
     make_streaming_properties(const feature_group& fg,
         const variability::entities::configuration& cfg) const;
 

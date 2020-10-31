@@ -24,11 +24,11 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.text.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
