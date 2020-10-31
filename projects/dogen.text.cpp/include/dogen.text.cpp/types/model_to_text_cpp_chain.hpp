@@ -82,6 +82,8 @@ private:
         const physical::entities::model& pm,
         const variability::entities::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         formattables::model& fm) const;
 
 public:

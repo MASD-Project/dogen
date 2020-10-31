@@ -78,8 +78,10 @@ apply(boost::shared_ptr<tracing::tracer> tracer,
     const physical::entities::model& pm,
     const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::streaming_properties>& streaming_properties,
     formattables::model& fm) const {
-    transforms::workflow wf(pm, feature_model, cf);
+    transforms::workflow wf(pm, feature_model, cf, streaming_properties);
     wf.execute(tracer, fm);
 }
 
@@ -104,7 +106,8 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
     auto fm(create_formattables_model(feature_model, rcfg, frp, m));
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
-    apply(ctx.tracer(), m.physical(), feature_model, cf, fm);
+    apply(ctx.tracer(), m.physical(), feature_model, cf,
+        fm.streaming_properties(), fm);
 }
 
 }
