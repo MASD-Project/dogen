@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.text.cpp/io/formattables/model_io.hpp"
 #include "dogen.text.cpp/io/formattables/formattable_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
@@ -63,14 +62,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace dogen::text::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -79,8 +70,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"cpp_standard\": " << v.cpp_standard() << ", "
-      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\""
+      << "\"cpp_standard\": " << v.cpp_standard()
       << " }";
     return(s);
 }

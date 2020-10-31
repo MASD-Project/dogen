@@ -1172,10 +1172,6 @@
         {
           "name": "cpp_standard",
           "type": "formattables::cpp_standards"
-        },
-        {
-          "name": "odb_sql_name_case",
-          "type": "std::string"
         }
       ]
     },

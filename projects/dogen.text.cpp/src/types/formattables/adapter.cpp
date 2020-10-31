@@ -54,20 +54,6 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 namespace dogen::text::cpp::formattables {
 
-std::string adapter::
-to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const {
-    using logical::entities::orm::letter_case;
-
-    switch (lc) {
-    case letter_case::upper_case: return upper_case;
-    case letter_case::lower_case: return lower_case;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(lc));
-        BOOST_LOG_SEV(lg, error) << invalid_case << s;
-        BOOST_THROW_EXCEPTION(adaptation_error(invalid_case + s));
-    } }
-}
-
 model adapter::adapt(const transforms::repository& frp,
     const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting logical model to formattables."
@@ -76,12 +62,6 @@ model adapter::adapt(const transforms::repository& frp,
 
     model r;
     r.name(m.logical().name());
-    if (m.logical().orm_properties()) {
-        const auto op(*m.logical().orm_properties());
-        if (op.letter_case())
-            r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
-    }
-
     for (const auto& region : m.logical_physical_regions()) {
         auto ptr(region.logical_element());
         const auto& e(*ptr);

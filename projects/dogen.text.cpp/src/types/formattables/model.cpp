@@ -29,13 +29,11 @@ model::model(
     const dogen::identification::entities::logical_name& name,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
-    const dogen::text::cpp::formattables::cpp_standards cpp_standard,
-    const std::string& odb_sql_name_case)
+    const dogen::text::cpp::formattables::cpp_standards cpp_standard)
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
-      cpp_standard_(cpp_standard),
-      odb_sql_name_case_(odb_sql_name_case) { }
+      cpp_standard_(cpp_standard) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -43,15 +41,13 @@ void model::swap(model& other) noexcept {
     swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(cpp_standard_, other.cpp_standard_);
-    swap(odb_sql_name_case_, other.odb_sql_name_case_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
-        cpp_standard_ == rhs.cpp_standard_ &&
-        odb_sql_name_case_ == rhs.odb_sql_name_case_;
+        cpp_standard_ == rhs.cpp_standard_;
 }
 
 model& model::operator=(model other) {
@@ -114,22 +110,6 @@ dogen::text::cpp::formattables::cpp_standards model::cpp_standard() const {
 
 void model::cpp_standard(const dogen::text::cpp::formattables::cpp_standards v) {
     cpp_standard_ = v;
-}
-
-const std::string& model::odb_sql_name_case() const {
-    return odb_sql_name_case_;
-}
-
-std::string& model::odb_sql_name_case() {
-    return odb_sql_name_case_;
-}
-
-void model::odb_sql_name_case(const std::string& v) {
-    odb_sql_name_case_ = v;
-}
-
-void model::odb_sql_name_case(const std::string&& v) {
-    odb_sql_name_case_ = std::move(v);
 }
 
 }

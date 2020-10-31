@@ -42,10 +42,6 @@ namespace dogen::text::cpp::formattables {
  * formattables space.
  */
 class adapter {
-private:
-    std::string
-    to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const;
-
 public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
