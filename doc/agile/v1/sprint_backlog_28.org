@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-30 Fri 18:44]
+#+CAPTION: Clock summary at [2020-10-31 Sat 12:17]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *71:32* |       |       | 100.0 |
+| *Total time*                                                | *72:48* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 71:32   |       |       | 100.0 |
-| Active                                                      |         | 71:32 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   5.2 |
+| Stories                                                     | 72:48   |       |       | 100.0 |
+| Active                                                      |         | 72:48 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   5.1 |
 | Create a demo and presentation for previous sprint          |         |       |  0:39 |   0.9 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   6.1 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.6 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   6.0 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.5 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.4 |
 | Analysis on a formatables refactor                          |         |       |  0:31 |   0.7 |
 | Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.4 |
-| Presentation for APA                                        |         |       |  5:11 |   7.2 |
-| Move C++ locator into physical model                        |         |       | 40:15 |  56.3 |
+| Presentation for APA                                        |         |       |  5:11 |   7.1 |
+| Move C++ locator into physical model                        |         |       | 40:15 |  55.3 |
+| Create a video series on the formatables refactor           |         |       |  0:37 |   0.8 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   3.4 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.6 |
 | Issues with emacs                                           |         |       |  1:09 |   1.6 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.5 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   3.4 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.7 |
-| Create a video series on the formatables refactor           |         |       |  0:37 |   0.9 |
+| Move stand-alone formatables to physical/logical models     |         |       |  1:16 |   1.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -483,28 +484,19 @@ https://facebook.com/Confer%C3%AAncia-APA-105017044613068
   with =build_files_expander=.
 - c# still has inclusion deps properties in interface.
 
-*** STARTED Issues with emacs                                         :story:
+*** COMPLETED Create a video series on the formatables refactor       :story:
+    CLOSED: [2020-10-31 Sat 11:15]
     :LOGBOOK:
-    CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
+    CLOCK: [2020-10-23 Fri 12:25]--[2020-10-23 Fri 12:34] =>  0:09
+    CLOCK: [2020-10-23 Fri 10:32]--[2020-10-23 Fri 10:45] =>  0:13
+    CLOCK: [2020-10-01 Thu 10:24]--[2020-10-01 Thu 10:39] =>  0:15
     :END:
 
-Time spent troubleshooting emacs issues.
+Story to clock time spent on video work which would not be required
+from a coding perspective (video uploads, etc).
 
-- problems loading very long lines in log file. Tried using [[https://www.emacswiki.org/emacs/SoLong][so-long]]
-  and fundamental, but still could not solve the problem.
-
-*** STARTED Rename =name= to =codec= name                             :story:
-    :LOGBOOK:
-    CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
-    :END:
-
-- add codec ID to name.
-
-Notes:
-
-- variability is also using the name class.
-
-*** STARTED Add full and relative path processing to PM               :story:
+*** POSTPONED Add full and relative path processing to PM             :story:
+    CLOSED: [2020-10-31 Sat 11:15]
     :LOGBOOK:
     CLOCK: [2020-09-26 Sat 15:43]--[2020-09-26 Sat 16:05] =>  0:22
     CLOCK: [2020-09-26 Sat 15:23]--[2020-09-26 Sat 15:31] =>  0:08
@@ -554,7 +546,8 @@ clear. We need a container with:
 - archetype ID
 - labels
 
-*** STARTED Create a factory transform for parts and archetype kinds  :story:
+*** POSTPONED Create a factory transform for parts and archetype kinds :story:
+    CLOSED: [2020-10-31 Sat 11:15]
     :LOGBOOK:
     CLOCK: [2020-10-02 Fri 16:22]--[2020-10-02 Fri 18:07] =>  1:45
     CLOCK: [2020-09-27 Sun 14:28]--[2020-09-27 Sun 16:56] =>  2:28
@@ -579,15 +572,38 @@ Notes:
   now need to make sure we can still convert archetypes into facets. A
   lot of the code is going to break once we add path.
 
-*** STARTED Create a video series on the formatables refactor         :story:
+*** STARTED Issues with emacs                                         :story:
     :LOGBOOK:
-    CLOCK: [2020-10-23 Fri 12:25]--[2020-10-23 Fri 12:34] =>  0:09
-    CLOCK: [2020-10-23 Fri 10:32]--[2020-10-23 Fri 10:45] =>  0:13
-    CLOCK: [2020-10-01 Thu 10:24]--[2020-10-01 Thu 10:39] =>  0:15
+    CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
     :END:
 
-Story to clock time spent on video work which would not be required
-from a coding perspective (video uploads, etc).
+Time spent troubleshooting emacs issues.
+
+- problems loading very long lines in log file. Tried using [[https://www.emacswiki.org/emacs/SoLong][so-long]]
+  and fundamental, but still could not solve the problem.
+
+*** STARTED Rename =name= to =codec= name                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
+    :END:
+
+- add codec ID to name.
+
+Notes:
+
+- variability is also using the name class.
+
+*** STARTED Move stand-alone formatables to physical/logical models   :story:
+    :LOGBOOK:
+    CLOCK: [2020-10-31 Sat 11:01]--[2020-10-31 Sat 12:17] =>  1:16
+    :END:
+
+Move the assorted types which are not related to helpers to their
+final location:
+
+- =facet_properties=
+- =project_items=
+- ODB related types.
 
 *** Add method to check if string is valid enum                       :story:
 
