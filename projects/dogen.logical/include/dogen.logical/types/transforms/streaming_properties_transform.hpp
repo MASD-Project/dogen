@@ -25,7 +25,11 @@
 #pragma once
 #endif
 
+#include <boost/optional/optional.hpp>
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/features/streaming.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -35,6 +39,12 @@ namespace dogen::logical::transforms {
  * the correct streaming incantation for each type.
  */
 class streaming_properties_transform final {
+private:
+    static boost::optional<entities::streaming_properties>
+    read_streaming_properties(
+        const features::streaming::feature_group& fg,
+        const entities::element& e);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };

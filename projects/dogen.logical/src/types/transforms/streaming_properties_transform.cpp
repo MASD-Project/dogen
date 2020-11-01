@@ -30,7 +30,6 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/features/streaming.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
-#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
@@ -51,69 +50,38 @@ namespace dogen::logical::transforms {
 
 using identification::entities::logical_id;
 
-namespace {
-
-class gatherer {
-public:
-    explicit gatherer(const features::streaming::feature_group fg)
-        : feature_group_(fg) {}
-
-private:
-    void process(const entities::element& e);
-
-public:
-    void operator()(const entities::element& e) { process(e); }
-
-public:
-    const std::unordered_map<logical_id, entities::streaming_properties>&
-    result() {
-        return result_;
-    }
-
-private:
-    const features::streaming::feature_group feature_group_;
-    std::unordered_map<logical_id, entities::streaming_properties> result_;
-};
-
-void gatherer::process(const entities::element& e) {
+boost::optional<entities::streaming_properties>
+streaming_properties_transform::read_streaming_properties(
+    const features::streaming::feature_group& fg,
+    const entities::element& e) {
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating streaming properties for: "
                              << id.value();
-
-    const auto& cfg(*e.configuration());
-    const auto& fg(feature_group_);
 
     /*
      * If we do not have any configuration related to streaming
      * operations, there is nothing to do.
      */
+    const auto& cfg(*e.configuration());
     const variability::helpers::configuration_selector s(cfg);
     if (!s.has_configuration_point(fg.requires_quoting) &&
         !s.has_configuration_point(fg.string_conversion_method) &&
         !s.has_configuration_point(fg.remove_unprintable_characters)) {
         BOOST_LOG_SEV(lg, debug) << "No streaming properties found.";
-        return;
+        return boost::optional<entities::streaming_properties>();
     }
 
     /*
      * Create the properties and slot them into the results container.
      */
-    entities::streaming_properties sp;
+    entities::streaming_properties r;
     const auto scfg(features::streaming::make_static_configuration(fg, cfg));
-    sp.requires_quoting(scfg.requires_quoting);
-    sp.string_conversion_method(scfg.string_conversion_method);
-    sp.remove_unprintable_characters(scfg.remove_unprintable_characters);
+    r.requires_quoting(scfg.requires_quoting);
+    r.string_conversion_method(scfg.string_conversion_method);
+    r.remove_unprintable_characters(scfg.remove_unprintable_characters);
 
-    const auto pair(std::make_pair(id, sp));
-    const auto inserted(result_.insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_id << id;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(duplicate_id + id.value()));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Created streaming properties: " << sp;
-}
-
+    BOOST_LOG_SEV(lg, debug) << "Created streaming properties: " << r;
+    return r;
 }
 
 void streaming_properties_transform::
@@ -123,11 +91,26 @@ apply(const context& ctx, entities::model& m) {
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::streaming::make_feature_group(fm));
+    std::unordered_map<identification::entities::logical_id,
+                       entities::streaming_properties> streaming_properties;
 
-    gatherer g(fg);
-    entities::elements_traversal(m, g);
-    BOOST_LOG_SEV(lg, debug) << "Streaming properties: " << g.result();
-    m.streaming_properties(g.result());
+    entities::elements_traversal(m,
+        [&](entities::element& e) {
+            const auto o(read_streaming_properties(fg, e));
+            if (!o)
+                return;
+
+            const auto id(e.name().id());
+            const auto pair(std::make_pair(id, *o));
+            const auto inserted(streaming_properties.insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_id + id.value()));
+            }
+        });
+    BOOST_LOG_SEV(lg, debug) << "Streaming properties: " << streaming_properties;
+    m.streaming_properties(streaming_properties);
 
     stp.end_transform(m);
 }
