@@ -297,13 +297,23 @@ bool assistant::requires_nested_namespaces() const {
 }
 
 bool assistant::requires_manual_default_constructor() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-
     /*
-     * In C++ 98 we must always create a default constructor because
-     * we cannot make use of the defaulted functions.
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
      */
-    return is_cpp_standard_98() || ap.requires_manual_default_constructor();
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(&element_));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(&element_));
+
+    if (optr != nullptr) {
+        return optr->technical_space_properties().
+            requires_manual_default_constructor();
+    } else if (pptr != nullptr) {
+        return pptr->technical_space_properties().
+            requires_manual_default_constructor();
+    }
+    return false;
 }
 
 bool assistant::supports_move_operator() const {
@@ -311,17 +321,43 @@ bool assistant::supports_move_operator() const {
 }
 
 bool assistant::requires_manual_move_constructor() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-
     /*
-     * C++ 98 does not support move constructors.
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
      */
-    return !is_cpp_standard_98() && ap.requires_manual_move_constructor();
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(&element_));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(&element_));
+
+    if (optr != nullptr) {
+        return optr->technical_space_properties().
+            requires_manual_move_constructor();
+    } else if (pptr != nullptr) {
+        return pptr->technical_space_properties().
+            requires_manual_move_constructor();
+    }
+    return false;
 }
 
 bool assistant::requires_stream_manipulators() const {
-    const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_stream_manipulators();
+    /*
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
+     */
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(&element_));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(&element_));
+
+    if (optr != nullptr) {
+        return optr->technical_space_properties().
+            requires_stream_manipulators();
+    } else if (pptr != nullptr) {
+        return pptr->technical_space_properties().
+            requires_stream_manipulators();
+    }
+    return false;
 }
 
 bool assistant::is_serialization_enabled() const {
