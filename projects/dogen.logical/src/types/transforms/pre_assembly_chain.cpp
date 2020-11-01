@@ -39,6 +39,8 @@
 #include "dogen.logical/types/transforms/variability_profiles_chain.hpp"
 #include "dogen.logical/types/transforms/labelling_transform.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
+#include "dogen.logical/types/transforms/technical_space_properties_transform.hpp"
+
 #include "dogen.logical/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -87,6 +89,7 @@ void pre_assembly_chain::apply(const context& ctx,
     visual_studio_transform::apply(ctx, m);
     labelling_transform::apply(ctx, m);
     streaming_properties_transform::apply(ctx, m);
+    technical_space_properties_transform::apply(ctx, m);
 
     /*
      * Primitive transform must happen before parsing transform, as it

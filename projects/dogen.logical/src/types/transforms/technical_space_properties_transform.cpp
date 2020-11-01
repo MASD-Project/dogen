@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/technical_space_properties_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("logical.transforms.technical_space_properties_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+const std::string duplicate_id("Duplicate ID: ");
+
+}
+
 
 namespace dogen::logical::transforms {
 
-bool technical_space_properties_transform::operator==(const technical_space_properties_transform& /*rhs*/) const {
-    return true;
+void technical_space_properties_transform::
+apply(const context &ctx, entities::model &m) {
+    tracing::scoped_transform_tracer stp(lg, "technical space properties",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }
