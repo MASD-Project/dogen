@@ -25,8 +25,15 @@
 #pragma once
 #endif
 
+#include <list>
+#include <boost/optional/optional.hpp>
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/features/technical_space_properties.hpp"
+#include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
 
 namespace dogen::logical::transforms {
 
@@ -34,6 +41,36 @@ namespace dogen::logical::transforms {
  * @brief Reads technical space specific properties.
  */
 class technical_space_properties_transform final {
+private:
+    static boost::optional<entities::structural::technical_space_properties>
+    obtain_properties(
+        const features::technical_space_properties::feature_group& fg,
+        entities::element& e);
+
+    static std::unordered_map<identification::entities::logical_id,
+                              entities::structural::technical_space_properties>
+    obtain_properties(const variability::entities::feature_model& fm,
+        entities::model& m);
+
+private:
+    static void
+    walk_name_tree(const identification::entities::logical_name_tree& nt,
+        const bool is_top_level, const std::unordered_map<
+        identification::entities::logical_id,
+        entities::structural::technical_space_properties>& src_tsps,
+        entities::structural::technical_space_properties& dest_tsp);
+
+    static entities::structural::technical_space_properties
+    compute_properties(
+        const std::unordered_map<identification::entities::logical_id,
+        entities::structural::technical_space_properties>& src_tsps,
+        const std::list<logical::entities::attribute>& attrs);
+
+    static void populate_properties(
+        const std::unordered_map<identification::entities::logical_id,
+        entities::structural::technical_space_properties>& src_tsps,
+        entities::model& m);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
