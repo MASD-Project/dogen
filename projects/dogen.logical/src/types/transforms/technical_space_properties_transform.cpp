@@ -27,6 +27,7 @@
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.identification/io/entities/technical_space_version_io.hpp"
 #include "dogen.logical/io/entities/structural/technical_space_properties_io.hpp"
 #include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
@@ -114,16 +115,18 @@ technical_space_properties_transform::obtain_properties(
 }
 
 void technical_space_properties_transform::
-walk_name_tree(const identification::entities::logical_name_tree& nt,
-    const bool is_top_level, const std::unordered_map<
+walk_name_tree(const bool is_cpp_standard_98,
+    const identification::entities::logical_name_tree& nt,
+    const bool top_level, const std::unordered_map<
     identification::entities::logical_id,
     entities::structural::technical_space_properties>& src_tsps,
     entities::structural::technical_space_properties& dest_tsp) {
 
     for (const auto& c : nt.children())
-        walk_name_tree(c, false/*is_top_level*/, src_tsps, dest_tsp);
+        walk_name_tree(is_cpp_standard_98, c, false/*top_level*/, src_tsps,
+            dest_tsp);
 
-    if (is_top_level && nt.is_current_simple_type())
+    if (is_cpp_standard_98 || (top_level && nt.is_current_simple_type()))
         dest_tsp.requires_manual_default_constructor(true);
 
     const auto i(src_tsps.find(nt.current().id()));
@@ -134,18 +137,26 @@ walk_name_tree(const identification::entities::logical_name_tree& nt,
     if (src_tsp.requires_stream_manipulators())
         dest_tsp.requires_stream_manipulators(true);
 
-    if (!is_top_level)
+    if (!top_level)
         return;
 
-    if (src_tsp.requires_manual_default_constructor())
+    /*
+     * In C++ 98 we must always create a default constructor because
+     * we cannot make use of the defaulted functions.
+     */
+    if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
         dest_tsp.requires_manual_default_constructor(true);
 
-    if (src_tsp.requires_manual_move_constructor())
+    /*
+     * C++ 98 does not support move constructors.
+     */
+    if (!is_cpp_standard_98 && src_tsp.requires_manual_move_constructor())
         dest_tsp.requires_manual_move_constructor(true);
 }
 
 entities::structural::technical_space_properties
-technical_space_properties_transform::compute_properties(
+technical_space_properties_transform::
+compute_properties(const bool is_cpp_standard_98,
     const std::unordered_map<identification::entities::logical_id,
     entities::structural::technical_space_properties>& src_tsps,
     const std::list<logical::entities::attribute>& attrs) {
@@ -153,7 +164,7 @@ technical_space_properties_transform::compute_properties(
     entities::structural::technical_space_properties r;
     for (const auto& attr : attrs) {
         const auto& nt(attr.parsed_type());
-        walk_name_tree(nt, true/*is_top_level*/, src_tsps, r);
+        walk_name_tree(is_cpp_standard_98, nt, true/*top_level*/, src_tsps, r);
     }
     return r;
 }
@@ -162,6 +173,11 @@ void technical_space_properties_transform::populate_properties(
     const std::unordered_map<identification::entities::logical_id,
     entities::structural::technical_space_properties>& src_tsps,
     entities::model& m) {
+
+    const auto tsv(m.technical_space_version());
+    BOOST_LOG_SEV(lg, debug) << "Technical space version: " << tsv;
+    using identification::entities::technical_space_version;
+    const bool is_cpp_standard_98(tsv == technical_space_version::cpp_98);
 
     using identification::entities::model_type;
     auto& se(m.structural_elements());
@@ -175,7 +191,8 @@ void technical_space_properties_transform::populate_properties(
             continue;
 
         const auto& attrs(e.local_attributes());
-        e.technical_space_properties(compute_properties(src_tsps, attrs));
+        const auto tsp(compute_properties(is_cpp_standard_98, src_tsps, attrs));
+        e.technical_space_properties(tsp);
     }
 
     for (auto& pair : se.primitives()) {
@@ -189,7 +206,8 @@ void technical_space_properties_transform::populate_properties(
 
         using logical::entities::attribute;
         const std::list<attribute> attrs{ p.value_attribute() };
-        p.technical_space_properties(compute_properties(src_tsps, attrs));
+        const auto tsp(compute_properties(is_cpp_standard_98, src_tsps, attrs));
+        p.technical_space_properties(tsp);
     }
 }
 
