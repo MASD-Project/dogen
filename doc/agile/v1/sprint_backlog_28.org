@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-01 Sun 12:45]
+#+CAPTION: Clock summary at [2020-11-01 Sun 16:36]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *77:04* |       |       | 100.0 |
+| *Total time*                                                | *80:01* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 77:04   |       |       | 100.0 |
-| Active                                                      |         | 77:04 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   4.8 |
+| Stories                                                     | 80:01   |       |       | 100.0 |
+| Active                                                      |         | 80:01 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   4.7 |
 | Create a demo and presentation for previous sprint          |         |       |  0:39 |   0.8 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   5.7 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.1 |
+| Sprint and product backlog grooming                         |         |       |  4:25 |   5.5 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   6.8 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.4 |
-| Analysis on a formatables refactor                          |         |       |  0:31 |   0.7 |
-| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.3 |
-| Presentation for APA                                        |         |       |  5:11 |   6.7 |
-| Move C++ locator into physical model                        |         |       | 40:15 |  52.2 |
+| Analysis on a formatables refactor                          |         |       |  0:31 |   0.6 |
+| Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.2 |
+| Presentation for APA                                        |         |       |  5:11 |   6.5 |
+| Move C++ locator into physical model                        |         |       | 40:15 |  50.3 |
 | Create a video series on the formatables refactor           |         |       |  0:37 |   0.8 |
-| Add full and relative path processing to PM                 |         |       |  2:27 |   3.2 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.1 |
-| Issues with emacs                                           |         |       |  1:09 |   1.5 |
+| Add full and relative path processing to PM                 |         |       |  2:27 |   3.1 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   6.9 |
+| Move stand-alone formatables to physical/logical models     |         |       |  8:27 |  10.6 |
+| Issues with emacs                                           |         |       |  1:09 |   1.4 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.4 |
-| Move stand-alone formatables to physical/logical models     |         |       |  5:32 |   7.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -207,6 +207,7 @@ Time spent creating the demo and presentation.
 ***** The logical-physical space
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-11-01 Sun 16:34]--[2020-11-01 Sun 16:36] =>  0:02
     CLOCK: [2020-10-23 Fri 09:41]--[2020-10-23 Fri 10:31] =>  0:50
     CLOCK: [2020-10-09 Fri 09:51]--[2020-10-09 Fri 10:15] =>  0:24
     CLOCK: [2020-10-01 Thu 10:17]--[2020-10-01 Thu 10:23] =>  0:06
@@ -572,6 +573,30 @@ Notes:
   now need to make sure we can still convert archetypes into facets. A
   lot of the code is going to break once we add path.
 
+*** COMPLETED Move stand-alone formatables to physical/logical models :story:
+    CLOSED: [2020-11-01 Sun 16:34]
+    :LOGBOOK:
+    CLOCK: [2020-11-01 Sun 16:33]--[2020-11-01 Sun 16:34] =>  0:01
+    CLOCK: [2020-11-01 Sun 16:24]--[2020-11-01 Sun 16:32] =>  0:08
+    CLOCK: [2020-11-01 Sun 16:08]--[2020-11-01 Sun 16:23] =>  0:15
+    CLOCK: [2020-11-01 Sun 13:36]--[2020-11-01 Sun 16:07] =>  2:31
+    CLOCK: [2020-11-01 Sun 11:30]--[2020-11-01 Sun 12:45] =>  1:15
+    CLOCK: [2020-10-31 Sat 13:30]--[2020-10-31 Sat 16:31] =>  3:01
+    CLOCK: [2020-10-31 Sat 11:01]--[2020-10-31 Sat 12:17] =>  1:16
+    :END:
+
+Move the assorted types which are not related to helpers to their
+final location:
+
+- =facet_properties=
+- =project_items=
+- ODB related types.
+- streaming properties
+- =cpp_standards=
+- =test_data_properties=
+- =aspect_properties=: c++ and c#. Features are still located in TS
+  specific namespaces.
+
 *** STARTED Issues with emacs                                         :story:
     :LOGBOOK:
     CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
@@ -593,22 +618,69 @@ Notes:
 
 - variability is also using the name class.
 
-*** STARTED Move stand-alone formatables to physical/logical models   :story:
-    :LOGBOOK:
-    CLOCK: [2020-11-01 Sun 11:30]--[2020-11-01 Sun 12:45] =>  1:15
-    CLOCK: [2020-10-31 Sat 13:30]--[2020-10-31 Sat 16:31] =>  3:01
-    CLOCK: [2020-10-31 Sat 11:01]--[2020-10-31 Sat 12:17] =>  1:16
-    :END:
+*** Move c++ helper related classes to logical model                  :story:
 
-Move the assorted types which are not related to helpers to their
-final location:
+Classes to move:
 
-- =facet_properties=
-- =project_items=
-- ODB related types.
-- streaming properties
-- =cpp_standards=
-- =test_data_properties=
+- =helper_descriptor=
+
+*** Move default constructor work from resolver                       :story:
+
+At present we are populating the default constructor for the bundle in
+the resolver:
+
+#+begin_src c++
+void resolver::resolve_feature_template_bundles(const indices& idx,
+    entities::model& m) {
+    for (auto& pair : m.variability_elements().feature_template_bundles()) {
+        auto& fb(*pair.second);
+        for (auto& ft : fb.feature_templates()) {
+            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+            if (ft.parsed_type().is_current_simple_type())
+                fb.requires_manual_default_constructor(true);
+        }
+    }
+}
+#+end_src
+
+This is very confusing because one would assume the resolver just
+resolves. We need to move this logic to =technical_space_properties=.
+
+*** Create a technical space specific property for default functions  :story:
+
+In assistant we have:
+
+#+begin_src c++
+bool assistant::supports_defaulted_functions() const {
+    return !is_cpp_standard_98();
+}
+
+bool assistant::supports_move_operator() const {
+    return !is_cpp_standard_98();
+}
+#+end_src
+
+This should really be in =technical_space_properties=. Check to see if
+we missed any.
+
+*** Default constructor incorrectly generated in C++ 98               :story:
+
+We have this logic in =technical_space_properties_transform=:
+
+#+begin_src c++
+    /*
+     * In C++ 98 we must always create a default constructor because
+     * we cannot make use of the defaulted functions.
+     */
+    if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
+        dest_tsp.requires_manual_default_constructor(true);
+#+end_src
+
+This is actually incorrect: we can use default constructors in C++ 98,
+as long as there are no other constructors. The problem is we are
+relying on the default constructor in test data generator so if we fix
+this with an =&&= instead of an =||= we break that code. We need to
+figure out what the correct implement is.
 
 *** Detect absence of configuration in bundles                        :story:
 
