@@ -23,6 +23,8 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
+#include "dogen.logical/types/features/technical_space_properties.hpp"
 #include "dogen.logical/types/transforms/technical_space_properties_transform.hpp"
 
 namespace {
@@ -36,7 +38,6 @@ auto lg(logger_factory(transform_id));
 const std::string duplicate_id("Duplicate ID: ");
 
 }
-
 
 namespace dogen::logical::transforms {
 
