@@ -4,11 +4,6 @@
     "masd.codec.dia.comment": "true",
     "masd.codec.model_modules": "dogen.identification",
     "masd.codec.input_technical_space": "cpp",
-    "masd.codec.reference": "cpp.builtins",
-    "masd.codec.reference": "cpp.std",
-    "masd.codec.reference": "cpp.boost",
-    "masd.codec.reference": "dogen.tracing",
-    "masd.codec.reference": "masd",
     "masd.codec.reference": "dogen.profiles",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
@@ -877,7 +872,7 @@
         },
         {
           "name": "technical_space_for_archetype",
-          "type": "std::unordered_map<physical_meta_id,  technical_space>",
+          "type": "std::unordered_map<physical_meta_id, technical_space>",
           "documentation": "Resolves a given physical meta-model element ID into its technical space.\n"
         }
       ]
@@ -895,6 +890,32 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::technical_space_version",
+      "documentation": "Version of the technical space to use.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp_98",
+          "type": ""
+        },
+        {
+          "name": "cpp_11",
+          "type": ""
+        },
+        {
+          "name": "cpp_14",
+          "type": ""
+        },
+        {
+          "name": "cpp_17",
+          "type": ""
+        }
+      ]
     }
   ]
 }
