@@ -26744,13 +26744,13 @@ technical space targeted.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O187">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,22"/>
+        <dia:point val="115,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,21.95;127.795,26.45"/>
+        <dia:rectangle val="114.95,21.95;129.795,26.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,22"/>
+        <dia:point val="115,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -26912,13 +26912,13 @@ technical space targeted.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O188">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,30"/>
+        <dia:point val="115,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,29.95;138.19,33.65"/>
+        <dia:rectangle val="114.95,29.95;140.19,33.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,30"/>
+        <dia:point val="115,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -27797,13 +27797,13 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O192">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,38"/>
+        <dia:point val="115,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,37.95;129.335,43.25"/>
+        <dia:rectangle val="114.95,37.95;131.335,43.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,38"/>
+        <dia:point val="115,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -40864,13 +40864,13 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O311">
       <dia:attribute name="obj_pos">
-        <dia:point val="95,84"/>
+        <dia:point val="90,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,83.95;115.185,89.25"/>
+        <dia:rectangle val="89.95,83.95;110.185,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="95,84"/>
+        <dia:point val="90,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -41063,13 +41063,13 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O312">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,84"/>
+        <dia:point val="66,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,83.95;86.565,89.25"/>
+        <dia:rectangle val="65.95,83.95;81.565,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,84"/>
+        <dia:point val="66,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -43360,16 +43360,16 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O332">
       <dia:attribute name="obj_pos">
-        <dia:point val="80,92"/>
+        <dia:point val="75,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,91.95;100.585,93.75"/>
+        <dia:rectangle val="74.95,91.95;95.585,93.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="80,92"/>
+        <dia:point val="75,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.535"/>
@@ -43389,7 +43389,7 @@ just to avoid problems.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="80.35,93.2441"/>
+            <dia:point val="75.35,93.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -43412,17 +43412,17 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O333">
       <dia:attribute name="obj_pos">
-        <dia:point val="90.2675,92"/>
+        <dia:point val="85.2675,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.2357,88.8495;90.3375,92.07"/>
+        <dia:rectangle val="81.2357,88.8495;85.3375,92.07"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="90.2675,92"/>
-        <dia:point val="86.515,89.2"/>
+        <dia:point val="85.2675,92"/>
+        <dia:point val="81.515,89.2"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:string>##</dia:string>
@@ -43440,7 +43440,7 @@ just to avoid problems.#</dia:string>
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="88.3915,91.1"/>
+        <dia:point val="83.3915,91.1"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -43456,17 +43456,17 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O334">
       <dia:attribute name="obj_pos">
-        <dia:point val="90.2675,92"/>
+        <dia:point val="85.2675,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.199,88.8303;95.2467,92.0685"/>
+        <dia:rectangle val="85.199,88.8303;90.2467,92.0685"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="90.2675,92"/>
-        <dia:point val="95,89.2"/>
+        <dia:point val="85.2675,92"/>
+        <dia:point val="90,89.2"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:string>##</dia:string>
@@ -43484,7 +43484,7 @@ just to avoid problems.#</dia:string>
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="92.6342,91.1"/>
+        <dia:point val="87.6342,91.1"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -46032,13 +46032,13 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O353">
       <dia:attribute name="obj_pos">
-        <dia:point val="119,74"/>
+        <dia:point val="115,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.95,73.95;138.415,83.25"/>
+        <dia:rectangle val="114.95,73.95;134.415,83.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="119,74"/>
+        <dia:point val="115,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.365000000000002"/>
@@ -48328,13 +48328,13 @@ FIXME: optional for now.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O368">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,46"/>
+        <dia:point val="115,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,45.95;133.955,52.85"/>
+        <dia:rectangle val="114.95,45.95;135.955,52.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,46"/>
+        <dia:point val="115,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
@@ -52526,13 +52526,13 @@ element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O401">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,62"/>
+        <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,61.95;138.575,67.25"/>
+        <dia:rectangle val="114.95,61.95;140.575,67.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,62"/>
+        <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.524999999999999"/>
@@ -55200,13 +55200,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O422">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,55"/>
+        <dia:point val="115,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,54.95;139.73,60.25"/>
+        <dia:rectangle val="114.95,54.95;141.73,60.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,55"/>
+        <dia:point val="115,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -55655,13 +55655,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O425">
       <dia:attribute name="obj_pos">
-        <dia:point val="113,69"/>
+        <dia:point val="115,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,68.95;130.875,72.65"/>
+        <dia:rectangle val="114.95,68.95;132.875,72.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="113,69"/>
+        <dia:point val="115,69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
