@@ -86,6 +86,7 @@ private:
         const variability::helpers::configuration_factory& cf,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
+        const identification::entities::technical_space_version tsv,
         formattables::model& fm) const;
 
 public:

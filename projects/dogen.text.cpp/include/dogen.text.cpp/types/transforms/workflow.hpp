@@ -52,7 +52,8 @@ public:
         const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf,
         const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties);
+        logical::entities::streaming_properties>& streaming_properties,
+        const identification::entities::technical_space_version tsv);
 
 public:
     /**
@@ -84,6 +85,8 @@ private:
     const std::unordered_map<identification::entities::logical_id,
                              logical::entities::streaming_properties>&
     streaming_properties_;
+    const identification::entities::technical_space_version
+    technical_space_version_;
 };
 
 }

@@ -29,10 +29,12 @@ context::context(const formattables::element_properties& element_properties,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
+    const identification::entities::technical_space_version tsv,
     boost::shared_ptr<tracing::tracer> tracer)
     : element_properties_(element_properties), physical_model_(pm),
       model_(fm), helpers_(helpers),
-      streaming_properties_(streaming_properties), tracer_(tracer) { }
+      streaming_properties_(streaming_properties),
+      technical_space_version_(tsv), tracer_(tracer) { }
 
 const formattables::element_properties&
 context::element_properties() const {
@@ -58,6 +60,11 @@ const std::unordered_map<identification::entities::logical_id,
                          logical::entities::streaming_properties>&
 context::streaming_properties() const {
     return streaming_properties_;
+}
+
+identification::entities::technical_space_version context::
+technical_space_version() const {
+    return technical_space_version_;
 }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {

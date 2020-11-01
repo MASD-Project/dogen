@@ -51,10 +51,11 @@ workflow::workflow(const physical::entities::model& pm,
     const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf,
     const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>&
-    streaming_properties)
+    logical::entities::streaming_properties>& streaming_properties,
+    const identification::entities::technical_space_version tsv)
     : physical_model_(pm), feature_model_(fm), configuration_factory_(cf),
-      streaming_properties_(streaming_properties) { }
+      streaming_properties_(streaming_properties),
+      technical_space_version_(tsv) { }
 
 cpp::transforms::registrar& workflow::registrar() {
     if (!registrar_)
@@ -115,7 +116,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(ep, physical_model_, fm, frp.helper_formatters(),
-            streaming_properties_, tracer);
+            streaming_properties_, technical_space_version_, tracer);
 
         auto& a(*aptr);
         const auto fs(aptr->formatting_style());
