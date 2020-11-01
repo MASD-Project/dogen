@@ -19,11 +19,9 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.text.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/element_properties_io.hpp"
-#include "dogen.text.cpp/io/formattables/test_data_properties_io.hpp"
 
 namespace std {
 
@@ -39,40 +37,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::cp
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen::text::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::cpp::formattables::element_properties\"" << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"helper_properties\": " << v.helper_properties() << ", "
-      << "\"attribute_level_test_data_properties\": " << v.attribute_level_test_data_properties()
+      << "\"helper_properties\": " << v.helper_properties()
       << " }";
     return(s);
 }

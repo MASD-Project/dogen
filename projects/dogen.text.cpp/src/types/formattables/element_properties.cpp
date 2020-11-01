@@ -24,23 +24,19 @@ namespace dogen::text::cpp::formattables {
 
 element_properties::element_properties(
     const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-    const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties,
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
+    const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties)
     : aspect_properties_(aspect_properties),
-      helper_properties_(helper_properties),
-      attribute_level_test_data_properties_(attribute_level_test_data_properties) { }
+      helper_properties_(helper_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
     swap(aspect_properties_, other.aspect_properties_);
     swap(helper_properties_, other.helper_properties_);
-    swap(attribute_level_test_data_properties_, other.attribute_level_test_data_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
     return aspect_properties_ == rhs.aspect_properties_ &&
-        helper_properties_ == rhs.helper_properties_ &&
-        attribute_level_test_data_properties_ == rhs.attribute_level_test_data_properties_;
+        helper_properties_ == rhs.helper_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
@@ -79,22 +75,6 @@ void element_properties::helper_properties(const std::list<dogen::text::cpp::for
 
 void element_properties::helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>&& v) {
     helper_properties_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() const {
-    return attribute_level_test_data_properties_;
-}
-
-std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() {
-    return attribute_level_test_data_properties_;
-}
-
-void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& v) {
-    attribute_level_test_data_properties_ = v;
-}
-
-void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>&& v) {
-    attribute_level_test_data_properties_ = std::move(v);
 }
 
 }

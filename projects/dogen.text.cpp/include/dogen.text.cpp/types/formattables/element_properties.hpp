@@ -26,12 +26,9 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
-#include <unordered_map>
 #include "dogen.text.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
-#include "dogen.text.cpp/types/formattables/test_data_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
 
@@ -48,8 +45,7 @@ public:
 public:
     element_properties(
         const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-        const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties,
-        const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
+        const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties);
 
 public:
     const dogen::text::cpp::formattables::aspect_properties& aspect_properties() const;
@@ -61,11 +57,6 @@ public:
     std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties();
     void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& v);
     void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>&& v);
-
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
-    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& v);
-    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>&& v);
 
 public:
     bool operator==(const element_properties& rhs) const;
@@ -80,7 +71,6 @@ public:
 private:
     dogen::text::cpp::formattables::aspect_properties aspect_properties_;
     std::list<dogen::text::cpp::formattables::helper_properties> helper_properties_;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 
 }
