@@ -21,7 +21,6 @@
 #include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
-#include "dogen.text.cpp/types/formattables/cpp_standard_expander.hpp"
 #include "dogen.text.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -47,27 +46,11 @@ void model_expander::reduce(model& fm) const {
     rd.reduce(fm);
 }
 
-void
-model_expander::expand_cpp_standard(
-    const variability::entities::feature_model& feature_model,
-    const variability::entities::configuration& rcfg, model& fm) const {
-    cpp_standard_expander ex;
-    ex.expand(feature_model, rcfg, fm);
-}
-
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const variability::entities::configuration& rcfg,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
-
-    /*
-     * C++ standard expansion must be done before enablement because
-     * we will use it to check that the enabled facets are compatible
-     * with the C++ standard (e.g. hash is not available for C++ 98).
-     */
-    expand_cpp_standard(feature_model, rcfg, fm);
 
     expand_aspects(feature_model, fm);
     expand_helpers(feature_model, streaming_properties, frp, fm);

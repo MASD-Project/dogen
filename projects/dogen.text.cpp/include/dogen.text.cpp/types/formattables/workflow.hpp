@@ -43,7 +43,6 @@ private:
 
     void expand_model(
         const variability::entities::feature_model& feature_model,
-        const variability::entities::configuration& rcfg,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp, model& fm) const;
@@ -51,7 +50,6 @@ private:
 public:
     model execute(
         const variability::entities::feature_model& feature_model,
-        const variability::entities::configuration& rcfg,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp,

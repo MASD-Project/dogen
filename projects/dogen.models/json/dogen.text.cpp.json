@@ -1164,10 +1164,6 @@
         {
           "name": "formattables",
           "type": "std::unordered_map<identification::entities::logical_id, formattables::formattable>"
-        },
-        {
-          "name": "cpp_standard",
-          "type": "formattables::cpp_standards"
         }
       ]
     },
@@ -1678,38 +1674,6 @@
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/io/shared_ptr_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.tracing/types/scoped_tracer.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/io/entities/element_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/io/entities/artefact_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/physical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/logical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/primitive_implementation_factory.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    tracing::scoped_transform_tracer stp(lg, \"primitive implementation\",\n        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);\n\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    const auto sn(p.name().simple());\n    const auto qn(ast.get_qualified_name(p.name()));\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        const auto attr(p.value_attribute());\n#>\n\nnamespace boost {\nnamespace serialization {\n<#+\n\n        /*\n         * Save function\n         */\n#>\n\ntemplate<typename Archive>\nvoid save(Archive& ar, const <#= qn #>& v, const unsigned int /*version*/) {\n    ar << make_nvp(\"<#= attr.name().simple() #>\", v.<#= attr.member_variable_name() #>);\n}\n\n<#+\n        /*\n         * Load function\n         */\n#>\ntemplate<typename Archive>\nvoid load(Archive& ar, <#= qn #>& v, const unsigned int /*version*/) {\n    ar >> make_nvp(\"<#= attr.name().simple() #>\", v.<#= attr.member_variable_name() #>);\n}\n\n} }\n\nnamespace boost {\nnamespace serialization {\n\ntemplate void save(archive::polymorphic_oarchive& ar, const <#= qn #>& v, unsigned int version);\ntemplate void load(archive::polymorphic_iarchive& ar, <#= qn #>& v, unsigned int version);\n\ntemplate void save(archive::text_oarchive& ar, const <#= qn #>& v, unsigned int version);\ntemplate void load(archive::text_iarchive& ar, <#= qn #>& v, unsigned int version);\n\ntemplate void save(archive::binary_oarchive& ar, const <#= qn #>& v, unsigned int version);\ntemplate void load(archive::binary_iarchive& ar, <#= qn #>& v, unsigned int version);\n\ntemplate void save(archive::xml_oarchive& ar, const <#= qn #>& v, unsigned int version);\ntemplate void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version);\n\n} }\n<#+\n    } // sbf\n    ast.update_artefact();\n    stp.end_transform(a);\n}\n\n#>\n"
         }
       ]
-    },
-    {
-      "name": "formattables::cpp_standards",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "cpp_98",
-          "type": ""
-        },
-        {
-          "name": "cpp_11",
-          "type": ""
-        },
-        {
-          "name": "cpp_14",
-          "type": ""
-        },
-        {
-          "name": "cpp_17",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "formattables::cpp_standard_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::test_data_properties",

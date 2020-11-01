@@ -57,12 +57,11 @@ model_to_text_cpp_chain::formatters_repository() const {
 formattables::model
 model_to_text_cpp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
-    const variability::entities::configuration& rcfg,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, const text::entities::model& m) const {
     formattables::workflow fw;
-    return fw.execute(feature_model, rcfg, streaming_properties, frp, m);
+    return fw.execute(feature_model, streaming_properties, frp, m);
 }
 
 identification::entities::physical_meta_id
@@ -100,7 +99,6 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
         id.value(), *ctx.tracer());
 
     const auto& feature_model(*ctx.feature_model());
-    const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& frp(formatters_repository());
 
     /*
@@ -108,7 +106,7 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
      */
     const auto& sps(m.logical().streaming_properties());
     const auto tsv(m.logical().technical_space_version());
-    auto fm(create_formattables_model(feature_model, rcfg, sps, frp, m));
+    auto fm(create_formattables_model(feature_model, sps, frp, m));
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_mode*/);
     apply(ctx.tracer(), m.physical(), feature_model, cf, sps, tsv, fm);

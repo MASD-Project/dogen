@@ -50,13 +50,8 @@ private:
 
     void reduce(model& fm) const;
 
-    void expand_cpp_standard(
-        const variability::entities::feature_model& feature_model,
-        const variability::entities::configuration& rcfg, model& fm) const;
-
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const variability::entities::configuration& rcfg,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp, model& fm) const;

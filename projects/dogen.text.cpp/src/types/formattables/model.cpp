@@ -22,28 +22,21 @@
 
 namespace dogen::text::cpp::formattables {
 
-model::model()
-    : cpp_standard_(static_cast<dogen::text::cpp::formattables::cpp_standards>(0)) { }
-
 model::model(
     const dogen::identification::entities::logical_name& name,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
-    const dogen::text::cpp::formattables::cpp_standards cpp_standard)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables)
     : name_(name),
-      formattables_(formattables),
-      cpp_standard_(cpp_standard) { }
+      formattables_(formattables) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(formattables_, other.formattables_);
-    swap(cpp_standard_, other.cpp_standard_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
-        formattables_ == rhs.formattables_ &&
-        cpp_standard_ == rhs.cpp_standard_;
+        formattables_ == rhs.formattables_;
 }
 
 model& model::operator=(model other) {
@@ -82,14 +75,6 @@ void model::formattables(const std::unordered_map<dogen::identification::entitie
 
 void model::formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
-}
-
-dogen::text::cpp::formattables::cpp_standards model::cpp_standard() const {
-    return cpp_standard_;
-}
-
-void model::cpp_standard(const dogen::text::cpp::formattables::cpp_standards v) {
-    cpp_standard_ = v;
 }
 
 }

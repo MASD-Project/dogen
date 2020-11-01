@@ -29,7 +29,6 @@
 #include <unordered_map>
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
-#include "dogen.text.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
@@ -37,18 +36,15 @@ namespace dogen::text::cpp::formattables {
 
 class model final {
 public:
+    model() = default;
     model(const model&) = default;
     model(model&&) = default;
     ~model() = default;
 
 public:
-    model();
-
-public:
     model(
         const dogen::identification::entities::logical_name& name,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
-        const dogen::text::cpp::formattables::cpp_standards cpp_standard);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables);
 
 public:
     const dogen::identification::entities::logical_name& name() const;
@@ -60,9 +56,6 @@ public:
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables();
     void formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& v);
     void formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>&& v);
-
-    dogen::text::cpp::formattables::cpp_standards cpp_standard() const;
-    void cpp_standard(const dogen::text::cpp::formattables::cpp_standards v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -77,7 +70,6 @@ public:
 private:
     dogen::identification::entities::logical_name name_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable> formattables_;
-    dogen::text::cpp::formattables::cpp_standards cpp_standard_;
 };
 
 }

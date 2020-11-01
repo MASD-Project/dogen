@@ -22,7 +22,6 @@
 #include "dogen.text.cpp/io/formattables/model_io.hpp"
 #include "dogen.text.cpp/io/formattables/formattable_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
-#include "dogen.text.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 
 namespace std {
@@ -49,8 +48,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::cpp::formattables::model\"" << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"formattables\": " << v.formattables() << ", "
-      << "\"cpp_standard\": " << v.cpp_standard()
+      << "\"formattables\": " << v.formattables()
       << " }";
     return(s);
 }

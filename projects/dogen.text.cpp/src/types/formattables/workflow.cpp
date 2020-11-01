@@ -40,23 +40,21 @@ model workflow::make_model(const transforms::repository& frp,
 
 void workflow::expand_model(
     const variability::entities::feature_model& feature_model,
-    const variability::entities::configuration& rcfg,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
     model_expander ex;
-    ex.expand(feature_model, rcfg, streaming_properties, frp, fm);
+    ex.expand(feature_model, streaming_properties, frp, fm);
 }
 
 model
 workflow::execute(const variability::entities::feature_model& feature_model,
-    const variability::entities::configuration& rcfg,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, const text::entities::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(feature_model, rcfg, streaming_properties, frp, r);
+    expand_model(feature_model, streaming_properties, frp, r);
 
     return r;
 }
