@@ -33,7 +33,8 @@ const boost::shared_ptr<dogen::logical::entities::structural::module>& rhs) {
 namespace dogen::logical::entities {
 
 model::model()
-    : input_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
+    : input_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
+      technical_space_version_(static_cast<dogen::identification::entities::technical_space_version>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -57,7 +58,8 @@ model::model(model&& rhs)
       build_elements_(std::move(rhs.build_elements_)),
       physical_elements_(std::move(rhs.physical_elements_)),
       meta_names_(std::move(rhs.meta_names_)),
-      streaming_properties_(std::move(rhs.streaming_properties_)) { }
+      streaming_properties_(std::move(rhs.streaming_properties_)),
+      technical_space_version_(std::move(rhs.technical_space_version_)) { }
 
 model::model(
     const dogen::identification::entities::logical_name& name,
@@ -81,7 +83,8 @@ model::model(
     const dogen::logical::entities::build::element_repository& build_elements,
     const dogen::logical::entities::physical::element_repository& physical_elements,
     const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
+    const dogen::identification::entities::technical_space_version technical_space_version)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -103,7 +106,8 @@ model::model(
       build_elements_(build_elements),
       physical_elements_(physical_elements),
       meta_names_(meta_names),
-      streaming_properties_(streaming_properties) { }
+      streaming_properties_(streaming_properties),
+      technical_space_version_(technical_space_version) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -129,6 +133,7 @@ void model::swap(model& other) noexcept {
     swap(physical_elements_, other.physical_elements_);
     swap(meta_names_, other.meta_names_);
     swap(streaming_properties_, other.streaming_properties_);
+    swap(technical_space_version_, other.technical_space_version_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -153,7 +158,8 @@ bool model::operator==(const model& rhs) const {
         build_elements_ == rhs.build_elements_ &&
         physical_elements_ == rhs.physical_elements_ &&
         meta_names_ == rhs.meta_names_ &&
-        streaming_properties_ == rhs.streaming_properties_;
+        streaming_properties_ == rhs.streaming_properties_ &&
+        technical_space_version_ == rhs.technical_space_version_;
 }
 
 model& model::operator=(model other) {
@@ -504,6 +510,14 @@ void model::streaming_properties(const std::unordered_map<dogen::identification:
 
 void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
+}
+
+dogen::identification::entities::technical_space_version model::technical_space_version() const {
+    return technical_space_version_;
+}
+
+void model::technical_space_version(const dogen::identification::entities::technical_space_version v) {
+    technical_space_version_ = v;
 }
 
 }

@@ -37,6 +37,7 @@
 #include "dogen.logical/io/entities/decoration/element_repository_io.hpp"
 #include "dogen.logical/io/entities/structural/element_repository_io.hpp"
 #include "dogen.logical/io/entities/templating/element_repository_io.hpp"
+#include "dogen.identification/io/entities/technical_space_version_io.hpp"
 #include "dogen.logical/io/entities/variability/element_repository_io.hpp"
 #include "dogen.logical/io/entities/serialization/element_repository_io.hpp"
 #include "dogen.logical/io/entities/visual_studio/element_repository_io.hpp"
@@ -194,7 +195,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"build_elements\": " << v.build_elements() << ", "
       << "\"physical_elements\": " << v.physical_elements() << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
-      << "\"streaming_properties\": " << v.streaming_properties()
+      << "\"streaming_properties\": " << v.streaming_properties() << ", "
+      << "\"technical_space_version\": " << v.technical_space_version()
       << " }";
     return(s);
 }

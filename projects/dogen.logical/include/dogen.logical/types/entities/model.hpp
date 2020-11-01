@@ -52,6 +52,7 @@
 #include "dogen.logical/types/entities/decoration/element_repository.hpp"
 #include "dogen.logical/types/entities/structural/element_repository.hpp"
 #include "dogen.logical/types/entities/templating/element_repository.hpp"
+#include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.logical/types/entities/variability/element_repository.hpp"
 #include "dogen.logical/types/entities/serialization/element_repository.hpp"
 #include "dogen.logical/types/entities/visual_studio/element_repository.hpp"
@@ -95,7 +96,8 @@ public:
         const dogen::logical::entities::build::element_repository& build_elements,
         const dogen::logical::entities::physical::element_repository& physical_elements,
         const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
+        const dogen::identification::entities::technical_space_version technical_space_version);
 
 public:
     /**
@@ -288,6 +290,14 @@ public:
     void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v);
     void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v);
 
+    /**
+     * @brief Version of the technical space we are targeting.
+     */
+    /**@{*/
+    dogen::identification::entities::technical_space_version technical_space_version() const;
+    void technical_space_version(const dogen::identification::entities::technical_space_version v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -321,6 +331,7 @@ private:
     dogen::logical::entities::physical::element_repository physical_elements_;
     std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name> meta_names_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties> streaming_properties_;
+    dogen::identification::entities::technical_space_version technical_space_version_;
 };
 
 }
