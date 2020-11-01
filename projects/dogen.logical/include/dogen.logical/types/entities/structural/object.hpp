@@ -36,6 +36,7 @@
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/orm/object_properties.hpp"
 #include "dogen.identification/hash/entities/logical_name_hash.hpp"
+#include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
 
 namespace dogen::logical::entities::structural {
 
@@ -97,9 +98,7 @@ public:
         const std::list<dogen::identification::entities::logical_name>& leaves,
         const boost::optional<dogen::identification::entities::logical_name>& type_registrar,
         const dogen::logical::entities::type_parameters& type_parameters,
-        const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor,
-        const bool requires_stream_manipulators,
+        const dogen::logical::entities::structural::technical_space_properties& technical_space_properties,
         const bool is_associative_container,
         const std::list<dogen::identification::entities::logical_name>& object_templates,
         const bool provides_opaqueness,
@@ -335,14 +334,10 @@ public:
     void type_parameters(const dogen::logical::entities::type_parameters& v);
     void type_parameters(const dogen::logical::entities::type_parameters&& v);
 
-    bool requires_manual_default_constructor() const;
-    void requires_manual_default_constructor(const bool v);
-
-    bool requires_manual_move_constructor() const;
-    void requires_manual_move_constructor(const bool v);
-
-    bool requires_stream_manipulators() const;
-    void requires_stream_manipulators(const bool v);
+    const dogen::logical::entities::structural::technical_space_properties& technical_space_properties() const;
+    dogen::logical::entities::structural::technical_space_properties& technical_space_properties();
+    void technical_space_properties(const dogen::logical::entities::structural::technical_space_properties& v);
+    void technical_space_properties(const dogen::logical::entities::structural::technical_space_properties&& v);
 
     /**
      * @brief Object is an associative container.
@@ -421,9 +416,7 @@ private:
     std::list<dogen::identification::entities::logical_name> leaves_;
     boost::optional<dogen::identification::entities::logical_name> type_registrar_;
     dogen::logical::entities::type_parameters type_parameters_;
-    bool requires_manual_default_constructor_;
-    bool requires_manual_move_constructor_;
-    bool requires_stream_manipulators_;
+    dogen::logical::entities::structural::technical_space_properties technical_space_properties_;
     bool is_associative_container_;
     std::list<dogen::identification::entities::logical_name> object_templates_;
     bool provides_opaqueness_;

@@ -4490,10 +4490,7 @@
       ]
     },
     {
-      "name": "entities::structural::TechnicalSpaceProperties",
-      "stereotypes": [
-        "masd::object_template"
-      ],
+      "name": "entities::structural::technical_space_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -4507,6 +4504,19 @@
         {
           "name": "requires_stream_manipulators",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::TechnicalSpaceProperties",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "technical_space_properties",
+          "type": "technical_space_properties"
         }
       ]
     }

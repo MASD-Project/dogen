@@ -31,6 +31,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/orm/primitive_properties.hpp"
+#include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
 
 namespace dogen::logical::entities::structural {
 
@@ -63,9 +64,7 @@ public:
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor,
-        const bool requires_stream_manipulators,
+        const dogen::logical::entities::structural::technical_space_properties& technical_space_properties,
         const bool is_nullable,
         const dogen::logical::entities::attribute& value_attribute,
         const bool use_type_aliasing,
@@ -83,14 +82,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    bool requires_manual_default_constructor() const;
-    void requires_manual_default_constructor(const bool v);
-
-    bool requires_manual_move_constructor() const;
-    void requires_manual_move_constructor(const bool v);
-
-    bool requires_stream_manipulators() const;
-    void requires_stream_manipulators(const bool v);
+    const dogen::logical::entities::structural::technical_space_properties& technical_space_properties() const;
+    dogen::logical::entities::structural::technical_space_properties& technical_space_properties();
+    void technical_space_properties(const dogen::logical::entities::structural::technical_space_properties& v);
+    void technical_space_properties(const dogen::logical::entities::structural::technical_space_properties&& v);
 
     /**
      * @brief If true, this element can be null (empty).
@@ -145,9 +140,7 @@ public:
     primitive& operator=(primitive other);
 
 private:
-    bool requires_manual_default_constructor_;
-    bool requires_manual_move_constructor_;
-    bool requires_stream_manipulators_;
+    dogen::logical::entities::structural::technical_space_properties technical_space_properties_;
     bool is_nullable_;
     dogen::logical::entities::attribute value_attribute_;
     bool use_type_aliasing_;

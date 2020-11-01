@@ -20,16 +20,23 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/attribute_io.hpp"
-#include "dogen.logical/io/entities/structural/primitive_io.hpp"
-#include "dogen.logical/io/entities/orm/primitive_properties_io.hpp"
 #include "dogen.logical/io/entities/structural/technical_space_properties_io.hpp"
 
 namespace dogen::logical::entities::structural {
 
-std::ostream& operator<<(std::ostream& s, const primitive& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const technical_space_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::logical::entities::structural::technical_space_properties\"" << ", "
+      << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
+      << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
+      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()
+      << " }";
     return(s);
 }
 

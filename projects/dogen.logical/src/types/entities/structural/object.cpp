@@ -27,6 +27,7 @@
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/orm/object_properties_io.hpp"
+#include "dogen.logical/io/entities/structural/technical_space_properties_io.hpp"
 
 namespace std {
 
@@ -132,9 +133,6 @@ object::object()
       is_final_(static_cast<bool>(0)),
       is_abstract_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
-      requires_manual_default_constructor_(static_cast<bool>(0)),
-      requires_manual_move_constructor_(static_cast<bool>(0)),
-      requires_stream_manipulators_(static_cast<bool>(0)),
       is_associative_container_(static_cast<bool>(0)),
       provides_opaqueness_(static_cast<bool>(0)),
       can_be_primitive_underlier_(static_cast<bool>(0)) { }
@@ -166,9 +164,7 @@ object::object(object&& rhs)
       leaves_(std::move(rhs.leaves_)),
       type_registrar_(std::move(rhs.type_registrar_)),
       type_parameters_(std::move(rhs.type_parameters_)),
-      requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
-      requires_manual_move_constructor_(std::move(rhs.requires_manual_move_constructor_)),
-      requires_stream_manipulators_(std::move(rhs.requires_stream_manipulators_)),
+      technical_space_properties_(std::move(rhs.technical_space_properties_)),
       is_associative_container_(std::move(rhs.is_associative_container_)),
       object_templates_(std::move(rhs.object_templates_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
@@ -212,9 +208,7 @@ object::object(
     const std::list<dogen::identification::entities::logical_name>& leaves,
     const boost::optional<dogen::identification::entities::logical_name>& type_registrar,
     const dogen::logical::entities::type_parameters& type_parameters,
-    const bool requires_manual_default_constructor,
-    const bool requires_manual_move_constructor,
-    const bool requires_stream_manipulators,
+    const dogen::logical::entities::structural::technical_space_properties& technical_space_properties,
     const bool is_associative_container,
     const std::list<dogen::identification::entities::logical_name>& object_templates,
     const bool provides_opaqueness,
@@ -257,9 +251,7 @@ object::object(
       leaves_(leaves),
       type_registrar_(type_registrar),
       type_parameters_(type_parameters),
-      requires_manual_default_constructor_(requires_manual_default_constructor),
-      requires_manual_move_constructor_(requires_manual_move_constructor),
-      requires_stream_manipulators_(requires_stream_manipulators),
+      technical_space_properties_(technical_space_properties),
       is_associative_container_(is_associative_container),
       object_templates_(object_templates),
       provides_opaqueness_(provides_opaqueness),
@@ -318,9 +310,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"leaves\": " << leaves_ << ", "
       << "\"type_registrar\": " << type_registrar_ << ", "
       << "\"type_parameters\": " << type_parameters_ << ", "
-      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
-      << "\"requires_manual_move_constructor\": " << requires_manual_move_constructor_ << ", "
-      << "\"requires_stream_manipulators\": " << requires_stream_manipulators_ << ", "
+      << "\"technical_space_properties\": " << technical_space_properties_ << ", "
       << "\"is_associative_container\": " << is_associative_container_ << ", "
       << "\"object_templates\": " << object_templates_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
@@ -357,9 +347,7 @@ void object::swap(object& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(type_registrar_, other.type_registrar_);
     swap(type_parameters_, other.type_parameters_);
-    swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
-    swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
-    swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
+    swap(technical_space_properties_, other.technical_space_properties_);
     swap(is_associative_container_, other.is_associative_container_);
     swap(object_templates_, other.object_templates_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
@@ -399,9 +387,7 @@ bool object::operator==(const object& rhs) const {
         leaves_ == rhs.leaves_ &&
         type_registrar_ == rhs.type_registrar_ &&
         type_parameters_ == rhs.type_parameters_ &&
-        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
-        requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
-        requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
+        technical_space_properties_ == rhs.technical_space_properties_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
         object_templates_ == rhs.object_templates_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
@@ -719,28 +705,20 @@ void object::type_parameters(const dogen::logical::entities::type_parameters&& v
     type_parameters_ = std::move(v);
 }
 
-bool object::requires_manual_default_constructor() const {
-    return requires_manual_default_constructor_;
+const dogen::logical::entities::structural::technical_space_properties& object::technical_space_properties() const {
+    return technical_space_properties_;
 }
 
-void object::requires_manual_default_constructor(const bool v) {
-    requires_manual_default_constructor_ = v;
+dogen::logical::entities::structural::technical_space_properties& object::technical_space_properties() {
+    return technical_space_properties_;
 }
 
-bool object::requires_manual_move_constructor() const {
-    return requires_manual_move_constructor_;
+void object::technical_space_properties(const dogen::logical::entities::structural::technical_space_properties& v) {
+    technical_space_properties_ = v;
 }
 
-void object::requires_manual_move_constructor(const bool v) {
-    requires_manual_move_constructor_ = v;
-}
-
-bool object::requires_stream_manipulators() const {
-    return requires_stream_manipulators_;
-}
-
-void object::requires_stream_manipulators(const bool v) {
-    requires_stream_manipulators_ = v;
+void object::technical_space_properties(const dogen::logical::entities::structural::technical_space_properties&& v) {
+    technical_space_properties_ = std::move(v);
 }
 
 bool object::is_associative_container() const {
