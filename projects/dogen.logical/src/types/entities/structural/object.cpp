@@ -134,7 +134,10 @@ object::object()
       in_inheritance_relationship_(static_cast<bool>(0)),
       is_associative_container_(static_cast<bool>(0)),
       provides_opaqueness_(static_cast<bool>(0)),
-      can_be_primitive_underlier_(static_cast<bool>(0)) { }
+      can_be_primitive_underlier_(static_cast<bool>(0)),
+      requires_manual_default_constructor_(static_cast<bool>(0)),
+      requires_manual_move_constructor_(static_cast<bool>(0)),
+      requires_stream_manipulators_(static_cast<bool>(0)) { }
 
 object::object(object&& rhs)
     : dogen::logical::entities::element(
@@ -167,7 +170,10 @@ object::object(object&& rhs)
       object_templates_(std::move(rhs.object_templates_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
       can_be_primitive_underlier_(std::move(rhs.can_be_primitive_underlier_)),
-      orm_properties_(std::move(rhs.orm_properties_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)),
+      requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
+      requires_manual_move_constructor_(std::move(rhs.requires_manual_move_constructor_)),
+      requires_stream_manipulators_(std::move(rhs.requires_stream_manipulators_)) { }
 
 object::object(
     const dogen::identification::entities::logical_name& name,
@@ -210,7 +216,10 @@ object::object(
     const std::list<dogen::identification::entities::logical_name>& object_templates,
     const bool provides_opaqueness,
     const bool can_be_primitive_underlier,
-    const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties)
+    const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties,
+    const bool requires_manual_default_constructor,
+    const bool requires_manual_move_constructor,
+    const bool requires_stream_manipulators)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -252,7 +261,10 @@ object::object(
       object_templates_(object_templates),
       provides_opaqueness_(provides_opaqueness),
       can_be_primitive_underlier_(can_be_primitive_underlier),
-      orm_properties_(orm_properties) { }
+      orm_properties_(orm_properties),
+      requires_manual_default_constructor_(requires_manual_default_constructor),
+      requires_manual_move_constructor_(requires_manual_move_constructor),
+      requires_stream_manipulators_(requires_stream_manipulators) { }
 
 void object::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -310,7 +322,10 @@ void object::to_stream(std::ostream& s) const {
       << "\"object_templates\": " << object_templates_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
       << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_ << ", "
-      << "\"orm_properties\": " << orm_properties_
+      << "\"orm_properties\": " << orm_properties_ << ", "
+      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
+      << "\"requires_manual_move_constructor\": " << requires_manual_move_constructor_ << ", "
+      << "\"requires_stream_manipulators\": " << requires_stream_manipulators_
       << " }";
 }
 
@@ -347,6 +362,9 @@ void object::swap(object& other) noexcept {
     swap(provides_opaqueness_, other.provides_opaqueness_);
     swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
     swap(orm_properties_, other.orm_properties_);
+    swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
+    swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
+    swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
 }
 
 bool object::equals(const dogen::logical::entities::element& other) const {
@@ -385,7 +403,10 @@ bool object::operator==(const object& rhs) const {
         object_templates_ == rhs.object_templates_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
         can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_ &&
-        orm_properties_ == rhs.orm_properties_;
+        orm_properties_ == rhs.orm_properties_ &&
+        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
+        requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
+        requires_stream_manipulators_ == rhs.requires_stream_manipulators_;
 }
 
 object& object::operator=(object other) {
@@ -752,6 +773,30 @@ void object::orm_properties(const boost::optional<dogen::logical::entities::orm:
 
 void object::orm_properties(const boost::optional<dogen::logical::entities::orm::object_properties>&& v) {
     orm_properties_ = std::move(v);
+}
+
+bool object::requires_manual_default_constructor() const {
+    return requires_manual_default_constructor_;
+}
+
+void object::requires_manual_default_constructor(const bool v) {
+    requires_manual_default_constructor_ = v;
+}
+
+bool object::requires_manual_move_constructor() const {
+    return requires_manual_move_constructor_;
+}
+
+void object::requires_manual_move_constructor(const bool v) {
+    requires_manual_move_constructor_ = v;
+}
+
+bool object::requires_stream_manipulators() const {
+    return requires_stream_manipulators_;
+}
+
+void object::requires_stream_manipulators(const bool v) {
+    requires_stream_manipulators_ = v;
 }
 
 }

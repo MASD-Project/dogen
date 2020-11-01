@@ -1768,6 +1768,18 @@
         {
           "name": "orm_properties",
           "type": "boost::optional<dogen::logical::entities::orm::object_properties>"
+        },
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "bool"
         }
       ]
     },
@@ -4437,6 +4449,52 @@
           "documentation": "Which version of C++ to use.\n",
           "tagged_values": {
             "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::technical_space_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::technical_space_properties",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp.aspect"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires a manual move constructor.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires stream manipulators.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
           }
         }
       ]

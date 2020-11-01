@@ -1853,33 +1853,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "aspect.requires_manual_default_constructor",
-          "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        },
-        {
-          "name": "aspect.requires_manual_move_constructor",
-          "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "documentation": "If true, the modeling element requires a manual move constructor.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        },
-        {
-          "name": "aspect.requires_stream_manipulators",
-          "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "documentation": "If true, the modeling element requires stream manipulators.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        },
-        {
           "name": "helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",

@@ -101,7 +101,10 @@ public:
         const std::list<dogen::identification::entities::logical_name>& object_templates,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
-        const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties);
+        const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties,
+        const bool requires_manual_default_constructor,
+        const bool requires_manual_move_constructor,
+        const bool requires_stream_manipulators);
 
 public:
     using element::accept;
@@ -371,6 +374,15 @@ public:
     void orm_properties(const boost::optional<dogen::logical::entities::orm::object_properties>& v);
     void orm_properties(const boost::optional<dogen::logical::entities::orm::object_properties>&& v);
 
+    bool requires_manual_default_constructor() const;
+    void requires_manual_default_constructor(const bool v);
+
+    bool requires_manual_move_constructor() const;
+    void requires_manual_move_constructor(const bool v);
+
+    bool requires_stream_manipulators() const;
+    void requires_stream_manipulators(const bool v);
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -414,6 +426,9 @@ private:
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
     boost::optional<dogen::logical::entities::orm::object_properties> orm_properties_;
+    bool requires_manual_default_constructor_;
+    bool requires_manual_move_constructor_;
+    bool requires_stream_manipulators_;
 };
 
 }
