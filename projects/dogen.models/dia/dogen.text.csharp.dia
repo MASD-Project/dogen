@@ -70,7 +70,7 @@
           <dia:boolean val="false"/>
         </dia:attribute>
         <dia:attribute name="snap-to-grid">
-          <dia:boolean val="false"/>
+          <dia:boolean val="true"/>
         </dia:attribute>
         <dia:attribute name="snap-to-object">
           <dia:boolean val="true"/>
@@ -13345,16 +13345,16 @@ using System;
         <dia:point val="75,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,9.95;105.195,16.05"/>
+        <dia:rectangle val="74.95,9.95;101.73,15.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="75,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.145"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -13448,29 +13448,6 @@ using System;
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#aspect.requires_static_reference_equals#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::boolean#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"true"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#helper.family#</dia:string>

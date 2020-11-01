@@ -4456,12 +4456,12 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.key_prefix": "masd.cpp.aspect"
+        "masd.variability.key_prefix": "masd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "requires_manual_default_constructor",
+          "name": "cpp.aspect.requires_manual_default_constructor",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
@@ -4470,7 +4470,7 @@
           }
         },
         {
-          "name": "requires_manual_move_constructor",
+          "name": "cpp.aspect.requires_manual_move_constructor",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual move constructor.\n",
@@ -4479,10 +4479,18 @@
           }
         },
         {
-          "name": "requires_stream_manipulators",
+          "name": "cpp.aspect.requires_stream_manipulators",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires stream manipulators.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "csharp.aspect.requires_static_reference_equals",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
@@ -4503,6 +4511,14 @@
         },
         {
           "name": "requires_stream_manipulators",
+          "type": "bool"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool"
+        },
+        {
+          "name": "requires_static_reference_equals",
           "type": "bool"
         }
       ]

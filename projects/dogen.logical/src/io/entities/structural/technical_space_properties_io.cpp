@@ -35,7 +35,9 @@ std::ostream& operator<<(std::ostream& s, const technical_space_properties& v) {
       << "\"__type__\": " << "\"dogen::logical::entities::structural::technical_space_properties\"" << ", "
       << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
       << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
-      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()
+      << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators() << ", "
+      << "\"is_floating_point\": " << v.is_floating_point() << ", "
+      << "\"requires_static_reference_equals\": " << v.requires_static_reference_equals()
       << " }";
     return(s);
 }

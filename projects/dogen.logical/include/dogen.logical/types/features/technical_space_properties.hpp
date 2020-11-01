@@ -38,6 +38,7 @@ public:
         variability::entities::feature requires_manual_default_constructor;
         variability::entities::feature requires_manual_move_constructor;
         variability::entities::feature requires_stream_manipulators;
+        variability::entities::feature requires_static_reference_equals;
     };
 
     static feature_group
@@ -48,11 +49,13 @@ public:
         bool requires_manual_default_constructor;
         bool requires_manual_move_constructor;
         bool requires_stream_manipulators;
+        bool requires_static_reference_equals;
 
         static_configuration() :
             requires_manual_default_constructor(),
             requires_manual_move_constructor(),
-            requires_stream_manipulators() {}
+            requires_stream_manipulators(),
+            requires_static_reference_equals() {}
     };
 
     static static_configuration make_static_configuration(

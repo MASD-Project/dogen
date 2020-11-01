@@ -42,7 +42,9 @@ public:
     technical_space_properties(
         const bool requires_manual_default_constructor,
         const bool requires_manual_move_constructor,
-        const bool requires_stream_manipulators);
+        const bool requires_stream_manipulators,
+        const bool is_floating_point,
+        const bool requires_static_reference_equals);
 
 public:
     bool requires_manual_default_constructor() const;
@@ -53,6 +55,12 @@ public:
 
     bool requires_stream_manipulators() const;
     void requires_stream_manipulators(const bool v);
+
+    bool is_floating_point() const;
+    void is_floating_point(const bool v);
+
+    bool requires_static_reference_equals() const;
+    void requires_static_reference_equals(const bool v);
 
 public:
     bool operator==(const technical_space_properties& rhs) const;
@@ -68,6 +76,8 @@ private:
     bool requires_manual_default_constructor_;
     bool requires_manual_move_constructor_;
     bool requires_stream_manipulators_;
+    bool is_floating_point_;
+    bool requires_static_reference_equals_;
 };
 
 }

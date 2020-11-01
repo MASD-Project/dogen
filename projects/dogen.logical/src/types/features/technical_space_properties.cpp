@@ -78,6 +78,22 @@ make_masd_cpp_aspect_requires_stream_manipulators() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_csharp_aspect_requires_static_reference_equals() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("requires_static_reference_equals");
+    r.name().qualified("masd.csharp.aspect.requires_static_reference_equals");
+    r.description(R"(
+)");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+    return r;
+}
+
 }
 
 technical_space_properties::feature_group
@@ -88,6 +104,7 @@ technical_space_properties::make_feature_group(const dogen::variability::entitie
     r.requires_manual_default_constructor = s.get_by_name("masd.cpp.aspect.requires_manual_default_constructor");
     r.requires_manual_move_constructor = s.get_by_name("masd.cpp.aspect.requires_manual_move_constructor");
     r.requires_stream_manipulators = s.get_by_name("masd.cpp.aspect.requires_stream_manipulators");
+    r.requires_static_reference_equals = s.get_by_name("masd.csharp.aspect.requires_static_reference_equals");
 
     return r;
 }
@@ -101,6 +118,7 @@ technical_space_properties::static_configuration technical_space_properties::mak
     r.requires_manual_default_constructor = s.get_boolean_content_or_default(fg.requires_manual_default_constructor);
     r.requires_manual_move_constructor = s.get_boolean_content_or_default(fg.requires_manual_move_constructor);
     r.requires_stream_manipulators = s.get_boolean_content_or_default(fg.requires_stream_manipulators);
+    r.requires_static_reference_equals = s.get_boolean_content_or_default(fg.requires_static_reference_equals);
     return r;
 }
 
@@ -111,6 +129,7 @@ technical_space_properties::make_features() {
     r.push_back(make_masd_cpp_aspect_requires_manual_default_constructor());
     r.push_back(make_masd_cpp_aspect_requires_manual_move_constructor());
     r.push_back(make_masd_cpp_aspect_requires_stream_manipulators());
+    r.push_back(make_masd_csharp_aspect_requires_static_reference_equals());
     return r;
 }
 
