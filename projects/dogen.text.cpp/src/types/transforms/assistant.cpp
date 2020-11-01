@@ -22,6 +22,7 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.physical/types/entities/meta_model_properties.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
@@ -86,6 +87,7 @@ namespace dogen::text::cpp::transforms {
 
 using identification::entities::logical_name;
 using identification::entities::logical_name_tree;
+using identification::entities::technical_space_version;
 
 assistant::assistant(const context& ctx, const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
@@ -277,13 +279,13 @@ std::string assistant::get_facet_directory_for_facet(
 }
 
 bool assistant::is_cpp_standard_98() const {
-    using formattables::cpp_standards;
-    return context_.model().cpp_standard() == cpp_standards::cpp_98;
+    const auto tsv(context_.technical_space_version());
+    return tsv == technical_space_version::cpp_98;
 }
 
 bool assistant::is_cpp_standard_17() const {
-    using formattables::cpp_standards;
-    return context_.model().cpp_standard() == cpp_standards::cpp_17;
+    const auto tsv(context_.technical_space_version());
+    return tsv == technical_space_version::cpp_17;
 }
 
 bool assistant::supports_defaulted_functions() const {
