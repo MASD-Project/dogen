@@ -27,6 +27,7 @@
 
 #include <list>
 #include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -37,6 +38,25 @@ namespace dogen::logical::transforms {
  * elements.
  */
 class technical_space_transform final {
+private:
+    /**
+     * @brief Converts string into its enumeration representation.
+     */
+    static identification::entities::technical_space_version
+    to_technical_space_version(const std::string& s);
+
+    /**
+     * @brief Handles technical space related attributes.
+     */
+    static void processs_technical_space(
+        const context& ctx, entities::model& m);
+
+    /**
+     * @brief Handles the version of the technical space.
+     */
+    static void processs_technical_space_version(
+        const context& ctx, entities::model& m);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
