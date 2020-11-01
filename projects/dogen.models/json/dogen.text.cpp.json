@@ -718,14 +718,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::building_error",
-      "documentation": "An error occurred while the factory was building.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::hash::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
