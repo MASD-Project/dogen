@@ -1741,7 +1741,8 @@
         "logical::meta_element",
         "Stateful",
         "Relatable",
-        "Parameterisable"
+        "Parameterisable",
+        "TechnicalSpaceProperties"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1768,18 +1769,6 @@
         {
           "name": "orm_properties",
           "type": "boost::optional<dogen::logical::entities::orm::object_properties>"
-        },
-        {
-          "name": "requires_manual_default_constructor",
-          "type": "bool"
-        },
-        {
-          "name": "requires_manual_move_constructor",
-          "type": "bool"
-        },
-        {
-          "name": "requires_stream_manipulators",
-          "type": "bool"
         }
       ]
     },
@@ -1843,7 +1832,8 @@
       "name": "entities::structural::primitive",
       "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "TechnicalSpaceProperties"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4496,6 +4486,27 @@
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::TechnicalSpaceProperties",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "bool"
         }
       ]
     }

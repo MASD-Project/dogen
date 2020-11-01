@@ -44,13 +44,19 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 namespace dogen::logical::entities::structural {
 
 primitive::primitive()
-    : is_nullable_(static_cast<bool>(0)),
+    : requires_manual_default_constructor_(static_cast<bool>(0)),
+      requires_manual_move_constructor_(static_cast<bool>(0)),
+      requires_stream_manipulators_(static_cast<bool>(0)),
+      is_nullable_(static_cast<bool>(0)),
       use_type_aliasing_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)) { }
 
 primitive::primitive(primitive&& rhs)
     : dogen::logical::entities::element(
         std::forward<dogen::logical::entities::element>(rhs)),
+      requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
+      requires_manual_move_constructor_(std::move(rhs.requires_manual_move_constructor_)),
+      requires_stream_manipulators_(std::move(rhs.requires_stream_manipulators_)),
       is_nullable_(std::move(rhs.is_nullable_)),
       value_attribute_(std::move(rhs.value_attribute_)),
       use_type_aliasing_(std::move(rhs.use_type_aliasing_)),
@@ -70,6 +76,9 @@ primitive::primitive(
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const bool requires_manual_default_constructor,
+    const bool requires_manual_move_constructor,
+    const bool requires_stream_manipulators,
     const bool is_nullable,
     const dogen::logical::entities::attribute& value_attribute,
     const bool use_type_aliasing,
@@ -88,6 +97,9 @@ primitive::primitive(
       labels,
       generability_status,
       decoration),
+      requires_manual_default_constructor_(requires_manual_default_constructor),
+      requires_manual_move_constructor_(requires_manual_move_constructor),
+      requires_stream_manipulators_(requires_stream_manipulators),
       is_nullable_(is_nullable),
       value_attribute_(value_attribute),
       use_type_aliasing_(use_type_aliasing),
@@ -122,6 +134,9 @@ void primitive::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::logical::entities::element::to_stream(s);
     s << ", "
+      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
+      << "\"requires_manual_move_constructor\": " << requires_manual_move_constructor_ << ", "
+      << "\"requires_stream_manipulators\": " << requires_stream_manipulators_ << ", "
       << "\"is_nullable\": " << is_nullable_ << ", "
       << "\"value_attribute\": " << value_attribute_ << ", "
       << "\"use_type_aliasing\": " << use_type_aliasing_ << ", "
@@ -134,6 +149,9 @@ void primitive::swap(primitive& other) noexcept {
     dogen::logical::entities::element::swap(other);
 
     using std::swap;
+    swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
+    swap(requires_manual_move_constructor_, other.requires_manual_move_constructor_);
+    swap(requires_stream_manipulators_, other.requires_stream_manipulators_);
     swap(is_nullable_, other.is_nullable_);
     swap(value_attribute_, other.value_attribute_);
     swap(use_type_aliasing_, other.use_type_aliasing_);
@@ -149,6 +167,9 @@ bool primitive::equals(const dogen::logical::entities::element& other) const {
 
 bool primitive::operator==(const primitive& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
+        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
+        requires_manual_move_constructor_ == rhs.requires_manual_move_constructor_ &&
+        requires_stream_manipulators_ == rhs.requires_stream_manipulators_ &&
         is_nullable_ == rhs.is_nullable_ &&
         value_attribute_ == rhs.value_attribute_ &&
         use_type_aliasing_ == rhs.use_type_aliasing_ &&
@@ -160,6 +181,30 @@ primitive& primitive::operator=(primitive other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool primitive::requires_manual_default_constructor() const {
+    return requires_manual_default_constructor_;
+}
+
+void primitive::requires_manual_default_constructor(const bool v) {
+    requires_manual_default_constructor_ = v;
+}
+
+bool primitive::requires_manual_move_constructor() const {
+    return requires_manual_move_constructor_;
+}
+
+void primitive::requires_manual_move_constructor(const bool v) {
+    requires_manual_move_constructor_ = v;
+}
+
+bool primitive::requires_stream_manipulators() const {
+    return requires_stream_manipulators_;
+}
+
+void primitive::requires_stream_manipulators(const bool v) {
+    requires_stream_manipulators_ = v;
 }
 
 bool primitive::is_nullable() const {

@@ -97,14 +97,14 @@ public:
         const std::list<dogen::identification::entities::logical_name>& leaves,
         const boost::optional<dogen::identification::entities::logical_name>& type_registrar,
         const dogen::logical::entities::type_parameters& type_parameters,
+        const bool requires_manual_default_constructor,
+        const bool requires_manual_move_constructor,
+        const bool requires_stream_manipulators,
         const bool is_associative_container,
         const std::list<dogen::identification::entities::logical_name>& object_templates,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
-        const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties,
-        const bool requires_manual_default_constructor,
-        const bool requires_manual_move_constructor,
-        const bool requires_stream_manipulators);
+        const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -335,6 +335,15 @@ public:
     void type_parameters(const dogen::logical::entities::type_parameters& v);
     void type_parameters(const dogen::logical::entities::type_parameters&& v);
 
+    bool requires_manual_default_constructor() const;
+    void requires_manual_default_constructor(const bool v);
+
+    bool requires_manual_move_constructor() const;
+    void requires_manual_move_constructor(const bool v);
+
+    bool requires_stream_manipulators() const;
+    void requires_stream_manipulators(const bool v);
+
     /**
      * @brief Object is an associative container.
      */
@@ -374,15 +383,6 @@ public:
     void orm_properties(const boost::optional<dogen::logical::entities::orm::object_properties>& v);
     void orm_properties(const boost::optional<dogen::logical::entities::orm::object_properties>&& v);
 
-    bool requires_manual_default_constructor() const;
-    void requires_manual_default_constructor(const bool v);
-
-    bool requires_manual_move_constructor() const;
-    void requires_manual_move_constructor(const bool v);
-
-    bool requires_stream_manipulators() const;
-    void requires_stream_manipulators(const bool v);
-
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -421,14 +421,14 @@ private:
     std::list<dogen::identification::entities::logical_name> leaves_;
     boost::optional<dogen::identification::entities::logical_name> type_registrar_;
     dogen::logical::entities::type_parameters type_parameters_;
+    bool requires_manual_default_constructor_;
+    bool requires_manual_move_constructor_;
+    bool requires_stream_manipulators_;
     bool is_associative_container_;
     std::list<dogen::identification::entities::logical_name> object_templates_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
     boost::optional<dogen::logical::entities::orm::object_properties> orm_properties_;
-    bool requires_manual_default_constructor_;
-    bool requires_manual_move_constructor_;
-    bool requires_stream_manipulators_;
 };
 
 }
