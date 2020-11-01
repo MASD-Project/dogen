@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-31 Sat 16:31]
+#+CAPTION: Clock summary at [2020-11-01 Sun 12:45]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                | *75:49* |       |       | 100.0 |
+| *Total time*                                                | *77:04* |       |       | 100.0 |
 |-------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                     | 75:49   |       |       | 100.0 |
-| Active                                                      |         | 75:49 |       | 100.0 |
-| edit release notes for previous sprint                      |         |       |  3:44 |   4.9 |
-| Create a demo and presentation for previous sprint          |         |       |  0:39 |   0.9 |
-| Sprint and product backlog grooming                         |         |       |  4:23 |   5.8 |
-| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.2 |
+| Stories                                                     | 77:04   |       |       | 100.0 |
+| Active                                                      |         | 77:04 |       | 100.0 |
+| edit release notes for previous sprint                      |         |       |  3:44 |   4.8 |
+| Create a demo and presentation for previous sprint          |         |       |  0:39 |   0.8 |
+| Sprint and product backlog grooming                         |         |       |  4:23 |   5.7 |
+| Directory names and postfixes are PMM properties            |         |       |  5:27 |   7.1 |
 | Move =enabled= and =overwrite= into =enablement_properties= |         |       |  0:19 |   0.4 |
 | Analysis on a formatables refactor                          |         |       |  0:31 |   0.7 |
 | Tracing of orchestration chains is incorrect                |         |       |  1:00 |   1.3 |
-| Presentation for APA                                        |         |       |  5:11 |   6.8 |
-| Move C++ locator into physical model                        |         |       | 40:15 |  53.1 |
+| Presentation for APA                                        |         |       |  5:11 |   6.7 |
+| Move C++ locator into physical model                        |         |       | 40:15 |  52.2 |
 | Create a video series on the formatables refactor           |         |       |  0:37 |   0.8 |
 | Add full and relative path processing to PM                 |         |       |  2:27 |   3.2 |
-| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.3 |
+| Create a factory transform for parts and archetype kinds    |         |       |  5:30 |   7.1 |
 | Issues with emacs                                           |         |       |  1:09 |   1.5 |
 | Rename =name= to =codec= name                               |         |       |  0:20 |   0.4 |
-| Move stand-alone formatables to physical/logical models     |         |       |  4:17 |   5.6 |
+| Move stand-alone formatables to physical/logical models     |         |       |  5:32 |   7.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -595,6 +595,7 @@ Notes:
 
 *** STARTED Move stand-alone formatables to physical/logical models   :story:
     :LOGBOOK:
+    CLOCK: [2020-11-01 Sun 11:30]--[2020-11-01 Sun 12:45] =>  1:15
     CLOCK: [2020-10-31 Sat 13:30]--[2020-10-31 Sat 16:31] =>  3:01
     CLOCK: [2020-10-31 Sat 11:01]--[2020-10-31 Sat 12:17] =>  1:16
     :END:
@@ -607,6 +608,7 @@ final location:
 - ODB related types.
 - streaming properties
 - =cpp_standards=
+- =test_data_properties=
 
 *** Detect absence of configuration in bundles                        :story:
 
