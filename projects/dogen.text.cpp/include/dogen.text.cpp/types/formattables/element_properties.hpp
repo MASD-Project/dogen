@@ -27,7 +27,6 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.text.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -43,16 +42,9 @@ public:
     ~element_properties() = default;
 
 public:
-    element_properties(
-        const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-        const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties);
+    explicit element_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties);
 
 public:
-    const dogen::text::cpp::formattables::aspect_properties& aspect_properties() const;
-    dogen::text::cpp::formattables::aspect_properties& aspect_properties();
-    void aspect_properties(const dogen::text::cpp::formattables::aspect_properties& v);
-    void aspect_properties(const dogen::text::cpp::formattables::aspect_properties&& v);
-
     const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties() const;
     std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties();
     void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& v);
@@ -69,7 +61,6 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    dogen::text::cpp::formattables::aspect_properties aspect_properties_;
     std::list<dogen::text::cpp::formattables::helper_properties> helper_properties_;
 };
 

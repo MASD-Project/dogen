@@ -38,10 +38,6 @@ namespace dogen::text::cpp::formattables {
 
 class model_expander {
 private:
-    void expand_aspects(
-        const variability::entities::feature_model& feature_model,
-        model& fm) const;
-
     void expand_helpers(
         const variability::entities::feature_model& feature_model,
         const std::unordered_map<identification::entities::logical_id,

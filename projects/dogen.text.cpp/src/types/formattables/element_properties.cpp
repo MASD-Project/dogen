@@ -22,43 +22,22 @@
 
 namespace dogen::text::cpp::formattables {
 
-element_properties::element_properties(
-    const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-    const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties)
-    : aspect_properties_(aspect_properties),
-      helper_properties_(helper_properties) { }
+element_properties::element_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties)
+    : helper_properties_(helper_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
-    swap(aspect_properties_, other.aspect_properties_);
     swap(helper_properties_, other.helper_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return aspect_properties_ == rhs.aspect_properties_ &&
-        helper_properties_ == rhs.helper_properties_;
+    return helper_properties_ == rhs.helper_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::text::cpp::formattables::aspect_properties& element_properties::aspect_properties() const {
-    return aspect_properties_;
-}
-
-dogen::text::cpp::formattables::aspect_properties& element_properties::aspect_properties() {
-    return aspect_properties_;
-}
-
-void element_properties::aspect_properties(const dogen::text::cpp::formattables::aspect_properties& v) {
-    aspect_properties_ = v;
-}
-
-void element_properties::aspect_properties(const dogen::text::cpp::formattables::aspect_properties&& v) {
-    aspect_properties_ = std::move(v);
 }
 
 const std::list<dogen::text::cpp::formattables::helper_properties>& element_properties::helper_properties() const {

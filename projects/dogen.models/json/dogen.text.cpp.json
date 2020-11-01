@@ -907,30 +907,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "aspect_properties",
-          "type": "formattables::aspect_properties"
-        },
-        {
           "name": "helper_properties",
           "type": "std::list<formattables::helper_properties>"
-        }
-      ]
-    },
-    {
-      "name": "formattables::aspect_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "requires_manual_default_constructor",
-          "type": "bool"
-        },
-        {
-          "name": "requires_manual_move_constructor",
-          "type": "bool"
-        },
-        {
-          "name": "requires_stream_manipulators",
-          "type": "bool"
         }
       ]
     },
@@ -1107,13 +1085,6 @@
     },
     {
       "name": "formattables::model_expander",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::aspect_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

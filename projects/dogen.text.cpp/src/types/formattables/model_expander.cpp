@@ -18,19 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
 #include "dogen.text.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::cpp::formattables {
-
-void model_expander::expand_aspects(
-    const variability::entities::feature_model& feature_model,
-    model& fm) const {
-    aspect_expander ex;
-    ex.expand(feature_model, fm);
-}
 
 void model_expander::expand_helpers(
     const variability::entities::feature_model& feature_model,
@@ -52,7 +44,6 @@ void model_expander::expand(
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
 
-    expand_aspects(feature_model, fm);
     expand_helpers(feature_model, streaming_properties, frp, fm);
 
     /*

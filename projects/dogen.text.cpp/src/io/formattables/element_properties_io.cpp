@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include "dogen.text.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/element_properties_io.hpp"
 
@@ -42,7 +41,6 @@ namespace dogen::text::cpp::formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::cpp::formattables::element_properties\"" << ", "
-      << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties()
       << " }";
     return(s);
