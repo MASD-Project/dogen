@@ -1949,15 +1949,6 @@
           }
         },
         {
-          "name": "standard",
-          "type": "masd::variability::text",
-          "value": "\"c++-14\"",
-          "documentation": "Which version of C++ to use.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global"
-          }
-        },
-        {
           "name": "helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",

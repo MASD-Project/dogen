@@ -37,6 +37,7 @@
 #include "dogen.logical/types/features/decoration_modeline.hpp"
 #include "dogen.logical/types/features/variability_templates.hpp"
 #include "dogen.logical/types/features/output_technical_space.hpp"
+#include "dogen.logical/types/features/technical_space_version.hpp"
 
 namespace dogen::logical::features {
 
@@ -56,6 +57,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::logical::features::physical_relations::make_features());
     rg.register_features(dogen::logical::features::primitive::make_features());
     rg.register_features(dogen::logical::features::streaming::make_features());
+    rg.register_features(dogen::logical::features::technical_space_version::make_features());
     rg.register_features(dogen::logical::features::type_parameters::make_features());
     rg.register_features(dogen::logical::features::variability_bundle::make_features());
     rg.register_features(dogen::logical::features::variability_templates::make_features());

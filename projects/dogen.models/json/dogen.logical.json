@@ -4419,6 +4419,27 @@
           "type": "bool"
         }
       ]
+    },
+    {
+      "name": "features::technical_space_version",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "standard",
+          "type": "masd::variability::text",
+          "value": "\"c++-14\"",
+          "documentation": "Which version of C++ to use.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
     }
   ]
 }

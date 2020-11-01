@@ -77,23 +77,6 @@ make_masd_cpp_aspect_requires_stream_manipulators() {
 }
 
 dogen::variability::entities::feature
-make_masd_cpp_standard() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("standard");
-    r.name().qualified("masd.cpp.standard");
-    r.description(R"(Which version of C++ to use.
-
-)");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "c++-14" }));
-    return r;
-}
-
-dogen::variability::entities::feature
 make_masd_cpp_helper_family() {
     using namespace dogen::variability::entities;
     feature r;
@@ -120,7 +103,6 @@ global_features::make_features() {
     r.push_back(make_masd_cpp_aspect_requires_manual_default_constructor());
     r.push_back(make_masd_cpp_aspect_requires_manual_move_constructor());
     r.push_back(make_masd_cpp_aspect_requires_stream_manipulators());
-    r.push_back(make_masd_cpp_standard());
     r.push_back(make_masd_cpp_helper_family());
     return r;
 }

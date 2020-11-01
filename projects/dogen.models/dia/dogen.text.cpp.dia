@@ -29330,7 +29330,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="-48,185"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,184.95;-16.265,191.85"/>
+        <dia:rectangle val="-48.05,184.95;-16.265,191.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,185"/>
@@ -29339,7 +29339,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -29497,31 +29497,6 @@ register_entities(variability::helpers::registrar&amp; rg) {
             <dia:string>#If true, the modeling element requires stream manipulators.
 
 #DOGEN masd.variability.binding_point=element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#standard#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"c++-14"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which version of C++ to use.
-
-#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
