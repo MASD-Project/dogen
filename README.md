@@ -15,8 +15,8 @@
 [![Build Status](https://img.shields.io/travis/MASD-Project/dogen.svg?label=linux/osx)](https://travis-ci.org/MASD-Project/dogen)
 [![Build Status](https://img.shields.io/appveyor/ci/mcraveiro/dogen.svg?label=windows)](https://ci.appveyor.com/project/mcraveiro/dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
-[![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.27) ](https://bintray.com/masd-project/main/dogen/1.0.27/link)
-[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.27.svg)](https://github.com/MASD-Project/dogen/commits/master)
+[![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.28) ](https://bintray.com/masd-project/main/dogen/1.0.28/link)
+[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.28.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
 [![Language](https://img.shields.io/badge/Language-C++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-C++17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
@@ -133,7 +133,7 @@ it mounts under ```/Volumes/```, e.g.:
 /Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
 ```
 
-Where ```${VERSION}``` is your Dogen version such as ```1.0.27```.
+Where ```${VERSION}``` is your Dogen version such as ```1.0.28```.
 
 ----
 

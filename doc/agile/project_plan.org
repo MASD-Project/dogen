@@ -17,23 +17,30 @@ task juggler installed:
 
 ** Software Development
 
-*** Generation meta-model clean-up
+*** Formattables clean-up
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  start
-   :allocate: s28
+   :allocate: s29
    :END:
 
-- remove all types that are in coding but are related to generation
-  space to generation, making sure they are properly copied across.
-- move formattables concepts into generation, generalising them. This
-  includes dependencies, etc.
+- remove all types that are in formattables
+- merge all backends into text model.
 
-*** PDMs generation
+*** Physical model clean-up
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s29
+   :allocate: s30
+   :END:
+
+- Replace legacy transforms with data-driven versions
+
+*** PDM generation
+   :PROPERTIES:
+   :EFFORT:   26d
+   :BLOCKER:  previous-sibling
+   :allocate: s31
    :END:
 
 - create PDMs
@@ -43,7 +50,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s30
+   :allocate: s32
    :END:
 
 - add proudct and product family level entities to coding.
@@ -52,7 +59,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s31
+   :allocate: s33
    :END:
 
 - add warning and errors infrastructure
@@ -64,17 +71,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-09-21
+    :start: 2020-11-02
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 28
-   :PROPERTIES:
-   :resource_id: s28
-   :END:
 ** Sprint 29
    :PROPERTIES:
    :resource_id: s29
@@ -90,4 +93,8 @@ Sprints for the project plan.
 ** Sprint 32
    :PROPERTIES:
    :resource_id: s32
+   :END:
+** Sprint 33
+   :PROPERTIES:
+   :resource_id: s33
    :END:
