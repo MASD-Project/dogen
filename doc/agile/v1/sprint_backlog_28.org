@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-01 Sun 16:36]
+#+CAPTION: Clock summary at [2020-11-02 Mon 08:29]
 | <75>                                                        |         |       |       |       |
 | Headline                                                    | Time    |       |       |     % |
 |-------------------------------------------------------------+---------+-------+-------+-------|
@@ -205,7 +205,8 @@ Time spent creating the demo and presentation.
 ***** Create an identification model
 ***** Rename injection to codec
 ***** The logical-physical space
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2020-11-02 Mon 08:29]
     :LOGBOOK:
     CLOCK: [2020-11-01 Sun 16:34]--[2020-11-01 Sun 16:36] =>  0:02
     CLOCK: [2020-10-23 Fri 09:41]--[2020-10-23 Fri 10:31] =>  0:50
@@ -597,7 +598,8 @@ final location:
 - =aspect_properties=: c++ and c#. Features are still located in TS
   specific namespaces.
 
-*** STARTED Issues with emacs                                         :story:
+*** COMPLETED Issues with emacs                                       :story:
+    CLOSED: [2020-11-02 Mon 08:29]
     :LOGBOOK:
     CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
     :END:
@@ -607,7 +609,8 @@ Time spent troubleshooting emacs issues.
 - problems loading very long lines in log file. Tried using [[https://www.emacswiki.org/emacs/SoLong][so-long]]
   and fundamental, but still could not solve the problem.
 
-*** STARTED Rename =name= to =codec= name                             :story:
+*** POSTPONED Rename =name= to =codec= name                           :story:
+    CLOSED: [2020-11-02 Mon 08:29]
     :LOGBOOK:
     CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
     :END:
@@ -617,277 +620,6 @@ Time spent troubleshooting emacs issues.
 Notes:
 
 - variability is also using the name class.
-
-*** Move c++ helper related classes to logical model                  :story:
-
-Classes to move:
-
-- =helper_descriptor=
-
-*** Move default constructor work from resolver                       :story:
-
-At present we are populating the default constructor for the bundle in
-the resolver:
-
-#+begin_src c++
-void resolver::resolve_feature_template_bundles(const indices& idx,
-    entities::model& m) {
-    for (auto& pair : m.variability_elements().feature_template_bundles()) {
-        auto& fb(*pair.second);
-        for (auto& ft : fb.feature_templates()) {
-            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
-            if (ft.parsed_type().is_current_simple_type())
-                fb.requires_manual_default_constructor(true);
-        }
-    }
-}
-#+end_src
-
-This is very confusing because one would assume the resolver just
-resolves. We need to move this logic to =technical_space_properties=.
-
-*** Create a technical space specific property for default functions  :story:
-
-In assistant we have:
-
-#+begin_src c++
-bool assistant::supports_defaulted_functions() const {
-    return !is_cpp_standard_98();
-}
-
-bool assistant::supports_move_operator() const {
-    return !is_cpp_standard_98();
-}
-#+end_src
-
-This should really be in =technical_space_properties=. Check to see if
-we missed any.
-
-*** Default constructor incorrectly generated in C++ 98               :story:
-
-We have this logic in =technical_space_properties_transform=:
-
-#+begin_src c++
-    /*
-     * In C++ 98 we must always create a default constructor because
-     * we cannot make use of the defaulted functions.
-     */
-    if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
-        dest_tsp.requires_manual_default_constructor(true);
-#+end_src
-
-This is actually incorrect: we can use default constructors in C++ 98,
-as long as there are no other constructors. The problem is we are
-relying on the default constructor in test data generator so if we fix
-this with an =&&= instead of an =||= we break that code. We need to
-figure out what the correct implement is.
-
-*** Detect absence of configuration in bundles                        :story:
-
-It would be nice if when we call =make_static_configuration= it would
-populate some flag stating whether none of the config was
-populated. The specific use case is that we may want to detect absence
-of all elements and do something in that case (for example, missing
-streaming properties).
-
-*** Refactor streaming properties processing                          :story:
-
-At present we copied across the logic from =text.cpp= where the
-streaming properties are stored as a class and the final processing
-happens in assistant. However, when we get rid of helpers, we could do
-all the processing in the streaming processing transform and store it
-in attributes.
-
-*** Add method to check if string is valid enum                       :story:
-
-We have a method to convert a string to an enum, but sometimes we just
-want to know if its valid without converting. We should have a method
-that just returns true or false, or throws, if the string is not a
-valid enum.
-
-*** Consider renaming =text= to =logical_physical=                    :story:
-
-This is really the right name for the model; the text processing part
-are the transforms that are done on the model.
-
-Notes:
-
-- rename =logical_physical_region= to just =region=.
-
-*** Create a de-normalised representation of archetype properties     :story:
-
-At present we have a two-step process: we first read the global
-configuration for a model, create the corresponding properties
-(e.g. backend, facet, archetype properties) and then we post-process
-these to create the =denormalised_archetype_properties=. However, we
-never really need to think about the individual properties because
-they are always used in the context of an artefact, which means we
-care about the de-normalised archetype properties only. Therefore we
-should:
-
-- have a =archetype_properties= that is composed of all other
-  properties;
-- change the =meta_model_properties_transform= to create internal
-  indices of properties as a first step for the final property
-  generation but do not expose these containers.
-
-Notes:
-
-- we can't remove the top-level containers just yet because they are
-  used within the formatables namespace. However, these appear to be
-  legacy use cases, so we should be able to do so when we get rid of
-  this namespace.
-
-*** Validate no two artefacts have the same ID                        :story:
-
-At present it is possible to generate two artefacts with the same path
-(which is the physical ID) and then have them overwrite each
-other. This causes diffs that are very difficult to get to the bottom
-of. It would be better to fail with a validation that detects
-duplicates.
-
-*** Fix name of configuration tracing file                            :story:
-
-This name looks incorrect:
-
-: 00000-configuration--initial_input.json
-
-*** Move C# locator into physical model                               :story:
-
-As per C++ model.
-
-*** Move directive group generation to physical model                 :story:
-
-- handle header guards as well.
-- consider renaming this to relative paths.
-- consider the role of parts in the directive groups.
-
-*** Move inclusion into physical model                                :story:
-
-- try to use artefacts to store dependencies.
-
-*** Move assorted c++ and c# properties into meta-model properties    :story:
-
-List of properties to move:
-
-- =aspect_properties=
-- =test_data_properties=
-- =streaming_properties=
-- =cpp_standards=
-- =build_files_expander=: requires updating logical model with the
-  properties, and then creating transforms.
-- =assistant_properties=
-- =attribute_properties=
-
-Create a transform to read these properties or add it to the existing
-meta-model properties transform.
-
-*** Move helpers to text and physical models                          :story:
-
-- move helper properties to text model.
-- move helpers as text transforms to text model. Refactor them to use
-  the new text model transform interface.
-
-*** Remove formatables namespace                                      :story:
-
-When all types have been moved, we can delete the formatables types
-and namespace.
-
-*** Move all text transforms in c++ and c# models into text model     :story:
-
-- rename namespaces to fit the hierarchy of LPS.
-
-*** Analysis on org-mode outstanding work                             :story:
-
-Notes:
-
-- map dogen types to a org-mode tag. The tags must replace =::= with
-  an underscore, e.g. =masd_enumeration= for
-  =masd::enumeration=. Mapping is done by detecting stereotype in the
-  stereotype list and removing it from there. Non-tagged headlines
-  default to documentation (see below).
-- any non-tagged section will be treated as documentation. On
-  generation it will be suitably converted into the language's format
-  for documentation (e.g. doxygen, C# docs etc). We need meta-model
-  elements for these such as "section", etc. Annoyingly, this also
-  means converting expressions such as =some text=. This will be
-  trickier.
-- in an ideal world we would also have entities such as paragraphs and
-  the like, to ensure we can reformat the text as required. For
-  example, the 80 column limitation we have in the input may not be
-  suitable for the end format (this is the case with markdown).
-- we are using qualified names, e.g. =entities::attribute=. These need
-  to be removed. We need to move the graphing logic into =codec=. See
-  story for this.
-- All models should have a unique ID for each element. The ID should
-  be based on GUIDs where possible, though there are some difficulties
-  for cases like Dia. We could create a "fixed" function that
-  generates GUIDs from dia IDs. For example:
-
-: <dia:childnode parent="O64"/>
-
-  We could take the id =O64= and normalise it to say 4 digits: =6400=
-  (noticed we removed the =O= as its not valid in hex); and then use a
-  well-defined GUID prefix:
-
-: 3dddc237-3771-45be-82c9-937c5cef
-
-  Then we can append the normalised Dia ID to the prefix. This would
-  ensure we always generate the same GUIDs on conversion from Dia. If
-  the GUIds change within Dia, then they will also change in the
-  conversion. This ID is then used as the codec ID. Note that its the
-  responsibility of the decoder to assign "child node IDs". For JSON
-  this must already be populated. For Dia its the =childnode=
-  field. For org-mode, we need to infer it from the structure of the
-  file. In org-mode we just need to use the =:CUSTOM_ID:= attribute:
-
-: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
-
-- qualified names are computed as a transform via the graph in codec
-  model.
-
-Links:
-
-- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
-
-*** Analysis of MDE papers to read                                    :story:
-
-Links:
-
-- [[https://ulir.ul.ie/bitstream/handle/10344/2126/2007_Botterweck.pdf;jsessionid=AC6FF39BA414E6065602C7851860C43D?sequence=2][Model-Driven Derivation of Product Architectures]]
-- [[https://madoc.bib.uni-mannheim.de/993/1/abwl_02_05.pdf][A Taxonomy of Metamodel Hierarchies]]
-
-*** Nightly nursing and other spikes                                  :story:
-
-Time spent troubleshooting environmental problems.
-
-*** Rename =org_mode= model                                           :story:
-
-Seems like a better name is needed for this model. Perhaps =orgmode=?
-Or just =org=? Just don't like =org_mode=.
-
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
-extent - are well known TLAs in MDE we should make use of these in
-class names. The names we have at present are very long. The
-additional size is not providing any benefits.
-
-*** Order of headers is hard-coded                                    :story:
-
-In inclusion expander, we have hacked the sorting:
-
-:        // FIXME: hacks for headers that must be last
-:        const bool lhs_is_gregorian(
-:            lhs.find_first_of(boost_serialization_gregorian) != npos);
-:        const bool rhs_is_gregorian(
-:            rhs.find_first_of(boost_serialization_gregorian) != npos);
-:        if (lhs_is_gregorian && !rhs_is_gregorian)
-:            return true;
-
-This could be handled via meta-data, supplying some kind of flag (sort
-last?). We should try to generate the code in the "natural order" and
-see if the code compiles with latest boost.
 
 ** Deprecated
 
