@@ -1,0 +1,437 @@
+#+title: Sprint Backlog 28
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) spike(p) }
+
+* Sprint Goals
+
+- reduce the impedance mismatch between the ultimate destination of
+  the code-base and its current state.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2020-11-02 Mon 23:14]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *0:51* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 0:51   |      |      | 100.0 |
+| Active                                 |        | 0:51 |      | 100.0 |
+| edit release notes for previous sprint |        |      | 0:42 |  82.4 |
+| Sprint and product backlog grooming    |        |      | 0:09 |  17.6 |
+#+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-02 Mon 23:00]--[2020-11-02 Mon 23:14] =>  0:14
+    CLOCK: [2020-11-02 Mon 22:22]--[2020-11-02 Mon 22:50] =>  0:28
+    :END:
+
+add github release notes for previous sprint.
+
+release announcements:
+
+- [[https://twitter.com/marcocraveiro/status/1308894541135708161][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1027-independ%C3%AAncia-activity-6714660822465048576-fYZV][linkedin]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+#+begin_src markdown
+![Praia das Miragens](https://upload.wikimedia.org/wikipedia/commons/f/f2/Parabolic_Shelters_%2818861902633%29.jpg?1604306484246)
+_Artesanal market, Praia das Miragens, Moçâmedes, Angola. (C) [2015 David Stanley](https://www.wikiwand.com/pt/Mo%C3%A7%C3%A2medes)_.
+
+**Draft release notes**
+
+# Introduction
+
+Welcome to yet another Dogen release. After a great number of hard-fought-sprints, we _finally_ managed to complete one with a more upbeat tone. Now, this is a funny thing to say, because we had to take a massive side-step rather than progress linearly down the path we laid out. The valuable lesson learnt is that, oftentimes, taking the _theoretically longer_ route is actually much faster than taking the _theoretically shorter_ route - which we should have known, had we heeded van de Snepscheut: "In theory, there is no difference between theory and practice. But, in practice, there is." What really matters, and what we keep forgetting, is how things work in practice. As we had mentioned many a times in these release notes, the highly rarefied, highly abstract meta-modeling work is not one which we are cut out for, particularly when dealing with very complex and long-running refactorings. Therefore, anything which can bring the abstraction level as close as possible to normal coding is bound to greatly increase productivity, even if it means adding "temporary code". With this sprint we finally saw the light and created a bridge between the dark _old world_ - largely hacked and hard-coded - and the bright and shiny _new world_ - completely data driven and code-generated. By meeting in the middle, we don't have to carry so much conceptual luggage on our heads, making the overall task much more approchable.
+
+This and much more shall be explained, oh dear reader, so please read on for some exciting developments on the Dogen front.
+
+# User visible changes
+
+This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there were no user facing features, the video discusses the work on internal features instead.
+
+[![Sprint 1.0.28 Demo](https://img.youtube.com/vi/swpKj0rKCpM/0.jpg)](https://youtu.be/swpKj0rKCpM)
+_Video 1: Sprint 28 Demo._
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_28.org).
+
+## Significant Internal Stories
+
+As we explained at length in the previous sprint's [release notes](https://github.com/MASD-Project/dogen/releases/tag/v1.0.27), our most pressing concern is finalising the conceptual model for the LPS (Logical-Physical Space). We have a pretty good grasp of what we think the end destination of the LPS is going to be, so all we are trying to do at present is to refactor the existing code to make use of those new entities and relationships, instead of what we had hard-coded; and much of the problems that still remain stem from the "formattables subsystem". Its perhaps worthwhile giving a quick primer of what formattables were, why they came about and why we are getting rid of them. For this we need to travel in time, to close to the start of Dogen. In those long forgotten days, long before we had the benefit of knowing about MDE (Model Driven Engineering) and domain concepts such as M2M (Model-to-Model) and M2T (Model-to-Text) transforms, we "invented" our own terminology and approach to converting modeling elements into source code. The classes responsible for generating the code were called ```formatters``` because we saw them as a "formatting engine" that dumped state into a stream; from there, it logically followed that the things we were "formatting" should be called "formattables", well, because we could not think of a better name. Crucially, we also assumed that the different Technical Spaces we were targeting had lots of incompatibilities that stopped us from sharing code between then, which meant that we ended up creating separate models for each of the supported Technical Spaces (e.g. ```C++``` and ```C#```). Each of these ended up with its own formattables namespace. In this world view, there was the belief that we needed to transform models closer to their ultimate Technical Space representation before we could start generating code. But after doing so, we began to realise that the formattables types were almost identical to their logical and physical counterparts, with a small number of differences.
+
+![Formattables types](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_formatables_sprint_23.png)
+_Figure 1: Fragment of the formattables namespace, C++ Technical Space, circa sprint 23._
+
+What we since learned is that the logical and physical models must be able to represent all of the data required in order to generate source code; and where there are commonalities between Technical Spaces, we must learn to make use of them, but where there are differences, well, they must still be represented within the logical and physical models. There is no where else to place it. And there is no requirement to keep the logical and physical models Technical Space agnostic as we long thought was needed. With this began a very long-standing effort to move modeling elements across, one at a time, from formattables into their final resting place in either logical or physical model. But this effort became unstuck when we tried to deal with the representation of paths (or "locations") in the new world. This is due to the fact that in a completely data driven world, all of the assembly performed in order to generate a path is done by introspecting elements of the logical model, the physical meta-model and the physical model. This is extremely abstract work, where all that was once a regular programming construct has now been replaced by a data representation of some kind. And we had no way to validate any of these representations until we reached the final stage of assembling paths together. We struggled with this on the backend of the last sprint and the start of this one. When it suddenly dawned that we could perhaps move one step closer to the end destination without necessarily making the whole journey. Going half-way, if you will. The moment of enlightenment that this sprint revealed was that we could move the hard-coded concepts in formattables to the new world of transforms and logical/physical entities without fully making them data-driven; and once we did that, we could than have something to validate against that was much more like-for-like, instead of a completely alien representation that we have at present.
+#end_src
+
+*** Create a demo and presentation for previous sprint                :story:
+
+Time spent creating the demo and presentation.
+
+**** Presentation
+
+***** Dogen v1.0.27, "Independência"
+
+    Marco Craveiro
+    Domain Driven Development
+    Released on 23rd September 2020
+
+***** Create an identification model
+***** Rename injection to codec
+***** The logical-physical space
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-02 Mon 22:50]--[2020-11-02 Mon 22:59] =>  0:09
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Add full and relative path processing to PM                       :story:
+
+We need to be able to generate full paths in the PM. This will require
+access to the file extensions. For this we will need new decoration
+elements. This must be done as part of the logical model to physical
+model conversion. While we're at it, we should also generate the
+relative paths. Once we have relative paths we should compute the
+header guards from them. These could be generalised to "unique
+identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we
+  cannot locate the extensions. Also we did not create all of the
+  required archetype kinds in the text models. The populating should
+  be done via profiles.
+- we must first figure out the number of enabled backends. The
+  meta-model properties will always contain all backends, but not all
+  of them are enabled.
+- we need to populate the part directories. For this we need to know
+  what parts are available for each backend (PMM), and then ensure the
+  part properties have been created. We also need a directory for the
+  part in variability. It is not clear we have support for this in the
+  template instantiation domains - we probably only have backend,
+  facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space
+  and its instances in the file-system.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We
+may need to treat certain labels more specially than others - its not
+clear. We need a container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*** Create a factory transform for parts and archetype kinds          :story:
+
+- integrate their generation into PMM chains.
+
+Notes:
+
+- it does not make a lot of sense to have an archetype kind
+  transform. That is, as with TSs, archetype kinds only provide
+  attributes (e.g. data) about physical space, but they won't be
+  expressed as actual physical elements. Parts however are connected
+  to the transforms; they will in the future be used as part of the
+  transform chain.
+- do we instantiate template domains over parts? We need to do so in
+  order to support directory overrides. The problem is that in order
+  for the part to become part of the topology of physical space, we
+  now need to make sure we can still convert archetypes into facets. A
+  lot of the code is going to break once we add path.
+
+*** Rename =name= to =codec= name                                     :story:
+
+- add codec ID to name.
+
+Notes:
+
+- variability is also using the name class.
+
+*** Move c++ helper related classes to logical model                  :story:
+
+Classes to move:
+
+- =helper_descriptor=
+
+*** Move default constructor work from resolver                       :story:
+
+At present we are populating the default constructor for the bundle in
+the resolver:
+
+#+begin_src c++
+void resolver::resolve_feature_template_bundles(const indices& idx,
+    entities::model& m) {
+    for (auto& pair : m.variability_elements().feature_template_bundles()) {
+        auto& fb(*pair.second);
+        for (auto& ft : fb.feature_templates()) {
+            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+            if (ft.parsed_type().is_current_simple_type())
+                fb.requires_manual_default_constructor(true);
+        }
+    }
+}
+#+end_src
+
+This is very confusing because one would assume the resolver just
+resolves. We need to move this logic to =technical_space_properties=.
+
+*** Create a technical space specific property for default functions  :story:
+
+In assistant we have:
+
+#+begin_src c++
+bool assistant::supports_defaulted_functions() const {
+    return !is_cpp_standard_98();
+}
+
+bool assistant::supports_move_operator() const {
+    return !is_cpp_standard_98();
+}
+#+end_src
+
+This should really be in =technical_space_properties=. Check to see if
+we missed any.
+
+*** Default constructor incorrectly generated in C++ 98               :story:
+
+We have this logic in =technical_space_properties_transform=:
+
+#+begin_src c++
+    /*
+     * In C++ 98 we must always create a default constructor because
+     * we cannot make use of the defaulted functions.
+     */
+    if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
+        dest_tsp.requires_manual_default_constructor(true);
+#+end_src
+
+This is actually incorrect: we can use default constructors in C++ 98,
+as long as there are no other constructors. The problem is we are
+relying on the default constructor in test data generator so if we fix
+this with an =&&= instead of an =||= we break that code. We need to
+figure out what the correct implement is.
+
+*** Detect absence of configuration in bundles                        :story:
+
+It would be nice if when we call =make_static_configuration= it would
+populate some flag stating whether none of the config was
+populated. The specific use case is that we may want to detect absence
+of all elements and do something in that case (for example, missing
+streaming properties).
+
+*** Refactor streaming properties processing                          :story:
+
+At present we copied across the logic from =text.cpp= where the
+streaming properties are stored as a class and the final processing
+happens in assistant. However, when we get rid of helpers, we could do
+all the processing in the streaming processing transform and store it
+in attributes.
+
+*** Add method to check if string is valid enum                       :story:
+
+We have a method to convert a string to an enum, but sometimes we just
+want to know if its valid without converting. We should have a method
+that just returns true or false, or throws, if the string is not a
+valid enum.
+
+*** Consider renaming =text= to =logical_physical=                    :story:
+
+This is really the right name for the model; the text processing part
+are the transforms that are done on the model.
+
+Notes:
+
+- rename =logical_physical_region= to just =region=.
+
+*** Create a de-normalised representation of archetype properties     :story:
+
+At present we have a two-step process: we first read the global
+configuration for a model, create the corresponding properties
+(e.g. backend, facet, archetype properties) and then we post-process
+these to create the =denormalised_archetype_properties=. However, we
+never really need to think about the individual properties because
+they are always used in the context of an artefact, which means we
+care about the de-normalised archetype properties only. Therefore we
+should:
+
+- have a =archetype_properties= that is composed of all other
+  properties;
+- change the =meta_model_properties_transform= to create internal
+  indices of properties as a first step for the final property
+  generation but do not expose these containers.
+
+Notes:
+
+- we can't remove the top-level containers just yet because they are
+  used within the formatables namespace. However, these appear to be
+  legacy use cases, so we should be able to do so when we get rid of
+  this namespace.
+
+*** Validate no two artefacts have the same ID                        :story:
+
+At present it is possible to generate two artefacts with the same path
+(which is the physical ID) and then have them overwrite each
+other. This causes diffs that are very difficult to get to the bottom
+of. It would be better to fail with a validation that detects
+duplicates.
+
+*** Fix name of configuration tracing file                            :story:
+
+This name looks incorrect:
+
+: 00000-configuration--initial_input.json
+
+*** Move C# locator into physical model                               :story:
+
+As per C++ model.
+
+*** Move directive group generation to physical model                 :story:
+
+- handle header guards as well.
+- consider renaming this to relative paths.
+- consider the role of parts in the directive groups.
+
+*** Move inclusion into physical model                                :story:
+
+- try to use artefacts to store dependencies.
+
+*** Move assorted c++ and c# properties into meta-model properties    :story:
+
+List of properties to move:
+
+- =aspect_properties=
+- =test_data_properties=
+- =streaming_properties=
+- =cpp_standards=
+- =build_files_expander=: requires updating logical model with the
+  properties, and then creating transforms.
+- =assistant_properties=
+- =attribute_properties=
+
+Create a transform to read these properties or add it to the existing
+meta-model properties transform.
+
+*** Move helpers to text and physical models                          :story:
+
+- move helper properties to text model.
+- move helpers as text transforms to text model. Refactor them to use
+  the new text model transform interface.
+
+*** Remove formatables namespace                                      :story:
+
+When all types have been moved, we can delete the formatables types
+and namespace.
+
+*** Move all text transforms in c++ and c# models into text model     :story:
+
+- rename namespaces to fit the hierarchy of LPS.
+
+*** Analysis on org-mode outstanding work                             :story:
+
+Notes:
+
+- map dogen types to a org-mode tag. The tags must replace =::= with
+  an underscore, e.g. =masd_enumeration= for
+  =masd::enumeration=. Mapping is done by detecting stereotype in the
+  stereotype list and removing it from there. Non-tagged headlines
+  default to documentation (see below).
+- any non-tagged section will be treated as documentation. On
+  generation it will be suitably converted into the language's format
+  for documentation (e.g. doxygen, C# docs etc). We need meta-model
+  elements for these such as "section", etc. Annoyingly, this also
+  means converting expressions such as =some text=. This will be
+  trickier.
+- in an ideal world we would also have entities such as paragraphs and
+  the like, to ensure we can reformat the text as required. For
+  example, the 80 column limitation we have in the input may not be
+  suitable for the end format (this is the case with markdown).
+- we are using qualified names, e.g. =entities::attribute=. These need
+  to be removed. We need to move the graphing logic into =codec=. See
+  story for this.
+- All models should have a unique ID for each element. The ID should
+  be based on GUIDs where possible, though there are some difficulties
+  for cases like Dia. We could create a "fixed" function that
+  generates GUIDs from dia IDs. For example:
+
+: <dia:childnode parent="O64"/>
+
+  We could take the id =O64= and normalise it to say 4 digits: =6400=
+  (noticed we removed the =O= as its not valid in hex); and then use a
+  well-defined GUID prefix:
+
+: 3dddc237-3771-45be-82c9-937c5cef
+
+  Then we can append the normalised Dia ID to the prefix. This would
+  ensure we always generate the same GUIDs on conversion from Dia. If
+  the GUIds change within Dia, then they will also change in the
+  conversion. This ID is then used as the codec ID. Note that its the
+  responsibility of the decoder to assign "child node IDs". For JSON
+  this must already be populated. For Dia its the =childnode=
+  field. For org-mode, we need to infer it from the structure of the
+  file. In org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+- qualified names are computed as a transform via the graph in codec
+  model.
+
+Links:
+
+- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
+
+*** Analysis of MDE papers to read                                    :story:
+
+Links:
+
+- [[https://ulir.ul.ie/bitstream/handle/10344/2126/2007_Botterweck.pdf;jsessionid=AC6FF39BA414E6065602C7851860C43D?sequence=2][Model-Driven Derivation of Product Architectures]]
+- [[https://madoc.bib.uni-mannheim.de/993/1/abwl_02_05.pdf][A Taxonomy of Metamodel Hierarchies]]
+
+*** Nightly nursing and other spikes                                  :story:
+
+Time spent troubleshooting environmental problems.
+
+*** Rename =org_mode= model                                           :story:
+
+Seems like a better name is needed for this model. Perhaps =orgmode=?
+Or just =org=? Just don't like =org_mode=.
+
+*** Rename "model-to-X" to TLAs                                       :story:
+
+Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
+extent - are well known TLAs in MDE we should make use of these in
+class names. The names we have at present are very long. The
+additional size is not providing any benefits.
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort
+last?). We should try to generate the code in the "natural order" and
+see if the code compiles with latest boost.
+
+** Deprecated
