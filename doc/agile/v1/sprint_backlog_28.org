@@ -41,15 +41,15 @@
 
 *** COMPLETED edit release notes for previous sprint                  :story:
     CLOSED: [2020-09-24 Thu 20:34]
-    :logbook:
-    clock: [2020-09-23 wed 22:01]--[2020-09-23 wed 22:40] =>  0:39
-    clock: [2020-09-23 wed 18:41]--[2020-09-23 wed 19:32] =>  0:51
-    clock: [2020-09-21 mon 19:31]--[2020-09-21 mon 21:45] =>  2:14
-    :end:
+    :LOGBOOK:
+    CLOCK: [2020-09-23 WED 22:01]--[2020-09-23 WED 22:40] =>  0:39
+    CLOCK: [2020-09-23 WED 18:41]--[2020-09-23 WED 19:32] =>  0:51
+    CLOCK: [2020-09-21 MON 19:31]--[2020-09-21 MON 21:45] =>  2:14
+    :END:
 
-add github release notes for previous sprint.
+Add github release notes for previous sprint.
 
-release announcements:
+Release announcements:
 
 - [[https://twitter.com/marcocraveiro/status/1308894541135708161][twitter]]
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1027-independ%C3%AAncia-activity-6714660822465048576-fYZV][linkedin]]
@@ -184,7 +184,7 @@ The goals for the next sprint are:
 - to implement locator and dependencies via PMM.
 
 That's all for this release. Happy Modeling!
-#end_src
+#+end_src
 
 *** COMPLETED Create a demo and presentation for previous sprint      :story:
     CLOSED: [2020-09-23 Wed 23:20]
