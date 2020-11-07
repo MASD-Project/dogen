@@ -913,30 +913,6 @@
       ]
     },
     {
-      "name": "transforms::inclusion_support_types",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "not_supported",
-          "type": "",
-          "documentation": "This formatter does not export an inclusion directive.\n"
-        },
-        {
-          "name": "regular_support",
-          "type": "",
-          "documentation": "This formatter exports a regular inclusion directive.\n"
-        },
-        {
-          "name": "canonical_support",
-          "type": "",
-          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\nand element.\n"
-        }
-      ]
-    },
-    {
       "name": "transforms::types::builtin_header",
       "documentation": "Generates header files for builtins.\n",
       "stereotypes": [

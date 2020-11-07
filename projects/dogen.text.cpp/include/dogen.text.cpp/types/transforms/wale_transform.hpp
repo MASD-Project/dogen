@@ -32,9 +32,6 @@
 namespace dogen::text::cpp::transforms {
 
 class wale_transform final {
-private:
-    bool is_header(const inclusion_support_types ist) const;
-
 public:
     void apply(const boost::filesystem::path& templates_directory,
         const model_to_text_transform& stock_transform,

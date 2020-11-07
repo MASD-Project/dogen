@@ -46,12 +46,6 @@ stitch_transform::stitch_transform(
     const variability::helpers::configuration_factory& cf)
     : instantiator_(templates_directory, fm, cf) {}
 
-bool stitch_transform::is_header(const inclusion_support_types ist) const {
-    return
-        ist == inclusion_support_types::regular_support ||
-        ist == inclusion_support_types::canonical_support;
-}
-
 void stitch_transform::apply(const model_to_text_transform& stock_transform,
     const logical::entities::element& e,
     physical::entities::artefact& a) const {

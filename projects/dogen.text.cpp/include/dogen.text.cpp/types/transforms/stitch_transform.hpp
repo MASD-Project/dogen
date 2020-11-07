@@ -40,9 +40,6 @@ public:
         const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
-private:
-    bool is_header(const inclusion_support_types ist) const;
-
 public:
     void apply(const model_to_text_transform& stock_transform,
         const logical::entities::element& e,

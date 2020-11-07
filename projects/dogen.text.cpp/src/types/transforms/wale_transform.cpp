@@ -37,12 +37,6 @@ const std::string missing_input("Missing formatting input");
 
 namespace dogen::text::cpp::transforms {
 
-bool wale_transform::is_header(const inclusion_support_types ist) const {
-    return
-        ist == inclusion_support_types::regular_support ||
-        ist == inclusion_support_types::canonical_support;
-}
-
 void wale_transform::apply(const boost::filesystem::path& templates_directory,
     const model_to_text_transform& stock_transform, const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
