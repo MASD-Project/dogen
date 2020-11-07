@@ -61,6 +61,8 @@ private:
     facets_for_family(const transforms::repository& frp) const;
 
     void populate_helper_properties(const helper_configuration& cfg,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp,
         std::unordered_map<identification::entities::logical_id,
         formattable>& formattables) const;

@@ -60,6 +60,8 @@ namespace dogen::text::cpp::formattables {
 class helper_properties_generator : public logical::entities::element_visitor {
 public:
     helper_properties_generator(const helper_configuration& cfg,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
         const helper_expander::facets_for_family_type& fff);
 
 private:
@@ -71,7 +73,7 @@ private:
         const identification::entities::logical_id& id) const;
 
     boost::optional<logical::entities::streaming_properties>
-    streaming_properties_for_id(const helper_configuration& cfg,
+    streaming_properties_for_id(
         const identification::entities::logical_id& id) const;
 
 private:
@@ -104,14 +106,20 @@ public:
 
 private:
     const helper_configuration& helper_configuration_;
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::streaming_properties>&
+    streaming_properties_;
     const helper_expander::facets_for_family_type& facets_for_family_;
     std::list<formattables::helper_properties> result_;
 };
 
 helper_properties_generator::
 helper_properties_generator(const helper_configuration& cfg,
+    const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
     const helper_expander::facets_for_family_type& fff)
-    : helper_configuration_(cfg), facets_for_family_(fff) {}
+    : helper_configuration_(cfg), streaming_properties_(streaming_properties),
+      facets_for_family_(fff) {}
 
 bool helper_properties_generator::
 requires_hashing_helper(const helper_expander::facets_for_family_type& fff,
@@ -150,12 +158,11 @@ helper_family_for_id(const helper_configuration& cfg,
 }
 
 boost::optional<logical::entities::streaming_properties>
-helper_properties_generator::
-streaming_properties_for_id(const helper_configuration& cfg,
+helper_properties_generator::streaming_properties_for_id(
     const identification::entities::logical_id& id) const {
 
-    const auto i(cfg.streaming_properties().find(id));
-    if (i == cfg.streaming_properties().end())
+    const auto i(streaming_properties_.find(id));
+    if (i == streaming_properties_.end())
         return boost::optional<logical::entities::streaming_properties>();
 
     BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
@@ -180,7 +187,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
-    const auto sp(streaming_properties_for_id(cfg, id));
+    const auto sp(streaming_properties_for_id(id));
     if (sp)
         r.streaming_properties(sp);
 
@@ -378,7 +385,10 @@ helper_expander::facets_for_family(const transforms::repository& frp) const {
 }
 
 void helper_expander::populate_helper_properties(
-    const helper_configuration& cfg, const transforms::repository& frp,
+    const helper_configuration& cfg, const std::unordered_map<
+    identification::entities::logical_id,
+    logical::entities::streaming_properties>& streaming_properties,
+    const transforms::repository& frp,
     std::unordered_map<identification::entities::logical_id,
     formattable>& formattables) const {
 
@@ -412,7 +422,7 @@ void helper_expander::populate_helper_properties(
         /*
          * Update the helper properties, if any exist.
          */
-        helper_properties_generator g(cfg, fff);
+        helper_properties_generator g(cfg, streaming_properties, fff);
         e.accept(g);
         eprops.helper_properties(g.result());
 
@@ -428,7 +438,8 @@ void helper_expander::expand(
     const transforms::repository& frp, model& fm) const {
     const auto fg(make_feature_group(feature_model));
     const auto cfg(make_configuration(fg, streaming_properties, fm));
-    populate_helper_properties(cfg, frp, fm.formattables());
+    populate_helper_properties(cfg, streaming_properties,
+        frp, fm.formattables());
 }
 
 }
