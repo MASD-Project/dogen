@@ -53,6 +53,7 @@ extensible_mappable::extensible_mappable(
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::list<dogen::logical::entities::mapping::destination>& destinations)
     : dogen::logical::entities::element(
       name,
@@ -66,7 +67,8 @@ extensible_mappable::extensible_mappable(
       configuration,
       labels,
       generability_status,
-      decoration),
+      decoration,
+      helper_properties),
       destinations_(destinations) { }
 
 void extensible_mappable::accept(const element_visitor& v) const {

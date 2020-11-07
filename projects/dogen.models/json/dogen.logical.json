@@ -293,6 +293,10 @@
           "name": "decoration",
           "type": "std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>",
           "documentation": "If set, decoration to be added to each generated file.\n"
+        },
+        {
+          "name": "helper_properties",
+          "type": "std::list<helper_properties>"
         }
       ]
     },
@@ -4533,6 +4537,70 @@
         {
           "name": "technical_space_properties",
           "type": "technical_space_properties"
+        }
+      ]
+    },
+    {
+      "name": "entities::helper_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "current",
+          "type": "helper_descriptor"
+        },
+        {
+          "name": "direct_descendants",
+          "type": "std::list<helper_descriptor>"
+        },
+        {
+          "name": "in_inheritance_relationship",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::helper_descriptor",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "namespaces",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "name_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "boost::optional<streaming_properties>"
+        },
+        {
+          "name": "is_simple_type",
+          "type": "bool"
+        },
+        {
+          "name": "requires_hashing_helper",
+          "type": "bool"
+        },
+        {
+          "name": "is_circular_dependency",
+          "type": "bool"
+        },
+        {
+          "name": "is_pointer",
+          "type": "bool"
         }
       ]
     }

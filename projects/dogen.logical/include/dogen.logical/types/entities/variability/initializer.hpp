@@ -58,6 +58,7 @@ public:
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::list<dogen::identification::entities::logical_name>& feature_template_bundles,
         const std::list<dogen::identification::entities::logical_name>& feature_bundles);
 

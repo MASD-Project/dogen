@@ -25,6 +25,7 @@
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
@@ -114,6 +115,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::helper_properties>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 element::element()
@@ -133,7 +148,8 @@ element::element(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
-    const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
+    const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties)
     : name_(name),
       documentation_(documentation),
       provenance_(provenance),
@@ -145,7 +161,8 @@ element::element(
       configuration_(configuration),
       labels_(labels),
       generability_status_(generability_status),
-      decoration_(decoration) { }
+      decoration_(decoration),
+      helper_properties_(helper_properties) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -167,7 +184,8 @@ void element::to_stream(std::ostream& s) const {
       << "\"configuration\": " << configuration_ << ", "
       << "\"labels\": " << labels_ << ", "
       << "\"generability_status\": " << generability_status_ << ", "
-      << "\"decoration\": " << decoration_
+      << "\"decoration\": " << decoration_ << ", "
+      << "\"helper_properties\": " << helper_properties_
       << " }";
 }
 
@@ -185,6 +203,7 @@ void element::swap(element& other) noexcept {
     swap(labels_, other.labels_);
     swap(generability_status_, other.generability_status_);
     swap(decoration_, other.decoration_);
+    swap(helper_properties_, other.helper_properties_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -199,7 +218,8 @@ bool element::compare(const element& rhs) const {
         configuration_ == rhs.configuration_ &&
         labels_ == rhs.labels_ &&
         generability_status_ == rhs.generability_status_ &&
-        decoration_ == rhs.decoration_;
+        decoration_ == rhs.decoration_ &&
+        helper_properties_ == rhs.helper_properties_;
 }
 
 const dogen::identification::entities::logical_name& element::name() const {
@@ -368,6 +388,22 @@ void element::decoration(const std::unordered_map<dogen::identification::entitie
 
 void element::decoration(const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >&& v) {
     decoration_ = std::move(v);
+}
+
+const std::list<dogen::logical::entities::helper_properties>& element::helper_properties() const {
+    return helper_properties_;
+}
+
+std::list<dogen::logical::entities::helper_properties>& element::helper_properties() {
+    return helper_properties_;
+}
+
+void element::helper_properties(const std::list<dogen::logical::entities::helper_properties>& v) {
+    helper_properties_ = v;
+}
+
+void element::helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v) {
+    helper_properties_ = std::move(v);
 }
 
 }

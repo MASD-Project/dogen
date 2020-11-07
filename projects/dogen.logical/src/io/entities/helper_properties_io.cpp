@@ -20,24 +20,38 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/stereotypes_io.hpp"
-#include "dogen.identification/io/entities/label_io.hpp"
-#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.logical/io/entities/helper_descriptor_io.hpp"
 #include "dogen.logical/io/entities/helper_properties_io.hpp"
-#include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.logical/io/entities/generability_status_io.hpp"
-#include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.identification/io/entities/codec_provenance_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_name_io.hpp"
-#include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::helper_descriptor>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen::logical::entities {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::logical::entities::helper_properties\"" << ", "
+      << "\"current\": " << v.current() << ", "
+      << "\"direct_descendants\": " << v.direct_descendants() << ", "
+      << "\"in_inheritance_relationship\": " << v.in_inheritance_relationship()
+      << " }";
     return(s);
 }
 

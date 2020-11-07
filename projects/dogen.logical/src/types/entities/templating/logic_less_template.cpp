@@ -47,6 +47,7 @@ logic_less_template::logic_less_template(
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::string& content)
     : dogen::logical::entities::element(
       name,
@@ -60,7 +61,8 @@ logic_less_template::logic_less_template(
       configuration,
       labels,
       generability_status,
-      decoration),
+      decoration,
+      helper_properties),
       content_(content) { }
 
 void logic_less_template::accept(const element_visitor& v) const {

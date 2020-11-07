@@ -47,6 +47,7 @@ fixed_mappable::fixed_mappable(
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::string& destination)
     : dogen::logical::entities::element(
       name,
@@ -60,7 +61,8 @@ fixed_mappable::fixed_mappable(
       configuration,
       labels,
       generability_status,
-      decoration),
+      decoration,
+      helper_properties),
       destination_(destination) { }
 
 void fixed_mappable::accept(const element_visitor& v) const {

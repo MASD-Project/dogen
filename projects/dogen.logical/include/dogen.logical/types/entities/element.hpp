@@ -35,6 +35,7 @@
 #include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.identification/types/entities/label.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
@@ -77,7 +78,8 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
+        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::list<dogen::logical::entities::helper_properties>& helper_properties);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -211,6 +213,11 @@ public:
     void decoration(const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >&& v);
     /**@}*/
 
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties() const;
+    std::list<dogen::logical::entities::helper_properties>& helper_properties();
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>& v);
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v);
+
 protected:
     bool compare(const element& rhs) const;
 public:
@@ -232,6 +239,7 @@ private:
     std::list<dogen::identification::entities::label> labels_;
     dogen::logical::entities::generability_status generability_status_;
     std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
+    std::list<dogen::logical::entities::helper_properties> helper_properties_;
 };
 
 inline element::~element() noexcept { }
