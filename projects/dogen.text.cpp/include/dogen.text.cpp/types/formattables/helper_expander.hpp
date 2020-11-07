@@ -39,15 +39,9 @@ namespace dogen::text::cpp::formattables {
 
 class helper_expander {
 private:
-    struct feature_group {
-        variability::entities::feature family;
-    };
-
-    feature_group make_feature_group(
-        const variability::entities::feature_model& fm) const;
-
-    helper_configuration
-    make_configuration(const feature_group& fg, const model& fm) const;
+    helper_configuration make_configuration(
+        const variability::entities::feature_model& feature_model,
+        const model& fm) const;
 
 public:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>

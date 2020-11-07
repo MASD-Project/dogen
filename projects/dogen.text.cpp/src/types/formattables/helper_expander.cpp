@@ -21,11 +21,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
+#include "dogen.logical/types/features/helpers.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -326,20 +325,15 @@ helper_properties_generator::result() const {
     return result_;
 }
 
-helper_expander::feature_group helper_expander::
-make_feature_group(const variability::entities::feature_model& fm) const {
-    const variability::helpers::feature_selector s(fm);
-    const auto hf(traits::cpp::helper::family());
-    feature_group r;
-    r.family = s.get_by_name(hf);
-    return r;
-}
-
-helper_configuration helper_expander::
-make_configuration(const feature_group& fg, const model& fm) const {
+helper_configuration
+helper_expander::make_configuration(
+    const variability::entities::feature_model& feature_model,
+    const model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
     helper_configuration r;
 
+    using logical::features::helpers;
+    const auto fg(helpers::make_feature_group(feature_model));
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -347,9 +341,9 @@ make_configuration(const feature_group& fg, const model& fm) const {
         auto& formattable(pair.second);
         auto& segment(*formattable.element());
         const auto& cfg(*segment.configuration());
-        const variability::helpers::configuration_selector s(cfg);
-        const auto fam(s.get_text_content_or_default(fg.family));
-        r.helper_families()[id] = fam;
+
+        const auto scfg(helpers::make_static_configuration(fg, cfg));
+        r.helper_families()[id] = scfg.family;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished making the configuration. Result:"
@@ -432,10 +426,9 @@ void helper_expander::expand(
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
-    const auto fg(make_feature_group(feature_model));
-    const auto cfg(make_configuration(fg, fm));
-    populate_helper_properties(cfg, streaming_properties,
-        frp, fm.formattables());
+    const auto cfg(make_configuration(feature_model, fm));
+    populate_helper_properties(cfg, streaming_properties, frp,
+        fm.formattables());
 }
 
 }
