@@ -18,10 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.logical/types/features/helpers.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
-#include "dogen.text.cpp/types/transforms/global_features.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::logical::features {
 
 namespace {
 
@@ -44,9 +46,28 @@ make_masd_cpp_helper_family() {
 
 }
 
+helpers::feature_group
+helpers::make_feature_group(const dogen::variability::entities::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.family = s.get_by_name("masd.cpp.helper.family");
+
+    return r;
+}
+
+helpers::static_configuration helpers::make_static_configuration(
+    const feature_group& fg,
+    const dogen::variability::entities::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    r.family = s.get_text_content_or_default(fg.family);
+    return r;
+}
 
 std::list<dogen::variability::entities::feature>
-global_features::make_features() {
+helpers::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_cpp_helper_family());

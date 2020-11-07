@@ -18,19 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_GLOBAL_FEATURES_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_GLOBAL_FEATURES_HPP
+#ifndef DOGEN_LOGICAL_TYPES_FEATURES_HELPERS_HPP
+#define DOGEN_LOGICAL_TYPES_FEATURES_HELPERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
+#include <string>
 #include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::logical::features {
 
-class global_features final {
+class helpers final {
+public:
+    struct feature_group {
+        variability::entities::feature family;
+    };
+
+    static feature_group
+    make_feature_group(const variability::entities::feature_model& fm);
+
+public:
+    struct static_configuration {
+        std::string family;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    template<typename Configurable>
+    static static_configuration make_static_configuration(
+        const feature_group& fg, const Configurable& c) {
+        return make_static_configuration(fg, *c.configuration());
+    }
 
 public:
     static std::list<dogen::variability::entities::feature>

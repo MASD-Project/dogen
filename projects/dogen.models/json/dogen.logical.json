@@ -4603,6 +4603,27 @@
           "type": "bool"
         }
       ]
+    },
+    {
+      "name": "features::helpers",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp.helper.family",
+          "type": "masd::variability::text",
+          "value": "\"Default\"",
+          "documentation": "Which family of helpers to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
     }
   ]
 }

@@ -1771,35 +1771,6 @@
       ]
     },
     {
-      "name": "feature_initializer",
-      "stereotypes": [
-        "masd::variability::initializer"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::global_features",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.key_prefix": "masd.cpp"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "helper.family",
-          "type": "masd::variability::text",
-          "value": "\"Default\"",
-          "documentation": "Which family of helpers to use for this modeling element.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        }
-      ]
-    },
-    {
       "name": "transforms::lexical_cast",
       "documentation": "Formatters related to conversions from and to\nstring.\n",
       "stereotypes": [
