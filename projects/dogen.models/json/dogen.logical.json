@@ -4575,6 +4575,10 @@
           "type": "std::string"
         },
         {
+          "name": "name_qualified",
+          "type": "std::string"
+        },
+        {
           "name": "name_tree_qualified",
           "type": "std::string"
         },

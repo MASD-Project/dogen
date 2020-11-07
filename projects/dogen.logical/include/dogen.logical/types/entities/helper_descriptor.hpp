@@ -49,6 +49,7 @@ public:
         const std::string& family,
         const std::list<std::string>& namespaces,
         const std::string& name_identifiable,
+        const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
         const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties,
@@ -72,6 +73,11 @@ public:
     std::string& name_identifiable();
     void name_identifiable(const std::string& v);
     void name_identifiable(const std::string&& v);
+
+    const std::string& name_qualified() const;
+    std::string& name_qualified();
+    void name_qualified(const std::string& v);
+    void name_qualified(const std::string&& v);
 
     const std::string& name_tree_qualified() const;
     std::string& name_tree_qualified();
@@ -114,6 +120,7 @@ private:
     std::string family_;
     std::list<std::string> namespaces_;
     std::string name_identifiable_;
+    std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
     boost::optional<dogen::logical::entities::streaming_properties> streaming_properties_;

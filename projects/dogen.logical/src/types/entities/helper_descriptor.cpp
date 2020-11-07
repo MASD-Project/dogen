@@ -32,6 +32,7 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : family_(std::move(rhs.family_)),
       namespaces_(std::move(rhs.namespaces_)),
       name_identifiable_(std::move(rhs.name_identifiable_)),
+      name_qualified_(std::move(rhs.name_qualified_)),
       name_tree_qualified_(std::move(rhs.name_tree_qualified_)),
       name_tree_identifiable_(std::move(rhs.name_tree_identifiable_)),
       streaming_properties_(std::move(rhs.streaming_properties_)),
@@ -44,6 +45,7 @@ helper_descriptor::helper_descriptor(
     const std::string& family,
     const std::list<std::string>& namespaces,
     const std::string& name_identifiable,
+    const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
     const boost::optional<dogen::logical::entities::streaming_properties>& streaming_properties,
@@ -54,6 +56,7 @@ helper_descriptor::helper_descriptor(
     : family_(family),
       namespaces_(namespaces),
       name_identifiable_(name_identifiable),
+      name_qualified_(name_qualified),
       name_tree_qualified_(name_tree_qualified),
       name_tree_identifiable_(name_tree_identifiable),
       streaming_properties_(streaming_properties),
@@ -67,6 +70,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(family_, other.family_);
     swap(namespaces_, other.namespaces_);
     swap(name_identifiable_, other.name_identifiable_);
+    swap(name_qualified_, other.name_qualified_);
     swap(name_tree_qualified_, other.name_tree_qualified_);
     swap(name_tree_identifiable_, other.name_tree_identifiable_);
     swap(streaming_properties_, other.streaming_properties_);
@@ -80,6 +84,7 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
     return family_ == rhs.family_ &&
         namespaces_ == rhs.namespaces_ &&
         name_identifiable_ == rhs.name_identifiable_ &&
+        name_qualified_ == rhs.name_qualified_ &&
         name_tree_qualified_ == rhs.name_tree_qualified_ &&
         name_tree_identifiable_ == rhs.name_tree_identifiable_ &&
         streaming_properties_ == rhs.streaming_properties_ &&
@@ -141,6 +146,22 @@ void helper_descriptor::name_identifiable(const std::string& v) {
 
 void helper_descriptor::name_identifiable(const std::string&& v) {
     name_identifiable_ = std::move(v);
+}
+
+const std::string& helper_descriptor::name_qualified() const {
+    return name_qualified_;
+}
+
+std::string& helper_descriptor::name_qualified() {
+    return name_qualified_;
+}
+
+void helper_descriptor::name_qualified(const std::string& v) {
+    name_qualified_ = v;
+}
+
+void helper_descriptor::name_qualified(const std::string&& v) {
+    name_qualified_ = std::move(v);
 }
 
 const std::string& helper_descriptor::name_tree_qualified() const {

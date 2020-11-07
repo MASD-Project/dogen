@@ -75,6 +75,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
       << "\"name_identifiable\": " << "\"" << tidy_up_string(v.name_identifiable()) << "\"" << ", "
+      << "\"name_qualified\": " << "\"" << tidy_up_string(v.name_qualified()) << "\"" << ", "
       << "\"name_tree_qualified\": " << "\"" << tidy_up_string(v.name_tree_qualified()) << "\"" << ", "
       << "\"name_tree_identifiable\": " << "\"" << tidy_up_string(v.name_tree_identifiable()) << "\"" << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
