@@ -22,7 +22,7 @@
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 
@@ -62,11 +62,11 @@ std::string string_helper::helper_name() const {
 }
 
 bool string_helper::is_enabled(const assistant& a,
-    const formattables::helper_properties& hp) const {
+    const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
-void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+void string_helper::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
 ast.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 ast.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
 ast.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;

@@ -22,7 +22,7 @@
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 
@@ -62,12 +62,12 @@ std::string associative_container_helper::helper_name() const {
 }
 
 bool associative_container_helper::is_enabled(const assistant& a,
-    const formattables::helper_properties& hp) const {
+    const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
 void associative_container_helper::
-apply(assistant& ast, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());

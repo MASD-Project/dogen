@@ -42,7 +42,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms {
 
@@ -282,7 +282,8 @@ public:
      * @brief Returns true if the types facet is required to support
      * streaming or if we are in io facet.
      */
-    bool is_streaming_enabled(const formattables::helper_properties& hp) const;
+    bool is_streaming_enabled(
+        const logical::entities::helper_properties& hp) const;
 
 public:
     /**
@@ -332,7 +333,7 @@ public:
 
 private:
     std::list<std::shared_ptr<transforms::helper_transform>>
-    get_helpers(const formattables::helper_properties& hp) const;
+    get_helpers(const logical::entities::helper_properties& hp) const;
 
     std::string
     streaming_for_type(const logical::entities::streaming_properties& sp,
@@ -350,7 +351,8 @@ public:
      * supplied type.
      */
     /**@{*/
-    std::string streaming_for_type(const formattables::helper_descriptor& hd,
+    std::string streaming_for_type(
+        const logical::entities::helper_descriptor& hd,
         const std::string& s) const;
     std::string streaming_for_type(
         const identification::entities::logical_name& n,

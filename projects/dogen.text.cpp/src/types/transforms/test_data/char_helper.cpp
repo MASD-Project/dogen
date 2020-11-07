@@ -21,7 +21,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/char_helper.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
@@ -59,11 +59,11 @@ std::string char_helper::helper_name() const {
 }
 
 bool char_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void char_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
+void char_helper::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());

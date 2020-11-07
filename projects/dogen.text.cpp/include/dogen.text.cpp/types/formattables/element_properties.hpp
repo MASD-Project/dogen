@@ -27,7 +27,7 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
 
@@ -42,13 +42,13 @@ public:
     ~element_properties() = default;
 
 public:
-    explicit element_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties);
+    explicit element_properties(const std::list<dogen::logical::entities::helper_properties>& helper_properties);
 
 public:
-    const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties() const;
-    std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties();
-    void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& v);
-    void helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>&& v);
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties() const;
+    std::list<dogen::logical::entities::helper_properties>& helper_properties();
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>& v);
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v);
 
 public:
     bool operator==(const element_properties& rhs) const;
@@ -61,7 +61,7 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    std::list<dogen::text::cpp::formattables::helper_properties> helper_properties_;
+    std::list<dogen::logical::entities::helper_properties> helper_properties_;
 };
 
 }

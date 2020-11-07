@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.logical/types/entities/helper_descriptor.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
@@ -31,9 +32,9 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
-#include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
@@ -54,6 +55,9 @@ const std::string empty_identifiable(
 }
 
 namespace dogen::text::cpp::formattables {
+
+using logical::entities::helper_properties;
+using logical::entities::helper_descriptor;
 
 class helper_properties_generator : public logical::entities::element_visitor {
 public:
@@ -100,7 +104,7 @@ public:
     void visit(const logical::entities::structural::primitive& p);
 
 public:
-    const std::list<formattables::helper_properties>& result() const;
+    const std::list<logical::entities::helper_properties>& result() const;
 
 private:
     const std::unordered_map<
@@ -109,7 +113,7 @@ private:
                              logical::entities::streaming_properties>&
     streaming_properties_;
     const helper_expander::facets_for_family_type& facets_for_family_;
-    std::list<formattables::helper_properties> result_;
+    std::list<logical::entities::helper_properties> result_;
 };
 
 helper_properties_generator::
@@ -318,7 +322,7 @@ visit(const logical::entities::structural::primitive& p) {
     result_ = compute_helper_properties(fff, iir, attrs);
 }
 
-const std::list<formattables::helper_properties>&
+const std::list<logical::entities::helper_properties>&
 helper_properties_generator::result() const {
     return result_;
 }

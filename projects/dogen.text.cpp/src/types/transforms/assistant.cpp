@@ -36,7 +36,7 @@
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
-#include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/traits.hpp"
 #include "dogen.text.cpp/types/transforms/odb/traits.hpp"
@@ -523,7 +523,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::list<std::shared_ptr<transforms::helper_transform>>
-assistant::get_helpers(const formattables::helper_properties& hp) const {
+assistant::get_helpers(const logical::entities::helper_properties& hp) const {
     /*
      * A family must have at least one helper registered. This is a
      * good way to detect spurious families in data files.
@@ -558,7 +558,7 @@ bool assistant::is_io() const {
 }
 
 bool assistant::
-is_streaming_enabled(const formattables::helper_properties& hp) const {
+is_streaming_enabled(const logical::entities::helper_properties& hp) const {
     /*
      * If the IO facet is globally disabled, we don't need streaming.
      */
@@ -650,7 +650,7 @@ std::string assistant::streaming_for_type(const logical_name& n,
 }
 
 std::string assistant::
-streaming_for_type(const formattables::helper_descriptor& hd,
+streaming_for_type(const logical::entities::helper_descriptor& hd,
     const std::string& s) const {
 
     const auto sp(hd.streaming_properties());

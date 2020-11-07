@@ -21,7 +21,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/string_helper.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
@@ -59,11 +59,11 @@ std::string string_helper::helper_name() const {
 }
 
 bool string_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+void string_helper::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
 ast.stream() << std::endl;
 ast.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
 ast.stream() << "    std::ostringstream s;" << std::endl;

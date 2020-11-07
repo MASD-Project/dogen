@@ -4534,7 +4534,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
@@ -10248,7 +10248,7 @@ and those used to generate them.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::helper_descriptor
+** logical::entities::helper_descriptor
 *** family
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -10293,14 +10293,14 @@ and those used to generate them.
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** formattables::helper_properties
+** logical::entities::helper_properties
 *** current
 :PROPERTIES:
-:masd.codec.type: formattables::helper_descriptor
+:masd.codec.type: logical::entities::helper_descriptor
 :END:
 *** direct_descendants
 :PROPERTIES:
-:masd.codec.type: std::list<formattables::helper_descriptor>
+:masd.codec.type: std::list<logical::entities::helper_descriptor>
 :END:
 *** in_inheritance_relationship
 :PROPERTIES:
@@ -10311,7 +10311,7 @@ All of the properties associated with an element.
 
 *** helper_properties
 :PROPERTIES:
-:masd.codec.type: std::list<formattables::helper_properties>
+:masd.codec.type: std::list<logical::entities::helper_properties>
 :END:
 ** formattables::formattable
 *** element
@@ -10464,9 +10464,9 @@ public:
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
     bool is_enabled(const assistant& a,
-        const formattables::helper_properties& hc) const override;
+        const logical::entities::helper_properties& hc) const override;
     void apply(assistant& a,
-        const formattables::helper_properties& hc) const override;
+        const logical::entities::helper_properties& hc) const override;
 };
 
 #+end_src
@@ -10513,7 +10513,7 @@ std::string {{class.simple_name}}::helper_name() const {
 }
 
 bool {{class.simple_name}}::is_enabled(const assistant& a,
-    const formattables::helper_properties& hp) const {
+    const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
@@ -10559,7 +10559,7 @@ std::string {{class.simple_name}}::helper_name() const {
 }
 
 bool {{class.simple_name}}::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 

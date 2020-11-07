@@ -21,7 +21,7 @@
 #include "dogen.text.cpp/types/transforms/serialization/path_helper.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 
@@ -59,12 +59,12 @@ std::string path_helper::helper_name() const {
 }
 
 bool path_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void path_helper::
-apply(assistant& ast, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());

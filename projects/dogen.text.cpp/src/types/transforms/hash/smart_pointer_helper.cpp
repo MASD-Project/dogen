@@ -20,7 +20,7 @@
  */
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text.cpp/types/transforms/hash/smart_pointer_helper.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
@@ -59,12 +59,12 @@ std::string smart_pointer_helper::helper_name() const {
 }
 
 bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void smart_pointer_helper::
-apply(assistant& ast, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());

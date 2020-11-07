@@ -35,6 +35,6 @@ std::string {{class.simple_name}}::helper_name() const {
 }
 
 bool {{class.simple_name}}::is_enabled(const assistant& a,
-    const formattables::helper_properties& hp) const {
+    const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }

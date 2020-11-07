@@ -22,7 +22,7 @@
 
 namespace dogen::text::cpp::formattables {
 
-element_properties::element_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties)
+element_properties::element_properties(const std::list<dogen::logical::entities::helper_properties>& helper_properties)
     : helper_properties_(helper_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
@@ -40,19 +40,19 @@ element_properties& element_properties::operator=(element_properties other) {
     return *this;
 }
 
-const std::list<dogen::text::cpp::formattables::helper_properties>& element_properties::helper_properties() const {
+const std::list<dogen::logical::entities::helper_properties>& element_properties::helper_properties() const {
     return helper_properties_;
 }
 
-std::list<dogen::text::cpp::formattables::helper_properties>& element_properties::helper_properties() {
+std::list<dogen::logical::entities::helper_properties>& element_properties::helper_properties() {
     return helper_properties_;
 }
 
-void element_properties::helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>& v) {
+void element_properties::helper_properties(const std::list<dogen::logical::entities::helper_properties>& v) {
     helper_properties_ = v;
 }
 
-void element_properties::helper_properties(const std::list<dogen::text::cpp::formattables::helper_properties>&& v) {
+void element_properties::helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v) {
     helper_properties_ = std::move(v);
 }
 

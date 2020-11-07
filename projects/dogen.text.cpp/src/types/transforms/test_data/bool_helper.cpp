@@ -21,7 +21,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/bool_helper.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
-#include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
@@ -59,11 +59,11 @@ std::string bool_helper::helper_name() const {
 }
 
 bool bool_helper::is_enabled(const assistant& /*a*/,
-    const formattables::helper_properties& /*hp*/) const {
+    const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void bool_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+void bool_helper::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
 ast.stream() << std::endl;
 ast.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
 ast.stream() << "    return (position % 2) != 0;" << std::endl;
