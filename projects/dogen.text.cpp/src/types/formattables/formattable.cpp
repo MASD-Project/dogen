@@ -34,22 +34,18 @@ namespace dogen::text::cpp::formattables {
 
 formattable::formattable(
     const boost::shared_ptr<dogen::logical::entities::element>& element,
-    const dogen::text::cpp::formattables::element_properties& element_properties,
     const dogen::physical::entities::region& artefacts)
     : element_(element),
-      element_properties_(element_properties),
       artefacts_(artefacts) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(element_, other.element_);
-    swap(element_properties_, other.element_properties_);
     swap(artefacts_, other.artefacts_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
     return element_ == rhs.element_ &&
-        element_properties_ == rhs.element_properties_ &&
         artefacts_ == rhs.artefacts_;
 }
 
@@ -73,22 +69,6 @@ void formattable::element(const boost::shared_ptr<dogen::logical::entities::elem
 
 void formattable::element(const boost::shared_ptr<dogen::logical::entities::element>&& v) {
     element_ = std::move(v);
-}
-
-const dogen::text::cpp::formattables::element_properties& formattable::element_properties() const {
-    return element_properties_;
-}
-
-dogen::text::cpp::formattables::element_properties& formattable::element_properties() {
-    return element_properties_;
-}
-
-void formattable::element_properties(const dogen::text::cpp::formattables::element_properties& v) {
-    element_properties_ = v;
-}
-
-void formattable::element_properties(const dogen::text::cpp::formattables::element_properties&& v) {
-    element_properties_ = std::move(v);
 }
 
 const dogen::physical::entities::region& formattable::artefacts() const {

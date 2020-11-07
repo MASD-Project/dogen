@@ -145,12 +145,6 @@ public:
 
 private:
     /**
-     * @brief
-     */
-    const formattables::element_properties& obtain_element_properties(
-        const identification::entities::logical_id& element_id) const;
-
-    /**
      * @brief Obtains the facet configuration for the facet
      * identified by facet name.
      *

@@ -100,7 +100,6 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
     const auto& ppp(mmp.project_path_properties());
     const auto templates_directory(ppp.templates_directory_full_path());
 
-    const auto& ep(fbl.element_properties());
     const auto& fmts(i->second);
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
@@ -115,7 +114,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 
         using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
-        context ctx(ep, physical_model_, fm, frp.helper_formatters(),
+        context ctx(physical_model_, fm, frp.helper_formatters(),
             streaming_properties_, technical_space_version_, tracer);
 
         auto& a(*aptr);

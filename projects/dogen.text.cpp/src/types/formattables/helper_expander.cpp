@@ -100,8 +100,8 @@ public:
      * other element types do not need helpers.
      */
     using logical::entities::element_visitor::visit;
-    void visit(const logical::entities::structural::object& o);
-    void visit(const logical::entities::structural::primitive& p);
+    void visit(logical::entities::structural::object& o);
+    void visit(logical::entities::structural::primitive& p);
 
 public:
     const std::list<logical::entities::helper_properties>& result() const;
@@ -307,7 +307,7 @@ compute_helper_properties(const helper_expander::facets_for_family_type& fff,
 }
 
 void helper_properties_generator::
-visit(const logical::entities::structural::object& o) {
+visit(logical::entities::structural::object& o) {
     const auto& fff(facets_for_family_);
     const auto& attrs(o.local_attributes());
     const auto iir(o.in_inheritance_relationship());
@@ -315,7 +315,7 @@ visit(const logical::entities::structural::object& o) {
 }
 
 void helper_properties_generator::
-visit(const logical::entities::structural::primitive& p) {
+visit(logical::entities::structural::primitive& p) {
     const auto& fff(facets_for_family_);
     const std::list<logical::entities::attribute> attrs({ p.value_attribute() });
     const auto iir(false/*in_inheritance_relationship*/);
@@ -391,13 +391,7 @@ populate_helper_properties(const std::unordered_map<
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& eprops(formattable.element_properties());
-
-        /*
-         * We only want to process the master segment; the extensions
-         * can be ignored.
-         */
-        const auto& e(*formattable.element());
+        auto& e(*formattable.element());
 
         /*
          * We only need to generate helpers for the target
@@ -418,7 +412,7 @@ populate_helper_properties(const std::unordered_map<
         helper_properties_generator
             g(helper_families, streaming_properties, fff);
         e.accept(g);
-        eprops.helper_properties(g.result());
+        e.helper_properties(g.result());
 
         BOOST_LOG_SEV(lg, debug) << "Helper properties generated: "
                                  << g.result().size();

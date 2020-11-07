@@ -791,10 +791,6 @@
           "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         },
         {
-          "name": "element_properties",
-          "type": "formattables::element_properties"
-        },
-        {
           "name": "model",
           "type": "formattables::model"
         },
@@ -825,17 +821,6 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formattables::element_properties",
-      "documentation": "All of the properties associated with an element.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "helper_properties",
-          "type": "std::list<logical::entities::helper_properties>"
-        }
-      ]
     },
     {
       "name": "transforms::types::builtin_header",
@@ -959,10 +944,6 @@
         {
           "name": "element",
           "type": "boost::shared_ptr<logical::entities::element>"
-        },
-        {
-          "name": "element_properties",
-          "type": "formattables::element_properties"
         },
         {
           "name": "artefacts",

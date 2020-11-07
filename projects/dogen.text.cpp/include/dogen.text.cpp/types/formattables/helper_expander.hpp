@@ -30,6 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"

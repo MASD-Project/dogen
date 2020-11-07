@@ -22,8 +22,8 @@
 
 namespace dogen::text::cpp::transforms {
 
-context::context(const formattables::element_properties& element_properties,
-    const physical::entities::model& pm, const formattables::model& fm,
+context::context(const physical::entities::model& pm,
+    const formattables::model& fm,
     const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
@@ -31,15 +31,9 @@ context::context(const formattables::element_properties& element_properties,
     logical::entities::streaming_properties>& streaming_properties,
     const identification::entities::technical_space_version tsv,
     boost::shared_ptr<tracing::tracer> tracer)
-    : element_properties_(element_properties), physical_model_(pm),
-      model_(fm), helpers_(helpers),
+    : physical_model_(pm), model_(fm), helpers_(helpers),
       streaming_properties_(streaming_properties),
       technical_space_version_(tsv), tracer_(tracer) { }
-
-const formattables::element_properties&
-context::element_properties() const {
-    return element_properties_;
-}
 
 const formattables::model& context::model() const {
     return model_;

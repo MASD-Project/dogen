@@ -213,22 +213,6 @@ assistant::get_product_name(const logical_name& n) const {
     return n.location().external_modules().front();
 }
 
-const formattables::element_properties& assistant::obtain_element_properties(
-    const identification::entities::logical_id& element_id) const {
-
-    if (element_id == element_.name().id())
-        return context_.element_properties();
-
-    const auto& formattables(context_.model().formattables());
-    const auto i(formattables.find(element_id));
-    if (i == formattables.end()) {
-        BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(element_not_found + element_id.value()));
-    }
-    return i->second.element_properties();
-}
-
 physical::entities::facet_properties assistant::obtain_facet_properties(
     const identification::entities::physical_meta_id& facet_name) const {
     const auto& mmp(context_.physical_model().meta_model_properties());
@@ -588,11 +572,10 @@ void assistant::add_helper_methods(const std::string& element_id) {
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
                              << element_id;
 
-    if (context_.element_properties().helper_properties().empty())
+    if (element_.helper_properties().empty())
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
 
-    const auto& eprops(context_.element_properties());
-    for (const auto& hlp_props : eprops.helper_properties()) {
+    for (const auto& hlp_props : element_.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(hlp_props));
 
@@ -662,8 +645,8 @@ streaming_for_type(const logical::entities::helper_descriptor& hd,
 
 bool assistant::requires_hashing_helper_method(
     const logical::entities::attribute& attr) const {
-    const auto& eprops(context_.element_properties());
-    for (const auto& hlp_props : eprops.helper_properties()) {
+    const auto& hps(element_.helper_properties());
+    for (const auto& hlp_props : hps) {
         const auto ident(attr.parsed_type().qualified().identifiable());
         const auto& desc(hlp_props.current());
         if (ident != desc.name_tree_identifiable())

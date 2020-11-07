@@ -38,7 +38,6 @@
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
-#include "dogen.text.cpp/types/formattables/element_properties.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -48,8 +47,7 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const formattables::element_properties& element_properties,
-        const physical::entities::model& pm,
+    context(const physical::entities::model& pm,
         const formattables::model& fm,
         const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
@@ -61,8 +59,6 @@ public:
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const formattables::element_properties& element_properties() const;
-
     const formattables::model& model() const;
 
     const std::unordered_map<std::string,
@@ -82,7 +78,6 @@ public:
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const formattables::element_properties& element_properties_;
     const physical::entities::model& physical_model_;
     const formattables::model& model_;
     const std::unordered_map<std::string,
