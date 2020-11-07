@@ -27,6 +27,7 @@
 
 #include "dogen.logical/types/entities/physical/part_fwd.hpp"
 #include "dogen.logical/types/entities/physical/facet_fwd.hpp"
+#include "dogen.logical/types/entities/physical/helper_fwd.hpp"
 #include "dogen.logical/types/entities/build/cmakelists_fwd.hpp"
 #include "dogen.logical/types/entities/physical/backend_fwd.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
@@ -187,6 +188,16 @@ public:
     virtual void visit(const dogen::logical::entities::physical::facet&) { }
     virtual void visit(dogen::logical::entities::physical::facet&) const { }
     virtual void visit(dogen::logical::entities::physical::facet&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::helper
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::helper&) const { }
+    virtual void visit(const dogen::logical::entities::physical::helper&) { }
+    virtual void visit(dogen::logical::entities::physical::helper&) const { }
+    virtual void visit(dogen::logical::entities::physical::helper&) { }
     /**@}*/
 
     /**

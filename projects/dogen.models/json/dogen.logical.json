@@ -4628,6 +4628,32 @@
           }
         }
       ]
+    },
+    {
+      "name": "entities::physical::helper",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "owning_formatters",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "owning_facets",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "helper_name",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }
