@@ -1380,16 +1380,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::helper_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "helper_families",
-          "type": "std::unordered_map<identification::entities::logical_id, std::string>"
-        }
-      ]
-    },
-    {
       "name": "transforms::types::primitive_header",
       "documentation": "Generates header files for primitives.\n",
       "stereotypes": [

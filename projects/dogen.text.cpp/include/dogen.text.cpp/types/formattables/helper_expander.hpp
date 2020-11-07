@@ -31,7 +31,6 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
-#include "dogen.text.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 
@@ -39,7 +38,8 @@ namespace dogen::text::cpp::formattables {
 
 class helper_expander {
 private:
-    helper_configuration make_configuration(
+    std::unordered_map<identification::entities::logical_id, std::string>
+    make_configuration(
         const variability::entities::feature_model& feature_model,
         const model& fm) const;
 
@@ -51,7 +51,8 @@ private:
     facets_for_family_type
     facets_for_family(const transforms::repository& frp) const;
 
-    void populate_helper_properties(const helper_configuration& cfg,
+    void populate_helper_properties(const std::unordered_map<
+        identification::entities::logical_id, std::string>& helper_families,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp,
