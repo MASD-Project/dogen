@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-07 Sat 18:26]
+#+CAPTION: Clock summary at [2020-11-07 Sat 22:44]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *10:05* |       |      | 100.0 |
+| *Total time*                                       | *11:23* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 10:05   |       |      | 100.0 |
-| Active                                             |         | 10:05 |      | 100.0 |
-| edit release notes for previous sprint             |         |       | 5:04 |  50.2 |
-| Create a demo and presentation for previous sprint |         |       | 0:28 |   4.6 |
-| Sprint and product backlog grooming                |         |       | 1:29 |  14.7 |
-| Add C++ helpers to the PMM                         |         |       | 3:04 |  30.4 |
+| Stories                                            | 11:23   |       |      | 100.0 |
+| Active                                             |         | 11:23 |      | 100.0 |
+| edit release notes for previous sprint             |         |       | 5:04 |  44.5 |
+| Create a demo and presentation for previous sprint |         |       | 0:28 |   4.1 |
+| Sprint and product backlog grooming                |         |       | 1:29 |  13.0 |
+| Add C++ helpers to the PMM                         |         |       | 4:22 |  38.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -277,6 +277,9 @@ way but we should create a new story for the "new world" way.
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-07 Sat 22:34]--[2020-11-07 Sat 22:44] =>  0:10
+    CLOCK: [2020-11-07 Sat 22:22]--[2020-11-07 Sat 22:33] =>  0:11
+    CLOCK: [2020-11-07 Sat 21:14]--[2020-11-07 Sat 22:11] =>  0:57
     CLOCK: [2020-11-07 Sat 15:47]--[2020-11-07 Sat 18:25] =>  2:38
     CLOCK: [2020-11-07 Sat 15:20]--[2020-11-07 Sat 15:46] =>  0:26
     :END:
@@ -293,7 +296,10 @@ Notes:
   interface. Create archetype for helpers; we need transform and
   factory. Add a helper family to facet mapping.
 - move reducer to the orchestration model. Do it in both LPS and
-  logical model.
+  logical model. Remove reducer from formattables.
+- add helpers to PMM. Need four archetypes (factory and transform,
+  header and implementation). Add logical transform using PMM to
+  generate helper properties. Remove helper expander.
 
 Merged stories:
 
@@ -409,6 +415,15 @@ remove all of the existing infrastructure in the TS models:
 - workflows
 - traits
 - registrars
+
+Notes:
+
+- in the new world we no longer need a M2T interface at the text
+  transform level. The backend chain knows of all of the facet chains;
+  and the facet chains know of all of the archetypes. We can dispatch
+  the element using the visitor into a concrete type and then find the
+  archetypes that process that type. However, we do not want to
+  generate an apply method per logical element...
 
 Merged stories:
 
