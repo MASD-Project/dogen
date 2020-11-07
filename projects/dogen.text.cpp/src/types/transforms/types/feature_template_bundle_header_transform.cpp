@@ -33,7 +33,6 @@
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"

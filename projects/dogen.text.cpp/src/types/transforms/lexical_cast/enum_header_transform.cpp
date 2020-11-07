@@ -32,7 +32,6 @@
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/traits.hpp"
-#include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"

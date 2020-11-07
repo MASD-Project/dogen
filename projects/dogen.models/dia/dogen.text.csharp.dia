@@ -7083,15 +7083,15 @@ using System;
         <dia:point val="31.495,-19.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.00125,-22.05;32.245,-14.945"/>
+        <dia:rectangle val="4.00125,-22.05;32.245,-15.945"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="31.495,-19.8"/>
-        <dia:point val="31.495,-15"/>
-        <dia:point val="4.05125,-15"/>
+        <dia:point val="31.495,-16"/>
+        <dia:point val="4.05125,-16"/>
         <dia:point val="4.05125,-22"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
