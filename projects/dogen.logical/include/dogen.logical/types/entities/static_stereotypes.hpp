@@ -68,7 +68,8 @@ enum class static_stereotypes : unsigned int {
     physical_facet = 34,
     physical_archetype = 35,
     physical_archetype_kind = 36,
-    physical_part = 37
+    physical_part = 37,
+    physical_helper = 38
 };
 
 }

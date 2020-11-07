@@ -144,6 +144,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::physical_part:
         attr = "\"physical_part\"";
         break;
+    case static_stereotypes::physical_helper:
+        attr = "\"physical_helper\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

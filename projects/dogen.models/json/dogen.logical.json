@@ -1183,6 +1183,10 @@
         {
           "name": "physical_part",
           "type": ""
+        },
+        {
+          "name": "physical_helper",
+          "type": ""
         }
       ]
     },
