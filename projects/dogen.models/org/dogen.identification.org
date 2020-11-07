@@ -652,6 +652,17 @@ Archetype names by qualified backend and facet names
 
 Resolves a given physical meta-model element ID into its technical space.
 
+** entities::technical_space_version
+:PROPERTIES:
+:masd.codec.stereotypes: masd::enumeration
+:END:
+
+Version of the technical space to use.
+
+*** cpp_98
+*** cpp_11
+*** cpp_14
+*** cpp_17
 * helpers
 :PROPERTIES:
 :masd.codec.dia.comment: true

@@ -73,7 +73,6 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -82,57 +81,6 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
-
-    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
-    const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
-    const bool requires_io(io_enabled && in_inheritance);
-
-    const auto ios(inclusion_constants::std::iosfwd());
-    if (requires_io)
-        builder.add(ios);
-
-    using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
-    builder.add(o.name(), ser_fwd_arch);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-
-    const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
-    builder.add(o.opaque_associations(), fwd_arch);
-
-    const auto self_arch(class_header_transform::static_archetype().meta_name().id().value());
-    builder.add(o.parents(), self_arch);
-
-    using hash = transforms::hash::traits;
-    const auto hash_carch(hash::traits::canonical_archetype());
-    builder.add(o.associative_container_keys(), hash_carch);
-
-    if (o.is_visitation_root()) {
-        /*
-         * On the header files of the visitation root we only care
-         * about the base visitor; as such we can get away with a
-         * forward declaration. For the visitation leaves, since we
-         * must include the parent we do not need any additional
-         * includes.
-         */
-        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype_qn());
-        builder.add(*o.base_visitor(), visitor_fwd_arch);
-    }
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -555,7 +503,6 @@ Generates header files for exceptions.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -564,15 +511,6 @@ Generates header files for exceptions.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> exception_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::string());
-    builder.add(inclusion_constants::boost::exception::info());
-    return builder.build();
-}
 
 void exception_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -680,18 +618,6 @@ Generates header files for enumerations.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::enumeration;
-    const auto& en(assistant::as<enumeration>(e));
-    auto builder(f.make());
-    const auto arch(traits::canonical_archetype());
-    builder.add(en.underlying_element(), arch);
-    return builder.build();
-}
-
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "enum header",
@@ -785,13 +711,6 @@ Generates header files for namespaces.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> namespace_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void namespace_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "namespace header",
@@ -861,7 +780,6 @@ Generates header files for visitors.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -870,20 +788,6 @@ Generates header files for visitors.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> visitor_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::visitor;
-    const auto& v(assistant::as<visitor>(e));
-    auto builder(f.make());
-    builder.add(v.visits(), traits::class_forward_declarations_archetype_qn());
-
-    if (v.parent())
-        builder.add(*v.parent(), traits::visitor_header_archetype_qn());
-
-    return builder.build();
-}
 
 void visitor_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -990,7 +894,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -999,49 +902,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::class_header_archetype_qn());
-    builder.add(o.name(), ch_arch);
-    builder.add(o.opaque_associations(), ch_arch);
-
-    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
-    const bool in_inheritance(o.is_parent() || o.is_child());
-    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
-    const bool requires_io(io_enabled && in_inheritance);
-
-    if (!requires_io)
-        return builder.build();
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
-
-    const auto io_carch(io::traits::canonical_archetype());
-    builder.add(o.transparent_associations(), io_carch);
-    builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parents(), io_carch);
-
-    if (o.is_visitation_leaf()) {
-        /*
-         * Only leaves have a visitation implementation. Note that we
-         * don't bother including the base if we are already including
-         * the derived visitor.
-         */
-        const auto v_arch(traits::visitor_header_archetype_qn());
-        if (o.derived_visitor())
-            builder.add(*o.derived_visitor(), v_arch);
-        else
-            builder.add(*o.base_visitor(), v_arch);
-    }
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -1532,19 +1392,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -1586,33 +1438,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-
-    // algorithm: domain headers need it for the swap function.
-    builder.add(inclusion_constants::std::algorithm());
-
-    using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
-    builder.add(p.name(), ser_fwd_arch);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(p.value_attribute().parsed_type().current(), carch);
-
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -1837,7 +1667,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -1846,19 +1675,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string>
-primitive_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::primitive;
-    const auto& o(assistant::as<primitive>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::primitive_header_archetype_qn());
-    builder.add(o.name(), ch_arch);
-    return builder.build();
-}
 
 void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2017,7 +1833,6 @@ Generates implementation files for feature template bundles
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -2026,32 +1841,6 @@ Generates implementation files for feature template bundles
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> feature_template_bundle_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_template_bundle;
-
-    const auto& fb(assistant::as<feature_template_bundle>(e));
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::list());
-    builder.add_as_user("dogen.variability/types/entities/feature_template.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/entities/feature_model.hpp");
-        builder.add_as_user("dogen.variability/types/entities/configuration.hpp");
-        builder.add_as_user("dogen.variability/types/entities/feature.hpp");
-
-        const auto ch_arch(traits::class_header_archetype_qn());
-        builder.add(fb.transparent_associations(), ch_arch);
-
-        const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
-        builder.add(fb.opaque_associations(), fwd_arch);
-    }
-
-    return builder.build();
-}
 
 void feature_template_bundle_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2196,7 +1985,6 @@ Generates implementation files for feature templates.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -2205,25 +1993,6 @@ Generates implementation files for feature templates.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> feature_template_bundle_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_template_bundle;
-    const auto& fb(assistant::as<feature_template_bundle>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::feature_template_bundle_header_archetype_qn());
-    builder.add(fb.name(), ch_arch);
-    builder.add_as_user("dogen.variability/types/helpers/value_factory.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/helpers/feature_selector.hpp");
-        builder.add_as_user("dogen.variability/types/helpers/configuration_selector.hpp");
-    }
-
-    return builder.build();
-}
 
 void feature_template_bundle_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2409,7 +2178,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -2418,18 +2186,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> variability_initializer_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-
-    using logical::entities::variability::initializer;
-    auto builder(f.make());
-    builder.add_as_user("dogen.variability/types/entities/feature_template.hpp");
-    builder.add_as_user("dogen.variability/types/helpers/registrar.hpp");
-
-    return builder.build();
-}
 
 void variability_initializer_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2498,7 +2254,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -2507,25 +2262,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> variability_initializer_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::initializer;
-    const auto& o(assistant::as<initializer>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::variability_initializer_header_archetype_qn());
-    builder.add(o.name(), ch_arch);
-
-    const auto ftb_arch(traits::feature_template_bundle_header_archetype_qn());
-    builder.add(o.feature_template_bundles(), ftb_arch);
-
-    const auto fb_arch(traits::feature_bundle_header_archetype_qn());
-    builder.add(o.feature_bundles(), fb_arch);
-
-    return builder.build();
-}
 
 void variability_initializer_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2608,13 +2344,6 @@ Generates forward declarations for classes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> class_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void class_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class forward declarations",
@@ -2680,13 +2409,6 @@ Generates forward declarations for visitors.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> visitor_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void visitor_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -2754,13 +2476,6 @@ Generates forward declarations for primitives.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive forward declarations",
@@ -2826,13 +2541,6 @@ Generates implementation file for entry point.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> main_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void main_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "main",
@@ -2896,7 +2604,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -2905,31 +2612,6 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> feature_bundle_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_bundle;
-
-    const auto& fb(assistant::as<feature_bundle>(e));
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::list());
-    builder.add_as_user("dogen.variability/types/entities/feature.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/entities/feature_model.hpp");
-        builder.add_as_user("dogen.variability/types/entities/configuration.hpp");
-
-        const auto ch_arch(traits::class_header_archetype_qn());
-        builder.add(fb.transparent_associations(), ch_arch);
-
-        const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
-        builder.add(fb.opaque_associations(), fwd_arch);
-    }
-
-    return builder.build();
-}
 
 void feature_bundle_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -3075,7 +2757,6 @@ Generates implementation files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
@@ -3084,25 +2765,6 @@ Generates implementation files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> feature_bundle_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::variability::feature_bundle;
-    const auto& fb(assistant::as<feature_bundle>(e));
-    auto builder(f.make());
-
-    const auto ch_arch(traits::feature_bundle_header_archetype_qn());
-    builder.add(fb.name(), ch_arch);
-    builder.add_as_user("dogen.variability/types/helpers/value_factory.hpp");
-
-    if (fb.generate_static_configuration()) {
-        builder.add_as_user("dogen.variability/types/helpers/feature_selector.hpp");
-        builder.add_as_user("dogen.variability/types/helpers/configuration_selector.hpp");
-    }
-
-    return builder.build();
-}
 
 void feature_bundle_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -3292,24 +2954,6 @@ Generates header files for archetypes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> archetype_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
-
-    auto builder(f.make());
-    using identification::entities::technical_space;
-    if (arch.major_technical_space() == technical_space::cpp) {
-        builder.add_as_user(
-            "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
-    } else if (arch.major_technical_space() == technical_space::csharp) {
-        builder.add_as_user(
-            "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
-    }
-
-    return builder.build();
-}
-
 void archetype_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header",
@@ -3330,29 +2974,17 @@ public:
     static const physical::entities::archetype& static_archetype();
     const physical::entities::archetype& archetype() const override;
 
-public:
 <#+
             using identification::entities::technical_space;
-            if (o.major_technical_space() == technical_space::cpp) {
+            if (o.major_technical_space() == technical_space::csharp) {
 #>
-    std::list<std::string> inclusion_dependencies(
-        const formattables::dependencies_builder_factory& f,
-        const logical::entities::element& e) const override;
-
-    inclusion_support_types inclusion_support_type() const override;
-
-    boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const override;
-<#+
-            } else if (o.major_technical_space() == technical_space::csharp) {
-#>
+public:
     std::list<std::string> inclusion_dependencies(
         const logical::entities::element& e) const override;
+
 <#+
             }
 #>
-
 public:
     void apply(const context& ctx, const logical::entities::element& e,
         physical::entities::artefact& a) const override;
@@ -3408,13 +3040,6 @@ Generates implementation files for archetypes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> archetype_class_implementation_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void archetype_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype class implementation",
@@ -3464,26 +3089,6 @@ Generates header files for facet transforms.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> facet_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
-
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
-    using identification::entities::technical_space;
-    if (fct.major_technical_space() == technical_space::cpp) {
-        builder.add_as_user(
-            "dogen.text.cpp/types/transforms/registrar.hpp");
-    } else if (fct.major_technical_space() == technical_space::csharp) {
-        builder.add_as_user(
-            "dogen.text.csharp/types/transforms/registrar.hpp");
-    }
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
 
 void facet_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -3565,22 +3170,6 @@ Generates implementation files for facet transforms.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> facet_class_implementation_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
-    auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
-    builder.add(fct.name(), ch_arch);
-    builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
 
 void facet_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -3670,26 +3259,6 @@ Generates header files for archetypes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> backend_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& be(assistant::as<logical::entities::physical::backend>(e));
-
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/backend.hpp");
-    using identification::entities::technical_space;
-    if (be.major_technical_space() == technical_space::cpp) {
-        builder.add_as_user(
-            "dogen.text.cpp/types/transforms/registrar.hpp");
-    } else if (be.major_technical_space() == technical_space::csharp) {
-        builder.add_as_user(
-            "dogen.text.csharp/types/transforms/registrar.hpp");
-    }
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
-
 void backend_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class header",
@@ -3764,24 +3333,6 @@ Generates implementation files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> backend_class_implementation_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
-    const auto& be(assistant::as<logical::entities::physical::backend>(e));
-
-    builder.add(be.name(), ch_arch);
-    builder.add(be.facets(), ch_arch);
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
 
 void backend_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -3891,13 +3442,6 @@ Generates header files for archetypes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> part_class_header_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void part_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "part class header",
@@ -3964,13 +3508,6 @@ Generates implementation files for archetypes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> part_class_implementation_transform_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void part_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "part class implementation",
@@ -4020,14 +3557,6 @@ Generates header files for archetype factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> archetype_class_header_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/archetype.hpp");
-    return builder.build();
-}
 
 void archetype_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -4109,17 +3638,6 @@ Generates implementation files for archetype factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> archetype_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
-    auto builder(f.make());
-    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
-    builder.add(arch.name(), ch_arch);
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
-    return builder.build();
-}
 
 void archetype_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -4255,14 +3773,6 @@ Generates header files for facet factories.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> facet_class_header_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
-    return builder.build();
-}
-
 void facet_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "facet class header",
@@ -4343,24 +3853,6 @@ Generates implementation files for facet factory.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> facet_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
-    auto builder(f.make());
-    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
-    builder.add(fct.name(), fct_ch_arch);
-
-    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
-    builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-
-    return builder.build();
-}
 
 void facet_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -4480,15 +3972,6 @@ Generates header files for backend factories.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> backend_class_header_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/backend.hpp");
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
-
 void backend_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class header",
@@ -4563,32 +4046,6 @@ Generates implementation files for backend factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> backend_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    const auto& be(assistant::as<logical::entities::physical::backend>(e));
-    const auto be_ch_arch(traits::backend_class_header_factory_archetype_qn());
-    builder.add(be.name(), be_ch_arch);
-
-    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
-    builder.add(be.facets(), fct_ch_arch);
-
-    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
-    builder.add(be.archetype_kinds(), ak_ch_arch);
-
-    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
-    builder.add(be.parts(), part_ch_arch);
-
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
 
 void backend_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -4750,15 +4207,6 @@ Generates header files for backend factories.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> part_class_header_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/part.hpp");
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
-
 void part_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "part class header",
@@ -4833,23 +4281,6 @@ Generates implementation files for part factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> part_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    const auto& part(assistant::as<logical::entities::physical::part>(e));
-    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
-    builder.add(part.name(), part_ch_arch);
-
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
 
 void part_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -4946,15 +4377,6 @@ Generates header files for archetype_kind factories.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> archetype_kind_class_header_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-    auto builder(f.make());
-    builder.add_as_user("dogen.physical/types/entities/archetype_kind.hpp");
-    const auto ch_arch(traits::class_header_archetype_qn());
-    return builder.build();
-}
-
 void archetype_kind_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype_kind class header",
@@ -5029,22 +4451,6 @@ Generates implementation files for archetype_kind factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> archetype_kind_class_implementation_factory_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    const auto& ak(assistant::as<logical::entities::physical::archetype_kind>(e));
-    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
-    builder.add(ak.name(), ak_ch_arch);
-
-    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
-    builder.add_as_user("dogen.utility/types/log/logger.hpp");
-    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-
-    return builder.build();
-}
 
 void archetype_kind_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5134,22 +4540,11 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::functional());
-    builder.add(e.name(), types::traits::canonical_archetype());
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5223,7 +4618,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
@@ -5231,22 +4625,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& o(assistant::as<logical::entities::structural::object>(e));
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    auto builder(f.make());
-    builder.add(o.name(), carch);
-
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-    builder.add(o.parents(), carch);
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5359,21 +4737,11 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::functional());
-    builder.add(e.name(), types::traits::enum_header_archetype_qn());
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5440,19 +4808,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5533,22 +4893,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::functional());
-    builder.add(e.name(), types::traits::canonical_archetype());
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5622,7 +4971,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
@@ -5630,20 +4978,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string>
-primitive_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    auto builder(f.make());
-    builder.add(p.name(), carch);
-
-    return builder.build();
-}
 
 void primitive_implementation_transform::
 apply(const context& ctx, const logical::entities::element& e,
@@ -5741,24 +5075,11 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::iosfwd());
-
-    using traits = transforms::types::traits;
-    builder.add(e.name(), traits::canonical_archetype());
-
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5819,7 +5140,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -5829,32 +5149,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& o(assistant::as<logical::entities::structural::object>(e));
-    auto builder(f.make());
-    const auto ch_fn(traits::class_header_archetype_qn());
-    builder.add(o.name(), ch_fn);
-
-    builder.add(o.opaque_associations(), ch_fn);
-
-    const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(class_implementation_transform::static_archetype().meta_name().id().value());
-    const bool io_enabled(builder.is_enabled(o.name(), self_fn));
-
-    if (!io_enabled)
-        return builder.build();
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
-    builder.add(o.transparent_associations(), io_carch);
-    builder.add(o.opaque_associations(), io_carch);
-    builder.add(o.parents(), io_carch);
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5923,24 +5217,11 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::iosfwd());
-
-    const auto eh_fn(types::traits::enum_header_archetype_qn());
-    builder.add(e.name(), eh_fn);
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -5998,7 +5279,6 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
@@ -6006,20 +5286,6 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    builder.add(inclusion_constants::std::ostream());
-    builder.add(inclusion_constants::std::stdexcept());
-    builder.add(inclusion_constants::std::string());
-
-    const auto eh_fn(traits::enum_header_archetype_qn());
-    builder.add(e.name(), eh_fn);
-    return builder.build();
-}
 
 void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6103,19 +5369,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6190,24 +5448,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(inclusion_constants::std::iosfwd());
-
-    using traits = transforms::types::traits;
-    builder.add(e.name(), traits::canonical_archetype());
-
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6271,7 +5516,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -6281,31 +5525,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string>
-primitive_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-    const auto ph_fn(traits::primitive_header_archetype_qn());
-    builder.add(p.name(), ph_fn);
-
-    const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().id().value());
-    const bool io_enabled(builder.is_enabled(p.name(), self_fn));
-
-    if (!io_enabled)
-        return builder.build();
-
-    const auto os(inclusion_constants::std::ostream());
-    builder.add(os);
-    builder.add(p.value_attribute().parsed_type().current(), io_carch);
-
-    return builder.build();
-}
 
 void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6394,34 +5613,12 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype_qn());
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::serialization::split_free());
-
-    if (o.is_parent())
-        builder.add(ic::boost::serialization::assume_abstract());
-
-    if (!o.is_parent() && o.is_child())
-        builder.add(ic::boost::type_traits::is_virtual_base_of());
-
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6507,43 +5704,11 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& o(assistant::as<logical::entities::structural::object>(e));
-    auto builder(f.make());
-
-    const auto ch_fn(traits::class_header_archetype_qn());
-    builder.add(o.name(), ch_fn);
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::archive::text_iarchive());
-    builder.add(ic::boost::archive::text_oarchive());
-    builder.add(ic::boost::archive::binary_iarchive());
-    builder.add(ic::boost::archive::binary_oarchive());
-    builder.add(ic::boost::archive::polymorphic_iarchive());
-    builder.add(ic::boost::archive::polymorphic_oarchive());
-
-    // XML serialisation
-    builder.add(ic::boost::serialization::nvp());
-    builder.add(ic::boost::archive::xml_iarchive());
-    builder.add(ic::boost::archive::xml_oarchive());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-    builder.add(o.parents(), carch);
-    builder.add(o.leaves(), carch);
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6695,22 +5860,12 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype_qn());
-    builder.add(inclusion_constants::boost::serialization::nvp());
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6762,19 +5917,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6816,27 +5963,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-    builder.add(p.name(), types::traits::primitive_header_archetype_qn());
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::serialization::split_free());
-
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -6901,42 +6032,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string>
-primitive_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-
-    const auto ph_fn(traits::primitive_header_archetype_qn());
-    builder.add(p.name(), ph_fn);
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::archive::text_iarchive());
-    builder.add(ic::boost::archive::text_oarchive());
-    builder.add(ic::boost::archive::binary_iarchive());
-    builder.add(ic::boost::archive::binary_oarchive());
-    builder.add(ic::boost::archive::polymorphic_iarchive());
-    builder.add(ic::boost::archive::polymorphic_oarchive());
-
-    // XML serialisation
-    builder.add(ic::boost::serialization::nvp());
-    builder.add(ic::boost::archive::xml_iarchive());
-    builder.add(ic::boost::archive::xml_oarchive());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(p.value_attribute().parsed_type().current(), carch);
-
-    return builder.build();
-}
 
 void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7042,18 +6142,6 @@ Generates forward declarations for classes.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> class_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    using tp = transforms::types::traits;
-    const auto tp_fn(tp::class_forward_declarations_archetype_qn());
-    builder.add(e.name(), tp_fn);
-
-    return builder.build();
-}
-
 void class_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "class forward declarations",
@@ -7125,18 +6213,6 @@ Generates forward declarations for primitives.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    using tp = transforms::types::traits;
-    const auto tp_fn(tp::primitive_forward_declarations_archetype_qn());
-    builder.add(e.name(), tp_fn);
-
-    return builder.build();
-}
-
 void primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive forward declarations",
@@ -7202,13 +6278,6 @@ Generates header files for type registrars.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> type_registrar_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void type_registrar_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7280,41 +6349,10 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> type_registrar_implementation_transform::
-inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    const auto& rg(assistant::as<logical::entities::serialization::type_registrar>(e));
-    auto builder(f.make());
-
-    const auto rh_fn(traits::type_registrar_header_archetype_qn());
-    builder.add(rg.name(), rh_fn);
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::archive::text_iarchive());
-    builder.add(ic::boost::archive::text_oarchive());
-    builder.add(ic::boost::archive::binary_iarchive());
-    builder.add(ic::boost::archive::binary_oarchive());
-    builder.add(ic::boost::archive::polymorphic_iarchive());
-    builder.add(ic::boost::archive::polymorphic_oarchive());
-
-    // XML serialisation
-    builder.add(ic::boost::archive::xml_iarchive());
-    builder.add(ic::boost::archive::xml_oarchive());
-
-    const auto ch_fn(traits::class_header_archetype_qn());
-    builder.add(rg.leaves(), ch_fn);
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(rg.registrar_dependencies(), carch);
-    return builder.build();
-}
 
 void type_registrar_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
    physical::entities::artefact& a) const {
@@ -7420,20 +6458,11 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(e.name(), types::traits::class_header_archetype_qn());
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7524,7 +6553,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
@@ -7532,23 +6560,6 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& o(assistant::as<logical::entities::structural::object>(e));
-    auto builder(f.make());
-    builder.add(o.name(), traits::class_header_archetype_qn());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-    builder.add(o.parents(), carch);
-    builder.add(o.leaves(), carch);
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7758,21 +6769,11 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    builder.add(e.name(), types::traits::enum_header_archetype_qn());
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7844,7 +6845,6 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
@@ -7852,15 +6852,6 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    builder.add(e.name(), traits::enum_header_archetype_qn());
-    return builder.build();
-}
 
 void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -7936,19 +6927,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8049,20 +7032,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(e.name(), types::traits::primitive_header_archetype_qn());
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8143,7 +7117,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
@@ -8151,20 +7124,6 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    const auto& p(assistant::as<logical::entities::structural::primitive>(e));
-    auto builder(f.make());
-    builder.add(p.name(), traits::primitive_header_archetype_qn());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(p.value_attribute().parsed_type().current(), carch);
-
-    return builder.build();
-}
 
 void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8311,31 +7270,12 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/class_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/class_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype_qn());
-
-    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
-    builder.add(o.transparent_associations(), carch);
-    builder.add(o.opaque_associations(), carch);
-
-    const auto self_fn(class_header_transform::static_archetype().meta_name().id().value());
-    builder.add(o.parents(), self_fn);
-
-    return builder.build();
-}
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8437,21 +7377,12 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype_qn());
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8508,19 +7439,11 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/builtin_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> builtin_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
-}
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8557,24 +7480,11 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::primitive;
-    const auto& p(assistant::as<primitive>(e));
-    auto builder(f.make());
-    builder.add(p.name(), types::traits::primitive_header_archetype_qn());
-
-    return builder.build();
-}
 
 void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8679,7 +7589,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -8687,13 +7596,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/object_odb_options_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> object_odb_options_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void object_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8783,7 +7685,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -8791,13 +7692,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_odb_options_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> primitive_odb_options_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void primitive_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -8887,7 +7781,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
@@ -8895,13 +7788,6 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/common_odb_options_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> common_odb_options_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void common_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -9028,10 +7914,6 @@ An error occurred whilst formatting.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::inclusion_constants
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** transforms::initializer
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -9083,20 +7965,6 @@ Supplies additional information required for formatting.
 :END:
 
 An error occurred whilst the factory was building.
-
-** transforms::inclusion_support_types
-:PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
-:END:
-*** not_supported
-This formatter does not export an inclusion directive.
-
-*** regular_support
-This formatter exports a regular inclusion directive.
-
-*** canonical_support
-This formatter exports a regular inclusion directive and is the default for its facet
-and element.
 
 ** transforms::wale_transform
 :PROPERTIES:
@@ -9160,7 +8028,6 @@ Generates tests for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
@@ -9172,64 +8039,6 @@ Generates tests for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/class_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    using logical::entities::structural::object;
-    const auto& o(assistant::as<object>(e));
-    auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype_qn());
-    builder.add(o.name(), test_data::traits::class_header_archetype_qn());
-
-    using ic = inclusion_constants;
-    builder.add(ic::std::string());
-    builder.add(ic::boost::test::unit_test());
-
-    if (o.is_parent())
-        builder.add(ic::boost::shared_ptr());
-
-    const auto io_arch(io::traits::class_header_archetype_qn());
-    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
-    if (io_enabled) {
-        builder.add(o.name(), io_arch);
-        builder.add(ic::std::sstream());
-        builder.add(ic::boost::property_tree::ptree());
-        builder.add(ic::boost::property_tree::json_parser());
-    }
-
-    using ser = transforms::serialization::traits;
-    const auto ser_arch(ser::class_header_archetype_qn());
-    const bool ser_enabled(builder.is_enabled(o.name(), ser_arch));
-    if (ser_enabled) {
-        builder.add(o.name(), ser_arch);
-
-        if (o.type_registrar())
-            builder.add(o.type_registrar(), ser::type_registrar_header_archetype_qn());
-
-        builder.add(ic::boost::archive::text_iarchive());
-        builder.add(ic::boost::archive::text_oarchive());
-        builder.add(ic::boost::archive::binary_iarchive());
-        builder.add(ic::boost::archive::binary_oarchive());
-        builder.add(ic::boost::archive::polymorphic_iarchive());
-        builder.add(ic::boost::archive::polymorphic_oarchive());
-        builder.add(ic::boost::serialization::nvp());
-        builder.add(ic::boost::archive::xml_iarchive());
-        builder.add(ic::boost::archive::xml_oarchive());
-
-        if (o.is_parent())
-            builder.add(ic::boost::serialization::shared_ptr());
-    }
-
-    using hash = transforms::hash::traits;
-    const auto hash_arch(hash::class_header_archetype_qn());
-    const bool hash_enabled(builder.is_enabled(o.name(), hash_arch));
-    if (hash_enabled)
-        builder.add(o.name(), hash_arch);
-
-    return builder.build();
-}
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -9727,7 +8536,6 @@ Generates tests for enumeration.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
@@ -9740,61 +8548,6 @@ Generates tests for enumeration.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/enum_implementation_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-
-    auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype_qn());
-    builder.add(e.name(), test_data::traits::enum_header_archetype_qn());
-
-    using ic = inclusion_constants;
-    builder.add(ic::std::string());
-    builder.add(ic::boost::test::unit_test());
-    builder.add(ic::boost::predef());
-
-    const auto io_arch(io::traits::enum_header_archetype_qn());
-    const bool io_enabled(builder.is_enabled(e.name(), io_arch));
-    if (io_enabled) {
-        builder.add(e.name(), io_arch);
-        builder.add(ic::std::sstream());
-        builder.add(ic::boost::property_tree::ptree());
-        builder.add(ic::boost::property_tree::json_parser());
-    }
-
-    const auto lc_arch(lexical_cast::traits::enum_header_archetype_qn());
-    const bool lc_enabled(builder.is_enabled(e.name(), lc_arch));
-    if (lc_enabled) {
-        builder.add(e.name(), lc_arch);
-        builder.add(ic::boost::lexical_cast());
-    }
-
-    using ser = transforms::serialization::traits;
-    const auto ser_arch(ser::enum_header_archetype_qn());
-    const bool ser_enabled(builder.is_enabled(e.name(), ser_arch));
-    if (ser_enabled) {
-        builder.add(e.name(), ser_arch);
-
-        builder.add(ic::boost::archive::text_iarchive());
-        builder.add(ic::boost::archive::text_oarchive());
-        builder.add(ic::boost::archive::binary_iarchive());
-        builder.add(ic::boost::archive::binary_oarchive());
-        builder.add(ic::boost::archive::polymorphic_iarchive());
-        builder.add(ic::boost::archive::polymorphic_oarchive());
-        builder.add(ic::boost::serialization::nvp());
-        builder.add(ic::boost::archive::xml_iarchive());
-        builder.add(ic::boost::archive::xml_oarchive());
-    }
-
-    using hash = transforms::hash::traits;
-    const auto hash_arch(hash::enum_header_archetype_qn());
-    const bool hash_enabled(builder.is_enabled(e.name(), hash_arch));
-    if (hash_enabled)
-        builder.add(e.name(), hash_arch);
-
-    return builder.build();
-}
 
 void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10057,7 +8810,6 @@ Generates entry point for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
@@ -10066,23 +8818,6 @@ Generates entry point for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/main_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> main_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
-
-    using logical::entities::structural::object;
-    auto builder(f.make());
-
-    using ic = inclusion_constants;
-    builder.add(ic::boost::test::unit_test());
-    builder.add(ic::boost::test::unit_test_monitor());
-    builder.add(ic::boost::exception::info());
-    builder.add(ic::std::iostream());
-    builder.add(ic::boost::exception::diagnostic_information());
-
-    return builder.build();
-}
 
 void main_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10173,13 +8908,6 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/cmakelists_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> cmakelists_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void cmakelists_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10275,42 +9003,6 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 :masd.variability.key_prefix: masd.cpp
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** aspect.requires_manual_default_constructor
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, the modeling element requires a manual defaul constructor.
-
-*** aspect.requires_manual_move_constructor
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, the modeling element requires a manual move constructor.
-
-*** aspect.requires_stream_manipulators
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, the modeling element requires stream manipulators.
-
-*** standard
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "c++-14"
-:END:
-
-Which version of C++ to use.
-
 *** helper.family
 :PROPERTIES:
 :masd.variability.binding_point: element
@@ -10319,33 +9011,6 @@ Which version of C++ to use.
 :END:
 
 Which family of helpers to use for this modeling element.
-
-*** streaming.string_conversion_method
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::text
-:masd.codec.value: ""
-:END:
-
-Which conversion method to use to convert strings.
-
-*** streaming.requires_quoting
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, streaming this type must be preceeded by quoting.
-
-*** streaming.remove_unprintable_characters
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-
-If true, streaming this type requires removing unprintable characters.
 
 ** transforms::lexical_cast
 :PROPERTIES:
@@ -10392,25 +9057,12 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/enum_header_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> enum_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& e) const {
-    auto builder(f.make());
-
-    const auto eh_fn(types::traits::enum_header_archetype_qn());
-    builder.add(e.name(), eh_fn);
-    builder.add(inclusion_constants::boost::lexical_cast());
-
-    return builder.build();
-}
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10555,13 +9207,6 @@ Generates logic-less templates.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> logic_less_template_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    std::list<std::string> r;
-    return r;
-}
-
 void logic_less_template_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "logic less template",
@@ -10636,13 +9281,6 @@ Generates visual studio project.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/project_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> project_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void project_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10750,13 +9388,6 @@ Generates visual studio solutions.
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> solution_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
-
 void solution_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "solution",
@@ -10847,13 +9478,6 @@ Generates msbuild targets.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> msbuild_targets_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void msbuild_targets_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
@@ -10984,13 +9608,6 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/source_cmakelists_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> source_cmakelists_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void source_cmakelists_transform::apply(const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
@@ -11140,13 +9757,6 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/include_cmakelists_factory.hpp" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
-
-std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
-}
 
 void include_cmakelists_transform::apply(const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
@@ -11638,30 +10248,6 @@ and those used to generate them.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::locator
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::dependencies_builder
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::building_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-
-An error occurred while the factory was building.
-
-** formattables::artefact_properties
-*** inclusion_dependencies
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-** formattables::dependencies_builder_factory
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::helper_descriptor
 *** family
 :PROPERTIES:
@@ -11689,7 +10275,7 @@ An error occurred while the factory was building.
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.codec.type: boost::optional<formattables::streaming_properties>
+:masd.codec.type: boost::optional<logical::entities::streaming_properties>
 :END:
 *** is_simple_type
 :PROPERTIES:
@@ -11723,38 +10309,9 @@ An error occurred while the factory was building.
 ** formattables::element_properties
 All of the properties associated with an element.
 
-*** aspect_properties
-:PROPERTIES:
-:masd.codec.type: formattables::aspect_properties
-:END:
-*** artefact_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>
-:END:
 *** helper_properties
 :PROPERTIES:
 :masd.codec.type: std::list<formattables::helper_properties>
-:END:
-*** canonical_archetype_to_archetype
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, std::string>
-:END:
-*** attribute_level_test_data_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, test_data_properties>
-:END:
-** formattables::aspect_properties
-*** requires_manual_default_constructor
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** requires_manual_move_constructor
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** requires_stream_manipulators
-:PROPERTIES:
-:masd.codec.type: bool
 :END:
 ** formattables::formattable
 *** element
@@ -11773,19 +10330,11 @@ All of the properties associated with an element.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::inclusion_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::reducer
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::model_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::aspect_expander
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -11804,92 +10353,15 @@ An error occurred during adaptation.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** formattables::odb_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::model
 *** name
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name
 :END:
-*** streaming_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
-:END:
 *** formattables
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::formattable>
 :END:
-*** facet_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, formattables::facet_properties>
-:END:
-*** cpp_standard
-:PROPERTIES:
-:masd.codec.type: formattables::cpp_standards
-:END:
-*** odb_databases
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-*** odb_sql_name_case
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** project_items
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-** formattables::facet_properties
-*** directory
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::facet_directory_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::canonical_archetype_resolver
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::canonical_archetype_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::resolution_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-** formattables::streaming_properties
-*** requires_quoting
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** string_conversion_method
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** remove_unprintable_characters
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::streaming_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::location_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-
-An error occurred while the locator was creating a path.
-
 ** formattables::helper_configuration
 *** helper_families
 :PROPERTIES:
@@ -11897,62 +10369,7 @@ An error occurred while the locator was creating a path.
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
-:END:
-** formattables::directive_group_repository
-*** by_id
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<std::string, formattables::directive_group>>
-:END:
-** formattables::directive_group_repository_factory
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::directive_group
-Represents the group of inclusion directives associated with a name and an archetype.
-
-*** primary
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-The main inclusion directive needed for this element.
-
-*** secondary
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-
-Any other directives that are also needed for this element.
-
-** formattables::build_files_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::cpp_standards
-:PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
-:END:
-*** cpp_98
-*** cpp_11
-*** cpp_14
-*** cpp_17
-** formattables::cpp_standard_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::test_data_properties
-*** maximum_size
-:PROPERTIES:
-:masd.codec.type: unsigned int
-:END:
-*** prefix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-** formattables::test_data_properties_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>
 :END:
 * initializer
 :PROPERTIES:
@@ -11973,17 +10390,6 @@ class {{class.simple_name}} final : public model_to_text_transform {
 public:
     static physical::entities::archetype static_archetype();
     const physical::entities::archetype& archetype() const override;
-
-public:
-    std::list<std::string> inclusion_dependencies(
-        const formattables::dependencies_builder_factory& f,
-        const logical::entities::element& e) const override;
-
-    inclusion_support_types inclusion_support_type() const override;
-
-    boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const identification::entities::logical_name& n) const override;
 
 public:
     void apply(const context& ctx, const logical::entities::element& e,
@@ -12016,21 +10422,6 @@ const physical::entities::archetype& {{class.simple_name}}::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
-    return inclusion_support_types::not_supported;
-}
-
-boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
-
-    using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().id().value()));
-    static const std::string not_supported("Inclusion path is not supported: ");
-
-    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
-    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
-}
-
 #+end_src
 * cpp_artefact_transform_implementation_header
 :PROPERTIES:
@@ -12055,15 +10446,6 @@ const physical::entities::archetype& {{class.simple_name}}::static_archetype() {
 
 const physical::entities::archetype& {{class.simple_name}}::archetype() const {
     return static_archetype();
-}
-
-inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
-    return inclusion_support_types::{{class.inclusion_support_type}};
-}
-
-boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& l, const identification::entities::logical_name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 #+end_src

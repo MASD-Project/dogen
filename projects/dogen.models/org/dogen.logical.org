@@ -466,6 +466,17 @@ Elements related to serialization.
 
 All meta-names by qualified name.
 
+*** streaming_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, streaming_properties>
+:END:
+*** technical_space_version
+:PROPERTIES:
+:masd.codec.type: identification::entities::technical_space_version
+:END:
+
+Version of the technical space we are targeting.
+
 ** entities::elements_traversal
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
@@ -1700,7 +1711,7 @@ If true, the object template has at least one parent.
 
 *** entities::structural::object
 :PROPERTIES:
-:masd.codec.stereotypes: logical::meta_element, Stateful, Relatable, Parameterisable
+:masd.codec.stereotypes: logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties
 :END:
 
 Representation of the class notion in the OOP paradigm.
@@ -1801,7 +1812,7 @@ Elements that are visitable by the visitor.
 :END:
 *** entities::structural::primitive
 :PROPERTIES:
-:masd.codec.stereotypes: logical::meta_element
+:masd.codec.stereotypes: logical::meta_element, TechnicalSpaceProperties
 :END:
 
 Defines an element created by the user to wrap another element, most likely a built-in.
@@ -1981,6 +1992,35 @@ Represents an entry point to a binary.
 
 General type to provide helpers.
 
+*** entities::structural::technical_space_properties
+**** requires_manual_default_constructor
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+**** requires_manual_move_constructor
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+**** requires_stream_manipulators
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+**** is_floating_point
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+**** requires_static_reference_equals
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** entities::structural::TechnicalSpaceProperties
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+**** technical_space_properties
+:PROPERTIES:
+:masd.codec.type: technical_space_properties
+:END:
 ** entities::mapping
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -2768,6 +2808,19 @@ model.
 
 Stereotypes that are not part of the masd UML profile. These are user defined.
 
+** entities::streaming_properties
+*** requires_quoting
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** string_conversion_method
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** remove_unprintable_characters
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
 * traits
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -2987,6 +3040,14 @@ An error occurred whilst applying a transformation.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::generability_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::streaming_properties_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::technical_space_properties_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -3976,6 +4037,90 @@ Define a variable relation between the current archetype and another archetype.
 
 Define a fixed relation between the current archetype and another archetype.
 
+** features::streaming
+:PROPERTIES:
+:masd.variability.key_prefix: masd.cpp.streaming
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+*** string_conversion_method
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
+:END:
+
+Which conversion method to use to convert strings.
+
+*** requires_quoting
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, streaming this type must be preceeded by quoting.
+
+*** remove_unprintable_characters
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, streaming this type requires removing unprintable characters.
+
+** features::technical_space_version
+:PROPERTIES:
+:masd.variability.key_prefix: masd.cpp
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+*** standard
+:PROPERTIES:
+:masd.variability.binding_point: global
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "c++-14"
+:END:
+
+Which version of C++ to use.
+
+** features::technical_space_properties
+:PROPERTIES:
+:masd.variability.key_prefix: masd
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+*** cpp.aspect.requires_manual_default_constructor
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, the modeling element requires a manual defaul constructor.
+
+*** cpp.aspect.requires_manual_move_constructor
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, the modeling element requires a manual move constructor.
+
+*** cpp.aspect.requires_stream_manipulators
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
+:END:
+
+If true, the modeling element requires stream manipulators.
+
+*** csharp.aspect.requires_static_reference_equals
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
+:END:
 * registrar
 :PROPERTIES:
 :masd.codec.stereotypes: masd::serialization::type_registrar

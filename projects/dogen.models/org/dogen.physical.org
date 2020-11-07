@@ -1250,6 +1250,18 @@ Directory in which to place C++ header files. Must be a relative path.
 
 If true, backends should have backend-specific directories to store their artefacts.
 
+*** implementation_directory_full_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+*** include_directory_full_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+*** templates_directory_full_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
 ** entities::MetaIdentifiable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template

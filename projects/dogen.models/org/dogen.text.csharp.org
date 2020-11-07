@@ -2537,12 +2537,6 @@ An error occurred whilst formatting.
 :masd.variability.key_prefix: masd.csharp
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** aspect.requires_static_reference_equals
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "true"
-:END:
 *** helper.family
 :PROPERTIES:
 :masd.variability.binding_point: element
