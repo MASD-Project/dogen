@@ -78,6 +78,295 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Analysis of MDE papers to read                                    :story:
+
+Links:
+
+- [[https://ulir.ul.ie/bitstream/handle/10344/2126/2007_Botterweck.pdf;jsessionid=AC6FF39BA414E6065602C7851860C43D?sequence=2][Model-Driven Derivation of Product Architectures]]
+- [[https://madoc.bib.uni-mannheim.de/993/1/abwl_02_05.pdf][A Taxonomy of Metamodel Hierarchies]]
+
+*** Analysis on org-mode outstanding work                             :story:
+
+Notes:
+
+- map dogen types to a org-mode tag. The tags must replace =::= with
+  an underscore, e.g. =masd_enumeration= for
+  =masd::enumeration=. Mapping is done by detecting stereotype in the
+  stereotype list and removing it from there. Non-tagged headlines
+  default to documentation (see below).
+- any non-tagged section will be treated as documentation. On
+  generation it will be suitably converted into the language's format
+  for documentation (e.g. doxygen, C# docs etc). We need meta-model
+  elements for these such as "section", etc. Annoyingly, this also
+  means converting expressions such as =some text=. This will be
+  trickier.
+- in an ideal world we would also have entities such as paragraphs and
+  the like, to ensure we can reformat the text as required. For
+  example, the 80 column limitation we have in the input may not be
+  suitable for the end format (this is the case with markdown).
+- we are using qualified names, e.g. =entities::attribute=. These need
+  to be removed. We need to move the graphing logic into =codec=. See
+  story for this.
+- All models should have a unique ID for each element. The ID should
+  be based on GUIDs where possible, though there are some difficulties
+  for cases like Dia. We could create a "fixed" function that
+  generates GUIDs from dia IDs. For example:
+
+: <dia:childnode parent="O64"/>
+
+  We could take the id =O64= and normalise it to say 4 digits: =6400=
+  (noticed we removed the =O= as its not valid in hex); and then use a
+  well-defined GUID prefix:
+
+: 3dddc237-3771-45be-82c9-937c5cef
+
+  Then we can append the normalised Dia ID to the prefix. This would
+  ensure we always generate the same GUIDs on conversion from Dia. If
+  the GUIds change within Dia, then they will also change in the
+  conversion. This ID is then used as the codec ID. Note that its the
+  responsibility of the decoder to assign "child node IDs". For JSON
+  this must already be populated. For Dia its the =childnode=
+  field. For org-mode, we need to infer it from the structure of the
+  file. In org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+- qualified names are computed as a transform via the graph in codec
+  model.
+
+Links:
+
+- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
+
+*** Rename =org_mode= model                                           :story:
+
+Seems like a better name is needed for this model. Perhaps =orgmode=?
+Or just =org=? Just don't like =org_mode=.
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort
+last?). We should try to generate the code in the "natural order" and
+see if the code compiles with latest boost.
+
+*** Create a de-normalised representation of archetype properties     :story:
+
+At present we have a two-step process: we first read the global
+configuration for a model, create the corresponding properties
+(e.g. backend, facet, archetype properties) and then we post-process
+these to create the =denormalised_archetype_properties=. However, we
+never really need to think about the individual properties because
+they are always used in the context of an artefact, which means we
+care about the de-normalised archetype properties only. Therefore we
+should:
+
+- have a =archetype_properties= that is composed of all other
+  properties;
+- change the =meta_model_properties_transform= to create internal
+  indices of properties as a first step for the final property
+  generation but do not expose these containers.
+
+Notes:
+
+- we can't remove the top-level containers just yet because they are
+  used within the formatables namespace. However, these appear to be
+  legacy use cases, so we should be able to do so when we get rid of
+  this namespace.
+
+*** Validate no two artefacts have the same ID                        :story:
+
+At present it is possible to generate two artefacts with the same path
+(which is the physical ID) and then have them overwrite each
+other. This causes diffs that are very difficult to get to the bottom
+of. It would be better to fail with a validation that detects
+duplicates.
+
+*** Fix name of configuration tracing file                            :story:
+
+This name looks incorrect:
+
+: 00000-configuration--initial_input.json
+
+*** Model functionality provided by assistant in the logical model    :story:
+
+We need to look at all the methods in assistant and see if we can
+replace them by data which is processed in transforms.
+
+*** Move default constructor work from resolver                       :story:
+
+At present we are populating the default constructor for the bundle in
+the resolver:
+
+#+begin_src c++
+void resolver::resolve_feature_template_bundles(const indices& idx,
+    entities::model& m) {
+    for (auto& pair : m.variability_elements().feature_template_bundles()) {
+        auto& fb(*pair.second);
+        for (auto& ft : fb.feature_templates()) {
+            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+            if (ft.parsed_type().is_current_simple_type())
+                fb.requires_manual_default_constructor(true);
+        }
+    }
+}
+#+end_src
+
+This is very confusing because one would assume the resolver just
+resolves. We need to move this logic to =technical_space_properties=.
+
+*** Create a technical space specific property for default functions  :story:
+
+In assistant we have:
+
+#+begin_src c++
+bool assistant::supports_defaulted_functions() const {
+    return !is_cpp_standard_98();
+}
+
+bool assistant::supports_move_operator() const {
+    return !is_cpp_standard_98();
+}
+#+end_src
+
+This should really be in =technical_space_properties=. Check to see if
+we missed any.
+
+*** Default constructor incorrectly generated in C++ 98               :story:
+
+We have this logic in =technical_space_properties_transform=:
+
+#+begin_src c++
+    /*
+     * In C++ 98 we must always create a default constructor because
+     * we cannot make use of the defaulted functions.
+     */
+    if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
+        dest_tsp.requires_manual_default_constructor(true);
+#+end_src
+
+This is actually incorrect: we can use default constructors in C++ 98,
+as long as there are no other constructors. The problem is we are
+relying on the default constructor in test data generator so if we fix
+this with an =&&= instead of an =||= we break that code. We need to
+figure out what the correct implement is.
+
+*** Detect absence of configuration in bundles                        :story:
+
+It would be nice if when we call =make_static_configuration= it would
+populate some flag stating whether none of the config was
+populated. The specific use case is that we may want to detect absence
+of all elements and do something in that case (for example, missing
+streaming properties).
+
+*** Refactor streaming properties processing                          :story:
+
+At present we copied across the logic from =text.cpp= where the
+streaming properties are stored as a class and the final processing
+happens in assistant. However, when we get rid of helpers, we could do
+all the processing in the streaming processing transform and store it
+in attributes.
+
+*** Add method to check if string is valid enum                       :story:
+
+We have a method to convert a string to an enum, but sometimes we just
+want to know if its valid without converting. We should have a method
+that just returns true or false, or throws, if the string is not a
+valid enum.
+
+*** Split =utility= into multiple models                              :story:
+
+What we have in the =utility= library at present is in fact a
+combination of different things:
+
+- log could be an extension to boost log, so part of =boost= PDM.
+- testing could be an extension of =Boost.Test= so part of =boost=
+  PDM.
+- =filesystem= also belongs to boost.
+- =formatters= are helpers in the LPS model.
+- =hash= is an extension of either boost or std models.
+- ...
+
+We need to finish the analysis on this and make sure we have the right
+model and PDMs to house these types.
+
+*** Add full and relative path processing to PM                       :story:
+
+We need to be able to generate full paths in the PM. This will require
+access to the file extensions. For this we will need new decoration
+elements. This must be done as part of the logical model to physical
+model conversion. While we're at it, we should also generate the
+relative paths. Once we have relative paths we should compute the
+header guards from them. These could be generalised to "unique
+identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we
+  cannot locate the extensions. Also we did not create all of the
+  required archetype kinds in the text models. The populating should
+  be done via profiles.
+- we must first figure out the number of enabled backends. The
+  meta-model properties will always contain all backends, but not all
+  of them are enabled.
+- we need to populate the part directories. For this we need to know
+  what parts are available for each backend (PMM), and then ensure the
+  part properties have been created. We also need a directory for the
+  part in variability. It is not clear we have support for this in the
+  template instantiation domains - we probably only have backend,
+  facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space
+  and its instances in the file-system.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We
+may need to treat certain labels more specially than others - its not
+clear. We need a container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*** Create a factory transform for parts and archetype kinds          :story:
+
+- integrate their generation into PMM chains.
+
+Notes:
+
+- it does not make a lot of sense to have an archetype kind
+  transform. That is, as with TSs, archetype kinds only provide
+  attributes (e.g. data) about physical space, but they won't be
+  expressed as actual physical elements. Parts however are connected
+  to the transforms; they will in the future be used as part of the
+  transform chain.
+- do we instantiate template domains over parts? We need to do so in
+  order to support directory overrides. The problem is that in order
+  for the part to become part of the topology of physical space, we
+  now need to make sure we can still convert archetypes into facets. A
+  lot of the code is going to break once we add path.
+
+*** Rename =name= to =codec= name                                     :story:
+
+- add codec ID to name.
+
+Notes:
+
+- variability is also using the name class.
+
 *** Allow arbitrary physical containment                              :story:
 
 We need to allow archetypes to be contained by any physical element,
@@ -299,36 +588,6 @@ physical model.
 :                     //         aptr->name().id().value()));
 :                     continue;
 :                 }
-
-*** Implement backend and facet transform                             :story:
-
-The backend transform should:
-
-- return the ID of the backend;
-- use the facet and archetype transforms to process all elements.
-
-Check backlog for a story on this.
-
-*** Deprecate managed directories                                     :story:
-
-There should only be one "managed directory" at the input stage, which
-is the component directory (for component models). If parts have
-relative directories off of the component directory then we should add
-to the list of managed directories inside the PM pipeline.
-
-*** Add technical spaces to PM and LM                                 :story:
-
-Technical spaces and their associated versions should be declared by
-the text models and should be part of the PM. The TS should be
-declared on the "global" text model so that backends can reuse them
-(e.g. we can declare XML with associated extensions and then use it
-where required).
-
-Notes:
-
-- TS should also have a physical name. However, they are not
-  associated with a backend. Actually they don't need a physical name
-  but they need some kind of identification.
 
 *** Improve support for references                                    :story:
 
@@ -771,6 +1030,171 @@ Merged stories:
 
 We probably already have a story for this, check backlog.
 
+*Generating a meta-model for dogen*
+
+We are making use of coding meta-types a fair bit in dogen:
+
+- we have meta-names, which we use for things such as indexing,
+  formatter discovery etc.
+- we need to know which types are generatable.
+- we are associating meta-types with technical spaces (intrinsic).
+
+It would be nice if somehow we were able to generate some basic
+reflection code that enabled us to ask for a meta-model's element
+meta-class. For example, given an element, we should be able to do:
+
+: element.meta_class().intrinsic_technical_space()
+
+The =meta_class()= method should be static and code-generated by
+dogen. This still requires a lot of thinking though. Look for
+reflection stories in backlog.
+
+We could also have a way to access a collection of all
+meta-types. This would be useful in order to generate a list of all
+the valid stereotypes which as model elements. However, for this there
+is some mapping required as we want
+=masd::coding::meta_model::enumeration= to map to =masd::enumeration=.
+
+Actually the right approach for this is to annotate all elements in
+coding as "meta-elements". They would then have all of these
+properties as features (stereotypes, etc). The code generator would
+then generate static methods for each class with this information. We
+could then return a =meta_class= from these classes, populated with
+relevant data.
+
+For this to work we need to define a =meta_class= meta-element, which
+has properties such as:
+
+- stereotype
+- the comments become the documentation of the stereotype
+- is generatable
+
+Dogen then generates the appropriate code for these types, as required
+by Dogen (pun intended).
+
+Interestingly, we have been binding formatters against model elements
+via the meta-name, but perhaps what we are really looking for is the
+stereotype instead. The meta-name is more or less meaningless but the
+stereotype is used by the UML profile. Of course we can't just call it
+"stereotype because that could mean anything, but it is in effect some
+kind of meta-type. The formatter binds against this, as does the UML
+modeling element; the meta-name and the assets class is simply an
+implementation detail.
+
+Merged stories:
+
+*Meta-element configuration*
+
+It is becoming obvious that there is a need to explicitly model
+meta-elements. A good example are the wale templates for handcrafted
+types. Say we want to associate a wale template with =entry_point=. We
+need one for C# and one for C++. We have the following alternatives:
+
+- the user needs to manually supply these as meta-data parameters
+  every time it creates an entry point.
+- next level is to have profiles: we could define a profile with these
+  parameters and the user is responsible for applying it to entry
+  points as required. This is flexible because users could choose
+  different wale templates. However, its painful that there isn't a
+  default wale template.
+- we could hard-code the default wale template into the field's value,
+  so that you'd get that value if you don't supply any. At least now
+  there is a default, but its hard-coded.
+- finally, if we could create a =<<metaclass= in a diagram, we could
+  then add the default values there _as data_.
+
+A related point is to do with cases where the meta-element requires
+specific configuration:
+
+- entry point, interface: should be types only.
+
+For these cases, it would be nice if we could associate a stereotype
+with the metaclass and then all instances would inherit these.
+
+This is actually simpler to implement than it may appear. We just need
+to have a meta-element of type =metaclass=, with an annotation and a
+name. The name of the metaclass is the element it is configuring
+(e.g. =entry_point=). We could have a transform that sets the static
+stereotype of the element based on the name for good measure. Then,
+during the profile merging, we could simply merge first its annotation
+into all elements of this type. Then we would continue with the
+profile merging. We could also do a hack and have a =root_module=
+=metaclass= which could be used for defaults. However, it is not clear
+when we should use this as opposed to plain stereotypes. The good
+thing about stereotypes is that we make the relationships explicit,
+whereas with =metaclass= we are making them slightly less transparent.
+
+If dogen had a way to set static properties, we could have a transform
+that updated all elements with their metaclass, so that you could
+simply do:
+
+: element.metaclass().name();
+: element.metaclass().annotation();
+
+This should be very simple to do, we just need a way to know if an
+attribute is static or not.
+
+*Consider creating a meta-element for logical elements*
+
+We probably either have a story for this or these ideas are scattered
+over a few stories. At present we have a number of properties
+associated with assets (i.e. logical) model elements which we set
+manually (each of these probably has a separate story):
+
+- meta-name
+- stereotype
+- whether a type is intrinsically generatable or not
+- RGB colour
+- whether the element supports dynamic stereotypes or not.
+
+There are probably more. These are all functions of the meta-type we
+are modeling. Just like we need "formatters" as a meta-type, we also
+need a way to express these within the model itself. The ideal
+solution would be to have a meta-type for these elements such that
+when we code-generate, we can add the additional elements that are
+specific to the logical model meta-types. However, the snag with that
+approach is that these elements have all attributes of an =object=
+plus these additional fields. We would have to create templates that
+intersperse object functionality with this meta-data, resulting on a
+lot of code duplication.
+
+A better approach is to copy what we did for ORM. We can have
+additional stereotypes associated with a meta-type, and those would
+result in the population of meta-data information. If those are
+present then we emit code for it (seems a bit much to create a facet
+for it as we did with ORM).
+
+Notes:
+
+- we probably don't need the meta-name. We just use it to bind
+  formatters to meta-types. We can use the "intrinsic stereotype" for
+  this.
+- we could use the same ORM-like approach for formatters and just
+  extend object.
+- we probably need a namespace for masd types. At present we have
+  =templating= but these are actually masd/dogen specific templates,
+  so they should also be in the same namespace.
+
+Merged stories:
+
+*Investigate use of =is_element_type= in stereotypes*
+
+We seem to only be considering a subset of the elements when doing the
+stereotype transform, yet its all working. Need to figure out why, and
+if this is no longer required, remove this method.
+
+*Add logical entity for meta-model elements*
+
+We now have a clear pattern for all logical model elements: they need
+a stereotype and an associated description, which must be registered
+somewhere (to avoid duplication and for documentation purposes). This
+is known at compile time - i.e. static.
+
+We could easily create a logical model representation of these
+elements and then allow users to annotate types with it. However, they
+must still remain =objects= because we still need to be able to model
+regular OO relationships.
+
 *** Add file extensions to decoration                                 :story:
 
 Create something really simple:
@@ -939,11 +1363,6 @@ We could simply do:
 
 This would also mean that you couldn't use a string by mistake.
 
-*** Prune non-generatable types from logical model                    :story:
-
-Add a pruning transform that filters out all non-generatable types
-from logical model.
-
 *** Add the notion of a major and a minor technical space             :story:
 
 When we move visual studio and other elements out of the current
@@ -953,24 +1372,6 @@ technical space (e.g. visual studio, etc). We could use emacs'
 convention and call these major and minor technical spaces.
 
 This should be a property of the backend.
-
-*** Create a common formatter interface                               :story:
-
-Once all language specific properties have been moved into their
-rightful places, we should be able to define a formatter interface
-that is suitable for both c++ and c# in generation. We should then
-also be able to move all of the registration code into generation. We
-then need to look at all containers of formatters etc to see what
-should be done at generation level.
-
-Once we have a common formatter interface, we can add the formatters
-themselves to the =element_artefacts= tuple. Then we can just iterate
-through the tuples and call the formatter instead having to do
-look-ups.
-
-Also, at this point we can then update the physical elements generated
-code to generate the transform code for backend and facet
-(e.g. delegation and aggregation of the result).
 
 *** Add documentation to archetypes headers                           :story:
 
@@ -1096,7 +1497,13 @@ model. However, there are a number of things that need looking at:
   =cpp=, =CMakeLists= etc. Perhaps we could make this a property of
   the kind as well.
 
-*** Consider renaming =wale= to =tangle=                              :story:
+*** Consider renaming =wale= to =mustache=                            :story:
+
+We need to rename all of the wale templates to mustache.
+
+Merged stories:
+
+*Consider renaming =wale= to =tangle=*
 
 Wale and stitch are remnant from the sewing days. Whilst stitch is
 still vaguely appropriate, we can't even remember what wale stands
@@ -1112,7 +1519,7 @@ will be replaced by a proper implementation of mustache as soon as we
 can. We should instead start calling it mustache and explain this is
 just a temporary fix.
 
-*** Consider renaming logic-less templates                            :story:
+*Consider renaming logic-less templates*
 
 Originally we though this was a good name because it was used by some
 domain experts, but it seems it generates more confusion than
@@ -1179,19 +1586,6 @@ At present when you add regexes for tracing filtering, we create a lot
 of empty directories. It doesn't seem easy to stop the directory
 generation but perhaps we could add the tracing directory to the file
 transforms and run the "remove empty directories" transform over it.
-
-*** Replace =formatting_error= with =transformation_error=            :story:
-
-Now that we moved from formatters to M2T transforms, we should stop
-throwing =formatting_error= and start throwing
-=transformation_error=. This needs to be done for both C# and C++ text
-models.
-
-*** Remove wale instantiation from stitch                             :story:
-
-Though we've split wale out of stitch in the logical model, its still
-possible to instantiate a wale template within stitch. We should
-remove this as well.
 
 *** Orchestration should have an initialiser                          :story:
 
@@ -1642,14 +2036,6 @@ Notes:
   another is related to allowing users to flatten facet
   directories. They have some connection, but its not obvious how much
   they overlap.
-*** Merge C++ and C# model into =m2t=                                 :story:
-
-Once we remove all of formatables and helpers from each technical
-space and once we remove all of the transforms in =m2t= that don't
-really belong there, we can probably merge all of these models into
-one. We would then have a =transforms= namespace, with sub-namespaces
-per language. Each of the namespaces is declared as a backend.
-
 *** Handling of model name is incorrect                               :story:
 
 At present we are handling all containers in one way, and model names
@@ -1772,6 +2158,23 @@ of shared model. At present, the only model which does this is
 =variability= but it does not make a lot of sense to put TS'
 there. Perhaps we should wait until we have enough entities to see
 what the name of this "core" model should be.
+
+Merged stories:
+
+*Add technical spaces to PM and LM*
+
+Technical spaces and their associated versions should be declared by
+the text models and should be part of the PM. The TS should be
+declared on the "global" text model so that backends can reuse them
+(e.g. we can declare XML with associated extensions and then use it
+where required).
+
+Notes:
+
+- TS should also have a physical name. However, they are not
+  associated with a backend. Actually they don't need a physical name
+  but they need some kind of identification.
+
 *** Add enablement test in C#                                         :story:
 
 At present we have probably broken enablement in C# due to the hackery
@@ -1849,7 +2252,7 @@ bindings.
 Once we have stereotypes in the =ident= model we can then bind to
 them.
 
-*** Consider adding cartridge formatters                              :story:
+*** Consider adding cartridge M2T transforms                          :story:
 
 At present we are creating CMake scripts to call ODB. This kind of
 makes sense because we see ODB as an external code generator. However,
@@ -2225,67 +2628,6 @@ to decomission a lot of code:
 1. =meta_naming_transform=, =meta_name_factory=.
 2. =stereotypes_helper=
 3. =static_stereotypes= enumeration
-
-*** Consider creating a meta-element for logical elements             :story:
-
-We probably either have a story for this or these ideas are scattered
-over a few stories. At present we have a number of properties
-associated with assets (i.e. logical) model elements which we set
-manually (each of these probably has a separate story):
-
-- meta-name
-- stereotype
-- whether a type is intrinsically generatable or not
-- RGB colour
-- whether the element supports dynamic stereotypes or not.
-
-There are probably more. These are all functions of the meta-type we
-are modeling. Just like we need "formatters" as a meta-type, we also
-need a way to express these within the model itself. The ideal
-solution would be to have a meta-type for these elements such that
-when we code-generate, we can add the additional elements that are
-specific to the logical model meta-types. However, the snag with that
-approach is that these elements have all attributes of an =object=
-plus these additional fields. We would have to create templates that
-intersperse object functionality with this meta-data, resulting on a
-lot of code duplication.
-
-A better approach is to copy what we did for ORM. We can have
-additional stereotypes associated with a meta-type, and those would
-result in the population of meta-data information. If those are
-present then we emit code for it (seems a bit much to create a facet
-for it as we did with ORM).
-
-Notes:
-
-- we probably don't need the meta-name. We just use it to bind
-  formatters to meta-types. We can use the "intrinsic stereotype" for
-  this.
-- we could use the same ORM-like approach for formatters and just
-  extend object.
-- we probably need a namespace for masd types. At present we have
-  =templating= but these are actually masd/dogen specific templates,
-  so they should also be in the same namespace.
-
-Merged stories:
-
-*Investigate use of =is_element_type= in stereotypes*
-
-We seem to only be considering a subset of the elements when doing the
-stereotype transform, yet its all working. Need to figure out why, and
-if this is no longer required, remove this method.
-
-*Add logical entity for meta-model elements*
-
-We now have a clear pattern for all logical model elements: they need
-a stereotype and an associated description, which must be registered
-somewhere (to avoid duplication and for documentation purposes). This
-is known at compile time - i.e. static.
-
-We could easily create a logical model representation of these
-elements and then allow users to annotate types with it. However, they
-must still remain =objects= because we still need to be able to model
-regular OO relationships.
 
 *** Consider renaming profiles                                        :story:
 
@@ -3537,6 +3879,9 @@ then declares which version it is using in the model. If the user
 attempts to use types that are not available for that version we
 should throw.
 
+We have now added a "temporary" =technical_space_version= that could
+be used for this (in =identification=).
+
 *** Add facet validation against language standard                    :story:
 
 With the move of enablement to yarn, we can no longer validate facets
@@ -3604,6 +3949,10 @@ not be available on a version.
 
 This should be done when we add technical spaces to the meta-model.
 
+We have now added a "temporary" =technical_space_version= that could
+be used for this (in =identification=). However, this needs to be done
+as data.
+
 Merged stories:
 
 *Drop the "c++-" prefix in meta-data for standard*
@@ -3629,6 +3978,8 @@ triggered by the presence of meta-elements. Or perhaps we can just say
 that we iterate through all "non-dominant" technical spaces ("main"
 and "secondary"?  "subsidiary"?) and generate anything for which there
 is an enabled and matching meta-element.
+
+- emacs terms: major and minor technical spaces.
 
 *** Setting include and source directory to empty                     :story:
 
@@ -3734,110 +4085,6 @@ this is simply hard-coded, but for key value pairs and for containers
 we need to take the appropriate action. Perhaps we could resolve this
 by using SFINAE? Basically provide implementations for each of the
 valid values.
-
-*** Generating a meta-model for dogen                                 :story:
-
-We are making use of coding meta-types a fair bit in dogen:
-
-- we have meta-names, which we use for things such as indexing,
-  formatter discovery etc.
-- we need to know which types are generatable.
-- we are associating meta-types with technical spaces (intrinsic).
-
-It would be nice if somehow we were able to generate some basic
-reflection code that enabled us to ask for a meta-model's element
-meta-class. For example, given an element, we should be able to do:
-
-: element.meta_class().intrinsic_technical_space()
-
-The =meta_class()= method should be static and code-generated by
-dogen. This still requires a lot of thinking though. Look for
-reflection stories in backlog.
-
-We could also have a way to access a collection of all
-meta-types. This would be useful in order to generate a list of all
-the valid stereotypes which as model elements. However, for this there
-is some mapping required as we want
-=masd::coding::meta_model::enumeration= to map to =masd::enumeration=.
-
-Actually the right approach for this is to annotate all elements in
-coding as "meta-elements". They would then have all of these
-properties as features (stereotypes, etc). The code generator would
-then generate static methods for each class with this information. We
-could then return a =meta_class= from these classes, populated with
-relevant data.
-
-For this to work we need to define a =meta_class= meta-element, which
-has properties such as:
-
-- stereotype
-- the comments become the documentation of the stereotype
-- is generatable
-
-Dogen then generates the appropriate code for these types, as required
-by Dogen (pun intended).
-
-Interestingly, we have been binding formatters against model elements
-via the meta-name, but perhaps what we are really looking for is the
-stereotype instead. The meta-name is more or less meaningless but the
-stereotype is used by the UML profile. Of course we can't just call it
-"stereotype because that could mean anything, but it is in effect some
-kind of meta-type. The formatter binds against this, as does the UML
-modeling element; the meta-name and the assets class is simply an
-implementation detail.
-
-Merged stories:
-
-*Meta-element configuration*
-
-It is becoming obvious that there is a need to explicitly model
-meta-elements. A good example are the wale templates for handcrafted
-types. Say we want to associate a wale template with =entry_point=. We
-need one for C# and one for C++. We have the following alternatives:
-
-- the user needs to manually supply these as meta-data parameters
-  every time it creates an entry point.
-- next level is to have profiles: we could define a profile with these
-  parameters and the user is responsible for applying it to entry
-  points as required. This is flexible because users could choose
-  different wale templates. However, its painful that there isn't a
-  default wale template.
-- we could hard-code the default wale template into the field's value,
-  so that you'd get that value if you don't supply any. At least now
-  there is a default, but its hard-coded.
-- finally, if we could create a =<<metaclass= in a diagram, we could
-  then add the default values there _as data_.
-
-A related point is to do with cases where the meta-element requires
-specific configuration:
-
-- entry point, interface: should be types only.
-
-For these cases, it would be nice if we could associate a stereotype
-with the metaclass and then all instances would inherit these.
-
-This is actually simpler to implement than it may appear. We just need
-to have a meta-element of type =metaclass=, with an annotation and a
-name. The name of the metaclass is the element it is configuring
-(e.g. =entry_point=). We could have a transform that sets the static
-stereotype of the element based on the name for good measure. Then,
-during the profile merging, we could simply merge first its annotation
-into all elements of this type. Then we would continue with the
-profile merging. We could also do a hack and have a =root_module=
-=metaclass= which could be used for defaults. However, it is not clear
-when we should use this as opposed to plain stereotypes. The good
-thing about stereotypes is that we make the relationships explicit,
-whereas with =metaclass= we are making them slightly less transparent.
-
-If dogen had a way to set static properties, we could have a transform
-that updated all elements with their metaclass, so that you could
-simply do:
-
-: element.metaclass().name();
-: element.metaclass().annotation();
-
-This should be very simple to do, we just need a way to know if an
-attribute is static or not.
 
 *** Come up with a name for models that contain "meta-elements"       :story:
 
@@ -4737,11 +4984,6 @@ In some cases we may require additional include directories to be
 added to a project. It should be possible to add these to a product or
 component. We need to find a specific use case for this though.
 
-*** Colouring script should be included as part of package            :story:
-
-Users should be able to make use of script as well. We need a tools
-folder in share.
-
 *** Create a "manual tests" stereotype with profiles                  :story:
 
 At present we have a =tests= facet that contains only the generated
@@ -4822,39 +5064,6 @@ licences. For example we could say that a model M with a proprietary
 licence including a PDM P with GPL licence is an error. This could
 come up as any other error would. We could have a "compatible with"
 field in licences for this.
-
-*** Consider generating the colour script                             :story:
-
-At present we have to manually update the colour script every time we
-add a new modeling element. In an ideal world, we should associate the
-colour with the modeling element and/or profile as part of the model
-itself. Dogen could then generate the script. Even more ideal would be
-if the script could include the "package" version of the script -
-e.g. run the MASD script first then run the local one. This requires a
-little bit of thinking because the script would be generated from the
-profiles and the profiles model is not expressed as code.
-
-A simpler version of this is to just go through the dia palette models
-and associate stereotypes with colours. Then use it to build the
-script. The user supplies one or more models as input. It would be a
-new "command" in dogen.
-
-Actually we should just create a meta-element for the colouring
-script. It is populated by looking at the static properties of each
-meta-element (once they are modeled correctly). If [[*Add support for "colour themes" to dogen][there are themes]],
-we should make it a function that takes in an argument with the theme
-name. Note also that we should take into account user-defined
-colouring schemes. This is mainly associated with profiles. For this
-we just need to have a colour property in the profile and use it in
-exactly the same fashion as we do for meta-elements. For good measure,
-once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
-simply call the main script from the user script.
-
-Links:
-
-- [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn: Choosing color palettes]]
-- [[https://seaborn.pydata.org/installing.html][seaborn: Installing and getting started]]
-- [[https://stackoverflow.com/questions/38249454/extract-rgb-or-6-digit-code-from-seaborn-palette][SO: Extract RGB or 6 digit code from Seaborn palette]]
 
 *** Add support for operations                                        :story:
 
@@ -5079,7 +5288,7 @@ association. However, we should still allow supplying this
 meta-parameter as meta-data because it may not be practical to have
 the association. And we need a way to express this in JSON as well.
 
-*** Consider allowing uml inheritance of object templates             :story:
+*** Consider allowing UML inheritance of object templates             :story:
 
 It would be nice if we could infer that an object inherits an
 interface from an object template via the "implements" generalisation,
@@ -8539,7 +8748,7 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
-*** Test cases show up as zero in report.ci                       :story:
+*** Test cases show up as zero in report.ci                           :story:
 
 The [[https://report.ci/reports/gh/MASD-Project/dogen][report.ci]] tool written by Klemens Morgenstern is now showing zero
 test cases. According to Klemens:
