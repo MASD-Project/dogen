@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Remove all elements which are not required for code
+ * generation.
+ */
 class elements_removal_transform final {
 public:
-    elements_removal_transform() = default;
-    elements_removal_transform(const elements_removal_transform&) = default;
-    elements_removal_transform(elements_removal_transform&&) = default;
-    ~elements_removal_transform() = default;
-    elements_removal_transform& operator=(const elements_removal_transform&) = default;
-
-public:
-    bool operator==(const elements_removal_transform& rhs) const;
-    bool operator!=(const elements_removal_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const text::transforms::context& ctx,
+        text::entities::model& m);
 };
 
 }

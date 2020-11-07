@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.text/io/entities/model_io.hpp"
+#include "dogen.text/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/elements_removal_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("orchestration.transforms.elements_removal_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::orchestration::transforms {
 
-bool elements_removal_transform::operator==(const elements_removal_transform& /*rhs*/) const {
-    return true;
+void elements_removal_transform::apply(const text::transforms::context& ctx,
+    text::entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "legacy dependencies",
+        transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
+
+
+    stp.end_transform(m);
 }
 
 }

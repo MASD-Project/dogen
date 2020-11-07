@@ -43,6 +43,7 @@
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/helpers/logical_to_physical_projector.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
+#include "dogen.orchestration/types/transforms/elements_removal_transform.hpp"
 #include "dogen.orchestration/types/transforms/legacy_dependencies_transform.hpp"
 #include "dogen.orchestration/types/transforms/physical_to_logical_population_transform.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_text_model_chain.hpp"
@@ -137,6 +138,12 @@ apply(const context& ctx, const logical::entities::model& lm) {
      * population chain.
      */
     physical_to_logical_population_transform::apply(ctx.text_context(), r);
+
+    /*
+     * Finally, remove all elements that do not contribute towards
+     * code generation.
+     */
+    elements_removal_transform::apply(ctx.text_context(), r);
 
     return r;
 }
