@@ -22,21 +22,16 @@
 
 namespace dogen::text::cpp::formattables {
 
-helper_configuration::helper_configuration(
-    const std::unordered_map<dogen::identification::entities::logical_id, std::string>& helper_families,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties)
-    : helper_families_(helper_families),
-      streaming_properties_(streaming_properties) { }
+helper_configuration::helper_configuration(const std::unordered_map<dogen::identification::entities::logical_id, std::string>& helper_families)
+    : helper_families_(helper_families) { }
 
 void helper_configuration::swap(helper_configuration& other) noexcept {
     using std::swap;
     swap(helper_families_, other.helper_families_);
-    swap(streaming_properties_, other.streaming_properties_);
 }
 
 bool helper_configuration::operator==(const helper_configuration& rhs) const {
-    return helper_families_ == rhs.helper_families_ &&
-        streaming_properties_ == rhs.streaming_properties_;
+    return helper_families_ == rhs.helper_families_;
 }
 
 helper_configuration& helper_configuration::operator=(helper_configuration other) {
@@ -59,22 +54,6 @@ void helper_configuration::helper_families(const std::unordered_map<dogen::ident
 
 void helper_configuration::helper_families(const std::unordered_map<dogen::identification::entities::logical_id, std::string>&& v) {
     helper_families_ = std::move(v);
-}
-
-const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& helper_configuration::streaming_properties() const {
-    return streaming_properties_;
-}
-
-std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& helper_configuration::streaming_properties() {
-    return streaming_properties_;
-}
-
-void helper_configuration::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& v) {
-    streaming_properties_ = v;
-}
-
-void helper_configuration::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>&& v) {
-    streaming_properties_ = std::move(v);
 }
 
 }

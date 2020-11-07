@@ -47,10 +47,7 @@ private:
         const variability::entities::feature_model& fm) const;
 
     helper_configuration
-    make_configuration(const feature_group& fg,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
-        const model& fm) const;
+    make_configuration(const feature_group& fg, const model& fm) const;
 
 public:
     typedef std::unordered_map<std::string, std::unordered_set<std::string>>

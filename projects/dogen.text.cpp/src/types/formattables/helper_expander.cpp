@@ -336,13 +336,9 @@ make_feature_group(const variability::entities::feature_model& fm) const {
 }
 
 helper_configuration helper_expander::
-make_configuration(const feature_group& fg,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
-    const model& fm) const {
+make_configuration(const feature_group& fg, const model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started making the configuration.";
     helper_configuration r;
-    r.streaming_properties(streaming_properties);
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -437,7 +433,7 @@ void helper_expander::expand(
     logical::entities::streaming_properties>& streaming_properties,
     const transforms::repository& frp, model& fm) const {
     const auto fg(make_feature_group(feature_model));
-    const auto cfg(make_configuration(fg, streaming_properties, fm));
+    const auto cfg(make_configuration(fg, fm));
     populate_helper_properties(cfg, streaming_properties,
         frp, fm.formattables());
 }

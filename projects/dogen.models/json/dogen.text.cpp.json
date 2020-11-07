@@ -1386,10 +1386,6 @@
         {
           "name": "helper_families",
           "type": "std::unordered_map<identification::entities::logical_id, std::string>"
-        },
-        {
-          "name": "streaming_properties",
-          "type": "std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>"
         }
       ]
     },
