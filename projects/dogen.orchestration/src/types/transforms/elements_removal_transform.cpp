@@ -20,8 +20,12 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/context.hpp"
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 #include "dogen.orchestration/types/transforms/elements_removal_transform.hpp"
 
 namespace {
@@ -41,6 +45,37 @@ void elements_removal_transform::apply(const text::transforms::context& ctx,
     tracing::scoped_transform_tracer stp(lg, "legacy dependencies",
         transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
 
+
+    const auto& in(ctx.physical_meta_model()->indexed_names());
+    const auto& idx(in.archetype_names_by_logical_meta_name());
+    std::list<text::entities::logical_physical_region> filtered_regions;
+    for (const auto& region : m.logical_physical_regions()) {
+        /*
+         * If the element has no archetypes, there is no point in it
+         * reaching code generation.
+         */
+        const auto& e(*region.logical_element());
+        const auto& mid(e.meta_name().id());
+        const auto& id(e.name().id());
+        const auto i(idx.find(mid));
+        if (i == idx.end()) {
+            BOOST_LOG_SEV(lg, debug) << "Element has no archetypes: " << id;
+            continue;
+        }
+
+        /*
+         * If the element is not part of the target model it won't be
+         * generated so filter it out.
+         */
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target) {
+            BOOST_LOG_SEV(lg, debug) << "Element not in target model: " << id;
+            continue;
+        }
+
+        filtered_regions.push_back(region);
+    }
+    m.logical_physical_regions(filtered_regions);
 
     stp.end_transform(m);
 }
