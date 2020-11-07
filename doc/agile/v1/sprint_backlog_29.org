@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-07 Sat 15:46]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *7:27* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 7:27   |      |      | 100.0 |
-| Active                                             |        | 7:27 |      | 100.0 |
-| edit release notes for previous sprint             |        |      | 5:04 |  68.0 |
-| Create a demo and presentation for previous sprint |        |      | 0:28 |   6.3 |
-| Sprint and product backlog grooming                |        |      | 1:29 |  19.9 |
-| Add C++ helpers to the PMM                         |        |      | 0:26 |   5.8 |
+#+CAPTION: Clock summary at [2020-11-07 Sat 18:26]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *10:05* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 10:05   |       |      | 100.0 |
+| Active                                             |         | 10:05 |      | 100.0 |
+| edit release notes for previous sprint             |         |       | 5:04 |  50.2 |
+| Create a demo and presentation for previous sprint |         |       | 0:28 |   4.6 |
+| Sprint and product backlog grooming                |         |       | 1:29 |  14.7 |
+| Add C++ helpers to the PMM                         |         |       | 3:04 |  30.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -277,6 +277,7 @@ way but we should create a new story for the "new world" way.
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-07 Sat 15:47]--[2020-11-07 Sat 18:25] =>  2:38
     CLOCK: [2020-11-07 Sat 15:20]--[2020-11-07 Sat 15:46] =>  0:26
     :END:
 
@@ -291,6 +292,8 @@ Notes:
 - create a PMM type to model the properties in the helper
   interface. Create archetype for helpers; we need transform and
   factory. Add a helper family to facet mapping.
+- move reducer to the orchestration model. Do it in both LPS and
+  logical model.
 
 Merged stories:
 
@@ -305,6 +308,22 @@ Classes to move:
 - move helper properties to text model.
 - move helpers as text transforms to text model. Refactor them to use
   the new text model transform interface.
+
+*** Feature initializer with no features does not compile             :story:
+
+We removed all the features from =masd::variability::initializer= and
+the compilation failed with the following error:
+
+#+begin_quote
+[5/19] Building CXX object projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
+FAILED: projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
+/usr/bin/clang++-11  -DENABLE_CPP_REF_IMPL_TESTS -DENABLE_CSHARP_REF_IMPL_TESTS -DLZMA_API_STATIC -D_GLIBCXX_USE_CXX11_ABI=1 -Istage/include -I../../../../projects/dogen/include -I../../../../projects/dogen.identification/include -I../../../../projects/dogen.physical/include -I../../../../projects/dogen.cli/include -I../../../../projects/dogen.utility/include -I../../../../projects/dogen.variability/include -I../../../../projects/dogen.dia/include -I../../../../projects/dogen.codec/include -I../../../../projects/dogen.codec.dia/include -I../../../../projects/dogen.codec.json/include -I../../../../projects/dogen.codec.org_mode/include -I../../../../projects/dogen.tracing/include -I../../../../projects/dogen.logical/include -I../../../../projects/dogen.orchestration/include -I../../../../projects/dogen.templating/include -I../../../../projects/dogen.text/include -I../../../../projects/dogen.text.cpp/include -I../../../../projects/dogen.text.csharp/include -I../../../../projects/dogen.relational/include -isystem /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include -Wall -Wextra -Wconversion -Wno-mismatched-tags -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility-inlines-hidden -fvisibility=hidden  -O3 -DNDEBUG -fPIC   -std=gnu++17 -MD -MT projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -MF projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o.d -o projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -c ../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp
+../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp:26:52: error: unused parameter 'rg' [-Werror,-Wunused-parameter]
+register_entities(variability::helpers::registrar& rg) {
+#+end_quote
+
+We could perhaps issue a dogen warning for the absence of features but
+the code should compile.
 
 *** Add C# helpers to the PMM                                         :story:
 
