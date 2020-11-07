@@ -3546,6 +3546,10 @@
         {
           "name": "archetype_kinds",
           "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>"
+        },
+        {
+          "name": "helpers",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>"
         }
       ]
     },

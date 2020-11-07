@@ -20,6 +20,7 @@
  */
 #include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
@@ -70,6 +71,15 @@ const boost::shared_ptr<dogen::logical::entities::physical::archetype_kind>& rhs
 
 }
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::logical::entities::physical::helper>& lhs,
+const boost::shared_ptr<dogen::logical::entities::physical::helper>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
 namespace dogen::logical::entities::physical {
 
 element_repository::element_repository(
@@ -77,12 +87,14 @@ element_repository::element_repository(
     const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& facets,
     const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& archetypes,
     const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& parts,
-    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& helpers)
     : backends_(backends),
       facets_(facets),
       archetypes_(archetypes),
       parts_(parts),
-      archetype_kinds_(archetype_kinds) { }
+      archetype_kinds_(archetype_kinds),
+      helpers_(helpers) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
@@ -91,6 +103,7 @@ void element_repository::swap(element_repository& other) noexcept {
     swap(archetypes_, other.archetypes_);
     swap(parts_, other.parts_);
     swap(archetype_kinds_, other.archetype_kinds_);
+    swap(helpers_, other.helpers_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
@@ -98,7 +111,8 @@ bool element_repository::operator==(const element_repository& rhs) const {
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
         parts_ == rhs.parts_ &&
-        archetype_kinds_ == rhs.archetype_kinds_;
+        archetype_kinds_ == rhs.archetype_kinds_ &&
+        helpers_ == rhs.helpers_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -185,6 +199,22 @@ void element_repository::archetype_kinds(const std::unordered_map<dogen::identif
 
 void element_repository::archetype_kinds(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >&& v) {
     archetype_kinds_ = std::move(v);
+}
+
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& element_repository::helpers() const {
+    return helpers_;
+}
+
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& element_repository::helpers() {
+    return helpers_;
+}
+
+void element_repository::helpers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& v) {
+    helpers_ = v;
+}
+
+void element_repository::helpers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >&& v) {
+    helpers_ = std::move(v);
 }
 
 }

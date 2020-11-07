@@ -21,6 +21,7 @@
 #include <ostream>
 #include "dogen.logical/io/entities/physical/part_io.hpp"
 #include "dogen.logical/io/entities/physical/facet_io.hpp"
+#include "dogen.logical/io/entities/physical/helper_io.hpp"
 #include "dogen.logical/io/entities/physical/backend_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/physical/archetype_io.hpp"
@@ -197,6 +198,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::physical::helper>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities::physical {
 
 std::ostream& operator<<(std::ostream& s, const element_repository& v) {
@@ -206,7 +241,8 @@ std::ostream& operator<<(std::ostream& s, const element_repository& v) {
       << "\"facets\": " << v.facets() << ", "
       << "\"archetypes\": " << v.archetypes() << ", "
       << "\"parts\": " << v.parts() << ", "
-      << "\"archetype_kinds\": " << v.archetype_kinds()
+      << "\"archetype_kinds\": " << v.archetype_kinds() << ", "
+      << "\"helpers\": " << v.helpers()
       << " }";
     return(s);
 }

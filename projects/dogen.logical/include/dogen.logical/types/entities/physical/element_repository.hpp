@@ -31,6 +31,7 @@
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.logical/types/entities/physical/part_fwd.hpp"
 #include "dogen.logical/types/entities/physical/facet_fwd.hpp"
+#include "dogen.logical/types/entities/physical/helper_fwd.hpp"
 #include "dogen.logical/types/entities/physical/backend_fwd.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/physical/archetype_fwd.hpp"
@@ -51,7 +52,8 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& facets,
         const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& archetypes,
         const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& parts,
-        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds);
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& helpers);
 
 public:
     const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >& backends() const;
@@ -79,6 +81,11 @@ public:
     void archetype_kinds(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& v);
     void archetype_kinds(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >&& v);
 
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& helpers() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& helpers();
+    void helpers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >& v);
+    void helpers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> >&& v);
+
 public:
     bool operator==(const element_repository& rhs) const;
     bool operator!=(const element_repository& rhs) const {
@@ -95,6 +102,7 @@ private:
     std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> > archetypes_;
     std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> > parts_;
     std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> > archetype_kinds_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::helper> > helpers_;
 };
 
 }
