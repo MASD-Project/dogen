@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-08 Sun 13:24]
+#+CAPTION: Clock summary at [2020-11-08 Sun 17:57]
 | <75>                                                 |         |       |      |       |
 | Headline                                             | Time    |       |      |     % |
 |------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                         | *13:34* |       |      | 100.0 |
+| *Total time*                                         | *15:35* |       |      | 100.0 |
 |------------------------------------------------------+---------+-------+------+-------|
-| Stories                                              | 13:34   |       |      | 100.0 |
-| Active                                               |         | 13:34 |      | 100.0 |
-| edit release notes for previous sprint               |         |       | 5:04 |  37.3 |
-| Create a demo and presentation for previous sprint   |         |       | 0:28 |   3.4 |
-| Sprint and product backlog grooming                  |         |       | 1:29 |  10.9 |
-| Improvements to template processing in logical model |         |       | 0:26 |   3.2 |
-| Add C++ helpers to the PMM                           |         |       | 6:07 |  45.1 |
+| Stories                                              | 15:35   |       |      | 100.0 |
+| Active                                               |         | 15:35 |      | 100.0 |
+| edit release notes for previous sprint               |         |       | 5:04 |  32.5 |
+| Create a demo and presentation for previous sprint   |         |       | 0:28 |   3.0 |
+| Sprint and product backlog grooming                  |         |       | 1:29 |   9.5 |
+| Improvements to template processing in logical model |         |       | 0:26 |   2.8 |
+| Add C++ helpers to the PMM                           |         |       | 8:08 |  52.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -296,6 +296,8 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
+    CLOCK: [2020-11-08 Sun 15:55]--[2020-11-08 Sun 16:18] =>  0:23
     CLOCK: [2020-11-08 Sun 12:26]--[2020-11-08 Sun 13:24] =>  0:58
     CLOCK: [2020-11-08 Sun 11:12]--[2020-11-08 Sun 11:59] =>  0:47
     CLOCK: [2020-11-07 Sat 22:34]--[2020-11-07 Sat 22:44] =>  0:10
@@ -321,6 +323,10 @@ Notes:
 - add helpers to PMM. Need four archetypes (factory and transform,
   header and implementation). Add logical transform using PMM to
   generate helper properties. Remove helper expander.
+- once we finish integrating template, mark them as non generatable:
+
+:     // FIXME: for now we still need these as generatable.
+
 
 Merged stories:
 
@@ -335,22 +341,6 @@ Classes to move:
 - move helper properties to text model.
 - move helpers as text transforms to text model. Refactor them to use
   the new text model transform interface.
-
-*** Feature initializer with no features does not compile             :story:
-
-We removed all the features from =masd::variability::initializer= and
-the compilation failed with the following error:
-
-#+begin_quote
-[5/19] Building CXX object projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
-FAILED: projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
-/usr/bin/clang++-11  -DENABLE_CPP_REF_IMPL_TESTS -DENABLE_CSHARP_REF_IMPL_TESTS -DLZMA_API_STATIC -D_GLIBCXX_USE_CXX11_ABI=1 -Istage/include -I../../../../projects/dogen/include -I../../../../projects/dogen.identification/include -I../../../../projects/dogen.physical/include -I../../../../projects/dogen.cli/include -I../../../../projects/dogen.utility/include -I../../../../projects/dogen.variability/include -I../../../../projects/dogen.dia/include -I../../../../projects/dogen.codec/include -I../../../../projects/dogen.codec.dia/include -I../../../../projects/dogen.codec.json/include -I../../../../projects/dogen.codec.org_mode/include -I../../../../projects/dogen.tracing/include -I../../../../projects/dogen.logical/include -I../../../../projects/dogen.orchestration/include -I../../../../projects/dogen.templating/include -I../../../../projects/dogen.text/include -I../../../../projects/dogen.text.cpp/include -I../../../../projects/dogen.text.csharp/include -I../../../../projects/dogen.relational/include -isystem /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include -Wall -Wextra -Wconversion -Wno-mismatched-tags -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility-inlines-hidden -fvisibility=hidden  -O3 -DNDEBUG -fPIC   -std=gnu++17 -MD -MT projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -MF projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o.d -o projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -c ../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp
-../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp:26:52: error: unused parameter 'rg' [-Werror,-Wunused-parameter]
-register_entities(variability::helpers::registrar& rg) {
-#+end_quote
-
-We could perhaps issue a dogen warning for the absence of features but
-the code should compile.
 
 *** Add C# helpers to the PMM                                         :story:
 
@@ -463,6 +453,22 @@ Now that we moved from formatters to M2T transforms, we should stop
 throwing =formatting_error= and start throwing
 =transformation_error=. This needs to be done for both C# and C++ text
 models.
+
+*** Feature initializer with no features does not compile             :story:
+
+We removed all the features from =masd::variability::initializer= and
+the compilation failed with the following error:
+
+#+begin_quote
+[5/19] Building CXX object projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
+FAILED: projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
+/usr/bin/clang++-11  -DENABLE_CPP_REF_IMPL_TESTS -DENABLE_CSHARP_REF_IMPL_TESTS -DLZMA_API_STATIC -D_GLIBCXX_USE_CXX11_ABI=1 -Istage/include -I../../../../projects/dogen/include -I../../../../projects/dogen.identification/include -I../../../../projects/dogen.physical/include -I../../../../projects/dogen.cli/include -I../../../../projects/dogen.utility/include -I../../../../projects/dogen.variability/include -I../../../../projects/dogen.dia/include -I../../../../projects/dogen.codec/include -I../../../../projects/dogen.codec.dia/include -I../../../../projects/dogen.codec.json/include -I../../../../projects/dogen.codec.org_mode/include -I../../../../projects/dogen.tracing/include -I../../../../projects/dogen.logical/include -I../../../../projects/dogen.orchestration/include -I../../../../projects/dogen.templating/include -I../../../../projects/dogen.text/include -I../../../../projects/dogen.text.cpp/include -I../../../../projects/dogen.text.csharp/include -I../../../../projects/dogen.relational/include -isystem /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include -Wall -Wextra -Wconversion -Wno-mismatched-tags -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility-inlines-hidden -fvisibility=hidden  -O3 -DNDEBUG -fPIC   -std=gnu++17 -MD -MT projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -MF projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o.d -o projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -c ../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp
+../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp:26:52: error: unused parameter 'rg' [-Werror,-Wunused-parameter]
+register_entities(variability::helpers::registrar& rg) {
+#+end_quote
+
+We could perhaps issue a dogen warning for the absence of features but
+the code should compile.
 
 *** Move all text transforms in c++ and c# models into text model     :story:
 

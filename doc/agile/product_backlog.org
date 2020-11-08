@@ -13247,6 +13247,8 @@ dogen's benchmarks:
 - [[https://bruun.co/2012/02/07/easy-cpp-benchmarking][Easy C++ benchmarking]]
 - [[https://github.com/martinus/nanobench][nanobench GH]]: ankerl::nanobench is a platform independent
   microbenchmarking library for C++11/14/17/20.
+- [[https://github.com/p-ranav/criterion][criterion GH]]: Criterion is a micro-benchmarking library for modern
+  C++.
 
 *** Generate AssemblyInfo in C#                                       :story:
 
