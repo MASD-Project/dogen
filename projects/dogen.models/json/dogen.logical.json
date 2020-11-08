@@ -4660,6 +4660,10 @@
         {
           "name": "helper_name",
           "type": "std::string"
+        },
+        {
+          "name": "text_templating",
+          "type": "archetype_text_templating"
         }
       ]
     }

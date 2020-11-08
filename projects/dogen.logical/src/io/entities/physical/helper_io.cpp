@@ -23,6 +23,7 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/physical/helper_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
 namespace dogen::logical::entities::physical {
 
