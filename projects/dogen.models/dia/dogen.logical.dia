@@ -46334,7 +46334,7 @@ FIXME: optional for now.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_rendering_transform#</dia:string>
+        <dia:string>#template_rendering_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

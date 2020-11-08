@@ -38,7 +38,7 @@
 #include "dogen.logical/types/transforms/odb_options_transform.hpp"
 #include "dogen.logical/types/transforms/visual_studio_project_type_transform.hpp"
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
-#include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
+#include "dogen.logical/types/transforms/template_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/decoration_transform.hpp"
 #include "dogen.logical/types/transforms/generability_transform.hpp"
 #include "dogen.logical/types/transforms/technical_space_properties_transform.hpp"
@@ -175,7 +175,7 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * Render all archetype templates. Must be done after the
      * logic-less template population.
      */
-    archetype_rendering_transform::apply(ctx, m);
+    template_rendering_transform::apply(ctx, m);
 
     /*
      * The technical space properties don't have any particular

@@ -30,12 +30,12 @@
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template.hpp"
-#include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
+#include "dogen.logical/types/transforms/template_rendering_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "logical.transforms.archetype_rendering_transform");
+    "logical.transforms.template_rendering_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -56,7 +56,7 @@ const std::string missing_logic_less_template(
 
 namespace dogen::logical::transforms {
 
-void archetype_rendering_transform::
+void template_rendering_transform::
 wale_template_population(entities::model& m) {
     const auto& pe(m.physical_elements());
     auto& archs(pe.archetypes());
@@ -83,7 +83,7 @@ wale_template_population(entities::model& m) {
     }
 }
 
-std::string archetype_rendering_transform::render_wale_template(
+std::string template_rendering_transform::render_wale_template(
     const variability::entities::feature_model& fm,
     const entities::physical::archetype& arch) {
     BOOST_LOG_SEV(lg, debug) << "Rendering wale template.";
@@ -148,7 +148,7 @@ std::string archetype_rendering_transform::render_wale_template(
     return r;
 }
 
-std::string archetype_rendering_transform::render_stitch_template(
+std::string template_rendering_transform::render_stitch_template(
     const variability::entities::feature_model& fm,
     const std::string& wale_template,
     const entities::physical::archetype& arch) {
@@ -205,7 +205,7 @@ std::string archetype_rendering_transform::render_stitch_template(
     return r;
 }
 
-void archetype_rendering_transform::
+void template_rendering_transform::
 render_all_templates(const context& ctx, entities::model& m) {
     auto& archs(m.physical_elements().archetypes());
     for (auto& pair : archs) {
@@ -228,7 +228,7 @@ render_all_templates(const context& ctx, entities::model& m) {
     }
 }
 
-void archetype_rendering_transform::
+void template_rendering_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "archetype rendering",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);

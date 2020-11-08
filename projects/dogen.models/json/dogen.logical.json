@@ -3871,7 +3871,7 @@
       ]
     },
     {
-      "name": "transforms::archetype_rendering_transform",
+      "name": "transforms::template_rendering_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

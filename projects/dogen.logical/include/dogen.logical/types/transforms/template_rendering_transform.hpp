@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_TRANSFORMS_ARCHETYPE_RENDERING_TRANSFORM_HPP
-#define DOGEN_LOGICAL_TYPES_TRANSFORMS_ARCHETYPE_RENDERING_TRANSFORM_HPP
+#ifndef DOGEN_LOGICAL_TYPES_TRANSFORMS_TEMPLATE_RENDERING_TRANSFORM_HPP
+#define DOGEN_LOGICAL_TYPES_TRANSFORMS_TEMPLATE_RENDERING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@ namespace dogen::logical::transforms {
 /**
  * @brief Renders all templates in archetypes.
  */
-class archetype_rendering_transform final {
+class template_rendering_transform final {
 private:
     /**
      * @brief Copy the wale template contents to the archetypes that
