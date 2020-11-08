@@ -4666,6 +4666,42 @@
           "type": "archetype_text_templating"
         }
       ]
+    },
+    {
+      "name": "features::physical_helpers",
+      "documentation": "Features related to the helpers in physical domain.\n\n\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.physical.helpers"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "masd::variability::text"
+        },
+        {
+          "name": "owning_formatters",
+          "type": "masd::variability::text_collection"
+        },
+        {
+          "name": "owning_facets",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
     }
   ]
 }
