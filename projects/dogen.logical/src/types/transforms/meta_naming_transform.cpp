@@ -257,6 +257,7 @@ void meta_naming_transform::populate_model_meta_names(entities::model& m) {
     insert(mnf::make_physical_archetype_name());
     insert(mnf::make_physical_archetype_kind_name());
     insert(mnf::make_physical_part_name());
+    insert(mnf::make_physical_helper_name());
 }
 
 void meta_naming_transform::

@@ -218,4 +218,10 @@ logical_meta_name logical_meta_name_factory::make_physical_part_name() {
     return r;
 }
 
+logical_meta_name logical_meta_name_factory::make_physical_helper_name() {
+    static const auto r(
+        make_name("physical_helper"));
+    return r;
+}
+
 }

@@ -71,6 +71,7 @@ public:
     static entities::logical_meta_name make_physical_archetype_name();
     static entities::logical_meta_name make_physical_archetype_kind_name();
     static entities::logical_meta_name make_physical_part_name();
+    static entities::logical_meta_name make_physical_helper_name();
 };
 
 }
