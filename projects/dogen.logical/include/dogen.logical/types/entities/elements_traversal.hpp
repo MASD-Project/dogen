@@ -57,6 +57,7 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 
 namespace dogen::logical::entities {
 
@@ -160,6 +161,9 @@ inline void elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.physical_elements().parts())
         v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().helpers())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -258,6 +262,8 @@ inline void elements_traversal(const entities::model& m,
     for (const auto& pair : m.physical_elements().parts())
         v(*pair.second);
 
+    for (const auto& pair : m.physical_elements().helpers())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -354,6 +360,9 @@ inline void elements_traversal(entities::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.physical_elements().parts())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().helpers())
         v(*pair.second);
 }
 /**@}*/
@@ -458,6 +467,9 @@ inline void shared_elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.physical_elements().parts())
         v(pair.second);
+
+    for (const auto& pair : m.physical_elements().helpers())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -555,6 +567,9 @@ inline void shared_elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.physical_elements().parts())
         v(pair.second);
+
+    for (const auto& pair : m.physical_elements().helpers())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -651,6 +666,9 @@ inline void shared_elements_traversal(entities::model& m,
         v(pair.second);
 
     for (const auto& pair : m.physical_elements().parts())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().helpers())
         v(pair.second);
 }
 /**@}*/
