@@ -301,6 +301,9 @@ process_element(const helpers::codec_to_logical_projector& p,
     case ss::physical_part:
         insert(p.to_physical_part(l, scr, e), pe.parts());
         break;
+    case ss::physical_helper:
+        insert(p.to_physical_helper(l, scr, e), pe.helpers());
+        break;
 
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
