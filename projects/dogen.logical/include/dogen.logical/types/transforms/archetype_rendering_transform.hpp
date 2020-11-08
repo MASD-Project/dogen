@@ -38,6 +38,12 @@ namespace dogen::logical::transforms {
 class archetype_rendering_transform final {
 private:
     /**
+     * @brief Copy the wale template contents to the archetypes that
+     * use them.
+     */
+    static void wale_template_population(entities::model& m);
+
+    /**
      * @brief Renders the wale template if any exists.
      */
     static std::string render_wale_template(
@@ -51,6 +57,11 @@ private:
         const variability::entities::feature_model& fm,
         const std::string& wale_template,
         const entities::physical::archetype& arch);
+
+    /**
+     * @brief Renders all templates.
+     */
+    static void render_all_templates(const context& ctx, entities::model& m);
 
 public:
     /**

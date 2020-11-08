@@ -167,7 +167,7 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * also depends on the pre-assembly transform for the physical
      * elements of course.
      */
-    logic_less_templates_population_transform::apply(ctx, m);
+    // logic_less_templates_population_transform::apply(ctx, m);
 
     /*
      * Technical spaces must be updated prior to decoration.

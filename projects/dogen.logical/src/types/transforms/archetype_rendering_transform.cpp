@@ -23,11 +23,13 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.templating/types/wale/instantiator.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/features/wale.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
+#include "dogen.logical/types/entities/templating/logic_less_template.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 
 namespace {
@@ -47,10 +49,39 @@ const std::string empty_stitch_template("Stitch template has no content: ");
 const std::string empty_wale_template("Wale template has no content: ");
 const std::string duplicate_key("Duplicate wale key: ");
 const std::string missing_decoration("Missing decoration: ");
+const std::string missing_logic_less_template(
+    "Could not locate referenced logic-less template: ");
 
 }
 
 namespace dogen::logical::transforms {
+
+void archetype_rendering_transform::
+wale_template_population(entities::model& m) {
+    const auto& pe(m.physical_elements());
+    auto& archs(pe.archetypes());
+    for (auto& pair : archs) {
+        auto& arch(*pair.second);
+        auto& tt(arch.text_templating());
+        if (!tt.wale_template())
+            continue;
+
+        /*
+         * Resolve logic-less template references to its content. We
+         * expect to find the template since resolution already has
+         * taken place, but you never know.
+         */
+        const auto tid(tt.wale_template()->id());
+        const auto& llt(m.templating_elements().logic_less_templates());
+        const auto k(llt.find(tid));
+        if (k == llt.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    missing_logic_less_template + tid.value()));
+        }
+        tt.wale_template_content(k->second->content());
+    }
+}
 
 std::string archetype_rendering_transform::render_wale_template(
     const variability::entities::feature_model& fm,
@@ -175,10 +206,7 @@ std::string archetype_rendering_transform::render_stitch_template(
 }
 
 void archetype_rendering_transform::
-apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "archetype rendering",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
-
+render_all_templates(const context& ctx, entities::model& m) {
     auto& archs(m.physical_elements().archetypes());
     for (auto& pair : archs) {
         auto& arch(*pair.second);
@@ -198,6 +226,24 @@ apply(const context& ctx, entities::model& m) {
         const auto rst(render_stitch_template(fm, rwt, arch));
         arch.text_templating().rendered_stitch_template(rst);
     }
+}
+
+void archetype_rendering_transform::
+apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "archetype rendering",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    /*
+     * Start by copying across the contents of all wale templates to
+     * the elements which use them.
+     */
+    wale_template_population(m);
+
+    /*
+     * Render all templates - stitch and wale - on all elements which
+     * have them.
+     */
+    render_all_templates(ctx, m);
 
     stp.end_transform(m);
 }
