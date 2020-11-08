@@ -33,6 +33,7 @@
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
@@ -76,6 +77,8 @@ const std::string missing_logical_meta_element(
     "Meta-element name not supplied.");
 const std::string uncontained_archetype(
     "Archetype must be contained by a backend and a facet. Name: ");
+const std::string uncontained_helper(
+    "Helper must be contained by a backend and a facet. Name: ");
 const std::string uncontained_facet(
     "Facet must be contained by a backend. Name: ");
 const std::string uncontained_part(
@@ -408,8 +411,8 @@ process_archetypes(const context& ctx, entities::model& m) {
      * First, we organise the parts by their IDs.
      */
     const auto& parts(pe.parts());
-    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
-        parts_by_ids;
+    using entities::physical::part;
+    std::unordered_map<std::string, boost::shared_ptr<part>> parts_by_ids;
     for (const auto& pair : parts) {
         const auto& part(*pair.second);
         const auto id(part.id());
@@ -554,6 +557,82 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing archetype kinds.";
 }
 
+void physical_entities_transform::
+process_helpers(const context& ctx, entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
+
+    using features::physical;
+    const auto& pe(m.physical_elements());
+    const auto& fm(*ctx.feature_model());
+    const auto fg(physical::make_feature_group(fm));
+
+    auto& archs(pe.helpers());
+    for (auto& pair : archs) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+        auto& helper(*pair.second);
+
+        /*
+         * The meta-model name is hard-coded as we only support one.
+         */
+        helper.meta_model_name(meta_model_name);
+
+        /*
+         * Read all of the associated meta-data. First we get the
+         * logical model meta-element ID. It must not be empty, but
+         * otherwise we don't validate it here - this will be done
+         * later on.
+         */
+        const auto scfg(physical::make_static_configuration(fg, helper));
+        helper.part_id(scfg.part_id);
+        if (scfg.logical_meta_element_id.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_logical_meta_element));
+        }
+
+        /*
+        * Read all relations for both the archetype and its generator.
+        */
+        // helper.relations(process_relations(ctx, *helper.configuration()));
+        auto& tt(helper.text_templating());
+        tt.relations(process_relations(ctx, *tt.configuration()));
+
+        /*
+         * Read the reference to a wale template. Its existence will
+         * be validated later on during resolution. It may be empty
+         * since not all archetypes need a wale template.
+         */
+        const auto wtr(scfg.wale_template_reference);
+        if (!wtr.empty()) {
+            identification::helpers::logical_name_builder b;
+            const auto n(b.build(wtr));
+            tt.wale_template(n);
+        }
+
+        /*
+         * Archetypes can only exist in the context of a backend and a
+         * facet.
+         */
+        if (helper.backend_name().empty() || helper.facet_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_helper << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_helper + id.value()));
+        }
+        /*
+         * Generate the ID for this archetype.
+         */
+        std::ostringstream os;
+        const auto sn(helper.name().simple());
+        os << meta_model_name << separator
+           << helper.backend_name() << separator
+           << helper.facet_name() << separator << sn;
+        helper.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << helper.id();
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing helpers.";
+}
+
 entities::physical::relations
 physical_entities_transform::process_relations(const context& ctx,
     const variability::entities::configuration& cfg) {
@@ -688,6 +767,7 @@ apply(const context& ctx, entities::model& m) {
     process_parts(ctx, m);
     process_archetype_kinds(m);
     process_archetypes(ctx, m);
+    process_helpers(ctx, m);
 
     stp.end_transform(m);
 }
