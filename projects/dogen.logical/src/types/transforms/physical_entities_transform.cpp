@@ -312,25 +312,28 @@ process_facets(const context& ctx, entities::model& m) {
             const auto i(archs.find(qn));
             if (i != archs.end()) {
                 auto& arch(*i->second);
+                BOOST_LOG_SEV(lg, debug) << "Contains archetype: "
+                                         << arch.name().qualified().dot();
+
                 fct.archetypes().push_back(arch.name());
                 arch.facet_name(fct.name().simple());
                 arch.backend_name(fct.backend_name());
                 arch.major_technical_space(fct.major_technical_space());
-                BOOST_LOG_SEV(lg, debug) << "Contains archetype: "
-                                         << arch.name().qualified().dot();
                 continue;
             }
 
             const auto& helpers(pe.helpers());
             const auto j(helpers.find(qn));
+
             if (j != helpers.end()) {
-                auto& h(*i->second);
+                auto& h(*j->second);
+                BOOST_LOG_SEV(lg, debug) << "Contains helper: "
+                                         << h.name().qualified().dot();
+
                 fct.helpers().push_back(h.name());
                 h.facet_name(fct.name().simple());
                 h.backend_name(fct.backend_name());
                 h.major_technical_space(fct.major_technical_space());
-                BOOST_LOG_SEV(lg, debug) << "Contains helper: "
-                                         << h.name().qualified().dot();
                 continue;
             }
 
@@ -578,25 +581,18 @@ process_helpers(const context& ctx, entities::model& m) {
         helper.meta_model_name(meta_model_name);
 
         /*
-         * Read all of the associated meta-data. First we get the
-         * logical model meta-element ID. It must not be empty, but
-         * otherwise we don't validate it here - this will be done
-         * later on.
+         * Read all of the associated meta-data.
          */
         const auto scfg(physical::make_static_configuration(fg, helper));
         helper.part_id(scfg.part_id);
-        if (scfg.logical_meta_element_id.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(missing_logical_meta_element));
-        }
 
         /*
         * Read all relations for both the archetype and its generator.
         */
-        // helper.relations(process_relations(ctx, *helper.configuration()));
+        helper.relations(process_relations(ctx, *helper.configuration()));
         auto& tt(helper.text_templating());
-        tt.relations(process_relations(ctx, *tt.configuration()));
+        // FIXME: ensure template config is populated
+        // tt.relations(process_relations(ctx, *tt.configuration()));
 
         /*
          * Read the reference to a wale template. Its existence will

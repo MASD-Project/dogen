@@ -211,6 +211,11 @@ public:
         static const auto n(mnf::make_physical_part_name());
         v.meta_name(n);
     }
+
+    void operator()(entities::physical::helper& v) {
+        static const auto n(mnf::make_physical_helper_name());
+        v.meta_name(n);
+    }
 };
 
 void meta_naming_transform::populate_model_meta_names(entities::model& m) {

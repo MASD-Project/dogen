@@ -114,6 +114,10 @@ public:
         v.generability_status(generability_status::generation_not_expected);
     }
 
+    void operator()(physical::helper& v) {
+        v.generability_status(generability_status::generation_not_expected);
+    }
+
     // FIXME: for now we still need these as generatable.
     // void operator()(templating::logic_less_template& v) {
     //     v.generability_status(generability_status::generation_not_expected);
