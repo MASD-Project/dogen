@@ -315,6 +315,20 @@ process_facets(const context& ctx, entities::model& m) {
                 arch.major_technical_space(fct.major_technical_space());
                 BOOST_LOG_SEV(lg, debug) << "Contains archetype: "
                                          << arch.name().qualified().dot();
+                continue;
+            }
+
+            const auto& helpers(pe.helpers());
+            const auto j(helpers.find(qn));
+            if (j != helpers.end()) {
+                auto& h(*i->second);
+                fct.helpers().push_back(h.name());
+                h.facet_name(fct.name().simple());
+                h.backend_name(fct.backend_name());
+                h.major_technical_space(fct.major_technical_space());
+                BOOST_LOG_SEV(lg, debug) << "Contains helper: "
+                                         << h.name().qualified().dot();
+                continue;
             }
 
             /*
@@ -539,13 +553,6 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
     }
     BOOST_LOG_SEV(lg, debug) << "Finished processing archetype kinds.";
 }
-
-// void physical_entities_transform::
-// process_helpers(const context& ctx, entities::model& m) {
-
-
-// }
-
 
 entities::physical::relations
 physical_entities_transform::process_relations(const context& ctx,
