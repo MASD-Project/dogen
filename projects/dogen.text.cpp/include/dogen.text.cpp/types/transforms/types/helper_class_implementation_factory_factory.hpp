@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_HELPER_CLASS_IMPLEMENTATION_FACTORY_FACTORY_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_HELPER_CLASS_IMPLEMENTATION_FACTORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,12 +31,12 @@ namespace dogen::text::cpp::transforms::types {
 
 /**
  * @brief Creates a physical representation for the archetype
- * part_class_header_factory.
+ * helper_class_implementation_factory.
  *
- * Archetype documentation: Generates header files for part factories.
+ * Archetype documentation: Generates implementation files for helper factories.
 
  */
-class part_class_header_factory_factory final {
+class helper_class_implementation_factory_factory final {
 public:
     /**
      * @brief Makes the archetype.

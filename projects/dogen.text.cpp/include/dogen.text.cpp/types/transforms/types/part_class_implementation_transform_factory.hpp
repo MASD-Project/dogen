@@ -33,7 +33,7 @@ namespace dogen::text::cpp::transforms::types {
  * @brief Creates a physical representation for the archetype
  * part_class_implementation_transform.
  *
- * Archetype documentation: Generates implementation files for archetypes.
+ * Archetype documentation: Generates implementation files for parts.
 
  */
 class part_class_implementation_transform_factory final {

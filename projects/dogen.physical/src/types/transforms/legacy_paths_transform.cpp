@@ -105,6 +105,10 @@ const std::string feature_template_bundle_header_ak(
 const std::string namespace_header_ak("namespace_header");
 const std::string part_class_header_factory_ak("part_class_header_factory");
 const std::string part_class_header_transform_ak("part_class_header_transform");
+const std::string helper_class_header_factory_ak(
+    "helper_class_header_factory");
+const std::string helper_class_header_transform_ak(
+    "helper_class_header_transform");
 const std::string primitive_header_ak("primitive_header");
 const std::string type_registrar_header_ak("type_registrar_header");
 const std::string visitor_header_ak("visitor_header");
@@ -142,6 +146,10 @@ const std::string part_class_implementation_factory_ak(
     "part_class_implementation_factory");
 const std::string part_class_implementation_transform_ak(
     "part_class_implementation_transform");
+const std::string helper_class_implementation_factory_ak(
+    "helper_class_implementation_factory");
+const std::string helper_class_implementation_transform_ak(
+    "helper_class_implementation_transform");
 const std::string primitive_implementation_ak("primitive_implementation");
 const std::string type_registrar_implementation_ak(
     "type_registrar_implementation");
@@ -1224,6 +1232,8 @@ get_archetye_kind(const std::string& archetype_name, const bool is_tests) {
         archetype_name == namespace_header_ak ||
         archetype_name == part_class_header_factory_ak ||
         archetype_name == part_class_header_transform_ak ||
+        archetype_name == helper_class_header_factory_ak ||
+        archetype_name == helper_class_header_transform_ak ||
         archetype_name == primitive_header_ak ||
         archetype_name == type_registrar_header_ak ||
         archetype_name == visitor_header_ak ||
@@ -1245,6 +1255,8 @@ get_archetye_kind(const std::string& archetype_name, const bool is_tests) {
         archetype_name == feature_template_bundle_implementation_ak ||
         archetype_name == part_class_implementation_factory_ak ||
         archetype_name == part_class_implementation_transform_ak ||
+        archetype_name == helper_class_implementation_factory_ak ||
+        archetype_name == helper_class_implementation_transform_ak ||
         archetype_name == primitive_implementation_ak ||
         archetype_name == type_registrar_implementation_ak ||
         archetype_name == variability_initializer_implementation_ak)

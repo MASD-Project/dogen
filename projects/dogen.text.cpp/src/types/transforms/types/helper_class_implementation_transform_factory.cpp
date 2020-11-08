@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-/**
- * @brief Creates a physical representation for the archetype
- * part_class_header_factory.
- *
- * Archetype documentation: Generates header files for part factories.
+physical::entities::archetype helper_class_implementation_transform_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "types", "helper_class_implementation_transform"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.physical_helper"));
+    r.technical_space(identification::entities::technical_space::cpp);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
- */
-class part_class_header_factory_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
-
+    return r;
 }
 
-#endif
+}

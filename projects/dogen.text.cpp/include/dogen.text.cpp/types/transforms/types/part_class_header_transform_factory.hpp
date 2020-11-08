@@ -33,7 +33,7 @@ namespace dogen::text::cpp::transforms::types {
  * @brief Creates a physical representation for the archetype
  * part_class_header_transform.
  *
- * Archetype documentation: Generates header files for archetypes.
+ * Archetype documentation: Generates header files for parts.
 
  */
 class part_class_header_transform_factory final {

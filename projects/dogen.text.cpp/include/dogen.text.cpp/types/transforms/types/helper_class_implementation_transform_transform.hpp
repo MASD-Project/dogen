@@ -18,30 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_PART_CLASS_HEADER_FACTORY_FACTORY_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_HELPER_CLASS_IMPLEMENTATION_TRANSFORM_TRANSFORM_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_HELPER_CLASS_IMPLEMENTATION_TRANSFORM_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-/**
- * @brief Creates a physical representation for the archetype
- * part_class_header_factory.
- *
- * Archetype documentation: Generates header files for part factories.
-
- */
-class part_class_header_factory_factory final {
+class helper_class_implementation_transform_transform final : public model_to_text_transform {
 public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+    void apply(const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const override;
 };
 
 }
