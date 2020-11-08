@@ -69,8 +69,9 @@ helper::helper(
     const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
-    const std::string& part_id,
+    const std::string& meta_model_name,
     const std::string& backend_name,
+    const std::string& part_id,
     const std::string& facet_name,
     const std::string& family,
     const std::list<std::string>& owning_formatters,
@@ -93,8 +94,9 @@ helper::helper(
       helper_properties),
       id_(id),
       major_technical_space_(major_technical_space),
-      part_id_(part_id),
+      meta_model_name_(meta_model_name),
       backend_name_(backend_name),
+      part_id_(part_id),
       facet_name_(facet_name),
       family_(family),
       owning_formatters_(owning_formatters),
@@ -126,8 +128,9 @@ void helper::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
-      << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
+      << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
+      << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
       << "\"family\": " << "\"" << tidy_up_string(family_) << "\"" << ", "
       << "\"owning_formatters\": " << owning_formatters_ << ", "
@@ -143,8 +146,9 @@ void helper::swap(helper& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
-    swap(part_id_, other.part_id_);
+    swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
+    swap(part_id_, other.part_id_);
     swap(facet_name_, other.facet_name_);
     swap(family_, other.family_);
     swap(owning_formatters_, other.owning_formatters_);
@@ -163,8 +167,9 @@ bool helper::operator==(const helper& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
-        part_id_ == rhs.part_id_ &&
+        meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
+        part_id_ == rhs.part_id_ &&
         facet_name_ == rhs.facet_name_ &&
         family_ == rhs.family_ &&
         owning_formatters_ == rhs.owning_formatters_ &&
@@ -203,20 +208,20 @@ void helper::major_technical_space(const dogen::identification::entities::techni
     major_technical_space_ = v;
 }
 
-const std::string& helper::part_id() const {
-    return part_id_;
+const std::string& helper::meta_model_name() const {
+    return meta_model_name_;
 }
 
-std::string& helper::part_id() {
-    return part_id_;
+std::string& helper::meta_model_name() {
+    return meta_model_name_;
 }
 
-void helper::part_id(const std::string& v) {
-    part_id_ = v;
+void helper::meta_model_name(const std::string& v) {
+    meta_model_name_ = v;
 }
 
-void helper::part_id(const std::string&& v) {
-    part_id_ = std::move(v);
+void helper::meta_model_name(const std::string&& v) {
+    meta_model_name_ = std::move(v);
 }
 
 const std::string& helper::backend_name() const {
@@ -233,6 +238,22 @@ void helper::backend_name(const std::string& v) {
 
 void helper::backend_name(const std::string&& v) {
     backend_name_ = std::move(v);
+}
+
+const std::string& helper::part_id() const {
+    return part_id_;
+}
+
+std::string& helper::part_id() {
+    return part_id_;
+}
+
+void helper::part_id(const std::string& v) {
+    part_id_ = v;
+}
+
+void helper::part_id(const std::string&& v) {
+    part_id_ = std::move(v);
 }
 
 const std::string& helper::facet_name() const {

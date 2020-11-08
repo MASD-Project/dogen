@@ -3568,16 +3568,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "meta_model_name",
-          "type": "std::string",
-          "documentation": "Name of the physical meta-model containing this element.\n"
-        },
-        {
-          "name": "backend_name",
-          "type": "std::string",
-          "documentation": "Name of the backend containing this element.\n"
-        },
-        {
           "name": "facet_name",
           "type": "std::string",
           "documentation": "Name of the facet containing this element.\n"
@@ -3621,11 +3611,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "meta_model_name",
-          "type": "std::string",
-          "documentation": "Name of the physical meta-model containing this element.\n"
-        },
-        {
           "name": "facets",
           "type": "std::list<identification::entities::logical_name>",
           "documentation": "All facets within this backend.\n"
@@ -3639,11 +3624,6 @@
           "name": "archetype_kinds",
           "type": "std::list<identification::entities::logical_name>",
           "documentation": "Kinds of archetypes defined in this backend.\n"
-        },
-        {
-          "name": "backend_name",
-          "type": "std::string",
-          "documentation": "FIXME: temporary attribute until we can rename the top-level namespaces.\n"
         },
         {
           "name": "directory_name",
@@ -3662,16 +3642,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "meta_model_name",
-          "type": "std::string",
-          "documentation": "Name of the physical meta-model containing this element.\n"
-        },
-        {
-          "name": "backend_name",
-          "type": "std::string",
-          "documentation": "Name of the backend containing this element.\n"
-        },
         {
           "name": "archetypes",
           "type": "std::list<identification::entities::logical_name>",
@@ -3702,16 +3672,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "meta_model_name",
-          "type": "std::string",
-          "documentation": "Name of the physical meta-model containing this element.\n"
-        },
-        {
-          "name": "backend_name",
-          "type": "std::string",
-          "documentation": "Name of the backend containing this element.\n"
-        },
         {
           "name": "external_modules_path_contribution",
           "type": "std::string",
@@ -3757,16 +3717,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "meta_model_name",
-          "type": "std::string",
-          "documentation": "Name of the physical meta-model containing this element.\n"
-        },
-        {
-          "name": "backend_name",
-          "type": "std::string",
-          "documentation": "Name of the backend containing this element.\n"
-        },
         {
           "name": "file_extension",
           "type": "std::string",
@@ -4096,6 +4046,16 @@
           "name": "major_technical_space",
           "type": "identification::entities::technical_space",
           "documentation": "Technical space to which this physical element belongs to.\n"
+        },
+        {
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
         }
       ]
     },
@@ -4644,10 +4604,6 @@
       "attributes": [
         {
           "name": "part_id",
-          "type": "std::string"
-        },
-        {
-          "name": "backend_name",
           "type": "std::string"
         },
         {

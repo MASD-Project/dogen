@@ -66,9 +66,9 @@ public:
         const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
-        const std::list<dogen::identification::entities::logical_id>& contains,
         const std::string& meta_model_name,
         const std::string& backend_name,
+        const std::list<dogen::identification::entities::logical_id>& contains,
         const std::list<dogen::identification::entities::logical_name>& archetypes,
         const std::list<dogen::identification::entities::logical_name>& helpers,
         const std::string& directory_name,
@@ -104,16 +104,6 @@ public:
     /**@}*/
 
     /**
-     * @brief All elements contained by this element.
-     */
-    /**@{*/
-    const std::list<dogen::identification::entities::logical_id>& contains() const;
-    std::list<dogen::identification::entities::logical_id>& contains();
-    void contains(const std::list<dogen::identification::entities::logical_id>& v);
-    void contains(const std::list<dogen::identification::entities::logical_id>&& v);
-    /**@}*/
-
-    /**
      * @brief Name of the physical meta-model containing this element.
      */
     /**@{*/
@@ -131,6 +121,16 @@ public:
     std::string& backend_name();
     void backend_name(const std::string& v);
     void backend_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief All elements contained by this element.
+     */
+    /**@{*/
+    const std::list<dogen::identification::entities::logical_id>& contains() const;
+    std::list<dogen::identification::entities::logical_id>& contains();
+    void contains(const std::list<dogen::identification::entities::logical_id>& v);
+    void contains(const std::list<dogen::identification::entities::logical_id>&& v);
     /**@}*/
 
     /**
@@ -184,9 +184,9 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
-    std::list<dogen::identification::entities::logical_id> contains_;
     std::string meta_model_name_;
     std::string backend_name_;
+    std::list<dogen::identification::entities::logical_id> contains_;
     std::list<dogen::identification::entities::logical_name> archetypes_;
     std::list<dogen::identification::entities::logical_name> helpers_;
     std::string directory_name_;

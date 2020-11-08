@@ -57,9 +57,9 @@ archetype::archetype(
     const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
-    const std::string& technical_space,
     const std::string& meta_model_name,
     const std::string& backend_name,
+    const std::string& technical_space,
     const std::string& facet_name,
     const std::string& part_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
@@ -82,9 +82,9 @@ archetype::archetype(
       helper_properties),
       id_(id),
       major_technical_space_(major_technical_space),
-      technical_space_(technical_space),
       meta_model_name_(meta_model_name),
       backend_name_(backend_name),
+      technical_space_(technical_space),
       facet_name_(facet_name),
       part_id_(part_id),
       logical_meta_element_id_(logical_meta_element_id),
@@ -116,9 +116,9 @@ void archetype::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
-      << "\"technical_space\": " << "\"" << tidy_up_string(technical_space_) << "\"" << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
+      << "\"technical_space\": " << "\"" << tidy_up_string(technical_space_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
       << "\"logical_meta_element_id\": " << logical_meta_element_id_ << ", "
@@ -134,9 +134,9 @@ void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
-    swap(technical_space_, other.technical_space_);
     swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
+    swap(technical_space_, other.technical_space_);
     swap(facet_name_, other.facet_name_);
     swap(part_id_, other.part_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
@@ -155,9 +155,9 @@ bool archetype::operator==(const archetype& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
-        technical_space_ == rhs.technical_space_ &&
         meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
+        technical_space_ == rhs.technical_space_ &&
         facet_name_ == rhs.facet_name_ &&
         part_id_ == rhs.part_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
@@ -196,22 +196,6 @@ void archetype::major_technical_space(const dogen::identification::entities::tec
     major_technical_space_ = v;
 }
 
-const std::string& archetype::technical_space() const {
-    return technical_space_;
-}
-
-std::string& archetype::technical_space() {
-    return technical_space_;
-}
-
-void archetype::technical_space(const std::string& v) {
-    technical_space_ = v;
-}
-
-void archetype::technical_space(const std::string&& v) {
-    technical_space_ = std::move(v);
-}
-
 const std::string& archetype::meta_model_name() const {
     return meta_model_name_;
 }
@@ -242,6 +226,22 @@ void archetype::backend_name(const std::string& v) {
 
 void archetype::backend_name(const std::string&& v) {
     backend_name_ = std::move(v);
+}
+
+const std::string& archetype::technical_space() const {
+    return technical_space_;
+}
+
+std::string& archetype::technical_space() {
+    return technical_space_;
+}
+
+void archetype::technical_space(const std::string& v) {
+    technical_space_ = v;
+}
+
+void archetype::technical_space(const std::string&& v) {
+    technical_space_ = std::move(v);
 }
 
 const std::string& archetype::facet_name() const {

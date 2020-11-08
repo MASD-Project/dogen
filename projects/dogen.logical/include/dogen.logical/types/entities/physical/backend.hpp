@@ -66,13 +66,13 @@ public:
         const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
+        const std::string& meta_model_name,
+        const std::string& backend_name,
         const std::list<dogen::identification::entities::logical_id>& contains,
         const std::string& technical_space,
-        const std::string& meta_model_name,
         const std::list<dogen::identification::entities::logical_name>& facets,
         const std::list<dogen::identification::entities::logical_name>& parts,
         const std::list<dogen::identification::entities::logical_name>& archetype_kinds,
-        const std::string& backend_name,
         const std::string& directory_name);
 
 public:
@@ -105,6 +105,26 @@ public:
     /**@}*/
 
     /**
+     * @brief Name of the physical meta-model containing this element.
+     */
+    /**@{*/
+    const std::string& meta_model_name() const;
+    std::string& meta_model_name();
+    void meta_model_name(const std::string& v);
+    void meta_model_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the backend containing this element.
+     */
+    /**@{*/
+    const std::string& backend_name() const;
+    std::string& backend_name();
+    void backend_name(const std::string& v);
+    void backend_name(const std::string&& v);
+    /**@}*/
+
+    /**
      * @brief All elements contained by this element.
      */
     /**@{*/
@@ -122,16 +142,6 @@ public:
     std::string& technical_space();
     void technical_space(const std::string& v);
     void technical_space(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the physical meta-model containing this element.
-     */
-    /**@{*/
-    const std::string& meta_model_name() const;
-    std::string& meta_model_name();
-    void meta_model_name(const std::string& v);
-    void meta_model_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -165,16 +175,6 @@ public:
     /**@}*/
 
     /**
-     * @brief FIXME: temporary attribute until we can rename the top-level namespaces.
-     */
-    /**@{*/
-    const std::string& backend_name() const;
-    std::string& backend_name();
-    void backend_name(const std::string& v);
-    void backend_name(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Default directory name to use for this backend.
      */
     /**@{*/
@@ -200,13 +200,13 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
+    std::string meta_model_name_;
+    std::string backend_name_;
     std::list<dogen::identification::entities::logical_id> contains_;
     std::string technical_space_;
-    std::string meta_model_name_;
     std::list<dogen::identification::entities::logical_name> facets_;
     std::list<dogen::identification::entities::logical_name> parts_;
     std::list<dogen::identification::entities::logical_name> archetype_kinds_;
-    std::string backend_name_;
     std::string directory_name_;
 };
 

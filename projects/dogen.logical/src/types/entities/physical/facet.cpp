@@ -84,9 +84,9 @@ facet::facet(
     const std::list<dogen::logical::entities::helper_properties>& helper_properties,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
-    const std::list<dogen::identification::entities::logical_id>& contains,
     const std::string& meta_model_name,
     const std::string& backend_name,
+    const std::list<dogen::identification::entities::logical_id>& contains,
     const std::list<dogen::identification::entities::logical_name>& archetypes,
     const std::list<dogen::identification::entities::logical_name>& helpers,
     const std::string& directory_name,
@@ -107,9 +107,9 @@ facet::facet(
       helper_properties),
       id_(id),
       major_technical_space_(major_technical_space),
-      contains_(contains),
       meta_model_name_(meta_model_name),
       backend_name_(backend_name),
+      contains_(contains),
       archetypes_(archetypes),
       helpers_(helpers),
       directory_name_(directory_name),
@@ -139,9 +139,9 @@ void facet::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
-      << "\"contains\": " << contains_ << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
+      << "\"contains\": " << contains_ << ", "
       << "\"archetypes\": " << archetypes_ << ", "
       << "\"helpers\": " << helpers_ << ", "
       << "\"directory_name\": " << "\"" << tidy_up_string(directory_name_) << "\"" << ", "
@@ -155,9 +155,9 @@ void facet::swap(facet& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
-    swap(contains_, other.contains_);
     swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
+    swap(contains_, other.contains_);
     swap(archetypes_, other.archetypes_);
     swap(helpers_, other.helpers_);
     swap(directory_name_, other.directory_name_);
@@ -174,9 +174,9 @@ bool facet::operator==(const facet& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
-        contains_ == rhs.contains_ &&
         meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
+        contains_ == rhs.contains_ &&
         archetypes_ == rhs.archetypes_ &&
         helpers_ == rhs.helpers_ &&
         directory_name_ == rhs.directory_name_ &&
@@ -213,22 +213,6 @@ void facet::major_technical_space(const dogen::identification::entities::technic
     major_technical_space_ = v;
 }
 
-const std::list<dogen::identification::entities::logical_id>& facet::contains() const {
-    return contains_;
-}
-
-std::list<dogen::identification::entities::logical_id>& facet::contains() {
-    return contains_;
-}
-
-void facet::contains(const std::list<dogen::identification::entities::logical_id>& v) {
-    contains_ = v;
-}
-
-void facet::contains(const std::list<dogen::identification::entities::logical_id>&& v) {
-    contains_ = std::move(v);
-}
-
 const std::string& facet::meta_model_name() const {
     return meta_model_name_;
 }
@@ -259,6 +243,22 @@ void facet::backend_name(const std::string& v) {
 
 void facet::backend_name(const std::string&& v) {
     backend_name_ = std::move(v);
+}
+
+const std::list<dogen::identification::entities::logical_id>& facet::contains() const {
+    return contains_;
+}
+
+std::list<dogen::identification::entities::logical_id>& facet::contains() {
+    return contains_;
+}
+
+void facet::contains(const std::list<dogen::identification::entities::logical_id>& v) {
+    contains_ = v;
+}
+
+void facet::contains(const std::list<dogen::identification::entities::logical_id>&& v) {
+    contains_ = std::move(v);
 }
 
 const std::list<dogen::identification::entities::logical_name>& facet::archetypes() const {

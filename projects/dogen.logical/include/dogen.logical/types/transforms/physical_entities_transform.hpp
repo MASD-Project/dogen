@@ -68,6 +68,12 @@ private:
     static void process_archetypes(const context& ctx, entities::model& m);
 
     /**
+     * @brief Processes all of the logical representations of
+     * helpers.
+     */
+    static void process_helpers(const context& ctx, entities::model& m);
+
+    /**
      * @brief Reads all data related to physical relations.
      */
     static entities::physical::relations process_relations(const context& ctx,

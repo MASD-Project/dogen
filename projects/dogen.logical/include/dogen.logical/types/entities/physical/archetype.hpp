@@ -66,9 +66,9 @@ public:
         const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
-        const std::string& technical_space,
         const std::string& meta_model_name,
         const std::string& backend_name,
+        const std::string& technical_space,
         const std::string& facet_name,
         const std::string& part_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
@@ -106,16 +106,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Technical space to which this physical element belongs to.
-     */
-    /**@{*/
-    const std::string& technical_space() const;
-    std::string& technical_space();
-    void technical_space(const std::string& v);
-    void technical_space(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Name of the physical meta-model containing this element.
      */
     /**@{*/
@@ -133,6 +123,16 @@ public:
     std::string& backend_name();
     void backend_name(const std::string& v);
     void backend_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    const std::string& technical_space() const;
+    std::string& technical_space();
+    void technical_space(const std::string& v);
+    void technical_space(const std::string&& v);
     /**@}*/
 
     /**
@@ -211,9 +211,9 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
-    std::string technical_space_;
     std::string meta_model_name_;
     std::string backend_name_;
+    std::string technical_space_;
     std::string facet_name_;
     std::string part_id_;
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
