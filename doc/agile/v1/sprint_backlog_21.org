@@ -742,7 +742,7 @@ Notes:
 **** How to add new meta-model elements
 
 1. create the namespace and type in assets model.
-2. add enumerations for the meta-type in assets in static_stereotypes.
+2. add enumerations for the meta-type in assets in =static_stereotypes=.
 3. add processing of new stereotype to =stereotypes_helper= in assets.
 4. add processing of new meta-type in =adapter= in engine, and also in
    =injection_model_to_assets_model_transform=.

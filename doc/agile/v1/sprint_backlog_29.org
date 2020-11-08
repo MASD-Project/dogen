@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-07 Sat 22:44]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *11:23* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 11:23   |       |      | 100.0 |
-| Active                                             |         | 11:23 |      | 100.0 |
-| edit release notes for previous sprint             |         |       | 5:04 |  44.5 |
-| Create a demo and presentation for previous sprint |         |       | 0:28 |   4.1 |
-| Sprint and product backlog grooming                |         |       | 1:29 |  13.0 |
-| Add C++ helpers to the PMM                         |         |       | 4:22 |  38.4 |
+#+CAPTION: Clock summary at [2020-11-08 Sun 13:24]
+| <75>                                                 |         |       |      |       |
+| Headline                                             | Time    |       |      |     % |
+|------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                         | *13:34* |       |      | 100.0 |
+|------------------------------------------------------+---------+-------+------+-------|
+| Stories                                              | 13:34   |       |      | 100.0 |
+| Active                                               |         | 13:34 |      | 100.0 |
+| edit release notes for previous sprint               |         |       | 5:04 |  37.3 |
+| Create a demo and presentation for previous sprint   |         |       | 0:28 |   3.4 |
+| Sprint and product backlog grooming                  |         |       | 1:29 |  10.9 |
+| Improvements to template processing in logical model |         |       | 0:26 |   3.2 |
+| Add C++ helpers to the PMM                           |         |       | 6:07 |  45.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -275,8 +276,28 @@ way but we should create a new story for the "new world" way.
 - consider renaming this to relative paths.
 - consider the role of parts in the directive groups.
 
+*** COMPLETED Improvements to template processing in logical model    :story:
+    CLOSED: [2020-11-08 Sun 12:26]
+    :LOGBOOK:
+    CLOCK: [2020-11-08 Sun 12:00]--[2020-11-08 Sun 12:26] =>  0:26
+    :END:
+
+At present we resolve wale template contents in a transform:
+=logic_less_templates_population_transform= and then render both wale
+and stitch templates in another: =archetype_rendering_transform=. We
+need to merge these transforms and drop the archetype prefix.
+
+Notes:
+
+- drop the prefix on =archetype_text_templating=.
+- drop relations in =archetype_text_templating= and see what
+  breaks. Actually these are needed to model the template relations,
+  which we have not yet completed.
+
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-08 Sun 12:26]--[2020-11-08 Sun 13:24] =>  0:58
+    CLOCK: [2020-11-08 Sun 11:12]--[2020-11-08 Sun 11:59] =>  0:47
     CLOCK: [2020-11-07 Sat 22:34]--[2020-11-07 Sat 22:44] =>  0:10
     CLOCK: [2020-11-07 Sat 22:22]--[2020-11-07 Sat 22:33] =>  0:11
     CLOCK: [2020-11-07 Sat 21:14]--[2020-11-07 Sat 22:11] =>  0:57
