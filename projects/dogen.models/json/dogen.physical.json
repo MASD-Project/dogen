@@ -212,6 +212,10 @@
           "type": "std::unordered_map<identification::entities::physical_meta_id, archetype>"
         },
         {
+          "name": "helpers",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, helper>"
+        },
+        {
           "name": "default_archetype_for_logical_meta_model_id",
           "type": "std::unordered_map<std::string, archetype>",
           "documentation": "Maps the logical model element ID to the default archetype for this facet.\n\nUsed to obtain the default archetype for referencing.\n"
@@ -2077,6 +2081,39 @@
           "name": "technical_space",
           "type": "identification::entities::technical_space",
           "documentation": "Technical space to which this physical element belongs to.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::helper",
+      "stereotypes": [
+        "MetaElement",
+        "Associatable",
+        "HasTechnicalSpace"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Properties of this helper with regards to relations.\n"
+        },
+        {
+          "name": "part",
+          "type": "identification::entities::physical_meta_id",
+          "documentation": "Part in which we are located.\n"
+        },
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "owning_formatters",
+          "type": "std::list<identification::entities::physical_meta_id>"
+        },
+        {
+          "name": "owning_facets",
+          "type": "std::list<identification::entities::physical_meta_id>"
         }
       ]
     }

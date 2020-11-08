@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/facet_io.hpp"
 #include "dogen.physical/io/entities/helper_io.hpp"
-#include "dogen.physical/io/entities/archetype_io.hpp"
+#include "dogen.physical/io/entities/relations_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
@@ -51,17 +51,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -69,35 +65,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::physical_meta_id>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << *i;
     }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::archetype>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -105,17 +79,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const facet& v) {
+std::ostream& operator<<(std::ostream& s, const helper& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::facet\"" << ", "
-      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::helper\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
-      << "\"archetypes\": " << v.archetypes() << ", "
-      << "\"helpers\": " << v.helpers() << ", "
-      << "\"default_archetype_for_logical_meta_model_id\": " << v.default_archetype_for_logical_meta_model_id()
+      << "\"depends\": " << v.depends() << ", "
+      << "\"generates\": " << v.generates() << ", "
+      << "\"generated_by\": " << "\"" << tidy_up_string(v.generated_by()) << "\"" << ", "
+      << "\"technical_space\": " << v.technical_space() << ", "
+      << "\"relations\": " << v.relations() << ", "
+      << "\"part\": " << v.part() << ", "
+      << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
+      << "\"owning_formatters\": " << v.owning_formatters() << ", "
+      << "\"owning_facets\": " << v.owning_facets()
       << " }";
     return(s);
 }

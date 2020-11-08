@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.physical/types/entities/helper.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
 #include "dogen.identification/types/entities/label.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
@@ -55,6 +56,7 @@ public:
         const std::list<dogen::identification::entities::label>& labels,
         const std::string& postfix,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>& helpers,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id);
 
 public:
@@ -113,6 +115,11 @@ public:
     void archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v);
     void archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>&& v);
 
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>& helpers() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>& helpers();
+    void helpers(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>& v);
+    void helpers(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper>&& v);
+
     /**
      * @brief Maps the logical model element ID to the default archetype for this facet.
      *
@@ -142,6 +149,7 @@ private:
     std::list<dogen::identification::entities::label> labels_;
     std::string postfix_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::helper> helpers_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> default_archetype_for_logical_meta_model_id_;
 };
 
