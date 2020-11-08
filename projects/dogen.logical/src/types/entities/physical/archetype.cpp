@@ -26,7 +26,7 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
+#include "dogen.logical/io/entities/physical/text_templating_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -64,7 +64,7 @@ archetype::archetype(
     const std::string& part_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::logical::entities::physical::relations& relations,
-    const dogen::logical::entities::physical::archetype_text_templating& text_templating,
+    const dogen::logical::entities::physical::text_templating& text_templating,
     const std::string& postfix)
     : dogen::logical::entities::element(
       name,
@@ -308,19 +308,19 @@ void archetype::relations(const dogen::logical::entities::physical::relations&& 
     relations_ = std::move(v);
 }
 
-const dogen::logical::entities::physical::archetype_text_templating& archetype::text_templating() const {
+const dogen::logical::entities::physical::text_templating& archetype::text_templating() const {
     return text_templating_;
 }
 
-dogen::logical::entities::physical::archetype_text_templating& archetype::text_templating() {
+dogen::logical::entities::physical::text_templating& archetype::text_templating() {
     return text_templating_;
 }
 
-void archetype::text_templating(const dogen::logical::entities::physical::archetype_text_templating& v) {
+void archetype::text_templating(const dogen::logical::entities::physical::text_templating& v) {
     text_templating_ = v;
 }
 
-void archetype::text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v) {
+void archetype::text_templating(const dogen::logical::entities::physical::text_templating&& v) {
     text_templating_ = std::move(v);
 }
 

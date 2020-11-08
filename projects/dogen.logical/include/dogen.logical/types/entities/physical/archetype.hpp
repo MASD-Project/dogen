@@ -32,7 +32,7 @@
 #include "dogen.logical/types/entities/physical/relations.hpp"
 #include "dogen.identification/types/entities/logical_meta_id.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
-#include "dogen.logical/types/entities/physical/archetype_text_templating.hpp"
+#include "dogen.logical/types/entities/physical/text_templating.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -73,7 +73,7 @@ public:
         const std::string& part_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
         const dogen::logical::entities::physical::relations& relations,
-        const dogen::logical::entities::physical::archetype_text_templating& text_templating,
+        const dogen::logical::entities::physical::text_templating& text_templating,
         const std::string& postfix);
 
 public:
@@ -179,10 +179,10 @@ public:
      * @brief Properties related to the text templating for this archetype.
      */
     /**@{*/
-    const dogen::logical::entities::physical::archetype_text_templating& text_templating() const;
-    dogen::logical::entities::physical::archetype_text_templating& text_templating();
-    void text_templating(const dogen::logical::entities::physical::archetype_text_templating& v);
-    void text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v);
+    const dogen::logical::entities::physical::text_templating& text_templating() const;
+    dogen::logical::entities::physical::text_templating& text_templating();
+    void text_templating(const dogen::logical::entities::physical::text_templating& v);
+    void text_templating(const dogen::logical::entities::physical::text_templating&& v);
     /**@}*/
 
     /**
@@ -218,7 +218,7 @@ private:
     std::string part_id_;
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
     dogen::logical::entities::physical::relations relations_;
-    dogen::logical::entities::physical::archetype_text_templating text_templating_;
+    dogen::logical::entities::physical::text_templating text_templating_;
     std::string postfix_;
 };
 

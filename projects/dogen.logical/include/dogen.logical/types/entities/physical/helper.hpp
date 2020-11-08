@@ -31,7 +31,7 @@
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
-#include "dogen.logical/types/entities/physical/archetype_text_templating.hpp"
+#include "dogen.logical/types/entities/physical/text_templating.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -66,7 +66,7 @@ public:
         const std::list<std::string>& owning_formatters,
         const std::list<std::string>& owning_facets,
         const std::string& helper_name,
-        const dogen::logical::entities::physical::archetype_text_templating& text_templating);
+        const dogen::logical::entities::physical::text_templating& text_templating);
 
 public:
     using element::accept;
@@ -117,10 +117,10 @@ public:
     void helper_name(const std::string& v);
     void helper_name(const std::string&& v);
 
-    const dogen::logical::entities::physical::archetype_text_templating& text_templating() const;
-    dogen::logical::entities::physical::archetype_text_templating& text_templating();
-    void text_templating(const dogen::logical::entities::physical::archetype_text_templating& v);
-    void text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v);
+    const dogen::logical::entities::physical::text_templating& text_templating() const;
+    dogen::logical::entities::physical::text_templating& text_templating();
+    void text_templating(const dogen::logical::entities::physical::text_templating& v);
+    void text_templating(const dogen::logical::entities::physical::text_templating&& v);
 
 public:
     bool operator==(const helper& rhs) const;
@@ -142,7 +142,7 @@ private:
     std::list<std::string> owning_formatters_;
     std::list<std::string> owning_facets_;
     std::string helper_name_;
-    dogen::logical::entities::physical::archetype_text_templating text_templating_;
+    dogen::logical::entities::physical::text_templating text_templating_;
 };
 
 }

@@ -24,7 +24,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
+#include "dogen.logical/io/entities/physical/text_templating_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -73,7 +73,7 @@ helper::helper(
     const std::list<std::string>& owning_formatters,
     const std::list<std::string>& owning_facets,
     const std::string& helper_name,
-    const dogen::logical::entities::physical::archetype_text_templating& text_templating)
+    const dogen::logical::entities::physical::text_templating& text_templating)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -252,19 +252,19 @@ void helper::helper_name(const std::string&& v) {
     helper_name_ = std::move(v);
 }
 
-const dogen::logical::entities::physical::archetype_text_templating& helper::text_templating() const {
+const dogen::logical::entities::physical::text_templating& helper::text_templating() const {
     return text_templating_;
 }
 
-dogen::logical::entities::physical::archetype_text_templating& helper::text_templating() {
+dogen::logical::entities::physical::text_templating& helper::text_templating() {
     return text_templating_;
 }
 
-void helper::text_templating(const dogen::logical::entities::physical::archetype_text_templating& v) {
+void helper::text_templating(const dogen::logical::entities::physical::text_templating& v) {
     text_templating_ = v;
 }
 
-void helper::text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v) {
+void helper::text_templating(const dogen::logical::entities::physical::text_templating&& v) {
     text_templating_ = std::move(v);
 }
 

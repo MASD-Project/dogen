@@ -3599,7 +3599,7 @@
         },
         {
           "name": "text_templating",
-          "type": "archetype_text_templating",
+          "type": "text_templating",
           "documentation": "Properties related to the text templating for this archetype.\n"
         },
         {
@@ -4205,7 +4205,7 @@
       ]
     },
     {
-      "name": "entities::physical::archetype_text_templating",
+      "name": "entities::physical::text_templating",
       "documentation": "Contains all the properties related to the generation of archetypes themselves.\n",
       "stereotypes": [
         "Configurable"
@@ -4663,7 +4663,7 @@
         },
         {
           "name": "text_templating",
-          "type": "archetype_text_templating"
+          "type": "text_templating"
         }
       ]
     },

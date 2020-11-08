@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_FWD_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_FWD_HPP
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_TEXT_TEMPLATING_FWD_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_TEXT_TEMPLATING_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen::logical::entities::physical {
 
-class archetype_text_templating;
+class text_templating;
 
 }
 
