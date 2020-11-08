@@ -21,7 +21,6 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
 #define DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
 
-#include "dogen.identification/types/entities/logical_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -34,6 +33,7 @@
 #include "dogen.codec/types/entities/attribute.hpp"
 #include "dogen.codec/types/entities/element.hpp"
 #include "dogen.identification/types/entities/logical_location.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/enumerator.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
@@ -70,6 +70,7 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
 
 namespace dogen::orchestration::helpers {
@@ -509,6 +510,15 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::part>
     to_physical_part(const identification::entities::logical_location& l,
+        const logical::entities::stereotypes& sts,
+        const codec::entities::element& ie) const;
+
+    /**
+     * @brief Converts an codec element with a stereotype of
+     * @e masd::physical::helper.
+     */
+    boost::shared_ptr<logical::entities::physical::helper>
+    to_physical_helper(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const codec::entities::element& ie) const;
 };

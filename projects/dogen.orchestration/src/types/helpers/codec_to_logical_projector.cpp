@@ -974,4 +974,45 @@ codec_to_logical_projector::to_physical_part(const logical_location& l,
     return r;
 }
 
+boost::shared_ptr<logical::entities::physical::helper>
+codec_to_logical_projector::to_physical_helper(const logical_location& l,
+    const logical::entities::stereotypes& sts,
+    const codec::entities::element& e) const {
+    using logical::entities::physical::helper;
+    auto r(boost::make_shared<helper>());
+    populate_element(l, sts, e, false/*is_container*/, *r);
+
+    const auto id(r->name().id());
+    for (const auto& attr : e.attributes()) {
+        const auto n(attr.name().simple());
+        ensure_not_empty(id, n);
+
+        const auto t(attr.type());
+        ensure_empty(id, t);
+
+        const auto id(r->name().id());
+        ensure_not_empty(id, n);
+
+        if (n != stitch_template_content_attr_name) {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                projection_error(unsupported_attribute + n));
+        }
+
+        auto& tt(r->text_templating());
+        tt.stitch_template_content(attr.documentation());
+        tt.configuration(attr.configuration());
+
+        auto& cfg(*tt.configuration());
+        cfg.name().qualified(r->name().qualified().dot());
+
+        logical::helpers::stereotypes_helper h;
+        const auto sts(h.from_primitives(attr.stereotypes()));
+        const auto& ds(sts.dynamic_stereotypes());
+        cfg.profile_bindings(to_potential_binding(ds));
+    }
+
+    return r;
+}
+
 }
