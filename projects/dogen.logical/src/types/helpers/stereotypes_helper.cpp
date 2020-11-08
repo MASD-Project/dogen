@@ -93,6 +93,7 @@ const stereotype stereotype_physical_archetype("masd::physical::archetype");
 const stereotype stereotype_physical_archetype_kind(
     "masd::physical::archetype_kind");
 const stereotype stereotype_physical_part("masd::physical::part");
+const stereotype stereotype_physical_helper("masd::physical::helper");
 
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
@@ -180,6 +181,8 @@ stereotypes_helper::from_primitive(const stereotype& st) const {
         return static_stereotypes::physical_archetype_kind;
     else if (st == stereotype_physical_part)
         return static_stereotypes::physical_part;
+    else if (st == stereotype_physical_helper)
+        return static_stereotypes::physical_helper;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
                              << " Assuming dynamic.";
@@ -274,6 +277,8 @@ to_primitive(const static_stereotypes ss) const {
         return stereotype_physical_archetype_kind;
     case static_stereotypes::physical_part:
         return stereotype_physical_part;
+    case static_stereotypes::physical_helper:
+        return stereotype_physical_helper;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -317,7 +322,8 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::physical_facet ||
         ss == static_stereotypes::physical_archetype ||
         ss == static_stereotypes::physical_archetype_kind ||
-        ss == static_stereotypes::physical_part;
+        ss == static_stereotypes::physical_part ||
+        ss == static_stereotypes::physical_helper;
 }
 
 std::list<static_stereotypes> stereotypes_helper::
