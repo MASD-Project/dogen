@@ -183,6 +183,8 @@ void merge_transform::merge(const entities::model& src, entities::model& dst) {
         dst.physical_elements().archetype_kinds());
     copy(src.physical_elements().parts(),
         dst.physical_elements().parts());
+    copy(src.physical_elements().helpers(),
+        dst.physical_elements().helpers());
     copy(src.templating_elements().logic_less_templates(),
         dst.templating_elements().logic_less_templates());
     copy(src.streaming_properties(), dst.streaming_properties());
