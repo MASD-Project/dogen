@@ -37,7 +37,6 @@
 #include "dogen.logical/types/transforms/type_registrar_transform.hpp"
 #include "dogen.logical/types/transforms/odb_options_transform.hpp"
 #include "dogen.logical/types/transforms/visual_studio_project_type_transform.hpp"
-#include "dogen.logical/types/transforms/logic_less_templates_population_transform.hpp"
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/decoration_transform.hpp"
@@ -161,13 +160,6 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * (generalisation) and origin (from the pre-assembly chain).
      */
     type_registrar_transform::apply(ctx, m);
-
-    /*
-     * This transform can be executed at any time after resolution. It
-     * also depends on the pre-assembly transform for the physical
-     * elements of course.
-     */
-    // logic_less_templates_population_transform::apply(ctx, m);
 
     /*
      * Technical spaces must be updated prior to decoration.
