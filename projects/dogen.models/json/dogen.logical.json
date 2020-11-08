@@ -4629,6 +4629,11 @@
         {
           "name": "text_templating",
           "type": "text_templating"
+        },
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this helper.\n"
         }
       ]
     },

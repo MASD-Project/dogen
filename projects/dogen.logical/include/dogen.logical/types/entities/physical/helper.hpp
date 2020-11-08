@@ -30,6 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/physical/relations.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/physical/text_templating.hpp"
 
@@ -70,7 +71,8 @@ public:
         const std::list<std::string>& owning_formatters,
         const std::list<std::string>& owning_facets,
         const std::string& helper_name,
-        const dogen::logical::entities::physical::text_templating& text_templating);
+        const dogen::logical::entities::physical::text_templating& text_templating,
+        const dogen::logical::entities::physical::relations& relations);
 
 public:
     using element::accept;
@@ -156,6 +158,16 @@ public:
     void text_templating(const dogen::logical::entities::physical::text_templating& v);
     void text_templating(const dogen::logical::entities::physical::text_templating&& v);
 
+    /**
+     * @brief Relation information for this helper.
+     */
+    /**@{*/
+    const dogen::logical::entities::physical::relations& relations() const;
+    dogen::logical::entities::physical::relations& relations();
+    void relations(const dogen::logical::entities::physical::relations& v);
+    void relations(const dogen::logical::entities::physical::relations&& v);
+    /**@}*/
+
 public:
     bool operator==(const helper& rhs) const;
     bool operator!=(const helper& rhs) const {
@@ -181,6 +193,7 @@ private:
     std::list<std::string> owning_facets_;
     std::string helper_name_;
     dogen::logical::entities::physical::text_templating text_templating_;
+    dogen::logical::entities::physical::relations relations_;
 };
 
 }

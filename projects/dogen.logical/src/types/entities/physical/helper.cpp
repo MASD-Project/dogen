@@ -23,6 +23,7 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/helper.hpp"
+#include "dogen.logical/io/entities/physical/relations_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/physical/text_templating_io.hpp"
 
@@ -77,7 +78,8 @@ helper::helper(
     const std::list<std::string>& owning_formatters,
     const std::list<std::string>& owning_facets,
     const std::string& helper_name,
-    const dogen::logical::entities::physical::text_templating& text_templating)
+    const dogen::logical::entities::physical::text_templating& text_templating,
+    const dogen::logical::entities::physical::relations& relations)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -102,7 +104,8 @@ helper::helper(
       owning_formatters_(owning_formatters),
       owning_facets_(owning_facets),
       helper_name_(helper_name),
-      text_templating_(text_templating) { }
+      text_templating_(text_templating),
+      relations_(relations) { }
 
 void helper::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -136,7 +139,8 @@ void helper::to_stream(std::ostream& s) const {
       << "\"owning_formatters\": " << owning_formatters_ << ", "
       << "\"owning_facets\": " << owning_facets_ << ", "
       << "\"helper_name\": " << "\"" << tidy_up_string(helper_name_) << "\"" << ", "
-      << "\"text_templating\": " << text_templating_
+      << "\"text_templating\": " << text_templating_ << ", "
+      << "\"relations\": " << relations_
       << " }";
 }
 
@@ -155,6 +159,7 @@ void helper::swap(helper& other) noexcept {
     swap(owning_facets_, other.owning_facets_);
     swap(helper_name_, other.helper_name_);
     swap(text_templating_, other.text_templating_);
+    swap(relations_, other.relations_);
 }
 
 bool helper::equals(const dogen::logical::entities::element& other) const {
@@ -175,7 +180,8 @@ bool helper::operator==(const helper& rhs) const {
         owning_formatters_ == rhs.owning_formatters_ &&
         owning_facets_ == rhs.owning_facets_ &&
         helper_name_ == rhs.helper_name_ &&
-        text_templating_ == rhs.text_templating_;
+        text_templating_ == rhs.text_templating_ &&
+        relations_ == rhs.relations_;
 }
 
 helper& helper::operator=(helper other) {
@@ -350,6 +356,22 @@ void helper::text_templating(const dogen::logical::entities::physical::text_temp
 
 void helper::text_templating(const dogen::logical::entities::physical::text_templating&& v) {
     text_templating_ = std::move(v);
+}
+
+const dogen::logical::entities::physical::relations& helper::relations() const {
+    return relations_;
+}
+
+dogen::logical::entities::physical::relations& helper::relations() {
+    return relations_;
+}
+
+void helper::relations(const dogen::logical::entities::physical::relations& v) {
+    relations_ = v;
+}
+
+void helper::relations(const dogen::logical::entities::physical::relations&& v) {
+    relations_ = std::move(v);
 }
 
 }
