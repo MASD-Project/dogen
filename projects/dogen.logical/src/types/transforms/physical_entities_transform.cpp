@@ -540,6 +540,13 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing archetype kinds.";
 }
 
+// void physical_entities_transform::
+// process_helpers(const context& ctx, entities::model& m) {
+
+
+// }
+
+
 entities::physical::relations
 physical_entities_transform::process_relations(const context& ctx,
     const variability::entities::configuration& cfg) {

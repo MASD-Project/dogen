@@ -62,6 +62,9 @@ public:
         const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
+        const std::string& part_id,
+        const std::string& backend_name,
+        const std::string& facet_name,
         const std::string& family,
         const std::list<std::string>& owning_formatters,
         const std::list<std::string>& owning_facets,
@@ -96,6 +99,21 @@ public:
     dogen::identification::entities::technical_space major_technical_space() const;
     void major_technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
+
+    const std::string& part_id() const;
+    std::string& part_id();
+    void part_id(const std::string& v);
+    void part_id(const std::string&& v);
+
+    const std::string& backend_name() const;
+    std::string& backend_name();
+    void backend_name(const std::string& v);
+    void backend_name(const std::string&& v);
+
+    const std::string& facet_name() const;
+    std::string& facet_name();
+    void facet_name(const std::string& v);
+    void facet_name(const std::string&& v);
 
     const std::string& family() const;
     std::string& family();
@@ -138,6 +156,9 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
+    std::string part_id_;
+    std::string backend_name_;
+    std::string facet_name_;
     std::string family_;
     std::list<std::string> owning_formatters_;
     std::list<std::string> owning_facets_;

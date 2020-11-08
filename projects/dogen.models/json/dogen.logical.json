@@ -3678,6 +3678,10 @@
           "documentation": "All archetypes in this facet.\n"
         },
         {
+          "name": "helpers",
+          "type": "std::list<identification::entities::logical_name>"
+        },
+        {
           "name": "directory_name",
           "type": "std::string",
           "documentation": "Default directory name to use for this facet.\n"
@@ -4638,6 +4642,18 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "part_id",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_name",
+          "type": "std::string"
+        },
         {
           "name": "family",
           "type": "std::string"

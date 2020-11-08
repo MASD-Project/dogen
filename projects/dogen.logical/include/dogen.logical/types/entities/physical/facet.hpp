@@ -70,6 +70,7 @@ public:
         const std::string& meta_model_name,
         const std::string& backend_name,
         const std::list<dogen::identification::entities::logical_name>& archetypes,
+        const std::list<dogen::identification::entities::logical_name>& helpers,
         const std::string& directory_name,
         const std::string& postfix);
 
@@ -142,6 +143,11 @@ public:
     void archetypes(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
+    const std::list<dogen::identification::entities::logical_name>& helpers() const;
+    std::list<dogen::identification::entities::logical_name>& helpers();
+    void helpers(const std::list<dogen::identification::entities::logical_name>& v);
+    void helpers(const std::list<dogen::identification::entities::logical_name>&& v);
+
     /**
      * @brief Default directory name to use for this facet.
      */
@@ -182,6 +188,7 @@ private:
     std::string meta_model_name_;
     std::string backend_name_;
     std::list<dogen::identification::entities::logical_name> archetypes_;
+    std::list<dogen::identification::entities::logical_name> helpers_;
     std::string directory_name_;
     std::string postfix_;
 };
