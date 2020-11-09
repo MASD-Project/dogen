@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-08 Sun 17:57]
+#+CAPTION: Clock summary at [2020-11-09 Mon 21:01]
 | <75>                                                 |         |       |      |       |
 | Headline                                             | Time    |       |      |     % |
 |------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                         | *15:35* |       |      | 100.0 |
+| *Total time*                                         | *16:05* |       |      | 100.0 |
 |------------------------------------------------------+---------+-------+------+-------|
-| Stories                                              | 15:35   |       |      | 100.0 |
-| Active                                               |         | 15:35 |      | 100.0 |
-| edit release notes for previous sprint               |         |       | 5:04 |  32.5 |
-| Create a demo and presentation for previous sprint   |         |       | 0:28 |   3.0 |
-| Sprint and product backlog grooming                  |         |       | 1:29 |   9.5 |
-| Improvements to template processing in logical model |         |       | 0:26 |   2.8 |
-| Add C++ helpers to the PMM                           |         |       | 8:08 |  52.2 |
+| Stories                                              | 16:05   |       |      | 100.0 |
+| Active                                               |         | 16:05 |      | 100.0 |
+| edit release notes for previous sprint               |         |       | 5:04 |  31.5 |
+| Create a demo and presentation for previous sprint   |         |       | 0:28 |   2.9 |
+| Sprint and product backlog grooming                  |         |       | 1:29 |   9.2 |
+| Improvements to template processing in logical model |         |       | 0:26 |   2.7 |
+| Add C++ helpers to the PMM                           |         |       | 8:38 |  53.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -296,6 +296,7 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-09 Mon 20:30]--[2020-11-09 Mon 21:00] =>  0:30
     CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
     CLOCK: [2020-11-08 Sun 15:55]--[2020-11-08 Sun 16:18] =>  0:23
     CLOCK: [2020-11-08 Sun 12:26]--[2020-11-08 Sun 13:24] =>  0:58
@@ -327,6 +328,9 @@ Notes:
 
 :     // FIXME: for now we still need these as generatable.
 
+- no includes have been added.
+- relation status is not being populated. Need to add meta-data.
+- cpp has a dummy function for transform. Need to update rendering transform.
 
 Merged stories:
 
