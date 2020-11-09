@@ -336,7 +336,7 @@ A number of videos are now available discussing Dogen, gathered under
   Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6):
   Narrates the design and implementation of the relational model for tracing.
 - [MASD - Dogen Coding: Identification Refactor](https://www.youtube.com/playlist?list=PLwfrwe216gF0wxWcw33JrXI4R2gTN9E8X): Describes some of the woes we went through when updating the code-base to use the shiny new ```identification``` model.
-- [MASD - Dogen Coding: Formatables Refactor](https://img.youtube.com/vi/pMqUzX0PU_I/0.jpg): Series of videos covering the long-running formattables refactor in Dogen, which moved most technical space specific types into their Logical and Physical destinations.
+- [MASD - Dogen Coding: Formatables Refactor](https://www.youtube.com/playlist?list=PLwfrwe216gF0NHaErGDeJrtGU8pAoNYlG): Series of videos covering the long-running formattables refactor in Dogen, which moved most technical space specific types into their Logical and Physical destinations.
 - [MASD - MDE Paper of the
   Week](https://www.youtube.com/playlist?list=PLwfrwe216gF0wbLBkiOmpCpdaeAU66634):
   Series of relevant
