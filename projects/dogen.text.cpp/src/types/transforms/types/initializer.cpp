@@ -55,6 +55,10 @@
 #include "dogen.text.cpp/types/transforms/types/part_class_implementation_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_implementation_factory_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/helper_class_header_transform_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/helper_class_header_factory_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp"
 
@@ -98,6 +102,10 @@ void initializer::initialize(registrar& rg) {
     register_formatter<part_class_implementation_transform_transform>(rg);
     register_formatter<part_class_header_factory_transform>(rg);
     register_formatter<part_class_implementation_factory_transform>(rg);
+    register_formatter<helper_class_header_transform_transform>(rg);
+    register_formatter<helper_class_implementation_transform_transform>(rg);
+    register_formatter<helper_class_header_factory_transform>(rg);
+    register_formatter<helper_class_implementation_factory_transform>(rg);
     register_formatter<archetype_kind_class_header_factory_transform>(rg);
     register_formatter<archetype_kind_class_implementation_factory_transform>(rg);
     register_helper_formatter<smart_pointer_helper>(rg);

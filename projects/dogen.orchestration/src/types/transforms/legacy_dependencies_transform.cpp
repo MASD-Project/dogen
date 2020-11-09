@@ -35,6 +35,7 @@
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 #include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -200,6 +201,7 @@ public:
     void visit(const logical::entities::physical::facet& v);
     void visit(const logical::entities::physical::backend& v);
     void visit(const logical::entities::physical::part& v);
+    void visit(const logical::entities::physical::helper& v);
     void visit(const logical::entities::physical::archetype_kind& v);
     void visit(const logical::entities::serialization::type_registrar& v);
     void visit(const logical::entities::variability::feature_bundle& v);
@@ -410,6 +412,38 @@ void region_processor::visit(const logical::entities::physical::part& v) {
                 "dogen.utility/types/log/logger.hpp");
             b.add_as_user(
                 "dogen.text/types/transforms/transformation_error.hpp");
+        }
+        build(b, a);
+    }
+}
+
+void region_processor::visit(const logical::entities::physical::helper& v) {
+    auto& pr(region_.physical_region());
+    for (auto& pair : pr.artefacts_by_archetype()) {
+        const auto& pmid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
+
+        dependencies_builder
+            b(inclusion_directives_, enabled_archetype_for_element_);
+        auto& a(*pair.second);
+        if (pmid.value() == "masd.cpp.types.helper_class_header_transform") {
+            using identification::entities::technical_space;
+            if (v.major_technical_space() == technical_space::cpp) {
+                b.add_as_user(
+                    "dogen.text.cpp/types/transforms/helper_transform.hpp");
+            } else if (v.major_technical_space() == technical_space::csharp) {
+                b.add_as_user(
+                    "dogen.text.csharp/types/transforms/helper_transform.hpp");
+            }
+        } else if (pmid.value() == "masd.cpp.types.helper_class_implementation_transform") {
+            // no deps
+        } else if (pmid.value() == "masd.cpp.types.helper_class_implementation_factory") {
+            b.add(v.name(),
+                "masd.cpp.types.helper_class_header_factory");
+            b.add_as_user(
+                "dogen.identification/types/helpers/physical_meta_name_factory.hpp");
+        } else if (pmid.value() == "masd.cpp.types.helper_class_header_factory") {
+            b.add_as_user("dogen.physical/types/entities/helper.hpp");
         }
         build(b, a);
     }
