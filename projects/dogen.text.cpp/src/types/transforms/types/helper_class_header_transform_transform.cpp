@@ -76,8 +76,6 @@ ast.stream() << "    void apply(assistant& a," << std::endl;
 ast.stream() << "        const logical::entities::helper_properties& hc) const override;" << std::endl;
 ast.stream() << "};" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "};" << std::endl;
-ast.stream() << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf

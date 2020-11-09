@@ -41884,8 +41884,6 @@ public:
         const logical::entities::helper_properties&amp; hc) const override;
 };
 
-};
-
 &lt;#+
         } // snf
 #&gt;
@@ -42466,7 +42464,7 @@ physical::entities::helper &lt;#= sn #&gt;::make() {
     physical::entities::helper r;
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
-    r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
+    // r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;
