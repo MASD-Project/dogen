@@ -18,26 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/test_data/associative_container_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/associative_container_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
-
-std::string associative_container_helper::id() const {
+std::string associative_container_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string associative_container_helper::family() const {
+std::string associative_container_helper_transform::family() const {
     static std::string r("AssociativeContainer");
     return r;
 }
 
 std::list<std::string>
-associative_container_helper::owning_formatters() const {
+associative_container_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_implementation_archetype_qn(),
         traits::primitive_implementation_archetype_qn()
@@ -46,24 +45,24 @@ associative_container_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-associative_container_helper::owning_facets() const {
+associative_container_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet_qn()
     });
     return r;
 }
 
-std::string associative_container_helper::helper_name() const {
-    static std::string r("associative_container_helper");
+std::string associative_container_helper_transform::helper_name() const {
+    static std::string r("associative_container_helper_transform");
     return r;
 }
 
-bool associative_container_helper::is_enabled(const assistant& /*a*/,
+bool associative_container_helper_transform::is_enabled(const assistant& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void associative_container_helper::
+void associative_container_helper_transform::
 apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());

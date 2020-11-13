@@ -18,31 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_ASSOCIATIVE_CONTAINER_HELPER_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_ASSOCIATIVE_CONTAINER_HELPER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
-#include "dogen.text.cpp/types/transforms/helper_transform.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/associative_container_helper_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
-class associative_container_helper : public helper_transform {
-public:
-    std::string id() const override;
-    std::string family() const override;
-    std::list<std::string> owning_formatters() const override;
-    std::list<std::string> owning_facets() const override;
-    std::string helper_name() const override;
-    bool is_enabled(const assistant& a,
-        const logical::entities::helper_properties& hc) const override;
-    void apply(assistant& a,
-        const logical::entities::helper_properties& hc) const override;
-};
+physical::entities::helper associative_container_helper_factory::make() {
+    physical::entities::helper r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "test_data", "associative_container_helper"));
+    // r.relations().status(physical::entities::relation_status::);
 
+    return r;
 }
 
-#endif
+}
