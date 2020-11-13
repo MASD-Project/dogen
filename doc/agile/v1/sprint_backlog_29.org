@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-09 Mon 21:01]
-| <75>                                                 |         |       |      |       |
-| Headline                                             | Time    |       |      |     % |
-|------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                         | *16:05* |       |      | 100.0 |
-|------------------------------------------------------+---------+-------+------+-------|
-| Stories                                              | 16:05   |       |      | 100.0 |
-| Active                                               |         | 16:05 |      | 100.0 |
-| edit release notes for previous sprint               |         |       | 5:04 |  31.5 |
-| Create a demo and presentation for previous sprint   |         |       | 0:28 |   2.9 |
-| Sprint and product backlog grooming                  |         |       | 1:29 |   9.2 |
-| Improvements to template processing in logical model |         |       | 0:26 |   2.7 |
-| Add C++ helpers to the PMM                           |         |       | 8:38 |  53.7 |
+#+CAPTION: Clock summary at [2020-11-13 Fri 12:19]
+| <75>                                                 |         |       |       |       |
+| Headline                                             | Time    |       |       |     % |
+|------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                         | *19:05* |       |       | 100.0 |
+|------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                              | 19:05   |       |       | 100.0 |
+| Active                                               |         | 19:05 |       | 100.0 |
+| edit release notes for previous sprint               |         |       |  5:04 |  26.6 |
+| Create a demo and presentation for previous sprint   |         |       |  0:28 |   2.4 |
+| Sprint and product backlog grooming                  |         |       |  1:29 |   7.8 |
+| Improvements to template processing in logical model |         |       |  0:26 |   2.3 |
+| Add C++ helpers to the PMM                           |         |       | 11:38 |  61.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -296,6 +296,9 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-13 Fri 11:01]--[2020-11-13 Fri 12:19] =>  1:18
+    CLOCK: [2020-11-13 Fri 09:15]--[2020-11-13 Fri 10:33] =>  1:38
+    CLOCK: [2020-11-10 Tue 20:46]--[2020-11-10 Tue 21:10] =>  0:24
     CLOCK: [2020-11-09 Mon 20:30]--[2020-11-09 Mon 21:00] =>  0:30
     CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
     CLOCK: [2020-11-08 Sun 15:55]--[2020-11-08 Sun 16:18] =>  0:23
@@ -330,7 +333,9 @@ Notes:
 
 - no includes have been added.
 - relation status is not being populated. Need to add meta-data.
-- cpp has a dummy function for transform. Need to update rendering transform.
+- cpp has a dummy function for transform. Need to update rendering
+  transform. We need to use a template method or supply the element
+  pointer to get access to the decorations.
 
 Merged stories:
 
@@ -503,6 +508,11 @@ are the transforms that are done on the model.
 Notes:
 
 - rename =logical_physical_region= to just =region=.
+- actually another way of looking at this is trying to figure out what
+  is the dominant responsibility of the component. The LPS will
+  probably be 2 or 3 types whereas the M2T transforms will be 99% of
+  the types. We probably should name the model after lps and the
+  component after the M2Ts.
 
 *** Rename "model-to-X" to TLAs                                       :story:
 
@@ -547,13 +557,13 @@ new "command" in dogen.
 
 Actually we should just create a meta-element for the colouring
 script. It is populated by looking at the static properties of each
-meta-element (once they are modeled correctly). If [[*Add support for "colour themes" to dogen][there are themes]],
+meta-element (once they are modeled correctly). If there are themes,
 we should make it a function that takes in an argument with the theme
 name. Note also that we should take into account user-defined
 colouring schemes. This is mainly associated with profiles. For this
 we just need to have a colour property in the profile and use it in
 exactly the same fashion as we do for meta-elements. For good measure,
-once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
+once we start distributing the colouring script with dogen, we can
 simply call the main script from the user script.
 
 Links:
