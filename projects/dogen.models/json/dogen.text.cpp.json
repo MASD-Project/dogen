@@ -1044,13 +1044,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::io::variant_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::serialization::path_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3861,6 +3854,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/ptree_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto nt_qn(d.name_tree_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {\n    std::ostringstream ss;\n    boost::property_tree::write_json(ss, v);\n\n    std::string content(ss.str());\n    boost::replace_all(content, \"\\r\\n\", \"\");\n    boost::replace_all(content, \"\\n\", \"\");\n\n    s << content;\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::io::variant_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation",
+        "masd.wale.kvp.class.simple_name": "variant_helper_transform",
+        "masd.wale.kvp.helper.family": "BoostVariant"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/variant_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid variant_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto nt_qn(d.name_tree_qualified());\n        const auto n_qn(d.name_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n#>\n\nstruct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<> {\n    <#= d.name_tree_identifiable() #>_visitor(std::ostream& s) : stream_(s) {\n        s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"<#= d.name_qualified() #>\\\"\" << \", \";\n        s << \"\\\"data\\\": \";\n    }\n\n    ~<#= d.name_tree_identifiable() #>_visitor() { stream_ << \" }\"; }\n<#+\n        for (const auto& dd : hp.direct_descendants()) {\n#>\n\n    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? \"\" : \"&\") #> v) const {\n<#+\n            if (dd.is_simple_type()) {\n#>\n        stream_ << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"<#= dd.name_qualified() #>\\\"\" << \", \";\n        stream_ << \"\\\"value\\\": \";\n        stream_ << <#= ast.streaming_for_type(dd, \"v\") #>;\n        stream_ << \" }\";\n<#+\n            } else\n#>\n        stream_ << <#= ast.streaming_for_type(dd, \"v\") #>;\n    }\n<#+\n        }\n#>\n\nprivate:\n    std::ostream& stream_;\n};\n\ninline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified() #>& v) {\n    boost::apply_visitor(<#= d.name_tree_identifiable() #>_visitor(s), v);\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
         }
       ]
     }
