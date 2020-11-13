@@ -33,7 +33,7 @@
 #include "dogen.text.cpp/types/transforms/io/ptree_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/sequence_container_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/smart_pointer_helper.hpp"
-#include "dogen.text.cpp/types/transforms/io/string_helper.hpp"
+#include "dogen.text.cpp/types/transforms/io/string_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/variant_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/initializer.hpp"
 
@@ -54,7 +54,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<pair_helper_transform>(rg);
     register_helper_formatter<ptree_helper>(rg);
     register_helper_formatter<sequence_container_helper>(rg);
-    register_helper_formatter<string_helper>(rg);
+    register_helper_formatter<string_helper_transform>(rg);
     register_helper_formatter<variant_helper>(rg);
 }
 

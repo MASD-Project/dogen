@@ -18,27 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/io/string_helper.hpp"
+#include "dogen.text.cpp/types/transforms/io/string_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::io {
-
-std::string string_helper::id() const {
+std::string string_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string string_helper::family() const {
+std::string string_helper_transform::family() const {
     static std::string r("String");
     return r;
 }
 
 std::list<std::string>
-string_helper::owning_formatters() const {
+string_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         io::traits::class_implementation_archetype_qn(),
         io::traits::primitive_implementation_archetype_qn(),
@@ -49,24 +48,24 @@ string_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-string_helper::owning_facets() const {
+string_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         io::traits::facet_qn(), types::traits::facet_qn()
     });
     return r;
 }
 
-std::string string_helper::helper_name() const {
-    static std::string r("string_helper");
+std::string string_helper_transform::helper_name() const {
+    static std::string r("string_helper_transform");
     return r;
 }
 
-bool string_helper::is_enabled(const assistant& a,
+bool string_helper_transform::is_enabled(const assistant& a,
     const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
-void string_helper::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
 ast.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 ast.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
 ast.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
