@@ -229,27 +229,34 @@ void template_rendering_transform::
 render_all_templates(const context& ctx, entities::model& m) {
     const auto& fm(*ctx.feature_model());
     auto& archs(m.physical_elements().archetypes());
-    for (auto& pair : archs) {
-        const auto& id(pair.first);
-        auto& arch(*pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id.value();
 
-        /*
-         * We start by rendering the wale template. This may not
-         * exist, in which case the string will be empty.
-         */
-        const auto& cfg(*arch.configuration());
-        auto& tt(arch.text_templating());
-        const auto rs(arch.relations().status());
-        const auto rwt(render_wale_template(fm, cfg, id, rs, tt));
+    const auto lambda([&](auto& e) {
+            const auto& id(e.name().id());
+            BOOST_LOG_SEV(lg, debug) << "Processing: " << id.value();
 
-        /*
-         * Now render the stitch template and update the archetype.
-         */
-        const auto& dec(arch.decoration());
-        const auto rst(render_stitch_template(fm, dec, id, rwt, tt));
-        arch.text_templating().rendered_stitch_template(rst);
-    }
+            /*
+             * We start by rendering the wale template. This may not
+             * exist, in which case the string will be empty.
+             */
+            const auto& cfg(*e.configuration());
+            auto& tt(e.text_templating());
+            const auto rs(e.relations().status());
+            const auto rwt(render_wale_template(fm, cfg, id, rs, tt));
+
+            /*
+             * Now render the stitch template and update the archetype.
+             */
+            const auto& dec(e.decoration());
+            const auto rst(render_stitch_template(fm, dec, id, rwt, tt));
+            e.text_templating().rendered_stitch_template(rst);
+        });
+
+    /*
+     * Process archetypes.
+     */
+    for (auto& pair : archs)
+        lambda(*pair.second);
+
 }
 
 void template_rendering_transform::
