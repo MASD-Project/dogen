@@ -1037,13 +1037,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::hash::sequence_container_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::hash::ptime_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3753,6 +3746,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/associative_container_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid associative_container_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n\n    if (hp.direct_descendants().size() == 2) {\n        const auto key(hp.direct_descendants().front());\n        const auto value(hp.direct_descendants().back());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n    for (const auto& i : v) {\n<#+\n        if (!key.requires_hashing_helper())\n#>\n        combine(seed, i.first);\n<#+\n        else\n#>\n        combine(seed, hash_<#= key.name_tree_identifiable() #>(i.first));\n<#+\n\n        if (!(value.requires_hashing_helper()))\n#>\n        combine(seed, i.second);\n<#+\n        else\n#>\n        combine(seed, hash_<#= value.name_tree_identifiable() #>(i.second));\n    }\n    return seed;\n}\n<#+\n    } else {\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n    for (const auto& i : v) {\n<#+\n    if (!containee.requires_hashing_helper())\n#>\n        combine(seed, i);\n<#+\n    else\n#>\n        combine(seed, hash_<#= containee.name_tree_identifiable() #>(i));\n    }\n    return seed;\n}\n<#+\n    }\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::hash::sequence_container_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "sequence_container_helper_transform",
+        "masd.wale.kvp.helper.family": "SequenceContainer"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/sequence_container_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid sequence_container_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n    const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n    for (const auto& i : v) {\n<#+\n    if (!containee.requires_hashing_helper())\n#>\n        combine(seed, i);\n<#+\n    else\n#>\n        combine(seed, hash_<#= containee.name_tree_identifiable() #>(i));\n    }\n    return seed;\n}\n<#+\n}\n#>\n"
         }
       ]
     }
