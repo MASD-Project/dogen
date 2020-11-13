@@ -19,14 +19,14 @@
  *
  */
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_new_helper_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-physical::entities::helper smart_pointer_new_helper_factory::make() {
+physical::entities::helper smart_pointer_helper_factory::make() {
     physical::entities::helper r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "types", "smart_pointer_new_helper"));
+    r.meta_name(pmnf::make("cpp", "types", "smart_pointer_helper"));
     // r.relations().status(physical::entities::relation_status::);
 
     return r;

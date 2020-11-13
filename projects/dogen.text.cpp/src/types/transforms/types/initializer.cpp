@@ -32,7 +32,7 @@
 #include "dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp"
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper.hpp"
+#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_header_transform.hpp"
@@ -108,7 +108,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<helper_class_implementation_factory_transform>(rg);
     register_formatter<archetype_kind_class_header_factory_transform>(rg);
     register_formatter<archetype_kind_class_implementation_factory_transform>(rg);
-    register_helper_formatter<smart_pointer_helper>(rg);
+    register_helper_formatter<smart_pointer_helper_transform>(rg);
 }
 
 }

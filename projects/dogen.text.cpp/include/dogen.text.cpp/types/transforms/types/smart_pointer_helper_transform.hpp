@@ -18,29 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_SMART_POINTER_NEW_HELPER_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_SMART_POINTER_NEW_HELPER_FACTORY_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_SMART_POINTER_HELPER_TRANSFORM_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_SMART_POINTER_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/helper.hpp"
+#include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-/**
- * @brief Creates a physical representation for the helper
- * smart_pointer_new_helper.
- *
- * Helper documentation: 
- */
-class smart_pointer_new_helper_factory final {
+class smart_pointer_helper_transform final : public helper_transform {
 public:
-    /**
-     * @brief Makes the helper.
-     */
-    static physical::entities::helper make();
+    std::string id() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    std::string helper_name() const override;
+    bool is_enabled(const assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+    void apply(assistant& a,
+        const logical::entities::helper_properties& hc) const override;
 };
 
 }
