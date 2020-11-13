@@ -28,7 +28,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/associative_container_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/bool_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/char_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/char_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/domain_type_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/number_helper.hpp"
@@ -54,9 +54,10 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_implementation_transform>(rg);
     register_formatter<enum_header_transform>(rg);
     register_formatter<enum_implementation_transform>(rg);
+
     register_helper_formatter<associative_container_helper>(rg);
     register_helper_formatter<bool_helper_transform>(rg);
-    register_helper_formatter<char_helper>(rg);
+    register_helper_formatter<char_helper_transform>(rg);
     register_helper_formatter<date_helper_transform>(rg);
     register_helper_formatter<domain_type_helper>(rg);
     register_helper_formatter<number_helper>(rg);
