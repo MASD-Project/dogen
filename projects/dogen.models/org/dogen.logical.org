@@ -344,6 +344,10 @@ meta-types (object templates) and non-types (modules and backend specific entiti
 
 If set, decoration to be added to each generated file.
 
+*** helper_properties
+:PROPERTIES:
+:masd.codec.type: std::list<helper_properties>
+:END:
 ** entities::model
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable, MetaNameable, Provenance
@@ -701,6 +705,7 @@ Lists all stereotypes defined in the masd UML profile.
 *** physical_archetype
 *** physical_archetype_kind
 *** physical_part
+*** physical_helper
 ** entities::input_model_set
 Represents a set of related logical models used as an input to the logical model chains.
 
@@ -2366,26 +2371,16 @@ Logical representation of elements in the physical dimension.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
 :END:
+**** helpers
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>
+:END:
 *** entities::physical::archetype
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement, HasTechnicalSpace
 :END:
 
 Represents an archetype within a facet.
-
-**** meta_model_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the physical meta-model containing this element.
-
-**** backend_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the backend containing this element.
 
 **** facet_name
 :PROPERTIES:
@@ -2417,7 +2412,7 @@ Relation information for this archetype.
 
 **** text_templating
 :PROPERTIES:
-:masd.codec.type: archetype_text_templating
+:masd.codec.type: text_templating
 :END:
 
 Properties related to the text templating for this archetype.
@@ -2435,13 +2430,6 @@ Default postfix to use for this archetype.
 :END:
 
 Represents a physical backend, targetting a major technical space such as C++ or C#.
-
-**** meta_model_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the physical meta-model containing this element.
 
 **** facets
 :PROPERTIES:
@@ -2464,13 +2452,6 @@ All parts within this backend.
 
 Kinds of archetypes defined in this backend.
 
-**** backend_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-FIXME: temporary attribute until we can rename the top-level namespaces.
-
 **** directory_name
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -2485,20 +2466,6 @@ Default directory name to use for this backend.
 
 Represents a facet within a backend, such as type definitions.
 
-**** meta_model_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the physical meta-model containing this element.
-
-**** backend_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the backend containing this element.
-
 **** archetypes
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
@@ -2506,6 +2473,10 @@ Name of the backend containing this element.
 
 All archetypes in this facet.
 
+**** helpers
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::logical_name>
+:END:
 **** directory_name
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -2526,20 +2497,6 @@ Default postfix to use for this facet.
 :END:
 
 Part whithin a backend.
-
-**** meta_model_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the physical meta-model containing this element.
-
-**** backend_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the backend containing this element.
 
 **** external_modules_path_contribution
 :PROPERTIES:
@@ -2594,20 +2551,6 @@ Default directory name to use for this part.
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement
 :END:
-**** meta_model_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the physical meta-model containing this element.
-
-**** backend_name
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Name of the backend containing this element.
-
 **** file_extension
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -2632,6 +2575,20 @@ Unique identifier in physical space for this element.
 :END:
 
 Technical space to which this physical element belongs to.
+
+**** meta_model_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the physical meta-model containing this element.
+
+**** backend_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the backend containing this element.
 
 *** entities::physical::variable_relation
 :PROPERTIES:
@@ -2696,7 +2653,7 @@ element.
 :PROPERTIES:
 :masd.codec.type: std::list<hard_coded_relation>
 :END:
-*** entities::physical::archetype_text_templating
+*** entities::physical::text_templating
 :PROPERTIES:
 :masd.codec.stereotypes: Configurable
 :END:
@@ -2750,6 +2707,45 @@ Relation information for this archetype.
 :END:
 
 Technical space to which this physical element belongs to.
+
+*** entities::physical::helper
+:PROPERTIES:
+:masd.codec.stereotypes: logical::meta_element, PhysicalElement
+:END:
+**** part_id
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+**** facet_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+**** family
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+**** owning_formatters
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+**** owning_facets
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+**** helper_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+**** text_templating
+:PROPERTIES:
+:masd.codec.type: text_templating
+:END:
+**** relations
+:PROPERTIES:
+:masd.codec.type: relations
+:END:
+
+Relation information for this helper.
 
 ** entities::output_model_set
 :PROPERTIES:
@@ -2818,6 +2814,64 @@ Stereotypes that are not part of the masd UML profile. These are user defined.
 :masd.codec.type: std::string
 :END:
 *** remove_unprintable_characters
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+** entities::helper_properties
+*** current
+:PROPERTIES:
+:masd.codec.type: helper_descriptor
+:END:
+*** direct_descendants
+:PROPERTIES:
+:masd.codec.type: std::list<helper_descriptor>
+:END:
+*** in_inheritance_relationship
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+** entities::helper_descriptor
+*** family
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** namespaces
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+*** name_identifiable
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** name_qualified
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** name_tree_qualified
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** name_tree_identifiable
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** streaming_properties
+:PROPERTIES:
+:masd.codec.type: boost::optional<streaming_properties>
+:END:
+*** is_simple_type
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** requires_hashing_helper
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** is_circular_dependency
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** is_pointer
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -3019,11 +3073,7 @@ An error occurred whilst applying a transformation.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::logic_less_templates_population_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::archetype_rendering_transform
+** transforms::template_rendering_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -4120,6 +4170,49 @@ If true, the modeling element requires stream manipulators.
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "true"
+:END:
+** features::helpers
+:PROPERTIES:
+:masd.variability.key_prefix: masd
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+*** cpp.helper.family
+:PROPERTIES:
+:masd.variability.binding_point: element
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "Default"
+:END:
+
+Which family of helpers to use for this modeling element.
+
+** features::physical_helpers
+:PROPERTIES:
+:masd.variability.default_binding_point: element
+:masd.variability.key_prefix: masd.physical.helpers
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+
+Features related to the helpers in physical domain.
+
+
+
+*** family
+:PROPERTIES:
+:masd.codec.type: masd::variability::text
+:END:
+*** owning_formatters
+:PROPERTIES:
+:masd.codec.type: masd::variability::text_collection
+:END:
+*** owning_facets
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text_collection
+:END:
+*** wale_template_reference
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text
 :END:
 * registrar
 :PROPERTIES:

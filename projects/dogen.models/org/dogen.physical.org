@@ -243,6 +243,10 @@ Represents a meta-region in physical space with archetypes for a given theme.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
+*** helpers
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, helper>
+:END:
 *** default_archetype_for_logical_meta_model_id
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, archetype>
@@ -1335,6 +1339,36 @@ Any other directives that are also needed for this element.
 
 Technical space to which this physical element belongs to.
 
+** entities::helper
+:PROPERTIES:
+:masd.codec.stereotypes: MetaElement, Associatable, HasTechnicalSpace
+:END:
+*** relations
+:PROPERTIES:
+:masd.codec.type: relations
+:END:
+
+Properties of this helper with regards to relations.
+
+*** part
+:PROPERTIES:
+:masd.codec.type: identification::entities::physical_meta_id
+:END:
+
+Part in which we are located.
+
+*** family
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** owning_formatters
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::physical_meta_id>
+:END:
+*** owning_facets
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::physical_meta_id>
+:END:
 * features
 :PROPERTIES:
 :masd.codec.dia.comment: true

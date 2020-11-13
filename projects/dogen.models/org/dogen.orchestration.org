@@ -110,6 +110,10 @@ An error occurred in the factory whilst making.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
+** transforms::elements_removal_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
 * generator
 :PROPERTIES:
 :masd.generalization.parent: dogen::generator

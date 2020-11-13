@@ -1409,10 +1409,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #>
 
 #+end_src
-*** transforms::types::smart_pointer_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
 *** transforms::types::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
@@ -3420,7 +3416,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
-Generates header files for archetypes.
+Generates header files for parts.
 
 **** stitch_template_content
 #+begin_src fundamental
@@ -3483,7 +3479,7 @@ public:
 :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
-Generates implementation files for archetypes.
+Generates implementation files for parts.
 
 **** stitch_template_content
 #+begin_src fundamental
@@ -4185,7 +4181,7 @@ physical::entities::backend <#= sn #>::make() {
 :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
-Generates header files for backend factories.
+Generates header files for part factories.
 
 **** stitch_template_content
 #+begin_src fundamental
@@ -4493,6 +4489,375 @@ physical::entities::archetype_kind <#= sn #>::make() {
 
 }
 
+#>
+
+#+end_src
+*** transforms::types::smart_pointer_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
+:masd.wale.kvp.helper.family: SmartPointer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+#>
+
+inline bool operator==(const <#= qn #>& lhs,
+const <#= qn #>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+
+#>
+
+#+end_src
+*** transforms::types::helper_class_header_transform
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
+:masd.wale.kvp.class.simple_name: helper_class_header_transform_transform
+:masd.wale.kvp.archetype.simple_name: helper_class_header_transform
+:masd.wale.kvp.meta_element: physical_helper
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:END:
+
+Generates header files for helpers.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_transform_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_transform_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void helper_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "types helper class header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::physical::helper>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(o.name().simple() + "_transform");
+#>
+
+class <#= sn #> final : public helper_transform {
+public:
+    std::string id() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    std::string helper_name() const override;
+    bool is_enabled(const assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+    void apply(assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
+
+#>
+
+#+end_src
+*** transforms::types::helper_class_implementation_transform
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
+:masd.wale.kvp.class.simple_name: helper_class_implementation_transform_transform
+:masd.wale.kvp.archetype.simple_name: helper_class_implementation_transform
+:masd.wale.kvp.meta_element: physical_helper
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: transform
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:END:
+
+Generates implementation files for helpers.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void helper_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "helper class implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto& arch(ast.as<logical::entities::physical::helper>(e));
+    ast.update_artefact();
+    a.content(arch.text_templating().rendered_stitch_template());
+    stp.end_transform(a);
+}
+
+#>
+
+#+end_src
+*** transforms::types::helper_class_header_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
+:masd.wale.kvp.class.simple_name: helper_class_header_factory_transform
+:masd.wale.kvp.archetype.simple_name: helper_class_header_factory
+:masd.wale.kvp.meta_element: physical_helper
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.wale.kvp.class.inclusion_support_type: regular_support
+:masd.physical.relation_status: relatable
+:masd.label.role: type_declaration
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
+:END:
+
+Generates header files for helper factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void helper_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "types helper class header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::physical::helper>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+/**
+ * @brief Creates a physical representation for the helper
+ * <#= o.name().simple() #>.
+ *
+ * Helper documentation: <#= o.documentation() #>
+ */
+class <#= o.name().simple() #>_factory final {
+public:
+    /**
+     * @brief Makes the helper.
+     */
+    static physical::entities::helper make();
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
+
+#>
+
+#+end_src
+*** transforms::types::helper_class_implementation_factory
+:PROPERTIES:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
+:masd.wale.kvp.class.simple_name: helper_class_implementation_factory_transform
+:masd.wale.kvp.archetype.simple_name: helper_class_implementation_factory
+:masd.wale.kvp.meta_element: physical_helper
+:masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.postfix: factory
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:END:
+
+Generates implementation files for helper factories.
+
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void helper_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "helper class implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto& arch(ast.as<logical::entities::physical::helper>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(arch));
+        {
+            const auto ns(ast.make_namespaces(arch.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(arch.name().simple() + "_factory");
+#>
+
+physical::entities::helper <#= sn #>::make() {
+    physical::entities::helper r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("<#= arch.backend_name() #>", "<#= arch.facet_name() #>", "<#= arch.name().simple() #>"));
+    // r.relations().status(physical::entities::relation_status::<#= arch.relations().status() #>);
+<#+
+            for(const auto& l : arch.labels()) {
+#>
+    r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
+<#+
+            }
+
+            for(const auto& cr : arch.relations().constant()) {
+#>
+
+    r.relations().constant().push_back(
+        physical::entities::constant_relation(
+            "<#= cr.original_urn() #>",
+            ""/*resolved_urn*/,
+<#+
+                if (cr.labels().empty()) {
+#>
+            std::list<identification::entities::label> {},
+<#+
+                } else {
+#>
+            std::list<identification::entities::label> {
+<#+
+                    utility::formatters::sequence_formatter sf(cr.labels().size());
+                    // sf.prefix_configuration().first(": ").not_first("  ");
+                    sf.postfix_configuration().not_last(",")/*.last("")*/;
+
+                    for(const auto& l : cr.labels()) {
+#>
+                identification::entities::label("<#= l.key() #>", "<#= l.value() #>")<#= sf.postfix() #>
+<#+
+                        sf.next();
+                    }
+#>
+            },
+<#+
+                }
+#>
+            "<#= cr.logical_model_element_id() #>"
+        )
+    );
+<#+
+            }
+
+            for(const auto& vr : arch.relations().variable()) {
+#>
+
+    r.relations().variable().push_back(
+        physical::entities::variable_relation(
+            "<#= vr.original_urn() #>",
+            ""/*resolved_urn*/,
+            physical::entities::variable_relation_type::<#= vr.type() #>
+        )
+    );
+<#+
+            }
+#>
+
+    return r;
+}
+
+<#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
 #>
 
 #+end_src
@@ -4825,50 +5190,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #>
 
 #+end_src
-*** transforms::hash::smart_pointer_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::time_duration_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::ptree_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::associative_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::date_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::optional_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::path_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::pair_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::sequence_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::ptime_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::hash::variant_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
 *** transforms::hash::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
@@ -5035,6 +5356,514 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::hash::date_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: date_helper_transform
+:masd.wale.kvp.helper.family: BoostDate
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/date_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void date_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    combine(seed, v.modjulian_day());
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::optional_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: optional_helper_transform
+:masd.wale.kvp.helper.family: Optional
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/optional_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void optional_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+<#+
+    if (!containee.requires_hashing_helper())
+#>
+    combine(seed, *v);
+<#+
+    else
+#>
+    combine(seed, hash_<#= containee.name_tree_identifiable() #>(*v));
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::pair_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: pair_helper_transform
+:masd.wale.kvp.helper.family: Pair
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/pair_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void pair_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto first(hp.direct_descendants().front());
+    const auto second(hp.direct_descendants().back());
+#
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+
+<#+
+    if (!first.requires_hashing_helper())
+#>
+    combine(seed, v.first);
+<#+
+    else
+#>
+    combine(seed, hash_<#= first.name_tree_identifiable() #>(v.first));
+<#+
+
+    if (!second.requires_hashing_helper())
+#>
+    combine(seed, v.second);
+<#+
+    else
+#>
+    combine(seed, hash_<#= second.name_tree_identifiable() #>(v.second));
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::time_duration_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: time_duration_helper_transform
+:masd.wale.kvp.helper.family: BoostTimeDuration
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/time_duration_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void time_duration_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    seed = static_cast<std::size_t>(v.total_seconds());
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::path_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: path_helper_transform
+:masd.wale.kvp.helper.family: BoostPath
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/path_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void path_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::associative_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: associative_container_helper_transform
+:masd.wale.kvp.helper.family: AssociativeContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/associative_container_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void associative_container_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+
+    if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    for (const auto& i : v) {
+<#+
+        if (!key.requires_hashing_helper())
+#>
+        combine(seed, i.first);
+<#+
+        else
+#>
+        combine(seed, hash_<#= key.name_tree_identifiable() #>(i.first));
+<#+
+
+        if (!(value.requires_hashing_helper()))
+#>
+        combine(seed, i.second);
+<#+
+        else
+#>
+        combine(seed, hash_<#= value.name_tree_identifiable() #>(i.second));
+    }
+    return seed;
+}
+<#+
+    } else {
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    for (const auto& i : v) {
+<#+
+    if (!containee.requires_hashing_helper())
+#>
+        combine(seed, i);
+<#+
+    else
+#>
+        combine(seed, hash_<#= containee.name_tree_identifiable() #>(i));
+    }
+    return seed;
+}
+<#+
+    }
+}
+#>
+
+#+end_src
+*** transforms::hash::sequence_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: sequence_container_helper_transform
+:masd.wale.kvp.helper.family: SequenceContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/sequence_container_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void sequence_container_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    for (const auto& i : v) {
+<#+
+    if (!containee.requires_hashing_helper())
+#>
+        combine(seed, i);
+<#+
+    else
+#>
+        combine(seed, hash_<#= containee.name_tree_identifiable() #>(i));
+    }
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::variant_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: variant_helper_transform
+:masd.wale.kvp.helper.family: BoostVariant
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/variant_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void variant_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto key(hp.direct_descendants().front());
+    const auto value(hp.direct_descendants().back());
+#>
+
+struct <#= ident #>_visitor : public boost::static_visitor<> {
+    <#= ident #>_visitor() : hash(0) {}
+<#+
+    for (const auto& dd : hp.direct_descendants()) {
+#>
+    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {
+<#+
+        if (!dd.requires_hashing_helper())
+#>
+        combine(hash, v);
+<#+
+        else
+#>
+        combine(hash, hash_<#= dd.name_tree_identifiable() #>(v));
+    }
+
+<#+
+    }
+#>
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    <#= ident #>_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::ptime_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: ptime_helper_transform
+:masd.wale.kvp.helper.family: BoostPTime
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/ptime_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptime_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
+    boost::posix_time::time_duration d(v - epoch);
+    seed = static_cast<std::size_t>(d.total_seconds());
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::ptree_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: ptree_helper_transform
+:masd.wale.kvp.helper.family: BoostPTree
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/ptree_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptree_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+    for (const auto& node : v) {
+        combine(seed, node.first);
+        combine(seed, node.second.data());
+        combine(seed, hash_<#= ident #>(node.second));
+    }
+
+    return seed;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::hash::smart_pointer_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
+:masd.wale.kvp.helper.family: SmartPointer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/smart_pointer_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    std::size_t seed(0);
+<#+
+    if (!containee.requires_hashing_helper())
+#>
+    combine(seed, *v);
+<#+
+    else
+#>
+    combine(seed, hash_<#= containee.name_tree_identifiable() #>(*v));
+    return seed;
+}
+<#+
 }
 #>
 
@@ -5386,42 +6215,8 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #>
 
 #+end_src
-*** transforms::io::associative_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::smart_pointer_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::ptree_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::optional_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::pair_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::sequence_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::variant_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::io::string_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
 *** transforms::io::inserter_implementation_helper
 :PROPERTIES:
-:masd.cpp.types.class_implementation.formatting_style: stitch
-:masd.cpp.types.class_implementation.overwrite: true
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::io::primitive_header
@@ -5574,6 +6369,421 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::io::optional_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: optional_helper_transform
+:masd.wale.kvp.helper.family: Optional
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/optional_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void optional_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        const auto n_qn(d.name_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << <#= ast.streaming_for_type(containee, "*v") #>;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::pair_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: pair_helper_transform
+:masd.wale.kvp.helper.family: Pair
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/pair_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        const auto n_qn(d.name_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        const auto first(hp.direct_descendants().front());
+        const auto second(hp.direct_descendants().back());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", ";
+
+    s << "\"first\": " << <#= ast.streaming_for_type(first, "v.first") #> << ", ";
+    s << "\"second\": " << <#= ast.streaming_for_type(second, "v.second") #>;
+    s << " }";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::string_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: string_helper_transform
+:masd.wale.kvp.helper.family: String
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/string_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+#>
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::ptree_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: ptree_helper_transform
+:masd.wale.kvp.helper.family: BoostPTree
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/ptree_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    std::ostringstream ss;
+    boost::property_tree::write_json(ss, v);
+
+    std::string content(ss.str());
+    boost::replace_all(content, "\r\n", "");
+    boost::replace_all(content, "\n", "");
+
+    s << content;
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::variant_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: variant_helper_transform
+:masd.wale.kvp.helper.family: BoostVariant
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/variant_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void variant_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        const auto n_qn(d.name_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+#>
+
+struct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<> {
+    <#= d.name_tree_identifiable() #>_visitor(std::ostream& s) : stream_(s) {
+        s << "{ " << "\"__type__\": " << "\"<#= d.name_qualified() #>\"" << ", ";
+        s << "\"data\": ";
+    }
+
+    ~<#= d.name_tree_identifiable() #>_visitor() { stream_ << " }"; }
+<#+
+        for (const auto& dd : hp.direct_descendants()) {
+#>
+
+    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {
+<#+
+            if (dd.is_simple_type()) {
+#>
+        stream_ << "{ " << "\"__type__\": " << "\"<#= dd.name_qualified() #>\"" << ", ";
+        stream_ << "\"value\": ";
+        stream_ << <#= ast.streaming_for_type(dd, "v") #>;
+        stream_ << " }";
+<#+
+            } else
+#>
+        stream_ << <#= ast.streaming_for_type(dd, "v") #>;
+    }
+<#+
+        }
+#>
+
+private:
+    std::ostream& stream_;
+};
+
+inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified() #>& v) {
+    boost::apply_visitor(<#= d.name_tree_identifiable() #>_visitor(s), v);
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::associative_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: associative_container_helper_transform
+:masd.wale.kvp.helper.family: AssociativeContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/associative_container_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void associative_container_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+
+        if (hp.direct_descendants().size() == 2) {
+            const auto key(hp.direct_descendants().front());
+            const auto value(hp.direct_descendants().back());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << <#= ast.streaming_for_type(key, "i->first") #>;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << <#= ast.streaming_for_type(value, "i->second") #>;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+<#+
+        } else {
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << <#= ast.streaming_for_type(containee, "*i") #>;
+    }
+    s << "] ";
+    return s;
+}
+
+<#+
+        }
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::sequence_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: sequence_container_helper_transform
+:masd.wale.kvp.helper.family: SequenceContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << <#= ast.streaming_for_type(containee, "*i") #>;
+    }
+    s << "] ";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>
+
+#+end_src
+*** transforms::io::smart_pointer_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
+:masd.wale.kvp.helper.family: SmartPointer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        const auto n_qn(d.name_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << <#= ast.streaming_for_type(containee, "*v") #>;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
 }
 #>
 
@@ -5934,10 +7144,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #>
 
 #+end_src
-*** transforms::serialization::path_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
 *** transforms::serialization::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
@@ -6419,6 +7625,51 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
     stp.end_transform(a);
 }
 
+#>
+
+#+end_src
+*** transforms::serialization::path_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: path_helper_transform
+:masd.wale.kvp.helper.family: BoostPath
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/path_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void path_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+#>
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
+{
+    std::string s;
+    if(Archive::is_saving::value)
+        s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+    if(Archive::is_loading::value)
+        p = s;
+}
+
+} }
+<#+
+    }
+}
 #>
 
 #+end_src
@@ -6944,70 +8195,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #>
 
 #+end_src
-*** transforms::test_data::associative_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::char_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::bool_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::date_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::domain_type_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::number_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::optional_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::pair_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::path_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::ptime_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::ptree_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::sequence_container_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::smart_pointer_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::string_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::time_duration_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
-*** transforms::test_data::variant_helper
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::cpp::helper_transform
-:END:
 *** transforms::test_data::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
@@ -7231,6 +8418,623 @@ populate(const unsigned int position, result_type& v) {
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::test_data::date_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: date_helper_transform
+:masd.wale.kvp.helper.family: BoostDate
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void date_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(const unsigned int position) {
+    const auto day(static_cast<unsigned short>(1 + (position % 27)));
+    boost::gregorian::date r(2002, 2, day);
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::bool_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: bool_helper_transform
+:masd.wale.kvp.helper.family: Boolean
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/bool_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void bool_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+#>
+
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::char_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: char_helper_transform
+:masd.wale.kvp.helper.family: Character
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/char_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void char_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #> create_<#= ident #>(const unsigned int position) {
+    const auto num(((position % 95) + 32) == 34 ? 35 : ((position % 95) + 32));
+    return static_cast<<#= qn #>>(num);
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::ptree_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: ptree_helper_transform
+:masd.wale.kvp.helper.family: BoostPTree
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/ptree_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(const unsigned int position) {
+    using boost::property_tree::ptree;
+    ptree c;
+    c.put("key_2", position);
+    ptree r;
+    r.push_back(ptree::value_type("key_1", c));
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::associative_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: associative_container_helper_transform
+:masd.wale.kvp.helper.family: AssociativeContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/associative_container_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void associative_container_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #> create_<#= ident #>(unsigned int position) {
+    <#= qn #> r;
+    for (unsigned int i(0); i < 4; ++i) {
+<#+
+    if (hp.direct_descendants().size() == 1) {
+        const auto containee(hp.direct_descendants().front());
+#>
+        r.insert(create_<#= containee.name_tree_identifiable() #>(position + i));
+<#+
+    } else if (hp.direct_descendants().size() == 2) {
+        const auto key(hp.direct_descendants().front());
+        const auto value(hp.direct_descendants().back());
+#>
+        r.insert(std::make_pair(create_<#= key.name_tree_identifiable() #>(position + i), create_<#= value.name_tree_identifiable() #>(position + i)));
+<#+
+    }
+#>
+    }
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::pair_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: pair_helper_transform
+:masd.wale.kvp.helper.family: Pair
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/pair_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto first(hp.direct_descendants().front());
+    const auto second(hp.direct_descendants().back());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r(
+        create_<#= first.name_tree_identifiable() #>(position),
+        create_<#= second.name_tree_identifiable() #>(position));
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::number_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: number_helper_transform
+:masd.wale.kvp.helper.family: Number
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/number_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void number_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #> create_<#= ident #>(const unsigned int position) {
+    return static_cast<<#= qn #>>(position);
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::variant_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: variant_helper_transform
+:masd.wale.kvp.helper.family: BoostVariant
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/variant_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void variant_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r;
+
+<#+
+    unsigned int i(0);
+    const auto size(hp.direct_descendants().size());
+    for (const auto& dd : hp.direct_descendants()) {
+        if (i == 0)
+#>
+    if (position == 0 || ((position % <#= size #>) == 0))
+<#+
+        else if (i == 1)
+#>
+    else if (position == 1 || ((position % <#= size + 1 #>) == 0))
+<#+
+        else
+#>
+    else if ((position % <#= i #>) == 0)
+        r = create_<#= dd.name_tree_identifiable() #>(position);
+<#+
+        ++i;
+    }
+#>
+
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::path_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: path_helper_transform
+:masd.wale.kvp.helper.family: BoostPath
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/path_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void path_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return <#= qn #>(s.str());
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::ptime_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: ptime_helper_transform
+:masd.wale.kvp.helper.family: BoostPTime
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptime_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(const unsigned int position) {
+    const auto day(static_cast<unsigned short>(1 + (position % 27)));
+    using boost::gregorian::date;
+    using boost::posix_time::ptime;
+    using boost::posix_time::time_duration;
+    date d(2002, 2, day);
+    ptime r(d, time_duration(1,2,3));
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::optional_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: optional_helper_transform
+:masd.wale.kvp.helper.family: Optional
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/optional_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void optional_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r(
+        create_<#= containee.name_tree_identifiable() #>(position));
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::smart_pointer_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
+:masd.wale.kvp.helper.family: SmartPointer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/smart_pointer_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r(
+        create_<#= containee.name_tree_identifiable() #>(position));
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::sequence_container_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: sequence_container_helper_transform
+:masd.wale.kvp.helper.family: SequenceContainer
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/sequence_container_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto containee(hp.direct_descendants().front());
+#>
+
+<#= qn #> create_<#= ident #>(unsigned int position) {
+    <#= qn #> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_<#= containee.name_tree_identifiable() #>(position + i));
+    }
+    return r;
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::string_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: string_helper_transform
+:masd.wale.kvp.helper.family: String
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/string_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+#>
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+<#+
+}
+#>
+
+#+end_src
+*** transforms::test_data::domain_type_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: domain_type_helper_transform
+:masd.wale.kvp.helper.family: Default
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/domain_type_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void domain_type_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const bool is_pointer(d.is_pointer());
+    const bool is_recursive(d.is_circular_dependency());
+
+    if (is_recursive) {
+#>
+
+<#= qn #><#= (is_pointer ? "*" : "") #>
+create_<#= ident #>(const unsigned int) {
+<#+
+        if (is_pointer) {
+#>
+    return nullptr;
+<#+
+        } else {
+#>
+    return <#= qn #>();
+<#+
+        }
+#>
+}
+<#+
+    } else {
+#>
+
+<#= qn #><#= (is_pointer ? "*" : "") #>
+create_<#= ident #>(const unsigned int position) {
+    return <#= qn #>_generator::create<#= (is_pointer ? "_ptr" : "") #>(position);
+}
+<#+
+    }
+}
+#>
+
+#+end_src
+*** transforms::test_data::time_duration_helper
+:PROPERTIES:
+:masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+:masd.wale.kvp.class.simple_name: time_duration_helper_transform
+:masd.wale.kvp.helper.family: BoostTimeDuration
+:masd.codec.stereotypes: masd::physical::helper
+:END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/time_duration_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void time_duration_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(const unsigned int position) {
+    unsigned int hour(position % 55);
+    using boost::posix_time::time_duration;
+    time_duration r(hour, 2, 3);
+    return r;
+}
+<#+
 }
 #>
 
@@ -7937,10 +9741,6 @@ Supplies additional information required for formatting.
 *** enabled_archetype_for_element
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
-:END:
-*** element_properties
-:PROPERTIES:
-:masd.codec.type: formattables::element_properties
 :END:
 *** model
 :PROPERTIES:
@@ -8997,21 +10797,6 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 #>
 
 #+end_src
-** transforms::global_features
-:PROPERTIES:
-:masd.variability.generate_static_configuration: false
-:masd.variability.key_prefix: masd.cpp
-:masd.codec.stereotypes: masd::variability::feature_bundle
-:END:
-*** helper.family
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "Default"
-:END:
-
-Which family of helpers to use for this modeling element.
-
 ** transforms::lexical_cast
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -10248,79 +12033,10 @@ and those used to generate them.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** logical::entities::helper_descriptor
-*** family
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** namespaces
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-*** name_identifiable
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_qualified
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_tree_qualified
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_tree_identifiable
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** streaming_properties
-:PROPERTIES:
-:masd.codec.type: boost::optional<logical::entities::streaming_properties>
-:END:
-*** is_simple_type
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** requires_hashing_helper
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** is_circular_dependency
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** is_pointer
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** logical::entities::helper_properties
-*** current
-:PROPERTIES:
-:masd.codec.type: logical::entities::helper_descriptor
-:END:
-*** direct_descendants
-:PROPERTIES:
-:masd.codec.type: std::list<logical::entities::helper_descriptor>
-:END:
-*** in_inheritance_relationship
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::element_properties
-All of the properties associated with an element.
-
-*** helper_properties
-:PROPERTIES:
-:masd.codec.type: std::list<logical::entities::helper_properties>
-:END:
 ** formattables::formattable
 *** element
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<logical::entities::element>
-:END:
-*** element_properties
-:PROPERTIES:
-:masd.codec.type: formattables::element_properties
 :END:
 *** artefacts
 :PROPERTIES:
@@ -10362,22 +12078,9 @@ An error occurred during adaptation.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::formattable>
 :END:
-** formattables::helper_configuration
-*** helper_families
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, std::string>
-:END:
-*** streaming_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, logical::entities::streaming_properties>
-:END:
 * initializer
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-* feature_initializer
-:PROPERTIES:
-:masd.codec.stereotypes: masd::variability::initializer
 :END:
 * cpp_artefact_transform_header
 :PROPERTIES:
