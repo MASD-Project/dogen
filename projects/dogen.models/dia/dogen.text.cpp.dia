@@ -16017,9 +16017,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.types.class_implementation.formatting_style=stitch
-#DOGEN masd.cpp.types.class_implementation.overwrite=true
-#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16133,7 +16131,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Note: dogen::handcrafted::typeable by design as this is
-not a regular" helper.#</dia:string>
+not a "regular" helper.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

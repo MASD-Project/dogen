@@ -30,8 +30,8 @@
 
 namespace dogen::text::cpp::transforms::io {
 
-void inserter_implementation_helper(
-    assistant& a, const logical::entities::structural::object& o, const bool inside_class);
+void inserter_implementation_helper(assistant& a,
+    const logical::entities::structural::object& o, const bool inside_class);
 
 }
 

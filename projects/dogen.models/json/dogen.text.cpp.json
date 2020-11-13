@@ -1027,10 +1027,6 @@
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
-      "tagged_values": {
-        "masd.cpp.types.class_implementation.formatting_style": "stitch",
-        "masd.cpp.types.class_implementation.overwrite": "true"
-      },
       "fallback_element_type": "masd::object"
     },
     {
