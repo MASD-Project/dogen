@@ -38,7 +38,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/ptree_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/sequence_container_helper.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/string_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/time_duration_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/variant_helper_transform.hpp"
@@ -67,7 +67,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<ptime_helper_transform>(rg);
     register_helper_formatter<ptree_helper_transform>(rg);
     register_helper_formatter<sequence_container_helper>(rg);
-    register_helper_formatter<smart_pointer_helper>(rg);
+    register_helper_formatter<smart_pointer_helper_transform>(rg);
     register_helper_formatter<string_helper>(rg);
     register_helper_formatter<time_duration_helper>(rg);
     register_helper_formatter<variant_helper_transform>(rg);
