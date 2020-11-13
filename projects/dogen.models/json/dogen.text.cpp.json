@@ -1023,13 +1023,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::hash::smart_pointer_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::io::associative_container_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3801,6 +3794,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/ptree_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid ptree_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n    for (const auto& node : v) {\n        combine(seed, node.first);\n        combine(seed, node.second.data());\n        combine(seed, hash_<#= ident #>(node.second));\n    }\n\n    return seed;\n}\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::hash::smart_pointer_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "smart_pointer_helper_transform",
+        "masd.wale.kvp.helper.family": "SmartPointer"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/smart_pointer_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid smart_pointer_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n    const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n<#+\n    if (!containee.requires_hashing_helper())\n#>\n    combine(seed, *v);\n<#+\n    else\n#>\n    combine(seed, hash_<#= containee.name_tree_identifiable() #>(*v));\n    return seed;\n}\n<#+\n}\n#>\n"
         }
       ]
     }
