@@ -36,7 +36,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/pair_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/path_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/ptime_helper.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/ptree_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/ptree_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/sequence_container_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/string_helper.hpp"
@@ -65,7 +65,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<pair_helper>(rg);
     register_helper_formatter<path_helper>(rg);
     register_helper_formatter<ptime_helper>(rg);
-    register_helper_formatter<ptree_helper>(rg);
+    register_helper_formatter<ptree_helper_transform>(rg);
     register_helper_formatter<sequence_container_helper>(rg);
     register_helper_formatter<smart_pointer_helper>(rg);
     register_helper_formatter<string_helper>(rg);
