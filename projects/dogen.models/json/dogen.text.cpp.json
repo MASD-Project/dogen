@@ -3383,52 +3383,6 @@
       ]
     },
     {
-      "name": "transforms::helper_implementation",
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "entity",
-        "masd.variability.stereotype": "dogen::helper_implementation"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.physical.part_id",
-          "type": "",
-          "value": "masd.cpp.implementation"
-        },
-        {
-          "name": "masd.physical.relation_status",
-          "type": "",
-          "value": "relatable"
-        }
-      ]
-    },
-    {
-      "name": "transforms::helper_header",
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "entity",
-        "masd.variability.stereotype": "dogen::helper_header"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.physical.part_id",
-          "type": "",
-          "value": "masd.cpp.public_headers"
-        },
-        {
-          "name": "masd.physical.wale_template_reference",
-          "type": "",
-          "value": "cpp_helper_transform_implementation"
-        }
-      ]
-    },
-    {
       "name": "transforms::hash::date_helper",
       "stereotypes": [
         "masd::physical::helper"
