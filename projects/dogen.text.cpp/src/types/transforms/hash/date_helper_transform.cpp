@@ -21,23 +21,22 @@
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
-#include "dogen.text.cpp/types/transforms/hash/date_helper.hpp"
+#include "dogen.text.cpp/types/transforms/hash/date_helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
-
-std::string date_helper::id() const {
+std::string date_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string date_helper::family() const {
+std::string date_helper_transform::family() const {
     static std::string r("BoostDate");
     return r;
 }
 
 std::list<std::string>
-date_helper::owning_formatters() const {
+date_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_implementation_archetype_qn(),
         traits::primitive_implementation_archetype_qn()
@@ -46,24 +45,24 @@ date_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-date_helper::owning_facets() const {
+date_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet_qn()
     });
     return r;
 }
 
-std::string date_helper::helper_name() const {
-    static std::string r("date_helper");
+std::string date_helper_transform::helper_name() const {
+    static std::string r("date_helper_transform");
     return r;
 }
 
-bool date_helper::is_enabled(const assistant& /*a*/,
+bool date_helper_transform::is_enabled(const assistant& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void date_helper::
+void date_helper_transform::
 apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
