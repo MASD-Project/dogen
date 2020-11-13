@@ -228,8 +228,6 @@ std::string template_rendering_transform::render_stitch_template(
 void template_rendering_transform::
 render_all_templates(const context& ctx, entities::model& m) {
     const auto& fm(*ctx.feature_model());
-    auto& archs(m.physical_elements().archetypes());
-
     const auto lambda([&](auto& e) {
             const auto& id(e.name().id());
             BOOST_LOG_SEV(lg, debug) << "Processing: " << id.value();
@@ -254,9 +252,14 @@ render_all_templates(const context& ctx, entities::model& m) {
     /*
      * Process archetypes.
      */
-    for (auto& pair : archs)
+    for (auto& pair : m.physical_elements().archetypes())
         lambda(*pair.second);
 
+    /*
+     * Process helpers.
+     */
+    for (auto& pair : m.physical_elements().helpers())
+        lambda(*pair.second);
 }
 
 void template_rendering_transform::
