@@ -32,7 +32,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/domain_type_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/number_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/optional_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/optional_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/pair_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/path_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp"
@@ -61,7 +61,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<date_helper_transform>(rg);
     register_helper_formatter<domain_type_helper>(rg);
     register_helper_formatter<number_helper_transform>(rg);
-    register_helper_formatter<optional_helper>(rg);
+    register_helper_formatter<optional_helper_transform>(rg);
     register_helper_formatter<pair_helper_transform>(rg);
     register_helper_formatter<path_helper_transform>(rg);
     register_helper_formatter<ptime_helper_transform>(rg);
