@@ -18,27 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/io/sequence_container_helper.hpp"
+#include "dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::io {
-
-std::string sequence_container_helper::id() const {
+std::string sequence_container_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string sequence_container_helper::family() const {
+std::string sequence_container_helper_transform::family() const {
     static std::string r("SequenceContainer");
     return r;
 }
 
 std::list<std::string>
-sequence_container_helper::owning_formatters() const {
+sequence_container_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         io::traits::class_implementation_archetype_qn(),
         io::traits::primitive_implementation_archetype_qn(),
@@ -49,24 +48,24 @@ sequence_container_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-sequence_container_helper::owning_facets() const {
+sequence_container_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         io::traits::facet_qn(), types::traits::facet_qn()
     });
     return r;
 }
 
-std::string sequence_container_helper::helper_name() const {
-    static std::string r("sequence_container_helper");
+std::string sequence_container_helper_transform::helper_name() const {
+    static std::string r("sequence_container_helper_transform");
     return r;
 }
 
-bool sequence_container_helper::is_enabled(const assistant& a,
+bool sequence_container_helper_transform::is_enabled(const assistant& a,
     const logical::entities::helper_properties& hp) const {
     return a.is_streaming_enabled(hp);
 }
 
-void sequence_container_helper::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());

@@ -1030,13 +1030,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::io::sequence_container_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::serialization::path_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3885,6 +3878,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/associative_container_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid associative_container_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto qn(d.name_tree_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n\n        if (hp.direct_descendants().size() == 2) {\n            const auto key(hp.direct_descendants().front());\n            const auto value(hp.direct_descendants().back());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {\n    s << \"[\";\n    for (auto i(v.begin()); i != v.end(); ++i) {\n        if (i != v.begin()) s << \", \";\n        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";\n        s << <#= ast.streaming_for_type(key, \"i->first\") #>;\n        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";\n        s << <#= ast.streaming_for_type(value, \"i->second\") #>;\n        s << \" } ]\";\n    }\n    s << \" ] \";\n    return s;\n}\n\n<#+\n        } else {\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {\n    s << \"[ \";\n    for (auto i(v.begin()); i != v.end(); ++i) {\n        if (i != v.begin()) s << \", \";\n        s << <#= ast.streaming_for_type(containee, \"*i\") #>;\n    }\n    s << \"] \";\n    return s;\n}\n\n<#+\n        }\n    }\n#>\n\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::io::sequence_container_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation",
+        "masd.wale.kvp.class.simple_name": "sequence_container_helper_transform",
+        "masd.wale.kvp.helper.family": "SequenceContainer"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto qn(d.name_tree_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {\n    s << \"[ \";\n    for (auto i(v.begin()); i != v.end(); ++i) {\n        if (i != v.begin()) s << \", \";\n        s << <#= ast.streaming_for_type(containee, \"*i\") #>;\n    }\n    s << \"] \";\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
         }
       ]
     }
