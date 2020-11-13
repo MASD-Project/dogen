@@ -1051,13 +1051,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::test_data::pair_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::test_data::path_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3969,6 +3962,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/associative_container_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid associative_container_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\n<#= qn #> create_<#= ident #>(unsigned int position) {\n    <#= qn #> r;\n    for (unsigned int i(0); i < 4; ++i) {\n<#+\n    if (hp.direct_descendants().size() == 1) {\n        const auto containee(hp.direct_descendants().front());\n#>\n        r.insert(create_<#= containee.name_tree_identifiable() #>(position + i));\n<#+\n    } else if (hp.direct_descendants().size() == 2) {\n        const auto key(hp.direct_descendants().front());\n        const auto value(hp.direct_descendants().back());\n#>\n        r.insert(std::make_pair(create_<#= key.name_tree_identifiable() #>(position + i), create_<#= value.name_tree_identifiable() #>(position + i)));\n<#+\n    }\n#>\n    }\n    return r;\n}\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::test_data::pair_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "pair_helper_transform",
+        "masd.wale.kvp.helper.family": "Pair"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/pair_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n    const auto first(hp.direct_descendants().front());\n    const auto second(hp.direct_descendants().back());\n#>\n\n<#= qn #>\ncreate_<#= ident #>(unsigned int position) {\n    <#= qn #> r(\n        create_<#= first.name_tree_identifiable() #>(position),\n        create_<#= second.name_tree_identifiable() #>(position));\n    return r;\n}\n<#+\n}\n#>\n"
         }
       ]
     }

@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_PAIR_HELPER_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_PAIR_HELPER_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_PAIR_HELPER_TRANSFORM_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_PAIR_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
-class pair_helper : public helper_transform {
+class pair_helper_transform final : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;
