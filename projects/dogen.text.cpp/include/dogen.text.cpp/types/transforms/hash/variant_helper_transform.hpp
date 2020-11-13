@@ -18,19 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_VARIANT_HELPER_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_VARIANT_HELPER_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_VARIANT_HELPER_TRANSFORM_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_VARIANT_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
 
-class variant_helper : public helper_transform {
+class variant_helper_transform final : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;

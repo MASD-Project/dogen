@@ -35,7 +35,7 @@
 #include "dogen.text.cpp/types/transforms/hash/sequence_container_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/smart_pointer_helper.hpp"
 #include "dogen.text.cpp/types/transforms/hash/time_duration_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/variant_helper.hpp"
+#include "dogen.text.cpp/types/transforms/hash/variant_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/initializer.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
@@ -58,7 +58,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<sequence_container_helper_transform>(rg);
     register_helper_formatter<smart_pointer_helper>(rg);
     register_helper_formatter<time_duration_helper_transform>(rg);
-    register_helper_formatter<variant_helper>(rg);
+    register_helper_formatter<variant_helper_transform>(rg);
 }
 
 }
