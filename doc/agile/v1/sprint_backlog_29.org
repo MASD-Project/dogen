@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-13 Fri 15:01]
-| <75>                                                 |         |       |       |       |
-| Headline                                             | Time    |       |       |     % |
-|------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *20:01* |       |       | 100.0 |
-|------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 20:01   |       |       | 100.0 |
-| Active                                               |         | 20:01 |       | 100.0 |
-| edit release notes for previous sprint               |         |       |  5:04 |  25.3 |
-| Create a demo and presentation for previous sprint   |         |       |  0:28 |   2.3 |
-| Sprint and product backlog grooming                  |         |       |  1:29 |   7.4 |
-| Improvements to template processing in logical model |         |       |  0:26 |   2.2 |
-| Add C++ helpers to the PMM                           |         |       | 12:34 |  62.8 |
+#+CAPTION: Clock summary at [2020-11-13 Fri 18:06]
+| <75>                                                 |         |       |      |       |
+| Headline                                             | Time    |       |      |     % |
+|------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                         | *22:16* |       |      | 100.0 |
+|------------------------------------------------------+---------+-------+------+-------|
+| Stories                                              | 22:16   |       |      | 100.0 |
+| Active                                               |         | 22:16 |      | 100.0 |
+| edit release notes for previous sprint               |         |       | 5:04 |  22.8 |
+| Create a demo and presentation for previous sprint   |         |       | 0:28 |   2.1 |
+| Sprint and product backlog grooming                  |         |       | 1:29 |   6.7 |
+| Improvements to template processing in logical model |         |       | 0:26 |   1.9 |
+| Add C++ helpers to the PMM                           |         |       | 8:08 |  36.5 |
+| Convert legacy helpers into new style helpers in C++ |         |       | 6:41 |  30.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -296,11 +297,6 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
-    CLOCK: [2020-11-13 Fri 14:02]--[2020-11-13 Fri 14:58] =>  0:56
-    CLOCK: [2020-11-13 Fri 11:01]--[2020-11-13 Fri 12:19] =>  1:18
-    CLOCK: [2020-11-13 Fri 09:15]--[2020-11-13 Fri 10:33] =>  1:38
-    CLOCK: [2020-11-10 Tue 20:46]--[2020-11-10 Tue 21:10] =>  0:24
-    CLOCK: [2020-11-09 Mon 20:30]--[2020-11-09 Mon 21:00] =>  0:30
     CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
     CLOCK: [2020-11-08 Sun 15:55]--[2020-11-08 Sun 16:18] =>  0:23
     CLOCK: [2020-11-08 Sun 12:26]--[2020-11-08 Sun 13:24] =>  0:58
@@ -351,6 +347,27 @@ Classes to move:
 - move helper properties to text model.
 - move helpers as text transforms to text model. Refactor them to use
   the new text model transform interface.
+
+*** STARTED Convert legacy helpers into new style helpers in C++      :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-13 Fri 16:58]--[2020-11-13 Fri 18:06] =>  1:08
+    CLOCK: [2020-11-13 Fri 15:51]--[2020-11-13 Fri 16:58] =>  1:07
+    CLOCK: [2020-11-13 Fri 14:02]--[2020-11-13 Fri 14:58] =>  0:56
+    CLOCK: [2020-11-13 Fri 11:01]--[2020-11-13 Fri 12:19] =>  1:18
+    CLOCK: [2020-11-13 Fri 09:15]--[2020-11-13 Fri 10:33] =>  1:38
+    CLOCK: [2020-11-10 Tue 20:46]--[2020-11-10 Tue 21:10] =>  0:24
+    CLOCK: [2020-11-09 Mon 20:30]--[2020-11-09 Mon 21:00] =>  0:30
+    :END:
+
+Create meta-model elements for the helpers, and update the templates.
+
+Notes:
+
+- inserter helper does not follow the existing patterns. We nee to
+  check if we can skip it initially because it may not affect the
+  changes needed for the helper expander via PMM.
+- C# needs to be done on after we done all of the formattable types so
+  we should do it as a separate story.
 
 *** Add C# helpers to the PMM                                         :story:
 
