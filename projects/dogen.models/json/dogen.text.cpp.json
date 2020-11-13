@@ -1044,13 +1044,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::test_data::ptime_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::test_data::sequence_container_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -4017,6 +4010,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/path_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid path_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\n<#= qn #>\ncreate_<#= ident #>(const unsigned int position) {\n    std::ostringstream s;\n    s << \"/a/path/number_\" << position;\n    return <#= qn #>(s.str());\n}\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::test_data::ptime_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "ptime_helper_transform",
+        "masd.wale.kvp.helper.family": "BoostPTime"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid ptime_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\n<#= qn #>\ncreate_<#= ident #>(const unsigned int position) {\n    const auto day(static_cast<unsigned short>(1 + (position % 27)));\n    using boost::gregorian::date;\n    using boost::posix_time::ptime;\n    using boost::posix_time::time_duration;\n    date d(2002, 2, day);\n    ptime r(d, time_duration(1,2,3));\n    return r;\n}\n<#+\n}\n#>\n"
         }
       ]
     }
