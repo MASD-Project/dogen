@@ -71,30 +71,35 @@ private:
     /**
      * @brief Resolves a name that has internal modules set.
      */
-    static identification::entities::logical_name resolve_name_with_internal_modules(
+    static identification::entities::logical_name
+    resolve_name_with_internal_modules(
         const entities::model& m, const indices& idx,
-        const identification::entities::logical_name& ctx, const identification::entities::logical_name& n);
+        const identification::entities::logical_name& ctx,
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a name where the ctx has internal modules.
      */
     static boost::optional<identification::entities::logical_name>
-    try_resolve_name_with_context_internal_modules(
-        const indices& idx, identification::entities::logical_name ctx, const identification::entities::logical_name& n);
+    try_resolve_name_with_context_internal_modules(const indices& idx,
+        identification::entities::logical_name ctx,
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a name where the ctx has model modules.
      */
     static boost::optional<identification::entities::logical_name>
     try_resolve_name_with_context_model_modules(
-        const indices& idx, identification::entities::logical_name ctx, const identification::entities::logical_name& n);
+        const indices& idx, identification::entities::logical_name ctx,
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
     static identification::entities::logical_name resolve_name(
         const entities::model& m, const indices& idx,
-        const identification::entities::logical_name& ctx, const identification::entities::logical_name& n);
+        const identification::entities::logical_name& ctx,
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves all references contained in a name tree.
@@ -177,12 +182,18 @@ private:
      */
     static void resolve_archetypes(const indices& idx, entities::model& m);
 
+    /**
+     * @brief Resolve all helpers.
+     */
+    static void resolve_helpers(const indices& idx, entities::model& m);
+
 public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    static identification::entities::logical_name resolve(const entities::model& m,
-        const indices& idx, const identification::entities::logical_name& ctx,
+    static identification::entities::logical_name
+    resolve(const entities::model& m, const indices& idx,
+        const identification::entities::logical_name& ctx,
         const identification::entities::logical_name& n);
 
     /**
@@ -193,8 +204,10 @@ public:
     try_resolve_object_template_name(identification::entities::logical_name ctx,
         const std::string& s, const entities::model& m);
     static boost::optional<identification::entities::logical_name>
-    try_resolve_object_template_name(const identification::entities::logical_name& ctx,
-        const identification::entities::logical_name& n, const entities::model& m);
+    try_resolve_object_template_name(
+        const identification::entities::logical_name& ctx,
+        const identification::entities::logical_name& n,
+        const entities::model& m);
     /**@}*/
 
 public:
