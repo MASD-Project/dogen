@@ -28,7 +28,7 @@
 #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/smart_pointer_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/associative_container_helper.hpp"
-#include "dogen.text.cpp/types/transforms/io/optional_helper.hpp"
+#include "dogen.text.cpp/types/transforms/io/optional_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/pair_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/ptree_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/sequence_container_helper.hpp"
@@ -47,9 +47,10 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_implementation_transform>(rg);
     register_formatter<enum_header_transform>(rg);
     register_formatter<enum_implementation_transform>(rg);
+
     register_helper_formatter<smart_pointer_helper>(rg);
     register_helper_formatter<associative_container_helper>(rg);
-    register_helper_formatter<optional_helper>(rg);
+    register_helper_formatter<optional_helper_transform>(rg);
     register_helper_formatter<pair_helper>(rg);
     register_helper_formatter<ptree_helper>(rg);
     register_helper_formatter<sequence_container_helper>(rg);
