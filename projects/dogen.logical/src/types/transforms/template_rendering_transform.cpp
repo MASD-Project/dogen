@@ -60,8 +60,14 @@ void
 template_rendering_transform::populate_wale_template(const entities::model& m,
     entities::physical::text_templating& tt) {
 
-    if (!tt.wale_template())
+    /*
+     * Not all templated elements require a wale template. If we don't
+     * have one we have nothing to do.
+     */
+    if (!tt.wale_template()) {
+        BOOST_LOG_SEV(lg, debug) << "Element does not have a wale template.";
         return;
+    }
 
     /*
      * Resolve logic-less template references to its content. We
@@ -76,27 +82,36 @@ template_rendering_transform::populate_wale_template(const entities::model& m,
         BOOST_THROW_EXCEPTION(transformation_error(
                 missing_logic_less_template + tid.value()));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Located template: " << tid.value();
     tt.wale_template_content(k->second->content());
+    BOOST_LOG_SEV(lg, debug) << "Populated wale template for element.";
 }
 
 void template_rendering_transform::
 wale_template_population(entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Populating all wale templates.";
+
+    const auto lambda(
+        [](auto& e, const auto& m) {
+            const auto lid(e.name().id());
+            BOOST_LOG_SEV(lg, debug) << "Processing: " << lid.value();
+            populate_wale_template(m, e.text_templating());
+        });
+
     /*
      * Populate the archetypes.
      */
-    const auto& pe(m.physical_elements());
-    for (auto& pair : pe.archetypes()) {
-        auto& arch(*pair.second);
-        populate_wale_template(m, arch.text_templating());
-    }
+    BOOST_LOG_SEV(lg, debug) << "Populating archetypes.";
+    for (auto& pair : m.physical_elements().archetypes())
+        lambda(*pair.second, m);
 
     /*
      * Populate the helpers.
      */
-    for (auto& pair : pe.helpers()) {
-        auto& helper(*pair.second);
-        populate_wale_template(m, helper.text_templating());
-    }
+    BOOST_LOG_SEV(lg, debug) << "Populating helpers.";
+    for (auto& pair : m.physical_elements().helpers())
+        lambda(*pair.second, m);
 }
 
 std::string template_rendering_transform::render_wale_template(
