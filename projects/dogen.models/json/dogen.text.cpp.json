@@ -1037,13 +1037,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::hash::ptime_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::io::associative_container_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3777,6 +3770,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/variant_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid variant_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n    const auto key(hp.direct_descendants().front());\n    const auto value(hp.direct_descendants().back());\n#>\n\nstruct <#= ident #>_visitor : public boost::static_visitor<> {\n    <#= ident #>_visitor() : hash(0) {}\n<#+\n    for (const auto& dd : hp.direct_descendants()) {\n#>\n    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? \"\" : \"&\") #> v) const {\n<#+\n        if (!dd.requires_hashing_helper())\n#>\n        combine(hash, v);\n<#+\n        else\n#>\n        combine(hash, hash_<#= dd.name_tree_identifiable() #>(v));\n    }\n\n<#+\n    }\n#>\n    mutable std::size_t hash;\n};\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    <#= ident #>_visitor vis;\n    boost::apply_visitor(vis, v);\n    return vis.hash;\n}\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::hash::ptime_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "ptime_helper_transform",
+        "masd.wale.kvp.helper.family": "BoostPTime"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/ptime_helper_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid ptime_helper_transform::\napply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\ninline std::size_t hash_<#= ident #>(const <#= qn #>& v) {\n    std::size_t seed(0);\n    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));\n    boost::posix_time::time_duration d(v - epoch);\n    seed = static_cast<std::size_t>(d.total_seconds());\n    return seed;\n}\n<#+\n}\n#>\n"
         }
       ]
     }
