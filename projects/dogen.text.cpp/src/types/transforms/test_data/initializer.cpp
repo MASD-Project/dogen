@@ -41,7 +41,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/string_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/time_duration_helper.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/variant_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/variant_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/initializer.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
@@ -70,7 +70,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<smart_pointer_helper>(rg);
     register_helper_formatter<string_helper>(rg);
     register_helper_formatter<time_duration_helper>(rg);
-    register_helper_formatter<variant_helper>(rg);
+    register_helper_formatter<variant_helper_transform>(rg);
 }
 
 }
