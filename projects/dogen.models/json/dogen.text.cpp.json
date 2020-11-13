@@ -1023,13 +1023,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::io::smart_pointer_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::serialization::path_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3897,6 +3890,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto qn(d.name_tree_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {\n    s << \"[ \";\n    for (auto i(v.begin()); i != v.end(); ++i) {\n        if (i != v.begin()) s << \", \";\n        s << <#= ast.streaming_for_type(containee, \"*i\") #>;\n    }\n    s << \"] \";\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::io::smart_pointer_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation",
+        "masd.wale.kvp.class.simple_name": "smart_pointer_helper_transform",
+        "masd.wale.kvp.helper.family": "SmartPointer"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto nt_qn(d.name_tree_qualified());\n        const auto n_qn(d.name_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {\n    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"<#= n_qn #>\\\"\" << \", \"\n      << \"\\\"memory\\\": \" << \"\\\"\" << static_cast<void*>(v.get()) << \"\\\"\" << \", \";\n\n    if (v)\n        s << \"\\\"data\\\": \" << <#= ast.streaming_for_type(containee, \"*v\") #>;\n    else\n        s << \"\\\"data\\\": \"\"\\\"<null>\\\"\";\n    s << \" }\";\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
         }
       ]
     }
