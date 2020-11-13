@@ -1051,13 +1051,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::test_data::date_helper",
-      "stereotypes": [
-        "dogen::cpp::helper_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::test_data::domain_type_helper",
       "stereotypes": [
         "dogen::cpp::helper_transform"
@@ -3909,6 +3902,25 @@
           "name": "stitch_template_content",
           "type": "",
           "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    {\n        const auto d(hp.current());\n        const auto nt_qn(d.name_tree_qualified());\n        const auto n_qn(d.name_qualified());\n        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));\n        const auto containee(hp.direct_descendants().front());\n#>\n\ninline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {\n    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"<#= n_qn #>\\\"\" << \", \"\n      << \"\\\"memory\\\": \" << \"\\\"\" << static_cast<void*>(v.get()) << \"\\\"\" << \", \";\n\n    if (v)\n        s << \"\\\"data\\\": \" << <#= ast.streaming_for_type(containee, \"*v\") #>;\n    else\n        s << \"\\\"data\\\": \"\"\\\"<null>\\\"\";\n    s << \" }\";\n    return s;\n}\n\n<#+\n    }\n#>\n\n<#+\n}\n#>\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::test_data::date_helper",
+      "stereotypes": [
+        "masd::physical::helper"
+      ],
+      "tagged_values": {
+        "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
+        "masd.wale.kvp.class.simple_name": "date_helper_transform",
+        "masd.wale.kvp.helper.family": "BoostDate"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/helper_properties.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid date_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {\n    const auto d(hp.current());\n    const auto qn(d.name_tree_qualified());\n    const auto ident(d.name_tree_identifiable());\n#>\n\n<#= qn #>\ncreate_<#= ident #>(const unsigned int position) {\n    const auto day(static_cast<unsigned short>(1 + (position % 27)));\n    boost::gregorian::date r(2002, 2, day);\n    return r;\n}\n<#+\n}\n#>\n"
         }
       ]
     }

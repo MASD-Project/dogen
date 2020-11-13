@@ -29,7 +29,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/associative_container_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/bool_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/char_helper.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/date_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/domain_type_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/number_helper.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/optional_helper.hpp"
@@ -57,7 +57,7 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<associative_container_helper>(rg);
     register_helper_formatter<bool_helper>(rg);
     register_helper_formatter<char_helper>(rg);
-    register_helper_formatter<date_helper>(rg);
+    register_helper_formatter<date_helper_transform>(rg);
     register_helper_formatter<domain_type_helper>(rg);
     register_helper_formatter<number_helper>(rg);
     register_helper_formatter<optional_helper>(rg);
