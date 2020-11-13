@@ -18,14 +18,51 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper.hpp"
+#include "dogen.text.cpp/types/transforms/types/smart_pointer_new_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::types {
+std::string smart_pointer_new_helper_transform::id() const {
+    static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
 
-void smart_pointer_helper::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+std::string smart_pointer_new_helper_transform::family() const {
+    static std::string r("SmartPointer");
+    return r;
+}
+
+std::list<std::string>
+smart_pointer_new_helper_transform::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_implementation_archetype_qn(),
+        traits::primitive_implementation_archetype_qn()
+    });
+    return r;
+}
+
+std::list<std::string>
+smart_pointer_new_helper_transform::owning_facets() const {
+    static auto r(std::list<std::string> {
+        traits::facet_qn()
+    });
+    return r;
+}
+
+std::string smart_pointer_new_helper_transform::helper_name() const {
+    static std::string r("smart_pointer_new_helper_transform");
+    return r;
+}
+
+bool smart_pointer_new_helper_transform::is_enabled(const assistant& /*a*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+    return true;
+}
+
+void smart_pointer_new_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
