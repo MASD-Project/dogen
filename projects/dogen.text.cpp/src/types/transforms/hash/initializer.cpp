@@ -25,7 +25,7 @@
 #include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/associative_container_helper.hpp"
+#include "dogen.text.cpp/types/transforms/hash/associative_container_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/date_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/optional_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/pair_helper_transform.hpp"
@@ -47,7 +47,8 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_header_transform>(rg);
     register_formatter<class_implementation_transform>(rg);
     register_formatter<enum_header_transform>(rg);
-    register_helper_formatter<associative_container_helper>(rg);
+
+    register_helper_formatter<associative_container_helper_transform>(rg);
     register_helper_formatter<date_helper_transform>(rg);
     register_helper_formatter<optional_helper_transform>(rg);
     register_helper_formatter<pair_helper_transform>(rg);
