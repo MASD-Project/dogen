@@ -56,43 +56,61 @@ const std::string missing_logic_less_template(
 
 namespace dogen::logical::transforms {
 
+void
+template_rendering_transform::populate_wale_template(const entities::model& m,
+    entities::physical::text_templating& tt) {
+
+    if (!tt.wale_template())
+        return;
+
+    /*
+     * Resolve logic-less template references to its content. We
+     * expect to find the template since resolution already has
+     * taken place, but you never know.
+     */
+    const auto tid(tt.wale_template()->id());
+    const auto& llt(m.templating_elements().logic_less_templates());
+    const auto k(llt.find(tid));
+    if (k == llt.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
+        BOOST_THROW_EXCEPTION(transformation_error(
+                missing_logic_less_template + tid.value()));
+    }
+    tt.wale_template_content(k->second->content());
+}
+
 void template_rendering_transform::
 wale_template_population(entities::model& m) {
+    /*
+     * Populate the archetypes.
+     */
     const auto& pe(m.physical_elements());
-    auto& archs(pe.archetypes());
-    for (auto& pair : archs) {
+    for (auto& pair : pe.archetypes()) {
         auto& arch(*pair.second);
-        auto& tt(arch.text_templating());
-        if (!tt.wale_template())
-            continue;
+        populate_wale_template(m, arch.text_templating());
+    }
 
-        /*
-         * Resolve logic-less template references to its content. We
-         * expect to find the template since resolution already has
-         * taken place, but you never know.
-         */
-        const auto tid(tt.wale_template()->id());
-        const auto& llt(m.templating_elements().logic_less_templates());
-        const auto k(llt.find(tid));
-        if (k == llt.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
-            BOOST_THROW_EXCEPTION(transformation_error(
-                    missing_logic_less_template + tid.value()));
-        }
-        tt.wale_template_content(k->second->content());
+    /*
+     * Populate the helpers.
+     */
+    for (auto& pair : pe.helpers()) {
+        auto& helper(*pair.second);
+        populate_wale_template(m, helper.text_templating());
     }
 }
 
 std::string template_rendering_transform::render_wale_template(
     const variability::entities::feature_model& fm,
-    const entities::physical::archetype& arch) {
-    BOOST_LOG_SEV(lg, debug) << "Rendering wale template.";
+    const variability::entities::configuration& cfg,
+    const identification::entities::logical_id& lid,
+    const std::string& relation_status,
+    entities::physical::text_templating& tt) {
+    BOOST_LOG_SEV(lg, debug) << "Rendering wale template: " << lid.value();
 
     /*
      * If there is no wale template there is nothing to do, return an
      * empty string.
      */
-    auto& tt(arch.text_templating());
     if (!tt.wale_template()) {
         std::string r;
         return r;
@@ -112,7 +130,7 @@ std::string template_rendering_transform::render_wale_template(
      * Read wale features.
      */
     const auto fg(features::wale::make_feature_group(fm));
-    const auto scfg(features::wale::make_static_configuration(fg, arch));
+    const auto scfg(features::wale::make_static_configuration(fg, cfg));
 
     /*
      * Create the input kvps for wale template.
@@ -134,9 +152,8 @@ std::string template_rendering_transform::render_wale_template(
     /*
      * Inject the keys that can be inferred from the meta-model element.
      */
-    const auto rs(arch.relations().status());
-    if (!rs.empty())
-        checked_insert(std::make_pair("referencing_status", rs));
+    if (!relation_status.empty())
+        checked_insert(std::make_pair("referencing_status", relation_status));
 
     /*
      * Instantiate the wale template.
@@ -150,19 +167,21 @@ std::string template_rendering_transform::render_wale_template(
 
 std::string template_rendering_transform::render_stitch_template(
     const variability::entities::feature_model& fm,
-    const std::string& wale_template,
-    const entities::physical::archetype& arch) {
+    const std::unordered_map<identification::entities::technical_space,
+    boost::optional<entities::decoration::element_properties>>& decoration,
+    const identification::entities::logical_id& lid,
+    const std::string& rendered_wale_template,
+    entities::physical::text_templating& tt) {
 
     /*
      * Stitch template cannot be empty.
      */
     BOOST_LOG_SEV(lg, debug) << "Rendering stitch template.";
-    auto& tt(arch.text_templating());
-    const auto id(arch.name().qualified().dot());
     const auto& st(tt.stitch_template_content());
     if (st.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_stitch_template << id;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_stitch_template + id));
+        BOOST_LOG_SEV(lg, error) << empty_stitch_template << lid;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(empty_stitch_template + lid.value()));
     }
 
     /*
@@ -172,10 +191,11 @@ std::string template_rendering_transform::render_stitch_template(
      * template instantiator. The decoration must exist.
      */
     const auto ts(identification::entities::technical_space::cpp);
-    const auto i(arch.decoration().find(ts));
-    if (i == arch.decoration().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_decoration << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_decoration + id));
+    const auto i(decoration.find(ts));
+    if (i == decoration.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_decoration << lid;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_decoration + lid.value()));
     }
 
     /*
@@ -190,7 +210,7 @@ std::string template_rendering_transform::render_stitch_template(
             decoration_postamble_key, dec ? dec->postamble() : empty
         },
         {
-            stitch_wale_key, wale_template
+            stitch_wale_key, rendered_wale_template
         }
     };
 
@@ -207,23 +227,27 @@ std::string template_rendering_transform::render_stitch_template(
 
 void template_rendering_transform::
 render_all_templates(const context& ctx, entities::model& m) {
+    const auto& fm(*ctx.feature_model());
     auto& archs(m.physical_elements().archetypes());
     for (auto& pair : archs) {
+        const auto& id(pair.first);
         auto& arch(*pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Processing: "
-                                 << arch.name().qualified().dot();
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id.value();
 
         /*
          * We start by rendering the wale template. This may not
          * exist, in which case the string will be empty.
          */
-        const auto& fm(*ctx.feature_model());
-        const auto rwt(render_wale_template(fm, arch));
+        const auto& cfg(*arch.configuration());
+        auto& tt(arch.text_templating());
+        const auto rs(arch.relations().status());
+        const auto rwt(render_wale_template(fm, cfg, id, rs, tt));
 
         /*
          * Now render the stitch template and update the archetype.
          */
-        const auto rst(render_stitch_template(fm, rwt, arch));
+        const auto& dec(arch.decoration());
+        const auto rst(render_stitch_template(fm, dec, id, rwt, tt));
         arch.text_templating().rendered_stitch_template(rst);
     }
 }

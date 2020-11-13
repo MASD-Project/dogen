@@ -26,7 +26,9 @@
 #endif
 
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/physical/helper.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -38,25 +40,38 @@ namespace dogen::logical::transforms {
 class template_rendering_transform final {
 private:
     /**
+     * @brief Populates the wale template properties.
+     */
+    static void populate_wale_template(const entities::model& m,
+        entities::physical::text_templating& tt);
+
+    /**
      * @brief Copy the wale template contents to the archetypes that
      * use them.
      */
     static void wale_template_population(entities::model& m);
 
+private:
     /**
      * @brief Renders the wale template if any exists.
      */
     static std::string render_wale_template(
         const variability::entities::feature_model& fm,
-        const entities::physical::archetype& arch);
+        const variability::entities::configuration& cfg,
+        const identification::entities::logical_id& lid,
+        const std::string& relation_status,
+        entities::physical::text_templating& tt);
 
     /**
      * @brief Render the stitch template, if any exists.
      */
     static std::string render_stitch_template(
         const variability::entities::feature_model& fm,
-        const std::string& wale_template,
-        const entities::physical::archetype& arch);
+        const std::unordered_map<identification::entities::technical_space,
+        boost::optional<entities::decoration::element_properties>>& decoration,
+        const identification::entities::logical_id& lid,
+        const std::string& rendered_wale_template,
+        entities::physical::text_templating& tt);
 
     /**
      * @brief Renders all templates.
