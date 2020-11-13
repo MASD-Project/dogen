@@ -18,26 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/test_data/string_helper.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/string_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
-
-std::string string_helper::id() const {
+std::string string_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string string_helper::family() const {
+std::string string_helper_transform::family() const {
     static std::string r("String");
     return r;
 }
 
 std::list<std::string>
-string_helper::owning_formatters() const {
+string_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_implementation_archetype_qn(),
         traits::primitive_implementation_archetype_qn()
@@ -46,24 +45,24 @@ string_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-string_helper::owning_facets() const {
+string_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet_qn()
     });
     return r;
 }
 
-std::string string_helper::helper_name() const {
-    static std::string r("string_helper");
+std::string string_helper_transform::helper_name() const {
+    static std::string r("string_helper_transform");
     return r;
 }
 
-bool string_helper::is_enabled(const assistant& /*a*/,
+bool string_helper_transform::is_enabled(const assistant& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void string_helper::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
 ast.stream() << std::endl;
 ast.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
 ast.stream() << "    std::ostringstream s;" << std::endl;
