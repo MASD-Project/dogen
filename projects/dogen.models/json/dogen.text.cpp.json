@@ -3394,7 +3394,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "date_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostDate"
+        "masd.wale.kvp.helper.family": "BoostDate",
+        "masd.physical.helpers.family": "BoostDate",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3413,7 +3417,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "optional_helper_transform",
-        "masd.wale.kvp.helper.family": "Optional"
+        "masd.wale.kvp.helper.family": "Optional",
+        "masd.physical.helpers.family": "Optional",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3432,7 +3440,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "pair_helper_transform",
-        "masd.wale.kvp.helper.family": "Pair"
+        "masd.wale.kvp.helper.family": "Pair",
+        "masd.physical.helpers.family": "Pair",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3451,7 +3463,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "time_duration_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostTimeDuration"
+        "masd.wale.kvp.helper.family": "BoostTimeDuration",
+        "masd.physical.helpers.family": "BoostTimeDuration",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3470,7 +3486,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "path_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostPath"
+        "masd.wale.kvp.helper.family": "BoostPath",
+        "masd.physical.helpers.family": "BoostPath",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3489,7 +3509,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "associative_container_helper_transform",
-        "masd.wale.kvp.helper.family": "AssociativeContainer"
+        "masd.wale.kvp.helper.family": "AssociativeContainer",
+        "masd.physical.helpers.family": "AssociativeContainer",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3508,7 +3532,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "sequence_container_helper_transform",
-        "masd.wale.kvp.helper.family": "SequenceContainer"
+        "masd.wale.kvp.helper.family": "SequenceContainer",
+        "masd.physical.helpers.family": "SequenceContainer",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3527,7 +3555,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "variant_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostVariant"
+        "masd.wale.kvp.helper.family": "BoostVariant",
+        "masd.physical.helpers.family": "BoostVariant",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3565,7 +3597,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "ptree_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostPTree"
+        "masd.wale.kvp.helper.family": "BoostPTree",
+        "masd.physical.helpers.family": "BoostPTree",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3584,7 +3620,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "smart_pointer_helper_transform",
-        "masd.wale.kvp.helper.family": "SmartPointer"
+        "masd.wale.kvp.helper.family": "SmartPointer",
+        "masd.physical.helpers.family": "SmartPointer",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.hash.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
