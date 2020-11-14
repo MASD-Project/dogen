@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-13 Fri 21:47]
-| <75>                                                 |         |       |      |       |
-| Headline                                             | Time    |       |      |     % |
-|------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                         | *22:41* |       |      | 100.0 |
-|------------------------------------------------------+---------+-------+------+-------|
-| Stories                                              | 22:41   |       |      | 100.0 |
-| Active                                               |         | 22:41 |      | 100.0 |
-| edit release notes for previous sprint               |         |       | 5:04 |  22.3 |
-| Create a demo and presentation for previous sprint   |         |       | 0:28 |   2.1 |
-| Sprint and product backlog grooming                  |         |       | 1:29 |   6.5 |
-| Improvements to template processing in logical model |         |       | 0:26 |   1.9 |
-| Convert legacy helpers into new style helpers in C++ |         |       | 6:59 |  30.8 |
-| Add C++ helpers to the PMM                           |         |       | 8:15 |  36.4 |
+#+CAPTION: Clock summary at [2020-11-14 Sat 13:23]
+| <75>                                                 |         |       |       |       |
+| Headline                                             | Time    |       |       |     % |
+|------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                         | *24:29* |       |       | 100.0 |
+|------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                              | 24:29   |       |       | 100.0 |
+| Active                                               |         | 24:29 |       | 100.0 |
+| edit release notes for previous sprint               |         |       |  5:04 |  20.7 |
+| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.9 |
+| Sprint and product backlog grooming                  |         |       |  1:29 |   6.1 |
+| Improvements to template processing in logical model |         |       |  0:26 |   1.8 |
+| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  28.5 |
+| Add C++ helpers to the PMM                           |         |       | 10:03 |  41.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -326,6 +326,7 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 11:35]--[2020-11-14 Sat 13:23] =>  1:48
     CLOCK: [2020-11-13 Fri 21:40]--[2020-11-13 Fri 21:47] =>  0:07
     CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
     CLOCK: [2020-11-08 Sun 15:55]--[2020-11-08 Sun 16:18] =>  0:23
@@ -555,6 +556,31 @@ additional size is not providing any benefits.
 Though we've split wale out of stitch in the logical model, its still
 possible to instantiate a wale template within stitch. We should
 remove this as well.
+
+*** Decouple physical model from logical model                        :story:
+
+At present we have a dependency of the logical model on the physical
+model. This is for two reasons:
+
+- variability (=variability_profiles_chain=): we need to instantiate
+  the template domains.
+- helpers (=helper_properties_transform=): we need access to the
+  helpers in order to create the helper properties.
+
+We should not really couple these two models. For the first case we
+could supply the domains as an argument when constructing the context
+and rely only on =std= types. Helpers will be decommissioned with
+PDMs. At that point we should look into making these two models
+independent again.
+
+Actually we could do a quick change now and address this:
+
+- do the variability change now.
+- instead of adding helper transform, add this work into the logical
+  to physical projector.
+
+Actually that would not work as we are projecting "the other way
+around". This work will have to wait.
 
 ** Deprecated
 *** CANCELLED Colouring script should be included as part of package  :story:
