@@ -47,23 +47,24 @@ physical::entities::facet test_data_factory::make() {
     r.directory_name("SequenceGenerators");
     r.postfix("SequenceGenerator");
 
-    const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().id());
-        const auto pair(std::make_pair(id, arch));
-        const auto inserted(r.archetypes().insert(pair).second);
+    const auto lambda([&](auto& container, const auto& element) {
+        const auto id(element.meta_name().id());
+        const auto pair(std::make_pair(id, element));
+        const auto inserted(container.insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate archetype: ");
+            const std::string duplicate_archetype("Duplicate id: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_archetype + id.value()));
         }
     });
 
-    lambda(assistant_factory::make());
-    lambda(class_factory::make());
-    lambda(enum_factory::make());
-    lambda(primitive_factory::make());
+    lambda(r.archetypes(), assistant_factory::make());
+    lambda(r.archetypes(), class_factory::make());
+    lambda(r.archetypes(), enum_factory::make());
+    lambda(r.archetypes(), primitive_factory::make());
+
     return r;
 }
 

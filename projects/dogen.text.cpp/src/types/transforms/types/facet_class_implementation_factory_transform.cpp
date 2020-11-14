@@ -93,13 +93,13 @@ ast.stream() << "    r.postfix(\"" << fct.postfix() << "\");" << std::endl;
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }
 ast.stream() << std::endl;
-ast.stream() << "    const auto lambda([&](const auto& arch) {" << std::endl;
-ast.stream() << "        const auto id(arch.meta_name().id());" << std::endl;
-ast.stream() << "        const auto pair(std::make_pair(id, arch));" << std::endl;
-ast.stream() << "        const auto inserted(r.archetypes().insert(pair).second);" << std::endl;
+ast.stream() << "    const auto lambda([&](auto& container, const auto& element) {" << std::endl;
+ast.stream() << "        const auto id(element.meta_name().id());" << std::endl;
+ast.stream() << "        const auto pair(std::make_pair(id, element));" << std::endl;
+ast.stream() << "        const auto inserted(container.insert(pair).second);" << std::endl;
 ast.stream() << "        if (!inserted) {" << std::endl;
 ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
-ast.stream() << "            const std::string duplicate_archetype(\"Duplicate archetype: \");" << std::endl;
+ast.stream() << "            const std::string duplicate_archetype(\"Duplicate id: \");" << std::endl;
 ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;" << std::endl;
 ast.stream() << "            BOOST_THROW_EXCEPTION(" << std::endl;
 ast.stream() << "                transformation_error(duplicate_archetype + id.value()));" << std::endl;
@@ -107,8 +107,13 @@ ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;
             for (const auto& n : fct.archetypes()) {
-ast.stream() << "    lambda(" << n.simple() << "_factory::make());" << std::endl;
+ast.stream() << "    lambda(r.archetypes(), " << n.simple() << "_factory::make());" << std::endl;
             }
+ast.stream() << std::endl;
+            for (const auto& n : fct.helpers()) {
+ast.stream() << "    lambda(r.helpers(), " << n.simple() << "_factory::make());" << std::endl;
+            }
+
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;

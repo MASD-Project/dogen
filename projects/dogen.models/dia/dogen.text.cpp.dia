@@ -35748,13 +35748,13 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
             }
 #&gt;
 
-    const auto lambda([&amp;](const auto&amp; arch) {
-        const auto id(arch.meta_name().id());
-        const auto pair(std::make_pair(id, arch));
-        const auto inserted(r.archetypes().insert(pair).second);
+    const auto lambda([&amp;](auto&amp; container, const auto&amp; element) {
+        const auto id(element.meta_name().id());
+        const auto pair(std::make_pair(id, element));
+        const auto inserted(container.insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate archetype: ");
+            const std::string duplicate_archetype("Duplicate id: ");
             BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_archetype + id.value()));
@@ -35764,9 +35764,18 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#+
             for (const auto&amp; n : fct.archetypes()) {
 #&gt;
-    lambda(&lt;#= n.simple() #&gt;_factory::make());
+    lambda(r.archetypes(), &lt;#= n.simple() #&gt;_factory::make());
 &lt;#+
             }
+#&gt;
+
+&lt;#+
+            for (const auto&amp; n : fct.helpers()) {
+#&gt;
+    lambda(r.helpers(), &lt;#= n.simple() #&gt;_factory::make());
+&lt;#+
+            }
+
 #&gt;
     return r;
 }

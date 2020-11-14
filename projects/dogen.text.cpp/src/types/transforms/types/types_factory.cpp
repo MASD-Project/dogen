@@ -85,60 +85,62 @@ physical::entities::facet types_factory::make() {
     r.directory_name("types");
     r.labels().push_back(identification::entities::label("test", "some_label"));
 
-    const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().id());
-        const auto pair(std::make_pair(id, arch));
-        const auto inserted(r.archetypes().insert(pair).second);
+    const auto lambda([&](auto& container, const auto& element) {
+        const auto id(element.meta_name().id());
+        const auto pair(std::make_pair(id, element));
+        const auto inserted(container.insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate archetype: ");
+            const std::string duplicate_archetype("Duplicate id: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_archetype + id.value()));
         }
     });
 
-    lambda(archetype_class_header_factory_factory::make());
-    lambda(archetype_class_header_transform_factory::make());
-    lambda(archetype_class_implementation_factory_factory::make());
-    lambda(archetype_class_implementation_transform_factory::make());
-    lambda(archetype_kind_class_header_factory_factory::make());
-    lambda(archetype_kind_class_implementation_factory_factory::make());
-    lambda(backend_class_header_factory_factory::make());
-    lambda(backend_class_header_transform_factory::make());
-    lambda(backend_class_implementation_factory_factory::make());
-    lambda(backend_class_implementation_transform_factory::make());
-    lambda(builtin_header_factory::make());
-    lambda(class_forward_declarations_factory::make());
-    lambda(class_header_factory::make());
-    lambda(class_implementation_factory::make());
-    lambda(enum_header_factory::make());
-    lambda(exception_header_factory::make());
-    lambda(facet_class_header_factory_factory::make());
-    lambda(facet_class_header_transform_factory::make());
-    lambda(facet_class_implementation_factory_factory::make());
-    lambda(facet_class_implementation_transform_factory::make());
-    lambda(feature_bundle_header_factory::make());
-    lambda(feature_bundle_implementation_factory::make());
-    lambda(feature_template_bundle_header_factory::make());
-    lambda(feature_template_bundle_implementation_factory::make());
-    lambda(helper_class_header_factory_factory::make());
-    lambda(helper_class_header_transform_factory::make());
-    lambda(helper_class_implementation_factory_factory::make());
-    lambda(helper_class_implementation_transform_factory::make());
-    lambda(main_factory::make());
-    lambda(namespace_header_factory::make());
-    lambda(part_class_header_factory_factory::make());
-    lambda(part_class_header_transform_factory::make());
-    lambda(part_class_implementation_factory_factory::make());
-    lambda(part_class_implementation_transform_factory::make());
-    lambda(primitive_forward_declarations_factory::make());
-    lambda(primitive_header_factory::make());
-    lambda(primitive_implementation_factory::make());
-    lambda(variability_initializer_header_factory::make());
-    lambda(variability_initializer_implementation_factory::make());
-    lambda(visitor_forward_declarations_factory::make());
-    lambda(visitor_header_factory::make());
+    lambda(r.archetypes(), archetype_class_header_factory_factory::make());
+    lambda(r.archetypes(), archetype_class_header_transform_factory::make());
+    lambda(r.archetypes(), archetype_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), archetype_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), archetype_kind_class_header_factory_factory::make());
+    lambda(r.archetypes(), archetype_kind_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), backend_class_header_factory_factory::make());
+    lambda(r.archetypes(), backend_class_header_transform_factory::make());
+    lambda(r.archetypes(), backend_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), backend_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), builtin_header_factory::make());
+    lambda(r.archetypes(), class_forward_declarations_factory::make());
+    lambda(r.archetypes(), class_header_factory::make());
+    lambda(r.archetypes(), class_implementation_factory::make());
+    lambda(r.archetypes(), enum_header_factory::make());
+    lambda(r.archetypes(), exception_header_factory::make());
+    lambda(r.archetypes(), facet_class_header_factory_factory::make());
+    lambda(r.archetypes(), facet_class_header_transform_factory::make());
+    lambda(r.archetypes(), facet_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), facet_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), feature_bundle_header_factory::make());
+    lambda(r.archetypes(), feature_bundle_implementation_factory::make());
+    lambda(r.archetypes(), feature_template_bundle_header_factory::make());
+    lambda(r.archetypes(), feature_template_bundle_implementation_factory::make());
+    lambda(r.archetypes(), helper_class_header_factory_factory::make());
+    lambda(r.archetypes(), helper_class_header_transform_factory::make());
+    lambda(r.archetypes(), helper_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), helper_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), main_factory::make());
+    lambda(r.archetypes(), namespace_header_factory::make());
+    lambda(r.archetypes(), part_class_header_factory_factory::make());
+    lambda(r.archetypes(), part_class_header_transform_factory::make());
+    lambda(r.archetypes(), part_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), part_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), primitive_forward_declarations_factory::make());
+    lambda(r.archetypes(), primitive_header_factory::make());
+    lambda(r.archetypes(), primitive_implementation_factory::make());
+    lambda(r.archetypes(), variability_initializer_header_factory::make());
+    lambda(r.archetypes(), variability_initializer_implementation_factory::make());
+    lambda(r.archetypes(), visitor_forward_declarations_factory::make());
+    lambda(r.archetypes(), visitor_header_factory::make());
+
+    lambda(r.helpers(), smart_pointer_helper_factory::make());
     return r;
 }
 
