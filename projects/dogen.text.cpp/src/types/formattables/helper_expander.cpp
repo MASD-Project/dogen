@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/entities/helper_descriptor.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
@@ -31,6 +30,7 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.logical/types/entities/helper_descriptor.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
@@ -353,7 +353,6 @@ helper_expander::make_configuration(
 
     return r;
 }
-
 
 helper_expander::facets_for_family_type
 helper_expander::facets_for_family(const transforms::repository& frp) const {
