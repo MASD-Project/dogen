@@ -25,12 +25,12 @@
 namespace dogen::text::cpp::formattables {
 
 void model_expander::expand_helpers(
-    const variability::entities::feature_model& feature_model,
+    const variability::entities::feature_model& /*feature_model*/,
     const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
-    const transforms::repository& frp, model& fm) const {
-    helper_expander ex;
-    ex.expand(feature_model, streaming_properties, frp, fm);
+    logical::entities::streaming_properties>& /*streaming_properties*/,
+    const transforms::repository& /*frp*/, model& /*fm*/) const {
+    // helper_expander ex;
+    // ex.expand(feature_model, streaming_properties, frp, fm);
 }
 
 void model_expander::reduce(model& fm) const {

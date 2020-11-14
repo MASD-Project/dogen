@@ -183,7 +183,7 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * than the model must be merged.
      */
     technical_space_properties_transform::apply(ctx, m);
-    // helper_properties_transform::apply(ctx, m);
+    helper_properties_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
