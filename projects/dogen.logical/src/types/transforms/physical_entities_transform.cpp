@@ -30,6 +30,7 @@
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/physical_relations.hpp"
+#include "dogen.logical/types/features/physical_helpers.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
@@ -564,33 +565,36 @@ void physical_entities_transform::
 process_helpers(const context& ctx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
 
-    using features::physical;
-    const auto& pe(m.physical_elements());
     const auto& fm(*ctx.feature_model());
-    const auto fg(physical::make_feature_group(fm));
+    using features::physical;
+    const auto fg1(physical::make_feature_group(fm));
 
-    auto& archs(pe.helpers());
-    for (auto& pair : archs) {
+    using features::physical_helpers;
+    const auto fg2(physical_helpers::make_feature_group(fm));
+
+    const auto& pe(m.physical_elements());
+    auto& hlps(pe.helpers());
+    for (auto& pair : hlps) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-        auto& helper(*pair.second);
+        auto& hlp(*pair.second);
 
         /*
          * The meta-model name is hard-coded as we only support one.
          */
-        helper.meta_model_name(meta_model_name);
+        hlp.meta_model_name(meta_model_name);
 
         /*
          * Read all of the associated meta-data.
          */
-        const auto scfg(physical::make_static_configuration(fg, helper));
-        helper.part_id(scfg.part_id);
+        const auto scfg1(physical::make_static_configuration(fg1, hlp));
+        hlp.part_id(scfg1.part_id);
 
         /*
         * Read all relations for both the archetype and its generator.
         */
-        helper.relations(process_relations(ctx, *helper.configuration()));
-        auto& tt(helper.text_templating());
+        hlp.relations(process_relations(ctx, *hlp.configuration()));
+        auto& tt(hlp.text_templating());
         // FIXME: ensure template config is populated
         // tt.relations(process_relations(ctx, *tt.configuration()));
 
@@ -599,7 +603,7 @@ process_helpers(const context& ctx, entities::model& m) {
          * be validated later on during resolution. It may be empty
          * since not all archetypes need a wale template.
          */
-        const auto wtr(scfg.wale_template_reference);
+        const auto wtr(scfg1.wale_template_reference);
         if (!wtr.empty()) {
             identification::helpers::logical_name_builder b;
             const auto n(b.build(wtr));
@@ -610,7 +614,7 @@ process_helpers(const context& ctx, entities::model& m) {
          * Archetypes can only exist in the context of a backend and a
          * facet.
          */
-        if (helper.backend_name().empty() || helper.facet_name().empty()) {
+        if (hlp.backend_name().empty() || hlp.facet_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_helper << id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(uncontained_helper + id.value()));
@@ -619,12 +623,17 @@ process_helpers(const context& ctx, entities::model& m) {
          * Generate the ID for this archetype.
          */
         std::ostringstream os;
-        const auto sn(helper.name().simple());
+        const auto sn(hlp.name().simple());
         os << meta_model_name << separator
-           << helper.backend_name() << separator
-           << helper.facet_name() << separator << sn;
-        helper.id(os.str());
-        BOOST_LOG_SEV(lg, debug) << "ID: " << helper.id();
+           << hlp.backend_name() << separator
+           << hlp.facet_name() << separator << sn;
+        hlp.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << hlp.id();
+
+        const auto scfg2(physical_helpers::make_static_configuration(fg2, hlp));
+        hlp.family(scfg2.family);
+        hlp.owning_facets(scfg2.owning_facets);
+        hlp.owning_formatters(scfg2.owning_formatters);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished processing helpers.";
 }

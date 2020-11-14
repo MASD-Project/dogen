@@ -104,8 +104,10 @@ physical_helpers::static_configuration physical_helpers::make_static_configurati
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.family = s.get_text_content(fg.family);
-    r.owning_formatters = s.get_text_collection_content(fg.owning_formatters);
+    if (s.has_configuration_point(fg.family))
+        r.family = s.get_text_content(fg.family);
+    if (s.has_configuration_point(fg.owning_formatters))
+        r.owning_formatters = s.get_text_collection_content(fg.owning_formatters);
     if (s.has_configuration_point(fg.owning_facets))
         r.owning_facets = s.get_text_collection_content(fg.owning_facets);
     if (s.has_configuration_point(fg.wale_template_reference))

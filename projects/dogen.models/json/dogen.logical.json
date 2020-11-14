@@ -4651,11 +4651,17 @@
       "attributes": [
         {
           "name": "family",
-          "type": "masd::variability::text"
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         },
         {
           "name": "owning_formatters",
-          "type": "masd::variability::text_collection"
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         },
         {
           "name": "owning_facets",
