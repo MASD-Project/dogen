@@ -33,7 +33,6 @@
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/helper_descriptor.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
@@ -67,7 +66,7 @@ using logical::entities::helper_descriptor;
 
 namespace {
 
-class helper_properties_generator : public logical::entities::element_visitor {
+class helper_properties_generator {
 public:
     helper_properties_generator(const std::unordered_map<
         identification::entities::logical_id, std::string>& helper_families,
@@ -103,12 +102,9 @@ public:
      * We are only interested in yarn objects and primitives; all
      * other element types do not need helpers.
      */
-    using logical::entities::element_visitor::visit;
-    void visit(logical::entities::structural::object& o);
-    void visit(logical::entities::structural::primitive& p);
-
-public:
-    const std::list<logical::entities::helper_properties>& result() const;
+    void operator()(entities::element&) {}
+    void operator()(logical::entities::structural::object& o);
+    void operator()(logical::entities::structural::primitive& p);
 
 private:
     const std::unordered_map<
@@ -118,7 +114,6 @@ private:
     streaming_properties_;
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
     facets_for_family_;
-    std::list<logical::entities::helper_properties> result_;
 };
 
 helper_properties_generator::
@@ -279,6 +274,78 @@ walk_name_tree(const bool in_inheritance_relationship,
     return r;
 }
 
+std::list<helper_properties>
+helper_properties_generator::compute_helper_properties(
+    const bool in_inheritance_relationship,
+    const std::list<logical::entities::attribute>& attrs) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
+
+    std::list<helper_properties> r;
+    if (attrs.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No attributes found.";
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Attributes found: " << attrs.size();
+
+    std::unordered_set<std::string> done;
+    const bool opaqueness_from_parent(false);
+    const bool iir(in_inheritance_relationship);
+    for (const auto& attr : attrs) {
+        const auto& nt(attr.parsed_type());
+        walk_name_tree(iir, opaqueness_from_parent, nt, done, r);
+    }
+
+    if (r.empty())
+        BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
+    return r;
+}
+
+void helper_properties_generator::
+operator()(logical::entities::structural::object& o) {
+    const auto& id(o.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+    /*
+     * We only need to generate helpers for the target model.
+     */
+    using identification::entities::model_type;
+    if (o.provenance().model_type() != model_type::target) {
+        BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
+        return;
+    }
+
+    const auto& attrs(o.local_attributes());
+    const auto iir(o.in_inheritance_relationship());
+    o.helper_properties(compute_helper_properties(iir, attrs));
+}
+
+void helper_properties_generator::
+operator()(logical::entities::structural::primitive& p) {
+    const auto& id(p.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+    /*
+     * We only need to generate helpers for the target model.
+     */
+    using identification::entities::model_type;
+    if (p.provenance().model_type() != model_type::target) {
+        BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
+        return;
+    }
+
+    using logical::entities::attribute;
+    const std::list<attribute> attrs({ p.value_attribute() });
+    const auto iir(false/*in_inheritance_relationship*/);
+    p.helper_properties(compute_helper_properties(iir, attrs));
+}
+
+}
+
+namespace {
 
 class configuration_generator {
 public:
@@ -316,55 +383,6 @@ void configuration_generator::operator()(entities::element& e) {
         BOOST_THROW_EXCEPTION(
             transformation_error(duplicate_id + id.value()));
     }
-}
-
-std::list<helper_properties>
-helper_properties_generator::compute_helper_properties(
-    const bool in_inheritance_relationship,
-    const std::list<logical::entities::attribute>& attrs) const {
-
-    BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
-
-    std::list<helper_properties> r;
-    if (attrs.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No attributes found.";
-        return r;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Attributes found: " << attrs.size();
-
-    std::unordered_set<std::string> done;
-    const bool opaqueness_from_parent(false);
-    const bool iir(in_inheritance_relationship);
-    for (const auto& attr : attrs) {
-        const auto& nt(attr.parsed_type());
-        walk_name_tree(iir, opaqueness_from_parent, nt, done, r);
-    }
-
-    if (r.empty())
-        BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
-
-    BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
-    return r;
-}
-
-void helper_properties_generator::
-visit(logical::entities::structural::object& o) {
-    const auto& attrs(o.local_attributes());
-    const auto iir(o.in_inheritance_relationship());
-    result_ = compute_helper_properties(iir, attrs);
-}
-
-void helper_properties_generator::
-visit(logical::entities::structural::primitive& p) {
-    const std::list<logical::entities::attribute> attrs({ p.value_attribute() });
-    const auto iir(false/*in_inheritance_relationship*/);
-    result_ = compute_helper_properties(iir, attrs);
-}
-
-const std::list<logical::entities::helper_properties>&
-helper_properties_generator::result() const {
-    return result_;
 }
 
 }
@@ -410,12 +428,17 @@ facets_for_family(const physical::entities::meta_model& pmm) {
 
 void helper_properties_transform::
 populate_helper_properties(const std::unordered_map<
-    identification::entities::logical_id, std::string>& /*helper_families*/,
+    identification::entities::logical_id, std::string>& helper_families,
     const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& /*streaming_properties*/,
+    logical::entities::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, std::unordered_set<std::string>>&
-    /*facets_for_family*/, entities::model& /*m*/) {
+    facets_for_family, entities::model& m) {
 
+    BOOST_LOG_SEV(lg, debug) << "Populating helper properties.";
+    helper_properties_generator
+        hpg(helper_families, streaming_properties, facets_for_family);
+    elements_traversal(m, hpg);
+    BOOST_LOG_SEV(lg, debug) << "Finished populating helper properties.";
 }
 
 void helper_properties_transform::
