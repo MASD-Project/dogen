@@ -40,19 +40,28 @@ namespace dogen::logical::transforms {
  */
 class helper_properties_transform final {
 private:
+    /**
+     * @brief Reads the helper related configuration from the model.
+     */
     static std::unordered_map<identification::entities::logical_id, std::string>
     make_configuration(const variability::entities::feature_model& fm,
         const entities::model& m);
 
 private:
-    std::unordered_map<std::string, std::unordered_set<std::string>>
-    facets_for_family(const physical::entities::meta_model& pmm) const;
+    /**
+     * @brief Unpack the helpers to generate a mapping of helper
+     * family to facet. The container has helpers by family, by owning
+     * file formatter.
+     */
+    static std::unordered_map<std::string, std::unordered_set<std::string>>
+    facets_for_family(const physical::entities::meta_model& pmm);
 
-    void populate_helper_properties(const std::unordered_map<
+    static void populate_helper_properties(const std::unordered_map<
         identification::entities::logical_id, std::string>& helper_families,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
-        const physical::entities::meta_model& pmm, entities::model& m) const;
+        const std::unordered_map<std::string, std::unordered_set<std::string>>&
+        facets_for_family, entities::model& m);
 
 public:
     static void apply(const context& ctx, entities::model& m);

@@ -107,7 +107,6 @@ void configuration_generator::operator()(entities::element& e) {
 
 }
 
-
 std::unordered_map<identification::entities::logical_id, std::string>
 helper_properties_transform::
 make_configuration(const variability::entities::feature_model& fm,
@@ -126,15 +125,59 @@ make_configuration(const variability::entities::feature_model& fm,
     return r;
 }
 
+std::unordered_map<std::string, std::unordered_set<std::string>>
+helper_properties_transform::
+facets_for_family(const physical::entities::meta_model& pmm) {
+    std::unordered_map<std::string, std::unordered_set<std::string>> r;
+    for (const auto& be : pmm.backends()) {
+        for (const auto& fct_pair : be.facets()) {
+            const auto& fct(fct_pair.second);
+            for (const auto& hlp_pair : fct.helpers()) {
+                const auto& hlp(hlp_pair.second);
+                const auto family(hlp.family());
+                for (const auto& owning_fct : hlp.owning_facets())
+                    r[family].insert(owning_fct.value());
+            }
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making facets for family. Result: "
+                             << r;
+    return r;
+}
+
+void helper_properties_transform::
+populate_helper_properties(const std::unordered_map<
+    identification::entities::logical_id, std::string>& /*helper_families*/,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::streaming_properties>& /*streaming_properties*/,
+    const std::unordered_map<std::string, std::unordered_set<std::string>>&
+    /*facets_for_family*/, entities::model& /*m*/) {
+
+}
 
 void helper_properties_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "decoration",
+    tracing::scoped_transform_tracer stp(lg, "helper properties",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
+    /*
+     * First we read the configuration.
+     */
     const auto& fm(*ctx.feature_model());
     const auto cfg(make_configuration(fm, m));
 
+    /*
+     * Then we map facets to families of helpers
+     */
+    const auto& pmm(*ctx.physical_meta_model());
+    const auto fff(facets_for_family(pmm));
+
+    /*
+     * Finally we can generate the helper properties.
+     */
+    const auto& sp(m.streaming_properties());
+    populate_helper_properties(cfg, sp, fff, m);
 
     stp.end_transform(m);
 }
