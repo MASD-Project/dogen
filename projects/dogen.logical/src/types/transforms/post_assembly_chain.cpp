@@ -41,6 +41,7 @@
 #include "dogen.logical/types/transforms/template_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/decoration_transform.hpp"
 #include "dogen.logical/types/transforms/generability_transform.hpp"
+#include "dogen.logical/types/transforms/helper_properties_transform.hpp"
 #include "dogen.logical/types/transforms/technical_space_properties_transform.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
 
@@ -178,10 +179,11 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
     template_rendering_transform::apply(ctx, m);
 
     /*
-     * The technical space properties don't have any particular
-     * dependencies other than the model must be merged.
+     * These transforms don't have any particular dependencies, other
+     * than the model must be merged.
      */
     technical_space_properties_transform::apply(ctx, m);
+    helper_properties_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
