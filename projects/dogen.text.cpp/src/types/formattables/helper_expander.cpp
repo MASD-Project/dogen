@@ -68,9 +68,7 @@ public:
         const helper_expander::facets_for_family_type& fff);
 
 private:
-    bool requires_hashing_helper(
-        const helper_expander::facets_for_family_type& fff,
-        const std::string& family) const;
+    bool requires_hashing_helper(const std::string& family) const;
 
     std::string helper_family_for_id(
         const identification::entities::logical_id& id) const;
@@ -81,17 +79,14 @@ private:
 
 private:
     boost::optional<helper_descriptor>
-    walk_name_tree(const helper_expander::facets_for_family_type& fff,
-        const bool in_inheritance_relationship,
+    walk_name_tree(const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent,
         const identification::entities::logical_name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
     std::list<helper_properties>
-    compute_helper_properties(
-        const helper_expander::facets_for_family_type& fff,
-        const bool in_inheritance_relationship,
+    compute_helper_properties(const bool in_inheritance_relationship,
         const std::list<logical::entities::attribute>& attrs) const;
 
 public:
@@ -126,15 +121,14 @@ helper_properties_generator(const std::unordered_map<
       streaming_properties_(streaming_properties), facets_for_family_(fff) {}
 
 bool helper_properties_generator::
-requires_hashing_helper(const helper_expander::facets_for_family_type& fff,
-    const std::string& family) const {
+requires_hashing_helper(const std::string& family) const {
 
     /*
      * If there is no entry on the container for this family, we don't
      * need a helper for hashing.
      */
-    const auto i(fff.find(family));
-    if (i == fff.end())
+    const auto i(facets_for_family_.find(family));
+    if (i == facets_for_family_.end())
         return false;
 
     /*
@@ -174,9 +168,7 @@ helper_properties_generator::streaming_properties_for_id(
 }
 
 boost::optional<helper_descriptor> helper_properties_generator::
-walk_name_tree(
-    const helper_expander::facets_for_family_type& fff,
-    const bool in_inheritance_relationship,
+walk_name_tree(const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent,
     const identification::entities::logical_name_tree& nt,
     std::unordered_set<std::string>& done,
@@ -196,7 +188,7 @@ walk_name_tree(
 
     const auto fam(helper_family_for_id(id));
     r.family(fam);
-    r.requires_hashing_helper(requires_hashing_helper(fff, fam));
+    r.requires_hashing_helper(requires_hashing_helper(fam));
 
     r.name_identifiable(nt.current().qualified().identifiable());
     r.name_qualified(nt.current().qualified().colon());
@@ -232,7 +224,7 @@ walk_name_tree(
          * children. If we have a child, we must have a descriptor.
          */
         const auto aco(nt.are_children_opaque());
-        const auto dd(walk_name_tree(fff, iir, aco, c, done, hps));
+        const auto dd(walk_name_tree(iir, aco, c, done, hps));
         if (!dd) {
             BOOST_LOG_SEV(lg, error) << descriptor_expected;
             BOOST_THROW_EXCEPTION(expansion_error(descriptor_expected));
@@ -276,8 +268,8 @@ walk_name_tree(
     return r;
 }
 
-std::list<helper_properties> helper_properties_generator::
-compute_helper_properties(const helper_expander::facets_for_family_type& fff,
+std::list<helper_properties>
+helper_properties_generator::compute_helper_properties(
     const bool in_inheritance_relationship,
     const std::list<logical::entities::attribute>& attrs) const {
 
@@ -296,7 +288,7 @@ compute_helper_properties(const helper_expander::facets_for_family_type& fff,
     const bool iir(in_inheritance_relationship);
     for (const auto& attr : attrs) {
         const auto& nt(attr.parsed_type());
-        walk_name_tree(fff, iir, opaqueness_from_parent, nt, done, r);
+        walk_name_tree(iir, opaqueness_from_parent, nt, done, r);
     }
 
     if (r.empty())
@@ -308,18 +300,16 @@ compute_helper_properties(const helper_expander::facets_for_family_type& fff,
 
 void helper_properties_generator::
 visit(logical::entities::structural::object& o) {
-    const auto& fff(facets_for_family_);
     const auto& attrs(o.local_attributes());
     const auto iir(o.in_inheritance_relationship());
-    result_ = compute_helper_properties(fff, iir, attrs);
+    result_ = compute_helper_properties(iir, attrs);
 }
 
 void helper_properties_generator::
 visit(logical::entities::structural::primitive& p) {
-    const auto& fff(facets_for_family_);
     const std::list<logical::entities::attribute> attrs({ p.value_attribute() });
     const auto iir(false/*in_inheritance_relationship*/);
-    result_ = compute_helper_properties(fff, iir, attrs);
+    result_ = compute_helper_properties(iir, attrs);
 }
 
 const std::list<logical::entities::helper_properties>&
