@@ -79,12 +79,20 @@ ast.stream() << "    // r.relations().status(physical::entities::relation_status
 ast.stream() << "    r.family(\"" << hlp.family() << "\");" << std::endl;
              }
 
-             for (const auto& of : hlp.owning_formatters()) {
-ast.stream() << "    r.owning_formatters().push_back(\"" << of << "\");" << std::endl;
+             if (!hlp.owning_facets().empty() || !hlp.owning_facets().empty()) {
+ast.stream() << "    using identification::entities::physical_meta_id;" << std::endl;
              }
 
+             for (const auto& of : hlp.owning_formatters()) {
+ast.stream() << "    r.owning_formatters().push_back(" << std::endl;
+ast.stream() << "        physical_meta_id(\"" << of << "\"));" << std::endl;
+             }
+
+
+             
              for (const auto& of : hlp.owning_facets()) {
-ast.stream() << "    r.owning_facets().push_back(\"" << of << "\");" << std::endl;
+ast.stream() << "    r.owning_facets().push_back(" << std::endl;
+ast.stream() << "        physical_meta_id(\"" << of << "\"));" << std::endl;
              }
 
              for(const auto& l : hlp.labels()) {

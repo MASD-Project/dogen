@@ -37354,7 +37354,11 @@ physical::entities::archetype_kind &lt;#= sn #&gt;::make() {
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation_enabled
 #DOGEN masd.wale.kvp.class.simple_name=smart_pointer_helper_transform
-#DOGEN masd.wale.kvp.helper.family=SmartPointer#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=SmartPointer
+#DOGEN masd.physical.helpers.family=SmartPointer
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38254,15 +38258,25 @@ physical::entities::helper &lt;#= sn #&gt;::make() {
 &lt;#+
              }
 
-             for (const auto&amp; of : hlp.owning_formatters()) {
+             if (!hlp.owning_facets().empty() || !hlp.owning_facets().empty()) {
 #&gt;
-    r.owning_formatters().push_back("&lt;#= of #&gt;");
+    using identification::entities::physical_meta_id;
 &lt;#+
              }
 
+             for (const auto&amp; of : hlp.owning_formatters()) {
+#&gt;
+    r.owning_formatters().push_back(
+        physical_meta_id("&lt;#= of #&gt;"));
+&lt;#+
+             }
+
+
+             
              for (const auto&amp; of : hlp.owning_facets()) {
 #&gt;
-    r.owning_facets().push_back("&lt;#= of #&gt;");
+    r.owning_facets().push_back(
+        physical_meta_id("&lt;#= of #&gt;"));
 &lt;#+
              }
 
