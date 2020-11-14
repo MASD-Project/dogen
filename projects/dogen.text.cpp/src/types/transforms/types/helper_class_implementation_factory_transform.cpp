@@ -79,7 +79,7 @@ ast.stream() << "    // r.relations().status(physical::entities::relation_status
 ast.stream() << "    r.family(\"" << hlp.family() << "\");" << std::endl;
              }
 
-             if (!hlp.owning_facets().empty() || !hlp.owning_facets().empty()) {
+             if (!hlp.owning_formatters().empty() || !hlp.owning_facets().empty()) {
 ast.stream() << "    using identification::entities::physical_meta_id;" << std::endl;
              }
 

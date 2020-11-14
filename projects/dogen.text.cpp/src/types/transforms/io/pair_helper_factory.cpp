@@ -28,6 +28,18 @@ physical::entities::helper pair_helper_factory::make() {
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "io", "pair_helper"));
     // r.relations().status(physical::entities::relation_status::);
+    r.family("Pair");
+    using identification::entities::physical_meta_id;
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.cpp.io.class_implementation"));
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.cpp.io.primitive_implementation"));
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.cpp.types.class_implementation"));
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.cpp.types.primitive_implementation"));
+    r.owning_facets().push_back(
+        physical_meta_id("masd.cpp.io"));
 
     return r;
 }

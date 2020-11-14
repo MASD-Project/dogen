@@ -38267,7 +38267,7 @@ physical::entities::helper &lt;#= sn #&gt;::make() {
 &lt;#+
              }
 
-             if (!hlp.owning_facets().empty() || !hlp.owning_facets().empty()) {
+             if (!hlp.owning_formatters().empty() || !hlp.owning_facets().empty()) {
 #&gt;
     using identification::entities::physical_meta_id;
 &lt;#+
@@ -40356,7 +40356,13 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=optional_helper_transform
-#DOGEN masd.wale.kvp.helper.family=Optional#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=Optional
+#DOGEN masd.physical.helpers.family=Optional
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40533,7 +40539,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=pair_helper_transform
-#DOGEN masd.wale.kvp.helper.family=Pair#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=Pair
+#DOGEN masd.physical.helpers.family=Pair
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40708,7 +40720,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=string_helper_transform
-#DOGEN masd.wale.kvp.helper.family=String#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=String
+#DOGEN masd.physical.helpers.family=String
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40870,7 +40888,13 @@ inline std::string tidy_up_string(std::string s) {
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=ptree_helper_transform
-#DOGEN masd.wale.kvp.helper.family=BoostPTree#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=BoostPTree
+#DOGEN masd.physical.helpers.family=BoostPTree
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41045,7 +41069,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=variant_helper_transform
-#DOGEN masd.wale.kvp.helper.family=BoostVariant#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=BoostVariant
+#DOGEN masd.physical.helpers.family=BoostVariant
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41246,7 +41276,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= d.na
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=associative_container_helper_transform
-#DOGEN masd.wale.kvp.helper.family=AssociativeContainer#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=AssociativeContainer
+#DOGEN masd.physical.helpers.family=AssociativeContainer
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41444,7 +41480,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=sequence_container_helper_transform
-#DOGEN masd.wale.kvp.helper.family=SequenceContainer#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=SequenceContainer
+#DOGEN masd.physical.helpers.family=SequenceContainer
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41618,7 +41660,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation
 #DOGEN masd.wale.kvp.class.simple_name=smart_pointer_helper_transform
-#DOGEN masd.wale.kvp.helper.family=SmartPointer#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=SmartPointer
+#DOGEN masd.physical.helpers.family=SmartPointer
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
