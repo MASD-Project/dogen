@@ -62,10 +62,223 @@ const std::string empty_identifiable(
 
 namespace dogen::logical::transforms {
 
-// using logical::entities::helper_properties;
-// using logical::entities::helper_descriptor;
+using logical::entities::helper_properties;
+using logical::entities::helper_descriptor;
 
 namespace {
+
+class helper_properties_generator : public logical::entities::element_visitor {
+public:
+    helper_properties_generator(const std::unordered_map<
+        identification::entities::logical_id, std::string>& helper_families,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::streaming_properties>& streaming_properties,
+        const std::unordered_map<std::string, std::unordered_set<std::string>>&
+        fff);
+
+private:
+    bool requires_hashing_helper(const std::string& family) const;
+
+    std::string helper_family_for_id(
+        const identification::entities::logical_id& id) const;
+
+    boost::optional<logical::entities::streaming_properties>
+    streaming_properties_for_id(
+        const identification::entities::logical_id& id) const;
+
+private:
+    boost::optional<helper_descriptor>
+    walk_name_tree(const bool in_inheritance_relationship,
+        const bool inherit_opaqueness_from_parent,
+        const identification::entities::logical_name_tree& nt,
+        std::unordered_set<std::string>& done,
+        std::list<helper_properties>& hps) const;
+
+    std::list<helper_properties>
+    compute_helper_properties(const bool in_inheritance_relationship,
+        const std::list<logical::entities::attribute>& attrs) const;
+
+public:
+    /*
+     * We are only interested in yarn objects and primitives; all
+     * other element types do not need helpers.
+     */
+    using logical::entities::element_visitor::visit;
+    void visit(logical::entities::structural::object& o);
+    void visit(logical::entities::structural::primitive& p);
+
+public:
+    const std::list<logical::entities::helper_properties>& result() const;
+
+private:
+    const std::unordered_map<
+    identification::entities::logical_id, std::string>& helper_families_;
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::streaming_properties>&
+    streaming_properties_;
+    const std::unordered_map<std::string, std::unordered_set<std::string>>&
+    facets_for_family_;
+    std::list<logical::entities::helper_properties> result_;
+};
+
+helper_properties_generator::
+helper_properties_generator(const std::unordered_map<
+    identification::entities::logical_id, std::string>& helper_families,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::streaming_properties>& streaming_properties,
+    const std::unordered_map<std::string, std::unordered_set<std::string>>&
+    fff)
+    : helper_families_(helper_families),
+      streaming_properties_(streaming_properties), facets_for_family_(fff) {}
+
+bool helper_properties_generator::
+requires_hashing_helper(const std::string& family) const {
+
+    /*
+     * If there is no entry on the container for this family, we don't
+     * need a helper for hashing.
+     */
+    const auto i(facets_for_family_.find(family));
+    if (i == facets_for_family_.end())
+        return false;
+
+    /*
+     * If the hash facet is not present in the helpers for this family
+     * then the family does not require hashing support.
+     */
+    const auto j(i->second.find("masd.cpp.hash"));
+    return j != i->second.end();
+}
+
+std::string helper_properties_generator::
+helper_family_for_id(const identification::entities::logical_id& id) const {
+
+    const auto i(helper_families_.find(id));
+    if (i == helper_families_.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_helper_family << id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_helper_family + id.value()));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Found helper family for type: " << id
+                             << ". Family:" << i->second;
+    return i->second;
+}
+
+boost::optional<logical::entities::streaming_properties>
+helper_properties_generator::streaming_properties_for_id(
+    const identification::entities::logical_id& id) const {
+
+    const auto i(streaming_properties_.find(id));
+    if (i == streaming_properties_.end())
+        return boost::optional<logical::entities::streaming_properties>();
+
+    BOOST_LOG_SEV(lg, debug) << "Found streaming configuration for type: " << id
+                             << ". Configuration: " << i->second;
+    return i->second;
+}
+
+boost::optional<helper_descriptor> helper_properties_generator::
+walk_name_tree(const bool in_inheritance_relationship,
+    const bool inherit_opaqueness_from_parent,
+    const identification::entities::logical_name_tree& nt,
+    std::unordered_set<std::string>& done,
+    std::list<helper_properties>& hps) const {
+
+    const auto id(nt.current().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
+
+    helper_descriptor r;
+    identification::helpers::logical_name_flattener nf;
+    r.namespaces(nf.flatten(nt.current()));
+    r.is_simple_type(nt.is_current_simple_type());
+
+    const auto sp(streaming_properties_for_id(id));
+    if (sp)
+        r.streaming_properties(sp);
+
+    const auto fam(helper_family_for_id(id));
+    r.family(fam);
+    r.requires_hashing_helper(requires_hashing_helper(fam));
+
+    r.name_identifiable(nt.current().qualified().identifiable());
+    r.name_qualified(nt.current().qualified().colon());
+    r.name_tree_identifiable(nt.qualified().identifiable());
+    r.name_tree_qualified(nt.qualified().colon());
+    r.is_circular_dependency(nt.is_circular_dependency());
+    r.is_pointer(inherit_opaqueness_from_parent);
+
+    /*
+     * Ensure we have different helpers for pointer and non-pointer
+     * support.
+     */
+    if (r.is_pointer())
+        r.name_tree_identifiable().append("_ptr");
+
+    helper_properties hp;
+    hp.current(r);
+
+    const auto iir(in_inheritance_relationship);
+    hp.in_inheritance_relationship(iir);
+
+    /*
+     * Note that we are processing the children even though the parent
+     * may not require a helper. This is slight over-caution and may
+     * even be wrong. We are basically saying that in a name tree,
+     * there may be nodes which do not require helpers followed by
+     * nodes that do.
+     */
+    for (const auto& c : nt.children()) {
+        /*
+         * We need to remember the descriptors of the direct
+         * descendants - and just the direct descendants, not its
+         * children. If we have a child, we must have a descriptor.
+         */
+        const auto aco(nt.are_children_opaque());
+        const auto dd(walk_name_tree(iir, aco, c, done, hps));
+        if (!dd) {
+            BOOST_LOG_SEV(lg, error) << descriptor_expected;
+            BOOST_THROW_EXCEPTION(transformation_error(descriptor_expected));
+        }
+
+        const auto ident(dd->name_tree_identifiable());
+        if (ident.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_identifiable;
+            BOOST_THROW_EXCEPTION(transformation_error(empty_identifiable));
+        }
+        hp.direct_descendants().push_back(*dd);
+    }
+    BOOST_LOG_SEV(lg, debug) << "Helper properties: " << hp;
+
+    /*
+     * Ensure we have not yet created a helper for this name
+     * tree. Note that we must still do the processing above in
+     * order to ensure the direct descendants are computed, even
+     * though the helper itself may not be required. As an
+     * example, take the case of a map of string to string. We
+     * need the helper for the map to have two direct descendants
+     * (one per string), but we do not want to generate two helper
+     * methods for the strings.
+     *
+     * Note also we are using the return type's identifiable name
+     * rather than the input name tree's identifiable. This is because
+     * we may have augmented it - e.g. the "is pointer" use case.
+     */
+    const auto ident(r.name_tree_identifiable());
+    if (ident.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_identifiable;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_identifiable));
+    }
+
+    if (done.find(ident) == done.end()) {
+        hps.push_back(hp);
+        done.insert(ident);
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Name tree already processed: " << ident;
+
+    return r;
+}
+
 
 class configuration_generator {
 public:
@@ -103,6 +316,55 @@ void configuration_generator::operator()(entities::element& e) {
         BOOST_THROW_EXCEPTION(
             transformation_error(duplicate_id + id.value()));
     }
+}
+
+std::list<helper_properties>
+helper_properties_generator::compute_helper_properties(
+    const bool in_inheritance_relationship,
+    const std::list<logical::entities::attribute>& attrs) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
+
+    std::list<helper_properties> r;
+    if (attrs.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No attributes found.";
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Attributes found: " << attrs.size();
+
+    std::unordered_set<std::string> done;
+    const bool opaqueness_from_parent(false);
+    const bool iir(in_inheritance_relationship);
+    for (const auto& attr : attrs) {
+        const auto& nt(attr.parsed_type());
+        walk_name_tree(iir, opaqueness_from_parent, nt, done, r);
+    }
+
+    if (r.empty())
+        BOOST_LOG_SEV(lg, debug) << "No helper properties found.";
+
+    BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
+    return r;
+}
+
+void helper_properties_generator::
+visit(logical::entities::structural::object& o) {
+    const auto& attrs(o.local_attributes());
+    const auto iir(o.in_inheritance_relationship());
+    result_ = compute_helper_properties(iir, attrs);
+}
+
+void helper_properties_generator::
+visit(logical::entities::structural::primitive& p) {
+    const std::list<logical::entities::attribute> attrs({ p.value_attribute() });
+    const auto iir(false/*in_inheritance_relationship*/);
+    result_ = compute_helper_properties(iir, attrs);
+}
+
+const std::list<logical::entities::helper_properties>&
+helper_properties_generator::result() const {
+    return result_;
 }
 
 }
