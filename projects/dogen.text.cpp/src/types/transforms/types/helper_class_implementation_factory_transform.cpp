@@ -60,26 +60,38 @@ void helper_class_implementation_factory_transform::apply(const context& ctx, co
     tracing::scoped_transform_tracer stp(lg, "helper class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    const auto& arch(ast.as<logical::entities::physical::helper>(e));
+    const auto& hlp(ast.as<logical::entities::physical::helper>(e));
 
     {
-        auto sbf(ast.make_scoped_boilerplate_formatter(arch));
+        auto sbf(ast.make_scoped_boilerplate_formatter(hlp));
         {
-            const auto ns(ast.make_namespaces(arch.name(),
+            const auto ns(ast.make_namespaces(hlp.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(arch.name().simple() + "_factory");
+            const auto sn(hlp.name().simple() + "_factory");
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::helper " << sn << "::make() {" << std::endl;
 ast.stream() << "    physical::entities::helper r;" << std::endl;
 ast.stream() << "    using pmnf = identification::helpers::physical_meta_name_factory;" << std::endl;
-ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
-ast.stream() << "    // r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
-            for(const auto& l : arch.labels()) {
+ast.stream() << "    r.meta_name(pmnf::make(\"" << hlp.backend_name() << "\", \"" << hlp.facet_name() << "\", \"" << hlp.name().simple() << "\"));" << std::endl;
+ast.stream() << "    // r.relations().status(physical::entities::relation_status::" << hlp.relations().status() << ");" << std::endl;
+             if (!hlp.family().empty()) {
+ast.stream() << "    r.family(\"" << hlp.family() << "\");" << std::endl;
+             }
+
+             for (const auto& of : hlp.owning_formatters()) {
+ast.stream() << "    r.owning_formatters().push_back(\"" << of << "\");" << std::endl;
+             }
+
+             for (const auto& of : hlp.owning_facets()) {
+ast.stream() << "    r.owning_facets().push_back(\"" << of << "\");" << std::endl;
+             }
+
+             for(const auto& l : hlp.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }
 
-            for(const auto& cr : arch.relations().constant()) {
+            for(const auto& cr : hlp.relations().constant()) {
 ast.stream() << std::endl;
 ast.stream() << "    r.relations().constant().push_back(" << std::endl;
 ast.stream() << "        physical::entities::constant_relation(" << std::endl;
@@ -104,7 +116,7 @@ ast.stream() << "        )" << std::endl;
 ast.stream() << "    );" << std::endl;
             }
 
-            for(const auto& vr : arch.relations().variable()) {
+            for(const auto& vr : hlp.relations().variable()) {
 ast.stream() << std::endl;
 ast.stream() << "    r.relations().variable().push_back(" << std::endl;
 ast.stream() << "        physical::entities::variable_relation(" << std::endl;

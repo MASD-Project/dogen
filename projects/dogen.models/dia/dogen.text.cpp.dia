@@ -38231,30 +38231,48 @@ void helper_class_implementation_factory_transform::apply(const context&amp; ctx
     tracing::scoped_transform_tracer stp(lg, "helper class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    const auto&amp; arch(ast.as&lt;logical::entities::physical::helper&gt;(e));
+    const auto&amp; hlp(ast.as&lt;logical::entities::physical::helper&gt;(e));
 
     {
-        auto sbf(ast.make_scoped_boilerplate_formatter(arch));
+        auto sbf(ast.make_scoped_boilerplate_formatter(hlp));
         {
-            const auto ns(ast.make_namespaces(arch.name(),
+            const auto ns(ast.make_namespaces(hlp.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(arch.name().simple() + "_factory");
+            const auto sn(hlp.name().simple() + "_factory");
 #&gt;
 
 physical::entities::helper &lt;#= sn #&gt;::make() {
     physical::entities::helper r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
-    // r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
+    r.meta_name(pmnf::make("&lt;#= hlp.backend_name() #&gt;", "&lt;#= hlp.facet_name() #&gt;", "&lt;#= hlp.name().simple() #&gt;"));
+    // r.relations().status(physical::entities::relation_status::&lt;#= hlp.relations().status() #&gt;);
 &lt;#+
-            for(const auto&amp; l : arch.labels()) {
+             if (!hlp.family().empty()) {
+#&gt;
+    r.family("&lt;#= hlp.family() #&gt;");
+&lt;#+
+             }
+
+             for (const auto&amp; of : hlp.owning_formatters()) {
+#&gt;
+    r.owning_formatters().push_back("&lt;#= of #&gt;");
+&lt;#+
+             }
+
+             for (const auto&amp; of : hlp.owning_facets()) {
+#&gt;
+    r.owning_facets().push_back("&lt;#= of #&gt;");
+&lt;#+
+             }
+
+             for(const auto&amp; l : hlp.labels()) {
 #&gt;
     r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
 
-            for(const auto&amp; cr : arch.relations().constant()) {
+            for(const auto&amp; cr : hlp.relations().constant()) {
 #&gt;
 
     r.relations().constant().push_back(
@@ -38291,7 +38309,7 @@ physical::entities::helper &lt;#= sn #&gt;::make() {
 &lt;#+
             }
 
-            for(const auto&amp; vr : arch.relations().variable()) {
+            for(const auto&amp; vr : hlp.relations().variable()) {
 #&gt;
 
     r.relations().variable().push_back(
