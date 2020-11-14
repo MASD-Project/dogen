@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-14 Sat 13:23]
+#+CAPTION: Clock summary at [2020-11-14 Sat 16:42]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *24:29* |       |       | 100.0 |
+| *Total time*                                         | *25:55* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 24:29   |       |       | 100.0 |
-| Active                                               |         | 24:29 |       | 100.0 |
-| edit release notes for previous sprint               |         |       |  5:04 |  20.7 |
-| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.9 |
-| Sprint and product backlog grooming                  |         |       |  1:29 |   6.1 |
-| Improvements to template processing in logical model |         |       |  0:26 |   1.8 |
-| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  28.5 |
-| Add C++ helpers to the PMM                           |         |       | 10:03 |  41.0 |
+| Stories                                              | 25:55   |       |       | 100.0 |
+| Active                                               |         | 25:55 |       | 100.0 |
+| edit release notes for previous sprint               |         |       |  5:04 |  19.5 |
+| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.8 |
+| Sprint and product backlog grooming                  |         |       |  1:29 |   5.7 |
+| Improvements to template processing in logical model |         |       |  0:26 |   1.7 |
+| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  26.9 |
+| Add C++ helpers to the PMM                           |         |       | 11:29 |  44.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -326,6 +326,7 @@ Notes:
 
 *** STARTED Add C++ helpers to the PMM                                :story:
     :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 15:15]--[2020-11-14 Sat 16:41] =>  1:26
     CLOCK: [2020-11-14 Sat 11:35]--[2020-11-14 Sat 13:23] =>  1:48
     CLOCK: [2020-11-13 Fri 21:40]--[2020-11-13 Fri 21:47] =>  0:07
     CLOCK: [2020-11-08 Sun 16:19]--[2020-11-08 Sun 17:57] =>  1:38
