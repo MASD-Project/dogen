@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-14 Sat 16:42]
+#+CAPTION: Clock summary at [2020-11-14 Sat 19:46]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *25:55* |       |       | 100.0 |
+| *Total time*                                         | *28:22* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 25:55   |       |       | 100.0 |
-| Active                                               |         | 25:55 |       | 100.0 |
-| edit release notes for previous sprint               |         |       |  5:04 |  19.5 |
-| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.8 |
-| Sprint and product backlog grooming                  |         |       |  1:29 |   5.7 |
-| Improvements to template processing in logical model |         |       |  0:26 |   1.7 |
-| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  26.9 |
-| Add C++ helpers to the PMM                           |         |       | 11:29 |  44.3 |
+| Stories                                              | 28:22   |       |       | 100.0 |
+| Active                                               |         | 28:22 |       | 100.0 |
+| edit release notes for previous sprint               |         |       |  5:04 |  17.9 |
+| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.6 |
+| Sprint and product backlog grooming                  |         |       |  1:30 |   5.3 |
+| Improvements to template processing in logical model |         |       |  0:26 |   1.5 |
+| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  24.6 |
+| Add C++ helpers to the PMM                           |         |       | 13:36 |  47.9 |
+| Remove JSON models from Dogen                        |         |       |  0:19 |   1.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -225,6 +226,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 19:45]--[2020-11-14 Sat 19:46] =>  0:01
     CLOCK: [2020-11-07 Sat 14:15]--[2020-11-07 Sat 15:06] =>  0:51
     CLOCK: [2020-11-07 Sat 08:49]--[2020-11-07 Sat 09:08] =>  0:19
     CLOCK: [2020-11-06 Fri 14:43]--[2020-11-06 Fri 14:53] =>  0:10
@@ -324,8 +326,11 @@ Notes:
 - C# needs to be done on after we done all of the formattable types so
   we should do it as a separate story.
 
-*** STARTED Add C++ helpers to the PMM                                :story:
+*** COMPLETED Add C++ helpers to the PMM                              :story:
+    CLOSED: [2020-11-14 Sat 19:44]
     :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 18:31]--[2020-11-14 Sat 19:44] =>  1:13
+    CLOCK: [2020-11-14 Sat 17:16]--[2020-11-14 Sat 18:10] =>  0:54
     CLOCK: [2020-11-14 Sat 15:15]--[2020-11-14 Sat 16:41] =>  1:26
     CLOCK: [2020-11-14 Sat 11:35]--[2020-11-14 Sat 13:23] =>  1:48
     CLOCK: [2020-11-13 Fri 21:40]--[2020-11-13 Fri 21:47] =>  0:07
@@ -382,6 +387,21 @@ Classes to move:
 - move helpers as text transforms to text model. Refactor them to use
   the new text model transform interface.
 
+*** STARTED Remove JSON models from Dogen                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
+    :END:
+
+The JSON code is no longer strategic and will be removed in the
+future. For now we are paying the cost of maintaining the JSON models
+in Dogen, and this cost has increased with helpers work. We need to
+remove the tests for the JSON models in Dogen as well as the models.
+
+Notes:
+
+- removed the JSON tests. We don't need to keep the Dogen models
+  updated in json any longer.
+
 *** Add C# helpers to the PMM                                         :story:
 
 Notes:
@@ -401,6 +421,14 @@ namespace which needs to be moved to the new world.
 
 When all types have been moved, we can delete the formatables types
 and namespace.
+
+Notes:
+
+- at present we cannot get rid of reducer because we are still relying
+  on having all types around for helpers in C#. Due to this we cannot
+  remove the rest of the types in C++ formatables until we got the C#
+  model at the same level. However, if we just get the helpers moved
+  across in C# that may be enough to unblock c++.
 
 *** Move assorted formattable properties in C#                        :story:
 
