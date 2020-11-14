@@ -32,7 +32,6 @@
 #include "dogen.text.cpp/types/transforms/types/namespace_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp"

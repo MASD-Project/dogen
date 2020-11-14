@@ -23,7 +23,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/path_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/serialization_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp"

@@ -304,7 +304,6 @@ visit(const logical::entities::physical::facet& v) {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
             b.add(v.name(), ch_arch);
             b.add(v.archetypes(), ch_arch);
-            b.add(v.helpers(), ch_arch);
             b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
             b.add_as_user(
@@ -320,6 +319,10 @@ visit(const logical::entities::physical::facet& v) {
 
             const auto ch_arch("masd.cpp.types.archetype_class_header_factory");
             b.add(v.archetypes(), ch_arch);
+
+            const auto ch_hlp("masd.cpp.types.helper_class_header_factory");
+            b.add(v.helpers(), ch_hlp);
+
             b.add_as_user(
                 "dogen.utility/types/log/logger.hpp");
             b.add_as_user(
