@@ -4672,6 +4672,13 @@
           }
         }
       ]
+    },
+    {
+      "name": "transforms::helper_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
