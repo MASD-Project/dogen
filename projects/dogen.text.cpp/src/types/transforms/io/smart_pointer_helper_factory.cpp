@@ -40,6 +40,8 @@ physical::entities::helper smart_pointer_helper_factory::make() {
         physical_meta_id("masd.cpp.types.primitive_implementation"));
     r.owning_facets().push_back(
         physical_meta_id("masd.cpp.io"));
+    r.owning_facets().push_back(
+        physical_meta_id("masd.cpp.types"));
 
     return r;
 }

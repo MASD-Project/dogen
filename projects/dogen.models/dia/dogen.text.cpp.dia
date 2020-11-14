@@ -39844,7 +39844,11 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation_enabled
 #DOGEN masd.wale.kvp.class.simple_name=ptime_helper_transform
-#DOGEN masd.wale.kvp.helper.family=BoostPTime#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=BoostPTime
+#DOGEN masd.physical.helpers.family=BoostPTime
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40362,7 +40366,8 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40545,7 +40550,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40726,7 +40732,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40894,7 +40901,8 @@ inline std::string tidy_up_string(std::string s) {
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41075,7 +41083,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41282,7 +41291,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= d.na
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41486,7 +41496,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41666,7 +41677,8 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.io.primitive_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
-#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io#</dia:string>
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.io
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
