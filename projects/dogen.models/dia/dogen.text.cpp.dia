@@ -44573,7 +44573,11 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation_enabled
 #DOGEN masd.wale.kvp.class.simple_name=path_helper_transform
-#DOGEN masd.wale.kvp.helper.family=BoostPath#</dia:string>
+#DOGEN masd.wale.kvp.helper.family=BoostPath
+#DOGEN masd.physical.helpers.family=BoostPath
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.serialization.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.serialization.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

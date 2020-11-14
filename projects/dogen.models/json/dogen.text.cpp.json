@@ -4211,7 +4211,11 @@
       "tagged_values": {
         "masd.physical.wale_template_reference": "cpp_helper_transform_implementation_enabled",
         "masd.wale.kvp.class.simple_name": "path_helper_transform",
-        "masd.wale.kvp.helper.family": "BoostPath"
+        "masd.wale.kvp.helper.family": "BoostPath",
+        "masd.physical.helpers.family": "BoostPath",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.serialization.class_implementation",
+        "masd.physical.helpers.owning_formatters": "masd.cpp.serialization.primitive_implementation",
+        "masd.physical.helpers.owning_facets": "masd.cpp.serialization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
