@@ -304,6 +304,7 @@ visit(const logical::entities::physical::facet& v) {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
             b.add(v.name(), ch_arch);
             b.add(v.archetypes(), ch_arch);
+            b.add(v.helpers(), ch_arch);
             b.add_as_user(
                 "dogen.identification/io/entities/physical_meta_id_io.hpp");
             b.add_as_user(

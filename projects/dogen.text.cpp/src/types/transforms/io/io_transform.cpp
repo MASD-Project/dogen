@@ -23,13 +23,21 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/pair_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/ptree_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/string_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/variant_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/optional_helper_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/associative_container_helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 namespace {
