@@ -18,38 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/formattables/helper_expander.hpp"
 #include "dogen.text.cpp/types/formattables/reducer.hpp"
 #include "dogen.text.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::cpp::formattables {
-
-void model_expander::expand_helpers(
-    const variability::entities::feature_model& /*feature_model*/,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& /*streaming_properties*/,
-    const transforms::repository& /*frp*/, model& /*fm*/) const {
-    // helper_expander ex;
-    // ex.expand(feature_model, streaming_properties, frp, fm);
-}
 
 void model_expander::reduce(model& fm) const {
     reducer rd;
     rd.reduce(fm);
 }
 
-void model_expander::expand(
-    const variability::entities::feature_model& feature_model,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
-    const transforms::repository& frp, model& fm) const {
-
-    expand_helpers(feature_model, streaming_properties, frp, fm);
-
-    /*
-     * All of the above expansions must be performed prior to
-     * reduction because we require types from external models.
-     */
+void model_expander::expand(model& fm) const {
     reduce(fm);
 }
 

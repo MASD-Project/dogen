@@ -70,9 +70,6 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const variability::entities::feature_model& feature_model,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
         const transforms::repository& frp,
         const text::entities::model& m) const;
 

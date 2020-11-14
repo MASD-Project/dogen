@@ -25,32 +25,16 @@
 #pragma once
 #endif
 
-#include <unordered_set>
-#include "dogen.variability/types/entities/feature.hpp"
-#include "dogen.variability/types/entities/configuration.hpp"
-#include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
-#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 
 namespace dogen::text::cpp::formattables {
 
 class model_expander {
 private:
-    void expand_helpers(
-        const variability::entities::feature_model& feature_model,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
-        const transforms::repository& frp, model& fm) const;
-
     void reduce(model& fm) const;
 
 public:
-    void expand(const variability::entities::feature_model& feature_model,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
-        const transforms::repository& frp, model& fm) const;
+    void expand(model& fm) const;
 };
 
 }
