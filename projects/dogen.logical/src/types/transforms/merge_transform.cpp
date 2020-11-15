@@ -123,7 +123,9 @@ void merge_transform::merge(const entities::model& src, entities::model& dst) {
         << " logic-less templates: "
         << src.templating_elements().logic_less_templates().size()
         << " streaming properties: "
-        << src.streaming_properties().size();;
+        << src.streaming_properties().size()
+        << " aspect properties: "
+        << src.aspect_properties().size();
 
     /*
      * Note that we are ignoring some elements, which do not require
@@ -188,6 +190,7 @@ void merge_transform::merge(const entities::model& src, entities::model& dst) {
     copy(src.templating_elements().logic_less_templates(),
         dst.templating_elements().logic_less_templates());
     copy(src.streaming_properties(), dst.streaming_properties());
+    copy(src.aspect_properties(), dst.aspect_properties());
 
     /*
      * Update the references of the merged model.
