@@ -1958,13 +1958,13 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,323"/>
+        <dia:point val="-17,323"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,322.95;12.27,326.65"/>
+        <dia:rectangle val="-17.05,322.95;11.27,326.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,323"/>
+        <dia:point val="-17,323"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -1984,7 +1984,6 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.exception
 #DOGEN masd.wale.kvp.class.simple_name=exception_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=exception_header
-#DOGEN masd.wale.kvp.meta_element=exception
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
@@ -2441,7 +2440,6 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.module
 #DOGEN masd.wale.kvp.class.simple_name=namespace_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=namespace_header
-#DOGEN masd.wale.kvp.meta_element=module
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -2642,7 +2640,6 @@ namespace &lt;#= m.name().simple() #&gt; {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visitor
 #DOGEN masd.wale.kvp.class.simple_name=visitor_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_header
-#DOGEN masd.wale.kvp.meta_element=visitor
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
@@ -20215,7 +20212,6 @@ BOOST_AUTO_TEST_SUITE_END()
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_template_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_template_bundle_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_header
-#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -20493,7 +20489,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_template_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_template_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -20817,7 +20812,6 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
 #DOGEN masd.wale.kvp.class.simple_name=variability_initializer_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_header
-#DOGEN masd.wale.kvp.meta_element=variability_initializer
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -21018,7 +21012,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
 #DOGEN masd.wale.kvp.class.simple_name=variability_initializer_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_initializer
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -23267,9 +23260,7 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
-#DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=forward declaration
 #DOGEN masd.physical.postfix=fwd#</dia:string>
@@ -23461,8 +23452,6 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=visitor_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_forward_declarations
 #DOGEN masd.physical.relation_status=relatable
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=visitor
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=forward declaration
 #DOGEN masd.physical.postfix=fwd#</dia:string>
@@ -23851,9 +23840,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.primitive
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
-#DOGEN masd.wale.kvp.meta_element=primitive
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=forward declaration
 #DOGEN masd.physical.postfix=fwd#</dia:string>
@@ -26220,7 +26207,6 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.entry_point
 #DOGEN masd.wale.kvp.class.simple_name=main_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=main
-#DOGEN masd.wale.kvp.meta_element=entry_point
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -28204,7 +28190,6 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_bundle_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_header
-#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -28483,7 +28468,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -28804,7 +28788,6 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_transform
-#DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:cpp
 #DOGEN masd.physical.constant_relation=dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
@@ -29407,7 +29390,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_transform
-#DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -32763,7 +32745,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header_transform
-#DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.constant_relation=dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
 #DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:cpp
@@ -32965,7 +32946,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_transform
-#DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.class_header
 #DOGEN masd.physical.variable_relation=transparent,role:type_declaration
@@ -33189,7 +33169,6 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header_transform
-#DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -33388,7 +33367,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation_transform
-#DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -33626,7 +33604,6 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_header_transform
-#DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -33816,7 +33793,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation_transform
-#DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -34296,9 +34272,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.constant_relation=dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
@@ -34502,7 +34476,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
 #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.archetype_class_header_factory
@@ -34765,9 +34738,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.physical.constant_relation=dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
@@ -34968,7 +34939,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.facet_class_header_factory
 #DOGEN masd.physical.variable_relation=transparent,archetype:masd.cpp.types.archetype_class_header_factory
@@ -35228,9 +35198,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.postfix=factory#</dia:string>
@@ -35430,7 +35398,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=factory#</dia:string>
       </dia:attribute>
@@ -35924,9 +35891,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.postfix=factory#</dia:string>
@@ -36126,7 +36091,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=factory#</dia:string>
       </dia:attribute>
@@ -36348,9 +36312,7 @@ physical::entities::part &lt;#= sn #&gt;::make() {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.postfix=factory#</dia:string>
@@ -36550,7 +36512,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=factory#</dia:string>
       </dia:attribute>
@@ -36929,7 +36890,6 @@ const &lt;#= qn #&gt;&amp; rhs) {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_helper
 #DOGEN masd.wale.kvp.class.simple_name=helper_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=helper_class_header_transform
-#DOGEN masd.wale.kvp.meta_element=physical_helper
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -37129,7 +37089,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_helper
 #DOGEN masd.wale.kvp.class.simple_name=helper_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=helper_class_implementation_transform
-#DOGEN masd.wale.kvp.meta_element=physical_helper
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
@@ -37306,9 +37265,7 @@ void helper_class_implementation_transform_transform::apply(const context&amp; c
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_helper
 #DOGEN masd.wale.kvp.class.simple_name=helper_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=helper_class_header_factory
-#DOGEN masd.wale.kvp.meta_element=physical_helper
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.label.role=type_declaration
 #DOGEN masd.physical.postfix=factory#</dia:string>
@@ -37511,7 +37468,6 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_helper
 #DOGEN masd.wale.kvp.class.simple_name=helper_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=helper_class_implementation_factory
-#DOGEN masd.wale.kvp.meta_element=physical_helper
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.physical.postfix=factory#</dia:string>
       </dia:attribute>
