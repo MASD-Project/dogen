@@ -28,8 +28,6 @@
 #include "dogen.text.cpp/types/workflow_error.hpp"
 #include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
-#include "dogen.text.cpp/types/transforms/wale_transform.hpp"
-#include "dogen.text.cpp/types/transforms/stitch_transform.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
 
@@ -48,13 +46,10 @@ namespace dogen::text::cpp::transforms {
 std::shared_ptr<cpp::transforms::registrar> workflow::registrar_;
 
 workflow::workflow(const physical::entities::model& pm,
-    const variability::entities::feature_model& fm,
-    const variability::helpers::configuration_factory& cf,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::streaming_properties>& streaming_properties,
     const identification::entities::technical_space_version tsv)
-    : physical_model_(pm), feature_model_(fm), configuration_factory_(cf),
-      streaming_properties_(streaming_properties),
+    : physical_model_(pm), streaming_properties_(streaming_properties),
       technical_space_version_(tsv) { }
 
 cpp::transforms::registrar& workflow::registrar() {
@@ -118,38 +113,10 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             streaming_properties_, technical_space_version_, tracer);
 
         auto& a(*aptr);
-        const auto fs(aptr->formatting_style());
-        if (fs == formatting_styles::stock) {
-             const auto id(fmt.archetype().meta_name().id().value());
-             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
-             fmt.apply(ctx, e, a);
-
-             const auto& p(aptr->file_path());
-             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-         } else if (fs == formatting_styles::wale) {
-             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
-             wale_transform f;
-             f.apply(templates_directory, fmt, ctx, e, a);
-
-             const auto& p(aptr->file_path());
-             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-         } else if (fs == formatting_styles::stitch) {
-             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
-             stitch_transform f(templates_directory, feature_model_,
-                 configuration_factory_);
-             f.apply(fmt, e, a);
-
-             const auto& p(aptr->file_path());
-             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-             if (!a.content().empty()) {
-                 BOOST_LOG_SEV(lg, debug) << "Template has content.";
-             } else {
-                 BOOST_LOG_SEV(lg, debug) << "Template has no content.";
-             }
-         } else {
-             BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
-             BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
-        }
+        const auto id(fmt.archetype().meta_name().id().value());
+        fmt.apply(ctx, e, a);
+        const auto& p(aptr->file_path());
+        BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
     }
 }
 

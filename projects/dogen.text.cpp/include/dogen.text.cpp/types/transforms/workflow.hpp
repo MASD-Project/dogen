@@ -33,7 +33,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -49,8 +48,6 @@ namespace dogen::text::cpp::transforms {
 class workflow final {
 public:
     workflow(const physical::entities::model& pm,
-        const variability::entities::feature_model& fm,
-        const variability::helpers::configuration_factory& cf,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::streaming_properties>& streaming_properties,
         const identification::entities::technical_space_version tsv);
@@ -80,8 +77,6 @@ public:
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;
     const physical::entities::model& physical_model_;
-    const variability::entities::feature_model& feature_model_;
-    const variability::helpers::configuration_factory& configuration_factory_;
     const std::unordered_map<identification::entities::logical_id,
                              logical::entities::streaming_properties>&
     streaming_properties_;
