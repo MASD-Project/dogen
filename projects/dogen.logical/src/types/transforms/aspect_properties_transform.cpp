@@ -57,10 +57,9 @@ using identification::entities::logical_id;
 
 namespace {
 
-class aspect_properties_generator {
+class generator {
 public:
-    explicit aspect_properties_generator(
-        const features::aspect::feature_group& fg);
+    explicit generator(const features::aspect::feature_group& fg);
 
 private:
     void handle_aspect_properties(
@@ -83,10 +82,10 @@ private:
     std::unordered_map<logical_id, entities::aspect_properties> result_;
 };
 
-aspect_properties_generator::aspect_properties_generator(
-    const features::aspect::feature_group& fg) : feature_group_(fg) {}
+generator::generator(const features::aspect::feature_group& fg)
+    : feature_group_(fg) {}
 
-void aspect_properties_generator::handle_aspect_properties(
+void generator::handle_aspect_properties(
     const variability::entities::configuration& cfg, const logical_id& id) {
     const variability::helpers::configuration_selector s(cfg);
 
@@ -103,28 +102,28 @@ void aspect_properties_generator::handle_aspect_properties(
     result_[id] = ap;
 }
 
-void aspect_properties_generator::
+void generator::
 operator()(const logical::entities::structural::enumeration& e) {
     handle_aspect_properties(*e.configuration(), e.name().id());
 }
 
-void aspect_properties_generator::
+void generator::
 operator()(const logical::entities::structural::exception& e) {
     handle_aspect_properties(*e.configuration(), e.name().id());
 }
 
-void aspect_properties_generator::
+void generator::
 operator()(const logical::entities::structural::object& o) {
     handle_aspect_properties(*o.configuration(), o.name().id());
 }
 
-void aspect_properties_generator::
+void generator::
 operator()(const logical::entities::structural::builtin& p) {
     handle_aspect_properties(*p.configuration(), p.name().id());
 }
 
 const std::unordered_map<logical_id, entities::aspect_properties>&
-aspect_properties_generator::result() const {
+generator::result() const {
     return result_;
 }
 
@@ -137,7 +136,7 @@ apply(const context& ctx, entities::model& m) {
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::aspect::make_feature_group(fm));
-    aspect_properties_generator g(fg);
+    generator g(fg);
 
     entities::elements_traversal(m, g);
     m.aspect_properties(g.result());
