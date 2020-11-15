@@ -23,6 +23,7 @@
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
@@ -58,10 +59,10 @@ assistant::
 assistant(const context& ctx, const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
     physical::entities::artefact& a) :
-    element_id_(e.name().qualified().dot()), artefact_(a), context_(ctx),
-    physical_meta_name_(pmn) {
+    element_(e), artefact_(a), context_(ctx), physical_meta_name_(pmn) {
 
-    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
+    BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                             << element_.name().id()
                              << " for archetype: "
                              << physical_meta_name_.id();
 
@@ -242,6 +243,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
     bool has_helpers(false);
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
+    //for (const auto& hlp_props : element_.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(hlp_props));
 
