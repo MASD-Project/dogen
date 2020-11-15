@@ -25,26 +25,22 @@ namespace dogen::text::csharp::formattables {
 model::model(
     const dogen::identification::entities::logical_name& name,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables,
-    const std::list<std::string>& project_items,
-    const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties)
+    const std::list<std::string>& project_items)
     : name_(name),
       formattables_(formattables),
-      project_items_(project_items),
-      assistant_properties_(assistant_properties) { }
+      project_items_(project_items) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(formattables_, other.formattables_);
     swap(project_items_, other.project_items_);
-    swap(assistant_properties_, other.assistant_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         formattables_ == rhs.formattables_ &&
-        project_items_ == rhs.project_items_ &&
-        assistant_properties_ == rhs.assistant_properties_;
+        project_items_ == rhs.project_items_;
 }
 
 model& model::operator=(model other) {
@@ -99,22 +95,6 @@ void model::project_items(const std::list<std::string>& v) {
 
 void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& model::assistant_properties() const {
-    return assistant_properties_;
-}
-
-std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& model::assistant_properties() {
-    return assistant_properties_;
-}
-
-void model::assistant_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& v) {
-    assistant_properties_ = v;
-}
-
-void model::assistant_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>&& v) {
-    assistant_properties_ = std::move(v);
 }
 
 }

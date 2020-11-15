@@ -23,7 +23,6 @@
 #include "dogen.text.csharp/io/formattables/model_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.text.csharp/io/formattables/formattable_io.hpp"
-#include "dogen.text.csharp/io/formattables/assistant_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -65,24 +64,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen::text::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -90,8 +71,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"project_items\": " << v.project_items() << ", "
-      << "\"assistant_properties\": " << v.assistant_properties()
+      << "\"project_items\": " << v.project_items()
       << " }";
     return(s);
 }

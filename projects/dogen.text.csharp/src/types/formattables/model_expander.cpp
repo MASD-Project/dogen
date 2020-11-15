@@ -19,20 +19,11 @@
  *
  */
 #include "dogen.text.csharp/types/formattables/project_items_expander.hpp"
-#include "dogen.text.csharp/types/formattables/assistant_expander.hpp"
 #include "dogen.text.csharp/types/formattables/reducer.hpp"
 #include "dogen.text.csharp/types/formattables/helper_expander.hpp"
 #include "dogen.text.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::csharp::formattables {
-
-void model_expander::expand_assistant_properties(
-    const variability::entities::feature_model& feature_model,
-    model& fm) const {
-
-    assistant_expander ex;
-    ex.expand(feature_model, fm);
-}
 
 void model_expander::reduce(model& fm) const {
     reducer rd;
@@ -54,13 +45,6 @@ expand_helpers(const variability::entities::feature_model& feature_model,
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
     const transforms::repository& frp, model& fm) const {
-
-    /*
-     * We must expand the aspect and assistant properties before
-     * reduction because we need to know about properties from
-     * non-target elements.
-     */
-    expand_assistant_properties(feature_model, fm);
 
     /*
      * We must expand helpers before reduction because we want to
