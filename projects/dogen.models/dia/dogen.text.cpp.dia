@@ -30156,19 +30156,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O183">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,208"/>
+        <dia:point val="-18,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,207.95;15.275,213.25"/>
+        <dia:rectangle val="-18.05,205.95;15.275,210.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,208"/>
+        <dia:point val="-18,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#header_configuration#</dia:string>
@@ -30289,29 +30289,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.locator_function#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#make_full_path_for_cpp_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.physical.wale_template_reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -30346,7 +30323,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.4375,197.55;20.03,208.05"/>
+        <dia:rectangle val="-1.4375,197.55;20.03,206.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30355,7 +30332,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
         <dia:point val="19.18,199"/>
         <dia:point val="-1.3875,199"/>
-        <dia:point val="-1.3875,208"/>
+        <dia:point val="-1.3875,206"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30394,19 +30371,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O185">
       <dia:attribute name="obj_pos">
-        <dia:point val="23,208"/>
+        <dia:point val="23,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,207.95;53.58,214.05"/>
+        <dia:rectangle val="22.95,205.95;53.58,211.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="23,208"/>
+        <dia:point val="23,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#implementation_configuration#</dia:string>
@@ -30527,29 +30504,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.locator_function#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#make_full_path_for_cpp_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.physical.wale_template_reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -30607,7 +30561,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.33,197.55;38.315,208.05"/>
+        <dia:rectangle val="18.33,197.55;38.315,206.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30616,7 +30570,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
         <dia:point val="19.18,199"/>
         <dia:point val="38.265,199"/>
-        <dia:point val="38.265,208"/>
+        <dia:point val="38.265,206"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30658,7 +30612,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="3,200"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,199.95;33.58,206.05"/>
+        <dia:rectangle val="2.95,199.95;33.58,205.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,200"/>
@@ -30667,7 +30621,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tests_configuration#</dia:string>
@@ -30788,29 +30742,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.locator_function#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#make_full_path_for_tests_cpp_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.physical.wale_template_reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -30868,7 +30799,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.215,197.55;20.03,200.001"/>
+        <dia:rectangle val="18.215,197.55;20.03,200.003"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30877,7 +30808,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="19.18,197.6"/>
         <dia:point val="19.18,199"/>
         <dia:point val="18.265,199"/>
-        <dia:point val="18.265,199.951"/>
+        <dia:point val="18.265,199.953"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30910,25 +30841,25 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O182" connection="6"/>
-        <dia:connection handle="1" to="O187" connection="16"/>
+        <dia:connection handle="1" to="O187" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O189">
       <dia:attribute name="obj_pos">
-        <dia:point val="-32,223"/>
+        <dia:point val="-32,219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-32.05,222.95;-4.5,229.05"/>
+        <dia:rectangle val="-32.05,218.95;-4.5,224.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-32,223"/>
+        <dia:point val="-32,219"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_header_configuration#</dia:string>
@@ -31093,29 +31024,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#object#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31126,19 +31034,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O190">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,220.4"/>
+        <dia:point val="-9.895,216.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.325,220.35;-5.7725,223.05"/>
+        <dia:rectangle val="-18.325,216.55;-9.045,219.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,220.4"/>
-        <dia:point val="-6.6225,222"/>
-        <dia:point val="-18.275,222"/>
-        <dia:point val="-18.275,223"/>
+        <dia:point val="-9.895,216.6"/>
+        <dia:point val="-9.895,218"/>
+        <dia:point val="-18.275,218"/>
+        <dia:point val="-18.275,219"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31177,19 +31085,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O191">
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,223"/>
+        <dia:point val="-1,219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,222.95;28.425,229.05"/>
+        <dia:rectangle val="-1.05,218.95;28.425,224.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-1,223"/>
+        <dia:point val="-1,219"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration_header_configuration#</dia:string>
@@ -31354,29 +31262,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#enumeration#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31387,19 +31272,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O192">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,220.4"/>
+        <dia:point val="-9.895,216.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.4725,220.35;13.7375,223.05"/>
+        <dia:rectangle val="-10.745,216.55;13.7375,219.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,220.4"/>
-        <dia:point val="-6.6225,222"/>
-        <dia:point val="13.6875,222"/>
-        <dia:point val="13.6875,223"/>
+        <dia:point val="-9.895,216.6"/>
+        <dia:point val="-9.895,218"/>
+        <dia:point val="13.6875,218"/>
+        <dia:point val="13.6875,219"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31438,19 +31323,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O193">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,218"/>
+        <dia:point val="32,214"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,217.95;59.5,224.05"/>
+        <dia:rectangle val="31.95,213.95;59.5,219.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,218"/>
+        <dia:point val="32,214"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_implementation_configuration#</dia:string>
@@ -31613,29 +31498,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#object#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31646,19 +31508,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O194">
       <dia:attribute name="obj_pos">
-        <dia:point val="38.265,214.05"/>
+        <dia:point val="38.265,211.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.415,214;45.775,218"/>
+        <dia:rectangle val="37.415,211.2;45.775,214.003"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="38.265,214.05"/>
-        <dia:point val="38.265,216"/>
-        <dia:point val="45.725,216"/>
-        <dia:point val="45.725,217.95"/>
+        <dia:point val="38.265,211.25"/>
+        <dia:point val="38.265,213"/>
+        <dia:point val="45.725,213"/>
+        <dia:point val="45.725,213.953"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31690,26 +31552,26 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O185" connection="16"/>
-        <dia:connection handle="1" to="O193" connection="16"/>
+        <dia:connection handle="0" to="O185" connection="14"/>
+        <dia:connection handle="1" to="O193" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,230"/>
+        <dia:point val="-17,225"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,229.95;10.885,236.05"/>
+        <dia:rectangle val="-17.05,224.95;10.885,230.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,230"/>
+        <dia:point val="-17,225"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_configuration#</dia:string>
@@ -31874,29 +31736,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#builtin#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31907,19 +31746,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O196">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,220.4"/>
+        <dia:point val="-9.895,216.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.4725,220.35;-3.0325,230.021"/>
+        <dia:rectangle val="-10.745,216.55;-3.0325,225"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,220.4"/>
-        <dia:point val="-6.6225,222"/>
-        <dia:point val="-3.0825,222"/>
-        <dia:point val="-3.0825,229.971"/>
+        <dia:point val="-9.895,216.6"/>
+        <dia:point val="-9.895,218"/>
+        <dia:point val="-3.0825,218"/>
+        <dia:point val="-3.0825,224.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31952,25 +31791,25 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O211" connection="6"/>
-        <dia:connection handle="1" to="O195" connection="16"/>
+        <dia:connection handle="1" to="O195" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O197">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,230"/>
+        <dia:point val="-48,225"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,229.95;-19.345,236.05"/>
+        <dia:rectangle val="-48.05,224.95;-19.345,230.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,230"/>
+        <dia:point val="-48,225"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_configuration#</dia:string>
@@ -32135,29 +31974,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#primitive#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -32168,19 +31984,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O198">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,220.4"/>
+        <dia:point val="-9.895,216.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.7475,220.35;-5.7725,230.021"/>
+        <dia:rectangle val="-33.7475,216.55;-9.045,225"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,220.4"/>
-        <dia:point val="-6.6225,222"/>
-        <dia:point val="-33.6975,222"/>
-        <dia:point val="-33.6975,229.971"/>
+        <dia:point val="-9.895,216.6"/>
+        <dia:point val="-9.895,218"/>
+        <dia:point val="-33.6975,218"/>
+        <dia:point val="-33.6975,224.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32213,25 +32029,25 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O211" connection="6"/>
-        <dia:connection handle="1" to="O197" connection="16"/>
+        <dia:connection handle="1" to="O197" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O199">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,230"/>
+        <dia:point val="16,225"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,229.95;44.655,236.05"/>
+        <dia:rectangle val="15.95,224.95;44.655,230.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,230"/>
+        <dia:point val="16,225"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_implementation_configuration#</dia:string>
@@ -32394,29 +32210,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#primitive#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -32427,19 +32220,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O200">
       <dia:attribute name="obj_pos">
-        <dia:point val="38.265,214"/>
+        <dia:point val="38.265,211.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.2525,213.95;39.115,230.05"/>
+        <dia:rectangle val="30.2525,211.15;39.115,225.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="38.265,214"/>
-        <dia:point val="38.265,216"/>
-        <dia:point val="30.3025,216"/>
-        <dia:point val="30.3025,230"/>
+        <dia:point val="38.265,211.2"/>
+        <dia:point val="38.265,213"/>
+        <dia:point val="30.3025,213"/>
+        <dia:point val="30.3025,225"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32478,19 +32271,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,225"/>
+        <dia:point val="46,220"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,224.95;76.425,231.05"/>
+        <dia:rectangle val="45.95,219.95;75.425,225.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,225"/>
+        <dia:point val="46,220"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration_implementation_configuration#</dia:string>
@@ -32653,29 +32446,6 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#enumeration#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -32686,19 +32456,19 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O202">
       <dia:attribute name="obj_pos">
-        <dia:point val="38.265,214"/>
+        <dia:point val="38.265,211.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.415,213.95;61.7375,225.05"/>
+        <dia:rectangle val="37.415,211.15;60.7375,220.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="38.265,214"/>
-        <dia:point val="38.265,216"/>
-        <dia:point val="61.6875,216"/>
-        <dia:point val="61.6875,225"/>
+        <dia:point val="38.265,211.2"/>
+        <dia:point val="38.265,213"/>
+        <dia:point val="60.6875,213"/>
+        <dia:point val="60.6875,220"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -34310,19 +34080,19 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O211">
       <dia:attribute name="obj_pos">
-        <dia:point val="-19,216"/>
+        <dia:point val="-19,213"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.05,215.95;5.805,220.45"/>
+        <dia:rectangle val="-19.05,212.95;-0.74,216.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-19,216"/>
+        <dia:point val="-19,213"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#header_facet_default_configuration#</dia:string>
@@ -34418,29 +34188,6 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.inclusion_support_type#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#canonical_support#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.physical.relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -34472,19 +34219,19 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O212">
       <dia:attribute name="obj_pos">
-        <dia:point val="-1.3875,213.2"/>
+        <dia:point val="-1.3875,210.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.6725,213.15;-0.5375,216.05"/>
+        <dia:rectangle val="-9.945,210.35;-0.5375,213.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-1.3875,213.2"/>
-        <dia:point val="-1.3875,215"/>
-        <dia:point val="-6.6225,215"/>
-        <dia:point val="-6.6225,216"/>
+        <dia:point val="-1.3875,210.4"/>
+        <dia:point val="-1.3875,212"/>
+        <dia:point val="-9.895,212"/>
+        <dia:point val="-9.895,213"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
