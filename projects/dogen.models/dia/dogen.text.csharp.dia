@@ -11782,7 +11782,7 @@ using System;
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -11941,7 +11941,7 @@ inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

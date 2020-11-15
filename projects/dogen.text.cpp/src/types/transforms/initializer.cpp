@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/templates/initializer.hpp"
 #include "dogen.text.cpp/types/transforms/types/initializer.hpp"
 #include "dogen.text.cpp/types/transforms/hash/initializer.hpp"
 #include "dogen.text.cpp/types/transforms/odb/initializer.hpp"
@@ -42,7 +41,6 @@ void initializer::initialize(registrar& rg) {
     test_data::initializer::initialize(rg);
     serialization::initializer::initialize(rg);
     tests::initializer::initialize(rg);
-    templates::initializer::initialize(rg);
     visual_studio::initializer::initialize(rg);
     build::initializer::initialize(rg);
 }

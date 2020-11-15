@@ -511,7 +511,7 @@ other layers can then configure features.
         <dia:point val="74,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,-33.05;86.1,-24.55"/>
+        <dia:rectangle val="73.95,-33.05;86.1,-25.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74,-33"/>
@@ -520,7 +520,7 @@ other layers can then configure features.
         <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#base_profile#</dia:string>
@@ -753,29 +753,6 @@ other layers can then configure features.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#templates.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -953,16 +930,16 @@ other layers can then configure features.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="80.025,-24.6"/>
+        <dia:point val="80.025,-25.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.975,-24.65;80.875,-20.95"/>
+        <dia:rectangle val="73.975,-25.45;80.875,-20.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="80.025,-24.6"/>
+        <dia:point val="80.025,-25.4"/>
         <dia:point val="80.025,-23"/>
         <dia:point val="74.025,-23"/>
         <dia:point val="74.025,-21"/>
@@ -3521,16 +3498,16 @@ for the element.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="80.025,-24.6"/>
+        <dia:point val="80.025,-25.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.175,-24.65;88.075,-21.0002"/>
+        <dia:rectangle val="79.175,-25.45;88.075,-21.0002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="80.025,-24.6"/>
+        <dia:point val="80.025,-25.4"/>
         <dia:point val="80.025,-23"/>
         <dia:point val="88.025,-23"/>
         <dia:point val="88.025,-21.0502"/>

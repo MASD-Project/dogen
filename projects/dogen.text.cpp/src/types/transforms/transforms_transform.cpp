@@ -29,7 +29,6 @@
 #include "dogen.text.cpp/types/transforms/tests/tests_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/types_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/templates/templates_transform.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_transform.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/lexical_cast_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/serialization_transform.hpp"
@@ -67,7 +66,6 @@ physical::entities::backend make_backend() {
     lambda(lexical_cast::lexical_cast_facet_chain::static_facet());
     lambda(odb::odb_facet_chain::static_facet());
     lambda(serialization::serialization_facet_chain::static_facet());
-    lambda(templates::templates_facet_chain::static_facet());
     lambda(test_data::test_data_facet_chain::static_facet());
     lambda(tests::tests_facet_chain::static_facet());
     lambda(types::types_facet_chain::static_facet());

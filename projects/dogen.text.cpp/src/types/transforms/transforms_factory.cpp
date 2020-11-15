@@ -33,7 +33,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/public_headers_factory.hpp"
-#include "dogen.text.cpp/types/transforms/templates/templates_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_factory.hpp"
 #include "dogen.text.cpp/types/transforms/standard_header_file_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
@@ -77,7 +76,6 @@ physical::entities::backend transforms_factory::make() {
     fct_inserter(lexical_cast::lexical_cast_factory::make());
     fct_inserter(odb::odb_factory::make());
     fct_inserter(serialization::serialization_factory::make());
-    fct_inserter(templates::templates_factory::make());
     fct_inserter(test_data::test_data_factory::make());
     fct_inserter(tests::tests_factory::make());
     fct_inserter(types::types_factory::make());
