@@ -25761,10 +25761,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=object_odb_options_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=object_odb_options
-#DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
@@ -25985,9 +25982,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.class.simple_name=primitive_odb_options_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_odb_options
 #DOGEN masd.wale.kvp.meta_element=primitive
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
@@ -26513,10 +26508,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.orm_common_odb_options
 #DOGEN masd.wale.kvp.class.simple_name=common_odb_options_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=common_odb_options
-#DOGEN masd.wale.kvp.meta_element=orm_common_odb_options
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
