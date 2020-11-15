@@ -89,7 +89,7 @@ ast.stream() << "        physical_meta_id(\"" << of << "\"));" << std::endl;
              }
 
 
-             
+
              for (const auto& of : hlp.owning_facets()) {
 ast.stream() << "    r.owning_facets().push_back(" << std::endl;
 ast.stream() << "        physical_meta_id(\"" << of << "\"));" << std::endl;
