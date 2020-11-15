@@ -8192,13 +8192,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O58">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,10"/>
+        <dia:point val="64,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,9.95;72.075,13.05"/>
+        <dia:rectangle val="63.95,10.95;72.075,14.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,10"/>
+        <dia:point val="64,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.0250000000000004"/>
@@ -12750,13 +12750,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
-        <dia:point val="75,10"/>
+        <dia:point val="75,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,9.95;95.185,13.65"/>
+        <dia:rectangle val="74.95,10.95;95.185,14.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="75,10"/>
+        <dia:point val="75,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -16194,13 +16194,13 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O110">
       <dia:attribute name="obj_pos">
-        <dia:point val="41,10"/>
+        <dia:point val="41,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,9.95;61.955,16.05"/>
+        <dia:rectangle val="40.95,10.95;61.955,17.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="41,10"/>
+        <dia:point val="41,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
