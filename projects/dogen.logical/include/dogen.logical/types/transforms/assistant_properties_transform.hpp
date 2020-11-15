@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Populates the C# assistant properties.
+ */
 class assistant_properties_transform final {
 public:
-    assistant_properties_transform() = default;
-    assistant_properties_transform(const assistant_properties_transform&) = default;
-    assistant_properties_transform(assistant_properties_transform&&) = default;
-    ~assistant_properties_transform() = default;
-    assistant_properties_transform& operator=(const assistant_properties_transform&) = default;
-
-public:
-    bool operator==(const assistant_properties_transform& rhs) const;
-    bool operator!=(const assistant_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

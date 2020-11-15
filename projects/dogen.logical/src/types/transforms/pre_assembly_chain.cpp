@@ -38,6 +38,8 @@
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.logical/types/transforms/variability_profiles_chain.hpp"
 #include "dogen.logical/types/transforms/labelling_transform.hpp"
+#include "dogen.logical/types/transforms/aspect_properties_transform.hpp"
+#include "dogen.logical/types/transforms/assistant_properties_transform.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
 #include "dogen.logical/types/transforms/pre_assembly_chain.hpp"
 
@@ -86,6 +88,8 @@ void pre_assembly_chain::apply(const context& ctx,
     variability_features_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
     labelling_transform::apply(ctx, m);
+    aspect_properties_transform::apply(ctx, m);
+    assistant_properties_transform::apply(ctx, m);
     streaming_properties_transform::apply(ctx, m);
 
     /*
