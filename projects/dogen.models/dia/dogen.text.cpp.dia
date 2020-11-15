@@ -23637,7 +23637,6 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization
@@ -24026,9 +24025,7 @@ class &lt;#= p.name().simple() #&gt;;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.primitive
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.relation_status=relatable
-#DOGEN masd.wale.kvp.meta_element=primitive
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization
 #DOGEN masd.physical.postfix=fwd#</dia:string>
       </dia:attribute>
@@ -24224,7 +24221,6 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.serialization_type_registrar
 #DOGEN masd.wale.kvp.class.simple_name=type_registrar_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_header
-#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -24421,7 +24417,6 @@ static void register_types(Archive&amp; ar);
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.serialization_type_registrar
 #DOGEN masd.wale.kvp.class.simple_name=type_registrar_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_implementation
-#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
