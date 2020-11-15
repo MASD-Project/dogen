@@ -88,7 +88,7 @@ model::model(
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
     const dogen::identification::entities::technical_space_version technical_space_version,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -546,19 +546,19 @@ void model::aspect_properties(const std::unordered_map<dogen::identification::en
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& model::assistant_properties() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& model::assistant_properties() const {
     return assistant_properties_;
 }
 
-std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& model::assistant_properties() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& model::assistant_properties() {
     return assistant_properties_;
 }
 
-void model::assistant_properties(const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& v) {
+void model::assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& v) {
     assistant_properties_ = v;
 }
 
-void model::assistant_properties(const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>&& v) {
+void model::assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>&& v) {
     assistant_properties_ = std::move(v);
 }
 

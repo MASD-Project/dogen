@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -102,7 +101,7 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
         const dogen::identification::entities::technical_space_version technical_space_version,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties,
-        const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties);
 
 public:
     /**
@@ -308,10 +307,10 @@ public:
     void aspect_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& v);
     void aspect_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties() const;
-    std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties();
-    void assistant_properties(const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& v);
-    void assistant_properties(const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties();
+    void assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& v);
+    void assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -348,7 +347,7 @@ private:
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties> streaming_properties_;
     dogen::identification::entities::technical_space_version technical_space_version_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties> aspect_properties_;
-    std::unordered_map<std::string, dogen::logical::entities::assistant_properties> assistant_properties_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties> assistant_properties_;
 };
 
 }

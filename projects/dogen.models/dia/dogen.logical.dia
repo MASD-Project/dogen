@@ -2497,7 +2497,7 @@ spaces.#</dia:string>
             <dia:string>#assistant_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, assistant_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::logical_id, assistant_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
