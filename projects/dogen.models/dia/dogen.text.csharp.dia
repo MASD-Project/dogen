@@ -11879,23 +11879,23 @@ using System;
           <dia:attribute name="comment">
             <dia:string>#namespace {
 
-const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
+const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::static_archetype() {
     static auto r({{archetype.simple_name}}_factory::make());
     return r;
 }
 
-const physical::entities::archetype&amp; {{class.simple_name}}::archetype() const {
+const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::archetype() const {
     return static_archetype();
 }
 
-std::list&lt;std::string&gt; {{class.simple_name}}::
+std::list&lt;std::string&gt; {{archetype.simple_name}}_transform::
 inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
     std::list&lt;std::string&gt; r;
     return r;
@@ -12504,12 +12504,8 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:string>#Generates visual studio project.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visual_studio_project
-#DOGEN masd.wale.kvp.class.simple_name=project_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=project
-#DOGEN masd.wale.kvp.meta_element=visual_studio_project
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
@@ -12735,12 +12731,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:string>#Generates visual studio solutions.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visual_studio_solution
-#DOGEN masd.wale.kvp.class.simple_name=solution_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=solution
-#DOGEN masd.wale.kvp.meta_element=visual_studio_solution
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
@@ -13064,9 +13056,7 @@ EndGlobal
         <dia:string>#Generates implementation files for assistants.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
-#DOGEN masd.wale.kvp.class.simple_name=assistant_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=assistant
-#DOGEN masd.wale.kvp.meta_element=assistant
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -13741,9 +13731,7 @@ using System.Collections;
         <dia:string>#Generates implementation files for assistants.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
-#DOGEN masd.wale.kvp.class.simple_name=assistant_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=assistant
-#DOGEN masd.wale.kvp.meta_element=assistant
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -14540,7 +14528,7 @@ the C# Technical Space.
         <dia:point val="-15,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,19.95;12.5,25.25"/>
+        <dia:rectangle val="-15.05,19.95;12.5,24.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-15,20"/>
@@ -14549,7 +14537,7 @@ the C# Technical Space.
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_configuration#</dia:string>
@@ -14654,29 +14642,6 @@ the C# Technical Space.
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>#dogen.logical.entities.object#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.simple_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#class_transform#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -14985,7 +14950,7 @@ the C# Technical Space.
         <dia:point val="16,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,19.95;45.425,25.25"/>
+        <dia:rectangle val="15.95,19.95;45.425,24.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="16,20"/>
@@ -14994,7 +14959,7 @@ the C# Technical Space.
         <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration_configuration#</dia:string>
@@ -15115,29 +15080,6 @@ the C# Technical Space.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.simple_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#enum_transform#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.wale.kvp.archetype.simple_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -15172,7 +15114,7 @@ the C# Technical Space.
         <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.26,16.95;30.7375,20.0027"/>
+        <dia:rectangle val="23.26,16.95;30.7375,19.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15181,7 +15123,7 @@ the C# Technical Space.
         <dia:point val="24.11,17"/>
         <dia:point val="24.11,19"/>
         <dia:point val="30.6875,19"/>
-        <dia:point val="30.6875,19.9527"/>
+        <dia:point val="30.6875,19.9496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15214,7 +15156,7 @@ the C# Technical Space.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O94" connection="6"/>
-        <dia:connection handle="1" to="O100" connection="14"/>
+        <dia:connection handle="1" to="O100" connection="12"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
@@ -15223,7 +15165,7 @@ the C# Technical Space.
         <dia:point val="0,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.05,25.95;28.655,31.25"/>
+        <dia:rectangle val="-0.05,25.95;28.655,30.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="0,26"/>
@@ -15232,7 +15174,7 @@ the C# Technical Space.
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception_configuration#</dia:string>
@@ -15353,29 +15295,6 @@ the C# Technical Space.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.simple_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#exception_transform#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.wale.kvp.archetype.simple_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -15461,7 +15380,7 @@ the C# Technical Space.
         <dia:point val="33,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.95,25.95;61.655,31.25"/>
+        <dia:rectangle val="32.95,25.95;61.655,30.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="33,26"/>
@@ -15470,7 +15389,7 @@ the C# Technical Space.
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_configuration#</dia:string>
@@ -15591,29 +15510,6 @@ the C# Technical Space.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.simple_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#primitive_transform#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.wale.kvp.archetype.simple_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -15699,7 +15595,7 @@ the C# Technical Space.
         <dia:point val="49,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.95,19.95;76.885,25.25"/>
+        <dia:rectangle val="48.95,19.95;76.885,24.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="49,20"/>
@@ -15708,7 +15604,7 @@ the C# Technical Space.
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_configuration#</dia:string>
@@ -15813,29 +15709,6 @@ the C# Technical Space.
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>#dogen.logical.entities.builtin#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.class.simple_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#builtin_transform#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
