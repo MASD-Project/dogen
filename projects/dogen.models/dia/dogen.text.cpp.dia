@@ -21148,158 +21148,13 @@ inline &lt;#= qn #&gt; lexical_cast(const std::string &amp; s) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,154"/>
+        <dia:point val="-50,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,153.95;-31.28,157.65"/>
+        <dia:rectangle val="-50.05,153.95;-31.395,157.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,154"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#cpp_artefact_transform_header#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#masd::templating::logic_less_templates#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="allow_resizing">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#ffc072ff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#content#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#class {{class.simple_name}} final : public model_to_text_transform {
-public:
-    static physical::entities::archetype static_archetype();
-    const physical::entities::archetype&amp; archetype() const override;
-
-public:
-    void apply(const context&amp; ctx, const logical::entities::element&amp; e,
-        physical::entities::artefact&amp; a) const override;
-};#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O133">
-      <dia:attribute name="obj_pos">
-        <dia:point val="-29,154"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,153.95;-10.395,157.65"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="-29,154"/>
+        <dia:point val="-50,154"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.555"/>
@@ -21444,164 +21299,15 @@ const physical::entities::archetype&amp; {{class.simple_name}}::archetype() cons
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O134">
+    <dia:object type="UML - Class" version="0" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,159"/>
+        <dia:point val="-29,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,158.95;-31.28,162.65"/>
+        <dia:rectangle val="-29.05,153.95;-11.1025,157.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,159"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#cpp_helper_transform_header#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#masd::templating::logic_less_templates#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="allow_resizing">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#ffc072ff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#content#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#class {{class.simple_name}} : public helper_transform {
-public:
-    std::string id() const override;
-    std::string family() const override;
-    std::list&lt;std::string&gt; owning_formatters() const override;
-    std::list&lt;std::string&gt; owning_facets() const override;
-    std::string helper_name() const override;
-    bool is_enabled(const assistant&amp; a,
-        const logical::entities::helper_properties&amp; hc) const override;
-    void apply(assistant&amp; a,
-        const logical::entities::helper_properties&amp; hc) const override;
-};
-#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O135">
-      <dia:attribute name="obj_pos">
-        <dia:point val="-29,159"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,158.95;-11.1025,162.65"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="-29,159"/>
+        <dia:point val="-29,154"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.8475"/>
@@ -21770,15 +21476,15 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; a,
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O136">
+    <dia:object type="UML - Class" version="0" id="O134">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,164"/>
+        <dia:point val="-50,159"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,163.95;-26.0875,167.65"/>
+        <dia:rectangle val="-50.05,158.95;-28.0875,162.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,164"/>
+        <dia:point val="-50,159"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.862500000000001"/>
@@ -21945,7 +21651,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O137">
+    <dia:object type="UML - LargePackage" version="0" id="O135">
       <dia:attribute name="obj_pos">
         <dia:point val="88,241"/>
       </dia:attribute>
@@ -21990,7 +21696,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O138">
+    <dia:object type="UML - Note" version="0" id="O136">
       <dia:attribute name="obj_pos">
         <dia:point val="90,243"/>
       </dia:attribute>
@@ -22042,9 +21748,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O137"/>
+      <dia:childnode parent="O135"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O139">
+    <dia:object type="UML - Class" version="0" id="O137">
       <dia:attribute name="obj_pos">
         <dia:point val="110,243"/>
       </dia:attribute>
@@ -22156,9 +21862,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O137"/>
+      <dia:childnode parent="O135"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O140">
+    <dia:object type="UML - Class" version="0" id="O138">
       <dia:attribute name="obj_pos">
         <dia:point val="126,243"/>
       </dia:attribute>
@@ -22270,9 +21976,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O137"/>
+      <dia:childnode parent="O135"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O141">
+    <dia:object type="UML - Class" version="0" id="O139">
       <dia:attribute name="obj_pos">
         <dia:point val="90,248"/>
       </dia:attribute>
@@ -22453,9 +22159,9 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O137"/>
+      <dia:childnode parent="O135"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O142">
+    <dia:object type="UML - Class" version="0" id="O140">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,323"/>
       </dia:attribute>
@@ -22646,7 +22352,7 @@ class &lt;#= o.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O143">
+    <dia:object type="UML - Class" version="0" id="O141">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,333"/>
       </dia:attribute>
@@ -22837,7 +22543,7 @@ class &lt;#= o.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O144">
+    <dia:object type="UML - Class" version="0" id="O142">
       <dia:attribute name="obj_pos">
         <dia:point val="90,327"/>
       </dia:attribute>
@@ -23034,7 +22740,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O145">
+    <dia:object type="UML - Class" version="0" id="O143">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,343"/>
       </dia:attribute>
@@ -23225,7 +22931,7 @@ class &lt;#= p.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O146">
+    <dia:object type="UML - Class" version="0" id="O144">
       <dia:attribute name="obj_pos">
         <dia:point val="90,337"/>
       </dia:attribute>
@@ -23421,7 +23127,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O147">
+    <dia:object type="UML - Class" version="0" id="O145">
       <dia:attribute name="obj_pos">
         <dia:point val="90,342"/>
       </dia:attribute>
@@ -23617,7 +23323,7 @@ static void register_types(Archive&amp; ar);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O148">
+    <dia:object type="UML - Class" version="0" id="O146">
       <dia:attribute name="obj_pos">
         <dia:point val="124,342"/>
       </dia:attribute>
@@ -23849,7 +23555,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O149">
+    <dia:object type="UML - Class" version="0" id="O147">
       <dia:attribute name="obj_pos">
         <dia:point val="-5,164"/>
       </dia:attribute>
@@ -23962,7 +23668,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O150">
+    <dia:object type="UML - LargePackage" version="0" id="O148">
       <dia:attribute name="obj_pos">
         <dia:point val="88,355"/>
       </dia:attribute>
@@ -24007,7 +23713,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O151">
+    <dia:object type="UML - Note" version="0" id="O149">
       <dia:attribute name="obj_pos">
         <dia:point val="90,357"/>
       </dia:attribute>
@@ -24059,9 +23765,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O152">
+    <dia:object type="UML - Class" version="0" id="O150">
       <dia:attribute name="obj_pos">
         <dia:point val="113,357"/>
       </dia:attribute>
@@ -24173,9 +23879,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O153">
+    <dia:object type="UML - Class" version="0" id="O151">
       <dia:attribute name="obj_pos">
         <dia:point val="131,357"/>
       </dia:attribute>
@@ -24287,9 +23993,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O154">
+    <dia:object type="UML - Class" version="0" id="O152">
       <dia:attribute name="obj_pos">
         <dia:point val="124,362"/>
       </dia:attribute>
@@ -24517,9 +24223,9 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O155">
+    <dia:object type="UML - Class" version="0" id="O153">
       <dia:attribute name="obj_pos">
         <dia:point val="90,362"/>
       </dia:attribute>
@@ -24732,9 +24438,9 @@ EndGlobal
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O156">
+    <dia:object type="UML - Class" version="0" id="O154">
       <dia:attribute name="obj_pos">
         <dia:point val="20,402"/>
       </dia:attribute>
@@ -24944,7 +24650,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O117"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O157">
+    <dia:object type="UML - Class" version="0" id="O155">
       <dia:attribute name="obj_pos">
         <dia:point val="20,374"/>
       </dia:attribute>
@@ -25164,7 +24870,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O158">
+    <dia:object type="UML - Class" version="0" id="O156">
       <dia:attribute name="obj_pos">
         <dia:point val="50,374"/>
       </dia:attribute>
@@ -25385,7 +25091,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O159">
+    <dia:object type="UML - Class" version="0" id="O157">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,363"/>
       </dia:attribute>
@@ -25578,7 +25284,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O160">
+    <dia:object type="UML - Class" version="0" id="O158">
       <dia:attribute name="obj_pos">
         <dia:point val="20,164"/>
       </dia:attribute>
@@ -25691,7 +25397,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O161">
+    <dia:object type="UML - Class" version="0" id="O159">
       <dia:attribute name="obj_pos">
         <dia:point val="20,378.929"/>
       </dia:attribute>
@@ -25934,7 +25640,7 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O162">
+    <dia:object type="UML - Class" version="0" id="O160">
       <dia:attribute name="obj_pos">
         <dia:point val="90,367"/>
       </dia:attribute>
@@ -26177,9 +25883,9 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O150"/>
+      <dia:childnode parent="O148"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O163">
+    <dia:object type="UML - LargePackage" version="0" id="O161">
       <dia:attribute name="obj_pos">
         <dia:point val="18,288"/>
       </dia:attribute>
@@ -26224,7 +25930,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O164">
+    <dia:object type="UML - Class" version="0" id="O162">
       <dia:attribute name="obj_pos">
         <dia:point val="52,295"/>
       </dia:attribute>
@@ -26496,9 +26202,9 @@ endif()
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O163"/>
+      <dia:childnode parent="O161"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O165">
+    <dia:object type="UML - Class" version="0" id="O163">
       <dia:attribute name="obj_pos">
         <dia:point val="20,295"/>
       </dia:attribute>
@@ -26705,9 +26411,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O163"/>
+      <dia:childnode parent="O161"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O166">
+    <dia:object type="UML - Note" version="0" id="O164">
       <dia:attribute name="obj_pos">
         <dia:point val="20,290"/>
       </dia:attribute>
@@ -26759,9 +26465,9 @@ install(
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O163"/>
+      <dia:childnode parent="O161"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O167">
+    <dia:object type="UML - Class" version="0" id="O165">
       <dia:attribute name="obj_pos">
         <dia:point val="37,290"/>
       </dia:attribute>
@@ -26873,9 +26579,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O163"/>
+      <dia:childnode parent="O161"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O168">
+    <dia:object type="UML - Class" version="0" id="O166">
       <dia:attribute name="obj_pos">
         <dia:point val="53,290"/>
       </dia:attribute>
@@ -26987,9 +26693,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O163"/>
+      <dia:childnode parent="O161"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O169">
+    <dia:object type="UML - Class" version="0" id="O167">
       <dia:attribute name="obj_pos">
         <dia:point val="52,402"/>
       </dia:attribute>
@@ -27246,7 +26952,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
       <dia:attribute name="templates"/>
       <dia:childnode parent="O117"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O170">
+    <dia:object type="UML - Class" version="0" id="O168">
       <dia:attribute name="obj_pos">
         <dia:point val="-5,159"/>
       </dia:attribute>
@@ -27359,7 +27065,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O171">
+    <dia:object type="UML - Class" version="0" id="O169">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,353"/>
       </dia:attribute>
@@ -27637,7 +27343,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O172">
+    <dia:object type="UML - Class" version="0" id="O170">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,353"/>
       </dia:attribute>
@@ -27957,7 +27663,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O173">
+    <dia:object type="UML - Class" version="0" id="O171">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,250"/>
       </dia:attribute>
@@ -28168,7 +27874,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O174">
+    <dia:object type="UML - Class" version="0" id="O172">
       <dia:attribute name="obj_pos">
         <dia:point val="-14,185"/>
       </dia:attribute>
@@ -28421,7 +28127,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O175">
+    <dia:object type="UML - Class" version="0" id="O173">
       <dia:attribute name="obj_pos">
         <dia:point val="50,175"/>
       </dia:attribute>
@@ -28559,7 +28265,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O176">
+    <dia:object type="UML - Class" version="0" id="O174">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,250"/>
       </dia:attribute>
@@ -28735,7 +28441,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O177">
+    <dia:object type="UML - Class" version="0" id="O175">
       <dia:attribute name="obj_pos">
         <dia:point val="-14,175"/>
       </dia:attribute>
@@ -28965,7 +28671,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O178">
+    <dia:object type="UML - Class" version="0" id="O176">
       <dia:attribute name="obj_pos">
         <dia:point val="10,185"/>
       </dia:attribute>
@@ -29195,7 +28901,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O179">
+    <dia:object type="UML - Class" version="0" id="O177">
       <dia:attribute name="obj_pos">
         <dia:point val="12,194"/>
       </dia:attribute>
@@ -29333,7 +29039,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O180">
+    <dia:object type="UML - Class" version="0" id="O178">
       <dia:attribute name="obj_pos">
         <dia:point val="-18,206"/>
       </dia:attribute>
@@ -29497,7 +29203,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O181">
+    <dia:object type="UML - Generalization" version="1" id="O179">
       <dia:attribute name="obj_pos">
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
@@ -29543,12 +29249,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O179" connection="6"/>
-        <dia:connection handle="1" to="O180" connection="1"/>
+        <dia:connection handle="0" to="O177" connection="6"/>
+        <dia:connection handle="1" to="O178" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O182">
+    <dia:object type="UML - Class" version="0" id="O180">
       <dia:attribute name="obj_pos">
         <dia:point val="23,206"/>
       </dia:attribute>
@@ -29735,7 +29441,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O183">
+    <dia:object type="UML - Generalization" version="1" id="O181">
       <dia:attribute name="obj_pos">
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
@@ -29781,12 +29487,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O179" connection="6"/>
-        <dia:connection handle="1" to="O182" connection="1"/>
+        <dia:connection handle="0" to="O177" connection="6"/>
+        <dia:connection handle="1" to="O180" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O184">
+    <dia:object type="UML - Class" version="0" id="O182">
       <dia:attribute name="obj_pos">
         <dia:point val="3,200"/>
       </dia:attribute>
@@ -29973,7 +29679,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O185">
+    <dia:object type="UML - Generalization" version="1" id="O183">
       <dia:attribute name="obj_pos">
         <dia:point val="19.18,197.6"/>
       </dia:attribute>
@@ -30019,12 +29725,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O179" connection="6"/>
-        <dia:connection handle="1" to="O184" connection="14"/>
+        <dia:connection handle="0" to="O177" connection="6"/>
+        <dia:connection handle="1" to="O182" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O186">
+    <dia:object type="UML - Class" version="0" id="O184">
       <dia:attribute name="obj_pos">
         <dia:point val="-32,219"/>
       </dia:attribute>
@@ -30211,7 +29917,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O187">
+    <dia:object type="UML - Generalization" version="1" id="O185">
       <dia:attribute name="obj_pos">
         <dia:point val="-9.895,216.6"/>
       </dia:attribute>
@@ -30257,12 +29963,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O208" connection="6"/>
-        <dia:connection handle="1" to="O186" connection="1"/>
+        <dia:connection handle="0" to="O206" connection="6"/>
+        <dia:connection handle="1" to="O184" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O188">
+    <dia:object type="UML - Class" version="0" id="O186">
       <dia:attribute name="obj_pos">
         <dia:point val="-1,219"/>
       </dia:attribute>
@@ -30449,7 +30155,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O189">
+    <dia:object type="UML - Generalization" version="1" id="O187">
       <dia:attribute name="obj_pos">
         <dia:point val="-9.895,216.6"/>
       </dia:attribute>
@@ -30495,12 +30201,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O208" connection="6"/>
-        <dia:connection handle="1" to="O188" connection="1"/>
+        <dia:connection handle="0" to="O206" connection="6"/>
+        <dia:connection handle="1" to="O186" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O190">
+    <dia:object type="UML - Class" version="0" id="O188">
       <dia:attribute name="obj_pos">
         <dia:point val="32,214"/>
       </dia:attribute>
@@ -30685,7 +30391,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O191">
+    <dia:object type="UML - Generalization" version="1" id="O189">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,211.25"/>
       </dia:attribute>
@@ -30731,12 +30437,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O182" connection="14"/>
-        <dia:connection handle="1" to="O190" connection="14"/>
+        <dia:connection handle="0" to="O180" connection="14"/>
+        <dia:connection handle="1" to="O188" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O192">
+    <dia:object type="UML - Class" version="0" id="O190">
       <dia:attribute name="obj_pos">
         <dia:point val="-17,225"/>
       </dia:attribute>
@@ -30923,7 +30629,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O193">
+    <dia:object type="UML - Generalization" version="1" id="O191">
       <dia:attribute name="obj_pos">
         <dia:point val="-9.895,216.6"/>
       </dia:attribute>
@@ -30969,12 +30675,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O208" connection="6"/>
-        <dia:connection handle="1" to="O192" connection="14"/>
+        <dia:connection handle="0" to="O206" connection="6"/>
+        <dia:connection handle="1" to="O190" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O194">
+    <dia:object type="UML - Class" version="0" id="O192">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,225"/>
       </dia:attribute>
@@ -31161,7 +30867,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O195">
+    <dia:object type="UML - Generalization" version="1" id="O193">
       <dia:attribute name="obj_pos">
         <dia:point val="-9.895,216.6"/>
       </dia:attribute>
@@ -31207,12 +30913,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O208" connection="6"/>
-        <dia:connection handle="1" to="O194" connection="14"/>
+        <dia:connection handle="0" to="O206" connection="6"/>
+        <dia:connection handle="1" to="O192" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O196">
+    <dia:object type="UML - Class" version="0" id="O194">
       <dia:attribute name="obj_pos">
         <dia:point val="16,225"/>
       </dia:attribute>
@@ -31397,7 +31103,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O197">
+    <dia:object type="UML - Generalization" version="1" id="O195">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,211.2"/>
       </dia:attribute>
@@ -31443,12 +31149,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O182" connection="6"/>
-        <dia:connection handle="1" to="O196" connection="1"/>
+        <dia:connection handle="0" to="O180" connection="6"/>
+        <dia:connection handle="1" to="O194" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O198">
+    <dia:object type="UML - Class" version="0" id="O196">
       <dia:attribute name="obj_pos">
         <dia:point val="46,220"/>
       </dia:attribute>
@@ -31633,7 +31339,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O199">
+    <dia:object type="UML - Generalization" version="1" id="O197">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,211.2"/>
       </dia:attribute>
@@ -31679,12 +31385,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O182" connection="6"/>
-        <dia:connection handle="1" to="O198" connection="1"/>
+        <dia:connection handle="0" to="O180" connection="6"/>
+        <dia:connection handle="1" to="O196" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O200">
+    <dia:object type="UML - Class" version="0" id="O198">
       <dia:attribute name="obj_pos">
         <dia:point val="10,175"/>
       </dia:attribute>
@@ -31914,7 +31620,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O201">
+    <dia:object type="UML - Class" version="0" id="O199">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,260"/>
       </dia:attribute>
@@ -32115,7 +31821,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O202">
+    <dia:object type="UML - Class" version="0" id="O200">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,260"/>
       </dia:attribute>
@@ -32338,7 +32044,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O203">
+    <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,270"/>
       </dia:attribute>
@@ -32536,7 +32242,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O204">
+    <dia:object type="UML - Class" version="0" id="O202">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,270"/>
       </dia:attribute>
@@ -32773,7 +32479,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O205">
+    <dia:object type="UML - Class" version="0" id="O203">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,280"/>
       </dia:attribute>
@@ -32962,7 +32668,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O206">
+    <dia:object type="UML - Class" version="0" id="O204">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,280"/>
       </dia:attribute>
@@ -33137,7 +32843,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O207">
+    <dia:object type="UML - Class" version="0" id="O205">
       <dia:attribute name="obj_pos">
         <dia:point val="-27,175"/>
       </dia:attribute>
@@ -33251,7 +32957,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O208">
+    <dia:object type="UML - Class" version="0" id="O206">
       <dia:attribute name="obj_pos">
         <dia:point val="-19,213"/>
       </dia:attribute>
@@ -33390,7 +33096,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O209">
+    <dia:object type="UML - Generalization" version="1" id="O207">
       <dia:attribute name="obj_pos">
         <dia:point val="-1.3875,210.4"/>
       </dia:attribute>
@@ -33436,12 +33142,12 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O180" connection="6"/>
-        <dia:connection handle="1" to="O208" connection="1"/>
+        <dia:connection handle="0" to="O178" connection="6"/>
+        <dia:connection handle="1" to="O206" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O210">
+    <dia:object type="UML - Class" version="0" id="O208">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,255"/>
       </dia:attribute>
@@ -33645,7 +33351,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O211">
+    <dia:object type="UML - Class" version="0" id="O209">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,255"/>
       </dia:attribute>
@@ -33907,7 +33613,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O212">
+    <dia:object type="UML - Class" version="0" id="O210">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,265"/>
       </dia:attribute>
@@ -34108,7 +33814,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O213">
+    <dia:object type="UML - Class" version="0" id="O211">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,265"/>
       </dia:attribute>
@@ -34367,7 +34073,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O214">
+    <dia:object type="UML - Class" version="0" id="O212">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,275"/>
       </dia:attribute>
@@ -34567,7 +34273,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O215">
+    <dia:object type="UML - Class" version="0" id="O213">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,275"/>
       </dia:attribute>
@@ -34853,7 +34559,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O216">
+    <dia:object type="UML - Class" version="0" id="O214">
       <dia:attribute name="obj_pos">
         <dia:point val="30,175"/>
       </dia:attribute>
@@ -35060,7 +34766,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O217">
+    <dia:object type="UML - Class" version="0" id="O215">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,285"/>
       </dia:attribute>
@@ -35260,7 +34966,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O218">
+    <dia:object type="UML - Class" version="0" id="O216">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,285"/>
       </dia:attribute>
@@ -35481,7 +35187,7 @@ physical::entities::part &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O219">
+    <dia:object type="UML - Class" version="0" id="O217">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,300"/>
       </dia:attribute>
@@ -35681,7 +35387,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O220">
+    <dia:object type="UML - Class" version="0" id="O218">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,300"/>
       </dia:attribute>
@@ -35887,7 +35593,7 @@ physical::entities::archetype_kind &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O221">
+    <dia:object type="UML - Class" version="0" id="O219">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,372"/>
       </dia:attribute>
@@ -36059,7 +35765,7 @@ const &lt;#= qn #&gt;&amp; rhs) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O222">
+    <dia:object type="UML - Class" version="0" id="O220">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,290"/>
       </dia:attribute>
@@ -36258,7 +35964,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O223">
+    <dia:object type="UML - Class" version="0" id="O221">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,290"/>
       </dia:attribute>
@@ -36434,7 +36140,7 @@ void helper_class_implementation_transform_transform::apply(const context&amp; c
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O224">
+    <dia:object type="UML - Class" version="0" id="O222">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,295"/>
       </dia:attribute>
@@ -36637,7 +36343,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O225">
+    <dia:object type="UML - Class" version="0" id="O223">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,295"/>
       </dia:attribute>
@@ -36919,7 +36625,7 @@ physical::entities::helper &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O226">
+    <dia:object type="UML - Class" version="0" id="O224">
       <dia:attribute name="obj_pos">
         <dia:point val="20,268"/>
       </dia:attribute>
@@ -37086,7 +36792,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O227">
+    <dia:object type="UML - Class" version="0" id="O225">
       <dia:attribute name="obj_pos">
         <dia:point val="36,268"/>
       </dia:attribute>
@@ -37265,7 +36971,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O228">
+    <dia:object type="UML - Class" version="0" id="O226">
       <dia:attribute name="obj_pos">
         <dia:point val="51,268"/>
       </dia:attribute>
@@ -37452,7 +37158,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O229">
+    <dia:object type="UML - Class" version="0" id="O227">
       <dia:attribute name="obj_pos">
         <dia:point val="64,268"/>
       </dia:attribute>
@@ -37619,7 +37325,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O230">
+    <dia:object type="UML - Class" version="0" id="O228">
       <dia:attribute name="obj_pos">
         <dia:point val="51,278"/>
       </dia:attribute>
@@ -37786,7 +37492,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O231">
+    <dia:object type="UML - Class" version="0" id="O229">
       <dia:attribute name="obj_pos">
         <dia:point val="20,273"/>
       </dia:attribute>
@@ -37995,7 +37701,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O232">
+    <dia:object type="UML - Class" version="0" id="O230">
       <dia:attribute name="obj_pos">
         <dia:point val="36,273"/>
       </dia:attribute>
@@ -38172,7 +37878,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O233">
+    <dia:object type="UML - Class" version="0" id="O231">
       <dia:attribute name="obj_pos">
         <dia:point val="51,273"/>
       </dia:attribute>
@@ -38363,7 +38069,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O234">
+    <dia:object type="UML - Class" version="0" id="O232">
       <dia:attribute name="obj_pos">
         <dia:point val="64,273"/>
       </dia:attribute>
@@ -38532,7 +38238,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O235">
+    <dia:object type="UML - Class" version="0" id="O233">
       <dia:attribute name="obj_pos">
         <dia:point val="20,278"/>
       </dia:attribute>
@@ -38704,7 +38410,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O236">
+    <dia:object type="UML - Class" version="0" id="O234">
       <dia:attribute name="obj_pos">
         <dia:point val="36,278"/>
       </dia:attribute>
@@ -38879,7 +38585,7 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O7"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O237">
+    <dia:object type="UML - Class" version="0" id="O235">
       <dia:attribute name="obj_pos">
         <dia:point val="20,337"/>
       </dia:attribute>
@@ -39063,7 +38769,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O238">
+    <dia:object type="UML - Class" version="0" id="O236">
       <dia:attribute name="obj_pos">
         <dia:point val="38,337"/>
       </dia:attribute>
@@ -39245,7 +38951,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O239">
+    <dia:object type="UML - Class" version="0" id="O237">
       <dia:attribute name="obj_pos">
         <dia:point val="55,337"/>
       </dia:attribute>
@@ -39414,7 +39120,7 @@ inline std::string tidy_up_string(std::string s) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O240">
+    <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
         <dia:point val="69,337"/>
       </dia:attribute>
@@ -39596,7 +39302,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O241">
+    <dia:object type="UML - Class" version="0" id="O239">
       <dia:attribute name="obj_pos">
         <dia:point val="69,342"/>
       </dia:attribute>
@@ -39804,7 +39510,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= d.na
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O242">
+    <dia:object type="UML - Class" version="0" id="O240">
       <dia:attribute name="obj_pos">
         <dia:point val="20,342"/>
       </dia:attribute>
@@ -40009,7 +39715,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O243">
+    <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
         <dia:point val="38,342"/>
       </dia:attribute>
@@ -40190,7 +39896,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O244">
+    <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
         <dia:point val="54,342"/>
       </dia:attribute>
@@ -40374,7 +40080,7 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= nt_q
       <dia:attribute name="templates"/>
       <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O245">
+    <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
         <dia:point val="90,289"/>
       </dia:attribute>
@@ -40542,7 +40248,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O246">
+    <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
         <dia:point val="109,289"/>
       </dia:attribute>
@@ -40703,7 +40409,7 @@ bool create_bool(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O247">
+    <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
         <dia:point val="124,289"/>
       </dia:attribute>
@@ -40868,7 +40574,7 @@ void char_helper_transform::apply(assistant&amp; ast, const logical::entities::h
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O248">
+    <dia:object type="UML - Class" version="0" id="O246">
       <dia:attribute name="obj_pos">
         <dia:point val="139,289"/>
       </dia:attribute>
@@ -41038,7 +40744,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O249">
+    <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
         <dia:point val="90,294"/>
       </dia:attribute>
@@ -41220,7 +40926,7 @@ apply(assistant&amp; ast, const logical::entities::helper_properties&amp; hp) co
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O250">
+    <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
         <dia:point val="109,294"/>
       </dia:attribute>
@@ -41390,7 +41096,7 @@ create_&lt;#= ident #&gt;(unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O251">
+    <dia:object type="UML - Class" version="0" id="O249">
       <dia:attribute name="obj_pos">
         <dia:point val="124,294"/>
       </dia:attribute>
@@ -41554,7 +41260,7 @@ void number_helper_transform::apply(assistant&amp; ast, const logical::entities:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O252">
+    <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
         <dia:point val="139,294"/>
       </dia:attribute>
@@ -41742,7 +41448,7 @@ create_&lt;#= ident #&gt;(unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O253">
+    <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
         <dia:point val="90,299"/>
       </dia:attribute>
@@ -41909,7 +41615,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O254">
+    <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
         <dia:point val="109,299"/>
       </dia:attribute>
@@ -42080,7 +41786,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O255">
+    <dia:object type="UML - Class" version="0" id="O253">
       <dia:attribute name="obj_pos">
         <dia:point val="124,299"/>
       </dia:attribute>
@@ -42248,7 +41954,7 @@ create_&lt;#= ident #&gt;(unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O256">
+    <dia:object type="UML - Class" version="0" id="O254">
       <dia:attribute name="obj_pos">
         <dia:point val="139,299"/>
       </dia:attribute>
@@ -42416,7 +42122,7 @@ create_&lt;#= ident #&gt;(unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O257">
+    <dia:object type="UML - Class" version="0" id="O255">
       <dia:attribute name="obj_pos">
         <dia:point val="90,304"/>
       </dia:attribute>
@@ -42585,7 +42291,7 @@ void sequence_container_helper_transform::apply(assistant&amp; ast, const logica
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O258">
+    <dia:object type="UML - Class" version="0" id="O256">
       <dia:attribute name="obj_pos">
         <dia:point val="109,304"/>
       </dia:attribute>
@@ -42748,7 +42454,7 @@ std::string create_std_string(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O259">
+    <dia:object type="UML - Class" version="0" id="O257">
       <dia:attribute name="obj_pos">
         <dia:point val="124,304"/>
       </dia:attribute>
@@ -42936,7 +42642,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O260">
+    <dia:object type="UML - Class" version="0" id="O258">
       <dia:attribute name="obj_pos">
         <dia:point val="139,304"/>
       </dia:attribute>
@@ -43104,7 +42810,7 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O24"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O261">
+    <dia:object type="UML - Class" version="0" id="O259">
       <dia:attribute name="obj_pos">
         <dia:point val="90,347"/>
       </dia:attribute>

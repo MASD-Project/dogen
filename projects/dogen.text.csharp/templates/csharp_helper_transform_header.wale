@@ -1,9 +1,0 @@
-class {{class.simple_name}} : public helper_transform {
-public:
-    std::string id() const override;
-    std::string family() const override;
-    std::list<std::string> owning_formatters() const override;
-    std::list<std::string> owning_facets() const override;
-    std::string helper_name() const override;
-    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
-};
