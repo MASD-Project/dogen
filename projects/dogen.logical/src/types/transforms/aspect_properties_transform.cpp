@@ -20,12 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.logical/io/entities/aspect_properties_io.hpp"
 #include "dogen.logical/types/entities/aspect_properties.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -127,8 +130,8 @@ aspect_properties_generator::result() const {
 
 }
 
-void
-aspect_properties_transform::apply(const context& ctx, entities::model& m) {
+void aspect_properties_transform::
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "aspect properties",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -138,6 +141,8 @@ aspect_properties_transform::apply(const context& ctx, entities::model& m) {
 
     entities::elements_traversal(m, g);
     m.aspect_properties(g.result());
+    BOOST_LOG_SEV(lg, debug) << "Aspect properties: "
+                             << m.aspect_properties();
 
     stp.end_transform(m);
 }
