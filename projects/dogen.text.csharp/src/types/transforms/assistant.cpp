@@ -22,9 +22,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
-#include "dogen.text/types/formatters/boilerplate_properties.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
+#include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -120,9 +121,9 @@ make_namespaces(const identification::entities::logical_name& n) const {
 
 std::string
 assistant::reference_equals(const logical::entities::attribute& attr) const {
-    const auto& c(context_.model().aspect_properties());
+    const auto& c(context_.aspect_properties());
     const auto n(attr.parsed_type().current());
-    const auto i(c.find(n.qualified().dot()));
+    const auto i(c.find(n.id()));
 
     bool requires_static_reference_equals(i == c.end() ?
         false : i->second.requires_static_reference_equals());
