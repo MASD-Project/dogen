@@ -222,13 +222,12 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
-boost::optional<formattables::assistant_properties> assistant::
+boost::optional<logical::entities::assistant_properties> assistant::
 get_assistant_properties(const logical::entities::attribute& attr) const {
-
-    const auto& ap(context_.model().assistant_properties());
-    const auto i(ap.find(attr.parsed_type().current().qualified().dot()));
+    const auto& ap(context_.assistant_properties());
+    const auto i(ap.find(attr.parsed_type().current().id()));
     if (i == ap.end())
-        return boost::optional<formattables::assistant_properties>();
+        return boost::optional<logical::entities::assistant_properties>();
 
     return i->second;
 }

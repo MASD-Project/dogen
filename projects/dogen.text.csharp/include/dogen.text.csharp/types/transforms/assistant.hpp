@@ -35,11 +35,11 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/assistant_properties.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
 #include "dogen.text.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.text.csharp/types/formattables/assistant_properties.hpp"
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::csharp::transforms {
@@ -128,7 +128,7 @@ public:
     void add_helper_methods(const std::string& element_id);
 
 public:
-    boost::optional<formattables::assistant_properties>
+    boost::optional<logical::entities::assistant_properties>
     get_assistant_properties(const logical::entities::attribute& attr) const;
 
 public:
