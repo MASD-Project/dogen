@@ -19174,7 +19174,6 @@ code.
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_implementation
-#DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -19810,7 +19809,6 @@ BOOST_AUTO_TEST_SUITE_END()
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.enumeration
 #DOGEN masd.wale.kvp.class.simple_name=enum_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=enum_implementation
-#DOGEN masd.wale.kvp.meta_element=enumeration
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -25550,7 +25548,6 @@ EndGlobal
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.entry_point
 #DOGEN masd.wale.kvp.class.simple_name=main_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=main
-#DOGEN masd.wale.kvp.meta_element=entry_point
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -27809,10 +27806,7 @@ install(
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.build_cmakelists
 #DOGEN masd.wale.kvp.class.simple_name=cmakelists_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=cmakelists
-#DOGEN masd.wale.kvp.meta_element=build_cmakelists
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.testing
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_tests_cmakelists
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
