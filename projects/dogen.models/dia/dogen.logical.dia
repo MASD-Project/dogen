@@ -55479,7 +55479,7 @@ model.#</dia:string>
         <dia:point val="-127,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-127.05,-42.05;-110.28,-35.95"/>
+        <dia:rectangle val="-127.05,-42.05;-110.28,-36.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-127,-42"/>
@@ -55488,7 +55488,7 @@ model.#</dia:string>
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#technical_space_properties#</dia:string>
@@ -55630,29 +55630,6 @@ model.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#requires_stream_manipulators#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_floating_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -57877,7 +57854,7 @@ model.#</dia:string>
         <dia:point val="-219,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-219.05,-16.05;-203.435,-12.35"/>
+        <dia:rectangle val="-219.05,-16.05;-203.435,-13.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-219,-16"/>
@@ -57886,7 +57863,7 @@ model.#</dia:string>
         <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#aspect_properties#</dia:string>
@@ -57979,29 +57956,6 @@ model.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_floating_point#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#requires_static_reference_equals#</dia:string>
@@ -58110,7 +58064,6 @@ model.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O15" connection="23"/>
-        <dia:connection handle="1" to="O437" connection="8"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

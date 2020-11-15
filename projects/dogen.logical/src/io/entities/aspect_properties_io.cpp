@@ -33,7 +33,6 @@ std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::entities::aspect_properties\"" << ", "
-      << "\"is_floating_point\": " << v.is_floating_point() << ", "
       << "\"requires_static_reference_equals\": " << v.requires_static_reference_equals()
       << " }";
     return(s);
