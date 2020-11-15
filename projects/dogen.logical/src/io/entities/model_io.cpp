@@ -19,9 +19,11 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
+#include "dogen.logical/io/entities/aspect_properties_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
@@ -169,6 +171,32 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -196,7 +224,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"physical_elements\": " << v.physical_elements() << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
-      << "\"technical_space_version\": " << v.technical_space_version()
+      << "\"technical_space_version\": " << v.technical_space_version() << ", "
+      << "\"aspect_properties\": " << v.aspect_properties()
       << " }";
     return(s);
 }

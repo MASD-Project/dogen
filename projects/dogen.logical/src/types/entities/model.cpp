@@ -59,7 +59,8 @@ model::model(model&& rhs)
       physical_elements_(std::move(rhs.physical_elements_)),
       meta_names_(std::move(rhs.meta_names_)),
       streaming_properties_(std::move(rhs.streaming_properties_)),
-      technical_space_version_(std::move(rhs.technical_space_version_)) { }
+      technical_space_version_(std::move(rhs.technical_space_version_)),
+      aspect_properties_(std::move(rhs.aspect_properties_)) { }
 
 model::model(
     const dogen::identification::entities::logical_name& name,
@@ -84,7 +85,8 @@ model::model(
     const dogen::logical::entities::physical::element_repository& physical_elements,
     const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
-    const dogen::identification::entities::technical_space_version technical_space_version)
+    const dogen::identification::entities::technical_space_version technical_space_version,
+    const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& aspect_properties)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -107,7 +109,8 @@ model::model(
       physical_elements_(physical_elements),
       meta_names_(meta_names),
       streaming_properties_(streaming_properties),
-      technical_space_version_(technical_space_version) { }
+      technical_space_version_(technical_space_version),
+      aspect_properties_(aspect_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -134,6 +137,7 @@ void model::swap(model& other) noexcept {
     swap(meta_names_, other.meta_names_);
     swap(streaming_properties_, other.streaming_properties_);
     swap(technical_space_version_, other.technical_space_version_);
+    swap(aspect_properties_, other.aspect_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -159,7 +163,8 @@ bool model::operator==(const model& rhs) const {
         physical_elements_ == rhs.physical_elements_ &&
         meta_names_ == rhs.meta_names_ &&
         streaming_properties_ == rhs.streaming_properties_ &&
-        technical_space_version_ == rhs.technical_space_version_;
+        technical_space_version_ == rhs.technical_space_version_ &&
+        aspect_properties_ == rhs.aspect_properties_;
 }
 
 model& model::operator=(model other) {
@@ -518,6 +523,22 @@ dogen::identification::entities::technical_space_version model::technical_space_
 
 void model::technical_space_version(const dogen::identification::entities::technical_space_version v) {
     technical_space_version_ = v;
+}
+
+const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& model::aspect_properties() const {
+    return aspect_properties_;
+}
+
+std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& model::aspect_properties() {
+    return aspect_properties_;
+}
+
+void model::aspect_properties(const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& v) {
+    aspect_properties_ = v;
+}
+
+void model::aspect_properties(const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>&& v) {
+    aspect_properties_ = std::move(v);
 }
 
 }
