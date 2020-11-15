@@ -101,7 +101,7 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name>& meta_names,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
         const dogen::identification::entities::technical_space_version technical_space_version,
-        const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& aspect_properties,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties);
 
 public:
@@ -303,10 +303,10 @@ public:
     void technical_space_version(const dogen::identification::entities::technical_space_version v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& aspect_properties() const;
-    std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& aspect_properties();
-    void aspect_properties(const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>& v);
-    void aspect_properties(const std::unordered_map<std::string, dogen::logical::entities::aspect_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties();
+    void aspect_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& v);
+    void aspect_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>&& v);
 
     const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties() const;
     std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& assistant_properties();
@@ -347,7 +347,7 @@ private:
     std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::logical_meta_name> meta_names_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties> streaming_properties_;
     dogen::identification::entities::technical_space_version technical_space_version_;
-    std::unordered_map<std::string, dogen::logical::entities::aspect_properties> aspect_properties_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties> aspect_properties_;
     std::unordered_map<std::string, dogen::logical::entities::assistant_properties> assistant_properties_;
 };
 
