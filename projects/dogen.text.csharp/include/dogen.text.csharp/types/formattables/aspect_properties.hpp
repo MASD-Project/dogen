@@ -39,14 +39,9 @@ public:
     aspect_properties();
 
 public:
-    aspect_properties(
-        const bool is_floating_point,
-        const bool requires_static_reference_equals);
+    explicit aspect_properties(const bool requires_static_reference_equals);
 
 public:
-    bool is_floating_point() const;
-    void is_floating_point(const bool v);
-
     bool requires_static_reference_equals() const;
     void requires_static_reference_equals(const bool v);
 
@@ -61,7 +56,6 @@ public:
     aspect_properties& operator=(aspect_properties other);
 
 private:
-    bool is_floating_point_;
     bool requires_static_reference_equals_;
 };
 

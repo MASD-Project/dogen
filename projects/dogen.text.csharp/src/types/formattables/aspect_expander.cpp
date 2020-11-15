@@ -60,8 +60,7 @@ public:
 
 private:
     void handle_aspect_properties(
-        const variability::entities::configuration& cfg,
-        const std::string& id, const bool is_floating_point = false);
+        const variability::entities::configuration& cfg, const std::string& id);
 
 public:
     using logical::entities::element_visitor::visit;
@@ -97,8 +96,7 @@ aspect_properties_generator::make_feature_group(
 }
 
 void aspect_properties_generator::handle_aspect_properties(
-    const variability::entities::configuration& cfg, const std::string& id,
-    const bool is_floating_point) {
+    const variability::entities::configuration& cfg, const std::string& id) {
     const variability::helpers::configuration_selector s(cfg);
 
     /*
@@ -110,7 +108,6 @@ void aspect_properties_generator::handle_aspect_properties(
     aspect_properties ap;
     const auto& rsrq(feature_group_.requires_static_reference_equals);
     ap.requires_static_reference_equals(s.get_boolean_content_or_default(rsrq));
-    ap.is_floating_point(is_floating_point);
 
     result_[id] = ap;
 }
