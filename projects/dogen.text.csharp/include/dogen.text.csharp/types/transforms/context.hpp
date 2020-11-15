@@ -58,7 +58,7 @@ public:
     helpers() const;
     const std::unordered_map<identification::entities::logical_id,
                              logical::entities::aspect_properties>&
-    aspect_properties();
+    aspect_properties() const;
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:

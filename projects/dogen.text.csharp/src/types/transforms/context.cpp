@@ -52,7 +52,7 @@ const std::unordered_map<
 
 const std::unordered_map<identification::entities::logical_id,
                          logical::entities::aspect_properties>&
-context::aspect_properties() {
+context::aspect_properties() const {
     return aspect_properties_;
 }
 
