@@ -41,36 +41,6 @@ make_masd_csharp_helper_family() {
     return r;
 }
 
-dogen::variability::entities::feature
-make_masd_csharp_assistant_requires_assistance() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("requires_assistance");
-    r.name().qualified("masd.csharp.assistant.requires_assistance");
-    r.description(R"(
-)");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-    return r;
-}
-
-dogen::variability::entities::feature
-make_masd_csharp_assistant_method_postfix() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("method_postfix");
-    r.name().qualified("masd.csharp.assistant.method_postfix");
-    r.description(R"(
-)");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    return r;
-}
-
 }
 
 
@@ -79,8 +49,6 @@ global_features::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_csharp_helper_family());
-    r.push_back(make_masd_csharp_assistant_requires_assistance());
-    r.push_back(make_masd_csharp_assistant_method_postfix());
     return r;
 }
 
