@@ -23072,10 +23072,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.templating_logic_less_templates
 #DOGEN masd.wale.kvp.class.simple_name=logic_less_template_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=logic_less_template
-#DOGEN masd.wale.kvp.meta_element=templating_logic_less_templates
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.templating
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_templates
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.templates
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
 #DOGEN masd.physical.relation_status=not_relatable
