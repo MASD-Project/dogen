@@ -33,8 +33,7 @@ const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
 namespace dogen::physical::entities {
 
 artefact::artefact()
-    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
-      formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
+    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 artefact::artefact(artefact&& rhs)
     : meta_name_(std::move(rhs.meta_name_)),
@@ -50,7 +49,6 @@ artefact::artefact(artefact&& rhs)
       unified_diff_(std::move(rhs.unified_diff_)),
       operation_(std::move(rhs.operation_)),
       enablement_properties_(std::move(rhs.enablement_properties_)),
-      formatting_style_(std::move(rhs.formatting_style_)),
       formatting_input_(std::move(rhs.formatting_input_)),
       relations_(std::move(rhs.relations_)) { }
 
@@ -68,7 +66,6 @@ artefact::artefact(
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::enablement_properties& enablement_properties,
-    const dogen::physical::entities::formatting_styles formatting_style,
     const std::string& formatting_input,
     const dogen::physical::entities::relation_properties& relations)
     : meta_name_(meta_name),
@@ -84,7 +81,6 @@ artefact::artefact(
       unified_diff_(unified_diff),
       operation_(operation),
       enablement_properties_(enablement_properties),
-      formatting_style_(formatting_style),
       formatting_input_(formatting_input),
       relations_(relations) { }
 
@@ -103,7 +99,6 @@ void artefact::swap(artefact& other) noexcept {
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_properties_, other.enablement_properties_);
-    swap(formatting_style_, other.formatting_style_);
     swap(formatting_input_, other.formatting_input_);
     swap(relations_, other.relations_);
 }
@@ -122,7 +117,6 @@ bool artefact::operator==(const artefact& rhs) const {
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
         enablement_properties_ == rhs.enablement_properties_ &&
-        formatting_style_ == rhs.formatting_style_ &&
         formatting_input_ == rhs.formatting_input_ &&
         relations_ == rhs.relations_;
 }
@@ -331,14 +325,6 @@ void artefact::enablement_properties(const dogen::physical::entities::enablement
 
 void artefact::enablement_properties(const dogen::physical::entities::enablement_properties&& v) {
     enablement_properties_ = std::move(v);
-}
-
-dogen::physical::entities::formatting_styles artefact::formatting_style() const {
-    return formatting_style_;
-}
-
-void artefact::formatting_style(const dogen::physical::entities::formatting_styles v) {
-    formatting_style_ = v;
 }
 
 const std::string& artefact::formatting_input() const {

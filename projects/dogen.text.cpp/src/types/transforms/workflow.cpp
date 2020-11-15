@@ -26,7 +26,6 @@
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
-#include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
@@ -107,7 +106,6 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         }
         BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
-        using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(physical_model_, fm, frp.helper_formatters(),
             streaming_properties_, technical_space_version_, tracer);

@@ -24,7 +24,6 @@
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/path_properties_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.identification/io/entities/physical_name_io.hpp"
 #include "dogen.physical/io/entities/relation_properties_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
@@ -89,7 +88,6 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "
       << "\"enablement_properties\": " << v.enablement_properties() << ", "
-      << "\"formatting_style\": " << v.formatting_style() << ", "
       << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\"" << ", "
       << "\"relations\": " << v.relations()
       << " }";

@@ -24,7 +24,6 @@
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/paths_transform.hpp"
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
-#include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 #include "dogen.physical/types/transforms/legacy_paths_transform.hpp"
 #include "dogen.physical/types/transforms/relations_transform.hpp"
@@ -75,7 +74,6 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      * There are no particular dependencies on the next set of
      * transforms.
      */
-    formatting_transform::apply(ctx, m);
     generability_transform::apply(ctx, m);
 
     stp.end_chain(m);

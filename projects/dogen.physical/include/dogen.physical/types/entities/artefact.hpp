@@ -32,7 +32,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/path_properties.hpp"
-#include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.physical/types/entities/relation_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
@@ -73,7 +72,6 @@ public:
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
         const dogen::physical::entities::enablement_properties& enablement_properties,
-        const dogen::physical::entities::formatting_styles formatting_style,
         const std::string& formatting_input,
         const dogen::physical::entities::relation_properties& relations);
 
@@ -207,14 +205,6 @@ public:
     /**@}*/
 
     /**
-     * @brief What type of M2T transform to use in order to generate the artefact's content.
-     */
-    /**@{*/
-    dogen::physical::entities::formatting_styles formatting_style() const;
-    void formatting_style(const dogen::physical::entities::formatting_styles v);
-    /**@}*/
-
-    /**
      * @brief Template used as input in order to generate the artefact's content, if any.
      */
     /**@{*/
@@ -253,7 +243,6 @@ private:
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
     dogen::physical::entities::enablement_properties enablement_properties_;
-    dogen::physical::entities::formatting_styles formatting_style_;
     std::string formatting_input_;
     dogen::physical::entities::relation_properties relations_;
 };
