@@ -29957,13 +29957,13 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:point val="-18,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,205.95;15.275,210.45"/>
+        <dia:rectangle val="-18.05,205.95;12.58,210.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-18,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
