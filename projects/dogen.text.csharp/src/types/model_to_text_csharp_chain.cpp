@@ -72,9 +72,11 @@ void model_to_text_csharp_chain::
 apply(boost::shared_ptr<tracing::tracer> tracer,
     const std::unordered_map<identification::entities::logical_id,
     logical::entities::aspect_properties>& aspect_properties,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::assistant_properties>& assistant_properties,
     formattables::model& fm) const {
     transforms::workflow wf;
-    wf.execute(tracer, aspect_properties, fm);
+    wf.execute(tracer, aspect_properties, assistant_properties,fm);
 }
 
 identification::entities::technical_space
@@ -91,12 +93,13 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     const auto& feature_model(*ctx.feature_model());
     const auto& frp(transforms::workflow::registrar().formatter_repository());
     const auto& ap(m.logical().aspect_properties());
+    const auto& assp(m.logical().assistant_properties());
 
     /*
      * Generate the formattables model.
      */
     auto fm(create_formattables_model(feature_model, frp, m));
-    apply(ctx.tracer(), ap, fm);
+    apply(ctx.tracer(), ap, assp, fm);
 
     using identification::entities::physical_meta_id;
     const auto beid(physical_meta_id("masd.csharp"));

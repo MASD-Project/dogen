@@ -65,6 +65,8 @@ private:
     void apply(boost::shared_ptr<tracing::tracer> tracer,
         const std::unordered_map<identification::entities::logical_id,
         logical::entities::aspect_properties>& aspect_properties,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::assistant_properties>& assistant_properties,
         formattables::model& fm) const;
 
 public:
