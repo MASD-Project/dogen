@@ -26,6 +26,7 @@
 #include "dogen.logical/io/entities/aspect_properties_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.logical/io/entities/assistant_properties_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
@@ -197,6 +198,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::assistant_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -225,7 +244,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"meta_names\": " << v.meta_names() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"technical_space_version\": " << v.technical_space_version() << ", "
-      << "\"aspect_properties\": " << v.aspect_properties()
+      << "\"aspect_properties\": " << v.aspect_properties() << ", "
+      << "\"assistant_properties\": " << v.assistant_properties()
       << " }";
     return(s);
 }
