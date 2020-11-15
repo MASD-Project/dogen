@@ -125,6 +125,8 @@ void merge_transform::merge(const entities::model& src, entities::model& dst) {
         << " streaming properties: "
         << src.streaming_properties().size()
         << " aspect properties: "
+        << src.aspect_properties().size()
+        << " assistant properties: "
         << src.aspect_properties().size();
 
     /*
@@ -191,6 +193,7 @@ void merge_transform::merge(const entities::model& src, entities::model& dst) {
         dst.templating_elements().logic_less_templates());
     copy(src.streaming_properties(), dst.streaming_properties());
     copy(src.aspect_properties(), dst.aspect_properties());
+    copy(src.assistant_properties(), dst.assistant_properties());
 
     /*
      * Update the references of the merged model.
