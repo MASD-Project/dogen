@@ -59,7 +59,7 @@ private:
         const bool top_level, const std::unordered_map<
         identification::entities::logical_id,
         entities::structural::technical_space_properties>& src_tsps,
-        entities::structural::technical_space_properties& dest_tsp);
+        entities::structural::technical_space_properties& dst_tsp);
 
     static entities::structural::technical_space_properties
     compute_properties(const bool is_cpp_standard_98,

@@ -71,7 +71,7 @@ technical_space_properties_transform::obtain_properties(
     }
 
     /*
-     * Create the properties and slot them into the results container.
+     * Create the properties by reading them from config.
      */
     entities::structural::technical_space_properties r;
     const auto scfg(features::technical_space_properties::
@@ -120,14 +120,14 @@ walk_name_tree(const bool is_cpp_standard_98,
     const bool top_level, const std::unordered_map<
     identification::entities::logical_id,
     entities::structural::technical_space_properties>& src_tsps,
-    entities::structural::technical_space_properties& dest_tsp) {
+    entities::structural::technical_space_properties& dst_tsp) {
 
     for (const auto& c : nt.children())
         walk_name_tree(is_cpp_standard_98, c, false/*top_level*/, src_tsps,
-            dest_tsp);
+            dst_tsp);
 
     if (is_cpp_standard_98 || (top_level && nt.is_current_simple_type()))
-        dest_tsp.requires_manual_default_constructor(true);
+        dst_tsp.requires_manual_default_constructor(true);
 
     const auto i(src_tsps.find(nt.current().id()));
     if (i == src_tsps.end())
@@ -135,7 +135,7 @@ walk_name_tree(const bool is_cpp_standard_98,
 
     const auto src_tsp(i->second);
     if (src_tsp.requires_stream_manipulators())
-        dest_tsp.requires_stream_manipulators(true);
+        dst_tsp.requires_stream_manipulators(true);
 
     if (!top_level)
         return;
@@ -145,13 +145,13 @@ walk_name_tree(const bool is_cpp_standard_98,
      * we cannot make use of the defaulted functions.
      */
     if (is_cpp_standard_98 || src_tsp.requires_manual_default_constructor())
-        dest_tsp.requires_manual_default_constructor(true);
+        dst_tsp.requires_manual_default_constructor(true);
 
     /*
      * C++ 98 does not support move constructors.
      */
     if (!is_cpp_standard_98 && src_tsp.requires_manual_move_constructor())
-        dest_tsp.requires_manual_move_constructor(true);
+        dst_tsp.requires_manual_move_constructor(true);
 }
 
 entities::structural::technical_space_properties
