@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.text.csharp/types/formattables/formattable.hpp"
-#include "dogen.text.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.text.csharp/types/formattables/assistant_properties.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -48,7 +47,6 @@ public:
         const dogen::identification::entities::logical_name& name,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
-        const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties);
 
 public:
@@ -66,11 +64,6 @@ public:
     std::list<std::string>& project_items();
     void project_items(const std::list<std::string>& v);
     void project_items(const std::list<std::string>&& v);
-
-    const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties() const;
-    std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties();
-    void aspect_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& v);
-    void aspect_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>&& v);
 
     const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties() const;
     std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties();
@@ -91,7 +84,6 @@ private:
     dogen::identification::entities::logical_name name_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::formattable> formattables_;
     std::list<std::string> project_items_;
-    std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties> aspect_properties_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties> assistant_properties_;
 };
 

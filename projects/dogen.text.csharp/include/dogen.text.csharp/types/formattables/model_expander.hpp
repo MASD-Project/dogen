@@ -33,10 +33,6 @@ namespace dogen::text::csharp::formattables {
 
 class model_expander final {
 private:
-    void expand_aspect_properties(
-        const variability::entities::feature_model& feature_model,
-        model& fm) const;
-
     void expand_assistant_properties(
         const variability::entities::feature_model& feature_model,
         model& fm) const;

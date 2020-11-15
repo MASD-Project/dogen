@@ -26,12 +26,10 @@ model::model(
     const dogen::identification::entities::logical_name& name,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
-    const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
-      aspect_properties_(aspect_properties),
       assistant_properties_(assistant_properties) { }
 
 void model::swap(model& other) noexcept {
@@ -39,7 +37,6 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(formattables_, other.formattables_);
     swap(project_items_, other.project_items_);
-    swap(aspect_properties_, other.aspect_properties_);
     swap(assistant_properties_, other.assistant_properties_);
 }
 
@@ -47,7 +44,6 @@ bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         formattables_ == rhs.formattables_ &&
         project_items_ == rhs.project_items_ &&
-        aspect_properties_ == rhs.aspect_properties_ &&
         assistant_properties_ == rhs.assistant_properties_;
 }
 
@@ -103,22 +99,6 @@ void model::project_items(const std::list<std::string>& v) {
 
 void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& model::aspect_properties() const {
-    return aspect_properties_;
-}
-
-std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& model::aspect_properties() {
-    return aspect_properties_;
-}
-
-void model::aspect_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& v) {
-    aspect_properties_ = v;
-}
-
-void model::aspect_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>&& v) {
-    aspect_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& model::assistant_properties() const {
