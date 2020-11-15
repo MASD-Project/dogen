@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.logical/types/entities/aspect_properties.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 #include "dogen.text.csharp/types/formattables/element_properties.hpp"
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
@@ -38,6 +39,8 @@ namespace dogen::text::csharp::transforms {
 class context final {
 public:
     context(const formattables::element_properties& element_properties,
+        const std::unordered_map<identification::entities::logical_id,
+        logical::entities::aspect_properties>& aspect_properties,
         const formattables::model& fm,
         const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
@@ -53,12 +56,17 @@ public:
                                  identification::entities::physical_meta_id,
                                  std::list<std::shared_ptr<helper_transform>>>>&
     helpers() const;
-
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::aspect_properties>&
+    aspect_properties();
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;
+    const std::unordered_map<identification::entities::logical_id,
+                             logical::entities::aspect_properties>&
+    aspect_properties_;
     const std::unordered_map<
         std::string, std::unordered_map<
                          identification::entities::physical_meta_id,

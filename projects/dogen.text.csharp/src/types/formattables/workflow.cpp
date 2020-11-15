@@ -53,6 +53,8 @@ void workflow::expand_model(
 
 model workflow::execute(
     const variability::entities::feature_model& feature_model,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::aspect_properties>& /*aspect_properties*/,
     const transforms::repository& frp, const text::entities::model& m) const {
 
     auto r(make_model(frp, m));

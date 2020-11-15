@@ -67,6 +67,8 @@ workflow::get_artefact(const std::unordered_map<
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::aspect_properties>& aspect_properties,
     const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
@@ -89,7 +91,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 
         const auto& eprops(formattable.element_properties());
         const auto& hlp_fmts(frp.helper_formatters());
-        const context ctx(eprops, fm, hlp_fmts, tracer);
+        const context ctx(eprops, aspect_properties, fm, hlp_fmts, tracer);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);

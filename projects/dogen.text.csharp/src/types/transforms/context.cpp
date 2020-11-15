@@ -23,13 +23,15 @@
 namespace dogen::text::csharp::transforms {
 
 context::context(const formattables::element_properties& element_properties,
-    const formattables::model& fm,
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::logical_id,
+    logical::entities::aspect_properties>& aspect_properties,
+    const formattables::model& fm, const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
     boost::shared_ptr<tracing::tracer> tracer)
     : element_properties_(element_properties), model_(fm),
-      helpers_(helpers), tracer_(tracer) { }
+      aspect_properties_(aspect_properties), helpers_(helpers),
+      tracer_(tracer) { }
 
 const formattables::element_properties& context::element_properties() const {
     return element_properties_;
@@ -46,6 +48,12 @@ const std::unordered_map<
         std::list<std::shared_ptr<helper_transform>>>>&
     context::helpers() const {
     return helpers_;
+}
+
+const std::unordered_map<identification::entities::logical_id,
+                         logical::entities::aspect_properties>&
+context::aspect_properties() {
+    return aspect_properties_;
 }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {
