@@ -18,21 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
-#define DOGEN_TEXT_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
+#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_FACTORY_HPP
+#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.text.csharp/types/formattables/helper_properties.hpp"
+#include "dogen.physical/types/entities/helper.hpp"
 
-namespace dogen::text::csharp::formattables {
+namespace dogen::text::csharp::transforms::types {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::text::csharp::formattables::helper_properties& v);
+/**
+ * @brief Creates a physical representation for the helper
+ * floating_point_number_helper.
+ *
+ * Helper documentation: 
+ */
+class floating_point_number_helper_factory final {
+public:
+    /**
+     * @brief Makes the helper.
+     */
+    static physical::entities::helper make();
+};
 
 }
 

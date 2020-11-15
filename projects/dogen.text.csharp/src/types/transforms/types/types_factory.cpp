@@ -28,6 +28,7 @@
 #include "dogen.text.csharp/types/transforms/types/exception_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text.csharp/types/transforms/types/floating_point_number_helper_factory.hpp"
 
 namespace dogen::text::csharp::transforms::types {
 namespace {
@@ -66,6 +67,7 @@ physical::entities::facet types_factory::make() {
     lambda(r.archetypes(), exception_factory::make());
     lambda(r.archetypes(), primitive_factory::make());
 
+    lambda(r.helpers(), floating_point_number_helper_factory::make());
     return r;
 }
 

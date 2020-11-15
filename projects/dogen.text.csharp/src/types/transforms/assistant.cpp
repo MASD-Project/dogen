@@ -26,7 +26,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
-#include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 
@@ -69,13 +69,13 @@ assistant(const context& ctx, const logical::entities::element& e,
     filtering_stream_.push(stream_);
 }
 
-std::string
-assistant::get_qualified_name(const identification::entities::logical_name& n) const {
+std::string assistant::get_qualified_name(
+    const identification::entities::logical_name& n) const {
     return n.qualified().dot();
 }
 
-std::string
-assistant::get_qualified_name(const identification::entities::logical_name_tree& nt) const {
+std::string assistant::get_qualified_name(
+    const identification::entities::logical_name_tree& nt) const {
     return nt.qualified().dot();
 }
 
@@ -184,7 +184,7 @@ make_argument_name(const logical::entities::attribute& attr) const {
 }
 
 std::list<std::shared_ptr<transforms::helper_transform>>
-assistant::get_helpers(const formattables::helper_properties& hp) const {
+assistant::get_helpers(const logical::entities::helper_properties& hp) const {
     const auto fam(hp.current().family());
 
     /*

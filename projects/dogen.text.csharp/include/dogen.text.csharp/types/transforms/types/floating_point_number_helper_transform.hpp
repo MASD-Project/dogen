@@ -18,16 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_FWD_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_FWD_HPP
+#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_TRANSFORM_HPP
+#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::text::csharp::formattables {
+#include "dogen.text.csharp/types/transforms/helper_transform.hpp"
 
-class helper_descriptor;
+namespace dogen::text::csharp::transforms::types {
+
+class floating_point_number_helper_transform final : public helper_transform {
+public:
+    std::string id() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    std::string helper_name() const override;
+    bool is_enabled(const assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+    void apply(assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+};
 
 }
 

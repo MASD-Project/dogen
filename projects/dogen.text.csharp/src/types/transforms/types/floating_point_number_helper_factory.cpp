@@ -18,28 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
-#include "dogen.text.csharp/types/transforms/helper_transform.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text.csharp/types/transforms/types/floating_point_number_helper_factory.hpp"
 
 namespace dogen::text::csharp::transforms::types {
 
-class floating_point_number_helper : public helper_transform {
-public:
-    std::string id() const override;
-    std::string family() const override;
-    std::list<std::string> owning_formatters() const override;
-    std::list<std::string> owning_facets() const override;
-    std::string helper_name() const override;
-    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
-};
+physical::entities::helper floating_point_number_helper_factory::make() {
+    physical::entities::helper r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("csharp", "types", "floating_point_number_helper"));
+    // r.relations().status(physical::entities::relation_status::);
+    r.family("FloatingPointNumber");
+    using identification::entities::physical_meta_id;
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.csharp.types.class"));
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.csharp.types.primitive"));
+    r.owning_facets().push_back(
+        physical_meta_id("masd.csharp.types"));
 
+    return r;
 }
 
-#endif
+}

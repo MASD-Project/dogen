@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include "dogen.text.csharp/types/transforms/assistant_fwd.hpp"
-#include "dogen.text.csharp/types/formattables/helper_properties_fwd.hpp"
+#include "dogen.logical/types/entities/helper_properties_fwd.hpp"
 
 namespace dogen::text::csharp::transforms {
 
@@ -45,8 +45,10 @@ public:
     virtual std::list<std::string> owning_formatters() const = 0;
     virtual std::list<std::string> owning_facets() const = 0;
     virtual std::string helper_name() const = 0;
+    virtual bool is_enabled(const assistant& a,
+        const logical::entities::helper_properties& hc) const = 0;
     virtual void apply(assistant& a,
-        const formattables::helper_properties& hp) const = 0;
+        const logical::entities::helper_properties& hp) const = 0;
 };
 
 }

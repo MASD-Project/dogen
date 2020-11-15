@@ -18,17 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_FWD_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_FWD_HPP
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text.csharp/types/transforms/io/enumerable_helper_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::csharp::transforms::io {
 
-namespace dogen::text::csharp::formattables {
+physical::entities::helper enumerable_helper_factory::make() {
+    physical::entities::helper r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("csharp", "io", "enumerable_helper"));
+    // r.relations().status(physical::entities::relation_status::);
+    r.family("Enumerable");
+    using identification::entities::physical_meta_id;
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.io.types.class"));
+    r.owning_formatters().push_back(
+        physical_meta_id("masd.io.types.primitive"));
+    r.owning_facets().push_back(
+        physical_meta_id("masd.csharp.io"));
 
-class helper_properties;
-
+    return r;
 }
 
-#endif
+}

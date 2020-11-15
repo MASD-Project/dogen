@@ -19,25 +19,24 @@
  *
  */
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/types/traits.hpp"
-#include "dogen.text.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.text.csharp/types/transforms/types/floating_point_number_helper.hpp"
+#include "dogen.text.csharp/types/transforms/io/traits.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
+#include "dogen.text.csharp/types/transforms/io/enumerable_helper_transform.hpp"
 
-namespace dogen::text::csharp::transforms::types {
-
-std::string floating_point_number_helper::id() const {
+namespace dogen::text::csharp::transforms::io {
+std::string enumerable_helper_transform::id() const {
     static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
 
-std::string floating_point_number_helper::family() const {
-    static std::string r("FloatingPointNumber");
+std::string enumerable_helper_transform::family() const {
+    static std::string r("Enumerable");
     return r;
 }
 
 std::list<std::string>
-floating_point_number_helper::owning_formatters() const {
+enumerable_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         traits::class_archetype_qn(),
         traits::primitive_archetype_qn()
@@ -46,24 +45,28 @@ floating_point_number_helper::owning_formatters() const {
 }
 
 std::list<std::string>
-floating_point_number_helper::owning_facets() const {
+enumerable_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
         traits::facet_qn()
     });
     return r;
 }
 
-std::string floating_point_number_helper::helper_name() const {
-    static std::string r("floating_point_number_helper");
+std::string enumerable_helper_transform::helper_name() const {
+    static std::string r("enumerable_helper_transform");
     return r;
 }
 
-void floating_point_number_helper::
-apply(assistant& ast, const formattables::helper_properties& hp) const {
+bool enumerable_helper_transform::is_enabled(const assistant& /*a*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+    return true;
+}
+
+void enumerable_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
 ast.stream() << "        /// <summary>" << std::endl;
-ast.stream() << "        /// Compare floating point numbers, taking precision into account (" << qn << " version)." << std::endl;
 ast.stream() << "        /// </summary>" << std::endl;
 ast.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
 ast.stream() << "        {" << std::endl;

@@ -30,7 +30,7 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/helper_configuration_io.hpp"
 #include "dogen.text.csharp/types/formattables/expansion_error.hpp"
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
@@ -63,15 +63,15 @@ private:
         const std::string& id) const;
 
 private:
-    boost::optional<helper_descriptor>
+    boost::optional<logical::entities::helper_descriptor>
     walk_name_tree(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const identification::entities::logical_name_tree& nt,
         std::unordered_set<std::string>& done,
-        std::list<helper_properties>& hps) const;
+        std::list<logical::entities::helper_properties>& hps) const;
 
-    std::list<helper_properties>
+    std::list<logical::entities::helper_properties>
     compute_helper_properties(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
@@ -87,12 +87,12 @@ public:
     void visit(const logical::entities::structural::primitive& p);
 
 public:
-    const std::list<formattables::helper_properties>& result() const;
+    const std::list<logical::entities::helper_properties>& result() const;
 
 private:
     const helper_configuration& helper_configuration_;
     const helper_expander::facets_for_family_type& facets_for_family_;
-    std::list<formattables::helper_properties> result_;
+    std::list<logical::entities::helper_properties> result_;
 };
 
 helper_properties_generator::
@@ -114,7 +114,8 @@ std::string helper_properties_generator::helper_family_for_id(
     return i->second;
 }
 
-void helper_properties_generator::visit(const logical::entities::structural::object& o) {
+void helper_properties_generator::
+visit(const logical::entities::structural::object& o) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
     const auto& attrs(o.local_attributes());
@@ -122,7 +123,8 @@ void helper_properties_generator::visit(const logical::entities::structural::obj
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 
-void helper_properties_generator::visit(const logical::entities::structural::primitive& p) {
+void helper_properties_generator::
+visit(const logical::entities::structural::primitive& p) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
     std::list<logical::entities::attribute> attrs({ p.value_attribute() });
@@ -130,23 +132,23 @@ void helper_properties_generator::visit(const logical::entities::structural::pri
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 
-const std::list<formattables::helper_properties>&
+const std::list<logical::entities::helper_properties>&
 helper_properties_generator::result() const {
     return result_;
 }
 
-boost::optional<helper_descriptor>
+boost::optional<logical::entities::helper_descriptor>
 helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const identification::entities::logical_name_tree& nt,
     std::unordered_set<std::string>& done,
-    std::list<helper_properties>& hps) const {
+    std::list<logical::entities::helper_properties>& hps) const {
 
     const auto id(nt.current().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
-    helper_descriptor r;
+    logical::entities::helper_descriptor r;
     identification::helpers::logical_name_flattener nf;
     r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
@@ -160,7 +162,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     r.name_tree_qualified(nt.qualified().dot());
     r.is_circular_dependency(nt.is_circular_dependency());
 
-    helper_properties hp;
+    logical::entities::helper_properties hp;
     hp.current(r);
 
     const auto iir(in_inheritance_relationship);
@@ -224,14 +226,14 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
 
 }
 
-std::list<helper_properties> helper_properties_generator::
+std::list<logical::entities::helper_properties> helper_properties_generator::
 compute_helper_properties(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const std::list<logical::entities::attribute>& attrs) const {
     BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
 
-    std::list<helper_properties> r;
+    std::list<logical::entities::helper_properties> r;
     if (attrs.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No properties found.";
         return r;

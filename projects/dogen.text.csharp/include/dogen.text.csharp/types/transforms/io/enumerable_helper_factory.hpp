@@ -18,21 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_IO_FORMATTABLES_HELPER_DESCRIPTOR_IO_HPP
-#define DOGEN_TEXT_CSHARP_IO_FORMATTABLES_HELPER_DESCRIPTOR_IO_HPP
+#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_FACTORY_HPP
+#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.text.csharp/types/formattables/helper_descriptor.hpp"
+#include "dogen.physical/types/entities/helper.hpp"
 
-namespace dogen::text::csharp::formattables {
+namespace dogen::text::csharp::transforms::io {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::text::csharp::formattables::helper_descriptor& v);
+/**
+ * @brief Creates a physical representation for the helper
+ * enumerable_helper.
+ *
+ * Helper documentation: 
+ */
+class enumerable_helper_factory final {
+public:
+    /**
+     * @brief Makes the helper.
+     */
+    static physical::entities::helper make();
+};
 
 }
 

@@ -20,13 +20,13 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
+#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/attribute_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::csharp::formattables::helper_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::helper_properties>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

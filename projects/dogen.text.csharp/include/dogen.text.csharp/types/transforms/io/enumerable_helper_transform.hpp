@@ -18,26 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_HPP
+#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_TRANSFORM_HPP
+#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_ENUMERABLE_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::csharp::transforms::io {
 
-class enumerable_helper : public helper_transform {
+class enumerable_helper_transform final : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;
     std::list<std::string> owning_formatters() const override;
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
-    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
+    bool is_enabled(const assistant& a,
+        const logical::entities::helper_properties& hc) const override;
+    void apply(assistant& a,
+        const logical::entities::helper_properties& hc) const override;
 };
 
 }

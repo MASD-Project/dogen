@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.text.csharp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text.csharp/types/formattables/attribute_properties.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -46,14 +46,14 @@ public:
 
 public:
     element_properties(
-        const std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties,
+        const std::list<dogen::logical::entities::helper_properties>& helper_properties,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties);
 
 public:
-    const std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties() const;
-    std::list<dogen::text::csharp::formattables::helper_properties>& helper_properties();
-    void helper_properties(const std::list<dogen::text::csharp::formattables::helper_properties>& v);
-    void helper_properties(const std::list<dogen::text::csharp::formattables::helper_properties>&& v);
+    const std::list<dogen::logical::entities::helper_properties>& helper_properties() const;
+    std::list<dogen::logical::entities::helper_properties>& helper_properties();
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>& v);
+    void helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v);
 
     const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties() const;
     std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties();
@@ -71,7 +71,7 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    std::list<dogen::text::csharp::formattables::helper_properties> helper_properties_;
+    std::list<dogen::logical::entities::helper_properties> helper_properties_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties> attribute_properties_;
 };
 

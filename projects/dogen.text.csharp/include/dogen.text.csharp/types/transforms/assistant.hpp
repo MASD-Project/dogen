@@ -39,7 +39,7 @@
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
-#include "dogen.text.csharp/types/formattables/helper_properties.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::csharp::transforms {
@@ -118,7 +118,7 @@ public:
 
 private:
     std::list<std::shared_ptr<transforms::helper_transform>>
-    get_helpers(const formattables::helper_properties& hp) const;
+    get_helpers(const logical::entities::helper_properties& hp) const;
 
 public:
     /**
