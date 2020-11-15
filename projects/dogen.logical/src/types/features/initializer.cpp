@@ -20,6 +20,7 @@
  */
 #include "dogen.logical/types/features/orm.hpp"
 #include "dogen.logical/types/features/wale.hpp"
+#include "dogen.logical/types/features/aspect.hpp"
 #include "dogen.logical/types/features/origin.hpp"
 #include "dogen.logical/types/features/helpers.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
@@ -46,6 +47,7 @@ namespace dogen::logical::features {
 
 void initializer::
 register_entities(variability::helpers::registrar& rg) {
+    rg.register_features(dogen::logical::features::aspect::make_features());
     rg.register_features(dogen::logical::features::decoration::make_features());
     rg.register_features(dogen::logical::features::decoration_modeline::make_features());
     rg.register_features(dogen::logical::features::enumeration::make_features());
