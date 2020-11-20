@@ -54,9 +54,9 @@ public:
     static boost::filesystem::path input_dogen_dia();
     static boost::filesystem::path input_dogen_dia_dia();
     static boost::filesystem::path input_dogen_physical_dia();
-    static boost::filesystem::path input_dogen_product_cpp_dia();
-    static boost::filesystem::path input_dogen_product_csharp_dia();
-    static boost::filesystem::path input_dogen_product_dia();
+    static boost::filesystem::path input_dogen_text_cpp_dia();
+    static boost::filesystem::path input_dogen_text_csharp_dia();
+    static boost::filesystem::path input_dogen_text_dia();
     static boost::filesystem::path input_dogen_codec_dia();
     static boost::filesystem::path input_dogen_codec_dia_dia();
     static boost::filesystem::path input_dogen_codec_json_dia();
@@ -72,9 +72,9 @@ public:
     static boost::filesystem::path input_dogen_json();
     static boost::filesystem::path input_dogen_dia_json();
     static boost::filesystem::path input_dogen_physical_json();
-    static boost::filesystem::path input_dogen_product_cpp_json();
-    static boost::filesystem::path input_dogen_product_csharp_json();
-    static boost::filesystem::path input_dogen_product_json();
+    static boost::filesystem::path input_dogen_text_cpp_json();
+    static boost::filesystem::path input_dogen_text_csharp_json();
+    static boost::filesystem::path input_dogen_text_json();
     static boost::filesystem::path input_dogen_codec_json();
     static boost::filesystem::path input_dogen_codec_dia_json();
     static boost::filesystem::path input_dogen_codec_json_json();
