@@ -28,11 +28,11 @@ namespace dogen::logical::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_cpp_helper_family() {
+make_masd_helper_family() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("family");
-    r.name().qualified("masd.cpp.helper.family");
+    r.name().qualified("masd.helper.family");
     r.description(R"(Which family of helpers to use for this modeling element.
 
 )");
@@ -51,7 +51,7 @@ helpers::make_feature_group(const dogen::variability::entities::feature_model& f
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.family = s.get_by_name("masd.cpp.helper.family");
+    r.family = s.get_by_name("masd.helper.family");
 
     return r;
 }
@@ -70,7 +70,7 @@ std::list<dogen::variability::entities::feature>
 helpers::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_cpp_helper_family());
+    r.push_back(make_masd_helper_family());
     return r;
 }
 

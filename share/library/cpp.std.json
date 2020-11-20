@@ -15,7 +15,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.integer8",
-        "masd.cpp.helper.family": "Character",
+        "masd.helper.family": "Character",
         "masd.cpp.streaming.requires_quoting": true,
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
@@ -29,7 +29,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.integer16",
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -42,7 +42,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.integer32",
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -55,7 +55,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.integer64",
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -67,7 +67,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Character",
+        "masd.helper.family": "Character",
         "masd.cpp.streaming.requires_quoting": true,
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
@@ -80,7 +80,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -92,7 +92,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -104,7 +104,7 @@
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
+        "masd.helper.family": "Number",
         "masd.cpp.aspect.requires_manual_default_constructor": true,
         "masd.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
@@ -114,7 +114,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.core.text.string",
-        "masd.cpp.helper.family": "String",
+        "masd.helper.family": "String",
         "masd.cpp.streaming.remove_unprintable_characters": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<string>",
         "masd.cpp.types.primitive_header.primary_inclusion_directive": "<string>",
@@ -130,7 +130,7 @@
       "name": "vector",
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.dynamic_array",
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<vector>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/vector.hpp>"
@@ -139,7 +139,7 @@
     {
       "name": "deque",
       "tagged_values": {
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<deque>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/deque.hpp>"
@@ -149,7 +149,7 @@
       "name": "array",
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.static_array",
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<array>"
       }
@@ -158,7 +158,7 @@
       "name": "list",
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.linked_list",
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<list>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
@@ -167,7 +167,7 @@
     {
       "name": "forward_list",
       "tagged_values": {
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<forward_list>"
       }
@@ -177,7 +177,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.ordered_set",
-        "masd.cpp.helper.family": "AssociativeContainer",
+        "masd.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<set>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/set.hpp>"
@@ -187,7 +187,7 @@
       "name": "multiset",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "SequenceContainer",
+        "masd.helper.family": "SequenceContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<multiset>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multiset.hpp>"
@@ -198,7 +198,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.unordered_set",
-        "masd.cpp.helper.family": "AssociativeContainer",
+        "masd.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_set.hpp>"
@@ -209,7 +209,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.ordered_dictionary",
-        "masd.cpp.helper.family": "AssociativeContainer",
+        "masd.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<map>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/map.hpp>"
@@ -219,7 +219,7 @@
       "name": "multimap",
       "is_associative_container": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "AssociativeContainer",
+        "masd.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<multimap>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multimap.hpp>"
@@ -230,7 +230,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.container.unordered_dictionary",
-        "masd.cpp.helper.family": "AssociativeContainer",
+        "masd.helper.family": "AssociativeContainer",
         "masd.type_parameters.count": 2,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_map.hpp>"
@@ -239,7 +239,7 @@
     {
       "name": "pair",
       "tagged_values": {
-        "masd.cpp.helper.family": "Pair",
+        "masd.helper.family": "Pair",
         "masd.type_parameters.count": 2,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<utility>",
         "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/utility.hpp>"
@@ -248,7 +248,7 @@
     {
       "name": "shared_ptr",
       "tagged_values": {
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<memory>"
@@ -257,7 +257,7 @@
     {
       "name": "weak_ptr",
       "tagged_values": {
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<memory>"
@@ -266,7 +266,7 @@
     {
       "name": "unique_ptr",
       "tagged_values": {
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<memory>"
@@ -281,7 +281,7 @@
     {
       "name": "optional",
       "tagged_values": {
-        "masd.cpp.helper.family": "Optional",
+        "masd.helper.family": "Optional",
         "masd.type_parameters.count": 1,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }

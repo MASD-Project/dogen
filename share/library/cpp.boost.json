@@ -10,7 +10,7 @@
       "name": "shared_ptr",
       "tagged_values": {
         "masd.mapping.target": "masd.lam.core.pointer",
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
@@ -22,7 +22,7 @@
     {
       "name": "weak_ptr",
       "tagged_values": {
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
@@ -34,7 +34,7 @@
     {
       "name": "scoped_ptr",
       "tagged_values": {
-        "masd.cpp.helper.family": "SmartPointer",
+        "masd.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
@@ -46,7 +46,7 @@
     {
       "name": "optional",
       "tagged_values": {
-        "masd.cpp.helper.family": "Optional",
+        "masd.helper.family": "Optional",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": false,
         "masd.cpp.aspect.requires_manual_move_constructor": true,
@@ -59,7 +59,7 @@
     {
       "name": "variant",
       "tagged_values": {
-        "masd.cpp.helper.family": "BoostVariant",
+        "masd.helper.family": "BoostVariant",
         "masd.type_parameters.variable_number_of_parameters": true,
         "masd.cpp.aspect.requires_manual_move_constructor": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/variant.hpp>",
@@ -96,7 +96,7 @@
     {
       "name": "filesystem::path",
       "tagged_values": {
-        "masd.cpp.helper.family": "BoostPath",
+        "masd.helper.family": "BoostPath",
         "masd.cpp.streaming.string_conversion_method": "generic_string()",
         "masd.cpp.aspect.requires_manual_move_constructor": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
@@ -110,7 +110,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.date",
-        "masd.cpp.helper.family": "BoostDate",
+        "masd.helper.family": "BoostDate",
         "masd.cpp.streaming.requires_quoting": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
         "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
@@ -127,7 +127,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.date_time",
-        "masd.cpp.helper.family": "BoostPTime",
+        "masd.helper.family": "BoostPTime",
         "masd.cpp.streaming.requires_quoting": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
         "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
@@ -144,7 +144,7 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.time",
-        "masd.cpp.helper.family": "BoostTimeDuration",
+        "masd.helper.family": "BoostTimeDuration",
         "masd.cpp.streaming.requires_quoting": true,
         "masd.cpp.aspect.requires_manual_move_constructor": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
@@ -158,7 +158,7 @@
     {
       "name": "property_tree::ptree",
       "tagged_values": {
-        "masd.cpp.helper.family": "BoostPTree",
+        "masd.helper.family": "BoostPTree",
         "masd.cpp.aspect.requires_manual_move_constructor": true,
         "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
         "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
