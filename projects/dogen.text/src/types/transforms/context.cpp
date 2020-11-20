@@ -21,21 +21,11 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::physical::entities::meta_model>& lhs,
 const boost::shared_ptr<dogen::physical::entities::meta_model>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::variability::entities::feature_model>& lhs,
-const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -55,19 +45,16 @@ namespace dogen::text::transforms {
 context::context(context&& rhs)
     : physical_meta_model_(std::move(rhs.physical_meta_model_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
-      feature_model_(std::move(rhs.feature_model_)),
       tracer_(std::move(rhs.tracer_)),
       generation_timestamp_(std::move(rhs.generation_timestamp_)) { }
 
 context::context(
     const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
     const boost::filesystem::path& output_directory_path,
-    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer,
     const std::string& generation_timestamp)
     : physical_meta_model_(physical_meta_model),
       output_directory_path_(output_directory_path),
-      feature_model_(feature_model),
       tracer_(tracer),
       generation_timestamp_(generation_timestamp) { }
 
@@ -75,7 +62,6 @@ void context::swap(context& other) noexcept {
     using std::swap;
     swap(physical_meta_model_, other.physical_meta_model_);
     swap(output_directory_path_, other.output_directory_path_);
-    swap(feature_model_, other.feature_model_);
     swap(tracer_, other.tracer_);
     swap(generation_timestamp_, other.generation_timestamp_);
 }
@@ -83,7 +69,6 @@ void context::swap(context& other) noexcept {
 bool context::operator==(const context& rhs) const {
     return physical_meta_model_ == rhs.physical_meta_model_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
-        feature_model_ == rhs.feature_model_ &&
         tracer_ == rhs.tracer_ &&
         generation_timestamp_ == rhs.generation_timestamp_;
 }
@@ -124,22 +109,6 @@ void context::output_directory_path(const boost::filesystem::path& v) {
 
 void context::output_directory_path(const boost::filesystem::path&& v) {
     output_directory_path_ = std::move(v);
-}
-
-const boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() const {
-    return feature_model_;
-}
-
-boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() {
-    return feature_model_;
-}
-
-void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
-    feature_model_ = v;
-}
-
-void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v) {
-    feature_model_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::tracing::tracer>& context::tracer() const {

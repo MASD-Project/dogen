@@ -109,7 +109,6 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     r.codec_context().feature_model(fm);
     r.logical_context().feature_model(fm);
-    r.text_context().feature_model(fm);
     r.physical_context().feature_model(fm);
 
     /*

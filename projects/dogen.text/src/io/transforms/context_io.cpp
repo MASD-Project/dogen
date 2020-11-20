@@ -23,27 +23,10 @@
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.text/io/transforms/context_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.variability/io/entities/feature_model_io.hpp"
 
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -88,7 +71,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::text::transforms::context\"" << ", "
       << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
-      << "\"feature_model\": " << v.feature_model() << ", "
       << "\"tracer\": " << v.tracer() << ", "
       << "\"generation_timestamp\": " << "\"" << tidy_up_string(v.generation_timestamp()) << "\""
       << " }";

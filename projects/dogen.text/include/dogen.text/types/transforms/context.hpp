@@ -31,7 +31,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen.physical/types/entities/meta_model_fwd.hpp"
-#include "dogen.variability/types/entities/feature_model_fwd.hpp"
 
 namespace dogen::text::transforms {
 
@@ -48,7 +47,6 @@ public:
     context(
         const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
         const boost::filesystem::path& output_directory_path,
-        const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
         const std::string& generation_timestamp);
 
@@ -72,11 +70,6 @@ public:
     void output_directory_path(const boost::filesystem::path& v);
     void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
-
-    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model() const;
-    boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model();
-    void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
-    void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<dogen::tracing::tracer>& tracer();
@@ -106,7 +99,6 @@ public:
 private:
     boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
     boost::filesystem::path output_directory_path_;
-    boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
     std::string generation_timestamp_;
 };
