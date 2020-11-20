@@ -25,7 +25,6 @@
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
-#include "dogen.text.cpp/types/formattables/workflow.hpp"
 #include "dogen.text.cpp/types/model_to_text_cpp_chain.hpp"
 
 namespace {

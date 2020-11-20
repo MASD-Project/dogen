@@ -25,7 +25,6 @@
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.text.csharp/types/formattables/workflow.hpp"
 #include "dogen.text.csharp/types/transforms/workflow.hpp"
 #include "dogen.text.csharp/types/model_to_text_csharp_chain.hpp"
 

@@ -20,7 +20,6 @@
  */
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
-#include "dogen.text.cpp/types/formattables/workflow.hpp"
 #include "dogen.text.cpp/types/transforms/initializer.hpp"
 #include "dogen.text.cpp/types/model_to_text_cpp_chain.hpp"
 #include "dogen.text.cpp/types/initializer.hpp"
