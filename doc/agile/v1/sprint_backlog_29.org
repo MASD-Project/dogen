@@ -13,26 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-20 Fri 12:46]
-| <75>                                                 |         |       |       |       |
-| Headline                                             | Time    |       |       |     % |
-|------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *37:41* |       |       | 100.0 |
-|------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 37:41   |       |       | 100.0 |
-| Active                                               |         | 37:41 |       | 100.0 |
-| edit release notes for previous sprint               |         |       |  5:04 |  13.4 |
-| Create a demo and presentation for previous sprint   |         |       |  0:28 |   1.2 |
-| Sprint and product backlog grooming                  |         |       |  1:30 |   4.0 |
-| Improvements to template processing in logical model |         |       |  0:26 |   1.1 |
-| Convert legacy helpers into new style helpers in C++ |         |       |  6:59 |  18.5 |
-| Add C++ helpers to the PMM                           |         |       | 13:36 |  36.1 |
-| Remove unused wale keys in =text.cpp=                |         |       |  0:34 |   1.5 |
-| Merge =cpp_artefact_transform*= wale templates       |         |       |  0:09 |   0.4 |
-| Fix some problems with c++ visual studio problems    |         |       |  0:59 |   2.6 |
-| Remove JSON models from Dogen                        |         |       |  0:19 |   0.8 |
-| Add C# helpers to the PMM                            |         |       |  3:50 |  10.2 |
-| Move assorted formattable properties in C#           |         |       |  3:47 |  10.0 |
+#+CAPTION: Clock summary at [2020-11-20 Fri 17:35]
+| <75>                                                      |         |       |       |       |
+| Headline                                                  | Time    |       |       |     % |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                              | *41:13* |       |       | 100.0 |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                   | 41:13   |       |       | 100.0 |
+| Active                                                    |         | 41:13 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |  12.3 |
+| Create a demo and presentation for previous sprint        |         |       |  0:28 |   1.1 |
+| Sprint and product backlog grooming                       |         |       |  1:30 |   3.6 |
+| Improvements to template processing in logical model      |         |       |  0:26 |   1.1 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  16.9 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  33.0 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   1.4 |
+| Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.4 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   2.4 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   9.4 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |  11.6 |
+| Remove JSON models from Dogen                             |         |       |  0:19 |   0.8 |
+| Issues with emacs                                         |         |       |  0:22 |   0.9 |
+| Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.7 |
+| Move context and M2T interface to =text= model            |         |       |  1:25 |   3.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -452,23 +455,10 @@ Problems:
 
 : <ClInclude Include="SampleConfiguration.h" />
 
-*** STARTED Remove JSON models from Dogen                             :story:
+*** COMPLETED Add C# helpers to the PMM                               :story:
+    CLOSED: [2020-11-20 Fri 15:03]
     :LOGBOOK:
-    CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
-    :END:
-
-The JSON code is no longer strategic and will be removed in the
-future. For now we are paying the cost of maintaining the JSON models
-in Dogen, and this cost has increased with helpers work. We need to
-remove the tests for the JSON models in Dogen as well as the models.
-
-Notes:
-
-- removed the JSON tests. We don't need to keep the Dogen models
-  updated in json any longer.
-
-*** STARTED Add C# helpers to the PMM                                 :story:
-    :LOGBOOK:
+    CLOCK: [2020-11-20 Fri 12:47]--[2020-11-20 Fri 12:50] =>  0:03
     CLOCK: [2020-11-20 Fri 09:30]--[2020-11-20 Fri 11:10] =>  1:40
     CLOCK: [2020-11-15 Sun 22:05]--[2020-11-15 Sun 22:34] =>  0:29
     CLOCK: [2020-11-15 Sun 21:40]--[2020-11-15 Sun 22:04] =>  0:24
@@ -484,8 +474,10 @@ Notes:
 - merge c++ and c# helpers.
 - when we enable logical model based helpers they don't come out.
 
-*** STARTED Move assorted formattable properties in C#                :story:
+*** COMPLETED Move assorted formattable properties in C#              :story:
+    CLOSED: [2020-11-20 Fri 15:03]
     :LOGBOOK:
+    CLOCK: [2020-11-20 Fri 14:02]--[2020-11-20 Fri 15:03] =>  1:01
     CLOCK: [2020-11-15 Sun 18:35]--[2020-11-15 Sun 18:59] =>  0:24
     CLOCK: [2020-11-15 Sun 15:14]--[2020-11-15 Sun 15:55] =>  0:41
     CLOCK: [2020-11-15 Sun 14:32]--[2020-11-15 Sun 14:40] =>  0:08
@@ -495,12 +487,207 @@ Notes:
 We have a number of types lying around formattables in C# that need to
 be moved to their correct logical and physical destination.
 
-*** Create a patch for tests                                          :story:
+*** COMPLETED Remove formatables namespace in C++                     :story:
+    CLOSED: [2020-11-20 Fri 15:03]
 
-At present we only output the head of the first 5 diffs when a model
-fails. However, in some cases we may want to look at the entire
-diff. It would be nice if we could output the patch into the
-byproducts directory for each test.
+When all types have been moved, we can delete the formatables types
+and namespace.
+
+Notes:
+
+- at present we cannot get rid of reducer because we are still relying
+  on having all types around for helpers in C#. Due to this we cannot
+  remove the rest of the types in C++ formatables until we got the C#
+  model at the same level. However, if we just get the helpers moved
+  across in C# that may be enough to unblock c++.
+
+*** STARTED Remove JSON models from Dogen                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
+    :END:
+
+The JSON code is no longer strategic and will be removed in the
+future. For now we are paying the cost of maintaining the JSON models
+in Dogen, and this cost has increased with helpers work. We need to
+remove the tests for the JSON models in Dogen as well as the models.
+
+Notes:
+
+- removed the JSON tests. We don't need to keep the Dogen models
+  updated in json any longer.
+
+*** STARTED Issues with emacs                                         :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-20 Fri 15:04]--[2020-11-20 Fri 15:26] =>  0:22
+    :END:
+
+- gnus crashes on startup.
+
+*** STARTED Move text transforms in c++ and c# models into text model :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-20 Fri 15:27]--[2020-11-20 Fri 16:08] =>  0:41
+    :END:
+
+- rename namespaces to fit the hierarchy of LPS.
+
+Merged stories:
+
+*Merge C++ and C# model into =m2t=*
+
+Once we remove all of formatables and helpers from each technical
+space and once we remove all of the transforms in =m2t= that don't
+really belong there, we can probably merge all of these models into
+one. We would then have a =transforms= namespace, with sub-namespaces
+per language. Each of the namespaces is declared as a backend.
+
+*** STARTED Move context and M2T interface to =text= model            :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-20 Fri 16:09]--[2020-11-20 Fri 17:34] =>  1:25
+    :END:
+
+Implement these two types in terms of logical or physical types, and
+move them to =text= model.
+
+Notes:
+
+- we need to add all properties used by the assistant back into the
+  text context.
+- at the moment we have a cycle between assistant and helper
+  interface. The problem is that the helpers need the assistant and
+  the assistant also needs the helpers. Also we cannot create the
+  assistant outside of the M2Ts and supply it instead of context
+  because the assistant is bound to an element. Finally we cannot move
+  the context to text and have it carry an entire text model; that is
+  just one hack too far. Besides we could not code-generate the
+  context if we do that. So the only alternative is to unpack all
+  properties in the model used by the assistant and add those to the
+  text context. The problem is that we already have the notion of a
+  "global" context in text that is populated ahead of time; this
+  clashes with this notion of a "local"context. However, this all begs
+  the question: what is the purpose of the "global" context in M2T /
+  text? we don't really do much other than to setup things for the
+  M2Ts to run.
+- actually the right solution is to break the cycle so that we can add
+  helpers without having to deal with the assistant. This is fairly
+  simple: there is only one public method in the assistant that uses
+  helpers. We could create an helper for that.
+- alternatively we can look at what methods the helpers use from the
+  assistant and see if we can make an ABC to implement those. List of
+  methods:
+  - =make_scoped_namespace_formatter=
+  - =ast.stream()=
+  - =ast.streaming_for_type(containee, "*v")=
+  - =a.is_streaming_enabled=
+  - =is_io_enabled=
+- pretty much all state can be supplied either on a "helper context"
+  or directly (e.g. =stream()= needs to be by reference).
+- so the steps then are:
+  - create an ABC for the helpers in text. Reimplement all helper
+    functionality in the ABC. Supply all arguments as either part of
+    context or directly. Make all helpers use that ABC and remove the
+    local helper interfaces.
+  - add properties to text context that the assistant needs, remove
+    uses of model in assistant. Make all transforms use text context.
+  - create assistants in text's backends. These are copies of the
+    existing assistants. Make all M2Ts use those assistants. Remove
+    old assistants.
+  - add a common M2T interface. Add repository and registrar to text.
+
+Merged stories:
+
+*Create a common formatter interface*
+
+Once all language specific properties have been moved into their
+rightful places, we should be able to define a formatter interface
+that is suitable for both c++ and c# in generation. We should then
+also be able to move all of the registration code into generation. We
+then need to look at all containers of formatters etc to see what
+should be done at generation level.
+
+Once we have a common formatter interface, we can add the formatters
+themselves to the =element_artefacts= tuple. Then we can just iterate
+through the tuples and call the formatter instead having to do
+look-ups.
+
+Also, at this point we can then update the physical elements generated
+code to generate the transform code for backend and facet
+(e.g. delegation and aggregation of the result).
+
+*Move =model_to_text_transform= to =text= model*
+
+This type has now been cleaned up and should be the same for C++ and
+C# so should be moved to the common model.
+
+*** Clean up helpers interface and move it to =text=                  :story:
+
+Notes:
+
+- we need to include the wale template in the meta-model
+  element. Once this is done we should see if we can remove the stitch
+  and wale formatters in the c++ model.
+- the helper interface should only take logical and physical types so
+  that we can move it to =text=. However, we may be using the
+  assistant. See if we can create the assistant inside the helper as
+  we do with formatters.
+
+*** Create a "combined" assistant in =text=                           :story:
+
+Assistant should not really exist, but to get us to the next step we
+should just make it a helper in =text= model. We just need to merge
+the C++ and C# classes into one and move it to =text=.
+
+*** Rename "model-to-X" to TLAs                                       :story:
+
+Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
+extent - are well known TLAs in MDE we should make use of these in
+class names. The names we have at present are very long. The
+additional size is not providing any benefits.
+
+*** Implement M2T chains via code generation                          :story:
+
+We need to update the =backend= and =part= transforms to be a set of
+calls to their "children", based on the PMM. Once this is done we can
+remove all of the existing infrastructure in the TS models:
+
+- repositories
+- initialisers
+- workflows
+- traits
+- registrars
+
+Notes:
+
+- in the new world we no longer need a M2T interface at the text
+  transform level. The backend chain knows of all of the facet chains;
+  and the facet chains know of all of the archetypes. We can dispatch
+  the element using the visitor into a concrete type and then find the
+  archetypes that process that type. However, we do not want to
+  generate an apply method per logical element...
+
+Merged stories:
+
+*Implement backend and facet transform*
+
+The backend transform should:
+
+- return the ID of the backend;
+- use the facet and archetype transforms to process all elements.
+
+Check backlog for a story on this.
+
+*** Consider renaming =text= to =logical_physical=                    :story:
+
+This is really the right name for the model; the text processing part
+are the transforms that are done on the model.
+
+Notes:
+
+- rename =logical_physical_region= to just =region=.
+- actually another way of looking at this is trying to figure out what
+  is the dominant responsibility of the component. The LPS will
+  probably be 2 or 3 types whereas the M2T transforms will be 99% of
+  the types. We probably should name the model after lps and the
+  component after the M2Ts.
 
 *** Move all stitch include dependencies to legacy transform          :story:
 
@@ -544,106 +731,6 @@ Actually we can't just do this directly else the inclusion will not
 work. However we do have a "reducer" transform in the formattables
 namespace which needs to be moved to the new world.
 
-*** Remove formatables namespace in C++                               :story:
-
-When all types have been moved, we can delete the formatables types
-and namespace.
-
-Notes:
-
-- at present we cannot get rid of reducer because we are still relying
-  on having all types around for helpers in C#. Due to this we cannot
-  remove the rest of the types in C++ formatables until we got the C#
-  model at the same level. However, if we just get the helpers moved
-  across in C# that may be enough to unblock c++.
-
-*** Create a "combined" assistant in =text=                           :story:
-
-Assistant should not really exist, but to get us to the next step we
-should just make it a helper in =text= model. We just need to merge
-the C++ and C# classes into one and move it to =text=.
-
-*** Clean up helpers interface and move it to =text=                  :story:
-
-Notes:
-
-- we need to include the wale template in the meta-model
-  element. Once this is done we should see if we can remove the stitch
-  and wale formatters in the c++ model.
-- the helper interface should only take logical and physical types so
-  that we can move it to =text=. However, we may be using the
-  assistant. See if we can create the assistant inside the helper as
-  we do with formatters.
-
-*** Move context and M2T interface to =text= model                    :story:
-
-Implement these two types in terms of logical or physical types, and
-move them to =text= model.
-
-Merged stories:
-
-*Create a common formatter interface*
-
-Once all language specific properties have been moved into their
-rightful places, we should be able to define a formatter interface
-that is suitable for both c++ and c# in generation. We should then
-also be able to move all of the registration code into generation. We
-then need to look at all containers of formatters etc to see what
-should be done at generation level.
-
-Once we have a common formatter interface, we can add the formatters
-themselves to the =element_artefacts= tuple. Then we can just iterate
-through the tuples and call the formatter instead having to do
-look-ups.
-
-Also, at this point we can then update the physical elements generated
-code to generate the transform code for backend and facet
-(e.g. delegation and aggregation of the result).
-
-*Move =model_to_text_transform= to =text= model*
-
-This type has now been cleaned up and should be the same for C++ and
-C# so should be moved to the common model.
-
-*** Implement M2T chains via code generation                          :story:
-
-We need to update the =backend= and =part= transforms to be a set of
-calls to their "children", based on the PMM. Once this is done we can
-remove all of the existing infrastructure in the TS models:
-
-- repositories
-- initialisers
-- workflows
-- traits
-- registrars
-
-Notes:
-
-- in the new world we no longer need a M2T interface at the text
-  transform level. The backend chain knows of all of the facet chains;
-  and the facet chains know of all of the archetypes. We can dispatch
-  the element using the visitor into a concrete type and then find the
-  archetypes that process that type. However, we do not want to
-  generate an apply method per logical element...
-
-Merged stories:
-
-*Implement backend and facet transform*
-
-The backend transform should:
-
-- return the ID of the backend;
-- use the facet and archetype transforms to process all elements.
-
-Check backlog for a story on this.
-
-*** Replace =formatting_error= with =transformation_error=            :story:
-
-Now that we moved from formatters to M2T transforms, we should stop
-throwing =formatting_error= and start throwing
-=transformation_error=. This needs to be done for both C# and C++ text
-models.
-
 *** Feature initializer with no features does not compile             :story:
 
 We removed all the features from =masd::variability::initializer= and
@@ -660,19 +747,12 @@ register_entities(variability::helpers::registrar& rg) {
 We could perhaps issue a dogen warning for the absence of features but
 the code should compile.
 
-*** Move all text transforms in c++ and c# models into text model     :story:
+*** Create a patch for tests                                          :story:
 
-- rename namespaces to fit the hierarchy of LPS.
-
-Merged stories:
-
-*Merge C++ and C# model into =m2t=*
-
-Once we remove all of formatables and helpers from each technical
-space and once we remove all of the transforms in =m2t= that don't
-really belong there, we can probably merge all of these models into
-one. We would then have a =transforms= namespace, with sub-namespaces
-per language. Each of the namespaces is declared as a backend.
+At present we only output the head of the first 5 diffs when a model
+fails. However, in some cases we may want to look at the entire
+diff. It would be nice if we could output the patch into the
+byproducts directory for each test.
 
 *** Deprecate managed directories                                     :story:
 
@@ -681,31 +761,10 @@ is the component directory (for component models). If parts have
 relative directories off of the component directory then we should add
 to the list of managed directories inside the PM pipeline.
 
-*** Consider renaming =text= to =logical_physical=                    :story:
-
-This is really the right name for the model; the text processing part
-are the transforms that are done on the model.
-
-Notes:
-
-- rename =logical_physical_region= to just =region=.
-- actually another way of looking at this is trying to figure out what
-  is the dominant responsibility of the component. The LPS will
-  probably be 2 or 3 types whereas the M2T transforms will be 99% of
-  the types. We probably should name the model after lps and the
-  component after the M2Ts.
-
 *** Wale should throw on non-required keys                            :story:
 
 At present we throw if we do not supply required keys. We should also
 throw if we supply non-required keys.
-
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
-extent - are well known TLAs in MDE we should make use of these in
-class names. The names we have at present are very long. The
-additional size is not providing any benefits.
 
 *** Remove wale instantiation from stitch                             :story:
 
@@ -782,3 +841,13 @@ Links:
 - [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn: Choosing color palettes]]
 - [[https://seaborn.pydata.org/installing.html][seaborn: Installing and getting started]]
 - [[https://stackoverflow.com/questions/38249454/extract-rgb-or-6-digit-code-from-seaborn-palette][SO: Extract RGB or 6 digit code from Seaborn palette]]
+
+*** CANCELLED Replace =formatting_error= with =transformation_error=  :story:
+    CLOSED: [2020-11-20 Fri 15:03]
+
+*Rationale*: Deleted class.
+
+Now that we moved from formatters to M2T transforms, we should stop
+throwing =formatting_error= and start throwing
+=transformation_error=. This needs to be done for both C# and C++ text
+models.

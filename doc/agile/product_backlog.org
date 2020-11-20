@@ -6718,6 +6718,7 @@ Links:
 - [[https://docs.microsoft.com/en-us/visualstudio/msbuild/itemgroup-element-msbuild?view=vs-2019][ItemGroup element (MSBuild)]]
 - [[https://docs.microsoft.com/en-us/visualstudio/msbuild/item-element-msbuild?view=vs-2019][Item element (MSBuild)]]
 - [[https://docs.microsoft.com/en-us/cpp/build/reference/vcxproj-file-structure?view=vs-2019][.vcxproj and .props file structure]]
+- [[https://docs.microsoft.com/en-us/cpp/build/reference/project-files?view=msvc-160][Project Files Example]]
 
 Merged stories:
 
