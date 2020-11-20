@@ -142,10 +142,6 @@ Configures the main options for the C++ backend.
 :PROPERTIES:
 :masd.codec.value: false
 :END:
-*** templates.enabled
-:PROPERTIES:
-:masd.codec.value: true
-:END:
 ** base::default_profile
 :PROPERTIES:
 :masd.variability.binding_point: global
@@ -363,71 +359,6 @@ This element has only a types implementation file.
 :masd.codec.value: false
 :END:
 *** class_implementation.enabled
-:PROPERTIES:
-:masd.codec.value: true
-:END:
-** composable::base_helper_formatter
-:PROPERTIES:
-:masd.codec.parent: composable::handcrafted_typeable
-:masd.codec.stereotypes: masd::variability::profile
-:END:
-*** masd.generalization.parent
-:PROPERTIES:
-:masd.codec.value: transforms::helper_transform
-:END:
-** composable::cpp_helper_transform
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.variability.stereotype: dogen::cpp::helper_transform
-:masd.variability.key_prefix: masd.cpp.types
-:masd.codec.parent: composable::base_helper_formatter
-:masd.codec.stereotypes: masd::variability::profile
-:END:
-*** class_header.formatting_style
-:PROPERTIES:
-:masd.codec.value: wale
-:END:
-*** class_header.formatting_input
-:PROPERTIES:
-:masd.codec.value: cpp_helper_transform_header.wale
-:END:
-*** class_header.overwrite
-:PROPERTIES:
-:masd.codec.value: true
-:END:
-*** class_implementation.formatting_style
-:PROPERTIES:
-:masd.codec.value: stitch
-:END:
-*** class_implementation.overwrite
-:PROPERTIES:
-:masd.codec.value: true
-:END:
-** composable::csharp_helper_transform
-:PROPERTIES:
-:masd.variability.binding_point: global
-:masd.variability.stereotype: dogen::csharp::helper_transform
-:masd.variability.key_prefix: masd.cpp.types
-:masd.codec.parent: composable::base_helper_formatter
-:masd.codec.stereotypes: masd::variability::profile
-:END:
-*** class_header.formatting_style
-:PROPERTIES:
-:masd.codec.value: wale
-:END:
-*** class_header.formatting_input
-:PROPERTIES:
-:masd.codec.value: csharp_helper_transform_header.wale
-:END:
-*** class_header.overwrite
-:PROPERTIES:
-:masd.codec.value: true
-:END:
-*** class_implementation.formatting_style
-:PROPERTIES:
-:masd.codec.value: stitch
-:END:
-*** class_implementation.overwrite
 :PROPERTIES:
 :masd.codec.value: true
 :END:

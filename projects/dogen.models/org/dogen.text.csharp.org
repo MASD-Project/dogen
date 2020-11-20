@@ -160,7 +160,7 @@ using System;
     {
 <#+
             if (!o.local_attributes().empty()) {
-                if (!ctx.element_properties().helper_properties().empty())
+                if (!o.helper_properties().empty())
                     ast.add_helper_methods(id);
 
                 /*
@@ -561,8 +561,44 @@ using System;
 :END:
 *** transforms::types::floating_point_number_helper
 :PROPERTIES:
-:masd.codec.stereotypes: dogen::csharp::helper_transform
+:masd.physical.wale_template_reference: csharp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: floating_point_number_helper_transform
+:masd.wale.kvp.helper.family: FloatingPointNumber
+:masd.physical.helpers.family: FloatingPointNumber
+:masd.physical.helpers.owning_formatters: masd.csharp.types.class
+:masd.physical.helpers.owning_formatters: masd.csharp.types.primitive
+:masd.physical.helpers.owning_facets: masd.csharp.types
+:masd.codec.stereotypes: masd::physical::helper
 :END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/floating_point_number_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void floating_point_number_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+#>
+        /// <summary>
+        /// Compare floating point numbers, taking precision into account (<#= qn #> version).
+        /// </summary>
+        static private bool NearlyEqual(<#= qn #> lhs, <#= qn #> rhs)
+        {
+            <#= qn #> epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * <#= qn #>.Epsilon;
+            return Math.Abs(lhs - rhs) <= epsilon;
+        }
+<#+
+}
+#>
+
+#+end_src
 *** transforms::types::builtin
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.types
@@ -655,12 +691,12 @@ using System;
     public sealed class <#= sn #>
     {
 <#+
-            if (!ctx.element_properties().helper_properties().empty())
+            if (!p.helper_properties().empty())
                 ast.add_helper_methods(id);
 
             /*
-             * Properties
-             */
+             ,* Properties
+             ,*/
 #>
         #region Properties
 <#+
@@ -672,8 +708,8 @@ using System;
 
 <#+
             /*
-             * Constructors.
-             */
+             ,* Constructors.
+             ,*/
 #>
         #region Constructors
         public <#= sn #>() { }
@@ -685,8 +721,8 @@ using System;
 
 <#+
             /*
-             * Equals
-             */
+             ,* Equals
+             ,*/
 #>
         #region Equality
         public override bool Equals(object obj)
@@ -1021,8 +1057,43 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
 :END:
 *** transforms::io::enumerable_helper
 :PROPERTIES:
-:masd.codec.stereotypes: dogen::csharp::helper_transform
+:masd.physical.wale_template_reference: csharp_helper_transform_implementation
+:masd.wale.kvp.class.simple_name: enumerable_helper_transform
+:masd.wale.kvp.helper.family: Enumerable
+:masd.physical.helpers.family: Enumerable
+:masd.physical.helpers.owning_formatters: masd.io.types.class
+:masd.physical.helpers.owning_formatters: masd.io.types.primitive
+:masd.physical.helpers.owning_facets: masd.csharp.io
+:masd.codec.stereotypes: masd::physical::helper
 :END:
+**** stitch_template_content
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/enumerable_helper_transform.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void enumerable_helper_transform::
+apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+#>
+        /// <summary>
+        /// </summary>
+        static private bool NearlyEqual(<#= qn #> lhs, <#= qn #> rhs)
+        {
+            <#= qn #> epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * <#= qn #>.Epsilon;
+            return Math.Abs(lhs - rhs) <= epsilon;
+        }
+<#+
+}
+#>
+
+#+end_src
 *** transforms::io::primitive
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.io
@@ -1137,9 +1208,7 @@ using System;
 *** transforms::io::assistant
 :PROPERTIES:
 :masd.physical.logical_meta_element_id: dogen.logical.entities.assistant
-:masd.wale.kvp.class.simple_name: assistant_transform
 :masd.wale.kvp.archetype.simple_name: assistant
-:masd.wale.kvp.meta_element: assistant
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.io
 :masd.codec.stereotypes: masd::physical::archetype, dogen::archetype_configuration
 :END:
@@ -2234,9 +2303,7 @@ using System.Collections.Generic;
 *** transforms::test_data::assistant
 :PROPERTIES:
 :masd.physical.logical_meta_element_id: dogen.logical.entities.assistant
-:masd.wale.kvp.class.simple_name: assistant_transform
 :masd.wale.kvp.archetype.simple_name: assistant
-:masd.wale.kvp.meta_element: assistant
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.test_data
 :masd.codec.stereotypes: masd::physical::archetype, dogen::archetype_configuration
 :END:
@@ -2531,29 +2598,6 @@ An error occurred whilst formatting.
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::global_features
-:PROPERTIES:
-:masd.variability.generate_static_configuration: false
-:masd.variability.key_prefix: masd.csharp
-:masd.codec.stereotypes: masd::variability::feature_bundle
-:END:
-*** helper.family
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::text
-:masd.codec.value: "Default"
-:END:
-*** assistant.requires_assistance
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::boolean
-:masd.codec.value: "false"
-:END:
-*** assistant.method_postfix
-:PROPERTIES:
-:masd.variability.binding_point: element
-:masd.codec.type: masd::variability::text
-:END:
 ** transforms::visual_studio
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -2574,12 +2618,8 @@ facet of the C# Technical Space.
 *** transforms::visual_studio::project
 :PROPERTIES:
 :masd.physical.logical_meta_element_id: dogen.logical.entities.visual_studio_project
-:masd.wale.kvp.class.simple_name: project_transform
 :masd.wale.kvp.archetype.simple_name: project
-:masd.wale.kvp.meta_element: visual_studio_project
-:masd.wale.kvp.meta_name_factory: logical::helpers::meta_name_factory
 :masd.physical.part_id: masd.csharp.implementation
-:masd.wale.kvp.locator_function: make_full_path_for_visual_studio_project
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
 :masd.physical.relation_status: not_relatable
@@ -2678,12 +2718,8 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 *** transforms::visual_studio::solution
 :PROPERTIES:
 :masd.physical.logical_meta_element_id: dogen.logical.entities.visual_studio_solution
-:masd.wale.kvp.class.simple_name: solution_transform
 :masd.wale.kvp.archetype.simple_name: solution
-:masd.wale.kvp.meta_element: visual_studio_solution
-:masd.wale.kvp.meta_name_factory: logical::helpers::meta_name_factory
 :masd.physical.part_id: masd.csharp.implementation
-:masd.wale.kvp.locator_function: make_full_path_for_visual_studio_solution
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
 :masd.physical.relation_status: not_relatable
@@ -2777,10 +2813,6 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: masd.csharp.implementation
 :END:
-*** masd.wale.kvp.locator_function
-:PROPERTIES:
-:masd.codec.value: make_full_path
-:END:
 *** masd.physical.wale_template_reference
 :PROPERTIES:
 :masd.codec.value: csharp_transform_implementation
@@ -2807,17 +2839,9 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: dogen.logical.entities.object
 :END:
-*** masd.wale.kvp.class.simple_name
-:PROPERTIES:
-:masd.codec.value: class_transform
-:END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
 :masd.codec.value: class
-:END:
-*** masd.wale.kvp.meta_element
-:PROPERTIES:
-:masd.codec.value: object
 :END:
 ** transforms::implementation
 :PROPERTIES:
@@ -2856,17 +2880,9 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: dogen.logical.entities.enumeration
 :END:
-*** masd.wale.kvp.class.simple_name
-:PROPERTIES:
-:masd.codec.value: enum_transform
-:END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
 :masd.codec.value: enum
-:END:
-*** masd.wale.kvp.meta_element
-:PROPERTIES:
-:masd.codec.value: enumeration
 :END:
 ** transforms::exception_configuration
 :PROPERTIES:
@@ -2882,15 +2898,7 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: dogen.logical.entities.exception
 :END:
-*** masd.wale.kvp.class.simple_name
-:PROPERTIES:
-:masd.codec.value: exception_transform
-:END:
 *** masd.wale.kvp.archetype.simple_name
-:PROPERTIES:
-:masd.codec.value: exception
-:END:
-*** masd.wale.kvp.meta_element
 :PROPERTIES:
 :masd.codec.value: exception
 :END:
@@ -2908,15 +2916,7 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: dogen.logical.entities.primitive
 :END:
-*** masd.wale.kvp.class.simple_name
-:PROPERTIES:
-:masd.codec.value: primitive_transform
-:END:
 *** masd.wale.kvp.archetype.simple_name
-:PROPERTIES:
-:masd.codec.value: primitive
-:END:
-*** masd.wale.kvp.meta_element
 :PROPERTIES:
 :masd.codec.value: primitive
 :END:
@@ -2934,15 +2934,7 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.value: dogen.logical.entities.builtin
 :END:
-*** masd.wale.kvp.class.simple_name
-:PROPERTIES:
-:masd.codec.value: builtin_transform
-:END:
 *** masd.wale.kvp.archetype.simple_name
-:PROPERTIES:
-:masd.codec.value: builtin
-:END:
-*** masd.wale.kvp.meta_element
 :PROPERTIES:
 :masd.codec.value: builtin
 :END:
@@ -2964,14 +2956,6 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-*** aspect_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::aspect_properties>
-:END:
-*** assistant_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::assistant_properties>
-:END:
 ** formattables::formattable
 *** element_properties
 :PROPERTIES:
@@ -2988,10 +2972,6 @@ Contains the configuration common to all archetypes.
 ** formattables::element_properties
 All of the properties associated with an element.
 
-*** helper_properties
-:PROPERTIES:
-:masd.codec.type: std::list<formattables::helper_properties>
-:END:
 *** attribute_properties
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, formattables::attribute_properties>
@@ -3031,93 +3011,6 @@ An error occurred whilst performing model expansion.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formattables::aspect_properties
-*** is_floating_point
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** requires_static_reference_equals
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::aspect_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::helper_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::helper_properties
-*** current
-:PROPERTIES:
-:masd.codec.type: formattables::helper_descriptor
-:END:
-*** direct_descendants
-:PROPERTIES:
-:masd.codec.type: std::list<formattables::helper_descriptor>
-:END:
-*** in_inheritance_relationship
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::helper_descriptor
-*** family
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** namespaces
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-*** name_identifiable
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_qualified
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_tree_qualified
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** name_tree_identifiable
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-*** is_simple_type
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** is_circular_dependency
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** formattables::helper_configuration
-*** helper_families
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, std::string>
-:END:
-** formattables::assistant_properties
-*** requires_assistance
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, the type needs help of an assistant.
-
-*** method_postfix
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
-
-Postfix to use to call the appropriate assistant method, if required.
-
-** formattables::assistant_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** formattables::attribute_properties
 *** auxiliary_function_properties
 :PROPERTIES:
@@ -3142,85 +3035,39 @@ The auxiliary function is supplied by a helper.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-* feature_initializer
-:PROPERTIES:
-:masd.codec.stereotypes: masd::variability::initializer
-:END:
-* csharp_artefact_transform_header
-:PROPERTIES:
-:masd.cpp.templates.logic_less_template.overwrite: false
-:masd.codec.stereotypes: masd::templating::logic_less_templates
-:END:
-** content
-#+begin_src mustache
-class {{class.simple_name}} final : public model_to_text_transform {
-public:
-    physical::entities::archetype static_archetype() const;
-    physical::entities::archetype archetype() const override;
-
-public:
-    std::list<std::string> inclusion_dependencies(
-        const logical::entities::element& e) const override;
-
-public:
-    void apply(const context& ctx, const logical::entities::element& e,
-        physical::entities::artefact& a) const override;
-};
-
-#+end_src
 * csharp_transform_implementation
 :PROPERTIES:
-:masd.cpp.templates.logic_less_template.overwrite: false
 :masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
 namespace {
 
-const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& {{class.simple_name}}::static_archetype() {
+const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
     static auto r({{archetype.simple_name}}_factory::make());
     return r;
 }
 
-const physical::entities::archetype& {{class.simple_name}}::archetype() const {
+const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
     return static_archetype();
 }
 
-std::list<std::string> {{class.simple_name}}::
+std::list<std::string> {{archetype.simple_name}}_transform::
 inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 #+end_src
-* csharp_helper_transform_header
-:PROPERTIES:
-:masd.cpp.templates.logic_less_template.overwrite: false
-:masd.codec.stereotypes: masd::templating::logic_less_templates
-:END:
-** content
-#+begin_src mustache
-class {{class.simple_name}} : public helper_transform {
-public:
-    std::string id() const override;
-    std::string family() const override;
-    std::list<std::string> owning_formatters() const override;
-    std::list<std::string> owning_facets() const override;
-    std::string helper_name() const override;
-    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
-};
-
-#+end_src
 * csharp_helper_transform_implementation
 :PROPERTIES:
-:masd.cpp.templates.logic_less_template.overwrite: false
 :masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
@@ -3256,6 +3103,11 @@ std::list<std::string>
 std::string {{class.simple_name}}::helper_name() const {
     static std::string r("{{class.simple_name}}");
     return r;
+}
+
+bool {{class.simple_name}}::is_enabled(const assistant& /*a*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+    return true;
 }
 
 #+end_src

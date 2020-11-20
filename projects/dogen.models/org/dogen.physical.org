@@ -484,13 +484,6 @@ Operation to be applied to this artefact.
 
 Stores the properties related to the enablement, as read out from configuration.
 
-*** formatting_style
-:PROPERTIES:
-:masd.codec.type: formatting_styles
-:END:
-
-What type of M2T transform to use in order to generate the artefact's content.
-
 *** formatting_input
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -847,13 +840,6 @@ Resolves a role into a concrete archetype, in the context of this logical elemen
 
 If false, the entire artefact set is not generatable.
 
-** entities::formatting_styles
-:PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
-:END:
-*** stock
-*** wale
-*** stitch
 ** entities::enablement_properties
 Stores the properties related to the enablement.
 
@@ -903,15 +889,6 @@ If supplied and true, the facet will have overwrite on.
 
 If supplied and true, the archetype will have overwrite on.
 
-** entities::formatting_configuration
-*** styles
-:PROPERTIES:
-:masd.codec.type: formatting_styles
-:END:
-*** input
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
 ** entities::backend_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaIdentifiable
@@ -1545,29 +1522,6 @@ Enablement related properties.
 
 If true, decorations are enabled on this modeling element.
 
-** features::formatting
-:PROPERTIES:
-:masd.variability.default_binding_point: any
-:masd.variability.instantiation_domain_name: masd.archetype
-:masd.codec.stereotypes: masd::variability::feature_template_bundle
-:END:
-
-Features related to formatting.
-
-*** formatting_style
-:PROPERTIES:
-:masd.codec.type: masd::variability::text
-:END:
-
-Style of formatting to use for this archetype.
-
-*** formatting_input
-:PROPERTIES:
-:masd.codec.type: masd::variability::text
-:END:
-
-If the formatting style requires a template, the name of the template to use.
-
 ** features::backend_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.backend
@@ -1850,10 +1804,6 @@ Smallest possible context required for bootstrapping purposes.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::enablement_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::formatting_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
