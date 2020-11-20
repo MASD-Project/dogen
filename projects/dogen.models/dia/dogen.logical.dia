@@ -1900,7 +1900,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:point val="-268,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-268.05,-21.05;-221.635,-0.55"/>
+        <dia:rectangle val="-268.05,-21.05;-221.635,0.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-268,-21"/>
@@ -1909,7 +1909,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="46.314999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.400000000000006"/>
+        <dia:real val="21.200000000000006"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -2498,6 +2498,29 @@ spaces.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;identification::entities::logical_id, assistant_properties&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#project_items#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17289,7 +17312,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-195.468,-56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.317,-56.45;-184.888,-45.95"/>
+        <dia:rectangle val="-196.318,-56.45;-184.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23079,7 +23102,7 @@ as a modeline.#</dia:string>
         <dia:point val="-256.007,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-268.05,-0.65;-255.257,4.8"/>
+        <dia:rectangle val="-268.05,0.15;-255.257,4.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23088,7 +23111,7 @@ as a modeline.#</dia:string>
         <dia:point val="-256.007,4"/>
         <dia:point val="-256.007,2"/>
         <dia:point val="-268,2"/>
-        <dia:point val="-268,-0.6"/>
+        <dia:point val="-268,0.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -46080,7 +46103,7 @@ FIXME: optional for now.
         <dia:point val="-231.938,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.688,-0.65;-221.485,4.8"/>
+        <dia:rectangle val="-232.688,0.15;-221.485,4.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -46089,7 +46112,7 @@ FIXME: optional for now.
         <dia:point val="-231.938,4"/>
         <dia:point val="-231.938,2"/>
         <dia:point val="-221.685,2"/>
-        <dia:point val="-221.685,-0.6"/>
+        <dia:point val="-221.685,0.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

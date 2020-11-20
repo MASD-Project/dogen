@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
@@ -207,6 +208,28 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -236,7 +259,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"technical_space_version\": " << v.technical_space_version() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
-      << "\"assistant_properties\": " << v.assistant_properties()
+      << "\"assistant_properties\": " << v.assistant_properties() << ", "
+      << "\"project_items\": " << v.project_items()
       << " }";
     return(s);
 }

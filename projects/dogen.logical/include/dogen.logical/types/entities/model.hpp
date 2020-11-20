@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -101,7 +102,8 @@ public:
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
         const dogen::identification::entities::technical_space_version technical_space_version,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties,
+        const std::list<std::string>& project_items);
 
 public:
     /**
@@ -312,6 +314,11 @@ public:
     void assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& v);
     void assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>&& v);
 
+    const std::list<std::string>& project_items() const;
+    std::list<std::string>& project_items();
+    void project_items(const std::list<std::string>& v);
+    void project_items(const std::list<std::string>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -348,6 +355,7 @@ private:
     dogen::identification::entities::technical_space_version technical_space_version_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties> aspect_properties_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties> assistant_properties_;
+    std::list<std::string> project_items_;
 };
 
 }
