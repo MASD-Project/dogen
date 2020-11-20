@@ -682,7 +682,7 @@ All models that are a member of this set.
 
 ** entities::relation_status
 :PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Status of a given archetype with regards to being related to other archetypes.

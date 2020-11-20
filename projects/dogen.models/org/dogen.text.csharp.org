@@ -10,6 +10,7 @@
 :masd.codec.reference: dogen.variability
 :masd.codec.reference: dogen.tracing
 :masd.codec.reference: dogen.logical
+:masd.codec.reference: dogen.text
 :masd.codec.reference: masd
 :masd.codec.reference: masd.variability
 :masd.codec.reference: dogen.profiles
@@ -695,8 +696,8 @@ using System;
                 ast.add_helper_methods(id);
 
             /*
-             ,* Properties
-             ,*/
+             * Properties
+             */
 #>
         #region Properties
 <#+
@@ -708,8 +709,8 @@ using System;
 
 <#+
             /*
-             ,* Constructors.
-             ,*/
+             * Constructors.
+             */
 #>
         #region Constructors
         public <#= sn #>() { }
@@ -721,8 +722,8 @@ using System;
 
 <#+
             /*
-             ,* Equals
-             ,*/
+             * Equals
+             */
 #>
         #region Equality
         public override bool Equals(object obj)
@@ -2570,13 +2571,9 @@ There was an error in the registrar.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-*** element_properties
-:PROPERTIES:
-:masd.codec.type: formattables::element_properties
-:END:
 *** model
 :PROPERTIES:
-:masd.codec.type: formattables::model
+:masd.codec.type: text::entities::model
 :END:
 *** helpers
 :PROPERTIES:
@@ -2941,99 +2938,6 @@ Contains the configuration common to all archetypes.
 * traits
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-* formattables
-** formattables::model
-*** name
-:PROPERTIES:
-:masd.codec.type: identification::entities::logical_name
-:END:
-*** formattables
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::formattable>
-:END:
-*** project_items
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
-** formattables::formattable
-*** element_properties
-:PROPERTIES:
-:masd.codec.type: formattables::element_properties
-:END:
-*** element
-:PROPERTIES:
-:masd.codec.type: boost::shared_ptr<logical::entities::element>
-:END:
-*** artefacts
-:PROPERTIES:
-:masd.codec.type: physical::entities::region
-:END:
-** formattables::element_properties
-All of the properties associated with an element.
-
-*** attribute_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::attribute_properties>
-:END:
-** formattables::adapter
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::adaptation_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-** formattables::workflow
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::model_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::reducer
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::expansion_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-
-An error occurred whilst performing model expansion.
-
-** formattables::using_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::project_items_expander
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** formattables::attribute_properties
-*** auxiliary_function_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, formattables::auxiliary_function_properties>
-:END:
-** formattables::auxiliary_function_types
-:PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
-:END:
-*** assistant
-The auxiliary function is supplied by an assistant.
-
-*** helper
-The auxiliary function is supplied by a helper.
-
-** formattables::auxiliary_function_properties
-*** type
-:PROPERTIES:
-:masd.codec.type: formattables::auxiliary_function_types
-:END:
-*** name
-:PROPERTIES:
-:masd.codec.type: std::string
 :END:
 * csharp_transform_implementation
 :PROPERTIES:
