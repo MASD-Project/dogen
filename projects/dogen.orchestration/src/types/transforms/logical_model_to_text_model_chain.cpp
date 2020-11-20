@@ -143,8 +143,7 @@ apply(const context& ctx, const logical::entities::model& lm) {
      * Finally, remove all elements that do not contribute towards
      * code generation.
      */
-    // FIXME: disabled until we move helpers transform to logical model
-    // elements_removal_transform::apply(ctx.text_context(), r);
+    elements_removal_transform::apply(ctx.text_context(), r);
 
     return r;
 }

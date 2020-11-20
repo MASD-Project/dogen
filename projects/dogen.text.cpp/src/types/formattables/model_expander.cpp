@@ -28,8 +28,8 @@ void model_expander::reduce(model& fm) const {
     rd.reduce(fm);
 }
 
-void model_expander::expand(model& fm) const {
-    reduce(fm);
+void model_expander::expand(model& /*fn*/) const {
+    // reduce(fm);
 }
 
 }
