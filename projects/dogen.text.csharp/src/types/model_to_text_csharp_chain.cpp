@@ -76,19 +76,6 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
         id.value(), *ctx.tracer());
 
     apply(ctx.tracer(), m);
-
-    /*
-     * FIXME: hackery to compute managed directories. Won;t be
-     * required in the new world.
-     */
-    using identification::entities::physical_meta_id;
-    const auto beid(physical_meta_id("masd.csharp"));
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto i(mmp.backend_properties().find(beid));
-    if (i != mmp.backend_properties().end()) {
-        const auto& be(i->second);
-        m.physical().managed_directories().push_back(be.file_path());
-    }
 }
 
 }
