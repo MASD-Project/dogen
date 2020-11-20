@@ -6708,25 +6708,6 @@ Problems:
 : StartupItem = CppModel.vcxroj
 : StartupItem = CSharpModel.csproj
 
-- bug: project items are not populated at present for C++:
-
-: ctx.model().project_items())
-
-- we are using =Compile= instead of =ClCompile= for c++:
-
-: <#+
-:    for (const auto& f : ctx.model().project_items())
-: #>
-:    <Compile Include="<#= f #>" />
-
-  Should really be:
-
-: <ClCompile Include="Scenario_CloudFontOverview.xaml.cpp">
-
-- header files should be in the file as well:
-
-: <ClInclude Include="SampleConfiguration.h" />
-
 - we should create separate groups for ODB files, etc.
 - its not possible to supply versions (VS version, tools version,
   etc).
