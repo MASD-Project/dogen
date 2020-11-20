@@ -29,7 +29,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/region.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
-#include "dogen.text.csharp/types/formattables/element_properties.hpp"
 
 namespace dogen::text::csharp::formattables {
 
@@ -42,16 +41,10 @@ public:
 
 public:
     formattable(
-        const dogen::text::csharp::formattables::element_properties& element_properties,
         const boost::shared_ptr<dogen::logical::entities::element>& element,
         const dogen::physical::entities::region& artefacts);
 
 public:
-    const dogen::text::csharp::formattables::element_properties& element_properties() const;
-    dogen::text::csharp::formattables::element_properties& element_properties();
-    void element_properties(const dogen::text::csharp::formattables::element_properties& v);
-    void element_properties(const dogen::text::csharp::formattables::element_properties&& v);
-
     const boost::shared_ptr<dogen::logical::entities::element>& element() const;
     boost::shared_ptr<dogen::logical::entities::element>& element();
     void element(const boost::shared_ptr<dogen::logical::entities::element>& v);
@@ -73,7 +66,6 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    dogen::text::csharp::formattables::element_properties element_properties_;
     boost::shared_ptr<dogen::logical::entities::element> element_;
     dogen::physical::entities::region artefacts_;
 };

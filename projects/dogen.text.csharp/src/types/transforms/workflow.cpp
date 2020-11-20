@@ -91,10 +91,9 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             BOOST_LOG_SEV(lg, debug) << "No formatters for meta name: " << mn;
         }
 
-        const auto& eprops(formattable.element_properties());
         const auto& hlp_fmts(frp.helper_formatters());
-        const context ctx(eprops, aspect_properties, assistant_properties,
-            fm, hlp_fmts, tracer);
+        const context ctx(aspect_properties, assistant_properties, fm, hlp_fmts,
+            tracer);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);

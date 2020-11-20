@@ -33,23 +33,19 @@ const boost::shared_ptr<dogen::logical::entities::element>& rhs) {
 namespace dogen::text::csharp::formattables {
 
 formattable::formattable(
-    const dogen::text::csharp::formattables::element_properties& element_properties,
     const boost::shared_ptr<dogen::logical::entities::element>& element,
     const dogen::physical::entities::region& artefacts)
-    : element_properties_(element_properties),
-      element_(element),
+    : element_(element),
       artefacts_(artefacts) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
-    swap(element_properties_, other.element_properties_);
     swap(element_, other.element_);
     swap(artefacts_, other.artefacts_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
-    return element_properties_ == rhs.element_properties_ &&
-        element_ == rhs.element_ &&
+    return element_ == rhs.element_ &&
         artefacts_ == rhs.artefacts_;
 }
 
@@ -57,22 +53,6 @@ formattable& formattable::operator=(formattable other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::text::csharp::formattables::element_properties& formattable::element_properties() const {
-    return element_properties_;
-}
-
-dogen::text::csharp::formattables::element_properties& formattable::element_properties() {
-    return element_properties_;
-}
-
-void formattable::element_properties(const dogen::text::csharp::formattables::element_properties& v) {
-    element_properties_ = v;
-}
-
-void formattable::element_properties(const dogen::text::csharp::formattables::element_properties&& v) {
-    element_properties_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::logical::entities::element>& formattable::element() const {

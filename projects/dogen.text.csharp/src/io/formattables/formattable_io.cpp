@@ -22,7 +22,6 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/region_io.hpp"
 #include "dogen.text.csharp/io/formattables/formattable_io.hpp"
-#include "dogen.text.csharp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
@@ -45,7 +44,6 @@ namespace dogen::text::csharp::formattables {
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::formattable\"" << ", "
-      << "\"element_properties\": " << v.element_properties() << ", "
       << "\"element\": " << v.element() << ", "
       << "\"artefacts\": " << v.artefacts()
       << " }";
