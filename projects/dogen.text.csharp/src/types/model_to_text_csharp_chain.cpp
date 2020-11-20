@@ -49,13 +49,6 @@ namespace dogen::text::csharp {
 model_to_text_csharp_chain::
 ~model_to_text_csharp_chain() noexcept { }
 
-formattables::model
-model_to_text_csharp_chain::create_formattables_model(
-    const transforms::repository& frp, const text::entities::model& m) const {
-    formattables::workflow fw;
-    return fw.execute(frp, m);
-}
-
 identification::entities::physical_meta_id
 model_to_text_csharp_chain::id() const {
     static identification::entities::physical_meta_id r("masd.csharp");
@@ -66,15 +59,10 @@ std::string model_to_text_csharp_chain::description() const {
     return ::description;
 }
 
-void model_to_text_csharp_chain::
-apply(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::aspect_properties>& aspect_properties,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::assistant_properties>& assistant_properties,
-    formattables::model& fm) const {
+void model_to_text_csharp_chain::apply(
+    boost::shared_ptr<tracing::tracer> tracer, text::entities::model& m) const {
     transforms::workflow wf;
-    wf.execute(tracer, aspect_properties, assistant_properties,fm);
+    wf.execute(tracer, m);
 }
 
 identification::entities::technical_space
@@ -88,16 +76,12 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C# M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    const auto& frp(transforms::workflow::registrar().formatter_repository());
-    const auto& ap(m.logical().aspect_properties());
-    const auto& assp(m.logical().assistant_properties());
+    apply(ctx.tracer(), m);
 
     /*
-     * Generate the formattables model.
+     * FIXME: hackery to compute managed directories. Won;t be
+     * required in the new world.
      */
-    auto fm(create_formattables_model(frp, m));
-    apply(ctx.tracer(), ap, assp, fm);
-
     using identification::entities::physical_meta_id;
     const auto beid(physical_meta_id("masd.csharp"));
     const auto& mmp(m.physical().meta_model_properties());

@@ -21,6 +21,7 @@
 #ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_WORKFLOW_HPP
 #define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_WORKFLOW_HPP
 
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -34,10 +35,11 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.text.cpp/types/formattables/model.hpp"
+#include "dogen.text/types/entities/model.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -48,8 +50,6 @@ namespace dogen::text::cpp::transforms {
 class workflow final {
 public:
     workflow(const physical::entities::model& pm,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
         const identification::entities::technical_space_version tsv);
 
 public:
@@ -61,25 +61,21 @@ public:
 
 private:
     boost::shared_ptr<physical::entities::artefact>
-    get_artefact(const std::unordered_map<
-        identification::entities::physical_meta_id,
-        boost::shared_ptr<physical::entities::artefact>>& artefacts,
+    get_artefact(const physical::entities::region& region,
         const identification::entities::physical_meta_id& archetype) const;
 
 private:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const formattables::model& fm, formattables::formattable& fbl) const;
+        const text::entities::model& m,
+        text::entities::logical_physical_region& region) const;
 
 public:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        formattables::model& fm) const;
+        text::entities::model& m) const;
 
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;
     const physical::entities::model& physical_model_;
-    const std::unordered_map<identification::entities::logical_id,
-                             logical::entities::streaming_properties>&
-    streaming_properties_;
     const identification::entities::technical_space_version
     technical_space_version_;
 };

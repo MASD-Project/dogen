@@ -47,20 +47,6 @@ namespace dogen::text::cpp {
 model_to_text_cpp_chain::
 ~model_to_text_cpp_chain() noexcept { }
 
-const transforms::repository&
-model_to_text_cpp_chain::formatters_repository() const {
-    const auto& rg(transforms::workflow::registrar());
-    rg.validate();
-    return rg.formatter_repository();
-}
-
-formattables::model
-model_to_text_cpp_chain::create_formattables_model(
-    const transforms::repository& frp, const text::entities::model& m) const {
-    formattables::workflow fw;
-    return fw.execute(frp, m);
-}
-
 identification::entities::physical_meta_id
 model_to_text_cpp_chain::id() const {
     static identification::entities::physical_meta_id r("masd.cpp");
@@ -74,12 +60,10 @@ std::string model_to_text_cpp_chain::description() const {
 void model_to_text_cpp_chain::
 apply(boost::shared_ptr<tracing::tracer> tracer,
     const physical::entities::model& pm,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
     const identification::entities::technical_space_version tsv,
-    formattables::model& fm) const {
-    transforms::workflow wf(pm, streaming_properties, tsv);
-    wf.execute(tracer, fm);
+    text::entities::model& m) const {
+    transforms::workflow wf(pm, tsv);
+    wf.execute(tracer, m);
 }
 
 identification::entities::technical_space
@@ -93,15 +77,8 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C++ M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    const auto& frp(formatters_repository());
-
-    /*
-     * Generate the formattables model.
-     */
-    const auto& sps(m.logical().streaming_properties());
     const auto tsv(m.logical().technical_space_version());
-    auto fm(create_formattables_model(frp, m));
-    apply(ctx.tracer(), m.physical(), sps, tsv, fm);
+    apply(ctx.tracer(), m.physical(), tsv, m);
 }
 
 }

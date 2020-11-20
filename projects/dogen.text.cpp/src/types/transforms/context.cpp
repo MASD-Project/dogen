@@ -22,20 +22,16 @@
 
 namespace dogen::text::cpp::transforms {
 
-context::context(const physical::entities::model& pm,
-    const formattables::model& fm,
+context::context(const text::entities::model& m,
     const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
     const identification::entities::technical_space_version tsv,
     boost::shared_ptr<tracing::tracer> tracer)
-    : physical_model_(pm), model_(fm), helpers_(helpers),
-      streaming_properties_(streaming_properties),
-      technical_space_version_(tsv), tracer_(tracer) { }
+    : model_(m), helpers_(helpers), technical_space_version_(tsv),
+      tracer_(tracer) { }
 
-const formattables::model& context::model() const {
+const text::entities::model& context::model() const {
     return model_;
 }
 
@@ -44,16 +40,6 @@ const std::unordered_map<std::string,
                        std::list<std::shared_ptr<helper_transform>>>>&
 context::helpers() const {
     return helpers_;
-}
-
-const physical::entities::model& context::physical_model() const {
-    return physical_model_;
-}
-
-const std::unordered_map<identification::entities::logical_id,
-                         logical::entities::streaming_properties>&
-context::streaming_properties() const {
-    return streaming_properties_;
 }
 
 identification::entities::technical_space_version context::

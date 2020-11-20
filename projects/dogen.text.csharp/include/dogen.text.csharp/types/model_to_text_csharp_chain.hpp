@@ -37,7 +37,6 @@
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.text.csharp/types/transforms/repository.hpp"
-#include "dogen.text.csharp/types/formattables/model.hpp"
 
 namespace dogen::text::csharp {
 
@@ -57,16 +56,8 @@ public:
     ~model_to_text_csharp_chain() noexcept;
 
 private:
-    formattables::model create_formattables_model(
-        const transforms::repository& frp,
-        const text::entities::model& m) const;
-
     void apply(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::aspect_properties>& aspect_properties,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::assistant_properties>& assistant_properties,
-        formattables::model& fm) const;
+        text::entities::model& fm) const;
 
 public:
     std::string description() const override;

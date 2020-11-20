@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/workflow_error.hpp"
@@ -52,13 +53,12 @@ csharp::transforms::registrar& workflow::registrar() {
 }
 
 boost::shared_ptr<physical::entities::artefact>
-workflow::get_artefact(const std::unordered_map<
-    identification::entities::physical_meta_id,
-    boost::shared_ptr<physical::entities::artefact>>& artefacts,
+workflow::get_artefact(const physical::entities::region& region,
     const identification::entities::physical_meta_id& archetype) const {
 
-    const auto i(artefacts.find(archetype));
-    if (i == artefacts.end()) {
+    const auto& aba(region.artefacts_by_archetype());
+    const auto i(aba.find(archetype));
+    if (i == aba.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
         BOOST_THROW_EXCEPTION(
             workflow_error(archetype_not_found + archetype.value()));
@@ -67,43 +67,35 @@ workflow::get_artefact(const std::unordered_map<
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::aspect_properties>& aspect_properties,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::assistant_properties>& assistant_properties,
-    const formattables::model& fm) const {
+    const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
-                             << fm.name().qualified().dot();
+                             << m.provenance().logical_name().id();
 
-    for (const auto& pair : fm.formattables()) {
-        const auto& formattable(pair.second);
-
-        const auto& e(*formattable.element());
-        const auto id(e.name().qualified().dot());
+    for (const auto& region : m.logical_physical_regions()) {
+        const auto& e(*region.logical_element());
+        const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         const auto mn(e.meta_name().id());
-        BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
+        BOOST_LOG_SEV(lg, debug) << "Meta ID: " << mn;
 
         const auto& frp(registrar().formatter_repository());
         const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
         if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "No formatters for meta name: " << mn;
+            continue;
         }
 
         const auto& hlp_fmts(frp.helper_formatters());
-        const context ctx(aspect_properties, assistant_properties, fm, hlp_fmts,
-            tracer);
+        const context ctx(m, hlp_fmts, tracer);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
             const auto pmn(fmt.archetype().meta_name());
             const auto arch(pmn.id());
-            auto aptr(get_artefact(
-                    formattable.artefacts().artefacts_by_archetype(), arch));
+            auto aptr(get_artefact(region.physical_region(), arch));
 
-            BOOST_LOG_SEV(lg, debug) << "Using formatter: "
-                                     << fmt.archetype().meta_name().id().value();
+            BOOST_LOG_SEV(lg, debug) << "Using formatter: " << arch;
 
             auto& a(*aptr);
             fmt.apply(ctx, e, a);

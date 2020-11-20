@@ -41,7 +41,6 @@
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
-#include "dogen.text.cpp/types/formattables/model.hpp"
 
 namespace dogen::text::cpp {
 
@@ -62,26 +61,12 @@ public:
 
 private:
     /**
-     * @brief Get the formatters repository.
-     */
-    const transforms::repository& formatters_repository() const;
-
-    /**
-     * @brief Create the formattables representation of the yarn model.
-     */
-    formattables::model create_formattables_model(
-        const transforms::repository& frp,
-        const text::entities::model& m) const;
-
-    /**
      * @brief Create the files representation of the formattables model.
      */
     void apply(boost::shared_ptr<tracing::tracer> tracer,
         const physical::entities::model& pm,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
         const identification::entities::technical_space_version tsv,
-        formattables::model& fm) const;
+        text::entities::model& m) const;
 
 public:
     identification::entities::physical_meta_id id() const override;

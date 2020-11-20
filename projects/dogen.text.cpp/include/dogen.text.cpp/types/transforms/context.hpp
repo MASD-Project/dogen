@@ -37,7 +37,7 @@
 #include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/streaming_properties.hpp"
-#include "dogen.text.cpp/types/formattables/model.hpp"
+#include "dogen.text/types/entities/model.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -47,30 +47,21 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const physical::entities::model& pm,
-        const formattables::model& fm,
+    context(const text::entities::model& m,
         const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
         std::list<std::shared_ptr<
         helper_transform>>>>& helpers,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::streaming_properties>& streaming_properties,
         const identification::entities::technical_space_version tsv,
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const formattables::model& model() const;
+    const text::entities::model& model() const;
 
     const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
             std::list<std::shared_ptr<helper_transform>>>>&
     helpers() const;
-
-    const physical::entities::model& physical_model() const;
-
-    const std::unordered_map<identification::entities::logical_id,
-                             logical::entities::streaming_properties>&
-    streaming_properties() const;
 
     identification::entities::technical_space_version
     technical_space_version() const;
@@ -78,15 +69,11 @@ public:
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const physical::entities::model& physical_model_;
-    const formattables::model& model_;
+    const text::entities::model& model_;
     const std::unordered_map<std::string,
         std::unordered_map<identification::entities::physical_meta_id,
                            std::list<std::shared_ptr<helper_transform>>>>&
     helpers_;
-    const std::unordered_map<identification::entities::logical_id,
-                             logical::entities::streaming_properties>&
-    streaming_properties_;
     const identification::entities::technical_space_version
     technical_space_version_;
     boost::shared_ptr<tracing::tracer> tracer_;

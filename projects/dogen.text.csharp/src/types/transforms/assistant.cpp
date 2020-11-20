@@ -122,7 +122,7 @@ make_namespaces(const identification::entities::logical_name& n) const {
 
 std::string
 assistant::reference_equals(const logical::entities::attribute& attr) const {
-    const auto& c(context_.aspect_properties());
+    const auto& c(context_.model().logical().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.id()));
 
@@ -225,7 +225,7 @@ assistant::get_helpers(const logical::entities::helper_properties& hp) const {
 
 boost::optional<logical::entities::assistant_properties> assistant::
 get_assistant_properties(const logical::entities::attribute& attr) const {
-    const auto& ap(context_.assistant_properties());
+    const auto& ap(context_.model().logical().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().id()));
     if (i == ap.end())
         return boost::optional<logical::entities::assistant_properties>();

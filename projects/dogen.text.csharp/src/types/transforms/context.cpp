@@ -22,19 +22,14 @@
 
 namespace dogen::text::csharp::transforms {
 
-context::context(const std::unordered_map<identification::entities::logical_id,
-    logical::entities::aspect_properties>& aspect_properties,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::assistant_properties>& assistant_properties,
-    const formattables::model& fm, const std::unordered_map<std::string,
+context::context(const text::entities::model& m,
+    const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
     boost::shared_ptr<tracing::tracer> tracer)
-    : model_(fm), aspect_properties_(aspect_properties),
-      assistant_properties_(assistant_properties), helpers_(helpers),
-      tracer_(tracer) { }
+    : model_(m), helpers_(helpers), tracer_(tracer) { }
 
-const formattables::model& context::model() const {
+const text::entities::model& context::model() const {
     return model_;
 }
 
@@ -43,20 +38,8 @@ const std::unordered_map<
     std::unordered_map<
         identification::entities::physical_meta_id,
         std::list<std::shared_ptr<helper_transform>>>>&
-    context::helpers() const {
+context::helpers() const {
     return helpers_;
-}
-
-const std::unordered_map<identification::entities::logical_id,
-                         logical::entities::aspect_properties>&
-context::aspect_properties() const {
-    return aspect_properties_;
-}
-
-const std::unordered_map<identification::entities::logical_id,
-                         logical::entities::assistant_properties>&
-context::assistant_properties() const {
-    return assistant_properties_;
 }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {

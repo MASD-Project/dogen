@@ -28,8 +28,9 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.text.csharp/types/formattables/model.hpp"
+#include "dogen.text/types/entities/model.hpp"
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
 
 namespace dogen::text::csharp::transforms {
@@ -47,18 +48,12 @@ public:
 
 private:
     boost::shared_ptr<physical::entities::artefact>
-    get_artefact(const std::unordered_map<
-        identification::entities::physical_meta_id,
-        boost::shared_ptr<physical::entities::artefact>>& artefacts,
+    get_artefact(const physical::entities::region& region,
         const identification::entities::physical_meta_id& archetype) const;
 
 public:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::aspect_properties>& aspect_properties,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::assistant_properties>& assistant_properties,
-        const formattables::model& fm) const;
+        const text::entities::model& m) const;
 
 private:
     static std::shared_ptr<csharp::transforms::registrar> registrar_;

@@ -215,7 +215,7 @@ assistant::get_product_name(const logical_name& n) const {
 
 physical::entities::facet_properties assistant::obtain_facet_properties(
     const identification::entities::physical_meta_id& facet_name) const {
-    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& mmp(context_.model().physical().meta_model_properties());
     const auto& fct_props(mmp.facet_properties());
     const auto i(fct_props.find(facet_name));
     if (i == fct_props.end()) {
@@ -238,7 +238,7 @@ bool assistant::is_archetype_enabled(
     const identification::entities::physical_meta_id& archetype) const {
     identification::entities::logical_id lid(element_.name().qualified().dot());
     identification::entities::logical_meta_physical_id ea(lid, archetype);
-    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& mmp(context_.model().physical().meta_model_properties());
     const auto& eafe(mmp.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
@@ -624,7 +624,7 @@ streaming_for_type(const logical::entities::streaming_properties& sp,
 std::string assistant::streaming_for_type(const logical_name& n,
     const std::string& s) const {
 
-    const auto str_propss(context_.streaming_properties());
+    const auto str_propss(context_.model().logical().streaming_properties());
     const auto i(str_propss.find(n.id()));
     if (i == str_propss.end())
         return s;
@@ -662,7 +662,7 @@ std::list<logical_name> assistant::names_with_enabled_archetype(
     const identification::entities::physical_meta_id& archetype,
     const std::list<logical_name> names) const {
     std::list<logical_name> r;
-    const auto& mmp(context_.physical_model().meta_model_properties());
+    const auto& mmp(context_.model().physical().meta_model_properties());
     const auto& eafe(mmp.enabled_archetype_for_element());
     for (const auto& n : names) {
         const identification::entities::logical_id lid(n.qualified().dot());

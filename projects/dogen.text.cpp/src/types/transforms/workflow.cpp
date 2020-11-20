@@ -25,6 +25,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
@@ -36,7 +37,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("text.cpp.transforms.workflow"));
 
 const std::string archetype_not_found("Archetype not found: ");
-const std::string invalid_formatting_style("Invalid formatting style");
 
 }
 
@@ -45,11 +45,8 @@ namespace dogen::text::cpp::transforms {
 std::shared_ptr<cpp::transforms::registrar> workflow::registrar_;
 
 workflow::workflow(const physical::entities::model& pm,
-    const std::unordered_map<identification::entities::logical_id,
-    logical::entities::streaming_properties>& streaming_properties,
     const identification::entities::technical_space_version tsv)
-    : physical_model_(pm), streaming_properties_(streaming_properties),
-      technical_space_version_(tsv) { }
+    : physical_model_(pm), technical_space_version_(tsv) { }
 
 cpp::transforms::registrar& workflow::registrar() {
     if (!registrar_)
@@ -59,13 +56,12 @@ cpp::transforms::registrar& workflow::registrar() {
 }
 
 boost::shared_ptr<physical::entities::artefact>
-workflow::get_artefact(const std::unordered_map<
-    identification::entities::physical_meta_id,
-    boost::shared_ptr<physical::entities::artefact>>& artefacts,
+workflow::get_artefact(const physical::entities::region& region,
     const identification::entities::physical_meta_id& archetype) const {
 
-    const auto i(artefacts.find(archetype));
-    if (i == artefacts.end()) {
+    const auto& aba(region.artefacts_by_archetype());
+    const auto i(aba.find(archetype));
+    if (i == aba.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
         BOOST_THROW_EXCEPTION(
             workflow_error(archetype_not_found + archetype.value()));
@@ -73,11 +69,13 @@ workflow::get_artefact(const std::unordered_map<
     return i->second;
 }
 
-void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const formattables::model& fm, formattables::formattable& fbl) const {
+void workflow::
+execute(boost::shared_ptr<tracing::tracer> tracer,
+    const text::entities::model& m,
+    text::entities::logical_physical_region& region) const {
 
-    const auto& e(*fbl.element());
-    const auto id(e.name().qualified().dot());
+    const auto& e(*region.logical_element());
+    const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
     const auto mn(e.meta_name().id());
@@ -99,7 +97,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto& fmt(*ptr);
         const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.id());
-        auto aptr(get_artefact(fbl.artefacts().artefacts_by_archetype(), arch));
+        auto aptr(get_artefact(region.physical_region(), arch));
         if (!aptr->enablement_properties().enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
@@ -107,8 +105,8 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
         const auto& frp(registrar().formatter_repository());
-        context ctx(physical_model_, fm, frp.helper_formatters(),
-            streaming_properties_, technical_space_version_, tracer);
+        context ctx(m, frp.helper_formatters(),
+            technical_space_version_, tracer);
 
         auto& a(*aptr);
         const auto id(fmt.archetype().meta_name().id().value());
@@ -119,14 +117,13 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    formattables::model& fm) const {
+    text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
-                             << fm.name().qualified().dot();
+                             << m.provenance().logical_name().id();
 
-    for (auto& pair : fm.formattables()) {
-        auto& fbl(pair.second);
-        execute(tracer, fm, fbl);
-    }
+    for (auto& region : m.logical_physical_regions())
+        execute(tracer, m, region);
+
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
 }
 
