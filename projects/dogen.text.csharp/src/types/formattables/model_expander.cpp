@@ -29,9 +29,9 @@ void model_expander::reduce(model& fm) const {
     rd.reduce(fm);
 }
 
-void model_expander::expand_project_items(model& fm) const {
-    project_items_expander pie;
-    pie.expand(fm);
+void model_expander::expand_project_items(model& /*fm*/) const {
+    // project_items_expander pie;
+    // pie.expand(fm);
 }
 
 void model_expander::expand(model& fm) const {

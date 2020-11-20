@@ -18,13 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.physical/types/entities/relation_status.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/lexical_cast/entities/relation_status_lc.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/helpers/header_guard_factory.hpp"
@@ -36,6 +41,9 @@
 #include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/visual_studio/item.hpp"
+#include "dogen.logical/types/entities/visual_studio/project.hpp"
+#include "dogen.logical/types/entities/visual_studio/item_group.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
@@ -45,8 +53,8 @@
 
 namespace {
 
-const std::string
-transform_id("orchestration.transforms.physical_to_logical_population_transform");
+const std::string transform_id(
+    "orchestration.transforms.physical_to_logical_population_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -57,6 +65,9 @@ const std::string postgresql("pgsql");
 const std::string oracle("oracle");
 const std::string sql_server("sqlserver");
 const std::string sqlite("sqlite");
+const std::string csharp_target("Compile");
+const std::string cpp_header_target("ClInclude");
+const std::string cpp_impl_target("ClCompile");
 
 const std::string missing_odb_options("Could not find the ODB Options element");
 const std::string missing_qualified_name(
@@ -64,11 +75,15 @@ const std::string missing_qualified_name(
 const std::string invalid_daatabase_system(
     "Database system is invalid or unsupported: ");
 const std::string missing_archetype("Achetype is missing: ");
+const std::string invalid_ots("Invalid number of output technical spaces.");
+const std::string invalid_relation_status(
+    "Relation status is invalid or unsupported: ");
 
 }
 
 namespace dogen::orchestration::transforms {
 
+using identification::entities::logical_meta_id;
 using identification::entities::logical_name;
 using identification::entities::physical_meta_id;
 using logical::entities::element_visitor;
@@ -330,6 +345,17 @@ visit(logical::entities::visual_studio::msbuild_targets& v) {
     v.odb_targets(targets_);
 }
 
+identification::entities::technical_space
+physical_to_logical_population_transform::
+get_technical_space(const logical::entities::model& m) {
+    const auto& ots(m.output_technical_spaces());
+    if (ots.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << invalid_ots << " Found: " << ots.size();
+        BOOST_THROW_EXCEPTION(transform_exception(invalid_ots));
+    }
+    return ots.front();
+}
+
 std::list<std::string> physical_to_logical_population_transform::
 make_odb_databases(const text::entities::model& m) {
     std::list<std::string> r;
@@ -369,6 +395,30 @@ make_odb_databases(const text::entities::model& m) {
     return r;
 }
 
+std::unordered_set<logical_meta_id>
+physical_to_logical_population_transform::
+meta_names_for_project_items() {
+    std::unordered_set<logical_meta_id> r;
+
+    using f = identification::helpers::logical_meta_name_factory;
+    r.insert(f::make_enumeration_name().id());
+    r.insert(f::make_primitive_name().id());
+    r.insert(f::make_exception_name().id());
+    r.insert(f::make_object_name().id());
+    r.insert(f::make_builtin_name().id());
+    r.insert(f::make_visitor_name().id());
+    r.insert(f::make_assistant_name().id());
+
+    return r;
+}
+
+bool physical_to_logical_population_transform::
+is_project_item(const logical_meta_id& mn)  {
+    static const auto mnfpi(meta_names_for_project_items());
+    const auto i(mnfpi.find(mn));
+    return i != mnfpi.end();
+}
+
 void physical_to_logical_population_transform::
 apply(const text::transforms::context& ctx, text::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "physical to logical population",
@@ -379,8 +429,8 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
     const auto& mmp(m.physical().meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
     const auto target_name("odb_" + boost::join(mm, separator));
-    logical::entities::orm::odb_targets ots;
-    ots.main_target_name(target_name);
+    logical::entities::orm::odb_targets odbt;
+    odbt.main_target_name(target_name);
 
     const auto ott(identification::entities::model_type::target);
     for (auto& region : m.logical_physical_regions()) {
@@ -398,7 +448,7 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
         }
 
         const auto& pr(region.physical_region());
-        odb_targets_factory f(target_name, dbs, pr, ppp, ots);
+        odb_targets_factory f(target_name, dbs, pr, ppp, odbt);
         e.accept(f);
     }
 
@@ -407,9 +457,11 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
      * stable. We obtained the formattables from an unordered map so
      * they could have come in in any order.
      */
-    ots.targets().sort(odb_target_comparer);
-    build_files_updater u(ppp, ots);
+    odbt.targets().sort(odb_target_comparer);
+    build_files_updater u(ppp, odbt);
 
+    std::list<std::pair<std::string, std::string>> project_items;
+    const auto ots(get_technical_space(m.logical()));
     for (auto& region : m.logical_physical_regions()) {
         auto& e(*region.logical_element());
         const auto id(e.name().id());
@@ -425,7 +477,76 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
         }
 
         e.accept(u);
+
+        /*
+         * Gather project items.
+         */
+        const auto& aba(region.physical_region().artefacts_by_archetype());
+        for (const auto& pair : aba) {
+            const auto& a(*pair.second);
+
+            const auto be(a.meta_name().location().backend());
+            using identification::entities::technical_space;
+            if ((ots == technical_space::csharp && be != "csharp") ||
+                (ots == technical_space::cpp && be != "cpp"))
+                continue;
+
+            const auto mt(e.meta_name().id());
+            if (!is_project_item(mt))
+                continue;
+
+            /*
+             * Ensure the item path uses backslashes for compatibility
+             * with Visual Studio and MonoDevelop.
+             */
+            auto rp(a.path_properties().relative_path().generic_string());
+            std::replace(rp.begin(), rp.end(), '/', '\\');
+
+            const auto target([&]() {
+                if (be == "csharp")
+                    return csharp_target;
+
+                const auto rs(a.relations().status());
+                using physical::entities::relation_status;
+                if (rs == relation_status::not_relatable)
+                    return cpp_impl_target;
+                else if (rs == relation_status::relatable ||
+                    rs == relation_status::facet_default)
+                    return cpp_header_target;
+
+                const auto s(boost::lexical_cast<std::string>(rs));
+                BOOST_LOG_SEV(lg, error) << invalid_relation_status << s;
+                BOOST_THROW_EXCEPTION(
+                    transform_exception(invalid_relation_status + s));
+            }());
+            project_items.push_back(std::make_pair(target, rp));
+        }
     }
+
+    /*
+     * Now update project items.
+     */
+    project_items.sort([](const std::pair<std::string, std::string>& lhs,
+            const std::pair<std::string, std::string>& rhs){
+        return lhs.second < rhs.second;
+    });
+    auto projects(m.logical().visual_studio_elements().projects());
+    for (auto& pair : projects) {
+        auto& proj(*pair.second);
+
+        using namespace logical::entities::visual_studio;
+        item_group ig;
+        for (const auto& pair : project_items) {
+            item item;
+            item.name(pair.first);
+            item.include(pair.second);
+            ig.items().push_back(item);
+        }
+        proj.item_groups().push_back(ig);
+    }
+
+    for (const auto& pair : project_items)
+        m.logical().project_items().push_back(pair.second);
 
     stp.end_transform(m);
 }

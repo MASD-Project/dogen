@@ -28,6 +28,8 @@
 
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/context_fwd.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
+
 
 namespace dogen::orchestration::transforms {
 
@@ -37,8 +39,16 @@ namespace dogen::orchestration::transforms {
  */
 class physical_to_logical_population_transform final {
 private:
+    static identification::entities::technical_space
+    get_technical_space(const logical::entities::model& m);
+
     static std::list<std::string>
     make_odb_databases(const text::entities::model& m);
+
+    static std::unordered_set<identification::entities::logical_meta_id>
+    meta_names_for_project_items();
+    static bool is_project_item(
+        const identification::entities::logical_meta_id& mn);
 
 public:
     static void apply(const text::transforms::context& ctx,
