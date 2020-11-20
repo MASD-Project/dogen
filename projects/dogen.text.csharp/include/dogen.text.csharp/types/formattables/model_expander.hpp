@@ -32,7 +32,6 @@ namespace dogen::text::csharp::formattables {
 class model_expander final {
 private:
     void reduce(model& fm) const;
-    void expand_project_items(model& fm) const;
 
 public:
     void expand(model& fm) const;

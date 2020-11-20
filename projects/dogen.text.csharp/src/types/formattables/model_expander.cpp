@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen.text.csharp/types/formattables/reducer.hpp"
 #include "dogen.text.csharp/types/formattables/model_expander.hpp"
 
@@ -29,14 +28,8 @@ void model_expander::reduce(model& fm) const {
     rd.reduce(fm);
 }
 
-void model_expander::expand_project_items(model& /*fm*/) const {
-    // project_items_expander pie;
-    // pie.expand(fm);
-}
-
 void model_expander::expand(model& fm) const {
     reduce(fm);
-    expand_project_items(fm);
 }
 
 }
