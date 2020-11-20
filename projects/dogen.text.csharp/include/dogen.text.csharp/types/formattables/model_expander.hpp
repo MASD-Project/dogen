@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.text.csharp/types/transforms/repository.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -34,15 +32,10 @@ namespace dogen::text::csharp::formattables {
 class model_expander final {
 private:
     void reduce(model& fm) const;
-
     void expand_project_items(model& fm) const;
-    void expand_helpers(
-        const variability::entities::feature_model& feature_model,
-        const transforms::repository& frp, model& fm) const;
 
 public:
-    void expand(const variability::entities::feature_model& feature_model,
-        const transforms::repository& frp, model& fm) const;
+    void expand(model& fm) const;
 };
 
 }

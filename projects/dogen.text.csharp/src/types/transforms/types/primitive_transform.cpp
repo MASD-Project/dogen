@@ -78,7 +78,7 @@ ast.stream() << std::endl;
             ast.comment(e.documentation(), 1/*indent*/);
 ast.stream() << "    public sealed class " << sn << std::endl;
 ast.stream() << "    {" << std::endl;
-            if (!ctx.element_properties().helper_properties().empty())
+            if (!p.helper_properties().empty())
                 ast.add_helper_methods(id);
 
             /*

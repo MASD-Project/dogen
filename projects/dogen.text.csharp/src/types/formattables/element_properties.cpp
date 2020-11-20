@@ -22,43 +22,22 @@
 
 namespace dogen::text::csharp::formattables {
 
-element_properties::element_properties(
-    const std::list<dogen::logical::entities::helper_properties>& helper_properties,
-    const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties)
-    : helper_properties_(helper_properties),
-      attribute_properties_(attribute_properties) { }
+element_properties::element_properties(const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& attribute_properties)
+    : attribute_properties_(attribute_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
-    swap(helper_properties_, other.helper_properties_);
     swap(attribute_properties_, other.attribute_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return helper_properties_ == rhs.helper_properties_ &&
-        attribute_properties_ == rhs.attribute_properties_;
+    return attribute_properties_ == rhs.attribute_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::list<dogen::logical::entities::helper_properties>& element_properties::helper_properties() const {
-    return helper_properties_;
-}
-
-std::list<dogen::logical::entities::helper_properties>& element_properties::helper_properties() {
-    return helper_properties_;
-}
-
-void element_properties::helper_properties(const std::list<dogen::logical::entities::helper_properties>& v) {
-    helper_properties_ = v;
-}
-
-void element_properties::helper_properties(const std::list<dogen::logical::entities::helper_properties>&& v) {
-    helper_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::text::csharp::formattables::attribute_properties>& element_properties::attribute_properties() const {

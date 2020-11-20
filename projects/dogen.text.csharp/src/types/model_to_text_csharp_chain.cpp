@@ -51,11 +51,9 @@ model_to_text_csharp_chain::
 
 formattables::model
 model_to_text_csharp_chain::create_formattables_model(
-    const variability::entities::feature_model& feature_model,
     const transforms::repository& frp, const text::entities::model& m) const {
     formattables::workflow fw;
-    const auto& ap(m.logical().aspect_properties());
-    return fw.execute(feature_model, ap, frp, m);
+    return fw.execute(frp, m);
 }
 
 identification::entities::physical_meta_id
@@ -90,7 +88,6 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C# M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    const auto& feature_model(*ctx.feature_model());
     const auto& frp(transforms::workflow::registrar().formatter_repository());
     const auto& ap(m.logical().aspect_properties());
     const auto& assp(m.logical().assistant_properties());
@@ -98,7 +95,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     /*
      * Generate the formattables model.
      */
-    auto fm(create_formattables_model(feature_model, frp, m));
+    auto fm(create_formattables_model(frp, m));
     apply(ctx.tracer(), ap, assp, fm);
 
     using identification::entities::physical_meta_id;

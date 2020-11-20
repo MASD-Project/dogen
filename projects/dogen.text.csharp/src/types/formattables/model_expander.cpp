@@ -20,7 +20,6 @@
  */
 #include "dogen.text.csharp/types/formattables/project_items_expander.hpp"
 #include "dogen.text.csharp/types/formattables/reducer.hpp"
-#include "dogen.text.csharp/types/formattables/helper_expander.hpp"
 #include "dogen.text.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -35,24 +34,7 @@ void model_expander::expand_project_items(model& fm) const {
     pie.expand(fm);
 }
 
-void model_expander::
-expand_helpers(const variability::entities::feature_model& feature_model,
-    const transforms::repository& frp, model& fm) const {
-    helper_expander he;
-    he.expand(feature_model, frp, fm);
-}
-
-void model_expander::expand(
-    const variability::entities::feature_model& feature_model,
-    const transforms::repository& frp, model& fm) const {
-
-    /*
-     * We must expand helpers before reduction because we want to
-     * generate helpers for all referenced types, not just those in
-     * the target model.
-     */
-    expand_helpers(feature_model, frp, fm);
-
+void model_expander::expand(model& fm) const {
     reduce(fm);
     expand_project_items(fm);
 }

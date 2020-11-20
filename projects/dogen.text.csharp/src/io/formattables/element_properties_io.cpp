@@ -20,23 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/attribute_properties_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::helper_properties>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -69,7 +54,6 @@ namespace dogen::text::csharp::formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::element_properties\"" << ", "
-      << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"attribute_properties\": " << v.attribute_properties()
       << " }";
     return(s);

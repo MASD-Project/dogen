@@ -84,7 +84,7 @@ ast.stream() << "    public " << ast.make_inheritance_keyword_text(o) << "class 
             }
 ast.stream() << "    {" << std::endl;
             if (!o.local_attributes().empty()) {
-                if (!ctx.element_properties().helper_properties().empty())
+                if (!o.helper_properties().empty())
                     ast.add_helper_methods(id);
 
                 /*

@@ -58,7 +58,6 @@ public:
 
 private:
     formattables::model create_formattables_model(
-        const variability::entities::feature_model& feature_model,
         const transforms::repository& frp,
         const text::entities::model& m) const;
 

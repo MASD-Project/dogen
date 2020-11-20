@@ -41,16 +41,10 @@ private:
     model make_model(const transforms::repository& frp,
         const text::entities::model& m) const;
 
-    void expand_model(
-        const variability::entities::feature_model& feature_model,
-        const transforms::repository& frp, model& fm) const;
+    void expand_model(model& fm) const;
 
 public:
-    model execute(
-        const variability::entities::feature_model& feature_model,
-        const std::unordered_map<identification::entities::logical_id,
-        logical::entities::aspect_properties>& aspect_properties,
-        const transforms::repository& frp,
+    model execute( const transforms::repository& frp,
         const text::entities::model& m) const;
 };
 
