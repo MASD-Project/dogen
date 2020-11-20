@@ -545,9 +545,6 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
         proj.item_groups().push_back(ig);
     }
 
-    for (const auto& pair : project_items)
-        m.logical().project_items().push_back(pair.second);
-
     stp.end_transform(m);
 }
 

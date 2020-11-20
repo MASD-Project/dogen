@@ -61,8 +61,7 @@ model::model(model&& rhs)
       streaming_properties_(std::move(rhs.streaming_properties_)),
       technical_space_version_(std::move(rhs.technical_space_version_)),
       aspect_properties_(std::move(rhs.aspect_properties_)),
-      assistant_properties_(std::move(rhs.assistant_properties_)),
-      project_items_(std::move(rhs.project_items_)) { }
+      assistant_properties_(std::move(rhs.assistant_properties_)) { }
 
 model::model(
     const dogen::identification::entities::logical_name& name,
@@ -89,8 +88,7 @@ model::model(
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::streaming_properties>& streaming_properties,
     const dogen::identification::entities::technical_space_version technical_space_version,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::aspect_properties>& aspect_properties,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties,
-    const std::list<std::string>& project_items)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>& assistant_properties)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -115,8 +113,7 @@ model::model(
       streaming_properties_(streaming_properties),
       technical_space_version_(technical_space_version),
       aspect_properties_(aspect_properties),
-      assistant_properties_(assistant_properties),
-      project_items_(project_items) { }
+      assistant_properties_(assistant_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -145,7 +142,6 @@ void model::swap(model& other) noexcept {
     swap(technical_space_version_, other.technical_space_version_);
     swap(aspect_properties_, other.aspect_properties_);
     swap(assistant_properties_, other.assistant_properties_);
-    swap(project_items_, other.project_items_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -173,8 +169,7 @@ bool model::operator==(const model& rhs) const {
         streaming_properties_ == rhs.streaming_properties_ &&
         technical_space_version_ == rhs.technical_space_version_ &&
         aspect_properties_ == rhs.aspect_properties_ &&
-        assistant_properties_ == rhs.assistant_properties_ &&
-        project_items_ == rhs.project_items_;
+        assistant_properties_ == rhs.assistant_properties_;
 }
 
 model& model::operator=(model other) {
@@ -565,22 +560,6 @@ void model::assistant_properties(const std::unordered_map<dogen::identification:
 
 void model::assistant_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::logical::entities::assistant_properties>&& v) {
     assistant_properties_ = std::move(v);
-}
-
-const std::list<std::string>& model::project_items() const {
-    return project_items_;
-}
-
-std::list<std::string>& model::project_items() {
-    return project_items_;
-}
-
-void model::project_items(const std::list<std::string>& v) {
-    project_items_ = v;
-}
-
-void model::project_items(const std::list<std::string>&& v) {
-    project_items_ = std::move(v);
 }
 
 }
