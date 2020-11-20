@@ -68,11 +68,11 @@ ast.stream() << std::endl;
             ast.comment(be.documentation());
 ast.stream() << "class " << be.name().simple() << "_backend_chain final {" << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static const physical::entities::backend& static_backend();" << std::endl;
-ast.stream() << "    const physical::entities::backend& backend() const;" << std::endl;
+ast.stream() << "    // static const physical::entities::backend& static_backend();" << std::endl;
+ast.stream() << "    // const physical::entities::backend& backend() const;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static void initialise(transforms::registrar& r);" << std::endl;
+ast.stream() << "    // static void initialise(transforms::registrar& r);" << std::endl;
 ast.stream() << "};" << std::endl;
         } // snf
 ast.stream() << std::endl;

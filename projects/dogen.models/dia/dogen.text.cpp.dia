@@ -29522,11 +29522,11 @@ void backend_class_header_transform_transform::apply(const context&amp; ctx, con
 #&gt;
 class &lt;#= be.name().simple() #&gt;_backend_chain final {
 public:
-    static const physical::entities::backend&amp; static_backend();
-    const physical::entities::backend&amp; backend() const;
+    // static const physical::entities::backend&amp; static_backend();
+    // const physical::entities::backend&amp; backend() const;
 
 public:
-    static void initialise(transforms::registrar&amp; r);
+    // static void initialise(transforms::registrar&amp; r);
 };
 &lt;#+
         } // snf
@@ -29723,6 +29723,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("&lt;#= be.name().qualified().dot() #&gt;"));
 
+/*
 physical::entities::backend make_backend() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= be.meta_model_name() #&gt;");
@@ -29752,9 +29753,10 @@ physical::entities::backend make_backend() {
 #&gt;
     return r;
 }
+*/
 
 }
-
+/*
 const physical::entities::backend&amp; &lt;#= sn #&gt;::static_backend() {
     static const auto r(make_backend());
     return r;
@@ -29763,7 +29765,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::static_backend() {
 const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
     return static_backend();
 }
-
+*/
 &lt;#+
         } // snf
 #&gt;

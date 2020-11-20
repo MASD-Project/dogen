@@ -74,6 +74,7 @@ ast.stream() << std::endl;
 ast.stream() << "using namespace dogen::utility::log;" << std::endl;
 ast.stream() << "static logger lg(logger_factory(\"" << be.name().qualified().dot() << "\"));" << std::endl;
 ast.stream() << std::endl;
+ast.stream() << "/*" << std::endl;
 ast.stream() << "physical::entities::backend make_backend() {" << std::endl;
 ast.stream() << "    identification::helpers::physical_meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << be.meta_model_name() << "\");" << std::endl;
@@ -99,9 +100,10 @@ ast.stream() << "    lambda(" << n.simple() << "::" << n.simple() << "_facet_cha
             }
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
+ast.stream() << "*/" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+ast.stream() << "/*" << std::endl;
 ast.stream() << "const physical::entities::backend& " << sn << "::static_backend() {" << std::endl;
 ast.stream() << "    static const auto r(make_backend());" << std::endl;
 ast.stream() << "    return r;" << std::endl;
@@ -110,7 +112,7 @@ ast.stream() << std::endl;
 ast.stream() << "const physical::entities::backend& " << sn << "::backend() const {" << std::endl;
 ast.stream() << "    return static_backend();" << std::endl;
 ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+ast.stream() << "*/" << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf

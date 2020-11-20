@@ -39,11 +39,11 @@ namespace dogen::text::csharp::transforms {
  */
 class transforms_backend_chain final {
 public:
-    static const physical::entities::backend& static_backend();
-    const physical::entities::backend& backend() const;
+    // static const physical::entities::backend& static_backend();
+    // const physical::entities::backend& backend() const;
 
 public:
-    static void initialise(transforms::registrar& r);
+    // static void initialise(transforms::registrar& r);
 };
 }
 

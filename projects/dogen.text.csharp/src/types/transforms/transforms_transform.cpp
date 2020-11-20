@@ -34,6 +34,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("dogen.text.csharp.transforms"));
 
+/*
 physical::entities::backend make_backend() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
@@ -60,9 +61,10 @@ physical::entities::backend make_backend() {
     lambda(visual_studio::visual_studio_facet_chain::static_facet());
     return r;
 }
+*/
 
 }
-
+/*
 const physical::entities::backend& transforms_backend_chain::static_backend() {
     static const auto r(make_backend());
     return r;
@@ -71,6 +73,6 @@ const physical::entities::backend& transforms_backend_chain::static_backend() {
 const physical::entities::backend& transforms_backend_chain::backend() const {
     return static_backend();
 }
-
+*/
 }
 
