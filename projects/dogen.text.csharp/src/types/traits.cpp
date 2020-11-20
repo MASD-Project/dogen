@@ -68,7 +68,7 @@ std::string traits::backend_directory_name() {
 }
 
 std::string traits::csharp::helper::family() {
-    static std::string r("masd.csharp.helper.family");
+    static std::string r("masd.helper.family");
     return r;
 }
 

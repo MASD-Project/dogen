@@ -32,7 +32,6 @@
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.codec/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
-#include "dogen.text.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.text.cpp/types/transforms/transforms_factory.hpp"
@@ -62,7 +61,6 @@ void context_bootstrapping_chain::register_variability_entities(
     logical::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
-    text::csharp::feature_initializer::register_entities(rg);
     features::initializer::register_entities(rg);
 }
 
