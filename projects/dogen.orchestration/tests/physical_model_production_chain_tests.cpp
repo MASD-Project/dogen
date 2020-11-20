@@ -155,7 +155,7 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
 
         const bool is_first_diff(diffs_found == 0);
         if (is_first_diff) {
-            std::cout << "Differences found. Outputting first five."
+            std::cout << "Differences found. Outputting head of first 5 diffs."
                       << std::endl;
         }
 
