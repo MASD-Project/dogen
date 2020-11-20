@@ -241,9 +241,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
 
     bool has_helpers(false);
-    const auto& eprops(context_.element_properties());
-    for (const auto& hlp_props : eprops.helper_properties()) {
-    //for (const auto& hlp_props : element_.helper_properties()) {
+    for (const auto& hlp_props : element_.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(hlp_props));
 
