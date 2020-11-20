@@ -12373,16 +12373,16 @@ models and meta-models for the physical model.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O91">
       <dia:attribute name="obj_pos">
-        <dia:point val="70,-76"/>
+        <dia:point val="69,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,-76.05;78.635,-70.75"/>
+        <dia:rectangle val="68.95,-68.05;85.335,-62.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="70,-76"/>
+        <dia:point val="69,-68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -12391,7 +12391,7 @@ models and meta-models for the physical model.
         <dia:string>#relation_status#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::enumeration#</dia:string>
+        <dia:string>#masd::enumeration, dogen::convertible#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Status of a given archetype with regards to being related to other archetypes.#</dia:string>
@@ -14581,7 +14581,7 @@ element.#</dia:string>
         <dia:point val="84.055,-82.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.2425,-83.55;84.805,-75.2"/>
+        <dia:rectangle val="77.0925,-83.55;84.805,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14589,8 +14589,8 @@ element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="84.055,-82.8"/>
         <dia:point val="84.055,-78"/>
-        <dia:point val="74.2925,-78"/>
-        <dia:point val="74.2925,-76"/>
+        <dia:point val="77.1425,-78"/>
+        <dia:point val="77.1425,-68"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -22282,7 +22282,7 @@ The format used is dependent on the technical space the artefact belongs to.#</d
         <dia:point val="136,-11.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.322,-12.15;136.75,-7.2"/>
+        <dia:rectangle val="131.323,-12.15;136.75,-7.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
