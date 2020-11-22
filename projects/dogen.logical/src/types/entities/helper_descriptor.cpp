@@ -26,8 +26,7 @@ helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),
       requires_hashing_helper_(static_cast<bool>(0)),
       is_circular_dependency_(static_cast<bool>(0)),
-      is_pointer_(static_cast<bool>(0)),
-      is_enabled_(static_cast<bool>(0)) { }
+      is_pointer_(static_cast<bool>(0)) { }
 
 helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : family_(std::move(rhs.family_)),
@@ -55,7 +54,7 @@ helper_descriptor::helper_descriptor(
     const bool requires_hashing_helper,
     const bool is_circular_dependency,
     const bool is_pointer,
-    const bool is_enabled)
+    const std::unordered_set<dogen::identification::entities::physical_meta_id>& is_enabled)
     : family_(family),
       namespaces_(namespaces),
       name_identifiable_(name_identifiable),
@@ -250,12 +249,20 @@ void helper_descriptor::is_pointer(const bool v) {
     is_pointer_ = v;
 }
 
-bool helper_descriptor::is_enabled() const {
+const std::unordered_set<dogen::identification::entities::physical_meta_id>& helper_descriptor::is_enabled() const {
     return is_enabled_;
 }
 
-void helper_descriptor::is_enabled(const bool v) {
+std::unordered_set<dogen::identification::entities::physical_meta_id>& helper_descriptor::is_enabled() {
+    return is_enabled_;
+}
+
+void helper_descriptor::is_enabled(const std::unordered_set<dogen::identification::entities::physical_meta_id>& v) {
     is_enabled_ = v;
+}
+
+void helper_descriptor::is_enabled(const std::unordered_set<dogen::identification::entities::physical_meta_id>&& v) {
+    is_enabled_ = std::move(v);
 }
 
 }

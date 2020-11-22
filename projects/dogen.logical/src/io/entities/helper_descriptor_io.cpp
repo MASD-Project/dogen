@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/helper_descriptor_io.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -56,6 +57,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::physical_meta_id>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
     return s;
 }
 

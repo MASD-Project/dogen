@@ -28,8 +28,11 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen.logical/types/entities/streaming_properties.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::logical::entities {
 
@@ -57,7 +60,7 @@ public:
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
         const bool is_pointer,
-        const bool is_enabled);
+        const std::unordered_set<dogen::identification::entities::physical_meta_id>& is_enabled);
 
 public:
     const std::string& family() const;
@@ -107,8 +110,15 @@ public:
     bool is_pointer() const;
     void is_pointer(const bool v);
 
-    bool is_enabled() const;
-    void is_enabled(const bool v);
+    /**
+     * @brief Set of archetypes for which this helper is enabled.
+     */
+    /**@{*/
+    const std::unordered_set<dogen::identification::entities::physical_meta_id>& is_enabled() const;
+    std::unordered_set<dogen::identification::entities::physical_meta_id>& is_enabled();
+    void is_enabled(const std::unordered_set<dogen::identification::entities::physical_meta_id>& v);
+    void is_enabled(const std::unordered_set<dogen::identification::entities::physical_meta_id>&& v);
+    /**@}*/
 
 public:
     bool operator==(const helper_descriptor& rhs) const;
@@ -132,7 +142,7 @@ private:
     bool requires_hashing_helper_;
     bool is_circular_dependency_;
     bool is_pointer_;
-    bool is_enabled_;
+    std::unordered_set<dogen::identification::entities::physical_meta_id> is_enabled_;
 };
 
 }
