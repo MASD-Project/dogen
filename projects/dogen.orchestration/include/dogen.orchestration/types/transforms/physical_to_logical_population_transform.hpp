@@ -50,6 +50,10 @@ private:
     static bool is_project_item(
         const identification::entities::logical_meta_id& mn);
 
+private:
+    static void transform_build_files(text::entities::model& m);
+    static void transform_project_items(text::entities::model& m);
+
 public:
     static void apply(const text::transforms::context& ctx,
         text::entities::model& m);

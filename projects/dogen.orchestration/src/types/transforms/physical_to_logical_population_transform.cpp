@@ -420,9 +420,7 @@ is_project_item(const logical_meta_id& mn)  {
 }
 
 void physical_to_logical_population_transform::
-apply(const text::transforms::context& ctx, text::entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "physical to logical population",
-        transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
+transform_build_files(text::entities::model& m) {
 
     const auto dbs(make_odb_databases(m));
     const auto& mm(m.logical().name().location().model_modules());
@@ -461,7 +459,28 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
     build_files_updater u(ppp, odbt);
 
     std::list<std::pair<std::string, std::string>> project_items;
+    for (auto& region : m.logical_physical_regions()) {
+        auto& e(*region.logical_element());
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Processing element: " << id.value();
+
+        /*
+         * We only want to process target elements; references can be
+         * ignored.
+         */
+        if (e.provenance().model_type() == ott)
+            e.accept(u);
+        else
+            BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
+    }
+}
+
+void physical_to_logical_population_transform::
+transform_project_items(text::entities::model& m) {
+    std::list<std::pair<std::string, std::string>> project_items;
     const auto ots(get_technical_space(m.logical()));
+    const auto ott(identification::entities::model_type::target);
+
     for (auto& region : m.logical_physical_regions()) {
         auto& e(*region.logical_element());
         const auto id(e.name().id());
@@ -475,8 +494,6 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
-
-        e.accept(u);
 
         /*
          * Gather project items.
@@ -544,6 +561,15 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
         }
         proj.item_groups().push_back(ig);
     }
+}
+
+void physical_to_logical_population_transform::
+apply(const text::transforms::context& ctx, text::entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "physical to logical population",
+        transform_id, m.logical().name().id().value(), *ctx.tracer(), m);
+
+    transform_build_files(m);
+    transform_project_items(m);
 
     stp.end_transform(m);
 }
