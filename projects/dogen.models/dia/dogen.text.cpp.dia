@@ -7970,13 +7970,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O48">
       <dia:attribute name="obj_pos">
-        <dia:point val="90,183"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,182.95;124.815,188.05"/>
+        <dia:rectangle val="89.95,183.95;124.815,189.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="90,183"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="34.765000000000001"/>
@@ -8243,14 +8243,14 @@ for a given C++ entity.#</dia:string>
         <dia:point val="99.5882,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.5253,180.437;107.552,183.396"/>
+        <dia:rectangle val="99.5221,180.434;107.592,184.385"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="99.5882,180.5"/>
-        <dia:point val="107.382,183"/>
+        <dia:point val="107.382,184"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:string>##</dia:string>
@@ -8268,7 +8268,7 @@ for a given C++ entity.#</dia:string>
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="103.485,182.25"/>
+        <dia:point val="103.485,182.75"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -8401,7 +8401,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="62.9125,159.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.1625,158.45;90.2,183.8"/>
+        <dia:rectangle val="62.1625,158.45;90.2,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8410,7 +8410,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="62.9125,159.2"/>
         <dia:point val="62.9125,168"/>
         <dia:point val="90,168"/>
-        <dia:point val="90,183"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8769,7 +8769,7 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="124.765,183"/>
+        <dia:point val="124.765,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="124.015,181.255;136.2,184.8"/>
@@ -8778,7 +8778,7 @@ registry of all available formatters.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="124.765,183"/>
+        <dia:point val="124.765,184"/>
         <dia:point val="124.765,182"/>
         <dia:point val="136,182"/>
         <dia:point val="136,184"/>
@@ -8850,16 +8850,16 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O58">
       <dia:attribute name="obj_pos">
-        <dia:point val="124.765,188"/>
+        <dia:point val="124.765,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="124.015,187.25;145.362,194.8"/>
+        <dia:rectangle val="124.015,188.25;145.362,194.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="124.765,188"/>
+        <dia:point val="124.765,189"/>
         <dia:point val="124.765,192"/>
         <dia:point val="145.162,192"/>
         <dia:point val="145.162,194"/>
@@ -12954,16 +12954,16 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O83">
       <dia:attribute name="obj_pos">
-        <dia:point val="90,188"/>
+        <dia:point val="90,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.5775,187.25;90.75,194.8"/>
+        <dia:rectangle val="72.5775,188.25;90.75,194.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="90,188"/>
+        <dia:point val="90,189"/>
         <dia:point val="90,191"/>
         <dia:point val="72.6275,191"/>
         <dia:point val="72.6275,194"/>
@@ -16024,16 +16024,16 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O99">
       <dia:attribute name="obj_pos">
-        <dia:point val="107.382,188.05"/>
+        <dia:point val="107.382,189.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.632,187.3;110.812,202.8"/>
+        <dia:rectangle val="106.632,188.3;110.812,202.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="107.382,188.05"/>
+        <dia:point val="107.382,189.05"/>
         <dia:point val="107.382,191"/>
         <dia:point val="110.612,191"/>
         <dia:point val="110.612,202"/>
