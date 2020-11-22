@@ -18,38 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_TRANSFORM_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_IO_TRANSFORMS_REPOSITORY_IO_HPP
+#define DOGEN_TEXT_IO_TRANSFORMS_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen.logical/types/entities/helper_properties_fwd.hpp"
+#include <iosfwd>
+#include "dogen.text/types/transforms/repository.hpp"
 
 namespace dogen::text::transforms {
 
-class helper_transform {
-public:
-    helper_transform() = default;
-    helper_transform(const helper_transform&) = delete;
-    helper_transform(helper_transform&&) = default;
-    virtual ~helper_transform() noexcept = 0;
-
-public:
-    bool operator==(const helper_transform& /*rhs*/) const;
-    virtual std::string id() const = 0;
-    virtual std::string family() const = 0;
-    virtual std::list<std::string> owning_formatters() const = 0;
-    virtual std::list<std::string> owning_facets() const = 0;
-    virtual std::string helper_name() const = 0;
-    virtual bool is_enabled(
-        const logical::entities::helper_properties& hp) const = 0;
-    virtual void apply(
-        const logical::entities::helper_properties& hp) const = 0;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::text::transforms::repository& v);
 
 }
 

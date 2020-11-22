@@ -18,33 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_ASSISTANT_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_ASSISTANT_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
+#include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::transforms {
 
-class assistant final {
-public:
-    assistant() = default;
-    assistant(const assistant&) = default;
-    assistant(assistant&&) = default;
-    ~assistant() = default;
-    assistant& operator=(const assistant&) = default;
-
-public:
-    bool operator==(const assistant& rhs) const;
-    bool operator!=(const assistant& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
-
+bool helper_transform::operator==(const helper_transform& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

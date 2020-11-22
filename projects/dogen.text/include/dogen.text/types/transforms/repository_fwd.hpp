@@ -18,12 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text/types/transforms/assistant.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_REPOSITORY_FWD_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_REPOSITORY_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::text::transforms {
 
-bool assistant::operator==(const assistant& /*rhs*/) const {
-    return true;
-}
+class repository;
 
 }
+
+#endif

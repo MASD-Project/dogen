@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_ASSISTANT_FWD_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_ASSISTANT_FWD_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_CHAIN_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
+
 namespace dogen::text::transforms {
 
-class assistant;
+class helper_chain final {
+public:
+    helper_chain() = default;
+    helper_chain(const helper_chain&) = default;
+    helper_chain(helper_chain&&) = default;
+    ~helper_chain() = default;
+    helper_chain& operator=(const helper_chain&) = default;
+
+public:
+    bool operator==(const helper_chain& rhs) const;
+    bool operator!=(const helper_chain& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 
