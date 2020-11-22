@@ -37,6 +37,13 @@ namespace dogen::logical::transforms {
 
 /**
  * @brief Populates all of the helper properties from the PMM.
+ *
+ * Note that this is a gigantic hack, helpers are just a temporary
+ * physical concept bolted in to the logical model and will be removed
+ * with the PMM. It is just here for now so we can move on to the next
+ * phase of refactoring. Note also that to determine enablement of
+ * helpers we rely on an orchestration transform, as it needs the PM
+ * and that was just one hack too far.
  */
 class helper_properties_transform final {
 private:
