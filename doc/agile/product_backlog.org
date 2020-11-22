@@ -78,6 +78,40 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Move io code in types in C++ to io facet                          :story:
+
+Originally we implemented io support for inheritance by making use of
+virtual functions. This is still the easiest way to do type
+dispatching; however, we then placed the io implementation in
+types. This is a bit annoying because it clutters types with io
+machinery. Another way of doing this is:
+
+- create a class to do the streaming for each type, call it =dumper=;
+- when there is no inheritance, =operator<<= simply calls the
+  appropriate dumper.
+- when there is inheritance, to_stream calls the appropriate dumper
+  directly; =operator<<= calls =to_stream=. in an ideal world we could
+  even make it private and =operator<<= a friend.
+
+With this, we no longer need all the complications of supporting io
+helpers in types (enabled in helpers, etc). We just need to determine
+if io is enabled (and in inheritance), in which case we output
+=to_stream= and for implementation, also include/use the dumper. Note
+that we still need to declare the dumpers in the io headers - at least
+for types involved in inheritance, but probably in all cases for
+consistency.
+
+In fact we should go one step further and rename the io facet
+"dumper", "data_dumper" or some such name. We called it "io" because
+it uses iostreams in C++ but that is just an implementation
+detail. The facet itself should be mainly composed of the dumpers
+themselves and then simply have =operator<<= as entry points to call
+the dumpers.
+
+This is a dependency in order to move to PDMs because we will not have
+helpers. Therefore there will be no way to handle the complex
+relationships between types and IO.
+
 *** Analysis of MDE papers to read                                    :story:
 
 Links:
@@ -10245,36 +10279,6 @@ Tasks:
 - add a meta-data flag to enable/disable this feature.
 - in assistant, during code generation, provide a function which
   injects the internal module.
-
-*** Move io code in types in C++ to io facet                          :story:
-
-Originally we implemented io support for inheritance by making use of
-virtual functions. This is still the easiest way to do type
-dispatching; however, we then placed the io implementation in
-types. This is a bit annoying because it clutters types with io
-machinery. Another way of doing this is:
-
-- create a class to do the streaming for each type, call it =dumper=;
-- when there is no inheritance, =operator<<= simply calls the
-  appropriate dumper.
-- when there is inheritance, to_stream calls the appropriate dumper
-  directly; =operator<<= calls =to_stream=. in an ideal world we could
-  even make it private and =operator<<= a friend.
-
-With this, we no longer need all the complications of supporting io
-helpers in types (enabled in helpers, etc). We just need to determine
-if io is enabled (and in inheritance), in which case we output
-=to_stream= and for implementation, also include/use the dumper. Note
-that we still need to declare the dumpers in the io headers - at least
-for types involved in inheritance, but probably in all cases for
-consistency.
-
-In fact we should go one step further and rename the io facet
-"dumper", "data_dumper" or some such name. We called it "io" because
-it uses iostreams in C++ but that is just an implementation
-detail. The facet itself should be mainly composed of the dumpers
-themselves and then simply have =operator<<= as entry points to call
-the dumpers.
 
 *** Rename formatting assistant                                       :story:
 
