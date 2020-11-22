@@ -82,7 +82,8 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"is_simple_type\": " << v.is_simple_type() << ", "
       << "\"requires_hashing_helper\": " << v.requires_hashing_helper() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
-      << "\"is_pointer\": " << v.is_pointer()
+      << "\"is_pointer\": " << v.is_pointer() << ", "
+      << "\"is_enabled\": " << v.is_enabled()
       << " }";
     return(s);
 }

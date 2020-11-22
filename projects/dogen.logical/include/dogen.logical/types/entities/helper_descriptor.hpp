@@ -56,7 +56,8 @@ public:
         const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
-        const bool is_pointer);
+        const bool is_pointer,
+        const bool is_enabled);
 
 public:
     const std::string& family() const;
@@ -106,6 +107,9 @@ public:
     bool is_pointer() const;
     void is_pointer(const bool v);
 
+    bool is_enabled() const;
+    void is_enabled(const bool v);
+
 public:
     bool operator==(const helper_descriptor& rhs) const;
     bool operator!=(const helper_descriptor& rhs) const {
@@ -128,6 +132,7 @@ private:
     bool requires_hashing_helper_;
     bool is_circular_dependency_;
     bool is_pointer_;
+    bool is_enabled_;
 };
 
 }

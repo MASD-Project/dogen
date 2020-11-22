@@ -26,7 +26,8 @@ helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),
       requires_hashing_helper_(static_cast<bool>(0)),
       is_circular_dependency_(static_cast<bool>(0)),
-      is_pointer_(static_cast<bool>(0)) { }
+      is_pointer_(static_cast<bool>(0)),
+      is_enabled_(static_cast<bool>(0)) { }
 
 helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
     : family_(std::move(rhs.family_)),
@@ -39,7 +40,8 @@ helper_descriptor::helper_descriptor(helper_descriptor&& rhs)
       is_simple_type_(std::move(rhs.is_simple_type_)),
       requires_hashing_helper_(std::move(rhs.requires_hashing_helper_)),
       is_circular_dependency_(std::move(rhs.is_circular_dependency_)),
-      is_pointer_(std::move(rhs.is_pointer_)) { }
+      is_pointer_(std::move(rhs.is_pointer_)),
+      is_enabled_(std::move(rhs.is_enabled_)) { }
 
 helper_descriptor::helper_descriptor(
     const std::string& family,
@@ -52,7 +54,8 @@ helper_descriptor::helper_descriptor(
     const bool is_simple_type,
     const bool requires_hashing_helper,
     const bool is_circular_dependency,
-    const bool is_pointer)
+    const bool is_pointer,
+    const bool is_enabled)
     : family_(family),
       namespaces_(namespaces),
       name_identifiable_(name_identifiable),
@@ -63,7 +66,8 @@ helper_descriptor::helper_descriptor(
       is_simple_type_(is_simple_type),
       requires_hashing_helper_(requires_hashing_helper),
       is_circular_dependency_(is_circular_dependency),
-      is_pointer_(is_pointer) { }
+      is_pointer_(is_pointer),
+      is_enabled_(is_enabled) { }
 
 void helper_descriptor::swap(helper_descriptor& other) noexcept {
     using std::swap;
@@ -78,6 +82,7 @@ void helper_descriptor::swap(helper_descriptor& other) noexcept {
     swap(requires_hashing_helper_, other.requires_hashing_helper_);
     swap(is_circular_dependency_, other.is_circular_dependency_);
     swap(is_pointer_, other.is_pointer_);
+    swap(is_enabled_, other.is_enabled_);
 }
 
 bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
@@ -91,7 +96,8 @@ bool helper_descriptor::operator==(const helper_descriptor& rhs) const {
         is_simple_type_ == rhs.is_simple_type_ &&
         requires_hashing_helper_ == rhs.requires_hashing_helper_ &&
         is_circular_dependency_ == rhs.is_circular_dependency_ &&
-        is_pointer_ == rhs.is_pointer_;
+        is_pointer_ == rhs.is_pointer_ &&
+        is_enabled_ == rhs.is_enabled_;
 }
 
 helper_descriptor& helper_descriptor::operator=(helper_descriptor other) {
@@ -242,6 +248,14 @@ bool helper_descriptor::is_pointer() const {
 
 void helper_descriptor::is_pointer(const bool v) {
     is_pointer_ = v;
+}
+
+bool helper_descriptor::is_enabled() const {
+    return is_enabled_;
+}
+
+void helper_descriptor::is_enabled(const bool v) {
+    is_enabled_ = v;
 }
 
 }
