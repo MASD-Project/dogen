@@ -27,7 +27,11 @@
 
 #include <list>
 #include <string>
-#include "dogen.logical/types/entities/helper_properties_fwd.hpp"
+#include <ostream>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::transforms {
 
@@ -38,16 +42,28 @@ public:
     helper_transform(helper_transform&&) = default;
     virtual ~helper_transform() noexcept = 0;
 
+protected:
+    bool is_streaming_enabled(const physical::entities::model& m,
+        const logical::entities::element& e,
+        const physical::entities::artefact& a,
+        const logical::entities::helper_properties& hp) const;
+
 public:
     bool operator==(const helper_transform& /*rhs*/) const;
+
+public:
     virtual std::string id() const = 0;
     virtual std::string family() const = 0;
     virtual std::list<std::string> owning_formatters() const = 0;
     virtual std::list<std::string> owning_facets() const = 0;
     virtual std::string helper_name() const = 0;
-    virtual bool is_enabled(
+    virtual bool is_enabled(const physical::entities::model& m,
+        const logical::entities::element& e,
+        const physical::entities::artefact& a,
         const logical::entities::helper_properties& hp) const = 0;
-    virtual void apply(
+    virtual void apply(std::ostream& os,
+        const logical::entities::element& e,
+        const physical::entities::artefact& a,
         const logical::entities::helper_properties& hp) const = 0;
 };
 
