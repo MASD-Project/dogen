@@ -23,7 +23,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/helper_descriptor_io.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,20 +61,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::physical_meta_id>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
@@ -97,8 +82,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
       << "\"is_simple_type\": " << v.is_simple_type() << ", "
       << "\"requires_hashing_helper\": " << v.requires_hashing_helper() << ", "
       << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
-      << "\"is_pointer\": " << v.is_pointer() << ", "
-      << "\"is_enabled\": " << v.is_enabled()
+      << "\"is_pointer\": " << v.is_pointer()
       << " }";
     return(s);
 }
