@@ -7873,13 +7873,13 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="167,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.95,91.95;217.6,94.85"/>
+        <dia:rectangle val="166.95,91.95;229.535,94.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="167,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="50.549999999999997"/>
+        <dia:real val="62.484999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
@@ -7977,10 +7977,10 @@ C++ technical space, or associated minor technical spaces.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#helper_transforms#</dia:string>
+            <dia:string>#helpers_by_family#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;helper_transform&gt;&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;identification::entities::physical_meta_id, std::list&lt;std::shared_ptr&lt;helper_transform&gt;&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8441,7 +8441,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="210.57,84.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="209.82,83.45;217.75,93.6"/>
+        <dia:rectangle val="209.82,83.45;229.685,93.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8449,8 +8449,8 @@ C++ technical space, or associated minor technical spaces.
       <dia:attribute name="orth_points">
         <dia:point val="210.57,84.2"/>
         <dia:point val="210.57,90"/>
-        <dia:point val="217.55,90"/>
-        <dia:point val="217.55,92"/>
+        <dia:point val="229.485,90"/>
+        <dia:point val="229.485,92"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

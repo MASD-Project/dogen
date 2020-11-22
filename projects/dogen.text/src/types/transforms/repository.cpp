@@ -32,16 +32,16 @@ const std::shared_ptr<dogen::text::transforms::helper_transform>& rhs) {
 
 namespace dogen::text::transforms {
 
-repository::repository(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helper_transforms)
-    : helper_transforms_(helper_transforms) { }
+repository::repository(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family)
+    : helpers_by_family_(helpers_by_family) { }
 
 void repository::swap(repository& other) noexcept {
     using std::swap;
-    swap(helper_transforms_, other.helper_transforms_);
+    swap(helpers_by_family_, other.helpers_by_family_);
 }
 
 bool repository::operator==(const repository& rhs) const {
-    return helper_transforms_ == rhs.helper_transforms_;
+    return helpers_by_family_ == rhs.helpers_by_family_;
 }
 
 repository& repository::operator=(repository other) {
@@ -50,20 +50,20 @@ repository& repository::operator=(repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& repository::helper_transforms() const {
-    return helper_transforms_;
+const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& repository::helpers_by_family() const {
+    return helpers_by_family_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& repository::helper_transforms() {
-    return helper_transforms_;
+std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& repository::helpers_by_family() {
+    return helpers_by_family_;
 }
 
-void repository::helper_transforms(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v) {
-    helper_transforms_ = v;
+void repository::helpers_by_family(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v) {
+    helpers_by_family_ = v;
 }
 
-void repository::helper_transforms(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >&& v) {
-    helper_transforms_ = std::move(v);
+void repository::helpers_by_family(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >&& v) {
+    helpers_by_family_ = std::move(v);
 }
 
 }

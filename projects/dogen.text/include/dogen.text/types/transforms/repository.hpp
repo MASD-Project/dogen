@@ -31,6 +31,8 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.text/types/transforms/helper_transform_fwd.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::text::transforms {
 
@@ -42,13 +44,13 @@ public:
     ~repository() = default;
 
 public:
-    explicit repository(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helper_transforms);
+    explicit repository(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helper_transforms() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helper_transforms();
-    void helper_transforms(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v);
-    void helper_transforms(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >&& v);
+    const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family() const;
+    std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family();
+    void helpers_by_family(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v);
+    void helpers_by_family(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >&& v);
 
 public:
     bool operator==(const repository& rhs) const;
@@ -61,7 +63,7 @@ public:
     repository& operator=(repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > > helper_transforms_;
+    std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > > helpers_by_family_;
 };
 
 }

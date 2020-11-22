@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.text/io/transforms/repository_io.hpp"
 #include "dogen.text/io/transforms/helper_transform_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -63,12 +64,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::shared_ptr
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -81,7 +82,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -102,7 +103,7 @@ namespace dogen::text::transforms {
 std::ostream& operator<<(std::ostream& s, const repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::transforms::repository\"" << ", "
-      << "\"helper_transforms\": " << v.helper_transforms()
+      << "\"helpers_by_family\": " << v.helpers_by_family()
       << " }";
     return(s);
 }
