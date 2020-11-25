@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-11-22 Sun 18:37]
+#+CAPTION: Clock summary at [2020-11-25 Wed 22:15]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *45:08* |       |       | 100.0 |
+| *Total time*                                              | *45:30* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 45:08   |       |       | 100.0 |
-| Active                                                    |         | 45:08 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |  11.2 |
+| Stories                                                   | 45:30   |       |       | 100.0 |
+| Active                                                    |         | 45:30 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |  11.1 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   1.0 |
-| Sprint and product backlog grooming                       |         |       |  1:30 |   3.3 |
+| Sprint and product backlog grooming                       |         |       |  1:52 |   4.1 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   1.0 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  15.5 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  30.1 |
-| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   1.3 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  15.3 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  29.9 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   1.2 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.3 |
 | Fix some problems with c++ visual studio problems         |         |       |  0:59 |   2.2 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   8.6 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |  10.6 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   8.5 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |  10.5 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.7 |
 | Issues with emacs                                         |         |       |  0:22 |   0.8 |
 | Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.5 |
-| Move context, helper and M2T interface to =text= model    |         |       |  5:20 |  11.8 |
+| Move context, helper and M2T interface to =text= model    |         |       |  5:20 |  11.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -234,6 +234,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-11-25 Wed 22:08]--[2020-11-25 Wed 22:15] =>  0:07
+    CLOCK: [2020-11-25 Wed 21:52]--[2020-11-25 Wed 22:07] =>  0:15
     CLOCK: [2020-11-14 Sat 19:45]--[2020-11-14 Sat 19:46] =>  0:01
     CLOCK: [2020-11-07 Sat 14:15]--[2020-11-07 Sat 15:06] =>  0:51
     CLOCK: [2020-11-07 Sat 08:49]--[2020-11-07 Sat 09:08] =>  0:19
@@ -625,6 +627,66 @@ code to generate the transform code for backend and facet
 
 This type has now been cleaned up and should be the same for C++ and
 C# so should be moved to the common model.
+
+*** Model functionality provided by assistant in the logical model    :story:
+
+We need to look at all the methods in assistant and see if we can
+replace them by data which is processed in transforms.
+
+*** Consider moving CI to GitHub Actions                              :story:
+
+At present we are using Travis and AppVeyor for our CI. However, it
+would be nice to have a single place with all of the CI (and even more
+ideally, packaging as well). GitHub seems to offer some kind of CI
+support via GitHub actions. However, we need to first move to building
+on [[*Build dogen from docker][docker]].
+
+Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
+
+Links:
+
+- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
+  caching]]
+
+*** Stitch formatter updates                                          :story:
+
+There are a number of issues with stitch formatters at present:
+
+- stitch transform is still generating its own artefact.
+
+Actually, now that we've updated all formatters do we even need a
+stitch formatter? The helpers are probably going via some other
+route. If so, remove it and the wale formatter.
+
+This is incorrect. Whilst we are using the output of stitch in a
+different way, we are still expanding the stitch template for the
+header files.
+
+*** Remove annotations from stitch templates                          :story:
+
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
+
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
+
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+We seem to be using features to read values out of the templates. We
+need to see if this adds any value.
 
 *** Clean up helpers interface and move it to =text=                  :story:
 

@@ -78,6 +78,56 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Replace meta-model naming with stereotypes                        :story:
+
+At present we are using meta-names for binding formatters to logical
+meta-model elements. This is not a very good way of doing things. We
+should bind them directly at the stereotype level. This would allow us
+to decomission a lot of code:
+
+1. =meta_naming_transform=, =meta_name_factory=.
+2. =stereotypes_helper=
+3. =static_stereotypes= enumeration
+
+*** Consider making technical spaces a core concept                   :story:
+
+At present we are trying to instantiate a stitch template. It requires
+knowing the technical space that the original archetype belongs to so
+that we can locate the appropriate decoration. However, because we are
+in the text model and the archetype is a physical concept, we have no
+way of knowing what the original TS was for a given archetype. We
+could of course locate the associated M2T transform etc - but this
+perhaps hints at a bigger problem with the conceptual model: technical
+spaces are much more of a pervasive concept than just logical model:
+
+- injectors belong to technical spaces.
+- logical model entities belong to technical spaces.
+- text transforms belong to technical spaces.
+- physical model entities such as archetypes and artefacts belong to
+  technical spaces.
+
+It would be nice if we could have this modeled correctly, in some kind
+of shared model. At present, the only model which does this is
+=variability= but it does not make a lot of sense to put TS'
+there. Perhaps we should wait until we have enough entities to see
+what the name of this "core" model should be.
+
+Merged stories:
+
+*Add technical spaces to PM and LM*
+
+Technical spaces and their associated versions should be declared by
+the text models and should be part of the PM. The TS should be
+declared on the "global" text model so that backends can reuse them
+(e.g. we can declare XML with associated extensions and then use it
+where required).
+
+Notes:
+
+- TS should also have a physical name. However, they are not
+  associated with a backend. Actually they don't need a physical name
+  but they need some kind of identification.
+
 *** Move io code in types in C++ to io facet                          :story:
 
 Originally we implemented io support for inheritance by making use of
@@ -230,11 +280,6 @@ duplicates.
 This name looks incorrect:
 
 : 00000-configuration--initial_input.json
-
-*** Model functionality provided by assistant in the logical model    :story:
-
-We need to look at all the methods in assistant and see if we can
-replace them by data which is processed in transforms.
 
 *** Move default constructor work from resolver                       :story:
 
@@ -418,14 +463,6 @@ We need to read a description attribute for:
 
 And populate these on the LM PMM, and then code generate them. The
 description should be the comment of the associated element.
-
-*** Rename =archetype_name_set=                                       :story:
-
-We haven't yet found the right name for this but the idea is that we
-have a container of all the meta-names which refer to archetypes in a
-region of physical space.
-
-- archetype name meta region? it is only meta-names.
 
 *** Allow arbitrary physical containment                              :story:
 
@@ -1600,20 +1637,6 @@ Notes:
 - we already have some kind of concept for this because we use this in
   the resolver. Investigate how its being used.
 
-*** Stitch formatter updates                                          :story:
-
-There are a number of issues with stitch formatters at present:
-
-- stitch transform is still generating its own artefact.
-
-Actually, now that we've updated all formatters do we even need a
-stitch formatter? The helpers are probably going via some other
-route. If so, remove it and the wale formatter.
-
-This is incorrect. Whilst we are using the output of stitch in a
-different way, we are still expanding the stitch template for the
-header files.
-
 *** Remove empty tracing directories                                  :story:
 
 At present when you add regexes for tracing filtering, we create a lot
@@ -1926,32 +1949,6 @@ possible problems with merging).
 At any rate the profiles should be kept within the =text*= models
 given they are used only for M2T transforms.
 
-*** Remove annotations from stitch templates                          :story:
-
-In the new world, stitch templates don't have all of the required
-information to build the boilerplate:
-
-- they cannot expand wale templates because the KVPs will be in the
-  element itself, not the template. Strictly speaking this is not an
-  problem we have right now though.
-- more importantly, the include dependencies cannot be computed by the
-  template. This is because the dependencies are really a function of
-  the model type we are expressing on the template. Instead, we did a
-  quick hack and supplied the includes as KVPs. So they are kind of
-  parameters but kind of not really parameters because they are
-  hard-coded to the template. It solved the immediate problem of
-  having them formatted and placed in the right part of the file, but
-  now we can see this is not the right approach.
-
-In reality, we should not have any annotations at all in
-templates. The boilerplate and includes should be supplied as KVPs and
-applied as variables. They should be composed externally with access
-to data from the model element. Thus we then need a way to associate
-includes with model elements. This is captured as a separate story.
-
-We seem to be using features to read values out of the templates. We
-need to see if this adds any value.
-
 *** Consider creating a org-mode based tracing format                 :story:
 
 We've already seen the power of org-mode for representing a code
@@ -2021,6 +2018,9 @@ templates would be much simpler. This can only be done once we use the
 PMM to compute paths. Also, we probably require a way to inject the
 dependencies. This will probably require merging code generation as
 well.
+
+Also this can only be done when we remove the current implementation
+of helpers and move to PDMs.
 
 *** Consider allowing representation of namespaces in file names      :story:
 
@@ -2170,45 +2170,6 @@ make things slightly more efficient:
 These should be called "product models" rather than projects. We
 should also consider how "product families" fit in this architecture.
 
-*** Consider making technical spaces a core concept                   :story:
-
-At present we are trying to instantiate a stitch template. It requires
-knowing the technical space that the original archetype belongs to so
-that we can locate the appropriate decoration. However, because we are
-in the text model and the archetype is a physical concept, we have no
-way of knowing what the original TS was for a given archetype. We
-could of course locate the associated M2T transform etc - but this
-perhaps hints at a bigger problem with the conceptual model: technical
-spaces are much more of a pervasive concept than just logical model:
-
-- injectors belong to technical spaces.
-- logical model entities belong to technical spaces.
-- text transforms belong to technical spaces.
-- physical model entities such as archetypes and artefacts belong to
-  technical spaces.
-
-It would be nice if we could have this modeled correctly, in some kind
-of shared model. At present, the only model which does this is
-=variability= but it does not make a lot of sense to put TS'
-there. Perhaps we should wait until we have enough entities to see
-what the name of this "core" model should be.
-
-Merged stories:
-
-*Add technical spaces to PM and LM*
-
-Technical spaces and their associated versions should be declared by
-the text models and should be part of the PM. The TS should be
-declared on the "global" text model so that backends can reuse them
-(e.g. we can declare XML with associated extensions and then use it
-where required).
-
-Notes:
-
-- TS should also have a physical name. However, they are not
-  associated with a backend. Actually they don't need a physical name
-  but they need some kind of identification.
-
 *** Add enablement test in C#                                         :story:
 
 At present we have probably broken enablement in C# due to the hackery
@@ -2218,7 +2179,7 @@ test enablement before we start hacking around with the enablement
 transforms. It will most likely be red - we need to add the pruning
 hack to get rid of disabled artefacts as we do in C++.
 
-*** Investigate doxygen's functionality                               :story:
+*** Investigate goxygen's functionality                               :story:
 
 Seems like an interesting project:
 
@@ -2440,16 +2401,6 @@ Links:
 - [[https://github.com/oatpp/oatpp-consul][oatpp-consul GitHub]]: oatpp client for consul https://oatpp.io/
 - [[https://www.consul.io/api/libraries-and-sdks.html][Consul - Client Libraries & SDKs]]
 
-*** Update the contributing to dogen doco                             :story:
-
-The MSSQL tools project has a great set of points on contributing. We
-should merge most of them into our contributing doco. We should also
-port it to org-mode.
-
-Links:
-
-- https://github.com/microsoft/sqltoolsservice
-
 *** Rename main Dogen package in Debian                               :story:
 
 At present we seem to have called our package =dogen-applications=:
@@ -2651,17 +2602,6 @@ Links:
 
 - [[https://arxiv.org/pdf/1509.04498.pdf][A comparison of mechanisms for integrating handwritten and generated
   code for object-oriented programming languages]]
-
-*** Replace meta-model naming with stereotypes                        :story:
-
-At present we are using meta-names for binding formatters to logical
-meta-model elements. This is not a very good way of doing things. We
-should bind them directly at the stereotype level. This would allow us
-to decomission a lot of code:
-
-1. =meta_naming_transform=, =meta_name_factory=.
-2. =stereotypes_helper=
-3. =static_stereotypes= enumeration
 
 *** Consider renaming profiles                                        :story:
 
@@ -3892,7 +3832,7 @@ facet depends on the hash facet if the user decides to add a
 type. We need to make sure we take these run-time dependencies into
 account too.
 
-*** Invalid stereotypes outside of objects are not detected           :story:
+*** Invalid stereotypes outside of objects are not detected :reviewing:story:
 
 At present we are only checking for invalid stereotypes (e.g. those
 which are neither static stereotypes, nor profiles nor object
@@ -8764,6 +8704,16 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Update the contributing to dogen doco                             :story:
+
+The MSSQL tools project has a great set of points on contributing. We
+should merge most of them into our contributing doco. We should also
+port it to org-mode.
+
+Links:
+
+- https://github.com/microsoft/sqltoolsservice
+
 *** Test cases show up as zero in report.ci                           :story:
 
 The [[https://report.ci/reports/gh/MASD-Project/dogen][report.ci]] tool written by Klemens Morgenstern is now showing zero
@@ -8893,21 +8843,6 @@ Link:
 - [[https://github.com/TheLartians/ModernCppStarter][ModernCppStarter GH]]: Kick-start your C++! A template for modern C++
   projects using CMake, CI, code coverage, clang-format, reproducible
   dependency management and much more.
-
-*** Consider moving CI to GitHub Actions                              :story:
-
-At present we are using Travis and AppVeyor for our CI. However, it
-would be nice to have a single place with all of the CI (and even more
-ideally, packaging as well). GitHub seems to offer some kind of CI
-support via GitHub actions. However, we need to first move to building
-on [[*Build dogen from docker][docker]].
-
-Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
-
-Links:
-
-- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
-  caching]]
 
 *** Run ODB on nightlies                                              :story:
 
@@ -14453,6 +14388,7 @@ Notes:
 Links:
 
 - [[https://dreamdota.com/explore-c-20-bitmask-design/][Explore C++20 Bit Flag with Designated Initializer and Concepts]]
+- [[https://m-peko.github.io/craft-cpp/posts/different-ways-to-define-binary-flags/][Different Ways To Define Binary Flags]]
 
 *** Support for file level comments via annotations                   :story:
 
@@ -16083,6 +16019,10 @@ This seems like another interest dynamic analysis tool:
 - [[https://clang.llvm.org/docs/MemorySanitizer.html][MemorySanitizer]]
 - [[https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html][UndefinedBehaviorSanitizer]]
 
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/jzky8o/what_linters_do_you_recommend/][What linters do you recommend?]]
+
 *** Add support for CPPCheck                                          :story:
 
 Seems like CPPCheck has a different take on dynamic analysis when
@@ -16138,6 +16078,39 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Investigate cookietemple project templates                        :story:
+
+#+begin_quote
+A cookiecutter based project template creation tool supporting several
+domains and languages with advanced linting, syncing and standardized
+workflows to get your project kickstarted in no time.
+#+end_quote
+
+Links:
+
+- [[https://github.com/cookiejar/cookietemple][GH project]]
+- [[https://www.reddit.com/r/cpp/comments/jzp8pe/if_you_are_looking_for_an_easy_way_to_start_a_new/][reddit: If you are looking for an easy way to start a new project,
+  checkout Cookietemple!]]
+
+*** Consider adding support for =repr=                                :story:
+
+#+begin_quote
+repr is a header-only library. Add include/ to your
+target_include_directories and include <repr/repr.h>.
+
+repr(value) returns a printable string representation of value. To
+achieve this, repr uses libfmt, magic_enum and boost::pfr, and
+provides a nice convenience function.
+
+repr() supports fundamental types, strings, containers, container
+adapters, aggregate-initializable classes/structs and chrono types.
+#+end_quote
+
+Links:
+
+- [[https://github.com/p-ranav/repr][GH repo]]
+- [[https://www.reddit.com/r/cpp/comments/jzgzoz/repr_for_c_return_printable_string_representation/][reddit: repr for C++: Return printable string representation of a value]]
 
 *** Product based operations                                          :story:
 
