@@ -7333,13 +7333,13 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="227,93"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.95,92.95;254.5,107.05"/>
+        <dia:rectangle val="226.95,92.95;251.42,107.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="227,93"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14.000000000000002"/>
@@ -7348,7 +7348,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:string>#helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable, dogen::handcrafted::pretty_printable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
@@ -7393,7 +7393,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c6ccffff"/>
+        <dia:color val="#e5e8ffff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000ff"/>
@@ -7858,19 +7858,19 @@ C++ technical space, or associated minor technical spaces.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O52">
       <dia:attribute name="obj_pos">
-        <dia:point val="226,80"/>
+        <dia:point val="227,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="225.95,79.95;252.345,85.25"/>
+        <dia:rectangle val="226.95,79.95;246.415,85.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="226,80"/>
+        <dia:point val="227,80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="5"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#helper_chain#</dia:string>
@@ -7921,7 +7921,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c6ccffff"/>
+        <dia:color val="#e5e8ffff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000ff"/>
@@ -7962,7 +7962,31 @@ C++ technical space, or associated minor technical spaces.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#physical_model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#physical::entities::meta_model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="true"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
@@ -8002,7 +8026,7 @@ C++ technical space, or associated minor technical spaces.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>##</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8025,61 +8049,10 @@ C++ technical space, or associated minor technical spaces.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#os#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#std::ostream#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#pm#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#physical::entities::meta_model#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#logical::entities::element#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#a#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#physical::entities::artefact#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8120,7 +8093,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:string>#repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8165,7 +8138,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#e5e8ffff"/>
+        <dia:color val="#f7e5ffff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000ff"/>
@@ -8508,19 +8481,19 @@ C++ technical space, or associated minor technical spaces.
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="239.148,85.2"/>
+        <dia:point val="236.683,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="238.398,84.45;254.65,94.6"/>
+        <dia:rectangle val="235.933,84.25;251.57,94.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="239.148,85.2"/>
-        <dia:point val="239.148,92"/>
-        <dia:point val="254.45,92"/>
-        <dia:point val="254.45,93"/>
+        <dia:point val="236.683,85"/>
+        <dia:point val="236.683,92"/>
+        <dia:point val="251.37,92"/>
+        <dia:point val="251.37,93"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8673,7 +8646,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="223.532,94.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="222.782,94.05;227.05,102.5"/>
+        <dia:rectangle val="222.782,94.05;227.05,100.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8681,8 +8654,8 @@ C++ technical space, or associated minor technical spaces.
       <dia:attribute name="orth_points">
         <dia:point val="223.532,94.8"/>
         <dia:point val="226,94.8"/>
-        <dia:point val="226,100.9"/>
-        <dia:point val="227,100.9"/>
+        <dia:point val="226,99.3"/>
+        <dia:point val="227,99.3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -8745,7 +8718,7 @@ C++ technical space, or associated minor technical spaces.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O53" connection="10"/>
-        <dia:connection handle="1" to="O51" connection="14"/>
+        <dia:connection handle="1" to="O51" connection="10"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -8754,7 +8727,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="223.14,82.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="223.09,80.35;226.75,84.3"/>
+        <dia:rectangle val="223.09,80.35;227.75,84.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8763,7 +8736,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="223.14,82.7"/>
         <dia:point val="224,82.7"/>
         <dia:point val="224,81.1"/>
-        <dia:point val="226,81.1"/>
+        <dia:point val="227,81.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
