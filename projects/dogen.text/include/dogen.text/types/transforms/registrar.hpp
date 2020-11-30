@@ -25,51 +25,36 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text/types/transforms/repository.hpp"
 
 namespace dogen::text::transforms {
 
 class registrar final {
-public:
-    registrar() = default;
-    registrar(const registrar&) = default;
-    registrar(registrar&&) = default;
-    ~registrar() = default;
+private:
+    /**
+     * @brief Ensures the transform passes a modicum of sanity checks.
+     */
+    void validate(std::shared_ptr<helper_transform> ht) const;
 
 public:
-    explicit registrar(const dogen::text::transforms::repository& repository_);
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
 public:
-    const dogen::text::transforms::repository& repository_() const;
-    dogen::text::transforms::repository& repository_();
-    void repository_(const dogen::text::transforms::repository& v);
-    void repository_(const dogen::text::transforms::repository&& v);
+    /**
+     * @brief Registers a helper transform.
+     */
+    void register_helper_transform(std::shared_ptr<helper_transform> ht);
 
 public:
-    bool operator==(const registrar& rhs) const;
-    bool operator!=(const registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(registrar& other) noexcept;
-    registrar& operator=(registrar other);
+    const repository& helper_repository() const;
 
 private:
-    dogen::text::transforms::repository repository__;
+    repository repository_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::text::transforms::registrar& lhs,
-    dogen::text::transforms::registrar& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

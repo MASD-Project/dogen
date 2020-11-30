@@ -25,24 +25,42 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <ostream>
+#include <boost/shared_ptr.hpp>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.text/types/transforms/registrar.hpp"
 
 namespace dogen::text::transforms {
 
 class helper_chain final {
 public:
-    helper_chain() = default;
-    helper_chain(const helper_chain&) = default;
-    helper_chain(helper_chain&&) = default;
-    ~helper_chain() = default;
-    helper_chain& operator=(const helper_chain&) = default;
+    /**
+     * @brief Returns the registrar. If it has not yet been
+     * initialised, initialises it.
+     */
+    static text::transforms::registrar& registrar();
+
+    /**
+     * @brief Physical model with meta-model properties.
+     *
+     * FIXME: big hack until we update the interfaces of the M2T
+     * transforms.
+     */
+    static physical::entities::model* model_;
+
+private:
+    std::list<std::shared_ptr<transforms::helper_transform>>
+    get_helpers(const physical::entities::artefact& a,
+        const logical::entities::helper_properties& hp) const;
 
 public:
-    bool operator==(const helper_chain& rhs) const;
-    bool operator!=(const helper_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void apply(std::ostream& os, const logical::entities::element& e,
+        const physical::entities::artefact& a);
 
+private:
+    static std::shared_ptr<text::transforms::registrar> registrar_;
 };
 
 }

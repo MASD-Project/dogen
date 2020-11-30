@@ -18,42 +18,76 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/forward_list_io.hpp"
+#include "dogen.text/io/transforms/repository_io.hpp"
+#include "dogen.text/types/transforms/registrar_error.hpp"
 #include "dogen.text/types/transforms/registrar.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("text.transforms.registrar"));
+
+const std::string null_helper_transform("Helper transform supplied is null");
+const std::string null_transform("Transform supplied is null.");
+const std::string duplicate_archetype("Duplicate formatter name: ");
+const std::string empty_family("Family cannot be empty.");
+const std::string no_helpers_by_family("No helpers by family provided.");
+
+}
 
 namespace dogen::text::transforms {
 
-registrar::registrar(const dogen::text::transforms::repository& repository_)
-    : repository__(repository_) { }
+void registrar::validate(std::shared_ptr<helper_transform> ht) const {
+    /*
+     * Must be pointing to a valid object.
+     */
+    if (!ht) {
+        BOOST_LOG_SEV(lg, error) << null_helper_transform;
+        BOOST_THROW_EXCEPTION(registrar_error(null_helper_transform));
+    }
 
-void registrar::swap(registrar& other) noexcept {
-    using std::swap;
-    swap(repository__, other.repository__);
+    /*
+     * Helper family must be populated
+     */
+    if(ht->family().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_family;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
+    }
 }
 
-bool registrar::operator==(const registrar& rhs) const {
-    return repository__ == rhs.repository__;
+void registrar::validate() const {
+    /*
+     * We must have at least one registered transform. This is a quick
+     * way of troubleshooting validation errors.
+     */
+    if (repository_.helpers_by_family().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_helpers_by_family;
+        BOOST_THROW_EXCEPTION(registrar_error(no_helpers_by_family));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrar is valid. Repository: "
+                             << repository_;
 }
 
-registrar& registrar::operator=(registrar other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) {
+    validate(ht);
+    auto& hbf(repository_.helpers_by_family()[ht->family()]);
+    for (const auto& of : ht->owning_formatters()) {
+        identification::entities::physical_meta_id pid(of);
+        hbf[pid].push_back(ht);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered helper transform: "
+                             << ht->helper_name();
+
 }
 
-const dogen::text::transforms::repository& registrar::repository_() const {
-    return repository__;
-}
-
-dogen::text::transforms::repository& registrar::repository_() {
-    return repository__;
-}
-
-void registrar::repository_(const dogen::text::transforms::repository& v) {
-    repository__ = v;
-}
-
-void registrar::repository_(const dogen::text::transforms::repository&& v) {
-    repository__ = std::move(v);
+const repository& registrar::helper_repository() const {
+    return repository_;
 }
 
 }
