@@ -14,6 +14,12 @@ environment:
       generator: Visual Studio 15 2017 Win64
       build_group: Continuous
 
+matrix:
+  # Build frequently times out.
+  allow_failures:
+    - compiler: msvc
+      configuration: Debug
+
 configuration:
   - Release
   - Debug
