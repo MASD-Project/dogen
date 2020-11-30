@@ -19005,6 +19005,9 @@ Links:
 - [[https://enterprisecraftsmanship.com/posts/when-to-mock/][Article: When to mock]]
 - [[https://github.com/Moq/moq4][GH Moq]]
 - [[https://github.com/moq/Moq.AutoMocker][GH Moq.AutoMocker]]
+- [[https://github.com/Guardsquare/mocxx][GH mocxx]], article: [[https://tech.guardsquare.com/posts/mocxx-the-mocking-tool/][The C++ Mocking Tool]], [[https://www.reddit.com/r/cpp/comments/k0atyi/mocxx_a_versatile_c_function_mocking_framework/][reddit]].
+- [[https://github.com/Smertig/rcmp][GH rcmp]]
+- [[http://blog.zhangliaoyuan.com/blog/2015/05/15/thy-ways-to-break-the-dependency-during-unit-testing-in-c_c++-programming/][The Ways to Break the Dependency During Unit Testing in C/C++ Programming]]
 
 *** Investigate ribosome for ideas                                    :story:
 
