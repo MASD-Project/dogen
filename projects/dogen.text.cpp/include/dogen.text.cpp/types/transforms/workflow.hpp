@@ -21,7 +21,6 @@
 #ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_WORKFLOW_HPP
 #define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_WORKFLOW_HPP
 
-#include "dogen.text/types/entities/logical_physical_region.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -38,6 +37,7 @@
 #include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
