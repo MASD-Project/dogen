@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <memory>
 #include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text/types/transforms/repository.hpp"
 
@@ -55,6 +56,12 @@ public:
 private:
     repository repository_;
 };
+
+template<typename HelperTransform>
+inline void register_helper(registrar& rg) {
+    const auto f(std::make_shared<HelperTransform>());
+    rg.register_helper_transform(f);
+}
 
 }
 
