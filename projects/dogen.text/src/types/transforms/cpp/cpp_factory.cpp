@@ -22,6 +22,7 @@
 #include "dogen.text/types/transforms/cpp/cpp_factory.hpp"
 #include "dogen.text/types/transforms/cpp/testing_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/cpp/types/types_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text/types/transforms/cpp/implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/public_headers_factory.hpp"
@@ -45,6 +46,20 @@ physical::entities::backend cpp_factory::make() {
     r.meta_name(b.build());
     r.directory_name("cpp");
     r.labels().push_back(identification::entities::label("test", "lbl"));
+
+    const auto fct_inserter([&](const auto& fct) {
+        const auto id(fct.meta_name().id());
+        const auto pair(std::make_pair(id, fct));
+        const auto inserted(r.facets().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate facet: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
+        }
+    });
+
+    fct_inserter(types::types_factory::make());
 
     const auto ak_inserter([&](const auto& ak) {
         const auto pair(std::make_pair(ak.id(), ak));

@@ -19,54 +19,32 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/transforms/cpp/cpp_transform.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/cpp/types/types_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text/types/transforms/cpp/types/types_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
-namespace dogen::text::transforms::cpp {
+namespace dogen::text::transforms::cpp::types {
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dogen.text.transforms.cpp"));
+static logger lg(logger_factory("dogen.text.transforms.cpp.types"));
 
-/*
-physical::entities::backend make_backend() {
+}
+
+physical::entities::facet types_factory::make() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("cpp");
+    b.facet("types");
 
-    physical::entities::backend r;
+    physical::entities::facet r;
     r.meta_name(b.build());
+    r.directory_name("types");
+    r.labels().push_back(identification::entities::label("test", "some_label"));
 
-    const auto lambda([&](const auto& fct) {
-        const auto id(fct.meta_name().id());
-        const auto pair(std::make_pair(id, fct));
-        const auto inserted(r.facets().insert(pair).second);
-        if (!inserted) {
-            using text::transforms::transformation_error;
-            const std::string duplicate_facet("Duplicate facet: ");
-            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
-        }
-    });
-
-    lambda(types::types_facet_chain::static_facet());
-    return r;
-}
-*/
-
-}
-/*
-const physical::entities::backend& cpp_backend_chain::static_backend() {
-    static const auto r(make_backend());
     return r;
 }
 
-const physical::entities::backend& cpp_backend_chain::backend() const {
-    return static_backend();
-}
-*/
 }
 
