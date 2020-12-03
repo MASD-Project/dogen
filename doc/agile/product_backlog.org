@@ -16079,6 +16079,24 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for snowflake                             :story:
+
+#+begin_quote
+In certain situations you need a low-latency, distributed,
+uncoordinated, (roughly) time ordered, compact and highly available Id
+generation system. This project was inspired by Twitter's Snowflake
+project which has been retired.
+#+end_quote
+
+Links:
+
+- [[https://github.com/Shenggan/SnowFlake][GH SnowFlake]]
+- [[https://github.com/sniper00/snowflake-cpp][GH snowflake-cpp]]
+- [[https://developer.twitter.com/en/docs/twitter-ids][twitter ids]]
+- [[https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html][Announcing Snowflake]]
+- [[https://medium.com/ingeniouslysimple/why-did-we-shift-away-from-database-generated-ids-7e0e54a49bb3][Why Did We Shift Away From Database-Generated Ids?]]
+- [[https://github.com/RobThree/IdGen][GH IdGen]] (C#)
+
 *** Consider moving to =PEGTL=                                        :story:
 
 Seems like a modern replacement for Boost.Spirit.
