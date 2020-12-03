@@ -248,6 +248,16 @@ render_all_templates(const context& ctx, entities::model& m) {
             BOOST_LOG_SEV(lg, debug) << "Processing: " << id.value();
 
             /*
+             * We don't need to render templates for elements which are not
+             * part of the target model.
+             */
+            using identification::entities::model_type;
+            if (e.provenance().model_type() != model_type::target) {
+                BOOST_LOG_SEV(lg, trace) << "Skipping Non-target element.";
+                return;
+            }
+
+            /*
              * We start by rendering the wale template. This may not
              * exist, in which case the string will be empty.
              */
@@ -279,7 +289,7 @@ render_all_templates(const context& ctx, entities::model& m) {
 
 void template_rendering_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "archetype rendering",
+    tracing::scoped_transform_tracer stp(lg, "template rendering",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
