@@ -30930,6 +30930,8 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
     r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
+
+            if (!fct.archetypes().empty() || !fct.helpers().empty()) {
 #&gt;
 
     const auto lambda([&amp;](auto&amp; container, const auto&amp; element) {
@@ -30946,6 +30948,8 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
     });
 
 &lt;#+
+            }
+
             for (const auto&amp; n : fct.archetypes()) {
 #&gt;
     lambda(r.archetypes(), &lt;#= n.simple() #&gt;_factory::make());

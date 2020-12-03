@@ -92,6 +92,8 @@ ast.stream() << "    r.postfix(\"" << fct.postfix() << "\");" << std::endl;
             for(const auto& l : fct.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }
+
+            if (!fct.archetypes().empty() || !fct.helpers().empty()) {
 ast.stream() << std::endl;
 ast.stream() << "    const auto lambda([&](auto& container, const auto& element) {" << std::endl;
 ast.stream() << "        const auto id(element.meta_name().id());" << std::endl;
@@ -106,6 +108,8 @@ ast.stream() << "                transformation_error(duplicate_archetype + id.v
 ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;
+            }
+
             for (const auto& n : fct.archetypes()) {
 ast.stream() << "    lambda(r.archetypes(), " << n.simple() << "_factory::make());" << std::endl;
             }
