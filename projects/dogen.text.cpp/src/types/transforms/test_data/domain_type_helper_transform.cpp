@@ -57,12 +57,16 @@ std::string domain_type_helper_transform::helper_name() const {
     return r;
 }
 
-bool domain_type_helper_transform::is_enabled(const assistant& /*a*/,
+bool domain_type_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void domain_type_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void domain_type_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -70,21 +74,21 @@ void domain_type_helper_transform::apply(assistant& ast, const logical::entities
     const bool is_recursive(d.is_circular_dependency());
 
     if (is_recursive) {
-ast.stream() << std::endl;
-ast.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-ast.stream() << "create_" << ident << "(const unsigned int) {" << std::endl;
+os << std::endl;
+os << qn << (is_pointer ? "*" : "") << std::endl;
+os << "create_" << ident << "(const unsigned int) {" << std::endl;
         if (is_pointer) {
-ast.stream() << "    return nullptr;" << std::endl;
+os << "    return nullptr;" << std::endl;
         } else {
-ast.stream() << "    return " << qn << "();" << std::endl;
+os << "    return " << qn << "();" << std::endl;
         }
-ast.stream() << "}" << std::endl;
+os << "}" << std::endl;
     } else {
-ast.stream() << std::endl;
-ast.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-ast.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << (is_pointer ? "*" : "") << std::endl;
+os << "create_" << ident << "(const unsigned int position) {" << std::endl;
+os << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
+os << "}" << std::endl;
     }
 }
 }

@@ -184,7 +184,7 @@ make_argument_name(const logical::entities::attribute& attr) const {
     return r;
 }
 
-std::list<std::shared_ptr<transforms::helper_transform>>
+std::list<std::shared_ptr<text::transforms::helper_transform>>
 assistant::get_helpers(const logical::entities::helper_properties& hp) const {
     const auto fam(hp.current().family());
 
@@ -220,7 +220,7 @@ assistant::get_helpers(const logical::entities::helper_properties& hp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                              << physical_meta_name_.id();
-    return std::list<std::shared_ptr<transforms::helper_transform>>();
+    return std::list<std::shared_ptr<text::transforms::helper_transform>>();
 }
 
 boost::optional<logical::entities::assistant_properties> assistant::
@@ -252,7 +252,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
             }
 
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
-            hlp->apply(*this, hlp_props);
+            hlp->apply(stream(), context_.model().logical(), hlp_props);
         }
     }
 

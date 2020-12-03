@@ -57,24 +57,28 @@ std::string ptree_helper_transform::helper_name() const {
     return r;
 }
 
-bool ptree_helper_transform::is_enabled(const assistant& /*a*/,
+bool ptree_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void ptree_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-ast.stream() << std::endl;
-ast.stream() << qn << std::endl;
-ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-ast.stream() << "    using boost::property_tree::ptree;" << std::endl;
-ast.stream() << "    ptree c;" << std::endl;
-ast.stream() << "    c.put(\"key_2\", position);" << std::endl;
-ast.stream() << "    ptree r;" << std::endl;
-ast.stream() << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
-ast.stream() << "    return r;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << std::endl;
+os << "create_" << ident << "(const unsigned int position) {" << std::endl;
+os << "    using boost::property_tree::ptree;" << std::endl;
+os << "    ptree c;" << std::endl;
+os << "    c.put(\"key_2\", position);" << std::endl;
+os << "    ptree r;" << std::endl;
+os << "    r.push_back(ptree::value_type(\"key_1\", c));" << std::endl;
+os << "    return r;" << std::endl;
+os << "}" << std::endl;
 }
 }

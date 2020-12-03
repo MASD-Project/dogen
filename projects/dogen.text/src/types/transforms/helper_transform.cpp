@@ -18,12 +18,74 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::transforms {
 
 using identification::entities::physical_meta_id;
 using identification::entities::logical_meta_physical_id;
+
+helper_transform::~helper_transform() noexcept {}
+
+formatters::scoped_namespace_formatter helper_transform::
+make_scoped_namespace_formatter(std::ostream& os,
+    const logical::entities::model& m, const std::list<std::string>& ns) const {
+    const auto ts(m.output_technical_spaces().front());
+    const auto tsv(m.technical_space_version());
+    using identification::entities::technical_space;
+    using identification::entities::technical_space_version;
+    const bool use_nesting(ts == technical_space::csharp ||
+        (ts == technical_space::cpp && tsv == technical_space_version::cpp_17));
+    return formatters::scoped_namespace_formatter(
+        os, ts, ns, true/*add_new_line*/, use_nesting);
+}
+
+std::string helper_transform::
+streaming_for_type(const logical::entities::streaming_properties& sp,
+    const std::string& s) const {
+    std::ostringstream stream;
+    utility::formatters::utility_formatter uf(stream);
+    if (sp.remove_unprintable_characters())
+        uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (!sp.string_conversion_method().empty()) {
+        // FIXME: hack to determine if we are being dereferenced.
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + "." + sp.string_conversion_method());
+    } else if (sp.requires_quoting())
+        uf.insert_streamed(s);
+    else
+        uf.insert(s);
+
+    return stream.str();
+}
+
+std::string
+helper_transform::streaming_for_type(const logical::entities::model& m,
+    const identification::entities::logical_name& n,
+    const std::string& s) const {
+    const auto str_propss(m.streaming_properties());
+    const auto i(str_propss.find(n.id()));
+    if (i == str_propss.end())
+        return s;
+
+    return streaming_for_type(i->second, s);
+}
+
+std::string helper_transform::
+streaming_for_type(const logical::entities::helper_descriptor& hd,
+    const std::string& s) const {
+
+    const auto sp(hd.streaming_properties());
+    if (!sp)
+        return s;
+
+    return streaming_for_type(*sp, s);
+}
 
 bool helper_transform::is_streaming_enabled(const physical::entities::model& m,
     const logical::entities::element& e,

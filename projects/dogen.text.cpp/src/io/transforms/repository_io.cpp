@@ -25,7 +25,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
-#include "dogen.text.cpp/types/transforms/helper_transform.hpp"
+#include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/io/transforms/repository_io.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -46,7 +46,7 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
 inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<std::string, std::unordered_map<
     identification::entities::physical_meta_id,
-    std::list<std::shared_ptr<helper_transform>>>>& helpers) {
+    std::list<std::shared_ptr<text::transforms::helper_transform>>>>& helpers) {
     s << "\"helper_formatters\": " << "[ ";
 
     for(auto i(helpers.begin()); i != helpers.end(); ++i) {

@@ -57,21 +57,25 @@ std::string enumerable_helper_transform::helper_name() const {
     return r;
 }
 
-bool enumerable_helper_transform::is_enabled(const assistant& /*a*/,
+bool enumerable_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void enumerable_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
-ast.stream() << "        /// <summary>" << std::endl;
-ast.stream() << "        /// </summary>" << std::endl;
-ast.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
-ast.stream() << "        {" << std::endl;
-ast.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;
-ast.stream() << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
-ast.stream() << "        }" << std::endl;
+os << "        /// <summary>" << std::endl;
+os << "        /// </summary>" << std::endl;
+os << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
+os << "        {" << std::endl;
+os << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;
+os << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
+os << "        }" << std::endl;
 }
 }

@@ -38,6 +38,9 @@ const std::string helpless_family("No registered helpers found for family: ");
 
 namespace dogen::text::transforms {
 
+using logical::entities::element;
+using physical::entities::artefact;
+
 std::shared_ptr<text::transforms::registrar> helper_chain::registrar_;
 physical::entities::model* helper_chain::model_;
 
@@ -49,7 +52,7 @@ text::transforms::registrar& helper_chain::registrar() {
 }
 
 std::list<std::shared_ptr<helper_transform>> helper_chain::
-get_helpers(const physical::entities::artefact& a,
+get_helpers(const artefact& a,
     const logical::entities::helper_properties& hp) const {
     /*
      * A family must have at least one helper registered. This is a
@@ -79,8 +82,8 @@ get_helpers(const physical::entities::artefact& a,
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
-void helper_chain::apply(std::ostream& os, const logical::entities::element& e,
-    const physical::entities::artefact& a) {
+void helper_chain::apply(std::ostream& os, const logical::entities::model& m,
+    const element& e, const artefact& a) {
 
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods for element: "
@@ -105,7 +108,7 @@ void helper_chain::apply(std::ostream& os, const logical::entities::element& e,
             }
 
             BOOST_LOG_SEV(lg, debug) << "Transforming with helper: " << id;
-            hlp->apply(os, e, a, hlp_props);
+            hlp->apply(os, m, hlp_props);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";

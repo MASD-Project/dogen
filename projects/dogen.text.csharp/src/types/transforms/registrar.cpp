@@ -115,8 +115,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
                              << " against meta name: " << pmn;
 }
 
-void registrar::
-register_helper_transform(std::shared_ptr<helper_transform> ht) {
+void registrar::register_helper_transform(
+    std::shared_ptr<text::transforms::helper_transform> ht) {
     if (!ht) {
         BOOST_LOG_SEV(lg, error) << null_transform_helper;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform_helper));

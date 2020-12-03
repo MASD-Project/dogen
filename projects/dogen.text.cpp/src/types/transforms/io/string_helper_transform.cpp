@@ -60,19 +60,23 @@ std::string string_helper_transform::helper_name() const {
     return r;
 }
 
-bool string_helper_transform::is_enabled(const assistant& a,
+bool string_helper_transform::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
-void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
-ast.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-ast.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
-ast.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
-ast.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
-ast.stream() << "    boost::replace_all(s, \"\\\\\", \"<backslash>\");" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+void string_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+os << "inline std::string tidy_up_string(std::string s) {" << std::endl;
+os << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
+os << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
+os << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
+os << "    boost::replace_all(s, \"\\\\\", \"<backslash>\");" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
 }
 }

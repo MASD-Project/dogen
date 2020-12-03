@@ -57,37 +57,41 @@ std::string variant_helper_transform::helper_name() const {
     return r;
 }
 
-bool variant_helper_transform::is_enabled(const assistant& /*a*/,
+bool variant_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void variant_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto key(hp.direct_descendants().front());
     const auto value(hp.direct_descendants().back());
-ast.stream() << std::endl;
-ast.stream() << "struct " << ident << "_visitor : public boost::static_visitor<> {" << std::endl;
-ast.stream() << "    " << ident << "_visitor() : hash(0) {}" << std::endl;
+os << std::endl;
+os << "struct " << ident << "_visitor : public boost::static_visitor<> {" << std::endl;
+os << "    " << ident << "_visitor() : hash(0) {}" << std::endl;
     for (const auto& dd : hp.direct_descendants()) {
-ast.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
+os << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
         if (!dd.requires_hashing_helper())
-ast.stream() << "        combine(hash, v);" << std::endl;
+os << "        combine(hash, v);" << std::endl;
         else
-ast.stream() << "        combine(hash, hash_" << dd.name_tree_identifiable() << "(v));" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << std::endl;
+os << "        combine(hash, hash_" << dd.name_tree_identifiable() << "(v));" << std::endl;
+os << "    }" << std::endl;
+os << std::endl;
     }
-ast.stream() << "    mutable std::size_t hash;" << std::endl;
-ast.stream() << "};" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
-ast.stream() << "    " << ident << "_visitor vis;" << std::endl;
-ast.stream() << "    boost::apply_visitor(vis, v);" << std::endl;
-ast.stream() << "    return vis.hash;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << "    mutable std::size_t hash;" << std::endl;
+os << "};" << std::endl;
+os << std::endl;
+os << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+os << "    " << ident << "_visitor vis;" << std::endl;
+os << "    boost::apply_visitor(vis, v);" << std::endl;
+os << "    return vis.hash;" << std::endl;
+os << "}" << std::endl;
 }
 }

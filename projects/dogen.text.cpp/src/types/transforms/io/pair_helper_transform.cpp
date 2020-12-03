@@ -60,30 +60,34 @@ std::string pair_helper_transform::helper_name() const {
     return r;
 }
 
-bool pair_helper_transform::is_enabled(const assistant& a,
+bool pair_helper_transform::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
-void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void pair_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto first(hp.direct_descendants().front());
         const auto second(hp.direct_descendants().back());
-ast.stream() << std::endl;
-ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
-ast.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    s << \"\\\"first\\\": \" << " << ast.streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
-ast.stream() << "    s << \"\\\"second\\\": \" << " << ast.streaming_for_type(second, "v.second") << ";" << std::endl;
-ast.stream() << "    s << \" }\";" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+os << std::endl;
+os << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+os << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;
+os << std::endl;
+os << "    s << \"\\\"first\\\": \" << " << streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
+os << "    s << \"\\\"second\\\": \" << " << streaming_for_type(second, "v.second") << ";" << std::endl;
+os << "    s << \" }\";" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
     }
-ast.stream() << std::endl;
+os << std::endl;
 }
 }

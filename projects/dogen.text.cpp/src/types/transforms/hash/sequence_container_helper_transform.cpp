@@ -57,27 +57,31 @@ std::string sequence_container_helper_transform::helper_name() const {
     return r;
 }
 
-bool sequence_container_helper_transform::is_enabled(const assistant& /*a*/,
+bool sequence_container_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void sequence_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto containee(hp.direct_descendants().front());
-ast.stream() << std::endl;
-ast.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
-ast.stream() << "    std::size_t seed(0);" << std::endl;
-ast.stream() << "    for (const auto& i : v) {" << std::endl;
+os << std::endl;
+os << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+os << "    std::size_t seed(0);" << std::endl;
+os << "    for (const auto& i : v) {" << std::endl;
     if (!containee.requires_hashing_helper())
-ast.stream() << "        combine(seed, i);" << std::endl;
+os << "        combine(seed, i);" << std::endl;
     else
-ast.stream() << "        combine(seed, hash_" << containee.name_tree_identifiable() << "(i));" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    return seed;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << "        combine(seed, hash_" << containee.name_tree_identifiable() << "(i));" << std::endl;
+os << "    }" << std::endl;
+os << "    return seed;" << std::endl;
+os << "}" << std::endl;
 }
 }

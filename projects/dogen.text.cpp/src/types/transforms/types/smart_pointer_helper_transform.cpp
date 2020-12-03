@@ -57,24 +57,28 @@ std::string smart_pointer_helper_transform::helper_name() const {
     return r;
 }
 
-bool smart_pointer_helper_transform::is_enabled(const assistant& /*a*/,
+bool smart_pointer_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
-ast.stream() << std::endl;
-ast.stream() << "inline bool operator==(const " << qn << "& lhs," << std::endl;
-ast.stream() << "const " << qn << "& rhs) {" << std::endl;
-ast.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
+os << std::endl;
+os << "inline bool operator==(const " << qn << "& lhs," << std::endl;
+os << "const " << qn << "& rhs) {" << std::endl;
+os << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
     }
-ast.stream() << std::endl;
+os << std::endl;
 }
 
 }

@@ -57,31 +57,35 @@ std::string path_helper_transform::helper_name() const {
     return r;
 }
 
-bool path_helper_transform::is_enabled(const assistant& /*a*/,
+bool path_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void path_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
-ast.stream() << "namespace boost {" << std::endl;
-ast.stream() << "namespace serialization {" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "template<class Archive>" << std::endl;
-ast.stream() << "void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)" << std::endl;
-ast.stream() << "{" << std::endl;
-ast.stream() << "    std::string s;" << std::endl;
-ast.stream() << "    if(Archive::is_saving::value)" << std::endl;
-ast.stream() << "        s = p.generic_string();" << std::endl;
-ast.stream() << "    ar & boost::serialization::make_nvp(\"path\", s);" << std::endl;
-ast.stream() << "    if(Archive::is_loading::value)" << std::endl;
-ast.stream() << "        p = s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "} }" << std::endl;
+os << "namespace boost {" << std::endl;
+os << "namespace serialization {" << std::endl;
+os << std::endl;
+os << "template<class Archive>" << std::endl;
+os << "void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)" << std::endl;
+os << "{" << std::endl;
+os << "    std::string s;" << std::endl;
+os << "    if(Archive::is_saving::value)" << std::endl;
+os << "        s = p.generic_string();" << std::endl;
+os << "    ar & boost::serialization::make_nvp(\"path\", s);" << std::endl;
+os << "    if(Archive::is_loading::value)" << std::endl;
+os << "        p = s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
+os << "} }" << std::endl;
     }
 }
 }

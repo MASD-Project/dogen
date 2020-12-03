@@ -395,6 +395,7 @@ void region_processor::visit(const logical::entities::physical::backend& v) {
 
 void region_processor::visit(const logical::entities::physical::part& v) {
     auto& pr(region_.physical_region());
+
     for (auto& pair : pr.artefacts_by_archetype()) {
         const auto& pmid(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << pmid.value();
@@ -431,14 +432,8 @@ void region_processor::visit(const logical::entities::physical::helper& v) {
             b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.helper_class_header_transform") {
-            using identification::entities::technical_space;
-            if (v.major_technical_space() == technical_space::cpp) {
-                b.add_as_user(
-                    "dogen.text.cpp/types/transforms/helper_transform.hpp");
-            } else if (v.major_technical_space() == technical_space::csharp) {
-                b.add_as_user(
-                    "dogen.text.csharp/types/transforms/helper_transform.hpp");
-            }
+            b.add_as_user(
+                    "dogen.text/types/transforms/helper_transform.hpp");
         } else if (pmid.value() == "masd.cpp.types.helper_class_implementation_transform") {
             // no deps
         } else if (pmid.value() == "masd.cpp.types.helper_class_implementation_factory") {

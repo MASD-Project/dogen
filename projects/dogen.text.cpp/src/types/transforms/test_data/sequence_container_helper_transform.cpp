@@ -57,23 +57,27 @@ std::string sequence_container_helper_transform::helper_name() const {
     return r;
 }
 
-bool sequence_container_helper_transform::is_enabled(const assistant& /*a*/,
+bool sequence_container_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void sequence_container_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto containee(hp.direct_descendants().front());
-ast.stream() << std::endl;
-ast.stream() << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
-ast.stream() << "    " << qn << " r;" << std::endl;
-ast.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
-ast.stream() << "        r.push_back(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    return r;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
+os << "    " << qn << " r;" << std::endl;
+os << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+os << "        r.push_back(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
+os << "    }" << std::endl;
+os << "    return r;" << std::endl;
+os << "}" << std::endl;
 }
 }

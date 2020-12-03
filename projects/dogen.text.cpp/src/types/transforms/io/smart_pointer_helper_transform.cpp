@@ -60,32 +60,36 @@ std::string smart_pointer_helper_transform::helper_name() const {
     return r;
 }
 
-bool smart_pointer_helper_transform::is_enabled(const assistant& a,
+bool smart_pointer_helper_transform::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
-void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto containee(hp.direct_descendants().front());
-ast.stream() << std::endl;
-ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
-ast.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \"" << std::endl;
-ast.stream() << "      << \"\\\"memory\\\": \" << \"\\\"\" << static_cast<void*>(v.get()) << \"\\\"\" << \", \";" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    if (v)" << std::endl;
-ast.stream() << "        s << \"\\\"data\\\": \" << " << ast.streaming_for_type(containee, "*v") << ";" << std::endl;
-ast.stream() << "    else" << std::endl;
-ast.stream() << "        s << \"\\\"data\\\": \"\"\\\"<null>\\\"\";" << std::endl;
-ast.stream() << "    s << \" }\";" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+os << std::endl;
+os << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+os << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \"" << std::endl;
+os << "      << \"\\\"memory\\\": \" << \"\\\"\" << static_cast<void*>(v.get()) << \"\\\"\" << \", \";" << std::endl;
+os << std::endl;
+os << "    if (v)" << std::endl;
+os << "        s << \"\\\"data\\\": \" << " << streaming_for_type(containee, "*v") << ";" << std::endl;
+os << "    else" << std::endl;
+os << "        s << \"\\\"data\\\": \"\"\\\"<null>\\\"\";" << std::endl;
+os << "    s << \" }\";" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
     }
-ast.stream() << std::endl;
+os << std::endl;
 }
 }

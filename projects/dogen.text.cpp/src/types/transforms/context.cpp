@@ -25,7 +25,7 @@ namespace dogen::text::cpp::transforms {
 context::context(const text::entities::model& m,
     const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
-    std::list<std::shared_ptr<helper_transform>>>>& helpers,
+    std::list<std::shared_ptr<text::transforms::helper_transform>>>>& helpers,
     const identification::entities::technical_space_version tsv,
     boost::shared_ptr<tracing::tracer> tracer)
     : model_(m), helpers_(helpers), technical_space_version_(tsv),
@@ -37,7 +37,8 @@ const text::entities::model& context::model() const {
 
 const std::unordered_map<std::string,
     std::unordered_map<identification::entities::physical_meta_id,
-                       std::list<std::shared_ptr<helper_transform>>>>&
+                       std::list<std::shared_ptr<
+                                     text::transforms::helper_transform>>>>&
 context::helpers() const {
     return helpers_;
 }

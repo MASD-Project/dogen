@@ -73,7 +73,8 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     physical_meta_name_validator::validate_archetype_name(mn);
 }
 
-void registrar::validate(std::shared_ptr<helper_transform> ht) const {
+void registrar::
+validate(std::shared_ptr<text::transforms::helper_transform> ht) const {
     /*
      * Must be pointing to a valid object.
      */
@@ -148,7 +149,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
                              << "' against meta name: '" << mn << "'";
 }
 
-void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) {
+void registrar::register_helper_transform(
+    std::shared_ptr<text::transforms::helper_transform> ht) {
     validate(ht);
     auto& trp(transform_repository_);
     auto& f(trp.helper_formatters_[ht->family()]);
@@ -169,7 +171,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      identification::entities::physical_meta_id,
                      std::list<
-                         std::shared_ptr<helper_transform>>>>&
+                         std::shared_ptr<text::transforms::helper_transform>>>>&
 registrar::helper_formatters() const {
     return transform_repository_.helper_formatters();
 }

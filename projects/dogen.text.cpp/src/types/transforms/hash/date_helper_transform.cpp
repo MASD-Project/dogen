@@ -57,21 +57,25 @@ std::string date_helper_transform::helper_name() const {
     return r;
 }
 
-bool date_helper_transform::is_enabled(const assistant& /*a*/,
+bool date_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void date_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-ast.stream() << std::endl;
-ast.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
-ast.stream() << "    std::size_t seed(0);" << std::endl;
-ast.stream() << "    combine(seed, v.modjulian_day());" << std::endl;
-ast.stream() << "    return seed;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+os << "    std::size_t seed(0);" << std::endl;
+os << "    combine(seed, v.modjulian_day());" << std::endl;
+os << "    return seed;" << std::endl;
+os << "}" << std::endl;
 }
 }

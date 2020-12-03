@@ -57,18 +57,22 @@ std::string number_helper_transform::helper_name() const {
     return r;
 }
 
-bool number_helper_transform::is_enabled(const assistant& /*a*/,
+bool number_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void number_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void number_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-ast.stream() << std::endl;
-ast.stream() << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
-ast.stream() << "    return static_cast<" << qn << ">(position);" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
+os << "    return static_cast<" << qn << ">(position);" << std::endl;
+os << "}" << std::endl;
 }
 }

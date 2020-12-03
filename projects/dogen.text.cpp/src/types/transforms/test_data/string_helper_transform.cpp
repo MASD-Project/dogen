@@ -57,17 +57,21 @@ std::string string_helper_transform::helper_name() const {
     return r;
 }
 
-bool string_helper_transform::is_enabled(const assistant& /*a*/,
+bool string_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
-ast.stream() << std::endl;
-ast.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
-ast.stream() << "    std::ostringstream s;" << std::endl;
-ast.stream() << "    s << \"a_string_\" << position;" << std::endl;
-ast.stream() << "    return s.str();" << std::endl;
-ast.stream() << "}" << std::endl;
+void string_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+os << std::endl;
+os << "std::string create_std_string(const unsigned int position) {" << std::endl;
+os << "    std::ostringstream s;" << std::endl;
+os << "    s << \"a_string_\" << position;" << std::endl;
+os << "    return s.str();" << std::endl;
+os << "}" << std::endl;
 }
 }

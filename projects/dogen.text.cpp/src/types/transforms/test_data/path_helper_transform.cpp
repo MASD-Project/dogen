@@ -57,21 +57,25 @@ std::string path_helper_transform::helper_name() const {
     return r;
 }
 
-bool path_helper_transform::is_enabled(const assistant& /*a*/,
+bool path_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void path_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void path_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-ast.stream() << std::endl;
-ast.stream() << qn << std::endl;
-ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-ast.stream() << "    std::ostringstream s;" << std::endl;
-ast.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
-ast.stream() << "    return " << qn << "(s.str());" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << std::endl;
+os << "create_" << ident << "(const unsigned int position) {" << std::endl;
+os << "    std::ostringstream s;" << std::endl;
+os << "    s << \"/a/path/number_\" << position;" << std::endl;
+os << "    return " << qn << "(s.str());" << std::endl;
+os << "}" << std::endl;
 }
 }

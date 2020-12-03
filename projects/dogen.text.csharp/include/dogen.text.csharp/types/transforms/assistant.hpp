@@ -40,7 +40,7 @@
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
-#include "dogen.text.csharp/types/transforms/helper_transform.hpp"
+#include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::csharp::transforms {
 
@@ -117,7 +117,7 @@ public:
     make_argument_name(const logical::entities::attribute& attr) const;
 
 private:
-    std::list<std::shared_ptr<transforms::helper_transform>>
+    std::list<std::shared_ptr<text::transforms::helper_transform>>
     get_helpers(const logical::entities::helper_properties& hp) const;
 
 public:

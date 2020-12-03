@@ -57,24 +57,28 @@ std::string pair_helper_transform::helper_name() const {
     return r;
 }
 
-bool pair_helper_transform::is_enabled(const assistant& /*a*/,
+bool pair_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void pair_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto first(hp.direct_descendants().front());
     const auto second(hp.direct_descendants().back());
-ast.stream() << std::endl;
-ast.stream() << qn << std::endl;
-ast.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
-ast.stream() << "    " << qn << " r(" << std::endl;
-ast.stream() << "        create_" << first.name_tree_identifiable() << "(position)," << std::endl;
-ast.stream() << "        create_" << second.name_tree_identifiable() << "(position));" << std::endl;
-ast.stream() << "    return r;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << std::endl;
+os << qn << std::endl;
+os << "create_" << ident << "(unsigned int position) {" << std::endl;
+os << "    " << qn << " r(" << std::endl;
+os << "        create_" << first.name_tree_identifiable() << "(position)," << std::endl;
+os << "        create_" << second.name_tree_identifiable() << "(position));" << std::endl;
+os << "    return r;" << std::endl;
+os << "}" << std::endl;
 }
 }

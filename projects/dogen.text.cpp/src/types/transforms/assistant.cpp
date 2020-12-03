@@ -506,7 +506,7 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::list<std::shared_ptr<transforms::helper_transform>>
+std::list<std::shared_ptr<text::transforms::helper_transform>>
 assistant::get_helpers(const logical::entities::helper_properties& hp) const {
     /*
      * A family must have at least one helper registered. This is a
@@ -533,7 +533,7 @@ assistant::get_helpers(const logical::entities::helper_properties& hp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                              << physical_meta_name_.id();
-    return std::list<std::shared_ptr<transforms::helper_transform>>();
+    return std::list<std::shared_ptr<text::transforms::helper_transform>>();
 }
 
 bool assistant::is_io() const {
@@ -585,13 +585,14 @@ void assistant::add_helper_methods(const std::string& element_id) {
          */
         for (const auto& hlp : helpers) {
             const auto id(hlp->id());
-            if (!hlp->is_enabled(*this, hlp_props)) {
+            if (!hlp->is_enabled(context_.model().physical(), element_,
+                    artefact_, hlp_props)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << id;
                 continue;
             }
 
             BOOST_LOG_SEV(lg, debug) << "Transforming with helper: " << id;
-            hlp->apply(*this, hlp_props);
+            hlp->apply(stream(), context_.model().logical(), hlp_props);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";

@@ -57,30 +57,34 @@ std::string associative_container_helper_transform::helper_name() const {
     return r;
 }
 
-bool associative_container_helper_transform::is_enabled(const assistant& /*a*/,
+bool associative_container_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
 void associative_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-ast.stream() << std::endl;
-ast.stream() << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
-ast.stream() << "    " << qn << " r;" << std::endl;
-ast.stream() << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
+os << std::endl;
+os << qn << " create_" << ident << "(unsigned int position) {" << std::endl;
+os << "    " << qn << " r;" << std::endl;
+os << "    for (unsigned int i(0); i < 4; ++i) {" << std::endl;
     if (hp.direct_descendants().size() == 1) {
         const auto containee(hp.direct_descendants().front());
-ast.stream() << "        r.insert(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
+os << "        r.insert(create_" << containee.name_tree_identifiable() << "(position + i));" << std::endl;
     } else if (hp.direct_descendants().size() == 2) {
         const auto key(hp.direct_descendants().front());
         const auto value(hp.direct_descendants().back());
-ast.stream() << "        r.insert(std::make_pair(create_" << key.name_tree_identifiable() << "(position + i), create_" << value.name_tree_identifiable() << "(position + i)));" << std::endl;
+os << "        r.insert(std::make_pair(create_" << key.name_tree_identifiable() << "(position + i), create_" << value.name_tree_identifiable() << "(position + i)));" << std::endl;
     }
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    return r;" << std::endl;
-ast.stream() << "}" << std::endl;
+os << "    }" << std::endl;
+os << "    return r;" << std::endl;
+os << "}" << std::endl;
 }
 }

@@ -63,17 +63,20 @@ void helper_class_header_transform_transform::apply(const context& ctx, const lo
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple() + "_transform");
 ast.stream() << std::endl;
-ast.stream() << "class " << sn << " final : public helper_transform {" << std::endl;
+ast.stream() << "class " << sn << " final : public text::transforms::helper_transform {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    std::string id() const override;" << std::endl;
 ast.stream() << "    std::string family() const override;" << std::endl;
 ast.stream() << "    std::list<std::string> owning_formatters() const override;" << std::endl;
 ast.stream() << "    std::list<std::string> owning_facets() const override;" << std::endl;
 ast.stream() << "    std::string helper_name() const override;" << std::endl;
-ast.stream() << "    bool is_enabled(const assistant& a," << std::endl;
-ast.stream() << "        const logical::entities::helper_properties& hc) const override;" << std::endl;
-ast.stream() << "    void apply(assistant& a," << std::endl;
-ast.stream() << "        const logical::entities::helper_properties& hc) const override;" << std::endl;
+ast.stream() << "    bool is_enabled(const physical::entities::model& m," << std::endl;
+ast.stream() << "        const logical::entities::element& e," << std::endl;
+ast.stream() << "        const physical::entities::artefact& a," << std::endl;
+ast.stream() << "        const logical::entities::helper_properties& hp) const override;" << std::endl;
+ast.stream() << "    void apply(std::ostream& os," << std::endl;
+ast.stream() << "        const logical::entities::model& m," << std::endl;
+ast.stream() << "        const logical::entities::helper_properties& hp) const override;" << std::endl;
 ast.stream() << "};" << std::endl;
 ast.stream() << std::endl;
         } // snf

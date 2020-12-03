@@ -60,30 +60,34 @@ std::string ptree_helper_transform::helper_name() const {
     return r;
 }
 
-bool ptree_helper_transform::is_enabled(const assistant& a,
+bool ptree_helper_transform::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
-void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void ptree_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
-ast.stream() << std::endl;
-ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
-ast.stream() << "    std::ostringstream ss;" << std::endl;
-ast.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    std::string content(ss.str());" << std::endl;
-ast.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
-ast.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    s << content;" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
+os << std::endl;
+os << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+os << "    std::ostringstream ss;" << std::endl;
+os << "    boost::property_tree::write_json(ss, v);" << std::endl;
+os << std::endl;
+os << "    std::string content(ss.str());" << std::endl;
+os << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
+os << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
+os << std::endl;
+os << "    s << content;" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
     }
-ast.stream() << std::endl;
+os << std::endl;
 }
 }

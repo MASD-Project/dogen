@@ -326,7 +326,7 @@ public:
     std::string comment_inline(const std::string& c) const;
 
 private:
-    std::list<std::shared_ptr<transforms::helper_transform>>
+    std::list<std::shared_ptr<text::transforms::helper_transform>>
     get_helpers(const logical::entities::helper_properties& hp) const;
 
     std::string

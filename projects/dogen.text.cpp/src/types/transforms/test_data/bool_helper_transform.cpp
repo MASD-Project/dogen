@@ -57,15 +57,19 @@ std::string bool_helper_transform::helper_name() const {
     return r;
 }
 
-bool bool_helper_transform::is_enabled(const assistant& /*a*/,
+bool bool_helper_transform::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
 
-void bool_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
-ast.stream() << std::endl;
-ast.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
-ast.stream() << "    return (position % 2) != 0;" << std::endl;
-ast.stream() << "}" << std::endl;
+void bool_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+os << std::endl;
+os << "bool create_bool(const unsigned int position) {" << std::endl;
+os << "    return (position % 2) != 0;" << std::endl;
+os << "}" << std::endl;
 }
 }

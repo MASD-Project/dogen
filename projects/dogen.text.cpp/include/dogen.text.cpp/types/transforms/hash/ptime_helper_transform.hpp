@@ -25,21 +25,24 @@
 #pragma once
 #endif
 
-#include "dogen.text.cpp/types/transforms/helper_transform.hpp"
+#include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
 
-class ptime_helper_transform final : public helper_transform {
+class ptime_helper_transform final : public text::transforms::helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;
     std::list<std::string> owning_formatters() const override;
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
-    bool is_enabled(const assistant& a,
-        const logical::entities::helper_properties& hc) const override;
-    void apply(assistant& a,
-        const logical::entities::helper_properties& hc) const override;
+    bool is_enabled(const physical::entities::model& m,
+        const logical::entities::element& e,
+        const physical::entities::artefact& a,
+        const logical::entities::helper_properties& hp) const override;
+    void apply(std::ostream& os,
+        const logical::entities::model& m,
+        const logical::entities::helper_properties& hp) const override;
 };
 
 }

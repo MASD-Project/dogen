@@ -56,7 +56,8 @@ private:
         const logical::entities::helper_properties& hp) const;
 
 public:
-    void apply(std::ostream& os, const logical::entities::element& e,
+    void apply(std::ostream& os, const logical::entities::model& m,
+        const logical::entities::element& e,
         const physical::entities::artefact& a);
 
 private:

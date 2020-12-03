@@ -45,7 +45,8 @@ std::unordered_map<
     std::string, std::unordered_map<
                      identification::entities::physical_meta_id,
                      std::list<
-                         std::shared_ptr<helper_transform>>>>&
+                         std::shared_ptr<
+                             text::transforms::helper_transform>>>>&
     repository::helper_formatters() {
     return helper_formatters_;
 }
@@ -72,7 +73,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      identification::entities::physical_meta_id,
                      std::list<
-                         std::shared_ptr<helper_transform>>>>&
+                         std::shared_ptr<text::transforms::helper_transform>>>>&
     repository::helper_formatters() const {
     return helper_formatters_;
 }

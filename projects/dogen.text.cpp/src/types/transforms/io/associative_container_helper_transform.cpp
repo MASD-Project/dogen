@@ -60,51 +60,55 @@ std::string associative_container_helper_transform::helper_name() const {
     return r;
 }
 
-bool associative_container_helper_transform::is_enabled(const assistant& a,
+bool associative_container_helper_transform::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
 void associative_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
 
         if (hp.direct_descendants().size() == 2) {
             const auto key(hp.direct_descendants().front());
             const auto value(hp.direct_descendants().back());
-ast.stream() << std::endl;
-ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
-ast.stream() << "    s << \"[\";" << std::endl;
-ast.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-ast.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-ast.stream() << "        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-ast.stream() << "        s << " << ast.streaming_for_type(key, "i->first") << ";" << std::endl;
-ast.stream() << "        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
-ast.stream() << "        s << " << ast.streaming_for_type(value, "i->second") << ";" << std::endl;
-ast.stream() << "        s << \" } ]\";" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    s << \" ] \";" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+os << std::endl;
+os << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
+os << "    s << \"[\";" << std::endl;
+os << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+os << "        if (i != v.begin()) s << \", \";" << std::endl;
+os << "        s << \"[ { \" << \"\\\"__type__\\\": \" << \"\\\"key\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
+os << "        s << " << streaming_for_type(key, "i->first") << ";" << std::endl;
+os << "        s << \" }, { \" << \"\\\"__type__\\\": \" << \"\\\"value\\\"\" << \", \" << \"\\\"data\\\": \";" << std::endl;
+os << "        s << " << streaming_for_type(value, "i->second") << ";" << std::endl;
+os << "        s << \" } ]\";" << std::endl;
+os << "    }" << std::endl;
+os << "    s << \" ] \";" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
         } else {
         const auto containee(hp.direct_descendants().front());
-ast.stream() << std::endl;
-ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
-ast.stream() << "    s << \"[ \";" << std::endl;
-ast.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-ast.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-ast.stream() << "        s << " << ast.streaming_for_type(containee, "*i") << ";" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    s << \"] \";" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
-ast.stream() << std::endl;
+os << std::endl;
+os << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
+os << "    s << \"[ \";" << std::endl;
+os << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+os << "        if (i != v.begin()) s << \", \";" << std::endl;
+os << "        s << " << streaming_for_type(containee, "*i") << ";" << std::endl;
+os << "    }" << std::endl;
+os << "    s << \"] \";" << std::endl;
+os << "    return s;" << std::endl;
+os << "}" << std::endl;
+os << std::endl;
         }
     }
-ast.stream() << std::endl;
+os << std::endl;
 }
 }
