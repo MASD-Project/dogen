@@ -64,18 +64,6 @@ streaming_for_type(const logical::entities::streaming_properties& sp,
     return stream.str();
 }
 
-std::string
-helper_transform::streaming_for_type(const logical::entities::model& m,
-    const identification::entities::logical_name& n,
-    const std::string& s) const {
-    const auto str_propss(m.streaming_properties());
-    const auto i(str_propss.find(n.id()));
-    if (i == str_propss.end())
-        return s;
-
-    return streaming_for_type(i->second, s);
-}
-
 std::string helper_transform::
 streaming_for_type(const logical::entities::helper_descriptor& hd,
     const std::string& s) const {

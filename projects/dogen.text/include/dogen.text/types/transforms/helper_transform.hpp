@@ -64,15 +64,9 @@ protected:
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */
-    /**@{*/
-    std::string streaming_for_type(const logical::entities::model& m,
-        const identification::entities::logical_name& n,
-        const std::string& s) const;
-
     std::string streaming_for_type(
         const logical::entities::helper_descriptor& hd,
         const std::string& s) const;
-    /**@}*/
 
     bool is_streaming_enabled(const physical::entities::model& m,
         const logical::entities::element& e,
