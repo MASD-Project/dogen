@@ -16079,6 +16079,68 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider moving to =PEGTL=                                        :story:
+
+Seems like a modern replacement for Boost.Spirit.
+
+#+begin_quote
+The Parsing Expression Grammar Template Library (PEGTL) is a
+zero-dependency C++ header-only parser combinator library for creating
+parsers according to a Parsing Expression Grammar (PEG).
+#+end_quote
+
+Links:
+
+- [[https://github.com/taocpp/PEGTL][GH repo]]
+
+*** Consider integrating with =NN-512=                                :story:
+
+#+begin_quote
+NN-512 is a compiler that generates C99 code for neural net inference:
+
+- It takes as input a simple text description of a convolutional
+  neural net inference graph
+- It produces as output a stand-alone C99 implementation of that graph
+- The generated C99 code uses AVX-512 vector instructions to perform
+  inference
+#+end_quote
+
+Links:
+
+- [[https://nn-512.com/][NN-512 site]]
+- [[https://www.reddit.com/r/cpp/comments/k3hiud/generate_standalone_cc_code_for_neural_net/][reddit discussion]]
+- [[https://www.ccoderun.ca/darkhelp/api/API.html][DarkHelp]]
+
+*** Investigate =refureku=                                            :story:
+
+#+begin_quote
+Refureku is a powerful C++17 RTTI free runtime reflection library
+based on Kodgen. It allows to retrieve information on namespaces,
+structs/classes, fields, methods, non-member variables, non-member
+functions, enums and enum values at runtime.
+#+end_quote
+
+Links:
+
+- [[https://github.com/jsoysouvanh/Refureku][GH repo]]
+
+*** Investigate =kodgen=                                              :story:
+
+#+begin_quote
+Kodgen is a C++17 library based on libclang. It provides tools to
+parse C++ source files, extract data from it, and generate files from
+the parsed data. The C++ entities parsed in the current implementation
+are namespaces, structs/classes, non-member and member variables,
+non-member and member functions, enums and enum values.
+#+end_quote
+
+One possible use for this would be to backout PDM models from existing
+source code.
+
+Links:
+
+- [[https://github.com/jsoysouvanh/Kodgen][GH repo]]
+
 *** Investigate cookietemple project templates                        :story:
 
 #+begin_quote
