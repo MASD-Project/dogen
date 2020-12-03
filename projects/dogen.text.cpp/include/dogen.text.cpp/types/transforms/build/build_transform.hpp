@@ -39,7 +39,7 @@ public:
     const physical::entities::facet& facet() const;
 
 public:
-    static void initialise(registrar& r);
+    // static void initialise(registrar& r);
 };
 }
 

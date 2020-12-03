@@ -73,7 +73,7 @@ ast.stream() << "    static const physical::entities::facet& static_facet();" <<
 ast.stream() << "    const physical::entities::facet& facet() const;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static void initialise(registrar& r);" << std::endl;
+ast.stream() << "    // static void initialise(registrar& r);" << std::endl;
 ast.stream() << "};" << std::endl;
         } // snf
 ast.stream() << std::endl;

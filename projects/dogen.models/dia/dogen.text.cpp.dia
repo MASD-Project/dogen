@@ -28717,7 +28717,7 @@ public:
     const physical::entities::facet&amp; facet() const;
 
 public:
-    static void initialise(registrar&amp; r);
+    // static void initialise(registrar&amp; r);
 };
 &lt;#+
         } // snf
