@@ -20,10 +20,19 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/cpp/cpp_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/io_transform.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/cpp/odb/odb_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/hash_transform.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/build/build_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/tests_transform.hpp"
 #include "dogen.text/types/transforms/cpp/types/types_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/test_data_transform.hpp"
+#include "dogen.text/types/transforms/cpp/lexical_cast/lexical_cast_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/serialization_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/visual_studio_transform.hpp"
 
 namespace dogen::text::transforms::cpp {
 namespace {
@@ -52,7 +61,16 @@ physical::entities::backend make_backend() {
         }
     });
 
+    lambda(build::build_facet_chain::static_facet());
+    lambda(hash::hash_facet_chain::static_facet());
+    lambda(io::io_facet_chain::static_facet());
+    lambda(lexical_cast::lexical_cast_facet_chain::static_facet());
+    lambda(odb::odb_facet_chain::static_facet());
+    lambda(serialization::serialization_facet_chain::static_facet());
+    lambda(test_data::test_data_facet_chain::static_facet());
+    lambda(tests::tests_facet_chain::static_facet());
     lambda(types::types_facet_chain::static_facet());
+    lambda(visual_studio::visual_studio_facet_chain::static_facet());
     return r;
 }
 */

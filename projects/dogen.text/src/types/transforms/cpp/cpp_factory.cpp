@@ -20,14 +20,23 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/cpp/cpp_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/io_factory.hpp"
+#include "dogen.text/types/transforms/cpp/odb/odb_factory.hpp"
 #include "dogen.text/types/transforms/cpp/testing_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/cpp/hash/hash_factory.hpp"
+#include "dogen.text/types/transforms/cpp/build/build_factory.hpp"
+#include "dogen.text/types/transforms/cpp/tests/tests_factory.hpp"
 #include "dogen.text/types/transforms/cpp/types/types_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text/types/transforms/cpp/implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/public_headers_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/test_data_factory.hpp"
 #include "dogen.text/types/transforms/cpp/standard_header_file_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/lexical_cast/lexical_cast_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/serialization_factory.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/visual_studio_factory.hpp"
 
 namespace dogen::text::transforms::cpp {
 namespace {
@@ -59,7 +68,16 @@ physical::entities::backend cpp_factory::make() {
         }
     });
 
+    fct_inserter(build::build_factory::make());
+    fct_inserter(hash::hash_factory::make());
+    fct_inserter(io::io_factory::make());
+    fct_inserter(lexical_cast::lexical_cast_factory::make());
+    fct_inserter(odb::odb_factory::make());
+    fct_inserter(serialization::serialization_factory::make());
+    fct_inserter(test_data::test_data_factory::make());
+    fct_inserter(tests::tests_factory::make());
     fct_inserter(types::types_factory::make());
+    fct_inserter(visual_studio::visual_studio_factory::make());
 
     const auto ak_inserter([&](const auto& ak) {
         const auto pair(std::make_pair(ak.id(), ak));
