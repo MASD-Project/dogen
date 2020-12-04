@@ -272,13 +272,6 @@ public:
      */
     bool is_io() const;
 
-    /**
-     * @brief Returns true if the types facet is required to support
-     * streaming or if we are in io facet.
-     */
-    bool is_streaming_enabled(
-        const logical::entities::helper_properties& hp) const;
-
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
@@ -326,9 +319,6 @@ public:
     std::string comment_inline(const std::string& c) const;
 
 private:
-    std::list<std::shared_ptr<text::transforms::helper_transform>>
-    get_helpers(const logical::entities::helper_properties& hp) const;
-
     std::string
     streaming_for_type(const logical::entities::streaming_properties& sp,
         const std::string& s) const;
@@ -344,14 +334,9 @@ public:
      * @brief Returns the correct streaming invocation for the
      * supplied type.
      */
-    /**@{*/
-    std::string streaming_for_type(
-        const logical::entities::helper_descriptor& hd,
-        const std::string& s) const;
     std::string streaming_for_type(
         const identification::entities::logical_name& n,
         const std::string& s) const;
-    /**@}*/
 
     /**
      * @brief Returns true if the type can be hashed without requiring a

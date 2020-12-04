@@ -36,7 +36,6 @@
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
-#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/traits.hpp"
 #include "dogen.text.cpp/types/transforms/odb/traits.hpp"
@@ -507,66 +506,9 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::list<std::shared_ptr<text::transforms::helper_transform>>
-assistant::get_helpers(const logical::entities::helper_properties& hp) const {
-    /*
-     * A family must have at least one helper registered. This is a
-     * good way to detect spurious families in data files.
-     */
-    const auto fam(hp.current().family());
-    const auto i(context_.helpers().find(fam));
-    if (i == context_.helpers().end()) {
-        BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
-        BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
-
-    /*
-     * Not all formatters need help, so its fine not to have a
-     * helper registered against a particular formatter.
-     */
-    const auto j(i->second.find(physical_meta_name_.id()));
-    if (j != i->second.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << physical_meta_name_.id();
-        return j->second;
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_meta_name_.id();
-    return std::list<std::shared_ptr<text::transforms::helper_transform>>();
-}
-
 bool assistant::is_io() const {
     const auto fn(physical_meta_name_.location().facet());
     return transforms::io::traits::facet_sn()  == fn;
-}
-
-bool assistant::
-is_streaming_enabled(const logical::entities::helper_properties& hp) const {
-    /*
-     * If the IO facet is globally disabled, we don't need streaming.
-     */
-    if (!is_io_enabled())
-        return false;
-
-    /*
-     * If we are in the IO facet, and we are not in an inheritance
-     * relationship we need streaming.
-     */
-    if (is_io() && !hp.in_inheritance_relationship())
-        return true;
-
-    /*
-     * If we are in the types class implementation and we are in an
-     * inheritance relationship, we'll need streaming.
-     */
-    using tt = transforms::types::traits;
-    identification::entities::physical_meta_id
-        cifn(tt::class_implementation_archetype_qn());
-    const auto arch(physical_meta_name_.id());
-    bool in_types_class_implementation(arch == cifn);
-    return in_types_class_implementation && hp.in_inheritance_relationship();
 }
 
 void assistant::add_helper_methods(const std::string& /*element_id*/) {
@@ -574,33 +516,6 @@ void assistant::add_helper_methods(const std::string& /*element_id*/) {
         &context_.model().physical();
     dogen::text::transforms::helper_chain::apply(stream(),
         context_.model().logical(), element_, artefact_);
-    // BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
-    //                          << element_id;
-
-    // if (element_.helper_properties().empty())
-    //     BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
-
-    // for (const auto& hlp_props : element_.helper_properties()) {
-    //     BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
-    //     const auto helpers(get_helpers(hlp_props));
-
-    //     /*
-    //      * Check to see if the helper is enabled, given the system's
-    //      * current configuration. If enabled, format it.
-    //      */
-    //     for (const auto& hlp : helpers) {
-    //         const auto id(hlp->id());
-    //         if (!hlp->is_enabled(context_.model().physical(), element_,
-    //                 artefact_, hlp_props)) {
-    //             BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << id;
-    //             continue;
-    //         }
-
-    //         BOOST_LOG_SEV(lg, debug) << "Transforming with helper: " << id;
-    //         hlp->apply(stream(), context_.model().logical(), hlp_props);
-    //     }
-    // }
-    // BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::string assistant::
@@ -636,17 +551,6 @@ std::string assistant::streaming_for_type(const logical_name& n,
         return s;
 
     return streaming_for_type(i->second, s);
-}
-
-std::string assistant::
-streaming_for_type(const logical::entities::helper_descriptor& hd,
-    const std::string& s) const {
-
-    const auto sp(hd.streaming_properties());
-    if (!sp)
-        return s;
-
-    return streaming_for_type(*sp, s);
 }
 
 bool assistant::requires_hashing_helper_method(
