@@ -38,7 +38,6 @@ const std::string no_transforms("Transform repository is empty.");
 const std::string no_transforms_by_meta_name(
     "No transforms by meta name provided.");
 
-const std::string null_transform_helper("Helper transform supplied is null");
 const std::string null_transform("Transform supplied is null.");
 const std::string duplicate_archetype("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
@@ -113,28 +112,6 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: "
                              << t->archetype().meta_name().id().value()
                              << " against meta name: " << pmn;
-}
-
-void registrar::register_helper_transform(
-    std::shared_ptr<text::transforms::helper_transform> ht) {
-    if (!ht) {
-        BOOST_LOG_SEV(lg, error) << null_transform_helper;
-        BOOST_THROW_EXCEPTION(registrar_error(null_transform_helper));
-    }
-
-    if(ht->family().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_family;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
-    }
-
-    auto& f(transform_repository_.helper_formatters_[ht->family()]);
-    for (const auto& of : ht->owning_formatters()) {
-        identification::entities::physical_meta_id pmid(of);
-        f[pmid].push_back(ht);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Registrered formatter helper: "
-                             << ht->helper_name();
 }
 
 const repository& registrar::formatter_repository() const {

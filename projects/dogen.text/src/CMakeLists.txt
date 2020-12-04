@@ -38,6 +38,7 @@ target_link_libraries(${lib_target_name}
     dogen.logical.lib
     dogen.templating.lib
     dogen.text.cpp.lib
+    dogen.text.csharp.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

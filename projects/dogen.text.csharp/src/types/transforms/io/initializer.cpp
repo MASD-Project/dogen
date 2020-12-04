@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
-#include "dogen.text.csharp/types/transforms/io/enumerable_helper_transform.hpp"
 #include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
 #include "dogen.text.csharp/types/transforms/io/class_transform.hpp"
 #include "dogen.text.csharp/types/transforms/io/enum_transform.hpp"
@@ -33,7 +32,6 @@ void initializer::initialize(registrar& rg) {
     register_formatter<primitive_transform>(rg);
     register_formatter<enum_transform>(rg);
     register_formatter<assistant_transform>(rg);
-    register_formatter_helper<enumerable_helper_transform>(rg);
 }
 
 }
