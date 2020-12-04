@@ -13,30 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-04 Fri 11:54]
+#+CAPTION: Clock summary at [2020-12-04 Fri 17:54]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *57:53* |       |       | 100.0 |
+| *Total time*                                              | *60:00* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 57:53   |       |       | 100.0 |
-| Active                                                    |         | 57:53 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   8.8 |
+| Stories                                                   | 60:00   |       |       | 100.0 |
+| Active                                                    |         | 60:00 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   8.4 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.8 |
-| Sprint and product backlog grooming                       |         |       |  2:21 |   4.1 |
+| Sprint and product backlog grooming                       |         |       |  2:37 |   4.4 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   0.7 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  12.1 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  23.5 |
-| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   1.0 |
-| Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.3 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.7 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   6.7 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   8.3 |
-| Orchestration should have an initialiser                  |         |       |  0:09 |   0.3 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  11.6 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  22.7 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.9 |
+| Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.6 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   6.5 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   8.0 |
+| Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.5 |
 | Issues with emacs                                         |         |       |  1:32 |   2.6 |
-| Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.2 |
-| Move context, helper and M2T interface to =text= model    |         |       | 15:55 |  27.5 |
+| Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.1 |
+| Move helpers to =text= model                              |         |       | 17:46 |  29.6 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -235,6 +235,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-04 Fri 17:06]--[2020-12-04 Fri 17:12] =>  0:06
+    CLOCK: [2020-12-04 Fri 16:00]--[2020-12-04 Fri 16:10] =>  0:10
     CLOCK: [2020-12-03 Thu 18:42]--[2020-12-03 Thu 18:52] =>  0:10
     CLOCK: [2020-11-30 Mon 19:01]--[2020-11-30 Mon 19:20] =>  0:19
     CLOCK: [2020-11-25 Wed 22:08]--[2020-11-25 Wed 22:15] =>  0:07
@@ -559,8 +561,10 @@ really belong there, we can probably merge all of these models into
 one. We would then have a =transforms= namespace, with sub-namespaces
 per language. Each of the namespaces is declared as a backend.
 
-*** STARTED Move context, helper and M2T interface to =text= model    :story:
+*** STARTED Move helpers to =text= model                              :story:
     :LOGBOOK:
+    CLOCK: [2020-12-04 Fri 17:13]--[2020-12-04 Fri 17:54] =>  0:41
+    CLOCK: [2020-12-04 Fri 16:11]--[2020-12-04 Fri 17:06] =>  1:02
     CLOCK: [2020-12-04 Fri 11:55]--[2020-12-04 Fri 12:10] =>  0:15
     CLOCK: [2020-12-04 Fri 09:01]--[2020-12-04 Fri 11:45] =>  2:44
     CLOCK: [2020-12-03 Thu 18:52]--[2020-12-03 Thu 19:53] =>  1:01
@@ -659,7 +663,6 @@ code to generate the transform code for backend and facet
 
 This type has now been cleaned up and should be the same for C++ and
 C# so should be moved to the common model.
-
 
 *** Model functionality provided by assistant in the logical model    :story:
 

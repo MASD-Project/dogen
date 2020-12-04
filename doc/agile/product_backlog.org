@@ -16071,6 +16071,39 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Investigate adding support for unity builds                       :story:
+
+Now that CMake has unity builds support, we should try building dogen
+this way and see if its faster. However, we need to first remove all
+of the static state we have in translation units at present:
+
+- loggers
+- strings with error messages, etc.
+
+These should become class state. There is also the issue with private
+classes defined in the cpp; we need to ensure these have unique names.
+
+Links:
+
+- [[https://onqtam.com/programming/2018-07-07-unity-builds/][A guide to unity builds]]
+- [[https://www.qt.io/blog/2019/08/01/precompiled-headers-and-unity-jumbo-builds-in-upcoming-cmake][Precompiled Headers and Unity (Jumbo) Builds in upcoming CMake]]
+
+*** Consider adding support for replxx                                :story:
+
+#+begin_quote
+A small, portable GNU readline replacement for Linux, Windows and
+MacOS which is capable of handling UTF-8 characters. Unlike GNU
+readline, which is GPL, this library uses a BSD license and can be
+used in any kind of program.
+#+end_quote
+
+It would be nice if Dogen could generate code to integrate with
+=replxx=.
+
+Links:
+
+- [[https://github.com/AmokHuginnsson/replxx][GH replxx]]
+
 *** Consider adding support for rocksdb                               :story:
 
 #+begin_quote
@@ -16123,6 +16156,12 @@ Links:
 - [[https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html][Announcing Snowflake]]
 - [[https://medium.com/ingeniouslysimple/why-did-we-shift-away-from-database-generated-ids-7e0e54a49bb3][Why Did We Shift Away From Database-Generated Ids?]]
 - [[https://github.com/RobThree/IdGen][GH IdGen]] (C#)
+- [[https://github.com/KMakowsky/CppShortID][CppShortID]]
+- [[https://kvz.io/create-short-ids-with-php-like-youtube-or-tinyurl.html][Create Youtube-Like IDs With PHP/Python/Javascript/Java/SQL]]
+- [[https://github.com/turbo/pg-shortkey][pg-shortkey]]
+- [[https://www.2ndquadrant.com/en/blog/sequential-uuid-generators/][Sequential UUID Generators]]
+- [[https://hashids.org/][hashids]]: generate short unique ids from integers
+- [[https://github.com/schoentoon/hashidsxx][GH hashidsxx]]
 
 *** Consider moving to =PEGTL=                                        :story:
 
