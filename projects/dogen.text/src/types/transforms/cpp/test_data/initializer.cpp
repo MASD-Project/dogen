@@ -18,12 +18,59 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/associative_container_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/bool_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/char_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/domain_type_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/number_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/optional_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/pair_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/path_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/ptree_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/sequence_container_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/string_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/time_duration_helper_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/variant_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::test_data {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    // register_formatter<builtin_header_transform>(rg);
+    // register_formatter<primitive_header_transform>(rg);
+    // register_formatter<primitive_implementation_transform>(rg);
+    // register_formatter<class_header_transform>(rg);
+    // register_formatter<class_implementation_transform>(rg);
+    // register_formatter<enum_header_transform>(rg);
+    // register_formatter<enum_implementation_transform>(rg);
+
+    using namespace dogen::text::cpp::transforms::test_data;
+    register_helper<associative_container_helper_transform>(rg);
+    register_helper<bool_helper_transform>(rg);
+    register_helper<char_helper_transform>(rg);
+    register_helper<date_helper_transform>(rg);
+    register_helper<domain_type_helper_transform>(rg);
+    register_helper<number_helper_transform>(rg);
+    register_helper<optional_helper_transform>(rg);
+    register_helper<pair_helper_transform>(rg);
+    register_helper<path_helper_transform>(rg);
+    register_helper<ptime_helper_transform>(rg);
+    register_helper<ptree_helper_transform>(rg);
+    register_helper<sequence_container_helper_transform>(rg);
+    register_helper<smart_pointer_helper_transform>(rg);
+    register_helper<string_helper_transform>(rg);
+    register_helper<time_duration_helper_transform>(rg);
+    register_helper<variant_helper_transform>(rg);
 }
 
 }

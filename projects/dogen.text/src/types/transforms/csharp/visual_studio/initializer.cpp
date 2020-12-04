@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
 #include "dogen.text/types/transforms/csharp/visual_studio/initializer.hpp"
 
 namespace dogen::text::transforms::csharp::visual_studio {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& /*rg*/) {
+    // register_formatter<solution_transform>(rg);
+    // register_formatter<project_transform>(rg);
 }
 
 }

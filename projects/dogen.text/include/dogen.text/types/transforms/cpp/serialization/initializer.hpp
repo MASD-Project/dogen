@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/transforms/registrar.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
 
-class initializer final {
+/**
+ * @brief Initialises the serialization facet.
+ */
+class initializer {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(registrar& r);
 };
 
 }

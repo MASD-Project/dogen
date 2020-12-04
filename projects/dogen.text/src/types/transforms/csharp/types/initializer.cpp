@@ -18,12 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.csharp/types/transforms/types/class_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/types/enum_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/types/exception_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/types/builtin_transform.hpp"
+#include "dogen.text.csharp/types/transforms/types/floating_point_number_helper_transform.hpp"
 #include "dogen.text/types/transforms/csharp/types/initializer.hpp"
 
 namespace dogen::text::transforms::csharp::types {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    // register_formatter<class_transform>(rg);
+    // register_formatter<primitive_transform>(rg);
+    // register_formatter<enum_transform>(rg);
+    // register_formatter<exception_transform>(rg);
+    // register_formatter<builtin_transform>(rg);
+
+    using namespace dogen::text::csharp::transforms::types;
+    register_helper<floating_point_number_helper_transform>(rg);
 }
 
 }

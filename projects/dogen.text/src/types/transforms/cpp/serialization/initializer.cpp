@@ -18,12 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/path_helper_transform.hpp"
+
 #include "dogen.text/types/transforms/cpp/serialization/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    // register_formatter<builtin_header_transform>(rg);
+    // register_formatter<primitive_header_transform>(rg);
+    // register_formatter<primitive_implementation_transform>(rg);
+    // register_formatter<class_header_transform>(rg);
+    // register_formatter<class_implementation_transform>(rg);
+    // register_formatter<enum_header_transform>(rg);
+    // register_formatter<class_forward_declarations_transform>(rg);
+    // register_formatter<primitive_forward_declarations_transform>(rg);
+    // register_formatter<type_registrar_header_transform>(rg);
+    // register_formatter<type_registrar_implementation_transform>(rg);
+    using namespace dogen::text::cpp::transforms::serialization;
+    register_helper<path_helper_transform>(rg);
 }
 
 }

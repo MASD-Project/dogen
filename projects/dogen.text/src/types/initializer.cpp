@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/initializer.hpp"
+#include "dogen.text/types/transforms/helper_chain.hpp"
 #include "dogen.text/types/initializer.hpp"
 
 namespace dogen::text {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    auto& rg(transforms::helper_chain::registrar());
+    transforms::initializer::initialize(rg);
 }
 
 }

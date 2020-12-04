@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/cpp/initializer.hpp"
+#include "dogen.text/types/transforms/csharp/initializer.hpp"
 #include "dogen.text/types/transforms/initializer.hpp"
 
 namespace dogen::text::transforms {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    cpp::initializer::initialize(rg);
+    csharp::initializer::initialize(rg);
 }
 
 }

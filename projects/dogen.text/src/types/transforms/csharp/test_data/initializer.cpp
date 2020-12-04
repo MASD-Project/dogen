@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.csharp/types/transforms/test_data/class_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/test_data/enum_transform.hpp"
+// #include "dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp"
 #include "dogen.text/types/transforms/csharp/test_data/initializer.hpp"
 
 namespace dogen::text::transforms::csharp::test_data {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& /*rg*/) {
+    // register_formatter<class_transform>(rg);
+    // register_formatter<primitive_transform>(rg);
+    // register_formatter<enum_transform>(rg);
+    // register_formatter<assistant_transform>(rg);
 }
 
 }

@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text/types/transforms/cpp/build/initializer.hpp"
+// #include "dogen.text/types/transforms/build/include_cmakelists_transform.hpp"
+// #include "dogen.text/types/transforms/build/source_cmakelists_transform.hpp"
 
+#include "dogen.text/types/transforms/cpp/build/initializer.hpp"
 namespace dogen::text::transforms::cpp::build {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& /*rg*/) {
+    // register_formatter<include_cmakelists_transform>(rg);
+    // register_formatter<source_cmakelists_transform>(rg);
 }
 
 }

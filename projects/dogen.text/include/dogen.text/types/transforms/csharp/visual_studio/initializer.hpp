@@ -1,4 +1,4 @@
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+#/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/transforms/registrar.hpp"
 
 namespace dogen::text::transforms::csharp::visual_studio {
 
+/**
+ * @brief Initialises the visual studio facet.
+ */
 class initializer final {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(registrar& r);
 };
 
 }

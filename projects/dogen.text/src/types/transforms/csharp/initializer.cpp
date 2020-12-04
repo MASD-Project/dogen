@@ -18,25 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_INITIALIZER_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_INITIALIZER_HPP
+#include "dogen.text/types/transforms/csharp/io/initializer.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/initializer.hpp"
+#include "dogen.text/types/transforms/csharp/types/initializer.hpp"
+#include "dogen.text/types/transforms/csharp/visual_studio/initializer.hpp"
+#include "dogen.text/types/transforms/csharp/initializer.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::csharp {
 
-#include "dogen.text/types/transforms/registrar.hpp"
-
-namespace dogen::text::transforms::csharp::test_data {
-
-/**
- * @brief Initialises the types facet.
- */
-class initializer final {
-public:
-    static void initialize(registrar& r);
-};
-
+void initializer::initialize(registrar& rg) {
+    io::initializer::initialize(rg);
+    test_data::initializer::initialize(rg);
+    types::initializer::initialize(rg);
+    visual_studio::initializer::initialize(rg);
 }
 
-#endif
+}

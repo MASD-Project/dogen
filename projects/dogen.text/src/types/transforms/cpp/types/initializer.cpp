@@ -18,12 +18,98 @@
  * MA 02110-1301, USA.
  *
  */
+// #include "dogen.text.cpp/types/transforms/types/main_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/builtin_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/primitive_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/class_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/enum_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/exception_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/namespace_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/visitor_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/feature_bundle_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/variability_initializer_header_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/variability_initializer_implementation_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_class_header_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/facet_class_header_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/facet_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/backend_class_header_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/backend_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/part_class_header_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/part_class_implementation_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/part_class_implementation_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/helper_class_header_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/helper_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp"
+// #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp"
+#include "dogen.text.cpp/types/traits.hpp"
+#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/types/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::types {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    // register_formatter<builtin_header_transform>(rg);
+    // register_formatter<primitive_header_transform>(rg);
+    // register_formatter<primitive_implementation_transform>(rg);
+    // register_formatter<class_header_transform>(rg);
+    // register_formatter<class_implementation_transform>(rg);
+    // register_formatter<enum_header_transform>(rg);
+    // register_formatter<exception_header_transform>(rg);
+    // register_formatter<namespace_header_transform>(rg);
+    // register_formatter<visitor_header_transform>(rg);
+    // register_formatter<class_forward_declarations_transform>(rg);
+    // register_formatter<visitor_forward_declarations_transform>(rg);
+    // register_formatter<primitive_forward_declarations_transform>(rg);
+    // register_formatter<feature_template_bundle_header_transform>(rg);
+    // register_formatter<feature_template_bundle_implementation_transform>(rg);
+    // register_formatter<feature_bundle_header_transform>(rg);
+    // register_formatter<feature_bundle_implementation_transform>(rg);
+    // register_formatter<variability_initializer_header_transform>(rg);
+    // register_formatter<variability_initializer_implementation_transform>(rg);
+    // register_formatter<main_transform>(rg);
+    // register_formatter<archetype_class_header_transform_transform>(rg);
+    // register_formatter<archetype_class_header_factory_transform>(rg);
+    // register_formatter<archetype_class_implementation_transform_transform>(rg);
+    // register_formatter<archetype_class_implementation_factory_transform>(rg);
+    // register_formatter<facet_class_header_transform_transform>(rg);
+    // register_formatter<facet_class_implementation_transform_transform>(rg);
+    // register_formatter<facet_class_header_factory_transform>(rg);
+    // register_formatter<facet_class_implementation_factory_transform>(rg);
+    // register_formatter<backend_class_header_transform_transform>(rg);
+    // register_formatter<backend_class_implementation_transform_transform>(rg);
+    // register_formatter<backend_class_header_factory_transform>(rg);
+    // register_formatter<backend_class_implementation_factory_transform>(rg);
+    // register_formatter<part_class_header_transform_transform>(rg);
+    // register_formatter<part_class_implementation_transform_transform>(rg);
+    // register_formatter<part_class_header_factory_transform>(rg);
+    // register_formatter<part_class_implementation_factory_transform>(rg);
+    // register_formatter<helper_class_header_transform_transform>(rg);
+    // register_formatter<helper_class_implementation_transform_transform>(rg);
+    // register_formatter<helper_class_header_factory_transform>(rg);
+    // register_formatter<helper_class_implementation_factory_transform>(rg);
+    // register_formatter<archetype_kind_class_header_factory_transform>(rg);
+    // register_formatter<archetype_kind_class_implementation_factory_transform>(rg);
+
+    using namespace dogen::text::cpp::transforms::types;
+    register_helper<smart_pointer_helper_transform>(rg);
 }
 
 }

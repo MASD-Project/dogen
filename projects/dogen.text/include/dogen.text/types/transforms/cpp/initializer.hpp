@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_INITIALIZER_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_INITIALIZER_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_INITIALIZER_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include "dogen.text/types/transforms/registrar.hpp"
 
-namespace dogen::text::transforms::csharp::test_data {
+namespace dogen::text::transforms::cpp {
 
 /**
- * @brief Initialises the types facet.
+ * @brief Initialises the cpp backend.
  */
-class initializer final {
+class initializer {
 public:
     static void initialize(registrar& r);
 };
