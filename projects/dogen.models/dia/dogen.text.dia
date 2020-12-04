@@ -17014,13 +17014,13 @@ bool {{class.simple_name}}::is_enabled(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O144">
       <dia:attribute name="obj_pos">
-        <dia:point val="104,197"/>
+        <dia:point val="105,197"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,196.95;114.56,200.65"/>
+        <dia:rectangle val="104.95,196.95;115.56,200.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="104,197"/>
+        <dia:point val="105,197"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -17038,6 +17038,9 @@ bool {{class.simple_name}}::is_enabled(
         <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation_enabled
 #DOGEN masd.wale.kvp.class.simple_name=smart_pointer_helper_transform
 #DOGEN masd.wale.kvp.helper.family=SmartPointer
+#DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.types
+#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
+#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=SmartPointer
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
@@ -17137,10 +17140,8 @@ bool {{class.simple_name}}::is_enabled(
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=os #&gt;
-&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
@@ -17484,7 +17485,7 @@ bool {{class.simple_name}}::is_enabled(
           <dia:attribute name="comment">
             <dia:string>#
 std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("&lt;") + traits::facet_qn() + std::string("&gt;") +
+    static auto r(std::string("&lt;{{facet.qualified_name}}&gt;") +
         std::string("&lt;") + helper_name() + std::string("&gt;"));
     return r;
 }
@@ -17497,8 +17498,8 @@ std::string {{class.simple_name}}::family() const {
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list&lt;std::string&gt; {
-        traits::class_implementation_archetype_qn(),
-        traits::primitive_implementation_archetype_qn()
+        "{{archetype.class_implementation}}",
+        "{{archetype.primitive_implementation}}"
     });
     return r;
 }
@@ -17506,7 +17507,7 @@ std::list&lt;std::string&gt;
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_facets() const {
     static auto r(std::list&lt;std::string&gt; {
-        traits::facet_qn()
+        "{{facet.qualified_name}}"
     });
     return r;
 }

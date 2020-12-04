@@ -60,7 +60,7 @@
 // #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp"
 // #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/types/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::types {
@@ -107,8 +107,6 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<helper_class_implementation_factory_transform>(rg);
     // register_formatter<archetype_kind_class_header_factory_transform>(rg);
     // register_formatter<archetype_kind_class_implementation_factory_transform>(rg);
-
-    using namespace dogen::text::cpp::transforms::types;
     register_helper<smart_pointer_helper_transform>(rg);
 }
 

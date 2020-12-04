@@ -18,14 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
+#include "dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
-namespace dogen::text::cpp::transforms::types {
+namespace dogen::text::transforms::cpp::types {
 std::string smart_pointer_helper_transform::id() const {
-    static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
+    static auto r(std::string("<masd.cpp.types>") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -38,8 +36,8 @@ std::string smart_pointer_helper_transform::family() const {
 std::list<std::string>
 smart_pointer_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_archetype_qn(),
-        traits::primitive_implementation_archetype_qn()
+        "masd.cpp.types.class_implementation",
+        "masd.cpp.types.primitive_implementation"
     });
     return r;
 }
@@ -47,7 +45,7 @@ smart_pointer_helper_transform::owning_formatters() const {
 std::list<std::string>
 smart_pointer_helper_transform::owning_facets() const {
     static auto r(std::list<std::string> {
-        traits::facet_qn()
+        "masd.cpp.types"
     });
     return r;
 }
