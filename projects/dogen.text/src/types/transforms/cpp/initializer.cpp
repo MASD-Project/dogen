@@ -33,16 +33,16 @@
 namespace dogen::text::transforms::cpp {
 
 void initializer::initialize(registrar& rg) {
-    build::initializer::initialize(rg);
+    types::initializer::initialize(rg);
     hash::initializer::initialize(rg);
+    odb::initializer::initialize(rg);
     io::initializer::initialize(rg);
     lexical_cast::initializer::initialize(rg);
-    odb::initializer::initialize(rg);
+    test_data::initializer::initialize(rg);
     serialization::initializer::initialize(rg);
     tests::initializer::initialize(rg);
-    test_data::initializer::initialize(rg);
-    types::initializer::initialize(rg);
     visual_studio::initializer::initialize(rg);
+    build::initializer::initialize(rg);
 }
 
 }
