@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/io/entities/helper_properties_io.hpp"
@@ -96,6 +97,11 @@ void helper_chain::apply(std::ostream& os, const logical::entities::model& m,
         return;
     }
 
+    const auto ots(m.output_technical_spaces().front());
+    const auto csharp_ts(identification::entities::technical_space::csharp);
+    const bool requires_region(ots ==csharp_ts);
+
+    bool has_helpers(false);
     for (const auto& hlp_props : e.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
         const auto helpers(get_helpers(a, hlp_props));
@@ -105,6 +111,11 @@ void helper_chain::apply(std::ostream& os, const logical::entities::model& m,
          * current configuration. If enabled, format it.
          */
         for (const auto& hlp : helpers) {
+            if (requires_region && !has_helpers) {
+                has_helpers = true;
+                os << "        #region Helpers" << std::endl;
+            }
+
             const auto id(hlp->id());
             if (!hlp->is_enabled(*model_, e, a, hlp_props)) {
                 BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << id;
@@ -115,6 +126,12 @@ void helper_chain::apply(std::ostream& os, const logical::entities::model& m,
             hlp->apply(os, m, hlp_props);
         }
     }
+
+    if (requires_region && has_helpers) {
+        os << "        #endregion" << std::endl << std::endl;
+        has_helpers = false;
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
