@@ -20,9 +20,13 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/csharp/io/io_transform.hpp"
 #include "dogen.text/types/transforms/csharp/csharp_transform.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/csharp/types/types_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/test_data_transform.hpp"
+#include "dogen.text/types/transforms/csharp/visual_studio/visual_studio_transform.hpp"
 
 namespace dogen::text::transforms::csharp {
 namespace {
@@ -51,6 +55,10 @@ physical::entities::backend make_backend() {
         }
     });
 
+    lambda(io::io_facet_chain::static_facet());
+    lambda(test_data::test_data_facet_chain::static_facet());
+    lambda(types::types_facet_chain::static_facet());
+    lambda(visual_studio::visual_studio_facet_chain::static_facet());
     return r;
 }
 */
