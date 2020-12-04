@@ -29,6 +29,7 @@
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/helper_chain.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 
 namespace {
@@ -233,35 +234,40 @@ get_assistant_properties(const logical::entities::attribute& attr) const {
     return i->second;
 }
 
-void assistant::add_helper_methods(const std::string& element_id) {
-    BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
-                             << element_id;
+void assistant::add_helper_methods(const std::string& /*element_id*/) {
+    dogen::text::transforms::helper_chain::model_ =
+        &context_.model().physical();
+    dogen::text::transforms::helper_chain::apply(stream(),
+        context_.model().logical(), element_, artefact_);
 
-    if (element_.helper_properties().empty())
-        BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
+    // BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
+    //                          << element_id;
 
-    bool has_helpers(false);
-    for (const auto& hlp_props : element_.helper_properties()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
-        const auto helpers(get_helpers(hlp_props));
+    // if (element_.helper_properties().empty())
+    //     BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
 
-        for (const auto& hlp : helpers) {
-            if (!has_helpers) {
-                has_helpers = true;
-                stream() << "        #region Helpers" << std::endl;
-            }
+    // bool has_helpers(false);
+    // for (const auto& hlp_props : element_.helper_properties()) {
+    //     BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
+    //     const auto helpers(get_helpers(hlp_props));
 
-            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
-            hlp->apply(stream(), context_.model().logical(), hlp_props);
-        }
-    }
+    //     for (const auto& hlp : helpers) {
+    //         if (!has_helpers) {
+    //             has_helpers = true;
+    //             stream() << "        #region Helpers" << std::endl;
+    //         }
 
-    if (has_helpers) {
-        stream() << "        #endregion" << std::endl << std::endl;
-        has_helpers = false;
-    }
+    //         BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
+    //         hlp->apply(stream(), context_.model().logical(), hlp_props);
+    //     }
+    // }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
+    // if (has_helpers) {
+    //     stream() << "        #endregion" << std::endl << std::endl;
+    //     has_helpers = false;
+    // }
+
+    // BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::ostream& assistant::stream() {
