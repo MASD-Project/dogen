@@ -42,7 +42,7 @@ using logical::entities::element;
 using physical::entities::artefact;
 
 std::shared_ptr<text::transforms::registrar> helper_chain::registrar_;
-physical::entities::model* helper_chain::model_;
+const physical::entities::model* helper_chain::model_;
 
 text::transforms::registrar& helper_chain::registrar() {
     if (!registrar_)
@@ -52,8 +52,7 @@ text::transforms::registrar& helper_chain::registrar() {
 }
 
 std::list<std::shared_ptr<helper_transform>> helper_chain::
-get_helpers(const artefact& a,
-    const logical::entities::helper_properties& hp) const {
+get_helpers(const artefact& a, const logical::entities::helper_properties& hp) {
     /*
      * A family must have at least one helper registered. This is a
      * good way to detect spurious families in data files.
@@ -89,8 +88,13 @@ void helper_chain::apply(std::ostream& os, const logical::entities::model& m,
     BOOST_LOG_SEV(lg, debug) << "Generating helper methods for element: "
                              << id.value();
 
-    if (e.helper_properties().empty())
+    // FIXME: do this only once.
+    registrar().validate();
+
+    if (e.helper_properties().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
+        return;
+    }
 
     for (const auto& hlp_props : e.helper_properties()) {
         BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;

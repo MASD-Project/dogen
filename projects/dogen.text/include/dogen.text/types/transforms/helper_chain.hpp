@@ -48,15 +48,15 @@ public:
      * FIXME: big hack until we update the interfaces of the M2T
      * transforms.
      */
-    static physical::entities::model* model_;
+    static const physical::entities::model * model_;
 
 private:
-    std::list<std::shared_ptr<transforms::helper_transform>>
+    static std::list<std::shared_ptr<transforms::helper_transform>>
     get_helpers(const physical::entities::artefact& a,
-        const logical::entities::helper_properties& hp) const;
+        const logical::entities::helper_properties& hp);
 
 public:
-    void apply(std::ostream& os, const logical::entities::model& m,
+    static void apply(std::ostream& os, const logical::entities::model& m,
         const logical::entities::element& e,
         const physical::entities::artefact& a);
 
