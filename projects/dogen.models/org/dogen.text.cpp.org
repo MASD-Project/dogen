@@ -3076,7 +3076,7 @@ public:
     const physical::entities::facet& facet() const;
 
 public:
-    static void initialise(registrar& r);
+    // static void initialise(registrar& r);
 };
 <#+
         } // snf
@@ -3842,6 +3842,8 @@ physical::entities::facet <#= sn #>::make() {
     r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
+
+            if (!fct.archetypes().empty() || !fct.helpers().empty()) {
 #>
 
     const auto lambda([&](auto& container, const auto& element) {
@@ -3858,6 +3860,8 @@ physical::entities::facet <#= sn #>::make() {
     });
 
 <#+
+            }
+
             for (const auto& n : fct.archetypes()) {
 #>
     lambda(r.archetypes(), <#= n.simple() #>_factory::make());
@@ -4446,7 +4450,7 @@ physical::entities::archetype_kind <#= sn #>::make() {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/smart_pointer_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4455,11 +4459,12 @@ physical::entities::archetype_kind <#= sn #>::make() {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
 #>
 
 inline bool operator==(const <#= qn #>& lhs,
@@ -4521,17 +4526,20 @@ void helper_class_header_transform_transform::apply(const context& ctx, const lo
             const auto sn(o.name().simple() + "_transform");
 #>
 
-class <#= sn #> final : public helper_transform {
+class <#= sn #> final : public text::transforms::helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;
     std::list<std::string> owning_formatters() const override;
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
-    bool is_enabled(const assistant& a,
-        const logical::entities::helper_properties& hc) const override;
-    void apply(assistant& a,
-        const logical::entities::helper_properties& hc) const override;
+    bool is_enabled(const physical::entities::model& m,
+        const logical::entities::element& e,
+        const physical::entities::artefact& a,
+        const logical::entities::helper_properties& hp) const override;
+    void apply(std::ostream& os,
+        const logical::entities::model& m,
+        const logical::entities::helper_properties& hp) const override;
 };
 
 <#+
@@ -5337,7 +5345,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5347,7 +5355,8 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 <#+
 
 void date_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5376,7 +5385,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5386,7 +5395,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void optional_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5427,7 +5437,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5437,13 +5447,13 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void pair_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto first(hp.direct_descendants().front());
     const auto second(hp.direct_descendants().back());
-#
 #>
 
 inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
@@ -5486,7 +5496,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5496,7 +5506,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void time_duration_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5525,7 +5536,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5534,8 +5545,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void path_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void path_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5564,7 +5575,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
@@ -5574,7 +5585,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void associative_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5645,7 +5657,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5655,7 +5667,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void sequence_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5694,7 +5707,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5704,7 +5717,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void variant_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5757,7 +5771,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5767,7 +5781,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void ptime_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5798,7 +5813,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5808,7 +5823,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void ptree_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -5842,7 +5858,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -5852,7 +5868,8 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 <#+
 
 void smart_pointer_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -6397,7 +6414,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/optional_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6408,12 +6425,13 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 <#+
 
 void optional_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto containee(hp.direct_descendants().front());
 #>
 
@@ -6421,7 +6439,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
     s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", ";
 
     if (v)
-        s << "\"data\": " << <#= ast.streaming_for_type(containee, "*v") #>;
+        s << "\"data\": " << <#= streaming_for_type(containee, "*v") #>;
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
@@ -6453,7 +6471,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/pair_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6463,12 +6481,13 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void pair_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto first(hp.direct_descendants().front());
         const auto second(hp.direct_descendants().back());
 #>
@@ -6476,8 +6495,8 @@ void pair_helper_transform::apply(assistant& ast, const logical::entities::helpe
 inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
     s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", ";
 
-    s << "\"first\": " << <#= ast.streaming_for_type(first, "v.first") #> << ", ";
-    s << "\"second\": " << <#= ast.streaming_for_type(second, "v.second") #>;
+    s << "\"first\": " << <#= streaming_for_type(first, "v.first") #> << ", ";
+    s << "\"second\": " << <#= streaming_for_type(second, "v.second") #>;
     s << " }";
     return s;
 }
@@ -6507,7 +6526,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/string_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6517,7 +6536,8 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+void string_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
 #>
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -6548,7 +6568,7 @@ inline std::string tidy_up_string(std::string s) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/ptree_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6558,11 +6578,12 @@ inline std::string tidy_up_string(std::string s) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void ptree_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
 #>
 
 inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
@@ -6602,7 +6623,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/variant_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6612,12 +6633,13 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void variant_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void variant_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
 #>
 
 struct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<> {
@@ -6637,12 +6659,12 @@ struct <#= d.name_tree_identifiable() #>_visitor : public boost::static_visitor<
 #>
         stream_ << "{ " << "\"__type__\": " << "\"<#= dd.name_qualified() #>\"" << ", ";
         stream_ << "\"value\": ";
-        stream_ << <#= ast.streaming_for_type(dd, "v") #>;
+        stream_ << <#= streaming_for_type(dd, "v") #>;
         stream_ << " }";
 <#+
             } else
 #>
-        stream_ << <#= ast.streaming_for_type(dd, "v") #>;
+        stream_ << <#= streaming_for_type(dd, "v") #>;
     }
 <#+
         }
@@ -6682,7 +6704,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/associative_container_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6693,11 +6715,12 @@ inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified
 <#+
 
 void associative_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
 
         if (hp.direct_descendants().size() == 2) {
             const auto key(hp.direct_descendants().front());
@@ -6709,9 +6732,9 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << <#= ast.streaming_for_type(key, "i->first") #>;
+        s << <#= streaming_for_type(key, "i->first") #>;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << <#= ast.streaming_for_type(value, "i->second") #>;
+        s << <#= streaming_for_type(value, "i->second") #>;
         s << " } ]";
     }
     s << " ] ";
@@ -6727,7 +6750,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << <#= ast.streaming_for_type(containee, "*i") #>;
+        s << <#= streaming_for_type(containee, "*i") #>;
     }
     s << "] ";
     return s;
@@ -6759,7 +6782,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6769,11 +6792,12 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void sequence_container_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto containee(hp.direct_descendants().front());
 #>
 
@@ -6781,7 +6805,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << <#= ast.streaming_for_type(containee, "*i") #>;
+        s << <#= streaming_for_type(containee, "*i") #>;
     }
     s << "] ";
     return s;
@@ -6812,7 +6836,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6822,12 +6846,13 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
         const auto containee(hp.direct_descendants().front());
 #>
 
@@ -6836,7 +6861,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
     if (v)
-        s << "\"data\": " << <#= ast.streaming_for_type(containee, "*v") #>;
+        s << "\"data\": " << <#= streaming_for_type(containee, "*v") #>;
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
@@ -7696,7 +7721,7 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/path_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -7706,7 +7731,8 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 <#+
 
 void path_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
@@ -8494,7 +8520,7 @@ populate(const unsigned int position, result_type& v) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/date_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8503,7 +8529,8 @@ populate(const unsigned int position, result_type& v) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void date_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void date_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8533,7 +8560,7 @@ create_<#= ident #>(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/bool_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8542,7 +8569,8 @@ create_<#= ident #>(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void bool_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+void bool_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
 #>
 
 bool create_bool(const unsigned int position) {
@@ -8566,7 +8594,7 @@ bool create_bool(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/char_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8575,7 +8603,8 @@ bool create_bool(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void char_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void char_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8603,7 +8632,7 @@ void char_helper_transform::apply(assistant& ast, const logical::entities::helpe
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/ptree_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8612,7 +8641,8 @@ void char_helper_transform::apply(assistant& ast, const logical::entities::helpe
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void ptree_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void ptree_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8645,7 +8675,7 @@ create_<#= ident #>(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/associative_container_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8655,7 +8685,8 @@ create_<#= ident #>(const unsigned int position) {
 <#+
 
 void associative_container_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8699,7 +8730,7 @@ apply(assistant& ast, const logical::entities::helper_properties& hp) const {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/pair_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8708,7 +8739,8 @@ apply(assistant& ast, const logical::entities::helper_properties& hp) const {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void pair_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void pair_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8741,7 +8773,7 @@ create_<#= ident #>(unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/number_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8750,7 +8782,8 @@ create_<#= ident #>(unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void number_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void number_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8777,7 +8810,7 @@ void number_helper_transform::apply(assistant& ast, const logical::entities::hel
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/variant_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8786,7 +8819,8 @@ void number_helper_transform::apply(assistant& ast, const logical::entities::hel
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void variant_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void variant_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8837,7 +8871,7 @@ create_<#= ident #>(unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/path_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8846,7 +8880,8 @@ create_<#= ident #>(unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void path_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void path_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8876,7 +8911,7 @@ create_<#= ident #>(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/ptime_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8885,7 +8920,8 @@ create_<#= ident #>(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void ptime_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void ptime_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8919,7 +8955,7 @@ create_<#= ident #>(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/optional_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8928,7 +8964,8 @@ create_<#= ident #>(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void optional_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void optional_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8959,7 +8996,7 @@ create_<#= ident #>(unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/smart_pointer_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8968,7 +9005,8 @@ create_<#= ident #>(unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void smart_pointer_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -8999,7 +9037,7 @@ create_<#= ident #>(unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/sequence_container_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -9008,7 +9046,8 @@ create_<#= ident #>(unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void sequence_container_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void sequence_container_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -9040,7 +9079,7 @@ void sequence_container_helper_transform::apply(assistant& ast, const logical::e
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/string_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -9049,7 +9088,8 @@ void sequence_container_helper_transform::apply(assistant& ast, const logical::e
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void string_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& /*hp*/) const {
+void string_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& /*hp*/) const {
 #>
 
 std::string create_std_string(const unsigned int position) {
@@ -9075,7 +9115,7 @@ std::string create_std_string(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/domain_type_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -9084,7 +9124,8 @@ std::string create_std_string(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void domain_type_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void domain_type_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -9135,7 +9176,7 @@ create_<#= ident #>(const unsigned int position) {
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/time_duration_helper_transform.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -9144,7 +9185,8 @@ create_<#= ident #>(const unsigned int position) {
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void time_duration_helper_transform::apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+void time_duration_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -9817,7 +9859,7 @@ An error occurred whilst formatting.
 :END:
 *** helper_formatters
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.codec.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<text::transforms::helper_transform>>>>
 :END:
 ** transforms::workflow
 :PROPERTIES:
@@ -9857,16 +9899,11 @@ Supplies additional information required for formatting.
 :END:
 *** helpers
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<text::transforms::helper_transform>>>>
 :END:
 *** tracer
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<tracing::tracer>
-:END:
-** transforms::helper_transform
-:PROPERTIES:
-:masd.cpp.types.class_forward_declarations.enabled: true
-:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::building_error
 :PROPERTIES:
@@ -12021,9 +12058,12 @@ std::string {{class.simple_name}}::helper_name() const {
     return r;
 }
 
-bool {{class.simple_name}}::is_enabled(const assistant& a,
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
     const logical::entities::helper_properties& hp) const {
-    return a.is_streaming_enabled(hp);
+    return is_streaming_enabled(m, e, a, hp);
 }
 
 #+end_src
@@ -12066,7 +12106,10 @@ std::string {{class.simple_name}}::helper_name() const {
     return r;
 }
 
-bool {{class.simple_name}}::is_enabled(const assistant& /*a*/,
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }

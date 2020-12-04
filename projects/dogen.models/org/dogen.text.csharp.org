@@ -573,7 +573,7 @@ using System;
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
@@ -583,7 +583,8 @@ using System;
 <#+
 
 void floating_point_number_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
 #>
@@ -1069,7 +1070,7 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
 :END:
 **** stitch_template_content
 #+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
@@ -1079,7 +1080,8 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
 <#+
 
 void enumerable_helper_transform::
-apply(assistant& ast, const logical::entities::helper_properties& hp) const {
+apply(std::ostream& os, const logical::entities::model& /*m*/,
+    const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
 #>
@@ -2577,7 +2579,7 @@ There was an error in the registrar.
 :END:
 *** helpers
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<text::transforms::helper_transform>>>>
 :END:
 *** tracer
 :PROPERTIES:
@@ -2590,11 +2592,6 @@ There was an error in the registrar.
 
 An error occurred whilst formatting.
 
-** transforms::helper_transform
-:PROPERTIES:
-:masd.cpp.types.class_forward_declarations.enabled: true
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 ** transforms::visual_studio
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -3009,7 +3006,10 @@ std::string {{class.simple_name}}::helper_name() const {
     return r;
 }
 
-bool {{class.simple_name}}::is_enabled(const assistant& /*a*/,
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
