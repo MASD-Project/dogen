@@ -31,7 +31,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.text.cpp/types/transforms/repository.hpp"
-#include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 
@@ -45,10 +44,7 @@ private:
     /**
      * @brief Ensures the transform passes a modicum of sanity checks.
      */
-    /**@{*/
     void validate(std::shared_ptr<model_to_text_transform> t) const;
-    void validate(std::shared_ptr<text::transforms::helper_transform> ht) const;
-    /**@{*/
 
 public:
     /**
@@ -62,29 +58,11 @@ public:
      */
     void register_transform(std::shared_ptr<model_to_text_transform> t);
 
-    /**
-     * @brief Registers a helper transform.
-     */
-    void register_helper_transform(
-        std::shared_ptr<text::transforms::helper_transform> ht);
-
 public:
     /**
      * @brief Returns all available transforms.
      */
     const repository& formatter_repository() const;
-
-public:
-    /**
-     * @brief Returns all of the available helper transforms.
-     */
-    const std::unordered_map<std::string,
-                             std::unordered_map<
-                                 identification::entities::physical_meta_id,
-                                 std::list<
-                                     std::shared_ptr<
-                                         text::transforms::helper_transform>>>>&
-    helper_formatters() const;
 
 private:
     repository transform_repository_;
@@ -100,12 +78,6 @@ template<typename Transform>
 inline void register_formatter(registrar& rg, const std::string& facet_name) {
     const auto t(std::make_shared<Transform>(facet_name));
     rg.register_transform(t);
-}
-
-template<typename Formatter>
-inline void register_helper_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_helper_transform(f);
 }
 
 }

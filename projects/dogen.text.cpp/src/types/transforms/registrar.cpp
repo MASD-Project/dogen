@@ -50,7 +50,6 @@ const std::string more_than_one_canonical_archetype(
     "Found more than one canonical transform for a facet: ");
 const std::string duplicate_archetype("Duplicate transform id: ");
 const std::string empty_family("Family cannot be empty.");
-const std::string null_helper_transform("Helper transform supplied is null");
 
 }
 
@@ -71,25 +70,6 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     const auto mn(t->archetype().meta_name());
     using identification::helpers::physical_meta_name_validator;
     physical_meta_name_validator::validate_archetype_name(mn);
-}
-
-void registrar::
-validate(std::shared_ptr<text::transforms::helper_transform> ht) const {
-    /*
-     * Must be pointing to a valid object.
-     */
-    if (!ht) {
-        BOOST_LOG_SEV(lg, error) << null_helper_transform;
-        BOOST_THROW_EXCEPTION(registrar_error(null_helper_transform));
-    }
-
-    /*
-     * Helper family must be populated
-     */
-    if(ht->family().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_family;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
-    }
 }
 
 void registrar::validate() const {
@@ -149,31 +129,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
                              << "' against meta name: '" << mn << "'";
 }
 
-void registrar::register_helper_transform(
-    std::shared_ptr<text::transforms::helper_transform> ht) {
-    validate(ht);
-    auto& trp(transform_repository_);
-    auto& f(trp.helper_formatters_[ht->family()]);
-    for (const auto& of : ht->owning_formatters()) {
-        identification::entities::physical_meta_id pid(of);
-        f[pid].push_back(ht);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Registrered helper transform: "
-                             << ht->helper_name();
-}
-
 const repository& registrar::formatter_repository() const {
     return transform_repository_;
-}
-
-const std::unordered_map<
-    std::string, std::unordered_map<
-                     identification::entities::physical_meta_id,
-                     std::list<
-                         std::shared_ptr<text::transforms::helper_transform>>>>&
-registrar::helper_formatters() const {
-    return transform_repository_.helper_formatters();
 }
 
 }

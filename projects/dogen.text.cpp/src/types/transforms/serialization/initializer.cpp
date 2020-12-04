@@ -27,7 +27,6 @@
 #include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/path_helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/initializer.hpp"
@@ -45,7 +44,6 @@ void initializer::initialize(registrar& rg) {
     register_formatter<primitive_forward_declarations_transform>(rg);
     register_formatter<type_registrar_header_transform>(rg);
     register_formatter<type_registrar_implementation_transform>(rg);
-    register_helper_formatter<path_helper_transform>(rg);
 }
 
 }
