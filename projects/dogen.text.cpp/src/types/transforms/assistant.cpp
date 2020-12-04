@@ -46,6 +46,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/helper_chain.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 
 namespace {
@@ -568,34 +569,38 @@ is_streaming_enabled(const logical::entities::helper_properties& hp) const {
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }
 
-void assistant::add_helper_methods(const std::string& element_id) {
-    BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
-                             << element_id;
+void assistant::add_helper_methods(const std::string& /*element_id*/) {
+    dogen::text::transforms::helper_chain::model_ =
+        &context_.model().physical();
+    dogen::text::transforms::helper_chain::apply(stream(),
+        context_.model().logical(), element_, artefact_);
+    // BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
+    //                          << element_id;
 
-    if (element_.helper_properties().empty())
-        BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
+    // if (element_.helper_properties().empty())
+    //     BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
 
-    for (const auto& hlp_props : element_.helper_properties()) {
-        BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
-        const auto helpers(get_helpers(hlp_props));
+    // for (const auto& hlp_props : element_.helper_properties()) {
+    //     BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
+    //     const auto helpers(get_helpers(hlp_props));
 
-        /*
-         * Check to see if the helper is enabled, given the system's
-         * current configuration. If enabled, format it.
-         */
-        for (const auto& hlp : helpers) {
-            const auto id(hlp->id());
-            if (!hlp->is_enabled(context_.model().physical(), element_,
-                    artefact_, hlp_props)) {
-                BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << id;
-                continue;
-            }
+    //     /*
+    //      * Check to see if the helper is enabled, given the system's
+    //      * current configuration. If enabled, format it.
+    //      */
+    //     for (const auto& hlp : helpers) {
+    //         const auto id(hlp->id());
+    //         if (!hlp->is_enabled(context_.model().physical(), element_,
+    //                 artefact_, hlp_props)) {
+    //             BOOST_LOG_SEV(lg, debug) << "Helper is not enabled." << id;
+    //             continue;
+    //         }
 
-            BOOST_LOG_SEV(lg, debug) << "Transforming with helper: " << id;
-            hlp->apply(stream(), context_.model().logical(), hlp_props);
-        }
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
+    //         BOOST_LOG_SEV(lg, debug) << "Transforming with helper: " << id;
+    //         hlp->apply(stream(), context_.model().logical(), hlp_props);
+    //     }
+    // }
+    // BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::string assistant::
