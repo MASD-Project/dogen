@@ -13,29 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-03 Thu 19:53]
+#+CAPTION: Clock summary at [2020-12-04 Fri 11:54]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *55:00* |       |       | 100.0 |
+| *Total time*                                              | *57:53* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 55:00   |       |       | 100.0 |
-| Active                                                    |         | 55:00 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   9.2 |
+| Stories                                                   | 57:53   |       |       | 100.0 |
+| Active                                                    |         | 57:53 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   8.8 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.8 |
-| Sprint and product backlog grooming                       |         |       |  2:21 |   4.3 |
-| Improvements to template processing in logical model      |         |       |  0:26 |   0.8 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  12.7 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  24.7 |
+| Sprint and product backlog grooming                       |         |       |  2:21 |   4.1 |
+| Improvements to template processing in logical model      |         |       |  0:26 |   0.7 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  12.1 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  23.5 |
 | Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   1.0 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.3 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.8 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   7.1 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   8.7 |
-| Remove JSON models from Dogen                             |         |       |  0:19 |   0.6 |
-| Issues with emacs                                         |         |       |  1:32 |   2.8 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.7 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   6.7 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   8.3 |
+| Orchestration should have an initialiser                  |         |       |  0:09 |   0.3 |
+| Remove JSON models from Dogen                             |         |       |  0:19 |   0.5 |
+| Issues with emacs                                         |         |       |  1:32 |   2.6 |
 | Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.2 |
-| Move context, helper and M2T interface to =text= model    |         |       | 13:11 |  24.0 |
+| Move context, helper and M2T interface to =text= model    |         |       | 15:55 |  27.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -505,6 +506,18 @@ Notes:
   model at the same level. However, if we just get the helpers moved
   across in C# that may be enough to unblock c++.
 
+*** COMPLETED Orchestration should have an initialiser                :story:
+    CLOSED: [2020-12-04 Fri 11:54]
+    :LOGBOOK:
+    CLOCK: [2020-12-04 Fri 11:45]--[2020-12-04 Fri 11:54] =>  0:09
+    :END:
+
+At present we are executing all initialisers from within orchestration
+tests and from within CLI. In reality, since orchestration is joining
+all the dots, it should have a top-level initialiser that sets
+everything up. It should then be called by the CLI initialiser and the
+tests initialiser, which has additional stuff to initialise.
+
 *** STARTED Remove JSON models from Dogen                             :story:
     :LOGBOOK:
     CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
@@ -548,6 +561,8 @@ per language. Each of the namespaces is declared as a backend.
 
 *** STARTED Move context, helper and M2T interface to =text= model    :story:
     :LOGBOOK:
+    CLOCK: [2020-12-04 Fri 11:55]--[2020-12-04 Fri 12:10] =>  0:15
+    CLOCK: [2020-12-04 Fri 09:01]--[2020-12-04 Fri 11:45] =>  2:44
     CLOCK: [2020-12-03 Thu 18:52]--[2020-12-03 Thu 19:53] =>  1:01
     CLOCK: [2020-12-03 Thu 17:15]--[2020-12-03 Thu 17:21] =>  0:06
     CLOCK: [2020-12-03 Thu 16:16]--[2020-12-03 Thu 17:14] =>  0:58
@@ -645,6 +660,7 @@ code to generate the transform code for backend and facet
 This type has now been cleaned up and should be the same for C++ and
 C# so should be moved to the common model.
 
+
 *** Model functionality provided by assistant in the logical model    :story:
 
 We need to look at all the methods in assistant and see if we can
@@ -664,6 +680,7 @@ Links:
 
 - [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
   caching]]
+- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
 
 *** Stitch formatter updates                                          :story:
 

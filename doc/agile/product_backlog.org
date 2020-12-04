@@ -1644,14 +1644,6 @@ of empty directories. It doesn't seem easy to stop the directory
 generation but perhaps we could add the tracing directory to the file
 transforms and run the "remove empty directories" transform over it.
 
-*** Orchestration should have an initialiser                          :story:
-
-At present we are executing all initialisers from within orchestration
-tests and from within CLI. In reality, since orchestration is joining
-all the dots, it should have a top-level initialiser that sets
-everything up. It should then be called by the CLI initialiser and the
-tests initialiser, which has additional stuff to initialise.
-
 *** Split enablement features                                         :story:
 
 At present we are instantiating the =enabled= feature across the
@@ -16078,6 +16070,41 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for rocksdb                               :story:
+
+#+begin_quote
+This code is a library that forms the core building block for a fast
+key-value server, especially suited for storing data on flash
+drives. It has a Log-Structured-Merge-Database (LSM) design with
+flexible tradeoffs between Write-Amplification-Factor (WAF),
+Read-Amplification-Factor (RAF) and Space-Amplification-Factor
+(SAF). It has multi-threaded compactions, making it especially
+suitable for storing multiple terabytes of data in a single database.
+#+end_quote
+
+Links:
+
+- [[https://github.com/facebook/rocksdb][GH rocksdb]]
+
+*** Consider adding support for typesense                             :story:
+
+#+begin_quote
+Typesense is a fast, typo-tolerant search engine for building
+delightful search experiences.
+#+end_quote
+
+It would be nice if dogen could generate code to integrate with
+typesense - whatever that means precisely, upload documents into the
+search engine? Serialise to a format compatible?
+
+Links:
+
+- [[https://github.com/typesense/typesense][GH typesense]]
+- [[https://developer.mozilla.org/en-US/docs/Web/OpenSearch][OpenSearch]]
+- [[https://github.com/phaistos-networks/Trinity][GH Trinity]]: "Trinity is a modern C++ information-retrieval library
+  for building queries, indexing documents and other content, running
+  queries and scoring documents matching them."
 
 *** Consider adding support for snowflake                             :story:
 
