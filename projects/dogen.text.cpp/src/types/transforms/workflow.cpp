@@ -104,9 +104,7 @@ execute(boost::shared_ptr<tracing::tracer> tracer,
         }
         BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
-        const auto& frp(registrar().formatter_repository());
-        context ctx(m, frp.helper_formatters(),
-            technical_space_version_, tracer);
+        context ctx(m, technical_space_version_, tracer);
 
         auto& a(*aptr);
         const auto id(fmt.archetype().meta_name().id().value());

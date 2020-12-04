@@ -38,7 +38,6 @@
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/streaming_properties.hpp"
 #include "dogen.text/types/entities/model.hpp"
-#include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::cpp::transforms {
 
@@ -48,21 +47,11 @@ namespace dogen::text::cpp::transforms {
 class context final {
 public:
     context(const text::entities::model& m,
-        const std::unordered_map<std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-        std::list<std::shared_ptr<
-        text::transforms::helper_transform>>>>& helpers,
         const identification::entities::technical_space_version tsv,
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
     const text::entities::model& model() const;
-
-    const std::unordered_map<std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-                           std::list<std::shared_ptr<
-                                         text::transforms::helper_transform>>>>&
-    helpers() const;
 
     identification::entities::technical_space_version
     technical_space_version() const;
@@ -71,11 +60,6 @@ public:
 
 private:
     const text::entities::model& model_;
-    const std::unordered_map<std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-                           std::list<std::shared_ptr<
-                                         text::transforms::helper_transform>>>>&
-    helpers_;
     const identification::entities::technical_space_version
     technical_space_version_;
     boost::shared_ptr<tracing::tracer> tracer_;
