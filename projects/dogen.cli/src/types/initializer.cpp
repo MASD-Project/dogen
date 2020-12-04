@@ -18,30 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/config.hpp"
-#include "dogen.text.csharp/types/initializer.hpp"
-#include "dogen.text.cpp/types/initializer.hpp"
-#include "dogen.codec.json/types/initializer.hpp"
-#include "dogen.codec.org_mode/types/initializer.hpp"
-#include "dogen.codec.dia/types/initializer.hpp"
-#include "dogen.tracing/types/initializer.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include "dogen.relational/types/initializer.hpp"
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
+#include "dogen.orchestration/types/initializer.hpp"
 #include "dogen.cli/types/initializer.hpp"
 
 namespace dogen::cli {
 
 void initializer::initialize() {
-    dogen::codec::org_mode::initializer::initialize();
-    dogen::codec::json::initializer::initialize();
-    dogen::codec::dia::initializer::initialize();
-    dogen::text::csharp::initializer::initialize();
-    dogen::text::cpp::initializer::initialize();
-    dogen::tracing::initializer::initialize();
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-    dogen::relational::initializer::initialize();
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
+    orchestration::initializer::initialize();
 }
 
 }

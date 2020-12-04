@@ -20,20 +20,12 @@
  */
 #define BOOST_TEST_MODULE dogen.orchestration.tests
 #include <boost/test/unit_test.hpp>
-#include "dogen/config.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
-#include "dogen.text.csharp/types/initializer.hpp"
-#include "dogen.text.cpp/types/initializer.hpp"
-#include "dogen.codec.json/types/initializer.hpp"
-#include "dogen.codec.org_mode/types/initializer.hpp"
-#include "dogen.codec.dia/types/initializer.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include "dogen.relational/types/initializer.hpp"
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
+#include "dogen.orchestration/types/initializer.hpp"
 #include "dogen.tracing/types/initializer.hpp"
 
 namespace  {
@@ -59,23 +51,14 @@ struct initializer {
         _CrtSetDbgFlag(0);
 #endif
 #endif
-
-        dogen::codec::org_mode::initializer::initialize();
-        dogen::codec::json::initializer::initialize();
-        dogen::codec::dia::initializer::initialize();
-        dogen::text::csharp::initializer::initialize();
-        dogen::text::cpp::initializer::initialize();
+        dogen::orchestration::initializer::initialize();
         dogen::utility::test_data::dogen_product::initialize();
-        dogen::tracing::initializer::initialize();
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
         dogen::utility::test_data::cpp_ref_impl_product::initialize();
 #endif // ENABLE_CPP_REF_IMPL_TESTS
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
         dogen::utility::test_data::csharp_ref_impl_product::initialize();
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-        dogen::relational::initializer::initialize();
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
         BOOST_LOG_SEV(lg, debug) << "Finished initialisation.";
     }
 };
