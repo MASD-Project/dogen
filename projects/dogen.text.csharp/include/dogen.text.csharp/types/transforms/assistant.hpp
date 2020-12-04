@@ -116,10 +116,6 @@ public:
     std::string
     make_argument_name(const logical::entities::attribute& attr) const;
 
-private:
-    std::list<std::shared_ptr<text::transforms::helper_transform>>
-    get_helpers(const logical::entities::helper_properties& hp) const;
-
 public:
     /**
      * @brief Creates any helper methods that may be required for this

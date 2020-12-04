@@ -27,7 +27,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
-#include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
 #include "dogen.text/types/transforms/helper_chain.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -47,8 +46,6 @@ const bool documenting_previous_identifier(true);
 
 const std::string default_family("Default");
 const std::string static_reference_equals("object");
-const std::string no_helpers_for_family("No helpers found for family: ");
-const std::string helpless_family("No registered helpers found for family: ");
 const std::string attribute_with_no_simple_name(
     "Attribute has empty simple name.");
 
@@ -185,45 +182,6 @@ make_argument_name(const logical::entities::attribute& attr) const {
     return r;
 }
 
-std::list<std::shared_ptr<text::transforms::helper_transform>>
-assistant::get_helpers(const logical::entities::helper_properties& hp) const {
-    const auto fam(hp.current().family());
-
-    /*
-     * Bit of a hack: we manually ignore the "Default" family. This is
-     * a quick way to solve a mismatch between C# and C++: in C++ we
-     * need a helper for all domain types, but not so in C#.
-     */
-    if (fam != default_family) {
-        /*
-         * A family must have at least one helper registered. This is a
-         * good way to detect spurious families in data files.
-         */
-        const auto i(context_.helpers().find(fam));
-        if (i == context_.helpers().end()) {
-            BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
-            BOOST_THROW_EXCEPTION(
-                formatting_error(no_helpers_for_family + fam));
-        }
-        BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
-
-        /*
-         * Not all formatters need help, so its fine not to have a
-         * helper registered against a particular formatter.
-         */
-        const auto j(i->second.find(physical_meta_name_.id()));
-        if (j != i->second.end()) {
-            BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                     << physical_meta_name_.id();
-            return j->second;
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_meta_name_.id();
-    return std::list<std::shared_ptr<text::transforms::helper_transform>>();
-}
-
 boost::optional<logical::entities::assistant_properties> assistant::
 get_assistant_properties(const logical::entities::attribute& attr) const {
     const auto& ap(context_.model().logical().assistant_properties());
@@ -239,35 +197,6 @@ void assistant::add_helper_methods(const std::string& /*element_id*/) {
         &context_.model().physical();
     dogen::text::transforms::helper_chain::apply(stream(),
         context_.model().logical(), element_, artefact_);
-
-    // BOOST_LOG_SEV(lg, debug) << "Generating helper methods. Element: "
-    //                          << element_id;
-
-    // if (element_.helper_properties().empty())
-    //     BOOST_LOG_SEV(lg, debug) << "No helper methods found.";
-
-    // bool has_helpers(false);
-    // for (const auto& hlp_props : element_.helper_properties()) {
-    //     BOOST_LOG_SEV(lg, debug) << "Helper configuration: " << hlp_props;
-    //     const auto helpers(get_helpers(hlp_props));
-
-    //     for (const auto& hlp : helpers) {
-    //         if (!has_helpers) {
-    //             has_helpers = true;
-    //             stream() << "        #region Helpers" << std::endl;
-    //         }
-
-    //         BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
-    //         hlp->apply(stream(), context_.model().logical(), hlp_props);
-    //     }
-    // }
-
-    // if (has_helpers) {
-    //     stream() << "        #endregion" << std::endl << std::endl;
-    //     has_helpers = false;
-    // }
-
-    // BOOST_LOG_SEV(lg, debug) << "Finished generating helper methods.";
 }
 
 std::ostream& assistant::stream() {
