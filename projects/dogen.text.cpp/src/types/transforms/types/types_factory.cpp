@@ -32,7 +32,6 @@
 #include "dogen.text.cpp/types/transforms/types/namespace_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/smart_pointer_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_factory.hpp"
@@ -140,7 +139,6 @@ physical::entities::facet types_factory::make() {
     lambda(r.archetypes(), visitor_forward_declarations_factory::make());
     lambda(r.archetypes(), visitor_header_factory::make());
 
-    lambda(r.helpers(), smart_pointer_helper_factory::make());
     return r;
 }
 
