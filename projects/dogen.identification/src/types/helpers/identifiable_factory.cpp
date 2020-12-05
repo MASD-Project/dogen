@@ -35,6 +35,7 @@ constexpr std::string_view space(" ");
 constexpr std::string_view less_than("<");
 constexpr std::string_view more_than(">");
 constexpr std::string_view separator("_");
+constexpr std::string_view slash("/");
 constexpr std::string_view scope_operator("::");
 
 }
@@ -46,6 +47,7 @@ std::string identifiable_factory::make(const std::string& s) {
     BOOST_LOG_SEV(lg, trace) << "Input string: " << r;
 
     boost::replace_all(r, dot, separator);
+    boost::replace_all(r, slash, separator);
     boost::replace_all(r, scope_operator, separator);
     boost::replace_all(r, less_than, separator);
 
