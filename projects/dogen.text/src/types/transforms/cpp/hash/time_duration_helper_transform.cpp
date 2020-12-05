@@ -36,8 +36,8 @@ std::string time_duration_helper_transform::family() const {
 std::list<std::string>
 time_duration_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
-        "masd.cpp.types.class_implementation",
-        "masd.cpp.types.primitive_implementation"
+        "masd.cpp.hash.class_implementation",
+        "masd.cpp.hash.primitive_implementation"
     });
     return r;
 }

@@ -17039,8 +17039,6 @@ bool {{class.simple_name}}::is_enabled(
 #DOGEN masd.wale.kvp.class.simple_name=smart_pointer_helper_transform
 #DOGEN masd.wale.kvp.helper.family=SmartPointer
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.types
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=SmartPointer
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.types.primitive_implementation
@@ -17498,8 +17496,8 @@ std::string {{class.simple_name}}::family() const {
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list&lt;std::string&gt; {
-        "{{archetype.class_implementation}}",
-        "{{archetype.primitive_implementation}}"
+        "{{facet.qualified_name}}.class_implementation",
+        "{{facet.qualified_name}}.primitive_implementation"
     });
     return r;
 }
@@ -17569,8 +17567,6 @@ bool {{class.simple_name}}::is_enabled(
 #DOGEN masd.wale.kvp.class.simple_name=date_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostDate
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostDate
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -17738,8 +17734,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=ptime_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostPTime
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostPTime
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -17909,8 +17903,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=associative_container_helper_transform
 #DOGEN masd.wale.kvp.helper.family=AssociativeContainer
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=AssociativeContainer
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -18120,8 +18112,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=optional_helper_transform
 #DOGEN masd.wale.kvp.helper.family=Optional
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=Optional
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -18301,8 +18291,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=sequence_container_helper_transform
 #DOGEN masd.wale.kvp.helper.family=SequenceContainer
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=SequenceContainer
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -18480,8 +18468,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=variant_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostVariant
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostVariant
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -18673,8 +18659,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=time_duration_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostTimeDuration
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostTimeDuration
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -18842,8 +18826,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=ptree_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostPTree
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostPTree
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -19016,8 +18998,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=pair_helper_transform
 #DOGEN masd.wale.kvp.helper.family=Pair
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=Pair
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -19204,8 +19184,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=smart_pointer_helper_transform
 #DOGEN masd.wale.kvp.helper.family=SmartPointer
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=SmartPointer
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
@@ -19381,8 +19359,6 @@ inline std::size_t hash_&lt;#= ident #&gt;(const &lt;#= qn #&gt;&amp; v) {
 #DOGEN masd.wale.kvp.class.simple_name=path_helper_transform
 #DOGEN masd.wale.kvp.helper.family=BoostPath
 #DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.hash
-#DOGEN masd.wale.kvp.archetype.class_implementation=masd.cpp.types.class_implementation
-#DOGEN masd.wale.kvp.archetype.primitive_implementation=masd.cpp.types.primitive_implementation
 #DOGEN masd.physical.helpers.family=BoostPath
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.class_implementation
 #DOGEN masd.physical.helpers.owning_formatters=masd.cpp.hash.primitive_implementation
