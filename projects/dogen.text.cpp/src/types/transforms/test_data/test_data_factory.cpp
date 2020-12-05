@@ -23,29 +23,13 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/bool_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/char_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/date_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/pair_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/path_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/ptime_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/ptree_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/number_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/string_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/builtin_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/variant_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/optional_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/domain_type_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/smart_pointer_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/time_duration_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/primitive_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/sequence_container_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/associative_container_helper_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 namespace {
@@ -87,22 +71,6 @@ physical::entities::facet test_data_factory::make() {
     lambda(r.archetypes(), primitive_header_factory::make());
     lambda(r.archetypes(), primitive_implementation_factory::make());
 
-    lambda(r.helpers(), associative_container_helper_factory::make());
-    lambda(r.helpers(), bool_helper_factory::make());
-    lambda(r.helpers(), char_helper_factory::make());
-    lambda(r.helpers(), date_helper_factory::make());
-    lambda(r.helpers(), domain_type_helper_factory::make());
-    lambda(r.helpers(), number_helper_factory::make());
-    lambda(r.helpers(), optional_helper_factory::make());
-    lambda(r.helpers(), pair_helper_factory::make());
-    lambda(r.helpers(), path_helper_factory::make());
-    lambda(r.helpers(), ptime_helper_factory::make());
-    lambda(r.helpers(), ptree_helper_factory::make());
-    lambda(r.helpers(), sequence_container_helper_factory::make());
-    lambda(r.helpers(), smart_pointer_helper_factory::make());
-    lambda(r.helpers(), string_helper_factory::make());
-    lambda(r.helpers(), time_duration_helper_factory::make());
-    lambda(r.helpers(), variant_helper_factory::make());
     return r;
 }
 
