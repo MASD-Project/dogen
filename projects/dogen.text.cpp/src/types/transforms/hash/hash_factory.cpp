@@ -22,24 +22,13 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/hash/hash_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text.cpp/types/transforms/hash/date_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/hash/enum_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/pair_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/path_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/ptime_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/ptree_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/hash/builtin_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/variant_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/optional_helper_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/smart_pointer_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/time_duration_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/sequence_container_helper_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/associative_container_helper_factory.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
 namespace {
@@ -80,17 +69,6 @@ physical::entities::facet hash_factory::make() {
     lambda(r.archetypes(), primitive_header_factory::make());
     lambda(r.archetypes(), primitive_implementation_factory::make());
 
-    lambda(r.helpers(), associative_container_helper_factory::make());
-    lambda(r.helpers(), date_helper_factory::make());
-    lambda(r.helpers(), optional_helper_factory::make());
-    lambda(r.helpers(), pair_helper_factory::make());
-    lambda(r.helpers(), path_helper_factory::make());
-    lambda(r.helpers(), ptime_helper_factory::make());
-    lambda(r.helpers(), ptree_helper_factory::make());
-    lambda(r.helpers(), sequence_container_helper_factory::make());
-    lambda(r.helpers(), smart_pointer_helper_factory::make());
-    lambda(r.helpers(), time_duration_helper_factory::make());
-    lambda(r.helpers(), variant_helper_factory::make());
     return r;
 }
 

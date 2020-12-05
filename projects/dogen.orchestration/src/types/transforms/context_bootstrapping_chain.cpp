@@ -34,6 +34,7 @@
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
+#include "dogen.text/types/transforms/cpp/cpp_factory.hpp"
 #include "dogen.text.cpp/types/transforms/transforms_factory.hpp"
 #include "dogen.text.csharp/types/transforms/transforms_factory.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
@@ -90,9 +91,20 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
      * Obtain the backends.
      */
+    // FIXME: for now we need to merge the helpers from the new backends.
+    auto old_be(text::cpp::transforms::transforms_factory::make());
+    auto new_be(text::transforms::cpp::cpp_factory::make());
+    for (const auto& new_pair : new_be.facets()) {
+        const auto& new_facet(new_pair.second);
+        for (auto& old_pair : old_be.facets()) {
+            auto& old_facet(old_pair.second);
+            if (old_facet.meta_name().id() == new_facet.meta_name().id())
+                old_facet.helpers(new_facet.helpers());
+        }
+    }
+
     const std::list<physical::entities::backend> bes {
-        text::cpp::transforms::transforms_factory::make(),
-        text::csharp::transforms::transforms_factory::make()
+        old_be, text::csharp::transforms::transforms_factory::make()
     };
 
     /*
