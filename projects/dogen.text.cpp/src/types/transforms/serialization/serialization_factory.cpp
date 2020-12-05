@@ -23,7 +23,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/enum_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/path_helper_factory.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/class_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/serialization_factory.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/builtin_header_factory.hpp"
@@ -78,7 +77,6 @@ physical::entities::facet serialization_factory::make() {
     lambda(r.archetypes(), type_registrar_header_factory::make());
     lambda(r.archetypes(), type_registrar_implementation_factory::make());
 
-    lambda(r.helpers(), path_helper_factory::make());
     return r;
 }
 
