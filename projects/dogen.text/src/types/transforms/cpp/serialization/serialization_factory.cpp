@@ -22,6 +22,7 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/path_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/serialization/serialization_factory.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
@@ -43,6 +44,21 @@ physical::entities::facet serialization_factory::make() {
     r.directory_name("serialization");
     r.postfix("ser");
 
+    const auto lambda([&](auto& container, const auto& element) {
+        const auto id(element.meta_name().id());
+        const auto pair(std::make_pair(id, element));
+        const auto inserted(container.insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_archetype("Duplicate id: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
+        }
+    });
+
+
+    lambda(r.helpers(), path_helper_factory::make());
     return r;
 }
 

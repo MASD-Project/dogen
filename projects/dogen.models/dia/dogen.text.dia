@@ -11770,7 +11770,7 @@ C++ technical space.
         <dia:point val="226,224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="225.95,222.15;282.05,251.05"/>
+        <dia:rectangle val="225.95,222.15;282.05,261.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11782,7 +11782,7 @@ C++ technical space.
         <dia:real val="56"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27"/>
+        <dia:real val="37"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#serialization#</dia:string>
@@ -11815,7 +11815,7 @@ C++ technical space.
         <dia:point val="284,224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="283.95,222.15;355.05,251.05"/>
+        <dia:rectangle val="283.95,222.15;355.05,261.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11827,7 +11827,7 @@ C++ technical space.
         <dia:real val="71"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27"/>
+        <dia:real val="37"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>
@@ -11860,7 +11860,7 @@ C++ technical space.
         <dia:point val="358,224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="357.95,222.15;420.05,251.05"/>
+        <dia:rectangle val="357.95,222.15;420.05,261.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11872,7 +11872,7 @@ C++ technical space.
         <dia:real val="62"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27"/>
+        <dia:real val="37"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#lexical_cast#</dia:string>
@@ -13517,7 +13517,7 @@ and to string.
         <dia:point val="424,140"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="423.95,138.15;522.05,253.05"/>
+        <dia:rectangle val="423.95,138.15;522.05,263.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13529,7 +13529,7 @@ and to string.
         <dia:real val="98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="113"/>
+        <dia:real val="123"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#csharp#</dia:string>
@@ -15206,7 +15206,7 @@ of the C# technical space.
         <dia:point val="426,224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="425.95,222.15;471.05,251.05"/>
+        <dia:rectangle val="425.95,222.15;471.05,261.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15218,7 +15218,7 @@ of the C# technical space.
         <dia:real val="45"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27"/>
+        <dia:real val="37"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -15251,7 +15251,7 @@ of the C# technical space.
         <dia:point val="473,224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="472.95,222.15;520.05,251.05"/>
+        <dia:rectangle val="472.95,222.15;520.05,261.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15263,7 +15263,7 @@ of the C# technical space.
         <dia:real val="47"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27"/>
+        <dia:real val="37"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>
@@ -15406,16 +15406,16 @@ C# technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="428,231"/>
+        <dia:point val="428,226"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="427.95,230.95;449.74,236.75"/>
+        <dia:rectangle val="427.95,225.95;449.74,231.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="428,231"/>
+        <dia:point val="428,226"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.690000000000001"/>
@@ -15440,7 +15440,7 @@ the C# technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="428.35,232.244"/>
+            <dia:point val="428.35,227.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -15463,16 +15463,16 @@ the C# technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="475,231"/>
+        <dia:point val="475,226"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="474.95,230.95;489.81,235.95"/>
+        <dia:rectangle val="474.95,225.95;489.81,230.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="475,231"/>
+        <dia:point val="475,226"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.76"/>
@@ -15496,7 +15496,7 @@ facet of the C# technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="475.35,232.244"/>
+            <dia:point val="475.35,227.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -15519,13 +15519,13 @@ facet of the C# technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O134">
       <dia:attribute name="obj_pos">
-        <dia:point val="453,189"/>
+        <dia:point val="455,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="452.95,188.95;465.87,192.65"/>
+        <dia:rectangle val="454.95,188.95;467.87,192.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="453,189"/>
+        <dia:point val="455,189"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15664,13 +15664,13 @@ facet of the C# technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O135">
       <dia:attribute name="obj_pos">
-        <dia:point val="504,189"/>
+        <dia:point val="505,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="503.95,188.95;516.87,192.65"/>
+        <dia:rectangle val="504.95,188.95;517.87,192.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="504,189"/>
+        <dia:point val="505,189"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15809,13 +15809,13 @@ facet of the C# technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O136">
       <dia:attribute name="obj_pos">
-        <dia:point val="453,231"/>
+        <dia:point val="455,226"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="452.95,230.95;465.87,234.65"/>
+        <dia:rectangle val="454.95,225.95;467.87,229.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="453,231"/>
+        <dia:point val="455,226"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15954,13 +15954,13 @@ facet of the C# technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O137">
       <dia:attribute name="obj_pos">
-        <dia:point val="500,231"/>
+        <dia:point val="505,226"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="499.95,230.95;512.87,234.65"/>
+        <dia:rectangle val="504.95,225.95;517.87,229.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="500,231"/>
+        <dia:point val="505,226"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -23713,6 +23713,183 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O92"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O182">
+      <dia:attribute name="obj_pos">
+        <dia:point val="228,241"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="227.95,240.95;238.56,244.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="228,241"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="10.51"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#path_helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##DOGEN masd.physical.wale_template_reference=cpp_helper_transform_implementation_enabled
+#DOGEN masd.wale.kvp.class.simple_name=path_helper_transform
+#DOGEN masd.wale.kvp.helper.family=BoostPath
+#DOGEN masd.wale.kvp.facet.qualified_name=masd.cpp.serialization
+#DOGEN masd.physical.helpers.family=BoostPath
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.serialization.class_implementation
+#DOGEN masd.physical.helpers.owning_formatters=masd.cpp.serialization.primitive_implementation
+#DOGEN masd.physical.helpers.owning_facets=masd.cpp.serialization#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#84c385ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=os #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/serialization/path_helper_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void path_helper_transform::
+apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
+    const logical::entities::helper_properties&amp; hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+#&gt;
+namespace boost {
+namespace serialization {
+
+template&lt;class Archive&gt;
+void serialize(Archive&amp; ar, boost::filesystem::path&amp; p, const unsigned int/*v*/)
+{
+    std::string s;
+    if(Archive::is_saving::value)
+        s = p.generic_string();
+    ar &amp; boost::serialization::make_nvp("path", s);
+    if(Archive::is_loading::value)
+        p = s;
+}
+
+} }
+&lt;#+
+    }
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O93"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>
