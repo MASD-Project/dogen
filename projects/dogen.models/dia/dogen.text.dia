@@ -16663,9 +16663,8 @@ inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#
-std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("&lt;") + traits::facet_qn() + std::string("&gt;") +
+            <dia:string>#std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("&lt;{{facet.qualified_name}}&gt;") +
         std::string("&lt;") + helper_name() + std::string("&gt;"));
     return r;
 }
@@ -16678,8 +16677,8 @@ std::string {{class.simple_name}}::family() const {
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list&lt;std::string&gt; {
-        traits::class_archetype_qn(),
-        traits::primitive_archetype_qn()
+        "{{facet.qualified_name}}.class_implementation",
+        "{{facet.qualified_name}}.primitive_implementation"
     });
     return r;
 }
@@ -16687,7 +16686,7 @@ std::list&lt;std::string&gt;
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_facets() const {
     static auto r(std::list&lt;std::string&gt; {
-        traits::facet_qn()
+        "{{facet.qualified_name}}"
     });
     return r;
 }
@@ -23890,6 +23889,341 @@ void serialize(Archive&amp; ar, boost::filesystem::path&amp; p, const unsigned i
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O93"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O183">
+      <dia:attribute name="obj_pos">
+        <dia:point val="428,208"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="427.95,207.95;441.963,211.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="428,208"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="13.9125"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#floating_point_number_helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##DOGEN masd.physical.wale_template_reference=csharp_helper_transform_implementation
+#DOGEN masd.wale.kvp.class.simple_name=floating_point_number_helper_transform
+#DOGEN masd.wale.kvp.helper.family=FloatingPointNumber
+#DOGEN masd.wale.kvp.facet.qualified_name=masd.csharp.types
+#DOGEN masd.physical.helpers.family=FloatingPointNumber
+#DOGEN masd.physical.helpers.owning_formatters=masd.csharp.types.class
+#DOGEN masd.physical.helpers.owning_formatters=masd.csharp.types.primitive
+#DOGEN masd.physical.helpers.owning_facets=masd.csharp.types#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#84c385ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=os #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/csharp/types/floating_point_number_helper_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void floating_point_number_helper_transform::
+apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
+    const logical::entities::helper_properties&amp; hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+#&gt;
+        /// &lt;summary&gt;
+        /// Compare floating point numbers, taking precision into account (&lt;#= qn #&gt; version).
+        /// &lt;/summary&gt;
+        static private bool NearlyEqual(&lt;#= qn #&gt; lhs, &lt;#= qn #&gt; rhs)
+        {
+            &lt;#= qn #&gt; epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * &lt;#= qn #&gt;.Epsilon;
+            return Math.Abs(lhs - rhs) &lt;= epsilon;
+        }
+&lt;#+
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O126"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O184">
+      <dia:attribute name="obj_pos">
+        <dia:point val="475,208"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="474.95,207.95;485.56,211.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="475,208"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="10.51"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#enumerable_helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::helper#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>##DOGEN masd.physical.wale_template_reference=csharp_helper_transform_implementation
+#DOGEN masd.wale.kvp.class.simple_name=enumerable_helper_transform
+#DOGEN masd.wale.kvp.helper.family=Enumerable
+#DOGEN masd.wale.kvp.facet.qualified_name=masd.csharp.io
+#DOGEN masd.physical.helpers.family=Enumerable
+#DOGEN masd.physical.helpers.owning_formatters=masd.io.types.class
+#DOGEN masd.physical.helpers.owning_formatters=masd.io.types.primitive
+#DOGEN masd.physical.helpers.owning_facets=masd.csharp.io#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#84c385ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=os #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/csharp/io/enumerable_helper_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void enumerable_helper_transform::
+apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
+    const logical::entities::helper_properties&amp; hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+#&gt;
+        /// &lt;summary&gt;
+        /// &lt;/summary&gt;
+        static private bool NearlyEqual(&lt;#= qn #&gt; lhs, &lt;#= qn #&gt; rhs)
+        {
+            &lt;#= qn #&gt; epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * &lt;#= qn #&gt;.Epsilon;
+            return Math.Abs(lhs - rhs) &lt;= epsilon;
+        }
+&lt;#+
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O127"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>
