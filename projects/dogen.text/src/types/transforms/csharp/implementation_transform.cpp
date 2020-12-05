@@ -1,2 +1,2 @@
 // dummy function to suppress ranlib warnings
-void implementation_transform() { }
+void src_types_transforms_csharp_implementation_transform_cpp() { }

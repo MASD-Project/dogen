@@ -21,6 +21,7 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/helpers/identifiable_factory.hpp"
 #include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
 
 namespace {
@@ -31,11 +32,11 @@ transform_id("physical.transforms.mock_content_filler_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-std::string create_hacked_contents(const std::string file_name) {
+std::string create_hacked_contents(const std::string identifier) {
     std::ostringstream ss;
 
     ss << "// dummy function to suppress ranlib warnings" << std::endl
-       << "void " << file_name << "() { }"
+       << "void " << identifier << "() { }"
        << std::endl;
 
     return ss.str();
@@ -72,14 +73,15 @@ apply(const context& ctx, entities::model& m) {
         if (!a.content().empty())
             continue;
 
-        const auto& fp(a.file_path());
+        const auto& fp(a.path_properties().relative_path());
         if (fp.extension() != ".cpp")
             continue;
 
         const auto gs(fp.generic_string());
         BOOST_LOG_SEV(lg, debug) << "File requires mock content: " << gs;
-        const auto fn(fp.stem().generic_string());
-        a.content(create_hacked_contents(fn));
+        using identification::helpers::identifiable_factory;
+        const auto identifier(identifiable_factory::make(gs));
+        a.content(create_hacked_contents(identifier));
     }
 }
 

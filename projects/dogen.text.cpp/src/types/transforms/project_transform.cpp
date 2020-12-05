@@ -1,2 +1,2 @@
 // dummy function to suppress ranlib warnings
-void project_transform() { }
+void src_types_transforms_project_transform_cpp() { }

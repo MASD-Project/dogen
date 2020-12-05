@@ -1,2 +1,2 @@
 // dummy function to suppress ranlib warnings
-void public_headers_transform() { }
+void src_types_transforms_public_headers_transform_cpp() { }

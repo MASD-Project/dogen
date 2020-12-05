@@ -1,2 +1,2 @@
 // dummy function to suppress ranlib warnings
-void templating_transform() { }
+void src_types_transforms_templating_transform_cpp() { }
