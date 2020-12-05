@@ -16677,8 +16677,8 @@ std::string {{class.simple_name}}::family() const {
 std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list&lt;std::string&gt; {
-        "{{facet.qualified_name}}.class_implementation",
-        "{{facet.qualified_name}}.primitive_implementation"
+        "{{facet.qualified_name}}.class",
+        "{{facet.qualified_name}}.primitive"
     });
     return r;
 }

@@ -36,8 +36,8 @@ std::string floating_point_number_helper_transform::family() const {
 std::list<std::string>
 floating_point_number_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
-        "masd.csharp.types.class_implementation",
-        "masd.csharp.types.primitive_implementation"
+        "masd.csharp.types.class",
+        "masd.csharp.types.primitive"
     });
     return r;
 }

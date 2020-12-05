@@ -36,8 +36,8 @@ std::string enumerable_helper_transform::family() const {
 std::list<std::string>
 enumerable_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
-        "masd.csharp.io.class_implementation",
-        "masd.csharp.io.primitive_implementation"
+        "masd.csharp.io.class",
+        "masd.csharp.io.primitive"
     });
     return r;
 }
