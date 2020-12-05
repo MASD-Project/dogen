@@ -24,18 +24,17 @@
 // #include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
 // #include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
 // #include "dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/associative_container_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/date_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/optional_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/pair_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/path_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/ptime_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/ptree_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/sequence_container_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/smart_pointer_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/time_duration_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/variant_helper_transform.hpp"
-
+#include "dogen.text/types/transforms/cpp/hash/associative_container_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/date_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/optional_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/pair_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/path_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/ptime_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/ptree_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/sequence_container_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/smart_pointer_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/time_duration_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/variant_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/hash/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::hash {
@@ -48,7 +47,6 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<class_implementation_transform>(rg);
     // register_formatter<enum_header_transform>(rg);
 
-    using namespace dogen::text::cpp::transforms::hash;
     register_helper<associative_container_helper_transform>(rg);
     register_helper<date_helper_transform>(rg);
     register_helper<optional_helper_transform>(rg);
