@@ -22,7 +22,18 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/cpp/hash/hash_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/hash/date_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/pair_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/path_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/ptime_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/ptree_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/variant_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/optional_helper_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/hash/smart_pointer_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/time_duration_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/sequence_container_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/hash/associative_container_helper_factory.hpp"
 
 namespace dogen::text::transforms::cpp::hash {
 namespace {
@@ -43,6 +54,31 @@ physical::entities::facet hash_factory::make() {
     r.directory_name("hash");
     r.postfix("hash");
 
+    const auto lambda([&](auto& container, const auto& element) {
+        const auto id(element.meta_name().id());
+        const auto pair(std::make_pair(id, element));
+        const auto inserted(container.insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_archetype("Duplicate id: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
+        }
+    });
+
+
+    lambda(r.helpers(), associative_container_helper_factory::make());
+    lambda(r.helpers(), date_helper_factory::make());
+    lambda(r.helpers(), optional_helper_factory::make());
+    lambda(r.helpers(), pair_helper_factory::make());
+    lambda(r.helpers(), path_helper_factory::make());
+    lambda(r.helpers(), ptime_helper_factory::make());
+    lambda(r.helpers(), ptree_helper_factory::make());
+    lambda(r.helpers(), sequence_container_helper_factory::make());
+    lambda(r.helpers(), smart_pointer_helper_factory::make());
+    lambda(r.helpers(), time_duration_helper_factory::make());
+    lambda(r.helpers(), variant_helper_factory::make());
     return r;
 }
 
