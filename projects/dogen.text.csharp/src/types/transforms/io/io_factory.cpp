@@ -27,7 +27,6 @@
 #include "dogen.text.csharp/types/transforms/io/assistant_factory.hpp"
 #include "dogen.text.csharp/types/transforms/io/primitive_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.csharp/types/transforms/io/enumerable_helper_factory.hpp"
 
 namespace dogen::text::csharp::transforms::io {
 namespace {
@@ -66,7 +65,6 @@ physical::entities::facet io_factory::make() {
     lambda(r.archetypes(), enum_factory::make());
     lambda(r.archetypes(), primitive_factory::make());
 
-    lambda(r.helpers(), enumerable_helper_factory::make());
     return r;
 }
 

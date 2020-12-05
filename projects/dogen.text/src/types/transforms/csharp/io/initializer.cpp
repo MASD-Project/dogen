@@ -22,7 +22,7 @@
 // #include "dogen.text.csharp/types/transforms/io/class_transform.hpp"
 // #include "dogen.text.csharp/types/transforms/io/enum_transform.hpp"
 // #include "dogen.text.csharp/types/transforms/io/assistant_transform.hpp"
-#include "dogen.text.csharp/types/transforms/io/enumerable_helper_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/enumerable_helper_transform.hpp"
 #include "dogen.text/types/transforms/csharp/io/initializer.hpp"
 
 namespace dogen::text::transforms::csharp::io {
@@ -33,7 +33,6 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<enum_transform>(rg);
     // register_formatter<assistant_transform>(rg);
 
-    using namespace dogen::text::csharp::transforms::io;
     register_helper<enumerable_helper_transform>(rg);
 }
 
