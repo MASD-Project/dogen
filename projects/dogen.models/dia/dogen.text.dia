@@ -10557,7 +10557,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.255,166.55;159.968,178"/>
+        <dia:rectangle val="138.255,166.55;159.967,178"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14807,7 +14807,7 @@ of the C# technical space.
         <dia:point val="466.11,151.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="455.252,151;466.96,160.002"/>
+        <dia:rectangle val="455.253,151;466.96,160.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17318,7 +17318,7 @@ std::list&lt;std::string&gt;
 {{class.simple_name}}::owning_formatters() const {
     static auto r(std::list&lt;std::string&gt; {
         "{{facet.qualified_name}}.class_implementation",
-        "{{facet.qualified_name}}.primitive_implementation"
+        "{{facet.qualified_name}}.primitive_implementation",
         "masd.cpp.types.class_implementation",
         "masd.cpp.types.primitive_implementation"
     });

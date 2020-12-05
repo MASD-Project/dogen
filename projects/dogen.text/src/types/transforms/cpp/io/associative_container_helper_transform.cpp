@@ -37,7 +37,7 @@ std::list<std::string>
 associative_container_helper_transform::owning_formatters() const {
     static auto r(std::list<std::string> {
         "masd.cpp.io.class_implementation",
-        "masd.cpp.io.primitive_implementation"
+        "masd.cpp.io.primitive_implementation",
         "masd.cpp.types.class_implementation",
         "masd.cpp.types.primitive_implementation"
     });
