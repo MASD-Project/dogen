@@ -25,15 +25,15 @@
 // #include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
 // #include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
 // #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/associative_container_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/optional_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/pair_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/ptree_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/sequence_container_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/smart_pointer_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/string_helper_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/variant_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/smart_pointer_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/associative_container_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/optional_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/pair_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/ptree_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/sequence_container_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/smart_pointer_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/string_helper_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/variant_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::io {
@@ -47,7 +47,6 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<enum_header_transform>(rg);
     // register_formatter<enum_implementation_transform>(rg);
 
-    using namespace dogen::text::cpp::transforms::io;
     register_helper<smart_pointer_helper_transform>(rg);
     register_helper<associative_container_helper_transform>(rg);
     register_helper<optional_helper_transform>(rg);
