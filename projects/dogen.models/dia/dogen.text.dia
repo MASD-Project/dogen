@@ -8962,7 +8962,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to most archetypes in tests.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::tests_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::tests_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9149,7 +9149,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all c++ header archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::header_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9313,7 +9313,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all c++ implementation archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::implementation_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9498,7 +9498,7 @@ C++ technical space.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::header_facet_default_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::header_facet_default_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9615,13 +9615,13 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O67">
       <dia:attribute name="obj_pos">
-        <dia:point val="161,172"/>
+        <dia:point val="161,169"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.95,171.95;190.425,176.45"/>
+        <dia:rectangle val="160.95,168.95;190.425,173.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="161,172"/>
+        <dia:point val="161,169"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -9639,7 +9639,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all enumeration header archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::enumeration_header_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9779,19 +9779,19 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O68">
       <dia:attribute name="obj_pos">
-        <dia:point val="131,172"/>
+        <dia:point val="131,169"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.95,171.95;158.5,175.65"/>
+        <dia:rectangle val="130.95,168.95;158.5,173.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="131,172"/>
+        <dia:point val="131,169"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_header_configuration#</dia:string>
@@ -9803,7 +9803,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all object header archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::object_header_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -9910,6 +9910,29 @@ C++ technical space.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.wale.kvp.archetype.simple_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#class_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -9920,13 +9943,13 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,178"/>
+        <dia:point val="115,175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,177.95;143.655,182.45"/>
+        <dia:rectangle val="114.95,174.95;143.655,179.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,178"/>
+        <dia:point val="115,175"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
@@ -9944,7 +9967,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all built header archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::primitive_header_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -10084,13 +10107,13 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O70">
       <dia:attribute name="obj_pos">
-        <dia:point val="146,178"/>
+        <dia:point val="146,175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.95,177.95;173.885,182.45"/>
+        <dia:rectangle val="145.95,174.95;173.885,179.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="146,178"/>
+        <dia:point val="146,175"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -10108,7 +10131,7 @@ C++ technical space.
         <dia:string>#Contains the configuration common to all built header archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::builtin_header_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -10455,7 +10478,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.255,166.55;144.775,172.05"/>
+        <dia:rectangle val="138.255,166.55;144.775,169.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10464,7 +10487,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
         <dia:point val="139.105,168"/>
         <dia:point val="144.725,168"/>
-        <dia:point val="144.725,172"/>
+        <dia:point val="144.725,169"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10506,7 +10529,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.252,166.55;139.955,178.05"/>
+        <dia:rectangle val="129.252,166.55;139.955,175.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10514,8 +10537,8 @@ C++ technical space.
       <dia:attribute name="orth_points">
         <dia:point val="139.105,166.6"/>
         <dia:point val="139.105,168"/>
-        <dia:point val="129.302,168"/>
-        <dia:point val="129.302,178"/>
+        <dia:point val="129.303,168"/>
+        <dia:point val="129.303,175"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10557,7 +10580,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.255,166.55;159.968,178"/>
+        <dia:rectangle val="138.255,166.55;159.968,175.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10566,7 +10589,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
         <dia:point val="139.105,168"/>
         <dia:point val="159.917,168"/>
-        <dia:point val="159.917,177.95"/>
+        <dia:point val="159.917,174.952"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10608,7 +10631,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.255,166.55;175.738,172.05"/>
+        <dia:rectangle val="138.255,166.55;175.738,169.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10617,7 +10640,7 @@ C++ technical space.
         <dia:point val="139.105,166.6"/>
         <dia:point val="139.105,168"/>
         <dia:point val="175.688,168"/>
-        <dia:point val="175.688,172"/>
+        <dia:point val="175.688,169"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10678,7 +10701,7 @@ C++ technical space.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::object_implementation_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -10818,13 +10841,13 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="178,178"/>
+        <dia:point val="178,175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.95,177.95;206.655,182.45"/>
+        <dia:rectangle val="177.95,174.95;206.655,179.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="178,178"/>
+        <dia:point val="178,175"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
@@ -10840,7 +10863,7 @@ C++ technical space.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::primitive_implementation_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -11002,7 +11025,7 @@ C++ technical space.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::enumeration_implementation_configuration2#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::enumeration_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -11247,16 +11270,16 @@ C++ technical space.
         <dia:point val="180.265,160.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="179.415,160.15;192.353,178.05"/>
+        <dia:rectangle val="179.415,160.15;192.353,175.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="180.265,160.2"/>
-        <dia:point val="180.265,171"/>
-        <dia:point val="192.303,171"/>
-        <dia:point val="192.303,178"/>
+        <dia:point val="180.265,168"/>
+        <dia:point val="192.303,168"/>
+        <dia:point val="192.303,175"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14807,7 +14830,7 @@ of the C# technical space.
         <dia:point val="466.11,151.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="455.252,151;466.96,160.002"/>
+        <dia:rectangle val="455.253,151;466.96,160.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
