@@ -57,11 +57,6 @@ void registrar::validate() const {
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms_by_meta_name));
     }
 
-    if (frp.stock_artefact_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_transforms;
-        BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
-    }
-
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
                              << frp;
 }
@@ -84,31 +79,11 @@ void registrar::register_transform(std::shared_ptr<
     physical_meta_name_validator::validate_archetype_name(pmn);
 
     /*
-     * Insert it into the main collection of stock transforms.
-     */
-    transform_repository_.stock_artefact_formatters_.push_front(t);
-
-    /*
      * Add the transform to the index by meta-name.
      */
     const auto lmn(t->archetype().logical_meta_element_id());
     auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
     safmt[lmn].push_front(t);
-
-    /*
-     * Add transform to the index by archetype name. Inserting the
-     * transform into this repository has the helpful side-effect of
-     * ensuring the id is unique in physical space.
-     */
-    const auto pid(pmn.id());
-    auto& safba(transform_repository_.stock_artefact_formatters_by_archetype());
-    const auto pair(std::make_pair(pid, t));
-    const auto inserted(safba.insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_archetype << pid;
-        BOOST_THROW_EXCEPTION(
-            registrar_error(duplicate_archetype + pid.value()));
-    }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: "
                              << t->archetype().meta_name().id().value()

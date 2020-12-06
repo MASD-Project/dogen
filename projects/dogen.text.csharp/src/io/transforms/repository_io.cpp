@@ -68,7 +68,6 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::text::cpp::formatters::container\", ";
     to_stream(s, rp.stock_artefact_formatters_by_meta_name());
-    to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
     s << " }";
     return s;
 }
