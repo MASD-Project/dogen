@@ -58,12 +58,13 @@ const physical::entities::archetype& main_transform::archetype() const {
     return static_archetype();
 }
 
-void main_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void main_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "main",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::structural::entry_point;
     const auto& ep(ast.as<entry_point>(e));
     const auto qn(ast.get_qualified_name(ep.name()));

@@ -52,7 +52,7 @@ private:
         const identification::entities::physical_meta_id& archetype) const;
 
 public:
-    void execute(boost::shared_ptr<tracing::tracer> tracer,
+    void execute(const text::transforms::context& ctx,
         const text::entities::model& m) const;
 
 private:

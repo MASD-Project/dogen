@@ -31,7 +31,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.text.cpp/types/transforms/repository.hpp"
-#include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
 
 namespace dogen::text::cpp::transforms {
@@ -44,7 +44,8 @@ private:
     /**
      * @brief Ensures the transform passes a modicum of sanity checks.
      */
-    void validate(std::shared_ptr<model_to_text_transform> t) const;
+    void validate(std::shared_ptr<
+        text::transforms::model_to_text_transform> t) const;
 
 public:
     /**
@@ -56,7 +57,8 @@ public:
     /**
      * @brief Registers a transform.
      */
-    void register_transform(std::shared_ptr<model_to_text_transform> t);
+    void register_transform(std::shared_ptr<
+        text::transforms::model_to_text_transform> t);
 
 public:
     /**

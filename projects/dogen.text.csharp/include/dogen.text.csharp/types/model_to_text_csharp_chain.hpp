@@ -56,7 +56,7 @@ public:
     ~model_to_text_csharp_chain() noexcept;
 
 private:
-    void apply(boost::shared_ptr<tracing::tracer> tracer,
+    void apply(const text::transforms::context& ctx,
         text::entities::model& fm) const;
 
 public:

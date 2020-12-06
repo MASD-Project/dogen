@@ -31,21 +31,17 @@
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.logical/types/entities/aspect_properties.hpp"
 #include "dogen.logical/types/entities/assistant_properties.hpp"
-#include "dogen.text/types/entities/model.hpp"
 
 namespace dogen::text::csharp::transforms {
 
 class context final {
 public:
-    context(const text::entities::model& m,
-        boost::shared_ptr<tracing::tracer> tracer);
+    explicit context(boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const text::entities::model& model() const;
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const text::entities::model& model_;
     boost::shared_ptr<tracing::tracer> tracer_;
 };
 

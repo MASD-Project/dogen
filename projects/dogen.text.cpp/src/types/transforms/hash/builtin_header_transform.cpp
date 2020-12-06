@@ -53,8 +53,9 @@ const physical::entities::archetype& builtin_header_transform::archetype() const
     return static_archetype();
 }
 
-void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void builtin_header_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "builtin header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 

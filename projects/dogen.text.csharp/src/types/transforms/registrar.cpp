@@ -66,7 +66,8 @@ void registrar::validate() const {
                              << frp;
 }
 
-void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
+void registrar::register_transform(std::shared_ptr<
+    text::transforms::model_to_text_transform> t) {
     /*
      * Must be pointing to a valid object.
      */

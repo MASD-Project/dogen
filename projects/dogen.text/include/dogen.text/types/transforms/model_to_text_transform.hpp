@@ -25,7 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.text/types/transforms/context.hpp"
+#include "dogen.text/types/entities/model.hpp"
 
 namespace dogen::text::transforms {
 
@@ -44,6 +48,15 @@ public:
      * @brief Physical archetype to which this M2T transform binds to.
      */
     virtual const physical::entities::archetype& archetype() const = 0;
+
+public:
+    /**
+     * @brief Generate a physical representation of the logical
+     * element.
+     */
+    virtual void apply(const context& ctx, const entities::model& lps,
+        const logical::entities::element& e,
+        physical::entities::artefact& a) const = 0;
 };
 
 }

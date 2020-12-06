@@ -1135,291 +1135,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="130,30"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.95,29.95;162.89,36.05"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="130,30"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="6"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#model_to_text_transform#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="allow_resizing">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#c6ccffff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes"/>
-      <dia:attribute name="operations">
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#full_path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#inclusion_dependencies#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters">
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#e#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#const logical::entities::element&amp;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#apply#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters">
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#ctx#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#const transforms::context&amp;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#e#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#const logical::entities::element&amp;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
-                <dia:string>#a#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#dogen::extraction::artefact#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="3"/>
-              </dia:attribute>
-            </dia:composite>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O1"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O9">
-      <dia:attribute name="obj_pos">
         <dia:point val="87,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.95,20.95;143.375,26.25"/>
+        <dia:rectangle val="86.95,20.95;145.685,26.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="87,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="56.325000000000003"/>
+        <dia:real val="58.635000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -1522,7 +1247,7 @@
             <dia:string>#stock_artefact_formatters_by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;transforms::model_to_text_transform&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1545,7 +1270,7 @@
             <dia:string>#stock_artefact_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;transforms::model_to_text_transform&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1568,7 +1293,7 @@
             <dia:string>#stock_artefact_formatters_by_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;transforms::model_to_text_transform&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1594,7 +1319,7 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O10">
+    <dia:object type="UML - Association" version="2" id="O9">
       <dia:attribute name="obj_pos">
         <dia:point val="99.7625,29.9519"/>
       </dia:attribute>
@@ -1671,92 +1396,11 @@
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O7" connection="12"/>
-        <dia:connection handle="1" to="O9" connection="5"/>
+        <dia:connection handle="1" to="O8" connection="5"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O11">
-      <dia:attribute name="obj_pos">
-        <dia:point val="143.325,26.2"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.95,25.45;144.075,30.8"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="143.325,26.2"/>
-        <dia:point val="143.325,28"/>
-        <dia:point val="130,28"/>
-        <dia:point val="130,30"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O9" connection="7"/>
-        <dia:connection handle="1" to="O8" connection="0"/>
-      </dia:connections>
-      <dia:childnode parent="O1"/>
-    </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O12">
+    <dia:object type="UML - LargePackage" version="0" id="O10">
       <dia:attribute name="obj_pos">
         <dia:point val="-15,40"/>
       </dia:attribute>
@@ -1801,7 +1445,7 @@
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O13">
+    <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,49"/>
       </dia:attribute>
@@ -1940,13 +1584,14 @@
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void class_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "class",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -2237,9 +1882,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O14">
+    <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
         <dia:point val="14,49"/>
       </dia:attribute>
@@ -2378,12 +2023,13 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void enum_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -2444,9 +2090,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O15">
+    <dia:object type="UML - LargePackage" version="0" id="O13">
       <dia:attribute name="obj_pos">
         <dia:point val="44,40"/>
       </dia:attribute>
@@ -2491,7 +2137,7 @@ using System;
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O16">
+    <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
         <dia:point val="46,49"/>
       </dia:attribute>
@@ -2630,12 +2276,13 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void class_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "class",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -2756,9 +2403,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O17">
+    <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
         <dia:point val="73,49"/>
       </dia:attribute>
@@ -2897,12 +2544,13 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-   physical::entities::artefact&amp; a) const {
+void enum_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
    tracing::scoped_transform_tracer stp(lg, "enum",
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -2977,9 +2625,9 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O18">
+    <dia:object type="UML - LargePackage" version="0" id="O16">
       <dia:attribute name="obj_pos">
         <dia:point val="102,40"/>
       </dia:attribute>
@@ -3024,7 +2672,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O19">
+    <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
         <dia:point val="104,49"/>
       </dia:attribute>
@@ -3163,12 +2811,13 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void class_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -3362,9 +3011,9 @@ using System.Collections.Generic;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O20">
+    <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
         <dia:point val="132,49"/>
       </dia:attribute>
@@ -3503,12 +3152,13 @@ using System.Collections.Generic;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void enum_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -3636,9 +3286,9 @@ using System.Collections.Generic;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O21">
+    <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,54"/>
       </dia:attribute>
@@ -3777,12 +3427,13 @@ using System.Collections.Generic;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void exception_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void exception_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "exception",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -3826,9 +3477,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O22">
+    <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
         <dia:point val="20,42"/>
       </dia:attribute>
@@ -3971,9 +3622,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O23">
+    <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
         <dia:point val="82,42"/>
       </dia:attribute>
@@ -4116,9 +3767,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O24">
+    <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
         <dia:point val="144,42"/>
       </dia:attribute>
@@ -4261,14 +3912,14 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O25">
+    <dia:object type="UML - Association" version="2" id="O23">
       <dia:attribute name="obj_pos">
         <dia:point val="119.335,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.112,14.25;120.085,21.8"/>
+        <dia:rectangle val="116.267,14.25;120.085,21.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4276,8 +3927,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="119.335,15"/>
         <dia:point val="119.335,19"/>
-        <dia:point val="115.162,19"/>
-        <dia:point val="115.162,21"/>
+        <dia:point val="116.317,19"/>
+        <dia:point val="116.317,21"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4340,11 +3991,11 @@ using System;
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O5" connection="6"/>
-        <dia:connection handle="1" to="O9" connection="1"/>
+        <dia:connection handle="1" to="O8" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O26">
+    <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
         <dia:point val="5,42"/>
       </dia:attribute>
@@ -4456,9 +4107,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O27">
+    <dia:object type="UML - Class" version="0" id="O25">
       <dia:attribute name="obj_pos">
         <dia:point val="66,42"/>
       </dia:attribute>
@@ -4570,9 +4221,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O28">
+    <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
         <dia:point val="128,42"/>
       </dia:attribute>
@@ -4684,9 +4335,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O29">
+    <dia:object type="UML - Note" version="0" id="O27">
       <dia:attribute name="obj_pos">
         <dia:point val="71,-5"/>
       </dia:attribute>
@@ -4737,7 +4388,7 @@ using System;
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Message" version="0" id="O30">
+    <dia:object type="UML - Message" version="0" id="O28">
       <dia:attribute name="obj_pos">
         <dia:point val="78.1875,-5"/>
       </dia:attribute>
@@ -4776,11 +4427,11 @@ using System;
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O29" connection="1"/>
+        <dia:connection handle="0" to="O27" connection="1"/>
         <dia:connection handle="1" to="O2" connection="7"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O31">
+    <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
         <dia:point val="25,-12"/>
       </dia:attribute>
@@ -4893,7 +4544,7 @@ using System;
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O32">
+    <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
         <dia:point val="115,30"/>
       </dia:attribute>
@@ -5007,7 +4658,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O33">
+    <dia:object type="UML - Association" version="2" id="O31">
       <dia:attribute name="obj_pos">
         <dia:point val="99.7625,34.2"/>
       </dia:attribute>
@@ -5084,11 +4735,11 @@ using System;
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O7" connection="6"/>
-        <dia:connection handle="1" to="O32" connection="6"/>
+        <dia:connection handle="1" to="O30" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O34">
+    <dia:object type="UML - Class" version="0" id="O32">
       <dia:attribute name="obj_pos">
         <dia:point val="71,30"/>
       </dia:attribute>
@@ -5202,7 +4853,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O35">
+    <dia:object type="UML - Class" version="0" id="O33">
       <dia:attribute name="obj_pos">
         <dia:point val="131,10"/>
       </dia:attribute>
@@ -5347,7 +4998,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O36">
+    <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
         <dia:point val="147,10"/>
       </dia:attribute>
@@ -5508,88 +5159,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O37">
-      <dia:attribute name="obj_pos">
-        <dia:point val="162.84,30"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.478,14.35;163.59,30.8"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="162.84,30"/>
-        <dia:point val="162.84,28"/>
-        <dia:point val="155.528,28"/>
-        <dia:point val="155.528,14.4"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O8" connection="2"/>
-        <dia:connection handle="1" to="O36" connection="6"/>
-      </dia:connections>
-      <dia:childnode parent="O1"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O38">
+    <dia:object type="UML - Class" version="0" id="O35">
       <dia:attribute name="obj_pos">
         <dia:point val="64,11"/>
       </dia:attribute>
@@ -5703,7 +5273,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O39">
+    <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,59"/>
       </dia:attribute>
@@ -5841,8 +5411,9 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void builtin_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void builtin_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; /*lps*/,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "builtin",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
@@ -5867,9 +5438,9 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O40">
+    <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
         <dia:point val="14,54"/>
       </dia:attribute>
@@ -6009,13 +5580,14 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void primitive_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -6158,9 +5730,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O41">
+    <dia:object type="UML - Class" version="0" id="O38">
       <dia:attribute name="obj_pos">
         <dia:point val="132,54"/>
       </dia:attribute>
@@ -6299,12 +5871,13 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void primitive_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -6453,9 +6026,9 @@ using System.Collections.Generic;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O42">
+    <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
         <dia:point val="46,54"/>
       </dia:attribute>
@@ -6594,12 +6167,13 @@ using System.Collections.Generic;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void primitive_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
@@ -6691,9 +6265,9 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O43">
+    <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
         <dia:point val="6,-12"/>
       </dia:attribute>
@@ -6828,12 +6402,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::st
 const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::archetype() const {
     return static_archetype();
 }
-
-std::list&lt;std::string&gt; {{archetype.simple_name}}_transform::
-inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
-    std::list&lt;std::string&gt; r;
-    return r;
-}#</dia:string>
+#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6852,7 +6421,7 @@ inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O44">
+    <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,-12"/>
       </dia:attribute>
@@ -7029,7 +6598,7 @@ bool {{class.simple_name}}::is_enabled(
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O45">
+    <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,-1"/>
       </dia:attribute>
@@ -7142,7 +6711,7 @@ bool {{class.simple_name}}::is_enabled(
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O46">
+    <dia:object type="UML - LargePackage" version="0" id="O43">
       <dia:attribute name="obj_pos">
         <dia:point val="161,40"/>
       </dia:attribute>
@@ -7187,7 +6756,7 @@ bool {{class.simple_name}}::is_enabled(
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O47">
+    <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
         <dia:point val="198,42"/>
       </dia:attribute>
@@ -7299,9 +6868,9 @@ bool {{class.simple_name}}::is_enabled(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O46"/>
+      <dia:childnode parent="O43"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O48">
+    <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
         <dia:point val="182,42"/>
       </dia:attribute>
@@ -7413,9 +6982,9 @@ bool {{class.simple_name}}::is_enabled(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O46"/>
+      <dia:childnode parent="O43"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O49">
+    <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
         <dia:point val="163,49"/>
       </dia:attribute>
@@ -7562,12 +7131,13 @@ bool {{class.simple_name}}::is_enabled(
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void project_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void project_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
     const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().id().value(), e));
 
@@ -7640,9 +7210,9 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O46"/>
+      <dia:childnode parent="O43"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O50">
+    <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
         <dia:point val="190,49"/>
       </dia:attribute>
@@ -7790,12 +7360,13 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void solution_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void solution_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
     const auto&amp; sln(ast.as&lt;solution&gt;(archetype().meta_name().id().value(), e));
 #&gt;
@@ -7852,9 +7423,9 @@ EndGlobal
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O46"/>
+      <dia:childnode parent="O43"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O51">
+    <dia:object type="UML - Class" version="0" id="O48">
       <dia:attribute name="obj_pos">
         <dia:point val="3,-1"/>
       </dia:attribute>
@@ -7967,7 +7538,7 @@ EndGlobal
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O52">
+    <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
         <dia:point val="73,54"/>
       </dia:attribute>
@@ -8108,12 +7679,13 @@ EndGlobal
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void assistant_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -8640,9 +8212,9 @@ using System.Collections;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O53">
+    <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
         <dia:point val="104,54"/>
       </dia:attribute>
@@ -8783,12 +8355,13 @@ using System.Collections;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
-    physical::entities::artefact&amp; a) const {
+void assistant_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -9017,9 +8590,9 @@ using System.Collections.Specialized;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O54">
+    <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
         <dia:point val="25,-1"/>
       </dia:attribute>
@@ -9132,7 +8705,7 @@ using System.Collections.Specialized;
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O55">
+    <dia:object type="UML - Note" version="0" id="O52">
       <dia:attribute name="obj_pos">
         <dia:point val="-15,8"/>
       </dia:attribute>
@@ -9194,7 +8767,7 @@ of the C# Technical Space.
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O56">
+    <dia:object type="UML - Note" version="0" id="O53">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,42"/>
       </dia:attribute>
@@ -9248,9 +8821,9 @@ the C# Technical Space.
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O12"/>
+      <dia:childnode parent="O10"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O57">
+    <dia:object type="UML - Class" version="0" id="O54">
       <dia:attribute name="obj_pos">
         <dia:point val="41,11"/>
       </dia:attribute>
@@ -9457,7 +9030,7 @@ the C# Technical Space.
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O58">
+    <dia:object type="UML - Note" version="0" id="O55">
       <dia:attribute name="obj_pos">
         <dia:point val="46,42"/>
       </dia:attribute>
@@ -9512,9 +9085,9 @@ the C# Technical Space.
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O15"/>
+      <dia:childnode parent="O13"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O59">
+    <dia:object type="UML - Note" version="0" id="O56">
       <dia:attribute name="obj_pos">
         <dia:point val="104,42"/>
       </dia:attribute>
@@ -9569,9 +9142,9 @@ facet of the C# Technical Space.
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O18"/>
+      <dia:childnode parent="O16"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O60">
+    <dia:object type="UML - Note" version="0" id="O57">
       <dia:attribute name="obj_pos">
         <dia:point val="163,42"/>
       </dia:attribute>
@@ -9624,7 +9197,7 @@ facet of the C# Technical Space.
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O46"/>
+      <dia:childnode parent="O43"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

@@ -58,10 +58,10 @@ std::string model_to_text_csharp_chain::description() const {
     return ::description;
 }
 
-void model_to_text_csharp_chain::apply(
-    boost::shared_ptr<tracing::tracer> tracer, text::entities::model& m) const {
+void model_to_text_csharp_chain::
+apply(const text::transforms::context& ctx, text::entities::model& m) const {
     transforms::workflow wf;
-    wf.execute(tracer, m);
+    wf.execute(ctx, m);
 }
 
 identification::entities::technical_space
@@ -75,7 +75,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C# M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    apply(ctx.tracer(), m);
+    apply(ctx, m);
 }
 
 }

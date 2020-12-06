@@ -58,12 +58,13 @@ const physical::entities::archetype& source_cmakelists_transform::archetype() co
     return static_archetype();
 }
 
-void source_cmakelists_transform::apply(const context& ctx,
+void source_cmakelists_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "source cmakelists",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto& c(ast.as<cmakelists>(e));
 

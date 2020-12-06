@@ -54,12 +54,13 @@ const physical::entities::archetype& part_class_implementation_factory_transform
     return static_archetype();
 }
 
-void part_class_implementation_factory_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void part_class_implementation_factory_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "part class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& part(ast.as<logical::entities::physical::part>(e));
 
     {

@@ -27,7 +27,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
-#include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/workflow.hpp"
 
@@ -44,9 +43,8 @@ namespace dogen::text::cpp::transforms {
 
 std::shared_ptr<cpp::transforms::registrar> workflow::registrar_;
 
-workflow::workflow(const physical::entities::model& pm,
-    const identification::entities::technical_space_version tsv)
-    : physical_model_(pm), technical_space_version_(tsv) { }
+workflow::workflow(const physical::entities::model& pm)
+    : physical_model_(pm) { }
 
 cpp::transforms::registrar& workflow::registrar() {
     if (!registrar_)
@@ -69,8 +67,7 @@ workflow::get_artefact(const physical::entities::region& region,
     return i->second;
 }
 
-void workflow::
-execute(boost::shared_ptr<tracing::tracer> tracer,
+void workflow::execute(const text::transforms::context& ctx,
     const text::entities::model& m,
     text::entities::logical_physical_region& region) const {
 
@@ -104,23 +101,21 @@ execute(boost::shared_ptr<tracing::tracer> tracer,
         }
         BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
-        context ctx(m, technical_space_version_, tracer);
-
         auto& a(*aptr);
         const auto id(fmt.archetype().meta_name().id().value());
-        fmt.apply(ctx, e, a);
+        fmt.apply(ctx, m, e, a);
         const auto& p(aptr->file_path());
         BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
     }
 }
 
-void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+void workflow::execute(const text::transforms::context& ctx,
     text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << m.provenance().logical_name().id();
 
     for (auto& region : m.logical_physical_regions())
-        execute(tracer, m, region);
+        execute(ctx, m, region);
 
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
 }

@@ -38,7 +38,8 @@
 #include "dogen.logical/types/entities/assistant_properties.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
-#include "dogen.text.csharp/types/transforms/context.hpp"
+#include "dogen.text/types/transforms/context.hpp"
+#include "dogen.text/types/entities/model.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text/types/transforms/helper_transform.hpp"
 
@@ -46,7 +47,9 @@ namespace dogen::text::csharp::transforms {
 
 class assistant final {
 public:
-    assistant(const context& ctx, const logical::entities::element& e,
+    assistant(const text::transforms::context& ctx,
+        const text::entities::model& lps,
+        const logical::entities::element& e,
         const identification::entities::physical_meta_name& pmn,
         physical::entities::artefact& a);
 
@@ -144,7 +147,7 @@ private:
     boost::iostreams::filtering_ostream filtering_stream_;
     const logical::entities::element& element_;
     physical::entities::artefact& artefact_;
-    const context& context_;
+    const text::entities::model& lps_;
     const identification::entities::physical_meta_name physical_meta_name_;
 };
 

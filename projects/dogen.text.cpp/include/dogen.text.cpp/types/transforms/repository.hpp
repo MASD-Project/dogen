@@ -35,7 +35,7 @@
 #include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.text/types/transforms/helper_transform_fwd.hpp"
-#include "dogen.text.cpp/types/transforms/model_to_text_transform_fwd.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform_fwd.hpp"
 
 namespace dogen::text::cpp::transforms {
 
@@ -52,56 +52,53 @@ private:
     /**
      * @brief Returns all available file formatters by type indx.
      */
-    std::unordered_map<
-        identification::entities::logical_meta_id,
-        std::forward_list<std::shared_ptr<model_to_text_transform>>
-    >&
+    std::unordered_map<identification::entities::logical_meta_id,
+                       std::forward_list<
+                           std::shared_ptr<
+                               text::transforms::model_to_text_transform>>
+                       >&
     stock_artefact_formatters_by_meta_name();
 
     /**
      * @brief Returns all available file formatters by archetype name.
      */
     std::unordered_map<identification::entities::physical_meta_id,
-                       std::shared_ptr<model_to_text_transform>>&
+                       std::shared_ptr<
+                           text::transforms::model_to_text_transform>>&
     stock_artefact_formatters_by_archetype();
 
     /**
      * @brief Returns all available file formatters.
      */
-    std::forward_list<std::shared_ptr<model_to_text_transform>>&
+    std::forward_list<
+        std::shared_ptr<
+            text::transforms::model_to_text_transform>>&
     stock_artefact_formatters();
-
-    /**
-     * @brief Returns all available helpers.
-     */
-    std::unordered_map<
-        std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-                           std::list<
-                               std::shared_ptr<
-                                   text::transforms::helper_transform>>>>&
-    helper_formatters();
 
 public:
     /**
      * @brief Returns all available file formatters by type indx.
      */
-    const std::unordered_map<
-        identification::entities::logical_meta_id,
-        std::forward_list<std::shared_ptr<model_to_text_transform>>>&
+    const std::unordered_map<identification::entities::logical_meta_id,
+                             std::forward_list<
+                                 std::shared_ptr<
+                                     text::transforms::model_to_text_transform>>
+                             >&
     stock_artefact_formatters_by_meta_name() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
      */
     const std::unordered_map<identification::entities::physical_meta_id,
-                             std::shared_ptr<model_to_text_transform>>&
+                             std::shared_ptr<
+                                 text::transforms::model_to_text_transform>>&
     stock_artefact_formatters_by_archetype() const;
 
     /**
      * @brief Returns all available file formatters.
      */
-    const std::forward_list<std::shared_ptr<model_to_text_transform>>&
+    const std::forward_list<std::shared_ptr<
+                                text::transforms::model_to_text_transform>>&
     stock_artefact_formatters() const;
 
     /**
@@ -118,12 +115,14 @@ public:
 private:
     std::unordered_map<
         identification::entities::logical_meta_id,
-        std::forward_list<std::shared_ptr<model_to_text_transform>>>
+        std::forward_list<
+            std::shared_ptr<text::transforms::model_to_text_transform>>>
     stock_artefact_formatters_by_meta_name_;
     std::unordered_map<identification::entities::physical_meta_id,
-                       std::shared_ptr<model_to_text_transform>>
+                       std::shared_ptr<
+                           text::transforms::model_to_text_transform>>
     stock_artefact_formatters_by_archetype_;
-    std::forward_list<std::shared_ptr<model_to_text_transform>>
+    std::forward_list<std::shared_ptr<text::transforms::model_to_text_transform>>
     stock_artefact_formatters_;
     std::unordered_map<
         std::string,

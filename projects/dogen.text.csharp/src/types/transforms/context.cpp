@@ -22,13 +22,8 @@
 
 namespace dogen::text::csharp::transforms {
 
-context::context(const text::entities::model& m,
-    boost::shared_ptr<tracing::tracer> tracer)
-    : model_(m), tracer_(tracer) { }
-
-const text::entities::model& context::model() const {
-    return model_;
-}
+context::context(boost::shared_ptr<tracing::tracer> tracer)
+    : tracer_(tracer) { }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {
     return tracer_;

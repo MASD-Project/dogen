@@ -51,14 +51,9 @@ const physical::entities::archetype& builtin_transform::archetype() const {
     return static_archetype();
 }
 
-std::list<std::string> builtin_transform::
-inclusion_dependencies(const logical::entities::element& /*e*/) const {
-    std::list<std::string> r;
-    return r;
-}
-
-void builtin_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void builtin_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "builtin",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 

@@ -55,18 +55,13 @@ const physical::entities::archetype& solution_transform::archetype() const {
     return static_archetype();
 }
 
-std::list<std::string> solution_transform::
-inclusion_dependencies(const logical::entities::element& /*e*/) const {
-    std::list<std::string> r;
-    return r;
-}
-
-void solution_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void solution_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
     const auto& sln(ast.as<solution>(archetype().meta_name().id().value(), e));
 ast.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;

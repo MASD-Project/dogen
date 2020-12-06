@@ -41,7 +41,8 @@
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.text.cpp/types/transforms/context.hpp"
+#include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -51,7 +52,9 @@ namespace dogen::text::cpp::transforms {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const logical::entities::element& e,
+    assistant(const text::transforms::context& ctx,
+        const text::entities::model& lps,
+        const logical::entities::element& e,
         const identification::entities::physical_meta_name& pmn,
         const bool requires_header_guard, physical::entities::artefact& a);
 
@@ -371,7 +374,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const logical::entities::element& element_;
-    const context& context_;
+    const text::entities::model& lps_;
     physical::entities::artefact& artefact_;
     const identification::entities::physical_meta_name physical_meta_name_;
     const bool requires_header_guard_;

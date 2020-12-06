@@ -22,20 +22,8 @@
 
 namespace dogen::text::cpp::transforms {
 
-context::context(const text::entities::model& m,
-    const identification::entities::technical_space_version tsv,
-    boost::shared_ptr<tracing::tracer> tracer)
-    : model_(m), technical_space_version_(tsv),
-      tracer_(tracer) { }
-
-const text::entities::model& context::model() const {
-    return model_;
-}
-
-identification::entities::technical_space_version context::
-technical_space_version() const {
-    return technical_space_version_;
-}
+context::context(boost::shared_ptr<tracing::tracer> tracer)
+    : tracer_(tracer) { }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {
     return tracer_;

@@ -55,7 +55,8 @@ const std::string empty_family("Family cannot be empty.");
 
 namespace dogen::text::cpp::transforms {
 
-void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
+void registrar::validate(
+    std::shared_ptr<text::transforms::model_to_text_transform> t) const {
     /*
      * Must be pointing to a valid object.
      */
@@ -91,7 +92,8 @@ void registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is valid. Repository: " << trp;
 }
 
-void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
+void registrar::register_transform(
+    std::shared_ptr<text::transforms::model_to_text_transform> f) {
     /*
      * First we ensure the transform is vaguely valid and insert it
      * into the main collection of stock transforms.

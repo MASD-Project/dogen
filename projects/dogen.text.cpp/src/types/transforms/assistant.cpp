@@ -89,12 +89,14 @@ using identification::entities::logical_name;
 using identification::entities::logical_name_tree;
 using identification::entities::technical_space_version;
 
-assistant::assistant(const context& ctx, const logical::entities::element& e,
+assistant::assistant(const text::transforms::context& /*ctx*/,
+    const text::entities::model& lps,
+    const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
     const bool requires_header_guard,
     physical::entities::artefact& a)
-    : element_(e), context_(ctx), artefact_(a),
-      physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
+    : element_(e), lps_(lps), artefact_(a), physical_meta_name_(pmn),
+      requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()
@@ -215,7 +217,7 @@ assistant::get_product_name(const logical_name& n) const {
 
 physical::entities::facet_properties assistant::obtain_facet_properties(
     const identification::entities::physical_meta_id& facet_name) const {
-    const auto& mmp(context_.model().physical().meta_model_properties());
+    const auto& mmp(lps_.physical().meta_model_properties());
     const auto& fct_props(mmp.facet_properties());
     const auto i(fct_props.find(facet_name));
     if (i == fct_props.end()) {
@@ -238,7 +240,7 @@ bool assistant::is_archetype_enabled(
     const identification::entities::physical_meta_id& archetype) const {
     identification::entities::logical_id lid(element_.name().qualified().dot());
     identification::entities::logical_meta_physical_id ea(lid, archetype);
-    const auto& mmp(context_.model().physical().meta_model_properties());
+    const auto& mmp(lps_.physical().meta_model_properties());
     const auto& eafe(mmp.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
@@ -263,12 +265,12 @@ std::string assistant::get_facet_directory_for_facet(
 }
 
 bool assistant::is_cpp_standard_98() const {
-    const auto tsv(context_.technical_space_version());
+    const auto tsv(lps_.logical().technical_space_version());
     return tsv == technical_space_version::cpp_98;
 }
 
 bool assistant::is_cpp_standard_17() const {
-    const auto tsv(context_.technical_space_version());
+    const auto tsv(lps_.logical().technical_space_version());
     return tsv == technical_space_version::cpp_17;
 }
 
@@ -512,10 +514,9 @@ bool assistant::is_io() const {
 }
 
 void assistant::add_helper_methods(const std::string& /*element_id*/) {
-    dogen::text::transforms::helper_chain::model_ =
-        &context_.model().physical();
-    dogen::text::transforms::helper_chain::apply(stream(),
-        context_.model().logical(), element_, artefact_);
+    using dogen::text::transforms::helper_chain;
+    helper_chain::model_ = &lps_.physical();
+    helper_chain::apply(stream(), lps_.logical(), element_, artefact_);
 }
 
 std::string assistant::
@@ -545,7 +546,7 @@ streaming_for_type(const logical::entities::streaming_properties& sp,
 std::string assistant::streaming_for_type(const logical_name& n,
     const std::string& s) const {
 
-    const auto str_propss(context_.model().logical().streaming_properties());
+    const auto str_propss(lps_.logical().streaming_properties());
     const auto i(str_propss.find(n.id()));
     if (i == str_propss.end())
         return s;
@@ -572,7 +573,7 @@ std::list<logical_name> assistant::names_with_enabled_archetype(
     const identification::entities::physical_meta_id& archetype,
     const std::list<logical_name> names) const {
     std::list<logical_name> r;
-    const auto& mmp(context_.model().physical().meta_model_properties());
+    const auto& mmp(lps_.physical().meta_model_properties());
     const auto& eafe(mmp.enabled_archetype_for_element());
     for (const auto& n : names) {
         const identification::entities::logical_id lid(n.qualified().dot());

@@ -53,11 +53,12 @@ const std::string attribute_with_no_simple_name(
 
 namespace dogen::text::csharp::transforms {
 
-assistant::
-assistant(const context& ctx, const logical::entities::element& e,
+assistant::assistant(const text::transforms::context& /*ctx*/,
+    const text::entities::model& lps, const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
     physical::entities::artefact& a) :
-    element_(e), artefact_(a), context_(ctx), physical_meta_name_(pmn) {
+    element_(e), artefact_(a), lps_(lps),
+    physical_meta_name_(pmn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().id()
@@ -120,7 +121,7 @@ make_namespaces(const identification::entities::logical_name& n) const {
 
 std::string
 assistant::reference_equals(const logical::entities::attribute& attr) const {
-    const auto& c(context_.model().logical().aspect_properties());
+    const auto& c(lps_.logical().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.id()));
 
@@ -184,7 +185,7 @@ make_argument_name(const logical::entities::attribute& attr) const {
 
 boost::optional<logical::entities::assistant_properties> assistant::
 get_assistant_properties(const logical::entities::attribute& attr) const {
-    const auto& ap(context_.model().logical().assistant_properties());
+    const auto& ap(lps_.logical().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().id()));
     if (i == ap.end())
         return boost::optional<logical::entities::assistant_properties>();
@@ -193,10 +194,9 @@ get_assistant_properties(const logical::entities::attribute& attr) const {
 }
 
 void assistant::add_helper_methods(const std::string& /*element_id*/) {
-    dogen::text::transforms::helper_chain::model_ =
-        &context_.model().physical();
-    dogen::text::transforms::helper_chain::apply(stream(),
-        context_.model().logical(), element_, artefact_);
+    using dogen::text::transforms::helper_chain;
+    helper_chain::model_ = &lps_.physical();
+    helper_chain::apply(stream(), lps_.logical(), element_, artefact_);
 }
 
 std::ostream& assistant::stream() {

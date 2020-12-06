@@ -57,12 +57,13 @@ const physical::entities::archetype& type_registrar_implementation_transform::ar
     return static_archetype();
 }
 
-void type_registrar_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
-   physical::entities::artefact& a) const {
+void type_registrar_implementation_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
    tracing::scoped_transform_tracer stp(lg, "type registrar implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& rg(ast.as<logical::entities::serialization::type_registrar>(e));
 
     {

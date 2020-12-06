@@ -25,18 +25,19 @@
 #pragma once
 #endif
 
-#include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-class backend_class_implementation_transform_transform final : public model_to_text_transform {
+class backend_class_implementation_transform_transform final : public text::transforms::model_to_text_transform {
 public:
     static const physical::entities::archetype& static_archetype();
     const physical::entities::archetype& archetype() const override;
 
 public:
-    void apply(const context& ctx, const logical::entities::element& e,
-        physical::entities::artefact& a) const override;
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
 };
 
 }

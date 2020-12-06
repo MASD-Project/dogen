@@ -63,10 +63,8 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    void apply(boost::shared_ptr<tracing::tracer> tracer,
-        const physical::entities::model& pm,
-        const identification::entities::technical_space_version tsv,
-        text::entities::model& m) const;
+    void apply(const text::transforms::context& ctx,
+        const physical::entities::model& pm, text::entities::model& m) const;
 
 public:
     identification::entities::physical_meta_id id() const override;

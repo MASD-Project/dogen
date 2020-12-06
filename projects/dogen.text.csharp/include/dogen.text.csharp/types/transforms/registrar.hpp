@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.text.csharp/types/transforms/repository.hpp"
-#include "dogen.text.csharp/types/transforms/model_to_text_transform.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::csharp::transforms {
 
@@ -48,7 +48,8 @@ public:
     /**
      * @brief Registers a transform.
      */
-    void register_transform(std::shared_ptr<model_to_text_transform> f);
+    void register_transform(
+        std::shared_ptr<text::transforms::model_to_text_transform> f);
 
 public:
     /**

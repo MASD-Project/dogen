@@ -56,13 +56,10 @@ std::string model_to_text_cpp_chain::description() const {
     return ::description;
 }
 
-void model_to_text_cpp_chain::
-apply(boost::shared_ptr<tracing::tracer> tracer,
-    const physical::entities::model& pm,
-    const identification::entities::technical_space_version tsv,
-    text::entities::model& m) const {
-    transforms::workflow wf(pm, tsv);
-    wf.execute(tracer, m);
+void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
+    const physical::entities::model& pm, text::entities::model& m) const {
+    transforms::workflow wf(pm);
+    wf.execute(ctx, m);
 }
 
 identification::entities::technical_space
@@ -76,8 +73,7 @@ void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
     tracing::scoped_chain_tracer stp(lg, "C++ M2T chain", transform_id,
         id.value(), *ctx.tracer());
 
-    const auto tsv(m.logical().technical_space_version());
-    apply(ctx.tracer(), m.physical(), tsv, m);
+    apply(ctx, m.physical(), m);
 }
 
 }

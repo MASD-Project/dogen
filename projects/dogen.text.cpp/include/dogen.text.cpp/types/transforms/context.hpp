@@ -35,9 +35,7 @@
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/types/entities/technical_space_version.hpp"
-#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/streaming_properties.hpp"
-#include "dogen.text/types/entities/model.hpp"
 
 namespace dogen::text::cpp::transforms {
 
@@ -46,22 +44,12 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const text::entities::model& m,
-        const identification::entities::technical_space_version tsv,
-        boost::shared_ptr<tracing::tracer> tracer);
+    explicit context(boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const text::entities::model& model() const;
-
-    identification::entities::technical_space_version
-    technical_space_version() const;
-
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const text::entities::model& model_;
-    const identification::entities::technical_space_version
-    technical_space_version_;
     boost::shared_ptr<tracing::tracer> tracer_;
 };
 

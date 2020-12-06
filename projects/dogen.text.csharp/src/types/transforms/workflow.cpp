@@ -25,7 +25,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/workflow_error.hpp"
-#include "dogen.text.csharp/types/transforms/context.hpp"
 #include "dogen.text.csharp/types/transforms/workflow.hpp"
 
 namespace {
@@ -66,7 +65,7 @@ workflow::get_artefact(const physical::entities::region& region,
     return i->second;
 }
 
-void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+void workflow::execute(const text::transforms::context& ctx,
     const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << m.provenance().logical_name().id();
@@ -86,7 +85,6 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             continue;
         }
 
-        const context ctx(m, tracer);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
@@ -97,7 +95,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << arch;
 
             auto& a(*aptr);
-            fmt.apply(ctx, e, a);
+            fmt.apply(ctx, m, e, a);
             const auto& p(a.file_path());
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
         }

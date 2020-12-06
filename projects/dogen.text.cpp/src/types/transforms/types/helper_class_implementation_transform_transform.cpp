@@ -54,11 +54,12 @@ const physical::entities::archetype& helper_class_implementation_transform_trans
     return static_archetype();
 }
 
-void helper_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void helper_class_implementation_transform_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "helper class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::helper>(e));
     ast.update_artefact();
     a.content(arch.text_templating().rendered_stitch_template());

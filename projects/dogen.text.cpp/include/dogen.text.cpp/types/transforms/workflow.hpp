@@ -40,6 +40,7 @@
 #include "dogen.text/types/entities/logical_physical_region.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -49,8 +50,7 @@ namespace dogen::text::cpp::transforms {
  */
 class workflow final {
 public:
-    workflow(const physical::entities::model& pm,
-        const identification::entities::technical_space_version tsv);
+    explicit workflow(const physical::entities::model& pm);
 
 public:
     /**
@@ -65,19 +65,17 @@ private:
         const identification::entities::physical_meta_id& archetype) const;
 
 private:
-    void execute(boost::shared_ptr<tracing::tracer> tracer,
+    void execute(const text::transforms::context& ctx,
         const text::entities::model& m,
         text::entities::logical_physical_region& region) const;
 
 public:
-    void execute(boost::shared_ptr<tracing::tracer> tracer,
+    void execute(const text::transforms::context& ctx,
         text::entities::model& m) const;
 
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;
     const physical::entities::model& physical_model_;
-    const identification::entities::technical_space_version
-    technical_space_version_;
 };
 
 }

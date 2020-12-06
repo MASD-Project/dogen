@@ -51,11 +51,12 @@ const physical::entities::archetype& archetype_class_header_transform_transform:
     return static_archetype();
 }
 
-void archetype_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
-    physical::entities::artefact& a) const {
+void archetype_class_header_transform_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
     {
@@ -65,21 +66,15 @@ void archetype_class_header_transform_transform::apply(const context& ctx, const
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple() + "_transform");
 ast.stream() << std::endl;
-ast.stream() << "class " << sn << " final : public model_to_text_transform {" << std::endl;
+ast.stream() << "class " << sn << " final : public text::transforms::model_to_text_transform {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    static const physical::entities::archetype& static_archetype();" << std::endl;
 ast.stream() << "    const physical::entities::archetype& archetype() const override;" << std::endl;
 ast.stream() << std::endl;
-            using identification::entities::technical_space;
-            if (o.major_technical_space() == technical_space::csharp) {
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
-ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
-ast.stream() << std::endl;
-            }
-ast.stream() << "public:" << std::endl;
-ast.stream() << "    void apply(const context& ctx, const logical::entities::element& e," << std::endl;
-ast.stream() << "        physical::entities::artefact& a) const override;" << std::endl;
+ast.stream() << "void apply(const text::transforms::context& ctx, const text::entities::model& lps," << std::endl;
+ast.stream() << "    const logical::entities::element& e," << std::endl;
+ast.stream() << "    physical::entities::artefact& a) const override;" << std::endl;
 ast.stream() << "};" << std::endl;
 ast.stream() << std::endl;
         } // snf

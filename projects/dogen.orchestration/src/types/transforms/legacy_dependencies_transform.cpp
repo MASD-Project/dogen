@@ -258,14 +258,8 @@ visit(const logical::entities::physical::archetype& v) {
             b(inclusion_directives_, enabled_archetype_for_element_);
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.archetype_class_header_transform") {
-            using identification::entities::technical_space;
-            if (v.major_technical_space() == technical_space::cpp) {
-                b.add_as_user(
-                    "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
-            } else if (v.major_technical_space() == technical_space::csharp) {
-                b.add_as_user(
-                    "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
-            }
+            b.add_as_user(
+                "dogen.text/types/transforms/model_to_text_transform.hpp");
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_transform") {
             // no deps
         } else if (pmid.value() == "masd.cpp.types.archetype_class_implementation_factory") {
