@@ -90,7 +90,7 @@
         <dia:point val="98,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,20.95;141.05,63.05"/>
+        <dia:rectangle val="97.95,20.95;141.05,64.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -102,7 +102,7 @@
         <dia:real val="43"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="41"/>
+        <dia:real val="42"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#entities#</dia:string>
@@ -1947,7 +1947,7 @@ for this model.#</dia:string>
         <dia:point val="144,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.95,20.95;226.05,63.05"/>
+        <dia:rectangle val="143.95,20.95;226.05,64.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1959,7 +1959,7 @@ for this model.#</dia:string>
         <dia:real val="82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="41"/>
+        <dia:real val="42"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#formatters#</dia:string>
@@ -24926,90 +24926,6 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O190">
       <dia:attribute name="obj_pos">
-        <dia:point val="311,66.0025"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="309.95,64.2025;311.75,67.6025"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="311,66.0025"/>
-        <dia:point val="311,64.2525"/>
-        <dia:point val="310,64.2525"/>
-        <dia:point val="310,64.9525"/>
-        <dia:point val="311,64.9525"/>
-        <dia:point val="311,66.0025"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="text_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O3" connection="8"/>
-        <dia:connection handle="1" to="O3" connection="8"/>
-      </dia:connections>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O191">
-      <dia:attribute name="obj_pos">
         <dia:point val="204.452,127"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
@@ -25089,7 +25005,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O192">
+    <dia:object type="UML - Association" version="2" id="O191">
       <dia:attribute name="obj_pos">
         <dia:point val="194,127"/>
       </dia:attribute>
