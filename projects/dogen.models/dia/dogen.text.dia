@@ -13668,7 +13668,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::archetype_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::archetype_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13878,7 +13878,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::primitive_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14042,7 +14042,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::enumeration_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::enumeration_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14206,7 +14206,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::object_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::object_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14370,7 +14370,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::exception_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::exception_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14534,7 +14534,7 @@ of the C# technical space.
         <dia:string>#Contains the configuration common to all archetypes.
 
 #DOGEN masd.variability.binding_point=entity
-#DOGEN masd.variability.stereotype=dogen::builtin_configuration3#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::builtin_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14830,7 +14830,7 @@ of the C# technical space.
         <dia:point val="466.11,151.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="455.253,151;466.96,160.002"/>
+        <dia:rectangle val="455.252,151;466.96,160.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
