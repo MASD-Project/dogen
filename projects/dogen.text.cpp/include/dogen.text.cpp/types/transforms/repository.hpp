@@ -49,7 +49,7 @@ private:
 
 private:
     /**
-     * @brief Returns all available file formatters by type indx.
+     * @brief Returns all available file formatters by type index.
      */
     std::unordered_map<identification::entities::logical_meta_id,
                        std::forward_list<
@@ -57,22 +57,6 @@ private:
                                text::transforms::model_to_text_transform>>
                        >&
     stock_artefact_formatters_by_meta_name();
-
-    /**
-     * @brief Returns all available file formatters by archetype name.
-     */
-    std::unordered_map<identification::entities::physical_meta_id,
-                       std::shared_ptr<
-                           text::transforms::model_to_text_transform>>&
-    stock_artefact_formatters_by_archetype();
-
-    /**
-     * @brief Returns all available file formatters.
-     */
-    std::forward_list<
-        std::shared_ptr<
-            text::transforms::model_to_text_transform>>&
-    stock_artefact_formatters();
 
 public:
     /**
@@ -85,33 +69,12 @@ public:
                              >&
     stock_artefact_formatters_by_meta_name() const;
 
-    /**
-     * @brief Returns all available file formatters by formatter name.
-     */
-    const std::unordered_map<identification::entities::physical_meta_id,
-                             std::shared_ptr<
-                                 text::transforms::model_to_text_transform>>&
-    stock_artefact_formatters_by_archetype() const;
-
-    /**
-     * @brief Returns all available file formatters.
-     */
-    const std::forward_list<std::shared_ptr<
-                                text::transforms::model_to_text_transform>>&
-    stock_artefact_formatters() const;
-
 private:
     std::unordered_map<
         identification::entities::logical_meta_id,
         std::forward_list<
             std::shared_ptr<text::transforms::model_to_text_transform>>>
     stock_artefact_formatters_by_meta_name_;
-    std::unordered_map<identification::entities::physical_meta_id,
-                       std::shared_ptr<
-                           text::transforms::model_to_text_transform>>
-    stock_artefact_formatters_by_archetype_;
-    std::forward_list<std::shared_ptr<text::transforms::model_to_text_transform>>
-    stock_artefact_formatters_;
 };
 
 }

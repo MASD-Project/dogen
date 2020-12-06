@@ -7557,7 +7557,7 @@ facet of the C++ technical space.
         <dia:point val="117,194"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,193.95;175.685,199.25"/>
+        <dia:rectangle val="116.95,193.95;175.685,197.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,194"/>
@@ -7566,7 +7566,7 @@ facet of the C++ technical space.
         <dia:real val="58.635000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#repository#</dia:string>
@@ -7667,52 +7667,6 @@ facet of the C++ technical space.
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#stock_artefact_formatters_by_archetype#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#stock_artefact_formatters#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;text::transforms::model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15236,7 +15190,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:point val="110.612,206.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.862,199.15;146.517,208.055"/>
+        <dia:rectangle val="109.862,197.55;146.517,208.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15245,7 +15199,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:point val="110.612,206.4"/>
         <dia:point val="110.612,208"/>
         <dia:point val="146.317,208"/>
-        <dia:point val="146.317,199.2"/>
+        <dia:point val="146.317,197.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
