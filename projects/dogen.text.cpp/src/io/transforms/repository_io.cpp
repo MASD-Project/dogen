@@ -25,7 +25,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
-#include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/io/transforms/repository_io.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -40,31 +39,6 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
         s <<  "\"" << (*i)->archetype().meta_name().id() << "\"";
     }
     s << " ], ";
-    return s;
-}
-
-inline std::ostream& to_stream(std::ostream& s,
-    const std::unordered_map<std::string, std::unordered_map<
-    identification::entities::physical_meta_id,
-    std::list<std::shared_ptr<text::transforms::helper_transform>>>>& helpers) {
-    s << "\"helper_formatters\": " << "[ ";
-
-    for(auto i(helpers.begin()); i != helpers.end(); ++i) {
-        if (i != helpers.begin()) s << ", ";
-        s <<  "{ \"" << i->first << "\":" << "[ ";
-        for(auto j(i->second.begin()); j != i->second.end(); ++j) {
-            if (j != i->second.begin()) s << ", ";
-            s <<  "{ \"" << j->first << "\":" << "[ ";
-            for(auto k(j->second.begin()); k != j->second.end(); ++k) {
-                if (k != j->second.begin()) s << ", ";
-                s <<  "\"" << (*k)->id() << "\"";
-            }
-            s << "] }";
-        }
-        s << "] }";
-
-    }
-    s << " ]";
     return s;
 }
 
@@ -93,7 +67,6 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
       << "\"dogen::text::cpp::transforms::container\", ";
     to_stream(s, rp.stock_artefact_formatters_by_meta_name());
     to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
-    to_stream(s, rp.helper_formatters());
     s << " }";
     return s;
 }

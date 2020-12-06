@@ -34,7 +34,6 @@
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
-#include "dogen.text/types/transforms/helper_transform_fwd.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform_fwd.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -101,17 +100,6 @@ public:
                                 text::transforms::model_to_text_transform>>&
     stock_artefact_formatters() const;
 
-    /**
-     * @brief Returns all available helpers.
-     */
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-                       std::list<
-                           std::shared_ptr<
-                               text::transforms::helper_transform>>>>&
-    helper_formatters() const;
-
 private:
     std::unordered_map<
         identification::entities::logical_meta_id,
@@ -124,13 +112,6 @@ private:
     stock_artefact_formatters_by_archetype_;
     std::forward_list<std::shared_ptr<text::transforms::model_to_text_transform>>
     stock_artefact_formatters_;
-    std::unordered_map<
-        std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-                           std::list<
-                               std::shared_ptr<
-                                   text::transforms::helper_transform>>>>
-    helper_formatters_;
 };
 
 }

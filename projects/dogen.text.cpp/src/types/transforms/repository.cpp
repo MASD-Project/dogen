@@ -20,7 +20,6 @@
  */
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
-#include "dogen.text/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 
 namespace dogen::text::cpp::transforms {
@@ -65,15 +64,6 @@ const std::forward_list<std::shared_ptr<
                             text::transforms::model_to_text_transform>>&
 repository::stock_artefact_formatters() const {
     return stock_artefact_formatters_;
-}
-
-const std::unordered_map<
-    std::string, std::unordered_map<
-                     identification::entities::physical_meta_id,
-                     std::list<
-                         std::shared_ptr<text::transforms::helper_transform>>>>&
-    repository::helper_formatters() const {
-    return helper_formatters_;
 }
 
 }
