@@ -32,7 +32,7 @@ const std::shared_ptr<dogen::text::transforms::model_to_text_transform>& rhs) {
 
 namespace dogen::text::transforms {
 
-text_transform_repository::text_transform_repository(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name)
+text_transform_repository::text_transform_repository(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name)
     : model_to_text_transforms_by_meta_name_(model_to_text_transforms_by_meta_name) { }
 
 void text_transform_repository::swap(text_transform_repository& other) noexcept {
@@ -50,19 +50,19 @@ text_transform_repository& text_transform_repository::operator=(text_transform_r
     return *this;
 }
 
-const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& text_transform_repository::model_to_text_transforms_by_meta_name() const {
+const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& text_transform_repository::model_to_text_transforms_by_meta_name() const {
     return model_to_text_transforms_by_meta_name_;
 }
 
-std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& text_transform_repository::model_to_text_transforms_by_meta_name() {
+std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& text_transform_repository::model_to_text_transforms_by_meta_name() {
     return model_to_text_transforms_by_meta_name_;
 }
 
-void text_transform_repository::model_to_text_transforms_by_meta_name(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& v) {
+void text_transform_repository::model_to_text_transforms_by_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& v) {
     model_to_text_transforms_by_meta_name_ = v;
 }
 
-void text_transform_repository::model_to_text_transforms_by_meta_name(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >&& v) {
+void text_transform_repository::model_to_text_transforms_by_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >&& v) {
     model_to_text_transforms_by_meta_name_ = std::move(v);
 }
 

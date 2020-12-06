@@ -26,10 +26,11 @@
 #endif
 
 #include <memory>
-#include <string>
 #include <algorithm>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform_fwd.hpp"
 
 namespace dogen::text::transforms {
@@ -42,13 +43,13 @@ public:
     ~text_transform_repository() = default;
 
 public:
-    explicit text_transform_repository(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name);
+    explicit text_transform_repository(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name);
 
 public:
-    const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name() const;
-    std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name();
-    void model_to_text_transforms_by_meta_name(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& v);
-    void model_to_text_transforms_by_meta_name(const std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name() const;
+    std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& model_to_text_transforms_by_meta_name();
+    void model_to_text_transforms_by_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >& v);
+    void model_to_text_transforms_by_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > >&& v);
 
 public:
     bool operator==(const text_transform_repository& rhs) const;
@@ -61,7 +62,7 @@ public:
     text_transform_repository& operator=(text_transform_repository other);
 
 private:
-    std::unordered_map<std::string, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > > model_to_text_transforms_by_meta_name_;
+    std::unordered_map<dogen::identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<dogen::text::transforms::model_to_text_transform> > > model_to_text_transforms_by_meta_name_;
 };
 
 }

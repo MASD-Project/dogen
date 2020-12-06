@@ -24433,16 +24433,16 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O186">
       <dia:attribute name="obj_pos">
-        <dia:point val="171,109"/>
+        <dia:point val="152,109"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="170.95,108.95;222.37,112.65"/>
+        <dia:rectangle val="151.95,108.95;214.92,112.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="171,109"/>
+        <dia:point val="152,109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="51.32"/>
+        <dia:real val="62.870000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -24543,7 +24543,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
             <dia:string>#model_to_text_transforms_by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;model_to_text_transform&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::logical_meta_id, std::forward_list&lt;std::shared_ptr&lt;model_to_text_transform&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -24571,17 +24571,17 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O187">
       <dia:attribute name="obj_pos">
-        <dia:point val="196.66,112.65"/>
+        <dia:point val="183.435,112.65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="188.95,111.9;197.41,118.6"/>
+        <dia:rectangle val="182.685,111.9;189.2,118.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="196.66,112.65"/>
-        <dia:point val="196.66,115"/>
+        <dia:point val="183.435,112.65"/>
+        <dia:point val="183.435,115"/>
         <dia:point val="189,115"/>
         <dia:point val="189,117"/>
       </dia:attribute>
@@ -24594,7 +24594,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#&lt; stores#</dia:string>
+        <dia:string>#stores &gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
         <dia:enum val="1"/>
@@ -25175,7 +25175,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="194,127"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="170.95,112.55;194.75,128.6"/>
+        <dia:rectangle val="151.95,112.55;194.75,128.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25183,8 +25183,8 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
       <dia:attribute name="orth_points">
         <dia:point val="194,127"/>
         <dia:point val="194,125"/>
-        <dia:point val="171,125"/>
-        <dia:point val="171,112.6"/>
+        <dia:point val="152,125"/>
+        <dia:point val="152,112.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
