@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_IO_TRANSFORMS_REPOSITORY_IO_HPP
-#define DOGEN_TEXT_IO_TRANSFORMS_REPOSITORY_IO_HPP
+#ifndef DOGEN_TEXT_IO_TRANSFORMS_HELPER_REPOSITORY_IO_HPP
+#define DOGEN_TEXT_IO_TRANSFORMS_HELPER_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.text/types/transforms/repository.hpp"
+#include "dogen.text/types/transforms/helper_repository.hpp"
 
 namespace dogen::text::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::text::transforms::repository& v);
+     const dogen::text::transforms::helper_repository& v);
 
 }
 

@@ -27,13 +27,13 @@
 
 namespace dogen::text::transforms::csharp::io {
 
-void initializer::initialize(registrar& rg) {
+void initializer::initialize(helper_registrar& hrg) {
     // register_formatter<class_transform>(rg);
     // register_formatter<primitive_transform>(rg);
     // register_formatter<enum_transform>(rg);
     // register_formatter<assistant_transform>(rg);
 
-    register_helper<enumerable_helper_transform>(rg);
+    register_helper<enumerable_helper_transform>(hrg);
 }
 
 }

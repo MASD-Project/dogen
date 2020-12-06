@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.text/io/transforms/repository_io.hpp"
 #include "dogen.text/io/transforms/helper_transform_io.hpp"
+#include "dogen.text/io/transforms/helper_repository_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -100,9 +100,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::text::transforms {
 
-std::ostream& operator<<(std::ostream& s, const repository& v) {
+std::ostream& operator<<(std::ostream& s, const helper_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::text::transforms::repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::text::transforms::helper_repository\"" << ", "
       << "\"helpers_by_family\": " << v.helpers_by_family()
       << " }";
     return(s);

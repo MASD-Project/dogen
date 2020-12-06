@@ -26,7 +26,7 @@
 
 namespace dogen::text::transforms::csharp::test_data {
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(helper_registrar& /*hrg*/) {
     // register_formatter<class_transform>(rg);
     // register_formatter<primitive_transform>(rg);
     // register_formatter<enum_transform>(rg);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_REPOSITORY_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_REPOSITORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_REPOSITORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,15 +36,15 @@
 
 namespace dogen::text::transforms {
 
-class repository final {
+class helper_repository final {
 public:
-    repository() = default;
-    repository(const repository&) = default;
-    repository(repository&&) = default;
-    ~repository() = default;
+    helper_repository() = default;
+    helper_repository(const helper_repository&) = default;
+    helper_repository(helper_repository&&) = default;
+    ~helper_repository() = default;
 
 public:
-    explicit repository(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family);
+    explicit helper_repository(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family);
 
 public:
     const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >& helpers_by_family() const;
@@ -53,14 +53,14 @@ public:
     void helpers_by_family(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > >&& v);
 
 public:
-    bool operator==(const repository& rhs) const;
-    bool operator!=(const repository& rhs) const {
+    bool operator==(const helper_repository& rhs) const;
+    bool operator!=(const helper_repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(repository& other) noexcept;
-    repository& operator=(repository other);
+    void swap(helper_repository& other) noexcept;
+    helper_repository& operator=(helper_repository other);
 
 private:
     std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<std::shared_ptr<dogen::text::transforms::helper_transform> > > > helpers_by_family_;
@@ -72,8 +72,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::text::transforms::repository& lhs,
-    dogen::text::transforms::repository& rhs) {
+    dogen::text::transforms::helper_repository& lhs,
+    dogen::text::transforms::helper_repository& rhs) {
     lhs.swap(rhs);
 }
 

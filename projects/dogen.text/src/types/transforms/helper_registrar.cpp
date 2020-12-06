@@ -22,14 +22,14 @@
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.text/io/transforms/repository_io.hpp"
+#include "dogen.text/io/transforms/helper_repository_io.hpp"
 #include "dogen.text/types/transforms/registrar_error.hpp"
-#include "dogen.text/types/transforms/registrar.hpp"
+#include "dogen.text/types/transforms/helper_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("text.transforms.registrar"));
+static logger lg(logger_factory("text.transforms.helper_registrar"));
 
 const std::string null_helper_transform("Helper transform supplied is null");
 const std::string null_transform("Transform supplied is null.");
@@ -41,7 +41,7 @@ const std::string no_helpers_by_family("No helpers by family provided.");
 
 namespace dogen::text::transforms {
 
-void registrar::validate(std::shared_ptr<helper_transform> ht) const {
+void helper_registrar::validate(std::shared_ptr<helper_transform> ht) const {
     /*
      * Must be pointing to a valid object.
      */
@@ -59,7 +59,7 @@ void registrar::validate(std::shared_ptr<helper_transform> ht) const {
     }
 }
 
-void registrar::validate() const {
+void helper_registrar::validate() const {
     /*
      * We must have at least one registered transform. This is a quick
      * way of troubleshooting validation errors.
@@ -73,7 +73,8 @@ void registrar::validate() const {
                              << repository_;
 }
 
-void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) {
+void helper_registrar::
+register_helper_transform(std::shared_ptr<helper_transform> ht) {
     validate(ht);
     auto& hbf(repository_.helpers_by_family()[ht->family()]);
     for (const auto& of : ht->owning_formatters()) {
@@ -86,7 +87,7 @@ void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) 
 
 }
 
-const repository& registrar::helper_repository() const {
+const helper_repository& helper_registrar::repository() const {
     return repository_;
 }
 

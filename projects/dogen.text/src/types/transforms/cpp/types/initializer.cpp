@@ -65,7 +65,7 @@
 
 namespace dogen::text::transforms::cpp::types {
 
-void initializer::initialize(registrar& rg) {
+void initializer::initialize(helper_registrar& hrg) {
     // register_formatter<builtin_header_transform>(rg);
     // register_formatter<primitive_header_transform>(rg);
     // register_formatter<primitive_implementation_transform>(rg);
@@ -107,7 +107,7 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<helper_class_implementation_factory_transform>(rg);
     // register_formatter<archetype_kind_class_header_factory_transform>(rg);
     // register_formatter<archetype_kind_class_implementation_factory_transform>(rg);
-    register_helper<smart_pointer_helper_transform>(rg);
+    register_helper<smart_pointer_helper_transform>(hrg);
 }
 
 }

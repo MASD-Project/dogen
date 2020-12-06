@@ -23,8 +23,8 @@
 
 namespace dogen::text::transforms::cpp::lexical_cast {
 
-void initializer::initialize(registrar& /*rg*/) {
-    // register_formatter<enum_header_transform>(rg);
+void initializer::initialize(helper_registrar& /*hrg*/) {
+    // register_formatter<enum_header_transform>(hrg);
 }
 
 }

@@ -24,7 +24,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/io/entities/helper_properties_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text/types/transforms/registrar.hpp"
+#include "dogen.text/types/transforms/helper_registrar.hpp"
 #include "dogen.text/types/transforms/helper_chain.hpp"
 
 namespace {
@@ -42,12 +42,12 @@ namespace dogen::text::transforms {
 using logical::entities::element;
 using physical::entities::artefact;
 
-std::shared_ptr<text::transforms::registrar> helper_chain::registrar_;
+std::shared_ptr<text::transforms::helper_registrar> helper_chain::registrar_;
 const physical::entities::model* helper_chain::model_;
 
-text::transforms::registrar& helper_chain::registrar() {
+text::transforms::helper_registrar& helper_chain::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<text::transforms::registrar>();
+        registrar_ = std::make_shared<text::transforms::helper_registrar>();
 
     return *registrar_;
 }
@@ -59,7 +59,7 @@ get_helpers(const artefact& a, const logical::entities::helper_properties& hp) {
      * good way to detect spurious families in data files.
      */
     const auto fam(hp.current().family());
-    const auto& helpers(registrar().helper_repository().helpers_by_family());
+    const auto& helpers(registrar().repository().helpers_by_family());
     const auto i(helpers.find(fam));
     if (i == helpers.end()) {
         BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;

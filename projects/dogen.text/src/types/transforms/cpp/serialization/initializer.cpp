@@ -34,7 +34,7 @@
 
 namespace dogen::text::transforms::cpp::serialization {
 
-void initializer::initialize(registrar& rg) {
+void initializer::initialize(helper_registrar& hrg) {
     // register_formatter<builtin_header_transform>(rg);
     // register_formatter<primitive_header_transform>(rg);
     // register_formatter<primitive_implementation_transform>(rg);
@@ -43,9 +43,9 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<enum_header_transform>(rg);
     // register_formatter<class_forward_declarations_transform>(rg);
     // register_formatter<primitive_forward_declarations_transform>(rg);
-    // register_formatter<type_registrar_header_transform>(rg);
-    // register_formatter<type_registrar_implementation_transform>(rg);
-    register_helper<path_helper_transform>(rg);
+    // register_formatter<type_helper_registrar_header_transform>(rg);
+    // register_formatter<type_helper_registrar_implementation_transform>(rg);
+    register_helper<path_helper_transform>(hrg);
 }
 
 }

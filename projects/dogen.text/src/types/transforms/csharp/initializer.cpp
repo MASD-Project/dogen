@@ -26,11 +26,11 @@
 
 namespace dogen::text::transforms::csharp {
 
-void initializer::initialize(registrar& rg) {
-    io::initializer::initialize(rg);
-    test_data::initializer::initialize(rg);
-    types::initializer::initialize(rg);
-    visual_studio::initializer::initialize(rg);
+void initializer::initialize(helper_registrar& hrg) {
+    io::initializer::initialize(hrg);
+    test_data::initializer::initialize(hrg);
+    types::initializer::initialize(hrg);
+    visual_studio::initializer::initialize(hrg);
 }
 
 }

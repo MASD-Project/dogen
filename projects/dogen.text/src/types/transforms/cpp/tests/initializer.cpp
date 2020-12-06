@@ -26,7 +26,7 @@
 
 namespace dogen::text::transforms::cpp::tests {
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(helper_registrar& /*hrg*/) {
     // register_formatter<cmakelists_transform>(rg);
     // register_formatter<class_implementation_transform>(rg);
     // register_formatter<enum_implementation_transform>(rg);

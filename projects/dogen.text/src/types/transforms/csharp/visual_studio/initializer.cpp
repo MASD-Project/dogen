@@ -24,7 +24,7 @@
 
 namespace dogen::text::transforms::csharp::visual_studio {
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(helper_registrar& /*hrg*/) {
     // register_formatter<solution_transform>(rg);
     // register_formatter<project_transform>(rg);
 }

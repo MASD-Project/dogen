@@ -18,24 +18,50 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_INITIALIZER_HPP
-#define DOGEN_TEXT_TYPES_TRANSFORMS_INITIALIZER_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_REGISTRAR_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_HELPER_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.text/types/transforms/helper_registrar.hpp"
+#include <memory>
+#include "dogen.text/types/transforms/helper_transform.hpp"
+#include "dogen.text/types/transforms/helper_repository.hpp"
 
 namespace dogen::text::transforms {
 
-/**
- * @brief Initialises all facets.
- */
-class initializer {
+class helper_registrar final {
+private:
+    /**
+     * @brief Ensures the transform passes a modicum of sanity checks.
+     */
+    void validate(std::shared_ptr<helper_transform> ht) const;
+
 public:
-    static void initialize(helper_registrar& hrg);
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
+
+public:
+    /**
+     * @brief Registers a helper transform.
+     */
+    void register_helper_transform(std::shared_ptr<helper_transform> ht);
+
+public:
+    const helper_repository& repository() const;
+
+private:
+    helper_repository repository_;
 };
+
+template<typename HelperTransform>
+inline void register_helper(helper_registrar& rg) {
+    const auto f(std::make_shared<HelperTransform>());
+    rg.register_helper_transform(f);
+}
 
 }
 

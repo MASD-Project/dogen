@@ -24,7 +24,7 @@
 #include "dogen.text/types/transforms/cpp/build/initializer.hpp"
 namespace dogen::text::transforms::cpp::build {
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(helper_registrar& /*hrg*/) {
     // register_formatter<include_cmakelists_transform>(rg);
     // register_formatter<source_cmakelists_transform>(rg);
 }

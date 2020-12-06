@@ -38,7 +38,7 @@
 
 namespace dogen::text::transforms::cpp::io {
 
-void initializer::initialize(registrar& rg) {
+void initializer::initialize(helper_registrar& hrg) {
     // register_formatter<builtin_header_transform>(rg);
     // register_formatter<primitive_header_transform>(rg);
     // register_formatter<primitive_implementation_transform>(rg);
@@ -47,14 +47,14 @@ void initializer::initialize(registrar& rg) {
     // register_formatter<enum_header_transform>(rg);
     // register_formatter<enum_implementation_transform>(rg);
 
-    register_helper<smart_pointer_helper_transform>(rg);
-    register_helper<associative_container_helper_transform>(rg);
-    register_helper<optional_helper_transform>(rg);
-    register_helper<pair_helper_transform>(rg);
-    register_helper<ptree_helper_transform>(rg);
-    register_helper<sequence_container_helper_transform>(rg);
-    register_helper<string_helper_transform>(rg);
-    register_helper<variant_helper_transform>(rg);
+    register_helper<smart_pointer_helper_transform>(hrg);
+    register_helper<associative_container_helper_transform>(hrg);
+    register_helper<optional_helper_transform>(hrg);
+    register_helper<pair_helper_transform>(hrg);
+    register_helper<ptree_helper_transform>(hrg);
+    register_helper<sequence_container_helper_transform>(hrg);
+    register_helper<string_helper_transform>(hrg);
+    register_helper<variant_helper_transform>(hrg);
 }
 
 }

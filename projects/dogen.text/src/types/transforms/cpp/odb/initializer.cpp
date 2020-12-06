@@ -29,7 +29,7 @@
 
 namespace dogen::text::transforms::cpp::odb {
 
-void initializer::initialize(registrar& /*rg*/) {
+void initializer::initialize(helper_registrar& /*hrg*/) {
     // register_formatter<builtin_header_transform>(rg);
     // register_formatter<primitive_header_transform>(rg);
     // register_formatter<class_header_transform>(rg);

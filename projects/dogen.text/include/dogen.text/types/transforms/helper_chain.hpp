@@ -30,17 +30,17 @@
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.text/types/transforms/registrar.hpp"
+#include "dogen.text/types/transforms/helper_registrar.hpp"
 
 namespace dogen::text::transforms {
 
 class helper_chain final {
 public:
     /**
-     * @brief Returns the registrar. If it has not yet been
+     * @brief Returns the helper_registrar. If it has not yet been
      * initialised, initialises it.
      */
-    static text::transforms::registrar& registrar();
+    static text::transforms::helper_registrar& registrar();
 
     /**
      * @brief Physical model with meta-model properties.
@@ -48,7 +48,7 @@ public:
      * FIXME: big hack until we update the interfaces of the M2T
      * transforms.
      */
-    static const physical::entities::model * model_;
+    static const physical::entities::model* model_;
 
 private:
     static std::list<std::shared_ptr<transforms::helper_transform>>
@@ -61,7 +61,7 @@ public:
         const physical::entities::artefact& a);
 
 private:
-    static std::shared_ptr<text::transforms::registrar> registrar_;
+    static std::shared_ptr<text::transforms::helper_registrar> registrar_;
 };
 
 }

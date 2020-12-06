@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.text/types/transforms/registrar.hpp"
+#include "dogen.text/types/transforms/helper_registrar.hpp"
 
 namespace dogen::text::transforms::csharp::io {
 
@@ -34,7 +34,7 @@ namespace dogen::text::transforms::csharp::io {
  */
 class initializer final {
 public:
-    static void initialize(registrar& r);
+    static void initialize(helper_registrar& hrg);
 };
 
 }

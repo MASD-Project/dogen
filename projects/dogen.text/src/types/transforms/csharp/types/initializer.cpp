@@ -28,14 +28,14 @@
 
 namespace dogen::text::transforms::csharp::types {
 
-void initializer::initialize(registrar& rg) {
+void initializer::initialize(helper_registrar& hrg) {
     // register_formatter<class_transform>(rg);
     // register_formatter<primitive_transform>(rg);
     // register_formatter<enum_transform>(rg);
     // register_formatter<exception_transform>(rg);
     // register_formatter<builtin_transform>(rg);
 
-    register_helper<floating_point_number_helper_transform>(rg);
+    register_helper<floating_point_number_helper_transform>(hrg);
 }
 
 }
