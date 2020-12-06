@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-06 Sun 11:16]
+#+CAPTION: Clock summary at [2020-12-06 Sun 16:28]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *65:17* |       |       | 100.0 |
+| *Total time*                                              | *68:26* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 65:17   |       |       | 100.0 |
-| Active                                                    |         | 65:17 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   7.8 |
+| Stories                                                   | 68:26   |       |       | 100.0 |
+| Active                                                    |         | 68:26 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   7.4 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  2:37 |   4.0 |
-| Improvements to template processing in logical model      |         |       |  0:26 |   0.7 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  10.7 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  20.8 |
-| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.9 |
+| Sprint and product backlog grooming                       |         |       |  2:37 |   3.8 |
+| Improvements to template processing in logical model      |         |       |  0:26 |   0.6 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  10.2 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  19.9 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.8 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.5 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.9 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   7.4 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.4 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.7 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   7.0 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  33.1 |
-| Add namespaces to "dummy function"                        |         |       |  0:10 |   0.3 |
+| Move helpers to =text= model                              |         |       | 21:38 |  31.6 |
+| Add namespaces to "dummy function"                        |         |       |  0:10 |   0.2 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.5 |
-| Issues with emacs                                         |         |       |  1:32 |   2.3 |
-| Move text transforms in c++ and c# models into text model |         |       |  1:56 |   3.0 |
+| Issues with emacs                                         |         |       |  1:32 |   2.2 |
+| Move text transforms in c++ and c# models into text model |         |       |  5:05 |   7.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -670,6 +670,8 @@ Notes:
 
 *** STARTED Move text transforms in c++ and c# models into text model :story:
     :LOGBOOK:
+    CLOCK: [2020-12-06 Sun 14:07]--[2020-12-06 Sun 16:27] =>  2:20
+    CLOCK: [2020-12-06 Sun 12:52]--[2020-12-06 Sun 13:41] =>  0:49
     CLOCK: [2020-12-06 Sun 10:01]--[2020-12-06 Sun 11:16] =>  1:15
     CLOCK: [2020-11-20 Fri 15:27]--[2020-11-20 Fri 16:08] =>  0:41
     :END:
@@ -684,6 +686,9 @@ Notes:
   for all TS's.
 - we need to have a top-level text_transform registrar, repository etc
   and then get the TS specific code to use those.
+- update all initialisers to use the registrar form the M2T chain;
+  update workflows to use it as well; delete all registrars and
+  repositories in TS-specific models.
 
 Merged stories:
 
