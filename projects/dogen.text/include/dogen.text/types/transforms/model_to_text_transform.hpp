@@ -45,6 +45,12 @@ public:
 
 public:
     /**
+     * @brief Required only for code generation of repository..
+     */
+    bool operator==(const model_to_text_transform& /*rhs*/) const;
+
+public:
+    /**
      * @brief Physical archetype to which this M2T transform binds to.
      */
     virtual const physical::entities::archetype& archetype() const = 0;
