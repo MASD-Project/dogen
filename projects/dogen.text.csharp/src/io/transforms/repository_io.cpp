@@ -45,31 +45,6 @@ inline std::ostream& to_stream(std::ostream& s, const Id& key,
 }
 
 inline std::ostream& to_stream(std::ostream& s,
-    const std::unordered_map<std::string,
-    std::unordered_map<identification::entities::physical_meta_id,
-    std::list<std::shared_ptr<text::transforms::helper_transform>>>>& helpers) {
-    s << "\"helper_formatters\": " << "[ ";
-
-    for(auto i(helpers.begin()); i != helpers.end(); ++i) {
-        if (i != helpers.begin()) s << ", ";
-        s <<  "{ \"" << i->first << "\":" << "[ ";
-        for(auto j(i->second.begin()); j != i->second.end(); ++j) {
-            if (j != i->second.begin()) s << ", ";
-            s <<  "{ \"" << j->first << "\":" << "[ ";
-            for(auto k(j->second.begin()); k != j->second.end(); ++k) {
-                if (k != j->second.begin()) s << ", ";
-                s <<  "\"" << (*k)->id() << "\"";
-            }
-            s << "] }";
-        }
-        s << "] }";
-
-    }
-    s << " ]";
-    return s;
-}
-
-inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<identification::entities::logical_meta_id,
     std::forward_list<std::shared_ptr<model_to_text_transform>>>& safmt) {
     s << "\"stock_artefact_formatters_by_meta_name\": " << "[ ";
@@ -93,7 +68,6 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
       << "\"dogen::text::cpp::formatters::container\", ";
     to_stream(s, rp.stock_artefact_formatters_by_meta_name());
     to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
-    to_stream(s, rp.helper_formatters());
     s << " }";
     return s;
 }

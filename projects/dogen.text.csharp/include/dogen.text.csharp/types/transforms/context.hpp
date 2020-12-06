@@ -32,39 +32,20 @@
 #include "dogen.logical/types/entities/aspect_properties.hpp"
 #include "dogen.logical/types/entities/assistant_properties.hpp"
 #include "dogen.text/types/entities/model.hpp"
-#include "dogen.text/types/transforms/helper_transform.hpp"
 
 namespace dogen::text::csharp::transforms {
 
 class context final {
 public:
     context(const text::entities::model& m,
-        const std::unordered_map<std::string,
-        std::unordered_map<identification::entities::physical_meta_id,
-        std::list<std::shared_ptr<
-        text::transforms::helper_transform>>>>& helpers,
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
     const text::entities::model& model() const;
-    const std::unordered_map<std::string,
-                             std::unordered_map<
-                                 identification::entities::physical_meta_id,
-                                 std::list<
-                                     std::shared_ptr<
-                                         text::transforms::helper_transform>>>>&
-    helpers() const;
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
     const text::entities::model& model_;
-    const std::unordered_map<
-        std::string, std::unordered_map<
-                         identification::entities::physical_meta_id,
-                         std::list<
-                             std::shared_ptr<
-                                 text::transforms::helper_transform>>>>&
-        helpers_;
     boost::shared_ptr<tracing::tracer> tracer_;
 };
 

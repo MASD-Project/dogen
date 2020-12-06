@@ -23,23 +23,11 @@
 namespace dogen::text::csharp::transforms {
 
 context::context(const text::entities::model& m,
-    const std::unordered_map<std::string,
-    std::unordered_map<identification::entities::physical_meta_id,
-    std::list<std::shared_ptr<text::transforms::helper_transform>>>>& helpers,
     boost::shared_ptr<tracing::tracer> tracer)
-    : model_(m), helpers_(helpers), tracer_(tracer) { }
+    : model_(m), tracer_(tracer) { }
 
 const text::entities::model& context::model() const {
     return model_;
-}
-
-const std::unordered_map<
-    std::string,
-    std::unordered_map<
-        identification::entities::physical_meta_id,
-        std::list<std::shared_ptr<text::transforms::helper_transform>>>>&
-context::helpers() const {
-    return helpers_;
 }
 
 boost::shared_ptr<tracing::tracer> context::tracer() const {

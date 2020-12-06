@@ -86,8 +86,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             continue;
         }
 
-        const auto& hlp_fmts(frp.helper_formatters());
-        const context ctx(m, hlp_fmts, tracer);
+        const context ctx(m, tracer);
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);

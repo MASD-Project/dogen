@@ -41,16 +41,6 @@ repository::stock_artefact_formatters() {
     return stock_artefact_formatters_;
 }
 
-std::unordered_map<
-    std::string, std::unordered_map<
-                     identification::entities::physical_meta_id,
-                     std::list<
-                         std::shared_ptr<
-                             text::transforms::helper_transform>>>>&
-    repository::helper_formatters() {
-    return helper_formatters_;
-}
-
 const std::unordered_map<
     identification::entities::logical_meta_id,
     std::forward_list<std::shared_ptr<model_to_text_transform>>>&
@@ -67,15 +57,6 @@ repository::stock_artefact_formatters_by_archetype() const {
 const std::forward_list<std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters() const {
     return stock_artefact_formatters_;
-}
-
-const std::unordered_map<
-    std::string, std::unordered_map<
-                     identification::entities::physical_meta_id,
-                     std::list<
-                         std::shared_ptr<text::transforms::helper_transform>>>>&
-    repository::helper_formatters() const {
-    return helper_formatters_;
 }
 
 }
