@@ -25,24 +25,42 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <memory>
+#include "dogen.text/types/transforms/text_transform_repository.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::transforms {
 
+/**
+ * @brief Tracks the registration of M2T transforms.
+ */
 class text_transform_registrar final {
-public:
-    text_transform_registrar() = default;
-    text_transform_registrar(const text_transform_registrar&) = default;
-    text_transform_registrar(text_transform_registrar&&) = default;
-    ~text_transform_registrar() = default;
-    text_transform_registrar& operator=(const text_transform_registrar&) = default;
+private:
+    /**
+     * @brief Ensures the transform passes a modicum of sanity checks.
+     */
+    void validate(std::shared_ptr<model_to_text_transform> t) const;
 
 public:
-    bool operator==(const text_transform_registrar& rhs) const;
-    bool operator!=(const text_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
+public:
+    /**
+     * @brief Registers a transform.
+     */
+    void register_transform(std::shared_ptr<model_to_text_transform> t);
+
+public:
+    /**
+     * @brief Returns all available transforms.
+     */
+    const text_transform_repository& repository() const;
+
+private:
+    text_transform_repository repository_;
 };
 
 }
