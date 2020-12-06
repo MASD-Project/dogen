@@ -46,6 +46,7 @@ namespace dogen::text::transforms {
 std::shared_ptr<
     model_to_text_technical_space_chain_registrar>
 model_to_text_chain::registrar_;
+transforms::text_transform_registrar text_transform_registrar_;
 
 model_to_text_technical_space_chain_registrar&
 model_to_text_chain::registrar() {
@@ -55,6 +56,10 @@ model_to_text_chain::registrar() {
     }
 
     return *registrar_;
+}
+
+transforms::text_transform_registrar& text_transform_registrar() {
+    return text_transform_registrar_;
 }
 
 void model_to_text_chain::

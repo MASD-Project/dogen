@@ -28,6 +28,7 @@
 #include <memory>
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/context_fwd.hpp"
+#include "dogen.text/types/transforms/text_transform_registrar.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
 namespace dogen::text::transforms {
@@ -38,9 +39,15 @@ namespace dogen::text::transforms {
 class model_to_text_chain final {
 public:
     /**
-     * @brief Registrar that keeps track of the available transforms.
+     * @brief Registrar that keeps track of the available chains.
      */
     static model_to_text_technical_space_chain_registrar& registrar();
+
+public:
+    /**
+     * @brief Registrar that keeps track of the available M2Ts.
+     */
+    static transforms::text_transform_registrar& text_transform_registrar();
 
 public:
     static void apply(const text::transforms::context& ctx,
@@ -49,6 +56,7 @@ public:
 private:
     static std::shared_ptr<model_to_text_technical_space_chain_registrar>
     registrar_;
+    static transforms::text_transform_registrar text_transform_registrar_;
 };
 
 /*
