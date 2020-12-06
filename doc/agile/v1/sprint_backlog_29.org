@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-05 Sat 18:51]
+#+CAPTION: Clock summary at [2020-12-06 Sun 11:16]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *64:02* |       |       | 100.0 |
+| *Total time*                                              | *65:17* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 64:02   |       |       | 100.0 |
-| Active                                                    |         | 64:02 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   7.9 |
+| Stories                                                   | 65:17   |       |       | 100.0 |
+| Active                                                    |         | 65:17 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   7.8 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  2:37 |   4.1 |
+| Sprint and product backlog grooming                       |         |       |  2:37 |   4.0 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   0.7 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  10.9 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  21.2 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  10.7 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  20.8 |
 | Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.9 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
 | Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.5 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   6.1 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   7.5 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.9 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   7.4 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  33.8 |
+| Move helpers to =text= model                              |         |       | 21:38 |  33.1 |
 | Add namespaces to "dummy function"                        |         |       |  0:10 |   0.3 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.5 |
-| Issues with emacs                                         |         |       |  1:32 |   2.4 |
-| Move text transforms in c++ and c# models into text model |         |       |  0:41 |   1.1 |
+| Issues with emacs                                         |         |       |  1:32 |   2.3 |
+| Move text transforms in c++ and c# models into text model |         |       |  1:56 |   3.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -670,10 +670,20 @@ Notes:
 
 *** STARTED Move text transforms in c++ and c# models into text model :story:
     :LOGBOOK:
+    CLOCK: [2020-12-06 Sun 10:01]--[2020-12-06 Sun 11:16] =>  1:15
     CLOCK: [2020-11-20 Fri 15:27]--[2020-11-20 Fri 16:08] =>  0:41
     :END:
 
 - rename namespaces to fit the hierarchy of LPS.
+- we must move the context first in order to move the M2T
+  interface. For this we need to split out the LPS model from the
+  context and then reuse the existing context. We need to update all
+  templates to take in the model and supply it to the assistant.
+- at present both the TS-specific chain and the workflow in both TS's
+  are almost identical. We can probably get away with a single chain
+  for all TS's.
+- we need to have a top-level text_transform registrar, repository etc
+  and then get the TS specific code to use those.
 
 Merged stories:
 
@@ -684,6 +694,14 @@ space and once we remove all of the transforms in =m2t= that don't
 really belong there, we can probably merge all of these models into
 one. We would then have a =transforms= namespace, with sub-namespaces
 per language. Each of the namespaces is declared as a backend.
+
+*** Consider moving helper chain to outside the text transforms       :story:
+
+Given helpers are temporary this may not make a lot of sense, but for
+what its worth, we could run the chain prior to executing the text
+transforms and then supply a string parameter with the helper
+text. This way the assistant would do less and there would be less
+code in each text transform.
 
 *** Model functionality provided by assistant in the logical model    :story:
 
