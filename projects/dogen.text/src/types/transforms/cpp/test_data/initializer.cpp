@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-// #include "dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/associative_container_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/bool_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/char_helper_transform.hpp"
@@ -45,16 +45,18 @@
 
 namespace dogen::text::transforms::cpp::test_data {
 
-void initializer::initialize(helper_registrar& hrg) {
-    // register_formatter<builtin_header_transform>(rg);
-    // register_formatter<primitive_header_transform>(rg);
-    // register_formatter<primitive_implementation_transform>(rg);
-    // register_formatter<class_header_transform>(rg);
-    // register_formatter<class_implementation_transform>(rg);
-    // register_formatter<enum_header_transform>(rg);
-    // register_formatter<enum_implementation_transform>(rg);
-
+void initializer::
+initialize(text_transform_registrar& ttrg, helper_registrar& hrg) {
+    using namespace text::cpp::transforms::test_data;
+    register_text_transform<builtin_header_transform>(ttrg);
+    register_text_transform<primitive_header_transform>(ttrg);
+    register_text_transform<primitive_implementation_transform>(ttrg);
+    register_text_transform<class_header_transform>(ttrg);
+    register_text_transform<class_implementation_transform>(ttrg);
+    register_text_transform<enum_header_transform>(ttrg);
+    register_text_transform<enum_implementation_transform>(ttrg);
     register_helper<associative_container_helper_transform>(hrg);
+
     register_helper<bool_helper_transform>(hrg);
     register_helper<char_helper_transform>(hrg);
     register_helper<date_helper_transform>(hrg);

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-// #include "dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/class_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/smart_pointer_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/associative_container_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/optional_helper_transform.hpp"
@@ -38,14 +38,16 @@
 
 namespace dogen::text::transforms::cpp::io {
 
-void initializer::initialize(helper_registrar& hrg) {
-    // register_formatter<builtin_header_transform>(rg);
-    // register_formatter<primitive_header_transform>(rg);
-    // register_formatter<primitive_implementation_transform>(rg);
-    // register_formatter<class_header_transform>(rg);
-    // register_formatter<class_implementation_transform>(rg);
-    // register_formatter<enum_header_transform>(rg);
-    // register_formatter<enum_implementation_transform>(rg);
+void initializer::initialize(text_transform_registrar& ttrg,
+    helper_registrar& hrg) {
+    using namespace text::cpp::transforms::io;
+    register_text_transform<builtin_header_transform>(ttrg);
+    register_text_transform<primitive_header_transform>(ttrg);
+    register_text_transform<primitive_implementation_transform>(ttrg);
+    register_text_transform<class_header_transform>(ttrg);
+    register_text_transform<class_implementation_transform>(ttrg);
+    register_text_transform<enum_header_transform>(ttrg);
+    register_text_transform<enum_implementation_transform>(ttrg);
 
     register_helper<smart_pointer_helper_transform>(hrg);
     register_helper<associative_container_helper_transform>(hrg);

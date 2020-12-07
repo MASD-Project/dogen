@@ -18,25 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-// #include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/class_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp"
 #include "dogen.text/types/transforms/cpp/odb/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::odb {
 
-void initializer::initialize(helper_registrar& /*hrg*/) {
-    // register_formatter<builtin_header_transform>(rg);
-    // register_formatter<primitive_header_transform>(rg);
-    // register_formatter<class_header_transform>(rg);
-    // register_formatter<enum_header_transform>(rg);
-    // register_formatter<common_odb_options_transform>(rg);
-    // register_formatter<object_odb_options_transform>(rg);
-    // register_formatter<primitive_odb_options_transform>(rg);
+void initializer::initialize(text_transform_registrar& ttrg,
+    helper_registrar& /*hrg*/) {
+    using namespace text::cpp::transforms::odb;
+    register_text_transform<builtin_header_transform>(ttrg);
+    register_text_transform<primitive_header_transform>(ttrg);
+    register_text_transform<class_header_transform>(ttrg);
+    register_text_transform<enum_header_transform>(ttrg);
+    register_text_transform<common_odb_options_transform>(ttrg);
+    register_text_transform<object_odb_options_transform>(ttrg);
+    register_text_transform<primitive_odb_options_transform>(ttrg);
 }
 
 }

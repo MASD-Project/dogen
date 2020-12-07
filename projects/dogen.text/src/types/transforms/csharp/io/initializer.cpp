@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-// #include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
-// #include "dogen.text.csharp/types/transforms/io/class_transform.hpp"
-// #include "dogen.text.csharp/types/transforms/io/enum_transform.hpp"
-// #include "dogen.text.csharp/types/transforms/io/assistant_transform.hpp"
+#include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
+#include "dogen.text.csharp/types/transforms/io/class_transform.hpp"
+#include "dogen.text.csharp/types/transforms/io/enum_transform.hpp"
+#include "dogen.text.csharp/types/transforms/io/assistant_transform.hpp"
 #include "dogen.text/types/transforms/csharp/io/enumerable_helper_transform.hpp"
 #include "dogen.text/types/transforms/csharp/io/initializer.hpp"
 
 namespace dogen::text::transforms::csharp::io {
 
-void initializer::initialize(helper_registrar& hrg) {
-    // register_formatter<class_transform>(rg);
-    // register_formatter<primitive_transform>(rg);
-    // register_formatter<enum_transform>(rg);
-    // register_formatter<assistant_transform>(rg);
+void initializer::initialize(text_transform_registrar& ttrg,
+    helper_registrar& hrg) {
+    using namespace text::csharp::transforms::io;
+    register_text_transform<class_transform>(ttrg);
+    register_text_transform<primitive_transform>(ttrg);
+    register_text_transform<enum_transform>(ttrg);
+    register_text_transform<assistant_transform>(ttrg);
 
     register_helper<enumerable_helper_transform>(hrg);
 }

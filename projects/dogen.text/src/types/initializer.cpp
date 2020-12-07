@@ -20,13 +20,15 @@
  */
 #include "dogen.text/types/transforms/initializer.hpp"
 #include "dogen.text/types/transforms/helper_chain.hpp"
+#include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text/types/initializer.hpp"
 
 namespace dogen::text {
 
 void initializer::initialize() {
-    auto& rg(transforms::helper_chain::registrar());
-    transforms::initializer::initialize(rg);
+    auto& hrg(transforms::helper_chain::registrar());
+    auto& ttrg(transforms::model_to_text_chain::text_transform_registrar());
+    transforms::initializer::initialize(ttrg, hrg);
 }
 
 }

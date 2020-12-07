@@ -24,9 +24,10 @@
 
 namespace dogen::text::transforms {
 
-void initializer::initialize(helper_registrar& hrg) {
-    cpp::initializer::initialize(hrg);
-    csharp::initializer::initialize(hrg);
+void initializer::
+initialize(text_transform_registrar& ttrg, helper_registrar& hrg) {
+    cpp::initializer::initialize(ttrg, hrg);
+    csharp::initializer::initialize(ttrg, hrg);
 }
 
 }

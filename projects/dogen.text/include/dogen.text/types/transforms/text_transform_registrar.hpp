@@ -63,6 +63,12 @@ private:
     text_transform_repository repository_;
 };
 
+template<typename TextTransform>
+inline void register_text_transform(text_transform_registrar& rg) {
+    const auto f(std::make_shared<TextTransform>());
+    rg.register_transform(f);
+}
+
 }
 
 #endif

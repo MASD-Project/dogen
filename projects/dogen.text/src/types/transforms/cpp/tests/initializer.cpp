@@ -26,11 +26,13 @@
 
 namespace dogen::text::transforms::cpp::tests {
 
-void initializer::initialize(helper_registrar& /*hrg*/) {
-    // register_formatter<cmakelists_transform>(rg);
-    // register_formatter<class_implementation_transform>(rg);
-    // register_formatter<enum_implementation_transform>(rg);
-    // register_formatter<main_transform>(rg);
+void initializer::initialize(text_transform_registrar& ttrg,
+    helper_registrar& /*hrg*/) {
+    using namespace text::cpp::transforms::tests;
+    register_text_transform<cmakelists_transform>(ttrg);
+    register_text_transform<class_implementation_transform>(ttrg);
+    register_text_transform<enum_implementation_transform>(ttrg);
+    register_text_transform<main_transform>(ttrg);
 }
 
 }

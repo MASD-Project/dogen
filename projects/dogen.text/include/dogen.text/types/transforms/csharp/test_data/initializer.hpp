@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen.text/types/transforms/helper_registrar.hpp"
+#include "dogen.text/types/transforms/text_transform_registrar.hpp"
 
 namespace dogen::text::transforms::csharp::test_data {
 
@@ -34,7 +35,8 @@ namespace dogen::text::transforms::csharp::test_data {
  */
 class initializer final {
 public:
-    static void initialize(helper_registrar& hrg);
+    static void initialize(text_transform_registrar& ttrg,
+        helper_registrar& hrg);
 };
 
 }

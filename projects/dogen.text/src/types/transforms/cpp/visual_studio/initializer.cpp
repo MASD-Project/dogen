@@ -25,10 +25,12 @@
 
 namespace dogen::text::transforms::cpp::visual_studio {
 
-void initializer::initialize(helper_registrar& /*hrg*/) {
-    // register_formatter<project_transform>(rg);
-    // register_formatter<solution_transform>(rg);
-    // register_formatter<msbuild_targets_transform>(rg);
+void initializer::initialize(text_transform_registrar& ttrg,
+    helper_registrar& /*hrg*/) {
+    using namespace text::cpp::transforms::visual_studio;
+    register_text_transform<project_transform>(ttrg);
+    register_text_transform<solution_transform>(ttrg);
+    register_text_transform<msbuild_targets_transform>(ttrg);
 }
 
 }

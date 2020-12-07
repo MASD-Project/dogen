@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-// #include "dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
-// #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
 #include "dogen.text/types/transforms/cpp/serialization/path_helper_transform.hpp"
 
 #include "dogen.text/types/transforms/cpp/serialization/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
 
-void initializer::initialize(helper_registrar& hrg) {
-    // register_formatter<builtin_header_transform>(rg);
-    // register_formatter<primitive_header_transform>(rg);
-    // register_formatter<primitive_implementation_transform>(rg);
-    // register_formatter<class_header_transform>(rg);
-    // register_formatter<class_implementation_transform>(rg);
-    // register_formatter<enum_header_transform>(rg);
-    // register_formatter<class_forward_declarations_transform>(rg);
-    // register_formatter<primitive_forward_declarations_transform>(rg);
-    // register_formatter<type_helper_registrar_header_transform>(rg);
-    // register_formatter<type_helper_registrar_implementation_transform>(rg);
+void initializer::
+initialize(text_transform_registrar& ttrg, helper_registrar& hrg) {
+    using namespace text::cpp::transforms::serialization;
+    register_text_transform<builtin_header_transform>(ttrg);
+    register_text_transform<primitive_header_transform>(ttrg);
+    register_text_transform<primitive_implementation_transform>(ttrg);
+    register_text_transform<class_header_transform>(ttrg);
+    register_text_transform<class_implementation_transform>(ttrg);
+    register_text_transform<enum_header_transform>(ttrg);
+    register_text_transform<class_forward_declarations_transform>(ttrg);
+    register_text_transform<primitive_forward_declarations_transform>(ttrg);
+    register_text_transform<type_registrar_header_transform>(ttrg);
+    register_text_transform<type_registrar_implementation_transform>(ttrg);
+
     register_helper<path_helper_transform>(hrg);
 }
 
