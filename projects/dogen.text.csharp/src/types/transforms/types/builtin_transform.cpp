@@ -26,8 +26,6 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/types/builtin_transform.hpp"
 #include "dogen.text.csharp/types/transforms/types/builtin_factory.hpp"

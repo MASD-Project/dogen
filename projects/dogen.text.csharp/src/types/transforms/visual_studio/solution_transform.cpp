@@ -26,12 +26,9 @@
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/traits.hpp"
-#include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp"

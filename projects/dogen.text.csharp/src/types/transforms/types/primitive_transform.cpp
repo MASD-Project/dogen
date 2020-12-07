@@ -28,8 +28,6 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_factory.hpp"
