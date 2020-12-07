@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text/types/transforms/model_to_text_chain.hpp"
-#include "dogen.text.csharp/types/transforms/workflow.hpp"
-#include "dogen.text.csharp/types/transforms/initializer.hpp"
-#include "dogen.text.csharp/types/model_to_text_csharp_chain.hpp"
+// #include "dogen.text/types/transforms/model_to_text_chain.hpp"
+// #include "dogen.text.csharp/types/transforms/workflow.hpp"
+// #include "dogen.text.csharp/types/transforms/initializer.hpp"
+// #include "dogen.text.csharp/types/model_to_text_csharp_chain.hpp"
 #include "dogen.text.csharp/types/initializer.hpp"
 
 namespace dogen::text::csharp {
 
 void initializer::initialize() {
-    transforms::initializer::initialize(transforms::workflow::registrar());
-    using text::transforms::register_transform;
-    register_transform<model_to_text_csharp_chain>();
+    // transforms::initializer::initialize(transforms::workflow::registrar());
+    // using text::transforms::register_transform;
+    // register_transform<model_to_text_csharp_chain>();
 }
 
 }
