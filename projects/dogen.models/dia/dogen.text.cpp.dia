@@ -373,7 +373,7 @@
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -385,7 +385,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -967,7 +967,7 @@ inline void swap(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -979,7 +979,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     const auto sn(o.name().simple());
@@ -1170,7 +1170,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/class_implementation_factory.hpp" #&gt;
@@ -1183,7 +1183,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -1414,7 +1414,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1426,7 +1426,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "exception header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::exception&gt;(e));
 
     {
@@ -1645,7 +1645,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1657,7 +1657,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -1861,7 +1861,7 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/module.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/namespace_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/namespace_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1873,7 +1873,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "namespace header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; m(ast.as&lt;logical::entities::structural::module&gt;(e));
 
     {
@@ -2059,7 +2059,7 @@ namespace &lt;#= m.name().simple() #&gt; {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -2071,7 +2071,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "visitor header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; v(ast.as&lt;logical::entities::structural::visitor&gt;(e));
 
     {
@@ -2295,7 +2295,7 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp" #&gt;
@@ -2309,7 +2309,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -2909,7 +2909,7 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -2921,7 +2921,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -3142,7 +3142,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3154,7 +3154,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -3332,7 +3332,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp" #&gt;
@@ -3346,7 +3346,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -3531,7 +3531,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3543,7 +3543,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -3719,7 +3719,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/enum_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3731,7 +3731,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -3970,7 +3970,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3982,7 +3982,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -4184,7 +4184,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_factory.hpp" #&gt;
@@ -4197,7 +4197,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -4503,7 +4503,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -4515,7 +4515,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -4723,7 +4723,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp" #&gt;
@@ -4736,7 +4736,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -5062,7 +5062,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -5074,7 +5074,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -5263,7 +5263,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp" #&gt;
@@ -5276,7 +5276,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -5507,7 +5507,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -5519,7 +5519,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -7763,7 +7763,7 @@ facet of the C++ technical space.
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -7775,7 +7775,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -7944,7 +7944,7 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -7956,7 +7956,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -8131,7 +8131,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -8296,7 +8296,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -8461,7 +8461,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -8626,7 +8626,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -8791,7 +8791,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -8957,7 +8957,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -9334,7 +9334,7 @@ not a "regular" helper.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -9346,7 +9346,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -9685,7 +9685,7 @@ inline void swap(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -9697,7 +9697,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -9885,7 +9885,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -9897,7 +9897,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -10074,7 +10074,7 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -10086,7 +10086,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
@@ -10293,7 +10293,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -10305,7 +10305,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -10501,7 +10501,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -10513,7 +10513,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -10694,7 +10694,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_implementation_transform.hpp" #&gt;
@@ -10708,7 +10708,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -10979,7 +10979,7 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/primitive_implementation_factory.hpp" #&gt;
@@ -10992,7 +10992,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -11197,7 +11197,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp" #&gt;
@@ -11211,7 +11211,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
@@ -11408,7 +11408,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_implementation_factory.hpp" #&gt;
@@ -11421,7 +11421,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -11676,7 +11676,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_factory.hpp" #&gt;
@@ -11689,7 +11689,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     const auto sn(p.name().simple());
@@ -12119,7 +12119,7 @@ code.
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/class_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/class_implementation_factory.hpp" #&gt;
@@ -12132,7 +12132,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(o));
@@ -12746,7 +12746,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/enum_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/enum_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -12758,7 +12758,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -13137,7 +13137,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp" #&gt;
@@ -13151,7 +13151,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "feature template bundle header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; fb(ast.as&lt;logical::entities::variability::feature_template_bundle&gt;(e));
 
     {
@@ -13411,7 +13411,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_transform.hpp" #&gt;
@@ -13425,7 +13425,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "feature template bundle implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; ftb(ast.as&lt;logical::entities::variability::feature_template_bundle&gt;(e));
 
     {
@@ -13726,7 +13726,7 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -13738,7 +13738,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "variability initializer header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::variability::initializer&gt;(e));
 
     {
@@ -13922,7 +13922,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_implementation_transform.hpp" #&gt;
@@ -13936,7 +13936,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "variability initializer implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::variability::initializer&gt;(e));
 
     {
@@ -14341,7 +14341,7 @@ string.
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/enum_header_factory.hpp" #&gt;
@@ -14354,7 +14354,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
     {
@@ -14737,7 +14737,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_forward_declarations_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -14749,7 +14749,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -14926,7 +14926,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_forward_declarations_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -14938,7 +14938,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "visitor forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::visitor&gt;(e));
 
     {
@@ -15115,7 +15115,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_forward_declarations_factory.hpp" #&gt;
@@ -15128,7 +15128,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -15308,7 +15308,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_forward_declarations_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -15320,7 +15320,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
@@ -15496,7 +15496,7 @@ class &lt;#= p.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_factory.hpp" #&gt;
@@ -15509,7 +15509,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
@@ -15686,7 +15686,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -15698,7 +15698,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "type registrar header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; rg(ast.as&lt;logical::entities::serialization::type_registrar&gt;(e));
 
     {
@@ -15881,7 +15881,7 @@ static void register_types(Archive&amp; ar);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_factory.hpp" #&gt;
@@ -15894,7 +15894,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
    tracing::scoped_transform_tracer stp(lg, "type registrar implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; rg(ast.as&lt;logical::entities::serialization::type_registrar&gt;(e));
 
     {
@@ -16440,7 +16440,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/project_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/project_factory.hpp" #&gt;
@@ -16453,7 +16453,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
     const auto&amp; proj(ast.as&lt;project&gt;(e));
 
@@ -16667,7 +16667,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/solution_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/solution_factory.hpp" #&gt;
@@ -16680,7 +16680,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::solution;
     const auto&amp; sln(ast.as&lt;solution&gt;(e));
 #&gt;
@@ -16874,7 +16874,7 @@ EndGlobal
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/main_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/main_factory.hpp" #&gt;
@@ -16887,7 +16887,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "main",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::structural::entry_point;
     const auto&amp; ep(ast.as&lt;entry_point&gt;(e));
     const auto qn(ast.get_qualified_name(ep.name()));
@@ -17086,7 +17086,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/object_odb_options_factory.hpp" #&gt;
@@ -17099,7 +17099,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "object odb options",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
@@ -17303,7 +17303,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/primitive_odb_options_factory.hpp" #&gt;
@@ -17316,7 +17316,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive odb options",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
@@ -17512,7 +17512,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/main_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/main_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
@@ -17525,7 +17525,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "main",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::structural::entry_point&gt;(e));
 
     {
@@ -17823,7 +17823,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/orm/common_odb_options.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/common_odb_options_factory.hpp" #&gt;
@@ -17836,7 +17836,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "common odb options",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::orm::common_odb_options;
     const auto&amp; o(ast.as&lt;common_odb_options&gt;(e));
 
@@ -18060,8 +18060,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/msbuild_targets.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_factory.hpp" #&gt;
@@ -18074,7 +18074,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "msbuild targets",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::msbuild_targets;
     const auto&amp; c(ast.as&lt;msbuild_targets&gt;(e));
 
@@ -18352,7 +18352,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/source_cmakelists_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/source_cmakelists_factory.hpp" #&gt;
@@ -18365,7 +18365,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "source cmakelists",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
 
@@ -18623,8 +18623,8 @@ endif()
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/build/include_cmakelists_factory.hpp" #&gt;
@@ -18637,7 +18637,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "include cmakelists",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
 
@@ -18993,7 +18993,7 @@ install(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/cmakelists_factory.hpp" #&gt;
@@ -19006,7 +19006,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "cmakelists",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
 
@@ -19355,7 +19355,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_header_transform.hpp" #&gt;
@@ -19369,7 +19369,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "feature bundle header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; fb(ast.as&lt;logical::entities::variability::feature_bundle&gt;(e));
 
     {
@@ -19630,7 +19630,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp" #&gt;
@@ -19644,7 +19644,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "feature bundle implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; fb(ast.as&lt;logical::entities::variability::feature_bundle&gt;(e));
 
     {
@@ -19944,7 +19944,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -19955,7 +19955,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::physical::archetype&gt;(e));
 
     {
@@ -20535,7 +20535,7 @@ void apply(const text::transforms::context&amp; ctx, const text::entities::model
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -20546,7 +20546,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; arch(ast.as&lt;logical::entities::physical::archetype&gt;(e));
     ast.update_artefact();
     a.content(arch.text_templating().rendered_stitch_template());
@@ -21399,7 +21399,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -21411,7 +21411,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "facet class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
     {
@@ -21604,7 +21604,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -21616,7 +21616,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "facet class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
     {
@@ -21816,7 +21816,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -21827,7 +21827,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
 
     {
@@ -22015,7 +22015,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -22027,7 +22027,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "backend class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
 
     {
@@ -22249,7 +22249,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -22261,7 +22261,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "part class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::physical::part&gt;(e));
 
     {
@@ -22439,7 +22439,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -22451,7 +22451,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "part class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     ast.update_artefact();
     stp.end_transform(a);
 }
@@ -22726,7 +22726,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -22737,7 +22737,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::physical::archetype&gt;(e));
 
     {
@@ -22931,7 +22931,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -22942,7 +22942,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; arch(ast.as&lt;logical::entities::physical::archetype&gt;(e));
 
     {
@@ -23188,7 +23188,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -23200,7 +23200,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "facet class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
     {
@@ -23393,7 +23393,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -23405,7 +23405,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "facet class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
     {
@@ -23647,7 +23647,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -23658,7 +23658,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
 
     {
@@ -23846,7 +23846,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -23858,7 +23858,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "backend class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
 
     {
@@ -24336,7 +24336,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -24347,7 +24347,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "part class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; part(ast.as&lt;logical::entities::physical::part&gt;(e));
 
     {
@@ -24535,7 +24535,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -24547,7 +24547,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "part class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; part(ast.as&lt;logical::entities::physical::part&gt;(e));
 
     {
@@ -24753,7 +24753,7 @@ physical::entities::part &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -24764,7 +24764,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype_kind class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; be(ast.as&lt;logical::entities::physical::archetype_kind&gt;(e));
 
     {
@@ -24952,7 +24952,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -24964,7 +24964,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "archetype_kind class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; ak(ast.as&lt;logical::entities::physical::archetype_kind&gt;(e));
 
     {
@@ -25153,7 +25153,7 @@ physical::entities::archetype_kind &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -25164,7 +25164,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types helper class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::physical::helper&gt;(e));
 
     {
@@ -25358,7 +25358,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_transform_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -25369,7 +25369,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "helper class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; arch(ast.as&lt;logical::entities::physical::helper&gt;(e));
     ast.update_artefact();
     a.content(arch.text_templating().rendered_stitch_template());
@@ -25531,7 +25531,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_header_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -25542,7 +25542,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types helper class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto&amp; o(ast.as&lt;logical::entities::physical::helper&gt;(e));
 
     {
@@ -25734,7 +25734,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -25745,7 +25745,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "helper class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto&amp; hlp(ast.as&lt;logical::entities::physical::helper&gt;(e));
 
     {

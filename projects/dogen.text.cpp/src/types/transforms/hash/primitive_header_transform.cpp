@@ -26,7 +26,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_header_factory.hpp"
 
@@ -55,7 +55,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "primitive header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());

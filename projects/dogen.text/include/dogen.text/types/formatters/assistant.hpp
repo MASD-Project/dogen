@@ -310,6 +310,43 @@ public:
      */
     std::string comment_inline(const std::string& c) const;
 
+private:
+    std::string
+    streaming_for_type(const logical::entities::streaming_properties& sp,
+        const std::string& s) const;
+
+public:
+    /**
+     * @brief Creates any helper methods that may be required for this
+     * formatter.
+     */
+    void add_helper_methods(const std::string& element_id);
+
+    /**
+     * @brief Returns the correct streaming invocation for the
+     * supplied type.
+     */
+    std::string streaming_for_type(
+        const identification::entities::logical_name& n,
+        const std::string& s) const;
+
+    /**
+     * @brief Returns true if the type can be hashed without requiring a
+     * helper method.
+     */
+    bool requires_hashing_helper_method(
+        const logical::entities::attribute& attr) const;
+
+public:
+    /**
+     * @brief Returns the subset of names for which the supplied
+     * archetype is enabled.
+     */
+    std::list<identification::entities::logical_name>
+    names_with_enabled_archetype(
+        const identification::entities::physical_meta_id& archetype,
+        const std::list<identification::entities::logical_name> names) const;
+
 public:
     /**
      * @brief Returns the stream that is currently being populated.

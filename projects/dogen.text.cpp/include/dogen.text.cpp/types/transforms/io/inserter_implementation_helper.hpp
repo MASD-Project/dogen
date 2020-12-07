@@ -26,11 +26,12 @@
 #endif
 
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 
-void inserter_implementation_helper(assistant& a,
+void inserter_implementation_helper(
+    text::formatters::assistant& ast,
     const logical::entities::structural::object& o, const bool inside_class);
 
 }

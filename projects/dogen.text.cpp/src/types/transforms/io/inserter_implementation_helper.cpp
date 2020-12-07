@@ -23,7 +23,8 @@
 
 namespace dogen::text::cpp::transforms::io {
 
-void inserter_implementation_helper(assistant& ast,
+void inserter_implementation_helper(
+    text::formatters::assistant& ast,
     const logical::entities::structural::object& o,
     const bool inside_class) {
     const auto qn(ast.get_qualified_name(o.name()));

@@ -26,7 +26,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_factory.hpp"
 
@@ -55,7 +55,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "visitor forward declarations",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
     const auto& o(ast.as<logical::entities::structural::visitor>(e));
 
     {

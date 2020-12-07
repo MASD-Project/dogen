@@ -29,7 +29,7 @@
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_factory.hpp"
@@ -59,7 +59,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {

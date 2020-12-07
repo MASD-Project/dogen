@@ -27,7 +27,7 @@
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/builtin_header_factory.hpp"
 

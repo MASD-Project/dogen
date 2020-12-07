@@ -28,7 +28,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_factory.hpp"
@@ -58,7 +58,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
    tracing::scoped_transform_tracer stp(lg, "type registrar implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     const auto& rg(ast.as<logical::entities::serialization::type_registrar>(e));
 
     {

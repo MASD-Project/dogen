@@ -20,13 +20,17 @@
  */
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/io/entities/streaming_properties_io.hpp"
+#include "dogen.text/types/transforms/helper_chain.hpp"
 #include "dogen.text/types/formatters/formatting_error.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 
@@ -272,6 +276,46 @@ bool assistant::requires_manual_default_constructor() const {
     return false;
 }
 
+bool assistant::requires_manual_move_constructor() const {
+    /*
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
+     */
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(&element_));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(&element_));
+
+    if (optr != nullptr) {
+        return optr->technical_space_properties().
+            requires_manual_move_constructor();
+    } else if (pptr != nullptr) {
+        return pptr->technical_space_properties().
+            requires_manual_move_constructor();
+    }
+    return false;
+}
+
+bool assistant::requires_stream_manipulators() const {
+    /*
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
+     */
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(&element_));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(&element_));
+
+    if (optr != nullptr) {
+        return optr->technical_space_properties().
+            requires_stream_manipulators();
+    } else if (pptr != nullptr) {
+        return pptr->technical_space_properties().
+            requires_stream_manipulators();
+    }
+    return false;
+}
+
 bool assistant::supports_move_operator() const {
     return !is_cpp_standard_98();
 }
@@ -428,6 +472,82 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     f.format(s, c);
     return s.str();
+}
+
+void assistant::add_helper_methods(const std::string& /*element_id*/) {
+    using dogen::text::transforms::helper_chain;
+    helper_chain::model_ = &lps_.physical();
+    helper_chain::apply(stream(), lps_.logical(), element_, artefact_);
+}
+
+std::string assistant::
+streaming_for_type(const logical::entities::streaming_properties& sp,
+    const std::string& s) const {
+
+    std::ostringstream stream;
+    utility::formatters::utility_formatter uf(stream);
+    BOOST_LOG_SEV(lg, debug) << "Streaming properties for type: " << sp;
+    if (sp.remove_unprintable_characters())
+        uf.insert_streamed("tidy_up_string(" + s + ")");
+    else if (!sp.string_conversion_method().empty()) {
+        // FIXME: hack to determine if we are being dereferenced.
+        std::string s1(s);
+        const auto i(s1.find('*'));
+        if (i != std::string::npos)
+            s1 = "(" + s + ")";
+        uf.insert_streamed(s1 + "." + sp.string_conversion_method());
+    } else if (sp.requires_quoting())
+        uf.insert_streamed(s);
+    else
+        uf.insert(s);
+
+    return stream.str();
+}
+
+std::string assistant::streaming_for_type(const logical_name& n,
+    const std::string& s) const {
+
+    const auto str_propss(lps_.logical().streaming_properties());
+    const auto i(str_propss.find(n.id()));
+    if (i == str_propss.end())
+        return s;
+
+    return streaming_for_type(i->second, s);
+}
+
+bool assistant::requires_hashing_helper_method(
+    const logical::entities::attribute& attr) const {
+    const auto& hps(element_.helper_properties());
+    for (const auto& hlp_props : hps) {
+        const auto ident(attr.parsed_type().qualified().identifiable());
+        const auto& desc(hlp_props.current());
+        if (ident != desc.name_tree_identifiable())
+            continue;
+
+        if (desc.requires_hashing_helper())
+            return true;
+    }
+    return false;
+}
+
+std::list<logical_name> assistant::names_with_enabled_archetype(
+    const identification::entities::physical_meta_id& archetype,
+    const std::list<logical_name> names) const {
+    std::list<logical_name> r;
+    const auto& mmp(lps_.physical().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
+    for (const auto& n : names) {
+        const identification::entities::logical_id lid(n.qualified().dot());
+        BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << lid;
+        identification::entities::logical_meta_physical_id ea(lid, archetype);
+        const auto i(eafe.find(ea));
+        const bool is_disabled(i == eafe.end());
+        if (is_disabled)
+            continue;
+
+        r.push_back(n);
+    }
+    return r;
 }
 
 std::ostream& assistant::stream() {

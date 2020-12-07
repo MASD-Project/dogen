@@ -30,7 +30,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/project.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/project_transform.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/project_factory.hpp"
@@ -60,7 +60,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
     const auto& proj(ast.as<project>(e));
 
