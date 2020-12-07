@@ -13,31 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-06 Sun 16:28]
+#+CAPTION: Clock summary at [2020-12-07 Mon 18:45]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *68:26* |       |       | 100.0 |
+| *Total time*                                              | *72:39* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 68:26   |       |       | 100.0 |
-| Active                                                    |         | 68:26 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   7.4 |
-| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  2:37 |   3.8 |
+| Stories                                                   | 72:39   |       |       | 100.0 |
+| Active                                                    |         | 72:39 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   7.0 |
+| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
+| Sprint and product backlog grooming                       |         |       |  2:37 |   3.6 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   0.6 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |  10.2 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  19.9 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   9.6 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  18.7 |
 | Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.8 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
 | Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.4 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.7 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   7.0 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.3 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   6.6 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  31.6 |
+| Move helpers to =text= model                              |         |       | 21:38 |  29.8 |
 | Add namespaces to "dummy function"                        |         |       |  0:10 |   0.2 |
-| Remove JSON models from Dogen                             |         |       |  0:19 |   0.5 |
-| Issues with emacs                                         |         |       |  1:32 |   2.2 |
-| Move text transforms in c++ and c# models into text model |         |       |  5:05 |   7.4 |
+| Remove disabled files from project items                  |         |       |  0:30 |   0.7 |
+| Remove JSON models from Dogen                             |         |       |  0:19 |   0.4 |
+| Issues with emacs                                         |         |       |  1:32 |   2.1 |
+| Move text transforms in c++ and c# models into text model |         |       |  8:48 |  12.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -644,6 +645,25 @@ with the same name, we get warnings on Windows MSVC:
 
 A quick fix is just to use the qualified name for the element.
 
+*** COMPLETED Remove disabled files from project items                :story:
+    CLOSED: [2020-12-07 Mon 14:33]
+    :LOGBOOK:
+    CLOCK: [2020-12-07 Mon 14:10]--[2020-12-07 Mon 14:40] =>  0:30
+    :END:
+
+We have resolved an outstanding issue whereby C# elements did not
+respect enablement, which resulted in the (correct) removal of
+files. However, the project items list does not reflect this,
+resulting in errors:
+
+: "C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpRefImpl.sln" (default target) (1) ->
+: "C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpModel\CSharpRefImpl.CSharpModel.csproj" (default target) (2) ->
+: (CoreCompile target) ->
+:  CSC : error CS2001: Source file 'C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpModel\Dumpers\HandcraftedDumper.cs' could not be found. [C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpModel\CSharpRefImpl.CSharpModel.csproj]
+:  CSC : error CS2001: Source file 'C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpModel\SequenceGenerators\HandcraftedSequenceGenerator.cs' could not be found. [C:\projects\csharp-ref-impl\Src\CSharpRefImpl.CSharpModel\CSharpRefImpl.CSharpModel.csproj]
+
+We need to check enablement when we add project items.
+
 *** STARTED Remove JSON models from Dogen                             :story:
     :LOGBOOK:
     CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
@@ -670,6 +690,9 @@ Notes:
 
 *** STARTED Move text transforms in c++ and c# models into text model :story:
     :LOGBOOK:
+    CLOCK: [2020-12-07 Mon 17:52]--[2020-12-07 Mon 18:45] =>  0:53
+    CLOCK: [2020-12-07 Mon 14:56]--[2020-12-07 Mon 16:01] =>  1:05
+    CLOCK: [2020-12-07 Mon 10:30]--[2020-12-07 Mon 12:15] =>  1:45
     CLOCK: [2020-12-06 Sun 14:07]--[2020-12-06 Sun 16:27] =>  2:20
     CLOCK: [2020-12-06 Sun 12:52]--[2020-12-06 Sun 13:41] =>  0:49
     CLOCK: [2020-12-06 Sun 10:01]--[2020-12-06 Sun 11:16] =>  1:15
@@ -689,6 +712,9 @@ Notes:
 - update all initialisers to use the registrar form the M2T chain;
   update workflows to use it as well; delete all registrars and
   repositories in TS-specific models.
+- move assistant to text as a formatter helper.
+- remove all uses of traits in formatters.
+- use common exception for transforms in text.
 
 Merged stories:
 
@@ -699,6 +725,12 @@ space and once we remove all of the transforms in =m2t= that don't
 really belong there, we can probably merge all of these models into
 one. We would then have a =transforms= namespace, with sub-namespaces
 per language. Each of the namespaces is declared as a backend.
+
+*** Move mustache templates into the =transforms= namespaces          :story:
+
+We left the templates at the top level as it was in the TS-specific
+models but they should really be within =transforms= namespace. We
+need to check to see how name resolution for templates is working.
 
 *** Consider moving helper chain to outside the text transforms       :story:
 
