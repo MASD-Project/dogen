@@ -33,6 +33,8 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
+#include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.text/types/entities/model.hpp"
 
 namespace dogen::text::formatters {
@@ -261,6 +263,64 @@ public:
      * facet.
      */
     bool is_io() const;
+
+public:
+    /**
+     * @brief Returns a scoped boilerplate formatter.
+     */
+    text::formatters::scoped_boilerplate_formatter
+    make_scoped_boilerplate_formatter(const logical::entities::element& e,
+        const identification::entities::technical_space ts =
+        identification::entities::technical_space::cpp);
+
+    /**
+     * @brief Returns a scoped namespace formatter.
+     */
+    text::formatters::scoped_namespace_formatter
+    make_scoped_namespace_formatter(const std::list<std::string>& ns);
+
+    /**
+     * @brief Creates the decoration preamble.
+     */
+    void make_decoration_preamble(const logical::entities::element& e,
+        const identification::entities::technical_space ts);
+
+public:
+    /**
+     * @brief Adds a top-level comment with doxygen keywords.
+     */
+    void comment(const std::string& c);
+
+    /**
+     * @brief Adds comments for the starting of a method group,
+     * including comment blocks.
+     */
+    void comment_start_method_group(const std::string& documentation,
+        const bool add_comment_blocks = true);
+
+    /**
+     * @brief Adds comments for the end of a method group, including
+     * comment blocks.
+     */
+    void comment_end_method_group(const std::string& documentation,
+        const bool add_comment_blocks = true);
+
+    /**
+     * @brief Returns @code c as as an inline comment.
+     */
+    std::string comment_inline(const std::string& c) const;
+
+public:
+    /**
+     * @brief Returns the stream that is currently being populated.
+     */
+    std::ostream& stream();
+
+    /**
+     * @brief Updates all of the relevant properties of the cached
+     * artefact, including content.
+     */
+    void update_artefact() const;
 
 private:
     std::ostringstream stream_;

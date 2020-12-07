@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
@@ -44,6 +45,11 @@ const std::string namespace_separator("::");
 const std::string underscore("_");
 const std::string dot(".");
 
+const bool start_on_first_line(true);
+const bool use_documentation_tool_markup(true);
+const bool last_line_is_blank(true);
+const bool documenting_previous_identifier(true);
+
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
@@ -59,6 +65,7 @@ namespace dogen::text::formatters {
 
 using physical::entities::artefact;
 using identification::entities::logical_name;
+using identification::entities::physical_meta_id;
 using identification::entities::logical_name_tree;
 using identification::entities::technical_space_version;
 
@@ -275,5 +282,169 @@ make_namespaces(const logical_name& n, const bool detect_model_name) const {
     return nf.flatten(n);
 }
 
+bool assistant::is_serialization_enabled() const {
+    physical_meta_id ca("masd.cpp.serialization.canonical_archetype");
+    return is_archetype_enabled(ca);
+}
+
+bool assistant::is_io_enabled() const {
+    physical_meta_id ca("masd.cpp.io.canonical_archetype");
+    return is_archetype_enabled(ca);
+}
+
+bool assistant::is_lexical_cast_enabled() const {
+    physical_meta_id ca("masd.cpp.lexical_cast.canonical_archetype");
+    return is_archetype_enabled(ca);
+}
+
+bool assistant::is_odb_facet_enabled() const {
+    physical_meta_id fqn("masd.cpp.odb");
+    return is_facet_enabled(fqn);
+}
+
+bool assistant::is_tests_enabled() const {
+    physical_meta_id fqn("masd.cpp.tests");
+    return is_facet_enabled(fqn);
+}
+
+bool assistant::is_hash_enabled() const {
+    physical_meta_id ca("masd.cpp.hash.canonical_archetype");
+    return is_archetype_enabled(ca);
+}
+
+bool assistant::is_test_data_enabled() const {
+    physical_meta_id fqn("masd.cpp.test_data");
+    return is_facet_enabled(fqn);
+}
+
+text::formatters::scoped_boilerplate_formatter assistant::
+make_scoped_boilerplate_formatter(const logical::entities::element& e,
+    const identification::entities::technical_space ts) {
+    text::formatters::boilerplate_properties bp;
+
+    const auto pp(artefact_.path_properties());
+    bp.dependencies(pp.inclusion_dependencies());
+    bp.header_guard(pp.header_guard());
+    bp.technical_space(ts);
+    const auto i(e.decoration().find(ts));
+    if (i != e.decoration().end() && i->second) {
+        const auto dec(*i->second);
+        bp.preamble(dec.preamble());
+        bp.postamble(dec.postamble());
+    }
+    bp.generate_preamble(true);
+    bp.generate_header_guards(true);
+
+    using text::formatters::scoped_boilerplate_formatter;
+    return scoped_boilerplate_formatter(stream(), bp);
+}
+
+text::formatters::scoped_namespace_formatter
+assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
+    return text::formatters::scoped_namespace_formatter(
+        stream(), identification::entities::technical_space::cpp,
+        ns, true/*add_new_line*/, requires_nested_namespaces());
+}
+
+void assistant::make_decoration_preamble(const logical::entities::element& e,
+    const identification::entities::technical_space ts) {
+
+    const auto i(e.decoration().find(ts));
+    if (i != e.decoration().end() && i->second) {
+        const auto dec(*i->second);
+        stream() << dec.preamble();
+    }
+}
+
+void assistant::comment(const std::string& c) {
+    if (c.empty())
+        return;
+
+    utility::formatters::comment_formatter f(
+        !start_on_first_line,
+        use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        utility::formatters::comment_style::c_style,
+        !last_line_is_blank);
+    f.format(stream(), c);
+}
+
+void assistant::
+comment_start_method_group(const std::string& documentation,
+    const bool add_comment_blocks) {
+    if (documentation.empty())
+        return;
+
+    {
+        utility::formatters::positive_indenter_scope pis(stream());
+        utility::formatters::comment_formatter f(
+            !start_on_first_line,
+            use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            utility::formatters::comment_style::c_style,
+            !last_line_is_blank);
+
+        f.format(stream(), documentation);
+        if (add_comment_blocks) {
+            f.format_doxygen_start_block(stream(), documentation);
+            stream() << std::endl;
+        }
+    }
+}
+
+void assistant::comment_end_method_group(const std::string& documentation,
+    const bool add_comment_blocks) {
+    if (documentation.empty())
+        return;
+
+    {
+        utility::formatters::positive_indenter_scope pis(stream());
+        utility::formatters::comment_formatter f(
+            start_on_first_line,
+            use_documentation_tool_markup,
+            !documenting_previous_identifier,
+            utility::formatters::comment_style::c_style,
+            !last_line_is_blank);
+
+        if (add_comment_blocks) {
+            f.format_doxygen_end_block(stream(), documentation);
+            stream() << std::endl;
+        }
+    }
+}
+
+std::string assistant::comment_inline(const std::string& c) const {
+    if (c.empty())
+        return empty;
+
+    std::ostringstream s;
+    s << " ";
+    utility::formatters::comment_formatter f(
+        start_on_first_line,
+        use_documentation_tool_markup,
+        documenting_previous_identifier,
+        utility::formatters::comment_style::cpp_style,
+        !last_line_is_blank);
+
+    f.format(s, c);
+    return s.str();
+}
+
+std::ostream& assistant::stream() {
+    return filtering_stream_;
+}
+
+void assistant::update_artefact() const {
+    artefact_.content(stream_.str());
+
+    const auto fp(artefact_.path_properties().file_path());
+    artefact_.file_path(fp);
+
+    physical::entities::operation op;
+    using ot = physical::entities::operation_type;
+    const bool overwrite(artefact_.enablement_properties().overwrite());
+    op.type(overwrite? ot::write : ot::create_only);
+    artefact_.operation(op);
+}
 
 }
