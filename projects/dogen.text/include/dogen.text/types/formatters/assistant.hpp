@@ -136,6 +136,35 @@ public:
     std::string get_product_name(
         const identification::entities::logical_name& n) const;
 
+private:
+    /**
+     * @brief Obtains the facet configuration for the facet
+     * identified by facet name.
+     *
+     * @pre Facet configuration must exist for the facet.
+     */
+    physical::entities::facet_properties obtain_facet_properties(
+        const identification::entities::physical_meta_id& facet_name) const;
+
+    /**
+     * @brief Returns true if the archetype is enabled, false
+     * otherwise.
+     */
+    bool is_archetype_enabled(
+        const identification::entities::physical_meta_id& archetype) const;
+
+    /**
+     * @brief Returns true if the facet is enabled, false otherwise.
+     */
+    bool is_facet_enabled(
+        const identification::entities::physical_meta_id& facet) const;
+
+    /**
+     * @brief Returns the folder for the current facet.
+     */
+    std::string get_facet_directory_for_facet(
+        const identification::entities::physical_meta_id& facet_name) const;
+
 public:
     /**
      * @brief If true, the current standard is set to c++ 98.

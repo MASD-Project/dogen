@@ -47,6 +47,10 @@ const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
     "Header guard for formatter is not set. Formatter: ");
+const std::string facet_properties_missing(
+    "Could not find facet configuration for formatter: ");
+const std::string facet_directory_missing(
+    "Facet directory is missing for facet: ");
 
 }
 
@@ -178,6 +182,48 @@ assistant::get_product_name(const logical_name& n) const {
         return empty;
 
     return n.location().external_modules().front();
+}
+
+physical::entities::facet_properties assistant::obtain_facet_properties(
+    const identification::entities::physical_meta_id& facet_name) const {
+    const auto& mmp(lps_.physical().meta_model_properties());
+    const auto& fct_props(mmp.facet_properties());
+    const auto i(fct_props.find(facet_name));
+    if (i == fct_props.end()) {
+        BOOST_LOG_SEV(lg, error) << facet_properties_missing
+                                 << facet_name;
+        BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
+                facet_name.value()));
+    }
+    return i->second;
+}
+
+bool assistant::is_archetype_enabled(
+    const identification::entities::physical_meta_id& archetype) const {
+    identification::entities::logical_id lid(element_.name().qualified().dot());
+    identification::entities::logical_meta_physical_id ea(lid, archetype);
+    const auto& mmp(lps_.physical().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
+    const auto i(eafe.find(ea));
+    const bool is_disabled(i == eafe.end());
+    return !is_disabled;
+}
+
+bool assistant::is_facet_enabled(
+    const identification::entities::physical_meta_id& facet) const {
+    const auto& fct_props(obtain_facet_properties(facet));
+    return fct_props.enabled();
+}
+
+std::string assistant::get_facet_directory_for_facet(
+    const identification::entities::physical_meta_id& facet_name) const {
+    const auto& fct_props(obtain_facet_properties(facet_name));
+    if (fct_props.directory_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(facet_directory_missing + facet_name.value()));
+    }
+    return fct_props.directory_name();
 }
 
 bool assistant::is_cpp_standard_98() const {
