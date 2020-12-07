@@ -513,6 +513,14 @@ transform_project_items(text::entities::model& m) {
                 continue;
 
             /*
+             * Ensure artefact is enabled. Disabled artefacts will not
+             * be generated and as such do not contribute to the list
+             * of project items.
+             */
+            if (!a.enablement_properties().enabled())
+                continue;
+
+            /*
              * Ensure the item path uses backslashes for compatibility
              * with Visual Studio and MonoDevelop.
              */
