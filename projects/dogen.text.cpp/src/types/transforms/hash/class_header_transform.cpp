@@ -27,7 +27,6 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
