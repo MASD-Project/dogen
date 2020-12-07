@@ -26,6 +26,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
@@ -109,6 +110,21 @@ new_apply(const text::transforms::context& ctx, text::entities::model& lps) {
         for (const auto& ptr : m2tts) {
             const auto& m2t(*ptr);
             const auto pmn(m2t.archetype().meta_name());
+
+            /*
+             * Ensure the transform for the requested technical space is
+             * marked as enabled. If it is disabled, the user has requested
+             * conflicting options - output on technical_space X but disable
+             * backend for technical space X - so we need to throw to let the
+             * user know.
+             */
+            using identification::helpers::physical_meta_id_builder;
+            const auto beid(physical_meta_id_builder::build_backend(pmn));
+            const auto& ek(mmp.enabled_backends());
+            const auto is_enabled(ek.find(beid) != ek.end());
+            if (!is_enabled)
+                continue;
+
             const auto arch(pmn.id());
             BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << arch;
 

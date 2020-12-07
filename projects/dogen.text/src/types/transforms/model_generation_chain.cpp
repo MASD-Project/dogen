@@ -45,8 +45,10 @@ apply(const context& ctx, entities::model_set& ms) {
     /*
      * Apply all of the text transforms to the model.
      */
-    for (auto& m : ms.models())
-        model_to_text_chain::apply(ctx, m);
+    for (auto& m : ms.models()) {
+        model_to_text_chain::new_apply(ctx, m);
+        // model_to_text_chain::apply(ctx, m);
+    }
 
     stp.end_chain(ms);
 }
