@@ -24,7 +24,7 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include <boost/throw_exception.hpp>
-#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"

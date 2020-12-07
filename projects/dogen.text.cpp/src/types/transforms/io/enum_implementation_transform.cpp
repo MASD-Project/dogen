@@ -29,7 +29,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/io/enum_implementation_factory.hpp"

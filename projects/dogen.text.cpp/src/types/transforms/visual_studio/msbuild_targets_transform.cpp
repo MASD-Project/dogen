@@ -31,7 +31,7 @@
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_factory.hpp"
 

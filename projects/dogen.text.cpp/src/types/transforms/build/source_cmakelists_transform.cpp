@@ -32,7 +32,7 @@
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/build/source_cmakelists_transform.hpp"
 #include "dogen.text.cpp/types/transforms/build/source_cmakelists_factory.hpp"
 

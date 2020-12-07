@@ -31,7 +31,7 @@
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/main_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/main_factory.hpp"
-#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {
