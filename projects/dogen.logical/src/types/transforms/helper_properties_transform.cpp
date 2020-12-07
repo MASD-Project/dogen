@@ -34,7 +34,6 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/helper_descriptor.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.logical/io/entities/streaming_properties_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"

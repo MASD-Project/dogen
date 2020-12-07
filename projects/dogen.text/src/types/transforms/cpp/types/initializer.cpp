@@ -59,7 +59,6 @@
 #include "dogen.text.cpp/types/transforms/types/helper_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_transform.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/types/initializer.hpp"
 
