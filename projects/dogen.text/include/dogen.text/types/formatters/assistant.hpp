@@ -212,6 +212,56 @@ public:
      */
     bool requires_stream_manipulators() const;
 
+public:
+    /**
+     * @brief returns the c++ namespaces for the name.
+     */
+    std::list<std::string>
+    make_namespaces(const identification::entities::logical_name& n,
+        const bool detect_model_name = true) const;
+
+ public:
+    /**
+     * @brief Returns true if serialization is enabled locally.
+     */
+    bool is_serialization_enabled() const;
+
+    /**
+     * @brief Returns true if io is enabled locally.
+     */
+    bool is_io_enabled() const;
+
+    /**
+     * @brief Returns true if io is enabled locally.
+     */
+    bool is_lexical_cast_enabled() const;
+
+    /**
+     * @brief Returns true if odb is enabled globally.
+     */
+    bool is_odb_facet_enabled() const;
+
+    /**
+     * @brief Returns true if tests is enabled globally.
+     */
+    bool is_tests_enabled() const;
+
+    /**
+     * @brief Returns true if hash is enabled locally.
+     */
+    bool is_hash_enabled() const;
+
+    /**
+     * @brief Returns true if test data is enabled globally.
+     */
+    bool is_test_data_enabled() const;
+
+    /**
+     * @brief Returns true if the current formatter belongs to the io
+     * facet.
+     */
+    bool is_io() const;
+
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;

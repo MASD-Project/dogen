@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.identification/types/entities/technical_space_version.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -266,6 +267,12 @@ bool assistant::requires_manual_default_constructor() const {
 
 bool assistant::supports_move_operator() const {
     return !is_cpp_standard_98();
+}
+
+std::list<std::string> assistant::
+make_namespaces(const logical_name& n, const bool detect_model_name) const {
+    identification::helpers::logical_name_flattener nf(detect_model_name);
+    return nf.flatten(n);
 }
 
 
