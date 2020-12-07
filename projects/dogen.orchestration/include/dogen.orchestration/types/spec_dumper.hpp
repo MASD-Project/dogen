@@ -36,6 +36,7 @@
 #include "dogen.variability/types/entities/value_type.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
 namespace dogen::orchestration {
@@ -87,7 +88,8 @@ private:
     /**
      * @brief Creates specs for the backends.
      */
-    spec_category create_generation_category() const;
+    spec_category
+    create_generation_category(const physical::entities::meta_model& pmm) const;
 
     /**
      * @brief Creates specs for all features.

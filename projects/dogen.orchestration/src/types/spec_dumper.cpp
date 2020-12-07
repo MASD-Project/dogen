@@ -155,17 +155,16 @@ spec_category spec_dumper::create_conversion_category() const {
     return r;
 }
 
-spec_category spec_dumper::create_generation_category() const {
+spec_category spec_dumper::
+create_generation_category(const physical::entities::meta_model& pmm) const {
     spec_category r;
     r.name("Generators");
     r.description("Available backends for code generation.");
-    using dogen::text::transforms::model_to_text_chain;
-    const auto& rg2(model_to_text_chain::registrar());
-    for(const auto& pair: rg2.transforms_by_technical_space()) {
-        const auto& t(*pair.second);
+
+    for (const auto& be : pmm.backends()) {
         spec_entry e;
-        e.name(t.id().value());
-        e.description(t.description());
+        e.name(be.meta_name().id().value());
+        e.description(be.description());
         r.entries().push_back(e);
     }
     return r;
@@ -233,15 +232,13 @@ specs spec_dumper::dump(const configuration& cfg) const {
         specs r;
         r.categories().push_back(create_codec_category());
         r.categories().push_back(create_conversion_category());
-        r.categories().push_back(create_generation_category());
 
         /*
          * Bootstrap the top-level context. We need a full context
          * because we require some models that are created in the
          * bootstrapping process.
          */
-        using namespace transforms;
-        using cbc = context_bootstrapping_chain;
+        using cbc = transforms::context_bootstrapping_chain;
         const auto& a(dumping_activity);
         const auto& od(empty_output_directory);
         const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
@@ -264,6 +261,11 @@ specs spec_dumper::dump(const configuration& cfg) const {
         const auto& pmm(*ctx.logical_context().physical_meta_model());
         const auto tid(pmm.template_instantiation_domains());
         r.categories().push_back(create_variability_domains_category(tid));
+
+        /*
+         * Dump data about the physical meta-model.
+         */
+        r.categories().push_back(create_generation_category(pmm));
 
         return r;
     }
