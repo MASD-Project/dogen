@@ -49,6 +49,15 @@ public:
      */
     static transforms::text_transform_registrar& text_transform_registrar();
 
+private:
+    static boost::shared_ptr<physical::entities::artefact>
+    get_artefact(const physical::entities::region& region,
+        const identification::entities::physical_meta_id& archetype);
+
+public:
+    static void new_apply(const text::transforms::context& ctx,
+        text::entities::model& lps);
+
 public:
     static void apply(const text::transforms::context& ctx,
         text::entities::model& m);

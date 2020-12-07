@@ -22,7 +22,9 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
@@ -38,6 +40,7 @@ const std::string unsupported_technical_space(
     "Could not find transform for technical space: ");
 const std::string disabled_transform(
     "Transform for requested technical space is disabled: ");
+const std::string archetype_not_found("Archetype not found: ");
 
 }
 
@@ -62,6 +65,66 @@ model_to_text_chain::registrar() {
 transforms::text_transform_registrar&
 model_to_text_chain::text_transform_registrar() {
     return text_transform_registrar_;
+}
+
+boost::shared_ptr<physical::entities::artefact>
+model_to_text_chain::get_artefact(const physical::entities::region& region,
+    const identification::entities::physical_meta_id& archetype) {
+
+    const auto& aba(region.artefacts_by_archetype());
+    const auto i(aba.find(archetype));
+    if (i == aba.end()) {
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(archetype_not_found + archetype.value()));
+    }
+    return i->second;
+}
+
+void model_to_text_chain::
+new_apply(const text::transforms::context& ctx, text::entities::model& lps) {
+
+    for (auto& region : lps.logical_physical_regions()) {
+        const auto& e(*region.logical_element());
+        const auto id(e.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
+
+        const auto mn(e.meta_name().id());
+        BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
+
+        const auto& rp(text_transform_registrar().repository());
+        const auto& m2tts_by_mn(rp.model_to_text_transforms_by_meta_name());
+        const auto i(m2tts_by_mn.find(mn));
+        if (i == m2tts_by_mn.end()) {
+            BOOST_LOG_SEV(lg, debug) << "No text transforms for meta name: "
+                                     << mn;
+            continue;
+        }
+
+        const auto& mmp(lps.physical().meta_model_properties());
+        const auto& ppp(mmp.project_path_properties());
+        const auto templates_directory(ppp.templates_directory_full_path());
+
+        const auto& m2tts(i->second);
+        for (const auto& ptr : m2tts) {
+            const auto& m2t(*ptr);
+            const auto pmn(m2t.archetype().meta_name());
+            const auto arch(pmn.id());
+            BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << arch;
+
+            auto aptr(get_artefact(region.physical_region(), arch));
+            if (!aptr->enablement_properties().enabled()) {
+                BOOST_LOG_SEV(lg, debug) << "Archetype is disabled.";
+                continue;
+            }
+            BOOST_LOG_SEV(lg, debug) << "Archetype is enabled.";
+
+            auto& a(*aptr);
+            m2t.apply(ctx, lps, e, a);
+            const auto& p(aptr->file_path());
+            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+        }
+    }
 }
 
 void model_to_text_chain::
