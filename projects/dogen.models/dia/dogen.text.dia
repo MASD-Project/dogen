@@ -25103,7 +25103,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#assisstant#</dia:string>
+        <dia:string>#assistant#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
