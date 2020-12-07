@@ -47,21 +47,8 @@ const std::string archetype_not_found("Archetype not found: ");
 
 namespace dogen::text::transforms {
 
-std::shared_ptr<
-    model_to_text_technical_space_chain_registrar>
-model_to_text_chain::registrar_;
 transforms::text_transform_registrar
 model_to_text_chain::text_transform_registrar_;
-
-model_to_text_technical_space_chain_registrar&
-model_to_text_chain::registrar() {
-    if (!registrar_) {
-        registrar_ = std::make_shared<
-            model_to_text_technical_space_chain_registrar>();
-    }
-
-    return *registrar_;
-}
 
 transforms::text_transform_registrar&
 model_to_text_chain::text_transform_registrar() {
@@ -83,8 +70,7 @@ model_to_text_chain::get_artefact(const physical::entities::region& region,
 }
 
 void model_to_text_chain::
-new_apply(const text::transforms::context& ctx, text::entities::model& lps) {
-
+apply(const text::transforms::context& ctx, text::entities::model& lps) {
     for (auto& region : lps.logical_physical_regions()) {
         const auto& e(*region.logical_element());
         const auto id(e.name().id());
@@ -141,66 +127,6 @@ new_apply(const text::transforms::context& ctx, text::entities::model& lps) {
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
         }
     }
-}
-
-void model_to_text_chain::
-apply(const text::transforms::context& ctx, text::entities::model& m) {
-    const auto id(m.provenance().logical_name().id());
-    tracing::scoped_chain_tracer stp(lg, "model to text chain", transform_id,
-        id.value(), *ctx.tracer(), m);
-
-    /*
-     * No point in proceeding if the model has not types to
-     * transform to text.
-     */
-    if (!m.physical().has_generatable_artefacts()) {
-        BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-        return;
-    }
-
-    /*
-     * Look for the required model extractor. If none is available,
-     * throw to let the user know it requested an unsupported
-     * transformation.
-     */
-    const auto ts(m.logical().output_technical_spaces().front());
-    BOOST_LOG_SEV(lg, debug) << "Looking for a transform for technical space: "
-                             << ts;
-    const auto ptr(registrar().transform_for_technical_space(ts));
-    if (!ptr) {
-        const auto s(boost::lexical_cast<std::string>(ts));
-        BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(unsupported_technical_space + s));
-    }
-
-    const auto& t(*ptr);
-    BOOST_LOG_SEV(lg, debug) << "Found transform: " << t.id();
-
-    /*
-     * Ensure the transform for the requested technical space is
-     * marked as enabled. If it is disabled, the user has requested
-     * conflicting options - output on technical_space X but disable
-     * backend for technical space X - so we need to throw to let the
-     * user know.
-     */
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto& ek(mmp.enabled_backends());
-    const auto is_enabled(ek.find(t.id()) != ek.end());
-    if (!is_enabled) {
-        BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
-        BOOST_THROW_EXCEPTION(
-            transformation_error(disabled_transform + t.id().value()));
-    }
-
-    /*
-     * Generate artefacts for all elements in model.
-     */
-    const bool ebd(mmp.project_path_properties().enable_backend_directories());
-    t.apply(ctx, ebd, m);
-
-    BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << t.id();
-    stp.end_chain(m);
 }
 
 }
