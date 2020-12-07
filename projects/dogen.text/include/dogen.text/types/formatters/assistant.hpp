@@ -31,6 +31,7 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.text/types/entities/model.hpp"
 
@@ -92,6 +93,48 @@ public:
     static std::string make_setter_return_type(
         const std::string& containing_type_name,
         const logical::entities::attribute& attr);
+
+public:
+        /**
+     * @brief Obtains the qualified name.
+     */
+    /**@{*/
+    std::string get_qualified_name(
+        const identification::entities::logical_name& n) const;
+    std::string get_qualified_name(
+        const identification::entities::logical_name_tree& nt) const;
+    /**@}*/
+
+    /**
+     * @brief Obtains the qualified namespace for this name.
+     *
+     * The qualified namespace contains all modules, but not the
+     * element name itself.
+     */
+    std::string get_qualified_namespace(
+        const identification::entities::logical_name& n) const;
+
+    /**
+     * @brief Obtains the model name as a string.
+     */
+    std::string
+    get_identifiable_model_name(
+        const identification::entities::logical_name& n) const;
+
+    /**
+     * @brief Obtains the model name as a set of strings separated by
+     * dots.
+     */
+    std::string
+    get_dot_separated_model_name(
+        const identification::entities::logical_name& n) const;
+
+    /**
+     * @brief Obtains the product name. This is defined to be the
+     * first external module, if any exists.
+     */
+    std::string get_product_name(
+        const identification::entities::logical_name& n) const;
 
 public:
     /**

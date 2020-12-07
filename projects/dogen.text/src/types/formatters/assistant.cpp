@@ -18,10 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.identification/types/entities/technical_space_version.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.text/types/formatters/formatting_error.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
@@ -38,6 +40,8 @@ const std::string final_keyword_text("final ");
 const std::string override_keyword_text(" override");
 const std::string noexcept_keyword_text(" noexcept");
 const std::string namespace_separator("::");
+const std::string underscore("_");
+const std::string dot(".");
 
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
@@ -49,6 +53,8 @@ const std::string header_guard_not_set(
 namespace dogen::text::formatters {
 
 using physical::entities::artefact;
+using identification::entities::logical_name;
+using identification::entities::logical_name_tree;
 using identification::entities::technical_space_version;
 
 assistant::assistant(const text::entities::model& lps,
@@ -127,6 +133,51 @@ make_setter_return_type(const std::string& containing_type_name,
         s << void_keyword_text;
 
     return s.str();
+}
+
+std::string
+assistant::get_qualified_name(const logical_name& n) const {
+    return n.qualified().colon();
+}
+
+std::string
+assistant::get_qualified_name(const logical_name_tree& nt) const {
+    return nt.qualified().colon();
+}
+
+std::string
+assistant::get_qualified_namespace(const logical_name& n) const {
+    const auto& l(n.location());
+    auto ns(l.external_modules());
+    for (const auto& m : l.model_modules())
+        ns.push_back(m);
+
+    for (const auto& m : l.internal_modules())
+        ns.push_back(m);
+
+    using boost::algorithm::join;
+    const auto r(join(n.location().model_modules(), namespace_separator));
+    return r;
+}
+
+std::string assistant::
+get_identifiable_model_name(const logical_name& n) const {
+    using boost::algorithm::join;
+    return join(n.location().model_modules(), underscore);
+}
+
+std::string assistant::
+get_dot_separated_model_name(const logical_name& n) const {
+    using boost::algorithm::join;
+    return join(n.location().model_modules(), dot);
+}
+
+std::string
+assistant::get_product_name(const logical_name& n) const {
+    if (n.location().external_modules().empty())
+        return empty;
+
+    return n.location().external_modules().front();
 }
 
 bool assistant::is_cpp_standard_98() const {
