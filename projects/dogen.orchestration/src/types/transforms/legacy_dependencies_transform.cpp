@@ -166,7 +166,6 @@ bool include_directive_comparer(
 namespace dogen::orchestration::transforms {
 
 using helpers::dependencies_builder;
-using identification::entities::technical_space;
 using identification::entities::logical_name;
 using identification::entities::logical_meta_physical_id;
 using physical::entities::inclusion_directives;
@@ -286,14 +285,6 @@ visit(const logical::entities::physical::facet& v) {
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.facet_class_header_transform") {
             b.add_as_user("dogen.physical/types/entities/facet.hpp");
-            using identification::entities::technical_space;
-            if (v.major_technical_space() == technical_space::cpp) {
-                b.add_as_user(
-                    "dogen.text.cpp/types/transforms/registrar.hpp");
-            } else if (v.major_technical_space() == technical_space::csharp) {
-                b.add_as_user(
-                    "dogen.text.csharp/types/transforms/registrar.hpp");
-            }
         } else if (pmid.value() == "masd.cpp.types.facet_class_implementation_transform") {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
             b.add(v.name(), ch_arch);
@@ -341,14 +332,6 @@ void region_processor::visit(const logical::entities::physical::backend& v) {
         auto& a(*pair.second);
         if (pmid.value() == "masd.cpp.types.backend_class_header_transform") {
             b.add_as_user("dogen.physical/types/entities/backend.hpp");
-            using identification::entities::technical_space;
-            if (v.major_technical_space() == technical_space::cpp) {
-                b.add_as_user(
-                    "dogen.text.cpp/types/transforms/registrar.hpp");
-            } else if (v.major_technical_space() == technical_space::csharp) {
-                b.add_as_user(
-                    "dogen.text.csharp/types/transforms/registrar.hpp");
-            }
         } else if (pmid.value() == "masd.cpp.types.backend_class_implementation_transform") {
             const auto ch_arch("masd.cpp.types.canonical_archetype");
             b.add(v.name(), ch_arch);

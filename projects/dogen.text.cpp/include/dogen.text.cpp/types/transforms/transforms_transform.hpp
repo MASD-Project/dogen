@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen.physical/types/entities/backend.hpp"
-#include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
 
