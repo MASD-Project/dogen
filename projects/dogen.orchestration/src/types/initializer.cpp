@@ -21,7 +21,6 @@
 #include "dogen/config.hpp"
 #include "dogen.text/types/initializer.hpp"
 #include "dogen.text.csharp/types/initializer.hpp"
-#include "dogen.text.cpp/types/initializer.hpp"
 #include "dogen.codec.json/types/initializer.hpp"
 #include "dogen.codec.org_mode/types/initializer.hpp"
 #include "dogen.codec.dia/types/initializer.hpp"
@@ -39,7 +38,6 @@ void initializer::initialize() {
     dogen::codec::dia::initializer::initialize();
     dogen::text::initializer::initialize();
     dogen::text::csharp::initializer::initialize();
-    dogen::text::cpp::initializer::initialize();
     dogen::tracing::initializer::initialize();
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
     dogen::relational::initializer::initialize();
