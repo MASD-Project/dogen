@@ -28,13 +28,8 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_factory.hpp"
 
@@ -72,7 +67,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
             const auto ns(ast.make_namespaces(rg.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto deps(rg.registrar_dependencies());
-            const identification::entities::physical_meta_id carch(traits::canonical_archetype());
+            const identification::entities::physical_meta_id carch("masd.cpp.types.canonical_archetype");
             const auto leaves(ast.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");

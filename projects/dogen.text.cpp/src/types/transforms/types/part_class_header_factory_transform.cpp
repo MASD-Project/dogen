@@ -29,8 +29,6 @@
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_factory_factory.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {

@@ -28,12 +28,6 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
-#include "dogen.text.cpp/types/transforms/io/traits.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_header_factory.hpp"
 

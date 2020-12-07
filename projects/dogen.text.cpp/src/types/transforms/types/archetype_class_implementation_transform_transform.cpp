@@ -32,8 +32,6 @@
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {

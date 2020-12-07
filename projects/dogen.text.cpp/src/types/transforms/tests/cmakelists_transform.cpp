@@ -28,13 +28,10 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/tests/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
 #include "dogen.text.cpp/types/transforms/tests/cmakelists_factory.hpp"

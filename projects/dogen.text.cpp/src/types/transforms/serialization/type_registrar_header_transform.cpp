@@ -26,10 +26,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_factory.hpp"
 

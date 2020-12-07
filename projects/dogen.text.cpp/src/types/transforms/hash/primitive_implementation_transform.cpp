@@ -30,11 +30,7 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_implementation_factory.hpp"
 

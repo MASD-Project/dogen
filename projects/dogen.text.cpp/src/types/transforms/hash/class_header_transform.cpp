@@ -30,11 +30,6 @@
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.logical/types/entities/helper_properties.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
-#include "dogen.text.cpp/types/transforms/hash/traits.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_header_factory.hpp"
 

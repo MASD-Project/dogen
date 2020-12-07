@@ -29,13 +29,9 @@
 #include "dogen.logical/types/entities/variability/initializer.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
-#include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"
-#include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_implementation_factory.hpp"
 
