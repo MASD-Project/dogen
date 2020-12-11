@@ -13,32 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-07 Mon 21:11]
+#+CAPTION: Clock summary at [2020-12-11 Fri 20:28]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *73:35* |       |       | 100.0 |
+| *Total time*                                              | *80:00* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 73:35   |       |       | 100.0 |
-| Active                                                    |         | 73:35 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   6.9 |
+| Stories                                                   | 80:00   |       |       | 100.0 |
+| Active                                                    |         | 80:00 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   6.3 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  2:37 |   3.6 |
-| Improvements to template processing in logical model      |         |       |  0:26 |   0.6 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   9.5 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  18.5 |
-| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.8 |
+| Sprint and product backlog grooming                       |         |       |  2:50 |   3.5 |
+| Improvements to template processing in logical model      |         |       |  0:26 |   0.5 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   8.7 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  17.0 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.7 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.3 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   5.3 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   6.5 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.2 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   4.9 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   6.0 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  29.4 |
+| Move helpers to =text= model                              |         |       | 21:38 |  27.0 |
 | Add namespaces to "dummy function"                        |         |       |  0:10 |   0.2 |
-| Remove disabled files from project items                  |         |       |  0:30 |   0.7 |
+| Remove disabled files from project items                  |         |       |  0:30 |   0.6 |
+| Move text transforms in c++ and c# models into text model |         |       | 15:56 |  19.9 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.4 |
-| Issues with emacs                                         |         |       |  1:32 |   2.1 |
-| Move text transforms in c++ and c# models into text model |         |       |  9:44 |  13.2 |
+| Issues with emacs                                         |         |       |  1:32 |   1.9 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -237,6 +237,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-11 Fri 20:15]--[2020-12-11 Fri 20:28] =>  0:13
     CLOCK: [2020-12-04 Fri 17:06]--[2020-12-04 Fri 17:12] =>  0:06
     CLOCK: [2020-12-04 Fri 16:00]--[2020-12-04 Fri 16:10] =>  0:10
     CLOCK: [2020-12-03 Thu 18:42]--[2020-12-03 Thu 18:52] =>  0:10
@@ -664,32 +665,12 @@ resulting in errors:
 
 We need to check enablement when we add project items.
 
-*** STARTED Remove JSON models from Dogen                             :story:
+*** COMPLETED Move text transforms in c++ and c# models into text model :story:
+    CLOSED: [2020-12-11 Fri 19:04]
     :LOGBOOK:
-    CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
-    :END:
-
-The JSON code is no longer strategic and will be removed in the
-future. For now we are paying the cost of maintaining the JSON models
-in Dogen, and this cost has increased with helpers work. We need to
-remove the tests for the JSON models in Dogen as well as the models.
-
-Notes:
-
-- removed the JSON tests. We don't need to keep the Dogen models
-  updated in json any longer.
-
-*** STARTED Issues with emacs                                         :story:
-    :LOGBOOK:
-    CLOCK: [2020-11-30 Mon 17:02]--[2020-11-30 Mon 18:12] =>  1:10
-    CLOCK: [2020-11-20 Fri 15:04]--[2020-11-20 Fri 15:26] =>  0:22
-    :END:
-
-- gnus crashes on startup.
-- upgrade to emacs 27, try to sort out issues with theme.
-
-*** STARTED Move text transforms in c++ and c# models into text model :story:
-    :LOGBOOK:
+    CLOCK: [2020-12-11 Fri 18:12]--[2020-12-11 Fri 19:04] =>  0:52
+    CLOCK: [2020-12-11 Fri 15:11]--[2020-12-11 Fri 18:12] =>  3:01
+    CLOCK: [2020-12-11 Fri 10:01]--[2020-12-11 Fri 12:20] =>  2:19
     CLOCK: [2020-12-07 Mon 20:15]--[2020-12-07 Mon 21:11] =>  0:56
     CLOCK: [2020-12-07 Mon 17:52]--[2020-12-07 Mon 18:45] =>  0:53
     CLOCK: [2020-12-07 Mon 14:56]--[2020-12-07 Mon 16:01] =>  1:05
@@ -726,6 +707,63 @@ space and once we remove all of the transforms in =m2t= that don't
 really belong there, we can probably merge all of these models into
 one. We would then have a =transforms= namespace, with sub-namespaces
 per language. Each of the namespaces is declared as a backend.
+
+*** STARTED Remove JSON models from Dogen                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
+    :END:
+
+The JSON code is no longer strategic and will be removed in the
+future. For now we are paying the cost of maintaining the JSON models
+in Dogen, and this cost has increased with helpers work. We need to
+remove the tests for the JSON models in Dogen as well as the models.
+
+Notes:
+
+- removed the JSON tests. We don't need to keep the Dogen models
+  updated in json any longer.
+
+*** STARTED Issues with emacs                                         :story:
+    :LOGBOOK:
+    CLOCK: [2020-11-30 Mon 17:02]--[2020-11-30 Mon 18:12] =>  1:10
+    CLOCK: [2020-11-20 Fri 15:04]--[2020-11-20 Fri 15:26] =>  0:22
+    :END:
+
+- gnus crashes on startup.
+- upgrade to emacs 27, try to sort out issues with theme.
+
+*** Move graph of containment to codec model                          :story:
+
+At present we are doing the containment graph within the dia codec. We
+should really do this in the main codec model so we can reuse it for
+org-mode.
+
+*** Move wale templates to TS namespaces                              :story:
+
+At present the wale templates are in the top-level namespace of the
+text model, but they should really be in each technical space.
+
+*** Allow uses of "dictionaries" for invalid class names              :story:
+
+It would be nice if we had a meta-type that represented a dictionary
+of invalid names and then could associate it with meta-types and
+possibly technical spaces. For example, we could say that certain
+words are invalid for all technical spaces, other only for technical
+space x etc. In addition, certain words could be valid for certain
+meta-types (say archetypes) but invalid for others (say objects). If
+these were meta-types we could place them in a dogen model and even
+allow users to create their own lists. Maybe the better term is
+"whitelist"?
+
+Links:
+
+- [[https://english.stackexchange.com/questions/51088/alternative-term-to-blacklist-and-whitelist][Alternative term to “Blacklist” and “Whitelist”]]
+
+*** Add technical space version to element                            :story:
+
+We should add the version of the TS to the element itself rather than
+querying it on the model. We probably should also have the major TS
+name in the element as well.
 
 *** Move mustache templates into the =transforms= namespaces          :story:
 
