@@ -22,6 +22,7 @@
 #include "dogen.text/types/transforms/cpp/cpp_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/io_factory.hpp"
 #include "dogen.text/types/transforms/cpp/odb/odb_factory.hpp"
+#include "dogen.text/types/transforms/cpp/project_factory.hpp"
 #include "dogen.text/types/transforms/cpp/testing_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/cpp/hash/hash_factory.hpp"
@@ -103,6 +104,7 @@ physical::entities::backend cpp_factory::make() {
         }
     });
     part_inserter(implementation_factory::make());
+    part_inserter(project_factory::make());
     part_inserter(public_headers_factory::make());
     part_inserter(testing_factory::make());
     return r;

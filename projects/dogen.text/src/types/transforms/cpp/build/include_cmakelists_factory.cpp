@@ -18,31 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/build/build_factory.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text/types/transforms/cpp/build/include_cmakelists_factory.hpp"
 
-namespace dogen::text::cpp::transforms::build {
-namespace {
+namespace dogen::text::transforms::cpp::build {
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("dogen.text.cpp.transforms.build"));
-
-}
-
-physical::entities::facet build_factory::make() {
-    identification::helpers::physical_meta_name_builder b;
-    b.meta_model("masd");
-    b.backend("cpp");
-    b.facet("build");
-
-    physical::entities::facet r;
-    r.meta_name(b.build());
+physical::entities::archetype include_cmakelists_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "build", "include_cmakelists"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.build_cmakelists"));
+    r.technical_space(identification::entities::technical_space::cmake);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;
 }
 
 }
-

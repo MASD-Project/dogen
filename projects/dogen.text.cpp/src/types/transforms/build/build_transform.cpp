@@ -23,8 +23,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/build/build_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/build/source_cmakelists_transform.hpp"
-#include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp"
 
 namespace dogen::text::cpp::transforms::build {
 namespace {

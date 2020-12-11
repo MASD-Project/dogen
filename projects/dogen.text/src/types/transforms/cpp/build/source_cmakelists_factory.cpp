@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_BUILD_SOURCE_CMAKELISTS_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_BUILD_SOURCE_CMAKELISTS_FACTORY_HPP
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text/types/transforms/cpp/build/source_cmakelists_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::cpp::build {
 
-#include "dogen.physical/types/entities/archetype.hpp"
+physical::entities::archetype source_cmakelists_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "build", "source_cmakelists"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.build_cmakelists"));
+    r.technical_space(identification::entities::technical_space::cmake);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
-namespace dogen::text::cpp::transforms::build {
-
-/**
- * @brief Creates a physical representation for the archetype
- * source_cmakelists.
- *
- * Archetype documentation: Generates cmakelists for tests.
-
- */
-class source_cmakelists_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
-
+    return r;
 }
 
-#endif
+}

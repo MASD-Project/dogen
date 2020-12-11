@@ -18,32 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_BUILD_INCLUDE_CMAKELISTS_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_BUILD_INCLUDE_CMAKELISTS_FACTORY_HPP
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.text/types/transforms/cpp/project_factory.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::cpp {
+namespace {
 
-#include "dogen.physical/types/entities/archetype.hpp"
-
-namespace dogen::text::cpp::transforms::build {
-
-/**
- * @brief Creates a physical representation for the archetype
- * include_cmakelists.
- *
- * Archetype documentation: Generates cmakelists for tests.
-
- */
-class include_cmakelists_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
+using namespace dogen::utility::log;
+static logger lg(logger_factory("dogen.text.transforms.cpp.project"));
 
 }
 
-#endif
+physical::entities::part project_factory::make() {
+    identification::helpers::physical_meta_name_builder b;
+    b.meta_model("masd");
+    b.backend("cpp");
+    b.part("project");
+
+    physical::entities::part r;
+    r.meta_name(b.build());
+
+    return r;
+}
+
+}
+

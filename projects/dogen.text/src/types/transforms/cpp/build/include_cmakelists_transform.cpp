@@ -34,13 +34,13 @@
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp"
-#include "dogen.text.cpp/types/transforms/build/include_cmakelists_factory.hpp"
+#include "dogen.text/types/transforms/cpp/build/include_cmakelists_transform.hpp"
+#include "dogen.text/types/transforms/cpp/build/include_cmakelists_factory.hpp"
 
-namespace dogen::text::cpp::transforms::build {
+namespace dogen::text::transforms::cpp::build {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.build.include_cmakelists_transform");
+const std::string transform_id("text.transforms.build.include_cmakelists_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

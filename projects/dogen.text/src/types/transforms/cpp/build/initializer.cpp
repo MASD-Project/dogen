@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp"
-#include "dogen.text.cpp/types/transforms/build/source_cmakelists_transform.hpp"
+#include "dogen.text/types/transforms/cpp/build/include_cmakelists_transform.hpp"
+#include "dogen.text/types/transforms/cpp/build/source_cmakelists_transform.hpp"
 #include "dogen.text/types/transforms/cpp/build/initializer.hpp"
 #include <boost/graph/named_function_params.hpp>
 
@@ -27,7 +27,6 @@ namespace dogen::text::transforms::cpp::build {
 
 void initializer::
 initialize(text_transform_registrar& ttrg, helper_registrar& /*hrg*/) {
-    using namespace text::cpp::transforms::build;
     register_text_transform<include_cmakelists_transform>(ttrg);
     register_text_transform<source_cmakelists_transform>(ttrg);
 }
