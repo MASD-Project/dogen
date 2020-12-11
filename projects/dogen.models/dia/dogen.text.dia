@@ -7536,7 +7536,7 @@ C++ technical space, or associated minor technical spaces.
         <dia:point val="245.57,83.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="227.192,82.45;246.32,87.8"/>
+        <dia:rectangle val="227.193,82.45;246.32,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9752,7 +9752,7 @@ C++ technical space.
         <dia:point val="139.105,131.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.252,131.55;139.955,140.05"/>
+        <dia:rectangle val="129.253,131.55;139.955,140.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9803,7 +9803,7 @@ C++ technical space.
         <dia:point val="139.105,131.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.255,131.55;159.968,140.002"/>
+        <dia:rectangle val="138.255,131.55;159.967,140.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14053,7 +14053,7 @@ of the C# technical space.
         <dia:point val="466.11,116.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="455.252,116;466.96,125.002"/>
+        <dia:rectangle val="455.253,116;466.96,125.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23668,7 +23668,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="133.435,82.6503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.685,81.9003;139.2,88.6"/>
+        <dia:rectangle val="132.685,81.9003;139.2,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23749,7 +23749,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="172,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.63,84.255;172.75,88.6"/>
+        <dia:rectangle val="165.63,84.255;172.75,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24023,7 +24023,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="182.452,92.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.855,91.45;183.202,97.6"/>
+        <dia:rectangle val="161.855,91.45;183.202,96.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24104,7 +24104,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="151.452,96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.702,92.15;152.54,97.6"/>
+        <dia:rectangle val="150.702,92.15;152.54,96.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24185,7 +24185,7 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
         <dia:point val="141,96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,82.55;141.75,97.6"/>
+        <dia:rectangle val="101.95,82.55;141.75,96.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
