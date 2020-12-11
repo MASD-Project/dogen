@@ -22,7 +22,17 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_header_transform.hpp"
 #include "dogen.text/types/transforms/cpp/serialization/serialization_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/type_registrar_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_forward_declarations_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/type_registrar_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_forward_declarations_transform.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
 namespace {

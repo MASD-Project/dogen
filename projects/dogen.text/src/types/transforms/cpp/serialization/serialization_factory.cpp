@@ -22,8 +22,18 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/enum_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/serialization/path_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/serialization/serialization_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/builtin_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/type_registrar_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/class_forward_declarations_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/type_registrar_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/serialization/primitive_forward_declarations_factory.hpp"
 
 namespace dogen::text::transforms::cpp::serialization {
 namespace {
@@ -57,6 +67,16 @@ physical::entities::facet serialization_factory::make() {
         }
     });
 
+    lambda(r.archetypes(), builtin_header_factory::make());
+    lambda(r.archetypes(), class_forward_declarations_factory::make());
+    lambda(r.archetypes(), class_header_factory::make());
+    lambda(r.archetypes(), class_implementation_factory::make());
+    lambda(r.archetypes(), enum_header_factory::make());
+    lambda(r.archetypes(), primitive_forward_declarations_factory::make());
+    lambda(r.archetypes(), primitive_header_factory::make());
+    lambda(r.archetypes(), primitive_implementation_factory::make());
+    lambda(r.archetypes(), type_registrar_header_factory::make());
+    lambda(r.archetypes(), type_registrar_implementation_factory::make());
 
     lambda(r.helpers(), path_helper_factory::make());
     return r;
