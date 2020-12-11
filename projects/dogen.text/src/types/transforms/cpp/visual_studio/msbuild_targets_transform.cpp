@@ -32,13 +32,13 @@
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp"
-#include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_factory.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/msbuild_targets_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/msbuild_targets_factory.hpp"
 
-namespace dogen::text::cpp::transforms::visual_studio {
+namespace dogen::text::transforms::cpp::visual_studio {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.visual_studio.msbuild_targets_transform");
+const std::string transform_id("text.transforms.visual_studio.msbuild_targets_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

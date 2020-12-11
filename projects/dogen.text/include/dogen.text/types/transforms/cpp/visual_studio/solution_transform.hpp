@@ -18,30 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_VISUAL_STUDIO_SOLUTION_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_VISUAL_STUDIO_SOLUTION_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::cpp::transforms::visual_studio {
+namespace dogen::text::transforms::cpp::visual_studio {
 
-/**
- * @brief Creates a physical representation for the archetype
- * solution.
- *
- * Archetype documentation: Generates visual studio solutions.
-
- */
-class solution_factory final {
+class solution_transform final : public text::transforms::model_to_text_transform {
 public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
 };
 
 }

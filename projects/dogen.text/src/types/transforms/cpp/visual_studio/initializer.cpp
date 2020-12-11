@@ -18,16 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/visual_studio/project_transform.hpp"
-#include "dogen.text.cpp/types/transforms/visual_studio/solution_transform.hpp"
-#include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/project_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/solution_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/msbuild_targets_transform.hpp"
 #include "dogen.text/types/transforms/cpp/visual_studio/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::visual_studio {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& /*hrg*/) {
-    using namespace text::cpp::transforms::visual_studio;
     register_text_transform<project_transform>(ttrg);
     register_text_transform<solution_transform>(ttrg);
     register_text_transform<msbuild_targets_transform>(ttrg);

@@ -22,7 +22,10 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/project_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/solution_transform.hpp"
 #include "dogen.text/types/transforms/cpp/visual_studio/visual_studio_transform.hpp"
+#include "dogen.text/types/transforms/cpp/visual_studio/msbuild_targets_transform.hpp"
 
 namespace dogen::text::transforms::cpp::visual_studio {
 namespace {
