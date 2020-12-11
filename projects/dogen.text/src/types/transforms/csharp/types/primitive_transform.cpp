@@ -29,13 +29,13 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/primitive_factory.hpp"
+#include "dogen.text/types/transforms/csharp/types/primitive_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/primitive_factory.hpp"
 
-namespace dogen::text::csharp::transforms::types {
+namespace dogen::text::transforms::csharp::types {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.types.primitive_transform");
+const std::string transform_id("text.transforms.types.primitive_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

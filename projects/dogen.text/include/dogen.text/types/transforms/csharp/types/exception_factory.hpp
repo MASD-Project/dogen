@@ -18,26 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_EXCEPTION_TRANSFORM_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_EXCEPTION_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_EXCEPTION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_EXCEPTION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.text/types/transforms/model_to_text_transform.hpp"
+#include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::csharp::transforms::types {
+namespace dogen::text::transforms::csharp::types {
 
-class exception_transform final : public text::transforms::model_to_text_transform {
+/**
+ * @brief Creates a physical representation for the archetype
+ * exception.
+ *
+ * Archetype documentation: Generates implementation files for exceptions.
+
+ */
+class exception_factory final {
 public:
-    static const physical::entities::archetype& static_archetype();
-    const physical::entities::archetype& archetype() const override;
-
-public:
-void apply(const text::transforms::context& ctx, const text::entities::model& lps,
-    const logical::entities::element& e,
-    physical::entities::artefact& a) const override;
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
 };
 
 }

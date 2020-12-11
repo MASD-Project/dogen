@@ -27,13 +27,13 @@
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/types/builtin_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/builtin_factory.hpp"
+#include "dogen.text/types/transforms/csharp/types/builtin_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/builtin_factory.hpp"
 
-namespace dogen::text::csharp::transforms::types {
+namespace dogen::text::transforms::csharp::types {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.types.builtin_transform");
+const std::string transform_id("text.transforms.types.builtin_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

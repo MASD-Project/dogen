@@ -24,39 +24,40 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/types/exception_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/exception_factory.hpp"
+#include "dogen.text/types/transforms/csharp/types/enum_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/enum_factory.hpp"
 
-namespace dogen::text::csharp::transforms::types {
+namespace dogen::text::transforms::csharp::types {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.types.exception_transform");
+const std::string transform_id("text.transforms.types.enum_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& exception_transform::static_archetype() {
-    static auto r(exception_factory::make());
+const physical::entities::archetype& enum_transform::static_archetype() {
+    static auto r(enum_factory::make());
     return r;
 }
 
-const physical::entities::archetype& exception_transform::archetype() const {
+const physical::entities::archetype& enum_transform::archetype() const {
     return static_archetype();
 }
 
-void exception_transform::
+void enum_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "exception",
+    tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -67,11 +68,19 @@ ast.stream() << std::endl;
             const auto ns(ast.make_namespaces(e.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             ast.comment(e.documentation(), 1/*indent*/);
-ast.stream() << "    public class " << sn << "  : Exception" << std::endl;
+            if (ye.use_implementation_defined_underlying_element())
+ast.stream() << "    public enum " << sn << std::endl;
+            else
+ast.stream() << "    public enum " << sn << " : " << ast.get_qualified_name(ye.underlying_element()) << std::endl;
 ast.stream() << "    {" << std::endl;
-ast.stream() << "        public " << sn << "() { }" << std::endl;
-ast.stream() << "        public " << sn << "(string message) : base(message) { }" << std::endl;
-ast.stream() << "        public " << sn << "(string message, Exception inner) : base(message, inner) { }" << std::endl;
+            utility::formatters::sequence_formatter sf(ye.enumerators().size());
+            for (const auto& en : ye.enumerators()) {
+                if (ye.use_implementation_defined_enumerator_values())
+ast.stream() << "        " << en.name().simple() << sf.postfix() << ast.comment_inline(en.documentation()) << std::endl;
+                else
+ast.stream() << "        " << en.name().simple() << " = " << en.value() << sf.postfix() << ast.comment_inline(en.documentation()) << std::endl;
+                sf.next();
+            }
 ast.stream() << "    }" << std::endl;
         } // snf
     } // sbf

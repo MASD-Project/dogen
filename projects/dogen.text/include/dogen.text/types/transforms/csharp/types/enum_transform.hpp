@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_PRIMITIVE_TRANSFORM_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TYPES_PRIMITIVE_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_ENUM_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_ENUM_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::csharp::transforms::types {
+namespace dogen::text::transforms::csharp::types {
 
-class primitive_transform final : public text::transforms::model_to_text_transform {
+class enum_transform final : public text::transforms::model_to_text_transform {
 public:
     static const physical::entities::archetype& static_archetype();
     const physical::entities::archetype& archetype() const override;

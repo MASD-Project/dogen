@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.csharp/types/transforms/types/class_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/enum_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/exception_transform.hpp"
-#include "dogen.text.csharp/types/transforms/types/builtin_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/class_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/primitive_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/enum_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/exception_transform.hpp"
+#include "dogen.text/types/transforms/csharp/types/builtin_transform.hpp"
 #include "dogen.text/types/transforms/csharp/types/floating_point_number_helper_transform.hpp"
 #include "dogen.text/types/transforms/csharp/types/initializer.hpp"
 
@@ -30,7 +30,6 @@ namespace dogen::text::transforms::csharp::types {
 
 void initializer::
 initialize(text_transform_registrar& ttrg, helper_registrar& hrg) {
-    using namespace text::csharp::transforms::types;
     register_text_transform<class_transform>(ttrg);
     register_text_transform<primitive_transform>(ttrg);
     register_text_transform<enum_transform>(ttrg);

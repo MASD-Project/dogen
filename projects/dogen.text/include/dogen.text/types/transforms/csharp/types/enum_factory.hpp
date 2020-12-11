@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.csharp/types/transforms/types/builtin_factory.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_ENUM_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TYPES_ENUM_FACTORY_HPP
 
-namespace dogen::text::csharp::transforms::types {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype builtin_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("csharp", "types", "builtin"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.builtin"));
-    r.technical_space(identification::entities::technical_space::csharp);
-    r.relations().status(physical::entities::relation_status::facet_default);
+#include "dogen.physical/types/entities/archetype.hpp"
 
-    return r;
+namespace dogen::text::transforms::csharp::types {
+
+/**
+ * @brief Creates a physical representation for the archetype
+ * enum.
+ *
+ * Archetype documentation: Generates implementation files for enums.
+
+ */
+class enum_factory final {
+public:
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
+};
+
 }
 
-}
+#endif
