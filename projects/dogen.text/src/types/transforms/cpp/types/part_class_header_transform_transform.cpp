@@ -33,7 +33,7 @@
 namespace dogen::text::transforms::cpp::types {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.types.part_class_header_transform_transform");
+const std::string transform_id("text.transforms.types.part_class_header_transform_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

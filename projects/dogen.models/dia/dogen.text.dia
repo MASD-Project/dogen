@@ -24596,7 +24596,7 @@ void apply(const text::transforms::context&amp; ctx, const text::entities::model
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_transform
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -24972,7 +24972,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_factory
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.types
 #DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
 #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.archetype_class_header_factory
 #DOGEN masd.physical.postfix=factory#</dia:string>
@@ -25431,7 +25431,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_transform
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.types
 #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.class_header
 #DOGEN masd.physical.variable_relation=transparent,role:type_declaration
 #DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
@@ -26743,7 +26743,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_header_transform
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -28013,7 +28013,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation_transform
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.types
 #DOGEN masd.physical.postfix=transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">

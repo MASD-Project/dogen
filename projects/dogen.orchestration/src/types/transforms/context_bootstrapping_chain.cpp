@@ -36,8 +36,6 @@
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.text/types/transforms/cpp/cpp_factory.hpp"
 #include "dogen.text/types/transforms/csharp/csharp_factory.hpp"
-#include "dogen.text.cpp/types/transforms/transforms_factory.hpp"
-#include "dogen.text.csharp/types/transforms/transforms_factory.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
@@ -92,27 +90,10 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
      * Obtain the backends.
      */
-    // FIXME: for now we need to merge the helpers from the new backends.
-    const auto lambda([](auto& old_be, const auto new_be) {
-        for (const auto& new_pair : new_be.facets()) {
-            const auto& new_facet(new_pair.second);
-            for (auto& old_pair : old_be.facets()) {
-                auto& old_facet(old_pair.second);
-                if (old_facet.meta_name().id() == new_facet.meta_name().id()) {
-                    old_facet.helpers(new_facet.helpers());
-                    for (const auto& new_pair2: new_facet.archetypes()) {
-                        old_facet.archetypes().insert(new_pair2);
-                    }
-                }
-            }
-        }
-    });
-
-    auto cpp_be(text::cpp::transforms::transforms_factory::make());
-    lambda(cpp_be, text::transforms::cpp::cpp_factory::make());
-    auto csharp_be(text::csharp::transforms::transforms_factory::make());
-    lambda(csharp_be, text::transforms::csharp::csharp_factory::make());
-    const std::list<physical::entities::backend> bes { cpp_be, csharp_be };
+    const std::list<physical::entities::backend> bes {
+        text::transforms::cpp::cpp_factory::make(),
+        text::transforms::csharp::csharp_factory::make()
+    };
 
     /*
      * Execute the physical chain to get a PMM.

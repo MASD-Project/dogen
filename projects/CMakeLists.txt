@@ -285,8 +285,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.orchestration/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.text/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.text.cpp/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.text.csharp/include
     )
 
 if (WITH_RELATIONAL_SUPPORT)
@@ -321,8 +319,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.text)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.text.cpp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.text.csharp)
 
 if (WITH_RELATIONAL_SUPPORT)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.relational)

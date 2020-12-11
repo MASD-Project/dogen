@@ -56,8 +56,6 @@ target_link_libraries(${lib_target_name}
     dogen.codec.json.lib
     dogen.codec.dia.lib
     dogen.logical.lib
-    dogen.text.cpp.lib
-    dogen.text.csharp.lib
     dogen.text.lib
     ${relational_lib}
     dogen.lib
