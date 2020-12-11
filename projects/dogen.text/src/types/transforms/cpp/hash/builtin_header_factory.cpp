@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/cpp/hash/builtin_header_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/hash/primitive_implementation_factory.hpp"
 
-namespace dogen::text::cpp::transforms::hash {
+namespace dogen::text::transforms::cpp::hash {
 
-physical::entities::archetype primitive_implementation_factory::make() {
+physical::entities::archetype builtin_header_factory::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "hash", "primitive_implementation"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.primitive"));
+    r.meta_name(pmnf::make("cpp", "hash", "builtin_header"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.builtin"));
     r.technical_space(identification::entities::technical_space::cpp);
-    r.relations().status(physical::entities::relation_status::not_relatable);
+    r.relations().status(physical::entities::relation_status::facet_default);
 
     return r;
 }

@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/hash/builtin_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/primitive_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/primitive_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/primitive_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/enum_header_transform.hpp"
 #include "dogen.text/types/transforms/cpp/hash/associative_container_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/hash/date_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/hash/optional_helper_transform.hpp"
@@ -41,7 +41,6 @@ namespace dogen::text::transforms::cpp::hash {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& hrg) {
-    using namespace text::cpp::transforms::hash;
     register_text_transform<builtin_header_transform>(ttrg);
     register_text_transform<primitive_header_transform>(ttrg);
     register_text_transform<primitive_implementation_transform>(ttrg);

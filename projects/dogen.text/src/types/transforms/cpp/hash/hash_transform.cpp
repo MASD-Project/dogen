@@ -22,7 +22,13 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/cpp/hash/hash_transform.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/hash/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/class_header_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/hash/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/hash/primitive_implementation_transform.hpp"
 
 namespace dogen::text::transforms::cpp::hash {
 namespace {

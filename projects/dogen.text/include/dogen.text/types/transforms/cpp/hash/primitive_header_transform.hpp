@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_PRIMITIVE_HEADER_TRANSFORM_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_PRIMITIVE_HEADER_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_HASH_PRIMITIVE_HEADER_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_HASH_PRIMITIVE_HEADER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::cpp::transforms::hash {
+namespace dogen::text::transforms::cpp::hash {
 
 class primitive_header_transform final : public text::transforms::model_to_text_transform {
 public:

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_PRIMITIVE_IMPLEMENTATION_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_HASH_PRIMITIVE_IMPLEMENTATION_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_HASH_CLASS_IMPLEMENTATION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_HASH_CLASS_IMPLEMENTATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::cpp::transforms::hash {
+namespace dogen::text::transforms::cpp::hash {
 
 /**
  * @brief Creates a physical representation for the archetype
- * primitive_implementation.
+ * class_implementation.
  *
- * Archetype documentation: Generates implementation files for primitives.
+ * Archetype documentation: Generates implementation files for objects.
 
  */
-class primitive_implementation_factory final {
+class class_implementation_factory final {
 public:
     /**
      * @brief Makes the archetype.
