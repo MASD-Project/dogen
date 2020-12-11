@@ -24,10 +24,28 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text/types/transforms/cpp/types/smart_pointer_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/part_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/facet_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/helper_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/part_class_header_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/backend_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/facet_class_header_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/helper_class_header_transform_factory.hpp"
 #include "dogen.text/types/transforms/cpp/types/archetype_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/backend_class_header_transform_factory.hpp"
 #include "dogen.text/types/transforms/cpp/types/archetype_class_header_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/part_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/facet_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_kind_class_header_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/helper_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/part_class_implementation_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/backend_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/facet_class_implementation_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/helper_class_implementation_transform_factory.hpp"
 #include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/backend_class_implementation_transform_factory.hpp"
 #include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_kind_class_implementation_factory_factory.hpp"
 
 namespace dogen::text::transforms::cpp::types {
 namespace {
@@ -65,6 +83,24 @@ physical::entities::facet types_factory::make() {
     lambda(r.archetypes(), archetype_class_header_transform_factory::make());
     lambda(r.archetypes(), archetype_class_implementation_factory_factory::make());
     lambda(r.archetypes(), archetype_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), archetype_kind_class_header_factory_factory::make());
+    lambda(r.archetypes(), archetype_kind_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), backend_class_header_factory_factory::make());
+    lambda(r.archetypes(), backend_class_header_transform_factory::make());
+    lambda(r.archetypes(), backend_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), backend_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), facet_class_header_factory_factory::make());
+    lambda(r.archetypes(), facet_class_header_transform_factory::make());
+    lambda(r.archetypes(), facet_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), facet_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), helper_class_header_factory_factory::make());
+    lambda(r.archetypes(), helper_class_header_transform_factory::make());
+    lambda(r.archetypes(), helper_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), helper_class_implementation_transform_factory::make());
+    lambda(r.archetypes(), part_class_header_factory_factory::make());
+    lambda(r.archetypes(), part_class_header_transform_factory::make());
+    lambda(r.archetypes(), part_class_implementation_factory_factory::make());
+    lambda(r.archetypes(), part_class_implementation_transform_factory::make());
 
     lambda(r.helpers(), smart_pointer_helper_factory::make());
     return r;
