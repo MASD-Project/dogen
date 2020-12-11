@@ -24,47 +24,45 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
-#include "dogen.text.csharp/types/transforms/io/primitive_factory.hpp"
+#include "dogen.text/types/transforms/csharp/io/enum_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/enum_factory.hpp"
 
-namespace dogen::text::csharp::transforms::io {
+namespace dogen::text::transforms::csharp::io {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.io.primitive_transform");
+const std::string transform_id("text.transforms.io.enum_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& primitive_transform::static_archetype() {
-    static auto r(primitive_factory::make());
+const physical::entities::archetype& enum_transform::static_archetype() {
+    static auto r(enum_factory::make());
     return r;
 }
 
-const physical::entities::archetype& primitive_transform::archetype() const {
+const physical::entities::archetype& enum_transform::archetype() const {
     return static_archetype();
 }
 
-void primitive_transform::
+void enum_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "primitive",
-        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+   tracing::scoped_transform_tracer stp(lg, "enum",
+       transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
-    const auto& p(ast.as<logical::entities::structural::primitive>(e));
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-ast.stream() << "using System;" << std::endl;
-ast.stream() << std::endl;
             const auto ns(ast.make_namespaces(e.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << "    /// <summary>" << std::endl;
@@ -80,29 +78,18 @@ ast.stream() << "                return;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "            assistant.AddStartObject();" << std::endl;
 ast.stream() << "            assistant.AddType(\"" << qn << "\", true/*withSeparator*/);" << std::endl;
-ast.stream() << "            if (value == null)" << std::endl;
+ast.stream() << "            string valueAsString = \"Unsupported Value\";" << std::endl;
+ast.stream() << "            switch (value)" << std::endl;
 ast.stream() << "            {" << std::endl;
-ast.stream() << "                assistant.Add(\"data\", \"<null>\");" << std::endl;
-ast.stream() << "                assistant.AddEndObject();" << std::endl;
-ast.stream() << "                return;" << std::endl;
+            for (const auto& en : ye.enumerators()) {
+ast.stream() << "                case " << ye.name().simple() << "." << en.name().simple() << ":" << std::endl;
+ast.stream() << "                    valueAsString = \"" << en.name().simple() << "\";" << std::endl;
+ast.stream() << "                    break;" << std::endl;
+            }
 ast.stream() << "            }" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "            assistant.AddKey(\"data\");" << std::endl;
-ast.stream() << "            assistant.AddPairSeparator();" << std::endl;
-ast.stream() << "            assistant.AddStartObject();" << std::endl;
-            const auto attr(p.value_attribute());
-            const auto oap(ast.get_assistant_properties(attr));
-            if (oap && oap->requires_assistance()) {
-ast.stream() << "            assistant.Add(\"" << attr.name().simple() << "\", value." << attr.name().simple() << ");" << std::endl;
-            } else {
-                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
-ast.stream() << "            assistant.AddKey(\"" << attr.name().simple() << "\");" << std::endl;
-ast.stream() << "            assistant.AddPairSeparator();" << std::endl;
-ast.stream() << "            " << attr_qn << "Dumper.Dump(assistant, value." << attr.name().simple() << ";" << std::endl;
-            }
-ast.stream() << "            assistant.AddEndObject(); // data" << std::endl;
-ast.stream() << "            assistant.AddEndObject(); // main object" << std::endl;
-ast.stream() << "            assistant.HandleMemberSeparator(withSeparator);" << std::endl;
+ast.stream() << "            assistant.Add(\"value\", valueAsString);" << std::endl;
+ast.stream() << "            assistant.AddEndObject();" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "            assistant.DecrementDepth();" << std::endl;
 ast.stream() << "        }" << std::endl;

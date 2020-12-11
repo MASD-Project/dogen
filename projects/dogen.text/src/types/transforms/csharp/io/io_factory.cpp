@@ -21,7 +21,11 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/csharp/io/io_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/csharp/io/enum_factory.hpp"
+#include "dogen.text/types/transforms/csharp/io/class_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/csharp/io/assistant_factory.hpp"
+#include "dogen.text/types/transforms/csharp/io/primitive_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text/types/transforms/csharp/io/enumerable_helper_factory.hpp"
 
@@ -57,6 +61,10 @@ physical::entities::facet io_factory::make() {
         }
     });
 
+    lambda(r.archetypes(), assistant_factory::make());
+    lambda(r.archetypes(), class_factory::make());
+    lambda(r.archetypes(), enum_factory::make());
+    lambda(r.archetypes(), primitive_factory::make());
 
     lambda(r.helpers(), enumerable_helper_factory::make());
     return r;

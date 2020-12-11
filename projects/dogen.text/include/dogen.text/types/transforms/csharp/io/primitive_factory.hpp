@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.csharp/types/transforms/io/enum_factory.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_IO_PRIMITIVE_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_IO_PRIMITIVE_FACTORY_HPP
 
-namespace dogen::text::csharp::transforms::io {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype enum_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("csharp", "io", "enum"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
-    r.technical_space(identification::entities::technical_space::csharp);
-    r.relations().status(physical::entities::relation_status::facet_default);
+#include "dogen.physical/types/entities/archetype.hpp"
 
-    return r;
+namespace dogen::text::transforms::csharp::io {
+
+/**
+ * @brief Creates a physical representation for the archetype
+ * primitive.
+ *
+ * Archetype documentation: Generates implementation files for primitives.
+
+ */
+class primitive_factory final {
+public:
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
+};
+
 }
 
-}
+#endif

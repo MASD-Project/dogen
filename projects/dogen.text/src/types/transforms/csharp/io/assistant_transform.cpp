@@ -28,10 +28,10 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/io/assistant_transform.hpp"
-#include "dogen.text.csharp/types/transforms/io/assistant_factory.hpp"
+#include "dogen.text/types/transforms/csharp/io/assistant_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/assistant_factory.hpp"
 
-namespace dogen::text::csharp::transforms::io {
+namespace dogen::text::transforms::csharp::io {
 namespace {
 
 const std::string transform_id("text.csharp.transforms.io.assistant_transform");

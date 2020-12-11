@@ -21,11 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text.csharp/types/transforms/io/io_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.csharp/types/transforms/io/enum_factory.hpp"
-#include "dogen.text.csharp/types/transforms/io/class_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text.csharp/types/transforms/io/assistant_factory.hpp"
-#include "dogen.text.csharp/types/transforms/io/primitive_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
 namespace dogen::text::csharp::transforms::io {
@@ -46,24 +42,6 @@ physical::entities::facet io_factory::make() {
     r.meta_name(b.build());
     r.directory_name("Dumpers");
     r.postfix("Dumper");
-
-    const auto lambda([&](auto& container, const auto& element) {
-        const auto id(element.meta_name().id());
-        const auto pair(std::make_pair(id, element));
-        const auto inserted(container.insert(pair).second);
-        if (!inserted) {
-            using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate id: ");
-            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_archetype + id.value()));
-        }
-    });
-
-    lambda(r.archetypes(), assistant_factory::make());
-    lambda(r.archetypes(), class_factory::make());
-    lambda(r.archetypes(), enum_factory::make());
-    lambda(r.archetypes(), primitive_factory::make());
 
     return r;
 }

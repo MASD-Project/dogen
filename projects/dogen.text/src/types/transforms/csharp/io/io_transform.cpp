@@ -22,6 +22,10 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/csharp/io/io_transform.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/csharp/io/enum_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/class_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/assistant_transform.hpp"
+#include "dogen.text/types/transforms/csharp/io/primitive_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
 namespace dogen::text::transforms::csharp::io {

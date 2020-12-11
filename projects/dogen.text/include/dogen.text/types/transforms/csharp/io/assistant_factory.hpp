@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_PRIMITIVE_FACTORY_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_IO_PRIMITIVE_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_IO_ASSISTANT_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_IO_ASSISTANT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::csharp::transforms::io {
+namespace dogen::text::transforms::csharp::io {
 
 /**
  * @brief Creates a physical representation for the archetype
- * primitive.
+ * assistant.
  *
- * Archetype documentation: Generates implementation files for primitives.
+ * Archetype documentation: Generates implementation files for assistants.
 
  */
-class primitive_factory final {
+class assistant_factory final {
 public:
     /**
      * @brief Makes the archetype.
