@@ -18,30 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_CLASS_IMPLEMENTATION_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_CLASS_IMPLEMENTATION_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_ENUM_IMPLEMENTATION_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_ENUM_IMPLEMENTATION_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::cpp::transforms::test_data {
+namespace dogen::text::transforms::cpp::test_data {
 
-/**
- * @brief Creates a physical representation for the archetype
- * class_implementation.
- *
- * Archetype documentation: Generates implementation files for objects.
-
- */
-class class_implementation_factory final {
+class enum_implementation_transform final : public text::transforms::model_to_text_transform {
 public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
 };
 
 }

@@ -19,15 +19,15 @@
  *
  */
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/builtin_header_factory.hpp"
 
-namespace dogen::text::cpp::transforms::test_data {
+namespace dogen::text::transforms::cpp::test_data {
 
-physical::entities::archetype enum_header_factory::make() {
+physical::entities::archetype builtin_header_factory::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "test_data", "enum_header"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
+    r.meta_name(pmnf::make("cpp", "test_data", "builtin_header"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.builtin"));
     r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::facet_default);
 

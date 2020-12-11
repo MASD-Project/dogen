@@ -31,13 +31,13 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_implementation_factory.hpp"
 
-namespace dogen::text::cpp::transforms::test_data {
+namespace dogen::text::transforms::cpp::test_data {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.test_data.enum_implementation_transform");
+const std::string transform_id("text.transforms.test_data.enum_implementation_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

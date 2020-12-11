@@ -10881,7 +10881,7 @@ C++ technical space.
         <dia:point val="229,152"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="228.95,150.15;300.05,183.05"/>
+        <dia:rectangle val="228.95,150.15;295.05,183.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10890,7 +10890,7 @@ C++ technical space.
         <dia:point val="229,152"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="71"/>
+        <dia:real val="66"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="31"/>
@@ -10968,22 +10968,22 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O86">
       <dia:attribute name="obj_pos">
-        <dia:point val="229,235"/>
+        <dia:point val="229,186"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="228.95,233.15;293.05,278.05"/>
+        <dia:rectangle val="228.95,184.15;295.05,238.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="229,235"/>
+        <dia:point val="229,186"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="64"/>
+        <dia:real val="66"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="43"/>
+        <dia:real val="52"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -11371,16 +11371,16 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,243"/>
+        <dia:point val="231,188"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,242.95;249.275,248.75"/>
+        <dia:rectangle val="230.95,187.95;249.275,193.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,243"/>
+        <dia:point val="231,188"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.225000000000001"/>
@@ -11405,7 +11405,7 @@ of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="231.35,244.244"/>
+            <dia:point val="231.35,189.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -12470,13 +12470,13 @@ and to string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="252,243"/>
+        <dia:point val="252,188"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="251.95,242.95;264.87,246.65"/>
+        <dia:rectangle val="251.95,187.95;264.87,191.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="252,243"/>
+        <dia:point val="252,188"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -20226,13 +20226,13 @@ inline std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= d.na
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O160">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,258"/>
+        <dia:point val="231,217"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,257.95;241.56,261.65"/>
+        <dia:rectangle val="230.95,216.95;241.56,220.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,258"/>
+        <dia:point val="231,217"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -20393,13 +20393,13 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O161">
       <dia:attribute name="obj_pos">
-        <dia:point val="248,258"/>
+        <dia:point val="248,217"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="247.95,257.95;258.56,261.65"/>
+        <dia:rectangle val="247.95,216.95;258.56,220.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="248,258"/>
+        <dia:point val="248,217"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -20554,13 +20554,13 @@ bool create_bool(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O162">
       <dia:attribute name="obj_pos">
-        <dia:point val="261,258"/>
+        <dia:point val="261,217"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="260.95,257.95;271.56,261.65"/>
+        <dia:rectangle val="260.95,216.95;271.56,220.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="261,258"/>
+        <dia:point val="261,217"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -20719,13 +20719,13 @@ void char_helper_transform::apply(std::ostream&amp; os, const logical::entities:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O163">
       <dia:attribute name="obj_pos">
-        <dia:point val="276,258"/>
+        <dia:point val="276,217"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="275.95,257.95;286.56,261.65"/>
+        <dia:rectangle val="275.95,216.95;286.56,220.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="276,258"/>
+        <dia:point val="276,217"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -20889,13 +20889,13 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O164">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,263"/>
+        <dia:point val="231,222"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,262.95;244.6,266.65"/>
+        <dia:rectangle val="230.95,221.95;244.6,225.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,263"/>
+        <dia:point val="231,222"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.550000000000001"/>
@@ -21071,13 +21071,13 @@ apply(std::ostream&amp; os, const logical::entities::model&amp; /*m*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O165">
       <dia:attribute name="obj_pos">
-        <dia:point val="248,263"/>
+        <dia:point val="248,222"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="247.95,262.95;258.56,266.65"/>
+        <dia:rectangle val="247.95,221.95;258.56,225.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="248,263"/>
+        <dia:point val="248,222"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -21241,13 +21241,13 @@ create_&lt;#= ident #&gt;(unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O166">
       <dia:attribute name="obj_pos">
-        <dia:point val="261,263"/>
+        <dia:point val="261,222"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="260.95,262.95;271.56,266.65"/>
+        <dia:rectangle val="260.95,221.95;271.56,225.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="261,263"/>
+        <dia:point val="261,222"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -21405,13 +21405,13 @@ void number_helper_transform::apply(std::ostream&amp; os, const logical::entitie
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O167">
       <dia:attribute name="obj_pos">
-        <dia:point val="276,263"/>
+        <dia:point val="276,222"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="275.95,262.95;286.56,266.65"/>
+        <dia:rectangle val="275.95,221.95;286.56,225.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="276,263"/>
+        <dia:point val="276,222"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -21593,13 +21593,13 @@ create_&lt;#= ident #&gt;(unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O168">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,268"/>
+        <dia:point val="231,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,267.95;241.56,271.65"/>
+        <dia:rectangle val="230.95,226.95;241.56,230.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,268"/>
+        <dia:point val="231,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -21760,13 +21760,13 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O169">
       <dia:attribute name="obj_pos">
-        <dia:point val="248,268"/>
+        <dia:point val="248,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="247.95,267.95;258.56,271.65"/>
+        <dia:rectangle val="247.95,226.95;258.56,230.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="248,268"/>
+        <dia:point val="248,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -21931,13 +21931,13 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O170">
       <dia:attribute name="obj_pos">
-        <dia:point val="261,268"/>
+        <dia:point val="261,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="260.95,267.95;271.56,271.65"/>
+        <dia:rectangle val="260.95,226.95;271.56,230.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="261,268"/>
+        <dia:point val="261,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -22099,13 +22099,13 @@ create_&lt;#= ident #&gt;(unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O171">
       <dia:attribute name="obj_pos">
-        <dia:point val="276,268"/>
+        <dia:point val="276,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="275.95,267.95;286.56,271.65"/>
+        <dia:rectangle val="275.95,226.95;286.56,230.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="276,268"/>
+        <dia:point val="276,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -22267,13 +22267,13 @@ create_&lt;#= ident #&gt;(unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O172">
       <dia:attribute name="obj_pos">
-        <dia:point val="231,273"/>
+        <dia:point val="231,232"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.95,272.95;243.838,276.65"/>
+        <dia:rectangle val="230.95,231.95;243.838,235.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="231,273"/>
+        <dia:point val="231,232"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.7875"/>
@@ -22436,13 +22436,13 @@ void sequence_container_helper_transform::apply(std::ostream&amp; os, const logi
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O173">
       <dia:attribute name="obj_pos">
-        <dia:point val="248,273"/>
+        <dia:point val="248,232"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="247.95,272.95;258.56,276.65"/>
+        <dia:rectangle val="247.95,231.95;258.56,235.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="248,273"/>
+        <dia:point val="248,232"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -22599,13 +22599,13 @@ std::string create_std_string(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O174">
       <dia:attribute name="obj_pos">
-        <dia:point val="261,273"/>
+        <dia:point val="261,232"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="260.95,272.95;271.56,276.65"/>
+        <dia:rectangle val="260.95,231.95;271.56,235.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="261,273"/>
+        <dia:point val="261,232"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -22787,13 +22787,13 @@ create_&lt;#= ident #&gt;(const unsigned int position) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O175">
       <dia:attribute name="obj_pos">
-        <dia:point val="276,273"/>
+        <dia:point val="276,232"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="275.95,272.95;286.56,276.65"/>
+        <dia:rectangle val="275.95,231.95;286.56,235.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="276,273"/>
+        <dia:point val="276,232"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.51"/>
@@ -40524,6 +40524,1605 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O85"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O257">
+      <dia:attribute name="obj_pos">
+        <dia:point val="231,196"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="230.95,195.95;256.575,199.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="231,196"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.524999999999999"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#class_header#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/class_header_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void class_header_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto sn(o.name().simple());
+            const auto qn(ast.get_qualified_name(o.name()));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= sn #&gt;_generator {
+&lt;#+
+            if (!o.is_parent()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;_generator();
+
+&lt;#+
+            }
+#&gt;
+public:
+    typedef &lt;#= qn #&gt; result_type;
+
+public:
+&lt;#+
+            if (!o.is_immutable())
+#&gt;
+    static void populate(const unsigned int position, result_type&amp; v);
+&lt;#+
+            if (!o.is_parent()) {
+#&gt;
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+&lt;#+
+            }
+#&gt;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O258">
+      <dia:attribute name="obj_pos">
+        <dia:point val="231,201"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="230.95,200.95;258.5,204.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="231,201"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="27.449999999999999"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#enum_header#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/enum_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/enum_header_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void enum_header_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= ye.name().simple() #&gt;_generator {
+public:
+    &lt;#= ye.name().simple() #&gt;_generator();
+
+public:
+    typedef &lt;#= ast.get_qualified_name(ye.name()) #&gt; result_type;
+
+public:
+    static void populate(const unsigned int position, result_type&amp; v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+&lt;#+
+         } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O259">
+      <dia:attribute name="obj_pos">
+        <dia:point val="231,206"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="230.95,205.95;257.73,209.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="231,206"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="26.68"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#primitive_header#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/primitive_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/primitive_header_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void primitive_header_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(ast.get_qualified_name(p.name()));
+    {
+
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= sn #&gt;_generator {
+public:
+    &lt;#= sn #&gt;_generator();
+
+public:
+    typedef &lt;#= qn #&gt; result_type;
+
+public:
+&lt;#+
+            if (!p.is_immutable())
+#&gt;
+    static void populate(const unsigned int position, result_type&amp; v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O260">
+      <dia:attribute name="obj_pos">
+        <dia:point val="231,211"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="230.95,210.95;256.96,214.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="231,211"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.91"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#builtin_header#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/builtin_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/builtin_header_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void builtin_header_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; /*lps*/,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "builtin header",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    stp.end_transform(a);
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O261">
+      <dia:attribute name="obj_pos">
+        <dia:point val="262,196"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="261.95,195.95;290.655,199.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="262,196"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="28.605"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#class_implementation#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/class_implementation_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void class_implementation_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        const auto sn(o.name().simple());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        if (!o.local_attributes().empty()) {
+#&gt;
+namespace {
+&lt;#+
+        ast.add_helper_methods(o.name().qualified().dot());
+#&gt;
+
+}
+
+&lt;#+
+        }
+
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+
+            /*
+             * Default constructor.
+             */
+            if (!o.is_parent()) {
+#&gt;
+
+&lt;#= sn #&gt;_generator::&lt;#= sn #&gt;_generator() : position_(0) { }
+&lt;#+
+            }
+
+            /*
+             * Populate method.
+             */
+            if (!o.is_immutable()) {
+                bool no_args(o.local_attributes().empty() &amp;&amp; o.parents().empty());
+                if (no_args) {
+#&gt;
+
+void &lt;#= sn #&gt;_generator::
+populate(const unsigned int /*position*/, result_type&amp; /*v*/) {
+&lt;#+
+                } else {
+#&gt;
+
+void &lt;#= sn #&gt;_generator::
+populate(const unsigned int position, result_type&amp; v) {
+&lt;#+
+                }
+
+                if (!o.parents().empty()) {
+                    const auto&amp; pn(o.parents().front());
+                    const auto pqn(ast.get_qualified_name(pn));
+#&gt;
+    &lt;#= pqn #&gt;_generator::populate(position, v);
+&lt;#+
+                }
+                unsigned int i(0);
+                for (const auto&amp; attr : o.local_attributes()) {
+#&gt;
+    v.&lt;#= attr.name().simple() #&gt;(create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + &lt;#= i #&gt;));
+&lt;#+
+                    ++i;
+                }
+#&gt;
+}
+&lt;#+
+            }
+
+            /*
+             * Create method.
+             */
+            if (!o.is_parent()) {
+                 const bool no_arg(o.all_attributes().empty());
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::create(const unsigned int&lt;#= (no_arg ? "/*position*/" : " position") #&gt;) {
+&lt;#+
+                if (o.is_immutable()) {
+#&gt;
+    return &lt;#= sn #&gt;(
+&lt;#+
+                    if (o.local_attributes().empty())
+#&gt;
+
+&lt;#+
+                    else {
+                        utility::formatters::sequence_formatter sf(o.local_attributes().size());
+                        for (const auto&amp; attr : o.local_attributes()) {
+#&gt;
+        create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + &lt;#= sf.current_position() #&gt;)&lt;#= sf.postfix() #&gt;
+&lt;#+
+                            sf.next();
+                        }
+                    }
+#&gt;
+        );
+&lt;#+
+                } else {
+#&gt;
+    &lt;#= sn #&gt; r;
+&lt;#+
+                    if (!o.all_attributes().empty())
+#&gt;
+    &lt;#= sn #&gt;_generator::populate(position, r);
+    return r;
+&lt;#+
+                }
+#&gt;
+}
+&lt;#+
+            }
+
+            /*
+             * Create method ptr.
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type*
+&lt;#= sn #&gt;_generator::create_ptr(const unsigned int position) {
+&lt;#+
+            if (o.leaves().empty()) {
+                if (o.is_immutable())
+#&gt;
+    return new &lt;#= sn #&gt;(create(position));
+&lt;#+
+                else {
+#&gt;
+    &lt;#= sn #&gt;* p = new &lt;#= sn #&gt;();
+    &lt;#= sn #&gt;_generator::populate(position, *p);
+    return p;
+&lt;#+
+                }
+            } else {
+                auto leaves(o.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                const auto total(static_cast&lt;unsigned int&gt;(leaves.size()));
+                for (const auto&amp; l : leaves) {
+#&gt;
+    if ((position % &lt;#= total #&gt;) == &lt;#= i++ #&gt;)
+        return &lt;#= ast.get_qualified_name(l) #&gt;_generator::create_ptr(position);
+&lt;#+
+                }
+#&gt;
+    return &lt;#= ast.get_qualified_name(front) #&gt;_generator::create_ptr(position);
+&lt;#+
+            }
+#&gt;
+}
+&lt;#+
+            /*
+             * Function operator
+             */
+             if (!o.is_parent()) {
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::operator()() {
+    return create(position_++);
+}
+&lt;#+
+            }
+#&gt;
+
+&lt;#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O262">
+      <dia:attribute name="obj_pos">
+        <dia:point val="262,201"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="261.95,200.95;292.58,204.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="262,201"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="30.530000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#enum_implementation#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::enumeration_implementation_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates implementation files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/enum_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/enum_implementation_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void enum_implementation_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#= ye.name().simple() #&gt;_generator::&lt;#= ye.name().simple() #&gt;_generator() : position_(0) { }
+void &lt;#= ye.name().simple() #&gt;_generator::
+populate(const unsigned int position, result_type&amp; v) {
+    v = static_cast&lt;&lt;#= ye.name().simple() #&gt;&gt;(position % &lt;#= ye.enumerators().size() #&gt;);
+}
+
+&lt;#= ye.name().simple() #&gt;_generator::result_type
+&lt;#= ye.name().simple() #&gt;_generator::create(const unsigned int  position) {
+    result_type r;
+    &lt;#= ye.name().simple() #&gt;_generator::populate(position, r);
+    return r;
+}
+
+&lt;#= ye.name().simple() #&gt;_generator::result_type
+&lt;#= ye.name().simple() #&gt;_generator::operator()() {
+    return create(position_++);
+}
+
+&lt;#+
+         } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O263">
+      <dia:attribute name="obj_pos">
+        <dia:point val="262,206"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="261.95,205.95;291.81,209.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="262,206"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="29.760000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#primitive_implementation#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.transforms.test_data#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="allow_resizing">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799ff"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000ff"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/transformation_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/primitive_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/test_data/primitive_implementation_factory.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void primitive_implementation_transform::
+apply(const text::transforms::context&amp; ctx, const text::entities::model&amp; lps,
+    const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive implementation",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(ast.get_qualified_name(p.name()));
+    {
+
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+#&gt;
+namespace {
+&lt;#+
+        ast.add_helper_methods(p.name().qualified().dot());
+#&gt;
+
+}
+
+&lt;#+
+        {
+            const auto attr(p.value_attribute());
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+
+            /*
+             * Default constructor.
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::&lt;#= sn #&gt;_generator() : position_(0) { }
+&lt;#+
+            /*
+             * Populate method.
+             */
+            if (!p.is_immutable()) {
+#&gt;
+
+void &lt;#= sn #&gt;_generator::
+populate(const unsigned int position, result_type&amp; v) {
+    v.&lt;#= attr.name().simple() #&gt;(create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + 1));
+}
+&lt;#+
+            }
+
+            /*
+             * Create method.
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::create(const unsigned int position) {
+&lt;#+
+            if (p.is_immutable()) {
+#&gt;
+    return &lt;#= sn #&gt;(create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + 1));
+&lt;#+
+            } else {
+#&gt;
+    &lt;#= sn #&gt; r;
+    &lt;#= sn #&gt;_generator::populate(position, r);
+    return r;
+&lt;#+
+            }
+#&gt;
+}
+&lt;#+
+            /*
+             * Create method ptr.
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type*
+&lt;#= sn #&gt;_generator::create_ptr(const unsigned int position) {
+&lt;#+
+            if (p.is_immutable())
+#&gt;
+    return new &lt;#= sn #&gt;(create(position));
+&lt;#+
+            else {
+#&gt;
+    &lt;#= sn #&gt;* r = new &lt;#= sn #&gt;();
+    &lt;#= sn #&gt;_generator::populate(position, *r);
+    return r;
+&lt;#+
+            }
+#&gt;
+}
+&lt;#+
+            /*
+             * Function operator
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::operator()() {
+    return create(position_++);
+}
+
+&lt;#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O86"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

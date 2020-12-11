@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_CLASS_IMPLEMENTATION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_CLASS_IMPLEMENTATION_FACTORY_HPP
 
-namespace dogen::text::cpp::transforms::test_data {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype class_header_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "test_data", "class_header"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.object"));
-    r.technical_space(identification::entities::technical_space::cpp);
-    r.relations().status(physical::entities::relation_status::facet_default);
+#include "dogen.physical/types/entities/archetype.hpp"
 
-    return r;
+namespace dogen::text::transforms::cpp::test_data {
+
+/**
+ * @brief Creates a physical representation for the archetype
+ * class_implementation.
+ *
+ * Archetype documentation: Generates implementation files for objects.
+
+ */
+class class_implementation_factory final {
+public:
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
+};
+
 }
 
-}
+#endif

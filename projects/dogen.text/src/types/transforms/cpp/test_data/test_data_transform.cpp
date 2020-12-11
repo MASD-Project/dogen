@@ -23,6 +23,13 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/test_data_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/primitive_implementation_transform.hpp"
 
 namespace dogen::text::transforms::cpp::test_data {
 namespace {

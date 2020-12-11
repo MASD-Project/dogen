@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_ENUM_HEADER_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_ENUM_HEADER_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_ENUM_IMPLEMENTATION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TEST_DATA_ENUM_IMPLEMENTATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::cpp::transforms::test_data {
+namespace dogen::text::transforms::cpp::test_data {
 
 /**
  * @brief Creates a physical representation for the archetype
- * enum_header.
+ * enum_implementation.
  *
- * Archetype documentation: Generates header files for enumerations.
+ * Archetype documentation: Generates implementation files for enumerations.
 
  */
-class enum_header_factory final {
+class enum_implementation_factory final {
 public:
     /**
      * @brief Makes the archetype.

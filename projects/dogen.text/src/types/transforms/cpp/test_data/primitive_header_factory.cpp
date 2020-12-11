@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_BUILTIN_HEADER_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEST_DATA_BUILTIN_HEADER_FACTORY_HPP
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/primitive_header_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::cpp::test_data {
 
-#include "dogen.physical/types/entities/archetype.hpp"
+physical::entities::archetype primitive_header_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "test_data", "primitive_header"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.primitive"));
+    r.technical_space(identification::entities::technical_space::cpp);
+    r.relations().status(physical::entities::relation_status::facet_default);
 
-namespace dogen::text::cpp::transforms::test_data {
-
-/**
- * @brief Creates a physical representation for the archetype
- * builtin_header.
- *
- * Archetype documentation: Generates header files for builtins.
-
- */
-class builtin_header_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
-
+    return r;
 }
 
-#endif
+}

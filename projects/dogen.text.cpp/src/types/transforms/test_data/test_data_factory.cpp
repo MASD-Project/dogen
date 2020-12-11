@@ -23,13 +23,6 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/builtin_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/primitive_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 namespace {
@@ -49,27 +42,6 @@ physical::entities::facet test_data_factory::make() {
     r.meta_name(b.build());
     r.directory_name("test_data");
     r.postfix("td");
-
-    const auto lambda([&](auto& container, const auto& element) {
-        const auto id(element.meta_name().id());
-        const auto pair(std::make_pair(id, element));
-        const auto inserted(container.insert(pair).second);
-        if (!inserted) {
-            using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate id: ");
-            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_archetype + id.value()));
-        }
-    });
-
-    lambda(r.archetypes(), builtin_header_factory::make());
-    lambda(r.archetypes(), class_header_factory::make());
-    lambda(r.archetypes(), class_implementation_factory::make());
-    lambda(r.archetypes(), enum_header_factory::make());
-    lambda(r.archetypes(), enum_implementation_factory::make());
-    lambda(r.archetypes(), primitive_header_factory::make());
-    lambda(r.archetypes(), primitive_implementation_factory::make());
 
     return r;
 }

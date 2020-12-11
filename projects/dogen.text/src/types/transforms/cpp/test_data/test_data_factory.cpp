@@ -26,17 +26,24 @@
 #include "dogen.text/types/transforms/cpp/test_data/bool_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/char_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/date_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/pair_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/path_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/class_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/ptime_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/ptree_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/number_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/string_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/builtin_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/variant_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/optional_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/primitive_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/domain_type_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/enum_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/class_implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/smart_pointer_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/time_duration_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/test_data/primitive_implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/sequence_container_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/test_data/associative_container_helper_factory.hpp"
 
@@ -72,6 +79,13 @@ physical::entities::facet test_data_factory::make() {
         }
     });
 
+    lambda(r.archetypes(), builtin_header_factory::make());
+    lambda(r.archetypes(), class_header_factory::make());
+    lambda(r.archetypes(), class_implementation_factory::make());
+    lambda(r.archetypes(), enum_header_factory::make());
+    lambda(r.archetypes(), enum_implementation_factory::make());
+    lambda(r.archetypes(), primitive_header_factory::make());
+    lambda(r.archetypes(), primitive_implementation_factory::make());
 
     lambda(r.helpers(), associative_container_helper_factory::make());
     lambda(r.helpers(), bool_helper_factory::make());
