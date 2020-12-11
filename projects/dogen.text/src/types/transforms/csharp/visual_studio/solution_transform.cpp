@@ -30,13 +30,13 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp"
+#include "dogen.text/types/transforms/csharp/visual_studio/solution_transform.hpp"
+#include "dogen.text/types/transforms/csharp/visual_studio/solution_factory.hpp"
 
-namespace dogen::text::csharp::transforms::visual_studio {
+namespace dogen::text::transforms::csharp::visual_studio {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.visual_studio.solution_transform");
+const std::string transform_id("text.transforms.visual_studio.solution_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

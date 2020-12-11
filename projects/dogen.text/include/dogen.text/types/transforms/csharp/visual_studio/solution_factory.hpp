@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_VISUAL_STUDIO_SOLUTION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_VISUAL_STUDIO_SOLUTION_FACTORY_HPP
 
-namespace dogen::text::csharp::transforms::visual_studio {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype solution_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("csharp", "visual_studio", "solution"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.visual_studio_solution"));
-    r.technical_space(identification::entities::technical_space::sln);
-    r.relations().status(physical::entities::relation_status::not_relatable);
+#include "dogen.physical/types/entities/archetype.hpp"
 
-    return r;
+namespace dogen::text::transforms::csharp::visual_studio {
+
+/**
+ * @brief Creates a physical representation for the archetype
+ * solution.
+ *
+ * Archetype documentation: Generates visual studio solutions.
+
+ */
+class solution_factory final {
+public:
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
+};
+
 }
 
-}
+#endif

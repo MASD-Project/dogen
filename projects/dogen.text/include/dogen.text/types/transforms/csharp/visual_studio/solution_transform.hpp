@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_VISUAL_STUDIO_SOLUTION_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::csharp::transforms::visual_studio {
+namespace dogen::text::transforms::csharp::visual_studio {
 
 class solution_transform final : public text::transforms::model_to_text_transform {
 public:

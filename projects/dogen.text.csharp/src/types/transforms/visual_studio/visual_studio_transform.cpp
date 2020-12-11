@@ -22,8 +22,6 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/visual_studio_transform.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
