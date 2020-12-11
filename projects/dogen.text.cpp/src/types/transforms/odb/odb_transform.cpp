@@ -22,14 +22,7 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/odb/odb_transform.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/class_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp"
 
 namespace dogen::text::cpp::transforms::odb {
 namespace {

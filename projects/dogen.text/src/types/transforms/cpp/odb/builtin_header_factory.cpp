@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/odb/enum_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/odb/builtin_header_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 
-namespace dogen::text::cpp::transforms::odb {
+namespace dogen::text::transforms::cpp::odb {
 
-physical::entities::archetype enum_header_factory::make() {
+physical::entities::archetype builtin_header_factory::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "odb", "enum_header"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
+    r.meta_name(pmnf::make("cpp", "odb", "builtin_header"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.builtin"));
     r.technical_space(identification::entities::technical_space::cpp);
     r.relations().status(physical::entities::relation_status::facet_default);
 

@@ -28,87 +28,68 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/common_odb_options_factory.hpp"
+#include "dogen.text/types/transforms/cpp/odb/primitive_odb_options_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/primitive_odb_options_factory.hpp"
 
-namespace dogen::text::cpp::transforms::odb {
+namespace dogen::text::transforms::cpp::odb {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.odb.common_odb_options_transform");
+const std::string transform_id("text.transforms.odb.primitive_odb_options_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& common_odb_options_transform::static_archetype() {
-    static auto r(common_odb_options_factory::make());
+const physical::entities::archetype& primitive_odb_options_transform::static_archetype() {
+    static auto r(primitive_odb_options_factory::make());
     return r;
 }
 
-const physical::entities::archetype& common_odb_options_transform::archetype() const {
+const physical::entities::archetype& primitive_odb_options_transform::archetype() const {
     return static_archetype();
 }
 
-void common_odb_options_transform::
+void primitive_odb_options_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "common odb options",
+    tracing::scoped_transform_tracer stp(lg, "primitive odb options",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
-    using logical::entities::orm::common_odb_options;
-    const auto& o(ast.as<common_odb_options>(e));
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
         const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
-        if (!ast.is_cpp_standard_98()) {
-ast.stream() << "# enable C++11" << std::endl;
-ast.stream() << "--std c++11" << std::endl;
+        if (!p.orm_properties()) {
 ast.stream() << std::endl;
-        }
-
-        if (!o.sql_name_case().empty()) {
-ast.stream() << "# casing" << std::endl;
-ast.stream() << "--sql-name-case " << o.sql_name_case() << std::endl;
+ast.stream() << "#" << std::endl;
+ast.stream() << "# class has no ODB options defined." << std::endl;
+ast.stream() << "#" << std::endl;
+        } else {
+            const auto ooo(p.orm_properties()->odb_options());
+ast.stream() << "# epilogue" << std::endl;
+ast.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
 ast.stream() << std::endl;
-        }
-
-        if (o.databases().size() > 1) {
-ast.stream() << "# enable multi-database support" << std::endl;
-ast.stream() << "--multi-database static" << std::endl;
-ast.stream() << std::endl;
-        }
-
-        if (!o.databases().empty()) {
-ast.stream() << "# target databases" << std::endl;
-
-            for (const auto& d : o.databases())
-ast.stream() << "--database " << d << std::endl;
-ast.stream() << std::endl;
-        }
-ast.stream() << "# use the boost profile" << std::endl;
-ast.stream() << "--profile boost" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "# generate queries and embedded schemas" << std::endl;
-ast.stream() << "--generate-query" << std::endl;
-ast.stream() << "--generate-schema" << std::endl;
-ast.stream() << "--schema-format embedded" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "# force odb extensions to be different from dogen ones just in case." << std::endl;
-ast.stream() << "--ixx-suffix .ixx" << std::endl;
-ast.stream() << "--hxx-suffix .hxx" << std::endl;
-ast.stream() << "--cxx-suffix .cxx" << std::endl;
+            if (!ooo.include_regexes().empty()) {
+ast.stream() << "# regexes" << std::endl;
+                for (const auto& regex : ooo.include_regexes())
+ast.stream() << "--include-regex " << regex << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "# debug regexes" << std::endl;
 ast.stream() << "# --include-regex-trace" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# make the header guards similar to dogen ones" << std::endl;
+ast.stream() << "--guard-prefix " << ooo.header_guard_prefix() << std::endl;
+            }
+        }
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);

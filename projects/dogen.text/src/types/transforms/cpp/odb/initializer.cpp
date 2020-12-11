@@ -18,20 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/class_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/common_odb_options_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/object_odb_options_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/primitive_odb_options_transform.hpp"
 #include "dogen.text/types/transforms/cpp/odb/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::odb {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& /*hrg*/) {
-    using namespace text::cpp::transforms::odb;
     register_text_transform<builtin_header_transform>(ttrg);
     register_text_transform<primitive_header_transform>(ttrg);
     register_text_transform<class_header_transform>(ttrg);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_ODB_COMMON_ODB_OPTIONS_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_ODB_COMMON_ODB_OPTIONS_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_ODB_OBJECT_ODB_OPTIONS_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_ODB_OBJECT_ODB_OPTIONS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::cpp::transforms::odb {
+namespace dogen::text::transforms::cpp::odb {
 
 /**
  * @brief Creates a physical representation for the archetype
- * common_odb_options.
+ * object_odb_options.
  *
  * Archetype documentation: Generates object options for odb.
 
  */
-class common_odb_options_factory final {
+class object_odb_options_factory final {
 public:
     /**
      * @brief Makes the archetype.

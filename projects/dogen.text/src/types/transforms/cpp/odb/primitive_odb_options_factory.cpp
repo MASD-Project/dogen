@@ -19,15 +19,15 @@
  *
  */
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/odb/object_odb_options_factory.hpp"
+#include "dogen.text/types/transforms/cpp/odb/primitive_odb_options_factory.hpp"
 
-namespace dogen::text::cpp::transforms::odb {
+namespace dogen::text::transforms::cpp::odb {
 
-physical::entities::archetype object_odb_options_factory::make() {
+physical::entities::archetype primitive_odb_options_factory::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "odb", "object_odb_options"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.object"));
+    r.meta_name(pmnf::make("cpp", "odb", "primitive_odb_options"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.primitive"));
     r.technical_space(identification::entities::technical_space::odb);
     r.relations().status(physical::entities::relation_status::not_relatable);
 

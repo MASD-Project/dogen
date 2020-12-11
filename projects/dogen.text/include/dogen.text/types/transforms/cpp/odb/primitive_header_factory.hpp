@@ -18,20 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/odb/builtin_header_factory.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_ODB_PRIMITIVE_HEADER_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_ODB_PRIMITIVE_HEADER_FACTORY_HPP
 
-namespace dogen::text::cpp::transforms::odb {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype builtin_header_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "odb", "builtin_header"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.builtin"));
-    r.technical_space(identification::entities::technical_space::cpp);
-    r.relations().status(physical::entities::relation_status::facet_default);
+#include "dogen.physical/types/entities/archetype.hpp"
 
-    return r;
+namespace dogen::text::transforms::cpp::odb {
+
+/**
+ * @brief Creates a physical representation for the archetype
+ * primitive_header.
+ *
+ * Archetype documentation: Generates header files for primitives.
+
+ */
+class primitive_header_factory final {
+public:
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
+};
+
 }
 
-}
+#endif

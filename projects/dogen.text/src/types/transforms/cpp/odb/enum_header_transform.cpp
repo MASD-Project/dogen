@@ -23,38 +23,56 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/odb/builtin_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/odb/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/odb/enum_header_factory.hpp"
 
-namespace dogen::text::cpp::transforms::odb {
+namespace dogen::text::transforms::cpp::odb {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.odb.builtin_header_transform");
+const std::string transform_id("text.transforms.odb.enum_header_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& builtin_header_transform::static_archetype() {
-    static auto r(builtin_header_factory::make());
+const physical::entities::archetype& enum_header_transform::static_archetype() {
+    static auto r(enum_header_factory::make());
     return r;
 }
 
-const physical::entities::archetype& builtin_header_transform::archetype() const {
+const physical::entities::archetype& enum_header_transform::archetype() const {
     return static_archetype();
 }
 
-void builtin_header_transform::
-apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/,
+void enum_header_transform::
+apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "builtin header",
+    tracing::scoped_transform_tracer stp(lg, "enum header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "#ifdef ODB_COMPILER" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "#endif" << std::endl;
+ast.stream() << std::endl;
+        } // snf
+ast.stream() << std::endl;
+    } // sbf
+    ast.update_artefact();
     stp.end_transform(a);
 }
 
