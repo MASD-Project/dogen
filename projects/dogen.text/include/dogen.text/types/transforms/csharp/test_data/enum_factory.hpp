@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_ENUM_FACTORY_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_ENUM_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_ENUM_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_ENUM_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::csharp::transforms::test_data {
+namespace dogen::text::transforms::csharp::test_data {
 
 /**
  * @brief Creates a physical representation for the archetype

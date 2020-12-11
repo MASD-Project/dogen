@@ -28,13 +28,13 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/assistant_factory.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/assistant_transform.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/assistant_factory.hpp"
 
-namespace dogen::text::csharp::transforms::test_data {
+namespace dogen::text::transforms::csharp::test_data {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.test_data.assistant_transform");
+const std::string transform_id("text.transforms.test_data.assistant_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

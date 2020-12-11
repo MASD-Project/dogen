@@ -24,43 +24,42 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/primitive_factory.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/enum_transform.hpp"
+#include "dogen.text/types/transforms/csharp/test_data/enum_factory.hpp"
 
-namespace dogen::text::csharp::transforms::test_data {
+namespace dogen::text::transforms::csharp::test_data {
 namespace {
 
-const std::string transform_id("text.csharp.transforms.test_data.primitive_transform");
+const std::string transform_id("text.transforms.test_data.enum_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& primitive_transform::static_archetype() {
-    static auto r(primitive_factory::make());
+const physical::entities::archetype& enum_transform::static_archetype() {
+    static auto r(enum_factory::make());
     return r;
 }
 
-const physical::entities::archetype& primitive_transform::archetype() const {
+const physical::entities::archetype& enum_transform::archetype() const {
     return static_archetype();
 }
 
-void primitive_transform::
+void enum_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "primitive",
+    tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
-    const auto& p(ast.as<logical::entities::structural::primitive>(e));
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
     {
         const auto sn(e.name().simple());
-        const auto qn(ast.get_qualified_name(e.name()));
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
 ast.stream() << "using System;" << std::endl;
@@ -69,28 +68,14 @@ ast.stream() << "using System.Collections.Generic;" << std::endl;
 ast.stream() << std::endl;
             const auto ns(ast.make_namespaces(e.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-
 ast.stream() << "    /// <summary>" << std::endl;
 ast.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
 ast.stream() << "    /// </summary>" << std::endl;
 ast.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
 ast.stream() << "    {" << std::endl;
-ast.stream() << "        static internal void Populate(" << sn << " value, uint position)" << std::endl;
-ast.stream() << "        {" << std::endl;
-            const auto attr(p.value_attribute());
-            const auto oap(ast.get_assistant_properties(attr));
-            if (oap && oap->requires_assistance()) {
-ast.stream() << "            value." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position);" << std::endl;
-            } else {
-                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
-ast.stream() << "            value." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position);" << std::endl;
-            }
-ast.stream() << "        }" << std::endl;
-ast.stream() << std::endl;
 ast.stream() << "        static internal " << sn << " Create(uint position)" << std::endl;
 ast.stream() << "        {" << std::endl;
-ast.stream() << "            var result = new " << sn << "();" << std::endl;
-ast.stream() << "            Populate(result, position);" << std::endl;
+ast.stream() << "            var result = (" << sn << ")(position % " << ye.enumerators().size() << ");" << std::endl;
 ast.stream() << "            return result;" << std::endl;
 ast.stream() << "        }" << std::endl;
 ast.stream() << std::endl;

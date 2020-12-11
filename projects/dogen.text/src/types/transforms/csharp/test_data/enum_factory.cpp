@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/csharp/test_data/enum_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/primitive_factory.hpp"
 
-namespace dogen::text::csharp::transforms::test_data {
+namespace dogen::text::transforms::csharp::test_data {
 
-physical::entities::archetype primitive_factory::make() {
+physical::entities::archetype enum_factory::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("csharp", "test_data", "primitive"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.primitive"));
+    r.meta_name(pmnf::make("csharp", "test_data", "enum"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
     r.technical_space(identification::entities::technical_space::csharp);
     r.relations().status(physical::entities::relation_status::facet_default);
 

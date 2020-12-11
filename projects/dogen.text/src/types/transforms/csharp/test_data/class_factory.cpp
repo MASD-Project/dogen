@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_PRIMITIVE_FACTORY_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_PRIMITIVE_FACTORY_HPP
+#include "dogen.text/types/transforms/csharp/test_data/class_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::csharp::test_data {
 
-#include "dogen.physical/types/entities/archetype.hpp"
+physical::entities::archetype class_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("csharp", "test_data", "class"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.object"));
+    r.technical_space(identification::entities::technical_space::csharp);
+    r.relations().status(physical::entities::relation_status::facet_default);
 
-namespace dogen::text::csharp::transforms::test_data {
-
-/**
- * @brief Creates a physical representation for the archetype
- * primitive.
- *
- * Archetype documentation: Generates implementation files for primitives.
-
- */
-class primitive_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
-
+    return r;
 }
 
-#endif
+}

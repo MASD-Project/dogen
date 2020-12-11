@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_PRIMITIVE_TRANSFORM_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_PRIMITIVE_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_PRIMITIVE_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CSHARP_TEST_DATA_PRIMITIVE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::csharp::transforms::test_data {
+namespace dogen::text::transforms::csharp::test_data {
 
 class primitive_transform final : public text::transforms::model_to_text_transform {
 public:

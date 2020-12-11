@@ -21,11 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/enum_transform.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/class_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp"
-#include "dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/test_data_transform.hpp"
 
 namespace dogen::text::csharp::transforms::test_data {
