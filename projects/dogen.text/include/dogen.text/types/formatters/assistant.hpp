@@ -27,6 +27,8 @@
 
 #include <sstream>
 #include <boost/iostreams/filtering_stream.hpp>
+#include "dogen.utility/types/formatters/comment_style.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -55,6 +57,20 @@ private:
      */
     void validate() const;
 
+private:
+    /**
+     * @brief Retrieves the major technical space for the LPS.
+     */
+    static identification::entities::technical_space
+    major_technical_space(const text::entities::model& lps);
+
+    /**
+     * @brief Determines the comment style as a function of the major
+     * technical space.
+     */
+    static utility::formatters::comment_style
+    comment_style(const identification::entities::technical_space mts);
+
 public:
     template<typename T>
     static const T&
@@ -63,6 +79,14 @@ public:
     }
 
 public:
+    /**
+     * @brief Returns the keyword to use for a given class, defining
+     * its inheritance properties: sealed or abstract. If non-empty,
+     * includes a trailing space.
+     */
+    static std::string make_inheritance_keyword_text(
+        const logical::entities::structural::object& o);
+
     /**
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
@@ -268,10 +292,13 @@ public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
+    /**@{*/
     text::formatters::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const logical::entities::element& e,
-        const identification::entities::technical_space ts =
-        identification::entities::technical_space::cpp);
+        const identification::entities::technical_space ts);
+    text::formatters::scoped_boilerplate_formatter
+    make_scoped_boilerplate_formatter(const logical::entities::element& e);
+    /**@}*/
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -286,10 +313,17 @@ public:
         const identification::entities::technical_space ts);
 
 public:
+    std::string
+    reference_equals(const logical::entities::attribute& attr) const;
+
+public:
     /**
      * @brief Adds a top-level comment with doxygen keywords.
      */
+    /**@{*/
     void comment(const std::string& c);
+    void comment(const std::string& c, const unsigned int identation_level);
+    /**@}*/
 
     /**
      * @brief Adds comments for the starting of a method group,
@@ -348,6 +382,13 @@ public:
         const std::list<identification::entities::logical_name> names) const;
 
 public:
+    std::string
+    make_argument_name(const logical::entities::attribute& attr) const;
+
+    boost::optional<logical::entities::assistant_properties>
+    get_assistant_properties(const logical::entities::attribute& attr) const;
+
+public:
     /**
      * @brief Returns the stream that is currently being populated.
      */
@@ -366,6 +407,8 @@ private:
     const text::entities::model& lps_;
     physical::entities::artefact& artefact_;
     const bool requires_header_guard_;
+    const identification::entities::technical_space major_technical_space_;
+    const utility::formatters::comment_style comment_style_;
 };
 
 }

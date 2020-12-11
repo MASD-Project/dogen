@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
@@ -48,6 +49,9 @@ const std::string noexcept_keyword_text(" noexcept");
 const std::string namespace_separator("::");
 const std::string underscore("_");
 const std::string dot(".");
+const std::string sealed_keyword_text("sealed ");
+const std::string abstract_keyword_text("abstract ");
+const std::string static_reference_equals("object");
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
@@ -62,6 +66,8 @@ const std::string facet_properties_missing(
     "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
+const std::string attribute_with_no_simple_name(
+    "Attribute has empty simple name.");
 
 }
 
@@ -71,13 +77,16 @@ using physical::entities::artefact;
 using identification::entities::logical_name;
 using identification::entities::physical_meta_id;
 using identification::entities::logical_name_tree;
+using identification::entities::technical_space;
 using identification::entities::technical_space_version;
 
 assistant::assistant(const text::entities::model& lps,
     const logical::entities::element& e, artefact& a,
     const bool requires_header_guard)
     : element_(e), lps_(lps), artefact_(a),
-      requires_header_guard_(requires_header_guard) {
+      requires_header_guard_(requires_header_guard),
+      major_technical_space_(major_technical_space(lps)),
+      comment_style_(comment_style(major_technical_space_)) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()
@@ -109,6 +118,27 @@ void assistant::validate() const {
         BOOST_THROW_EXCEPTION(
             formatting_error(header_guard_not_set + pmn.value()));
     }
+}
+
+identification::entities::technical_space assistant::
+major_technical_space(const text::entities::model& lps) {
+    const auto& ots(lps.logical().output_technical_spaces());
+    return ots.front();
+}
+
+utility::formatters::comment_style assistant::
+comment_style(identification::entities::technical_space mts) {
+    using utility::formatters::comment_style;
+    return mts == technical_space::csharp ?
+        comment_style::csharp_style : comment_style::c_style;
+}
+
+std::string assistant::
+make_inheritance_keyword_text(const logical::entities::structural::object& o) {
+    if (o.is_parent())
+        return abstract_keyword_text;
+
+    return o.is_final() ? sealed_keyword_text : empty;
 }
 
 std::string assistant::
@@ -153,12 +183,18 @@ make_setter_return_type(const std::string& containing_type_name,
 
 std::string
 assistant::get_qualified_name(const logical_name& n) const {
-    return n.qualified().colon();
+    if (major_technical_space_ == technical_space::cpp)
+        return n.qualified().colon();
+
+    return n.qualified().dot();
 }
 
 std::string
 assistant::get_qualified_name(const logical_name_tree& nt) const {
-    return nt.qualified().colon();
+    if (major_technical_space_ == technical_space::cpp)
+        return nt.qualified().colon();
+
+    return nt.qualified().dot();
 }
 
 std::string
@@ -383,11 +419,16 @@ make_scoped_boilerplate_formatter(const logical::entities::element& e,
     return scoped_boilerplate_formatter(stream(), bp);
 }
 
+text::formatters::scoped_boilerplate_formatter assistant::
+make_scoped_boilerplate_formatter(const logical::entities::element& e) {
+    return make_scoped_boilerplate_formatter(e, major_technical_space_);
+}
+
 text::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return text::formatters::scoped_namespace_formatter(
-        stream(), identification::entities::technical_space::cpp,
-        ns, true/*add_new_line*/, requires_nested_namespaces());
+        stream(), major_technical_space_, ns, true/*add_new_line*/,
+        requires_nested_namespaces());
 }
 
 void assistant::make_decoration_preamble(const logical::entities::element& e,
@@ -400,17 +441,46 @@ void assistant::make_decoration_preamble(const logical::entities::element& e,
     }
 }
 
+std::string
+assistant::reference_equals(const logical::entities::attribute& attr) const {
+    const auto& c(lps_.logical().aspect_properties());
+    const auto n(attr.parsed_type().current());
+    const auto i(c.find(n.id()));
+
+    bool requires_static_reference_equals(i == c.end() ?
+        false : i->second.requires_static_reference_equals());
+
+    if (requires_static_reference_equals)
+        return static_reference_equals;
+
+    return attr.name().simple();
+}
+
 void assistant::comment(const std::string& c) {
     if (c.empty())
         return;
 
+    const bool sofl(major_technical_space_ == technical_space::csharp);
     utility::formatters::comment_formatter f(
-        !start_on_first_line,
+        sofl/*start_on_first_line*/,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        utility::formatters::comment_style::c_style,
-        !last_line_is_blank);
+        comment_style_, !last_line_is_blank);
     f.format(stream(), c);
+}
+
+void assistant::
+comment(const std::string& c, const unsigned int identation_level) {
+    if (c.empty())
+        return;
+
+    for (unsigned int i = 0; i < identation_level; ++i)
+        stream() << utility::formatters::indent_in;
+
+    comment(c);
+
+    for (unsigned int i = 0; i < identation_level; ++i)
+        stream() << utility::formatters::indent_out;
 }
 
 void assistant::
@@ -424,8 +494,7 @@ comment_start_method_group(const std::string& documentation,
         utility::formatters::comment_formatter f(
             !start_on_first_line,
             use_documentation_tool_markup,
-            !documenting_previous_identifier,
-            utility::formatters::comment_style::c_style,
+            !documenting_previous_identifier, comment_style_,
             !last_line_is_blank);
 
         f.format(stream(), documentation);
@@ -447,8 +516,7 @@ void assistant::comment_end_method_group(const std::string& documentation,
             start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            utility::formatters::comment_style::c_style,
-            !last_line_is_blank);
+            comment_style_, !last_line_is_blank);
 
         if (add_comment_blocks) {
             f.format_doxygen_end_block(stream(), documentation);
@@ -461,14 +529,18 @@ std::string assistant::comment_inline(const std::string& c) const {
     if (c.empty())
         return empty;
 
+    using utility::formatters::comment_style;
+    const comment_style cs(major_technical_space_ == technical_space::cpp ?
+        comment_style::cpp_style :
+        comment_style::csharp_style);
+
     std::ostringstream s;
     s << " ";
     utility::formatters::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        utility::formatters::comment_style::cpp_style,
-        !last_line_is_blank);
+        cs, !last_line_is_blank);
 
     f.format(s, c);
     return s.str();
@@ -548,6 +620,28 @@ std::list<logical_name> assistant::names_with_enabled_archetype(
         r.push_back(n);
     }
     return r;
+}
+
+std::string assistant::
+make_argument_name(const logical::entities::attribute& attr) const {
+    auto r(attr.name().simple());
+    if (r.empty()) {
+        BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
+        BOOST_THROW_EXCEPTION(formatting_error(attribute_with_no_simple_name));
+    }
+
+    r[0] = static_cast<char>(std::tolower(r[0]));
+    return r;
+}
+
+boost::optional<logical::entities::assistant_properties> assistant::
+get_assistant_properties(const logical::entities::attribute& attr) const {
+    const auto& ap(lps_.logical().assistant_properties());
+    const auto i(ap.find(attr.parsed_type().current().id()));
+    if (i == ap.end())
+        return boost::optional<logical::entities::assistant_properties>();
+
+    return i->second;
 }
 
 std::ostream& assistant::stream() {
