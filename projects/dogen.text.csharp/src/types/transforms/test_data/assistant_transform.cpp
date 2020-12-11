@@ -27,7 +27,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
-#include "dogen.text.csharp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/assistant_factory.hpp"
 
@@ -56,7 +56,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));

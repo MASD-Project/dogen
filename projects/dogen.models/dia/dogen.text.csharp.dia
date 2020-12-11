@@ -372,7 +372,7 @@
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/class_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/class_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -385,8 +385,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -809,7 +809,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/enum_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/enum_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -821,8 +821,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1060,7 +1060,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/class_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/class_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1072,8 +1072,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "class",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1326,7 +1326,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/enum_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/enum_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1338,8 +1338,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
    tracing::scoped_transform_tracer stp(lg, "enum",
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1591,7 +1591,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1603,8 +1603,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1930,7 +1930,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -1942,8 +1942,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -2203,7 +2203,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/exception_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/exception_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -2215,7 +2215,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "exception",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -2718,120 +2718,6 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="45,27"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.95,26.95;57.87,30.05"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="45,27"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#assistant#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="allow_resizing">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#e5e8ffff"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000ff"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O1"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O17">
-      <dia:attribute name="obj_pos">
         <dia:point val="34,27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
@@ -2944,7 +2830,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O18">
+    <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,59"/>
       </dia:attribute>
@@ -3074,7 +2960,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/builtin_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/builtin_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3109,7 +2995,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O19">
+    <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
         <dia:point val="14,54"/>
       </dia:attribute>
@@ -3241,7 +3127,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/primitive_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/primitive_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3254,8 +3140,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -3399,7 +3285,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O20">
+    <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
         <dia:point val="132,54"/>
       </dia:attribute>
@@ -3530,7 +3416,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3542,8 +3428,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -3693,7 +3579,7 @@ using System.Collections.Generic;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O8"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O21">
+    <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
         <dia:point val="46,54"/>
       </dia:attribute>
@@ -3824,7 +3710,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/primitive_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/primitive_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -3836,8 +3722,8 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -3930,7 +3816,7 @@ using System;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O5"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O22">
+    <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
         <dia:point val="-17,13"/>
       </dia:attribute>
@@ -4084,7 +3970,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O23">
+    <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
         <dia:point val="-17,19"/>
       </dia:attribute>
@@ -4197,7 +4083,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O24">
+    <dia:object type="UML - LargePackage" version="0" id="O23">
       <dia:attribute name="obj_pos">
         <dia:point val="161,40"/>
       </dia:attribute>
@@ -4242,7 +4128,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O25">
+    <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
         <dia:point val="182,42"/>
       </dia:attribute>
@@ -4354,9 +4240,9 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O24"/>
+      <dia:childnode parent="O23"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O26">
+    <dia:object type="UML - Class" version="0" id="O25">
       <dia:attribute name="obj_pos">
         <dia:point val="163,49"/>
       </dia:attribute>
@@ -4495,7 +4381,7 @@ const physical::entities::archetype&amp; {{archetype.simple_name}}_transform::ar
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/project_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -4507,9 +4393,9 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
-    const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().id().value(), e));
+    const auto&amp; proj(ast.as&lt;project&gt;(e));
 
 #&gt;
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -4580,9 +4466,9 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O24"/>
+      <dia:childnode parent="O23"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O27">
+    <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
         <dia:point val="190,49"/>
       </dia:attribute>
@@ -4721,7 +4607,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -4733,9 +4619,9 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::solution;
-    const auto&amp; sln(ast.as&lt;solution&gt;(archetype().meta_name().id().value(), e));
+    const auto&amp; sln(ast.as&lt;solution&gt;(e));
 #&gt;
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
@@ -4790,9 +4676,9 @@ EndGlobal
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O24"/>
+      <dia:childnode parent="O23"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O28">
+    <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
         <dia:point val="2,19"/>
       </dia:attribute>
@@ -4905,7 +4791,7 @@ EndGlobal
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O29">
+    <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
         <dia:point val="73,54"/>
       </dia:attribute>
@@ -5038,7 +4924,7 @@ EndGlobal
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/assistant_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/assistant_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -5050,7 +4936,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -5579,7 +5465,7 @@ using System.Collections;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O5"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O30">
+    <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
         <dia:point val="104,54"/>
       </dia:attribute>
@@ -5712,7 +5598,7 @@ using System.Collections;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/logical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -5724,7 +5610,7 @@ apply(const text::transforms::context&amp; ctx, const text::entities::model&amp;
     tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -5955,7 +5841,7 @@ using System.Collections.Specialized;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O8"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O31">
+    <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
         <dia:point val="21,19"/>
       </dia:attribute>
@@ -6068,7 +5954,7 @@ using System.Collections.Specialized;
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O32">
+    <dia:object type="UML - Note" version="0" id="O31">
       <dia:attribute name="obj_pos">
         <dia:point val="-15,27"/>
       </dia:attribute>
@@ -6130,7 +6016,7 @@ of the C# Technical Space.
       </dia:attribute>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O33">
+    <dia:object type="UML - Note" version="0" id="O32">
       <dia:attribute name="obj_pos">
         <dia:point val="-13,42"/>
       </dia:attribute>
@@ -6186,7 +6072,7 @@ the C# Technical Space.
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O34">
+    <dia:object type="UML - Class" version="0" id="O33">
       <dia:attribute name="obj_pos">
         <dia:point val="10,27"/>
       </dia:attribute>
@@ -6393,7 +6279,7 @@ the C# Technical Space.
       <dia:attribute name="templates"/>
       <dia:childnode parent="O1"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O35">
+    <dia:object type="UML - Note" version="0" id="O34">
       <dia:attribute name="obj_pos">
         <dia:point val="46,42"/>
       </dia:attribute>
@@ -6450,7 +6336,7 @@ the C# Technical Space.
       </dia:attribute>
       <dia:childnode parent="O5"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O36">
+    <dia:object type="UML - Note" version="0" id="O35">
       <dia:attribute name="obj_pos">
         <dia:point val="104,42"/>
       </dia:attribute>
@@ -6507,7 +6393,7 @@ facet of the C# Technical Space.
       </dia:attribute>
       <dia:childnode parent="O8"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O37">
+    <dia:object type="UML - Note" version="0" id="O36">
       <dia:attribute name="obj_pos">
         <dia:point val="163,42"/>
       </dia:attribute>
@@ -6560,7 +6446,7 @@ facet of the C# Technical Space.
       <dia:attribute name="fill_colour">
         <dia:color val="#f0e68cff"/>
       </dia:attribute>
-      <dia:childnode parent="O24"/>
+      <dia:childnode parent="O23"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

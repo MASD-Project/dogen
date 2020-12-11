@@ -29,7 +29,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
-#include "dogen.text.csharp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp"
 
@@ -58,9 +58,9 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::solution;
-    const auto& sln(ast.as<solution>(archetype().meta_name().id().value(), e));
+    const auto& sln(ast.as<solution>(e));
 ast.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 ast.stream() << "# Visual Studio 2012" << std::endl;
     for (const auto& ppb : sln.project_persistence_blocks()) {

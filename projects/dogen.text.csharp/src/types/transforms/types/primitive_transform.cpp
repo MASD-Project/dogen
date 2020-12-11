@@ -28,7 +28,7 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.text.csharp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_factory.hpp"
 
@@ -58,8 +58,8 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
-    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().id().value(), e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));

@@ -29,7 +29,7 @@
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/project.hpp"
-#include "dogen.text.csharp/types/transforms/assistant.hpp"
+#include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/project_factory.hpp"
 
@@ -58,9 +58,9 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
     tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, lps, e, archetype().meta_name(), a);
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
-    const auto& proj(ast.as<project>(archetype().meta_name().id().value(), e));
+    const auto& proj(ast.as<project>(e));
 
 ast.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 ast.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
