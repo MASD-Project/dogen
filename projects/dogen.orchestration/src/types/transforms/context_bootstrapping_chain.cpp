@@ -98,8 +98,12 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
             const auto& new_facet(new_pair.second);
             for (auto& old_pair : old_be.facets()) {
                 auto& old_facet(old_pair.second);
-                if (old_facet.meta_name().id() == new_facet.meta_name().id())
+                if (old_facet.meta_name().id() == new_facet.meta_name().id()) {
                     old_facet.helpers(new_facet.helpers());
+                    for (const auto& new_pair2: new_facet.archetypes()) {
+                        old_facet.archetypes().insert(new_pair2);
+                    }
+                }
             }
         }
     });
