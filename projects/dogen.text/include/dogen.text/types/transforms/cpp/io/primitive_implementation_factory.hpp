@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_BUILTIN_HEADER_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_BUILTIN_HEADER_FACTORY_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_IO_PRIMITIVE_IMPLEMENTATION_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_IO_PRIMITIVE_IMPLEMENTATION_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,16 +27,16 @@
 
 #include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::cpp::transforms::io {
+namespace dogen::text::transforms::cpp::io {
 
 /**
  * @brief Creates a physical representation for the archetype
- * builtin_header.
+ * primitive_implementation.
  *
- * Archetype documentation: Generates header files for builtins.
+ * Archetype documentation: Generates implementation files for primitives.
 
  */
-class builtin_header_factory final {
+class primitive_implementation_factory final {
 public:
     /**
      * @brief Makes the archetype.

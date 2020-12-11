@@ -18,21 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_INSERTER_IMPLEMENTATION_HELPER_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_INSERTER_IMPLEMENTATION_HELPER_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_IO_BUILTIN_HEADER_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_IO_BUILTIN_HEADER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.text/types/formatters/assistant.hpp"
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-namespace dogen::text::cpp::transforms::io {
+namespace dogen::text::transforms::cpp::io {
 
-void inserter_implementation_helper(
-    text::formatters::assistant& ast,
-    const logical::entities::structural::object& o, const bool inside_class);
+class builtin_header_transform final : public text::transforms::model_to_text_transform {
+public:
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
+};
 
 }
 

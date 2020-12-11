@@ -22,7 +22,14 @@
 #include "dogen.text/types/transforms/cpp/io/io_transform.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/builtin_header_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_implementation_transform.hpp"
 
 namespace dogen::text::transforms::cpp::io {
 namespace {

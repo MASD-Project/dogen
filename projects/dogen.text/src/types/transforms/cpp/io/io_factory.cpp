@@ -22,13 +22,20 @@
 #include "dogen.text/types/transforms/cpp/io/io_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/pair_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/ptree_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/string_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/builtin_header_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/variant_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/optional_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_header_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/smart_pointer_helper_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_implementation_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/sequence_container_helper_factory.hpp"
 #include "dogen.text/types/transforms/cpp/io/associative_container_helper_factory.hpp"
 
@@ -64,6 +71,13 @@ physical::entities::facet io_factory::make() {
         }
     });
 
+    lambda(r.archetypes(), builtin_header_factory::make());
+    lambda(r.archetypes(), class_header_factory::make());
+    lambda(r.archetypes(), class_implementation_factory::make());
+    lambda(r.archetypes(), enum_header_factory::make());
+    lambda(r.archetypes(), enum_implementation_factory::make());
+    lambda(r.archetypes(), primitive_header_factory::make());
+    lambda(r.archetypes(), primitive_implementation_factory::make());
 
     lambda(r.helpers(), associative_container_helper_factory::make());
     lambda(r.helpers(), optional_helper_factory::make());

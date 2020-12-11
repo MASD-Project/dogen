@@ -32,7 +32,6 @@
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"
 #include "dogen.text/types/transforms/cpp/types/feature_template_bundle_header_transform.hpp"
 #include "dogen.text/types/transforms/cpp/types/feature_template_bundle_header_factory.hpp"
 

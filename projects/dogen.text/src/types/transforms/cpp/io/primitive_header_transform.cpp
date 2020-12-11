@@ -23,51 +23,55 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_header_factory.hpp"
 
-namespace dogen::text::cpp::transforms::io {
+namespace dogen::text::transforms::cpp::io {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.io.enum_header_transform");
+const std::string transform_id("text.transforms.io.primitive_header_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& enum_header_transform::static_archetype() {
-    static auto r(enum_header_factory::make());
+const physical::entities::archetype& primitive_header_transform::static_archetype() {
+    static auto r(primitive_header_factory::make());
     return r;
 }
 
-const physical::entities::archetype& enum_header_transform::archetype() const {
+const physical::entities::archetype& primitive_header_transform::archetype() const {
     return static_archetype();
 }
 
-void enum_header_transform::
+void primitive_header_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "enum header",
+    tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
+    const auto sn(p.name().simple());
+    const auto qn(ast.get_qualified_name(p.name()));
     {
+
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(ast.make_namespaces(ye.name()));
+            const auto ns(ast.make_namespaces(p.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto qn(ast.get_qualified_name(p.name()));
 ast.stream() << std::endl;
-ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << ye.name().simple() << "& v);" << std::endl;
+ast.stream() << "std::ostream&" << std::endl;
+ast.stream() << "operator<<(std::ostream& s, const " << qn << "& v);" << std::endl;
 ast.stream() << std::endl;
-         } // snf
+        } // snf
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/class_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/builtin_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/primitive_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_implementation_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/smart_pointer_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/associative_container_helper_transform.hpp"
 #include "dogen.text/types/transforms/cpp/io/optional_helper_transform.hpp"
@@ -40,7 +40,6 @@ namespace dogen::text::transforms::cpp::io {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& hrg) {
-    using namespace text::cpp::transforms::io;
     register_text_transform<builtin_header_transform>(ttrg);
     register_text_transform<primitive_header_transform>(ttrg);
     register_text_transform<primitive_implementation_transform>(ttrg);

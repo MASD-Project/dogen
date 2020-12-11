@@ -18,32 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_CLASS_IMPLEMENTATION_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_IO_CLASS_IMPLEMENTATION_FACTORY_HPP
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/enum_implementation_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::text::transforms::cpp::io {
 
-#include "dogen.physical/types/entities/archetype.hpp"
+physical::entities::archetype enum_implementation_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "io", "enum_implementation"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.enumeration"));
+    r.technical_space(identification::entities::technical_space::cpp);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
-namespace dogen::text::cpp::transforms::io {
-
-/**
- * @brief Creates a physical representation for the archetype
- * class_implementation.
- *
- * Archetype documentation: Generates implementation files for objects.
-
- */
-class class_implementation_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static physical::entities::archetype make();
-};
-
+    return r;
 }
 
-#endif
+}

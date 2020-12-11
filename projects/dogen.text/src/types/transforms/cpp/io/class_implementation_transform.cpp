@@ -23,59 +23,70 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
+#include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/io/primitive_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/primitive_header_factory.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.text/types/transforms/cpp/io/inserter_implementation_helper.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_implementation_factory.hpp"
 
-namespace dogen::text::cpp::transforms::io {
+namespace dogen::text::transforms::cpp::io {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.io.primitive_header_transform");
+const std::string transform_id("text.transforms.io.class_implementation_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& primitive_header_transform::static_archetype() {
-    static auto r(primitive_header_factory::make());
+const physical::entities::archetype& class_implementation_transform::static_archetype() {
+    static auto r(class_implementation_factory::make());
     return r;
 }
 
-const physical::entities::archetype& primitive_header_transform::archetype() const {
+const physical::entities::archetype& class_implementation_transform::archetype() const {
     return static_archetype();
 }
 
-void primitive_header_transform::
+void class_implementation_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "FIXME",
+    tracing::scoped_transform_tracer stp(lg, "class implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
-    const auto& p(ast.as<logical::entities::structural::primitive>(e));
+    text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
-    const auto sn(p.name().simple());
-    const auto qn(ast.get_qualified_name(p.name()));
     {
-
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
+
         {
-            const auto ns(ast.make_namespaces(p.name()));
+            const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto qn(ast.get_qualified_name(p.name()));
+            const auto sn(o.name().simple());
+            const auto qn(ast.get_qualified_name(o.name()));
+            const bool no_arg(!o.is_parent() && o.parents().empty() &&
+                o.local_attributes().empty());
 ast.stream() << std::endl;
-ast.stream() << "std::ostream&" << std::endl;
-ast.stream() << "operator<<(std::ostream& s, const " << qn << "& v);" << std::endl;
+ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
+            if (o.is_parent() || !o.parents().empty()) {
+ast.stream() << "    v.to_stream(s);" << std::endl;
+ast.stream() << "    return(s);" << std::endl;
+            } else
+                io::inserter_implementation_helper(ast, o, false/*inside_class*/);
+ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
         } // snf
-ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
 }
-
 }

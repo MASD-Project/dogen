@@ -24,74 +24,56 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include <boost/throw_exception.hpp>
-#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/io/enum_implementation_factory.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/io/class_header_factory.hpp"
 
-namespace dogen::text::cpp::transforms::io {
+namespace dogen::text::transforms::cpp::io {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.io.enum_implementation_transform");
+const std::string transform_id("text.transforms.io.class_header_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-const physical::entities::archetype& enum_implementation_transform::static_archetype() {
-    static auto r(enum_implementation_factory::make());
+const physical::entities::archetype& class_header_transform::static_archetype() {
+    static auto r(class_header_factory::make());
     return r;
 }
 
-const physical::entities::archetype& enum_implementation_transform::archetype() const {
+const physical::entities::archetype& class_header_transform::archetype() const {
     return static_archetype();
 }
 
-void enum_implementation_transform::
+void class_header_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "enum implementation",
+    tracing::scoped_transform_tracer stp(lg, "class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(ast.make_namespaces(ye.name()));
+            const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto qn(ast.get_qualified_name(o.name()));
 ast.stream() << std::endl;
-ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << ye.name().simple() << "& v) {" << std::endl;
-ast.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << ye.name().simple() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+ast.stream() << "std::ostream&" << std::endl;
+ast.stream() << "operator<<(std::ostream& s," << std::endl;
+ast.stream() << "     const " << qn << "& v);" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "    std::string attr;" << std::endl;
-ast.stream() << "    switch (v) {" << std::endl;
-            for (const auto& en : ye.enumerators()) {
-                if (ast.is_cpp_standard_98())
-ast.stream() << "    case " << en.name().simple() << ":" << std::endl;
-                else
-ast.stream() << "    case " << ye.name().simple() << "::" << en.name().simple() << ":" << std::endl;
-ast.stream() << "        attr = \"\\\"" << en.name().simple() << "\\\"\";" << std::endl;
-ast.stream() << "        break;" << std::endl;
-            }
-ast.stream() << "    default:" << std::endl;
-ast.stream() << "        throw std::invalid_argument(\"Invalid value for " << ye.name().simple() << "\");" << std::endl;
-ast.stream() << "    }" << std::endl;
-ast.stream() << "    s << attr << \" }\";" << std::endl;
-ast.stream() << "    return s;" << std::endl;
-ast.stream() << "}" << std::endl;
+        } // snf
 ast.stream() << std::endl;
-         } // snf
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
 }
-
 }
