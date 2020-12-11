@@ -18,33 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/types/types_factory.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TYPES_VISITOR_FORWARD_DECLARATIONS_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TYPES_VISITOR_FORWARD_DECLARATIONS_TRANSFORM_HPP
 
-namespace dogen::text::cpp::transforms::types {
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("dogen.text.cpp.transforms.types"));
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-}
+namespace dogen::text::transforms::cpp::types {
 
-physical::entities::facet types_factory::make() {
-    identification::helpers::physical_meta_name_builder b;
-    b.meta_model("masd");
-    b.backend("cpp");
-    b.facet("types");
+class visitor_forward_declarations_transform final : public text::transforms::model_to_text_transform {
+public:
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
 
-    physical::entities::facet r;
-    r.meta_name(b.build());
-    r.directory_name("types");
-    r.labels().push_back(identification::entities::label("test", "some_label"));
-
-    return r;
-}
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
+};
 
 }
 
+#endif

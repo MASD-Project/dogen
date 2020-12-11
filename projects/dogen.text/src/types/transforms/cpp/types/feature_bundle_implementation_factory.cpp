@@ -18,33 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/types/types_factory.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/feature_bundle_implementation_factory.hpp"
 
-namespace dogen::text::cpp::transforms::types {
-namespace {
+namespace dogen::text::transforms::cpp::types {
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("dogen.text.cpp.transforms.types"));
-
-}
-
-physical::entities::facet types_factory::make() {
-    identification::helpers::physical_meta_name_builder b;
-    b.meta_model("masd");
-    b.backend("cpp");
-    b.facet("types");
-
-    physical::entities::facet r;
-    r.meta_name(b.build());
-    r.directory_name("types");
-    r.labels().push_back(identification::entities::label("test", "some_label"));
+physical::entities::archetype feature_bundle_implementation_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "types", "feature_bundle_implementation"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.variability_feature_bundle"));
+    r.technical_space(identification::entities::technical_space::cpp);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;
 }
 
 }
-
