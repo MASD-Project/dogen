@@ -18,25 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/tests/main_transform_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TESTS_ENUM_IMPLEMENTATION_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TESTS_ENUM_IMPLEMENTATION_TRANSFORM_HPP
 
-namespace dogen::text::cpp::transforms::tests {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const physical::entities::archetype& main_transform_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-            using pmnf = identification::helpers::physical_meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "tests",
-                "main_transform_factory"));
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-        r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.entry_point"));
-        r.relations().status(physical::entities::relation_status::not_relatable);
-        return r;
-    }());
-    return r;
+namespace dogen::text::transforms::cpp::tests {
+
+class enum_implementation_transform final : public text::transforms::model_to_text_transform {
+public:
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
+};
+
 }
 
-}
-
+#endif

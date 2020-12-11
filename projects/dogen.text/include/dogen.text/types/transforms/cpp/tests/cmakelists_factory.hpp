@@ -18,26 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TESTS_MAIN_TRANSFORM_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TESTS_MAIN_TRANSFORM_HPP
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TESTS_CMAKELISTS_FACTORY_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TESTS_CMAKELISTS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.text/types/transforms/model_to_text_transform.hpp"
+#include "dogen.physical/types/entities/archetype.hpp"
 
-namespace dogen::text::cpp::transforms::tests {
+namespace dogen::text::transforms::cpp::tests {
 
-class main_transform final : public text::transforms::model_to_text_transform {
+/**
+ * @brief Creates a physical representation for the archetype
+ * cmakelists.
+ *
+ * Archetype documentation: Generates cmakelists for tests.
+
+ */
+class cmakelists_factory final {
 public:
-    static const physical::entities::archetype& static_archetype();
-    const physical::entities::archetype& archetype() const override;
-
-public:
-void apply(const text::transforms::context& ctx, const text::entities::model& lps,
-    const logical::entities::element& e,
-    physical::entities::artefact& a) const override;
+    /**
+     * @brief Makes the archetype.
+     */
+    static physical::entities::archetype make();
 };
 
 }

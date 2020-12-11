@@ -18,17 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/tests/class_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/tests/enum_implementation_transform.hpp"
-#include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
-#include "dogen.text.cpp/types/transforms/tests/main_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/class_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/cmakelists_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/main_transform.hpp"
 #include "dogen.text/types/transforms/cpp/tests/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::tests {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& /*hrg*/) {
-    using namespace text::cpp::transforms::tests;
     register_text_transform<cmakelists_transform>(ttrg);
     register_text_transform<class_implementation_transform>(ttrg);
     register_text_transform<enum_implementation_transform>(ttrg);

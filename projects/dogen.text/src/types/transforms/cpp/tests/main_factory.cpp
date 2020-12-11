@@ -18,25 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/cpp/tests/main_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/tests/class_implementation_transform_factory.hpp"
 
-namespace dogen::text::cpp::transforms::tests {
+namespace dogen::text::transforms::cpp::tests {
 
-const physical::entities::archetype& class_implementation_transform_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-            using pmnf = identification::helpers::physical_meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "tests",
-                "class_implementation_transform_factory"));
+physical::entities::archetype main_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = identification::helpers::physical_meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "tests", "main"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.entry_point"));
+    r.technical_space(identification::entities::technical_space::cpp);
+    r.relations().status(physical::entities::relation_status::not_relatable);
 
-        r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.object"));
-        r.relations().status(physical::entities::relation_status::not_relatable);
-        return r;
-    }());
     return r;
 }
 
 }
-

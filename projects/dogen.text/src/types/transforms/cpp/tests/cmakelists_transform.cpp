@@ -33,13 +33,13 @@
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
-#include "dogen.text.cpp/types/transforms/tests/cmakelists_factory.hpp"
+#include "dogen.text/types/transforms/cpp/tests/cmakelists_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/cmakelists_factory.hpp"
 
-namespace dogen::text::cpp::transforms::tests {
+namespace dogen::text::transforms::cpp::tests {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.tests.cmakelists_transform");
+const std::string transform_id("text.transforms.tests.cmakelists_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

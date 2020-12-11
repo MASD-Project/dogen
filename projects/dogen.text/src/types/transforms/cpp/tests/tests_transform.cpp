@@ -21,8 +21,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text/types/transforms/cpp/tests/main_transform.hpp"
 #include "dogen.text/types/transforms/cpp/tests/tests_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/cmakelists_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/tests/enum_implementation_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/class_implementation_transform.hpp"
 
 namespace dogen::text::transforms::cpp::tests {
 namespace {

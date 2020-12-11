@@ -31,13 +31,13 @@
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/tests/main_transform.hpp"
-#include "dogen.text.cpp/types/transforms/tests/main_factory.hpp"
+#include "dogen.text/types/transforms/cpp/tests/main_transform.hpp"
+#include "dogen.text/types/transforms/cpp/tests/main_factory.hpp"
 
-namespace dogen::text::cpp::transforms::tests {
+namespace dogen::text::transforms::cpp::tests {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.tests.main_transform");
+const std::string transform_id("text.transforms.tests.main_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
