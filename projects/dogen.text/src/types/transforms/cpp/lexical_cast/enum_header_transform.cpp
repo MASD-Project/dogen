@@ -30,13 +30,13 @@
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
-#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
-#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_factory.hpp"
+#include "dogen.text/types/transforms/cpp/lexical_cast/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/lexical_cast/enum_header_factory.hpp"
 
-namespace dogen::text::cpp::transforms::lexical_cast {
+namespace dogen::text::transforms::cpp::lexical_cast {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.lexical_cast.enum_header_transform");
+const std::string transform_id("text.transforms.lexical_cast.enum_header_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

@@ -18,14 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
+#include "dogen.text/types/transforms/cpp/lexical_cast/enum_header_transform.hpp"
 #include "dogen.text/types/transforms/cpp/lexical_cast/initializer.hpp"
 
 namespace dogen::text::transforms::cpp::lexical_cast {
 
 void initializer::initialize(text_transform_registrar& ttrg,
     helper_registrar& /*hrg*/) {
-    using namespace text::cpp::transforms::lexical_cast;
     register_text_transform<enum_header_transform>(ttrg);
 }
 

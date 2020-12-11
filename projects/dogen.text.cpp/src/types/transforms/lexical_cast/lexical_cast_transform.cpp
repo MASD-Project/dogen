@@ -22,7 +22,6 @@
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/lexical_cast_transform.hpp"
 
 namespace dogen::text::cpp::transforms::lexical_cast {
