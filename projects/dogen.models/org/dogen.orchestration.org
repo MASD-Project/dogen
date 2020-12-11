@@ -211,3 +211,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 :masd.generalization.parent: dogen::spec_dumper
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
+* initializer
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
