@@ -23,6 +23,10 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text/types/transforms/cpp/types/types_transform.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_header_factory_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_header_transform_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_factory_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_transform_transform.hpp"
 
 namespace dogen::text::transforms::cpp::types {
 namespace {

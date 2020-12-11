@@ -31,10 +31,10 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_factory_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_factory_factory.hpp"
 
-namespace dogen::text::cpp::transforms::types {
+namespace dogen::text::transforms::cpp::types {
 namespace {
 
 const std::string transform_id("text.cpp.transforms.types.archetype_class_implementation_factory_transform");

@@ -19,9 +19,9 @@
  *
  */
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_implementation_factory_factory.hpp"
 
-namespace dogen::text::cpp::transforms::types {
+namespace dogen::text::transforms::cpp::types {
 
 physical::entities::archetype archetype_class_implementation_factory_factory::make() {
     physical::entities::archetype r;

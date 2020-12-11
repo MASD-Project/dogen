@@ -18,20 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp"
+#ifndef DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TYPES_ARCHETYPE_CLASS_IMPLEMENTATION_TRANSFORM_TRANSFORM_HPP
+#define DOGEN_TEXT_TYPES_TRANSFORMS_CPP_TYPES_ARCHETYPE_CLASS_IMPLEMENTATION_TRANSFORM_TRANSFORM_HPP
 
-namespace dogen::text::cpp::transforms::types {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-physical::entities::archetype archetype_class_implementation_transform_factory::make() {
-    physical::entities::archetype r;
-    using pmnf = identification::helpers::physical_meta_name_factory;
-    r.meta_name(pmnf::make("cpp", "types", "archetype_class_implementation_transform"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.physical_archetype"));
-    r.technical_space(identification::entities::technical_space::cpp);
-    r.relations().status(physical::entities::relation_status::not_relatable);
+#include "dogen.text/types/transforms/model_to_text_transform.hpp"
 
-    return r;
+namespace dogen::text::transforms::cpp::types {
+
+class archetype_class_implementation_transform_transform final : public text::transforms::model_to_text_transform {
+public:
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
+
+public:
+void apply(const text::transforms::context& ctx, const text::entities::model& lps,
+    const logical::entities::element& e,
+    physical::entities::artefact& a) const override;
+};
+
 }
 
-}
+#endif

@@ -27,13 +27,13 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text/types/formatters/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_header_transform_transform.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_header_transform_factory.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_header_transform_transform.hpp"
+#include "dogen.text/types/transforms/cpp/types/archetype_class_header_transform_factory.hpp"
 
-namespace dogen::text::cpp::transforms::types {
+namespace dogen::text::transforms::cpp::types {
 namespace {
 
-const std::string transform_id("text.cpp.transforms.types.archetype_class_header_transform_transform");
+const std::string transform_id("text.transforms.types.archetype_class_header_transform_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
