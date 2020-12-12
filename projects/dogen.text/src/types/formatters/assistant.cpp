@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <cctype>
 #include <boost/algorithm/string.hpp>
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
