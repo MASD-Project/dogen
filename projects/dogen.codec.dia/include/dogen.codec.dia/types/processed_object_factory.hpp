@@ -26,11 +26,11 @@
 #endif
 
 #include <string>
-#include "dogen.dia/types/attribute_fwd.hpp"
-#include "dogen.dia/types/object_fwd.hpp"
-#include "dogen.dia/types/attribute_fwd.hpp"
-#include "dogen.dia/types/composite_fwd.hpp"
-#include "dogen.dia/types/diagram_fwd.hpp"
+#include "dogen.dia/types/entities/attribute_fwd.hpp"
+#include "dogen.dia/types/entities/object_fwd.hpp"
+#include "dogen.dia/types/entities/attribute_fwd.hpp"
+#include "dogen.dia/types/entities/composite_fwd.hpp"
+#include "dogen.dia/types/entities/diagram_fwd.hpp"
 #include "dogen.codec.dia/types/dia_object_types.hpp"
 #include "dogen.codec.dia/types/processed_object_fwd.hpp"
 #include "dogen.codec.dia/types/processed_comment_fwd.hpp"
@@ -45,7 +45,8 @@ private:
     /**
      * @brief Parses the dia attribute as a string, returning its value.
      */
-    static std::string parse_string_attribute(const dogen::dia::attribute& a);
+    static std::string parse_string_attribute(
+        const dogen::dia::entities::attribute& a);
 
     /**
      * @brief Makes a processed comment from the input attribute.
@@ -53,7 +54,7 @@ private:
      * @pre Attribute must be of type string.
      */
     static processed_comment
-    create_processed_comment(const dogen::dia::attribute& a);
+    create_processed_comment(const dogen::dia::entities::attribute& a);
 
     /**
      * @brief Given a string with a dia object type, returns the
@@ -64,45 +65,46 @@ private:
     /**
      * @brief Parse connection information from Dia object.
      */
-    static void
-    parse_connections(const dogen::dia::object& o, processed_object& po);
+    static void parse_connections(const dogen::dia::entities::object& o,
+        processed_object& po);
 
     /**
      * @brief Parse the attribute as a Dia text.
      */
-    static void
-    parse_as_dia_text(const dogen::dia::attribute a, processed_object& po);
+    static void parse_as_dia_text(const dogen::dia::entities::attribute a,
+        processed_object& po);
 
     /**
      * @brief Processes the raw Dia stereotypes.
      */
-    static void
-    parse_as_stereotypes(dogen::dia::attribute a, processed_object& po);
+    static void parse_as_stereotypes(dogen::dia::entities::attribute a,
+        processed_object& po);
 
     /**
      * @brief Parses the contents of the Dia attribute assuming it
      * contains UML attributes.
      */
     static void parse_as_class_attributes(
-        const dogen::dia::attribute a, processed_object& po);
+        const dogen::dia::entities::attribute a, processed_object& po);
 
     /**
      * @brief Parses the Dia attributes from the Dia object.
      */
-    static void
-    parse_attributes(const dogen::dia::object& o, processed_object& po);
+    static void parse_attributes(const dogen::dia::entities::object& o,
+        processed_object& po);
 
 public:
     /**
      * @brief Generates a processed object.
      */
-    static processed_object make(const dogen::dia::object& o);
+    static processed_object make(const dogen::dia::entities::object& o);
 
     /**
      * @brief Generates a processed object representation of the
      * diagram.
      */
-    static std::list<processed_object> make(const dogen::dia::diagram& d);
+    static std::list<processed_object>
+    make(const dogen::dia::entities::diagram& d);
 };
 
 }

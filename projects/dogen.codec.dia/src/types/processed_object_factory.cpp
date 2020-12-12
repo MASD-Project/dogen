@@ -27,10 +27,10 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.dia/types/object.hpp"
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/diagram.hpp"
+#include "dogen.dia/types/entities/object.hpp"
+#include "dogen.dia/types/entities/attribute.hpp"
+#include "dogen.dia/types/entities/composite.hpp"
+#include "dogen.dia/types/entities/diagram.hpp"
 #include "dogen.codec.dia/io/dia_object_types_io.hpp"
 #include "dogen.codec.dia/io/processed_object_io.hpp"
 #include "dogen.codec.dia/types/building_error.hpp"
@@ -117,7 +117,7 @@ boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
 namespace dogen::codec::dia {
 
 std::string processed_object_factory::
-parse_string_attribute(const dogen::dia::attribute& a) {
+parse_string_attribute(const dogen::dia::entities::attribute& a) {
     const auto values(a.values());
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
@@ -127,7 +127,7 @@ parse_string_attribute(const dogen::dia::attribute& a) {
                 boost::lexical_cast<std::string>(values.size())));
     }
 
-    using dogen::dia::string;
+    using dogen::dia::entities::string;
     const auto v(get_attribute_value<string>(values.front(), dia_string));
     std::string name(v.value());
     boost::erase_first(name, hash_character);
@@ -137,7 +137,7 @@ parse_string_attribute(const dogen::dia::attribute& a) {
 }
 
 processed_comment processed_object_factory::
-create_processed_comment(const dogen::dia::attribute& a) {
+create_processed_comment(const dogen::dia::entities::attribute& a) {
     const auto s(parse_string_attribute(a));
     return processed_comment_factory::make(s);
 }
@@ -170,7 +170,7 @@ parse_object_type(const std::string& ot) {
 }
 
 void processed_object_factory::
-parse_connections(const dogen::dia::object& o, processed_object& po) {
+parse_connections(const dogen::dia::entities::object& o, processed_object& po) {
     /*
      * If there are no connections we have no work to do.
      */
@@ -206,7 +206,7 @@ parse_connections(const dogen::dia::object& o, processed_object& po) {
 }
 
 void processed_object_factory::
-parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
+parse_as_dia_text(const dogen::dia::entities::attribute a, processed_object& po) {
     if (a.values().size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
                                  << "have a single value but found "
@@ -215,7 +215,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
     }
 
 
-    using dogen::dia::composite;
+    using dogen::dia::entities::composite;
     const auto c(try_get_attribute_value<composite>(a.values().front()));
     if (!c)
         return;
@@ -239,7 +239,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
 }
 
 void  processed_object_factory::parse_as_class_attributes(
-    const dogen::dia::attribute a, processed_object& po) {
+    const dogen::dia::entities::attribute a, processed_object& po) {
 
     const auto& values(a.values());
     if (values.empty()) {
@@ -248,7 +248,7 @@ void  processed_object_factory::parse_as_class_attributes(
     }
 
     for (const auto& v : values) {
-        using dogen::dia::composite;
+        using dogen::dia::entities::composite;
         const auto& c(get_attribute_value<composite>(v, dia_composite));
         if (c.type() != dia_uml_attribute) {
             BOOST_LOG_SEV(lg, error) << "Expected composite type "
@@ -277,7 +277,7 @@ void  processed_object_factory::parse_as_class_attributes(
 }
 
 void processed_object_factory::
-parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
+parse_as_stereotypes(dogen::dia::entities::attribute a, processed_object& po) {
     /*
      * When it comes to stereotypes, we only care about objects and
      * packages.
@@ -295,7 +295,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
 }
 
 void processed_object_factory::
-parse_attributes(const dogen::dia::object& o, processed_object& po) {
+parse_attributes(const dogen::dia::entities::object& o, processed_object& po) {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             po.name(parse_string_attribute(a));
@@ -310,7 +310,7 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) {
     }
 }
 
-processed_object processed_object_factory::make(const dogen::dia::object& o) {
+processed_object processed_object_factory::make(const dogen::dia::entities::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
     processed_object r;
@@ -328,7 +328,7 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
 }
 
 std::list<processed_object>
-processed_object_factory::make(const dogen::dia::diagram& d) {
+processed_object_factory::make(const dogen::dia::entities::diagram& d) {
     std::list<processed_object> r;
     for (const auto& l : d.layers()) {
         for (const auto& o : l.objects())

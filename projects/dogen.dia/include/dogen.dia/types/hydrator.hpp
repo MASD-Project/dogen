@@ -26,13 +26,13 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.dia/types/diagram.hpp"
+#include "dogen.dia/types/entities/diagram.hpp"
 
 namespace dogen::dia {
 
 class hydrator {
 public:
-    diagram hydrate(boost::filesystem::path file_name);
+    entities::diagram hydrate(boost::filesystem::path file_name);
 };
 
 }

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen.dia/types/diagram_fwd.hpp"
+#include "dogen.dia/types/entities/diagram_fwd.hpp"
 #include "dogen.codec/types/entities/model.hpp"
 #include "dogen.codec.dia/types/grapher.hpp"
 #include "dogen.codec.dia/types/validator.hpp"
@@ -49,7 +49,7 @@ private:
      */
 
     std::list<processed_object>
-    obtain_processed_objects(const dogen::dia::diagram& d) const;
+    obtain_processed_objects(const dogen::dia::entities::diagram& d) const;
 
     /**
      * @brief Transforms the entire graph of processed objects into an

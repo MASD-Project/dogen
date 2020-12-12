@@ -26,7 +26,7 @@
 #endif
 
 #include <array>
-#include "dogen.dia/types/object.hpp"
+#include "dogen.dia/types/entities/object.hpp"
 
 namespace dogen::dia::test {
 
@@ -46,35 +46,35 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_uml_note(const unsigned int number = 0);
+    static entities::object make_uml_note(const unsigned int number = 0);
 
     /**
      * @brief Generates a new UML class.
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_class(const unsigned int number = 0);
+    static entities::object make_class(const unsigned int number = 0);
 
     /**
      * @brief Generates a new UML class without a name attribute.
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_no_name_class(const unsigned int number = 0);
+    static entities::object make_no_name_class(const unsigned int number = 0);
 
     /**
      * @brief Generates a new UML class with a blank name attribute.
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_blank_name_class(const unsigned int number = 0);
+    static entities::object make_blank_name_class(const unsigned int number = 0);
 
     /**
      * @brief Generates a new UML class with the given stereotype.
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_stereotyped_class(
+    static entities::object make_stereotyped_class(
         const std::string& st, const unsigned int number = 0);
 
     /**
@@ -82,7 +82,7 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static object make_large_package(const unsigned int number = 0);
+    static entities::object make_large_package(const unsigned int number = 0);
 
     /**
      * @brief Generates a UML class inside a large package, plus the
@@ -90,7 +90,7 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 3>
+    static std::array<entities::object, 3>
     make_class_inside_two_large_packages(unsigned int number = 0);
 
     /**
@@ -99,7 +99,7 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 2>
+    static std::array<entities::object, 2>
     make_class_inside_large_package(unsigned int number = 0);
 
     /**
@@ -108,7 +108,7 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 3> make_generalization(unsigned int number = 0);
+    static std::array<entities::object, 3> make_generalization(unsigned int number = 0);
 
     /**
      * @brief Generates two UML classes and a generalisation between
@@ -116,7 +116,7 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 4>
+    static std::array<entities::object, 4>
     make_generalization_inside_large_package(unsigned int number = 0);
 
     /**
@@ -125,14 +125,14 @@ public:
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 3> make_association(unsigned int number = 0);
+    static std::array<entities::object, 3> make_association(unsigned int number = 0);
 
     /**
      * @brief Generates objects directly connected in a cycle.
      *
      * @param number identifier used for object ID generation.
      */
-    static std::array<object, 4>
+    static std::array<entities::object, 4>
     make_first_degree_cycle(unsigned int number = 0);
 };
 

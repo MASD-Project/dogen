@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/logging.hpp"
-#include "dogen.dia/io/object_io.hpp"
+#include "dogen.dia/io/entities/object_io.hpp"
 #include "dogen.codec.dia/types/processed_object.hpp"
 #include "dogen.codec.dia/types/processed_object_factory.hpp"
 #include "dogen.codec.dia/io/processed_object_io.hpp"

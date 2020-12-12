@@ -25,8 +25,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.dia/types/hydrator.hpp"
-#include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.dia/types/diagram.hpp"
+#include "dogen.dia/io/entities/diagram_io.hpp"
+#include "dogen.dia/types/entities/diagram.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
@@ -68,7 +68,7 @@ inline bool is_not_relevant(const processed_object& po) {
 decoding_transform::~decoding_transform() noexcept {}
 
 std::list<processed_object> decoding_transform::
-obtain_processed_objects(const dogen::dia::diagram& d) const {
+obtain_processed_objects(const dogen::dia::entities::diagram& d) const {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
 
     /*

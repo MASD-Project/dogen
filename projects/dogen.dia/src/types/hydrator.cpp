@@ -24,20 +24,20 @@
 #include "dogen.utility/types/xml/text_reader.hpp"
 #include "dogen.utility/types/xml/node_types_io.hpp"
 #include "dogen.dia/types/hydration_error.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/rectangle.hpp"
-#include "dogen.dia/types/boolean.hpp"
-#include "dogen.dia/types/color.hpp"
-#include "dogen.dia/types/enumeration.hpp"
-#include "dogen.dia/types/font.hpp"
-#include "dogen.dia/types/integer.hpp"
-#include "dogen.dia/types/point.hpp"
-#include "dogen.dia/types/real.hpp"
-#include "dogen.dia/types/string.hpp"
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/child_node.hpp"
-#include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/types/object.hpp"
+#include "dogen.dia/types/entities/composite.hpp"
+#include "dogen.dia/types/entities/rectangle.hpp"
+#include "dogen.dia/types/entities/boolean.hpp"
+#include "dogen.dia/types/entities/color.hpp"
+#include "dogen.dia/types/entities/enumeration.hpp"
+#include "dogen.dia/types/entities/font.hpp"
+#include "dogen.dia/types/entities/integer.hpp"
+#include "dogen.dia/types/entities/point.hpp"
+#include "dogen.dia/types/entities/real.hpp"
+#include "dogen.dia/types/entities/string.hpp"
+#include "dogen.dia/types/entities/attribute.hpp"
+#include "dogen.dia/types/entities/child_node.hpp"
+#include "dogen.dia/types/entities/connection.hpp"
+#include "dogen.dia/types/entities/object.hpp"
 #include "dogen.dia/types/hydrator.hpp"
 
 namespace {
@@ -92,6 +92,8 @@ const bool skip_whitespace(true);
 }
 
 namespace dogen::dia {
+
+using namespace dogen::dia::entities;
 
 class hydrator_impl {
 public:
