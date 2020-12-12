@@ -62,10 +62,8 @@ const std::string uml_association("UML - Association");
 const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
-const std::string invalid_object_type("Invalid value for object type: ");
-const std::string invalid_yarn_element(
-    "Invalid or usupported yarn element type: ");
 
+const std::string invalid_object_type("Invalid value for object type: ");
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string uml_attribute_expected("UML atttribute expected");
@@ -310,7 +308,8 @@ parse_attributes(const dogen::dia::entities::object& o, processed_object& po) {
     }
 }
 
-processed_object processed_object_factory::make(const dogen::dia::entities::object& o) {
+processed_object processed_object_factory::
+make(const dogen::dia::entities::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
     processed_object r;
