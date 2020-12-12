@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.dia/types/entities/diagram.hpp"
 
 namespace dogen::dia::transforms {
 
+/**
+ * @brief Transforms a string with an XML representation of a Dia
+ * diagram into a diagram.
+ */
 class string_to_diagram_transform final {
 public:
-    string_to_diagram_transform() = default;
-    string_to_diagram_transform(const string_to_diagram_transform&) = default;
-    string_to_diagram_transform(string_to_diagram_transform&&) = default;
-    ~string_to_diagram_transform() = default;
-    string_to_diagram_transform& operator=(const string_to_diagram_transform&) = default;
-
-public:
-    bool operator==(const string_to_diagram_transform& rhs) const;
-    bool operator!=(const string_to_diagram_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::diagram apply(const std::string& s);
 };
 
 }
