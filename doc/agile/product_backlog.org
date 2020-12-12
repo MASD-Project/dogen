@@ -1838,6 +1838,13 @@ nice to make them visible. Advantages:
   archetypes, etc) or we could add support for proper operations. It
   could be done via meta-data.
 
+Notes:
+
+- the =transform= meta-type should include dependencies so that we
+  could compute the transform graph as part of the generation
+  process. We need to rework all chains so that they can be code
+  generated.
+
 *** Consider creating a container for profiles                        :story:
 
 At present we have placed all profiles in the profiles model and made
