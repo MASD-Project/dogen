@@ -25,7 +25,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.dia/types/hydrator.hpp"
 #include "dogen.dia/types/transforms/string_to_diagram_transform.hpp"
 #include "dogen.dia/io/entities/diagram_io.hpp"
 #include "dogen.dia/types/entities/diagram.hpp"
@@ -135,7 +134,7 @@ codec::entities::model
 decoding_transform::apply(const codec::transforms::context& ctx,
     const boost::filesystem::path& p) {
 
-    BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
+    BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram: " << p.generic_string();
 
     using dogen::utility::filesystem::read_file_content;
     const auto c(read_file_content(p));
@@ -143,8 +142,6 @@ decoding_transform::apply(const codec::transforms::context& ctx,
     using dogen::dia::transforms::string_to_diagram_transform;
     const auto d(string_to_diagram_transform::apply(c));
 
-    // dogen::dia::hydrator h;
-    // const auto diagram(h.hydrate(p));
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     const auto model_name(p.stem().generic_string());
@@ -155,8 +152,8 @@ decoding_transform::apply(const codec::transforms::context& ctx,
     const auto r(obtain_model(model_name, pos));
     stp.end_transform(r);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished converting diagram into "
-                             << "an codec model.";
+    BOOST_LOG_SEV(lg, debug) << "Finished converting diagram into codec model.";
+
     return r;
 }
 

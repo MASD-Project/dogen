@@ -22,7 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/xml/text_reader.hpp"
 #include "dogen.utility/types/xml/node_types_io.hpp"
-#include "dogen.dia/types/hydration_error.hpp"
 #include "dogen.dia/types/entities/composite.hpp"
 #include "dogen.dia/types/entities/rectangle.hpp"
 #include "dogen.dia/types/entities/boolean.hpp"
@@ -226,7 +225,7 @@ composite hydrator::read_attribute_value() {
             if (inner_composite) {
                 BOOST_LOG_SEV(lg, error) << expected_one_inner_composite;
                 BOOST_THROW_EXCEPTION(
-                    hydration_error(expected_one_inner_composite));
+                    transformation_error(expected_one_inner_composite));
             }
 
             inner_composite = composite_ptr(new composite());
@@ -238,7 +237,7 @@ composite hydrator::read_attribute_value() {
             attributes.push_back(ptr);
         } else {
             BOOST_LOG_SEV(lg, error) << unexpected_element;
-            BOOST_THROW_EXCEPTION(hydration_error(unexpected_element));
+            BOOST_THROW_EXCEPTION(transformation_error(unexpected_element));
         }
     } while (!reader_.is_end_element(dia_composite));
     result.value(attributes);
@@ -264,7 +263,7 @@ attribute hydrator::read_attribute() {
         const std::string name(reader_.name());
         if (!is_attribute_value(name)) {
             BOOST_LOG_SEV(lg, error) << unsupported_value << name;
-            BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + name));
+            BOOST_THROW_EXCEPTION(transformation_error(unsupported_value + name));
         }
 
         if (name == dia_color)
@@ -317,8 +316,8 @@ std::vector<connection> hydrator::read_connections() {
         if (!reader_.is_start_element(dia_connection)) {
             BOOST_LOG_SEV(lg, error) << unexpected_connection_type
                                      << reader_.name();
-            BOOST_THROW_EXCEPTION(hydration_error(unexpected_connection_type +
-                reader_.name()));
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    unexpected_connection_type + reader_.name()));
         }
         r.push_back(read_connection());
     } while (!reader_.is_end_element(dia_connections));
