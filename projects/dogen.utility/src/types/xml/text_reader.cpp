@@ -283,7 +283,7 @@ text_reader::text_reader(const boost::filesystem::path& file_name,
 text_reader::text_reader(const std::string& content,
     const bool skip_whitespace)
     : skip_whitespace_(skip_whitespace),
-      impl_(std::unique_ptr<impl>(new impl(content))) { }
+      impl_(std::unique_ptr<impl>(new impl(content, true/*fake*/))) { }
 
 text_reader::~text_reader() {
     // required here due to uncomplete type in unique_ptr
