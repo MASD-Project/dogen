@@ -571,14 +571,15 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_boost_model_dia_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(cpp_ref_impl_compressed_dia_produces_expected_model) {
-    SETUP_TEST_LOG("cpp_ref_impl_compressed_dia_produces_expected_model");
-    using dogen::utility::test_data::cpp_ref_impl_product;
-    const auto t(cpp_ref_impl_product::input_cpp_ref_impl_compressed_dia());
-    const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(apply_physical_model_production(t, od));
-    BOOST_CHECK(check_for_differences(od, m));
-}
+// FIXME: compression support removed.
+// BOOST_AUTO_TEST_CASE(cpp_ref_impl_compressed_dia_produces_expected_model) {
+//     SETUP_TEST_LOG("cpp_ref_impl_compressed_dia_produces_expected_model");
+//     using dogen::utility::test_data::cpp_ref_impl_product;
+//     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_compressed_dia());
+//     const auto od(cpp_ref_impl_product::project_directory());
+//     const auto m(apply_physical_model_production(t, od));
+//     BOOST_CHECK(check_for_differences(od, m));
+// }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_98_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_98_dia_produces_expected_model");
@@ -803,14 +804,15 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_boost_model_json_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(cpp_ref_impl_compressed_json_produces_expected_model) {
-    SETUP_TEST_LOG("cpp_ref_impl_compressed_json_produces_expected_model");
-    using dogen::utility::test_data::cpp_ref_impl_product;
-    const auto t(cpp_ref_impl_product::input_cpp_ref_impl_compressed_json());
-    const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(apply_physical_model_production(t, od));
-    BOOST_CHECK(check_for_differences(od, m));
-}
+// FIXME: compression support removed.
+// BOOST_AUTO_TEST_CASE(cpp_ref_impl_compressed_json_produces_expected_model) {
+//     SETUP_TEST_LOG("cpp_ref_impl_compressed_json_produces_expected_model");
+//     using dogen::utility::test_data::cpp_ref_impl_product;
+//     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_compressed_json());
+//     const auto od(cpp_ref_impl_product::project_directory());
+//     const auto m(apply_physical_model_production(t, od));
+//     BOOST_CHECK(check_for_differences(od, m));
+// }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_98_json_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_98_json_produces_expected_model");
