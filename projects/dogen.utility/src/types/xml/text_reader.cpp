@@ -121,7 +121,8 @@ namespace dogen::utility::xml {
  */
 class text_reader::impl {
 public:
-    impl(const std::string& file_name);
+    explicit impl(const std::string& file_name);
+    impl(const std::string& content, const bool);
     ~impl();
 
 public:
@@ -139,6 +140,17 @@ public:
 private:
     xmlTextReaderPtr reader_;
 };
+
+text_reader::impl::impl(const std::string& content, const bool)
+    : reader_(xmlReaderForMemory(content.c_str(),
+            static_cast<int>(content.length()), NULL, NULL, 0)) {
+
+    if (reader_ != NULL)
+        return;
+
+    BOOST_LOG_SEV(lg, error) << initialisation_error;
+    BOOST_THROW_EXCEPTION(exception(initialisation_error));
+}
 
 text_reader::impl::impl(const std::string& file_name)
     : reader_(xmlNewTextReaderFilename(file_name.c_str())) {
@@ -247,9 +259,8 @@ bool text_reader::impl::skip() const {
 }
 
 text_reader::text_reader(const boost::filesystem::path& file_name,
-    const bool skip_whitespace)
-    : file_name_(file_name),
-      skip_whitespace_(skip_whitespace) {
+    const bool skip_whitespace) : file_name_(file_name),
+                                  skip_whitespace_(skip_whitespace) {
 
     if (!boost::filesystem::exists(file_name)) {
         BOOST_LOG_SEV(lg, error) << error_file_not_found
@@ -268,6 +279,11 @@ text_reader::text_reader(const boost::filesystem::path& file_name,
 
     impl_ = std::unique_ptr<impl>(new impl(file_name_.string()));
 }
+
+text_reader::text_reader(const std::string& content,
+    const bool skip_whitespace)
+    : skip_whitespace_(skip_whitespace),
+      impl_(std::unique_ptr<impl>(new impl(content))) { }
 
 text_reader::~text_reader() {
     // required here due to uncomplete type in unique_ptr

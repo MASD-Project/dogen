@@ -53,6 +53,13 @@ public:
     text_reader(const boost::filesystem::path& file_name,
         const bool skip_whitespace = false);
 
+    /**
+     * @brief Initialises the reader with a string.
+     * @param skip_whitespace if true, reads will skip whitespace
+     */
+    text_reader(const std::string& content,
+        const bool skip_whitespace = false);
+
     ~text_reader();
 
 public:
