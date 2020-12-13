@@ -49,7 +49,6 @@ apply(const context& ctx, const entities::artefact& a) {
     tracing::scoped_chain_tracer stp(lg, "artefact to model",
         transform_id, model_name, *ctx.tracer());
 
-
     if (a.codec_name() == json_codec_name) {
         const auto r(json_artefact_to_model_transform::apply(ctx, a));
         stp.end_chain(r);

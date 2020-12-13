@@ -205,8 +205,8 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
 
 
 entities::artefact model_to_org_artefact_transform::
-apply(const transforms::context& ctx, const entities::model& m,
-    const boost::filesystem::path& p) {
+apply(const transforms::context& ctx, const boost::filesystem::path& p,
+    const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "json artefact to model",
         transform_id, m.name().qualified(), *ctx.tracer(), m);
 

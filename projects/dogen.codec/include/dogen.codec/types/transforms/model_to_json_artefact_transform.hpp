@@ -63,8 +63,8 @@ private:
 
 public:
     static entities::artefact
-    apply(const transforms::context& ctx, const entities::model& m,
-        const boost::filesystem::path& p);
+    apply(const transforms::context& ctx, const boost::filesystem::path& p,
+        const entities::model& m);
 };
 
 }
