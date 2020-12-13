@@ -52,8 +52,6 @@ target_link_libraries(${lib_target_name}
     dogen.dia.lib
     dogen.physical.lib
     dogen.codec.lib
-    dogen.codec.org_mode.lib
-    dogen.codec.json.lib
     dogen.codec.dia.lib
     dogen.logical.lib
     dogen.text.lib
