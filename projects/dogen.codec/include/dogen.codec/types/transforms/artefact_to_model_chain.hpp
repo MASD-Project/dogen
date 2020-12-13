@@ -34,6 +34,10 @@ namespace dogen::codec::transforms {
 /**
  * @brief Applies the codec transform for the supplied artefact,
  * if one exists.
+ *
+ * Transforms the external model in whatever supported external
+ * representation it may be in - Dia, JSON, etc - into the internal
+ * representation of a codec model.
  */
 class artefact_to_model_chain final {
 public:

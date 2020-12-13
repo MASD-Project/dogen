@@ -32,6 +32,7 @@
 #include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
+#include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -93,14 +94,10 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     const auto a(file_to_artefact_transform::apply(ctx, p));
 
     /*
-     * Transform the external model in whatever supported
-     * external representation it may be in - Dia, JSON, etc - into
-     * the internal representation of a codec model.
+     * Transform the external model to the internal representation of
+     * a codec model.
      */
-    auto r(transform_artefact(ctx, a));
-
-    // auto& t(transform_for_model(p));
-    // auto r(t.apply(ctx, p));
+    auto r(artefact_to_model_chain::apply(ctx, a));
 
     /*
      * Update the provenance properties.
