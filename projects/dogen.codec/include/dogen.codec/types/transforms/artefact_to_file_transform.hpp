@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Writes the artefact to the filesystem.
+ */
 class artefact_to_file_transform final {
 public:
-    artefact_to_file_transform() = default;
-    artefact_to_file_transform(const artefact_to_file_transform&) = default;
-    artefact_to_file_transform(artefact_to_file_transform&&) = default;
-    ~artefact_to_file_transform() = default;
-    artefact_to_file_transform& operator=(const artefact_to_file_transform&) = default;
-
-public:
-    bool operator==(const artefact_to_file_transform& rhs) const;
-    bool operator!=(const artefact_to_file_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void
+    apply(const transforms::context& ctx, const entities::artefact& a);
 };
 
 }

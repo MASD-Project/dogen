@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/types/transforms/artefact_to_file_transform.hpp"
+
+namespace {
+
+const std::string transform_id("codec.transforms.artefact_to_file_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::codec::transforms {
 
-bool artefact_to_file_transform::operator==(const artefact_to_file_transform& /*rhs*/) const {
-    return true;
+void artefact_to_file_transform::
+apply(const transforms::context& ctx, const entities::artefact& a) {
+    const auto fn(a.path().stem());
+    tracing::scoped_transform_tracer stp(lg, "artefact to file",
+        transform_id, fn.stem().generic_string(), *ctx.tracer(), a);
+
+    utility::filesystem::write_file_content(a.path(), a.content());
+
+    stp.end_transform(a);
 }
 
 }
