@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.codec/io/entities/model_io.hpp"
+#include "dogen.codec/io/entities/comment_io.hpp"
 #include "dogen.codec/io/entities/element_io.hpp"
 #include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.identification/io/entities/stereotype_io.hpp"
@@ -128,12 +129,13 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::codec::entities::model\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
-      << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
+      << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
+      << "\"comment\": " << v.comment() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"input_technical_space\": " << "\"" << tidy_up_string(v.input_technical_space()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "

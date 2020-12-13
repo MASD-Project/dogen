@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.codec/io/entities/comment_io.hpp"
 #include "dogen.codec/io/entities/element_io.hpp"
 #include "dogen.codec/io/entities/attribute_io.hpp"
 #include "dogen.identification/io/entities/name_io.hpp"
@@ -122,12 +123,13 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::codec::entities::element\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
-      << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
+      << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
+      << "\"comment\": " << v.comment() << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes() << ", "
       << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\"" << ", "

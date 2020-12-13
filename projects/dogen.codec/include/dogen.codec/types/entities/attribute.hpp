@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.identification/types/entities/name.hpp"
 #include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.identification/types/entities/tagged_value.hpp"
@@ -47,12 +48,13 @@ public:
 public:
     attribute(
         const std::list<dogen::identification::entities::tagged_value>& tagged_values,
-        const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
         const std::list<dogen::identification::entities::stereotype>& stereotypes,
         const std::string& documentation,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::codec_provenance& provenance,
+        const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
+        const dogen::codec::entities::comment& comment,
         const std::string& type,
         const std::string& value);
 
@@ -61,16 +63,6 @@ public:
     std::list<dogen::identification::entities::tagged_value>& tagged_values();
     void tagged_values(const std::list<dogen::identification::entities::tagged_value>& v);
     void tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v);
-
-    /**
-     * @brief Meta-data sourced externally that can be used to override meta-data in model.
-     */
-    /**@{*/
-    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides() const;
-    std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides();
-    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v);
-    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v);
-    /**@}*/
 
     const std::list<dogen::identification::entities::stereotype>& stereotypes() const;
     std::list<dogen::identification::entities::stereotype>& stereotypes();
@@ -120,6 +112,26 @@ public:
     void provenance(const dogen::identification::entities::codec_provenance&& v);
     /**@}*/
 
+    /**
+     * @brief Meta-data sourced externally that can be used to override meta-data in model.
+     */
+    /**@{*/
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides() const;
+    std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides();
+    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v);
+    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v);
+    /**@}*/
+
+    /**
+     * @brief Properties associated with the codec comment.
+     */
+    /**@{*/
+    const dogen::codec::entities::comment& comment() const;
+    dogen::codec::entities::comment& comment();
+    void comment(const dogen::codec::entities::comment& v);
+    void comment(const dogen::codec::entities::comment&& v);
+    /**@}*/
+
     const std::string& type() const;
     std::string& type();
     void type(const std::string& v);
@@ -147,12 +159,13 @@ public:
 
 private:
     std::list<dogen::identification::entities::tagged_value> tagged_values_;
-    std::list<dogen::identification::entities::tagged_value> tagged_values_overrides_;
     std::list<dogen::identification::entities::stereotype> stereotypes_;
     std::string documentation_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::codec_provenance provenance_;
+    std::list<dogen::identification::entities::tagged_value> tagged_values_overrides_;
+    dogen::codec::entities::comment comment_;
     std::string type_;
     std::string value_;
 };

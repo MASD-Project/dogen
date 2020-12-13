@@ -34,23 +34,25 @@ namespace dogen::codec::entities {
 
 model::model(
     const std::list<dogen::identification::entities::tagged_value>& tagged_values,
-    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
     const std::list<dogen::identification::entities::stereotype>& stereotypes,
     const std::string& documentation,
     const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::codec_provenance& provenance,
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
+    const dogen::codec::entities::comment& comment,
     const std::list<dogen::codec::entities::element>& elements,
     const std::string& input_technical_space,
     const std::list<std::string>& references,
     const std::unordered_set<std::string>& processed_variability_overrides)
     : tagged_values_(tagged_values),
-      tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
       configuration_(configuration),
       provenance_(provenance),
+      tagged_values_overrides_(tagged_values_overrides),
+      comment_(comment),
       elements_(elements),
       input_technical_space_(input_technical_space),
       references_(references),
@@ -59,12 +61,13 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(tagged_values_, other.tagged_values_);
-    swap(tagged_values_overrides_, other.tagged_values_overrides_);
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
+    swap(tagged_values_overrides_, other.tagged_values_overrides_);
+    swap(comment_, other.comment_);
     swap(elements_, other.elements_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(references_, other.references_);
@@ -73,12 +76,13 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return tagged_values_ == rhs.tagged_values_ &&
-        tagged_values_overrides_ == rhs.tagged_values_overrides_ &&
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
+        tagged_values_overrides_ == rhs.tagged_values_overrides_ &&
+        comment_ == rhs.comment_ &&
         elements_ == rhs.elements_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         references_ == rhs.references_ &&
@@ -105,22 +109,6 @@ void model::tagged_values(const std::list<dogen::identification::entities::tagge
 
 void model::tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v) {
     tagged_values_ = std::move(v);
-}
-
-const std::list<dogen::identification::entities::tagged_value>& model::tagged_values_overrides() const {
-    return tagged_values_overrides_;
-}
-
-std::list<dogen::identification::entities::tagged_value>& model::tagged_values_overrides() {
-    return tagged_values_overrides_;
-}
-
-void model::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v) {
-    tagged_values_overrides_ = v;
-}
-
-void model::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v) {
-    tagged_values_overrides_ = std::move(v);
 }
 
 const std::list<dogen::identification::entities::stereotype>& model::stereotypes() const {
@@ -201,6 +189,38 @@ void model::provenance(const dogen::identification::entities::codec_provenance& 
 
 void model::provenance(const dogen::identification::entities::codec_provenance&& v) {
     provenance_ = std::move(v);
+}
+
+const std::list<dogen::identification::entities::tagged_value>& model::tagged_values_overrides() const {
+    return tagged_values_overrides_;
+}
+
+std::list<dogen::identification::entities::tagged_value>& model::tagged_values_overrides() {
+    return tagged_values_overrides_;
+}
+
+void model::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v) {
+    tagged_values_overrides_ = v;
+}
+
+void model::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v) {
+    tagged_values_overrides_ = std::move(v);
+}
+
+const dogen::codec::entities::comment& model::comment() const {
+    return comment_;
+}
+
+dogen::codec::entities::comment& model::comment() {
+    return comment_;
+}
+
+void model::comment(const dogen::codec::entities::comment& v) {
+    comment_ = v;
+}
+
+void model::comment(const dogen::codec::entities::comment&& v) {
+    comment_ = std::move(v);
 }
 
 const std::list<dogen::codec::entities::element>& model::elements() const {

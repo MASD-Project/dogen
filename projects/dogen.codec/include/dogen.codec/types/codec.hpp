@@ -31,7 +31,7 @@
  * An external model is defined as:
  *
  * @li a third-party format that is not owned or controlled by
- *     Dogen, such as Dia;
+ *     Dogen, such as Dia or org-mode.
  * @li a Dogen format designed for interoperability (JSON).
  *
  * External models are converted into an intermediate format called
@@ -42,11 +42,16 @@
  *
  * A @e codec must be created for each external model that is to be
  * injected, providing a transformation between the native formats
- * and the codec model. The codecs are created in their own models,
- * following the naming convention codec.X for a given codec X.
- * They then register against the codec registrar. Note that for a
- * given file extension, there can only be one and only one codec to
- * manage it.
+ * and the codec model. The codecs are created as transforms in the
+ * present model, and should reuse common infrastructure where possible.
+ * There should also be a "native" model representing the original
+ * codec format as much as possible (e.g. "dogen.dia"). The idea for
+ * those models is just to provide a faithful representation of the
+ * native codec domain model (though it may not necessarily be
+ * complete).
+ *
+ * In general, codecs use file extensions to determine the type of the
+ * codec.
  */
 namespace dogen::codec {
 }
