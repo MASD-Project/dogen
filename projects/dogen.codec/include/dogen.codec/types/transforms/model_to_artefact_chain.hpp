@@ -41,8 +41,8 @@ namespace dogen::codec::transforms {
 class model_to_artefact_chain final {
 public:
     static entities::artefact
-    apply(const context& ctx, const std::string& codec_name,
-        const boost::filesystem::path& p, const entities::model& m);
+    apply(const context& ctx, const boost::filesystem::path& p,
+        const entities::model& m);
 };
 
 }

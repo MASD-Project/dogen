@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
@@ -35,6 +36,7 @@ const std::string transform_id("codec.transforms.model_to_artefact_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const char dot('.');
 const std::string json_codec_name("json");
 const std::string org_codec_name("org");
 
@@ -44,12 +46,24 @@ const std::string unsupported_codec("No transform are available for codec: ");
 
 namespace dogen::codec::transforms {
 
+inline std::string path_to_codec_name(const boost::filesystem::path& p) {
+    /*
+     * The codec type is created from the extension, after the leading
+     * dot is removed, and the string is normalised to lower case.
+     */
+    const auto ext(p.extension().generic_string());
+    const auto starts_with_dot(!ext.empty() && ext[0] == dot);
+    const auto codec_name(starts_with_dot ? ext.substr(1) : ext);
+    return boost::to_lower_copy(codec_name);
+}
+
 entities::artefact model_to_artefact_chain::
-apply(const context& ctx, const std::string& codec_name,
-    const boost::filesystem::path& p, const entities::model& m) {
+apply(const context& ctx, const boost::filesystem::path& p,
+    const entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model to artefact",
         transform_id, m.name().qualified(), *ctx.tracer());
 
+    const auto codec_name(path_to_codec_name(p));
     if (codec_name == json_codec_name) {
         const auto r(model_to_json_artefact_transform::apply(ctx, p, m));
         stp.end_chain(r);
