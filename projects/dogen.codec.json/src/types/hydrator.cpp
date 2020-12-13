@@ -122,7 +122,24 @@ hydrator::read_parents(const boost::property_tree::ptree& pt) const {
 codec::entities::attribute hydrator::
 read_attribute(const boost::property_tree::ptree& pt) const {
     codec::entities::attribute r;
-    r.name().simple(pt.get<std::string>(name_key));
+
+    const auto n(pt.get<std::string>(name_key));
+    r.name().qualified(n);
+
+    /*
+     * FIXME: we cannot handle simple attribute names properly at
+     * present because some "simple" names are actually qualified such
+     * as the features, e.g.:
+     *
+     *  cpp.aspect.requires_manual_default_constructor
+     *
+     * Due to this we need to do a simple hack. This needs proper
+     * thought.
+     */
+    // auto tokens(utility::string::splitter::split_scoped(n));
+    // r.name().simple(tokens.back());
+    r.name().simple(n);
+
     r.type(pt.get<std::string>(type_key));
     r.value(pt.get<std::string>(value_key, empty));
     r.documentation(read_documentation(pt));
@@ -135,7 +152,13 @@ read_attribute(const boost::property_tree::ptree& pt) const {
 codec::entities::element hydrator::read_element(
     const boost::property_tree::ptree& pt, const std::string& id) const {
     codec::entities::element r;
-    r.name().simple(pt.get<std::string>(name_key));
+
+    const auto n(pt.get<std::string>(name_key));
+    r.name().qualified(n);
+
+    auto tokens(utility::string::splitter::split_scoped(n));
+    r.name().simple(tokens.back());
+
     r.documentation(read_documentation(pt));
     r.parents(read_parents(pt));
     r.tagged_values(read_tagged_values(pt));
@@ -234,6 +257,7 @@ hydrator::hydrate(const boost::filesystem::path& p) const {
 
     auto r(hydrate(s));
     r.name().simple(p.stem().generic_string());
+    r.name().qualified(r.name().simple()); // FIXME: hack
 
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;

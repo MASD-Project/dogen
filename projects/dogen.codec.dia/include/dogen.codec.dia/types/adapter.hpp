@@ -58,9 +58,10 @@ private:
 
 private:
     /**
-     * @brief Adapts a processed attribute into a codec exoattribute.
+     * @brief Adapts a processed attribute into a codec attribute.
      */
-    static codec::entities::attribute adapt(const processed_attribute& a);
+    static codec::entities::attribute
+    adapt(const processed_attribute& a, const std::string& qualified_owner);
 
 public:
     /**

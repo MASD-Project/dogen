@@ -84,8 +84,7 @@ namespace dogen::orchestration::transforms {
 using dogen::identification::entities::logical_id;
 
 template<typename Element>
-inline void
-insert(const boost::shared_ptr<Element>& e,
+inline void insert(const boost::shared_ptr<Element>& e,
     std::unordered_map<logical_id, boost::shared_ptr<Element>>& dst) {
     const auto id(e->name().qualified().dot());
     bool inserted(dst.insert(std::make_pair(id, e)).second);

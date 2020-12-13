@@ -21,6 +21,7 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
 #define DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
 
+#include "dogen.identification/types/entities/name.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -85,10 +86,13 @@ private:
      * @brief Ensure the string is not empty.
      */
     /**@{*/
+    void ensure_not_empty(const std::string& s) const;
     void ensure_not_empty(
         const identification::entities::logical_id& element_id,
         const std::string& s) const;
-    void ensure_not_empty(const std::string& s) const;
+    void ensure_not_empty(
+        const identification::entities::logical_id& element_id,
+        const identification::entities::name& n) const;
     /**@{*/
 
     /**
@@ -101,17 +105,27 @@ private:
      * @brief Ensure the attributes are empty.
      */
     void ensure_empty(const identification::entities::logical_id& element_id,
-        const std::list<codec::entities::attribute>& ias) const;
+        const std::list<codec::entities::attribute>& cattrs) const;
 
 private:
     /**
      * @brief Creates a list of potential bindings from a list of stereotypes.
      */
     std::list<variability::entities::potential_binding> to_potential_binding(
-        const std::list<identification::entities::stereotype>& stereotypes
-        ) const;
+        const std::list<identification::entities::stereotype>& sts) const;
 
 private:
+    /**
+     * @brief Creates a logical name using the element name provided.
+     *
+     * @param n may be a simple name or a qualified name, via a scope
+     * operator.
+     *
+     * @pre n must not be empty.
+     */
+    identification::entities::logical_name
+    to_name(const std::string& n, const bool is_container) const;
+
     /**
      * @brief Creates a logical name using the element name provided, and
      * places it in the location provided.
@@ -127,17 +141,6 @@ private:
         const std::string& n, const bool is_container) const;
 
     /**
-     * @brief Creates a logical name using the element name provided.
-     *
-     * @param n may be a simple name or a qualified name, via a scope
-     * operator.
-     *
-     * @pre n must not be empty.
-     */
-    identification::entities::logical_name
-    to_name(const std::string& n, const bool is_container) const;
-
-    /**
      * @brief Converts an codec attribute to a modeline field.
      *
      * @pre name and value of the injector attribute must not be empty.
@@ -145,7 +148,7 @@ private:
      */
     logical::entities::decoration::modeline_field
     to_modeline_field(const identification::entities::logical_name& owner,
-        const codec::entities::attribute& ia) const;
+        const codec::entities::attribute& cattr) const;
 
     /**
      * @brief Converts an codec attribute to an logical attribute.
@@ -154,7 +157,7 @@ private:
      */
     logical::entities::attribute
     to_attribute(const identification::entities::logical_name& owner,
-        const codec::entities::attribute& ia) const;
+        const codec::entities::attribute& cattr) const;
 
     /**
      * @brief Converts an injector attribute to an logical enumerator.
@@ -164,7 +167,7 @@ private:
      */
     logical::entities::structural::enumerator
     to_enumerator(const identification::entities::logical_name& owner,
-        const codec::entities::attribute& ia) const;
+        const codec::entities::attribute& cattr) const;
 
 private:
     /**
@@ -173,7 +176,7 @@ private:
      */
     void populate_element(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie,
+        const codec::entities::element& ce,
         const bool is_container, logical::entities::element& e) const;
 
 public:
@@ -184,7 +187,7 @@ public:
     boost::shared_ptr<logical::entities::structural::object>
     to_object(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -193,7 +196,7 @@ public:
     boost::shared_ptr<logical::entities::structural::object_template>
     to_object_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -202,7 +205,7 @@ public:
     boost::shared_ptr<logical::entities::structural::exception>
     to_exception(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -211,7 +214,7 @@ public:
     boost::shared_ptr<logical::entities::structural::primitive>
     to_primitive(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -220,7 +223,7 @@ public:
     boost::shared_ptr<logical::entities::structural::enumeration>
     to_enumeration(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -229,7 +232,7 @@ public:
     boost::shared_ptr<logical::entities::structural::module>
     to_module(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -238,7 +241,7 @@ public:
     boost::shared_ptr<logical::entities::structural::builtin>
     to_builtin(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -247,7 +250,7 @@ public:
     boost::shared_ptr<logical::entities::structural::entry_point>
     to_entry_point(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -256,7 +259,7 @@ public:
     boost::shared_ptr<logical::entities::structural::assistant>
     to_assistant(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -266,7 +269,7 @@ public:
     boost::shared_ptr<logical::entities::decoration::modeline_group>
     to_modeline_group(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -275,7 +278,7 @@ public:
     boost::shared_ptr<logical::entities::decoration::modeline>
     to_modeline(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -284,7 +287,7 @@ public:
     boost::shared_ptr<logical::entities::decoration::generation_marker>
     to_generation_marker(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -293,7 +296,7 @@ public:
     boost::shared_ptr<logical::entities::decoration::licence>
     to_licence(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 private:
     /**
@@ -301,7 +304,7 @@ private:
      */
     void populate_abstract_profile(
         const identification::entities::logical_location& l,
-        const codec::entities::element& ie,
+        const codec::entities::element& ce,
         logical::entities::variability::abstract_profile& ap) const;
 
     /**
@@ -309,7 +312,7 @@ private:
      */
     void populate_abstract_profile_entry(
         const identification::entities::logical_name& n,
-        const codec::entities::attribute& attr,
+        const codec::entities::attribute& cattr,
         logical::entities::variability::abstract_profile_entry& ape) const;
 
     /**
@@ -317,7 +320,7 @@ private:
      */
     void populate_abstract_feature(
         const identification::entities::logical_name& pn,
-        const codec::entities::attribute& ia,
+        const codec::entities::attribute& cattr,
         logical::entities::variability::abstract_feature& af) const;
 
 public:
@@ -328,7 +331,7 @@ public:
     boost::shared_ptr<logical::entities::variability::profile>
     to_variability_profile(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -339,7 +342,7 @@ public:
     to_variability_profile_template(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -350,7 +353,7 @@ public:
     to_variability_feature_template_bundle(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -361,7 +364,7 @@ public:
     to_variability_feature_bundle(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -372,7 +375,7 @@ public:
     to_variability_initializer(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -382,7 +385,7 @@ public:
     boost::shared_ptr<logical::entities::mapping::fixed_mappable>
     to_fixed_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -392,7 +395,7 @@ public:
     boost::shared_ptr<logical::entities::mapping::extensible_mappable>
     to_extensible_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -402,7 +405,7 @@ public:
     boost::shared_ptr<logical::entities::templating::logic_less_template>
     to_logic_less_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -412,7 +415,7 @@ public:
     boost::shared_ptr<logical::entities::serialization::type_registrar>
     to_type_registrar(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -423,7 +426,7 @@ public:
     to_visual_studio_solution(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -433,7 +436,7 @@ public:
     to_visual_studio_project(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -443,7 +446,7 @@ public:
     to_visual_studio_msbuild_targets(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -454,7 +457,7 @@ public:
     to_orm_common_odb_options(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -464,7 +467,7 @@ public:
     boost::shared_ptr<logical::entities::build::cmakelists>
     to_build_cmakelists(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
 public:
     /**
@@ -474,7 +477,7 @@ public:
     boost::shared_ptr<logical::entities::physical::backend>
     to_physical_backend(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -483,7 +486,7 @@ public:
     boost::shared_ptr<logical::entities::physical::facet>
     to_physical_facet(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -492,7 +495,7 @@ public:
     boost::shared_ptr<logical::entities::physical::archetype>
     to_physical_archetype(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -502,7 +505,7 @@ public:
     to_physical_archetype_kind(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -511,7 +514,7 @@ public:
     boost::shared_ptr<logical::entities::physical::part>
     to_physical_part(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 
     /**
      * @brief Converts an codec element with a stereotype of
@@ -520,7 +523,7 @@ public:
     boost::shared_ptr<logical::entities::physical::helper>
     to_physical_helper(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const codec::entities::element& ie) const;
+        const codec::entities::element& ce) const;
 };
 
 }

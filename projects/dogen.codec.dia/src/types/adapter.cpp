@@ -58,12 +58,13 @@ std::string adapter::qualified_name(const std::string& contained_by,
     return contained_by + name_delimiter + simple_name;
 }
 
-codec::entities::attribute
-adapter::adapt(const processed_attribute& a) {
+codec::entities::attribute adapter::adapt(const processed_attribute& a,
+    const std::string& qualified_owner) {
     validate_dia_name(a.name());
 
     codec::entities::attribute r;
     r.name().simple(a.name());
+    r.name().qualified(qualified_name(qualified_owner, a.name()));
     r.type(a.type());
     r.value(a.value());
     r.documentation(a.comment().documentation());
@@ -104,7 +105,8 @@ adapter::adapt(const processed_object& po, const std::string& contained_by,
     validate_dia_name(po.name());
 
     codec::entities::element r;
-    r.name().simple(qualified_name(contained_by, po.name()));
+    r.name().simple(po.name());
+    r.name().qualified(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
     r.tagged_values(po.comment().tagged_values());
@@ -115,7 +117,7 @@ adapter::adapt(const processed_object& po, const std::string& contained_by,
     process_stereotypes(po, r);
 
     for (const auto& attr : po.attributes())
-        r.attributes().push_back(adapt(attr));
+        r.attributes().push_back(adapt(attr, r.name().qualified()));
 
     return r;
 }
