@@ -24,6 +24,7 @@
 #include "dogen.codec/types/transforms/context.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
+#include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
 
 namespace {
@@ -65,18 +66,27 @@ void model_to_model_chain::apply(const transforms::context& ctx,
         transform_id, *ctx.tracer());
 
     /*
+     * Convert the files into artefacts.
+     */
+    const auto src_a(file_to_artefact_transform::apply(ctx, src));
+    const auto dst_a(file_to_artefact_transform::apply(ctx, dst));
+
+
+
+
+    /*
      * Obtain a tuple containing the source and destination
      * transforms.
      */
-    BOOST_LOG_SEV(lg, info) << " Transforming: " << src.generic_string()
-                            << " to: " << dst.generic_string();
-    auto tuple(obtain_transforms(src, dst));
-    auto src_model(tuple.get<0>().apply(ctx, src));
+    // BOOST_LOG_SEV(lg, info) << " Transforming: " << src.generic_string()
+    //                         << " to: " << dst.generic_string();
+    // auto tuple(obtain_transforms(src, dst));
+    // auto src_model(tuple.get<0>().apply(ctx, src));
 
     /*
      * Transform the model to the requested representation.
      */
-    tuple.get<1>().apply(ctx, src_model, dst);
+    // tuple.get<1>().apply(ctx, src_model, dst);
 }
 
 }
