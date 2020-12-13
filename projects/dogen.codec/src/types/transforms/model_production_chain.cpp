@@ -84,8 +84,8 @@ transforms::registrar& model_production_chain::registrar() {
 entities::model model_production_chain::
 apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.stem().generic_string());
-    tracing::scoped_chain_tracer stp(lg, "codec model production chain",
-        transform_id, model_name, *ctx.tracer());
+    tracing::scoped_chain_tracer stp(lg, "codec model production", transform_id,
+        model_name, *ctx.tracer());
 
     /*
      * Convert the file into an artefact.

@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Applies the codec transform for the supplied artefact,
+ * if one exists.
+ */
 class artefact_to_model_chain final {
 public:
-    artefact_to_model_chain() = default;
-    artefact_to_model_chain(const artefact_to_model_chain&) = default;
-    artefact_to_model_chain(artefact_to_model_chain&&) = default;
-    ~artefact_to_model_chain() = default;
-    artefact_to_model_chain& operator=(const artefact_to_model_chain&) = default;
-
-public:
-    bool operator==(const artefact_to_model_chain& rhs) const;
-    bool operator!=(const artefact_to_model_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::model
+    apply(const context& ctx, const entities::artefact& a);
 };
 
 }
