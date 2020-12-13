@@ -25,24 +25,46 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <map>
+#include <string>
+#include <iosfwd>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Transforms the supplied codec model into an artefact encoded
+ * using JSON.
+ */
 class model_to_json_artefact_transform final {
-public:
-    model_to_json_artefact_transform() = default;
-    model_to_json_artefact_transform(const model_to_json_artefact_transform&) = default;
-    model_to_json_artefact_transform(model_to_json_artefact_transform&&) = default;
-    ~model_to_json_artefact_transform() = default;
-    model_to_json_artefact_transform& operator=(const model_to_json_artefact_transform&) = default;
+private:
+    static std::string tidy_up_string(std::string s);
+
+private:
+    static void insert_documentation(std::ostream& s, const std::string& d);
+    static void insert_tagged_values(std::ostream& s,
+        const std::list<identification::entities::tagged_value>& tvs);
+    static void insert_stereotypes(std::ostream& s,
+        const std::list<identification::entities::stereotype>& sts);
+    static void insert_parents(std::ostream& s,
+        const std::list<std::string>& parents);
+    static void insert_attribute(std::ostream& s,
+        const codec::entities::attribute& a);
+    static void insert_element(std::ostream& s,
+        const codec::entities::element& e);
+    static std::string to_string(const codec::entities::model& m);
 
 public:
-    bool operator==(const model_to_json_artefact_transform& rhs) const;
-    bool operator!=(const model_to_json_artefact_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::artefact
+    apply(const transforms::context& ctx, const entities::model& m,
+        const boost::filesystem::path& p);
 };
 
 }

@@ -24,8 +24,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
+#include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
 
