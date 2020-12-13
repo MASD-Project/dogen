@@ -25,24 +25,79 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <boost/filesystem/path.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.identification/types/entities/tagged_value.hpp"
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Processes the artefact as if encoded using JSON, converting
+ * it into an instance of the codec model.
+ */
 class json_artefact_to_model_transform final {
-public:
-    json_artefact_to_model_transform() = default;
-    json_artefact_to_model_transform(const json_artefact_to_model_transform&) = default;
-    json_artefact_to_model_transform(json_artefact_to_model_transform&&) = default;
-    ~json_artefact_to_model_transform() = default;
-    json_artefact_to_model_transform& operator=(const json_artefact_to_model_transform&) = default;
+    private:
+    /**
+     * @brief Reads the key value pairs from the property tree.
+     */
+    static std::list<std::pair<std::string, std::string>>
+    read_kvps(const boost::property_tree::ptree& pt);
+
+    /**
+     * @brief Reads the stereotypes, if any exists.
+     */
+    static std::list<identification::entities::stereotype>
+    read_stereotypes(const boost::property_tree::ptree& pt);
+
+    /**
+     * @brief Reads the parents, if any exists.
+     */
+    static std::list<std::string>
+    read_parents(const boost::property_tree::ptree& pt);
+
+    /**
+     * @brief Reads the documentation, if any exists.
+     */
+    static std::string
+    read_documentation(const boost::property_tree::ptree& pt);
+
+    /**
+     * @brief Reads the tagged values, if any exists.
+     */
+    static std::list<identification::entities::tagged_value>
+    read_tagged_values(const boost::property_tree::ptree& pt);
+
+private:
+    /**
+     * @brief Reads the attributes, if any.
+     */
+    static codec::entities::attribute
+    read_attribute(const boost::property_tree::ptree& pt);
+
+    /**
+     * @brief Reads an element according to its meta-type by
+     * dispatching to the correct read functions.
+     */
+    static codec::entities::element
+    read_element(const boost::property_tree::ptree& pt, const std::string& id);
+
+    /**
+     * @brief Reads the entire stream as a property tree.
+     */
+    static codec::entities::model read_stream(std::istream& s);
 
 public:
-    bool operator==(const json_artefact_to_model_transform& rhs) const;
-    bool operator!=(const json_artefact_to_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::model
+    apply(const transforms::context& ctx, const entities::artefact& a);
 };
 
 }
