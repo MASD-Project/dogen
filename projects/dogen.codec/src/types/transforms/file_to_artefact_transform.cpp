@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -48,12 +49,13 @@ apply(const transforms::context& ctx, const boost::filesystem::path& p) {
     r.content(utility::filesystem::read_file_content(p));
 
     /*
-     * Remove leading dot from extension, if any exists, and make the
-     * resulting string the codec type.
+     * The codec type is created from the extension, after the leading
+     * dot is removed, and the string is normalised to lower case.
      */
-    const auto ext(fn.extension().generic_string());
+    const auto ext(p.extension().generic_string());
     const auto starts_with_dot(!ext.empty() && ext[0] == dot);
-    r.codec_name(starts_with_dot ? ext.substr(1) : ext);
+    const auto codec_name(starts_with_dot ? ext.substr(1) : ext);
+    r.codec_name(boost::to_lower_copy(codec_name));
 
     stp.end_transform(r);
 
