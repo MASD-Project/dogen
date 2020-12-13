@@ -25,7 +25,11 @@
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
+#include "dogen.codec/types/transforms/artefact_to_file_transform.hpp"
+#include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
+#include "dogen.codec/types/transforms/model_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
+#include <boost/test/tree/test_unit.hpp>
 
 namespace {
 
@@ -66,13 +70,26 @@ void model_to_model_chain::apply(const transforms::context& ctx,
         transform_id, *ctx.tracer());
 
     /*
-     * Convert the files into artefacts.
+     * Convert the source path into an artefact. Note that we infer
+     * the codec to use from the supplied path.
      */
     const auto src_a(file_to_artefact_transform::apply(ctx, src));
-    const auto dst_a(file_to_artefact_transform::apply(ctx, dst));
 
+    /*
+     * Convert the source artefact into a model.
+     */
+    const auto src_m(artefact_to_model_chain::apply(ctx, src_a));
 
+    /*
+     * Convert the source model into the destination model. Note that
+     * we infer the codec to use from the requested path.
+     */
+    const auto dst_a(model_to_artefact_chain::apply(ctx, dst, src_m));
 
+    /*
+     * Write the destination artefact into a file.
+     */
+    artefact_to_file_transform::apply(ctx, dst_a);
 
     /*
      * Obtain a tuple containing the source and destination
