@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Reads a file at a given path and creates an artefact from
+ * it. The file extension is used to populate the artefact type.
+ */
 class file_to_artefact_transform final {
 public:
-    file_to_artefact_transform() = default;
-    file_to_artefact_transform(const file_to_artefact_transform&) = default;
-    file_to_artefact_transform(file_to_artefact_transform&&) = default;
-    ~file_to_artefact_transform() = default;
-    file_to_artefact_transform& operator=(const file_to_artefact_transform&) = default;
-
-public:
-    bool operator==(const file_to_artefact_transform& rhs) const;
-    bool operator!=(const file_to_artefact_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::artefact
+    apply(const transforms::context& ctx, const boost::filesystem::path& p);
 };
 
 }
