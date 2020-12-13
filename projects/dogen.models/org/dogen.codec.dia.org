@@ -277,10 +277,6 @@ If true, the comment should be attached to the dia object containing it.
 
 Content of the field as it was read from the dia object.
 
-* initializer
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 * building_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
@@ -298,10 +294,6 @@ Content of the field as it was read from the dia object.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * adapter
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-* decoding_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

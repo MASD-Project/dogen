@@ -21,7 +21,7 @@ Provides support for encoding and decoding of external models.
 An external model is defined as:
 
 @li a third-party format that is not owned or controlled by
-    Dogen, such as Dia;
+    Dogen, such as Dia or org-mode.
 @li a Dogen format designed for interoperability (JSON).
 
 External models are converted into an intermediate format called
@@ -32,28 +32,18 @@ technical space.
 
 A @e codec must be created for each external model that is to be
 injected, providing a transformation between the native formats
-and the codec model. The codecs are created in their own models,
-following the naming convention codec.X for a given codec X.
-They then register against the codec registrar. Note that for a
-given file extension, there can only be one and only one codec to
-manage it.
+and the codec model. The codecs are created as transforms in the
+present model, and should reuse common infrastructure where possible.
+There should also be a "native" model representing the original
+codec format as much as possible (e.g. "dogen.dia"). The idea for
+those models is just to provide a faithful representation of the
+native codec domain model (though it may not necessarily be
+complete).
+
+In general, codecs use file extensions to determine the type of the
+codec.
 
 * transforms
-** encoding_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-:END:
-** registrar
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** registrar_error
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-
-A registration error has occurred.
-
 ** model_production_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -94,10 +84,6 @@ Raw set of variability overrides.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** decoding_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-:END:
 ** model_set_production_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -126,7 +112,52 @@ Raw set of variability overrides.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
+** file_to_artefact_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** json_artefact_to_model_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** model_to_json_artefact_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** dia_artefact_to_model_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** org_artefact_to_model_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** model_to_org_artefact_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** artefact_to_file_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** artefact_to_model_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** model_to_artefact_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
 * entities
+:PROPERTIES:
+:masd.codec.dia.comment: true
+:END:
+
+Object model that is codec-agnostic but aims to provide
+a representation of the core entities needed by all codecs.
+
+Not all codecs will make use of all entities.
+
 ** model
 :PROPERTIES:
 :masd.codec.stereotypes: Element
@@ -252,13 +283,6 @@ Ability to contain tagged values.
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::tagged_value>
 :END:
-*** tagged_values_overrides
-:PROPERTIES:
-:masd.codec.type: std::list<identification::entities::tagged_value>
-:END:
-
-Meta-data sourced externally that can be used to override meta-data in model.
-
 ** Stereotypable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
@@ -329,9 +353,37 @@ Properties related to the origin of the modeling element.
 
 Provenance details of this codec element.
 
+** TaggableOverridable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to contain tagged values.
+
+*** tagged_values_overrides
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::tagged_value>
+:END:
+
+Meta-data sourced externally that can be used to override meta-data in model.
+
+** Commentable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Has the ability to have an associated comment.
+
+*** comment
+:PROPERTIES:
+:masd.codec.type: comment
+:END:
+
+Properties associated with the codec comment.
+
 ** Element
 :PROPERTIES:
-:masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin
+:masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
 :masd.codec.stereotypes: masd::object_template
 :END:
 
@@ -355,6 +407,107 @@ graph.
 
 Contains the list of referenced models for a particular model name.
 
+** comment
+:PROPERTIES:
+:masd.codec.stereotypes: Documentable, Taggable
+:END:
+
+Represents a comment block as read out from the codec representation.
+
+*** applies_to_container
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+Content of the field as it belonged to the containing object.
+
+*** original_content
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Content, as read from the codec representation.
+
+** object
+:PROPERTIES:
+:masd.codec.stereotypes: Commentable
+:END:
+
+Represents an "raw" codec object which may or may not contain a modeling element of interest.
+
+*** id
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Original ID available in the codec representation, if any.
+
+*** name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Original name in codec representation. May be qualified or simple; its nature is codec dependent.
+
+*** object_type
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Native codec representation for the object type. Its interpretation is codec dependent.
+
+*** stereotypes
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Original steoreotypes assigned to the object, if any.
+
+*** container_id
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Codec ID of the container of this object, if any.
+
+*** connection
+:PROPERTIES:
+:masd.codec.type: boost::optional<std::pair<std::string,std::string>>
+:END:
+
+Connections this object may have with other objects, if any.
+
+*** attributes
+:PROPERTIES:
+:masd.codec.type: std::list<attribute>
+:END:
+
+All attributes associated with this object.
+
+** artefact
+*** path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Path to the file representing this artefact, if any.
+
+*** codec_name
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the codec to process this artefact.
+
+*** content
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+#+begin_src mustache
+Contents of the artefact.
+
+#+end_src
 * helpers
 ** references_resolver
 :PROPERTIES:
