@@ -13,34 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-12 Sat 18:21]
+#+CAPTION: Clock summary at [2020-12-13 Sun 13:34]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *83:52* |       |       | 100.0 |
+| *Total time*                                              | *86:28* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 83:52   |       |       | 100.0 |
-| Active                                                    |         | 83:52 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   6.0 |
-| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  3:09 |   3.8 |
+| Stories                                                   | 86:28   |       |       | 100.0 |
+| Active                                                    |         | 86:28 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   5.9 |
+| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.5 |
+| Sprint and product backlog grooming                       |         |       |  3:09 |   3.6 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   0.5 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   8.3 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  16.2 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   8.1 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  15.7 |
 | Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.7 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.2 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   4.6 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   5.7 |
+| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.1 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   4.5 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   5.6 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  25.8 |
+| Move helpers to =text= model                              |         |       | 21:38 |  25.0 |
 | Add namespaces to "dummy function"                        |         |       |  0:10 |   0.2 |
 | Remove disabled files from project items                  |         |       |  0:30 |   0.6 |
-| Move text transforms in c++ and c# models into text model |         |       | 15:56 |  19.0 |
+| Move text transforms in c++ and c# models into text model |         |       | 15:56 |  18.4 |
 | Use MDE terminology in Dia model                          |         |       |  1:47 |   2.1 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.4 |
 | Issues with emacs                                         |         |       |  1:32 |   1.8 |
-| Merge codec models                                        |         |       |  1:46 |   2.1 |
+| Merge codec models                                        |         |       |  4:22 |   5.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -746,6 +746,8 @@ Notes:
 
 *** STARTED Merge codec models                                        :story:
     :LOGBOOK:
+    CLOCK: [2020-12-13 Sun 12:26]--[2020-12-13 Sun 13:34] =>  1:08
+    CLOCK: [2020-12-13 Sun 10:58]--[2020-12-13 Sun 12:26] =>  1:28
     CLOCK: [2020-12-12 Sat 17:02]--[2020-12-12 Sat 18:20] =>  1:18
     CLOCK: [2020-12-12 Sat 14:45]--[2020-12-12 Sat 15:13] =>  0:28
     :END:
