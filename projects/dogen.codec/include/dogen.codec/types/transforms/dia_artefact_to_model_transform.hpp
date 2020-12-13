@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Processes the artefact as if encoded as a Dia diagram,
+ * converting it into an instance of the codec model.
+ */
 class dia_artefact_to_model_transform final {
 public:
-    dia_artefact_to_model_transform() = default;
-    dia_artefact_to_model_transform(const dia_artefact_to_model_transform&) = default;
-    dia_artefact_to_model_transform(dia_artefact_to_model_transform&&) = default;
-    ~dia_artefact_to_model_transform() = default;
-    dia_artefact_to_model_transform& operator=(const dia_artefact_to_model_transform&) = default;
-
-public:
-    bool operator==(const dia_artefact_to_model_transform& rhs) const;
-    bool operator!=(const dia_artefact_to_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::model
+    apply(const transforms::context& ctx, const entities::artefact& a);
 };
 
 }
