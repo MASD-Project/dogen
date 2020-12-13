@@ -37,6 +37,7 @@ target_link_libraries(${lib_target_name}
     dogen.utility.lib
     dogen.variability.lib
     dogen.identification.lib
+    dogen.codec.dia.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

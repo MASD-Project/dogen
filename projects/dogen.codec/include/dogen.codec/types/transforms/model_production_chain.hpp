@@ -28,7 +28,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.codec/types/entities/model.hpp"
 #include "dogen.codec/types/entities/artefact.hpp"
-#include "dogen.codec/types/transforms/registrar.hpp"
 #include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
@@ -38,28 +37,6 @@ namespace dogen::codec::transforms {
  * it and transforms it into an codec model.
  */
 class model_production_chain final {
-private:
-    /**
-     * @brief Given a path to an external model, returns the
-     * appropriate decoding transform for it.
-     */
-    static decoding_transform&
-    transform_for_model(const boost::filesystem::path& p);
-
-    /**
-     * @brief Applies the codec transform for the supplied artefact,
-     * if one exists.
-     */
-    static entities::model
-    transform_artefact(const context& ctx, const entities::artefact& a);
-
-public:
-    /**
-     * @brief Registrar that keeps track of the available encoding and
-     * decoding transforms.
-     */
-    static transforms::registrar& registrar();
-
 public:
     /**
      * @brief Apply the transform to the external model at path @e p.
@@ -69,32 +46,7 @@ public:
      */
     static entities::model
     apply(const context& ctx, const boost::filesystem::path& p);
-
-private:
-    static std::shared_ptr<transforms::registrar> registrar_;
 };
-
-
-/*
- * Helper method to register encoding transforms.
- */
-template<typename EncodingTransform>
-inline void register_encoding_transform() {
-    auto& rg(model_production_chain::registrar());
-    auto t(std::make_shared<EncodingTransform>());
-    rg.register_encoding_transform(t);
-}
-
-/*
- * Helper method to register decoding transforms.
- */
-template<typename DecodingTransform>
-inline void register_decoding_transform() {
-    auto& rg(model_production_chain::registrar());
-    auto t(std::make_shared<DecodingTransform>());
-    rg.register_decoding_transform(t);
-}
-
 
 }
 

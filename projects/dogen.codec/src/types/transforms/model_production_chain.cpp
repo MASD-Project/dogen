@@ -51,37 +51,6 @@ const std::string unsupported_codec("No transform are available for codec: ");
 
 namespace dogen::codec::transforms {
 
-std::shared_ptr<registrar> model_production_chain::registrar_;
-
-decoding_transform&
-model_production_chain::transform_for_model(const boost::filesystem::path& p) {
-    /*
-     * Ensure the registrar is in a valid state before we proceed.
-     */
-    auto& rg(registrar());
-    rg.validate();
-    return rg.decoding_transform_for_path(p);
-}
-
-entities::model model_production_chain::
-transform_artefact(const context& ctx, const entities::artefact& a) {
-    if (a.codec_name() == json_codec_name)
-        return json_artefact_to_model_transform::apply(ctx, a);
-    else if (a.codec_name() == dia_codec_name)
-        return dia_artefact_to_model_transform::apply(ctx, a);
-
-    BOOST_LOG_SEV(lg, error) << unsupported_codec << a.codec_name();
-    BOOST_THROW_EXCEPTION(
-        transformation_error(unsupported_codec + a.codec_name()));
-}
-
-transforms::registrar& model_production_chain::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<transforms::registrar>();
-
-    return *registrar_;
-}
-
 entities::model model_production_chain::
 apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.stem().generic_string());

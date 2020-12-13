@@ -20,8 +20,6 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.codec.json/types/initializer.hpp"
-#include "dogen.codec.dia/types/initializer.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/converter.hpp"

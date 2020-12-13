@@ -29,8 +29,6 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.codec/types/transforms/context_fwd.hpp"
-#include "dogen.codec/types/transforms/encoding_transform.hpp"
-#include "dogen.codec/types/transforms/decoding_transform.hpp"
 
 namespace dogen::codec::transforms {
 
@@ -39,16 +37,6 @@ namespace dogen::codec::transforms {
  * external model of another type.
  */
 class model_to_model_chain final {
-public:
-    /**
-     * @note Using boost tuple as we can't get pair to work with
-     * references.
-     */
-    static boost::tuple<decoding_transform&, encoding_transform&>
-    obtain_transforms(
-        const boost::filesystem::path& src_path,
-        const boost::filesystem::path& dst_path);
-
 public:
     static void apply(const transforms::context& ctx,
         const boost::filesystem::path& src_path,

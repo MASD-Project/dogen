@@ -117,19 +117,20 @@ spec_category spec_dumper::create_codec_category() const {
     r.name("Codec");
     r.description("Read external formats into Dogen.");
 
-    using codec::transforms::model_production_chain;
-    auto& rg(model_production_chain::registrar());
-    for (const auto& ext : rg.registered_decoding_extensions()) {
-        const auto& d(rg.decoding_transform_for_extension(ext));
-        spec_entry e;
-        e.name(d.id());
+    // FIXME: waiting for codec meta-model.
+    // using codec::transforms::model_production_chain;
+    // auto& rg(model_production_chain::registrar());
+    // for (const auto& ext : rg.registered_decoding_extensions()) {
+    //     const auto& d(rg.decoding_transform_for_extension(ext));
+    //     spec_entry e;
+    //     e.name(d.id());
 
-        std::ostringstream s;
-        s << preprocess(d.description())
-          << " Extension: '" << d.extension() << "'";
-        e.description(s.str());
-        r.entries().push_back(e);
-    }
+    //     std::ostringstream s;
+    //     s << preprocess(d.description())
+    //       << " Extension: '" << d.extension() << "'";
+    //     e.description(s.str());
+    //     r.entries().push_back(e);
+    // }
     return r;
 }
 
@@ -138,19 +139,20 @@ spec_category spec_dumper::create_conversion_category() const {
     r.name("Conversion");
     r.description("Output to an external format from a Dogen model.");
 
-    using codec::transforms::model_production_chain;
-    auto& rg(model_production_chain::registrar());
-    for (const auto& ext : rg.registered_encoding_extensions()) {
-        const auto& d(rg.encoding_transform_for_extension(ext));
-        spec_entry e;
-        e.name(d.id());
+    // FIXME: waiting for codec meta-model.
+    // using codec::transforms::model_production_chain;
+    // auto& rg(model_production_chain::registrar());
+    // for (const auto& ext : rg.registered_encoding_extensions()) {
+    //     const auto& d(rg.encoding_transform_for_extension(ext));
+    //     spec_entry e;
+    //     e.name(d.id());
 
-        std::ostringstream s;
-        s << preprocess(d.description())
-          << " Extension: '" << d.extension() << "'";
-        e.description(s.str());
-        r.entries().push_back(e);
-    }
+    //     std::ostringstream s;
+    //     s << preprocess(d.description())
+    //       << " Extension: '" << d.extension() << "'";
+    //     e.description(s.str());
+    //     r.entries().push_back(e);
+    // }
 
     return r;
 }

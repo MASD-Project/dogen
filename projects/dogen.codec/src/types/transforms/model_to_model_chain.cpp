@@ -46,24 +46,6 @@ namespace dogen::codec::transforms {
 
 using boost::filesystem::path;
 
-boost::tuple<decoding_transform&, encoding_transform&>
-model_to_model_chain::obtain_transforms(const path& src, const path& dst) {
-    /*
-     * Start by ensuring the registrar is in a good place.
-     */
-    auto& rg(model_production_chain::registrar());
-    rg.validate();
-
-    /*
-     * Now ensure we have the required support for the two
-     * transformations we intend to do. If not, there is no point
-     * continuing.
-     */
-    return boost::tie(
-        rg.decoding_transform_for_path(src),
-        rg.encoding_transform_for_path(dst));
-}
-
 void model_to_model_chain::apply(const transforms::context& ctx,
     const path& src, const path& dst) {
     tracing::scoped_chain_tracer stp(lg, "model to model chain",
@@ -90,20 +72,6 @@ void model_to_model_chain::apply(const transforms::context& ctx,
      * Write the destination artefact into a file.
      */
     artefact_to_file_transform::apply(ctx, dst_a);
-
-    /*
-     * Obtain a tuple containing the source and destination
-     * transforms.
-     */
-    // BOOST_LOG_SEV(lg, info) << " Transforming: " << src.generic_string()
-    //                         << " to: " << dst.generic_string();
-    // auto tuple(obtain_transforms(src, dst));
-    // auto src_model(tuple.get<0>().apply(ctx, src));
-
-    /*
-     * Transform the model to the requested representation.
-     */
-    // tuple.get<1>().apply(ctx, src_model, dst);
 }
 
 }
