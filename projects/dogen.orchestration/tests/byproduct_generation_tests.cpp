@@ -30,7 +30,7 @@ const std::string references_graph_graphviz_fn("references_graph.dot");
 const std::string physical_name_prefix("00000-configuration-");
 const std::string physical_name_postfix("-initial_input.json");
 const std::string codec_transform_prefix(
-    "00000-codec.dia.decoding_transform-dogen-");
+    "00002-codec.transforms.dia_artefact_to_model_transform-dogen-");
 const std::string first_short_name("00000-initial_input.json");
 const std::string second_short_name("00001-input.json");
 const std::string codec_transform_postfix("-input.json");

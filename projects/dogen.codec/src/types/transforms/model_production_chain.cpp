@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
@@ -27,6 +28,10 @@
 #include "dogen.codec/types/transforms/references_transform.hpp"
 #include "dogen.codec/types/transforms/configuration_transform.hpp"
 #include "dogen.codec/types/transforms/tagged_values_overrides_transform.hpp"
+#include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
+#include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
+#include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
+#include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -35,6 +40,11 @@ const std::string transform_id("codec.transforms.model_production_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
+
+const std::string json_codec_name("json");
+const std::string dia_codec_name("dia");
+
+const std::string unsupported_codec("No transform are available for codec: ");
 
 }
 
@@ -52,6 +62,18 @@ model_production_chain::transform_for_model(const boost::filesystem::path& p) {
     return rg.decoding_transform_for_path(p);
 }
 
+entities::model model_production_chain::
+transform_artefact(const context& ctx, const entities::artefact& a) {
+    if (a.codec_name() == json_codec_name)
+        return json_artefact_to_model_transform::apply(ctx, a);
+    else if (a.codec_name() == dia_codec_name)
+        return dia_artefact_to_model_transform::apply(ctx, a);
+
+    BOOST_LOG_SEV(lg, error) << unsupported_codec << a.codec_name();
+    BOOST_THROW_EXCEPTION(
+        transformation_error(unsupported_codec + a.codec_name()));
+}
+
 transforms::registrar& model_production_chain::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<transforms::registrar>();
@@ -64,13 +86,21 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.stem().generic_string());
     tracing::scoped_chain_tracer stp(lg, "codec model production chain",
         transform_id, model_name, *ctx.tracer());
+
     /*
-     * Transform the external model in whatever supported external
-     * representation it may be in - Dia, JSON, etc - into the
-     * internal representation of an codec model.
+     * Convert the file into an artefact.
      */
-    auto& t(transform_for_model(p));
-    auto r(t.apply(ctx, p));
+    const auto a(file_to_artefact_transform::apply(ctx, p));
+
+    /*
+     * Transform the external model in whatever supported
+     * external representation it may be in - Dia, JSON, etc - into
+     * the internal representation of a codec model.
+     */
+    auto r(transform_artefact(ctx, a));
+
+    // auto& t(transform_for_model(p));
+    // auto r(t.apply(ctx, p));
 
     /*
      * Update the provenance properties.

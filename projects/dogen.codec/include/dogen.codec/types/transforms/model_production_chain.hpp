@@ -27,6 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
 #include "dogen.codec/types/transforms/registrar.hpp"
 #include "dogen.codec/types/transforms/context_fwd.hpp"
 
@@ -38,12 +39,19 @@ namespace dogen::codec::transforms {
  */
 class model_production_chain final {
 private:
-    /*
+    /**
      * @brief Given a path to an external model, returns the
      * appropriate decoding transform for it.
      */
     static decoding_transform&
     transform_for_model(const boost::filesystem::path& p);
+
+    /**
+     * @brief Applies the codec transform for the supplied artefact,
+     * if one exists.
+     */
+    static entities::model
+    transform_artefact(const context& ctx, const entities::artefact& a);
 
 public:
     /**
