@@ -35,15 +35,15 @@ as possible, so we can evaluate how they work together.
 :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
 :END:
 * package
-** package::palette_test_one_one
+** palette_test_one_one
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** package::palette_test_one_two
+** palette_test_one_two
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** package::palette_test_one_three
+** palette_test_one_three
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
 :END:

@@ -30,11 +30,11 @@ Orchestration-based imlementation of the Dogen product API.
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
 
-** transforms::code_generation_chain
+** code_generation_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::context
+** context
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
@@ -59,58 +59,58 @@ the entry points to all transformations.
 :PROPERTIES:
 :masd.codec.type: physical::transforms::context
 :END:
-** transforms::context_factory
+** context_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::factory_exception
+** factory_exception
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred in the factory whilst making.
 
-** transforms::codec_model_to_logical_model_transform
+** codec_model_to_logical_model_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::codec_model_set_to_logical_input_model_set_chain
+** codec_model_set_to_logical_input_model_set_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::transform_exception
+** transform_exception
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** transforms::logical_model_to_text_model_chain
+** logical_model_to_text_model_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::physical_model_production_chain
+** physical_model_production_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::text_model_to_physical_model_transform
+** text_model_to_physical_model_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::context_bootstrapping_chain
+** context_bootstrapping_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::text_model_production_chain
+** text_model_production_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::legacy_dependencies_transform
+** legacy_dependencies_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::physical_to_logical_population_transform
+** physical_to_logical_population_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::elements_removal_transform
+** elements_removal_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -135,26 +135,26 @@ An error occurred in the factory whilst making.
 
 Helpers for the orchestration model.
 
-** helpers::codec_to_logical_projector
+** codec_to_logical_projector
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::logical_to_physical_projector
+** logical_to_physical_projector
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::projection_error
+** projection_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error ocurred whilst projecting elements from one space into another.
 
-** helpers::dependencies_builder
+** dependencies_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::building_error
+** building_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
@@ -165,7 +165,7 @@ An error ocurred whilst projecting elements from one space into another.
 
 Features for the orchestration model.
 
-** features::model_location
+** model_location
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.codec
@@ -194,7 +194,7 @@ Model modules containing this model.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
-** features::initializer
+** initializer
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::initializer
 :END:

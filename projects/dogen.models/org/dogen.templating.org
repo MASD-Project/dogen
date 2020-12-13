@@ -15,7 +15,7 @@
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 * wale
-** wale::text_template
+** text_template
 :PROPERTIES:
 :masd.codec.stereotypes: ConfigurableViaKvps
 :END:
@@ -31,26 +31,26 @@ Represents a wale text template.
 Textual content of the wale template.
 
 #+end_src
-** wale::key_extractor
+** key_extractor
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** wale::instantiator
+** instantiator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** wale::formatter
+** formatter
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** wale::formatting_error
+** formatting_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst formatting.
 
-** wale::extraction_error
+** extraction_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
@@ -58,11 +58,11 @@ An error occurred whilst formatting.
 An error occurred whilst extracting a key.
 
 * stitch
-** stitch::parser
+** parser
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** stitch::block
+** block
 *** type
 :PROPERTIES:
 :masd.codec.type: block_types
@@ -71,7 +71,7 @@ An error occurred whilst extracting a key.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** stitch::text_template
+** text_template
 :PROPERTIES:
 :masd.codec.stereotypes: ConfigurableViaKvps
 :END:
@@ -92,25 +92,25 @@ Properties of the template.
 
 Body of the text template.
 
-** stitch::formatter
+** formatter
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** stitch::parsing_error
+** parsing_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst parsing.
 
-** stitch::formatting_error
+** formatting_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst formatting.
 
-** stitch::properties
+** properties
 *** stream_variable_name
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -131,12 +131,12 @@ An error occurred whilst formatting.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
-** stitch::line
+** line
 *** blocks
 :PROPERTIES:
 :masd.codec.type: std::list<block>
 :END:
-** stitch::block_types
+** block_types
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -144,11 +144,11 @@ An error occurred whilst formatting.
 *** standard_control_block
 *** expression_block
 *** variable_block
-** stitch::instantiator
+** instantiator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** stitch::text_template_body
+** text_template_body
 *** tagged_values
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::tagged_value>
@@ -160,11 +160,11 @@ Set of tagged values read from the template.
 :PROPERTIES:
 :masd.codec.type: std::list<line>
 :END:
-** stitch::instantiation_error
+** instantiation_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** stitch::features
+** features
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.stitch
@@ -242,22 +242,22 @@ Set of keys that are expected to be supplied.
 Key value pairs that were supplied for instantiation.
 
 * helpers
-** helpers::kvp_validator
+** kvp_validator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::validation_error
+** validation_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred with the supplied KVPs.
 
-** helpers::kvp_resolver
+** kvp_resolver
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::resolution_error
+** resolution_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:

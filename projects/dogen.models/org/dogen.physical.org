@@ -34,26 +34,26 @@ physical dimension of MASD conceptual space.
 
 Helpers for the physical model.
 
-** helpers::template_instantiation_domains_factory
+** template_instantiation_domains_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::building_error
+** building_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while the field factory was building.
 
-** helpers::path_generator
+** path_generator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::file_status_collector
+** file_status_collector
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::files_by_status
+** files_by_status
 *** unexpected
 :PROPERTIES:
 :masd.codec.type: std::list<boost::filesystem::path>
@@ -62,22 +62,22 @@ An error occurred while the field factory was building.
 :PROPERTIES:
 :masd.codec.type: std::list<boost::filesystem::path>
 :END:
-** helpers::unified_differ
+** unified_differ
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::meta_model_validator
+** meta_model_validator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::validation_error
+** validation_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during validation.
 
-** helpers::header_guard_factory
+** header_guard_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -88,7 +88,7 @@ An error occurred during validation.
 
 Defines the MASD physical space.
 
-** entities::meta_model
+** meta_model
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement
 :END:
@@ -122,7 +122,7 @@ All backends available in this meta-model.
 
 Repository with all the meta-names in this meta-model, indexed appropriately.
 
-** entities::backend
+** backend
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement, HasTechnicalSpace
 :END:
@@ -158,7 +158,7 @@ Archetypes by archetype ID.
 
 Archetype kinds by ID.
 
-** entities::part
+** part
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement
 :END:
@@ -185,7 +185,7 @@ component in a backend.
 
 If true, this part needs a path relative to its root.
 
-** entities::path_configuration
+** path_configuration
 Describes how paths are handled within a part.
 
 *** external_modules
@@ -216,7 +216,7 @@ What kind of contribution does the facet make to the final path.
 
 What kind of contribution do the internal modules make to the final path.
 
-** entities::path_contribution_type
+** path_contribution_type
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -232,7 +232,7 @@ The item contributes folders to the path.
 *** as_path_components
 The item contributes a single folder to the path, as a delimited string.
 
-** entities::facet
+** facet
 :PROPERTIES:
 :masd.codec.stereotypes: ContainingMetaElement, Postfixable
 :END:
@@ -256,7 +256,7 @@ Maps the logical model element ID to the default archetype for this facet.
 
 Used to obtain the default archetype for referencing.
 
-** entities::archetype
+** archetype
 :PROPERTIES:
 :masd.codec.stereotypes: MetaElement, Postfixable, Associatable, HasTechnicalSpace
 :END:
@@ -291,7 +291,7 @@ Part in which we are located.
 
 Properties of this archetype with regards to relations.
 
-** entities::archetype_kind
+** archetype_kind
 :PROPERTIES:
 :masd.codec.stereotypes: Describable
 :END:
@@ -306,7 +306,7 @@ Represents a type of archetypes.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** entities::model
+** model
 :PROPERTIES:
 :masd.codec.stereotypes: Element
 :END:
@@ -356,7 +356,7 @@ If true the repository has at least one generable artefact, false otherwise.
 
 All physical regions in  this model, by logical ID.
 
-** entities::Describable
+** Describable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -367,7 +367,7 @@ All physical regions in  this model, by logical ID.
 
 Human readable description of the entity.
 
-** entities::MetaNameable
+** MetaNameable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -381,7 +381,7 @@ Ability to have a meta-name.
 
 Meta-name for this meta-element.
 
-** entities::Labelable
+** Labelable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -395,12 +395,12 @@ The ability to attach labels to an element.
 
 All labels associated with this element.
 
-** entities::MetaElement
+** MetaElement
 :PROPERTIES:
 :masd.codec.parent: entities::Describable, entities::MetaNameable, entities::Labelable
 :masd.codec.stereotypes: masd::object_template
 :END:
-** entities::ContainingMetaElement
+** ContainingMetaElement
 :PROPERTIES:
 :masd.codec.parent: entities::MetaElement
 :masd.codec.stereotypes: masd::object_template
@@ -415,7 +415,7 @@ The meta-element can contain other meta-elements.
 
 Default name to use for the directory in the file-system representing this element.
 
-** entities::Postfixable
+** Postfixable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -426,7 +426,7 @@ Default name to use for the directory in the file-system representing this eleme
 
 Postfix to apply to artefacts within this element, if any.
 
-** entities::artefact
+** artefact
 :PROPERTIES:
 :masd.codec.stereotypes: Element, HasTechnicalSpace
 :END:
@@ -495,7 +495,7 @@ Template used as input in order to generate the artefact's content, if any.
 :PROPERTIES:
 :masd.codec.type: relation_properties
 :END:
-** entities::Configurable
+** Configurable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -509,7 +509,7 @@ Ability to have meta-data associated.
 
 Configuration for this element.
 
-** entities::Provenance
+** Provenance
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -523,7 +523,7 @@ Properties related to the origin of the modeling element.
 
 Details of the provenance of this model element.
 
-** entities::Nameable
+** Nameable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -537,7 +537,7 @@ Ability to have a name.
 
 Name of the physical element.
 
-** entities::LogicalPhysicalSpaceIdentity
+** LogicalPhysicalSpaceIdentity
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -548,12 +548,12 @@ Name of the physical element.
 
 Point in logical-physical space represented by this element.
 
-** entities::Element
+** Element
 :PROPERTIES:
 :masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable, entities::LogicalPhysicalSpaceIdentity
 :masd.codec.stereotypes: masd::object_template
 :END:
-** entities::outputting_properties
+** outputting_properties
 Properties related to outputting.
 
 *** force_write
@@ -572,7 +572,7 @@ Properties related to outputting.
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** entities::operation
+** operation
 Operation to apply to an artefact.
 
 *** type
@@ -583,7 +583,7 @@ Operation to apply to an artefact.
 :PROPERTIES:
 :masd.codec.type: operation_reason
 :END:
-** entities::operation_type
+** operation_type
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
 :masd.codec.stereotypes: masd::enumeration
@@ -603,7 +603,7 @@ Ingores an artefact.
 *** remove
 Deletes a file.
 
-** entities::operation_reason
+** operation_reason
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
 :masd.codec.stereotypes: masd::enumeration
@@ -638,7 +638,7 @@ File is unexpected but the user asked us not to delete it.
 *** ignore_regex
 File is unexpected but the user asked us to ignore it via regexes.
 
-** entities::Associatable
+** Associatable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -666,7 +666,7 @@ List of meta-elements this meta-element is used to generate, if any.
 
 Meta-element used to generate this meta-element, if any.
 
-** entities::model_set
+** model_set
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
@@ -680,7 +680,7 @@ Represents a set of related physical models.
 
 All models that are a member of this set.
 
-** entities::relation_status
+** relation_status
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
@@ -696,7 +696,7 @@ Archetype can be related to archetypes.
 *** facet_default
 FIXME: hack for now
 
-** entities::constant_relation
+** constant_relation
 :PROPERTIES:
 :masd.codec.stereotypes: Urnable, Labelable
 :END:
@@ -712,7 +712,7 @@ ID of the logical model element that the relation is fixed against.
 
 Element must exist in the current loaded models.
 
-** entities::variable_relation
+** variable_relation
 :PROPERTIES:
 :masd.codec.stereotypes: Urnable
 :END:
@@ -723,7 +723,7 @@ Element must exist in the current loaded models.
 
 How these archetypes are related.
 
-** entities::Urnable
+** Urnable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -747,7 +747,7 @@ URN pointing to the archetype.
 
  It must have the form "archetype:".
 
-** entities::variable_relation_type
+** variable_relation_type
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -775,7 +775,7 @@ The associated element is used as an associative key.
 *** visitation
 The associated element visits or is visited by the current element.
 
-** entities::relations
+** relations
 Models relationships between archetypes.
 
 *** status
@@ -805,14 +805,14 @@ element.
 :PROPERTIES:
 :masd.codec.type: std::list<hard_coded_relation>
 :END:
-** entities::hard_coded_relation
+** hard_coded_relation
 Relations against hard-coded values.
 
 *** value
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** entities::region
+** region
 :PROPERTIES:
 :masd.codec.stereotypes: Configurable, Provenance
 :END:
@@ -840,7 +840,7 @@ Resolves a role into a concrete archetype, in the context of this logical elemen
 
 If false, the entire artefact set is not generatable.
 
-** entities::enablement_properties
+** enablement_properties
 Stores the properties related to the enablement.
 
 *** enabled
@@ -889,7 +889,7 @@ If supplied and true, the facet will have overwrite on.
 
 If supplied and true, the archetype will have overwrite on.
 
-** entities::backend_properties
+** backend_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaIdentifiable
 :END:
@@ -938,7 +938,7 @@ Directory name as read out from the configuration.
 
 Name of the directory to use for the backend, computed from configuration.
 
-** entities::archetype_kind_properties
+** archetype_kind_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaNameable
 :END:
@@ -946,7 +946,7 @@ Name of the directory to use for the backend, computed from configuration.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** entities::facet_properties
+** facet_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaIdentifiable
 :END:
@@ -995,7 +995,7 @@ Postfix as read out from the configuration, if any.
 
 Computed postfix to apply to all artefacts in this facet.
 
-** entities::archetype_properties
+** archetype_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaIdentifiable
 :END:
@@ -1042,7 +1042,7 @@ Computed postfix to apply to all artefacts of this archetype.
 :PROPERTIES:
 :masd.codec.type: part_properties
 :END:
-** entities::meta_model_properties
+** meta_model_properties
 Meta-model configuration supplied by this model.
 
 The meta-model properties represent a set of variability overrides supplied on top
@@ -1098,7 +1098,7 @@ Contains the IDs of all of the backends which are enabled.
 :PROPERTIES:
 :masd.codec.type: project_path_properties
 :END:
-** entities::part_properties
+** part_properties
 :PROPERTIES:
 :masd.codec.stereotypes: MetaIdentifiable
 :END:
@@ -1135,7 +1135,7 @@ Directory name as read out from the configuration.
 
 Computed name of the directory to use for the part.
 
-** entities::path_properties
+** path_properties
 *** file_path
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
@@ -1178,7 +1178,7 @@ C++ Inlusion dependencies for this artefact.
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-** entities::project_path_properties
+** project_path_properties
 Legacy type containing all proprties related to paths.
 
 *** include_directory_name
@@ -1243,7 +1243,7 @@ If true, backends should have backend-specific directories to store their artefa
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-** entities::MetaIdentifiable
+** MetaIdentifiable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -1254,7 +1254,7 @@ If true, backends should have backend-specific directories to store their artefa
 
 Meta-id of the physical meta-element.
 
-** entities::legacy_archetype_kind
+** legacy_archetype_kind
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -1274,7 +1274,7 @@ Kinds of archetypes available across all technical spaces.
 *** tests_cpp_implementation
 *** templates
 *** csharp_implementation
-** entities::relation_properties
+** relation_properties
 *** status
 :PROPERTIES:
 :masd.codec.type: relation_status
@@ -1288,7 +1288,7 @@ Artefacts that this artefact depends on.
 
 The format used is dependent on the technical space the artefact belongs to.
 
-** entities::inclusion_directives
+** inclusion_directives
 Represents the group of inclusion directives associated with a name and an archetype.
 
 *** primary
@@ -1305,7 +1305,7 @@ The main inclusion directive needed for this element.
 
 Any other directives that are also needed for this element.
 
-** entities::HasTechnicalSpace
+** HasTechnicalSpace
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -1316,7 +1316,7 @@ Any other directives that are also needed for this element.
 
 Technical space to which this physical element belongs to.
 
-** entities::helper
+** helper
 :PROPERTIES:
 :masd.codec.stereotypes: MetaElement, Associatable, HasTechnicalSpace
 :END:
@@ -1353,7 +1353,7 @@ Part in which we are located.
 
 Features for the MASD physical model.
 
-** features::facet_features
+** facet_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.facet
 :masd.codec.stereotypes: masd::variability::feature_template_bundle
@@ -1409,7 +1409,7 @@ Postfix to use for all files that belong to this facet.
 
 If true, the generated files will overwrite existing files.
 
-** features::archetype_features
+** archetype_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.archetype
 :masd.codec.stereotypes: masd::variability::feature_template_bundle
@@ -1438,11 +1438,11 @@ Postfix to use for all files that belong to this facet.
 
 If true, the generated files will overwrite existing files.
 
-** features::initializer
+** initializer
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::initializer
 :END:
-** features::filesystem
+** filesystem
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.physical
@@ -1504,7 +1504,7 @@ If true, a directory is created for each technical space targeted.
 Note that this setting is only relevant if you are targetting a single output technical
 space. If you are targetting more than one, it will automatically be set to true.
 
-** features::enablement
+** enablement
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.generate_static_configuration: false
@@ -1522,7 +1522,7 @@ Enablement related properties.
 
 If true, decorations are enabled on this modeling element.
 
-** features::backend_features
+** backend_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.backend
 :masd.codec.stereotypes: masd::variability::feature_template_bundle
@@ -1541,7 +1541,7 @@ Physical features common to all backends.
 
 Directory in which to place this backend.
 
-** features::path_features
+** path_features
 :PROPERTIES:
 :masd.variability.generate_static_configuration: true
 :masd.variability.key_prefix: masd.cpp
@@ -1640,7 +1640,7 @@ If true, make all file names unique within a model.
 
 If true, facet directories will not be used.
 
-** features::directive_features
+** directive_features
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.instantiation_domain_name: masd.cpp.archetype
@@ -1654,7 +1654,7 @@ If true, facet directories will not be used.
 :PROPERTIES:
 :masd.codec.type: masd::variability::text_collection
 :END:
-** features::inclusion_features
+** inclusion_features
 :PROPERTIES:
 :masd.variability.generate_static_configuration: false
 :masd.variability.key_prefix: masd.cpp
@@ -1677,7 +1677,7 @@ If true, inclusion is required for this modeling element.
 Contains all of the transforms needed to produce
 models and meta-models for the physical model.
 
-** transforms::context
+** context
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
@@ -1716,67 +1716,67 @@ Meta-model for the physical dimension.
 
 Full path to the output directory chosen by the user.
 
-** transforms::transform_exception
+** transform_exception
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** transforms::file_generation_chain
+** file_generation_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::write_artefacts_transform
+** write_artefacts_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::update_outputting_properties_transform
+** update_outputting_properties_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::remove_files_transform
+** remove_files_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::generate_report_transform
+** generate_report_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::model_post_processing_chain
+** model_post_processing_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::generate_diffs_transform
+** generate_diffs_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::gather_external_artefacts_transform
+** gather_external_artefacts_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::generate_patch_transform
+** generate_patch_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::mock_content_filler_transform
+** mock_content_filler_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::operation_transform
+** operation_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::merge_transform
+** merge_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::meta_model_production_chain
+** meta_model_production_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::compute_name_indices_transform
+** compute_name_indices_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::minimal_context
+** minimal_context
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
@@ -1787,43 +1787,43 @@ Smallest possible context required for bootstrapping purposes.
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
-** transforms::meta_model_assembly_transform
+** meta_model_assembly_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::compute_template_instantiation_domains
+** compute_template_instantiation_domains
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::model_population_chain
+** model_population_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::meta_model_properties_transform
+** meta_model_properties_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::enablement_transform
+** enablement_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::generability_transform
+** generability_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::paths_transform
+** paths_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::remove_regions_transform
+** remove_regions_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::legacy_paths_transform
+** legacy_paths_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::relations_transform
+** relations_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

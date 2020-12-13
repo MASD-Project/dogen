@@ -23,7 +23,7 @@ identification within Dogen.
 Stores all of the entities related to identification
 of Dogen elements.
 
-** entities::name
+** name
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
@@ -37,7 +37,7 @@ General name for modeling elements which do not need any specialisation.
 
 Qualified name for an element.
 
-** entities::codec_provenance
+** codec_provenance
 Source of a model element in the codec dimension.
 
 *** model_id
@@ -75,7 +75,7 @@ Identifier for the modeling element in the codec dimension.
 
 Where the element was located in the original source.
 
-** entities::model_type
+** model_type
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -94,7 +94,7 @@ The element was part of a reference model which is regular dogen model.
 *** not_yet_determined
 The origin of the element is not yet known.
 
-** entities::sha1_hash
+** sha1_hash
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
@@ -102,7 +102,7 @@ The origin of the element is not yet known.
 
 Stores a SHA1 hash.
 
-** entities::codec_id
+** codec_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
@@ -110,7 +110,7 @@ Stores a SHA1 hash.
 
 ID of the elment as sourced from the codec model, if any.
 
-** entities::logical_id
+** logical_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive, dogen::hashable
@@ -118,7 +118,7 @@ ID of the elment as sourced from the codec model, if any.
 
 ID of the elment in the logical dimension.
 
-** entities::physical_meta_id
+** physical_meta_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive, dogen::hashable
@@ -126,7 +126,7 @@ ID of the elment in the logical dimension.
 
 ID of the meta-element in the physical dimension.
 
-** entities::codec_location
+** codec_location
 Location of a modeling element in the codec dimension.
 
 *** line
@@ -143,7 +143,7 @@ Line number where the element was defined.
 
 Column number where the element was defined.
 
-** entities::logical_provenance
+** logical_provenance
 Source of a model element in the logical dimension.
 
 *** codec
@@ -167,7 +167,7 @@ Provenance of the current element in the logical dimension.
 
 Provenance of the current element in the logical dimension as a meta-element.
 
-** entities::logical_meta_id
+** logical_meta_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive, dogen::hashable
@@ -175,7 +175,7 @@ Provenance of the current element in the logical dimension as a meta-element.
 
 ID for a logical meta-element.
 
-** entities::label
+** label
 A label is a key-value pair that can be used by the processing engine in a flexible way.
 
 *** key
@@ -192,7 +192,7 @@ Key of the label.
 
 Value associated with this label.
 
-** entities::tagged_value
+** tagged_value
 Represents a tagged value in a similar spirit to UMLs.
 
 *** tag
@@ -209,7 +209,7 @@ Tag name.
 
 Value associated with this tag.
 
-** entities::logical_name
+** logical_name
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
 :END:
@@ -248,7 +248,7 @@ Where the name is located in element space.
 
 If true, the name indicates an element that can contain other elements.
 
-** entities::logical_location
+** logical_location
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::hashable
 :END:
@@ -295,7 +295,7 @@ Name of the owning element, if any.
 For coding elements which are located within other logical elements
 that are not modules, such as attributes, inner classes, etc.
 
-** entities::qualified_representations
+** qualified_representations
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::hashable
 :END:
@@ -324,7 +324,7 @@ Qualified identifier using "::" as the separator.
 Representation of the identifier that can usable as an identifier on all of the
 supported technical spaces, using the entire name structure.
 
-** entities::physical_meta_location
+** physical_meta_location
 Location of an entity or set of entities in the physical meta-model.
 
 These must be populated in order, e.g. in order to have a backend we must have a
@@ -368,7 +368,7 @@ Name of the facet where this element is located, if any.
 
 Name of the archetype for this element, if applicable.
 
-** entities::physical_meta_name
+** physical_meta_name
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
@@ -396,7 +396,7 @@ Identifier for this physical meta-element.
 
 Location for a meta-name in physical space.
 
-** entities::logical_meta_name
+** logical_meta_name
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
@@ -407,7 +407,7 @@ Location for a meta-name in physical space.
 
 Identifier for this logical meta-element.
 
-** entities::technical_space
+** technical_space
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
@@ -439,7 +439,7 @@ Visual studio solution.
 *** mustache
 Mustache templates.
 
-** entities::physical_name
+** physical_name
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
@@ -453,7 +453,7 @@ Name of a physical model element.
 
 ID for a physical element.
 
-** entities::Nameable
+** Nameable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -467,7 +467,7 @@ Ability to have a name.
 
 Simple name for a modeling element.
 
-** entities::logical_meta_physical_id
+** logical_meta_physical_id
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::hashable
 :END:
@@ -488,7 +488,7 @@ ID of the element in the logical dimension.
 
 ID of the element in the physical dimension.
 
-** entities::physical_id
+** physical_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
@@ -496,7 +496,7 @@ ID of the element in the physical dimension.
 
 ID for a physical element.
 
-** entities::model_id
+** model_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
@@ -504,7 +504,7 @@ ID for a physical element.
 
 ID for a model.
 
-** entities::stereotype
+** stereotype
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
@@ -512,7 +512,7 @@ ID for a model.
 
 Stereotype.
 
-** entities::logical_name_tree
+** logical_name_tree
 :PROPERTIES:
 :masd.codec.stereotypes: QualifiedRepresentations
 :END:
@@ -570,7 +570,7 @@ Returns true if @e current is a simple type such as a built-in or an enumeration
 
 If true, "current" stores a floating point type.
 
-** entities::QualifiedRepresentations
+** QualifiedRepresentations
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
@@ -584,7 +584,7 @@ Name with multiple qualified representations.
 
 Contains the name according to different representations.
 
-** entities::archetype_name_set
+** archetype_name_set
 *** logical_meta_id
 :PROPERTIES:
 :masd.codec.type: logical_meta_id
@@ -614,7 +614,7 @@ form is supported. Otherwise no such mapping will exist.
 
 Maps a label to archetype ID within the present logical manifold.
 
-** entities::physical_meta_name_indices
+** physical_meta_name_indices
 Containing physical meta-names, indexed as required by use cases.
 
 *** all
@@ -652,7 +652,7 @@ Archetype names by qualified backend and facet names
 
 Resolves a given physical meta-model element ID into its technical space.
 
-** entities::technical_space_version
+** technical_space_version
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -670,18 +670,18 @@ Version of the technical space to use.
 
 Assorted helpers used to construct domain entities.
 
-** helpers::identifiable_factory
+** identifiable_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::building_error
+** building_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst building.
 
-** helpers::qualified_representations_builder
+** qualified_representations_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -693,11 +693,11 @@ An error occurred whilst building.
 :PROPERTIES:
 :masd.codec.type: pretty_printer
 :END:
-** helpers::logical_name_factory
+** logical_name_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::logical_name_builder
+** logical_name_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -705,11 +705,11 @@ An error occurred whilst building.
 :PROPERTIES:
 :masd.codec.type: entities::logical_name
 :END:
-** helpers::logical_name_flattener
+** logical_name_flattener
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::logical_location_builder
+** logical_location_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -717,25 +717,25 @@ An error occurred whilst building.
 :PROPERTIES:
 :masd.codec.type: entities::logical_location
 :END:
-** helpers::flattening_error
+** flattening_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst flattening a name.
 
-** helpers::printing_error
+** printing_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst pretty printing.
 
-** helpers::pretty_printer
+** pretty_printer
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::separators
+** separators
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
@@ -751,19 +751,19 @@ Separate name elements with a '::'.
 *** dots
 Separate name elements with a '.'.
 
-** helpers::physical_meta_name_factory
+** physical_meta_name_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::physical_meta_name_builder
+** physical_meta_name_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::physical_meta_id_builder
+** physical_meta_id_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::logical_name_tree_builder
+** logical_name_tree_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -779,11 +779,11 @@ Separate name elements with a '.'.
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<node>
 :END:
-** helpers::legacy_logical_name_tree_parser
+** legacy_logical_name_tree_parser
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::node
+** node
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -813,37 +813,37 @@ Current node.
 
 Child nodes in a tree.
 
-** helpers::new_logical_name_tree_parser
+** new_logical_name_tree_parser
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::parsing_error
+** parsing_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 A fatal error has occurred while parsing.
 
-** helpers::physical_meta_name_validator
+** physical_meta_name_validator
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::validation_error
+** validation_error
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during validation.
 
-** helpers::physical_id_factory
+** physical_id_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::meta_name_index_builder
+** meta_name_index_builder
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::logical_meta_name_factory
+** logical_meta_name_factory
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
