@@ -13,34 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-13 Sun 13:34]
+#+CAPTION: Clock summary at [2020-12-13 Sun 18:55]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *86:28* |       |       | 100.0 |
+| *Total time*                                              | *89:40* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 86:28   |       |       | 100.0 |
-| Active                                                    |         | 86:28 |       | 100.0 |
-| edit release notes for previous sprint                    |         |       |  5:04 |   5.9 |
+| Stories                                                   | 89:40   |       |       | 100.0 |
+| Active                                                    |         | 89:40 |       | 100.0 |
+| edit release notes for previous sprint                    |         |       |  5:04 |   5.7 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  3:09 |   3.6 |
+| Sprint and product backlog grooming                       |         |       |  3:09 |   3.5 |
 | Improvements to template processing in logical model      |         |       |  0:26 |   0.5 |
-| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   8.1 |
-| Add C++ helpers to the PMM                                |         |       | 13:36 |  15.7 |
-| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.7 |
+| Convert legacy helpers into new style helpers in C++      |         |       |  6:59 |   7.8 |
+| Add C++ helpers to the PMM                                |         |       | 13:36 |  15.2 |
+| Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.6 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
 | Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.1 |
-| Add C# helpers to the PMM                                 |         |       |  3:53 |   4.5 |
-| Move assorted formattable properties in C#                |         |       |  4:48 |   5.6 |
+| Add C# helpers to the PMM                                 |         |       |  3:53 |   4.3 |
+| Move assorted formattable properties in C#                |         |       |  4:48 |   5.4 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
-| Move helpers to =text= model                              |         |       | 21:38 |  25.0 |
+| Move helpers to =text= model                              |         |       | 21:38 |  24.1 |
 | Add namespaces to "dummy function"                        |         |       |  0:10 |   0.2 |
 | Remove disabled files from project items                  |         |       |  0:30 |   0.6 |
-| Move text transforms in c++ and c# models into text model |         |       | 15:56 |  18.4 |
-| Use MDE terminology in Dia model                          |         |       |  1:47 |   2.1 |
+| Move text transforms in c++ and c# models into text model |         |       | 15:56 |  17.8 |
+| Use MDE terminology in Dia model                          |         |       |  1:47 |   2.0 |
 | Remove JSON models from Dogen                             |         |       |  0:19 |   0.4 |
-| Issues with emacs                                         |         |       |  1:32 |   1.8 |
-| Merge codec models                                        |         |       |  4:22 |   5.1 |
+| Issues with emacs                                         |         |       |  1:32 |   1.7 |
+| Merge codec models                                        |         |       |  7:34 |   8.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -720,7 +720,8 @@ per language. Each of the namespaces is declared as a backend.
 The dia model should have the usual structure of transforms, entities,
 etc.
 
-*** STARTED Remove JSON models from Dogen                             :story:
+*** POSTPONED Remove JSON models from Dogen                           :story:
+    CLOSED: [2020-12-13 Sun 18:55]
     :LOGBOOK:
     CLOCK: [2020-11-14 Sat 18:11]--[2020-11-14 Sat 18:30] =>  0:19
     :END:
@@ -735,7 +736,8 @@ Notes:
 - removed the JSON tests. We don't need to keep the Dogen models
   updated in json any longer.
 
-*** STARTED Issues with emacs                                         :story:
+*** COMPLETED Issues with emacs                                       :story:
+    CLOSED: [2020-12-13 Sun 18:55]
     :LOGBOOK:
     CLOCK: [2020-11-30 Mon 17:02]--[2020-11-30 Mon 18:12] =>  1:10
     CLOCK: [2020-11-20 Fri 15:04]--[2020-11-20 Fri 15:26] =>  0:22
@@ -744,13 +746,21 @@ Notes:
 - gnus crashes on startup.
 - upgrade to emacs 27, try to sort out issues with theme.
 
-*** STARTED Merge codec models                                        :story:
+*** COMPLETED Merge codec models                                      :story:
+    CLOSED: [2020-12-13 Sun 18:55]
     :LOGBOOK:
+    CLOCK: [2020-12-13 Sun 17:01]--[2020-12-13 Sun 18:55] =>  1:54
+    CLOCK: [2020-12-13 Sun 16:07]--[2020-12-13 Sun 16:47] =>  0:40
+    CLOCK: [2020-12-13 Sun 15:29]--[2020-12-13 Sun 16:07] =>  0:38
     CLOCK: [2020-12-13 Sun 12:26]--[2020-12-13 Sun 13:34] =>  1:08
     CLOCK: [2020-12-13 Sun 10:58]--[2020-12-13 Sun 12:26] =>  1:28
     CLOCK: [2020-12-12 Sat 17:02]--[2020-12-12 Sat 18:20] =>  1:18
     CLOCK: [2020-12-12 Sat 14:45]--[2020-12-12 Sat 15:13] =>  0:28
     :END:
+
+*Rationale*: task not quite completed but remaining work is very
+specific to the codec dia model, so might as well raise a story for
+that next sprint.
 
 We should take the same approach as we did with text and merge all of
 the codec models. We can use different namespaces for each codec type,
@@ -773,320 +783,6 @@ Notes:
   find profiles' parents any longer. In addition, we must be using
   attributes' qualified names somewhere where we should have been
   using simple names.
-
-*** Remove dia-specific types in dia model                            :story:
-
-We probably don't need the "processed" types, we can just use the
-codec types directly.
-
-*** Consider handling "dia comments" in a general manner              :story:
-
-At present we allow comments with:
-
-: #DOGEN masd.codec.dia.comment=true
-
-to be processed as part of the containing object. We should try to
-generalise this notion so that any codec could make use of this
-feature.
-
-*** Consider adding a codec meta-model                                :story:
-
-As we did with the PMM, it would be nice if you could create an
-element with a stereotype, say:
-
-: masd::codec
-
-And then have it create a meta-model entry for the codec, with an
-associated name and description. These can then be used for
-documentation. It should also include the codec extension. The codec
-interface should return the meta-type of the codec.
-
-*** Move graph of containment to codec model                          :story:
-
-At present we are doing the containment graph within the dia codec. We
-should really do this in the main codec model so we can reuse it for
-org-mode.
-
-*** Move wale templates to TS namespaces                              :story:
-
-At present the wale templates are in the top-level namespace of the
-text model, but they should really be in each technical space.
-
-*** Allow uses of "dictionaries" for invalid class names              :story:
-
-It would be nice if we had a meta-type that represented a dictionary
-of invalid names and then could associate it with meta-types and
-possibly technical spaces. For example, we could say that certain
-words are invalid for all technical spaces, other only for technical
-space x etc. In addition, certain words could be valid for certain
-meta-types (say archetypes) but invalid for others (say objects). If
-these were meta-types we could place them in a dogen model and even
-allow users to create their own lists. Maybe the better term is
-"whitelist"?
-
-Links:
-
-- [[https://english.stackexchange.com/questions/51088/alternative-term-to-blacklist-and-whitelist][Alternative term to “Blacklist” and “Whitelist”]]
-
-*** Add technical space version to element                            :story:
-
-We should add the version of the TS to the element itself rather than
-querying it on the model. We probably should also have the major TS
-name in the element as well.
-
-*** Move mustache templates into the =transforms= namespaces          :story:
-
-We left the templates at the top level as it was in the TS-specific
-models but they should really be within =transforms= namespace. We
-need to check to see how name resolution for templates is working.
-
-*** Consider moving helper chain to outside the text transforms       :story:
-
-Given helpers are temporary this may not make a lot of sense, but for
-what its worth, we could run the chain prior to executing the text
-transforms and then supply a string parameter with the helper
-text. This way the assistant would do less and there would be less
-code in each text transform.
-
-*** Model functionality provided by assistant in the logical model    :story:
-
-We need to look at all the methods in assistant and see if we can
-replace them by data which is processed in transforms.
-
-*** Consider moving CI to GitHub Actions                              :story:
-
-At present we are using Travis and AppVeyor for our CI. However, it
-would be nice to have a single place with all of the CI (and even more
-ideally, packaging as well). GitHub seems to offer some kind of CI
-support via GitHub actions. However, we need to first move to building
-on [[*Build dogen from docker][docker]].
-
-Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
-
-Links:
-
-- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
-  caching]]
-- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
-
-*** Stitch formatter updates                                          :story:
-
-There are a number of issues with stitch formatters at present:
-
-- stitch transform is still generating its own artefact.
-
-Actually, now that we've updated all formatters do we even need a
-stitch formatter? The helpers are probably going via some other
-route. If so, remove it and the wale formatter.
-
-This is incorrect. Whilst we are using the output of stitch in a
-different way, we are still expanding the stitch template for the
-header files.
-
-*** Remove annotations from stitch templates                          :story:
-
-In the new world, stitch templates don't have all of the required
-information to build the boilerplate:
-
-- they cannot expand wale templates because the KVPs will be in the
-  element itself, not the template. Strictly speaking this is not an
-  problem we have right now though.
-- more importantly, the include dependencies cannot be computed by the
-  template. This is because the dependencies are really a function of
-  the model type we are expressing on the template. Instead, we did a
-  quick hack and supplied the includes as KVPs. So they are kind of
-  parameters but kind of not really parameters because they are
-  hard-coded to the template. It solved the immediate problem of
-  having them formatted and placed in the right part of the file, but
-  now we can see this is not the right approach.
-
-In reality, we should not have any annotations at all in
-templates. The boilerplate and includes should be supplied as KVPs and
-applied as variables. They should be composed externally with access
-to data from the model element. Thus we then need a way to associate
-includes with model elements. This is captured as a separate story.
-
-We seem to be using features to read values out of the templates. We
-need to see if this adds any value.
-
-*** Clean up helpers interface and move it to =text=                  :story:
-
-Notes:
-
-- we need to include the wale template in the meta-model
-  element. Once this is done we should see if we can remove the stitch
-  and wale formatters in the c++ model.
-- the helper interface should only take logical and physical types so
-  that we can move it to =text=. However, we may be using the
-  assistant. See if we can create the assistant inside the helper as
-  we do with formatters.
-
-*** Create a "combined" assistant in =text=                           :story:
-
-Assistant should not really exist, but to get us to the next step we
-should just make it a helper in =text= model. We just need to merge
-the C++ and C# classes into one and move it to =text=.
-
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
-extent - are well known TLAs in MDE we should make use of these in
-class names. The names we have at present are very long. The
-additional size is not providing any benefits.
-
-*** Implement M2T chains via code generation                          :story:
-
-We need to update the =backend= and =part= transforms to be a set of
-calls to their "children", based on the PMM. Once this is done we can
-remove all of the existing infrastructure in the TS models:
-
-- repositories
-- initialisers
-- workflows
-- traits
-- registrars
-
-Notes:
-
-- in the new world we no longer need a M2T interface at the text
-  transform level. The backend chain knows of all of the facet chains;
-  and the facet chains know of all of the archetypes. We can dispatch
-  the element using the visitor into a concrete type and then find the
-  archetypes that process that type. However, we do not want to
-  generate an apply method per logical element...
-
-Merged stories:
-
-*Implement backend and facet transform*
-
-The backend transform should:
-
-- return the ID of the backend;
-- use the facet and archetype transforms to process all elements.
-
-Check backlog for a story on this.
-
-*** Consider renaming =text= to =logical_physical=                    :story:
-
-This is really the right name for the model; the text processing part
-are the transforms that are done on the model.
-
-Notes:
-
-- rename =logical_physical_region= to just =region=.
-- actually another way of looking at this is trying to figure out what
-  is the dominant responsibility of the component. The LPS will
-  probably be 2 or 3 types whereas the M2T transforms will be 99% of
-  the types. We probably should name the model after lps and the
-  component after the M2Ts.
-
-*** Move all stitch include dependencies to legacy transform          :story:
-
-We should move all of the inclusion dependencies in stitch templates
-into the legacy dependencies transform, e.g.:
-
-#+begin_src
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/date_helper_transform.hpp" #>
-#+end_src
-
-Once we do this we should also remove support for
-=inclusion_dependency= so that it is not possible to add these any
-more. We need to check to see if all the headers we have at present
-are really required (for example traits should not be).
-
-This is a prerequisite for moving to relationship based dependencies.
-
-*** Improve modeling of attribute properties                          :story:
-
-When we decommissioned formattables we did a lift and shift of a few
-properties into the model itself:
-
-- =streaming_properties=
-- =aspect_properties=
-- =assistant_properties=
-
-This was the first phase of this work. Once the PDM work has been
-carried out and we determine which of these properties are really
-required, we should move them to the attributes instead of the model
-because that is how they are ultimately used.
-
-*** Prune non-generatable types from logical model                    :story:
-
-Add a pruning transform that filters out all non-generatable types
-from logical model.
-
-Actually we can't just do this directly else the inclusion will not
-work. However we do have a "reducer" transform in the formattables
-namespace which needs to be moved to the new world.
-
-*** Feature initializer with no features does not compile             :story:
-
-We removed all the features from =masd::variability::initializer= and
-the compilation failed with the following error:
-
-#+begin_quote
-[5/19] Building CXX object projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
-FAILED: projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o
-/usr/bin/clang++-11  -DENABLE_CPP_REF_IMPL_TESTS -DENABLE_CSHARP_REF_IMPL_TESTS -DLZMA_API_STATIC -D_GLIBCXX_USE_CXX11_ABI=1 -Istage/include -I../../../../projects/dogen/include -I../../../../projects/dogen.identification/include -I../../../../projects/dogen.physical/include -I../../../../projects/dogen.cli/include -I../../../../projects/dogen.utility/include -I../../../../projects/dogen.variability/include -I../../../../projects/dogen.dia/include -I../../../../projects/dogen.codec/include -I../../../../projects/dogen.codec.dia/include -I../../../../projects/dogen.codec.json/include -I../../../../projects/dogen.codec.org_mode/include -I../../../../projects/dogen.tracing/include -I../../../../projects/dogen.logical/include -I../../../../projects/dogen.orchestration/include -I../../../../projects/dogen.templating/include -I../../../../projects/dogen.text/include -I../../../../projects/dogen.text.cpp/include -I../../../../projects/dogen.text.csharp/include -I../../../../projects/dogen.relational/include -isystem /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include -Wall -Wextra -Wconversion -Wno-mismatched-tags -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility-inlines-hidden -fvisibility=hidden  -O3 -DNDEBUG -fPIC   -std=gnu++17 -MD -MT projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -MF projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o.d -o projects/dogen.text.cpp/src/CMakeFiles/dogen.text.cpp.lib.dir/types/feature_initializer.cpp.o -c ../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp
-../../../../projects/dogen.text.cpp/src/types/feature_initializer.cpp:26:52: error: unused parameter 'rg' [-Werror,-Wunused-parameter]
-register_entities(variability::helpers::registrar& rg) {
-#+end_quote
-
-We could perhaps issue a dogen warning for the absence of features but
-the code should compile.
-
-*** Create a patch for tests                                          :story:
-
-At present we only output the head of the first 5 diffs when a model
-fails. However, in some cases we may want to look at the entire
-diff. It would be nice if we could output the patch into the
-byproducts directory for each test.
-
-*** Deprecate managed directories                                     :story:
-
-There should only be one "managed directory" at the input stage, which
-is the component directory (for component models). If parts have
-relative directories off of the component directory then we should add
-to the list of managed directories inside the PM pipeline.
-
-*** Wale should throw on non-required keys                            :story:
-
-At present we throw if we do not supply required keys. We should also
-throw if we supply non-required keys.
-
-*** Remove wale instantiation from stitch                             :story:
-
-Though we've split wale out of stitch in the logical model, its still
-possible to instantiate a wale template within stitch. We should
-remove this as well.
-
-*** Decouple physical model from logical model                        :story:
-
-At present we have a dependency of the logical model on the physical
-model. This is for two reasons:
-
-- variability (=variability_profiles_chain=): we need to instantiate
-  the template domains.
-- helpers (=helper_properties_transform=): we need access to the
-  helpers in order to create the helper properties.
-
-We should not really couple these two models. For the first case we
-could supply the domains as an argument when constructing the context
-and rely only on =std= types. Helpers will be decommissioned with
-PDMs. At that point we should look into making these two models
-independent again.
-
-Actually we could do a quick change now and address this:
-
-- do the variability change now.
-- instead of adding helper transform, add this work into the logical
-  to physical projector.
-
-Actually that would not work as we are projecting "the other way
-around". This work will have to wait.
 
 ** Deprecated
 *** CANCELLED Colouring script should be included as part of package  :story:
