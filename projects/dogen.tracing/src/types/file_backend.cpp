@@ -195,7 +195,7 @@ file_backend::full_path_for_writing(const std::string& transform_id,
     const auto r(current_directory_ / s.str());
     BOOST_LOG_SEV(lg, debug) << "Computed full path for writing: "
                              << r.generic_string()
-                             << " CRAP: " << model_id;
+                             << " ID: " << model_id;
     return r;
 }
 

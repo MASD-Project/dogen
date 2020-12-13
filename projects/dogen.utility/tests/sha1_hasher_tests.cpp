@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(computing_the_hash_of_a_trivial_non_empty_string_produces_t
 BOOST_AUTO_TEST_CASE(computing_the_hash_of_an_empty_string_produces_the_exepcted_result) {
     SETUP_TEST_LOG_SOURCE("computing_the_hash_of_an_empty_string_produces_the_exepcted_result");
 
-    // $ touch crap.log && sha1sum crap.log
+    // $ touch file.log && sha1sum file.log
     //    1f45006cda88569c1d44559db1aef695b30d8817  -
     BOOST_LOG_SEV(lg, info) << "input: '" << empty << "'";
     const auto actual(sha1_hasher(empty));
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(computing_the_hash_of_an_empty_string_produces_the_exepcted
 BOOST_AUTO_TEST_CASE(computing_the_hash_of_a_multi_line_string_produces_the_exepcted_result) {
     SETUP_TEST_LOG_SOURCE("computing_the_hash_of_a_multi_line_string_produces_the_exepcted_result");
 
-    // $ touch crap.log && sha1sum crap.log
+    // $ touch file.log && sha1sum file.log
     //    1f45006cda88569c1d44559db1aef695b30d8817  -
     BOOST_LOG_SEV(lg, info) << "input: '" << multi_line_input << "'";
     const auto actual(sha1_hasher(multi_line_input));
