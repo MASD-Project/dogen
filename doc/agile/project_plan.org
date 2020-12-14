@@ -17,21 +17,18 @@ task juggler installed:
 
 ** Software Development
 
-*** Formattables clean-up
+*** Move to org-mode
    :PROPERTIES:
    :EFFORT:   26d
-   :BLOCKER:  start
-   :allocate: s29
+   :BLOCKER:  previous-sibling
+   :allocate: s30
    :END:
-
-- remove all types that are in formattables
-- merge all backends into text model.
 
 *** Physical model clean-up
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s30
+   :allocate: s31
    :END:
 
 - Replace legacy transforms with data-driven versions
@@ -40,7 +37,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s31
+   :allocate: s32
    :END:
 
 - create PDMs
@@ -50,7 +47,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s32
+   :allocate: s33
    :END:
 
 - add proudct and product family level entities to coding.
@@ -59,7 +56,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s33
+   :allocate: s34
    :END:
 
 - add warning and errors infrastructure
@@ -71,17 +68,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-11-02
+    :start: 2020-12-14
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 29
-   :PROPERTIES:
-   :resource_id: s29
-   :END:
 ** Sprint 30
    :PROPERTIES:
    :resource_id: s30
@@ -97,4 +90,8 @@ Sprints for the project plan.
 ** Sprint 33
    :PROPERTIES:
    :resource_id: s33
+   :END:
+** Sprint 34
+   :PROPERTIES:
+   :resource_id: s34
    :END:

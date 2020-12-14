@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-13 Sun 18:55]
+#+CAPTION: Clock summary at [2020-12-14 Mon 17:23]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
@@ -29,7 +29,7 @@
 | Add C++ helpers to the PMM                                |         |       | 13:36 |  15.2 |
 | Remove unused wale keys in =text.cpp=                     |         |       |  0:34 |   0.6 |
 | Merge =cpp_artefact_transform*= wale templates            |         |       |  0:09 |   0.2 |
-| Fix some problems with c++ visual studio problems         |         |       |  0:59 |   1.1 |
+| Fix some problems with c++ visual studio                  |         |       |  0:59 |   1.1 |
 | Add C# helpers to the PMM                                 |         |       |  3:53 |   4.3 |
 | Move assorted formattable properties in C#                |         |       |  4:48 |   5.4 |
 | Orchestration should have an initialiser                  |         |       |  0:09 |   0.2 |
@@ -237,7 +237,8 @@ Time spent creating the demo and presentation.
 ***** Move C++ locator into physical model
 ***** Move stand-alone formattables to physical/logical models
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2020-12-14 Mon 18:16]
     :LOGBOOK:
     CLOCK: [2020-12-12 Sat 14:25]--[2020-12-12 Sat 14:44] =>  0:19
     CLOCK: [2020-12-11 Fri 20:15]--[2020-12-11 Fri 20:28] =>  0:13
@@ -440,7 +441,7 @@ const physical::entities::archetype& {{class.simple_name}}::static_archetype() {
 }
 #+end_src
 
-*** COMPLETED Fix some problems with c++ visual studio problems       :story:
+*** COMPLETED Fix some problems with c++ visual studio                :story:
     CLOSED: [2020-11-20 Fri 12:46]
     :LOGBOOK:
     CLOCK: [2020-11-20 Fri 12:44]--[2020-11-20 Fri 12:46] =>  0:02
