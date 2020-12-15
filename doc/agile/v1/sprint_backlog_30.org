@@ -14,20 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-14 Mon 19:32]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *4:27* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 4:27   |      |      | 100.0 |
-| Active                                 |        | 4:27 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 4:27 | 100.0 |
+#+CAPTION: Clock summary at [2020-12-15 Tue 18:52]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *6:38* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 6:38   |      |      | 100.0 |
+| Active                                             |        | 6:38 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:04 |  91.5 |
+| Create a demo and presentation for previous sprint |        |      | 0:34 |   8.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2020-12-15 Tue 18:52]
     :LOGBOOK:
+    CLOCK: [2020-12-15 Tue 18:02]--[2020-12-15 Tue 18:52] =>  0:50
+    CLOCK: [2020-12-14 Mon 22:02]--[2020-12-14 Mon 22:49] =>  0:47
     CLOCK: [2020-12-14 Mon 18:15]--[2020-12-14 Mon 19:31] =>  1:16
     CLOCK: [2020-12-13 Sun 19:20]--[2020-12-13 Sun 22:31] =>  3:11
     :END:
@@ -41,8 +45,6 @@ release announcements:
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 #+begin_src markdown
-**DRAFT: Release notes under construction**
-
 ![Bar O Stop](https://explorersclubfh.files.wordpress.com/2010/06/bar-stop-to-benguela.jpg)
 _Bar O Stop, Namibe. (C) 2010 [Jo Sinfield](https://explorersclubfh.wordpress.com/2010/06/30/angola-update-and-binga-bay-to-flamingo-bay-26th-to-29th-june-2010/)_
 
@@ -54,7 +56,7 @@ And so t'was that the 29th sprint of the 1.0 era finally came to a close; and wh
 
 This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there were no user facing features, the video discusses the work on internal features instead.
 
-[![Sprint 1.0.29 Demo](https://img.youtube.com/vi/tLzxPJMPFFI/0.jpg)](https://youtu.be/tLzxPJMPFFI)
+[![Sprint 1.0.29 Demo](https://img.youtube.com/vi/FEqQVCWo0S4/0.jpg)](https://youtu.be/FEqQVCWo0S4)
 _Video 1: Sprint 29 Demo._
 
 # Development Matters
@@ -80,11 +82,11 @@ It is also perhaps worth spending a few moments to reflect on the lessons taught
 - the "language agnostic" representation, which is now housed in the ```logic``` model;
 - the "language-specific" representation, which was implemented by formattables (_i.e._, ```text.cpp``` and ```text.csharp```).
 
-What the empirical approach demonstrated was that there is no clear way to separate the second and third representations, try as we might, because there is just _so much_ overlap between them. The road to the LPS had necessarily to go through formattables, because _in theory_ it appeared so clear and logical that separate TSs (Technical Spaces) should have clean, TS-specific representations which were ready to be written to files. As Mencken stated:
+What the empirical approach demonstrated was that there is no clear way to separate the second and third representations, try as we might, because there is just _so much_ overlap between them. The road to the LPS had necessarily to go through formattables, because _in theory_ it appeared so clear and logical that separate TSs (Technical Spaces) should have clean, TS-specific representations which were ready to be written to files. As [Mencken stated](https://quoteinvestigator.com/2016/07/17/solution/):
 
-> For every complex problem there is an answer that is clear, simple, and wrong.
+> Every complex problem has a solution which is simple, direct, plausible—and wrong.
 
-In fact, It took a great deal of careful reading through the literature, together with a lot of practical experimentation, to realise that doing so is not very practical at all. Thus, it does not seem that it was possible to have avoided making this design mistake. One could even say that this "mistake" is nothing but the empirical approach at play, because you are expected to conduct experiments and accumulate facts about your object of study, and then revise your hypothesis accordingly. The downside, of course, is that it takes a fair amount of time and effort to perform these "revisions" and it certainly feels as if there was "wasted time" which could have been saved if only we started off with the correct design in the first place. Alas, it is not clear how would one simply have the intuition for the correct design _without_ the experimentation. In other words, the programmer's perennial condition.
+In fact, It took a great deal of careful reading through the literature, together with a lot of practical experimentation, to realise that doing so is not at all  practical. Thus, it does not seem that it was possible to have avoided making this design mistake. One could even say that this "mistake" is nothing but the empirical approach at play, because you are expected to conduct experiments and accumulate facts about your object of study, and then revise your hypothesis accordingly. The downside, of course, is that it takes a fair amount of time and effort to perform these "revisions" and it certainly feels as if there was "wasted time" which could have been saved if only we started off with the correct design in the first place. Alas, it is not clear how would one simply have the intuition for the correct design _without_ the experimentation. In other words, the programmer's perennial condition.
 
 ### Move helpers into ```text``` model and add them to the PMM
 
@@ -134,32 +136,49 @@ At this juncture, your design alarm bells are probably ringing very loudly, and 
 - the "helpers" where really PDMs in disguise, and those would be dealt with at some point in the future, so they could be ignored for now;
 - the "assistant" had ultimately two distinct responsibilities: 1) to perform some TS-specific transformation of data elements from the logical model, which we now understood to fall under the logical model umbrella; 2) to perform some "formating assistance", providing common routines to a lot of M2T transforms. We implemented some of these refactors, but others were deemed to be outside of the scope of the present exercise, and were therefore added to the backlog.
 
-But this was the harbinger of things to come. Much more significantly, assistants and helpers where bound together in a cycle, meaning we could not move them incrementally to the ```text``` model as we originally envisioned. As we've elaborated many a times in these pages, cycles are never the bringers of good fortune, so we took upon ourselves breaking the cycle as part of this exercise. Fortunately this was not too difficult, as the parts of the assistant API used by the helpers were fairly self contained. The functionality was encapsulated into an ABC (Abstract Base Class), a decision that is not without controversy, but which suffices amply to address the problem at hand - all the more so given that helpers are to be removed in the not too distant future.
+This was the harbinger of things to come. Much more significantly, assistants and helpers where bound together in a cycle, meaning we could not move them incrementally to the ```text``` model as we originally envisioned. As we've elaborated many a times in these pages, cycles are never the bearers of good fortune, so we took upon ourselves breaking the cycle as part of this exercise. Fortunately this was not too difficult, as the parts of the assistant API used by the helpers were fairly self contained. The functionality was encapsulated into an ABC (Abstract Base Class), a decision that is not without controversy, but which suffices amply to address the problem at hand - all the more so given that helpers are to be removed in the not too distant future.
 
-A second stumbling block was that, even though helpers are deprecated and their impact should be contained to legacy code, they still needed to be accessible via the PMM. Sadly, the existing helper code was making use of some of the same features which in the new world are addressed by the PMM, and so we had no choice but to extend the PMM with helper support. Though not ideal, this was done in a fairly painless manner, and it is hopefully self-contained enough that not much of the code base will start to rely on its presence. Once all of these obstacles were resolved, the bulk of the work was fairly repetitive: to move helpers in groups into the ```text``` model, tidying up each text template until it produced compilable code.
+A third stumbling block was that, even though helpers are deprecated and their impact should be contained to legacy code, they still needed to be accessible via the PMM. Sadly, the existing helper code was making use of some of the same features which in the new world are addressed by the PMM, and so we had no choice but to extend the PMM with helper support. Though not ideal, this was done in a fairly painless manner, and it is hopefully self-contained enough that not much of the code base will start to rely on its presence. Once all of these obstacles were resolved, the bulk of the work was fairly repetitive: to move helpers in groups into the ```text``` model, tidying up each text template until it produced compilable code.
 
 In the end, the following stories were required to bring the main story to a close:
 
 - **Improvements to template processing in logical model**: minor fixes to how templates were being handled.
 - **Convert legacy helpers into new style helpers in C++**: the bulk of the adaptation work in the C++ TS.
-- **Add C++ helpers to the PMM**: Move helpers from ```text.cpp``` into ```text```.
+- **Add C++ helpers to the PMM**: Adding PMM infrastructure to deal with helpers. Here we are mainly concerned with C++, but to be fair much of the infrastructure is common to all TSs.
 - **Remove unused wale keys in ```text.cpp```**: minor tidy-up of templates and associated wale (mustache) keys.
 - **Merge ```cpp_artefact_transform*``` wale templates** : Removal of unnecessary wale (mustache) templates.
-- **Add C# helpers to the PMM**: Work on the C# TS to move helpers across.
-- **Move helpers to ```text``` model**: Remaining work in moving the helpers.
+- **Add C# helpers to the PMM**: Modifications to the PMM to cater for C#-specific concerns.
+- **Move helpers to ```text``` model**: Remaining work in moving the helpers across to the combined ```text``` model.
 
-### Move text transforms in c++ and c# models into text model
+### Move text transforms in C++ and C# models into text model
 
-Once we had helpers under our belt, we could turn our attention to the more pressing concerns of the M2T transforms. These presented a bigger problem due to scale: there are just _far too many_ text transforms. This was a particularly annoying problem due to how editing in Dia works at present, with severe limitations on how copying and pasting across diagrams works. Alas, there was nothing for it but patience. Over a long period of time, we performed a similar exercise to that of the helpers and moved each text template into their resting location in the ```text``` model. The work was not what you'd call a creative exercise, but nonetheless an important one because the final layout of the ```text``` model now mirrors precisely the contents of the PMM which is what we had intended from the beginning.
+Once we had helpers under our belt, we could turn our attention to the more pressing concerns of the M2T transforms. These presented a bigger problem due to scale: there are just _far too many_ text transforms. This was a particularly annoying problem due to how editing in Dia works at present, with severe limitations on copying and pasting across diagrams. Alas, there was nothing for it but patience. Over a long period of time, we performed a similar exercise to that of the helpers and moved each text template into their resting location in the ```text``` model. The work was not what you'd call a creative exercise, but nonetheless an important one because the final layout of the ```text``` model now mirrors the contents of the PMM - precisely what we had intended from the beginning.
 
 ![Text model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_text_model_birds_eye.png)
 _Figure 1: Birds-eye view of the ```text``` model_
 
-Figure 1 shows a birds-eye view of the ```text``` model. On the top-leftmost corner you can see the wale (mustache) templates. Next to it is the ```entities``` namespace, containing the definition of the LPS. At the bottom of the picture you have the two major TS: C++ (on the bottom left) and C# (on the bottom right, clipped on the right). Each TS shows some of the M2T transforms that composes them. All elements are exposed into the PMM via code-generation.
+Figure 1 shows a birds-eye view of the ```text``` model. On the top-leftmost corner, in orange, you can see the wale (mustache) templates. Next to it is the ```entities``` namespace, containing the definition of the LPS (in pink-ish). At the bottom of the picture, with the greener tones, you have the two major TS: C++ (on the bottom left) and C# (on the bottom right, clipped). Each TS shows some of the M2T transforms that composes them. All elements are exposed into the PMM via code-generation.
 
 ### Clean up and merge codec models
 
-The final "large" architectural problem we had to address was the current approach for the ```codec``` models. Originally we had envisioned the existence of a number of codecs for Dogen, which could potentially be dynamically injected. They would extend Dogen to process file types for specific use cases, such as eCore models and other UML diagrams. Whilst we still see a need for such an approach, it was originally done with little conceptual understanding of MDE (Model Driven Engineering) and as such resulted in lots of _suis generis_ terminology. In addition, we ended up with lots of little "modelets" with tiny bits of functionality, because each codec now shares most of its pipeline with the main ```codec``` model. Thus, the right approach was to merge all of these models into the ```codec``` model, and to move away from legacy terms such as ```hydrator```, ```encoder``` and the like, favouring instead the typical MDE terminology of transforms and transform chains. This story covered the bulk of the work, including the merging of the ```codec.json``` and ```codec.org``` models, but sadly just as we were closing in in the ```codec.dia``` model we ran out of time. The work shall be completed early next sprint.
+The final "large" architectural problem we had to address was the current approach for the ```codec``` models. Long ago, we envisioned a proliferation of the number of codecs for Dogen, and so thought these should be dynamically injected to facilitate the use case. In our view, each codec would extend Dogen to process file types for specific uses, such as adding eCore support, as well as for other, non-UML-based representations. Whilst we still see a need for such an approach, it was originally done with little conceptual understanding of MDE and as such resulted in lots of _suis generis_ terminology. In addition, we ended up with lots of little "modelets" with tiny bits of functionality, because each codec now shares most of its pipeline with the main ```codec``` model. Thus, the right approach was to merge all of these models into the ```codec``` model, and to move away from legacy terms such as ```hydrator```, ```encoder``` and the like, favouring instead the typical MDE terminology of transforms and transform chains. This story covered the bulk of the work, including the merging of the ```codec.json``` and ```codec.org``` models, but sadly just as we were closing in in the ```codec.dia``` model we ran out of time. The work shall be completed early next sprint.
+
+![Codec model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_codec_model_transforms.png)
+_Figure 2: Fragment of the ```codec``` model after refactoring._
+
+Other stories related to this work:
+
+- **Use MDE terminology in Dia model**: the plain (non-codec) representation of Dia got an "MDE tidy-up, following the same pattern as all other models and using transforms rather than hydrators, etc.
+
+### Assorted smaller stories
+
+A number of small stories was also worked on:
+
+- **Fix some problems with c++ visual studio**: assorted improvements to Visual Studio project files; though these are still not ready for end users.
+- **Orchestration should have an initialiser**: instead of copying and pasting the individual initialisers, create a top-level initialiser in orchestration and reuse it.
+- **Add namespaces to "dummy function"**: two classes with the same name in different namespaces resulted in the same "dummy" function, resulting in spurious OSX warnings. With this change, we generate the dummy function name from file path resulting in unique names in a component.
+- **Remove disabled files from project items**: C# and C++ Visual Studio solutions contained files for disabled facets, due to the way enablement worked in C#. With the merge to the text model, this caused problems so we now honour disabled facets when generating project files.
+- **Remove JSON models from Dogen**: Remove tests for JSON models within the Dogen product. JSON is still supported within the C++ reference implementation, but at least this way we do not need to regenerate the JSON models every time we change Dogen models which is quite often.
 
 ### Video series of Dogen coding
 
@@ -196,20 +215,16 @@ _Table 2: Individual videos on the playlist for the ```text``` model refactor._
 [![Text model refactor](https://img.youtube.com/vi/B_WuIIWCKFU/0.jpg)](https://www.youtube.com/playlist?list=PLwfrwe216gF0MGgLSSOmRW3g_BcfrgIzU)
 _Video 3: Playlist "MASD - Dogen Coding: Formatables Refactor"._
 
-### Assorted smaller stories
-
-- **Fix some problems with c++ visual studio**: Assorted improvements to Visual Studio project files; though these are still not ready for end users.
-
 ## Resourcing
 
-
+On one hand, the utilisation rate of 35% was not particularly brilliant this sprint, but by pretty much any other metric it has to be considered a model of resource consumption (if you pardon the MDE pun). Almost 89% of the total ask was used on stories directly related to the development process, and whilst the break down of stories was not exactly stellar, we still managed a good spread with the top 3 stories consuming 24.1%, 17.8% and 15.2% respectively. We tend to look closely at this because its a good indicator of the health of the analysis of a sprint, and its always a bad sign when one story dominates the majority of the ask. Nonetheless, when one looks at the story titles in more detail its still clear that there was a certain element of laziness in how the work was split and, as always, there is room for improvement in this department. The 11% on non-core tasks had the usual characteristics, with 5.7% allocated to the release notes, and a very cheap demo at 0.5%. One important note though is that this sprint consumed almost 90 hours in total rather than the more traditional 80, which means that looking at percentage numbers is somewhat misleading, particularly when comparing to a typical sprint. The major downside of this sprint was general tiredness, as usual, given the huge amount of the commitment. Sadly not much can be changed in this department, and ideally we wouldn't want to slow down in the next sprint though the Holidays may have a detrimental effect.
 
 ![Sprint 29 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_pie_chart.jpg)
-_Figure 2_: Cost of stories for sprint 29.
+_Figure 3_: Cost of stories for sprint 29.
 
 ## Roadmap
 
-
+The key alteration to the road map - other than the removal of the long standing "formattables refactor" - was the addition of the org-mode codec. We've spent far too many hours dealing with the inadequacies of Dia, and it is by now clear that we have much to gain by moving into Emacs for all our modeling needs (and thus, all our Dogen needs since everything else is already done inside Emacs). Therefore we've decided to take the hit and work on implementing org-mode support next sprint before we resume the PMM work. Other than that we are as we were, though on the plus side the road map does have a very realistic feel now given that we are actually completing targets on a sprint by sprint basis.
 
 ![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_project_plan.png)
 
@@ -217,7 +232,7 @@ _Figure 2_: Cost of stories for sprint 29.
 
 # Binaries
 
-You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.29) or GitHub, as per Table 1. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.28.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.29.tar.gz) format.
+You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.29) or [GitHub](https://github.com/MASD-Project/dogen/releases/tag/v1.0.29), as per Table 3. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.28.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.29.tar.gz) format.
 
 | Operative System | Format | BinTray | GitHub |
 |----------|-------|-----|--------|
@@ -229,7 +244,7 @@ _Table 3: Binary packages for Dogen._
 
 **Note 1:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
 
-**Note 2:** Due to issues with Travis CI, we had a number of failed OSX builds we could not produce a final build for this sprint. However, given no user related functionality is provided we left the link to the last successful build of Sprint 29. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
+**Note 2:** Due to issues with Travis CI, we had a number of failed OSX builds and we could not produce a final build for this sprint. However, given no user related functionality is provided, we left the link to the last successful build of Sprint 29. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
 
 # Next Sprint
 
@@ -242,7 +257,11 @@ The goals for the next sprint are:
 That's all for this release. Happy Modeling!
 #+end_src markdown
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-12-14 Mon 23:24]
+    :LOGBOOK:
+    CLOCK: [2020-12-14 Mon 22:50]--[2020-12-14 Mon 23:24] =>  0:34
+    :END:
 
 Time spent creating the demo and presentation.
 
@@ -253,6 +272,10 @@ Time spent creating the demo and presentation.
     Marco Craveiro
     Domain Driven Development
     Released on 14th December 2020
+
+***** Complete the formattables refactor
+***** Move helpers into text model and add them to the PMM
+***** Clean up and merge codec models
 
 *** Sprint and product backlog grooming                               :story:
 
