@@ -14,16 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-15 Tue 18:52]
+#+CAPTION: Clock summary at [2020-12-16 Wed 20:16]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *6:38* |      |      | 100.0 |
+| *Total time*                                       | *7:51* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 6:38   |      |      | 100.0 |
-| Active                                             |        | 6:38 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:04 |  91.5 |
-| Create a demo and presentation for previous sprint |        |      | 0:34 |   8.5 |
+| Stories                                            | 7:51   |      |      | 100.0 |
+| Active                                             |        | 7:51 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:04 |  77.3 |
+| Create a demo and presentation for previous sprint |        |      | 0:34 |   7.2 |
+| Sprint and product backlog grooming                |        |      | 0:09 |   1.9 |
+| Org-mode as a carrier format for modeling          |        |      | 1:04 |  13.6 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -40,7 +42,7 @@ add github release notes for previous sprint.
 
 release announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1324723551795118080][twitter]]
+- [[https://twitter.com/MarcoCraveiro/status/1338921450623930373][twitter]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6730489589905154048/][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
@@ -277,8 +279,118 @@ Time spent creating the demo and presentation.
 ***** Move helpers into text model and add them to the PMM
 ***** Clean up and merge codec models
 
-*** Sprint and product backlog grooming                               :story:
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-12-16 Wed 19:02]--[2020-12-16 Wed 19:11] =>  0:09
+    :END:
 
 Updates to sprint and product backlog.
+
+*** STARTED Org-mode as a carrier format for modeling                 :story:
+    :LOGBOOK:
+    CLOCK: [2020-12-16 Wed 19:12]--[2020-12-16 Wed 20:16] =>  1:04
+    :END:
+
+This is a bit of a weird idea, but may just work; this story is a
+placeholder to capture ideas in this space. Consider a org-mode
+file as a model. Ideas:
+
+- the top-level properties are all model properties. For example, if
+  you add text at the top, that is a model comment.
+- We could add a org-mode file link for each file element so that we
+  could easily move from model to implementation. The file format
+  should have a section for this (files by facet?), with all of the
+  bookmarks. However, its a bit painful to do this manually, so we
+  need some form of round-tripping.
+- we can also make use of the exact same format for Dogen comments as
+  we do in Dia, with =#DOGEN= markers.
+- stereotypes and other meta-data can be conveyed using org-mode
+  properties. In addition, due to org-babel, we can include code
+  snippets on any programming language, with some (minimal) IDE-like
+  integration.
+- we could also include the GUIDs for merging as org-mode properties.
+- once we create a C++ stand-alone product to represent org-mode
+  documents, we can just create an adapter for it as an injector.
+- there already is some support for creating state-machines in
+  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
+  dot and tables]]
+- we should also look at verb as an extension to org-mode.
+
+Links:
+
+- [[https://github.com/mirkoboehm/OrgModeParser][OrgModeParser]]: requires QT.
+- [[https://www.reddit.com/r/emacs/comments/bciwiz/does_orgmode_have_a_formal_grammar_or_some_subset/][Does orgmode have a formal grammar, or some subset of it?]]
+- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
+- [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
+- [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
+- [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+- [[https://github.com/federicotdn/verb][verb]]: Verb is a package for Emacs which allows you to organize and
+  send HTTP requests.
+- [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
+- [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools!]]
+
+*** Analysis on org-mode outstanding work                             :story:
+
+Notes:
+
+- map dogen types to a org-mode tag. The tags must replace =::= with
+  an underscore, e.g. =masd_enumeration= for
+  =masd::enumeration=. Mapping is done by detecting stereotype in the
+  stereotype list and removing it from there. Non-tagged headlines
+  default to documentation (see below).
+- any non-tagged section will be treated as documentation. On
+  generation it will be suitably converted into the language's format
+  for documentation (e.g. doxygen, C# docs etc). We need meta-model
+  elements for these such as "section", etc. Annoyingly, this also
+  means converting expressions such as =some text=. This will be
+  trickier.
+- in an ideal world we would also have entities such as paragraphs and
+  the like, to ensure we can reformat the text as required. For
+  example, the 80 column limitation we have in the input may not be
+  suitable for the end format (this is the case with markdown).
+- we are using qualified names, e.g. =entities::attribute=. These need
+  to be removed. We need to move the graphing logic into =codec=. See
+  story for this.
+- All models should have a unique ID for each element. The ID should
+  be based on GUIDs where possible, though there are some difficulties
+  for cases like Dia. We could create a "fixed" function that
+  generates GUIDs from dia IDs. For example:
+
+: <dia:childnode parent="O64"/>
+
+  We could take the id =O64= and normalise it to say 4 digits: =6400=
+  (noticed we removed the =O= as its not valid in hex); and then use a
+  well-defined GUID prefix:
+
+: 3dddc237-3771-45be-82c9-937c5cef
+
+  Then we can append the normalised Dia ID to the prefix. This would
+  ensure we always generate the same GUIDs on conversion from Dia. If
+  the GUIds change within Dia, then they will also change in the
+  conversion. This ID is then used as the codec ID. Note that its the
+  responsibility of the decoder to assign "child node IDs". For JSON
+  this must already be populated. For Dia its the =childnode=
+  field. For org-mode, we need to infer it from the structure of the
+  file. In org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+- qualified names are computed as a transform via the graph in codec
+  model. Fixed.
+- packages/namespaces do not have a stereotype in org document. In
+  fact nor do regular objects. We need to figure out the logic for
+  meta-types.
+- no space between headline and comment when there are no properties.
+
+Links:
+
+- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
+- [[https://karl-voit.at/2017/09/23/orgmode-as-markup-only/][Org-Mode Is One of the Most Reasonable Markup Languages to Use for
+  Text]]
+
+*** Rename =org_mode= model                                           :story:
+
+Seems like a better name is needed for this model. Perhaps =orgmode=?
+Or just =org=? Just don't like =org_mode=.
 
 ** Deprecated
