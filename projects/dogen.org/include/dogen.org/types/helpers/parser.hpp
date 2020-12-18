@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <istream>
 #include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/entities/document.hpp"
 
@@ -39,16 +40,18 @@ namespace dogen::org::helpers {
 class parser final {
 private:
     /**
-     * @brief Splits the string by newlines.
+     * @brief Retrieves the next line of the stream, if any is
+     * available.
+     *
+     * Unlike standard getline, it preserves new lines.
      */
-    static std::list<std::string> split_into_lines(const std::string& s);
+    static std::istream& getline(std::istream& is, std::string& s);
 
     /**
      * @brief Parses the remaining content as part of an headline.
      */
-    std::list<entities::headline>
-    parse_headlines(const std::list<std::string>& lines,
-        std::list<std::string>::const_iterator& i);
+    static std::list<entities::headline>
+    parse_headline(std::istream& is, const std::string& heading_line);
 
 public:
     static entities::document parse(const std::string& s);

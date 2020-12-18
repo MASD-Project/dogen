@@ -40,54 +40,79 @@ const std::regex headline_regex("^\\*+\\s");
 
 namespace dogen::org::helpers {
 
-std::list<std::string> parser::split_into_lines(const std::string& s) {
-    std::string line;
+std::istream& parser::getline(std::istream& is, std::string& s) {
     std::ostringstream os;
-    std::istringstream is(s);
-    std::list<std::string> r;
-    while (std::getline(is, line)) {
-        os << line;
+    std::getline(is, s);
+    os << s;
 
-        /*
-         * Try to detect if there was a newline on this line or
-         * not. There is no easy way to preserve the original input in
-         * getline, so we resort to this hack. The logic is that if we
-         * hae not reached the EOF, then there must have been a
-         * newline.
-         */
-        if(!is.eof() && !is.fail())
-            os << std::endl;
+    /*
+     * Try to detect if there was a newline on this line or not. There
+     * is no easy way to preserve the original input in getline, so we
+     * resort to this hack. The logic is that if we have not reached
+     * the EOF, then there must have been a newline.
+     */
+    if(!is.eof() && !is.fail())
+        os << std::endl;
 
-        r.push_back(os.str());
-        os.str("");
-    }
-    return r;
+    s = os.str();
+    return is;
 }
+
+// std::list<entities::headline>
+// parser::parse_headline(std::istream& is, const std::string& heading_line) {
+//     std::list<entities::headline> r;
+
+//     std::string line;
+//     std::ostringstream os;
+//     while(getline(is, line)) {
+//         BOOST_LOG_SEV(lg, debug) << "Processing line: " << line;
+
+//         if (std::regex_match(line, headline_regex)) {
+//             entities::headline
+//             r.headlines(parse_headline(is, line));
+//         } else {
+//             os << line;
+//         }
+//     }
+
+
+
+
+
+
+//     return r;
+// }
 
 entities::document parser::parse(const std::string& s) {
     BOOST_LOG_SEV(lg, trace) << "Parsing org document: '" << s << "'";
-    entities::document r;
-    const auto lines(split_into_lines(s));
 
     /*
      * If there is no content, return an empty document.
      */
-    if (lines.empty())
+    entities::document r;
+    if (s.empty())
         return r;
 
-
-    auto i(lines.begin());
+    std::string line;
     std::ostringstream os;
-    while(i != lines.end()) {
-        const auto& line(*i);
+    std::istringstream is(s);
+    while(getline(is, line)) {
         BOOST_LOG_SEV(lg, debug) << "Processing line: " << line;
 
         if (std::regex_match(line, headline_regex)) {
-            // is headline
+            const std::string content(os.str());
+            if (!content.empty()) {
+                entities::block tb;
+                tb.type(entities::block_type::text_block);
+                tb.contents(content);
+                r.section().blocks().push_back(tb);
+            }
+
+
+            // r.headlines(parse_headline(is, line));
         } else {
             os << line;
         }
-        ++i;
     }
 
     const std::string remainder(os.str());
