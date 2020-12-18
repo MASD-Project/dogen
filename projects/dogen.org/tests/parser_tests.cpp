@@ -34,16 +34,17 @@ const std::string test_suite("parser_tests");
 const std::string empty;
 const std::string single_line_document(
     "A simple OrgMode file that the parser should parse properly.");
-const std::string only_text_content_muti_line(R"(some text content
+const std::string multi_line_document(R"(some text content
 other text content)");
 
-const std::string inline_standard_control_block(R"(<#+ single line #>)");
-const std::string empty_standard_control_block(R"(<#+
-#>)");
+const std::string multi_line_document_with_spurious_spaces(R"(some text content
 
-const std::string single_line_standard_control_block(R"(<#+
-single line
-#>)");
+
+
+
+
+other text content)");
+
 
 dogen::org::entities::document
 parse(const std::string& s) {
@@ -64,8 +65,8 @@ BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_document) {
     BOOST_CHECK(document.section().blocks().empty());
 }
 
-BOOST_AUTO_TEST_CASE(single_line_document_results_in_section_with_one_line) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("single_line_document_results_in_section_with_one_line");
+BOOST_AUTO_TEST_CASE(single_line_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("single_line_document_results_in_expected_org_document");
     const auto document(parse(single_line_document));
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
@@ -73,8 +74,36 @@ BOOST_AUTO_TEST_CASE(single_line_document_results_in_section_with_one_line) {
 
     const auto& blocks(document.section().blocks());
     BOOST_CHECK(!blocks.empty());
-    BOOST_CHECK(blocks.front().contents() == single_line_document);
+
+    const auto& c(blocks.front().contents());
+    BOOST_CHECK(c == single_line_document);
 }
 
+BOOST_AUTO_TEST_CASE(multi_line_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("multi_line_document_results_in_expected_org_document");
+    const auto document(parse(multi_line_document));
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_CHECK(!blocks.empty());
+
+    const auto& c(blocks.front().contents());
+    BOOST_CHECK(c == multi_line_document);
+}
+
+BOOST_AUTO_TEST_CASE(multi_line_document_with_spurious_spaces_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("multi_line_document_with_spurious_spaces_in_expected_org_document");
+    const auto document(parse(multi_line_document_with_spurious_spaces));
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_CHECK(!blocks.empty());
+    const auto& c(blocks.front().contents());
+    BOOST_CHECK(c == multi_line_document_with_spurious_spaces);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

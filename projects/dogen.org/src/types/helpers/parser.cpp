@@ -22,6 +22,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
+#include  <boost/algorithm/string/replace.hpp>
 #include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.org/io/entities/document_io.hpp"
@@ -34,6 +35,14 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("org.helpers.parser"));
 
 const std::regex headline_regex("^\\*+\\s");
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 }
 
@@ -49,12 +58,22 @@ entities::document parser::parse(const std::string& s) {
 
     while (std::getline(is, line)) {
         ++line_number;
-        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << line;
+        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << tidy_up_string(line);
 
         if (std::regex_match(line, headline_regex)) {
             // is headline
         } else {
             os << line;
+
+            /*
+             * Try to detect if there was a newline on this line or
+             * not. There is no easy way to preserve the original
+             * input in getline, so we resort to this hack. The logic
+             * is that if we hae not reached the EOF, then there must
+             * have been a newline.
+             */
+            if(!is.eof() && !is.fail())
+                os << std::endl;
         }
     }
 
