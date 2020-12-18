@@ -2984,7 +2984,7 @@
         <dia:point val="-2,-27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.05,-27.05;24.745,-13.25"/>
+        <dia:rectangle val="-2.05,-27.05;24.745,-12.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2996,7 +2996,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="14.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3016,6 +3016,7 @@ of org mode required by Dogen.
 #DOGEN masd.codec.reference=masd
 #DOGEN masd.codec.reference=masd.variability
 #DOGEN masd.codec.reference=dogen.profiles
+#DOGEN masd.codec.reference=dogen.tracing
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -3433,16 +3434,16 @@ of org mode required by Dogen.
         <dia:point val="75,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,-17.05;91.335,-13.35"/>
+        <dia:rectangle val="74.95,-17.05;94.415,-12.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="75,-17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#string_to_document_transform#</dia:string>
@@ -3567,6 +3568,23 @@ of org mode required by Dogen.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#tracer#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#boost::shared_ptr&lt;tracing::tracer&gt;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#s#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
@@ -3593,19 +3611,19 @@ of org mode required by Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="93,-4"/>
+        <dia:point val="91,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.95,-4.05;109.335,-0.35"/>
+        <dia:rectangle val="90.95,-4.05;110.415,0.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="93,-4"/>
+        <dia:point val="91,-4"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.285"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#document_to_string_transform#</dia:string>
@@ -3728,6 +3746,23 @@ of org mode required by Dogen.
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#tracer#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#boost::shared_ptr&lt;tracing::tracer&gt;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
                 <dia:string>#d#</dia:string>
@@ -4337,17 +4372,17 @@ of org mode required by Dogen.
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O35">
       <dia:attribute name="obj_pos">
-        <dia:point val="83.1425,-13.3582"/>
+        <dia:point val="84.6825,-12.55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.95,-14.1082;83.8925,8.6"/>
+        <dia:rectangle val="77.95,-13.3;85.4325,8.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.1425,-13.3582"/>
-        <dia:point val="83.1425,-6"/>
+        <dia:point val="84.6825,-12.55"/>
+        <dia:point val="84.6825,-6"/>
         <dia:point val="78,-6"/>
         <dia:point val="78,7"/>
       </dia:attribute>
@@ -4417,17 +4452,17 @@ of org mode required by Dogen.
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="101.142,-0.4"/>
+        <dia:point val="100.683,0.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.085,-1.15;101.892,8.6"/>
+        <dia:rectangle val="98.085,-0.35;101.433,8.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="101.142,-0.4"/>
-        <dia:point val="101.142,2"/>
+        <dia:point val="100.683,0.4"/>
+        <dia:point val="100.683,2"/>
         <dia:point val="98.135,2"/>
         <dia:point val="98.135,7"/>
       </dia:attribute>
@@ -4497,13 +4532,13 @@ of org mode required by Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="31,-25"/>
+        <dia:point val="34,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.95,-25.05;48.875,-20.55"/>
+        <dia:rectangle val="33.95,-25.05;51.875,-20.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="31,-25"/>
+        <dia:point val="34,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
@@ -5019,13 +5054,13 @@ of org mode required by Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="54,-25"/>
+        <dia:point val="56,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,-25.05;61.865,-21.95"/>
+        <dia:rectangle val="55.95,-25.05;63.865,-21.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="54,-25"/>
+        <dia:point val="56,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -5217,7 +5252,7 @@ of org mode required by Dogen.
         <dia:point val="61.745,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.8575,-22.0004;62.495,-15.4"/>
+        <dia:rectangle val="59.8575,-22.0004;62.495,-15.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5225,8 +5260,8 @@ of org mode required by Dogen.
       <dia:attribute name="orth_points">
         <dia:point val="61.745,-17"/>
         <dia:point val="61.745,-19"/>
-        <dia:point val="57.9075,-19"/>
-        <dia:point val="57.9075,-21.9504"/>
+        <dia:point val="59.9075,-19"/>
+        <dia:point val="59.9075,-21.9504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5298,7 +5333,7 @@ of org mode required by Dogen.
         <dia:point val="47,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.8625,-20.65;47.75,-15.4"/>
+        <dia:rectangle val="42.8625,-20.65;47.75,-15.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5306,8 +5341,8 @@ of org mode required by Dogen.
       <dia:attribute name="orth_points">
         <dia:point val="47,-17"/>
         <dia:point val="47,-19"/>
-        <dia:point val="39.9125,-19"/>
-        <dia:point val="39.9125,-20.6"/>
+        <dia:point val="42.9125,-19"/>
+        <dia:point val="42.9125,-20.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

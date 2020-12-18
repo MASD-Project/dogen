@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::transforms {
 
+/**
+ * @brief Converts a string containing a org-mode document into the
+ * dogen domain model org-mode representation.
+ */
 class string_to_document_transform final {
 public:
-    string_to_document_transform() = default;
-    string_to_document_transform(const string_to_document_transform&) = default;
-    string_to_document_transform(string_to_document_transform&&) = default;
-    ~string_to_document_transform() = default;
-    string_to_document_transform& operator=(const string_to_document_transform&) = default;
-
-public:
-    bool operator==(const string_to_document_transform& rhs) const;
-    bool operator!=(const string_to_document_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::document
+    apply(boost::shared_ptr<tracing::tracer> tracer, const std::string& s);
 };
 
 }

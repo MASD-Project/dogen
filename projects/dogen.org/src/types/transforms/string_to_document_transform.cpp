@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.org/io/entities/document_io.hpp"
 #include "dogen.org/types/transforms/string_to_document_transform.hpp"
+
+namespace {
+
+const std::string transform_id("org.transforms.string_to_document_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::org::transforms {
 
-bool string_to_document_transform::operator==(const string_to_document_transform& /*rhs*/) const {
-    return true;
+entities::document string_to_document_transform::
+apply(boost::shared_ptr<tracing::tracer> tracer, const std::string& s) {
+    tracing::scoped_transform_tracer stp(lg, "string to document",
+        transform_id, "org_document", *tracer, s);
+
+    entities::document r;
+    stp.end_transform(r);
+
+    return r;
 }
 
 }
