@@ -25,24 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <istream>
+#include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::helpers {
 
+/**
+ * @brief Builds a org-mode document from a string.
+ */
 class document_factory final {
-public:
-    document_factory() = default;
-    document_factory(const document_factory&) = default;
-    document_factory(document_factory&&) = default;
-    ~document_factory() = default;
-    document_factory& operator=(const document_factory&) = default;
+private:
+    /**
+     * @brief Retrieves the next line of the stream, if any is
+     * available.
+     *
+     * Unlike standard getline, it preserves new lines.
+     */
+    static std::istream& getline(std::istream& is, std::string& s);
 
 public:
-    bool operator==(const document_factory& rhs) const;
-    bool operator!=(const document_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::document make(const std::string& s);
 };
 
 }
