@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-18 Fri 12:44]
+#+CAPTION: Clock summary at [2020-12-18 Fri 17:45]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *11:29* |       |      | 100.0 |
+| *Total time*                                       | *15:16* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 11:29   |       |      | 100.0 |
-| Active                                             |         | 11:29 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 6:04 |  52.8 |
-| Create a demo and presentation for previous sprint |         |       | 0:34 |   4.9 |
-| Sprint and product backlog grooming                |         |       | 0:35 |   5.1 |
-| Org-mode as a carrier format for modeling          |         |       | 4:16 |  37.2 |
+| Stories                                            | 15:16   |       |      | 100.0 |
+| Active                                             |         | 15:16 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 6:04 |  39.7 |
+| Create a demo and presentation for previous sprint |         |       | 0:34 |   3.7 |
+| Sprint and product backlog grooming                |         |       | 0:35 |   3.8 |
+| Add org-mode support                               |         |       | 8:03 |  52.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -324,12 +324,23 @@ Assistant should not really exist, but to get us to the next step we
 should just make it a helper in =text= model. We just need to merge
 the C++ and C# classes into one and move it to =text=.
 
-*** STARTED Org-mode as a carrier format for modeling                 :story:
+*** STARTED Add org-mode support                                      :story:
     :LOGBOOK:
+    CLOCK: [2020-12-18 Fri 17:10]--[2020-12-18 Fri 17:44] =>  0:34
+    CLOCK: [2020-12-18 Fri 16:46]--[2020-12-18 Fri 16:53] =>  0:07
+    CLOCK: [2020-12-18 Fri 13:23]--[2020-12-18 Fri 16:29] =>  3:06
     CLOCK: [2020-12-18 Fri 09:31]--[2020-12-18 Fri 12:42] =>  3:11
     CLOCK: [2020-12-18 Fri 09:29]--[2020-12-18 Fri 09:30] =>  0:01
     CLOCK: [2020-12-16 Wed 19:12]--[2020-12-16 Wed 20:16] =>  1:04
     :END:
+
+Create an org-mode model, and add transforms to read to and from
+org-mode. Then create a codec to convert it into the Dogen
+representation.
+
+Merged stories:
+
+*Org-mode as a carrier format for modeling*
 
 This is a bit of a weird idea, but may just work; this story is a
 placeholder to capture ideas in this space. Consider a org-mode
