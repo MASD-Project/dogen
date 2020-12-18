@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-16 Wed 20:16]
+#+CAPTION: Clock summary at [2020-12-18 Fri 09:30]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *7:51* |      |      | 100.0 |
+| *Total time*                                       | *8:18* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 7:51   |      |      | 100.0 |
-| Active                                             |        | 7:51 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:04 |  77.3 |
-| Create a demo and presentation for previous sprint |        |      | 0:34 |   7.2 |
-| Sprint and product backlog grooming                |        |      | 0:09 |   1.9 |
-| Org-mode as a carrier format for modeling          |        |      | 1:04 |  13.6 |
+| Stories                                            | 8:18   |      |      | 100.0 |
+| Active                                             |        | 8:18 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:04 |  73.1 |
+| Create a demo and presentation for previous sprint |        |      | 0:34 |   6.8 |
+| Sprint and product backlog grooming                |        |      | 0:35 |   7.0 |
+| Org-mode as a carrier format for modeling          |        |      | 1:05 |  13.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -282,12 +282,51 @@ Time spent creating the demo and presentation.
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
     CLOCK: [2020-12-16 Wed 19:02]--[2020-12-16 Wed 19:11] =>  0:09
+    CLOCK: [2020-12-18 Fri 09:00]--[2020-12-18 Fri 09:26] =>  0:26
     :END:
 
 Updates to sprint and product backlog.
 
+*** COMPLETED Stitch formatter updates                                :story:
+    CLOSED: [2020-12-18 Fri 09:05]
+
+There are a number of issues with stitch formatters at present:
+
+- stitch transform is still generating its own artefact.
+
+Actually, now that we've updated all formatters do we even need a
+stitch formatter? The helpers are probably going via some other
+route. If so, remove it and the wale formatter.
+
+This is incorrect. Whilst we are using the output of stitch in a
+different way, we are still expanding the stitch template for the
+header files.
+
+*** COMPLETED Clean up helpers interface and move it to =text=        :story:
+    CLOSED: [2020-12-18 Fri 09:05]
+
+Notes:
+
+- we need to include the wale template in the meta-model
+  element. Once this is done we should see if we can remove the stitch
+  and wale formatters in the c++ model.
+- the helper interface should only take logical and physical types so
+  that we can move it to =text=. However, we may be using the
+  assistant. See if we can create the assistant inside the helper as
+  we do with formatters.
+
+*** COMPLETED Create a "combined" assistant in =text=                 :story:
+    CLOSED: [2020-12-18 Fri 09:06]
+
+*Rationale*: implemented in the previous sprint.
+
+Assistant should not really exist, but to get us to the next step we
+should just make it a helper in =text= model. We just need to merge
+the C++ and C# classes into one and move it to =text=.
+
 *** STARTED Org-mode as a carrier format for modeling                 :story:
     :LOGBOOK:
+    CLOCK: [2020-12-18 Fri 09:29]--[2020-12-18 Fri 09:30] =>  0:01
     CLOCK: [2020-12-16 Wed 19:12]--[2020-12-16 Wed 20:16] =>  1:04
     :END:
 
@@ -328,6 +367,39 @@ Links:
   send HTTP requests.
 - [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
 - [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools!]]
+
+*** Generated CMakefiles do not take tests into account               :story:
+
+At present most models have:
+
+: masd::build::cmakelists, dogen::handcrafted::cmake
+
+One of the reasons is because the template is not taking generated
+tests into account. It should have:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** Consider creating a "combined" template                           :story:
+
+We have a large number of templates that look very similar: the M2T
+transforms. We could support them with a "clever" combination of wale
+and stitch templates: the top-level wale template could stay as it is,
+plus a "preamble" and "postamble":
+
+: void primitive_implementation_transform::
+: apply(const text::transforms::context& ctx, const text::entities::model& lps,
+:     const logical::entities::element& e, physical::entities::artefact& a) const {
+:     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
+:         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+and a closing bracket:
+
+: }
+
+However, maybe this is just too much work for just a few lines of code
+and it will increase the complexity a lot for a small win.
 
 *** Analysis on org-mode outstanding work                             :story:
 
@@ -393,4 +465,303 @@ Links:
 Seems like a better name is needed for this model. Perhaps =orgmode=?
 Or just =org=? Just don't like =org_mode=.
 
+*** Remove dia-specific types in dia model                            :story:
+
+We probably don't need the "processed" types, we can just use the
+codec types directly.
+
+*** Consider handling "dia comments" in a general manner              :story:
+
+At present we allow comments with:
+
+: #DOGEN masd.codec.dia.comment=true
+
+to be processed as part of the containing object. We should try to
+generalise this notion so that any codec could make use of this
+feature.
+
+*** Move graph of containment to codec model                          :story:
+
+At present we are doing the containment graph within the dia codec. We
+should really do this in the main codec model so we can reuse it for
+org-mode.
+
+*** Move wale templates to TS namespaces                              :story:
+
+At present the wale templates are in the top-level namespace of the
+text model, but they should really be in each technical space.
+
+Merged stories:
+
+*Move mustache templates into the =transforms= namespaces*
+
+We left the templates at the top level as it was in the TS-specific
+models but they should really be within =transforms= namespace. We
+need to check to see how name resolution for templates is working.
+
+*** Implement M2T chains via code generation                          :story:
+
+We need to update the =backend= and =part= transforms to be a set of
+calls to their "children", based on the PMM. Once this is done we can
+remove all of the existing infrastructure in the TS models:
+
+- repositories
+- initialisers
+- workflows
+- traits
+- registrars
+
+Notes:
+
+- in the new world we no longer need a M2T interface at the text
+  transform level. The backend chain knows of all of the facet chains;
+  and the facet chains know of all of the archetypes. We can dispatch
+  the element using the visitor into a concrete type and then find the
+  archetypes that process that type. However, we do not want to
+  generate an apply method per logical element...
+
+Merged stories:
+
+*Implement backend and facet transform*
+
+The backend transform should:
+
+- return the ID of the backend;
+- use the facet and archetype transforms to process all elements.
+
+Check backlog for a story on this.
+
+
+
+
+*** Consider renaming =text= to =logical_physical=                    :story:
+
+This is really the right name for the model; the text processing part
+are the transforms that are done on the model.
+
+Notes:
+
+- rename =logical_physical_region= to just =region=.
+- actually another way of looking at this is trying to figure out what
+  is the dominant responsibility of the component. The LPS will
+  probably be 2 or 3 types whereas the M2T transforms will be 99% of
+  the types. We probably should name the model after lps and the
+  component after the M2Ts. So rename instead the model to LPS.
+
+*** Deprecate managed directories                                     :story:
+
+There should only be one "managed directory" at the input stage, which
+is the component directory (for component models). If parts have
+relative directories off of the component directory then we should add
+to the list of managed directories inside the PM pipeline.
+
+
+*** Validate no two artefacts have the same ID                        :story:
+
+At present it is possible to generate two artefacts with the same path
+(which is the physical ID) and then have them overwrite each
+other. This causes diffs that are very difficult to get to the bottom
+of. It would be better to fail with a validation that detects
+duplicates.
+
+Merged stories:
+
+*Add a validator for text model*
+
+The validator should check the paths. This can also be done in
+physical model.
+
+:                 /*
+:                  * FIXME: we are still generating artefacts for global
+:                  * module.
+:                  */
+:                 if (aptr->file_path().empty()) {
+:                     BOOST_LOG_SEV(lg, error) << empty_path
+:                                              << aptr->name().id();
+:                     // BOOST_THROW_EXCEPTION(transform_exception(empty_path +
+:                     //         aptr->name().id().value()));
+:                     continue;
+:                 }
+
+*** Fix name of configuration tracing file                            :story:
+
+This name looks incorrect:
+
+: 00000-configuration--initial_input.json
+
+*** Rename =name= to =codec= name                                     :story:
+
+- add codec ID to name.
+
+Notes:
+
+- variability is also using the name class.
+
+*** Add descriptions to PMM elements                                  :story:
+
+We need to read a description attribute for:
+
+- backend
+- facet
+- part
+- archetype
+
+And populate these on the LM PMM, and then code generate them. The
+description should be the comment of the associated element.
+
+*** Create a physical ID in logical-physical space                    :story:
+
+Artefacts are points in logical-physical space. They should have an ID
+which is composed by both logical and physical location. We could
+create a very simple builder that concatenates both, for example:
+
+: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
+
+The use of =|= would make it really easy to split out IDs as required,
+and to visually figure out which part is which. Note though that the
+ID is an opaque identifier and the splitting happens for
+troubleshooting purposes only, not in the code. With the physical
+model, all references are done using these IDs. So for example, if an
+artefact =a0= depends on artefact =a1=, the dependency is recorded as
+the ID of =a1=. The physical model should also be indexed by ID
+instead of being a list of artefacts.
+
+We already created =logical_meta_physical_id= type so maybe we don't
+need this ID as well.
+
+*** codecs: encoders and decoders should work in terms of strings     :story:
+
+We should only have strings (or perhaps streams) in the encoder and
+decoder interfaces. The handling of files should be the responsibility
+of the caller.
+
+*** Factor out duplication in stitch and wale templates               :story:
+
+At present we are duplicating a lot of stuff in stitch templates. If
+we look at the directives, we can group them as follows:
+
+1. Hard-coded. These have the same value for all templates:
+
+: <#@ masd.stitch.stream_variable_name=ast.stream() #>
+: <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+: <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+
+2. Facet-dependent. These have the same value for a given facet:
+
+: <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+
+3. Meta-element dependent. If we know who the meta-element is, we can
+   generate these:
+
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+: <#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
+: <#@ masd.stitch.wale.kvp.meta_element=object #>
+
+4. M2T transform dependent. If we know the name of the transform, we
+   can generate these:
+
+: <#@ masd.stitch.wale.kvp.class.simple_name=class_implementation_transform #>
+: <#@ masd.stitch.wale.kvp.archetype.simple_name=class_implementation #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp" #>
+
+5. Not needed in the new world:
+
+: <#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
+
+6. Are dependent on the content of the template and so must be added manually:
+
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
+
+We can address the first point and possibly the second point by
+creating profiles. For point 3 and 4 we could inject these values as
+part of transforms. Finally, we could so some simple filtering of
+meta-data: any key starting with =masd.stitch.= is added to the KVP
+container for the template. Some of these are injected manually.
+
+Sadly we cannot share profiles between C++ and C# because at present
+we cannot inherit across models. We could consider fixing this via
+meta-data. Actually having said that we need to be able to use:
+
+: masd.variability.profile = dogen.profiles.base.disable_all_facets
+
+In the same model; this may work across models as well (modulus
+possible problems with merging).
+
+At any rate the profiles should be kept within the =text*= models
+given they are used only for M2T transforms.
+
+
+*** Stitch templates should be bound to Dogen M2T transforms          :story:
+
+At present we have tried to create some kind of generic implementation
+of a templating engine. However in practice we only need it for the
+implementation of the apply method of a M2T transform. We could take
+advantage of this in order to simplify templates; we could assume that
+the only thing we could code-generate in a stitch template is the
+inside of the apply method. We need to check but T4 does something
+similar. This would mean that many things would be hard-coded such as
+the name of the stream variable etc.
+
+Everything else should be supplied as meta-data parameters to the
+modeling element for archetypes: includes, etc. This means the
+templates would be much simpler. This can only be done once we use the
+PMM to compute paths. Also, we probably require a way to inject the
+dependencies. This will probably require merging code generation as
+well.
+
+Also this can only be done when we remove the current implementation
+of helpers and move to PDMs.
+
+*** Name all transform exceptions consistently                        :story:
+
+It seems on engine we call them "transform exception" but on assets we
+call them "transformation error". Check all other models and them
+these consistently.
+
+Merged stories:
+
+*Rename =transformation_error= to =transform_exception=*
+
+In keeping with the framework guidelines for naming exceptions. We need to
+also look at all other exceptions.
+
 ** Deprecated
+
+*** CANCELLED Consider moving helper chain to outside the text transforms :story:
+    CLOSED: [2020-12-18 Fri 09:01]
+
+*Rationale*: helpers are only temporary so lets not waste any extra
+engineering on them.
+
+Given helpers are temporary this may not make a lot of sense, but for
+what its worth, we could run the chain prior to executing the text
+transforms and then supply a string parameter with the helper
+text. This way the assistant would do less and there would be less
+code in each text transform.
+
+*** CANCELLED Rename "model-to-X" to TLAs                             :story:
+    CLOSED: [2020-12-18 Fri 09:01]
+
+Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
+extent - are well known TLAs in MDE we should make use of these in
+class names. The names we have at present are very long. The
+additional size is not providing any benefits.
+
+*** CANCELLED Merge properties factory with stitching factory         :story:
+    CLOSED: [2020-12-18 Fri 09:03]
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
