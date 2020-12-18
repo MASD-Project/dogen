@@ -38,15 +38,6 @@ namespace dogen::org::transforms {
  * dogen domain model org-mode representation.
  */
 class string_to_document_transform final {
-private:
-    /**
-     * @brief Retrieves the next line of the stream, if any is
-     * available.
-     *
-     * Unlike standard getline, it preserves new lines.
-     */
-    static std::istream& getline(std::istream& is, std::string& s);
-
 public:
     static entities::document
     apply(boost::shared_ptr<tracing::tracer> tracer, const std::string& s);
