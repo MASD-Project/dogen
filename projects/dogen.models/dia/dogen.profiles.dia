@@ -5173,6 +5173,8 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>#Regexes to ignore.
 
+FIXME: we should remove all ignores related to tests and add a proper facet for manual tests.
+
 #DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
       </dia:attribute>
