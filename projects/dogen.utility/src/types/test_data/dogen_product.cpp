@@ -48,6 +48,7 @@ const std::string path_dogen_cli_dia("dogen.cli.dia");
 const std::string path_dogen_logical_dia("dogen.logical.dia");
 const std::string path_dogen_dia("dogen.dia");
 const std::string path_dogen_dia_dia("dogen.dia.dia");
+const std::string path_dogen_org_dia("dogen.org.dia");
 const std::string path_dogen_physical_dia("dogen.physical.dia");
 const std::string path_dogen_text_dia("dogen.text.dia");
 const std::string path_dogen_codec_dia("dogen.codec.dia");
@@ -57,6 +58,8 @@ const std::string path_dogen_orchestration_dia("dogen.orchestration.dia");
 const std::string path_dogen_templating_dia("dogen.templating.dia");
 const std::string path_dogen_tracing_dia("dogen.tracing.dia");
 const std::string path_dogen_utility_dia("dogen.utility.dia");
+const std::string path_dogen_relational_dia("dogen.utility.dia");
+const std::string path_dogen_identification_dia("dogen.utility.dia");
 
 const std::string path_dogen_cli_json("dogen.cli.json");
 const std::string path_dogen_variability_json("dogen.variability.json");
@@ -160,6 +163,11 @@ path dogen_product::input_dogen_dia() {
     return dia_models_directory_ / path_dogen_dia;
 }
 
+path dogen_product::input_dogen_org_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_dogen_org_dia;
+}
+
 path dogen_product::input_dogen_dia_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_dogen_dia_dia;
@@ -209,6 +217,18 @@ path dogen_product::input_dogen_utility_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_dogen_utility_dia;
 }
+
+path dogen_product::input_dogen_relational_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_dogen_relational_dia;
+}
+
+path dogen_product::input_dogen_identification_dia() {
+    ensure_initialized();
+    return dia_models_directory_ / path_dogen_identification_dia;
+}
+
+
 
 path dogen_product::input_dogen_variability_json() {
     ensure_initialized();
