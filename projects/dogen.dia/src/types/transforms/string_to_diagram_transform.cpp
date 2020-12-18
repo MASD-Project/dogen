@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/xml/text_reader.hpp"
 #include "dogen.utility/types/xml/node_types_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.dia/types/entities/composite.hpp"
 #include "dogen.dia/types/entities/rectangle.hpp"
 #include "dogen.dia/types/entities/boolean.hpp"
@@ -37,12 +38,15 @@
 #include "dogen.dia/types/entities/connection.hpp"
 #include "dogen.dia/types/entities/object.hpp"
 #include "dogen.dia/types/transforms/transformation_error.hpp"
+#include "dogen.dia/io/entities/diagram_io.hpp"
 #include "dogen.dia/types/transforms/string_to_diagram_transform.hpp"
 
 namespace {
 
+const std::string transform_id("dia.transforms.string_to_diagram_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("dia.transforms.diagram string_to_diagram_transform"));
+auto lg(logger_factory(transform_id));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");
@@ -426,9 +430,16 @@ diagram hydrator::hydrate() {
     return read_diagram();
 }
 
-entities::diagram string_to_diagram_transform::apply(const std::string& s) {
+entities::diagram string_to_diagram_transform::
+apply(boost::shared_ptr<tracing::tracer> tracer, const std::string& s) {
+    tracing::scoped_transform_tracer stp(lg, "string to diagram",
+        transform_id, "dia_model", *tracer, s);
+
     hydrator h(s);
-    return h.hydrate();
+    const auto r(h.hydrate());
+    stp.end_transform(r);
+
+    return r;
 }
 
 }

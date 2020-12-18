@@ -26,6 +26,8 @@
 #endif
 
 #include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.dia/types/entities/diagram.hpp"
 
 namespace dogen::dia::transforms {
@@ -36,7 +38,8 @@ namespace dogen::dia::transforms {
  */
 class string_to_diagram_transform final {
 public:
-    static entities::diagram apply(const std::string& s);
+    static entities::diagram
+    apply(boost::shared_ptr<tracing::tracer> tracer, const std::string& s);
 };
 
 }

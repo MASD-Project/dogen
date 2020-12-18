@@ -123,7 +123,7 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing Dia diagram.";
     using dogen::dia::transforms::string_to_diagram_transform;
-    const auto d(string_to_diagram_transform::apply(a.content()));
+    const auto d(string_to_diagram_transform::apply(ctx.tracer(), a.content()));
 
     BOOST_LOG_SEV(lg, debug) << "Processed Dia diagram.";
 
