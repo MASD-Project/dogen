@@ -18,52 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.org/types/helpers/node.hpp"
 #include "dogen.org/types/helpers/builder.hpp"
 
-namespace boost {
+namespace {
 
-inline bool operator==(const boost::shared_ptr<dogen::org::helpers::node>& lhs,
-const boost::shared_ptr<dogen::org::helpers::node>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
+using namespace dogen::utility::log;
+auto lg(logger_factory("org.helpers.builder"));
 
 }
 
 namespace dogen::org::helpers {
 
-builder::builder(const boost::shared_ptr<dogen::org::helpers::node>& root_)
-    : root__(root_) { }
+builder::builder() : root_(boost::make_shared<node>()) { }
 
-void builder::swap(builder& other) noexcept {
-    using std::swap;
-    swap(root__, other.root__);
+void builder::add_line(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "Processing line: " << s;
 }
 
-bool builder::operator==(const builder& rhs) const {
-    return root__ == rhs.root__;
-}
-
-builder& builder::operator=(builder other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const boost::shared_ptr<dogen::org::helpers::node>& builder::root_() const {
-    return root__;
-}
-
-boost::shared_ptr<dogen::org::helpers::node>& builder::root_() {
-    return root__;
-}
-
-void builder::root_(const boost::shared_ptr<dogen::org::helpers::node>& v) {
-    root__ = v;
-}
-
-void builder::root_(const boost::shared_ptr<dogen::org::helpers::node>&& v) {
-    root__ = std::move(v);
+entities::document builder::build() const {
+    entities::document r;
+    return r;
 }
 
 }

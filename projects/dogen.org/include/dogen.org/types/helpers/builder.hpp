@@ -21,56 +21,33 @@
 #ifndef DOGEN_ORG_TYPES_HELPERS_BUILDER_HPP
 #define DOGEN_ORG_TYPES_HELPERS_BUILDER_HPP
 
+#include "dogen.org/types/entities/document.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen.org/types/helpers/node_fwd.hpp"
 
 namespace dogen::org::helpers {
 
+/**
+ * @brief Builds org documents.
+ */
 class builder final {
 public:
-    builder() = default;
-    builder(const builder&) = default;
-    builder(builder&&) = default;
-    ~builder() = default;
+    builder();
 
 public:
-    explicit builder(const boost::shared_ptr<dogen::org::helpers::node>& root_);
+    void add_line(const std::string& s);
 
 public:
-    const boost::shared_ptr<dogen::org::helpers::node>& root_() const;
-    boost::shared_ptr<dogen::org::helpers::node>& root_();
-    void root_(const boost::shared_ptr<dogen::org::helpers::node>& v);
-    void root_(const boost::shared_ptr<dogen::org::helpers::node>&& v);
-
-public:
-    bool operator==(const builder& rhs) const;
-    bool operator!=(const builder& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(builder& other) noexcept;
-    builder& operator=(builder other);
+    entities::document build() const;
 
 private:
-    boost::shared_ptr<dogen::org::helpers::node> root__;
+    boost::shared_ptr<dogen::org::helpers::node> root_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::org::helpers::builder& lhs,
-    dogen::org::helpers::builder& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 
