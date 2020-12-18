@@ -26,6 +26,35 @@
 #include "dogen.org/io/entities/headline_io.hpp"
 #include "dogen.org/io/entities/todo_keyword_io.hpp"
 #include "dogen.org/io/entities/priority_cookie_io.hpp"
+#include "dogen.org/io/entities/affiliated_keyword_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::org::entities::affiliated_keyword>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::org::entities::drawer>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace std {
 
@@ -63,33 +92,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::org::ent
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::org::entities::drawer>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::org::entities {
 
 std::ostream& operator<<(std::ostream& s, const headline& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::org::entities::headline\"" << ", "
+      << "\"affiliated_keywords\": " << v.affiliated_keywords() << ", "
+      << "\"drawers\": " << v.drawers() << ", "
       << "\"section\": " << v.section() << ", "
       << "\"headlines\": " << v.headlines() << ", "
       << "\"level\": " << v.level() << ", "
       << "\"priority\": " << v.priority() << ", "
       << "\"title\": " << "\"" << tidy_up_string(v.title()) << "\"" << ", "
       << "\"tags\": " << v.tags() << ", "
-      << "\"todo_keyword\": " << v.todo_keyword() << ", "
-      << "\"drawers\": " << v.drawers()
+      << "\"todo_keyword\": " << v.todo_keyword()
       << " }";
     return(s);
 }

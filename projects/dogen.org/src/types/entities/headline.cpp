@@ -26,25 +26,29 @@ headline::headline()
     : level_(static_cast<unsigned int>(0)) { }
 
 headline::headline(
+    const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords,
+    const std::list<dogen::org::entities::drawer>& drawers,
     const dogen::org::entities::section& section,
     const std::list<dogen::org::entities::headline>& headlines,
     const unsigned int level,
     const dogen::org::entities::priority_cookie& priority,
     const std::string& title,
     const std::list<dogen::org::entities::tag>& tags,
-    const dogen::org::entities::todo_keyword& todo_keyword,
-    const std::list<dogen::org::entities::drawer>& drawers)
-    : section_(section),
+    const dogen::org::entities::todo_keyword& todo_keyword)
+    : affiliated_keywords_(affiliated_keywords),
+      drawers_(drawers),
+      section_(section),
       headlines_(headlines),
       level_(level),
       priority_(priority),
       title_(title),
       tags_(tags),
-      todo_keyword_(todo_keyword),
-      drawers_(drawers) { }
+      todo_keyword_(todo_keyword) { }
 
 void headline::swap(headline& other) noexcept {
     using std::swap;
+    swap(affiliated_keywords_, other.affiliated_keywords_);
+    swap(drawers_, other.drawers_);
     swap(section_, other.section_);
     swap(headlines_, other.headlines_);
     swap(level_, other.level_);
@@ -52,24 +56,56 @@ void headline::swap(headline& other) noexcept {
     swap(title_, other.title_);
     swap(tags_, other.tags_);
     swap(todo_keyword_, other.todo_keyword_);
-    swap(drawers_, other.drawers_);
 }
 
 bool headline::operator==(const headline& rhs) const {
-    return section_ == rhs.section_ &&
+    return affiliated_keywords_ == rhs.affiliated_keywords_ &&
+        drawers_ == rhs.drawers_ &&
+        section_ == rhs.section_ &&
         headlines_ == rhs.headlines_ &&
         level_ == rhs.level_ &&
         priority_ == rhs.priority_ &&
         title_ == rhs.title_ &&
         tags_ == rhs.tags_ &&
-        todo_keyword_ == rhs.todo_keyword_ &&
-        drawers_ == rhs.drawers_;
+        todo_keyword_ == rhs.todo_keyword_;
 }
 
 headline& headline::operator=(headline other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::list<dogen::org::entities::affiliated_keyword>& headline::affiliated_keywords() const {
+    return affiliated_keywords_;
+}
+
+std::list<dogen::org::entities::affiliated_keyword>& headline::affiliated_keywords() {
+    return affiliated_keywords_;
+}
+
+void headline::affiliated_keywords(const std::list<dogen::org::entities::affiliated_keyword>& v) {
+    affiliated_keywords_ = v;
+}
+
+void headline::affiliated_keywords(const std::list<dogen::org::entities::affiliated_keyword>&& v) {
+    affiliated_keywords_ = std::move(v);
+}
+
+const std::list<dogen::org::entities::drawer>& headline::drawers() const {
+    return drawers_;
+}
+
+std::list<dogen::org::entities::drawer>& headline::drawers() {
+    return drawers_;
+}
+
+void headline::drawers(const std::list<dogen::org::entities::drawer>& v) {
+    drawers_ = v;
+}
+
+void headline::drawers(const std::list<dogen::org::entities::drawer>&& v) {
+    drawers_ = std::move(v);
 }
 
 const dogen::org::entities::section& headline::section() const {
@@ -174,22 +210,6 @@ void headline::todo_keyword(const dogen::org::entities::todo_keyword& v) {
 
 void headline::todo_keyword(const dogen::org::entities::todo_keyword&& v) {
     todo_keyword_ = std::move(v);
-}
-
-const std::list<dogen::org::entities::drawer>& headline::drawers() const {
-    return drawers_;
-}
-
-std::list<dogen::org::entities::drawer>& headline::drawers() {
-    return drawers_;
-}
-
-void headline::drawers(const std::list<dogen::org::entities::drawer>& v) {
-    drawers_ = v;
-}
-
-void headline::drawers(const std::list<dogen::org::entities::drawer>&& v) {
-    drawers_ = std::move(v);
 }
 
 }

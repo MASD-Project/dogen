@@ -34,6 +34,7 @@
 #include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/entities/todo_keyword.hpp"
 #include "dogen.org/types/entities/priority_cookie.hpp"
+#include "dogen.org/types/entities/affiliated_keyword.hpp"
 
 namespace dogen::org::entities {
 
@@ -48,16 +49,27 @@ public:
 
 public:
     headline(
+        const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords,
+        const std::list<dogen::org::entities::drawer>& drawers,
         const dogen::org::entities::section& section,
         const std::list<dogen::org::entities::headline>& headlines,
         const unsigned int level,
         const dogen::org::entities::priority_cookie& priority,
         const std::string& title,
         const std::list<dogen::org::entities::tag>& tags,
-        const dogen::org::entities::todo_keyword& todo_keyword,
-        const std::list<dogen::org::entities::drawer>& drawers);
+        const dogen::org::entities::todo_keyword& todo_keyword);
 
 public:
+    const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords() const;
+    std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords();
+    void affiliated_keywords(const std::list<dogen::org::entities::affiliated_keyword>& v);
+    void affiliated_keywords(const std::list<dogen::org::entities::affiliated_keyword>&& v);
+
+    const std::list<dogen::org::entities::drawer>& drawers() const;
+    std::list<dogen::org::entities::drawer>& drawers();
+    void drawers(const std::list<dogen::org::entities::drawer>& v);
+    void drawers(const std::list<dogen::org::entities::drawer>&& v);
+
     const dogen::org::entities::section& section() const;
     dogen::org::entities::section& section();
     void section(const dogen::org::entities::section& v);
@@ -121,11 +133,6 @@ public:
     void todo_keyword(const dogen::org::entities::todo_keyword&& v);
     /**@}*/
 
-    const std::list<dogen::org::entities::drawer>& drawers() const;
-    std::list<dogen::org::entities::drawer>& drawers();
-    void drawers(const std::list<dogen::org::entities::drawer>& v);
-    void drawers(const std::list<dogen::org::entities::drawer>&& v);
-
 public:
     bool operator==(const headline& rhs) const;
     bool operator!=(const headline& rhs) const {
@@ -137,6 +144,8 @@ public:
     headline& operator=(headline other);
 
 private:
+    std::list<dogen::org::entities::affiliated_keyword> affiliated_keywords_;
+    std::list<dogen::org::entities::drawer> drawers_;
     dogen::org::entities::section section_;
     std::list<dogen::org::entities::headline> headlines_;
     unsigned int level_;
@@ -144,7 +153,6 @@ private:
     std::string title_;
     std::list<dogen::org::entities::tag> tags_;
     dogen::org::entities::todo_keyword todo_keyword_;
-    std::list<dogen::org::entities::drawer> drawers_;
 };
 
 }
