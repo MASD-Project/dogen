@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
+#include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::helpers {
@@ -35,6 +37,19 @@ namespace dogen::org::helpers {
  * its domain representation.
  */
 class parser final {
+private:
+    /**
+     * @brief Splits the string by newlines.
+     */
+    static std::list<std::string> split_into_lines(const std::string& s);
+
+    /**
+     * @brief Parses the remaining content as part of an headline.
+     */
+    std::list<entities::headline>
+    parse_headlines(const std::list<std::string>& lines,
+        std::list<std::string>::const_iterator& i);
+
 public:
     static entities::document parse(const std::string& s);
 };

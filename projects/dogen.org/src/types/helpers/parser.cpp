@@ -36,45 +36,58 @@ static logger lg(logger_factory("org.helpers.parser"));
 
 const std::regex headline_regex("^\\*+\\s");
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 }
 
 namespace dogen::org::helpers {
 
+std::list<std::string> parser::split_into_lines(const std::string& s) {
+    std::string line;
+    std::ostringstream os;
+    std::istringstream is(s);
+    std::list<std::string> r;
+    while (std::getline(is, line)) {
+        os << line;
+
+        /*
+         * Try to detect if there was a newline on this line or
+         * not. There is no easy way to preserve the original input in
+         * getline, so we resort to this hack. The logic is that if we
+         * hae not reached the EOF, then there must have been a
+         * newline.
+         */
+        if(!is.eof() && !is.fail())
+            os << std::endl;
+
+        r.push_back(os.str());
+        os.str("");
+    }
+    return r;
+}
+
 entities::document parser::parse(const std::string& s) {
     BOOST_LOG_SEV(lg, trace) << "Parsing org document: '" << s << "'";
     entities::document r;
-    unsigned int line_number(0);
-    std::string line;
-    std::istringstream is(s);
-    std::ostringstream os;
+    const auto lines(split_into_lines(s));
 
-    while (std::getline(is, line)) {
-        ++line_number;
-        BOOST_LOG_SEV(lg, debug) << "Parsing line: " << tidy_up_string(line);
+    /*
+     * If there is no content, return an empty document.
+     */
+    if (lines.empty())
+        return r;
+
+
+    auto i(lines.begin());
+    std::ostringstream os;
+    while(i != lines.end()) {
+        const auto& line(*i);
+        BOOST_LOG_SEV(lg, debug) << "Processing line: " << line;
 
         if (std::regex_match(line, headline_regex)) {
             // is headline
         } else {
             os << line;
-
-            /*
-             * Try to detect if there was a newline on this line or
-             * not. There is no easy way to preserve the original
-             * input in getline, so we resort to this hack. The logic
-             * is that if we hae not reached the EOF, then there must
-             * have been a newline.
-             */
-            if(!is.eof() && !is.fail())
-                os << std::endl;
         }
+        ++i;
     }
 
     const std::string remainder(os.str());
