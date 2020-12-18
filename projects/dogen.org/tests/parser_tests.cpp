@@ -28,11 +28,12 @@
 
 namespace {
 
-const std::string empty;
 const std::string test_module("dogen.org.tests");
 const std::string test_suite("parser_tests");
 
-const std::string only_text_content_in_single_line("some text content");
+const std::string empty;
+const std::string single_line_document(
+    "A simple OrgMode file that the parser should parse properly.");
 const std::string only_text_content_muti_line(R"(some text content
 other text content)");
 
@@ -54,13 +55,26 @@ parse(const std::string& s) {
 
 BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
 
-BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
-    SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
+BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("empty_string_results_in_empty_document");
     const auto document(parse(empty));
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
     BOOST_CHECK(document.headlines().empty());
     BOOST_CHECK(document.section().blocks().empty());
 }
+
+BOOST_AUTO_TEST_CASE(single_line_document_results_in_section_with_one_line) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("single_line_document_results_in_section_with_one_line");
+    const auto document(parse(single_line_document));
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_CHECK(!blocks.empty());
+    BOOST_CHECK(blocks.front().contents() == single_line_document);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
