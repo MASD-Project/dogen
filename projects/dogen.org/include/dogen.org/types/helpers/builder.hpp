@@ -21,13 +21,16 @@
 #ifndef DOGEN_ORG_TYPES_HELPERS_BUILDER_HPP
 #define DOGEN_ORG_TYPES_HELPERS_BUILDER_HPP
 
-#include "dogen.org/types/entities/document.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <stack>
 #include <string>
+#include <sstream>
 #include <boost/shared_ptr.hpp>
+#include "dogen.org/types/entities/document.hpp"
+#include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/helpers/node_fwd.hpp"
 
 namespace dogen::org::helpers {
@@ -39,14 +42,21 @@ class builder final {
 public:
     builder();
 
+private:
+    void end_current_block();
+    entities::headline make_headline(boost::shared_ptr<node> n) const;
+
 public:
     void add_line(const std::string& s);
 
 public:
-    entities::document build() const;
+    entities::document build();
 
 private:
-    boost::shared_ptr<dogen::org::helpers::node> root_;
+    std::ostringstream stream_;
+    entities::block_type block_type_;
+    boost::shared_ptr<node> root_;
+    std::stack<boost::shared_ptr<node>> stack_;
 };
 
 }

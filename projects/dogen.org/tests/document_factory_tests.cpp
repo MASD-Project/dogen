@@ -20,7 +20,7 @@
  */
 #include <algorithm>
 #include <boost/test/unit_test.hpp>
-#include "dogen.org/types/helpers/parser.hpp"
+#include "dogen.org/types/helpers/document_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -29,11 +29,11 @@
 namespace {
 
 const std::string test_module("dogen.org.tests");
-const std::string test_suite("parser_tests");
+const std::string test_suite("document_factory_tests");
 
 const std::string empty;
 const std::string single_line_document(
-    "A simple OrgMode file that the parser should parse properly.");
+    "A simple OrgMode file that the document_factory should parse properly.");
 const std::string multi_line_document(R"(some text content
 other text content)");
 
@@ -47,18 +47,19 @@ other text content)");
 
 
 dogen::org::entities::document
-parse(const std::string& s) {
-    dogen::org::helpers::parser p;
-    return p.parse(s);
+make(const std::string& s) {
+    dogen::org::helpers::document_factory f;
+    return f.make(s);
 }
 
 }
 
-BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
+BOOST_AUTO_TEST_SUITE(document_factory_tests)
 
 BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_document) {
     SETUP_TEST_LOG_SOURCE_DEBUG("empty_string_results_in_empty_document");
-    const auto document(parse(empty));
+    const auto document(make(empty));
+
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
     BOOST_CHECK(document.headlines().empty());
@@ -67,7 +68,8 @@ BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_document) {
 
 BOOST_AUTO_TEST_CASE(single_line_document_results_in_expected_org_document) {
     SETUP_TEST_LOG_SOURCE_DEBUG("single_line_document_results_in_expected_org_document");
-    const auto document(parse(single_line_document));
+    const auto document(make(single_line_document));
+
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
     BOOST_CHECK(document.headlines().empty());
@@ -81,7 +83,8 @@ BOOST_AUTO_TEST_CASE(single_line_document_results_in_expected_org_document) {
 
 BOOST_AUTO_TEST_CASE(multi_line_document_results_in_expected_org_document) {
     SETUP_TEST_LOG_SOURCE_DEBUG("multi_line_document_results_in_expected_org_document");
-    const auto document(parse(multi_line_document));
+    const auto document(make(multi_line_document));
+
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
     BOOST_CHECK(document.headlines().empty());
@@ -95,7 +98,8 @@ BOOST_AUTO_TEST_CASE(multi_line_document_results_in_expected_org_document) {
 
 BOOST_AUTO_TEST_CASE(multi_line_document_with_spurious_spaces_results_in_expected_org_document) {
     SETUP_TEST_LOG_SOURCE_DEBUG("multi_line_document_with_spurious_spaces_in_expected_org_document");
-    const auto document(parse(multi_line_document_with_spurious_spaces));
+    const auto document(make(multi_line_document_with_spurious_spaces));
+
     BOOST_CHECK(document.affiliated_keywords().empty());
     BOOST_CHECK(document.drawers().empty());
     BOOST_CHECK(document.headlines().empty());

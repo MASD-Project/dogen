@@ -34,27 +34,10 @@
 namespace dogen::org::helpers {
 
 /**
- * @brief Parses a string containing a valid org-mode document into
- * its domain representation.
+ * @brief
  */
 class parser final {
-private:
-    /**
-     * @brief Retrieves the next line of the stream, if any is
-     * available.
-     *
-     * Unlike standard getline, it preserves new lines.
-     */
-    static std::istream& getline(std::istream& is, std::string& s);
-
-    /**
-     * @brief Parses the remaining content as part of an headline.
-     */
-    static std::list<entities::headline>
-    parse_headline(std::istream& is, const std::string& heading_line);
-
 public:
-    static entities::document parse(const std::string& s);
 };
 
 }
