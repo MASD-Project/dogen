@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::helpers {
 
+/**
+ * @brief Parses a string containing a valid org-mode document into
+ * its domain representation.
+ */
 class parser final {
 public:
-    parser() = default;
-    parser(const parser&) = default;
-    parser(parser&&) = default;
-    ~parser() = default;
-    parser& operator=(const parser&) = default;
-
-public:
-    bool operator==(const parser& rhs) const;
-    bool operator!=(const parser& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::document parse(const std::string& s);
 };
 
 }

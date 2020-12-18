@@ -20,6 +20,7 @@
  */
 #include <algorithm>
 #include <boost/test/unit_test.hpp>
+#include "dogen.org/types/helpers/parser.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -43,11 +44,11 @@ const std::string single_line_standard_control_block(R"(<#+
 single line
 #>)");
 
-// dogen::templating::stitch::text_template_body
-// parse(const std::string& s) {
-//     dogen::templating::stitch::parser p;
-//     return p.parse(s);
-// }
+dogen::org::entities::document
+parse(const std::string& s) {
+    dogen::org::helpers::parser p;
+    return p.parse(s);
+}
 
 }
 
@@ -55,8 +56,11 @@ BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
 
 BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
-    // const auto body(parse(empty));
-    // BOOST_CHECK(body.lines().empty());
+    const auto document(parse(empty));
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

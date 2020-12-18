@@ -22,8 +22,9 @@
 
 namespace dogen::org::helpers {
 
-bool parser::operator==(const parser& /*rhs*/) const {
-    return true;
+entities::document parser::parse(const std::string& /*s*/) {
+    entities::document r;
+    return r;
 }
 
 }
