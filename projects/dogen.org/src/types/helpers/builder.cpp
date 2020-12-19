@@ -77,6 +77,7 @@ void builder::end_current_block() {
     tb.type(block_type_);
     tb.contents(content);
     stack_.top()->current().section().blocks().push_back(tb);
+    block_type_ = block_type::invalid;
 }
 
 void builder::handle_headline(const entities::headline hl) {
@@ -117,11 +118,11 @@ void builder::handle_headline(const entities::headline hl) {
     /*
      * If there is a mismatch between the stack size and the headline
      * level, the only valid possibility is that the headline level is
-     * one behind of the stack size, meaning it is a sibling. If so,
-     * we need to pop the current node, and create a child for its
+     * one ahead of the stack size, meaning it is a sibling. If so, we
+     * need to pop the current node, and create a child for its
      * parent.
      */
-    ensure_expected_headline_level(sz, hl.level() + 1);
+    ensure_expected_headline_level(sz + 1, hl.level());
 
     stack_.pop();
     auto& current(*stack_.top());
@@ -151,10 +152,11 @@ void builder::add_line(const std::string& s) {
          * If we don't have a specific block type, default it to
          * regular text.
          */
-        if (block_type_ == block_type::invalid)
+        if (block_type_ == block_type::invalid) {
             block_type_ = block_type::text_block;
-
-        stream_ << s;
+            stream_ << s;
+        } else
+            stream_ << std::endl << s;
     }
 }
 

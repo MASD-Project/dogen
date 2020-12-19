@@ -62,7 +62,7 @@ entities::document document_factory::make(const std::string& s) {
     std::string line;
     std::istringstream is(s);
     helpers::builder b;
-    while(getline(is, line)) {
+    while(std::getline(is, line)) {
         b.add_line(line);
     }
 

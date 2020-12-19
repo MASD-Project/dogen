@@ -67,6 +67,7 @@ parser::try_parse_headline(const std::string& s) {
     /*
      * Retrieve the asterisks and count them to determine the level.
      */
+    BOOST_LOG_SEV(lg, debug) << "Line is a headline.";
     std::istringstream is(s);
     std::string token;
     is >> token;
