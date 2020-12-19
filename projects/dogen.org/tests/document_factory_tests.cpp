@@ -128,6 +128,16 @@ more content.
 some content
 )");
 
+const std::string simple_affiliated_keywords("#+title: some title");
+const std::string multiple_affiliated_keywords(R"(#+title: some title
+#+no_value:
+#+with_value: 1234
+
+some text content
+other text content
+
+)");
+
 dogen::org::entities::document
 make(const std::string& s) {
     dogen::org::helpers::document_factory f;
@@ -789,5 +799,50 @@ some content)");
     BOOST_CHECK(bc == expected_back_sec);
 }
 
+BOOST_AUTO_TEST_CASE(simple_affiliated_keywords_document_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("simple_affiliated_keywords_document_results_in_expected_document");
+    const auto document(make(simple_affiliated_keywords));
+
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.affiliated_keywords().size() == 1);
+    const auto& ak(document.affiliated_keywords().front());
+    BOOST_CHECK(ak.key() == "title");
+    BOOST_CHECK(ak.value() == "some title");
+}
+
+BOOST_AUTO_TEST_CASE(multiple_affiliated_keywords_document_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("multiple_affiliated_keywords_document_results_in_expected_document");
+    const auto document(make(multiple_affiliated_keywords));
+
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    BOOST_REQUIRE(document.affiliated_keywords().size() == 2);
+    const auto& front(document.affiliated_keywords().front());
+    BOOST_CHECK(front.key() == "title");
+    BOOST_CHECK(front.value() == "some title");
+
+    const auto& back(document.affiliated_keywords().back());
+    BOOST_CHECK(back.key() == "with_value");
+    BOOST_CHECK(back.value() == "1234");
+
+    BOOST_REQUIRE(document.section().blocks().size() == 2);
+
+    /*
+     * Key without a value is not recognised as an affiliated keyword.
+     */
+    const auto& front_block(document.section().blocks().front().contents());
+    BOOST_CHECK(front_block == "#+no_value:");
+
+    const auto& back_block(document.section().blocks().back().contents());
+    const std::string expected_sec(R"(
+some text content
+other text content
+)");
+    BOOST_CHECK(expected_sec == back_block);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

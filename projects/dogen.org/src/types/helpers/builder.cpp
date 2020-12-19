@@ -169,8 +169,11 @@ void builder::add_line(const std::string& s) {
     ensure_stack_not_empty();
     BOOST_LOG_SEV(lg, debug) << "Processing line: '" << s << "'";
 
-    const auto o(parser::try_parse_headline(s));
-    if (o) {
+    /*
+     * First we try to parse the line as if it was a headline.
+     */
+    const auto oh(parser::try_parse_headline(s));
+    if (oh) {
         /*
          * Flush any pending content we may have.
          */
@@ -179,20 +182,40 @@ void builder::add_line(const std::string& s) {
         /*
          * Handle the new incoming headline.
          */
-        handle_headline(*o);
-    } else {
+        handle_headline(*oh);
+        return;
+    }
+
+    /*
+     * Next we try to parse it as an affiliated keyword.
+     */
+    const auto oak(parser::try_parse_affiliated_keyword(s));
+    if (oak) {
         /*
-         * If we don't have a specific block type, default it to
-         * regular text.
+         * Flush any pending content we may have.
          */
-        if (block_type_ == block_type::invalid) {
-            BOOST_LOG_SEV(lg, debug) << "Adding to block as first line.";
-            block_type_ = block_type::text_block;
-            stream_ << s;
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "Adding to block.";
-            stream_ << std::endl << s;
-        }
+        end_current_block();
+
+        /*
+         * Add the affiliated keywords to the current node.
+         */
+        auto& top(*stack_.top());
+        top.current().affiliated_keywords().push_back(*oak);
+        return;
+    }
+
+    /*
+     * Finally, if nothing else matches, it must be a text block. If
+     * we don't have a specific block type, default it to regular
+     * text.
+     */
+    if (block_type_ == block_type::invalid) {
+        BOOST_LOG_SEV(lg, debug) << "Adding to block as first line.";
+        block_type_ = block_type::text_block;
+        stream_ << s;
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Adding to block.";
+        stream_ << std::endl << s;
     }
 }
 

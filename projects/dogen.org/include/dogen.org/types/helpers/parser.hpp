@@ -21,6 +21,7 @@
 #ifndef DOGEN_ORG_TYPES_HELPERS_PARSER_HPP
 #define DOGEN_ORG_TYPES_HELPERS_PARSER_HPP
 
+#include "dogen.org/types/entities/affiliated_keyword.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -46,6 +47,12 @@ public:
      */
     static boost::optional<entities::headline>
     try_parse_headline(const std::string& s);
+
+    /**
+     * @brief Attempts to parse the string as an affiliated keyword.
+     */
+    static boost::optional<entities::affiliated_keyword>
+    try_parse_affiliated_keyword(const std::string& s);
 };
 
 }

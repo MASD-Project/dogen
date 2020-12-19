@@ -25,6 +25,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen.org/types/entities/affiliated_keyword.hpp"
 #include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.org/types/entities/tag.hpp"
 #include "dogen.utility/types/log/logger.hpp"
@@ -43,6 +44,7 @@ const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
 const std::regex todo_keyword_regex("^[A-Z].*");
 const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
+const std::regex affiliated_keyword_regex("^#\\+\\w+:\\s.*");
 
 }
 
@@ -165,6 +167,46 @@ parser::try_parse_headline(const std::string& s) {
         }
     }
 
+    return r;
+}
+
+boost::optional<entities::affiliated_keyword>
+parser::try_parse_affiliated_keyword(const std::string& s) {
+    /*
+     * If there is only white space in the string, there is nothing to
+     * worry about.
+     */
+    const auto trimmed(boost::algorithm::trim_copy(s));
+    if (trimmed.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Line is empty. Not an affiliated keyword.";
+        return boost::optional<entities::affiliated_keyword>();
+    }
+
+    /*
+     * As per org documentation: Affiliated keywords are built upon
+     * one of the following patterns:
+     *
+     *   #+KEY: VALUE
+     *   #+KEY[OPTIONAL]: VALUE
+     *   #+ATTR_BACKEND: VALUE
+     *
+     * We only support the first and last syntax.
+     */
+    if (!std::regex_match(s, affiliated_keyword_regex)) {
+        BOOST_LOG_SEV(lg, debug) << "Line is not an affiliated keyword.";
+        return boost::optional<entities::affiliated_keyword>();
+    }
+
+    /*
+     * Extract the key and value from the keywords. We move plus or
+     * minus two of the colon to avoid the colon itself as well as the
+     * spaces. These are known to be there due to the regex we used to
+     * find keywords.
+     */
+    entities::affiliated_keyword r;
+    const auto colon_pos(s.find_first_of(":"));
+    r.key(s.substr(2, colon_pos - 2));
+    r.value(s.substr(colon_pos + 2));
     return r;
 }
 
