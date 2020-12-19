@@ -479,7 +479,7 @@
         <dia:point val="100.135,12.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.385,11.45;106.263,17.6"/>
+        <dia:rectangle val="99.385,11.45;106.262,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1593,7 +1593,7 @@
         <dia:point val="90.0675,12.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.3175,11.45;94.5763,17.6"/>
+        <dia:rectangle val="89.3175,11.45;94.5762,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2386,7 +2386,7 @@
         <dia:point val="106.062,18.8487"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.5525,18.0987;106.812,25.5541"/>
+        <dia:rectangle val="98.5525,18.0987;106.812,24.7541"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2467,7 +2467,7 @@
         <dia:point val="92,29.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.25,28.45;96.4925,33.6"/>
+        <dia:rectangle val="91.25,28.45;96.4925,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2548,7 +2548,7 @@
         <dia:point val="67,25.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.8575,24.45;67.75,29.6"/>
+        <dia:rectangle val="61.8575,24.45;67.75,28.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2629,7 +2629,7 @@
         <dia:point val="77.0675,25.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.8575,24.45;77.8175,29.6"/>
+        <dia:rectangle val="72.8575,24.45;77.8175,28.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2710,7 +2710,7 @@
         <dia:point val="87.135,25.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.8575,24.45;87.885,29.6"/>
+        <dia:rectangle val="84.8575,24.45;87.885,28.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2791,7 +2791,7 @@
         <dia:point val="60,10.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.2425,9.85;60.75,17.5498"/>
+        <dia:rectangle val="58.2425,9.85;60.75,16.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2872,7 +2872,7 @@
         <dia:point val="87.135,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.25,11.45;87.335,17.6"/>
+        <dia:rectangle val="79.25,11.45;87.335,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2981,7 +2981,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="29.35,8.24405"/>
+            <dia:point val="29.35,8.24406"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -4317,7 +4317,7 @@ of org mode required by Dogen.
         <dia:point val="29,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.25,-8.05;33.1075,-2.4"/>
+        <dia:rectangle val="28.25,-8.05;33.1075,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4398,7 +4398,7 @@ of org mode required by Dogen.
         <dia:point val="88.6825,0.449341"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,-0.300659;89.4325,8.6"/>
+        <dia:rectangle val="79.95,-0.300659;89.4325,7.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4478,7 +4478,7 @@ of org mode required by Dogen.
         <dia:point val="97.6825,-8.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.9325,-9.35;100.335,8.6"/>
+        <dia:rectangle val="96.9325,-9.35;100.335,7.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5194,7 +5194,7 @@ of org mode required by Dogen.
         <dia:point val="54.14,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.25,-8.35;54.34,-2.4"/>
+        <dia:rectangle val="47.25,-8.35;54.34,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5275,7 +5275,7 @@ of org mode required by Dogen.
         <dia:point val="62.745,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.995,-20.0004;68.1075,-13.4"/>
+        <dia:rectangle val="61.995,-20.0004;68.1075,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5356,7 +5356,7 @@ of org mode required by Dogen.
         <dia:point val="48,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.8625,-18.65;48.75,-13.4"/>
+        <dia:rectangle val="44.8625,-18.65;48.75,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5437,7 +5437,7 @@ of org mode required by Dogen.
         <dia:point val="105.205,29.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.455,28.45;109.108,33.6"/>
+        <dia:rectangle val="104.455,28.45;109.107,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5518,7 +5518,7 @@ of org mode required by Dogen.
         <dia:point val="67,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.25,10.55;74.56,17.6"/>
+        <dia:rectangle val="66.25,10.55;74.56,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5599,7 +5599,7 @@ of org mode required by Dogen.
         <dia:point val="80,7.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.31,6.95;80.75,10.5"/>
+        <dia:rectangle val="74.31,6.95;80.75,9.755"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5680,7 +5680,7 @@ of org mode required by Dogen.
         <dia:point val="60,7.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.765,6.95;60.75,11.3"/>
+        <dia:rectangle val="56.765,6.95;60.75,10.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5924,7 +5924,7 @@ of org mode required by Dogen.
         <dia:point val="57,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.25,-7.65;62.945,-2.4"/>
+        <dia:rectangle val="56.25,-7.65;62.945,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6005,7 +6005,7 @@ of org mode required by Dogen.
         <dia:point val="88.6825,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.85,-6.05;89.4325,-2.4"/>
+        <dia:rectangle val="72.85,-6.745;89.4325,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6085,7 +6085,7 @@ of org mode required by Dogen.
         <dia:point val="87.135,16.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.385,15.95;90.05,20.3"/>
+        <dia:rectangle val="86.385,15.95;90.05,19.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
