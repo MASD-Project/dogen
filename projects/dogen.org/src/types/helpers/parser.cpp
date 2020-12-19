@@ -86,7 +86,7 @@ parser::try_parse_headline(const std::string& s) {
         r.todo_keyword(entities::todo_keyword(token));
 
         is >> token;
-        if(!is.good()) {
+        if (is.fail()) {
             BOOST_LOG_SEV(lg, debug) << "Nothing left to read after keyword.";
             return r;
         }
@@ -100,7 +100,7 @@ parser::try_parse_headline(const std::string& s) {
         r.priority(entities::priority_cookie(token));
 
         is >> token;
-        if(!is.good()) {
+        if (is.fail()) {
             BOOST_LOG_SEV(lg, debug) << "Nothing left to read after cookie.";
             return r;
         }
@@ -138,8 +138,15 @@ parser::try_parse_headline(const std::string& s) {
     if (found_tag) {
         std::list<std::string> tags;
         boost::split(tags, token, boost::is_any_of(":"));
-        for (const auto& tag : tags)
-            r.tags().push_back(entities::tag(tag));
+        for (const auto& tag : tags) {
+            /*
+             * For some reason, boost split returns the position of
+             * the delimiters as empty strings, so we need to skip
+             * those.
+             */
+            if (!tag.empty())
+                r.tags().push_back(entities::tag(tag));
+        }
     }
 
     return r;

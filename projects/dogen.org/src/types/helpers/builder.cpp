@@ -165,8 +165,6 @@ entities::headline builder::make_headline(boost::shared_ptr<node> n) const {
     for (const auto& child : n->children())
         r.headlines().push_back(make_headline(child));
 
-    BOOST_LOG_SEV(lg, debug) << "Processing headline: " << r.title();
-
     return r;
 }
 
