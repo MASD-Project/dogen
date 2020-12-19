@@ -71,11 +71,13 @@ const std::string
 headline_with_priority_todo_and_multi_word_title(
     "* DONE [#I] title with more than one word");
 const std::string headline_with_no_title_and_single_tag("* :tag:");
-const std::string headline_with_no_title_and_multiple_tags("* :tag:b:c:d");
+const std::string headline_with_no_title_and_multiple_tags("* :tag:b:c:d:");
 const std::string headline_with_single_word_title_and_single_tag(
     "* title :tag:");
 const std::string headline_with_multi_word_title_and_single_tag(
     "* title with more than one word :tag:");
+const std::string complete_headline(
+    "* DONE [#A] title with more than one word :tag1:tag2:tag3:");
 
 dogen::org::entities::document
 make(const std::string& s) {

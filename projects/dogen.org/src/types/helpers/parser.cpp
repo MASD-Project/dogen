@@ -42,7 +42,7 @@ const std::string tag_start(":");
 const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
 const std::regex todo_keyword_regex("^[A-Z].*");
-const std::regex tags_regex("^:");
+const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
 
 }
 
@@ -114,10 +114,15 @@ parser::try_parse_headline(const std::string& s) {
     bool is_first(true);
     std::ostringstream os;
     do {
-        if (boost::starts_with(token, tag_start)) {
-            BOOST_LOG_SEV(lg, debug) << "Found tags: " << token;
+        BOOST_LOG_SEV(lg, debug) << "Processing token: '" << token << "'";
+        if (std::regex_match(token, tags_regex)) {
+            BOOST_LOG_SEV(lg, debug) << "Found tags.";
             found_tag = true;
-        } else if (is_first) {
+            break;
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Not a tag.";
+        if (is_first) {
             os << token;
             is_first = false;
         } else {
