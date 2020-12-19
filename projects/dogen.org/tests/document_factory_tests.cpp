@@ -86,7 +86,8 @@ other text content
 headline content
 more headline content)");
 
-const std::string two_headlines_with_content(R"(some text content
+const std::string top_level_content_two_headlines_without_content(
+    R"(some text content
 other text content
 
 * first headline
@@ -168,6 +169,7 @@ BOOST_AUTO_TEST_CASE(simple_headline_document_results_in_expected_org_document) 
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == single_word_title);
     BOOST_CHECK(hl.affiliated_keywords().empty());
     BOOST_CHECK(hl.drawers().empty());
@@ -187,6 +189,7 @@ BOOST_AUTO_TEST_CASE(multi_word_headline_document_results_in_expected_org_docume
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.affiliated_keywords().empty());
     BOOST_CHECK(hl.drawers().empty());
@@ -236,6 +239,7 @@ BOOST_AUTO_TEST_CASE(headline_with_priority_cookie_no_title_document_results_in_
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title().empty());
     BOOST_CHECK(hl.priority().value() == "[#A]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -257,6 +261,7 @@ BOOST_AUTO_TEST_CASE(headline_with_priority_cookie_and_single_word_title_documen
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == single_word_title);
     BOOST_CHECK(hl.priority().value() == "[#Z]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -278,6 +283,7 @@ BOOST_AUTO_TEST_CASE(headline_with_priority_cookie_and_multi_word_title_document
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.priority().value() == "[#Z]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -299,6 +305,7 @@ BOOST_AUTO_TEST_CASE(headline_with_real_todo_no_title_document_results_in_expect
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title().empty());
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -320,6 +327,7 @@ BOOST_AUTO_TEST_CASE(headline_with_fake_todo_no_title_document_results_in_expect
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title().empty());
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -341,6 +349,7 @@ BOOST_AUTO_TEST_CASE(headline_with_todo_keyword_and_single_word_title_document_r
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == single_word_title);
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -362,6 +371,7 @@ BOOST_AUTO_TEST_CASE(headline_with_todo_keyword_and_multi_word_title_document_re
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -383,6 +393,7 @@ BOOST_AUTO_TEST_CASE(headline_with_priority_todo_and_single_word_title_document_
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == single_word_title);
     BOOST_CHECK(hl.priority().value() == "[#I]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -404,6 +415,7 @@ BOOST_AUTO_TEST_CASE(headline_with_priority_todo_and_multi_word_title_document_r
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.priority().value() == "[#I]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -425,6 +437,7 @@ BOOST_AUTO_TEST_CASE(headline_with_no_title_and_single_tag_document_results_in_e
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title().empty());
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -449,6 +462,7 @@ BOOST_AUTO_TEST_CASE(headline_with_no_title_and_multiple_tags_document_results_i
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title().empty());
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -474,6 +488,7 @@ BOOST_AUTO_TEST_CASE(headline_with_single_word_title_and_single_tag_document_res
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == single_word_title);
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -498,6 +513,7 @@ BOOST_AUTO_TEST_CASE(headline_with_multi_word_title_and_single_tag_document_resu
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -522,6 +538,7 @@ BOOST_AUTO_TEST_CASE(complete_headline_document_results_in_expected_org_document
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == multi_word_title);
     BOOST_CHECK(hl.priority().value() == "[#A]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -555,6 +572,7 @@ other text content
     BOOST_REQUIRE(hls.size() == 1);
 
     const auto& hl(hls.front());
+    BOOST_CHECK(hl.headlines().empty());
     BOOST_CHECK(hl.title() == "first headline");
     BOOST_CHECK(hl.priority().value().empty());
     BOOST_CHECK(hl.affiliated_keywords().empty());
@@ -562,7 +580,7 @@ other text content
     BOOST_CHECK(hl.todo_keyword().value().empty());
     BOOST_CHECK(hl.tags().empty());
 
-    BOOST_REQUIRE(!hl.section().blocks().empty());
+    BOOST_REQUIRE(hl.section().blocks().size() == 1);
     const auto& cs(hl.section().blocks().front().contents());
     const std::string expected_sec(R"(
 headline content
@@ -570,26 +588,43 @@ more headline content)");
     BOOST_CHECK(cs == expected_sec);
 }
 
-// BOOST_AUTO_TEST_CASE(two_headlines_with_content_document_results_in_expected_org_document) {
-//     SETUP_TEST_LOG_SOURCE_DEBUG("two_headlines_with_content_document_in_expected_org_document");
-//     const auto document(make(two_headlines_with_content));
+BOOST_AUTO_TEST_CASE(top_level_content_two_headlines_without_content_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("top_level_content_two_headlines_without_content_document_in_expected_org_document");
+    const auto document(make(top_level_content_two_headlines_without_content));
 
-//     BOOST_CHECK(document.affiliated_keywords().empty());
-//     BOOST_CHECK(document.drawers().empty());
-//     BOOST_CHECK(document.section().blocks().empty());
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
 
-//     const auto& hls(document.headlines());
-//     BOOST_REQUIRE(hls.size() == 1);
+    const auto& blocks(document.section().blocks());
+    BOOST_REQUIRE(blocks.size() == 1);
+    const auto& c(blocks.front().contents());
+    const std::string expected_doc(R"(some text content
+other text content
+)");
+    BOOST_CHECK(c == expected_doc);
 
-//     const auto& hl(hls.front());
-//     BOOST_CHECK(hl.title().empty());
-//     BOOST_CHECK(hl.priority().value().empty());
-//     BOOST_CHECK(hl.affiliated_keywords().empty());
-//     BOOST_CHECK(hl.drawers().empty());
-//     BOOST_CHECK(hl.section().blocks().empty());
-//     BOOST_CHECK(hl.todo_keyword().value() == "FAKE");
-//     BOOST_CHECK(hl.tags().empty());
-// }
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 1);
+
+    const auto& hl(hls.front());
+    BOOST_CHECK(hl.title() == "first headline");
+    BOOST_CHECK(hl.priority().value().empty());
+    BOOST_CHECK(hl.affiliated_keywords().empty());
+    BOOST_CHECK(hl.drawers().empty());
+    BOOST_CHECK(hl.section().blocks().empty());
+    BOOST_CHECK(hl.todo_keyword().value().empty());
+    BOOST_CHECK(hl.tags().empty());
+
+    BOOST_CHECK(hl.headlines().size() == 1);
+    const auto& child(hl.headlines().front());
+    BOOST_CHECK(child.title() == "second headline");
+    BOOST_CHECK(child.priority().value().empty());
+    BOOST_CHECK(child.affiliated_keywords().empty());
+    BOOST_CHECK(child.drawers().empty());
+    BOOST_CHECK(child.section().blocks().empty());
+    BOOST_CHECK(child.todo_keyword().value().empty());
+    BOOST_CHECK(child.tags().empty());
+}
 
 
 BOOST_AUTO_TEST_SUITE_END()
