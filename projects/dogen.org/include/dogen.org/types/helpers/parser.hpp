@@ -28,16 +28,24 @@
 #include <list>
 #include <string>
 #include <istream>
+#include <boost/optional.hpp>
 #include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::helpers {
 
 /**
- * @brief
+ * @brief Parses a small number of well-defined org-mode constructs
+ * such as headlines and blocks.
  */
 class parser final {
 public:
+    /**
+     * @brief Attempts to parse the string as an headline. If the
+     * string is not a headline returns an empty optional.
+     */
+    static boost::optional<entities::headline>
+    try_parse_headline(const std::string& s);
 };
 
 }

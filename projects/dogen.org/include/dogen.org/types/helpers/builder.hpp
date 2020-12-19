@@ -43,11 +43,19 @@ public:
     builder();
 
 private:
+    void ensure_stack_not_empty() const;
+    void ensure_expected_headline_level(const unsigned int expected,
+        const unsigned int actual) const;
+
+private:
     void end_current_block();
-    entities::headline make_headline(boost::shared_ptr<node> n) const;
+    void handle_headline(const entities::headline hl);
 
 public:
     void add_line(const std::string& s);
+
+private:
+    entities::headline make_headline(boost::shared_ptr<node> n) const;
 
 public:
     entities::document build();

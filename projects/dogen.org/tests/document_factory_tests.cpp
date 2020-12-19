@@ -19,6 +19,7 @@
  *
  */
 #include <algorithm>
+#include <boost/test/tools/old/interface.hpp>
 #include <boost/test/unit_test.hpp>
 #include "dogen.org/types/helpers/document_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
@@ -44,7 +45,8 @@ const std::string multi_line_document_with_spurious_spaces(R"(some text content
 
 
 other text content)");
-
+const std::string simple_headline("* headline");
+const std::string multi_word_headline("* headline with more than one word");
 
 dogen::org::entities::document
 make(const std::string& s) {
@@ -75,7 +77,7 @@ BOOST_AUTO_TEST_CASE(single_line_document_results_in_expected_org_document) {
     BOOST_CHECK(document.headlines().empty());
 
     const auto& blocks(document.section().blocks());
-    BOOST_CHECK(!blocks.empty());
+    BOOST_REQUIRE(!blocks.empty());
 
     const auto& c(blocks.front().contents());
     BOOST_CHECK(c == single_line_document);
@@ -90,7 +92,7 @@ BOOST_AUTO_TEST_CASE(multi_line_document_results_in_expected_org_document) {
     BOOST_CHECK(document.headlines().empty());
 
     const auto& blocks(document.section().blocks());
-    BOOST_CHECK(!blocks.empty());
+    BOOST_REQUIRE(!blocks.empty());
 
     const auto& c(blocks.front().contents());
     BOOST_CHECK(c == multi_line_document);
@@ -105,9 +107,45 @@ BOOST_AUTO_TEST_CASE(multi_line_document_with_spurious_spaces_results_in_expecte
     BOOST_CHECK(document.headlines().empty());
 
     const auto& blocks(document.section().blocks());
-    BOOST_CHECK(!blocks.empty());
+    BOOST_REQUIRE(!blocks.empty());
     const auto& c(blocks.front().contents());
     BOOST_CHECK(c == multi_line_document_with_spurious_spaces);
+}
+
+BOOST_AUTO_TEST_CASE(simple_headline_document_with_spurious_spaces_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("simple_headline_document_with_spurious_spaces_in_expected_org_document");
+    const auto document(make(simple_headline));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 1);
+
+    const auto& hl(hls.front());
+    BOOST_CHECK(hl.title() == "headline");
+    BOOST_CHECK(hl.affiliated_keywords().empty());
+    BOOST_CHECK(hl.drawers().empty());
+    BOOST_CHECK(hl.section().blocks().empty());
+}
+
+BOOST_AUTO_TEST_CASE(multi_word_headline_document_with_spurious_spaces_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("multi_word_headline_document_with_spurious_spaces_in_expected_org_document");
+    const auto document(make(multi_word_headline));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 1);
+
+    const auto& hl(hls.front());
+    BOOST_CHECK(hl.title() == "headline with more than one word");
+    BOOST_CHECK(hl.affiliated_keywords().empty());
+    BOOST_CHECK(hl.drawers().empty());
+    BOOST_CHECK(hl.section().blocks().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
