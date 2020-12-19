@@ -806,7 +806,6 @@ Notes:
   the same project. The user chooses where to place them.
 
 
-
 *** Create a factory transform for parts and archetype kinds          :story:
 
 - integrate their generation into PMM chains.
@@ -15995,6 +15994,23 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Investigate =ganja.js=                                            :story:
+
+It is not entirely clear what exactly this library does, but it is
+related to code generation, so it may come under dogen's umbrella:
+
+#+begin_quote
+Technically, ganja.js is a code generator producing classes that
+reificate algebraic literals and expressions by using reflection, a
+built-in tokenizer and a simple AST translator to rewrite functions
+containing algebraic constructs to their procedural counterparts.
+#+end_quote
+
+Links:
+
+- [[https://github.com/enkimute/ganja.js][GH project]]
+- [[https://news.ycombinator.com/item?id=25471046][HN discussion]]
 
 *** Investigate adding support for unity builds                       :story:
 

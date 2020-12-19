@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 29
+#+title: Sprint Backlog 30
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-18 Fri 17:45]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *15:16* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 15:16   |       |      | 100.0 |
-| Active                                             |         | 15:16 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 6:04 |  39.7 |
-| Create a demo and presentation for previous sprint |         |       | 0:34 |   3.7 |
-| Sprint and product backlog grooming                |         |       | 0:35 |   3.8 |
-| Add org-mode support                               |         |       | 8:03 |  52.7 |
+#+CAPTION: Clock summary at [2020-12-19 Sat 14:23]
+| <75>                                               |         |       |       |       |
+| Headline                                           | Time    |       |       |     % |
+|----------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                       | *18:37* |       |       | 100.0 |
+|----------------------------------------------------+---------+-------+-------+-------|
+| Stories                                            | 18:37   |       |       | 100.0 |
+| Active                                             |         | 18:37 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  32.6 |
+| Create a demo and presentation for previous sprint |         |       |  0:34 |   3.0 |
+| Sprint and product backlog grooming                |         |       |  0:35 |   3.1 |
+| Add org-mode support                               |         |       | 11:24 |  61.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -326,6 +326,7 @@ the C++ and C# classes into one and move it to =text=.
 
 *** STARTED Add org-mode support                                      :story:
     :LOGBOOK:
+    CLOCK: [2020-12-19 Sat 11:02]--[2020-12-19 Sat 14:23] =>  3:21
     CLOCK: [2020-12-18 Fri 17:10]--[2020-12-18 Fri 17:44] =>  0:34
     CLOCK: [2020-12-18 Fri 16:46]--[2020-12-18 Fri 16:53] =>  0:07
     CLOCK: [2020-12-18 Fri 13:23]--[2020-12-18 Fri 16:29] =>  3:06
@@ -545,7 +546,6 @@ Check backlog for a story on this.
 
 
 
-
 *** Consider renaming =text= to =logical_physical=                    :story:
 
 This is really the right name for the model; the text processing part
@@ -566,7 +566,6 @@ There should only be one "managed directory" at the input stage, which
 is the component directory (for component models). If parts have
 relative directories off of the component directory then we should add
 to the list of managed directories inside the PM pipeline.
-
 
 *** Validate no two artefacts have the same ID                        :story:
 
@@ -712,7 +711,6 @@ possible problems with merging).
 
 At any rate the profiles should be kept within the =text*= models
 given they are used only for M2T transforms.
-
 
 *** Stitch templates should be bound to Dogen M2T transforms          :story:
 
