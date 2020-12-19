@@ -47,6 +47,9 @@ const std::string multi_line_document_with_spurious_spaces(R"(some text content
 other text content)");
 const std::string simple_headline("* headline");
 const std::string multi_word_headline("* headline with more than one word");
+const std::string headline_with_priority_cookie_no_title("* [#A]");
+const std::string title_less_headline("***");
+const std::string title_less_headline_with_space("*** ");
 
 dogen::org::entities::document
 make(const std::string& s) {
@@ -143,6 +146,55 @@ BOOST_AUTO_TEST_CASE(multi_word_headline_document_with_spurious_spaces_results_i
 
     const auto& hl(hls.front());
     BOOST_CHECK(hl.title() == "headline with more than one word");
+    BOOST_CHECK(hl.affiliated_keywords().empty());
+    BOOST_CHECK(hl.drawers().empty());
+    BOOST_CHECK(hl.section().blocks().empty());
+}
+
+BOOST_AUTO_TEST_CASE(title_less_headline_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("title_less_headline_document_results_in_expected_org_document");
+    const auto document(make(title_less_headline));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_REQUIRE(!blocks.empty());
+
+    const auto& c(blocks.front().contents());
+    BOOST_CHECK(c == title_less_headline);
+}
+
+BOOST_AUTO_TEST_CASE(title_less_headline_with_space_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("title_less_headline_with_space_document_results_in_expected_org_document");
+    const auto document(make(title_less_headline_with_space));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_REQUIRE(!blocks.empty());
+
+    const auto& c(blocks.front().contents());
+    BOOST_CHECK(c == title_less_headline_with_space);
+}
+
+BOOST_AUTO_TEST_CASE(headline_with_priority_cookie_no_title_document_with_spurious_spaces_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("headline_with_priority_cookie_no_title_document_with_spurious_spaces_in_expected_org_document");
+    const auto document(make(headline_with_priority_cookie_no_title));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 1);
+
+    const auto& hl(hls.front());
+    BOOST_CHECK(hl.title().empty());
+    BOOST_CHECK(hl.priority().value() == "[#A]");
     BOOST_CHECK(hl.affiliated_keywords().empty());
     BOOST_CHECK(hl.drawers().empty());
     BOOST_CHECK(hl.section().blocks().empty());

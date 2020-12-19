@@ -23,7 +23,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.org/types/entities/block_type.hpp"
@@ -40,8 +39,9 @@ static logger lg(logger_factory("org.helpers.parser"));
 
 const std::string space(" ");
 const std::string tag_start(":");
-const std::regex headline_regex("^\\*+\\s.*");
+const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
+const std::regex todo_keyword_regex("^[A-Z].*");
 const std::regex tags_regex("^:");
 
 }
@@ -81,18 +81,29 @@ parser::try_parse_headline(const std::string& s) {
      * a keyword.
      */
     is >> token;
-    const auto upper_token(boost::to_upper_copy(token));
-    if (token == upper_token) {
+    if (std::regex_match(token, todo_keyword_regex)) {
+        BOOST_LOG_SEV(lg, debug) << "Found a TODO keyword: " << token;
         r.todo_keyword(entities::todo_keyword(token));
+
         is >> token;
+        if(!is.good()) {
+            BOOST_LOG_SEV(lg, debug) << "Nothing left to read after keyword.";
+            return r;
+        }
     }
 
     /*
      * Priority cookies have the form [#CHARACTER].
      */
     if (std::regex_match(token, priority_cookie_regex)) {
+        BOOST_LOG_SEV(lg, debug) << "Found a priority cookie: " << token;
         r.priority(entities::priority_cookie(token));
+
         is >> token;
+        if(!is.good()) {
+            BOOST_LOG_SEV(lg, debug) << "Nothing left to read after cookie.";
+            return r;
+        }
     }
 
     /*
@@ -103,9 +114,10 @@ parser::try_parse_headline(const std::string& s) {
     bool is_first(true);
     std::ostringstream os;
     do {
-        if (boost::starts_with(token, tag_start))
+        if (boost::starts_with(token, tag_start)) {
+            BOOST_LOG_SEV(lg, debug) << "Found tags: " << token;
             found_tag = true;
-        else if (is_first) {
+        } else if (is_first) {
             os << token;
             is_first = false;
         } else {
