@@ -93,6 +93,41 @@ other text content
 * first headline
 ** second headline)");
 
+const std::string top_level_content_two_headlines_with_content(
+    R"(some text content
+other text content
+
+* first headline
+
+some content
+
+** second headline
+
+more content.
+
+)");
+
+const std::string complex_headline_structure(
+    R"(some text content
+other text content
+
+* 1
+
+some content
+
+** 1.1
+
+more content.
+
+*** DONE [#A] 1.1.1 :tag:b:c:d:
+** 1.2
+* 2
+** 2.1
+* 3
+
+some content
+)");
+
 dogen::org::entities::document
 make(const std::string& s) {
     dogen::org::helpers::document_factory f;
@@ -624,6 +659,134 @@ other text content
     BOOST_CHECK(child.section().blocks().empty());
     BOOST_CHECK(child.todo_keyword().value().empty());
     BOOST_CHECK(child.tags().empty());
+}
+
+BOOST_AUTO_TEST_CASE(top_level_content_two_headlines_with_content_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("top_level_content_two_headlines_with_content_document_in_expected_org_document");
+    const auto document(make(top_level_content_two_headlines_with_content));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_REQUIRE(blocks.size() == 1);
+    const auto& c(blocks.front().contents());
+    const std::string expected_doc(R"(some text content
+other text content
+)");
+    BOOST_CHECK(c == expected_doc);
+
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 1);
+
+    const auto& hl(hls.front());
+    BOOST_CHECK(hl.title() == "first headline");
+    BOOST_CHECK(hl.priority().value().empty());
+    BOOST_CHECK(hl.affiliated_keywords().empty());
+    BOOST_CHECK(hl.drawers().empty());
+    BOOST_CHECK(hl.todo_keyword().value().empty());
+    BOOST_CHECK(hl.tags().empty());
+
+    BOOST_REQUIRE(hl.section().blocks().size() == 1);
+    const auto& cs(hl.section().blocks().front().contents());
+    const std::string expected_sec(R"(
+some content
+)");
+    BOOST_CHECK(cs == expected_sec);
+
+    BOOST_CHECK(hl.headlines().size() == 1);
+    const auto& child(hl.headlines().front());
+    BOOST_CHECK(child.title() == "second headline");
+    BOOST_CHECK(child.priority().value().empty());
+    BOOST_CHECK(child.affiliated_keywords().empty());
+    BOOST_CHECK(child.drawers().empty());
+    BOOST_CHECK(child.todo_keyword().value().empty());
+    BOOST_CHECK(child.tags().empty());
+
+    BOOST_REQUIRE(child.section().blocks().size() == 1);
+    const auto& ccs(child.section().blocks().front().contents());
+    const std::string expected_child_sec(R"(
+more content.
+)");
+    BOOST_CHECK(ccs == expected_child_sec);
+}
+
+BOOST_AUTO_TEST_CASE(complex_headline_structure_document_results_in_expected_org_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("complex_headline_structure_document_in_expected_org_document");
+    const auto document(make(complex_headline_structure));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+
+    const auto& blocks(document.section().blocks());
+    BOOST_REQUIRE(!blocks.empty());
+
+    const auto& c(blocks.front().contents());
+    const std::string expected_doc(R"(some text content
+other text content
+)");
+    BOOST_CHECK(c == expected_doc);
+
+    const auto& hls(document.headlines());
+    BOOST_REQUIRE(hls.size() == 3);
+
+    const auto& front(hls.front());
+    BOOST_REQUIRE(front.headlines().size() == 2);
+    BOOST_REQUIRE(front.headlines().front().headlines().size() == 1);
+    BOOST_CHECK(front.headlines().front().title() == "1.1");
+    BOOST_REQUIRE(front.headlines().front().headlines().size() == 1);
+
+    const auto& grand_child(front.headlines().front().headlines().front());
+    BOOST_CHECK(grand_child.headlines().empty());
+    BOOST_CHECK(grand_child.title() == "1.1.1");
+    BOOST_CHECK(grand_child.priority().value() == "[#A]");
+    BOOST_CHECK(grand_child.todo_keyword().value() == "DONE");
+
+    const auto& tags(grand_child.tags());
+    BOOST_REQUIRE(tags.size() == 4);
+    BOOST_CHECK(tags.front().value() == "tag");
+    BOOST_CHECK(tags.back().value() == "d");
+
+    BOOST_CHECK(front.headlines().back().headlines().empty());
+    BOOST_CHECK(front.headlines().back().title() == "1.2");
+    BOOST_CHECK(front.title() == "1");
+    BOOST_CHECK(front.priority().value().empty());
+    BOOST_CHECK(front.affiliated_keywords().empty());
+    BOOST_CHECK(front.drawers().empty());
+    BOOST_CHECK(front.todo_keyword().value().empty());
+    BOOST_CHECK(front.tags().empty());
+
+    BOOST_REQUIRE(front.section().blocks().size() == 1);
+    const auto& cs(front.section().blocks().front().contents());
+    const std::string expected_sec(R"(
+some content
+)");
+    BOOST_CHECK(cs == expected_sec);
+
+    const auto& middle(*(++hls.begin()));
+    BOOST_CHECK(middle.title() == "2");
+    BOOST_CHECK(middle.headlines().front().headlines().empty());
+    BOOST_CHECK(middle.priority().value().empty());
+    BOOST_CHECK(middle.affiliated_keywords().empty());
+    BOOST_CHECK(middle.drawers().empty());
+    BOOST_CHECK(middle.todo_keyword().value().empty());
+    BOOST_CHECK(middle.tags().empty());
+    BOOST_CHECK(middle.section().blocks().empty());
+
+    const auto& back(hls.back());
+    BOOST_CHECK(back.title() == "3");
+    BOOST_CHECK(back.headlines().empty());
+    BOOST_CHECK(back.priority().value().empty());
+    BOOST_CHECK(back.affiliated_keywords().empty());
+    BOOST_CHECK(back.drawers().empty());
+    BOOST_CHECK(back.todo_keyword().value().empty());
+    BOOST_CHECK(back.tags().empty());
+
+    BOOST_REQUIRE(back.section().blocks().size() == 1);
+    const auto& bc(back.section().blocks().back().contents());
+    const std::string expected_back_sec(R"(
+some content)");
+    BOOST_CHECK(bc == expected_back_sec);
 }
 
 

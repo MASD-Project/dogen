@@ -67,12 +67,20 @@ void builder::ensure_expected_headline_level(const unsigned int expected,
 }
 
 void builder::end_current_block() {
+    BOOST_LOG_SEV(lg, debug) << "Ending current block.";
     const std::string content(stream_.str());
     stream_.str("");
 
-    if (content.empty())
+    BOOST_LOG_SEV(lg, trace) << "Block contents: '" << content << "'";
+    if (content.empty()) {
+        BOOST_LOG_SEV(lg, trace) << "Block is empty, ignoring.";
         return;
+    }
 
+    /*
+     * If there are contents for the current block, we need to add it
+     * to the headline currently on top.
+     */
     entities::block tb;
     tb.type(block_type_);
     tb.contents(content);
@@ -80,7 +88,7 @@ void builder::end_current_block() {
     block_type_ = block_type::invalid;
 }
 
-void builder::handle_headline(const entities::headline hl) {
+void builder::handle_headline(const entities::headline& hl) {
     /*
      * We found a headline. We need to detect if the headline is a
      * sibling or a children of the current level.
@@ -116,15 +124,40 @@ void builder::handle_headline(const entities::headline hl) {
     }
 
     /*
-     * If there is a mismatch between the stack size and the headline
-     * level, the only valid possibility is that the headline level is
-     * one ahead of the stack size, meaning it is a sibling. If so, we
-     * need to pop the current node, and create a child for its
-     * parent.
+     * If the stack is one smaller than the current headline level,
+     * this means we have a sibling. We just need to go up to the
+     * parent level to add the sibling and then make it the front of
+     * the stack.
      */
-    ensure_expected_headline_level(sz + 1, hl.level());
+    if (sz + 1 == hl.level()) {
+        stack_.pop();
+        auto& current(*stack_.top());
+        auto child(boost::make_shared<node>());
+        child->current(hl);
+        current.children().push_back(child);
+        stack_.push(child);
+    }
 
-    stack_.pop();
+    /*
+     * Finally, the only remaining possibility is that we are now
+     * going "up" in the hierarchy - that is, we are adding children
+     * to one of our parent's parent. However, for this to be the
+     * case, the stack size must be greater than the headline level.
+     */
+    if (sz < hl.level()) {
+        std::ostringstream os;
+        os << "unexpected stack size: " << sz
+           << " Level: " << hl.level();
+        const std::string msg(os.str());
+        BOOST_LOG_SEV(lg, error) << msg;
+        BOOST_THROW_EXCEPTION(building_error(msg));
+    }
+    const auto number_of_pops(sz - hl.level());
+    BOOST_LOG_SEV(lg, debug) << "Popping stack: " << number_of_pops;
+    for (unsigned int i = 0; i < number_of_pops; ++i)
+        stack_.pop();
+
+    ensure_stack_not_empty();
     auto& current(*stack_.top());
     auto child(boost::make_shared<node>());
     child->current(hl);
@@ -153,10 +186,13 @@ void builder::add_line(const std::string& s) {
          * regular text.
          */
         if (block_type_ == block_type::invalid) {
+            BOOST_LOG_SEV(lg, debug) << "Adding to block as first line.";
             block_type_ = block_type::text_block;
             stream_ << s;
-        } else
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "Adding to block.";
             stream_ << std::endl << s;
+        }
     }
 }
 

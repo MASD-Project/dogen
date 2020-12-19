@@ -49,7 +49,7 @@ private:
 
 private:
     void end_current_block();
-    void handle_headline(const entities::headline hl);
+    void handle_headline(const entities::headline& hl);
 
 public:
     void add_line(const std::string& s);
