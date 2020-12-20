@@ -134,7 +134,7 @@
         <dia:point val="-20,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,-14.05;7.515,18.95"/>
+        <dia:rectangle val="-20.05,-14.05;7.515,20.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -146,7 +146,7 @@
         <dia:real val="27.465"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="32.899999999999999"/>
+        <dia:real val="34.5"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -186,6 +186,8 @@ codec.
 #DOGEN masd.codec.reference=cpp.boost
 #DOGEN masd.codec.reference=dogen.variability
 #DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=dogen.org
+#DOGEN masd.codec.reference=dogen.dia
 #DOGEN masd.codec.reference=masd
 #DOGEN masd.codec.reference=masd.variability
 #DOGEN masd.codec.reference=dogen.profiles
@@ -3685,7 +3687,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="40,66.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.9384,66.049;46.2654,68.3988"/>
+        <dia:rectangle val="39.9384,66.0489;46.2654,68.3988"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3729,7 +3731,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="178,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.95,11.95;192.712,15.05"/>
+        <dia:rectangle val="177.95,11.95;192.713,15.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="178,12"/>
@@ -8385,7 +8387,7 @@ graph.#</dia:string>
         <dia:point val="60.57,32.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.8575,28.35;61.32,36.8"/>
+        <dia:rectangle val="41.8575,28.35;61.32,36.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8466,7 +8468,7 @@ graph.#</dia:string>
         <dia:point val="50.0625,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.3125,5.35;52.225,9.6"/>
+        <dia:rectangle val="49.3125,5.255;52.225,8.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10262,7 +10264,7 @@ Not all codecs will make use of all entities.
         <dia:point val="92,77.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.395,76.35;92.75,80.7"/>
+        <dia:rectangle val="87.395,76.35;92.75,79.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10343,7 +10345,7 @@ Not all codecs will make use of all entities.
         <dia:point val="65,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.25,66.55;68.4225,77.6"/>
+        <dia:rectangle val="64.25,66.55;68.4225,76.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10424,7 +10426,7 @@ Not all codecs will make use of all entities.
         <dia:point val="76.2225,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.4725,71.55;81.4225,77.6"/>
+        <dia:rectangle val="75.4725,71.55;81.4225,76.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10504,7 +10506,7 @@ Not all codecs will make use of all entities.
         <dia:point val="87.445,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.695,66.55;94.4225,77.6"/>
+        <dia:rectangle val="86.695,66.55;94.4225,76.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10585,7 +10587,7 @@ Not all codecs will make use of all entities.
         <dia:point val="92,80.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.25,79.65;95.725,86.6"/>
+        <dia:rectangle val="91.25,79.65;95.725,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10666,7 +10668,7 @@ Not all codecs will make use of all entities.
         <dia:point val="102.453,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.703,71.55;104.15,77.6"/>
+        <dia:rectangle val="101.703,71.55;104.15,76.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10747,7 +10749,7 @@ Not all codecs will make use of all entities.
         <dia:point val="48.34,79.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.59,78.85;57.535,86.6"/>
+        <dia:rectangle val="47.59,78.85;57.535,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11041,7 +11043,7 @@ Not all codecs will make use of all entities.
         <dia:point val="35,79.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.005,78.35;35.75,81.7"/>
+        <dia:rectangle val="32.005,78.35;35.75,80.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11122,7 +11124,7 @@ Not all codecs will make use of all entities.
         <dia:point val="61.68,77.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.93,76.35;65.05,80.7"/>
+        <dia:rectangle val="60.93,76.35;65.05,79.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11203,7 +11205,7 @@ Not all codecs will make use of all entities.
         <dia:point val="61.68,79.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.93,78.85;70.2,86.6"/>
+        <dia:rectangle val="60.93,78.85;70.2,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11284,7 +11286,7 @@ Not all codecs will make use of all entities.
         <dia:point val="112.905,80.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.155,79.65;117.118,86.6"/>
+        <dia:rectangle val="112.155,79.65;117.118,85.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11365,7 +11367,7 @@ Not all codecs will make use of all entities.
         <dia:point val="103,89.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.8625,88.65;103.75,95.5498"/>
+        <dia:rectangle val="98.8625,88.65;103.75,94.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11446,7 +11448,7 @@ Not all codecs will make use of all entities.
         <dia:point val="130.835,89.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.862,88.65;131.585,95.5498"/>
+        <dia:rectangle val="125.862,88.65;131.585,94.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
