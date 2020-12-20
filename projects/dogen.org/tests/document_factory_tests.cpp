@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <boost/test/tools/old/interface.hpp>
 #include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.org/types/helpers/document_factory.hpp"
@@ -28,6 +29,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
 
 namespace {
 
@@ -245,7 +247,17 @@ make(const std::string& s) {
     return f.make(s);
 }
 
+dogen::org::entities::document
+make(const boost::filesystem::path& p) {
+    const std::string s(dogen::utility::filesystem::read_file_content(p));
+
+    dogen::org::helpers::document_factory f;
+    return f.make(s);
 }
+
+}
+
+using dogen::utility::test_data::dogen_product;
 
 BOOST_AUTO_TEST_SUITE(document_factory_tests)
 
@@ -1255,7 +1267,102 @@ more content
 )");
     BOOST_CHECK(back.parameters().empty());
     BOOST_CHECK(back.type() == block_type::text_block);
+}
 
+BOOST_AUTO_TEST_CASE(dogen_org_model_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_org_model_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_physical_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_physical_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_physical_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_cli_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_cli_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_cli_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_dia_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_dia_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_dia_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_org_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_org_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_org_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_tracing_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_tracing_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_tracing_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_codec_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_codec_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_codec_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_codec_dia_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_codec_dia_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_codec_dia_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_text_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_text_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_text_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_logical_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_logical_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_logical_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_templating_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_templating_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_templating_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_orchestration_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_orchestration_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_orchestration_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_utility_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_utility_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_utility_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_variability_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_variability_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_variability_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_relational_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_relational_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_relational_org()));
+    BOOST_CHECK(!document.headlines().empty());
+}
+
+BOOST_AUTO_TEST_CASE(dogen_identification_org_does_not_throw) {
+    SETUP_TEST_LOG_SOURCE("dogen_identification_org_does_not_throw");
+    const auto document(make(dogen_product::input_dogen_identification_org()));
+    BOOST_CHECK(!document.headlines().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

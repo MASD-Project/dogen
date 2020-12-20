@@ -20,7 +20,27 @@
  */
 #define BOOST_TEST_MODULE dogen.templating.tests
 #include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
+
+namespace  {
+
+const std::string test_suite("initializer");
+const std::string test_module("dogen.org.tests");
+
+struct initializer {
+    initializer() {
+        SETUP_TEST_LOG_SOURCE("initializer");
+        BOOST_LOG_SEV(lg, debug) << "Started initialisation.";
+
+        dogen::utility::test_data::dogen_product::initialize();
+        BOOST_LOG_SEV(lg, debug) << "Finished initialisation.";
+    }
+};
+
+}
 
 using namespace dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
+BOOST_GLOBAL_FIXTURE(initializer);
