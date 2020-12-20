@@ -773,7 +773,7 @@ other text content
 }
 
 BOOST_AUTO_TEST_CASE(top_level_content_two_headlines_with_content_document_results_in_expected_org_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("top_level_content_two_headlines_with_content_document_in_expected_org_document");
+    SETUP_TEST_LOG_SOURCE("top_level_content_two_headlines_with_content_document_in_expected_org_document");
     const auto document(make(top_level_content_two_headlines_with_content));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -1209,7 +1209,7 @@ more content
 }
 
 BOOST_AUTO_TEST_CASE(text_and_greater_block_interleaved_in_headline_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("text_and_greater_block_interleaved_in_headline_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("text_and_greater_block_interleaved_in_headline_results_in_expected_document");
     const auto document(make(text_and_greater_block_interleaved_in_headline));
 
     BOOST_CHECK(!document.affiliated_keywords().empty());
