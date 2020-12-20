@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/make_shared.hpp>
+#include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.org/types/helpers/node.hpp"
 #include "dogen.org/io/entities/document_io.hpp"
 #include "dogen.org/types/helpers/building_error.hpp"
 #include "dogen.org/types/helpers/parser.hpp"
+#include "dogen.org/io/entities/block_type_io.hpp"
 #include "dogen.org/types/helpers/builder.hpp"
 
 namespace {
@@ -35,6 +38,10 @@ const std::string unexpected_level("Headline is at an unexpected level.");
 const std::string empty_stack("Stack is empty, expected content");
 const std::string invalid_drawer("Drawer contains drawer: ");
 const std::string empty_drawers("Expected at least one drawer.");
+const std::string invalid_block("Block contains block: ");
+const std::string unfinished_block("No end block found.");
+const std::string empty_blocks("No blocks found.");
+const std::string unexpected_block_type("Unexpected block type: ");
 
 }
 
@@ -42,9 +49,10 @@ namespace dogen::org::helpers {
 
 using entities::block_type;
 
-builder::builder() : block_type_(block_type::invalid),
-                     root_(boost::make_shared<node>()),
-                     in_drawer_(false) {
+builder::builder() : root_(boost::make_shared<node>()),
+                     in_drawer_(false),
+                     in_greater_block_(false),
+                     is_first_line_(true) {
     root_->data().level(0);
     stack_.push(root_);
 }
@@ -61,7 +69,12 @@ node& builder::top() const {
     return *stack_.top();
 }
 
-void builder::end_current_block() {
+void builder::end_text_block() {
+    if (in_greater_block_) {
+        BOOST_LOG_SEV(lg, error) << unfinished_block;
+        BOOST_THROW_EXCEPTION(building_error(unfinished_block));
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Ending current block.";
     const std::string content(stream_.str());
     stream_.str("");
@@ -73,14 +86,14 @@ void builder::end_current_block() {
     }
 
     /*
-     * If there are contents for the current block, we need to add it
-     * to the headline currently on top.
+     * If there are contents for the current text block, we need to
+     * add it to the headline currently on top.
      */
     entities::block tb;
-    tb.type(block_type_);
+    tb.type(block_type::text_block);
     tb.contents(content);
     top().data().section().blocks().push_back(tb);
-    block_type_ = block_type::invalid;
+    is_first_line_ = true;
 }
 
 void builder::handle_headline(const entities::headline& hl) {
@@ -180,7 +193,7 @@ void builder::add_line(const std::string& s) {
         /*
          * Flush any pending content we may have.
          */
-        end_current_block();
+        end_text_block();
 
         /*
          * Handle the new incoming headline.
@@ -197,7 +210,7 @@ void builder::add_line(const std::string& s) {
         /*
          * Flush any pending content we may have.
          */
-        end_current_block();
+        end_text_block();
 
         /*
          * Add the affiliated keywords to the current node.
@@ -207,15 +220,88 @@ void builder::add_line(const std::string& s) {
     }
 
     /*
+     * Handle greater blocks before drawers.
+     */
+    const auto ob(parser::try_parse_greater_block_start(s));
+    if (ob) {
+        /*
+         * Blocks cannot be inside of blocks or drawers.
+         */
+        if (in_greater_block_ || in_drawer_) {
+            BOOST_LOG_SEV(lg, error) << invalid_block << s;
+            BOOST_THROW_EXCEPTION(building_error(invalid_block + s));
+        }
+
+        /*
+         * Flush any pending content we may have into a text block.
+         */
+        end_text_block();
+
+        /*
+         * Add the block to the current node.
+         */
+        in_greater_block_ = true;
+        top().data().section().blocks().push_back(*ob);
+        return;
+    }
+
+    /*
+     * If we're inside of a greater block (i.e. not a text block),
+     * there are only two valid possibilities: either we are adding
+     * content, or finishing it.
+     */
+    if (in_greater_block_) {
+        /*
+         * If we're working on a greater block, we expect to see it in
+         * the collection.
+         */
+        auto& blocks(top().data().section().blocks());
+        if (blocks.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_blocks;
+            BOOST_THROW_EXCEPTION(building_error(empty_blocks));
+        }
+
+        /*
+         * Ensure the block is of the expected type.
+         */
+        auto& block(blocks.back());
+        if (block.type() != entities::block_type::greater_block) {
+            const std::string s(boost::lexical_cast<std::string>(block.type()));
+            BOOST_LOG_SEV(lg, error) << unexpected_block_type << s;
+            BOOST_THROW_EXCEPTION(building_error(unexpected_block_type + s));
+        }
+
+        /*
+         * Attempt to detect the end of a greater block. Note that if we do have
+         * an end of block but it does not match the current block's
+         * name, the parser will throw.
+         */
+        if (parser::is_greater_block_end(s, block.name())) {
+            const std::string content(stream_.str());
+            stream_.str("");
+            block.contents(content);
+            in_greater_block_ = false;
+            is_first_line_ = true;
+        } else {
+            /*
+             * Add content to the greater block.
+             */
+            if (is_first_line_) {
+                BOOST_LOG_SEV(lg, debug) << "Add first line to greater block.";
+                stream_ << s;
+            } else {
+                BOOST_LOG_SEV(lg, debug) << "Add line to greater block.";
+                stream_ << std::endl << s;
+            }
+        }
+        return;
+    }
+
+    /*
      * Now handle the drawers.
      */
     const auto od(parser::try_parse_drawer_start(s));
     if (od) {
-        /*
-         * Flush any pending content we may have.
-         */
-        end_current_block();
-
         /*
          * Drawers cannot be inside of drawers.
          */
@@ -224,6 +310,11 @@ void builder::add_line(const std::string& s) {
             BOOST_THROW_EXCEPTION(building_error(invalid_drawer + s));
         }
         in_drawer_ = true;
+
+        /*
+         * Flush any pending content we may have.
+         */
+        end_text_block();
 
         /*
          * Add the drawer to the current node.
@@ -258,16 +349,14 @@ void builder::add_line(const std::string& s) {
     }
 
     /*
-     * Finally, if nothing else matches, it must be a text block. If
-     * we don't have a specific block type, default it to regular
-     * text.
+     * Finally, if nothing else matches, it must be a text block.
      */
-    if (block_type_ == block_type::invalid) {
-        BOOST_LOG_SEV(lg, debug) << "Adding to block as first line.";
-        block_type_ = block_type::text_block;
+    if (is_first_line_) {
+        BOOST_LOG_SEV(lg, debug) << "Add first line to text block.";
         stream_ << s;
+        is_first_line_ = false;
     } else {
-        BOOST_LOG_SEV(lg, debug) << "Adding to block.";
+        BOOST_LOG_SEV(lg, debug) << "Add line to text to block.";
         stream_ << std::endl << s;
     }
 }
@@ -286,7 +375,7 @@ entities::document builder::build() {
     /*
      * Flush any pending content we may have.
      */
-    end_current_block();
+    end_text_block();
 
     /*
      * Create the document from the root node.

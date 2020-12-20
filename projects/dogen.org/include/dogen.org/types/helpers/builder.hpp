@@ -57,10 +57,9 @@ private:
     node& top() const;
 
     /**
-     * @brief Flushes all the content accumulated into the current
-     * block.
+     * @brief Flushes all the content accumulated into a text block.
      */
-    void end_current_block();
+    void end_text_block();
 
     /**
      * @brief Processes the headline, adding it to the current node.
@@ -88,10 +87,11 @@ public:
 
 private:
     std::ostringstream stream_;
-    entities::block_type block_type_;
     boost::shared_ptr<node> root_;
     std::stack<boost::shared_ptr<node>> stack_;
     bool in_drawer_;
+    bool in_greater_block_;
+    bool is_first_line_;
 };
 
 }

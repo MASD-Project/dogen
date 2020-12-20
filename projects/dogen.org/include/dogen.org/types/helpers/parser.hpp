@@ -22,6 +22,7 @@
 #define DOGEN_ORG_TYPES_HELPERS_PARSER_HPP
 
 #include "dogen.org/types/entities/affiliated_keyword.hpp"
+#include "dogen.org/types/entities/block.hpp"
 #include "dogen.org/types/entities/drawer.hpp"
 #include "dogen.org/types/entities/drawer_content.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -63,6 +64,7 @@ public:
     static boost::optional<entities::affiliated_keyword>
     try_parse_affiliated_keyword(const std::string& s);
 
+public:
     /**
      * @brief Attempts to parse the string as the start of an org
      * drawer.
@@ -83,6 +85,22 @@ public:
      * value field.
      */
     static entities::drawer_content parse_drawer_content(const std::string& s);
+
+public:
+    /**
+     * @brief Attempts to parse the string as the start of a block.
+     */
+    static boost::optional<entities::block>
+    try_parse_greater_block_start(const std::string& s);
+
+    /**
+     * @brief Returns true if the string denotes the end of a block.
+     *
+     * Note that this method detects mismatching block ends and
+     * throws.
+     */
+    static bool is_greater_block_end(const std::string& s,
+        const std::string& block_name);
 };
 
 }

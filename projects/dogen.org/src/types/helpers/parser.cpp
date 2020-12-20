@@ -28,6 +28,7 @@
 #include "dogen.org/types/entities/affiliated_keyword.hpp"
 #include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.org/types/entities/drawer_type.hpp"
+#include "dogen.org/types/entities/parameter.hpp"
 #include "dogen.org/types/entities/tag.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.org/io/entities/document_io.hpp"
@@ -44,6 +45,8 @@ const std::string space(" ");
 const std::string colon(":");
 const std::string property_drawer_start(":PROPERTIES:");
 const std::string property_drawer_end(":END:");
+const std::string block_start_prefix("#+BEGIN_");
+const std::string block_end_prefix("#+END_");
 
 const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
@@ -284,6 +287,73 @@ entities::drawer_content parser::parse_drawer_content(const std::string& s) {
     r.key(s.substr(first_colon_pos + 1, second_colon_pos - 1));
     r.value(s.substr(second_colon_pos + 2)); // +2 to skip the space in-between
     return r;
+}
+
+boost::optional<entities::block>
+parser::try_parse_greater_block_start(const std::string& s) {
+    /*
+     * If there is only white space in the string, or if its smaller
+     * than the block start prefix, its definitely not one of
+     * ours. Note that we add an extra character to the length because
+     * the block name is required.
+     */
+    const auto prefix_length(block_start_prefix.length());
+    if (is_empty_or_whitespace(s) || s.length() <= prefix_length + 1) {
+        BOOST_LOG_SEV(lg, debug) << "Line is not a block start.";
+        return boost::optional<entities::block>();
+    }
+
+    /*
+     * The structure of a block, as per documentation, is:
+     *
+     *    #+BEGIN_NAME DATA
+     *    CONTENTS
+     *    #+END_NAME
+     *
+     * We allow both lower and upper case notation.
+     */
+    std::string prefix(s.substr(0, prefix_length));
+    boost::to_upper(prefix);
+    if (prefix != block_start_prefix) {
+        BOOST_LOG_SEV(lg, debug) << "Line does not have a block prefix.";
+        return boost::optional<entities::block>();
+    }
+
+    /*
+     * Grab the name by skipping the block prefix.
+     */
+    entities::block r;
+    r.name(s.substr(prefix_length));
+
+    /*
+     * Type must always be greater block; we don't distinguish
+     * sub-types.
+     */
+    r.type(entities::block_type::greater_block);
+
+    /*
+     * Now grab the parameters, if any.
+     */
+    std::list<std::string> tokens;
+    boost::split(tokens, s, boost::is_any_of(space));
+    tokens.pop_front(); // skip start of block.
+    for (const auto& token : tokens) {
+        /*
+         * For some reason, boost split returns the position of
+         * the delimiters as empty strings, so we need to skip
+         * those.
+         */
+        if (!token.empty())
+            r.parameters().push_back(entities::parameter(token));
+    }
+    return r;
+}
+
+bool parser::
+is_greater_block_end(const std::string& s, const std::string& block_name) {
+    const auto upper(boost::to_upper_copy(block_name));
+    const std::string expected(block_end_prefix + upper);
+    return s == expected;
 }
 
 }
