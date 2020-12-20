@@ -44,19 +44,11 @@ public:
 
 public:
     drawer(
+        const std::string& name,
         const dogen::org::entities::drawer_type type,
-        const std::list<dogen::org::entities::drawer_content>& contents,
-        const std::string& name);
+        const std::list<dogen::org::entities::drawer_content>& contents);
 
 public:
-    dogen::org::entities::drawer_type type() const;
-    void type(const dogen::org::entities::drawer_type v);
-
-    const std::list<dogen::org::entities::drawer_content>& contents() const;
-    std::list<dogen::org::entities::drawer_content>& contents();
-    void contents(const std::list<dogen::org::entities::drawer_content>& v);
-    void contents(const std::list<dogen::org::entities::drawer_content>&& v);
-
     /**
      * @brief Original name used by the property.
      */
@@ -66,6 +58,14 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
     /**@}*/
+
+    dogen::org::entities::drawer_type type() const;
+    void type(const dogen::org::entities::drawer_type v);
+
+    const std::list<dogen::org::entities::drawer_content>& contents() const;
+    std::list<dogen::org::entities::drawer_content>& contents();
+    void contents(const std::list<dogen::org::entities::drawer_content>& v);
+    void contents(const std::list<dogen::org::entities::drawer_content>&& v);
 
 public:
     bool operator==(const drawer& rhs) const;
@@ -78,9 +78,9 @@ public:
     drawer& operator=(drawer other);
 
 private:
+    std::string name_;
     dogen::org::entities::drawer_type type_;
     std::list<dogen::org::entities::drawer_content> contents_;
-    std::string name_;
 };
 
 }

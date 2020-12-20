@@ -1214,6 +1214,29 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Original name used by the property.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -1247,29 +1270,6 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Original name used by the property.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5622,7 +5622,7 @@ of org mode required by Dogen.
         <dia:point val="80,7.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.31,6.95;80.75,9.755"/>
+        <dia:rectangle val="74.31,6.95;80.75,10.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5630,8 +5630,8 @@ of org mode required by Dogen.
       <dia:attribute name="orth_points">
         <dia:point val="80,7.7"/>
         <dia:point val="78,7.7"/>
-        <dia:point val="78,8.9"/>
-        <dia:point val="74.36,8.9"/>
+        <dia:point val="78,9.7"/>
+        <dia:point val="74.36,9.7"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -5694,7 +5694,7 @@ of org mode required by Dogen.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O2" connection="3"/>
-        <dia:connection handle="1" to="O7" connection="9"/>
+        <dia:connection handle="1" to="O7" connection="11"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
