@@ -41,6 +41,7 @@ const std::string failed_create("Failed to create output directory.");
 const std::string output_dir("dogen.code_generation_test_output");
 
 const std::string models_dia_dir("dogen.models/dia");
+const std::string models_org_dir("dogen.models/org");
 const std::string models_json_dir("dogen.models/json");
 
 const std::string path_dogen_dia("dogen.dia");
@@ -59,6 +60,23 @@ const std::string path_dogen_utility_dia("dogen.utility.dia");
 const std::string path_dogen_variability_dia("dogen.variability.dia");
 const std::string path_dogen_relational_dia("dogen.utility.dia");
 const std::string path_dogen_identification_dia("dogen.utility.dia");
+
+const std::string path_dogen_org("dogen.org");
+const std::string path_dogen_physical_org("dogen.physical.org");
+const std::string path_dogen_cli_org("dogen.cli.org");
+const std::string path_dogen_dia_org("dogen.dia.org");
+const std::string path_dogen_org_org("dogen.org.org");
+const std::string path_dogen_tracing_org("dogen.tracing.org");
+const std::string path_dogen_codec_org("dogen.codec.org");
+const std::string path_dogen_codec_dia_org("dogen.codec.dia.org");
+const std::string path_dogen_text_org("dogen.text.org");
+const std::string path_dogen_logical_org("dogen.logical.org");
+const std::string path_dogen_templating_org("dogen.templating.org");
+const std::string path_dogen_orchestration_org("dogen.orchestration.org");
+const std::string path_dogen_utility_org("dogen.utility.org");
+const std::string path_dogen_variability_org("dogen.variability.org");
+const std::string path_dogen_relational_org("dogen.utility.org");
+const std::string path_dogen_identification_org("dogen.utility.org");
 
 const std::string path_dogen_json("dogen.json");
 const std::string path_dogen_physical_json("dogen.physical.json");
@@ -83,6 +101,7 @@ namespace dogen::utility::test_data {
 
 path dogen_product::project_directory_;
 path dogen_product::dia_models_directory_;
+path dogen_product::org_models_directory_;
 path dogen_product::json_models_directory_;
 path dogen_product::output_directory_;
 
@@ -101,6 +120,7 @@ void dogen_product::initialize() {
     }
 
     dia_models_directory_ = project_directory_ / models_dia_dir;
+    org_models_directory_ = project_directory_ / models_org_dir;
     json_models_directory_ = project_directory_ / models_json_dir;
 
     output_directory_ = boost::filesystem::absolute(output_dir);
@@ -223,6 +243,89 @@ path dogen_product::input_dogen_relational_dia() {
 path dogen_product::input_dogen_identification_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_dogen_identification_dia;
+}
+
+/*
+ * Org paths
+ */
+path dogen_product::input_dogen_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_org;
+}
+
+path dogen_product::input_dogen_physical_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_physical_org;
+}
+
+path dogen_product::input_dogen_cli_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_cli_org;
+}
+
+path dogen_product::input_dogen_dia_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_dia_org;
+}
+
+path dogen_product::input_dogen_org_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_org_org;
+}
+
+path dogen_product::input_dogen_tracing_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_tracing_org;
+}
+
+path dogen_product::input_dogen_codec_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_codec_org;
+}
+
+path dogen_product::input_dogen_codec_dia_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_codec_dia_org;
+}
+
+path dogen_product::input_dogen_text_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_text_org;
+}
+
+path dogen_product::input_dogen_logical_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_logical_org;
+}
+
+path dogen_product::input_dogen_templating_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_templating_org;
+}
+
+path dogen_product::input_dogen_orchestration_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_orchestration_org;
+}
+
+path dogen_product::input_dogen_utility_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_utility_org;
+}
+
+path dogen_product::input_dogen_variability_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_variability_org;
+}
+
+path dogen_product::input_dogen_relational_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_relational_org;
+}
+
+path dogen_product::input_dogen_identification_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_dogen_identification_org;
 }
 
 /*

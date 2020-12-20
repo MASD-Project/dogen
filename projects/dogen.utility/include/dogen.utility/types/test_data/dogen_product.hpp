@@ -66,6 +66,24 @@ public:
     static boost::filesystem::path input_dogen_identification_dia();
 
 public:
+    static boost::filesystem::path input_dogen_org();
+    static boost::filesystem::path input_dogen_physical_org();
+    static boost::filesystem::path input_dogen_cli_org();
+    static boost::filesystem::path input_dogen_dia_org();
+    static boost::filesystem::path input_dogen_org_org();
+    static boost::filesystem::path input_dogen_tracing_org();
+    static boost::filesystem::path input_dogen_codec_org();
+    static boost::filesystem::path input_dogen_codec_dia_org();
+    static boost::filesystem::path input_dogen_text_org();
+    static boost::filesystem::path input_dogen_logical_org();
+    static boost::filesystem::path input_dogen_templating_org();
+    static boost::filesystem::path input_dogen_orchestration_org();
+    static boost::filesystem::path input_dogen_utility_org();
+    static boost::filesystem::path input_dogen_variability_org();
+    static boost::filesystem::path input_dogen_relational_org();
+    static boost::filesystem::path input_dogen_identification_org();
+
+public:
     static boost::filesystem::path input_dogen_json();
     static boost::filesystem::path input_dogen_physical_json();
     static boost::filesystem::path input_dogen_cli_json();
@@ -84,6 +102,7 @@ public:
 private:
     static boost::filesystem::path project_directory_;
     static boost::filesystem::path dia_models_directory_;
+    static boost::filesystem::path org_models_directory_;
     static boost::filesystem::path json_models_directory_;
     static boost::filesystem::path output_directory_;
 };
