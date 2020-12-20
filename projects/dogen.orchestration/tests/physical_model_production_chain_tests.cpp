@@ -441,11 +441,15 @@ bool check_out_of_sync(const boost::filesystem::path& output_dir,
 
 }
 
+using dogen::utility::test_data::dogen_product;
+
 BOOST_AUTO_TEST_SUITE(physical_model_production_chain_tests)
 
+/*
+ * Dia tests
+ */
 BOOST_AUTO_TEST_CASE(dogen_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -454,7 +458,6 @@ BOOST_AUTO_TEST_CASE(dogen_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_physical_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_physical_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_physical_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -463,7 +466,6 @@ BOOST_AUTO_TEST_CASE(dogen_physical_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_cli_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_cli_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_cli_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -472,7 +474,6 @@ BOOST_AUTO_TEST_CASE(dogen_cli_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_dia_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_dia_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -481,7 +482,6 @@ BOOST_AUTO_TEST_CASE(dogen_dia_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_org_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_org_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_org_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -490,7 +490,6 @@ BOOST_AUTO_TEST_CASE(dogen_org_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_tracing_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_tracing_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_tracing_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -499,7 +498,6 @@ BOOST_AUTO_TEST_CASE(dogen_tracing_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_codec_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_product_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_codec_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -508,7 +506,6 @@ BOOST_AUTO_TEST_CASE(dogen_codec_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_codec_dia_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_codec_dia_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_codec_dia_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -517,7 +514,6 @@ BOOST_AUTO_TEST_CASE(dogen_codec_dia_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_text_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_text_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_text_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -526,7 +522,6 @@ BOOST_AUTO_TEST_CASE(dogen_text_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_logical_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_logical_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_logical_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -535,7 +530,6 @@ BOOST_AUTO_TEST_CASE(dogen_logical_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_templating_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_templating_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_templating_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -544,7 +538,6 @@ BOOST_AUTO_TEST_CASE(dogen_templating_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_orchestration_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_orchestration_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_orchestration_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -553,7 +546,6 @@ BOOST_AUTO_TEST_CASE(dogen_orchestration_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_utility_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_utility_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_utility_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -562,7 +554,6 @@ BOOST_AUTO_TEST_CASE(dogen_utility_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_variability_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_variability_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -571,7 +562,6 @@ BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_relational_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_relational_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_relational_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
@@ -580,12 +570,22 @@ BOOST_AUTO_TEST_CASE(dogen_relational_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_identification_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_identification_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_identification_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
+
+/*
+ * Org tests
+ */
+// BOOST_AUTO_IGNORE_TEST_CASE(dogen_org_produces_expected_model) {
+//     SETUP_TEST_LOG("dogen_org_produces_expected_model");
+//     const auto t(dogen_product::input_dogen_org());
+//     const auto od(dogen_product::project_directory());
+//     const auto m(apply_physical_model_production(t, od));
+//     BOOST_CHECK(check_for_differences(od, m));
+// }
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
 
@@ -812,6 +812,9 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_dia_produces_expected_model) {
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
 
+/*
+ * JSON tests.
+ */
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_boost_model_json_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_boost_model_json_produces_expected_model");
     using dogen::utility::test_data::cpp_ref_impl_product;
