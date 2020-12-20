@@ -30,10 +30,7 @@ namespace dogen::org::entities {
 enum class block_type : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     text_block = 1,
-    greater_block = 2,
-    dynamic_block = 3,
-    comment_block = 4,
-    source_block = 5
+    greater_block = 2
 };
 
 }

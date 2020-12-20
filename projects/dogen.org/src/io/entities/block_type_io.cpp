@@ -39,15 +39,6 @@ std::ostream& operator<<(std::ostream& s, const block_type& v) {
     case block_type::greater_block:
         attr = "\"greater_block\"";
         break;
-    case block_type::dynamic_block:
-        attr = "\"dynamic_block\"";
-        break;
-    case block_type::comment_block:
-        attr = "\"comment_block\"";
-        break;
-    case block_type::source_block:
-        attr = "\"source_block\"";
-        break;
     default:
         throw std::invalid_argument("Invalid value for block_type");
     }
