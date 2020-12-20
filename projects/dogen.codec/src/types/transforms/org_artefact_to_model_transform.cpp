@@ -18,12 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.codec/io/entities/model_io.hpp"
+#include "dogen.codec/io/entities/artefact_io.hpp"
+#include "dogen.org/types/transforms/string_to_document_transform.hpp"
 #include "dogen.codec/types/transforms/org_artefact_to_model_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("codec.transforms.org_artefact_to_model_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::codec::transforms {
 
-bool org_artefact_to_model_transform::operator==(const org_artefact_to_model_transform& /*rhs*/) const {
-    return true;
+entities::model org_artefact_to_model_transform::
+apply(const transforms::context& ctx, const entities::artefact& a) {
+    const auto fn(a.path().filename().stem().generic_string());
+    const auto t(ctx.tracer());
+    tracing::scoped_transform_tracer stp(lg, "org artefact to model",
+        transform_id, fn, *t, a);
+
+    BOOST_LOG_SEV(lg, debug) << "Processing org-mode document.";
+    using org::transforms::string_to_document_transform;
+    const auto d(string_to_document_transform::apply(t, a.content()));
+
+    BOOST_LOG_SEV(lg, debug) << "Processed org-mode document.";
+    entities::model r;
+    stp.end_transform(r);
+    return r;
 }
 
 }

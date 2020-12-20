@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Processes the artefact as if encoded as an org-mode
+ * document, and converts it into an instance of the codec model.
+ */
 class org_artefact_to_model_transform final {
 public:
-    org_artefact_to_model_transform() = default;
-    org_artefact_to_model_transform(const org_artefact_to_model_transform&) = default;
-    org_artefact_to_model_transform(org_artefact_to_model_transform&&) = default;
-    ~org_artefact_to_model_transform() = default;
-    org_artefact_to_model_transform& operator=(const org_artefact_to_model_transform&) = default;
-
-public:
-    bool operator==(const org_artefact_to_model_transform& rhs) const;
-    bool operator!=(const org_artefact_to_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::model
+    apply(const transforms::context& ctx, const entities::artefact& a);
 };
 
 }

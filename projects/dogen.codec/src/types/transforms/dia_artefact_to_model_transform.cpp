@@ -118,7 +118,7 @@ obtain_model(const std::string& name, const std::list<processed_object>& pos) {
 entities::model dia_artefact_to_model_transform::
 apply(const transforms::context& ctx, const entities::artefact& a) {
     const auto fn(a.path().filename().stem().generic_string());
-    tracing::scoped_transform_tracer stp(lg, "json artefact to model",
+    tracing::scoped_transform_tracer stp(lg, "dia artefact to model",
         transform_id, fn, *ctx.tracer(), a);
 
     BOOST_LOG_SEV(lg, debug) << "Processing Dia diagram.";
