@@ -24,6 +24,7 @@
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
+#include "dogen.codec/types/transforms/org_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 
@@ -35,6 +36,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string json_codec_name("json");
+const std::string org_codec_name("org");
 const std::string dia_codec_name("dia");
 
 const std::string unsupported_codec("No transform are available for codec: ");
@@ -55,6 +57,10 @@ apply(const context& ctx, const entities::artefact& a) {
         return r;
     } else if (a.codec_name() == dia_codec_name) {
         const auto r(dia_artefact_to_model_transform::apply(ctx, a));
+        stp.end_chain(r);
+        return r;
+    } else if (a.codec_name() == org_codec_name) {
+        const auto r(org_artefact_to_model_transform::apply(ctx, a));
         stp.end_chain(r);
         return r;
     }
