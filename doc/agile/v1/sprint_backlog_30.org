@@ -7,25 +7,24 @@
 
 - to finish the codec tidy-up work.
 - to implement org mode codec.
-- to start implement path and dependencies via PMM.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-20 Sun 16:30]
+#+CAPTION: Clock summary at [2020-12-20 Sun 18:39]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *26:28* |       |       | 100.0 |
+| *Total time*                                       | *26:59* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 26:28   |       |       | 100.0 |
-| Active                                             |         | 26:28 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  22.9 |
+| Stories                                            | 26:59   |       |       | 100.0 |
+| Active                                             |         | 26:59 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  22.5 |
 | Create a demo and presentation for previous sprint |         |       |  0:34 |   2.1 |
 | Sprint and product backlog grooming                |         |       |  0:35 |   2.2 |
-| Add support for reading org-mode documents         |         |       | 19:15 |  72.7 |
+| Add support for reading org-mode documents         |         |       | 19:46 |  73.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -326,6 +325,7 @@ the C++ and C# classes into one and move it to =text=.
 
 *** STARTED Add support for reading org-mode documents                :story:
     :LOGBOOK:
+    CLOCK: [2020-12-20 Sun 18:08]--[2020-12-20 Sun 18:39] =>  0:31
     CLOCK: [2020-12-20 Sun 15:15]--[2020-12-20 Sun 16:30] =>  1:15
     CLOCK: [2020-12-20 Sun 10:11]--[2020-12-20 Sun 14:15] =>  4:04
     CLOCK: [2020-12-19 Sat 17:31]--[2020-12-19 Sat 17:33] =>  0:02
