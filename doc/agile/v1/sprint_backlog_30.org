@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-19 Sat 17:33]
+#+CAPTION: Clock summary at [2020-12-20 Sun 14:15]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *21:09* |       |       | 100.0 |
+| *Total time*                                       | *25:13* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 21:09   |       |       | 100.0 |
-| Active                                             |         | 21:09 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  28.7 |
-| Create a demo and presentation for previous sprint |         |       |  0:34 |   2.7 |
-| Sprint and product backlog grooming                |         |       |  0:35 |   2.8 |
-| Add org-mode support                               |         |       | 13:56 |  65.9 |
+| Stories                                            | 25:13   |       |       | 100.0 |
+| Active                                             |         | 25:13 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  24.1 |
+| Create a demo and presentation for previous sprint |         |       |  0:34 |   2.2 |
+| Sprint and product backlog grooming                |         |       |  0:35 |   2.3 |
+| Add org-mode support                               |         |       | 18:00 |  71.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -326,6 +326,7 @@ the C++ and C# classes into one and move it to =text=.
 
 *** STARTED Add org-mode support                                      :story:
     :LOGBOOK:
+    CLOCK: [2020-12-20 Sun 10:11]--[2020-12-20 Sun 14:15] =>  4:04
     CLOCK: [2020-12-19 Sat 17:31]--[2020-12-19 Sat 17:33] =>  0:02
     CLOCK: [2020-12-19 Sat 15:00]--[2020-12-19 Sat 17:30] =>  2:30
     CLOCK: [2020-12-19 Sat 11:02]--[2020-12-19 Sat 14:23] =>  3:21
