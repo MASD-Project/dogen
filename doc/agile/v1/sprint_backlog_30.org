@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-20 Sun 14:15]
+#+CAPTION: Clock summary at [2020-12-20 Sun 16:30]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *25:13* |       |       | 100.0 |
+| *Total time*                                       | *26:28* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 25:13   |       |       | 100.0 |
-| Active                                             |         | 25:13 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  24.1 |
-| Create a demo and presentation for previous sprint |         |       |  0:34 |   2.2 |
-| Sprint and product backlog grooming                |         |       |  0:35 |   2.3 |
-| Add org-mode support                               |         |       | 18:00 |  71.4 |
+| Stories                                            | 26:28   |       |       | 100.0 |
+| Active                                             |         | 26:28 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  22.9 |
+| Create a demo and presentation for previous sprint |         |       |  0:34 |   2.1 |
+| Sprint and product backlog grooming                |         |       |  0:35 |   2.2 |
+| Add support for reading org-mode documents         |         |       | 19:15 |  72.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -324,8 +324,9 @@ Assistant should not really exist, but to get us to the next step we
 should just make it a helper in =text= model. We just need to merge
 the C++ and C# classes into one and move it to =text=.
 
-*** STARTED Add org-mode support                                      :story:
+*** STARTED Add support for reading org-mode documents                :story:
     :LOGBOOK:
+    CLOCK: [2020-12-20 Sun 15:15]--[2020-12-20 Sun 16:30] =>  1:15
     CLOCK: [2020-12-20 Sun 10:11]--[2020-12-20 Sun 14:15] =>  4:04
     CLOCK: [2020-12-19 Sat 17:31]--[2020-12-19 Sat 17:33] =>  0:02
     CLOCK: [2020-12-19 Sat 15:00]--[2020-12-19 Sat 17:30] =>  2:30
@@ -338,9 +339,9 @@ the C++ and C# classes into one and move it to =text=.
     CLOCK: [2020-12-16 Wed 19:12]--[2020-12-16 Wed 20:16] =>  1:04
     :END:
 
-Create an org-mode model, and add transforms to read to and from
-org-mode. Then create a codec to convert it into the Dogen
-representation.
+Create an org-mode model, and add transforms to read from
+org-mode. The remaining work should go under their own stories (codec,
+writing support, etc).
 
 Merged stories:
 
