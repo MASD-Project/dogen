@@ -141,32 +141,27 @@ other text content
 )");
 
 const std::string simple_empty_drawer(R"(:some_drawer:
-:end:
-)");
+:end:)");
 
 const std::string drawer_with_one_line(R"(:some_drawer:
 some contents
-:end:
-)");
+:end:)");
 
 const std::string drawer_with_multiple_lines(R"(:some_drawer:
 some contents
 more contents
 yet some more
-:end:
-)");
+:end:)");
 
 const std::string property_drawer_with_one_entry(R"(:PROPERTIES:
 :key: a value
-:END:
-)");
+:END:)");
 
 const std::string property_drawer_with_multiple_entries(R"(:PROPERTIES:
 :key0: a value
 :key1: another value
 :abc: v
-:END:
-)");
+:END:)");
 
 const std::string various_drawers_in_headlines(R"(#+title: some title
 :PROPERTIES:
@@ -198,8 +193,11 @@ contents
 
 const std::string greater_block_without_parameters(R"(#+begin_src
 content
-#+end_src
-)");
+#+end_src)");
+
+const std::string greater_block_with_parameters(R"(#+begin_src c++
+content
+#+end_src)");
 
 const std::string text_and_greater_block_interleaved(R"(some text content
 other text content
@@ -209,6 +207,35 @@ content
 #+end_src
 
 text content
+more content
+)");
+
+const std::string text_and_greater_block_interleaved_in_headline(R"(#+title: some title
+:PROPERTIES:
+:key_0: value_0
+:END:
+
+some text content
+
+* 1
+:PROPERTIES:
+:key_1: value_1
+:END:
+
+content
+
+** 1.1
+*** 1.1.1
+:PROPERTIES:
+:key_1_1_1: value_1_1_1
+:END:
+
+content
+
+#+begin_src c++
+content
+#+end_src
+
 more content
 )");
 
@@ -746,7 +773,7 @@ other text content
 }
 
 BOOST_AUTO_TEST_CASE(top_level_content_two_headlines_with_content_document_results_in_expected_org_document) {
-    SETUP_TEST_LOG_SOURCE("top_level_content_two_headlines_with_content_document_in_expected_org_document");
+    SETUP_TEST_LOG_SOURCE_DEBUG("top_level_content_two_headlines_with_content_document_in_expected_org_document");
     const auto document(make(top_level_content_two_headlines_with_content));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -791,6 +818,7 @@ some content
     const auto& ccs(child.section().blocks().front().contents());
     const std::string expected_child_sec(R"(
 more content.
+
 )");
     BOOST_CHECK(ccs == expected_child_sec);
 }
@@ -869,7 +897,8 @@ some content
     BOOST_REQUIRE(back.section().blocks().size() == 1);
     const auto& bc(back.section().blocks().back().contents());
     const std::string expected_back_sec(R"(
-some content)");
+some content
+)");
     BOOST_CHECK(bc == expected_back_sec);
 }
 
@@ -915,6 +944,7 @@ BOOST_AUTO_TEST_CASE(multiple_affiliated_keywords_document_results_in_expected_d
     const std::string expected_sec(R"(
 some text content
 other text content
+
 )");
     BOOST_CHECK(expected_sec == back_block);
 }
@@ -1108,7 +1138,7 @@ content
 }
 
 BOOST_AUTO_TEST_CASE(greater_block_without_parameters_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("greater_block_without_parameters_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("greater_block_without_parameters_results_in_expected_document");
     const auto document(make(greater_block_without_parameters));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -1125,8 +1155,27 @@ BOOST_AUTO_TEST_CASE(greater_block_without_parameters_results_in_expected_docume
     BOOST_CHECK(front.type() == block_type::greater_block);
 }
 
+BOOST_AUTO_TEST_CASE(greater_block_with_parameters_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE("greater_block_with_parameters_results_in_expected_document");
+    const auto document(make(greater_block_with_parameters));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    BOOST_REQUIRE(document.section().blocks().size() == 1);
+    const auto& front(document.section().blocks().front());
+    BOOST_CHECK(front.name() == "src");
+    BOOST_CHECK(front.contents() == "content");
+    BOOST_REQUIRE(front.parameters().size() == 1);
+    BOOST_CHECK(front.parameters().front().value() == "c++");
+
+    using dogen::org::entities::block_type;
+    BOOST_CHECK(front.type() == block_type::greater_block);
+}
+
 BOOST_AUTO_TEST_CASE(text_and_greater_block_interleaved_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("text_and_greater_block_interleaved_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("text_and_greater_block_interleaved_results_in_expected_document");
     const auto document(make(text_and_greater_block_interleaved));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -1143,7 +1192,6 @@ other text content
     using dogen::org::entities::block_type;
     BOOST_CHECK(front.type() == block_type::text_block);
 
-
     const auto& middle(*(++document.section().blocks().begin()));
     BOOST_CHECK(middle.name() == "src");
     BOOST_CHECK(middle.contents() == "content");
@@ -1154,9 +1202,60 @@ other text content
     BOOST_CHECK(back.name().empty());
     BOOST_CHECK(back.contents() == R"(
 text content
-more content)");
+more content
+)");
     BOOST_CHECK(back.parameters().empty());
     BOOST_CHECK(back.type() == block_type::text_block);
+}
+
+BOOST_AUTO_TEST_CASE(text_and_greater_block_interleaved_in_headline_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("text_and_greater_block_interleaved_in_headline_results_in_expected_document");
+    const auto document(make(text_and_greater_block_interleaved_in_headline));
+
+    BOOST_CHECK(!document.affiliated_keywords().empty());
+    BOOST_CHECK(!document.drawers().empty());
+    BOOST_REQUIRE(document.headlines().size() == 1);
+
+    const auto h1(document.headlines().front());
+    BOOST_CHECK(h1.title() == "1");
+
+    BOOST_REQUIRE(h1.headlines().size() == 1);
+    const auto& h1_1(h1.headlines().front());
+    BOOST_CHECK(h1_1.title() == "1.1");
+    BOOST_REQUIRE(h1_1.headlines().size() == 1);
+
+    const auto& h1_1_1(h1_1.headlines().front());
+    BOOST_CHECK(h1_1_1.title() == "1.1.1");
+    BOOST_CHECK(h1_1_1.headlines().empty());
+    BOOST_CHECK(h1_1_1.drawers().size() == 1);
+    BOOST_CHECK(h1_1_1.section().blocks().size() == 3);
+
+    const auto& front(h1_1_1.section().blocks().front());
+    BOOST_CHECK(front.name().empty());
+    BOOST_CHECK(front.contents() == R"(
+content
+)");
+    BOOST_CHECK(front.parameters().empty());
+    using dogen::org::entities::block_type;
+    BOOST_CHECK(front.type() == block_type::text_block);
+
+    const auto& middle(*(++h1_1_1.section().blocks().begin()));
+    BOOST_CHECK(middle.name() == "src");
+    BOOST_CHECK(middle.contents() == "content");
+    using dogen::org::entities::block_type;
+    BOOST_CHECK(middle.type() == block_type::greater_block);
+    BOOST_REQUIRE(middle.parameters().size() == 1);
+    BOOST_CHECK(middle.parameters().front().value() == "c++");
+
+
+    const auto& back(h1_1_1.section().blocks().back());
+    BOOST_CHECK(back.name().empty());
+    BOOST_CHECK(back.contents() == R"(
+more content
+)");
+    BOOST_CHECK(back.parameters().empty());
+    BOOST_CHECK(back.type() == block_type::text_block);
+
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -363,6 +363,7 @@ void builder::add_line(const std::string& s) {
 }
 
 void builder::add_final_new_line() {
+    BOOST_LOG_SEV(lg, debug) << "Adding final new line.";
     stream_ << std::endl;
 }
 

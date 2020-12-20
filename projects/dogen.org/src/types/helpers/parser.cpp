@@ -322,11 +322,18 @@ parser::try_parse_greater_block_start(const std::string& s) {
     }
 
     /*
-     * Grab the name by skipping the block prefix.
+     * Tokenise the input.
      */
     BOOST_LOG_SEV(lg, debug) << "Line is a greater block start.";
+    std::list<std::string> tokens;
+    boost::split(tokens, s, boost::is_any_of(space));
+
+    /*
+     * Grab the name by skipping the block prefix.
+     */
     entities::block r;
-    r.name(s.substr(prefix_length));
+    r.name(tokens.front().substr(prefix_length));
+    tokens.pop_front();
 
     /*
      * Type must always be greater block; we don't distinguish
@@ -337,9 +344,6 @@ parser::try_parse_greater_block_start(const std::string& s) {
     /*
      * Now grab the parameters, if any.
      */
-    std::list<std::string> tokens;
-    boost::split(tokens, s, boost::is_any_of(space));
-    tokens.pop_front(); // skip start of block.
     for (const auto& token : tokens) {
         /*
          * For some reason, boost split returns the position of

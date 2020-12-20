@@ -27,11 +27,16 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("org.helpers.document_factory"));
 
+const char carriage_return('\r');
+const char line_feed('\n');
+
 }
 
 namespace dogen::org::helpers {
 
 entities::document document_factory::make(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "Building an org mode document.";
+
     /*
      * If there is no content, return an empty document.
      */
@@ -40,18 +45,36 @@ entities::document document_factory::make(const std::string& s) {
         return r;
     }
 
+    /*
+     * Add one line at a time to our builder. Note that getline
+     * consumes the new lines, so the builder has some special
+     * handling to cope with that.
+     */
     std::string line;
     std::istringstream is(s);
     helpers::builder b;
-    while(std::getline(is, line)) {
+    while(std::getline(is, line))
         b.add_line(line);
-    }
 
-    const auto last_char(*s.rend());
-    if (last_char == '\r' || last_char == '\n')
+    /*
+     * Determine if the document ended with a new line and if so tell
+     * the builder about it. The builder logic is not able to detect
+     * this particular case.
+     */
+    const auto last_char(*s.crbegin());
+    BOOST_LOG_SEV(lg, debug) << "Last char:"
+                             << static_cast<unsigned int>(last_char);
+    if (last_char == carriage_return || last_char == line_feed)
         b.add_final_new_line();
+    else
+        BOOST_LOG_SEV(lg, debug) << "Not adding final new line.";
 
-    return b.build();
+    /*
+     * Build the document.
+     */
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Finished building an org mode document.";
+    return r;
 }
 
 }
