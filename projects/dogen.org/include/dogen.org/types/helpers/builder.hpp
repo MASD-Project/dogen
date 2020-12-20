@@ -43,21 +43,47 @@ public:
     builder();
 
 private:
+    /**
+     * @brief Throws if the stack is empty.
+     */
     void ensure_stack_not_empty() const;
-    void ensure_expected_headline_level(const unsigned int expected,
-        const unsigned int actual) const;
 
 private:
+    /**
+     * @brief Returns the node at the top of the stack.
+     *
+     * @pre stack must not be empty.
+     */
+    node& top() const;
+
+    /**
+     * @brief Flushes all the content accumulated into the current
+     * block.
+     */
     void end_current_block();
+
+    /**
+     * @brief Processes the headline, adding it to the current node.
+     */
     void handle_headline(const entities::headline& hl);
 
-public:
-    void add_line(const std::string& s);
-
 private:
+    /**
+     * @brief Creates an headline structure from the supplied node, by
+     * recursing it.
+     */
     entities::headline make_headline(boost::shared_ptr<node> n) const;
 
 public:
+    /**
+     * @brief Adds line to the builder.
+     */
+    void add_line(const std::string& s);
+
+public:
+    /**
+     * @brief Builds an org mode document from the data supplied so far.
+     */
     entities::document build();
 
 private:
@@ -65,6 +91,7 @@ private:
     entities::block_type block_type_;
     boost::shared_ptr<node> root_;
     std::stack<boost::shared_ptr<node>> stack_;
+    bool in_drawer_;
 };
 
 }

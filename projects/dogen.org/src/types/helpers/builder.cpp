@@ -33,6 +33,7 @@ auto lg(logger_factory("org.helpers.builder"));
 
 const std::string unexpected_level("Headline is at an unexpected level.");
 const std::string empty_stack("Stack is empty, expected content");
+const std::string invalid_drawer("Drawer contains drawer: ");
 
 }
 
@@ -41,7 +42,8 @@ namespace dogen::org::helpers {
 using entities::block_type;
 
 builder::builder() : block_type_(block_type::invalid),
-                     root_(boost::make_shared<node>()) {
+                     root_(boost::make_shared<node>()),
+                     in_drawer_(false) {
     root_->data().level(0);
     stack_.push(root_);
 }
@@ -52,18 +54,10 @@ void builder::ensure_stack_not_empty() const {
         BOOST_THROW_EXCEPTION(building_error(empty_stack));
     }
 }
-void builder::ensure_expected_headline_level(const unsigned int expected,
-    const unsigned int actual) const {
 
-    if (expected == actual)
-        return;
-
-    std::ostringstream os;
-    os << unexpected_level << "expected: " << expected
-       << " but found " << actual;
-    const std::string msg(os.str());
-    BOOST_LOG_SEV(lg, error) << msg;
-    BOOST_THROW_EXCEPTION(building_error(msg));
+node& builder::top() const {
+    ensure_stack_not_empty();
+    return *stack_.top();
 }
 
 void builder::end_current_block() {
@@ -84,7 +78,7 @@ void builder::end_current_block() {
     entities::block tb;
     tb.type(block_type_);
     tb.contents(content);
-    stack_.top()->data().section().blocks().push_back(tb);
+    top().data().section().blocks().push_back(tb);
     block_type_ = block_type::invalid;
 }
 
@@ -117,8 +111,7 @@ void builder::handle_headline(const entities::headline& hl) {
         auto child(boost::make_shared<node>());
         child->data(hl);
 
-        auto& current(*stack_.top());
-        current.children().push_back(child);
+        top().children().push_back(child);
         stack_.push(child);
         return;
     }
@@ -131,10 +124,10 @@ void builder::handle_headline(const entities::headline& hl) {
      */
     if (sz + 1 == hl.level()) {
         stack_.pop();
-        auto& current(*stack_.top());
         auto child(boost::make_shared<node>());
         child->data(hl);
-        current.children().push_back(child);
+
+        top().children().push_back(child);
         stack_.push(child);
     }
 
@@ -146,23 +139,32 @@ void builder::handle_headline(const entities::headline& hl) {
      */
     if (sz < hl.level()) {
         std::ostringstream os;
-        os << "unexpected stack size: " << sz
-           << " Level: " << hl.level();
+        os << "unexpected stack size: " << sz << " Level: " << hl.level();
         const std::string msg(os.str());
         BOOST_LOG_SEV(lg, error) << msg;
         BOOST_THROW_EXCEPTION(building_error(msg));
     }
+
     const auto number_of_pops(sz - hl.level());
     BOOST_LOG_SEV(lg, debug) << "Popping stack: " << number_of_pops;
     for (unsigned int i = 0; i < number_of_pops; ++i)
         stack_.pop();
 
-    ensure_stack_not_empty();
-    auto& current(*stack_.top());
     auto child(boost::make_shared<node>());
     child->data(hl);
-    current.children().push_back(child);
+
+    top().children().push_back(child);
     stack_.push(child);
+}
+
+entities::headline builder::make_headline(boost::shared_ptr<node> n) const {
+    entities::headline r(n->data());
+    BOOST_LOG_SEV(lg, debug) << "Processing headline: " << r.title();
+
+    for (const auto& child : n->children())
+        r.headlines().push_back(make_headline(child));
+
+    return r;
 }
 
 void builder::add_line(const std::string& s) {
@@ -199,8 +201,33 @@ void builder::add_line(const std::string& s) {
         /*
          * Add the affiliated keywords to the current node.
          */
-        auto& top(*stack_.top());
-        top.data().affiliated_keywords().push_back(*oak);
+        top().data().affiliated_keywords().push_back(*oak);
+        return;
+    }
+
+    /*
+     * Now handle the drawers.
+     */
+    const auto od(parser::try_parse_drawer_start(s));
+    if (od) {
+        /*
+         * Flush any pending content we may have.
+         */
+        end_current_block();
+
+        /*
+         * Drawers cannot be inside of drawers.
+         */
+        if (in_drawer_) {
+            BOOST_LOG_SEV(lg, error) << invalid_drawer << s;
+            BOOST_THROW_EXCEPTION(building_error(invalid_drawer + s));
+        }
+        in_drawer_ = true;
+
+        /*
+         * Add the drawer to the current node.
+         */
+        top().data().drawers().push_back(*od);
         return;
     }
 
@@ -217,16 +244,6 @@ void builder::add_line(const std::string& s) {
         BOOST_LOG_SEV(lg, debug) << "Adding to block.";
         stream_ << std::endl << s;
     }
-}
-
-entities::headline builder::make_headline(boost::shared_ptr<node> n) const {
-    entities::headline r(n->data());
-    BOOST_LOG_SEV(lg, debug) << "Processing headline: " << r.title();
-
-    for (const auto& child : n->children())
-        r.headlines().push_back(make_headline(child));
-
-    return r;
 }
 
 entities::document builder::build() {
