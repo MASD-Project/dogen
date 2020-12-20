@@ -27,6 +27,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.org/types/entities/affiliated_keyword.hpp"
 #include "dogen.org/types/entities/block_type.hpp"
+#include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.org/types/entities/tag.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.org/io/entities/document_io.hpp"
@@ -38,17 +39,32 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("org.helpers.parser"));
 
+const std::string empty;
 const std::string space(" ");
-const std::string tag_start(":");
+const std::string colon(":");
+const std::string property_drawer_start(":PROPERTIES:");
+const std::string property_drawer_end(":END:");
+
+
 const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
 const std::regex todo_keyword_regex("^[A-Z].*");
 const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
+const std::regex drawer_regex("^\\:\\w+\\:");
 const std::regex affiliated_keyword_regex("^#\\+\\w+:\\s.*");
 
 }
 
 namespace dogen::org::helpers {
+
+bool parser::is_empty_or_whitespace(const std::string& s) {
+    const auto trimmed(boost::algorithm::trim_copy(s));
+    if (trimmed.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Line is empty or whitespace.";
+        return true;
+    }
+    return false;
+}
 
 boost::optional<entities::headline>
 parser::try_parse_headline(const std::string& s) {
@@ -56,11 +72,8 @@ parser::try_parse_headline(const std::string& s) {
      * If there is only white space in the string, there is nothing to
      * worry about.
      */
-    const auto trimmed(boost::algorithm::trim_copy(s));
-    if (trimmed.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Line is empty, so not a headline.";
+    if (is_empty_or_whitespace(s))
         return boost::optional<entities::headline>();
-    }
 
     /*
      * According to the org spec, a headline is defined as:
@@ -90,8 +103,8 @@ parser::try_parse_headline(const std::string& s) {
     /*
      * The next element is the optional "keyword". We don't actually
      * validate we're one of the setup TODO keywords; instead we just
-     * check to see if its upper case. If it is, we assume it must be
-     * a keyword.
+     * check to see if it matches our regex. If it is, we assume it
+     * must be a valid keyword.
      */
     is >> token;
     if (std::regex_match(token, todo_keyword_regex)) {
@@ -176,11 +189,8 @@ parser::try_parse_affiliated_keyword(const std::string& s) {
      * If there is only white space in the string, there is nothing to
      * worry about.
      */
-    const auto trimmed(boost::algorithm::trim_copy(s));
-    if (trimmed.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Line is empty. Not an affiliated keyword.";
+    if (is_empty_or_whitespace(s))
         return boost::optional<entities::affiliated_keyword>();
-    }
 
     /*
      * As per org documentation: Affiliated keywords are built upon
@@ -207,6 +217,34 @@ parser::try_parse_affiliated_keyword(const std::string& s) {
     const auto colon_pos(s.find_first_of(":"));
     r.key(s.substr(2, colon_pos - 2));
     r.value(s.substr(colon_pos + 2));
+    return r;
+}
+
+boost::optional<entities::drawer>
+parser::try_parse_drawer_start(const std::string& s) {
+    /*
+     * If there is only white space in the string, there is nothing to
+     * worry about.
+     */
+    if (is_empty_or_whitespace(s))
+        return boost::optional<entities::drawer>();
+
+    /*
+     * Check to see if the string matches the expected shape of the
+     * start of a drawer.
+     */
+    if (!std::regex_match(s, drawer_regex)) {
+        BOOST_LOG_SEV(lg, debug) << "Line is not the start of a drawer.";
+        return boost::optional<entities::drawer>();
+    }
+
+    entities::drawer r;
+    r.name(boost::replace_all_copy(s, colon, empty));
+
+    using entities::drawer_type;
+    r.type(boost::to_upper_copy(s) == property_drawer_start ?
+        drawer_type::property_drawer : drawer_type::regular);
+
     return r;
 }
 
