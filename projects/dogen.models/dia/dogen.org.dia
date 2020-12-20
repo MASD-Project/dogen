@@ -1110,7 +1110,7 @@
         <dia:point val="60,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.95,6.95;74.41,10.65"/>
+        <dia:rectangle val="59.95,6.95;74.41,11.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="60,7"/>
@@ -1119,7 +1119,7 @@
         <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#drawer#</dia:string>
@@ -1247,6 +1247,29 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Original name used by the property.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2788,16 +2811,16 @@
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="60,10.6"/>
+        <dia:point val="60,11.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.2425,9.85;60.75,16.7498"/>
+        <dia:rectangle val="58.2425,10.65;60.75,16.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="60,10.6"/>
+        <dia:point val="60,11.4"/>
         <dia:point val="60,14"/>
         <dia:point val="58.2925,14"/>
         <dia:point val="58.2925,15.9498"/>
@@ -4662,7 +4685,7 @@ of org mode required by Dogen.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#current#</dia:string>
+            <dia:string>#data#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#entities::headline#</dia:string>
@@ -5518,7 +5541,7 @@ of org mode required by Dogen.
         <dia:point val="67,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.25,10.55;74.56,16.8"/>
+        <dia:rectangle val="66.25,11.35;74.56,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5527,7 +5550,7 @@ of org mode required by Dogen.
         <dia:point val="67,16"/>
         <dia:point val="67,14"/>
         <dia:point val="74.36,14"/>
-        <dia:point val="74.36,10.6"/>
+        <dia:point val="74.36,11.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

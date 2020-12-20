@@ -32,19 +32,19 @@ const boost::shared_ptr<dogen::org::helpers::node>& rhs) {
 namespace dogen::org::helpers {
 
 node::node(
-    const dogen::org::entities::headline& current,
+    const dogen::org::entities::headline& data,
     const std::list<boost::shared_ptr<dogen::org::helpers::node> >& children)
-    : current_(current),
+    : data_(data),
       children_(children) { }
 
 void node::swap(node& other) noexcept {
     using std::swap;
-    swap(current_, other.current_);
+    swap(data_, other.data_);
     swap(children_, other.children_);
 }
 
 bool node::operator==(const node& rhs) const {
-    return current_ == rhs.current_ &&
+    return data_ == rhs.data_ &&
         children_ == rhs.children_;
 }
 
@@ -54,20 +54,20 @@ node& node::operator=(node other) {
     return *this;
 }
 
-const dogen::org::entities::headline& node::current() const {
-    return current_;
+const dogen::org::entities::headline& node::data() const {
+    return data_;
 }
 
-dogen::org::entities::headline& node::current() {
-    return current_;
+dogen::org::entities::headline& node::data() {
+    return data_;
 }
 
-void node::current(const dogen::org::entities::headline& v) {
-    current_ = v;
+void node::data(const dogen::org::entities::headline& v) {
+    data_ = v;
 }
 
-void node::current(const dogen::org::entities::headline&& v) {
-    current_ = std::move(v);
+void node::data(const dogen::org::entities::headline&& v) {
+    data_ = std::move(v);
 }
 
 const std::list<boost::shared_ptr<dogen::org::helpers::node> >& node::children() const {

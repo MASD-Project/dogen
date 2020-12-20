@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.org/io/entities/drawer_io.hpp"
 #include "dogen.org/io/entities/drawer_type_io.hpp"
 #include "dogen.org/io/entities/drawer_content_io.hpp"
@@ -37,13 +38,22 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::org::ent
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace dogen::org::entities {
 
 std::ostream& operator<<(std::ostream& s, const drawer& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::org::entities::drawer\"" << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"contents\": " << v.contents()
+      << "\"contents\": " << v.contents() << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\""
       << " }";
     return(s);
 }

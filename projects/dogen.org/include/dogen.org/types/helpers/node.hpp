@@ -42,14 +42,14 @@ public:
 
 public:
     node(
-        const dogen::org::entities::headline& current,
+        const dogen::org::entities::headline& data,
         const std::list<boost::shared_ptr<dogen::org::helpers::node> >& children);
 
 public:
-    const dogen::org::entities::headline& current() const;
-    dogen::org::entities::headline& current();
-    void current(const dogen::org::entities::headline& v);
-    void current(const dogen::org::entities::headline&& v);
+    const dogen::org::entities::headline& data() const;
+    dogen::org::entities::headline& data();
+    void data(const dogen::org::entities::headline& v);
+    void data(const dogen::org::entities::headline&& v);
 
     const std::list<boost::shared_ptr<dogen::org::helpers::node> >& children() const;
     std::list<boost::shared_ptr<dogen::org::helpers::node> >& children();
@@ -67,7 +67,7 @@ public:
     node& operator=(node other);
 
 private:
-    dogen::org::entities::headline current_;
+    dogen::org::entities::headline data_;
     std::list<boost::shared_ptr<dogen::org::helpers::node> > children_;
 };
 

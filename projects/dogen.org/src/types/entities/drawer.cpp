@@ -27,19 +27,23 @@ drawer::drawer()
 
 drawer::drawer(
     const dogen::org::entities::drawer_type type,
-    const std::list<dogen::org::entities::drawer_content>& contents)
+    const std::list<dogen::org::entities::drawer_content>& contents,
+    const std::string& name)
     : type_(type),
-      contents_(contents) { }
+      contents_(contents),
+      name_(name) { }
 
 void drawer::swap(drawer& other) noexcept {
     using std::swap;
     swap(type_, other.type_);
     swap(contents_, other.contents_);
+    swap(name_, other.name_);
 }
 
 bool drawer::operator==(const drawer& rhs) const {
     return type_ == rhs.type_ &&
-        contents_ == rhs.contents_;
+        contents_ == rhs.contents_ &&
+        name_ == rhs.name_;
 }
 
 drawer& drawer::operator=(drawer other) {
@@ -70,6 +74,22 @@ void drawer::contents(const std::list<dogen::org::entities::drawer_content>& v) 
 
 void drawer::contents(const std::list<dogen::org::entities::drawer_content>&& v) {
     contents_ = std::move(v);
+}
+
+const std::string& drawer::name() const {
+    return name_;
+}
+
+std::string& drawer::name() {
+    return name_;
+}
+
+void drawer::name(const std::string& v) {
+    name_ = v;
+}
+
+void drawer::name(const std::string&& v) {
+    name_ = std::move(v);
 }
 
 }

@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.org/types/entities/drawer_content.hpp"
@@ -44,7 +45,8 @@ public:
 public:
     drawer(
         const dogen::org::entities::drawer_type type,
-        const std::list<dogen::org::entities::drawer_content>& contents);
+        const std::list<dogen::org::entities::drawer_content>& contents,
+        const std::string& name);
 
 public:
     dogen::org::entities::drawer_type type() const;
@@ -54,6 +56,16 @@ public:
     std::list<dogen::org::entities::drawer_content>& contents();
     void contents(const std::list<dogen::org::entities::drawer_content>& v);
     void contents(const std::list<dogen::org::entities::drawer_content>&& v);
+
+    /**
+     * @brief Original name used by the property.
+     */
+    /**@{*/
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const drawer& rhs) const;
@@ -68,6 +80,7 @@ public:
 private:
     dogen::org::entities::drawer_type type_;
     std::list<dogen::org::entities::drawer_content> contents_;
+    std::string name_;
 };
 
 }

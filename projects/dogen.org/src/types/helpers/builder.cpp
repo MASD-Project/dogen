@@ -42,7 +42,7 @@ using entities::block_type;
 
 builder::builder() : block_type_(block_type::invalid),
                      root_(boost::make_shared<node>()) {
-    root_->current().level(0);
+    root_->data().level(0);
     stack_.push(root_);
 }
 
@@ -84,7 +84,7 @@ void builder::end_current_block() {
     entities::block tb;
     tb.type(block_type_);
     tb.contents(content);
-    stack_.top()->current().section().blocks().push_back(tb);
+    stack_.top()->data().section().blocks().push_back(tb);
     block_type_ = block_type::invalid;
 }
 
@@ -115,7 +115,7 @@ void builder::handle_headline(const entities::headline& hl) {
          * Create the node for the new headline and update the stack.
          */
         auto child(boost::make_shared<node>());
-        child->current(hl);
+        child->data(hl);
 
         auto& current(*stack_.top());
         current.children().push_back(child);
@@ -133,7 +133,7 @@ void builder::handle_headline(const entities::headline& hl) {
         stack_.pop();
         auto& current(*stack_.top());
         auto child(boost::make_shared<node>());
-        child->current(hl);
+        child->data(hl);
         current.children().push_back(child);
         stack_.push(child);
     }
@@ -160,7 +160,7 @@ void builder::handle_headline(const entities::headline& hl) {
     ensure_stack_not_empty();
     auto& current(*stack_.top());
     auto child(boost::make_shared<node>());
-    child->current(hl);
+    child->data(hl);
     current.children().push_back(child);
     stack_.push(child);
 }
@@ -200,7 +200,7 @@ void builder::add_line(const std::string& s) {
          * Add the affiliated keywords to the current node.
          */
         auto& top(*stack_.top());
-        top.current().affiliated_keywords().push_back(*oak);
+        top.data().affiliated_keywords().push_back(*oak);
         return;
     }
 
@@ -220,7 +220,7 @@ void builder::add_line(const std::string& s) {
 }
 
 entities::headline builder::make_headline(boost::shared_ptr<node> n) const {
-    entities::headline r(n->current());
+    entities::headline r(n->data());
     BOOST_LOG_SEV(lg, debug) << "Processing headline: " << r.title();
 
     for (const auto& child : n->children())
@@ -241,7 +241,7 @@ entities::document builder::build() {
      * Create the document from the root node.
      */
     entities::document r;
-    const auto& c(root_->current());
+    const auto& c(root_->data());
     r.affiliated_keywords(c.affiliated_keywords());
     r.drawers(c.drawers());
     r.section(c.section());

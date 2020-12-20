@@ -57,7 +57,7 @@ namespace dogen::org::helpers {
 std::ostream& operator<<(std::ostream& s, const node& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::org::helpers::node\"" << ", "
-      << "\"current\": " << v.current() << ", "
+      << "\"data\": " << v.data() << ", "
       << "\"children\": " << v.children()
       << " }";
     return(s);
