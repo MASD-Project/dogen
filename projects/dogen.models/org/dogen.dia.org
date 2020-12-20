@@ -10,6 +10,7 @@
 :masd.codec.reference: masd
 :masd.codec.reference: masd.variability
 :masd.codec.reference: dogen.profiles
+:masd.codec.reference: dogen.tracing
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 

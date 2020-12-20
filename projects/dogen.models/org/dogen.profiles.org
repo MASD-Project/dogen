@@ -92,6 +92,8 @@ Configures the main options for the C# backend.
 
 Regexes to ignore.
 
+FIXME: we should remove all ignores related to tests and add a proper facet for manual tests.
+
 *** ignore_files_matching_regex
 :PROPERTIES:
 :masd.codec.value: .*/test/.*
