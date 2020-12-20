@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <boost/test/tools/old/interface.hpp>
 #include <boost/test/unit_test.hpp>
+#include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.org/types/helpers/document_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
@@ -194,6 +195,23 @@ content
 
 contents
 )");
+
+const std::string greater_block_without_parameters(R"(#+begin_src
+content
+#+end_src
+)");
+
+const std::string text_and_greater_block_interleaved(R"(some text content
+other text content
+
+#+begin_src
+content
+#+end_src
+
+text content
+more content
+)");
+
 dogen::org::entities::document
 make(const std::string& s) {
     dogen::org::helpers::document_factory f;
@@ -902,7 +920,7 @@ other text content
 }
 
 BOOST_AUTO_TEST_CASE(simple_empty_drawer_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("simple_empty_drawer_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("simple_empty_drawer_results_in_expected_document");
     const auto document(make(simple_empty_drawer));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -919,7 +937,7 @@ BOOST_AUTO_TEST_CASE(simple_empty_drawer_results_in_expected_document) {
 }
 
 BOOST_AUTO_TEST_CASE(drawer_with_one_line_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("drawer_with_one_line_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("drawer_with_one_line_results_in_expected_document");
     const auto document(make(drawer_with_one_line));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -940,7 +958,7 @@ BOOST_AUTO_TEST_CASE(drawer_with_one_line_results_in_expected_document) {
 }
 
 BOOST_AUTO_TEST_CASE(drawer_with_multiple_lines_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("drawer_with_multiple_lines_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("drawer_with_multiple_lines_results_in_expected_document");
     const auto document(make(drawer_with_multiple_lines));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -965,7 +983,7 @@ BOOST_AUTO_TEST_CASE(drawer_with_multiple_lines_results_in_expected_document) {
 }
 
 BOOST_AUTO_TEST_CASE(property_drawer_with_one_entry_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("property_drawer_with_one_entry_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("property_drawer_with_one_entry_results_in_expected_document");
     const auto document(make(property_drawer_with_one_entry));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -986,7 +1004,7 @@ BOOST_AUTO_TEST_CASE(property_drawer_with_one_entry_results_in_expected_document
 }
 
 BOOST_AUTO_TEST_CASE(property_drawer_with_multiple_entries_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("property_drawer_with_multiple_entries_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("property_drawer_with_multiple_entries_results_in_expected_document");
     const auto document(make(property_drawer_with_multiple_entries));
 
     BOOST_CHECK(document.affiliated_keywords().empty());
@@ -1011,7 +1029,7 @@ BOOST_AUTO_TEST_CASE(property_drawer_with_multiple_entries_results_in_expected_d
 }
 
 BOOST_AUTO_TEST_CASE(various_drawers_in_headlines_results_in_expected_document) {
-    SETUP_TEST_LOG_SOURCE_DEBUG("various_drawers_in_headlines_results_in_expected_document");
+    SETUP_TEST_LOG_SOURCE("various_drawers_in_headlines_results_in_expected_document");
     const auto document(make(various_drawers_in_headlines));
 
     /*
@@ -1087,6 +1105,58 @@ content
 
     using dogen::org::entities::drawer_type;
     BOOST_CHECK(h1_1_1_drawer.type() == drawer_type::property_drawer);
+}
+
+BOOST_AUTO_TEST_CASE(greater_block_without_parameters_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("greater_block_without_parameters_results_in_expected_document");
+    const auto document(make(greater_block_without_parameters));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    BOOST_REQUIRE(document.section().blocks().size() == 1);
+    const auto& front(document.section().blocks().front());
+    BOOST_CHECK(front.name() == "src");
+    BOOST_CHECK(front.contents() == "content");
+    BOOST_CHECK(front.parameters().empty());
+
+    using dogen::org::entities::block_type;
+    BOOST_CHECK(front.type() == block_type::greater_block);
+}
+
+BOOST_AUTO_TEST_CASE(text_and_greater_block_interleaved_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("text_and_greater_block_interleaved_results_in_expected_document");
+    const auto document(make(text_and_greater_block_interleaved));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.drawers().empty());
+    BOOST_CHECK(document.headlines().empty());
+
+    BOOST_REQUIRE(document.section().blocks().size() == 3);
+    const auto& front(document.section().blocks().front());
+    BOOST_CHECK(front.name().empty());
+    BOOST_CHECK(front.contents() == R"(some text content
+other text content
+)");
+    BOOST_CHECK(front.parameters().empty());
+    using dogen::org::entities::block_type;
+    BOOST_CHECK(front.type() == block_type::text_block);
+
+
+    const auto& middle(*(++document.section().blocks().begin()));
+    BOOST_CHECK(middle.name() == "src");
+    BOOST_CHECK(middle.contents() == "content");
+    BOOST_CHECK(middle.parameters().empty());
+    BOOST_CHECK(middle.type() == block_type::greater_block);
+
+    const auto& back(document.section().blocks().back());
+    BOOST_CHECK(back.name().empty());
+    BOOST_CHECK(back.contents() == R"(
+text content
+more content)");
+    BOOST_CHECK(back.parameters().empty());
+    BOOST_CHECK(back.type() == block_type::text_block);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

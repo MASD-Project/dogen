@@ -56,6 +56,8 @@ const std::regex drawer_regex("^\\:\\w+\\:");
 const std::regex drawer_content_regex("^\\:\\w+\\:\\s.+");
 const std::regex affiliated_keyword_regex("^#\\+\\w+:\\s.*");
 
+const std::string unexpected_block_end("Unexpected block end: ");
+
 }
 
 namespace dogen::org::helpers {
@@ -322,6 +324,7 @@ parser::try_parse_greater_block_start(const std::string& s) {
     /*
      * Grab the name by skipping the block prefix.
      */
+    BOOST_LOG_SEV(lg, debug) << "Line is a greater block start.";
     entities::block r;
     r.name(s.substr(prefix_length));
 
@@ -351,9 +354,34 @@ parser::try_parse_greater_block_start(const std::string& s) {
 
 bool parser::
 is_greater_block_end(const std::string& s, const std::string& block_name) {
-    const auto upper(boost::to_upper_copy(block_name));
-    const std::string expected(block_end_prefix + upper);
-    return s == expected;
+    BOOST_LOG_SEV(lg, debug) << "Checking for greater block end.";
+
+    const auto actual(boost::to_upper_copy(s));
+    BOOST_LOG_SEV(lg, debug) << "Actual: '" << actual << "'";
+
+    /*
+     * If it does not appear to be an end block at all, no point in
+     * proceeding.
+     */
+    if (!boost::starts_with(actual, block_end_prefix))
+        return false;
+
+    const auto upper_name(boost::to_upper_copy(block_name));
+    const std::string expected(block_end_prefix + upper_name);
+    BOOST_LOG_SEV(lg, debug) << "Expected: '" << expected << "'";
+
+    const auto r(expected == actual);
+    if (!r) {
+        /*
+         * We find a greater block end, but it does not match the
+         * expected block name.
+         */
+        BOOST_LOG_SEV(lg, error) << unexpected_block_end << s;
+        BOOST_THROW_EXCEPTION(parsing_error(unexpected_block_end + s));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Line ends a greater block: " << r;
+    return r;
 }
 
 }

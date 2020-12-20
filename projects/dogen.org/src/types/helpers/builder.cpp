@@ -242,6 +242,7 @@ void builder::add_line(const std::string& s) {
          */
         in_greater_block_ = true;
         top().data().section().blocks().push_back(*ob);
+        BOOST_LOG_SEV(lg, debug) << "Started a nwe greater block.";
         return;
     }
 
@@ -359,6 +360,10 @@ void builder::add_line(const std::string& s) {
         BOOST_LOG_SEV(lg, debug) << "Add line to text to block.";
         stream_ << std::endl << s;
     }
+}
+
+void builder::add_final_new_line() {
+    stream_ << std::endl;
 }
 
 entities::document builder::build() {

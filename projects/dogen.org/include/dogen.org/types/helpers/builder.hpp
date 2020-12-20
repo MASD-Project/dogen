@@ -79,6 +79,11 @@ public:
      */
     void add_line(const std::string& s);
 
+    /**
+     * @brief Adds a final new line to the content.
+     */
+    void add_final_new_line();
+
 public:
     /**
      * @brief Builds an org mode document from the data supplied so far.

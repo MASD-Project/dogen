@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <istream>
 #include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::helpers {
@@ -35,15 +34,6 @@ namespace dogen::org::helpers {
  * @brief Builds a org-mode document from a string.
  */
 class document_factory final {
-private:
-    /**
-     * @brief Retrieves the next line of the stream, if any is
-     * available.
-     *
-     * Unlike standard getline, it preserves new lines.
-     */
-    static std::istream& getline(std::istream& is, std::string& s);
-
 public:
     static entities::document make(const std::string& s);
 };

@@ -31,25 +31,6 @@ auto lg(logger_factory("org.helpers.document_factory"));
 
 namespace dogen::org::helpers {
 
-std::istream&
-document_factory::getline(std::istream& is, std::string& s) {
-    std::ostringstream os;
-    std::getline(is, s);
-    os << s;
-
-    /*
-     * Try to detect if there was a newline on this line or not. There
-     * is no easy way to preserve the original input in getline, so we
-     * resort to this hack. The logic is that if we have not reached
-     * the EOF, then there must have been a newline.
-     */
-    if(!is.eof() && !is.fail())
-        os << std::endl;
-
-    s = os.str();
-    return is;
-}
-
 entities::document document_factory::make(const std::string& s) {
     /*
      * If there is no content, return an empty document.
@@ -65,6 +46,10 @@ entities::document document_factory::make(const std::string& s) {
     while(std::getline(is, line)) {
         b.add_line(line);
     }
+
+    const auto last_char(*s.rend());
+    if (last_char == '\r' || last_char == '\n')
+        b.add_final_new_line();
 
     return b.build();
 }
