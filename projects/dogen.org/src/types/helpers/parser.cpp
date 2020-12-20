@@ -230,6 +230,12 @@ parser::try_parse_drawer_start(const std::string& s) {
         return boost::optional<entities::drawer>();
 
     /*
+     * If we match the drawer end, we're not a drawer.
+     */
+    if (is_drawer_end(s))
+        return boost::optional<entities::drawer>();
+
+    /*
      * Check to see if the string matches the expected shape of the
      * start of a drawer.
      */
@@ -262,7 +268,9 @@ entities::drawer_content parser::parse_drawer_content(const std::string& s) {
     entities::drawer_content r;
     if (is_empty_or_whitespace(s) ||
         !std::regex_match(s, drawer_content_regex)) {
+        BOOST_LOG_SEV(lg, debug) << "Drawer contents have no structure.";
         r.value(s);
+        return r;
     }
 
     /*
@@ -270,10 +278,11 @@ entities::drawer_content parser::parse_drawer_content(const std::string& s) {
      *
      *    :KEY: VALUE
      */
+    BOOST_LOG_SEV(lg, debug) << "Drawer contents are a KVP.";
     const auto first_colon_pos(s.find_first_of(colon));
-    const auto second_colon_pos(s.find_first_of(colon, first_colon_pos));
-    r.key(s.substr(first_colon_pos + 1, second_colon_pos - 2));
-    r.value(s.substr(second_colon_pos + 1));
+    const auto second_colon_pos(s.find_first_of(colon, first_colon_pos + 1));
+    r.key(s.substr(first_colon_pos + 1, second_colon_pos - 1));
+    r.value(s.substr(second_colon_pos + 2)); // +2 to skip the space in-between
     return r;
 }
 

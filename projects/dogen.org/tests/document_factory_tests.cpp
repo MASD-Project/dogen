@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <boost/test/tools/old/interface.hpp>
 #include <boost/test/unit_test.hpp>
+#include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.org/types/helpers/document_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
@@ -138,6 +139,61 @@ other text content
 
 )");
 
+const std::string simple_empty_drawer(R"(:some_drawer:
+:end:
+)");
+
+const std::string drawer_with_one_line(R"(:some_drawer:
+some contents
+:end:
+)");
+
+const std::string drawer_with_multiple_lines(R"(:some_drawer:
+some contents
+more contents
+yet some more
+:end:
+)");
+
+const std::string property_drawer_with_one_entry(R"(:PROPERTIES:
+:key: a value
+:END:
+)");
+
+const std::string property_drawer_with_multiple_entries(R"(:PROPERTIES:
+:key0: a value
+:key1: another value
+:abc: v
+:END:
+)");
+
+const std::string various_drawers_in_headlines(R"(#+title: some title
+:PROPERTIES:
+:key_0: value_0
+:END:
+
+some text content
+
+* 1
+:PROPERTIES:
+:key_1: value_1
+:END:
+
+content
+
+** 1.1
+*** 1.1.1
+:PROPERTIES:
+:key_1_1_1: value_1_1_1
+:END:
+
+* 2
+:PROPERTIES:
+:key_2: value_2
+:END:
+
+contents
+)");
 dogen::org::entities::document
 make(const std::string& s) {
     dogen::org::helpers::document_factory f;
@@ -843,6 +899,194 @@ some text content
 other text content
 )");
     BOOST_CHECK(expected_sec == back_block);
+}
+
+BOOST_AUTO_TEST_CASE(simple_empty_drawer_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("simple_empty_drawer_results_in_expected_document");
+    const auto document(make(simple_empty_drawer));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& drawer(document.drawers().back());
+    BOOST_CHECK(drawer.name() == "some_drawer");
+    BOOST_CHECK(drawer.contents().empty());
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(drawer.type() == drawer_type::regular);
+}
+
+BOOST_AUTO_TEST_CASE(drawer_with_one_line_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("drawer_with_one_line_results_in_expected_document");
+    const auto document(make(drawer_with_one_line));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& drawer(document.drawers().back());
+    BOOST_CHECK(drawer.name() == "some_drawer");
+    BOOST_REQUIRE(drawer.contents().size() == 1);
+
+    const auto& contents(drawer.contents().front());
+    BOOST_CHECK(contents.key().empty());
+    BOOST_CHECK(contents.value() == "some contents");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(drawer.type() == drawer_type::regular);
+}
+
+BOOST_AUTO_TEST_CASE(drawer_with_multiple_lines_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("drawer_with_multiple_lines_results_in_expected_document");
+    const auto document(make(drawer_with_multiple_lines));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& drawer(document.drawers().back());
+    BOOST_CHECK(drawer.name() == "some_drawer");
+
+    BOOST_REQUIRE(drawer.contents().size() == 3);
+    const auto& front(drawer.contents().front());
+    BOOST_CHECK(front.key().empty());
+    BOOST_CHECK(front.value() == "some contents");
+
+    const auto& back(drawer.contents().back());
+    BOOST_CHECK(back.key().empty());
+    BOOST_CHECK(back.value() == "yet some more");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(drawer.type() == drawer_type::regular);
+}
+
+BOOST_AUTO_TEST_CASE(property_drawer_with_one_entry_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("property_drawer_with_one_entry_results_in_expected_document");
+    const auto document(make(property_drawer_with_one_entry));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& drawer(document.drawers().back());
+    BOOST_CHECK(drawer.name() == "PROPERTIES");
+
+    BOOST_REQUIRE(drawer.contents().size() == 1);
+    const auto& front(drawer.contents().front());
+    BOOST_CHECK(front.key() == "key");
+    BOOST_CHECK(front.value() == "a value");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(drawer.type() == drawer_type::property_drawer);
+}
+
+BOOST_AUTO_TEST_CASE(property_drawer_with_multiple_entries_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("property_drawer_with_multiple_entries_results_in_expected_document");
+    const auto document(make(property_drawer_with_multiple_entries));
+
+    BOOST_CHECK(document.affiliated_keywords().empty());
+    BOOST_CHECK(document.headlines().empty());
+    BOOST_CHECK(document.section().blocks().empty());
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& drawer(document.drawers().back());
+    BOOST_CHECK(drawer.name() == "PROPERTIES");
+
+    BOOST_REQUIRE(drawer.contents().size() == 3);
+    const auto& front(drawer.contents().front());
+    BOOST_CHECK(front.key() == "key0");
+    BOOST_CHECK(front.value() == "a value");
+
+    const auto& back(drawer.contents().back());
+    BOOST_CHECK(back.key() == "abc");
+    BOOST_CHECK(back.value() == "v");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(drawer.type() == drawer_type::property_drawer);
+}
+
+BOOST_AUTO_TEST_CASE(various_drawers_in_headlines_results_in_expected_document) {
+    SETUP_TEST_LOG_SOURCE_DEBUG("various_drawers_in_headlines_results_in_expected_document");
+    const auto document(make(various_drawers_in_headlines));
+
+    /*
+     * Validate top-level.
+     */
+    BOOST_REQUIRE(document.affiliated_keywords().size() == 1);
+    const auto& ak(document.affiliated_keywords().front());
+    BOOST_CHECK(ak.key() == "title");
+    BOOST_CHECK(ak.value() == "some title");
+
+    const auto& document_blocks(document.section().blocks());
+    BOOST_REQUIRE(document_blocks.size() == 1);
+
+    const auto& document_content(document_blocks.front().contents());
+    const auto expected_document_content(R"(
+some text content
+)");
+    BOOST_CHECK(document_content == expected_document_content);
+
+    BOOST_REQUIRE(document.drawers().size() == 1);
+    const auto& document_drawer(document.drawers().back());
+    BOOST_CHECK(document_drawer.name() == "PROPERTIES");
+
+    BOOST_REQUIRE(document_drawer.contents().size() == 1);
+    const auto& front(document_drawer.contents().front());
+    BOOST_CHECK(front.key() == "key_0");
+    BOOST_CHECK(front.value() == "value_0");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(document_drawer.type() == drawer_type::property_drawer);
+    BOOST_REQUIRE(document.headlines().size() == 2);
+
+    /*
+     * Validate headline 1.
+     */
+    const auto h1(document.headlines().front());
+    BOOST_CHECK(h1.title() == "1");
+
+    const auto& h1_blocks(h1.section().blocks());
+    BOOST_REQUIRE(h1_blocks.size() == 1);
+
+    const auto& h1_content(h1_blocks.front().contents());
+    const auto expected_h1_content(R"(
+content
+)");
+    BOOST_CHECK(h1_content == expected_h1_content);
+
+    /*
+     * Validate headline 1.1.
+     */
+    BOOST_REQUIRE(h1.headlines().size() == 1);
+    const auto& h1_1(h1.headlines().front());
+    BOOST_CHECK(h1_1.title() == "1.1");
+    BOOST_CHECK(h1_1.section().blocks().empty());
+    BOOST_REQUIRE(h1_1.drawers().empty());
+
+    /*
+     * Validate headline 1.1.1.
+     */
+    BOOST_REQUIRE(h1_1.headlines().size() == 1);
+    const auto& h1_1_1(h1_1.headlines().front());
+    BOOST_CHECK(h1_1_1.title() == "1.1.1");
+    BOOST_REQUIRE(h1_1_1.headlines().empty());
+    BOOST_REQUIRE(h1_1_1.drawers().size() == 1);
+
+    const auto& h1_1_1_drawer(h1_1_1.drawers().back());
+    BOOST_CHECK(h1_1_1_drawer.name() == "PROPERTIES");
+
+    BOOST_REQUIRE(h1_1_1_drawer.contents().size() == 1);
+    const auto& h1_1_1_front(h1_1_1_drawer.contents().front());
+    BOOST_CHECK(h1_1_1_front.key() == "key_1_1_1");
+    BOOST_CHECK(h1_1_1_front.value() == "value_1_1_1");
+
+    using dogen::org::entities::drawer_type;
+    BOOST_CHECK(h1_1_1_drawer.type() == drawer_type::property_drawer);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

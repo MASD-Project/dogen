@@ -254,6 +254,7 @@ void builder::add_line(const std::string& s) {
 
             drawers.back().contents().push_back(dc);
         }
+        return;
     }
 
     /*
@@ -273,6 +274,14 @@ void builder::add_line(const std::string& s) {
 
 entities::document builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Building document.";
+
+    /*
+     * We don't expect documents to contain "half" of a drawer.
+     */
+    if (in_drawer_) {
+        BOOST_LOG_SEV(lg, error) << invalid_drawer;
+        BOOST_THROW_EXCEPTION(building_error(invalid_drawer));
+    }
 
     /*
      * Flush any pending content we may have.
