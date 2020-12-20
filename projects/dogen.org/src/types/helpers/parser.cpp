@@ -45,12 +45,12 @@ const std::string colon(":");
 const std::string property_drawer_start(":PROPERTIES:");
 const std::string property_drawer_end(":END:");
 
-
 const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
 const std::regex todo_keyword_regex("^[A-Z].*");
 const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
 const std::regex drawer_regex("^\\:\\w+\\:");
+const std::regex drawer_content_regex("^\\:\\w+\\:\\s.+");
 const std::regex affiliated_keyword_regex("^#\\+\\w+:\\s.*");
 
 }
@@ -168,7 +168,7 @@ parser::try_parse_headline(const std::string& s) {
      */
     if (found_tag) {
         std::list<std::string> tags;
-        boost::split(tags, token, boost::is_any_of(":"));
+        boost::split(tags, token, boost::is_any_of(colon));
         for (const auto& tag : tags) {
             /*
              * For some reason, boost split returns the position of
@@ -214,7 +214,7 @@ parser::try_parse_affiliated_keyword(const std::string& s) {
      * find keywords.
      */
     entities::affiliated_keyword r;
-    const auto colon_pos(s.find_first_of(":"));
+    const auto colon_pos(s.find_first_of(colon));
     r.key(s.substr(2, colon_pos - 2));
     r.value(s.substr(colon_pos + 2));
     return r;
@@ -242,9 +242,38 @@ parser::try_parse_drawer_start(const std::string& s) {
     r.name(boost::replace_all_copy(s, colon, empty));
 
     using entities::drawer_type;
-    r.type(boost::to_upper_copy(s) == property_drawer_start ?
-        drawer_type::property_drawer : drawer_type::regular);
+    const bool is_property(boost::to_upper_copy(s) == property_drawer_start);
+    r.type(is_property ? drawer_type::property_drawer : drawer_type::regular);
+    BOOST_LOG_SEV(lg, debug) << "Created drawer: '" << r.name()
+                             << "'. Is property drawer: "
+                             << is_property;
+    return r;
+}
 
+bool parser::is_drawer_end(const std::string& s) {
+    return boost::to_upper_copy(s) == property_drawer_end;
+}
+
+entities::drawer_content parser::parse_drawer_content(const std::string& s) {
+    /*
+     * If the line has no discernible structure, just push it as a
+     * value.
+     */
+    entities::drawer_content r;
+    if (is_empty_or_whitespace(s) ||
+        !std::regex_match(s, drawer_content_regex)) {
+        r.value(s);
+    }
+
+    /*
+     * The structure of a property drawer is:
+     *
+     *    :KEY: VALUE
+     */
+    const auto first_colon_pos(s.find_first_of(colon));
+    const auto second_colon_pos(s.find_first_of(colon, first_colon_pos));
+    r.key(s.substr(first_colon_pos + 1, second_colon_pos - 2));
+    r.value(s.substr(second_colon_pos + 1));
     return r;
 }
 

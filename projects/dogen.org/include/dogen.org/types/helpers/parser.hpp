@@ -23,6 +23,7 @@
 
 #include "dogen.org/types/entities/affiliated_keyword.hpp"
 #include "dogen.org/types/entities/drawer.hpp"
+#include "dogen.org/types/entities/drawer_content.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -68,6 +69,20 @@ public:
      */
     static boost::optional<entities::drawer>
     try_parse_drawer_start(const std::string& s);
+
+    /**
+     * @brief Returns true if the string denotes the end of a drawer.
+     */
+    static bool is_drawer_end(const std::string& s);
+
+    /**
+     * @brief Parse the string as drawer contents.
+     *
+     * If the contents take the form of a KVP, it performs the
+     * appropriate split; else the entire contents are placed in the
+     * value field.
+     */
+    static entities::drawer_content parse_drawer_content(const std::string& s);
 };
 
 }

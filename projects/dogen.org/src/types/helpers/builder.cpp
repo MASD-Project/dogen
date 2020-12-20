@@ -34,6 +34,7 @@ auto lg(logger_factory("org.helpers.builder"));
 const std::string unexpected_level("Headline is at an unexpected level.");
 const std::string empty_stack("Stack is empty, expected content");
 const std::string invalid_drawer("Drawer contains drawer: ");
+const std::string empty_drawers("Expected at least one drawer.");
 
 }
 
@@ -229,6 +230,30 @@ void builder::add_line(const std::string& s) {
          */
         top().data().drawers().push_back(*od);
         return;
+    }
+
+    /*
+     * If we're inside of a drawer, there are only two valid
+     * possibilities: either we are adding content to the drawer, or
+     * finishing it.
+     */
+    if (in_drawer_) {
+        if (parser::is_drawer_end(s))
+            in_drawer_ = false;
+        else {
+            /*
+             * We expect there to be an open drawer, so find it and
+             * push out contents into it.
+             */
+            const auto dc(parser::parse_drawer_content(s));
+            auto& drawers(top().data().drawers());
+            if (drawers.empty()) {
+                BOOST_LOG_SEV(lg, error) << empty_drawers;
+                BOOST_THROW_EXCEPTION(building_error(empty_drawers));
+            }
+
+            drawers.back().contents().push_back(dc);
+        }
     }
 
     /*
