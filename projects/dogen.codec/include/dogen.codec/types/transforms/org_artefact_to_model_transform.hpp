@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include "dogen.org/types/entities/drawer.hpp"
+#include "dogen.org/types/entities/headline.hpp"
 #include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/element.hpp"
 #include "dogen.codec/types/entities/artefact.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
 
@@ -36,6 +39,20 @@ namespace dogen::codec::transforms {
  * document, and converts it into an instance of the codec model.
  */
 class org_artefact_to_model_transform final {
+private:
+    /**
+     * @brief Reads the tagged values, if any exists.
+     */
+    static std::list<identification::entities::tagged_value>
+    read_tagged_values(const std::list<org::entities::drawer>& drawers);
+
+    /**
+     * @brief Reads elements recursively.
+     */
+    static std::list<entities::element>
+    read_element(const std::string& parent_name,
+        const org::entities::headline& h);
+
 public:
     static entities::model
     apply(const transforms::context& ctx, const entities::artefact& a);

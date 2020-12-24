@@ -18,12 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.org/io/entities/drawer_type_io.hpp"
+#include "dogen.org/types/transforms/string_to_document_transform.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
-#include "dogen.org/types/transforms/string_to_document_transform.hpp"
+#include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/org_artefact_to_model_transform.hpp"
 
 namespace {
@@ -34,9 +38,60 @@ transform_id("codec.transforms.org_artefact_to_model_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string unexpected_number_of_drawers(
+    "Unexpected number of drawers: ");
+const std::string unexpected_drawer_type("Unexpected drawer type: ");
+const std::string invalid_property("Property is missing key or value.");
+
 }
 
 namespace dogen::codec::transforms {
+
+using identification::entities::tagged_value;
+using org::entities::drawer_type;
+
+std::list<tagged_value> org_artefact_to_model_transform::
+read_tagged_values(const std::list<org::entities::drawer>& drawers) {
+    /*
+     * Org models are expected to have exactly one property
+     * drawer. Ensure that's the case and read its contents.
+     */
+    const auto sz(drawers.size());
+    if (sz != 1) {
+        BOOST_LOG_SEV(lg, error) << unexpected_number_of_drawers << sz;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_number_of_drawers +
+                boost::lexical_cast<std::string>(sz)));
+    }
+
+    const auto& drawer(drawers.front());
+    if (drawer.type() != drawer_type::property_drawer) {
+        BOOST_LOG_SEV(lg, error) << unexpected_drawer_type << drawer.type();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_drawer_type +
+                boost::lexical_cast<std::string>(drawer.type())));
+    }
+
+    std::list<tagged_value> r;
+    for (const auto& dc : drawer.contents()) {
+        /*
+         * Properties are expected to have both key and value.
+         */
+        if (dc.key().empty() || dc.value().empty()) {
+            BOOST_LOG_SEV(lg, error) << invalid_property << "Key: '"
+                                     << dc.key() << "' Value: '"
+                                     << dc.value() << "'";
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_property));
+        }
+
+        tagged_value tv;
+        tv.tag(dc.key());
+        tv.value(dc.value());
+        r.push_back(tv);
+    }
+    return r;
+}
 
 entities::model org_artefact_to_model_transform::
 apply(const transforms::context& ctx, const entities::artefact& a) {
@@ -47,10 +102,12 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing org-mode document.";
     using org::transforms::string_to_document_transform;
-    const auto d(string_to_document_transform::apply(t, a.content()));
+    const auto doc(string_to_document_transform::apply(t, a.content()));
 
     BOOST_LOG_SEV(lg, debug) << "Processed org-mode document.";
     entities::model r;
+    r.tagged_values(read_tagged_values(doc.drawers()));
+
     stp.end_transform(r);
     return r;
 }
