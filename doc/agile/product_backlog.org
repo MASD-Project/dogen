@@ -78,6 +78,26 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider adding support for C++ container generation              :story:
+
+At present we are creating a lot of maps etc. These have common access
+patterns:
+
+- "strict" find: find or throw.
+- "strict" insert: if duplicate, throw.
+
+We should catalogue all of these, there are probably more. A better
+approach would be to have a type much like primitive which wraps the
+container with the right accessors. It would also make domain
+terminology much saner. We should probably expose the typical C++
+infrastructure such as iterators, ranges, etc. This may also be useful
+for containers such as list and vector though we don't have use cases
+for these yet.
+
+Links:
+
+- [[https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp][Writing a custom iterator in modern C++]]
+
 *** Consider adding a codec meta-model                                :story:
 
 As we did with the PMM, it would be nice if you could create an
@@ -804,7 +824,6 @@ Notes:
   called =serialisation=. Or we could map it to say RapidJSON
   serialisation. Or we could support two methods of serialisation for
   the same project. The user chooses where to place them.
-
 
 *** Create a factory transform for parts and archetype kinds          :story:
 
@@ -2487,7 +2506,6 @@ We should have meta-data configuration that describes the ODB files:
 We should generalise this problem so that when we are using other
 cartridges such as protobuf/grpc, we can extend it for these use
 cases - expected cartridge files?
-
 
 *** Consider making a separation between userspace and masd space     :story:
 

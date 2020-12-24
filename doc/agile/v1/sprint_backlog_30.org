@@ -9,22 +9,22 @@
 - to implement org mode codec.
 
 * Stories
-
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-20 Sun 18:39]
+#+CAPTION: Clock summary at [2020-12-24 Thu 14:20]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *26:59* |       |       | 100.0 |
+| *Total time*                                       | *30:53* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 26:59   |       |       | 100.0 |
-| Active                                             |         | 26:59 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  22.5 |
-| Create a demo and presentation for previous sprint |         |       |  0:34 |   2.1 |
-| Sprint and product backlog grooming                |         |       |  0:35 |   2.2 |
-| Add support for reading org-mode documents         |         |       | 19:46 |  73.3 |
+| Stories                                            | 30:53   |       |       | 100.0 |
+| Active                                             |         | 30:53 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  19.6 |
+| Create a demo and presentation for previous sprint |         |       |  0:34 |   1.8 |
+| Sprint and product backlog grooming                |         |       |  0:35 |   1.9 |
+| Add support for reading org mode documents         |         |       | 19:46 |  64.0 |
+| Add org-mode codec for input                       |         |       |  3:54 |  12.6 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -323,7 +323,8 @@ Assistant should not really exist, but to get us to the next step we
 should just make it a helper in =text= model. We just need to merge
 the C++ and C# classes into one and move it to =text=.
 
-*** STARTED Add support for reading org-mode documents                :story:
+*** COMPLETED Add support for reading org mode documents              :story:
+    CLOSED: [2020-12-24 Thu 10:27]
     :LOGBOOK:
     CLOCK: [2020-12-20 Sun 18:08]--[2020-12-20 Sun 18:39] =>  0:31
     CLOCK: [2020-12-20 Sun 15:15]--[2020-12-20 Sun 16:30] =>  1:15
@@ -391,38 +392,50 @@ Links:
 - [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
 - [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools!]]
 
-*** Generated CMakefiles do not take tests into account               :story:
+*** STARTED Add org-mode codec for input                              :story:
+    :LOGBOOK:
+    CLOCK: [2020-12-24 Thu 14:18]--[2020-12-24 Thu 14:20] =>  0:02
+    CLOCK: [2020-12-24 Thu 14:12]--[2020-12-24 Thu 14:17] =>  0:05
+    CLOCK: [2020-12-24 Thu 10:24]--[2020-12-24 Thu 14:11] =>  3:47
+    :END:
 
-At present most models have:
+Create a transform in the codec model that converts org-mode documents
+into codec models.
 
-: masd::build::cmakelists, dogen::handcrafted::cmake
+Notes:
 
-One of the reasons is because the template is not taking generated
-tests into account. It should have:
+- we need to determine how to handle composition. We thought it would
+  be sufficient to supply qualified names but it seems we are still
+  getting errors to do with containment.
 
-: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-: endif()
+: 2020-12-24 14:09:23.309647 [DEBUG] [logical.transforms.containment_transform] Looking for container:  { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }
+: 2020-12-24 14:09:23.309650 [DEBUG] [logical.transforms.containment_transform] Trying module as the container.
+: 2020-12-24 14:09:23.309652 [DEBUG] [logical.transforms.containment_transform] Could not find container: ' { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }'.
+: 2020-12-24 14:09:23.309655 [DEBUG] [logical.transforms.containment_transform] Trying modeline group as the container.
+: 2020-12-24 14:09:23.309658 [DEBUG] [logical.transforms.containment_transform] Could not find container: ' { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }'.
+: 2020-12-24 14:09:23.309661 [DEBUG] [logical.transforms.containment_transform] Trying backend as the container.
+: 2020-12-24 14:09:23.309665 [DEBUG] [logical.transforms.containment_transform] Could not find container: ' { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }'.
+: 2020-12-24 14:09:23.309668 [DEBUG] [logical.transforms.containment_transform] Trying facets as the container.
+: 2020-12-24 14:09:23.309671 [DEBUG] [logical.transforms.containment_transform] Could not find container: ' { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }'.
+: 2020-12-24 14:09:23.309674 [ERROR] [logical.transforms.containment_transform] Could not find containing element:  { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }
+: 2020-12-24 14:09:23.309730 [DEBUG] [logical.transforms.containment_transform] Finished transform: containment.
 
-*** Consider creating a "combined" template                           :story:
+*** Empty model generation produces no diffs                          :story:
 
-We have a large number of templates that look very similar: the M2T
-transforms. We could support them with a "clever" combination of wale
-and stitch templates: the top-level wale template could stay as it is,
-plus a "preamble" and "postamble":
+At present if we do not generate any files at all, the diffing system
+breaks down. This is because we always diff the generated files
+against the actual files but if there are no generated files then we
+have nothing to diff. Logs:
 
-: void primitive_implementation_transform::
-: apply(const text::transforms::context& ctx, const text::entities::model& lps,
-:     const logical::entities::element& e, physical::entities::artefact& a) const {
-:     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
-:         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+: 2020-12-24 11:09:56.742871 [INFO] [physical.helpers.file_status_collector] Started collecting status for model: dogen
+: 2020-12-24 11:09:56.742874 [DEBUG] [physical.helpers.file_status_collector] Initial directories: [ "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/cpp" ]
+: 2020-12-24 11:09:56.742888 [DEBUG] [physical.helpers.file_status_collector] Filtered directories: [  ]
+: 2020-12-24 11:09:56.742892 [DEBUG] [physical.helpers.file_status_collector] No directories to analyse.
+: 2020-12-24 11:09:56.742895 [DEBUG] [physical.transforms.gather_external_artefacts_transform] No files found.
+: 2020-12-24 11:09:56.742898 [DEBUG] [physical.transforms.gather_external_artefacts_transform] Finished transform: gather external artefacts transform.
 
-and a closing bracket:
-
-: }
-
-However, maybe this is just too much work for just a few lines of code
-and it will increase the complexity a lot for a small win.
+We need to look at the actual files and report all of those that
+exist but have not match in the generated files collection.
 
 *** Analysis on org-mode outstanding work                             :story:
 
@@ -482,6 +495,59 @@ Links:
 - [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
 - [[https://karl-voit.at/2017/09/23/orgmode-as-markup-only/][Org-Mode Is One of the Most Reasonable Markup Languages to Use for
   Text]]
+
+*** Analysis on org mode round-tripping                               :story:
+
+We should try to ensure that org mode documents round-trip. Some of the
+use cases:
+
+- we could inject the physical paths for each element after we done
+  the generation. This would make finding files very
+  easy. Alternatively, we could generate another org mode document for
+  this.
+- we could inject tests. These can be obtained via an LSP query (see
+  backlog).
+- we could create lists of generated and hand-crafted files and
+  elements. We could also inform the user about which elements are
+  only used by generated elements.
+- we could create lists in lisp that could be used for grepping.
+
+It is not clear if we need round tripping for all of these use cases,
+or if these are just different projections of the model. Round
+tripping does add a lot of complexity so we should take this into account.
+
+*** Generated CMakefiles do not take tests into account               :story:
+
+At present most models have:
+
+: masd::build::cmakelists, dogen::handcrafted::cmake
+
+One of the reasons is because the template is not taking generated
+tests into account. It should have:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** Consider creating a "combined" template                           :story:
+
+We have a large number of templates that look very similar: the M2T
+transforms. We could support them with a "clever" combination of wale
+and stitch templates: the top-level wale template could stay as it is,
+plus a "preamble" and "postamble":
+
+: void primitive_implementation_transform::
+: apply(const text::transforms::context& ctx, const text::entities::model& lps,
+:     const logical::entities::element& e, physical::entities::artefact& a) const {
+:     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
+:         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+and a closing bracket:
+
+: }
+
+However, maybe this is just too much work for just a few lines of code
+and it will increase the complexity a lot for a small win.
 
 *** Rename =org_mode= model                                           :story:
 
@@ -553,8 +619,6 @@ The backend transform should:
 - use the facet and archetype transforms to process all elements.
 
 Check backlog for a story on this.
-
-
 
 *** Consider renaming =text= to =logical_physical=                    :story:
 
