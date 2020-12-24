@@ -322,7 +322,7 @@ void profile_binding_transform::bind(const entities::profile_repository& prp,
     /*
      * If we could find nothing suitable, just return the original.
      */
-    // BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
+    BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
 }
 
 void profile_binding_transform::apply(const entities::profile_repository& prp,
