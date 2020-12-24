@@ -33,6 +33,7 @@
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
+#include "dogen.codec/types/transforms/meta_data_transform.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -92,6 +93,11 @@ apply(const context& ctx, const boost::filesystem::path& p) {
      * Read the model references.
      */
     references_transform::apply(ctx, r);
+
+    /*
+     * Read all meta-data for elements and attributes.
+     */
+    meta_data_transform::apply(ctx, r);
 
     stp.end_chain(r);
     return r;
