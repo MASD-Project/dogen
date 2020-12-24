@@ -45,7 +45,8 @@ namespace dogen::codec::transforms {
  */
 class model_to_org_artefact_transform final {
 private:
-    static std::string tidy_up_string(std::string s);
+    static std::string make_headline(const unsigned int level,
+        const std::string& title, const std::string& tag);
 
 private:
     static void insert_tagged_values(std::ostream& s,

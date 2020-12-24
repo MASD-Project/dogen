@@ -37,11 +37,29 @@ auto lg(logger_factory(transform_id));
 
 const std::string scope("::");
 const std::string comma_space(", ");
+const std::string element_tag(":masd_element:");
+const std::string attribute_tag(":masd_attribute:");
+
 const std::string invalid_enumerator("invalid");
 
 }
 
 namespace dogen::codec::transforms {
+
+std::string model_to_org_artefact_transform::
+make_headline(const unsigned int level,
+    const std::string& title, const std::string& tag) {
+    const std::string stars(level, '*');
+
+    std::ostringstream os;
+    os << stars << " " << title;
+    const auto tag_space_count(77 - tag.size() - title.size() - 1
+        - stars.size());
+    const std::string tag_spaces(tag_space_count > 0 ?
+        tag_space_count : 1, ' ');
+    os << tag_spaces << tag << std::endl;
+    return os.str();
+}
 
 void model_to_org_artefact_transform::insert_tagged_values(std::ostream& s,
     const std::list<identification::entities::tagged_value>& tvs) {
@@ -88,8 +106,7 @@ insert_parents(std::ostream& s, const std::list<std::string>& parents) {
 
 void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
     const unsigned int level, const entities::attribute& a) {
-    const std::string stars(level, '*');
-    s << stars << " " << a.name().simple() << std::endl;
+    s << make_headline(level, a.name().simple(), attribute_tag);
 
     const auto& tvs(a.tagged_values());
     if (!a.type().empty() || !a.value().empty() || !a.stereotypes().empty()
@@ -130,9 +147,7 @@ void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
 
 void model_to_org_artefact_transform::insert_element(std::ostream& s,
     const unsigned int level, const entities::element& e) {
-
-    const std::string stars(level, '*');
-    s << stars << " " << e.name().simple() << std::endl;
+    s << make_headline(level, e.name().simple(), element_tag);
 
     const auto& tv(e.tagged_values());
     if (!e.parents().empty() || !e.stereotypes().empty() || !tv.empty()) {
@@ -207,7 +222,7 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
 entities::artefact model_to_org_artefact_transform::
 apply(const transforms::context& ctx, const boost::filesystem::path& p,
     const entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "json artefact to model",
+    tracing::scoped_transform_tracer stp(lg, "org artefact to model",
         transform_id, m.name().qualified(), *ctx.tracer(), m);
 
     entities::artefact r;
