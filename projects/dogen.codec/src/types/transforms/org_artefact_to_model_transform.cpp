@@ -40,6 +40,7 @@ auto lg(logger_factory(transform_id));
 
 const std::string element_tag("masd_element");
 const std::string attribute_tag("masd_attribute");
+const std::string object_element_type("masd::object");
 
 const std::string unexpected_number_of_drawers(
     "Unexpected number of drawers: ");
@@ -149,6 +150,7 @@ make_attribute(const org::entities::headline& h) {
 
     entities::attribute r;
     r.name().simple(h.title());
+    r.name().qualified(h.title()); // FIXME
 
     /*
      * Attributes may not have drawers.
@@ -213,6 +215,7 @@ make_elements(const std::list<org::entities::headline>& headlines,
             }
 
             entities::element child;
+            child.fallback_element_type(object_element_type);
             child.name().simple(h.title());
             child.name().qualified(current.name().qualified() + "::" +
                 child.name().simple());
@@ -281,6 +284,7 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         entities::element current;
         current.name().simple(h.title());
         current.name().qualified(current.name().simple());
+        current.fallback_element_type(object_element_type);
 
         /*
          * Elements may not have drawers.
