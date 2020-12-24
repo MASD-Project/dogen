@@ -50,7 +50,7 @@ const std::string block_end_prefix("#+END_");
 
 const std::regex headline_regex("^\\*+\\s.+");
 const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
-const std::regex todo_keyword_regex("^[A-Z].*");
+const std::regex todo_keyword_regex("^[A-Z]+");
 const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
 const std::regex drawer_regex("^\\:\\w+\\:");
 const std::regex drawer_content_regex("^\\:[0-9a-zA-Z\\._]+\\:\\s.+");
