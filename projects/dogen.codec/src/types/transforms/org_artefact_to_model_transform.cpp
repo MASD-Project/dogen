@@ -41,6 +41,7 @@ auto lg(logger_factory(transform_id));
 const std::string element_tag("masd_element");
 const std::string attribute_tag("masd_attribute");
 const std::string object_element_type("masd::object");
+const std::string module_element_type("masd::module");
 
 const std::string unexpected_number_of_drawers(
     "Unexpected number of drawers: ");
@@ -213,6 +214,11 @@ make_elements(const std::list<org::entities::headline>& headlines,
                 BOOST_THROW_EXCEPTION(
                     transformation_error(unexpected_element + h.title()));
             }
+
+            /*
+             * Since we contain elements, we must be a module.
+             */
+            current.fallback_element_type(module_element_type);
 
             entities::element child;
             child.fallback_element_type(object_element_type);
