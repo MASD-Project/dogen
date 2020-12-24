@@ -15,140 +15,140 @@
 
 Assorted utilities used by Dogen.
 
-* exception
-** invalid_enum_value
+* exception                                                    :masd_element:
+** invalid_enum_value                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** utility_exception
+** utility_exception                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* filesystem
-** file
+* filesystem                                                   :masd_element:
+** file                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** file_not_found
+** file_not_found                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 File was not found.
 
-** io_error
+** io_error                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst performing an IO operation.
 
-** path
+** path                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* hash
-** combine
+* hash                                                         :masd_element:
+** combine                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** list_hash
+** list_hash                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** sha1_hasher
+** sha1_hasher                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* io
-** array_io
+* io                                                           :masd_element:
+** array_io                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** forward_list_io
+** forward_list_io                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** jsonify_io
+** jsonify_io                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** list_io
+** list_io                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** map_io
+** map_io                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** memory_io
+** memory_io                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** optional_io
+** optional_io                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** pair_io
+** pair_io                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** set_io
+** set_io                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** shared_ptr_io
+** shared_ptr_io                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** typeindex_io
+** typeindex_io                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** unordered_map_io
+** unordered_map_io                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** unordered_set_io
+** unordered_set_io                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** vector_io
+** vector_io                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* log
-** logger
+* log                                                          :masd_element:
+** logger                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** lifecycle_manager
+** lifecycle_manager                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** scoped_lifecycle_manager
+** scoped_lifecycle_manager                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** severity_level
+** severity_level                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** logging_configuration
+** logging_configuration                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
 
 Options related to logging.
 
-*** severity
+*** severity                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Level at which to log.
 
-*** filename
+*** filename                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -157,21 +157,21 @@ Name of the file to log into.
 
 If empty, file logging is disabled.
 
-*** output_to_console
+*** output_to_console                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, dumps the log into the console.
 
-*** output_directory
+*** output_directory                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
 
 Directory in which to place the output.
 
-** invalid_logging_configuration
+** invalid_logging_configuration                               :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: false
 :masd.codec.stereotypes: masd::exception
@@ -179,159 +179,159 @@ Directory in which to place the output.
 
 The values supplied for the logging configuration are not valid.
 
-** logging_configuration_validator
+** logging_configuration_validator                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* serialization
-** archive_types
+* serialization                                                :masd_element:
+** archive_types                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** xml_helper
+** xml_helper                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** path
+** path                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* string
-** splitter
+* string                                                       :masd_element:
+** splitter                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** differ
+** differ                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* test
-** asserter
+* test                                                         :masd_element:
+** asserter                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** bytewise_file_asserter
+** bytewise_file_asserter                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** file_asserter
+** file_asserter                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** logging
+** logging                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** xml_serialization_helper
+** xml_serialization_helper                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** exception_checkers
+** exception_checkers                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** fixture
+** fixture                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** macros
+** macros                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* test_data
-** filesystem_tests
+* test_data                                                    :masd_element:
+** filesystem_tests                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** generate_container
+** generate_container                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** generator
+** generator                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** northwind
+** northwind                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** resolver
+** resolver                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** sequence
+** sequence                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** tds_test_good
+** tds_test_good                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** test_data
+** test_data                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** validating_resolver
+** validating_resolver                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** xml_reader
+** xml_reader                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** dogen_product
+** dogen_product                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** cpp_ref_impl_product
+** cpp_ref_impl_product                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** csharp_ref_impl_product
+** csharp_ref_impl_product                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** test_data_exception
+** test_data_exception                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst obtaining the test data.
 
-* xml
-** exception
+* xml                                                          :masd_element:
+** exception                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** node_types
+** node_types                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** node_types_io
+** node_types_io                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** text_reader
+** text_reader                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** text_reader_io
+** text_reader_io                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* environment
-** environment_exception
+* environment                                                  :masd_element:
+** environment_exception                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 There was an error reading an environment variable.
 
-** variable_reader
+** variable_reader                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* formatters
+* formatters                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -340,79 +340,79 @@ Contains all of the formatting primitives
 that are not associated with any particular
 model.
 
-** formatting_error
+** formatting_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error has occurred while formatting.
 
-** quote_type
+** quote_type                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Types of quotes that can be used in streaming.
 
-*** single_quote
-*** double_quote
-** spacing_type
+*** single_quote                                             :masd_attribute:
+*** double_quote                                             :masd_attribute:
+** spacing_type                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-*** no_space
-*** left_space
-*** right_space
-*** left_and_right_space
-** utility_formatter
+*** no_space                                                 :masd_attribute:
+*** left_space                                               :masd_attribute:
+*** right_space                                              :masd_attribute:
+*** left_and_right_space                                     :masd_attribute:
+** utility_formatter                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** indent_filter
+** indent_filter                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** comment_style
+** comment_style                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Supported styles of comments.
 
-*** c_style
+*** c_style                                                  :masd_attribute:
 Original C programming language style.
 
-*** cpp_style
+*** cpp_style                                                :masd_attribute:
 One line, C++ style.
 
-*** csharp_style
+*** csharp_style                                             :masd_attribute:
 C# programming language style.
 
-*** shell_style
+*** shell_style                                              :masd_attribute:
 UNIX shell scripting comments.
 
-*** sql_style
+*** sql_style                                                :masd_attribute:
 Comments start with a double-dash.
 
-*** xml_style
+*** xml_style                                                :masd_attribute:
 Comments using XML syntax.
 
-** comment_formatter
+** comment_formatter                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** sequence_formatter
+** sequence_formatter                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** infix_configuration
+** infix_configuration                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
 
 Configuration to use for a given infix in sequence formatter.
 
-*** first
+*** first                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -420,32 +420,32 @@ Configuration to use for a given infix in sequence formatter.
 Applicable only to the first element of a sequence, if the sequence has more
 than one element.
 
-*** not_first
+*** not_first                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Applicable to all elements other than the first.
 
-*** not_last
+*** not_last                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Applicable to all elements other than the last.
 
-*** last
+*** last                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Only applicable to the last element of a sequence.
 
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

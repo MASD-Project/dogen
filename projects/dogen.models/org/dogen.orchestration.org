@@ -22,7 +22,7 @@
 
 Orchestration-based imlementation of the Dogen product API.
 
-* transforms
+* transforms                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -30,142 +30,142 @@ Orchestration-based imlementation of the Dogen product API.
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
 
-** code_generation_chain
+** code_generation_chain                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** context
+** context                                                     :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
-*** variability_context
+*** variability_context                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: variability::transforms::context
 :END:
-*** codec_context
+*** codec_context                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: codec::transforms::context
 :END:
-*** logical_context
+*** logical_context                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: logical::transforms::context
 :END:
-*** text_context
+*** text_context                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: text::transforms::context
 :END:
-*** physical_context
+*** physical_context                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: physical::transforms::context
 :END:
-** context_factory
+** context_factory                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** factory_exception
+** factory_exception                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred in the factory whilst making.
 
-** codec_model_to_logical_model_transform
+** codec_model_to_logical_model_transform                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** codec_model_set_to_logical_input_model_set_chain
+** codec_model_set_to_logical_input_model_set_chain            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transform_exception
+** transform_exception                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** logical_model_to_text_model_chain
+** logical_model_to_text_model_chain                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** physical_model_production_chain
+** physical_model_production_chain                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** text_model_to_physical_model_transform
+** text_model_to_physical_model_transform                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** context_bootstrapping_chain
+** context_bootstrapping_chain                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** text_model_production_chain
+** text_model_production_chain                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** legacy_dependencies_transform
+** legacy_dependencies_transform                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** physical_to_logical_population_transform
+** physical_to_logical_population_transform                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** elements_removal_transform
+** elements_removal_transform                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* generator
+* generator                                                    :masd_element:
 :PROPERTIES:
 :masd.generalization.parent: dogen::generator
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* converter
+* converter                                                    :masd_element:
 :PROPERTIES:
 :masd.generalization.parent: dogen::converter
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* injector_factory
+* injector_factory                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* helpers
+* helpers                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Helpers for the orchestration model.
 
-** codec_to_logical_projector
+** codec_to_logical_projector                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** logical_to_physical_projector
+** logical_to_physical_projector                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** projection_error
+** projection_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error ocurred whilst projecting elements from one space into another.
 
-** dependencies_builder
+** dependencies_builder                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** building_error
+** building_error                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-* features
+* features                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Features for the orchestration model.
 
-** model_location
+** model_location                                              :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.codec
@@ -174,7 +174,7 @@ Features for the orchestration model.
 
 Feature group for model location related features.
 
-*** external_modules
+*** external_modules                                         :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -185,7 +185,7 @@ External modules containing this model.
 External modules contribute to the namespace of the model but not the model
 name.
 
-*** model_modules
+*** model_modules                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::text
 :END:
@@ -194,24 +194,24 @@ Model modules containing this model.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
-** initializer
+** initializer                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::initializer
 :END:
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
-* spec_dumper
+* spec_dumper                                                  :masd_element:
 :PROPERTIES:
 :masd.generalization.parent: dogen::spec_dumper
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* initializer
+* initializer                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

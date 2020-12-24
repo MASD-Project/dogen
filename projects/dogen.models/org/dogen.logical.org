@@ -48,21 +48,21 @@ together into a bigger model - called the @e merged model.
 rules (such as verifying that all types have a definitions,
 etc.).
 
-* entities
+* entities                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Entities that define the logical model.
 
-** attribute
+** attribute                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Documentable, Configurable, Nameable, Stereotypable
 :END:
 
 Represents an attribute in an object.
 
-*** unparsed_type
+*** unparsed_type                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -71,32 +71,32 @@ Original type name as it appeared in the source, without any parsing.
 
 Name must be in one of the supported notations.
 
-*** parsed_type
+*** parsed_type                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name_tree
 :END:
 
 Tree of names that represent the type of the attribute, after suitable parsing.
 
-*** is_immutable
+*** is_immutable                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the attribute can only be read but not set.
 
-*** is_fluent
+*** is_fluent                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the attribute's setter will return the object iteself.
 
-*** orm_properties
+*** orm_properties                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<orm::attribute_properties>
 :END:
-*** member_variable_name
+*** member_variable_name                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -106,35 +106,35 @@ Representation of the attribute name as a member variable.
 Note that at present we only support a single style for naming member variables,
 across all languages. This will have to be revisited in the future.
 
-*** getter_setter_name
+*** getter_setter_name                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name to use for getter and setter.
 
-** Nameable
+** Nameable                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a name.
 
-*** name
+*** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name
 :END:
 
 Fully qualified name.
 
-** Documentable
+** Documentable                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to provide documentation.
 
-*** documentation
+*** documentation                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -145,71 +145,71 @@ These are expected to follow the grammar of the comment processing tools
 of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
 etc.
 
-** Provenance
+** Provenance                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Details of the origin of this model element.
 
-*** provenance
+*** provenance                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::codec_provenance
 :END:
 
 Details of the provenance of this model element.
 
-** Containable
+** Containable                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The ability to be contained inside a module.
 
-*** contained_by
+*** contained_by                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_id
 :END:
 
 ID of the element in which we are contained, if any.
 
-*** in_global_module
+*** in_global_module                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the element is located in the global module.
 
-** Stereotypable
+** Stereotypable                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** stereotypes
+*** stereotypes                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: stereotypes
 :END:
 
 All stereotypes associated with this element.
 
-** MetaNameable
+** MetaNameable                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a meta-name.
 
-*** meta_name
+*** meta_name                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_meta_name
 :END:
 
 Name of the element in the meta-model that this instance conforms to.
 
-** TechnicalSpaceRelationship
+** TechnicalSpaceRelationship                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** intrinsic_technical_space
+*** intrinsic_technical_space                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space
 :END:
@@ -220,46 +220,46 @@ spaces.
 If the element can be mapped to a technical space then its intrinsic nature is
 agnostic. Otherwise, the element belongs to a concrete technical space.
 
-** Configurable
+** Configurable                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have meta-data associated.
 
-*** configuration
+*** configuration                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
 :END:
 
 Configuration for this element.
 
-** Labelable
+** Labelable                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The ability to attach labels to an element.
 
-*** labels
+*** labels                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::label>
 :END:
 
 All labels associated with this element.
 
-** Generatable
+** Generatable                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** generability_status
+*** generability_status                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: generability_status
 :END:
 
 The status of this element with regards to generability.
 
-** Element
+** Element                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::Nameable, entities::Documentable, entities::Provenance, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable, entities::Generatable
 :masd.codec.stereotypes: masd::object_template
@@ -271,14 +271,14 @@ We define the Element object template purely to make our life easier
 when creating the element class. It is not required for any other
 purpose.
 
-** Stateful
+** Stateful                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a state.
 
-*** all_attributes
+*** all_attributes                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<attribute>
 :END:
@@ -295,14 +295,14 @@ This is a union of the following sets:
 The first and third sets are cached in this object. The second isn't as we do
 not have a need for it.
 
-*** local_attributes
+*** local_attributes                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<attribute>
 :END:
 
 The set of all attributes directly associated with the type.
 
-*** inherited_attributes
+*** inherited_attributes                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_name, std::list<attribute>>
 :END:
@@ -312,21 +312,21 @@ The set of all attributes obtained via inheritance, by parent name.
 Note that we are using name as a key by design (instead of id); it is required for
 formatting.
 
-*** is_immutable
+*** is_immutable                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, do not generate setters for the element's attributes.
 
-*** is_fluent
+*** is_fluent                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, generate fluent setters.
 
-** element
+** element                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::visitable, Element
 :END:
@@ -337,25 +337,25 @@ An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
 meta-types (object templates) and non-types (modules and backend specific entities).
 
-*** decoration
+*** decoration                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
 :END:
 
 If set, decoration to be added to each generated file.
 
-*** helper_properties
+*** helper_properties                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<helper_properties>
 :END:
-** model
+** model                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable, MetaNameable, Provenance
 :END:
 
 Intermediate representation of a masd model.
 
-*** references
+*** references                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
 :END:
@@ -363,7 +363,7 @@ Intermediate representation of a masd model.
 All other intermediate models that this model depends on, mapped to their
 origin.
 
-*** leaves
+*** leaves                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_name>
 :END:
@@ -372,25 +372,25 @@ All leaf types in this model.
 
 Leaves are types concrete types which have a parent.
 
-*** root_module
+*** root_module                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<structural::module>
 :END:
-*** input_technical_space
+*** input_technical_space                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space
 :END:
 
 Technical space in which this model was written.
 
-*** output_technical_spaces
+*** output_technical_spaces                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::technical_space>
 :END:
 
 Technical spaces into which to extract the final model.
 
-*** all_technical_spaces
+*** all_technical_spaces                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::technical_space>
 :END:
@@ -401,146 +401,146 @@ Includes the primary technical space (e.g. the output technical space) as well a
 all of the secondary technical spaces. Does not include any abstract technical
 spaces.
 
-*** orm_properties
+*** orm_properties                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<orm::model_properties>
 :END:
-*** structural_elements
+*** structural_elements                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: structural::element_repository
 :END:
 
 All structural elements in this model.
 
-*** decoration_elements
+*** decoration_elements                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: decoration::element_repository
 :END:
 
 All decoration elements in this model.
 
-*** variability_elements
+*** variability_elements                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: variability::element_repository
 :END:
 
 All variability elements in this model.
 
-*** mapping_elements
+*** mapping_elements                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: mapping::element_repository
 :END:
 
 Model elements related to element mapping.
 
-*** templating_elements
+*** templating_elements                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: templating::element_repository
 :END:
 
 Elements related to text templates.
 
-*** serialization_elements
+*** serialization_elements                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: serialization::element_repository
 :END:
 
 Elements related to serialization.
 
-*** visual_studio_elements
+*** visual_studio_elements                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: visual_studio::element_repository
 :END:
-*** orm_elements
+*** orm_elements                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: orm::element_repository
 :END:
-*** build_elements
+*** build_elements                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: build::element_repository
 :END:
-*** physical_elements
+*** physical_elements                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: physical::element_repository
 :END:
-*** meta_names
+*** meta_names                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
 :END:
 
 All meta-names by qualified name.
 
-*** streaming_properties
+*** streaming_properties                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, streaming_properties>
 :END:
-*** technical_space_version
+*** technical_space_version                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space_version
 :END:
 
 Version of the technical space we are targeting.
 
-*** aspect_properties
+*** aspect_properties                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, aspect_properties>
 :END:
-*** assistant_properties
+*** assistant_properties                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, assistant_properties>
 :END:
-** elements_traversal
+** elements_traversal                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** TraversalVisitor
+** TraversalVisitor                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-** Visitable
+** Visitable                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The ability to handle visitation.
 
-*** base_visitor
+*** base_visitor                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Base class of the visitor that visits the current element, if any.
 
-*** derived_visitor
+*** derived_visitor                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Derived class of the visitor that visits the current element, if any.
 
-*** is_visitation_root
+*** is_visitation_root                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** is_visitation_leaf
+*** is_visitation_leaf                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** Associatable
+** Associatable                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The element has the ability to associate itself with other elements.
 
-*** transparent_associations
+*** transparent_associations                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are involved in aggregation or composition relationships.
 
-*** opaque_associations
+*** opaque_associations                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
@@ -550,49 +550,49 @@ indirection.
 
 This is used to break cycles where required.
 
-*** associative_container_keys
+*** associative_container_keys                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are keys in an associative container.
 
-** Generalizable
+** Generalizable                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The element has the ability to be part of a generalization relationship.
 
-*** is_parent
+*** is_parent                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 True if this element is the parent of one or more elements, false otherwise.
 
-*** is_child
+*** is_child                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the element has at least one parent.
 
-*** is_leaf
+*** is_leaf                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 True if the type has a parent but no children.
 
-*** is_final
+*** is_final                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the element cannot be inherited from.
 
-*** is_final_requested
+*** is_final_requested                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
@@ -601,46 +601,46 @@ If present and true/false, user has requested is_final to be true/false.
 
 If not present, user did not make any statements with regards to finality.
 
-*** is_abstract
+*** is_abstract                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the type is an abstract type.
 
-*** in_inheritance_relationship
+*** in_inheritance_relationship                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 True if the object is related to at least one other object as a parent or a child.
 
-*** root_parents
+*** root_parents                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Top-most parents at the root of the inheritance hierarchy, if any.
 
-*** parents
+*** parents                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Direct parent of this element, if any.
 
-*** leaves
+*** leaves                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are at the bottom of the inheritance tree.
 
-*** type_registrar
+*** type_registrar                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
-** Relatable
+** Relatable                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::Containable, entities::Visitable, entities::Associatable, entities::Generalizable
 :masd.codec.stereotypes: masd::object_template
@@ -648,105 +648,105 @@ Elements that are at the bottom of the inheritance tree.
 
 Element has the ability to have relationships with other elements.
 
-** Parameterisable
+** Parameterisable                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** type_parameters
+*** type_parameters                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: type_parameters
 :END:
-** type_parameters
-*** variable_number_of_parameters
+** type_parameters                                             :masd_element:
+*** variable_number_of_parameters                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** count
+*** count                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned int
 :END:
-*** always_in_heap
+*** always_in_heap                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** static_stereotypes
+** static_stereotypes                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Lists all stereotypes defined in the masd UML profile.
 
-*** fluent
-*** immutable
-*** visitable
-*** structural_object
-*** structural_object_template
-*** structural_exception
-*** structural_primitive
-*** structural_enumeration
-*** structural_module
-*** structural_builtin
-*** structural_entry_point
-*** structural_assistant
-*** orm_object
-*** orm_value
-*** decoration_modeline_group
-*** decoration_modeline
-*** decoration_generation_marker
-*** decoration_licence
-*** variability_profile
-*** variability_profile_template
-*** variability_feature_bundle
-*** variability_feature_template_bundle
-*** variability_initializer
-*** mapping_fixed_mappable
-*** mapping_extensible_mappable
-*** templating_logic_less_template
-*** serialization_type_registrar
-*** visual_studio_solution
-*** visual_studio_project
-*** visual_studio_msbuild_targets
-*** orm_common_odb_options
-*** build_cmakelists
-*** physical_backend
-*** physical_facet
-*** physical_archetype
-*** physical_archetype_kind
-*** physical_part
-*** physical_helper
-** input_model_set
+*** fluent                                                   :masd_attribute:
+*** immutable                                                :masd_attribute:
+*** visitable                                                :masd_attribute:
+*** structural_object                                        :masd_attribute:
+*** structural_object_template                               :masd_attribute:
+*** structural_exception                                     :masd_attribute:
+*** structural_primitive                                     :masd_attribute:
+*** structural_enumeration                                   :masd_attribute:
+*** structural_module                                        :masd_attribute:
+*** structural_builtin                                       :masd_attribute:
+*** structural_entry_point                                   :masd_attribute:
+*** structural_assistant                                     :masd_attribute:
+*** orm_object                                               :masd_attribute:
+*** orm_value                                                :masd_attribute:
+*** decoration_modeline_group                                :masd_attribute:
+*** decoration_modeline                                      :masd_attribute:
+*** decoration_generation_marker                             :masd_attribute:
+*** decoration_licence                                       :masd_attribute:
+*** variability_profile                                      :masd_attribute:
+*** variability_profile_template                             :masd_attribute:
+*** variability_feature_bundle                               :masd_attribute:
+*** variability_feature_template_bundle                      :masd_attribute:
+*** variability_initializer                                  :masd_attribute:
+*** mapping_fixed_mappable                                   :masd_attribute:
+*** mapping_extensible_mappable                              :masd_attribute:
+*** templating_logic_less_template                           :masd_attribute:
+*** serialization_type_registrar                             :masd_attribute:
+*** visual_studio_solution                                   :masd_attribute:
+*** visual_studio_project                                    :masd_attribute:
+*** visual_studio_msbuild_targets                            :masd_attribute:
+*** orm_common_odb_options                                   :masd_attribute:
+*** build_cmakelists                                         :masd_attribute:
+*** physical_backend                                         :masd_attribute:
+*** physical_facet                                           :masd_attribute:
+*** physical_archetype                                       :masd_attribute:
+*** physical_archetype_kind                                  :masd_attribute:
+*** physical_part                                            :masd_attribute:
+*** physical_helper                                          :masd_attribute:
+** input_model_set                                             :masd_element:
 Represents a set of related logical models used as an input to the logical model chains.
 
-*** target
+*** target                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: model
 :END:
-*** references
+*** references                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<model>
 :END:
-*** fixed_mappings
+*** fixed_mappings                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
 
 Maps a fixed mappable name, using the scope notation, to its destination.
 
-** Container
+** Container                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Has the ability to contain other elements.
 
-*** contains
+*** contains                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_id>
 :END:
 
 All elements contained by this element.
 
-** decoration
+** decoration                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -754,14 +754,14 @@ All elements contained by this element.
 Houses all of the meta-modeling elements and
 properties related to decorations.
 
-*** licence
+*** licence                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Represents legal licence for software projects.
 
-**** short_form
+**** short_form                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -770,7 +770,7 @@ Represents legal licence for software projects.
 Short version of the licence, for inclusion in project files.
 
 #+end_src
-**** long_form
+**** long_form                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -779,7 +779,7 @@ Short version of the licence, for inclusion in project files.
 Long form of the licence text, suitable for generation of LICENCE files.
 
 #+end_src
-*** modeline_group
+*** modeline_group                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, Container
 :END:
@@ -789,14 +789,14 @@ Group of modelines, logically associated.
 For example, one may choose to have a set of modelines for @e emacs , or for
 @e vi, etc.
 
-**** modelines
+**** modelines                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<boost::shared_ptr<modeline>>
 :END:
 
 Modelines that make up the group.
 
-*** modeline
+*** modeline                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -812,82 +812,82 @@ In this particular case, both prefix and postfix are @e -*-; @e mode is the firs
 field name and its value is @e c++; the KVP separator is @e : and the field
 separator is @e ;.
 
-**** editor
+**** editor                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: editor
 :END:
 
 The modeline will use the syntax for this editor.
 
-**** location
+**** location                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: modeline_location
 :END:
 
 Where to place the modeline.
 
-**** fields
+**** fields                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<modeline_field>
 :END:
 
 List of all the parameters in the preamble, in order of appearence.
 
-**** technical_space
+**** technical_space                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space
 :END:
 
 Technical space that this modeline targets.
 
-*** editor
+*** editor                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Supported editors for modelines.
 
-**** emacs
+**** emacs                                                   :masd_attribute:
 The emacs editor.
 
-**** vi
+**** vi                                                      :masd_attribute:
 The generic vi editor.
 
-**** vim
+**** vim                                                     :masd_attribute:
 The vi-like editor vim.
 
-**** ex
+**** ex                                                      :masd_attribute:
 The old ex editor.
 
-*** modeline_field
-**** name
+*** modeline_field                                             :masd_element:
+**** name                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the field.
 
-**** value
+**** value                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Value of the field.
 
-*** modeline_location
+*** modeline_location                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Location in the file to place the modeline.
 
-**** top
+**** top                                                     :masd_attribute:
 Very first line in file.
 
-**** bottom
+**** bottom                                                  :masd_attribute:
 Very last line in file.
 
-*** generation_marker
+*** generation_marker                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -896,7 +896,7 @@ Properties of the "generation marker" to add to generated files.
 
 These are also known as "location strings".
 
-**** add_date_time
+**** add_date_time                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -906,45 +906,45 @@ If true, the location strings will include the date and time of generation.
 This is not recomended for models that are generated often as it will trigger
 rebuilds for no good reason.
 
-**** add_dogen_version
+**** add_dogen_version                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, adds the version of dogen used to generate the code.
 
-**** add_model_to_text_transform_details
+**** add_model_to_text_transform_details                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, adds information about the transform used to generate the file.
 
-**** add_warning
+**** add_warning                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, warns users that the file was code-generated.
 
-**** add_origin_sha1_hash
+**** add_origin_sha1_hash                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, adds the SHA1 hash of the original model to the marker.
 
-**** message
+**** message                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Custom message to add to each generated file.
 
-*** element_properties
+*** element_properties                                         :masd_element:
 Decoration for this element.
 
-**** preamble
+**** preamble                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -954,7 +954,7 @@ Preamble for all artefacts created from this element.
 The preamble is located at the top of an artefact and includes elements such as a
 modeline, licence,  copyrights, etc.
 
-**** postamble
+**** postamble                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -964,34 +964,34 @@ Postamble for all artefacts created from this element.
 The postamble is located at the bottom of an artefact and includes elements such
 as a modeline.
 
-*** element_repository
-**** modeline_groups
+*** element_repository                                         :masd_element:
+**** modeline_groups                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
 :END:
-**** modelines
+**** modelines                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
 :END:
-**** licences
+**** licences                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
 :END:
-**** generation_markers
+**** generation_markers                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
 :END:
-** meta_element
+** meta_element                                                :masd_element:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: logical::meta_element
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-*** masd.generalization.parent
+*** masd.generalization.parent                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: dogen::logical::entities::element
 :END:
-** variability
+** variability                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -1042,35 +1042,35 @@ future we hope to simplify this by making the shapes align - though
 perhaps it will have the underisable side-effect of hiding all of this
 complexity.
 
-*** abstract_feature
+*** abstract_feature                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Documentable, Configurable, Nameable
 :END:
 
 Contains all of the common attributes between features and feature templates.
 
-**** original_key
+**** original_key                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Key as it was originally provided by the user.
 
-**** key
+**** key                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Identifier of the feature, as will be seen by the end user.
 
-**** identifiable_key
+**** identifiable_key                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Post-processed key, suitable for use as an identifier.
 
-**** unparsed_type
+**** unparsed_type                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -1079,28 +1079,28 @@ Type of the static configuration field, as read out from original model.
 
 This is the type before mapping and parsing.
 
-**** mapped_type
+**** mapped_type                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Unparsed type, after mapping has taken place.
 
-**** parsed_type
+**** parsed_type                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name_tree
 :END:
 
 Mapped type, after parsing has taken place.
 
-**** default_value
+**** default_value                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 String representing the default value set on the model.
 
-**** value_type
+**** value_type                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: variability::entities::value_type
 :END:
@@ -1109,7 +1109,7 @@ Type of the value pointed to by the feature.
 
 By implication, this also determines the type of the default value.
 
-**** binding_point
+**** binding_point                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<variability::entities::binding_point>
 :END:
@@ -1120,14 +1120,14 @@ If the default binding point is supplied for a bundle, the features cannot
 supply individual binding points. Conversely, if not supplied, they must supply
 their individual binding points.
 
-**** is_optional
+**** is_optional                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the feature generated by the feature template is optional.
 
-**** requires_optionality
+**** requires_optionality                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -1136,7 +1136,7 @@ If true, the feature's static configuration will have an optional type.
 
 This is only required if the feature template is optional and has no default value.
 
-*** feature_template
+*** feature_template                                           :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_feature
 :END:
@@ -1145,53 +1145,53 @@ Represents a feature template in variability space.
 
 Feature templates are expanded into features within the variability model.
 
-**** default_value_overrides
+**** default_value_overrides                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<default_value_override>
 :END:
-*** initializer
+*** initializer                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Responsible for initialising features and feature templates.
 
-**** feature_template_bundles
+**** feature_template_bundles                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Names of all the templates that this initialiser will register.
 
-**** feature_bundles
+**** feature_bundles                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Names of all the features that this initialiser will register.
 
-*** element_repository
-**** profile_templates
+*** element_repository                                         :masd_element:
+**** profile_templates                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
 :END:
-**** profiles
+**** profiles                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
 :END:
-**** feature_template_bundles
+**** feature_template_bundles                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
 :END:
-**** feature_bundles
+**** feature_bundles                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
 :END:
-**** initializer
+**** initializer                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<initializer>
 :END:
-*** abstract_bundle
+*** abstract_bundle                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, Associatable
 :END:
@@ -1209,28 +1209,28 @@ Generated code comprises of two aspects:
 @li the generation of a static configuration class to  represent the feature once
  read out from the dynamic configuration - if requested.
 
-**** key_prefix
+**** key_prefix                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Prefix to use when composing the key, if any.
 
-**** generate_registration
+**** generate_registration                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, code will be generated to perform the registration of the features.
 
-**** generate_static_configuration
+**** generate_static_configuration                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the code generator will output a class to represent the static configuration.
 
-**** requires_manual_default_constructor
+**** requires_manual_default_constructor                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -1238,7 +1238,7 @@ If true, the code generator will output a class to represent the static configur
 If true, the code generated for this feature template bundle needs a manually
 generated default constructor.
 
-**** default_binding_point
+**** default_binding_point                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<variability::entities::binding_point>
 :END:
@@ -1250,7 +1250,7 @@ model. If the default binding point is supplied for a bundle, the templates cann
 supply individual binding points. Conversely, if not supplied, they must supply
 their individual binding points.
 
-*** feature_bundle
+*** feature_bundle                                             :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_bundle
 :END:
@@ -1269,21 +1269,21 @@ Generated code comprises of two aspects:
 
 Both of these aspects are optional, but at least one must be chosen.
 
-**** features
+**** features                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<feature>
 :END:
 
 Set of features associated with this feature bundle.
 
-*** feature
+*** feature                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_feature
 :END:
 
 Represents a feature in variability space.
 
-*** feature_template_bundle
+*** feature_template_bundle                                    :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_bundle
 :END:
@@ -1303,109 +1303,109 @@ Generated code comprises of two aspects:
 
 Both of these aspects are optional, but at least one must be chosen.
 
-**** feature_templates
+**** feature_templates                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<feature_template>
 :END:
 
 Set of feature templates associated with this feature template bundle.
 
-**** instantiation_domain_name
+**** instantiation_domain_name                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** abstract_profile
+*** abstract_profile                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
-**** stereotype
+**** stereotype                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** parents
+**** parents                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Parents of this profile template.
 
-**** key_prefix
+**** key_prefix                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Prefix to use when composing the key, if any.
 
-*** profile_template
+*** profile_template                                           :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_profile
 :END:
-**** entries
+**** entries                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<profile_template_entry>
 :END:
-*** profile
+*** profile                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_profile
 :END:
 
 Represents a profile from the variability subsystem.
 
-**** entries
+**** entries                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<profile_entry>
 :END:
 
 Configuration entries in this profile.
 
-**** binding_point
+**** binding_point                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Binding point for the profile.
 
-*** abstract_profile_entry
+*** abstract_profile_entry                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Documentable, Configurable, Nameable
 :END:
-**** original_key
+**** original_key                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Key as it was originally provided by the user.
 
-**** key
+**** key                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** value
+**** value                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-*** profile_entry
+*** profile_entry                                              :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_profile_entry
 :END:
-*** profile_template_entry
+*** profile_template_entry                                     :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::variability::abstract_profile_entry
 :END:
-**** instantiation_domain_name
+**** instantiation_domain_name                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** default_value_override
-**** key_ends_with
+*** default_value_override                                     :masd_element:
+**** key_ends_with                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** default_value
+**** default_value                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** orm
+** orm                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -1413,287 +1413,287 @@ Key as it was originally provided by the user.
 Houses all of the properties related to ORM
 support in Dogen.
 
-*** model_properties
+*** model_properties                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Schemable, Caseable
 :END:
-**** database_systems
+**** database_systems                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<database_system>
 :END:
-*** database_system
+*** database_system                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::hashable, dogen::convertible
 :END:
-**** mysql
-**** postgresql
-**** oracle
-**** sql_server
-**** sqlite
-*** letter_case
+**** mysql                                                   :masd_attribute:
+**** postgresql                                              :masd_attribute:
+**** oracle                                                  :masd_attribute:
+**** sql_server                                              :masd_attribute:
+**** sqlite                                                  :masd_attribute:
+*** letter_case                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
-**** upper_case
-**** lower_case
-*** object_properties
+**** upper_case                                              :masd_attribute:
+**** lower_case                                              :masd_attribute:
+*** object_properties                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: OrmElement
 :END:
-**** table_name
+**** table_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the table to map this element to.
 
-**** is_value
+**** is_value                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, treat this object as a value type (e.g. simple type) rather than as an object.
 
-**** has_primary_key
+**** has_primary_key                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 True if the object has an attribute marked as a primary key, false otherwise.
 
-*** primitive_properties
+*** primitive_properties                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: OrmElement, Overridable
 :END:
-*** module_properties
+*** module_properties                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Schemable, Caseable
 :END:
-*** attribute_properties
+*** attribute_properties                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Overridable, OdbPragmable
 :END:
-**** column_name
+**** column_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the column to use for this attribute. If populated, will override the attribute name.
 
-**** is_primary_key
+**** is_primary_key                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this attribute is a primary key for the relation.
 
-**** is_nullable
+**** is_nullable                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
 
 If true, the attribute can be NULL.
 
-**** is_composite
+**** is_composite                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the value of this attribute is a composite value.
 
-*** Schemable
+*** Schemable                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 Model element can belong to a relational database schema.
 
-**** schema_name
+**** schema_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the database schema in which to place this element.
 
-**** capitalised_schema_name
+**** capitalised_schema_name                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Schema name with the correct capitalisation.
 
-*** Caseable
+*** Caseable                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
 
 The model element supports configuration related to casing.
 
-**** letter_case
+**** letter_case                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<letter_case>
 :END:
 
 What case to use for the database identifiers.
 
-*** Mappeable
+*** Mappeable                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** generate_mapping
+**** generate_mapping                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, object-relational mapping will be generated for this element.
 
-*** TypeMappable
+*** TypeMappable                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** type_mappings
+**** type_mappings                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<type_mapping>
 :END:
 
 List of mappings of relational database types.
 
-*** OdbPragmable
+*** OdbPragmable                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** odb_pragmas
+**** odb_pragmas                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
 
 Pragmas for the ODB ORM backend.
 
-*** OrmElement
+*** OrmElement                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::orm::Schemable, entities::orm::Caseable, entities::orm::Mappeable, entities::orm::TypeMappable, entities::orm::OdbPragmable
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** odb_options
+**** odb_options                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: odb_options
 :END:
-*** Overridable
+*** Overridable                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** type_overrides
+**** type_overrides                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<database_system, std::string>
 :END:
 
 Override the default type for this attribute for a given database system.
 
-*** type_mapping
-**** source_type
+*** type_mapping                                               :masd_element:
+**** source_type                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Type which we intend to map from. Example: TEXT.
 
-**** destination_type
+**** destination_type                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Type we intend to map to. Example: JSONB.
 
-**** to_source_type
+**** to_source_type                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Function that converts into the source type.
 
-**** to_destination_type
+**** to_destination_type                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Function that converts into the destination type.
 
-**** database
+**** database                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<database_system>
 :END:
 
 Database to which the mapping applies. If none is supplied, it will apply to all.
 
-*** odb_options
-**** epilogue
+*** odb_options                                                :masd_element:
+**** epilogue                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** include_regexes
+**** include_regexes                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-**** header_guard_prefix
+**** header_guard_prefix                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** common_odb_options
+*** common_odb_options                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
-**** sql_name_case
+**** sql_name_case                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** databases
+**** databases                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-*** element_repository
-**** common_odb_options
+*** element_repository                                         :masd_element:
+**** common_odb_options                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
 :END:
-*** odb_targets
-**** main_target_name
+*** odb_targets                                                :masd_element:
+**** main_target_name                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** common_odb_options
+**** common_odb_options                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** targets
+**** targets                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<odb_target>
 :END:
-*** odb_target
-**** name
+*** odb_target                                                 :masd_element:
+**** name                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** comment
+**** comment                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** output_directory
+**** output_directory                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** types_file
+**** types_file                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** move_parameters
+**** move_parameters                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::pair<std::string, std::string>>
 :END:
-**** object_odb_options
+**** object_odb_options                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** structural
+** structural                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -1701,28 +1701,28 @@ Database to which the mapping applies. If none is supplied, it will apply to all
 Houses all of the meta-modeling elements related
 to structural modeling.
 
-*** object_template
+*** object_template                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, Stateful
 :END:
 
 Represents a structural template for masd objects.
 
-**** parents
+**** parents                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 List of object templates that this object template inherits from, if any.
 
-**** is_child
+**** is_child                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the object template has at least one parent.
 
-*** object
+*** object                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties
 :END:
@@ -1734,135 +1734,135 @@ name because all elements should also have the prefix meta - after all, logical
 is ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.
 
-**** is_associative_container
+**** is_associative_container                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 Object is an associative container.
 
-**** object_templates
+**** object_templates                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 All object templates associated with this object.
 
-**** provides_opaqueness
+**** provides_opaqueness                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this type provides opaqueness to any type parameters it may have.
 
-**** can_be_primitive_underlier
+**** can_be_primitive_underlier                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this object can be the underlying element of a primitive.
 
-**** orm_properties
+**** orm_properties                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<dogen::logical::entities::orm::object_properties>
 :END:
-*** builtin
+*** builtin                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Represents a value type that is built-in at the hardware level.
 
-**** is_default_enumeration_type
+**** is_default_enumeration_type                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this built-in is the default type to be used on enumerations.
 
-**** is_floating_point
+**** is_floating_point                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this built-in represents a floating point number.
 
-**** can_be_enumeration_underlier
+**** can_be_enumeration_underlier                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this element can be the underlying element of an enumeration.
 
-**** can_be_primitive_underlier
+**** can_be_primitive_underlier                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this built-in can be the underlying element of a primitive.
 
-*** exception
+*** exception                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Represents an exception which can be thrown.
 
-*** visitor
+*** visitor                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
-**** visits
+**** visits                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are visitable by the visitor.
 
-**** parent
+**** parent                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
-*** primitive
+*** primitive                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, TechnicalSpaceProperties
 :END:
 
 Defines an element created by the user to wrap another element, most likely a built-in.
 
-**** is_nullable
+**** is_nullable                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this element can be null (empty).
 
-**** value_attribute
+**** value_attribute                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: attribute
 :END:
 
 Attribute that represents the value of the primitive.
 
-**** use_type_aliasing
+**** use_type_aliasing                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If set to true, and if the owning technical space supports it, use type aliasing.
 
-**** is_immutable
+**** is_immutable                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, do not generate modifiable operations.
 
-**** orm_properties
+**** orm_properties                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<dogen::logical::entities::orm::primitive_properties>
 :END:
-*** module
+*** module                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, Container
 :END:
@@ -1871,25 +1871,25 @@ Container for other logical elements.
 
 Aggregates a group of logically related elements into a unit.
 
-**** is_root
+**** is_root                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this module is thee root module of the model.
 
-**** is_global_module
+**** is_global_module                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, this module is the pseudo module that models the global namespace.
 
-**** orm_properties
+**** orm_properties                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<dogen::logical::entities::orm::module_properties>
 :END:
-*** enumeration
+*** enumeration                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -1897,42 +1897,42 @@ If true, this module is the pseudo module that models the global namespace.
 Defines a bounded set of logically related values for a built-in type
 or a string.
 
-**** underlying_element
+**** underlying_element                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name
 :END:
 
 Underlying element of each instance of the enumeration.
 
-**** enumerators
+**** enumerators                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<enumerator>
 :END:
 
 Enumerators for this enumeration.
 
-**** use_implementation_defined_underlying_element
+**** use_implementation_defined_underlying_element           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, we will use the implementation specific default enumeration type.
 
-**** use_implementation_defined_enumerator_values
+**** use_implementation_defined_enumerator_values            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, we will rely on compiler generated enumeration values.
 
-**** add_invalid_enumerator
+**** add_invalid_enumerator                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, an enumerator for "invalid" will be added.
 
-*** enumerator
+*** enumerator                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Documentable, Nameable, Configurable, Stereotypable
 :END:
@@ -1941,7 +1941,7 @@ One of a set of valid values that an enumeration can assume.
 
 The enumerator defines an element in the domain of the enumeration.
 
-**** value
+**** value                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -1950,94 +1950,94 @@ Value for the enumerator.
 
 It must be castable to instance of the type defined in the enumeration.
 
-*** element_repository
-**** modules
+*** element_repository                                         :masd_element:
+**** modules                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>
 :END:
-**** object_templates
+**** object_templates                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>
 :END:
-**** builtins
+**** builtins                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>
 :END:
-**** enumerations
+**** enumerations                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>
 :END:
-**** primitives
+**** primitives                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>
 :END:
-**** objects
+**** objects                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>
 :END:
-**** exceptions
+**** exceptions                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>
 :END:
-**** visitors
+**** visitors                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>
 :END:
-**** entry_points
+**** entry_points                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>
 :END:
-**** assistants
+**** assistants                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>
 :END:
-*** entry_point
+*** entry_point                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Represents an entry point to a binary.
 
-*** assistant
+*** assistant                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 General type to provide helpers.
 
-*** technical_space_properties
-**** requires_manual_default_constructor
+*** technical_space_properties                                 :masd_element:
+**** requires_manual_default_constructor                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-**** requires_manual_move_constructor
+**** requires_manual_move_constructor                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-**** requires_stream_manipulators
+**** requires_stream_manipulators                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-**** requires_static_reference_equals
+**** requires_static_reference_equals                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** TechnicalSpaceProperties
+*** TechnicalSpaceProperties                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** technical_space_properties
+**** technical_space_properties                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: technical_space_properties
 :END:
-** mapping
+** mapping                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Meta-model elements related to mapping domains.
 
-*** extensible_mappable
+*** extensible_mappable                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -2048,32 +2048,32 @@ Mappables can be used to create a Platform Independent Model (PIM), which is the
 mapped to concrete types to form a Platform Specific Model (PSM). Users can
 extend the mappings as required.
 
-**** destinations
+**** destinations                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<destination>
 :END:
 
 All the destinations that this source has been mapped to.
 
-*** element_repository
-**** extensible_mappables
+*** element_repository                                         :masd_element:
+**** extensible_mappables                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
 :END:
-**** fixed_mappables
+**** fixed_mappables                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
 :END:
-*** destination
-**** name
+*** destination                                                :masd_element:
+**** name                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_name
 :END:
-**** technical_space
+**** technical_space                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space
 :END:
-*** fixed_mappable
+*** fixed_mappable                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -2083,18 +2083,18 @@ A mappable meta-model element for a special purpose.
 At present, the only fixed mappables used by Dogen are related to the mapping of
 variability types.
 
-**** destination
+**** destination                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** templating
+** templating                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Meta-model elements related to templating .
 
-*** logic_less_template
+*** logic_less_template                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -2103,7 +2103,7 @@ Represents a logic-less template.
 
 At present the system only supports wale templates.
 
-**** content
+**** content                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -2112,12 +2112,12 @@ At present the system only supports wale templates.
 Content of the logic-less template.
 
 #+end_src
-*** element_repository
-**** logic_less_templates
+*** element_repository                                         :masd_element:
+**** logic_less_templates                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
 :END:
-** serialization
+** serialization                                               :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -2125,7 +2125,7 @@ Content of the logic-less template.
 Houses all of the meta-modeling elements related
 to serialisation.
 
-*** type_registrar
+*** type_registrar                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
@@ -2138,26 +2138,26 @@ serialisation infrastructure in order for the deserialisation of base and derive
 types to work. The type registrar is aware of all types with such requirements and
 generates the registration code as needed.
 
-**** leaves
+**** leaves                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 List of all concrete classes which are part of an inheritance tree.
 
-**** registrar_dependencies
+**** registrar_dependencies                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Registrars on other models this registrar depends on.
 
-*** element_repository
-**** type_registrars
+*** element_repository                                         :masd_element:
+**** type_registrars                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
 :END:
-** visual_studio
+** visual_studio                                               :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -2165,73 +2165,73 @@ Registrars on other models this registrar depends on.
 Houses meta-model elements related to
 build systems.
 
-*** project
+*** project                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
 :END:
 
 Represents a Visual Studio project.
 
-**** type_guid
+**** type_guid                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 GUID used by Visual Studio to identify projects of this type.
 
-**** item_groups
+**** item_groups                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<item_group>
 :END:
 
 Set of item groups in the project.
 
-**** project_name
+**** project_name                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Formatted name of the project.
 
-*** element_repository
-**** solutions
+*** element_repository                                         :masd_element:
+**** solutions                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
 :END:
 
 All solutions in this model.
 
-**** projects
+**** projects                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
 :END:
 
 All projects in this model.
 
-**** msbuild_targets
+**** msbuild_targets                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
 :END:
-*** item_group
+*** item_group                                                 :masd_element:
 Represents an MSBuild ItemGroup.
 
 Documented as follows: Contains a set of user-defined Item elements. Every item
 used in a MSBuild project must be specified as a child of an ItemGroup element.
 
-**** items
+**** items                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<item>
 :END:
 
 Set of MSBuild Items that make up this ItemGroup.
 
-*** item
+*** item                                                       :masd_element:
 Represents an MSBuild Item, used in Visual Studio projects.
 
 Documentation:  Contains a user-defined item and its metadata. Every item that is
 used in a MSBuild project must be specified as a child of an ItemGroup element.
 
-**** name
+**** name                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -2240,69 +2240,69 @@ Name of the item, such as "Compile", "CompileCl", etc.
 
 Maps to a well known MSBuild target.
 
-**** include
+**** include                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the file to include.
 
-*** solution
+*** solution                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
 :END:
-**** project_persistence_blocks
+**** project_persistence_blocks                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<project_persistence_block>
 :END:
 
 Set of project persistence blocks in this solution.
 
-*** project_persistence_block
+*** project_persistence_block                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: UniquelyIdentifiable
 :END:
-**** name
+**** name                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the project.
 
-**** relative_path
+**** relative_path                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
 
 Relative path to the project file.
 
-**** type_guid
+**** type_guid                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 GUID used by Visual Studio to identify projects of this type.
 
-*** UniquelyIdentifiable
+*** UniquelyIdentifiable                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** guid
+**** guid                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 GUID that uniquely identifies this element.
 
-*** msbuild_targets
+*** msbuild_targets                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
-**** odb_targets
+**** odb_targets                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: dogen::logical::entities::orm::odb_targets
 :END:
-** build
+** build                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
@@ -2311,313 +2311,313 @@ Houses all of the meta-modeling elements related
 to building, which don't have their own containing
 namespace.
 
-*** element_repository
-**** cmakelists
+*** element_repository                                         :masd_element:
+**** cmakelists                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
 :END:
-*** cmakelists
+*** cmakelists                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element
 :END:
 
 Represents build CMakeLists files.
 
-**** include_directory_path
+**** include_directory_path                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** source_directory_name
+**** source_directory_name                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** header_file_extension
+**** header_file_extension                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** implementation_file_extension
+**** implementation_file_extension                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** odb_targets
+**** odb_targets                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: dogen::logical::entities::orm::odb_targets
 :END:
-**** tests_directory_name
+**** tests_directory_name                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** physical
+** physical                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Logical representation of elements in the physical dimension.
 
-*** element_repository
-**** backends
+*** element_repository                                         :masd_element:
+**** backends                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
 :END:
-**** facets
+**** facets                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
 :END:
-**** archetypes
+**** archetypes                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>
 :END:
-**** parts
+**** parts                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>
 :END:
-**** archetype_kinds
+**** archetype_kinds                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
 :END:
-**** helpers
+**** helpers                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>
 :END:
-*** archetype
+*** archetype                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement, HasTechnicalSpace
 :END:
 
 Represents an archetype within a facet.
 
-**** facet_name
+**** facet_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the facet containing this element.
 
-**** part_id
+**** part_id                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 ID for the part this archetype belongs to.
 
-**** logical_meta_element_id
+**** logical_meta_element_id                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_meta_id
 :END:
 
 ID of the meta-element in the logical model this archetype binds to.
 
-**** relations
+**** relations                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: relations
 :END:
 
 Relation information for this archetype.
 
-**** text_templating
+**** text_templating                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: text_templating
 :END:
 
 Properties related to the text templating for this archetype.
 
-**** postfix
+**** postfix                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Default postfix to use for this archetype.
 
-*** backend
+*** backend                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container, HasTechnicalSpace
 :END:
 
 Represents a physical backend, targetting a major technical space such as C++ or C#.
 
-**** facets
+**** facets                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 All facets within this backend.
 
-**** parts
+**** parts                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 All parts within this backend.
 
-**** archetype_kinds
+**** archetype_kinds                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 Kinds of archetypes defined in this backend.
 
-**** directory_name
+**** directory_name                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Default directory name to use for this backend.
 
-*** facet
+*** facet                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container
 :END:
 
 Represents a facet within a backend, such as type definitions.
 
-**** archetypes
+**** archetypes                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 All archetypes in this facet.
 
-**** helpers
+**** helpers                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
-**** directory_name
+**** directory_name                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Default directory name to use for this facet.
 
-**** postfix
+**** postfix                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Default postfix to use for this facet.
 
-*** part
+*** part                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement
 :END:
 
 Part whithin a backend.
 
-**** external_modules_path_contribution
+**** external_modules_path_contribution                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 What kind of contribution do the external modules make to the final path.
 
-**** model_modules_path_contribution
+**** model_modules_path_contribution                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 What kind of contribution do the model modules make to the final path.
 
-**** facet_path_contribution
+**** facet_path_contribution                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 What kind of contribution does the facet make to the final path.
 
-**** internal_modules_path_contribution
+**** internal_modules_path_contribution                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 What kind of contribution do the internal modules make to the final path.
 
-**** requires_relative_path
+**** requires_relative_path                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, a relative path should be generated for this part.
 
-**** archetypes
+**** archetypes                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::logical_name>
 :END:
 
 All archetypes in this part.
 
-**** directory_name
+**** directory_name                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Default directory name to use for this part.
 
-*** archetype_kind
+*** archetype_kind                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement
 :END:
-**** file_extension
+**** file_extension                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Extension to use for the files of this kind.
 
-*** PhysicalElement
+*** PhysicalElement                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** id
+**** id                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Unique identifier in physical space for this element.
 
-**** major_technical_space
+**** major_technical_space                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::technical_space
 :END:
 
 Technical space to which this physical element belongs to.
 
-**** meta_model_name
+**** meta_model_name                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the physical meta-model containing this element.
 
-**** backend_name
+**** backend_name                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the backend containing this element.
 
-*** variable_relation
+*** variable_relation                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Urnable
 :END:
-**** type
+**** type                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Type of the variable relation.
 
-*** constant_relation
+*** constant_relation                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Urnable, Labelable
 :END:
-**** logical_model_element_id
+**** logical_model_element_id                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** Urnable
+*** Urnable                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** original_urn
+**** original_urn                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -2628,20 +2628,20 @@ URN pointing to an archetype or a label, as it was originally created by the use
 pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
 to a unique archetype.
 
-*** hard_coded_relation
-**** value
+*** hard_coded_relation                                        :masd_element:
+**** value                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** relations
-**** status
+*** relations                                                  :masd_element:
+**** status                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Status of this archetype with regards to relations.
 
-**** constant
+**** constant                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<constant_relation>
 :END:
@@ -2649,22 +2649,22 @@ Status of this archetype with regards to relations.
 All archetypes this archetype is related to,  over a fixed logical meta-model
 element.
 
-**** variable
+**** variable                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<variable_relation>
 :END:
-**** hard_coded
+**** hard_coded                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<hard_coded_relation>
 :END:
-*** text_templating
+*** text_templating                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Configurable
 :END:
 
 Contains all the properties related to the generation of archetypes themselves.
 
-**** stitch_template_content
+**** stitch_template_content                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -2673,127 +2673,127 @@ Contains all the properties related to the generation of archetypes themselves.
 Content of the stitch template associated with this archetype, if any exists.
 
 #+end_src
-**** wale_template
+**** wale_template                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Parsed name of the wale template linked to this archetype, if any.
 
-**** wale_template_content
+**** wale_template_content                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Content of the wale template associated with this archetype, if any exists.
 
-**** rendered_stitch_template
+**** rendered_stitch_template                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Contains the result of the stitch template after rendering.
 
-**** relations
+**** relations                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: relations
 :END:
 
 Relation information for this archetype.
 
-*** HasTechnicalSpace
+*** HasTechnicalSpace                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-**** technical_space
+**** technical_space                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Technical space to which this physical element belongs to.
 
-*** helper
+*** helper                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: logical::meta_element, PhysicalElement
 :END:
-**** part_id
+**** part_id                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** facet_name
+**** facet_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** family
+**** family                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** owning_formatters
+**** owning_formatters                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-**** owning_facets
+**** owning_facets                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-**** helper_name
+**** helper_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-**** text_templating
+**** text_templating                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: text_templating
 :END:
-**** relations
+**** relations                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: relations
 :END:
 
 Relation information for this helper.
 
-** output_model_set
+** output_model_set                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Nameable
 :END:
 
 Represents a set of related logical models produced as ouput of the logical model chains.
 
-*** models
+*** models                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<model>
 :END:
 
 All models in this model set.
 
-** generability_status
+** generability_status                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 The status of this element with regards to generability.
 
-*** non_generatable_source
+*** non_generatable_source                                   :masd_attribute:
 The element was sourced from a non-target model.
 
-*** generation_not_expected
+*** generation_not_expected                                  :masd_attribute:
 The element is of a type that is expected to have support for generation.
 
-*** non_generatable_state
+*** non_generatable_state                                    :masd_attribute:
 The element is normally generatable, but is in a state that precludes generation.
 
-*** generation_disabled
+*** generation_disabled                                      :masd_attribute:
 The user requested generation to be disabled.
 
-*** generation_ignored
+*** generation_ignored                                       :masd_attribute:
 User requested that any changes to this element are to be ignored.
 
-*** generatable
+*** generatable                                              :masd_attribute:
 The element is generatable.
 
-** stereotypes
+** stereotypes                                                 :masd_element:
 Stereotype information associated with this element.
 
-*** static_stereotypes
+*** static_stereotypes                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<static_stereotypes>
 :END:
@@ -2801,116 +2801,116 @@ Stereotype information associated with this element.
 Stereotypes that are part of the dogen UML profile, and so are well-known to the
 model.
 
-*** dynamic_stereotypes
+*** dynamic_stereotypes                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::stereotype>
 :END:
 
 Stereotypes that are not part of the masd UML profile. These are user defined.
 
-** streaming_properties
-*** requires_quoting
+** streaming_properties                                        :masd_element:
+*** requires_quoting                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** string_conversion_method
+*** string_conversion_method                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** remove_unprintable_characters
+*** remove_unprintable_characters                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** helper_properties
-*** current
+** helper_properties                                           :masd_element:
+*** current                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: helper_descriptor
 :END:
-*** direct_descendants
+*** direct_descendants                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<helper_descriptor>
 :END:
-*** in_inheritance_relationship
+*** in_inheritance_relationship                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** helper_descriptor
-*** family
+** helper_descriptor                                           :masd_element:
+*** family                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** namespaces
+*** namespaces                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-*** name_identifiable
+*** name_identifiable                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** name_qualified
+*** name_qualified                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** name_tree_qualified
+*** name_tree_qualified                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** name_tree_identifiable
+*** name_tree_identifiable                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** streaming_properties
+*** streaming_properties                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<streaming_properties>
 :END:
-*** is_simple_type
+*** is_simple_type                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** requires_hashing_helper
+*** requires_hashing_helper                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** is_circular_dependency
+*** is_circular_dependency                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** is_pointer
+*** is_pointer                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** aspect_properties
-*** requires_static_reference_equals
+** aspect_properties                                           :masd_element:
+*** requires_static_reference_equals                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-** assistant_properties
-*** requires_assistance
+** assistant_properties                                        :masd_element:
+*** requires_assistance                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, the type needs help of an assistant.
 
-*** method_postfix
+*** method_postfix                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Postfix to use to call the appropriate assistant method, if required.
 
-* traits
+* traits                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* transforms
+* transforms                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Houses all of the transformations supported by logical.
 
-** context
+** context                                                     :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
@@ -2924,466 +2924,466 @@ of unrelated state; however, over time, we found that a number of
 arguments were being supplied across the call graph, resulting in a
 lot of repetitive code. The context gathers together all of these.
 
-*** compatibility_mode
+*** compatibility_mode                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-*** feature_model
+*** feature_model                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
 :END:
-*** physical_meta_model
+*** physical_meta_model                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<physical::entities::meta_model>
 :END:
 
 Meta-model for the physical dimension.
 
-*** mapping_repository
+*** mapping_repository                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<helpers::mapping_set_repository>
 :END:
-*** tracer
+*** tracer                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
-*** activity_timestamp
+*** activity_timestamp                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Human readable timestamp of when the activity took place.
 
-** pre_assembly_chain
+** pre_assembly_chain                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** model_production_chain
+** model_production_chain                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** assembly_chain
+** assembly_chain                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** post_assembly_chain
+** post_assembly_chain                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** merge_transform
+** merge_transform                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** modules_transform
+** modules_transform                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** origin_transform
+** origin_transform                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** technical_space_transform
+** technical_space_transform                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** type_params_transform
+** type_params_transform                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** parsing_transform
+** parsing_transform                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** primitives_transform
+** primitives_transform                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** generalization_transform
+** generalization_transform                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** stereotypes_transform
+** stereotypes_transform                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** object_templates_transform
+** object_templates_transform                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** global_module_transform
+** global_module_transform                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** orm_transform
+** orm_transform                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** resolver_transform
+** resolver_transform                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** attributes_transform
+** attributes_transform                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** associations_transform
+** associations_transform                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transformation_error
+** transformation_error                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst applying a transformation.
 
-** enumerations_transform
+** enumerations_transform                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** extensible_mapping_transform
+** extensible_mapping_transform                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** meta_naming_transform
+** meta_naming_transform                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** modelines_transform
+** modelines_transform                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** containment_transform
+** containment_transform                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** variability_features_transform
+** variability_features_transform                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** mapping_elements_transform
+** mapping_elements_transform                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** type_registrar_transform
+** type_registrar_transform                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** visual_studio_transform
+** visual_studio_transform                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** visual_studio_project_type_transform
+** visual_studio_project_type_transform                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** odb_options_transform
+** odb_options_transform                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** variability_profiles_chain
+** variability_profiles_chain                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** dynamic_stereotypes_transform
+** dynamic_stereotypes_transform                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** variability_profiles_transform
+** variability_profiles_transform                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** physical_entities_transform
+** physical_entities_transform                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** template_rendering_transform
+** template_rendering_transform                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** decoration_transform
+** decoration_transform                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** all_technical_spaces_transform
+** all_technical_spaces_transform                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** labelling_transform
+** labelling_transform                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** generability_transform
+** generability_transform                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** streaming_properties_transform
+** streaming_properties_transform                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** technical_space_properties_transform
+** technical_space_properties_transform                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** helper_properties_transform
+** helper_properties_transform                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** aspect_properties_transform
+** aspect_properties_transform                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** assistant_properties_transform
+** assistant_properties_transform                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* helpers
-** decomposition_result
-*** names
+* helpers                                                      :masd_element:
+** decomposition_result                                        :masd_element:
+*** names                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
 :END:
-*** meta_names
+*** meta_names                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
 :END:
-*** name_trees
+*** name_trees                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
 :END:
-** decomposer
+** decomposer                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** post_assembly_validator
+** post_assembly_validator                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** validation_error
+** validation_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during validation.
 
-** pre_assembly_validator
+** pre_assembly_validator                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** indices
-*** objects_always_in_heap
+** indices                                                     :masd_element:
+*** objects_always_in_heap                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-*** elements_referable_by_attributes
+*** elements_referable_by_attributes                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-*** primitive_underliers
+*** primitive_underliers                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-*** enumeration_underliers
+*** enumeration_underliers                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-*** abstract_elements
+*** abstract_elements                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-** indexing_error
+** indexing_error                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 A fatal error has occurred while indexing.
 
-** indexer
+** indexer                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** resolver
+** resolver                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** resolution_error
+** resolution_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while trying to resolve a type.
 
-** mapping_error
+** mapping_error                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error has occurred while mapping element names.
 
-** mapper
+** mapper                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** mapping_context
-*** translations
+** mapping_context                                             :masd_element:
+*** translations                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
 :END:
-*** erasures
+*** erasures                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<identification::entities::logical_id>
 :END:
-*** codecs
+*** codecs                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
 :END:
-** mapping_set
+** mapping_set                                                 :masd_element:
 Consistent unit of mapping that can be used to translate a model from one technical
 space to another.
 
-*** name
+*** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** by_agnostic_id
+*** by_agnostic_id                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>
 :END:
-*** erasures_by_technical_space
+*** erasures_by_technical_space                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
 :END:
-** mapping_set_repository
+** mapping_set_repository                                      :masd_element:
 Stores all available mapping sets.
 
-*** default_mapping_set
+*** default_mapping_set                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: mapping_set
 :END:
-*** by_name
+*** by_name                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, mapping_set>
 :END:
-** mappings_validator
+** mappings_validator                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** mapping
+** mapping                                                     :masd_element:
 Stores the mapping of a key (the element id) to its values, organised by technical
 space.
 
-*** agnostic_id
+*** agnostic_id                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_id
 :END:
 
 Technical space agnostic ID of the element we're mapping from.
 
-*** by_technical_space
+*** by_technical_space                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::technical_space, mapping_value>
 :END:
 
 Values of the mapping, by technical space.
 
-** mapping_value
+** mapping_value                                               :masd_element:
 Value of a mapping.
 
-*** mapping_action
+*** mapping_action                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: mapping_actions
 :END:
-*** default_name
+*** default_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<identification::entities::logical_name>
 :END:
-** mapping_actions
+** mapping_actions                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-*** translate
-*** erase
-** visual_studio_project_type_mapper
+*** translate                                                :masd_attribute:
+*** erase                                                    :masd_attribute:
+** visual_studio_project_type_mapper                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** profile_adapter
+** profile_adapter                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** configuration_model_set_adapter
+** configuration_model_set_adapter                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** adaptation_exception
+** adaptation_exception                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-** decoration_repository
-*** modelines_by_modeline_group_by_technical_space
+** decoration_repository                                       :masd_element:
+*** modelines_by_modeline_group_by_technical_space           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
 :END:
-*** licences_by_name
+*** licences_by_name                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>
 :END:
-*** generation_markers_by_name
+*** generation_markers_by_name                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
 :END:
-** decoration_repository_factory
+** decoration_repository_factory                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** decoration_configuration
-*** enabled
+** decoration_configuration                                    :masd_element:
+*** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
-*** copyright_notices
+*** copyright_notices                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
 :END:
-*** licence_name
+*** licence_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_id
 :END:
-*** modeline_group_name
+*** modeline_group_name                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_id
 :END:
-*** marker_name
+*** marker_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::logical_id
 :END:
-** decoration_configuration_factory
+** decoration_configuration_factory                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** decoration_factory
+** decoration_factory                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** stereotypes_helper
+** stereotypes_helper                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** building_error
+** building_error                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error has occurred in a factory.
 
-* features
+* features                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Defines all features used by the logical model.
 
-** type_parameters
+** type_parameters                                             :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.type_parameters
@@ -3392,26 +3392,26 @@ Defines all features used by the logical model.
 
 Parameters to configure generic types.
 
-*** variable_number_of_parameters
+*** variable_number_of_parameters                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
 :END:
-*** count
+*** count                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::number
 :masd.codec.value: "0"
 :END:
-*** always_in_heap
+*** always_in_heap                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
 :END:
-** initializer
+** initializer                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::initializer
 :END:
-** enumeration
+** enumeration                                                 :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.enumeration
@@ -3420,7 +3420,7 @@ Parameters to configure generic types.
 
 Parameters related to enumerations.
 
-*** use_implementation_defined_underlying_element
+*** use_implementation_defined_underlying_element            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
@@ -3429,7 +3429,7 @@ Parameters related to enumerations.
 If true, it uses the default implementation defined underlying element for the
 technical space targeted.
 
-*** underlying_element
+*** underlying_element                                       :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3437,7 +3437,7 @@ technical space targeted.
 
 Name of the underlying element to use for the enumeration.
 
-*** use_implementation_defined_enumerator_values
+*** use_implementation_defined_enumerator_values             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
@@ -3445,7 +3445,7 @@ Name of the underlying element to use for the enumeration.
 
 If true, uses the enumeration values supplied by the underlying technical space.
 
-*** add_invalid_enumerator
+*** add_invalid_enumerator                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "true"
@@ -3453,7 +3453,7 @@ If true, uses the enumeration values supplied by the underlying technical space.
 
 If true, adds an enumerator to represent an invalid choice.
 
-** enumerator
+** enumerator                                                  :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: property
 :masd.variability.key_prefix: masd.enumerator
@@ -3462,7 +3462,7 @@ If true, adds an enumerator to represent an invalid choice.
 
 Parameters related to enumerators.
 
-*** value
+*** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3470,7 +3470,7 @@ Parameters related to enumerators.
 
 Value to use for this enumerator. Must be unique for an enumeration.
 
-** generalization
+** generalization                                              :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.generalization
@@ -3479,7 +3479,7 @@ Value to use for this enumerator. Must be unique for an enumeration.
 
 Features related to the generalization relationship.
 
-*** is_final
+*** is_final                                                 :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::boolean
@@ -3487,7 +3487,7 @@ Features related to the generalization relationship.
 
 Whether to mark a type as final or not.
 
-*** parent
+*** parent                                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3495,7 +3495,7 @@ Whether to mark a type as final or not.
 
 Name of the parent of the current element.
 
-** origin
+** origin                                                      :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3503,7 +3503,7 @@ Name of the parent of the current element.
 
 Features related to the origin of the model.
 
-*** masd.codec.is_proxy_model
+*** masd.codec.is_proxy_model                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
@@ -3511,7 +3511,7 @@ Features related to the origin of the model.
 
 If true, sets the origin of the model to "proxy model".
 
-** output_technical_space
+** output_technical_space                                      :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.physical
@@ -3520,7 +3520,7 @@ If true, sets the origin of the model to "proxy model".
 
 Features related to the output technical space.
 
-*** output_technical_space
+*** output_technical_space                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text_collection
@@ -3528,7 +3528,7 @@ Features related to the output technical space.
 
 Set of output technical spaces that this model targets.
 
-** primitive
+** primitive                                                   :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.primitive
@@ -3537,7 +3537,7 @@ Set of output technical spaces that this model targets.
 
 Features related to primitive elements.
 
-*** underlying_element
+*** underlying_element                                       :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3545,7 +3545,7 @@ Features related to primitive elements.
 
 Name of the underlying element to use for the primitive.
 
-*** is_nullable
+*** is_nullable                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
@@ -3553,7 +3553,7 @@ Name of the underlying element to use for the primitive.
 
 If true, the primitive can be null.
 
-*** use_type_aliasing
+*** use_type_aliasing                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
@@ -3562,7 +3562,7 @@ If true, the primitive can be null.
 If true, use type aliasing to implement the primitive if the technical space supports
 it.
 
-** orm
+** orm                                                         :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.orm
 :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3570,7 +3570,7 @@ it.
 
 Features related to ORM support.
 
-*** database_system
+*** database_system                                          :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.is_optional: true
@@ -3579,7 +3579,7 @@ Features related to ORM support.
 
 Database system to target for ORM support.
 
-*** table_name
+*** table_name                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -3588,7 +3588,7 @@ Database system to target for ORM support.
 
 Name of the database table for this element.
 
-*** schema_name
+*** schema_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3597,7 +3597,7 @@ Name of the database table for this element.
 
 Name of the database schema for this modeling element.
 
-*** is_primary_key
+*** is_primary_key                                           :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3606,7 +3606,7 @@ Name of the database schema for this modeling element.
 
 If true, this property will be used for the primary key.
 
-*** column_name
+*** column_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3615,7 +3615,7 @@ If true, this property will be used for the primary key.
 
 Overrides the name of the column name for the database table.
 
-*** is_nullable
+*** is_nullable                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3624,7 +3624,7 @@ Overrides the name of the column name for the database table.
 
 If true, the column can be null.
 
-*** is_composite
+*** is_composite                                             :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3633,7 +3633,7 @@ If true, the column can be null.
 
 If true, the primary key is a composite key.
 
-*** letter_case
+*** letter_case                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.is_optional: true
@@ -3642,7 +3642,7 @@ If true, the primary key is a composite key.
 
 Determines the casing to use for identifiers.
 
-*** type_override
+*** type_override                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3654,7 +3654,7 @@ Overrides to use for the relational type, for a given database system.
 Note: we've set the binding point to "any" as a hack to allow for primitive support.
 Should really be "property".
 
-*** type_mapping
+*** type_mapping                                             :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3666,7 +3666,7 @@ Type maps to create for the relational type, possibly for a given database syste
 Note: we've set the binding point to "any" as a hack to allow for primitive support.
 Should really be "property".
 
-*** odb_pragma
+*** odb_pragma                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3678,7 +3678,7 @@ Raw ODB pragmas that are applied as-is by the system.
 Use these when you need some functionality which is not natively supported by
 ORM in Dogen.
 
-** decoration_modeline
+** decoration_modeline                                         :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.decoration.modeline
@@ -3687,7 +3687,7 @@ ORM in Dogen.
 
 Modeline properties.
 
-*** editor
+*** editor                                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3695,7 +3695,7 @@ Modeline properties.
 
 Editor to use in this modeline.
 
-*** location
+*** location                                                 :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3703,7 +3703,7 @@ Editor to use in this modeline.
 
 Where to place the modeline.
 
-*** technical_space
+*** technical_space                                          :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3711,7 +3711,7 @@ Where to place the modeline.
 
 Technical space targeted by the modeline.
 
-** variability_templates
+** variability_templates                                       :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.variability
 :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3719,7 +3719,7 @@ Technical space targeted by the modeline.
 
 Features related to the processing of variability for feature and profile templates.
 
-*** binding_point
+*** binding_point                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3728,7 +3728,7 @@ Features related to the processing of variability for feature and profile templa
 
 Where does this feature bind into.
 
-*** stereotype
+*** stereotype                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -3737,7 +3737,7 @@ Where does this feature bind into.
 
 Stereotype for this profile. Must be globally unique.
 
-*** value
+*** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3749,7 +3749,7 @@ Value for a facet or profile template.
 Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
-*** is_optional
+*** is_optional                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.codec.type: masd::variability::boolean
@@ -3758,7 +3758,7 @@ the default value field if available.
 
 If true, the feature template provides an optional feature.
 
-*** default_value_override
+*** default_value_override                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3769,7 +3769,7 @@ Default values to override the "default" default value.
 
 These match on keys ending with the specified string.
 
-** mapping
+** mapping                                                     :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.mapping
@@ -3778,7 +3778,7 @@ These match on keys ending with the specified string.
 
 Meta-data related to element mapping.
 
-*** target
+*** target                                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3786,7 +3786,7 @@ Meta-data related to element mapping.
 
 Type that is the source of the mapping.
 
-*** destination
+*** destination                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3794,7 +3794,7 @@ Type that is the source of the mapping.
 
 Type that is the destination of the mapping.
 
-** variability_bundle
+** variability_bundle                                          :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.variability
 :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3802,7 +3802,7 @@ Type that is the destination of the mapping.
 
 Features related to the processing of variability for feature bundles.
 
-*** generate_registration
+*** generate_registration                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -3813,7 +3813,7 @@ If true, generates code to register the features.
 
 @pre Features must not already exist.
 
-*** generate_static_configuration
+*** generate_static_configuration                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -3822,7 +3822,7 @@ If true, generates code to register the features.
 
 If true, generates a c++ class to contain the configuration at compile time.
 
-*** default_binding_point
+*** default_binding_point                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3831,7 +3831,7 @@ If true, generates a c++ class to contain the configuration at compile time.
 
 Where does this bundle bind to.
 
-*** instantiation_domain_name
+*** instantiation_domain_name                                :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3840,7 +3840,7 @@ Where does this bundle bind to.
 
 Template instantiation domain name to use when instantiating template.
 
-*** key_prefix
+*** key_prefix                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -3849,7 +3849,7 @@ Template instantiation domain name to use when instantiating template.
 
 Prefix to apply to construct the qualified name, if any.
 
-** variability_entry
+** variability_entry                                           :masd_element:
 :PROPERTIES:
 :masd.variability.generate_registration: false
 :masd.variability.key_prefix: masd.variability
@@ -3858,7 +3858,7 @@ Prefix to apply to construct the qualified name, if any.
 
 Features related to the processing of variability for profiles and profile templates.
 
-*** binding_point
+*** binding_point                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3867,7 +3867,7 @@ Features related to the processing of variability for profiles and profile templ
 
 Where does this profile or profile template bind to.
 
-*** value
+*** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
@@ -3879,7 +3879,7 @@ Value for a facet or profile template.
 Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
-*** instantiation_domain_name
+*** instantiation_domain_name                                :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3888,7 +3888,7 @@ the default value field if available.
 
 Template instantiation domain name to use when instantiating template.
 
-** variability_profile
+** variability_profile                                         :masd_element:
 :PROPERTIES:
 :masd.variability.generate_registration: false
 :masd.variability.key_prefix: masd.variability
@@ -3897,7 +3897,7 @@ Template instantiation domain name to use when instantiating template.
 
 Features related to the processing of variability for profile entries.
 
-*** stereotype
+*** stereotype                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -3906,7 +3906,7 @@ Features related to the processing of variability for profile entries.
 
 Stereotype for this profile. Must be globally unique.
 
-*** key_prefix
+*** key_prefix                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -3915,7 +3915,7 @@ Stereotype for this profile. Must be globally unique.
 
 Prefix to apply to construct the qualified name, if any.
 
-*** binding_point
+*** binding_point                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
@@ -3924,7 +3924,7 @@ Prefix to apply to construct the qualified name, if any.
 
 Where does this profile or profile template bind to.
 
-** physical
+** physical                                                    :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.physical
@@ -3933,7 +3933,7 @@ Where does this profile or profile template bind to.
 
 Features required for physical elements.
 
-*** backend_name
+*** backend_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3943,7 +3943,7 @@ Simple name of the backend.
 
 FIXME: temporary until we rename the namespaces.
 
-*** part_id
+*** part_id                                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3953,7 +3953,7 @@ Fully qualified physical name of the part this artefact belongs to.
 
 FIXME: optional for now.
 
-*** logical_meta_element_id
+*** logical_meta_element_id                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3963,7 +3963,7 @@ Fully qualified name of the logical model element.
 
 FIXME: optional for now.
 
-*** major_technical_space
+*** major_technical_space                                    :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3971,7 +3971,7 @@ FIXME: optional for now.
 
 Major technical space to which this element belongs to.
 
-*** technical_space
+*** technical_space                                          :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3979,7 +3979,7 @@ Major technical space to which this element belongs to.
 
 Technical space to which this element belongs to.
 
-*** wale_template_reference
+*** wale_template_reference                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3987,7 +3987,7 @@ Technical space to which this element belongs to.
 
 Name of the wale template that the archetype uses.
 
-*** directory_name
+*** directory_name                                           :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -3995,7 +3995,7 @@ Name of the wale template that the archetype uses.
 
 Name of the directory to use for this physical element.
 
-*** postfix
+*** postfix                                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4003,7 +4003,7 @@ Name of the directory to use for this physical element.
 
 Postfix to use for this physical element.
 
-** wale
+** wale                                                        :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.wale
@@ -4012,7 +4012,7 @@ Postfix to use for this physical element.
 
 Wale related features.
 
-*** text_template
+*** text_template                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4020,7 +4020,7 @@ Wale related features.
 
 Name of the wale text template to instantiate, if any.
 
-*** kvp
+*** kvp                                                      :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::key_value_pair
@@ -4028,13 +4028,13 @@ Name of the wale text template to instantiate, if any.
 
 Array of wale KVPs to use in template instantiation.
 
-** decoration
+** decoration                                                  :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.decoration
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** enabled
+*** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::boolean
@@ -4042,7 +4042,7 @@ Array of wale KVPs to use in template instantiation.
 
 If true, decorations are enabled on this modeling element.
 
-*** copyright_notice
+*** copyright_notice                                         :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text_collection
@@ -4050,7 +4050,7 @@ If true, decorations are enabled on this modeling element.
 
 Copyright notices for this modeling element.
 
-*** licence_name
+*** licence_name                                             :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4058,7 +4058,7 @@ Copyright notices for this modeling element.
 
 Name of the licence to use for this modeling element.
 
-*** modeline_group_name
+*** modeline_group_name                                      :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4066,7 +4066,7 @@ Name of the licence to use for this modeling element.
 
 Name of the modeline group for this modeling element.
 
-*** marker_name
+*** marker_name                                              :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4074,14 +4074,14 @@ Name of the modeline group for this modeling element.
 
 Name of the decoration marker to use for this modeling element.
 
-** labelling
+** labelling                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 
 Features related to labels.
 
-*** masd.label
+*** masd.label                                               :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
@@ -4090,7 +4090,7 @@ Features related to labels.
 
 Labels to attach to modeling elements. Key must be unique.
 
-** physical_relations
+** physical_relations                                          :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.physical
@@ -4099,7 +4099,7 @@ Labels to attach to modeling elements. Key must be unique.
 
 Features related to relations at the physical level.
 
-*** relation_status
+*** relation_status                                          :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
@@ -4107,7 +4107,7 @@ Features related to relations at the physical level.
 
 Relation status for the archetype.
 
-*** variable_relation
+*** variable_relation                                        :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::comma_separated_collection
@@ -4115,7 +4115,7 @@ Relation status for the archetype.
 
 Define a variable relation between the current archetype and another archetype.
 
-*** constant_relation
+*** constant_relation                                        :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::comma_separated_collection
@@ -4123,12 +4123,12 @@ Define a variable relation between the current archetype and another archetype.
 
 Define a fixed relation between the current archetype and another archetype.
 
-** streaming
+** streaming                                                   :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.cpp.streaming
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** string_conversion_method
+*** string_conversion_method                                 :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::text
@@ -4137,7 +4137,7 @@ Define a fixed relation between the current archetype and another archetype.
 
 Which conversion method to use to convert strings.
 
-*** requires_quoting
+*** requires_quoting                                         :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -4146,7 +4146,7 @@ Which conversion method to use to convert strings.
 
 If true, streaming this type must be preceeded by quoting.
 
-*** remove_unprintable_characters
+*** remove_unprintable_characters                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -4155,12 +4155,12 @@ If true, streaming this type must be preceeded by quoting.
 
 If true, streaming this type requires removing unprintable characters.
 
-** technical_space_version
+** technical_space_version                                     :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.cpp
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** standard
+*** standard                                                 :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: global
 :masd.codec.type: masd::variability::text
@@ -4169,12 +4169,12 @@ If true, streaming this type requires removing unprintable characters.
 
 Which version of C++ to use.
 
-** technical_space_properties
+** technical_space_properties                                  :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** cpp.aspect.requires_manual_default_constructor
+*** cpp.aspect.requires_manual_default_constructor           :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -4183,7 +4183,7 @@ Which version of C++ to use.
 
 If true, the modeling element requires a manual defaul constructor.
 
-*** cpp.aspect.requires_manual_move_constructor
+*** cpp.aspect.requires_manual_move_constructor              :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -4192,7 +4192,7 @@ If true, the modeling element requires a manual defaul constructor.
 
 If true, the modeling element requires a manual move constructor.
 
-*** cpp.aspect.requires_stream_manipulators
+*** cpp.aspect.requires_stream_manipulators                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
@@ -4201,12 +4201,12 @@ If true, the modeling element requires a manual move constructor.
 
 If true, the modeling element requires stream manipulators.
 
-** helpers
+** helpers                                                     :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** helper.family
+*** helper.family                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::text
@@ -4215,7 +4215,7 @@ If true, the modeling element requires stream manipulators.
 
 Which family of helpers to use for this modeling element.
 
-** physical_helpers
+** physical_helpers                                            :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.physical.helpers
@@ -4226,85 +4226,85 @@ Features related to the helpers in physical domain.
 
 
 
-*** family
+*** family                                                   :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
-*** owning_formatters
+*** owning_formatters                                        :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text_collection
 :END:
-*** owning_facets
+*** owning_facets                                            :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text_collection
 :END:
-*** wale_template_reference
+*** wale_template_reference                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
-** aspect
+** aspect                                                      :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.csharp.aspect
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** requires_static_reference_equals
+*** requires_static_reference_equals                         :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "true"
 :END:
-** assistant
+** assistant                                                   :masd_element:
 :PROPERTIES:
 :masd.variability.key_prefix: masd.csharp.assistant
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-*** requires_assistance
+*** requires_assistance                                      :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::boolean
 :masd.codec.value: "false"
 :END:
-*** method_postfix
+*** method_postfix                                           :masd_attribute:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.codec.type: masd::variability::text
 :END:
-* registrar
+* registrar                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::serialization::type_registrar
 :END:
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
-* formatters
+* formatters                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Contains formatting classes for the logical model.
 
-** decoration_formatter
+** decoration_formatter                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** generation_marker_formatter
+** generation_marker_formatter                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** modeline_formatter
+** modeline_formatter                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** formatting_error
+** formatting_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:

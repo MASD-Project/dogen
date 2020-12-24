@@ -15,67 +15,67 @@
 
 Provides the top-level API for the dogen product.
 
-* configuration
+* configuration                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
-** model_processing
+** model_processing                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: model_processing_configuration
 :END:
-** tracing
+** tracing                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<tracing_configuration>
 :END:
 
 Configuration for tracing.
 
-** diffing
+** diffing                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<diffing_configuration>
 :END:
-** reporting
+** reporting                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<reporting_configuration>
 :END:
-** byproduct_directory
+** byproduct_directory                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
 
 Directory in which to place all files not directly related to generated code.
 
-** database
+** database                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<database_configuration>
 :END:
 
 Configuration related to database connectivity, if any.
 
-* tracing_level
+* tracing_level                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available levels for tracing transformation.
 
-** detail
-** summary
-* tracing_configuration
+** detail                                                    :masd_attribute:
+** summary                                                   :masd_attribute:
+* tracing_configuration                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
 
 Configuration related to transform tracing.
 
-** level
+** level                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: tracing_level
 :END:
 
 Dump all available tracing information about transforms.
 
-** format
+** format                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: tracing_format
 :END:
@@ -84,7 +84,7 @@ Format to use when writting trace files.
 
 Only valid for the file backend.
 
-** guids_enabled
+** guids_enabled                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -93,7 +93,7 @@ Enable GUIDs in probe stats.
 
 Disabling GUIDs makes comparisons easier.
 
-** logging_impact
+** logging_impact                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
@@ -103,7 +103,7 @@ Additional information to tell tracing about the possible impact of logging.
 Informative string detailing whether logging was off, or set to debug etc. This is
 required in order to be able to compare like-for-like numbers.
 
-** use_short_names
+** use_short_names                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -111,77 +111,77 @@ required in order to be able to compare like-for-like numbers.
 Use short directory and file names. Useful mainly on windows due to path
 size limitations.
 
-** output_directory
+** output_directory                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-** backend
+** backend                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: tracing_backend
 :END:
 
 Which backend to use for tracing.
 
-** run_id
+** run_id                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Identifier to use for the present run.
 
-** filter_regexes
+** filter_regexes                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<std::string>
 :END:
 
 If supplied, ignore all traces except those which match the supplied regexes.
 
-* tracing_format
+* tracing_format                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available formats for tracing transformations.
 
-** plain
+** plain                                                     :masd_attribute:
 Plain text format.
 
-** org_mode
+** org_mode                                                  :masd_attribute:
 Emacs Org mode.
 
-** graphviz
+** graphviz                                                  :masd_attribute:
 Dot notation for GraphViz
 
-* configuration_builder
+* configuration_builder                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 
 masd::builder
 
-* diffing_configuration
+* diffing_configuration                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
 
 Configuration for diff generation.
 
-** destination
+** destination                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: diffing_destination
 :END:
-** output_directory
+** output_directory                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-* configuration_validator
+* configuration_validator                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* model_processing_configuration
+* model_processing_configuration                               :masd_element:
 Configuration related to the behaviour of Dogen whilst processing models.
 
-** compatibility_mode_enabled
+** compatibility_mode_enabled                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
@@ -191,14 +191,14 @@ Try to process models even if there are errors.
 Only a certain class of errors are allowed, believed to be caused by backwards or
 forwards compatibility problems: missing types or types that do not exist.
 
-** dry_run_mode_enabled
+** dry_run_mode_enabled                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, all transforms wil be executed but no code will be emitted.
 
-** variability_overrides
+** variability_overrides                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<std::string>
 :END:
@@ -217,14 +217,14 @@ Please note that you can only override elements in the following cases:
 not as part of a profile).
 - the type of the feature being overriden must be scalar.
 
-** activity_timestamp
+** activity_timestamp                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::posix_time::ptime
 :END:
 
 Timepoint at which the activity started.
 
-* invalid_configuration_exception
+* invalid_configuration_exception                              :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: false
 :masd.codec.stereotypes: masd::exception
@@ -232,205 +232,204 @@ Timepoint at which the activity started.
 
 The values supplied for the configuration are not valid.
 
-* generator
+* generator                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* converter
+* converter                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* generation_exception
+* generation_exception                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-* conversion_exception
+* conversion_exception                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-* diffing_destination
+* diffing_destination                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Where to place the diffing results.
 
-** file
+** file                                                      :masd_attribute:
 Generates a patch file.
 
-** console
+** console                                                   :masd_attribute:
 Outputs the diff to the console.
 
-* reporting_configuration
+* reporting_configuration                                      :masd_element:
 Configuration related to operational reports.
 
-** style
+** style                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: reporting_style
 :END:
-** output_directory
+** output_directory                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-* reporting_style
+* reporting_style                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Available formats for operational reports.
 
-** plain
+** plain                                                     :masd_attribute:
 Plain text format.
 
-** org_mode
+** org_mode                                                  :masd_attribute:
 Emacs Org mode.
 
-* mock_configuration_factory
+* mock_configuration_factory                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* database_configuration
+* database_configuration                                       :masd_element:
 Contains the config
 
-** host
+** host                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Database host to connect to.
 
-** port
+** port                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned int
 :END:
 
 Database port to connect to.
 
-** name
+** name                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of the database to connect to.
 
-** user
+** user                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 User to use in thedatabase connection.
 
-** password
+** password                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** engine
+** engine                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: database_engine
 :END:
 
 Which relational database engine to connect to.
 
-** generate_schema
+** generate_schema                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
 
 If true, deletes all tables and recreates them. Otherwise, assumes their presence.
 
-* tracing_backend
+* tracing_backend                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available backends to manage tracing information.
 
-** file
+** file                                                      :masd_attribute:
 Write tracing information to files.
 
-** relational_database
+** relational_database                                       :masd_attribute:
 Write tracing information to a relational database.
 
-* database_engine
+* database_engine                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
 
 Supported relational databases engines.
 
-** postgres
+** postgres                                                  :masd_attribute:
 Connect to a PostgreSQL database.
 
-** sqlite
+** sqlite                                                    :masd_attribute:
 Connect to a SQLite database.
 
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
-* specs
+* specs                                                        :masd_element:
 Describes details of the available functionality within this version of Dogen.
 
-** categories
+** categories                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<spec_category>
 :END:
 
 All categories of specifications.
 
-* spec_category
+* spec_category                                                :masd_element:
 Describes a category of dogen specifications.
 
-** name
+** name                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name of this group of specs.
 
-** entries
+** entries                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<spec_entry>
 :END:
 
 Entries describing various aspects of this group.
 
-** description
+** description                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Purpose of the group.
 
-* spec_entry
+* spec_entry                                                   :masd_element:
 Unit of functionality within Dogen.
 
-** name
+** name                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Name for this spec entry.
 
-** description
+** description                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Human readable text describing this entry.
 
-* spec_dumper
+* spec_dumper                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* dumping_exception
+* dumping_exception                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error ocurred when dumping dogen's specs.
-

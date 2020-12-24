@@ -20,240 +20,240 @@ documents.
 The support is very basic and focuses only on the features
 of org mode required by Dogen.
 
-* entities
+* entities                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
 
 Represents entities from Emacs' org-mode.
 
-** section
-*** blocks
+** section                                                     :masd_element:
+*** blocks                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<block>
 :END:
-** document
-*** affiliated_keywords
+** document                                                    :masd_element:
+*** affiliated_keywords                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<affiliated_keyword>
 :END:
-*** drawers
+*** drawers                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<drawer>
 :END:
-*** section
+*** section                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: section
 :END:
 
 Top-level section in document.
 
-*** headlines
+*** headlines                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<headline>
 :END:
 
 Top-level headlines in document.
 
-** headline
-*** affiliated_keywords
+** headline                                                    :masd_element:
+*** affiliated_keywords                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<affiliated_keyword>
 :END:
-*** drawers
+*** drawers                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<drawer>
 :END:
-*** section
+*** section                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: section
 :END:
-*** headlines
+*** headlines                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<headline>
 :END:
 
 Top-most headlines within this headline.
 
-*** level
+*** level                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned int
 :END:
 
 Reduced level of the headline. STARS in the original org-mode format.
 
-*** priority
+*** priority                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: priority_cookie
 :END:
 
 Headline's priority.
 
-*** title
+*** title                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Parsed headline's text, without the stars and the tags.
 
-*** tags
+*** tags                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<tag>
 :END:
 
 Headline's tags, if any.
 
-*** todo_keyword
+*** todo_keyword                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: todo_keyword
 :END:
 
 Headline's TODO keyword.
 
-** tag
+** tag                                                         :masd_element:
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
 :END:
-** todo_keyword
+** todo_keyword                                                :masd_element:
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
 :END:
-** drawer
-*** name
+** drawer                                                      :masd_element:
+*** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Original name used by the property.
 
-*** type
+*** type                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: drawer_type
 :END:
-*** contents
+*** contents                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<drawer_content>
 :END:
-** drawer_content
-*** key
+** drawer_content                                              :masd_element:
+*** key                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** value
+*** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** affiliated_keyword
-*** key
+** affiliated_keyword                                          :masd_element:
+*** key                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** value
+*** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** drawer_type
+** drawer_type                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-*** regular
-*** property_drawer
-** priority_cookie
+*** regular                                                  :masd_attribute:
+*** property_drawer                                          :masd_attribute:
+** priority_cookie                                             :masd_element:
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
 :END:
-** block
-*** name
+** block                                                       :masd_element:
+*** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** parameters
+*** parameters                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<parameter>
 :END:
-*** contents
+*** contents                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-*** type
+*** type                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: block_type
 :END:
-** block_type
+** block_type                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-*** text_block
-*** greater_block
-** parameter
+*** text_block                                               :masd_attribute:
+*** greater_block                                            :masd_attribute:
+** parameter                                                   :masd_element:
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
 :masd.codec.stereotypes: masd::primitive
 :END:
-* registrar
+* registrar                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::serialization::type_registrar
 :END:
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
-* transforms
-** string_to_document_transform
+* transforms                                                   :masd_element:
+** string_to_document_transform                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** document_to_string_transform
+** document_to_string_transform                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* helpers
-** parser
+* helpers                                                      :masd_element:
+** parser                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** parsing_error
+** parsing_error                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error ocurred whilst parsing an org-mode document.
 
-** node
+** node                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::untestable
 :END:
-*** data
+*** data                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: entities::headline
 :END:
-*** children
+*** children                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<boost::shared_ptr<node>>
 :END:
-** builder
+** builder                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-*** root_
+*** root_                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<node>
 :END:
-** building_error
+** building_error                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst building.
 
-** document_factory
+** document_factory                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

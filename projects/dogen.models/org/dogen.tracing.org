@@ -16,107 +16,107 @@
 
 Houses classes common to all transformations.
 
-* tracer
+* tracer                                                       :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
 :END:
-** backend
+** backend                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<backend>
 :END:
-* metrics
+* metrics                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::untestable
 :END:
-** transform_id
+** transform_id                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** model_id
+** model_id                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** guid
+** guid                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** start
+** start                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned long
 :END:
-** end
+** end                                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned long
 :END:
-** children
+** children                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<boost::shared_ptr<metrics>>
 :END:
-* metrics_builder
+* metrics_builder                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* metrics_printer
+* metrics_printer                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* tracing_error
+* tracing_error                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred when trying to generate tracing data.
 
-* scoped_tracer
+* scoped_tracer                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* references_printer
+* references_printer                                           :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* backend
+* backend                                                      :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
 :END:
-* file_backend
+* file_backend                                                 :masd_element:
 :PROPERTIES:
 :masd.codec.parent: backend
 :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
 :END:
-* backend_factory_registrar
+* backend_factory_registrar                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** backend_factories_
+** backend_factories_                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
 :END:
-* registrar_error
+* registrar_error                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-* backend_factory
+* backend_factory                                              :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-* file_backend_factory
+* file_backend_factory                                         :masd_element:
 :PROPERTIES:
 :masd.codec.parent: backend_factory
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* initializer
+* initializer                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-* main
+* main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
-* CMakeLists
+* CMakeLists                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

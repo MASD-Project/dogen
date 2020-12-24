@@ -1,74 +1,74 @@
 #+title: dogen.json_schema
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-* schema_document
-** id_keyword
+* schema_document                                              :masd_element:
+** id_keyword                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 Defines a URI for the schema.
 
-** schema_keyword
+** schema_keyword                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** title
+** title                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** type
+** type                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: type
 :END:
-** description
+** description                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-* type
+* type                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-** object
-** array
-** string
-** number
-** boolean
-** null
-* properties
-** type
+** object                                                    :masd_attribute:
+** array                                                     :masd_attribute:
+** string                                                    :masd_attribute:
+** number                                                    :masd_attribute:
+** boolean                                                   :masd_attribute:
+** null                                                      :masd_attribute:
+* properties                                                   :masd_element:
+** type                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: type
 :END:
-** minimum
+** minimum                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned int
 :END:
-** maximum
+** maximum                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: unsigned int
 :END:
-** description
+** description                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-* value
-* object
+* value                                                        :masd_element:
+* object                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.parent: value
 :END:
-* array
+* array                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.parent: value
 :END:
-* string
+* string                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.parent: value
 :END:
-* number
+* number                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.parent: value
 :END:
-* boolean
+* boolean                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.parent: value
 :END:
