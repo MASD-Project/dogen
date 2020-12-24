@@ -53,7 +53,7 @@ const std::regex priority_cookie_regex("^\\[#[a-zA-Z]\\]");
 const std::regex todo_keyword_regex("^[A-Z].*");
 const std::regex tags_regex("^\\:\\w+(:\\w+)*\\:");
 const std::regex drawer_regex("^\\:\\w+\\:");
-const std::regex drawer_content_regex("^\\:\\w+\\:\\s.+");
+const std::regex drawer_content_regex("^\\:[0-9a-zA-Z\\._]+\\:\\s.+");
 const std::regex affiliated_keyword_regex("^#\\+\\w+:\\s.*");
 
 const std::string unexpected_block_end("Unexpected block end: ");
