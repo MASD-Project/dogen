@@ -43,7 +43,7 @@ namespace dogen::physical::transforms {
 
 entities::model merge_transform::apply(const physical::transforms::context& ctx,
     const physical::entities::model_set& ms) {
-    tracing::scoped_chain_tracer stp(lg, "merge transform", transform_id,
+    tracing::scoped_transform_tracer stp(lg, "merge transform", transform_id,
         ms.name().simple(), *ctx.tracer(), ms);
 
     bool first(true);
@@ -87,7 +87,7 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
             r.managed_directories().push_back(md);
     }
 
-    stp.end_chain(r);
+    stp.end_transform(r);
     return r;
 }
 
