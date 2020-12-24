@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.codec/types/features/uml.hpp"
+#include "dogen.codec/types/features/meta_data.hpp"
 #include "dogen.codec/types/features/reference.hpp"
 #include "dogen.codec/types/features/initializer.hpp"
 #include "dogen.codec/types/features/input_technical_space.hpp"
@@ -28,6 +29,7 @@ namespace dogen::codec::features {
 void initializer::
 register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::codec::features::input_technical_space::make_features());
+    rg.register_features(dogen::codec::features::meta_data::make_features());
     rg.register_features(dogen::codec::features::reference::make_features());
     rg.register_features(dogen::codec::features::uml::make_features());
 }
