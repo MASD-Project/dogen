@@ -18,12 +18,55 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.codec/io/entities/model_io.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
+#include "dogen.codec/types/features/meta_data.hpp"
 #include "dogen.codec/types/transforms/meta_data_transform.hpp"
+
+namespace {
+
+const std::string transform_id("codec.transforms.meta_data_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
+
 
 namespace dogen::codec::transforms {
 
-bool meta_data_transform::operator==(const meta_data_transform& /*rhs*/) const {
-    return true;
+void meta_data_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "meta-data",
+        transform_id, m.name().simple(), *ctx.tracer(), m);
+
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::meta_data::make_feature_group(fm));
+
+    for (auto& e : m.elements()) {
+        using features::meta_data;
+        const auto scfg(meta_data::make_static_configuration(fg, e));
+        using identification::entities::stereotype;
+        for (const auto& s : scfg.stereotypes)
+            e.stereotypes().push_back(stereotype(s));
+
+        for (auto& attr : e.attributes()) {
+            const auto scfg(meta_data::make_static_configuration(fg, attr));
+            for (const auto& s : scfg.stereotypes)
+                e.stereotypes().push_back(stereotype(s));
+
+            if (!scfg.value.empty())
+                attr.value(scfg.value);
+
+            if (!scfg.type.empty())
+                attr.type(scfg.type);
+        }
+    }
+
+    stp.end_transform(m);
 }
 
 }

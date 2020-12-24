@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Reads assorted meta-data.
+ */
 class meta_data_transform final {
 public:
-    meta_data_transform() = default;
-    meta_data_transform(const meta_data_transform&) = default;
-    meta_data_transform(meta_data_transform&&) = default;
-    ~meta_data_transform() = default;
-    meta_data_transform& operator=(const meta_data_transform&) = default;
-
-public:
-    bool operator==(const meta_data_transform& rhs) const;
-    bool operator!=(const meta_data_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
