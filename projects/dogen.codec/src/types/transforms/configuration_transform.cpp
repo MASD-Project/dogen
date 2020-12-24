@@ -28,7 +28,7 @@
 
 namespace {
 
-const std::string transform_id("injector.transforms.configuration_transform");
+const std::string transform_id("codec.transforms.configuration_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

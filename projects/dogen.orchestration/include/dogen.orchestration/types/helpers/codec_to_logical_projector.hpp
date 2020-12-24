@@ -143,8 +143,8 @@ private:
     /**
      * @brief Converts an codec attribute to a modeline field.
      *
-     * @pre name and value of the injector attribute must not be empty.
-     * @pre value of the injector attribute must be empty.
+     * @pre name and value of the codec attribute must not be empty.
+     * @pre value of the codec attribute must be empty.
      */
     logical::entities::decoration::modeline_field
     to_modeline_field(const identification::entities::logical_name& owner,
@@ -153,17 +153,17 @@ private:
     /**
      * @brief Converts an codec attribute to an logical attribute.
      *
-     * @pre name of the injector attribute must not be empty.
+     * @pre name of the codec attribute must not be empty.
      */
     logical::entities::attribute
     to_attribute(const identification::entities::logical_name& owner,
         const codec::entities::attribute& cattr) const;
 
     /**
-     * @brief Converts an injector attribute to an logical enumerator.
+     * @brief Converts an codec attribute to an logical enumerator.
      *
-     * @pre name of the injector attribute must not be empty.
-     * @pre type and value of the injector attribute must be empty.
+     * @pre name of the codec attribute must not be empty.
+     * @pre type and value of the codec attribute must be empty.
      */
     logical::entities::structural::enumerator
     to_enumerator(const identification::entities::logical_name& owner,

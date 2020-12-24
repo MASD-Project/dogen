@@ -79,7 +79,7 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     tagged_values_overrides_transform::apply(ctx, r);
 
     /*
-     * Process the configuration
+     * Generate the configuration from tagged values.
      */
     configuration_transform::apply(ctx, r);
 

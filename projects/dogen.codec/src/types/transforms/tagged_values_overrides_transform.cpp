@@ -32,7 +32,7 @@
 namespace {
 
 const std::string
-transform_id("injector.transforms.tagged_values_overrides_transform");
+transform_id("codec.transforms.tagged_values_overrides_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
