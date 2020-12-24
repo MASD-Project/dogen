@@ -40,18 +40,46 @@ namespace dogen::codec::transforms {
  */
 class org_artefact_to_model_transform final {
 private:
+    enum class headline_type {
+        ignore,
+        attribute,
+        element
+    };
+
+    /**
+     * @brief Reads the tags of a headline to determine its type with
+     * regards to the codec model.
+     */
+    static headline_type get_headline_type(const org::entities::headline& h);
+
+private:
     /**
      * @brief Reads the tagged values, if any exists.
      */
     static std::list<identification::entities::tagged_value>
-    read_tagged_values(const std::list<org::entities::drawer>& drawers);
+    make_tagged_values(const std::list<org::entities::drawer>& drawers);
+
 
     /**
-     * @brief Reads elements recursively.
+     * @brief Processes the headline as if containing a codec
+     * attribute.
+     */
+    static entities::attribute make_attribute(const org::entities::headline& h);
+
+    /**
+     * @brief Processes the headline as if containing an element.
+     */
+    static std::list<entities::element> make_elements(
+        const std::list<org::entities::headline>& headlines,
+        entities::element& current);
+
+    /**
+     * @brief Processes headlines as if containing codec elements.
      */
     static std::list<entities::element>
-    read_element(const std::string& parent_name,
-        const org::entities::headline& h);
+    make_elements(const std::string& parent_name,
+        const std::list<org::entities::headline>& headlines);
+
 
 public:
     static entities::model

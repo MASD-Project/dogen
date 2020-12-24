@@ -38,10 +38,19 @@ transform_id("codec.transforms.org_artefact_to_model_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string element_tag("masd_element");
+const std::string attribute_tag("masd_attribute");
+
 const std::string unexpected_number_of_drawers(
     "Unexpected number of drawers: ");
 const std::string unexpected_drawer_type("Unexpected drawer type: ");
 const std::string invalid_property("Property is missing key or value.");
+const std::string invalid_tags("Invalid tags for headline: ");
+const std::string unexpected_attribute(
+    "Did not expect headline with attribute tag:");
+const std::string unexpected_children(
+    "Attribute headlines cannot have children: ");
+const std::string unexpected_element("Cannot mix elements with attributes: ");
 
 }
 
@@ -50,8 +59,42 @@ namespace dogen::codec::transforms {
 using identification::entities::tagged_value;
 using org::entities::drawer_type;
 
+org_artefact_to_model_transform::headline_type org_artefact_to_model_transform::
+get_headline_type(const org::entities::headline& h) {
+    /*
+     * If the headline has no tags, we can safely ignore it.
+     */
+    if (h.tags().empty())
+        return headline_type::ignore;
+
+    /*
+     * Loop through all the tags, and locate those we're interested
+     * in.
+     */
+    bool found(false);
+    auto r(headline_type::ignore);
+    for (const auto& tag : h.tags()) {
+        if (tag.value() == element_tag)
+            r = headline_type::element;
+        else if (tag.value() == attribute_tag)
+            r = headline_type::attribute;
+
+        /*
+         * We expect to have one or zero type related tags. If they appear
+         * more than once, throw.
+         */
+        if (found) {
+            BOOST_LOG_SEV(lg, error) << invalid_tags << h.title();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_tags + h.title()));
+        }
+        found = true;
+    }
+    return r;
+}
+
 std::list<tagged_value> org_artefact_to_model_transform::
-read_tagged_values(const std::list<org::entities::drawer>& drawers) {
+make_tagged_values(const std::list<org::entities::drawer>& drawers) {
     /*
      * Org models are expected to have exactly one property
      * drawer. Ensure that's the case and read its contents.
@@ -93,6 +136,101 @@ read_tagged_values(const std::list<org::entities::drawer>& drawers) {
     return r;
 }
 
+entities::attribute org_artefact_to_model_transform::
+make_attribute(const org::entities::headline& h) {
+    /*
+     * The headline must not have children.
+     */
+    if(!h.headlines().empty()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_children << h.title();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_children + h.title()));
+    }
+
+    entities::attribute r;
+    r.name().simple(h.title());
+
+    /*
+     * Attributes may not have drawers.
+     */
+    if (!h.drawers().empty())
+        r.tagged_values(make_tagged_values(h.drawers()));
+
+    return r;
+}
+
+std::list<entities::element> org_artefact_to_model_transform::
+make_elements(const std::list<org::entities::headline>& headlines,
+    entities::element& current) {
+    /*
+     * Process all top-level headlines.
+     */
+    bool found_element(false);
+    bool found_attribute(false);
+    std::list<entities::element> r;
+    for (const auto& h : headlines) {
+        BOOST_LOG_SEV(lg, debug) << "Processing headline: '"
+                                 << h.title() << "'";
+
+        /*
+         * If the headline is not one of ours, we can ignore it. This
+         * allows having non-Dogen content in a org document. However,
+         * note that if the user decided to use tags in sub-headlines
+         * these are ignored as well.
+         */
+        const auto ht(get_headline_type(h));
+        if (ht == headline_type::ignore) {
+            BOOST_LOG_SEV(lg, debug) << "Ignoring headline: " << h.title();
+            continue;
+        }
+
+        /*
+         * If we found an attribute, all other headlines processed
+         * thus far must also be attributes.
+         */
+        if (ht == headline_type::attribute) {
+            found_attribute = true;
+            if (found_element) {
+                BOOST_LOG_SEV(lg, error) << unexpected_attribute << h.title();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(unexpected_attribute + h.title()));
+            }
+
+            current.attributes().push_back(make_attribute(h));
+            continue;
+        }
+
+        /*
+         * If the headline type is element, we don't expect to have
+         * already seen attributes.
+         */
+        if (ht == headline_type::element) {
+            found_element = true;
+            if (found_attribute) {
+                BOOST_LOG_SEV(lg, error) << unexpected_element << h.title();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(unexpected_element + h.title()));
+            }
+
+            entities::element child;
+            child.name().simple(h.title());
+            child.name().qualified(current.name().qualified() + "::" +
+                child.name().simple());
+
+            /*
+             * Elements may not have drawers.
+             */
+            if (!h.drawers().empty())
+                child.tagged_values(make_tagged_values(h.drawers()));
+
+            r.splice(r.end(), make_elements(h.headlines(), child));
+        }
+    }
+
+    r.push_back(current);
+    return r;
+}
+
 entities::model org_artefact_to_model_transform::
 apply(const transforms::context& ctx, const entities::artefact& a) {
     const auto fn(a.path().filename().stem().generic_string());
@@ -106,7 +244,53 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Processed org-mode document.";
     entities::model r;
-    r.tagged_values(read_tagged_values(doc.drawers()));
+    r.tagged_values(make_tagged_values(doc.drawers()));
+
+    /*
+     * Process all top-level headlines.
+     */
+    for (const auto& h : doc.headlines()) {
+        BOOST_LOG_SEV(lg, debug) << "Processing headline: '"
+                                 << h.title() << "'";
+
+        /*
+         * If the headline is not one of ours, we can ignore it. This
+         * allows having non-Dogen content in a org document. However,
+         * note that if the user decided to use tags in sub-headlines
+         * these are ignored as well.
+         */
+        const auto ht(get_headline_type(h));
+        if (ht == headline_type::ignore) {
+            BOOST_LOG_SEV(lg, debug) << "Ignoring headline.";
+            continue;
+        }
+
+        /*
+         * We are only expecting "element" as our children, so if it's
+         * not throw.
+         */
+        if (ht == headline_type::attribute) {
+            BOOST_LOG_SEV(lg, error) << unexpected_attribute << h.title();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(unexpected_attribute + h.title()));
+        }
+
+        /*
+         * Process the current element.
+         */
+        entities::element current;
+        current.name().simple(h.title());
+        current.name().qualified(current.name().simple());
+
+        /*
+         * Elements may not have drawers.
+         */
+        if (!h.drawers().empty())
+            current.tagged_values(make_tagged_values(h.drawers()));
+
+        r.elements().splice(r.elements().end(),
+            make_elements(h.headlines(), current));
+    }
 
     stp.end_transform(r);
     return r;
