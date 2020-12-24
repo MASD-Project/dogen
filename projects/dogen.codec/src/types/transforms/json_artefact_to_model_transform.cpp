@@ -69,33 +69,6 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 namespace dogen::codec::transforms {
 
-std::string json_artefact_to_model_transform::
-read_documentation(const boost::property_tree::ptree& pt) {
-    const auto opt(pt.get_optional<std::string>(documentation_key));
-    if (!opt)
-        return empty;
-
-    const auto r(*opt);
-    return r;
-}
-
-std::list<identification::entities::tagged_value>
-json_artefact_to_model_transform::
-read_tagged_values(const boost::property_tree::ptree& pt) {
-    std::list<identification::entities::tagged_value> r;
-    const auto i(pt.find(tagged_values_key));
-    if (i == pt.not_found() || i->second.empty())
-        return r;
-
-    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
-        identification::entities::tagged_value tv;
-        tv.tag(j->first);
-        tv.value(j->second.get_value<std::string>());
-        r.push_back(tv);
-    }
-    return r;
-}
-
 std::list<identification::entities::stereotype>
 json_artefact_to_model_transform::
 read_stereotypes(const boost::property_tree::ptree& pt) {
@@ -123,6 +96,34 @@ read_parents(const boost::property_tree::ptree& pt) {
     for (auto j(i->second.begin()); j != i->second.end(); ++j)
         r.push_back(j->second.get_value<std::string>());
 
+    return r;
+}
+
+
+std::string json_artefact_to_model_transform::
+read_documentation(const boost::property_tree::ptree& pt) {
+    const auto opt(pt.get_optional<std::string>(documentation_key));
+    if (!opt)
+        return empty;
+
+    const auto r(*opt);
+    return r;
+}
+
+std::list<identification::entities::tagged_value>
+json_artefact_to_model_transform::
+read_tagged_values(const boost::property_tree::ptree& pt) {
+    std::list<identification::entities::tagged_value> r;
+    const auto i(pt.find(tagged_values_key));
+    if (i == pt.not_found() || i->second.empty())
+        return r;
+
+    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+        identification::entities::tagged_value tv;
+        tv.tag(j->first);
+        tv.value(j->second.get_value<std::string>());
+        r.push_back(tv);
+    }
     return r;
 }
 

@@ -45,13 +45,7 @@ namespace dogen::codec::transforms {
  * it into an instance of the codec model.
  */
 class json_artefact_to_model_transform final {
-    private:
-    /**
-     * @brief Reads the key value pairs from the property tree.
-     */
-    static std::list<std::pair<std::string, std::string>>
-    read_kvps(const boost::property_tree::ptree& pt);
-
+private:
     /**
      * @brief Reads the stereotypes, if any exists.
      */
