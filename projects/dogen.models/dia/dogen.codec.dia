@@ -11529,13 +11529,13 @@ Not all codecs will make use of all entities.
         <dia:point val="186,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="185.95,58.95;200.795,65.05"/>
+        <dia:rectangle val="185.95,58.95;205.03,65.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="186,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -11639,7 +11639,7 @@ Not all codecs will make use of all entities.
             <dia:string>#stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::comma_separated#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

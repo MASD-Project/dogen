@@ -36,7 +36,7 @@ make_masd_codec_stereotypes() {
     r.description(R"(Stereotypes associated with this element or attribute.
 
 )");
-    const auto vt(value_type::text);
+    const auto vt(value_type::comma_separated);
     r.value_type(vt);
     r.binding_point(binding_point::any);
     return r;
@@ -109,7 +109,7 @@ meta_data::static_configuration meta_data::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.stereotypes))
-        r.stereotypes = s.get_text_content(fg.stereotypes);
+        r.stereotypes = s.get_comma_separated_content(fg.stereotypes);
     if (s.has_configuration_point(fg.type))
         r.type = s.get_text_content(fg.type);
     if (s.has_configuration_point(fg.value))

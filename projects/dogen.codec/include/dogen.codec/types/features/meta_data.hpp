@@ -50,7 +50,7 @@ public:
 
 public:
     struct static_configuration {
-        std::string stereotypes;
+        std::list<std::string> stereotypes;
         std::string type;
         std::string value;
         std::string parent;
