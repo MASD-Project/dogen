@@ -240,7 +240,10 @@ codec_to_logical_projector::to_modeline_field(const logical_name& owner,
 logical::entities::attribute
 codec_to_logical_projector::to_attribute(const logical_name& owner,
     const codec::entities::attribute& cattr) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading attribute for: " << owner.id().value();
     ensure_not_empty(owner.id(), cattr.name());
+
+    BOOST_LOG_SEV(lg, debug) << "Attribute: " << cattr.name().simple();
 
     logical_name_factory f;
     logical::entities::attribute r;
