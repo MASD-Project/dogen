@@ -53,6 +53,9 @@ void meta_data_transform::apply(const context& ctx, entities::model& m) {
         for (const auto& s : scfg.stereotypes)
             e.stereotypes().push_back(stereotype(s));
 
+        for (const auto& p : scfg.parent)
+            e.parents().push_back(p);
+
         for (auto& attr : e.attributes()) {
             const auto scfg(meta_data::make_static_configuration(fg, attr));
             for (const auto& s : scfg.stereotypes)
