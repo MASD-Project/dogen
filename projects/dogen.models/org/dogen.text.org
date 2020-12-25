@@ -4586,8 +4586,7 @@ make_<#= ft.identifiable_key() #>() {
 <#+
                     }
 #>
-    r.description(R"(<#= ft.documentation() #>
-)");
+    r.description(R"(<#= ft.documentation() #>)");
     const auto vt(<#= enum_mapper::from_value_type(ft.value_type()) #>);
     r.value_type(vt);
     r.binding_point(<#= enum_mapper::from_binding_point(*ft.binding_point()) #>);
@@ -4777,8 +4776,7 @@ make_<#= f.identifiable_key() #>() {
 <#+
                    }
 #>
-    r.description(R"(<#= f.documentation() #>
-)");
+    r.description(R"(<#= f.documentation() #>)");
     const auto vt(<#= enum_mapper::from_value_type(f.value_type()) #>);
     r.value_type(vt);
 <#+
