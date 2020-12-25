@@ -11714,7 +11714,7 @@ Not all codecs will make use of all entities.
             <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::comma_separated#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11927,7 +11927,7 @@ Not all codecs will make use of all entities.
         <dia:point val="48.34,79.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.59,78.85;49.5725,91.6"/>
+        <dia:rectangle val="47.59,78.85;49.5725,90.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

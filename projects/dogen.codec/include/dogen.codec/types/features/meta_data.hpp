@@ -53,7 +53,7 @@ public:
         std::list<std::string> stereotypes;
         std::string type;
         std::string value;
-        std::string parent;
+        std::list<std::string> parent;
     };
 
     static static_configuration make_static_configuration(

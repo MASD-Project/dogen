@@ -81,7 +81,7 @@ make_masd_codec_parent() {
     r.description(R"(Parent associated with this element.
 
 )");
-    const auto vt(value_type::text);
+    const auto vt(value_type::comma_separated);
     r.value_type(vt);
     r.binding_point(binding_point::any);
     return r;
@@ -115,7 +115,7 @@ meta_data::static_configuration meta_data::make_static_configuration(
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_content(fg.value);
     if (s.has_configuration_point(fg.parent))
-        r.parent = s.get_text_content(fg.parent);
+        r.parent = s.get_comma_separated_content(fg.parent);
     return r;
 }
 
