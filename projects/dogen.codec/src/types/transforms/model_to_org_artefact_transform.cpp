@@ -122,8 +122,8 @@ void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
         insert_stereotypes(s, a.stereotypes());
         s << ":END:" << std::endl;
 
-        if (!a.documentation().empty())
-            s << std::endl;
+        // if (!a.documentation().empty())
+        //     s << std::endl;
     }
 
     if (!a.documentation().empty()) {
@@ -157,12 +157,12 @@ void model_to_org_artefact_transform::insert_element(std::ostream& s,
         insert_stereotypes(s, e.stereotypes());
         s << ":END:" << std::endl;
 
-        if (!e.documentation().empty())
-            s << std::endl;
+        // if (!e.documentation().empty())
+        //     s << std::endl;
     }
 
     if (!e.documentation().empty())
-        s << e.documentation() << std::endl;
+        s << e.documentation()/*<< std::endl*/;
 
     for (const auto& a : e.attributes())
         insert_attribute(s, level + 1, a);
@@ -198,12 +198,12 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
         insert_stereotypes(s, m.stereotypes());
         s << ":END:" << std::endl;
 
-        if (!m.documentation().empty())
-            s << std::endl;
+        // if (!m.documentation().empty())
+        //     s << std::endl;
     }
 
     if (!m.documentation().empty())
-        s << m.documentation() << std::endl;
+        s << m.documentation()/* << std::endl*/;
 
     std::unordered_map<std::string,
                        std::list<entities::element>> parent_to_child_map;
