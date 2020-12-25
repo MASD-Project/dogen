@@ -78,10 +78,13 @@ obtain_profile_name(const feature_group& fg,
     BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
     const helpers::configuration_selector s(cfg);
     std::string r;
-    if (s.has_configuration_point(fg.profile))
+    if (s.has_configuration_point(fg.profile)) {
         r = s.get_text_content(fg.profile);
+        BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
+    }
+    else
+        BOOST_LOG_SEV(lg, debug) << "Profile name field not found.";
 
-    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
     return r;
 }
 
@@ -157,7 +160,7 @@ void profile_binding_transform::handle_potential_bindings(
          * exists. Its fine for a profile not to have a base layer
          * too.
          */
-        const auto profile(i->second);
+        const auto& profile(i->second);
         const auto prf_bl(profile.base_layer_profile());
         if (!prf_bl.empty()) {
             /*
@@ -307,6 +310,8 @@ void profile_binding_transform::bind(const entities::profile_repository& prp,
 
         const auto i(prp.by_name().find(def_profn));
         if (i != prp.by_name().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Found default profile.";
+
             helpers::configuration_point_merger mg;
             const auto profile(i->second);
             const auto cps(mg.merge(
@@ -316,6 +321,8 @@ void profile_binding_transform::bind(const entities::profile_repository& prp,
                     profile.configuration_points()));
             cfg.configuration_points(cps);
         }
+        else
+            BOOST_LOG_SEV(lg, debug) << "Could not find default profile.";
     } else
         BOOST_LOG_SEV(lg, debug) << "Scope does not have a default profile.";
 
