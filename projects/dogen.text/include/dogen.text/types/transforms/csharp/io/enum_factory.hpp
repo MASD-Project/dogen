@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::io {
  * enum.
  *
  * Archetype documentation: Generates implementation files for enums.
-
  */
 class enum_factory final {
 public:

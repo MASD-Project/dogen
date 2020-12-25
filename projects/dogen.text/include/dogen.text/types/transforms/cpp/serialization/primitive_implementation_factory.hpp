@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::serialization {
  * primitive_implementation.
  *
  * Archetype documentation: Generates header files for primitives.
-
  */
 class primitive_implementation_factory final {
 public:

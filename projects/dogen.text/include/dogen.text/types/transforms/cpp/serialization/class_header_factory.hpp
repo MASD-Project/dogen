@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::serialization {
  * class_header.
  *
  * Archetype documentation: Generates header files for objects.
-
  */
 class class_header_factory final {
 public:

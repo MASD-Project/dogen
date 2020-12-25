@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::types {
  * builtin.
  *
  * Archetype documentation: Generates implementation files for builtins.
-
  */
 class builtin_factory final {
 public:

@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::types {
  * exception.
  *
  * Archetype documentation: Generates implementation files for exceptions.
-
  */
 class exception_factory final {
 public:

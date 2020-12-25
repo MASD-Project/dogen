@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * namespace_header.
  *
  * Archetype documentation: Generates header files for namespaces.
-
  */
 class namespace_header_factory final {
 public:

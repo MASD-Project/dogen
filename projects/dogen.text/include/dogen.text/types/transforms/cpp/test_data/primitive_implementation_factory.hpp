@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::test_data {
  * primitive_implementation.
  *
  * Archetype documentation: Generates implementation files for primitives.
-
  */
 class primitive_implementation_factory final {
 public:

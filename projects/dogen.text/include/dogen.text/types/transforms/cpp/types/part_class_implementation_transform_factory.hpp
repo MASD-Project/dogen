@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * part_class_implementation_transform.
  *
  * Archetype documentation: Generates implementation files for parts.
-
  */
 class part_class_implementation_transform_factory final {
 public:

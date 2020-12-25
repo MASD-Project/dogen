@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::odb {
  * enum_header.
  *
  * Archetype documentation: Generates header files for enumerations.
-
  */
 class enum_header_factory final {
 public:

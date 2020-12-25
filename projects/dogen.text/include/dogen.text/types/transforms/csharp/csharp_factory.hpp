@@ -38,7 +38,6 @@ namespace dogen::text::transforms::csharp {
 Takes types in the logical model and creates text
 representations of the these types according to the grammar
 of the C# technical space.
-
  */
 class csharp_factory final {
 public:

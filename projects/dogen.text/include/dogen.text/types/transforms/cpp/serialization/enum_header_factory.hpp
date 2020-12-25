@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::serialization {
  * enum_header.
  *
  * Archetype documentation: Generates header files for primitives.
-
  */
 class enum_header_factory final {
 public:

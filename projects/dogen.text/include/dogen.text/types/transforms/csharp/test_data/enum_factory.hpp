@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::test_data {
  * enum.
  *
  * Archetype documentation: Generates implementation files for enums.
-
  */
 class enum_factory final {
 public:

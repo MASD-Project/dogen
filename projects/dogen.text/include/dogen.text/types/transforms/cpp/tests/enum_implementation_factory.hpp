@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::tests {
  * enum_implementation.
  *
  * Archetype documentation: Generates tests for enumeration.
-
  */
 class enum_implementation_factory final {
 public:

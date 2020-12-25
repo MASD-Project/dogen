@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::hash {
  *
  * Facet documentation: M2T transforms for the hash facet of the
 C++ technical space.
-
  */
 class hash_factory final {
 public:

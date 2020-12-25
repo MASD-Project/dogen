@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::serialization {
  * type_registrar_implementation.
  *
  * Archetype documentation: Generates header files for feature bundles.
-
  */
 class type_registrar_implementation_factory final {
 public:

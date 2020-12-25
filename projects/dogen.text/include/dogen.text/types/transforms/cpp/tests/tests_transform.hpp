@@ -32,8 +32,6 @@ namespace dogen::text::transforms::cpp::tests {
 /**
  * @brief M2T transforms that generate tests for
  * generated code, in the C++ technical space.
- *
- *
  */
 class tests_facet_chain final {
 public:

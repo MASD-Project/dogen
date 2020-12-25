@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * helper_class_header_transform.
  *
  * Archetype documentation: Generates header files for helpers.
-
  */
 class helper_class_header_transform_factory final {
 public:

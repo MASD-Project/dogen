@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::io {
  * class.
  *
  * Archetype documentation: Generates implementation files for objects.
-
  */
 class class_factory final {
 public:

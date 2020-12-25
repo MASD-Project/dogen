@@ -35,7 +35,6 @@ namespace dogen::text::transforms::csharp::io {
  *
  * Facet documentation: M2T transforms for the io facet of the
 C# technical space.
-
  */
 class io_factory final {
 public:

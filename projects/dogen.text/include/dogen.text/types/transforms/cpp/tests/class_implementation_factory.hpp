@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::tests {
  * class_implementation.
  *
  * Archetype documentation: Generates tests for objects.
-
  */
 class class_implementation_factory final {
 public:

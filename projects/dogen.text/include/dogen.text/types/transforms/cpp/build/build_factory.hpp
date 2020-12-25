@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::build {
  * build.
  *
  * Facet documentation: M2T transforms related to build files.
-
  */
 class build_factory final {
 public:

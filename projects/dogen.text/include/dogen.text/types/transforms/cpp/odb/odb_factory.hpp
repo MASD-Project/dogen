@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::odb {
  *
  * Facet documentation: M2T transforms for the ODB facet of the
 C++ technical space.
-
  */
 class odb_factory final {
 public:

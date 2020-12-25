@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::tests {
  * cmakelists.
  *
  * Archetype documentation: Generates cmakelists for tests.
-
  */
 class cmakelists_factory final {
 public:

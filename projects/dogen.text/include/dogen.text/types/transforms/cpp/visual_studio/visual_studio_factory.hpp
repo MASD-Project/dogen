@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::visual_studio {
  *
  * Facet documentation: M2T transforms related to Visual Studio
 support.
-
  */
 class visual_studio_factory final {
 public:

@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * visitor_header.
  *
  * Archetype documentation: Generates header files for visitors.
-
  */
 class visitor_header_factory final {
 public:

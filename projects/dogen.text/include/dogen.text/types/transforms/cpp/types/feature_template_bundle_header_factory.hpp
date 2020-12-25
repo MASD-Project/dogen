@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * feature_template_bundle_header.
  *
  * Archetype documentation: Generates implementation files for feature template bundles
-
  */
 class feature_template_bundle_header_factory final {
 public:

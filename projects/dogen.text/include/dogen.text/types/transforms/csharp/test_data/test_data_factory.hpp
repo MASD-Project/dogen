@@ -35,7 +35,6 @@ namespace dogen::text::transforms::csharp::test_data {
  *
  * Facet documentation: M2T transforms for the test data facet of
 the C# technical space.
-
  */
 class test_data_factory final {
 public:

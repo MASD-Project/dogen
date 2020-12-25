@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * helper_class_implementation_factory.
  *
  * Archetype documentation: Generates implementation files for helper factories.
-
  */
 class helper_class_implementation_factory_factory final {
 public:

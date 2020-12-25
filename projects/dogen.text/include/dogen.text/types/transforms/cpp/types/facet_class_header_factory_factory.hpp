@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * facet_class_header_factory.
  *
  * Archetype documentation: Generates header files for facet factories.
-
  */
 class facet_class_header_factory_factory final {
 public:

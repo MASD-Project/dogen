@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::odb {
  * primitive_header.
  *
  * Archetype documentation: Generates header files for primitives.
-
  */
 class primitive_header_factory final {
 public:

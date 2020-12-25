@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::serialization {
  * type_registrar_header.
  *
  * Archetype documentation: Generates header files for type registrars.
-
  */
 class type_registrar_header_factory final {
 public:

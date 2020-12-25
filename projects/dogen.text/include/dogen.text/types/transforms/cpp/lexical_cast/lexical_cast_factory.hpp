@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::lexical_cast {
  *
  * Facet documentation: M2T transforms related to conversions from
 and to string.
-
  */
 class lexical_cast_factory final {
 public:

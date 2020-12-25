@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::visual_studio {
  * solution.
  *
  * Archetype documentation: Generates visual studio solutions.
-
  */
 class solution_factory final {
 public:

@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp {
  * implementation.
  *
  * Part documentation: Contains the implementation files.
-
  */
  class implementation_factory final {
 public:

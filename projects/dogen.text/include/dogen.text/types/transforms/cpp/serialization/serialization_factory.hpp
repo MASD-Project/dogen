@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::serialization {
  *
  * Facet documentation: M2T transforms for the boost serialisation
 facet of the C++ technical space.
-
  */
 class serialization_factory final {
 public:

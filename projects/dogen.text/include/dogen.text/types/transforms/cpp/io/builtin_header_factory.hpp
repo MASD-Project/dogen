@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::io {
  * builtin_header.
  *
  * Archetype documentation: Generates header files for builtins.
-
  */
 class builtin_header_factory final {
 public:

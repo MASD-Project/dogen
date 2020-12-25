@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * backend_class_header_transform.
  *
  * Archetype documentation: Generates header files for archetypes.
-
  */
 class backend_class_header_transform_factory final {
 public:

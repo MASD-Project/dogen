@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp {
  * testing.
  *
  * Part documentation: Contains the generated test files.
-
  */
  class testing_factory final {
 public:

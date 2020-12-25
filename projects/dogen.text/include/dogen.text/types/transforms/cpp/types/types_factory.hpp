@@ -35,7 +35,6 @@ namespace dogen::text::transforms::cpp::types {
  *
  * Facet documentation: M2T transforms for the types facet of the
 C++ technical space.
-
  */
 class types_factory final {
 public:

@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * main.
  *
  * Archetype documentation: Generates implementation file for entry point.
-
  */
 class main_factory final {
 public:

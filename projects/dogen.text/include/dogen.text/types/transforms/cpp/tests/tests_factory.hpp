@@ -35,9 +35,6 @@ namespace dogen::text::transforms::cpp::tests {
  *
  * Facet documentation: M2T transforms that generate tests for
 generated code, in the C++ technical space.
-
-
-
  */
 class tests_factory final {
 public:

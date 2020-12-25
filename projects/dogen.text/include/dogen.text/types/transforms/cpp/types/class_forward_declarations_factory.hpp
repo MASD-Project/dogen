@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * class_forward_declarations.
  *
  * Archetype documentation: Generates forward declarations for classes.
-
  */
 class class_forward_declarations_factory final {
 public:

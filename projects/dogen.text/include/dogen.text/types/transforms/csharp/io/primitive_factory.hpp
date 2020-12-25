@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::io {
  * primitive.
  *
  * Archetype documentation: Generates implementation files for primitives.
-
  */
 class primitive_factory final {
 public:

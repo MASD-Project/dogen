@@ -41,6 +41,7 @@
 #include "dogen.logical/types/transforms/aspect_properties_transform.hpp"
 #include "dogen.logical/types/transforms/assistant_properties_transform.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
+#include "dogen.logical/types/transforms/documentation_transform.hpp"
 #include "dogen.logical/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -91,6 +92,7 @@ void pre_assembly_chain::apply(const context& ctx,
     aspect_properties_transform::apply(ctx, m);
     assistant_properties_transform::apply(ctx, m);
     streaming_properties_transform::apply(ctx, m);
+    documentation_transform::apply(ctx, m);
 
     /*
      * Primitive transform must happen before parsing transform, as it

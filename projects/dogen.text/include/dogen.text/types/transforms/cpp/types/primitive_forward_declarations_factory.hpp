@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * primitive_forward_declarations.
  *
  * Archetype documentation: Generates forward declarations for primitives.
-
  */
 class primitive_forward_declarations_factory final {
 public:

@@ -32,8 +32,6 @@ namespace dogen::text::transforms::csharp::visual_studio {
 /**
  * @brief M2T transforms for the visual studio
  * facet of the C# technical space.
- *
- *
  */
 class visual_studio_facet_chain final {
 public:

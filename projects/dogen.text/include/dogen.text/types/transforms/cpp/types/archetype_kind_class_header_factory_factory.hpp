@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * archetype_kind_class_header_factory.
  *
  * Archetype documentation: Generates header files for archetype_kind factories.
-
  */
 class archetype_kind_class_header_factory_factory final {
 public:

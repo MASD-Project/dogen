@@ -34,7 +34,6 @@ namespace dogen::text::transforms::csharp::io {
  * assistant.
  *
  * Archetype documentation: Generates implementation files for assistants.
-
  */
 class assistant_factory final {
 public:

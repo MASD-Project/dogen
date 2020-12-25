@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::types {
  * exception_header.
  *
  * Archetype documentation: Generates header files for exceptions.
-
  */
 class exception_header_factory final {
 public:

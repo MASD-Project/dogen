@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp {
  * project.
  *
  * Part documentation: FIXME: to be removed.
-
  */
  class project_factory final {
 public:

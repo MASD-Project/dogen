@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::odb {
  * class_header.
  *
  * Archetype documentation: Generates header files for archetypes.
-
  */
 class class_header_factory final {
 public:

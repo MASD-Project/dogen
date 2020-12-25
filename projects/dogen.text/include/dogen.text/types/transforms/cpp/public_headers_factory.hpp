@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp {
  * public_headers.
  *
  * Part documentation: Contains the header files that are publicly visible.
-
  */
  class public_headers_factory final {
 public:

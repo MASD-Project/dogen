@@ -34,7 +34,6 @@ namespace dogen::text::transforms::cpp::tests {
  * main.
  *
  * Archetype documentation: Generates entry point for tests.
-
  */
 class main_factory final {
 public:

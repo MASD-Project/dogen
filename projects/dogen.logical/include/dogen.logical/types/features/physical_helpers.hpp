@@ -35,8 +35,6 @@ namespace dogen::logical::features {
 
 /**
  * @brief Features related to the helpers in physical domain.
- *
- *
  */
 class physical_helpers final {
 public:
