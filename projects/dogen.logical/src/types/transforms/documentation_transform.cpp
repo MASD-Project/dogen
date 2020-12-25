@@ -18,12 +18,69 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/documentation_transform.hpp"
+
+namespace {
+
+const std::string transform_id("logical.transforms.documentation_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::logical::transforms {
 
-bool documentation_transform::operator==(const documentation_transform& /*rhs*/) const {
-    return true;
+namespace {
+
+/**
+ * @brief Updates the documentation on all model elements.
+ */
+class trimmer {
+private:
+    void trim(logical::entities::element& e) {
+        const auto trimmed(boost::algorithm::trim_copy(e.documentation()));
+        e.documentation(trimmed);
+    }
+
+    void trim(logical::entities::attribute& attr) {
+        const auto trimmed(boost::algorithm::trim_copy(attr.documentation()));
+        attr.documentation(trimmed);
+    }
+
+public:
+    void operator()(logical::entities::element& v) { trim(v); }
+    void operator()(logical::entities::structural::object_template &v) {
+        trim(v);
+        for (auto& attr : v.local_attributes())
+            trim(attr);
+    }
+
+    void operator()(logical::entities::structural::object& v) {
+        trim(v);
+        for (auto& attr : v.local_attributes())
+            trim(attr);
+    }
+};
+
+}
+
+void documentation_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "documentation transform",
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
+
+    trimmer t;
+    using logical::entities::elements_traversal;
+    elements_traversal(m, t);
+    stp.end_transform(m);
 }
 
 }

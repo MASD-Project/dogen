@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Processes the documentation of all elements.
+ */
 class documentation_transform final {
 public:
-    documentation_transform() = default;
-    documentation_transform(const documentation_transform&) = default;
-    documentation_transform(documentation_transform&&) = default;
-    ~documentation_transform() = default;
-    documentation_transform& operator=(const documentation_transform&) = default;
-
-public:
-    bool operator==(const documentation_transform& rhs) const;
-    bool operator!=(const documentation_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
