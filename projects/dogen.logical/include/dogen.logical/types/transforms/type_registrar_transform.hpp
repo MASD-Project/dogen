@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/features/type_parameters.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 

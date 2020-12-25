@@ -24,6 +24,7 @@
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/features/type_parameters.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
