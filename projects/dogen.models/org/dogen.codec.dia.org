@@ -17,7 +17,6 @@
 :masd.codec.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
-
 Codec.Dia is a unidirectional transformation model that transforms
 a Dia @e diagram into an codec @e model.
 
@@ -91,15 +90,12 @@ place at the top-level. Only one such note is expected per containing
 entity.
 
 For details on the stereotypes see the MASD UML profile.
-
 * adaptation_error                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 A fatal error has occurred while adapting a Dia model object
 into its masd representation.
-
 * grapher                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -108,9 +104,7 @@ into its masd representation.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error has occurred while building the dia object graph.
-
 * processed_comment_factory                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -124,21 +118,18 @@ An error has occurred while building the dia object graph.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Name of the property.
 
 ** type                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Type of the property.
 
 ** comment                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: processed_comment
 :END:
-
 Any comments associated with the property.
 
 ** value                                                     :masd_attribute:
@@ -147,26 +138,22 @@ Any comments associated with the property.
 :END:
 * processed_object                                             :masd_element:
 Representation of a dia object after first stage processing.
-
 ** id                                                        :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Dia object id.
 
 ** name                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Name of the object in dia format.
 
 ** dia_object_type                                           :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: dia_object_types
 :END:
-
 Type of the dia object.
 
 ** stereotypes                                               :masd_attribute:
@@ -177,7 +164,6 @@ Type of the dia object.
 :PROPERTIES:
 :masd.codec.type: processed_comment
 :END:
-
 Any comments associated with the object.
 
 On the case of a UML note, represents the text of the note.
@@ -186,30 +172,25 @@ On the case of a UML note, represents the text of the note.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 If the object is contained in another object, its node id.
 
 ** connection                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<std::pair<std::string,std::string>>
 :END:
-
 Connections this object may have with other objects.
 
 ** attributes                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<processed_attribute>
 :END:
-
 All attributes associated with dia object.
 
 * dia_object_types                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-
 Identifier for the type of Dia object.
-
 ** uml_large_package                                         :masd_attribute:
 A UML package
 
@@ -239,42 +220,35 @@ UML Realization
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 The object profile is not valid.
-
 * traits                                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * processed_comment                                            :masd_element:
 Contains the same content as the original dia comment, but split by type of data.
-
 ** documentation                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Text of the comment, excluding all Dogen instructions.
 
 ** tagged_values                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::tagged_value>
 :END:
-
 Tagged values extracted from this comment.
 
 ** applicable_to_parent_object                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-
 If true, the comment should be attached to the dia object containing it.
 
 ** original_content                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Content of the field as it was read from the dia object.
 
 * building_error                                               :masd_element:

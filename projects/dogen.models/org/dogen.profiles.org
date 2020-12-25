@@ -9,7 +9,6 @@
 :masd.cpp.enabled: false
 :masd.csharp.enabled: false
 :END:
-
 Top-level model in Dogen that contains all of the shared
 types at the meta-model level.
 
@@ -18,16 +17,13 @@ should not produce any output.
 
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
-
 * base                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 The base layer profiles are designed to be applied first.
 Their objective is to set the initial state from which
 other layers can then configure features.
-
 
 
 ** decoration                                                  :masd_element:
@@ -36,9 +32,7 @@ other layers can then configure features.
 :masd.variability.key_prefix: masd.decoration
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Configuration for the decoration elements.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -60,9 +54,7 @@ Configuration for the decoration elements.
 :masd.variability.key_prefix: masd.physical
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Configuration for extraction.
-
 *** delete_extra_files                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -76,9 +68,7 @@ Configuration for extraction.
 :masd.variability.key_prefix: masd.csharp
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Configures the main options for the C# backend.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -89,11 +79,9 @@ Configures the main options for the C# backend.
 :masd.variability.key_prefix: masd.physical
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Regexes to ignore.
 
 FIXME: we should remove all ignores related to tests and add a proper facet for manual tests.
-
 *** ignore_files_matching_regex                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: .*/test/.*
@@ -117,9 +105,7 @@ FIXME: we should remove all ignores related to tests and add a proper facet for 
 :masd.codec.parent: base::base
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Configures the main options for the C++ backend.
-
 *** odb.enabled                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -150,9 +136,7 @@ Configures the main options for the C++ backend.
 :masd.codec.parent: base::base_profile
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Variability profile for a typical dogen model.
-
 ** disable_all_facets                                          :masd_element:
 :PROPERTIES:
 :masd.variability.binding_point: global
@@ -160,9 +144,7 @@ Variability profile for a typical dogen model.
 :masd.codec.stereotypes: masd::variability::profile_template
 :END:
 
-
 Disables all facets in the C++ backend.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.facet
@@ -199,21 +181,17 @@ Disables all facets in the C++ backend.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 The composable layer is made up of profiles that
 are meant to be applied on top of the base layer.
 These can be used to compose the final configuration
 for the element.
-
 ** typeable                                                    :masd_element:
 :PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::typeable
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Model element is defined as a type.
-
 *** masd.cpp.types.enabled                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -222,7 +200,6 @@ Model element is defined as a type.
 :PROPERTIES:
 :masd.codec.value: dogen.profiles.base.disable_all_facets
 :END:
-
 If you are typeable, it probably means you do not want the default configuration,
 so we disable all facets.
 
@@ -233,9 +210,7 @@ so we disable all facets.
 :masd.variability.key_prefix: masd.cpp.io
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 The element has the ability to dump itself to a stream.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -247,9 +222,7 @@ The element has the ability to dump itself to a stream.
 :masd.variability.key_prefix: masd.cpp.hash
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 The element has the ability to generate hashes.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -270,9 +243,7 @@ The element has the ability to generate hashes.
 :masd.variability.binding_point: element
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Base profile for model elements that are manually generated.
-
 *** masd.variability.profile                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: dogen.profiles.base.disable_all_facets
@@ -301,9 +272,7 @@ Base profile for model elements that are manually generated.
 :masd.codec.parent: composable::handcrafted
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Configuration for model elements that are generated manually by the user.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true
@@ -324,9 +293,7 @@ Configuration for model elements that are generated manually by the user.
 :masd.codec.parent: composable::handcrafted_typeable
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 This element has only a types header file.
-
 *** class_implementation.enabled                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -349,9 +316,7 @@ This element has only a types header file.
 :masd.codec.parent: composable::handcrafted_typeable
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 This element has only a types implementation file.
-
 *** class_header.enabled                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -398,9 +363,7 @@ This element has only a types implementation file.
 :masd.variability.key_prefix: masd.cpp.tests
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Model element will not be tested via generated tests.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -412,9 +375,7 @@ Model element will not be tested via generated tests.
 :masd.variability.key_prefix: masd.cpp.types
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 The element does not have a types facet.
-
 *** enabled                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: false
@@ -441,9 +402,7 @@ The element does not have a types facet.
 :masd.variability.key_prefix: masd.cpp.types
 :masd.codec.stereotypes: masd::variability::profile
 :END:
-
 Element has forward declarations.
-
 *** class_forward_declarations.enabled                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.value: true

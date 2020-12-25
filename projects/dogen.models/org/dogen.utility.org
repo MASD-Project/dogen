@@ -12,9 +12,7 @@
 :masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
-
 Assorted utilities used by Dogen.
-
 * exception                                                    :masd_element:
 ** invalid_enum_value                                          :masd_element:
 :PROPERTIES:
@@ -33,16 +31,12 @@ Assorted utilities used by Dogen.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 File was not found.
-
 ** io_error                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst performing an IO operation.
-
 ** path                                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -138,21 +132,17 @@ An error occurred whilst performing an IO operation.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
-
 Options related to logging.
-
 *** severity                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Level at which to log.
 
 *** filename                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Name of the file to log into.
 
 If empty, file logging is disabled.
@@ -161,14 +151,12 @@ If empty, file logging is disabled.
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
-
 If true, dumps the log into the console.
 
 *** output_directory                                         :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
-
 Directory in which to place the output.
 
 ** invalid_logging_configuration                               :masd_element:
@@ -176,9 +164,7 @@ Directory in which to place the output.
 :masd.cpp.types.class_forward_declarations.enabled: false
 :masd.codec.stereotypes: masd::exception
 :END:
-
 The values supplied for the logging configuration are not valid.
-
 ** logging_configuration_validator                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -295,9 +281,7 @@ The values supplied for the logging configuration are not valid.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst obtaining the test data.
-
 * xml                                                          :masd_element:
 ** exception                                                   :masd_element:
 :PROPERTIES:
@@ -324,9 +308,7 @@ An error occurred whilst obtaining the test data.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 There was an error reading an environment variable.
-
 ** variable_reader                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -335,25 +317,19 @@ There was an error reading an environment variable.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 Contains all of the formatting primitives
 that are not associated with any particular
 model.
-
 ** formatting_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error has occurred while formatting.
-
 ** quote_type                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-
 Types of quotes that can be used in streaming.
-
 *** single_quote                                             :masd_attribute:
 *** double_quote                                             :masd_attribute:
 ** spacing_type                                                :masd_element:
@@ -376,9 +352,7 @@ Types of quotes that can be used in streaming.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
-
 Supported styles of comments.
-
 *** c_style                                                  :masd_attribute:
 Original C programming language style.
 
@@ -409,14 +383,11 @@ Comments using XML syntax.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
-
 Configuration to use for a given infix in sequence formatter.
-
 *** first                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Applicable only to the first element of a sequence, if the sequence has more
 than one element.
 
@@ -424,21 +395,18 @@ than one element.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Applicable to all elements other than the first.
 
 *** not_last                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Applicable to all elements other than the last.
 
 *** last                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 Only applicable to the last element of a sequence.
 
 * main                                                         :masd_element:

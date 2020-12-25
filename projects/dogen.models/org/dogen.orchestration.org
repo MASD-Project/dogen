@@ -19,17 +19,13 @@
 :masd.codec.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
-
 Orchestration-based imlementation of the Dogen product API.
-
 * transforms                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
-
 ** code_generation_chain                                       :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -67,9 +63,7 @@ the entry points to all transformations.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred in the factory whilst making.
-
 ** codec_model_to_logical_model_transform                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -132,9 +126,7 @@ An error occurred in the factory whilst making.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 Helpers for the orchestration model.
-
 ** codec_to_logical_projector                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -147,9 +139,7 @@ Helpers for the orchestration model.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error ocurred whilst projecting elements from one space into another.
-
 ** dependencies_builder                                        :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -162,24 +152,19 @@ An error ocurred whilst projecting elements from one space into another.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
-
 Features for the orchestration model.
-
 ** model_location                                              :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.codec
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-
 Feature group for model location related features.
-
 *** external_modules                                         :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
-
 External modules containing this model.
 
 External modules contribute to the namespace of the model but not the model
@@ -189,7 +174,6 @@ name.
 :PROPERTIES:
 :masd.codec.type: masd::variability::text
 :END:
-
 Model modules containing this model.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.

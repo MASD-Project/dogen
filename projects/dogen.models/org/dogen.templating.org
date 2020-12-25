@@ -19,14 +19,11 @@
 :PROPERTIES:
 :masd.codec.stereotypes: ConfigurableViaKvps
 :END:
-
 Represents a wale text template.
-
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 #+begin_src mustache
 Textual content of the wale template.
 
@@ -47,16 +44,12 @@ Textual content of the wale template.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst formatting.
-
 ** extraction_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst extracting a key.
-
 * stitch                                                       :masd_element:
 ** parser                                                      :masd_element:
 :PROPERTIES:
@@ -75,21 +68,17 @@ An error occurred whilst extracting a key.
 :PROPERTIES:
 :masd.codec.stereotypes: ConfigurableViaKvps
 :END:
-
 Domain representation of a stitch template.
-
 *** properties                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: properties
 :END:
-
 Properties of the template.
 
 *** body                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: text_template_body
 :END:
-
 Body of the text template.
 
 ** formatter                                                   :masd_element:
@@ -100,16 +89,12 @@ Body of the text template.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst parsing.
-
 ** formatting_error                                            :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred whilst formatting.
-
 ** properties                                                  :masd_element:
 *** stream_variable_name                                     :masd_attribute:
 :PROPERTIES:
@@ -153,7 +138,6 @@ An error occurred whilst formatting.
 :PROPERTIES:
 :masd.codec.type: std::list<identification::entities::tagged_value>
 :END:
-
 Set of tagged values read from the template.
 
 *** lines                                                    :masd_attribute:
@@ -170,15 +154,12 @@ Set of tagged values read from the template.
 :masd.variability.key_prefix: masd.stitch
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
-
 Stitch templating features.
-
 *** stream_variable_name                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::text
 :masd.codec.value: "stream_"
 :END:
-
 Which name to use for the variable with the stream.
 
 *** relative_output_directory                                :masd_attribute:
@@ -186,7 +167,6 @@ Which name to use for the variable with the stream.
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
-
 Relative path to the output directory.
 
 *** inclusion_dependency                                     :masd_attribute:
@@ -194,14 +174,12 @@ Relative path to the output directory.
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text_collection
 :END:
-
 C++ Include header.
 
 *** containing_namespaces                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: masd::variability::text
 :END:
-
 Namespaces that contain the class represented by the template.
 
 *** wale.text_template                                       :masd_attribute:
@@ -209,7 +187,6 @@ Namespaces that contain the class represented by the template.
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
-
 Name of the wale text template to instantiate, if any.
 
 *** wale.kvp                                                 :masd_attribute:
@@ -217,28 +194,23 @@ Name of the wale text template to instantiate, if any.
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::key_value_pair
 :END:
-
 Array of wale KVPs to use in template instantiation.
 
 * ConfigurableViaKvps                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-
 Element has the ability to recieve configuration arguments as a set of KVPs.
-
 ** expected_keys                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_set<std::string>
 :END:
-
 Set of keys that are expected to be supplied.
 
 ** supplied_kvps                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
-
 Key value pairs that were supplied for instantiation.
 
 * helpers                                                      :masd_element:
@@ -250,9 +222,7 @@ Key value pairs that were supplied for instantiation.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred with the supplied KVPs.
-
 ** kvp_resolver                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -261,9 +231,7 @@ An error occurred with the supplied KVPs.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
-
 An error occurred when trying to resolve a key.
-
 * initializer                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::variability::initializer

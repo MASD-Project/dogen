@@ -12,20 +12,16 @@
 :masd.cpp.standard: c++-17
 :masd.csharp.enabled: false
 :END:
-
 Welcome to Dogen!
 
 This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
-
 * one_property                                                 :masd_element:
 Hello World class.
-
 ** property                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-
 This is a sample property.
 
