@@ -21,6 +21,7 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_ORG_ARTEFACT_TO_MODEL_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_ORG_ARTEFACT_TO_MODEL_TRANSFORM_HPP
 
+#include "dogen.org/types/entities/section.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -51,6 +52,11 @@ private:
      * regards to the codec model.
      */
     static headline_type get_headline_type(const org::entities::headline& h);
+
+    /**
+     * @brief Converts an org section into text.
+     */
+    static std::string section_to_text(const org::entities::section& s);
 
 private:
     /**

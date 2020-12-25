@@ -20,6 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <sstream>
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -95,6 +96,18 @@ get_headline_type(const org::entities::headline& h) {
     return r;
 }
 
+std::string org_artefact_to_model_transform::
+section_to_text(const org::entities::section& s) {
+    BOOST_LOG_SEV(lg, debug) << "Processing section.";
+
+    std::ostringstream os;
+    for (const auto& b : s.blocks())
+        os << b.contents();
+
+    BOOST_LOG_SEV(lg, debug) << "Finished processing section.";
+    return os.str();
+}
+
 std::list<tagged_value> org_artefact_to_model_transform::
 make_tagged_values(const std::list<org::entities::drawer>& drawers) {
     /*
@@ -152,6 +165,8 @@ make_attribute(const org::entities::headline& h) {
     entities::attribute r;
     r.name().simple(h.title());
     r.name().qualified(h.title()); // FIXME
+    r.comment().original_content(section_to_text(h.section()));
+    r.documentation(r.comment().original_content());
 
     /*
      * Attributes may not have drawers.
@@ -222,6 +237,8 @@ make_elements(const std::list<org::entities::headline>& headlines,
 
             entities::element child;
             child.fallback_element_type(object_element_type);
+            child.comment().original_content(section_to_text(h.section()));
+            child.documentation(child.comment().original_content());
             child.name().simple(h.title());
             child.name().qualified(current.name().qualified() + "::" +
                 child.name().simple());
@@ -253,7 +270,10 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Processed org-mode document.";
     entities::model r;
+    r.name().simple(fn);
     r.tagged_values(make_tagged_values(doc.drawers()));
+    r.comment().original_content(section_to_text(doc.section()));
+    r.documentation(r.comment().original_content());
 
     /*
      * Process all top-level headlines.
@@ -291,6 +311,8 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         current.name().simple(h.title());
         current.name().qualified(current.name().simple());
         current.fallback_element_type(object_element_type);
+        current.comment().original_content(section_to_text(h.section()));
+        current.documentation(current.comment().original_content());
 
         /*
          * Elements may not have drawers.
