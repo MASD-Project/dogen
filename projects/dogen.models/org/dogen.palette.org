@@ -9,6 +9,7 @@
 :masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
 Exercises all dogen-defined stereotypes that have an impact in
 colour, so we can see how the entire palette looks like.
 
@@ -20,6 +21,7 @@ it looks good, then run it against all other dogen models.
 
 We should try to keep all elements in one screen as much
 as possible, so we can evaluate how they work together.
+
 * palette_test_one_one                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable

@@ -13,7 +13,9 @@
 :masd.codec.reference: dogen.tracing
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
 Represents the domain of the Dia diagram editor.
+
 * main                                                         :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::entry_point, dogen::untypable
@@ -26,72 +28,87 @@ Represents the domain of the Dia diagram editor.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
+
 Contains all the entities required by Dogen from the
 domain of the Dia diagram editor.
+
 ** diagram                                                     :masd_element:
 Represents a diagram in Dia.
+
 *** diagram_data                                             :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: diagram_data
 :END:
+
 Basic diagram definitions.
 
 *** layers                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<layer>
 :END:
+
 Visual layers on the diagram.
 
 ** layer                                                       :masd_element:
 Represents a layer in a Dia diagram.
+
 *** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Name of the layer.
 
 *** visible                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 Whether the layer is visible on screen or not.
 
 *** active                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 Whether the layer is active or not.
 
 *** objects                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<object>
 :END:
+
 Dia objects contained in layer.
 
 ** object                                                      :masd_element:
 Represents a Dia object.
+
 *** id                                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Unique identifier for the object in this diagram.
 
 *** type                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Type of the object.
 
 *** version                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: int
 :END:
+
 Version of the object.
 
 *** connections                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<connection>
 :END:
+
 Connection details for this object.
 
 *** child_node                                               :masd_attribute:
@@ -102,26 +119,31 @@ Connection details for this object.
 :PROPERTIES:
 :masd.codec.type: std::vector<attribute>
 :END:
+
 All attributes associated with the object.
 
 ** connection                                                  :masd_element:
 Connection between entities in a Dia diagram.
+
 *** handle                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Internal handle for the connection.
 
 *** to                                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Object we're connected to.
 
 *** connection_slot                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Number of the connection slot we're connected to.
 
 This is known in Dia as a connection but to avoid confusion between the class and the slot concepts,
@@ -129,10 +151,12 @@ we renamed it.
 
 ** diagram_data                                                :masd_element:
 Represents a all the data associated with a diagram.
+
 *** attributes                                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<attribute>
 :END:
+
 All attributes associated with the diagram data.
 
 ** child_node                                                  :masd_element:
@@ -141,28 +165,34 @@ Represents a child_node in a diagram.
 Child nodes are used in Dia to represent the relationship between a package and the entities it contains.
 For example, if class O1 is inside package O0 then class O1 will have a child node element with a parent
 pointing to O0.
+
 *** parent                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Parent for this object.
 
 ** attribute                                                   :masd_element:
 Attribute in a Dia diagram.
+
 *** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Name of the attribute.
 
 *** values                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
 :END:
+
 Values for the attribute.
 
 ** font                                                        :masd_element:
 Represents a font in a diagram.
+
 *** family                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -179,87 +209,108 @@ Represents a font in a diagram.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::untestable
 :END:
+
 Attribute value which is made up of other attributes.
+
 *** type                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Type of the composite node
 
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<boost::shared_ptr<attribute>>
 :END:
+
 Underlying Dia attributes.
 
 *** inner_composite                                          :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<composite>
 :END:
+
 Some composites contain an inner composite field.
 
 ** color                                                       :masd_element:
 Represents a color in a diagram.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of an RGB value in hex.
 
 ** real                                                        :masd_element:
 Represents a real value.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of a real value.
 
 ** integer                                                     :masd_element:
 Represents an integer value.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of an integer value.
 
 ** boolean                                                     :masd_element:
 Represents a boolean value.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of a boolean value.
 
 ** point                                                       :masd_element:
 Represents a point in a diagram.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of a point with X/Y coordinates.
 
 ** enumeration                                                 :masd_element:
 Represents a enumeration in a diagram.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of a enumeration.
 
 ** string                                                      :masd_element:
 Represents a string value.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Represents a string value.
 
 ** rectangle                                                   :masd_element:
 Represents a rectangle in a diagram.
+
 *** value                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Text representation of a rectangle with a pair of X/Y coordinates.
 
 * transforms                                                   :masd_element:
@@ -267,7 +318,9 @@ Text representation of a rectangle with a pair of X/Y coordinates.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst applying a transformation.
+
 ** string_to_diagram_transform                                 :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable

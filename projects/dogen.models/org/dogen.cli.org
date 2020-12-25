@@ -14,12 +14,16 @@
 :masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
 Implements the command-line interface for Dogen.
+
 * parser_exception                                             :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 A fatal error has occurred during option parsing.
+
 * application                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -41,13 +45,17 @@ A fatal error has occurred during option parsing.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 A fatal error has occurred whilst executing the application.
+
 * configuration                                                :masd_element:
 All of the configuration required by the command line application.
+
 ** logging                                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::optional<utility::log::logging_configuration>
 :END:
+
 Configuration related to logging, if any.
 
 ** api                                                       :masd_attribute:
@@ -62,17 +70,21 @@ Configuration related to logging, if any.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
+
 Configuration related to code generation.
+
 ** reference_model_directories                               :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::vector<boost::filesystem::path>
 :END:
+
 Directories to search for reference models.
 
 ** target                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
+
 Target model for generation.
 
 ** output_directory                                          :masd_attribute:
@@ -83,7 +95,9 @@ Target model for generation.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
+
 Configuration for the model conversion.
+
 ** source                                                    :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
@@ -92,6 +106,7 @@ Configuration for the model conversion.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Name of the file to output the conversion to.
 
 * configuration_validator                                      :masd_element:
@@ -106,7 +121,9 @@ Name of the file to output the conversion to.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
+
 Configuration specific to the CLI application.
+
 ** activity                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
@@ -115,6 +132,7 @@ Configuration specific to the CLI application.
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path
 :END:
+
 Directory in which to place all files not directly related to generated code.
 
 * main                                                         :masd_element:
@@ -131,10 +149,13 @@ Directory in which to place all files not directly related to generated code.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::fluent
 :END:
+
 Dumps all the specs about this version of dogen.
+
 ** style                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: reporting_style
 :END:
+
 Which style to use when dumping the specs.
 

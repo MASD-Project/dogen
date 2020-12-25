@@ -5,6 +5,7 @@
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Defines a URI for the schema.
 
 ** schema_keyword                                            :masd_attribute:
