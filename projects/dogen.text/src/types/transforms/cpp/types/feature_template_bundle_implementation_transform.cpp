@@ -91,8 +91,7 @@ ast.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                     if (has_qualified_name) {
 ast.stream() << "    r.name().qualified(\"" << ft.key() << "\");" << std::endl;
                     }
-ast.stream() << "    r.description(R\"(" << ft.documentation() << std::endl;
-ast.stream() << ")\");" << std::endl;
+ast.stream() << "    r.description(R\"(" << ft.documentation() << ")\");" << std::endl;
 ast.stream() << "    const auto vt(" << enum_mapper::from_value_type(ft.value_type()) << ");" << std::endl;
 ast.stream() << "    r.value_type(vt);" << std::endl;
 ast.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.binding_point()) << ");" << std::endl;

@@ -33,8 +33,7 @@ make_masd_mapping_target() {
     feature r;
     r.name().simple("target");
     r.name().qualified("masd.mapping.target");
-    r.description(R"(Type that is the source of the mapping.
-)");
+    r.description(R"(Type that is the source of the mapping.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -47,8 +46,7 @@ make_masd_mapping_destination() {
     feature r;
     r.name().simple("destination");
     r.name().qualified("masd.mapping.destination");
-    r.description(R"(Type that is the destination of the mapping.
-)");
+    r.description(R"(Type that is the destination of the mapping.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);

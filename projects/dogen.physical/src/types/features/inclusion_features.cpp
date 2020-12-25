@@ -31,8 +31,7 @@ make_masd_cpp_inclusion_required() {
     feature r;
     r.name().simple("inclusion_required");
     r.name().qualified("masd.cpp.inclusion_required");
-    r.description(R"(If true, inclusion is required for this modeling element.
-)");
+    r.description(R"(If true, inclusion is required for this modeling element.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);

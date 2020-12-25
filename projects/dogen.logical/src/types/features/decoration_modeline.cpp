@@ -33,8 +33,7 @@ make_masd_decoration_modeline_editor() {
     feature r;
     r.name().simple("editor");
     r.name().qualified("masd.decoration.modeline.editor");
-    r.description(R"(Editor to use in this modeline.
-)");
+    r.description(R"(Editor to use in this modeline.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -47,8 +46,7 @@ make_masd_decoration_modeline_location() {
     feature r;
     r.name().simple("location");
     r.name().qualified("masd.decoration.modeline.location");
-    r.description(R"(Where to place the modeline.
-)");
+    r.description(R"(Where to place the modeline.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -61,8 +59,7 @@ make_masd_decoration_modeline_technical_space() {
     feature r;
     r.name().simple("technical_space");
     r.name().qualified("masd.decoration.modeline.technical_space");
-    r.description(R"(Technical space targeted by the modeline.
-)");
+    r.description(R"(Technical space targeted by the modeline.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);

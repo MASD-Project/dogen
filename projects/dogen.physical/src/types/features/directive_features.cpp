@@ -32,8 +32,7 @@ make_primary_inclusion_directive() {
     using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("primary_inclusion_directive");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -46,8 +45,7 @@ make_secondary_inclusion_directive() {
     using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("secondary_inclusion_directive");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);

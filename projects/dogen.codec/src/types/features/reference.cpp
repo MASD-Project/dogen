@@ -33,8 +33,7 @@ make_masd_codec_reference() {
     feature r;
     r.name().simple("reference");
     r.name().qualified("masd.codec.reference");
-    r.description(R"(Imports an external model.
-)");
+    r.description(R"(Imports an external model.)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);

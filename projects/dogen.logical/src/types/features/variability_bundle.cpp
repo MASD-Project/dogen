@@ -35,8 +35,7 @@ make_masd_variability_generate_registration() {
     r.name().qualified("masd.variability.generate_registration");
     r.description(R"(If true, generates code to register the features.
 
-@pre Features must not already exist.
-)");
+@pre Features must not already exist.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -51,8 +50,7 @@ make_masd_variability_generate_static_configuration() {
     feature r;
     r.name().simple("generate_static_configuration");
     r.name().qualified("masd.variability.generate_static_configuration");
-    r.description(R"(If true, generates a c++ class to contain the configuration at compile time.
-)");
+    r.description(R"(If true, generates a c++ class to contain the configuration at compile time.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -67,8 +65,7 @@ make_masd_variability_default_binding_point() {
     feature r;
     r.name().simple("default_binding_point");
     r.name().qualified("masd.variability.default_binding_point");
-    r.description(R"(Where does this bundle bind to.
-)");
+    r.description(R"(Where does this bundle bind to.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -81,8 +78,7 @@ make_masd_variability_instantiation_domain_name() {
     feature r;
     r.name().simple("instantiation_domain_name");
     r.name().qualified("masd.variability.instantiation_domain_name");
-    r.description(R"(Template instantiation domain name to use when instantiating template.
-)");
+    r.description(R"(Template instantiation domain name to use when instantiating template.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -95,8 +91,7 @@ make_masd_variability_key_prefix() {
     feature r;
     r.name().simple("key_prefix");
     r.name().qualified("masd.variability.key_prefix");
-    r.description(R"(Prefix to apply to construct the qualified name, if any.
-)");
+    r.description(R"(Prefix to apply to construct the qualified name, if any.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);

@@ -33371,8 +33371,7 @@ make_&lt;#= ft.identifiable_key() #&gt;() {
 &lt;#+
                     }
 #&gt;
-    r.description(R"(&lt;#= ft.documentation() #&gt;
-)");
+    r.description(R"(&lt;#= ft.documentation() #&gt;)");
     const auto vt(&lt;#= enum_mapper::from_value_type(ft.value_type()) #&gt;);
     r.value_type(vt);
     r.binding_point(&lt;#= enum_mapper::from_binding_point(*ft.binding_point()) #&gt;);
@@ -33689,8 +33688,7 @@ make_&lt;#= f.identifiable_key() #&gt;() {
 &lt;#+
                    }
 #&gt;
-    r.description(R"(&lt;#= f.documentation() #&gt;
-)");
+    r.description(R"(&lt;#= f.documentation() #&gt;)");
     const auto vt(&lt;#= enum_mapper::from_value_type(f.value_type()) #&gt;);
     r.value_type(vt);
 &lt;#+

@@ -33,8 +33,7 @@ make_masd_cpp_standard() {
     feature r;
     r.name().simple("standard");
     r.name().qualified("masd.cpp.standard");
-    r.description(R"(Which version of C++ to use.
-)");
+    r.description(R"(Which version of C++ to use.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);

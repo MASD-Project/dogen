@@ -33,8 +33,7 @@ make_masd_variability_profile() {
     feature r;
     r.name().simple("profile");
     r.name().qualified("masd.variability.profile");
-    r.description(R"(Profile associated with this configuration.
-)");
+    r.description(R"(Profile associated with this configuration.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);

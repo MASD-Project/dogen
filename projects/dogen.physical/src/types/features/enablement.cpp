@@ -30,8 +30,7 @@ make_enabled() {
     using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("enabled");
-    r.description(R"(If true, decorations are enabled on this modeling element.
-)");
+    r.description(R"(If true, decorations are enabled on this modeling element.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);

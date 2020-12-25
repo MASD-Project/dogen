@@ -33,8 +33,7 @@ make_masd_cpp_headers_output_directory() {
     feature r;
     r.name().simple("headers_output_directory");
     r.name().qualified("masd.cpp.headers_output_directory");
-    r.description(R"(Override location of public c++ headers.
-)");
+    r.description(R"(Override location of public c++ headers.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -47,8 +46,7 @@ make_masd_cpp_source_directory_name() {
     feature r;
     r.name().simple("source_directory_name");
     r.name().qualified("masd.cpp.source_directory_name");
-    r.description(R"(Directory in which to place C++ source files.
-)");
+    r.description(R"(Directory in which to place C++ source files.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -63,8 +61,7 @@ make_masd_cpp_include_directory_name() {
     feature r;
     r.name().simple("include_directory_name");
     r.name().qualified("masd.cpp.include_directory_name");
-    r.description(R"(Directory in which to place include headers.
-)");
+    r.description(R"(Directory in which to place include headers.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -79,8 +76,7 @@ make_masd_cpp_tests_directory_name() {
     feature r;
     r.name().simple("tests_directory_name");
     r.name().qualified("masd.cpp.tests_directory_name");
-    r.description(R"(Directory in which to place c++ tests.
-)");
+    r.description(R"(Directory in which to place c++ tests.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -95,8 +91,7 @@ make_masd_cpp_templates_directory_name() {
     feature r;
     r.name().simple("templates_directory_name");
     r.name().qualified("masd.cpp.templates_directory_name");
-    r.description(R"(Directory in which to place text templates.
-)");
+    r.description(R"(Directory in which to place text templates.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -111,8 +106,7 @@ make_masd_cpp_header_file_extension() {
     feature r;
     r.name().simple("header_file_extension");
     r.name().qualified("masd.cpp.header_file_extension");
-    r.description(R"(Extension to use for C++ header files.
-)");
+    r.description(R"(Extension to use for C++ header files.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -127,8 +121,7 @@ make_masd_cpp_implementation_file_extension() {
     feature r;
     r.name().simple("implementation_file_extension");
     r.name().qualified("masd.cpp.implementation_file_extension");
-    r.description(R"(Extension to use for C++ implementation files.
-)");
+    r.description(R"(Extension to use for C++ implementation files.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -143,8 +136,7 @@ make_masd_cpp_templates_file_extension() {
     feature r;
     r.name().simple("templates_file_extension");
     r.name().qualified("masd.cpp.templates_file_extension");
-    r.description(R"(Extension to use for text templates.
-)");
+    r.description(R"(Extension to use for text templates.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -159,8 +151,7 @@ make_masd_cpp_enable_unique_file_names() {
     feature r;
     r.name().simple("enable_unique_file_names");
     r.name().qualified("masd.cpp.enable_unique_file_names");
-    r.description(R"(If true, make all file names unique within a model.
-)");
+    r.description(R"(If true, make all file names unique within a model.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -175,8 +166,7 @@ make_masd_cpp_disable_facet_directories() {
     feature r;
     r.name().simple("disable_facet_directories");
     r.name().qualified("masd.cpp.disable_facet_directories");
-    r.description(R"(If true, facet directories will not be used.
-)");
+    r.description(R"(If true, facet directories will not be used.)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);

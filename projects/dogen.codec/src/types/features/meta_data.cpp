@@ -33,8 +33,7 @@ make_masd_codec_stereotypes() {
     feature r;
     r.name().simple("stereotypes");
     r.name().qualified("masd.codec.stereotypes");
-    r.description(R"(Stereotypes associated with this element or attribute.
-)");
+    r.description(R"(Stereotypes associated with this element or attribute.)");
     const auto vt(value_type::comma_separated);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -47,8 +46,7 @@ make_masd_codec_type() {
     feature r;
     r.name().simple("type");
     r.name().qualified("masd.codec.type");
-    r.description(R"(Type associated with this attribute.
-)");
+    r.description(R"(Type associated with this attribute.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -61,8 +59,7 @@ make_masd_codec_value() {
     feature r;
     r.name().simple("value");
     r.name().qualified("masd.codec.value");
-    r.description(R"(Value associated with this attribute.
-)");
+    r.description(R"(Value associated with this attribute.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -75,8 +72,7 @@ make_masd_codec_parent() {
     feature r;
     r.name().simple("parent");
     r.name().qualified("masd.codec.parent");
-    r.description(R"(Parent associated with this element.
-)");
+    r.description(R"(Parent associated with this element.)");
     const auto vt(value_type::comma_separated);
     r.value_type(vt);
     r.binding_point(binding_point::any);

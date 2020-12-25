@@ -32,8 +32,7 @@ make_directory_name() {
     using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("directory_name");
-    r.description(R"(Directory in which to place this backend.
-)");
+    r.description(R"(Directory in which to place this backend.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);

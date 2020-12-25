@@ -33,8 +33,7 @@ make_masd_label() {
     feature r;
     r.name().simple("label");
     r.name().qualified("masd.label");
-    r.description(R"(Labels to attach to modeling elements. Key must be unique.
-)");
+    r.description(R"(Labels to attach to modeling elements. Key must be unique.)");
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);
     r.is_partially_matchable(true);

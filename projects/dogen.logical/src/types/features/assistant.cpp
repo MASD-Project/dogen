@@ -33,8 +33,7 @@ make_masd_csharp_assistant_requires_assistance() {
     feature r;
     r.name().simple("requires_assistance");
     r.name().qualified("masd.csharp.assistant.requires_assistance");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -49,8 +48,7 @@ make_masd_csharp_assistant_method_postfix() {
     feature r;
     r.name().simple("method_postfix");
     r.name().qualified("masd.csharp.assistant.method_postfix");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);

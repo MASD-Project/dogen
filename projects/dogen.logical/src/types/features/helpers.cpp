@@ -33,8 +33,7 @@ make_masd_helper_family() {
     feature r;
     r.name().simple("family");
     r.name().qualified("masd.helper.family");
-    r.description(R"(Which family of helpers to use for this modeling element.
-)");
+    r.description(R"(Which family of helpers to use for this modeling element.)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);

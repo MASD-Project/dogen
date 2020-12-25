@@ -33,8 +33,7 @@ make_masd_physical_output_technical_space() {
     feature r;
     r.name().simple("output_technical_space");
     r.name().qualified("masd.physical.output_technical_space");
-    r.description(R"(Set of output technical spaces that this model targets.
-)");
+    r.description(R"(Set of output technical spaces that this model targets.)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);

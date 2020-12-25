@@ -33,8 +33,7 @@ make_masd_physical_helpers_family() {
     feature r;
     r.name().simple("family");
     r.name().qualified("masd.physical.helpers.family");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -47,8 +46,7 @@ make_masd_physical_helpers_owning_formatters() {
     feature r;
     r.name().simple("owning_formatters");
     r.name().qualified("masd.physical.helpers.owning_formatters");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -61,8 +59,7 @@ make_masd_physical_helpers_owning_facets() {
     feature r;
     r.name().simple("owning_facets");
     r.name().qualified("masd.physical.helpers.owning_facets");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -75,8 +72,7 @@ make_masd_physical_helpers_wale_template_reference() {
     feature r;
     r.name().simple("wale_template_reference");
     r.name().qualified("masd.physical.helpers.wale_template_reference");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);

@@ -91,8 +91,7 @@ ast.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                    if (has_qualified_name) {
 ast.stream() << "    r.name().qualified(\"" << f.key() << "\");" << std::endl;
                    }
-ast.stream() << "    r.description(R\"(" << f.documentation() << std::endl;
-ast.stream() << ")\");" << std::endl;
+ast.stream() << "    r.description(R\"(" << f.documentation() << ")\");" << std::endl;
 ast.stream() << "    const auto vt(" << enum_mapper::from_value_type(f.value_type()) << ");" << std::endl;
 ast.stream() << "    r.value_type(vt);" << std::endl;
                    if (f.unparsed_type() == "masd::variability::key_value_pair") {

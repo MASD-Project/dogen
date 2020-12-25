@@ -33,8 +33,7 @@ make_masd_csharp_aspect_requires_static_reference_equals() {
     feature r;
     r.name().simple("requires_static_reference_equals");
     r.name().qualified("masd.csharp.aspect.requires_static_reference_equals");
-    r.description(R"(
-)");
+    r.description(R"()");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
