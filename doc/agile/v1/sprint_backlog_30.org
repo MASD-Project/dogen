@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-25 Fri 15:23]
-| <75>                                               |         |       |       |       |
-| Headline                                           | Time    |       |       |     % |
-|----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *33:42* |       |       | 100.0 |
-|----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 33:42   |       |       | 100.0 |
-| Active                                             |         | 33:42 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  18.0 |
-| Create a demo and presentation for previous sprint |         |       |  0:34 |   1.7 |
-| Sprint and product backlog grooming                |         |       |  0:35 |   1.7 |
-| Add support for reading org mode documents         |         |       | 19:46 |  58.7 |
-| Add org-mode codec for input                       |         |       |  6:43 |  19.9 |
+#+CAPTION: Clock summary at [2020-12-25 Fri 20:24]
+| <75>                                                |         |       |       |       |
+| Headline                                            | Time    |       |       |     % |
+|-----------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                        | *35:21* |       |       | 100.0 |
+|-----------------------------------------------------+---------+-------+-------+-------|
+| Stories                                             | 35:21   |       |       | 100.0 |
+| Active                                              |         | 35:21 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  17.2 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.6 |
+| Sprint and product backlog grooming                 |         |       |  0:35 |   1.7 |
+| Add support for reading org mode documents          |         |       | 19:46 |  55.9 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   3.0 |
+| Add org-mode codec for input                        |         |       |  7:19 |  20.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -392,8 +393,55 @@ Links:
 - [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
 - [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools!]]
 
+*** COMPLETED Remove leading and trailing new lines from comments     :story:
+    CLOSED: [2020-12-25 Fri 20:15]
+    :LOGBOOK:
+    CLOCK: [2020-12-25 Fri 19:19]--[2020-12-25 Fri 20:15] =>  0:56
+    CLOCK: [2020-12-25 Fri 17:02]--[2020-12-25 Fri 17:09] =>  0:07
+    :END:
+
+At present we are using the comments as supplied in the codec
+model. This works ok mostly, but it has some issues. For Dia the main
+issue is when we use meta-data in a comment, e.g.:
+
+: Directory in which to place C++ source files.
+:
+: #DOGEN masd.variability.binding_point=global
+
+We don't really want a trailing line in this comment, but we need it
+to separate the meta-data. The end result is not ideal:
+
+:     r.name().simple("source_directory_name");
+:     r.name().qualified("masd.cpp.source_directory_name");
+:     r.description(R"(Directory in which to place C++ source files.
+:
+: )");
+
+Similarly in org-mode we are removing the spaces to avoid spurious
+diffs:
+
+: :masd.codec.reference: masd.variability
+: :masd.codec.reference: dogen.profiles
+: :masd.variability.profile: dogen.profiles.base.default_profile
+: :END:
+: Implements the command-line interface for Dogen.
+: * parser_exception                                             :masd_element:
+: :PROPERTIES:
+: :masd.codec.stereotypes: masd::exception
+: :END:
+
+One possible solution is to always remove leading and trailing new
+lines, as a transform inside the logical model.
+
+Links:
+
+- [[https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring][What's the best way to trim std::string?]]
+
 *** STARTED Add org-mode codec for input                              :story:
     :LOGBOOK:
+    CLOCK: [2020-12-25 Fri 20:16]--[2020-12-25 Fri 20:24] =>  0:08
+    CLOCK: [2020-12-25 Fri 16:50]--[2020-12-25 Fri 17:01] =>  0:11
+    CLOCK: [2020-12-25 Fri 16:30]--[2020-12-25 Fri 16:47] =>  0:17
     CLOCK: [2020-12-25 Fri 13:41]--[2020-12-25 Fri 15:23] =>  1:42
     CLOCK: [2020-12-24 Thu 17:00]--[2020-12-24 Thu 17:16] =>  0:16
     CLOCK: [2020-12-24 Thu 16:08]--[2020-12-24 Thu 16:59] =>  0:51
@@ -440,6 +488,18 @@ Notes:
   We need to understand what should be coming out of the
   merging. Maybe we can compare the logging for org model with the
   logging for dia model.
+- to sort models by elements:
+
+: jq '.elements|=sort_by(.name.qualified)'
+
+- attributes have an extra new line. Added transform to trim.
+- processing of code blocks generates errors:
+
+: Dynamic exception type: boost::wrapexcept<dogen::templating::stitch::parsing_error>
+: std::exception::what: Unexpected directive.
+: [dogen::templating::stitch::tag_line_number*] = 1
+: unknown location(0): fatal error: in "physical_model_production_chain_tests/dogen_text_org_produces_expected_model": std::runtime_error: Error during test
+
 
 *** Empty model generation produces no diffs                          :story:
 
