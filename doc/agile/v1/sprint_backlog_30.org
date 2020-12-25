@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-24 Thu 14:20]
+#+CAPTION: Clock summary at [2020-12-25 Fri 15:23]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *30:53* |       |       | 100.0 |
+| *Total time*                                       | *33:42* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 30:53   |       |       | 100.0 |
-| Active                                             |         | 30:53 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  6:04 |  19.6 |
-| Create a demo and presentation for previous sprint |         |       |  0:34 |   1.8 |
-| Sprint and product backlog grooming                |         |       |  0:35 |   1.9 |
-| Add support for reading org mode documents         |         |       | 19:46 |  64.0 |
-| Add org-mode codec for input                       |         |       |  3:54 |  12.6 |
+| Stories                                            | 33:42   |       |       | 100.0 |
+| Active                                             |         | 33:42 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  6:04 |  18.0 |
+| Create a demo and presentation for previous sprint |         |       |  0:34 |   1.7 |
+| Sprint and product backlog grooming                |         |       |  0:35 |   1.7 |
+| Add support for reading org mode documents         |         |       | 19:46 |  58.7 |
+| Add org-mode codec for input                       |         |       |  6:43 |  19.9 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -394,6 +394,9 @@ Links:
 
 *** STARTED Add org-mode codec for input                              :story:
     :LOGBOOK:
+    CLOCK: [2020-12-25 Fri 13:41]--[2020-12-25 Fri 15:23] =>  1:42
+    CLOCK: [2020-12-24 Thu 17:00]--[2020-12-24 Thu 17:16] =>  0:16
+    CLOCK: [2020-12-24 Thu 16:08]--[2020-12-24 Thu 16:59] =>  0:51
     CLOCK: [2020-12-24 Thu 14:18]--[2020-12-24 Thu 14:20] =>  0:02
     CLOCK: [2020-12-24 Thu 14:12]--[2020-12-24 Thu 14:17] =>  0:05
     CLOCK: [2020-12-24 Thu 10:24]--[2020-12-24 Thu 14:11] =>  3:47
@@ -419,6 +422,24 @@ Notes:
 : 2020-12-24 14:09:23.309671 [DEBUG] [logical.transforms.containment_transform] Could not find container: ' { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }'.
 : 2020-12-24 14:09:23.309674 [ERROR] [logical.transforms.containment_transform] Could not find containing element:  { "__type__": "dogen::identification::entities::logical_id", "value": "dogen.profiles.composable" }
 : 2020-12-24 14:09:23.309730 [DEBUG] [logical.transforms.containment_transform] Finished transform: containment.
+
+- =physical.transforms.merge_transform=: set to chain by mistake?
+- we are now generating both C++ and C# code. This implies something
+  is not quite right with the profile binding. However a cursory
+  inspection of profiles shows that they seemed to have been
+  transformed correctly. The problem may be more suitable, causing
+  some binding error. We need to check that the model is binding to
+  the base profile. It is not clear if this is the root cause:
+
+: 2020-12-24 17:02:45.449202 [DEBUG] [variability.transforms.profile_binding_transform] Profile name: 'dogen.profiles.base.default_profile'
+: 2020-12-24 17:02:45.449206 [TRACE] [variability.transforms.profile_binding_transform] Configured base layer profile: dogen.profiles.base.default_profile
+: 2020-12-24 17:02:45.449251 [TRACE] [variability.transforms.profile_binding_transform] Merged profile.
+: 2020-12-24 17:02:45.449255 [TRACE] [variability.transforms.profile_binding_transform] Accumulated profile is empty.
+: 2020-12-24 17:02:45.449257 [TRACE] [variability.transforms.profile_binding_transform] No base layer found on all profiles.
+
+  We need to understand what should be coming out of the
+  merging. Maybe we can compare the logging for org model with the
+  logging for dia model.
 
 *** Empty model generation produces no diffs                          :story:
 
