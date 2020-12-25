@@ -31,7 +31,6 @@ make_enabled() {
     feature_template r;
     r.name().simple("enabled");
     r.description(R"(If true, decorations are enabled on this modeling element.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

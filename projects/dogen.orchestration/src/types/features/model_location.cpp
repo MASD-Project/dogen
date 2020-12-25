@@ -37,7 +37,6 @@ make_masd_codec_external_modules() {
 
 External modules contribute to the namespace of the model but not the model
 name.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -54,7 +53,6 @@ make_masd_codec_model_modules() {
     r.description(R"(Model modules containing this model.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

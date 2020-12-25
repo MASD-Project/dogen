@@ -36,7 +36,6 @@ make_masd_physical_backend_name() {
     r.description(R"(Simple name of the backend.
 
 FIXME: temporary until we rename the namespaces.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -53,7 +52,6 @@ make_masd_physical_part_id() {
     r.description(R"(Fully qualified physical name of the part this artefact belongs to.
 
 FIXME: optional for now.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -70,7 +68,6 @@ make_masd_physical_logical_meta_element_id() {
     r.description(R"(Fully qualified name of the logical model element.
 
 FIXME: optional for now.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -85,7 +82,6 @@ make_masd_physical_major_technical_space() {
     r.name().simple("major_technical_space");
     r.name().qualified("masd.physical.major_technical_space");
     r.description(R"(Major technical space to which this element belongs to.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -100,7 +96,6 @@ make_masd_physical_technical_space() {
     r.name().simple("technical_space");
     r.name().qualified("masd.physical.technical_space");
     r.description(R"(Technical space to which this element belongs to.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -115,7 +110,6 @@ make_masd_physical_wale_template_reference() {
     r.name().simple("wale_template_reference");
     r.name().qualified("masd.physical.wale_template_reference");
     r.description(R"(Name of the wale template that the archetype uses.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -130,7 +124,6 @@ make_masd_physical_directory_name() {
     r.name().simple("directory_name");
     r.name().qualified("masd.physical.directory_name");
     r.description(R"(Name of the directory to use for this physical element.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -145,7 +138,6 @@ make_masd_physical_postfix() {
     r.name().simple("postfix");
     r.name().qualified("masd.physical.postfix");
     r.description(R"(Postfix to use for this physical element.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

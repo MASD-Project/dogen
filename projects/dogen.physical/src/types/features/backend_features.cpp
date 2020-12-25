@@ -33,7 +33,6 @@ make_directory_name() {
     feature_template r;
     r.name().simple("directory_name");
     r.description(R"(Directory in which to place this backend.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

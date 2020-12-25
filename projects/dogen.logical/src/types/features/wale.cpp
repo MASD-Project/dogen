@@ -34,7 +34,6 @@ make_masd_wale_text_template() {
     r.name().simple("text_template");
     r.name().qualified("masd.wale.text_template");
     r.description(R"(Name of the wale text template to instantiate, if any.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -49,7 +48,6 @@ make_masd_wale_kvp() {
     r.name().simple("kvp");
     r.name().qualified("masd.wale.kvp");
     r.description(R"(Array of wale KVPs to use in template instantiation.
-
 )");
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);

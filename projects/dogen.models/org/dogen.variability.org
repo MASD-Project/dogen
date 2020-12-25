@@ -14,6 +14,7 @@
 :masd.codec.reference: dogen.identification
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
 The varibility model is responsible for managing variation in MASD.
 
 One of the core principles of MASD is to enable the development of
@@ -46,34 +47,44 @@ the geometry of physical space, but this is not a concern o veriability -
 only of its user. This decoupling was achieved by creating the concept
 of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
+
 * entities                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
+
 Contains all of the types describing variability
 with Masd.
+
 ** element                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: Element
 :END:
+
 Represents an element modeling some aspect of variability.
+
 ** feature                                                     :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::element
 :masd.codec.stereotypes: FeatureElement
 :END:
+
 Unit of configuration within Dogen. Defines the domain of values.
+
 *** is_partially_matchable                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 Feature name can be matched partially.
 
 ** binding_point                                               :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
+
 Determines how a feature can be bound to a modeling element.
+
 *** any                                                      :masd_attribute:
 Feature can be configured anywhere.
 
@@ -91,6 +102,7 @@ Feature can only be configured in an operation of a modeling element.
 
 ** feature_model                                               :masd_element:
 Container of all available features, organised for querying.
+
 *** all                                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<feature>
@@ -99,12 +111,14 @@ Container of all available features, organised for querying.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, feature>
 :END:
+
 Features by qualified name.
 
 *** partially_matchable                                      :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, feature>
 :END:
+
 Features that can be partially matcheable, by qualified name.
 
 ** feature_template                                            :masd_element:
@@ -112,18 +126,23 @@ Features that can be partially matcheable, by qualified name.
 :masd.codec.parent: entities::element
 :masd.codec.stereotypes: FeatureElement, Templateable
 :END:
+
 Defines a template that can be used to instantiate features.
+
 *** default_value_overrides                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<default_value_override>
 :END:
+
 Overrides for the default value, if any.
 
 ** value_type                                                  :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
+
 What values can a feature have.
+
 *** text                                                     :masd_attribute:
 Represents a text value.
 
@@ -150,7 +169,9 @@ Represents a collection of CSV input that is split into a collection of text val
 :masd.codec.parent: entities::element
 :masd.codec.stereotypes: Profilable
 :END:
+
 Holds a set of templates for configuration points.
+
 *** templates                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<configuration_point_template>
@@ -168,14 +189,18 @@ Holds a set of templates for configuration points.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::visitable
 :END:
+
 Base class of all value types.
 
 Represents a value for a configuration point, a default value for a feature, etc.
+
 ** number                                                      :masd_element:
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a numeric integral value.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: int
@@ -184,7 +209,9 @@ Represents a numeric integral value.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a text value.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -193,7 +220,9 @@ Represents a text value.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a collection of text values.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
@@ -202,7 +231,9 @@ Represents a collection of text values.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a boolean value.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
@@ -211,11 +242,14 @@ Represents a boolean value.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a pair of key and value.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::pair<std::string, std::string>>
 :END:
+
 #+begin_src mustache
 The data structure was chosen to guarantee that the order is maintained from 
 source.
@@ -230,12 +264,14 @@ source.
 :PROPERTIES:
 :masd.codec.type: std::list<potential_binding>
 :END:
+
 Bindings to profiles.
 
 *** configuration_bindings                                   :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<potential_binding>
 :END:
+
 Relationships between this bound configuration and other bound configurations.
 
 These relationships are inferred from the relationships of the underlying model
@@ -245,12 +281,14 @@ elements.
 :PROPERTIES:
 :masd.codec.type: binding_point
 :END:
+
 Where was this configuration sourced from with regards to binding.
 
 *** from_target                                              :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 If true, this configuration was sourced from an element in the target model.
 
 ** configuration_point                                         :masd_element:
@@ -258,16 +296,21 @@ If true, this configuration was sourced from an element in the target model.
 :masd.codec.parent: entities::element
 :masd.codec.stereotypes: Valuable
 :END:
+
 Maps a feature name to an instance value
+
 ** Nameable                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
+
 Elements with the ability of being named.
+
 *** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: identification::entities::name
 :END:
+
 Name of this variability element.
 
 ** Describable                                                 :masd_element:
@@ -278,6 +321,7 @@ Name of this variability element.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Human readable description of the feature, used for documentation.
 
 ** Element                                                     :masd_element:
@@ -293,6 +337,7 @@ Human readable description of the feature, used for documentation.
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<value>
 :END:
+
 Default value for element, if any.
 
 ** Typeable                                                    :masd_element:
@@ -303,6 +348,7 @@ Default value for element, if any.
 :PROPERTIES:
 :masd.codec.type: value_type
 :END:
+
 Type of the value for the feature that will result of the template instantiation.
 
 ** BindActionable                                              :masd_element:
@@ -325,6 +371,7 @@ Type of the value for the feature that will result of the template instantiation
 :PROPERTIES:
 :masd.codec.type: binding_point
 :END:
+
 How the feature binds against other model elements.
 
 ** FeatureElement                                              :masd_element:
@@ -340,6 +387,7 @@ How the feature binds against other model elements.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Name of the domain to use for template instantiation.
 
 @pre The instantiation domain name must exist.
@@ -352,6 +400,7 @@ Name of the domain to use for template instantiation.
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<value>
 :END:
+
 Value that has been assigned to this element.
 
 ** ConfigurationStore                                          :masd_element:
@@ -362,6 +411,7 @@ Value that has been assigned to this element.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, configuration_point>
 :END:
+
 All configuration points associated with this element.
 
 ** profile                                                     :masd_element:
@@ -373,19 +423,23 @@ All configuration points associated with this element.
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 If true, the profile has been merged with all of its parents.
 
 *** base_layer_profile                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 Which base layer does this profile rely on, if any.
 
 ** binding_action                                              :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
 :END:
+
 What action to take when binding.
+
 *** ignore                                                   :masd_attribute:
 Ignores the implict relationship.
 
@@ -422,10 +476,12 @@ Copy across the value of the feature from the related element
 :END:
 ** potential_binding                                           :masd_element:
 Contains information about a potential binding.
+
 *** name                                                     :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+
 The name to bind to. This can represent a profile or configuration name, or an
 alias.
 
@@ -433,22 +489,26 @@ alias.
 :PROPERTIES:
 :masd.codec.type: bool
 :END:
+
 If true, the potential binding was realised into an actual binding.
 
 ** feature_template_repository                                 :masd_element:
 Stores a set of feature templates.
+
 *** templates                                                :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<feature_template>
 :END:
 ** feature_repository                                          :masd_element:
 Stores a set of features.
+
 *** features                                                 :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<feature>
 :END:
 ** default_value_override                                      :masd_element:
 Stores an override for a default value.
+
 *** key_ends_with                                            :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::string
@@ -482,7 +542,9 @@ Stores an override for a default value.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a CSV input that is split into a collection of text values.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::string>
@@ -491,7 +553,9 @@ Represents a CSV input that is split into a collection of text values.
 :PROPERTIES:
 :masd.codec.parent: entities::value
 :END:
+
 Represents a collection of CSV input that is split into a collection of text values.
+
 *** content                                                  :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: std::list<std::list<std::string>>
@@ -533,7 +597,9 @@ Represents a collection of CSV input that is split into a collection of text val
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst instantiating templates.
+
 ** registrar                                                   :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -554,7 +620,9 @@ An error occurred whilst instantiating templates.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst mapping enums to or from strings.
+
 ** relational_adapter                                          :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -563,7 +631,9 @@ An error occurred whilst mapping enums to or from strings.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst adapting a model.
+
 ** configuration_points_factory                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -572,7 +642,9 @@ An error occurred whilst adapting a model.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst merging.
+
 * transforms                                                   :masd_element:
 ** feature_model_production_chain                              :masd_element:
 :PROPERTIES:
@@ -602,7 +674,9 @@ An error occurred whilst merging.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
+
 Context for transformations.
+
 *** compatibility_mode                                       :masd_attribute:
 :PROPERTIES:
 :masd.codec.type: bool
@@ -611,6 +685,7 @@ Context for transformations.
 :PROPERTIES:
 :masd.codec.type: std::unordered_map<std::string, std::vector<std::string>>
 :END:
+
 Provides all of the domains to be used for template instantiation.
 
 Example of a domain is "masd.facet" which contains the list of all available facets.
@@ -629,7 +704,9 @@ user choices.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred whilst applying a transformation.
+
 ** global_configuration_binding_transform                      :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -647,19 +724,24 @@ An error occurred whilst applying a transformation.
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :END:
+
 Features used by the variability model.
+
 ** profile                                                     :masd_element:
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.variability
 :masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
+
 Features related to profile processing.
+
 *** profile                                                  :masd_attribute:
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.codec.type: masd::variability::text
 :END:
+
 Profile associated with this configuration.
 
 ** initializer                                                 :masd_element:

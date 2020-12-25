@@ -34,7 +34,6 @@ make_masd_codec_input_technical_space() {
     r.name().simple("input_technical_space");
     r.name().qualified("masd.codec.input_technical_space");
     r.description(R"(Input technical space for this model.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

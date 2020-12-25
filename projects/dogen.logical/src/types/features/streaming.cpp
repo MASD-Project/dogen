@@ -34,7 +34,6 @@ make_masd_cpp_streaming_string_conversion_method() {
     r.name().simple("string_conversion_method");
     r.name().qualified("masd.cpp.streaming.string_conversion_method");
     r.description(R"(Which conversion method to use to convert strings.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -51,7 +50,6 @@ make_masd_cpp_streaming_requires_quoting() {
     r.name().simple("requires_quoting");
     r.name().qualified("masd.cpp.streaming.requires_quoting");
     r.description(R"(If true, streaming this type must be preceeded by quoting.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -68,7 +66,6 @@ make_masd_cpp_streaming_remove_unprintable_characters() {
     r.name().simple("remove_unprintable_characters");
     r.name().qualified("masd.cpp.streaming.remove_unprintable_characters");
     r.description(R"(If true, streaming this type requires removing unprintable characters.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

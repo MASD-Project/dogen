@@ -46,14 +46,26 @@ namespace {
  */
 class trimmer {
 private:
+    std::string trim(std::string& s) {
+        /*
+         * Do not use "trim" as it also removes spaces in the middle
+         * of the string.
+         */
+        boost::algorithm::trim_left(s);
+        boost::algorithm::trim_right(s);
+        return s;
+    }
+
     void trim(logical::entities::element& e) {
-        const auto trimmed(boost::algorithm::trim_copy(e.documentation()));
-        e.documentation(trimmed);
+        e.documentation(trim(e.documentation()));
     }
 
     void trim(logical::entities::attribute& attr) {
-        const auto trimmed(boost::algorithm::trim_copy(attr.documentation()));
-        attr.documentation(trimmed);
+        attr.documentation(trim(attr.documentation()));
+    }
+
+    void trim(logical::entities::variability::abstract_feature& af) {
+        af.documentation(trim(af.documentation()));
     }
 
 public:
@@ -67,6 +79,17 @@ public:
     void operator()(logical::entities::structural::object& v) {
         trim(v);
         for (auto& attr : v.local_attributes())
+            trim(attr);
+    }
+
+    void operator()(entities::variability::feature_template_bundle& v) {
+        trim(v);
+        for (auto& attr : v.feature_templates())
+            trim(attr);
+    }
+    void operator()(entities::variability::feature_bundle& v) {
+        trim(v);
+        for (auto& attr : v.features())
             trim(attr);
     }
 };

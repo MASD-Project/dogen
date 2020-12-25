@@ -34,7 +34,6 @@ make_masd_enumerator_value() {
     r.name().simple("value");
     r.name().qualified("masd.enumerator.value");
     r.description(R"(Value to use for this enumerator. Must be unique for an enumeration.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

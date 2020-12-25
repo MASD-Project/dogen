@@ -34,7 +34,6 @@ make_masd_generalization_is_final() {
     r.name().simple("is_final");
     r.name().qualified("masd.generalization.is_final");
     r.description(R"(Whether to mark a type as final or not.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -49,7 +48,6 @@ make_masd_generalization_parent() {
     r.name().simple("parent");
     r.name().qualified("masd.generalization.parent");
     r.description(R"(Name of the parent of the current element.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

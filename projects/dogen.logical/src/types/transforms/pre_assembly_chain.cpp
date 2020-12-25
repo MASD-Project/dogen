@@ -80,6 +80,12 @@ void pre_assembly_chain::apply(const context& ctx,
     modelines_transform::apply(ctx, m);
 
     /*
+     * Documentation transform must be executed before the variability
+     * transform.
+     */
+    documentation_transform::apply(ctx, m);
+
+    /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
@@ -92,7 +98,6 @@ void pre_assembly_chain::apply(const context& ctx,
     aspect_properties_transform::apply(ctx, m);
     assistant_properties_transform::apply(ctx, m);
     streaming_properties_transform::apply(ctx, m);
-    documentation_transform::apply(ctx, m);
 
     /*
      * Primitive transform must happen before parsing transform, as it

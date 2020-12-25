@@ -34,7 +34,6 @@ make_masd_cpp_aspect_requires_manual_default_constructor() {
     r.name().simple("requires_manual_default_constructor");
     r.name().qualified("masd.cpp.aspect.requires_manual_default_constructor");
     r.description(R"(If true, the modeling element requires a manual defaul constructor.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -51,7 +50,6 @@ make_masd_cpp_aspect_requires_manual_move_constructor() {
     r.name().simple("requires_manual_move_constructor");
     r.name().qualified("masd.cpp.aspect.requires_manual_move_constructor");
     r.description(R"(If true, the modeling element requires a manual move constructor.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -68,7 +66,6 @@ make_masd_cpp_aspect_requires_stream_manipulators() {
     r.name().simple("requires_stream_manipulators");
     r.name().qualified("masd.cpp.aspect.requires_stream_manipulators");
     r.description(R"(If true, the modeling element requires stream manipulators.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

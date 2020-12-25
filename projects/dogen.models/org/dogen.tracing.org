@@ -13,7 +13,9 @@
 :masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
 Houses classes common to all transformations.
+
 * tracer                                                       :masd_element:
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
@@ -63,7 +65,9 @@ Houses classes common to all transformations.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
 :END:
+
 An error occurred when trying to generate tracing data.
+
 * scoped_tracer                                                :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable

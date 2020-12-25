@@ -37,7 +37,6 @@ make_masd_physical_force_write() {
 
 If false, the system will check to see if writing is needed by performing a binary
 diff. If no changes are detected, no writting is performed.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -56,7 +55,6 @@ make_masd_physical_delete_extra_files() {
     r.description(R"(If true, any files the code generator is not aware of are deleted.
 
 If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -75,7 +73,6 @@ make_masd_physical_ignore_files_matching_regex() {
     r.description(R"(Regular expressions to filter files prior to deletion.
 
 Only applicable if "delete_extra_files" is enabled.
-
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
@@ -93,7 +90,6 @@ make_masd_physical_delete_empty_directories() {
 
 This setting is recursive: if a directory is composed of one or more directories that
 are themselves empty, the entire directory tree is deleted.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -113,7 +109,6 @@ make_masd_physical_enable_backend_directories() {
 
 Note that this setting is only relevant if you are targetting a single output technical
 space. If you are targetting more than one, it will automatically be set to true.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

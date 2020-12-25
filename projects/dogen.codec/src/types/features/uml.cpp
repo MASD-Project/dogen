@@ -34,7 +34,6 @@ make_masd_codec_dia_comment() {
     r.description(R"(If true, the UML comment is linked to the containing package.
 
 If the containing package is the model itself, it is linked to the model's module.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

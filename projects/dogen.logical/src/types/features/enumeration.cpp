@@ -35,7 +35,6 @@ make_masd_enumeration_use_implementation_defined_underlying_element() {
     r.name().qualified("masd.enumeration.use_implementation_defined_underlying_element");
     r.description(R"(If true, it uses the default implementation defined underlying element for the
 technical space targeted.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -52,7 +51,6 @@ make_masd_enumeration_underlying_element() {
     r.name().simple("underlying_element");
     r.name().qualified("masd.enumeration.underlying_element");
     r.description(R"(Name of the underlying element to use for the enumeration.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -67,7 +65,6 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     r.name().simple("use_implementation_defined_enumerator_values");
     r.name().qualified("masd.enumeration.use_implementation_defined_enumerator_values");
     r.description(R"(If true, uses the enumeration values supplied by the underlying technical space.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -84,7 +81,6 @@ make_masd_enumeration_add_invalid_enumerator() {
     r.name().simple("add_invalid_enumerator");
     r.name().qualified("masd.enumeration.add_invalid_enumerator");
     r.description(R"(If true, adds an enumerator to represent an invalid choice.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

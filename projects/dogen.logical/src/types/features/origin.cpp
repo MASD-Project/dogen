@@ -34,7 +34,6 @@ make_masd_codec_is_proxy_model() {
     r.name().simple("is_proxy_model");
     r.name().qualified("masd.codec.is_proxy_model");
     r.description(R"(If true, sets the origin of the model to "proxy model".
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);

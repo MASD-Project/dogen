@@ -34,7 +34,6 @@ make_masd_variability_profile() {
     r.name().simple("profile");
     r.name().qualified("masd.variability.profile");
     r.description(R"(Profile associated with this configuration.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);

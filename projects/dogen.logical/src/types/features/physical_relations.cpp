@@ -34,7 +34,6 @@ make_masd_physical_relation_status() {
     r.name().simple("relation_status");
     r.name().qualified("masd.physical.relation_status");
     r.description(R"(Relation status for the archetype.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -49,7 +48,6 @@ make_masd_physical_variable_relation() {
     r.name().simple("variable_relation");
     r.name().qualified("masd.physical.variable_relation");
     r.description(R"(Define a variable relation between the current archetype and another archetype.
-
 )");
     const auto vt(value_type::comma_separated_collection);
     r.value_type(vt);
@@ -64,7 +62,6 @@ make_masd_physical_constant_relation() {
     r.name().simple("constant_relation");
     r.name().qualified("masd.physical.constant_relation");
     r.description(R"(Define a fixed relation between the current archetype and another archetype.
-
 )");
     const auto vt(value_type::comma_separated_collection);
     r.value_type(vt);

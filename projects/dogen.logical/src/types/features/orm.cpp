@@ -34,7 +34,6 @@ make_masd_orm_database_system() {
     r.name().simple("database_system");
     r.name().qualified("masd.orm.database_system");
     r.description(R"(Database system to target for ORM support.
-
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
@@ -49,7 +48,6 @@ make_masd_orm_table_name() {
     r.name().simple("table_name");
     r.name().qualified("masd.orm.table_name");
     r.description(R"(Name of the database table for this element.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -64,7 +62,6 @@ make_masd_orm_schema_name() {
     r.name().simple("schema_name");
     r.name().qualified("masd.orm.schema_name");
     r.description(R"(Name of the database schema for this modeling element.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -79,7 +76,6 @@ make_masd_orm_is_primary_key() {
     r.name().simple("is_primary_key");
     r.name().qualified("masd.orm.is_primary_key");
     r.description(R"(If true, this property will be used for the primary key.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -94,7 +90,6 @@ make_masd_orm_column_name() {
     r.name().simple("column_name");
     r.name().qualified("masd.orm.column_name");
     r.description(R"(Overrides the name of the column name for the database table.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -109,7 +104,6 @@ make_masd_orm_is_nullable() {
     r.name().simple("is_nullable");
     r.name().qualified("masd.orm.is_nullable");
     r.description(R"(If true, the column can be null.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -124,7 +118,6 @@ make_masd_orm_is_composite() {
     r.name().simple("is_composite");
     r.name().qualified("masd.orm.is_composite");
     r.description(R"(If true, the primary key is a composite key.
-
 )");
     const auto vt(value_type::boolean);
     r.value_type(vt);
@@ -139,7 +132,6 @@ make_masd_orm_letter_case() {
     r.name().simple("letter_case");
     r.name().qualified("masd.orm.letter_case");
     r.description(R"(Determines the casing to use for identifiers.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -157,7 +149,6 @@ make_masd_orm_type_override() {
 
 Note: we've set the binding point to "any" as a hack to allow for primitive support.
 Should really be "property".
-
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
@@ -175,7 +166,6 @@ make_masd_orm_type_mapping() {
 
 Note: we've set the binding point to "any" as a hack to allow for primitive support.
 Should really be "property".
-
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
@@ -193,7 +183,6 @@ make_masd_orm_odb_pragma() {
 
 Use these when you need some functionality which is not natively supported by
 ORM in Dogen.
-
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);

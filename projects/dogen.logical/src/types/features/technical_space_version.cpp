@@ -34,7 +34,6 @@ make_masd_cpp_standard() {
     r.name().simple("standard");
     r.name().qualified("masd.cpp.standard");
     r.description(R"(Which version of C++ to use.
-
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
