@@ -647,7 +647,7 @@ BOOST_AUTO_TEST_CASE(dogen_text_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_text_org_produces_expected_model");
     const auto t(dogen_product::input_dogen_text_org());
     const auto od(dogen_product::project_directory());
-    const auto m(apply_physical_model_production(t, od, true));
+    const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
