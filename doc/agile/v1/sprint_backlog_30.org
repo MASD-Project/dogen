@@ -12,20 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-26 Sat 10:28]
+#+CAPTION: Clock summary at [2020-12-26 Sat 20:58]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *35:58* |       |       | 100.0 |
+| *Total time*                                        | *38:14* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 35:58   |       |       | 100.0 |
-| Active                                              |         | 35:58 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  16.9 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.6 |
-| Sprint and product backlog grooming                 |         |       |  0:35 |   1.6 |
-| Add support for reading org mode documents          |         |       | 19:46 |  55.0 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.9 |
-| Add org-mode codec for input                        |         |       |  7:56 |  22.1 |
+| Stories                                             | 38:14   |       |       | 100.0 |
+| Active                                              |         | 38:14 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  15.9 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.5 |
+| Sprint and product backlog grooming                 |         |       |  0:36 |   1.6 |
+| Add support for reading org mode documents          |         |       | 19:46 |  51.7 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.7 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   5.1 |
+| Add org-mode codec for input                        |         |       |  8:10 |  21.4 |
+| Convert library models into org                     |         |       |  0:05 |   0.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +283,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-26 Sat 20:38]--[2020-12-26 Sat 20:39] =>  0:01
     CLOCK: [2020-12-16 Wed 19:02]--[2020-12-16 Wed 19:11] =>  0:09
     CLOCK: [2020-12-18 Fri 09:00]--[2020-12-18 Fri 09:26] =>  0:26
     :END:
@@ -437,8 +440,43 @@ Links:
 
 - [[https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring][What's the best way to trim std::string?]]
 
-*** STARTED Add org-mode codec for input                              :story:
+*** COMPLETED Stitch templates are consuming whitespace               :story:
+    CLOSED: [2020-12-26 Sat 20:37]
     :LOGBOOK:
+    CLOCK: [2020-12-26 Sat 19:21]--[2020-12-26 Sat 20:37] =>  1:16
+    CLOCK: [2020-12-26 Sat 17:56]--[2020-12-26 Sat 18:02] =>  0:06
+    CLOCK: [2020-12-26 Sat 17:00]--[2020-12-26 Sat 17:05] =>  0:05
+    CLOCK: [2020-12-26 Sat 16:30]--[2020-12-26 Sat 16:59] =>  0:29
+    :END:
+
+We have whitespace between wale and stitch template, like so:
+
+: <#$ stitch.wale.template_instantiation_result #>
+: <#+
+:
+: void smart_pointer_helper_transform::
+: apply(std::ostream& os, const logical::entities::model& /*m*/,
+:
+
+However, the generated code does not contain the whitespace:
+
+:     const logical::entities::helper_properties& /*hp*/) const {
+:     return true;
+: }
+: void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+
+We seem to be trimming the block somehow. Actually the problem is that
+with the trimming of whitespace on the documentation transform we
+removed the trailing new line. That means that the space on the stitch
+template is actually now being used to new line the wale template. We
+did a quick hack to address this problem by adding the newline when
+rendering the wale template. This is not great but it solves the
+problem at hand.
+
+*** COMPLETED Add org-mode codec for input                            :story:
+    CLOSED: [2020-12-26 Sat 20:58]
+    :LOGBOOK:
+    CLOCK: [2020-12-26 Sat 20:39]--[2020-12-26 Sat 20:53] =>  0:14
     CLOCK: [2020-12-26 Sat 10:01]--[2020-12-26 Sat 10:26] =>  0:25
     CLOCK: [2020-12-25 Fri 21:02]--[2020-12-25 Fri 21:14] =>  0:12
     CLOCK: [2020-12-25 Fri 20:16]--[2020-12-25 Fri 20:24] =>  0:08
@@ -505,6 +543,73 @@ Notes:
 - spacing in transforms is wrong; we don't seem to have a line of
   space between stitch and wale, even though we can see the line in
   the stitch template.
+
+*** STARTED Convert library models into org                           :story:
+    :LOGBOOK:
+    CLOCK: [2020-12-26 Sat 20:53]--[2020-12-26 Sat 20:58] =>  0:05
+    :END:
+
+We should normalise all models into org-mode. We need to convert the
+library models into org, and deal with any missing information we may
+have from the JSON front end.
+
+Notes:
+
+- Error with enums:
+
+: 2020-12-26 20:52:38.570793 [DEBUG] [logical.transforms.enumerations_transform] Started transform: enumerations
+: 2020-12-26 20:52:38.570801 [DEBUG] [logical.transforms.enumerations_transform] Obtaining default enumeration underlying element name for model: dogen.text
+: 2020-12-26 20:52:38.570806 [ERROR] [logical.transforms.enumerations_transform] Model does not have a default enumeration type: dogen.text
+
+  The problem is probably coming from some JSON special code:
+
+#+begin_src json
+{
+      "name": "int8_t",
+      "stereotypes": [
+        "masd::builtin"
+      ],
+      "can_be_enumeration_underlier": true,
+      "can_be_primitive_underlier": true,
+      "tagged_values": {
+#+end_src
+
+- =can_be_enumeration_underlier= and =can_be_primitive_underlier= are
+  probably being lost in translation.
+
+*** Running convert without parameters should work                    :story:
+
+We tried converting like so:
+
+: $ dogen.cli convert cpp.boost.json cpp.boost.org
+: Error: File not found:
+: Failed to execute command.
+
+It seems we ended up with empty source and target. The correct
+incantation is as follows:
+
+: $ dogen.cli convert --help
+: Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
+: Dogen is created by the MASD project.
+: Displaying options specific to the convert command.
+: For global options, type --help.
+:
+: Convert:
+:   -s [ --source ] arg      Input model to read, in any of the supported
+:                            formats.
+:   -d [ --destination ] arg Output model to convert to, in any of the supported
+:                           formats.
+
+We should at least give a proper error message. Ideally we should be
+able to infer source and destination from the positional arguments.
+
+*** Refactor the templating model                                     :story:
+
+We should use "standard" conventions in this model as well:
+
+- add entities namespace. Name entities after their "type",
+  e.g. =stitch_template=, etc.
+- add transforms for the template expansion.
 
 *** Empty model generation produces no diffs                          :story:
 
