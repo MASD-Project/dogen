@@ -21,6 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/physical/archetype_fwd.hpp"
+#include "dogen.logical/types/entities/templating/logic_less_template_fwd.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -91,6 +93,21 @@ public:
         trim(v);
         for (auto& attr : v.features())
             trim(attr);
+    }
+
+    void operator()(entities::physical::archetype& v) {
+        trim(v);
+        trim(v.text_templating().stitch_template_content());
+    }
+
+    void operator()(entities::physical::helper& v) {
+        trim(v);
+        trim(v.text_templating().stitch_template_content());
+    }
+
+    void operator()(entities::templating::logic_less_template& v) {
+        trim(v);
+        trim(v.content());
     }
 };
 

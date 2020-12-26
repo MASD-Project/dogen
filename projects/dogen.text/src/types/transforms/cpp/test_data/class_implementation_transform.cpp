@@ -53,7 +53,6 @@ const physical::entities::archetype& class_implementation_transform::static_arch
 const physical::entities::archetype& class_implementation_transform::archetype() const {
     return static_archetype();
 }
-
 void class_implementation_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

@@ -48,7 +48,6 @@ const physical::entities::archetype& class_forward_declarations_transform::stati
 const physical::entities::archetype& class_forward_declarations_transform::archetype() const {
     return static_archetype();
 }
-
 void class_forward_declarations_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

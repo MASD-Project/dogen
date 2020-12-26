@@ -64,7 +64,6 @@ bool associative_container_helper_transform::is_enabled(
     const logical::entities::helper_properties& hp) const {
     return is_streaming_enabled(m, e, a, hp);
 }
-
 void associative_container_helper_transform::
 apply(std::ostream& os, const logical::entities::model& m,
     const logical::entities::helper_properties& hp) const {
