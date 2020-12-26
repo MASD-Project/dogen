@@ -242,7 +242,7 @@ void builder::add_line(const std::string& s) {
          */
         in_greater_block_ = true;
         top().data().section().blocks().push_back(*ob);
-        BOOST_LOG_SEV(lg, debug) << "Started a nwe greater block.";
+        BOOST_LOG_SEV(lg, debug) << "Started a new greater block.";
         return;
     }
 
@@ -289,6 +289,7 @@ void builder::add_line(const std::string& s) {
              */
             if (is_first_line_) {
                 BOOST_LOG_SEV(lg, debug) << "Add first line to greater block.";
+                is_first_line_ = false;
                 stream_ << s;
             } else {
                 BOOST_LOG_SEV(lg, debug) << "Add line to greater block.";
