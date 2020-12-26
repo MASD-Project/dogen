@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-25 Fri 20:24]
+#+CAPTION: Clock summary at [2020-12-26 Sat 10:28]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *35:21* |       |       | 100.0 |
+| *Total time*                                        | *35:58* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 35:21   |       |       | 100.0 |
-| Active                                              |         | 35:21 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  17.2 |
+| Stories                                             | 35:58   |       |       | 100.0 |
+| Active                                              |         | 35:58 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  16.9 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.6 |
-| Sprint and product backlog grooming                 |         |       |  0:35 |   1.7 |
-| Add support for reading org mode documents          |         |       | 19:46 |  55.9 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   3.0 |
-| Add org-mode codec for input                        |         |       |  7:19 |  20.7 |
+| Sprint and product backlog grooming                 |         |       |  0:35 |   1.6 |
+| Add support for reading org mode documents          |         |       | 19:46 |  55.0 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.9 |
+| Add org-mode codec for input                        |         |       |  7:56 |  22.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -439,6 +439,8 @@ Links:
 
 *** STARTED Add org-mode codec for input                              :story:
     :LOGBOOK:
+    CLOCK: [2020-12-26 Sat 10:01]--[2020-12-26 Sat 10:26] =>  0:25
+    CLOCK: [2020-12-25 Fri 21:02]--[2020-12-25 Fri 21:14] =>  0:12
     CLOCK: [2020-12-25 Fri 20:16]--[2020-12-25 Fri 20:24] =>  0:08
     CLOCK: [2020-12-25 Fri 16:50]--[2020-12-25 Fri 17:01] =>  0:11
     CLOCK: [2020-12-25 Fri 16:30]--[2020-12-25 Fri 16:47] =>  0:17
@@ -500,6 +502,9 @@ Notes:
 : [dogen::templating::stitch::tag_line_number*] = 1
 : unknown location(0): fatal error: in "physical_model_production_chain_tests/dogen_text_org_produces_expected_model": std::runtime_error: Error during test
 
+- spacing in transforms is wrong; we don't seem to have a line of
+  space between stitch and wale, even though we can see the line in
+  the stitch template.
 
 *** Empty model generation produces no diffs                          :story:
 
