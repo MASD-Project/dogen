@@ -88,10 +88,15 @@ void formatter::format_variable_block_line(const std::string& l,
     s << v;
 }
 
-void formatter::
-format_standard_control_block_line(
+void formatter::format_standard_control_block_line(
     const std::string& l, std::ostream& s) const {
-    s << l << std::endl;
+    if (l.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Line was empty.";
+        s << std::endl;
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Added line: " << l;
+        s << l << std::endl;
+    }
 }
 
 void formatter::format_mixed_content_line(const std::string& stream_name,
@@ -190,9 +195,7 @@ std::string formatter::format(const text_template& tt) const {
     }
 
     const auto r(s.str());
-
-    BOOST_LOG_SEV(lg, debug) << "Formatted template.";
-
+    BOOST_LOG_SEV(lg, debug) << "Formatted template: " << r;
     return r;
 }
 

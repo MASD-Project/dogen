@@ -80,7 +80,19 @@ block parser::create_block(const block_types bt, const std::string& c,
     const bool trim) const {
     block r;
     r.type(bt);
-    r.content(trim ? boost::trim_copy(c) : c);
+
+    if (trim) {
+        /*
+         * Perform a left and a right trim manually instead of calling
+         * the trim function as it also affects inner spacing.
+         */
+        auto trimmed(c);
+        boost::trim_left(trimmed);
+        boost::trim_right(trimmed);
+        r.content(trimmed);
+    } else
+        r.content(c);
+
     return r;
 }
 
@@ -88,8 +100,8 @@ block parser::create_text_block(const std::string& c, const bool trim) const {
     return create_block(block_types::text_block, c, trim);
 }
 
-block parser::create_standard_control_block(const std::string& c,
-    const bool trim) const {
+block parser::
+create_standard_control_block(const std::string& c, const bool trim) const {
     return create_block(block_types::standard_control_block, c, trim);
 }
 
@@ -176,7 +188,7 @@ parse_expression_block(const std::string& input_line) const {
 
 line parser::
 parse_inline_standard_control_block(const std::string& input_line) const {
-    BOOST_LOG_SEV(lg, debug) << "Line is inline control block";
+    BOOST_LOG_SEV(lg, debug) << "Line is inline control block.";
     auto cooked_line(input_line);
     boost::replace_all(cooked_line, start_standard_control_block_marker, empty);
     boost::replace_all(cooked_line, end_block_marker, empty);
@@ -243,7 +255,11 @@ line parser::parse_variable(const std::string& input_line) const {
 }
 
 text_template_body parser::parse(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Parsing: '" << s << "'.";
+
+    /*
+     * If the template is empty, there is nothing to do.
+     */
     if (s.empty())
         return text_template_body();
 
@@ -251,22 +267,32 @@ text_template_body parser::parse(const std::string& s) const {
     unsigned int line_number(0);
     std::list<identification::entities::tagged_value> tvs;
     try {
-        line output_line;
         bool in_standard_control_block(false), in_directives_block(true);
         std::string input_line;
         std::istringstream is(s);
 
         while (std::getline(is, input_line)) {
             ++line_number;
-            BOOST_LOG_SEV(lg, debug) << "Parsing line: " << input_line;
+            BOOST_LOG_SEV(lg, debug) << "Parsing line: '" << input_line << "'.";
 
+            /*
+             * Start expression markers must be contained in a single
+             * line, e.g.
+             *
+             * <#= abc #>
+             */
             if (boost::contains(input_line, start_expression_block_marker)) {
                 lines.push_back(parse_expression_block(input_line));
                 continue;
             }
 
+            /*
+             * Directives must be contained in a single line, e.g.:
+             *
+             * <#@ masd.stitch.stream_variable_name=os #>
+             */
             if (boost::starts_with(input_line, start_directive_marker)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is directive";
+                BOOST_LOG_SEV(lg, debug) << "Line is directive.";
                 if (!in_directives_block) {
                     BOOST_LOG_SEV(lg, error) << unexpected_directive;
                     BOOST_THROW_EXCEPTION(
@@ -277,18 +303,31 @@ text_template_body parser::parse(const std::string& s) const {
                 continue;
             }
 
+            /*
+             * Variables must be in a single line as well:
+             *
+             * <#$ stitch.wale.template_instantiation_result #>
+             */
             if (boost::starts_with(input_line, start_variable_marker)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is a variable";
+                BOOST_LOG_SEV(lg, debug) << "Line is a variable.";
                 lines.push_back(parse_variable(input_line));
                 continue;
             }
 
             in_directives_block = false;
 
+            /*
+             * Check for the start of a standard control block, e.g.:
+             *
+             * <#+
+             */
             if (boost::starts_with(input_line,
                     start_standard_control_block_marker)) {
-                BOOST_LOG_SEV(lg, debug) << "Line is standard control block";
+                BOOST_LOG_SEV(lg, debug) << "Line is standard control block.";
 
+                /*
+                 * Blocks cannot contain blocks.
+                 */
                 if (in_standard_control_block) {
                     BOOST_LOG_SEV(lg, error)
                         << cannot_start_standard_control_block;
@@ -296,6 +335,12 @@ text_template_body parser::parse(const std::string& s) const {
                         parsing_error(cannot_start_standard_control_block));
                 }
 
+                /*
+                 * Handle the case of an inline standard control
+                 * block, e.g.:
+                 *
+                 * <#+ xxx #>
+                 */
                 if (boost::ends_with(input_line, end_block_marker)) {
                     const auto l(parse_inline_standard_control_block(
                             input_line));
@@ -303,6 +348,10 @@ text_template_body parser::parse(const std::string& s) const {
                     continue;
                 }
 
+                /*
+                 * Do not allow users to add spurious content to the
+                 * start of block.
+                 */
                 if (input_line.size() != 3) {
                     BOOST_LOG_SEV(lg, error) << unexpected_additional_content;
                     BOOST_THROW_EXCEPTION(
@@ -313,6 +362,10 @@ text_template_body parser::parse(const std::string& s) const {
                 continue;
             }
 
+            /*
+             * Check for blocks inside of blocks, in an inline
+             * statement.
+             */
             if (boost::contains(input_line,
                     start_standard_control_block_marker)) {
                 BOOST_LOG_SEV(lg, error)
@@ -321,13 +374,21 @@ text_template_body parser::parse(const std::string& s) const {
                         cannot_start_standard_control_block_in_middle));
             }
 
+            /*
+             * Directives block is expected to be declared at the
+             * start. We don't want users to mix-and-match and add
+             * directives all over the place.
+             */
             if (boost::contains(input_line, start_directive_marker)) {
                 BOOST_LOG_SEV(lg, error) << unexpected_directive;
                 BOOST_THROW_EXCEPTION(parsing_error(unexpected_directive));
             }
 
+            /*
+             * Handle end block.
+             */
             if (boost::contains(input_line, end_block_marker)) {
-                BOOST_LOG_SEV(lg, debug) << "Closing end block";
+                BOOST_LOG_SEV(lg, debug) << "Closing end block.";
 
                 if (!in_standard_control_block) {
                     BOOST_LOG_SEV(lg, error) << end_marker_without_start_marker;
@@ -343,19 +404,24 @@ text_template_body parser::parse(const std::string& s) const {
 
                 if (in_standard_control_block) {
                     BOOST_LOG_SEV(lg, debug)
-                        << "Closing standard control block";
+                        << "Closing standard control block.";
                     in_standard_control_block = false;
                     continue;
                 }
             }
 
+            /*
+             * Add a single-block line to the template.
+             */
+            BOOST_LOG_SEV(lg, debug) << "Creating single block line";
             block b;
             b.type(in_standard_control_block ?
                 block_types::standard_control_block : block_types::text_block);
             b.content(input_line);
-            output_line.blocks().push_back(b);
-            lines.push_back(output_line);
-            output_line.blocks().clear();
+            line l;
+            l.blocks().push_back(b);
+            lines.push_back(l);
+            l.blocks().clear();
         }
 
         if (in_standard_control_block) {
