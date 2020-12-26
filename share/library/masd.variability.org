@@ -1,0 +1,55 @@
+#+title: masd.variability
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+:PROPERTIES:
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: masd.variability
+:masd.codec.input_technical_space: agnostic
+:masd.codec.is_proxy_model: true
+:masd.cpp.enabled: false
+:masd.csharp.enabled: false
+:END:
+
+The variability model defines a domain of types related to
+MASD's variability implementation.
+
+This model is not intended to be generated. If generated,
+should not produce any output.
+
+You should be able to reference this model from any technical
+space; keep it technical space agnostic.
+
+* text                                                         :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: std::string
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* number                                                       :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: int
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* text_collection                                              :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: std::list<std::string>
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* key_value_pair                                               :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: std::list<std::pair<std::string, std::string>>
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* boolean                                                      :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: bool
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* comma_separated                                              :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: std::list<std::string>
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
+* comma_separated_collection                                   :masd_element:
+:PROPERTIES:
+:masd.mapping.destination: std::list<std::list<std::string>>
+:masd.codec.stereotypes: masd::mapping::fixed_mappable
+:END:
