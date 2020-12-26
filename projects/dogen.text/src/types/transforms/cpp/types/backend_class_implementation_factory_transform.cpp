@@ -51,6 +51,7 @@ const physical::entities::archetype& backend_class_implementation_factory_transf
 const physical::entities::archetype& backend_class_implementation_factory_transform::archetype() const {
     return static_archetype();
 }
+
 void backend_class_implementation_factory_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

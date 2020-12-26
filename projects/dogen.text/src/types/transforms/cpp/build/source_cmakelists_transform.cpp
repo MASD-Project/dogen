@@ -54,6 +54,7 @@ const physical::entities::archetype& source_cmakelists_transform::static_archety
 const physical::entities::archetype& source_cmakelists_transform::archetype() const {
     return static_archetype();
 }
+
 void source_cmakelists_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

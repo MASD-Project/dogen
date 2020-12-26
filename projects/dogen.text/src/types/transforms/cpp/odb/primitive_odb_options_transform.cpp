@@ -54,6 +54,7 @@ const physical::entities::archetype& primitive_odb_options_transform::static_arc
 const physical::entities::archetype& primitive_odb_options_transform::archetype() const {
     return static_archetype();
 }
+
 void primitive_odb_options_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

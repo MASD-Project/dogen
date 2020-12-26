@@ -171,11 +171,16 @@ std::string template_rendering_transform::render_wale_template(
         checked_insert(std::make_pair("referencing_status", relation_status));
 
     /*
-     * Instantiate the wale template.
+     * Instantiate the wale template. Note that because we trim all
+     * documentation, the trailing new line will be missing from the
+     * template. We add it here. This is not exactly brilliant, but
+     * solves the problem at hand.
      */
     templating::wale::instantiator inst;
     const auto& content(tt.wale_template_content());
-    const auto r(inst.instantiate(content, kvps));
+    std::ostringstream os;
+    os << inst.instantiate(content, kvps) << std::endl;
+    const auto r(os.str());
     BOOST_LOG_SEV(lg, debug) << "Finished rendering wale template.";
     return r;
 }

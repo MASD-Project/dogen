@@ -62,6 +62,7 @@ bool ptree_helper_transform::is_enabled(
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
 }
+
 void ptree_helper_transform::apply(std::ostream& os, const logical::entities::model& /*m*/,
     const logical::entities::helper_properties& hp) const {
     const auto d(hp.current());

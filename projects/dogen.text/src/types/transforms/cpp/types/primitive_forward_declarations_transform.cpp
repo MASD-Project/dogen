@@ -48,6 +48,7 @@ const physical::entities::archetype& primitive_forward_declarations_transform::s
 const physical::entities::archetype& primitive_forward_declarations_transform::archetype() const {
     return static_archetype();
 }
+
 void primitive_forward_declarations_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

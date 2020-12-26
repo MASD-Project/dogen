@@ -48,6 +48,7 @@ const physical::entities::archetype& helper_class_header_transform_transform::st
 const physical::entities::archetype& helper_class_header_transform_transform::archetype() const {
     return static_archetype();
 }
+
 void helper_class_header_transform_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {

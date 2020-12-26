@@ -52,6 +52,7 @@ const physical::entities::archetype& variability_initializer_implementation_tran
 const physical::entities::archetype& variability_initializer_implementation_transform::archetype() const {
     return static_archetype();
 }
+
 void variability_initializer_implementation_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& lps,
     const logical::entities::element& e, physical::entities::artefact& a) const {
