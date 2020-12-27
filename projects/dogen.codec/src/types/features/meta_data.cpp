@@ -79,6 +79,84 @@ make_masd_codec_parent() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_codec_can_be_primitive_underlier() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("can_be_primitive_underlier");
+    r.name().qualified("masd.codec.can_be_primitive_underlier");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_in_global_module() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("in_global_module");
+    r.name().qualified("masd.codec.in_global_module");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_can_be_enumeration_underlier() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("can_be_enumeration_underlier");
+    r.name().qualified("masd.codec.can_be_enumeration_underlier");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_is_default_enumeration_type() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("is_default_enumeration_type");
+    r.name().qualified("masd.codec.is_default_enumeration_type");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_is_associative_container() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("is_associative_container");
+    r.name().qualified("masd.codec.is_associative_container");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_is_floating_point() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("is_floating_point");
+    r.name().qualified("masd.codec.is_floating_point");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
 }
 
 meta_data::feature_group
@@ -90,6 +168,12 @@ meta_data::make_feature_group(const dogen::variability::entities::feature_model&
     r.type = s.get_by_name("masd.codec.type");
     r.value = s.get_by_name("masd.codec.value");
     r.parent = s.get_by_name("masd.codec.parent");
+    r.can_be_primitive_underlier = s.get_by_name("masd.codec.can_be_primitive_underlier");
+    r.in_global_module = s.get_by_name("masd.codec.in_global_module");
+    r.can_be_enumeration_underlier = s.get_by_name("masd.codec.can_be_enumeration_underlier");
+    r.is_default_enumeration_type = s.get_by_name("masd.codec.is_default_enumeration_type");
+    r.is_associative_container = s.get_by_name("masd.codec.is_associative_container");
+    r.is_floating_point = s.get_by_name("masd.codec.is_floating_point");
 
     return r;
 }
@@ -108,6 +192,18 @@ meta_data::static_configuration meta_data::make_static_configuration(
         r.value = s.get_text_content(fg.value);
     if (s.has_configuration_point(fg.parent))
         r.parent = s.get_comma_separated_content(fg.parent);
+    if (s.has_configuration_point(fg.can_be_primitive_underlier))
+        r.can_be_primitive_underlier = s.get_boolean_content(fg.can_be_primitive_underlier);
+    if (s.has_configuration_point(fg.in_global_module))
+        r.in_global_module = s.get_boolean_content(fg.in_global_module);
+    if (s.has_configuration_point(fg.can_be_enumeration_underlier))
+        r.can_be_enumeration_underlier = s.get_boolean_content(fg.can_be_enumeration_underlier);
+    if (s.has_configuration_point(fg.is_default_enumeration_type))
+        r.is_default_enumeration_type = s.get_boolean_content(fg.is_default_enumeration_type);
+    if (s.has_configuration_point(fg.is_associative_container))
+        r.is_associative_container = s.get_boolean_content(fg.is_associative_container);
+    if (s.has_configuration_point(fg.is_floating_point))
+        r.is_floating_point = s.get_boolean_content(fg.is_floating_point);
     return r;
 }
 
@@ -119,6 +215,12 @@ meta_data::make_features() {
     r.push_back(make_masd_codec_type());
     r.push_back(make_masd_codec_value());
     r.push_back(make_masd_codec_parent());
+    r.push_back(make_masd_codec_can_be_primitive_underlier());
+    r.push_back(make_masd_codec_in_global_module());
+    r.push_back(make_masd_codec_can_be_enumeration_underlier());
+    r.push_back(make_masd_codec_is_default_enumeration_type());
+    r.push_back(make_masd_codec_is_associative_container());
+    r.push_back(make_masd_codec_is_floating_point());
     return r;
 }
 

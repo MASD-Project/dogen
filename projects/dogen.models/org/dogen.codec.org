@@ -640,6 +640,36 @@ Value associated with this attribute.
 
 Parent associated with this element.
 
+*** can_be_primitive_underlier                               :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
+*** in_global_module                                         :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
+*** can_be_enumeration_underlier                             :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
+*** is_default_enumeration_type                              :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
+*** is_associative_container                                 :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
+*** is_floating_point                                        :masd_attribute:
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::boolean
+:END:
 * registrar                                                    :masd_element:
 :PROPERTIES:
 :masd.codec.stereotypes: masd::serialization::type_registrar

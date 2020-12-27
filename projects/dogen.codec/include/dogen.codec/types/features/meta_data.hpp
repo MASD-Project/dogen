@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -43,6 +44,12 @@ public:
         variability::entities::feature type;
         variability::entities::feature value;
         variability::entities::feature parent;
+        variability::entities::feature can_be_primitive_underlier;
+        variability::entities::feature in_global_module;
+        variability::entities::feature can_be_enumeration_underlier;
+        variability::entities::feature is_default_enumeration_type;
+        variability::entities::feature is_associative_container;
+        variability::entities::feature is_floating_point;
     };
 
     static feature_group
@@ -54,6 +61,12 @@ public:
         std::string type;
         std::string value;
         std::list<std::string> parent;
+        boost::optional<bool> can_be_primitive_underlier;
+        boost::optional<bool> in_global_module;
+        boost::optional<bool> can_be_enumeration_underlier;
+        boost::optional<bool> is_default_enumeration_type;
+        boost::optional<bool> is_associative_container;
+        boost::optional<bool> is_floating_point;
     };
 
     static static_configuration make_static_configuration(
