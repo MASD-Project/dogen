@@ -139,7 +139,8 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"is_default_enumeration_type\": " << v.is_default_enumeration_type() << ", "
       << "\"is_associative_container\": " << v.is_associative_container() << ", "
       << "\"is_floating_point\": " << v.is_floating_point() << ", "
-      << "\"containing_element_id\": " << v.containing_element_id()
+      << "\"containing_element_id\": " << v.containing_element_id() << ", "
+      << "\"is_package\": " << v.is_package()
       << " }";
     return(s);
 }

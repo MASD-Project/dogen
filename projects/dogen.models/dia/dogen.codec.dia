@@ -70,7 +70,7 @@
           <dia:boolean val="false"/>
         </dia:attribute>
         <dia:attribute name="snap-to-grid">
-          <dia:boolean val="true"/>
+          <dia:boolean val="false"/>
         </dia:attribute>
         <dia:attribute name="snap-to-object">
           <dia:boolean val="true"/>
@@ -854,7 +854,7 @@ codec.
         <dia:point val="12,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,23.95;34.88,34.85"/>
+        <dia:rectangle val="11.95,23.95;34.88,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12,24"/>
@@ -863,7 +863,7 @@ codec.
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.799999999999999"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element#</dia:string>
@@ -1176,6 +1176,29 @@ main stereotypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#ID of the containing element, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_package#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the element represents a package.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1925,7 +1948,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="88.7625,30"/>
         <dia:point val="88.7625,38"/>
         <dia:point val="12,38"/>
-        <dia:point val="12,34.8"/>
+        <dia:point val="12,35.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7922,7 +7945,7 @@ graph.#</dia:string>
         <dia:point val="48,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,23.95;73.19,32.45"/>
+        <dia:rectangle val="47.95,23.95;73.19,33.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,24"/>
@@ -7931,7 +7954,7 @@ graph.#</dia:string>
         <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object#</dia:string>
@@ -8185,6 +8208,29 @@ graph.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_package#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the object represents a package.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -8384,7 +8430,7 @@ graph.#</dia:string>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="60.57,32.4"/>
+        <dia:point val="60.57,33.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="41.8575,28.35;61.32,36.055"/>
@@ -8393,7 +8439,7 @@ graph.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="60.57,32.4"/>
+        <dia:point val="60.57,33.2"/>
         <dia:point val="60.57,36"/>
         <dia:point val="41.9075,36"/>
         <dia:point val="41.9075,28.4"/>

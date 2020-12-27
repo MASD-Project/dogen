@@ -40,9 +40,11 @@ namespace dogen::codec::entities {
  */
 class object final {
 public:
-    object() = default;
     object(const object&) = default;
     ~object() = default;
+
+public:
+    object();
 
 public:
     object(object&& rhs);
@@ -56,7 +58,8 @@ public:
         const std::string& stereotypes,
         const std::string& container_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::list<dogen::codec::entities::attribute>& attributes);
+        const std::list<dogen::codec::entities::attribute>& attributes,
+        const bool is_package);
 
 public:
     /**
@@ -139,6 +142,14 @@ public:
     void attributes(const std::list<dogen::codec::entities::attribute>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the object represents a package.
+     */
+    /**@{*/
+    bool is_package() const;
+    void is_package(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -158,6 +169,7 @@ private:
     std::string container_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
     std::list<dogen::codec::entities::attribute> attributes_;
+    bool is_package_;
 };
 
 }

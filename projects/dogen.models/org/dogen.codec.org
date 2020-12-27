@@ -247,6 +247,13 @@ main stereotypes.
 
 ID of the containing element, if any.
 
+*** is_package                                               :masd_attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the element represents a package.
+
 ** attribute                                                   :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: Element
@@ -490,6 +497,13 @@ Connections this object may have with other objects, if any.
     :END:
 
 All attributes associated with this object.
+
+*** is_package                                               :masd_attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the object represents a package.
 
 ** artefact                                                    :masd_element:
 *** path                                                     :masd_attribute:
