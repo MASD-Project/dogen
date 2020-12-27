@@ -1,0 +1,233 @@
+#+title: cpp.std
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+:PROPERTIES:
+:masd.codec.input_technical_space: cpp
+:masd.codec.is_proxy_model: true
+:masd.codec.model_modules: std
+:END:
+
+C++ Standard Library types.
+* int8_t                                                       :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.numeric.integer8
+:masd.helper.family: Character
+:masd.cpp.streaming.requires_quoting: true
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:masd.codec.can_be_enumeration_underlier: true
+:END:
+* int16_t                                                      :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.numeric.integer16
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* int32_t                                                      :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.numeric.integer32
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* int64_t                                                      :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.numeric.integer64
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* uint8_t                                                      :masd_element:
+:PROPERTIES:
+:masd.helper.family: Character
+:masd.cpp.streaming.requires_quoting: true
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* uint16_t                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* uint32_t                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* uint64_t                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: Number
+:masd.cpp.aspect.requires_manual_default_constructor: true
+:masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
+:masd.codec.stereotypes: masd::builtin
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* string                                                       :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.core.text.string
+:masd.helper.family: String
+:masd.cpp.streaming.remove_unprintable_characters: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <string>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <string>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/string.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/string.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/algorithm/string.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/algorithm/string.hpp>
+:masd.cpp.test_data.class_header.primary_inclusion_directive: <sstream>
+:masd.cpp.test_data.primitive_header.primary_inclusion_directive: <sstream>
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* vector                                                       :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.dynamic_array
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <vector>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/vector.hpp>
+:END:
+* deque                                                        :masd_element:
+:PROPERTIES:
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <deque>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/deque.hpp>
+:END:
+* array                                                        :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.static_array
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <array>
+:END:
+* list                                                         :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.linked_list
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <list>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/list.hpp>
+:END:
+* forward_list                                                 :masd_element:
+:PROPERTIES:
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <forward_list>
+:END:
+* set                                                          :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.ordered_set
+:masd.helper.family: AssociativeContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <set>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/set.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* multiset                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: SequenceContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <multiset>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/multiset.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* unordered_set                                                :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.unordered_set
+:masd.helper.family: AssociativeContainer
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <unordered_set>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/unordered_set.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* map                                                          :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.ordered_dictionary
+:masd.helper.family: AssociativeContainer
+:masd.type_parameters.count: 2
+:masd.cpp.types.class_header.primary_inclusion_directive: <map>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/map.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* multimap                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: AssociativeContainer
+:masd.type_parameters.count: 2
+:masd.cpp.types.class_header.primary_inclusion_directive: <multimap>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/multimap.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* unordered_map                                                :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.container.unordered_dictionary
+:masd.helper.family: AssociativeContainer
+:masd.type_parameters.count: 2
+:masd.cpp.types.class_header.primary_inclusion_directive: <unordered_map>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/unordered_map.hpp>
+:masd.codec.is_associative_container: true
+:END:
+* pair                                                         :masd_element:
+:PROPERTIES:
+:masd.helper.family: Pair
+:masd.type_parameters.count: 2
+:masd.cpp.types.class_header.primary_inclusion_directive: <utility>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/utility.hpp>
+:END:
+* shared_ptr                                                   :masd_element:
+:PROPERTIES:
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <memory>
+:END:
+* weak_ptr                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <memory>
+:END:
+* unique_ptr                                                   :masd_element:
+:PROPERTIES:
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <memory>
+:END:
+* function                                                     :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <functional>
+:END:
+* optional                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: Optional
+:masd.type_parameters.count: 1
+:masd.cpp.types.class_header.primary_inclusion_directive: <functional>
+:END:
+* ostream                                                      :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <ostream>
+:END:
+* ostringstream                                                :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <sstream>
+:END:
+* type_index                                                   :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <typeindex>
+:END:
