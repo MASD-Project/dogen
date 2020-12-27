@@ -24,7 +24,6 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
-#include "dogen.codec/types/features/meta_data.hpp"
 #include "dogen.codec/types/transforms/meta_data_transform.hpp"
 
 namespace {
@@ -36,8 +35,50 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-
 namespace dogen::codec::transforms {
+
+void meta_data_transform::
+apply(const features::meta_data::feature_group& fg, entities::element& e) {
+    using features::meta_data;
+    using identification::entities::stereotype;
+
+    const auto scfg(meta_data::make_static_configuration(fg, e));
+    for (const auto& s : scfg.stereotypes)
+        e.stereotypes().push_back(stereotype(s));
+
+    for (const auto& p : scfg.parent)
+        e.parents().push_back(p);
+
+    if (scfg.can_be_primitive_underlier)
+        e.can_be_enumeration_underlier(*scfg.can_be_primitive_underlier);
+
+    if (scfg.in_global_module)
+        e.in_global_module(*scfg.in_global_module);
+
+    if (scfg.can_be_enumeration_underlier)
+        e.can_be_enumeration_underlier(*scfg.can_be_enumeration_underlier);
+
+    if (scfg.is_default_enumeration_type)
+        e.is_default_enumeration_type(*scfg.is_default_enumeration_type);
+
+    if (scfg.is_associative_container)
+        e.is_associative_container(*scfg.is_associative_container);
+
+    if (scfg.is_floating_point)
+        e.is_floating_point(*scfg.is_floating_point);
+}
+
+void meta_data_transform::
+apply(const features::meta_data::feature_group& fg, entities::attribute& attr) {
+    using features::meta_data;
+
+    const auto scfg(meta_data::make_static_configuration(fg, attr));
+    if (!scfg.value.empty())
+        attr.value(scfg.value);
+
+    if (!scfg.type.empty())
+        attr.type(scfg.type);
+}
 
 void meta_data_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta-data",
@@ -47,26 +88,10 @@ void meta_data_transform::apply(const context& ctx, entities::model& m) {
     const auto fg(features::meta_data::make_feature_group(fm));
 
     for (auto& e : m.elements()) {
-        using features::meta_data;
-        const auto scfg(meta_data::make_static_configuration(fg, e));
-        using identification::entities::stereotype;
-        for (const auto& s : scfg.stereotypes)
-            e.stereotypes().push_back(stereotype(s));
+        apply(fg, e);
 
-        for (const auto& p : scfg.parent)
-            e.parents().push_back(p);
-
-        for (auto& attr : e.attributes()) {
-            const auto scfg(meta_data::make_static_configuration(fg, attr));
-            for (const auto& s : scfg.stereotypes)
-                e.stereotypes().push_back(stereotype(s));
-
-            if (!scfg.value.empty())
-                attr.value(scfg.value);
-
-            if (!scfg.type.empty())
-                attr.type(scfg.type);
-        }
+        for (auto& attr : e.attributes())
+            apply(fg, attr);
     }
 
     stp.end_transform(m);

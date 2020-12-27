@@ -26,6 +26,9 @@
 #endif
 
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/features/meta_data.hpp"
 #include "dogen.codec/types/entities/model.hpp"
 #include "dogen.codec/types/transforms/context_fwd.hpp"
 
@@ -35,6 +38,19 @@ namespace dogen::codec::transforms {
  * @brief Reads assorted meta-data.
  */
 class meta_data_transform final {
+private:
+    /**
+     * @brief Apply the transform to the supplied element.
+     */
+    static void apply(const features::meta_data::feature_group& fg,
+        entities::element& e);
+
+    /**
+     * @brief Apply the transform to the supplied attribute.
+     */
+    static void apply(const features::meta_data::feature_group& fg,
+        entities::attribute& attr);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
