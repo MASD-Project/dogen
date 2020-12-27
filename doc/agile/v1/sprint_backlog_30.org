@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-26 Sat 20:58]
+#+CAPTION: Clock summary at [2020-12-27 Sun 11:47]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *38:14* |       |       | 100.0 |
+| *Total time*                                        | *39:38* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 38:14   |       |       | 100.0 |
-| Active                                              |         | 38:14 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  15.9 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.5 |
-| Sprint and product backlog grooming                 |         |       |  0:36 |   1.6 |
-| Add support for reading org mode documents          |         |       | 19:46 |  51.7 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.7 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   5.1 |
-| Add org-mode codec for input                        |         |       |  8:10 |  21.4 |
-| Convert library models into org                     |         |       |  0:05 |   0.2 |
+| Stories                                             | 39:38   |       |       | 100.0 |
+| Active                                              |         | 39:38 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  15.3 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.4 |
+| Sprint and product backlog grooming                 |         |       |  0:39 |   1.6 |
+| Add support for reading org mode documents          |         |       | 19:46 |  49.9 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.6 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.9 |
+| Add org-mode codec for input                        |         |       |  8:10 |  20.6 |
+| Convert library models into org                     |         |       |  1:26 |   3.6 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -283,6 +283,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 11:44]--[2020-12-27 Sun 11:47] =>  0:03
     CLOCK: [2020-12-26 Sat 20:38]--[2020-12-26 Sat 20:39] =>  0:01
     CLOCK: [2020-12-16 Wed 19:02]--[2020-12-16 Wed 19:11] =>  0:09
     CLOCK: [2020-12-18 Fri 09:00]--[2020-12-18 Fri 09:26] =>  0:26
@@ -544,8 +545,11 @@ Notes:
   space between stitch and wale, even though we can see the line in
   the stitch template.
 
-*** STARTED Convert library models into org                           :story:
+*** COMPLETED Convert library models into org                         :story:
+    CLOSED: [2020-12-27 Sun 11:43]
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 11:02]--[2020-12-27 Sun 11:43] =>  0:41
+    CLOCK: [2020-12-27 Sun 10:00]--[2020-12-27 Sun 10:40] =>  0:40
     CLOCK: [2020-12-26 Sat 20:53]--[2020-12-26 Sat 20:58] =>  0:05
     :END:
 
@@ -576,6 +580,40 @@ Notes:
 
 - =can_be_enumeration_underlier= and =can_be_primitive_underlier= are
   probably being lost in translation.
+- for some reason some types are not coming through correctly:
+
+: std::exception::what: Invalid underlying type: std.string
+
+  Nothing looks incorrect in the =std::string= org
+  representation. This was due to bugs in meta-data processing.
+- JSON models are encoding namespaces in names:
+
+:       "name": "posix_time::ptime",
+
+  We need to detect qualified names and then add the required
+  headlines. Actually this is very tricky: at present we do not have a
+  proper way to convert the JSON models into a structure with
+  containment without going into the logical model. It would be a fair
+  bit of work to port this into codec. Instead, we can just convert
+  the models that require this manually.
+
+*** Convert reference models into org                                 :story:
+
+We need to convert all reference models into org, and add tests for
+them.
+
+*** JSON models do not create containment structure                   :story:
+
+At present the JSON models represent containment via qualified names,
+e.g.:
+
+:       "name": "posix_time::ptime",
+
+However, this is then not propagated correctly into the codec
+model. This means that if you have a JSON model with namespaces, it
+will result in an org model (say) without namespaces. We need to
+figure out what we did for Dia. Perhaps we can use the qualified names
+to create packages.
 
 *** Running convert without parameters should work                    :story:
 
