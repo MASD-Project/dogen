@@ -35,6 +35,7 @@ transform_id("codec.transforms.model_to_org_artefact_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string empty;
 const std::string scope("::");
 const std::string comma_space(", ");
 const std::string element_tag(":masd_element:");
@@ -46,9 +47,12 @@ const std::string invalid_enumerator("invalid");
 
 namespace dogen::codec::transforms {
 
+using identification::entities::tagged_value;
+using identification::entities::stereotype;
+
 std::string model_to_org_artefact_transform::
-make_headline(const unsigned int level,
-    const std::string& title, const std::string& tag) {
+make_headline(const unsigned int level, const std::string& title,
+    const std::string& tag) {
     const std::string stars(level, '*');
 
     std::ostringstream os;
@@ -62,21 +66,20 @@ make_headline(const unsigned int level,
 }
 
 void model_to_org_artefact_transform::insert_tagged_values(std::ostream& s,
-    const std::list<identification::entities::tagged_value>& tvs) {
+    const std::string& spaces, const std::list<tagged_value>& tvs) {
     if (tvs.empty())
         return;
 
     for (const auto& tv : tvs)
-        s << ":" << tv.tag() << ": " << tv.value() << std::endl;
+        s << spaces << ":" << tv.tag() << ": " << tv.value() << std::endl;
 }
 
 void model_to_org_artefact_transform::insert_stereotypes(std::ostream& s,
-    const std::list<identification::entities::stereotype>& sts) {
+    const std::string& spaces, const std::list<stereotype>& sts) {
     if (sts.empty())
         return;
 
-    s << ":masd.codec.stereotypes: ";
-
+    s << spaces << ":masd.codec.stereotypes: ";
     bool is_first(true);
     for (const auto& st : sts) {
         if (!is_first)
@@ -88,12 +91,12 @@ void model_to_org_artefact_transform::insert_stereotypes(std::ostream& s,
 }
 
 void model_to_org_artefact_transform::
-insert_parents(std::ostream& s, const std::list<std::string>& parents) {
+insert_parents(std::ostream& s, const std::string& spaces,
+    const std::list<std::string>& parents) {
     if (parents.empty())
         return;
 
-    s << ":masd.codec.parent: ";
-
+    s << spaces << ":masd.codec.parent: ";
     bool is_first(true);
     for (const auto& p : parents) {
         if (!is_first)
@@ -109,18 +112,20 @@ void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
     s << make_headline(level, a.name().simple(), attribute_tag);
 
     const auto& tvs(a.tagged_values());
+    const std::string spaces(level + 1, ' ');
+
     if (!a.type().empty() || !a.value().empty() || !a.stereotypes().empty()
         || !tvs.empty()) {
-        s << ":PROPERTIES:" << std::endl;
-        insert_tagged_values(s, tvs);
+        s << spaces << ":PROPERTIES:" << std::endl;
+        insert_tagged_values(s, spaces, tvs);
         if (!a.type().empty())
-            s << ":masd.codec.type: " << a.type() << std::endl;
+            s << spaces << ":masd.codec.type: " << a.type() << std::endl;
 
         if (!a.value().empty())
-            s << ":masd.codec.value: " << a.value() << std::endl;
+            s << spaces << ":masd.codec.value: " << a.value() << std::endl;
 
-        insert_stereotypes(s, a.stereotypes());
-        s << ":END:" << std::endl;
+        insert_stereotypes(s, spaces, a.stereotypes());
+        s << spaces << ":END:" << std::endl;
 
         if (!a.documentation().empty())
             s << std::endl;
@@ -146,27 +151,39 @@ void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
 }
 
 void model_to_org_artefact_transform::insert_element_attributes(std::ostream& s,
-    const entities::element& e) {
+    const std::string& spaces, const entities::element& e) {
     /*
      * Don't bother outputting any of these flags if they are false.
      */
-    if (e.can_be_primitive_underlier())
-        s << ":masd.codec.can_be_primitive_underlier: true" << std::endl;
+    if (e.can_be_primitive_underlier()) {
+        s << spaces << ":masd.codec.can_be_primitive_underlier: true"
+          << std::endl;
+    }
 
-    if (e.in_global_module())
-        s << ":masd.codec.in_global_module: true" << std::endl;
+    if (e.in_global_module()) {
+        s << spaces << ":masd.codec.in_global_module: true"
+          << std::endl;
+    }
 
-    if (e.can_be_enumeration_underlier())
-        s << ":masd.codec.can_be_enumeration_underlier: true" << std::endl;
+    if (e.can_be_enumeration_underlier()) {
+        s << spaces << ":masd.codec.can_be_enumeration_underlier: true"
+          << std::endl;
+    }
 
-    if (e.is_default_enumeration_type())
-        s << ":masd.codec.is_default_enumeration_type: true" << std::endl;
+    if (e.is_default_enumeration_type()) {
+        s << spaces << ":masd.codec.is_default_enumeration_type: true"
+          << std::endl;
+    }
 
-    if (e.is_associative_container())
-        s << ":masd.codec.is_associative_container: true" << std::endl;
+    if (e.is_associative_container()) {
+        s << spaces << ":masd.codec.is_associative_container: true"
+          << std::endl;
+    }
 
-    if (e.is_floating_point())
-        s << ":masd.codec.is_floating_point: true" << std::endl;
+    if (e.is_floating_point()) {
+        s << spaces << ":masd.codec.is_floating_point: true"
+          << std::endl;
+    }
 }
 
 void model_to_org_artefact_transform::insert_element(std::ostream& s,
@@ -174,17 +191,19 @@ void model_to_org_artefact_transform::insert_element(std::ostream& s,
     s << make_headline(level, e.name().simple(), element_tag);
 
     const auto& tv(e.tagged_values());
-    if (!e.parents().empty() || !e.stereotypes().empty() || !tv.empty()) {
-        s << ":PROPERTIES:" << std::endl;
-        insert_tagged_values(s, tv);
-        insert_parents(s, e.parents());
-        insert_stereotypes(s, e.stereotypes());
-        insert_element_attributes(s, e);
-        s << ":END:" << std::endl;
+    const std::string spaces(level + 1, ' ');
 
-        if (!e.documentation().empty())
-            s << std::endl;
+    if (!e.parents().empty() || !e.stereotypes().empty() || !tv.empty()) {
+        s << spaces << ":PROPERTIES:" << std::endl;
+        insert_tagged_values(s, spaces, tv);
+        insert_parents(s, spaces, e.parents());
+        insert_stereotypes(s, spaces, e.stereotypes());
+        insert_element_attributes(s, spaces, e);
+        s << spaces << ":END:" << std::endl;
     }
+
+    if (!e.documentation().empty())
+        s << std::endl;
 
     if (!e.documentation().empty())
         s << e.documentation() << std::endl;
@@ -219,8 +238,8 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
     const auto& tv(m.tagged_values());
     if (!m.stereotypes().empty() || !tv.empty()) {
         s << ":PROPERTIES:" << std::endl;
-        insert_tagged_values(s, tv);
-        insert_stereotypes(s, m.stereotypes());
+        insert_tagged_values(s, empty, tv);
+        insert_stereotypes(s, empty, m.stereotypes());
         s << ":END:" << std::endl;
 
         if (!m.documentation().empty())
