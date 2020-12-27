@@ -43,6 +43,7 @@ const std::string output_dir("masd.csharp_ref_impl.code_generation_test_output")
 
 const std::string models_dia_dir("CSharpRefImpl.Models/dia");
 const std::string models_json_dir("CSharpRefImpl.Models/json");
+const std::string models_org_dir("CSharpRefImpl.Models/org");
 
 const std::string path_csharprefimpl_csharpmodel_dia(
     "CSharpRefImpl.CSharpModel.dia");
@@ -58,6 +59,13 @@ const std::string path_csharprefimpl_directory_settings_json(
 const std::string path_csharprefimpl_lammodel_json(
     "CSharpRefImpl.LamModel.json");
 
+const std::string path_csharprefimpl_csharpmodel_org(
+    "CSharpRefImpl.CSharpModel.org");
+const std::string path_csharprefimpl_directory_settings_org(
+    "CSharpRefImpl.DirectorySettings.org");
+const std::string path_csharprefimpl_lammodel_org(
+    "CSharpRefImpl.LamModel.org");
+
 }
 
 using boost::filesystem::path;
@@ -67,6 +75,7 @@ namespace dogen::utility::test_data {
 path csharp_ref_impl_product::project_directory_;
 path csharp_ref_impl_product::dia_models_directory_;
 path csharp_ref_impl_product::json_models_directory_;
+path csharp_ref_impl_product::org_models_directory_;
 path csharp_ref_impl_product::output_directory_;
 
 void csharp_ref_impl_product::initialize() {
@@ -87,6 +96,7 @@ void csharp_ref_impl_product::initialize() {
 
     dia_models_directory_ = project_directory_ / models_dia_dir;
     json_models_directory_ = project_directory_ / models_json_dir;
+    org_models_directory_ = project_directory_ / models_org_dir;
     BOOST_LOG_SEV(lg, debug) << "Dia models: "
                              << dia_models_directory_.generic_string()
                              << " JSON models: "
@@ -163,6 +173,23 @@ input_csharprefimpl_directory_settings_json() {
 path csharp_ref_impl_product::input_csharprefimpl_lammodel_json() {
     ensure_initialized();
     return json_models_directory_ / path_csharprefimpl_lammodel_json;
+}
+
+path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_csharprefimpl_csharpmodel_org;
+}
+
+path csharp_ref_impl_product::
+input_csharprefimpl_directory_settings_org() {
+    ensure_initialized();
+    return org_models_directory_ /
+        path_csharprefimpl_directory_settings_org;
+}
+
+path csharp_ref_impl_product::input_csharprefimpl_lammodel_org() {
+    ensure_initialized();
+    return org_models_directory_ / path_csharprefimpl_lammodel_org;
 }
 
 }
