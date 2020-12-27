@@ -1,0 +1,154 @@
+#+title: cpp.boost
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+:PROPERTIES:
+:masd.codec.input_technical_space: cpp
+:masd.codec.is_proxy_model: true
+:masd.codec.model_modules: boost
+:END:
+
+Boost Library types.
+* shared_ptr                                                   :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.core.pointer
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/shared_ptr.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/shared_ptr.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
+:END:
+* weak_ptr                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/weak_ptr.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/weak_ptr.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
+:END:
+* scoped_ptr                                                   :masd_element:
+:PROPERTIES:
+:masd.helper.family: SmartPointer
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/scoped_ptr.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/scoped_ptr.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
+:END:
+* optional                                                     :masd_element:
+:PROPERTIES:
+:masd.helper.family: Optional
+:masd.type_parameters.count: 1
+:masd.type_parameters.always_in_heap: false
+:masd.cpp.aspect.requires_manual_move_constructor: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/optional.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/optional.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
+:END:
+* variant                                                      :masd_element:
+:PROPERTIES:
+:masd.helper.family: BoostVariant
+:masd.type_parameters.variable_number_of_parameters: true
+:masd.cpp.aspect.requires_manual_move_constructor: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/variant.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/variant.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/variant.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/variant.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
+:masd.cpp.hash.class_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
+:masd.cpp.hash.primitive_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
+:END:
+* asio                                                         :masd_element:
+** io_service                                                  :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
+:END:
+** ip                                                          :masd_element:
+*** tcp                                                        :masd_element:
+**** socket                                                    :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
+:END:
+**** acceptor                                                  :masd_element:
+:PROPERTIES:
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
+:END:
+* filesystem                                                   :masd_element:
+** path                                                        :masd_element:
+:PROPERTIES:
+:masd.helper.family: BoostPath
+:masd.cpp.streaming.string_conversion_method: generic_string()
+:masd.cpp.aspect.requires_manual_move_constructor: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/filesystem/path.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/filesystem/path.hpp>
+:masd.cpp.test_data.class_header.primary_inclusion_directive: <sstream>
+:masd.cpp.test_data.primitive_header.primary_inclusion_directive: <sstream>
+:END:
+* gregorian                                                    :masd_element:
+** date                                                        :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.chrono.date
+:masd.helper.family: BoostDate
+:masd.cpp.streaming.requires_quoting: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/date_time/gregorian/gregorian_types.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/date_time/gregorian/gregorian_types.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/date_time/gregorian/greg_serialize.hpp>
+:masd.cpp.serialization.class_header.secondary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/date_time/gregorian/greg_serialize.hpp>
+:masd.cpp.serialization.primitive_header.secondary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* posix_time                                                   :masd_element:
+** ptime                                                       :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.chrono.date_time
+:masd.helper.family: BoostPTime
+:masd.cpp.streaming.requires_quoting: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time_types.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time_types.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/date_time/posix_time/time_serialize.hpp>
+:masd.cpp.serialization.class_header.secondary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/time_serialize.hpp>
+:masd.cpp.serialization.primitive_header.secondary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.codec.can_be_primitive_underlier: true
+:END:
+** time_duration                                               :masd_element:
+:PROPERTIES:
+:masd.mapping.target: masd.lam.chrono.time
+:masd.helper.family: BoostTimeDuration
+:masd.cpp.streaming.requires_quoting: true
+:masd.cpp.aspect.requires_manual_move_constructor: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time_types.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time_types.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/date_time/posix_time/time_serialize.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/time_serialize.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
+:masd.codec.can_be_primitive_underlier: true
+:END:
+* property_tree                                                :masd_element:
+** ptree                                                       :masd_element:
+:PROPERTIES:
+:masd.helper.family: BoostPTree
+:masd.cpp.aspect.requires_manual_move_constructor: true
+:masd.cpp.types.class_header.primary_inclusion_directive: <boost/property_tree/ptree.hpp>
+:masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/property_tree/ptree.hpp>
+:masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/property_tree/ptree_serialization.hpp>
+:masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/property_tree/ptree_serialization.hpp>
+:masd.cpp.io.class_header.primary_inclusion_directive: <boost/property_tree/json_parser.hpp>
+:masd.cpp.io.class_header.secondary_inclusion_directive: <boost/algorithm/string.hpp>
+:masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/property_tree/json_parser.hpp>
+:masd.cpp.io.primitive_header.secondary_inclusion_directive: <boost/algorithm/string.hpp>
+:END:
