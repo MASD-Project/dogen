@@ -27,7 +27,7 @@ physical dimension of MASD conceptual space.
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -81,7 +81,7 @@ An error occurred during validation.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -1355,7 +1355,7 @@ Part in which we are located.
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::physical_meta_id>
     :END:
-* features                                                     :masd_element:
+* features                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -1678,7 +1678,7 @@ If true, facet directories will not be used.
 
 If true, inclusion is required for this modeling element.
 
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

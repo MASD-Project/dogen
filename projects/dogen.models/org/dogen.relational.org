@@ -18,7 +18,7 @@
 :masd.orm.letter_case: upper_case
 :masd.orm.schema_name: dogen
 :END:
-* tracing                                                      :masd_element:
+* tracing                                                       :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :masd.orm.schema_name: dogen

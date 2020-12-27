@@ -15,7 +15,7 @@
 
 Assorted utilities used by Dogen.
 
-* exception                                                    :masd_element:
+* exception                                                     :masd_module:
 ** invalid_enum_value                                          :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
@@ -24,7 +24,7 @@ Assorted utilities used by Dogen.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
-* filesystem                                                   :masd_element:
+* filesystem                                                    :masd_module:
 ** file                                                        :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -47,7 +47,7 @@ An error occurred whilst performing an IO operation.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* hash                                                         :masd_element:
+* hash                                                          :masd_module:
 ** combine                                                     :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
@@ -60,7 +60,7 @@ An error occurred whilst performing an IO operation.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* io                                                           :masd_element:
+* io                                                            :masd_module:
 ** array_io                                                    :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
@@ -117,7 +117,7 @@ An error occurred whilst performing an IO operation.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
-* log                                                          :masd_element:
+* log                                                           :masd_module:
 ** logger                                                      :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -183,7 +183,7 @@ The values supplied for the logging configuration are not valid.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* serialization                                                :masd_element:
+* serialization                                                 :masd_module:
 ** archive_types                                               :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -196,7 +196,7 @@ The values supplied for the logging configuration are not valid.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
-* string                                                       :masd_element:
+* string                                                        :masd_module:
 ** splitter                                                    :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -205,7 +205,7 @@ The values supplied for the logging configuration are not valid.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* test                                                         :masd_element:
+* test                                                          :masd_module:
 ** asserter                                                    :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -238,7 +238,7 @@ The values supplied for the logging configuration are not valid.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
-* test_data                                                    :masd_element:
+* test_data                                                     :masd_module:
 ** filesystem_tests                                            :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -298,7 +298,7 @@ The values supplied for the logging configuration are not valid.
 
 An error occurred whilst obtaining the test data.
 
-* xml                                                          :masd_element:
+* xml                                                           :masd_module:
 ** exception                                                   :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
@@ -319,7 +319,7 @@ An error occurred whilst obtaining the test data.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* environment                                                  :masd_element:
+* environment                                                   :masd_module:
 ** environment_exception                                       :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
@@ -331,7 +331,7 @@ There was an error reading an environment variable.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* formatters                                                   :masd_element:
+* formatters                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

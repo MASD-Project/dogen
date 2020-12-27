@@ -48,7 +48,7 @@ only of its user. This decoupling was achieved by creating the concept
 of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
 
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -565,7 +565,7 @@ Represents a collection of CSV input that is split into a collection of text val
     :PROPERTIES:
     :masd.codec.type: std::list<std::list<std::string>>
     :END:
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
 ** feature_selector                                            :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -650,7 +650,7 @@ An error occurred whilst adapting a model.
 
 An error occurred whilst merging.
 
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
 ** feature_model_production_chain                              :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -725,7 +725,7 @@ An error occurred whilst applying a transformation.
     :PROPERTIES:
     :masd.codec.type: std::list<entities::profile_template>
     :END:
-* features                                                     :masd_element:
+* features                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

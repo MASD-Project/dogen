@@ -18,255 +18,255 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-* emacs                                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::modeline_group
-:END:
+* emacs                                                         :masd_module:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::modeline_group
+  :END:
 ** cpp                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: cpp
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: cpp
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** mode                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: c++
-:END:
+    :PROPERTIES:
+    :masd.codec.value: c++
+    :END:
 *** tab-width                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** indent-tabs-mode                                         :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nil
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nil
+    :END:
 *** c-basic-offset                                           :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** cs                                                          :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: csharp
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+    :PROPERTIES:
+    :masd.decoration.modeline.editor: emacs
+    :masd.decoration.modeline.location: top
+    :masd.decoration.modeline.technical_space: csharp
+    :masd.codec.stereotypes: masd::decoration::modeline
+    :END:
 *** mode                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: csharp
-:END:
+    :PROPERTIES:
+    :masd.codec.value: csharp
+    :END:
 *** tab-width                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** indent-tabs-mode                                         :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nil
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nil
+    :END:
 *** c-basic-offset                                           :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** cmake                                                       :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: cmake
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: cmake
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** mode                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: cmake
-:END:
+    :PROPERTIES:
+    :masd.codec.value: cmake
+    :END:
 *** cmake-tab-width                                          :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** indent-tabs-mode                                         :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nil
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nil
+    :END:
 ** odb                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: odb
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: odb
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** mode                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: sh
-:END:
+    :PROPERTIES:
+    :masd.codec.value: sh
+    :END:
 *** tab-width                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** indent-tabs-mode                                         :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nil
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nil
+    :END:
 ** xml                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: xml
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: xml
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** mode                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nxml
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nxml
+    :END:
 *** tab-width                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** indent-tabs-mode                                         :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: nil
-:END:
+    :PROPERTIES:
+    :masd.codec.value: nil
+    :END:
 ** sln                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: sln
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
-* vim                                                          :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::modeline_group
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: sln
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
+* vim                                                           :masd_module:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::modeline_group
+  :END:
 ** xml                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: vim
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: xml
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: vim
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: xml
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** ft                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: xml
-:END:
+    :PROPERTIES:
+    :masd.codec.value: xml
+    :END:
 *** tabstop                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** expandtab                                                :masd_attribute:
 *** shiftwidth                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** softtabstop                                              :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** odb                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: vim
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: odb
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: vim
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: odb
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** ft                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: sh
-:END:
+    :PROPERTIES:
+    :masd.codec.value: sh
+    :END:
 *** tabstop                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** expandtab                                                :masd_attribute:
 *** shiftwidth                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** softtabstop                                              :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** cmake                                                       :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: vim
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: cmake
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: vim
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: cmake
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** ft                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: cmake
-:END:
+    :PROPERTIES:
+    :masd.codec.value: cmake
+    :END:
 *** tabstop                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** expandtab                                                :masd_attribute:
 *** shiftwidth                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** softtabstop                                              :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** cs                                                          :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: vim
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: csharp
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: vim
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: csharp
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** ft                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: csharp
-:END:
+    :PROPERTIES:
+    :masd.codec.value: csharp
+    :END:
 *** tabstop                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** expandtab                                                :masd_attribute:
 *** shiftwidth                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** softtabstop                                              :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** cpp                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: vim
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: cpp
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: vim
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: cpp
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 *** ft                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: cpp
-:END:
+    :PROPERTIES:
+    :masd.codec.value: cpp
+    :END:
 *** tabstop                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** expandtab                                                :masd_attribute:
 *** shiftwidth                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 *** softtabstop                                              :masd_attribute:
-:PROPERTIES:
-:masd.codec.value: 4
-:END:
+    :PROPERTIES:
+    :masd.codec.value: 4
+    :END:
 ** sln                                                         :masd_element:
-:PROPERTIES:
-:masd.decoration.modeline.editor: emacs
-:masd.decoration.modeline.location: top
-:masd.decoration.modeline.technical_space: sln
-:masd.codec.stereotypes: masd::decoration::modeline
-:END:
+   :PROPERTIES:
+   :masd.decoration.modeline.editor: emacs
+   :masd.decoration.modeline.location: top
+   :masd.decoration.modeline.technical_space: sln
+   :masd.codec.stereotypes: masd::decoration::modeline
+   :END:
 * apache_v2_0                                                  :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::licence
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::licence
+  :END:
 
 Apache Licence, version 2.
 
@@ -494,9 +494,9 @@ Apache License
 
 #+end_src
 * bsl_v1_0                                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::licence
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::licence
+  :END:
 
 Boost Software Licence, version 1.
 
@@ -537,9 +537,9 @@ DEALINGS IN THE SOFTWARE.
 
 #+end_src
 * gpl_v2                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::licence
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::licence
+  :END:
 
 GNU Public Licence, version 2.
 
@@ -904,9 +904,9 @@ Public License instead of this License.
 
 #+end_src
 * gpl_v3                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::licence
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::licence
+  :END:
 
 GNU Public Licence, version 3.
 
@@ -1611,9 +1611,9 @@ Public License instead of this License.  But first, please read
 
 #+end_src
 * proprietary                                                  :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::decoration::licence
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::decoration::licence
+  :END:
 
 Sample properietary licence.
 

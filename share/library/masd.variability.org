@@ -19,37 +19,37 @@ You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
 * text                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: std::string
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: std::string
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * number                                                       :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: int
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: int
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * text_collection                                              :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: std::list<std::string>
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: std::list<std::string>
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * key_value_pair                                               :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: std::list<std::pair<std::string, std::string>>
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: std::list<std::pair<std::string, std::string>>
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * boolean                                                      :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: bool
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: bool
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * comma_separated                                              :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: std::list<std::string>
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: std::list<std::string>
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:
 * comma_separated_collection                                   :masd_element:
-:PROPERTIES:
-:masd.mapping.destination: std::list<std::list<std::string>>
-:masd.codec.stereotypes: masd::mapping::fixed_mappable
-:END:
+  :PROPERTIES:
+  :masd.mapping.destination: std::list<std::list<std::string>>
+  :masd.codec.stereotypes: masd::mapping::fixed_mappable
+  :END:

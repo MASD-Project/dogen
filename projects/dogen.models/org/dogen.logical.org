@@ -48,7 +48,7 @@ together into a bigger model - called the @e merged model.
 rules (such as verifying that all types have a definitions,
 etc.).
 
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -747,7 +747,7 @@ Has the ability to contain other elements.
 
 All elements contained by this element.
 
-** decoration                                                  :masd_element:
+** decoration                                                   :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -993,7 +993,7 @@ as a modeline.
     :PROPERTIES:
     :masd.codec.value: dogen::logical::entities::element
     :END:
-** variability                                                 :masd_element:
+** variability                                                  :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -1407,7 +1407,7 @@ Key as it was originally provided by the user.
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
-** orm                                                         :masd_element:
+** orm                                                          :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -1695,7 +1695,7 @@ Database to which the mapping applies. If none is supplied, it will apply to all
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
-** structural                                                  :masd_element:
+** structural                                                   :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2032,7 +2032,7 @@ General type to provide helpers.
      :PROPERTIES:
      :masd.codec.type: technical_space_properties
      :END:
-** mapping                                                     :masd_element:
+** mapping                                                      :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2089,7 +2089,7 @@ variability types.
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
-** templating                                                  :masd_element:
+** templating                                                   :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2119,7 +2119,7 @@ Content of the logic-less template.
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
      :END:
-** serialization                                               :masd_element:
+** serialization                                                :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2159,7 +2159,7 @@ Registrars on other models this registrar depends on.
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
      :END:
-** visual_studio                                               :masd_element:
+** visual_studio                                                :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2306,7 +2306,7 @@ GUID that uniquely identifies this element.
      :PROPERTIES:
      :masd.codec.type: dogen::logical::entities::orm::odb_targets
      :END:
-** build                                                       :masd_element:
+** build                                                        :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2351,7 +2351,7 @@ Represents build CMakeLists files.
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
-** physical                                                    :masd_element:
+** physical                                                     :masd_module:
    :PROPERTIES:
    :masd.codec.dia.comment: true
    :END:
@@ -2908,7 +2908,7 @@ Postfix to use to call the appropriate assistant method, if required.
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -3146,7 +3146,7 @@ An error occurred whilst applying a transformation.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
 ** decomposition_result                                        :masd_element:
 *** names                                                    :masd_attribute:
     :PROPERTIES:
@@ -3389,7 +3389,7 @@ Value of a mapping.
 
 An error has occurred in a factory.
 
-* features                                                     :masd_element:
+* features                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -4298,7 +4298,7 @@ Features related to the helpers in physical domain.
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-* formatters                                                   :masd_element:
+* formatters                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

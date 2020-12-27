@@ -8,86 +8,86 @@
 
 Basic collection types.
 * IEnumerable                                                  :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: IEnumerable
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: IEnumerable
+  :END:
 * ICollection                                                  :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: ICollection
-:masd.codec.parent: IEnumerable
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: ICollection
+  :masd.codec.parent: IEnumerable
+  :END:
 * IList                                                        :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: IList
-:masd.codec.parent: ICollection
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: IList
+  :masd.codec.parent: ICollection
+  :END:
 * ArrayList                                                    :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: ArrayList
-:masd.codec.parent: IList
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: ArrayList
+  :masd.codec.parent: IList
+  :END:
 * IDictionary                                                  :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: IDictionary
-:masd.codec.parent: ICollection
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: IDictionary
+  :masd.codec.parent: ICollection
+  :END:
 * Hashtable                                                    :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Hashtable
-:masd.codec.parent: IDictionary
-:END:
-* Specialized                                                  :masd_element:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Hashtable
+  :masd.codec.parent: IDictionary
+  :END:
+* Specialized                                                   :masd_module:
 ** HybridDictionary                                            :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: HybridDictionary
-:masd.codec.parent: IDictionary
-:END:
+   :PROPERTIES:
+   :masd.csharp.aspect.requires_static_reference_equals: true
+   :masd.csharp.assistant.requires_assistance: true
+   :masd.csharp.assistant.method_postfix: HybridDictionary
+   :masd.codec.parent: IDictionary
+   :END:
 ** NameValueCollection                                         :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: NameValueCollection
-:masd.codec.parent: ICollection
-:END:
+   :PROPERTIES:
+   :masd.csharp.aspect.requires_static_reference_equals: true
+   :masd.csharp.assistant.requires_assistance: true
+   :masd.csharp.assistant.method_postfix: NameValueCollection
+   :masd.codec.parent: ICollection
+   :END:
 * BitArray                                                     :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: BitArray
-:masd.codec.parent: ICollection
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: BitArray
+  :masd.codec.parent: ICollection
+  :END:
 * Queue                                                        :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Queue
-:masd.codec.parent: ICollection
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Queue
+  :masd.codec.parent: ICollection
+  :END:
 * Stack                                                        :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Stack
-:masd.codec.parent: ICollection
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Stack
+  :masd.codec.parent: ICollection
+  :END:
 * SortedList                                                   :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: true
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: SortedList
-:masd.codec.parent: IDictionary
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: true
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: SortedList
+  :masd.codec.parent: IDictionary
+  :END:

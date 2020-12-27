@@ -24,7 +24,7 @@ Represents the domain of the Dia diagram editor.
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -329,7 +329,7 @@ Represents a rectangle in a diagram.
 
 Text representation of a rectangle with a pair of X/Y coordinates.
 
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
 ** transformation_error                                        :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception

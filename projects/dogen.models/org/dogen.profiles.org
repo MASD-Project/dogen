@@ -19,7 +19,7 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-* base                                                         :masd_element:
+* base                                                          :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -195,7 +195,7 @@ Disables all facets in the C++ backend.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-* composable                                                   :masd_element:
+* composable                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

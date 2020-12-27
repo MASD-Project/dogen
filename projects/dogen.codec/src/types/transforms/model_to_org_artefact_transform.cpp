@@ -40,6 +40,8 @@ const std::string scope("::");
 const std::string comma_space(", ");
 const std::string element_tag(":masd_element:");
 const std::string attribute_tag(":masd_attribute:");
+const std::string module_tag(":masd_module:");
+const std::string module_element_type("masd::module");
 
 const std::string invalid_enumerator("invalid");
 
@@ -188,7 +190,9 @@ void model_to_org_artefact_transform::insert_element_attributes(std::ostream& s,
 
 void model_to_org_artefact_transform::insert_element(std::ostream& s,
     const unsigned int level, const entities::element& e) {
-    s << make_headline(level, e.name().simple(), element_tag);
+    const auto tag(e.fallback_element_type() == module_element_type ?
+        module_tag : element_tag);
+    s << make_headline(level, e.name().simple(), tag);
 
     const auto& tv(e.tagged_values());
     const std::string spaces(level + 1, ' ');

@@ -7,155 +7,156 @@
 :END:
 
 CLR-provided built-in types.
+
 * byte                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.byte
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Byte
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.byte
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Byte
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * sbyte                                                        :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.integer8
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: ShortByte
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.integer8
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: ShortByte
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * int                                                          :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.integer
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Int
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:masd.codec.is_default_enumeration_type: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.integer
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Int
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :masd.codec.is_default_enumeration_type: true
+  :END:
 * uint                                                         :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: UInt
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: UInt
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * short                                                        :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Short
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Short
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * ushort                                                       :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: UShort
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: UShort
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * long                                                         :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Long
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Long
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * ulong                                                        :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: ULong
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: ULong
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * float                                                        :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.single_float
-:masd.helper.family: FloatingPointNumber
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Float
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.is_floating_point: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.single_float
+  :masd.helper.family: FloatingPointNumber
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Float
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.is_floating_point: true
+  :END:
 * double                                                       :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.double_float
-:masd.helper.family: FloatingPointNumber
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Double
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.is_floating_point: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.double_float
+  :masd.helper.family: FloatingPointNumber
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Double
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.is_floating_point: true
+  :END:
 * char                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.text.character
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Char
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.text.character
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Char
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * bool                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.boolean
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Bool
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.boolean
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Bool
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * object                                                       :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.object
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Object
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.object
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Object
+  :masd.codec.in_global_module: true
+  :END:
 * string                                                       :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.text.string
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: String
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.text.string
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: String
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * decimal                                                      :masd_element:
-:PROPERTIES:
-:masd.csharp.aspect.requires_static_reference_equals: false
-:masd.csharp.assistant.requires_assistance: true
-:masd.csharp.assistant.method_postfix: Decimal
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.csharp.aspect.requires_static_reference_equals: false
+  :masd.csharp.assistant.requires_assistance: true
+  :masd.csharp.assistant.method_postfix: Decimal
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:

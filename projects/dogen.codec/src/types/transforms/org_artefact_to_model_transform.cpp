@@ -39,8 +39,10 @@ transform_id("codec.transforms.org_artefact_to_model_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string empty;
 const std::string element_tag("masd_element");
 const std::string attribute_tag("masd_attribute");
+const std::string module_tag("masd_module");
 const std::string object_element_type("masd::object");
 const std::string module_element_type("masd::module");
 
@@ -54,6 +56,8 @@ const std::string unexpected_attribute(
 const std::string unexpected_children(
     "Attribute headlines cannot have children: ");
 const std::string unexpected_element("Cannot mix elements with attributes: ");
+const std::string unexpected_headline_type("Headline has an unexpected type: ");
+const std::string unexpected_composition("Invalid containing element: ");
 
 }
 
@@ -81,6 +85,8 @@ get_headline_type(const org::entities::headline& h) {
             r = headline_type::element;
         else if (tag.value() == attribute_tag)
             r = headline_type::attribute;
+        else if (tag.value() == module_tag)
+            r = headline_type::module;
 
         /*
          * We expect to have one or zero type related tags. If they appear
@@ -177,14 +183,42 @@ make_attribute(const org::entities::headline& h) {
     return r;
 }
 
+entities::element
+org_artefact_to_model_transform::make_element(const headline_type ht,
+    const std::string& qualified_parent, const org::entities::headline& h) {
+    entities::element r;
+    r.comment().original_content(section_to_text(h.section()));
+    r.documentation(r.comment().original_content());
+    r.name().simple(h.title());
+    r.name().qualified(qualified_parent + "::" + r.name().simple());
+
+    /*
+     * Determine the fallback based on the headline type.
+     */
+    if (ht == headline_type::module)
+        r.fallback_element_type(module_element_type);
+    else if (ht == headline_type::element)
+        r.fallback_element_type(object_element_type);
+    else {
+        BOOST_LOG_SEV(lg, error) << unexpected_headline_type << h.title();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_headline_type + h.title()));
+    }
+
+    if (!h.drawers().empty())
+        r.tagged_values(make_tagged_values(h.drawers()));
+
+    return r;
+}
+
 std::list<entities::element> org_artefact_to_model_transform::
 make_elements(const std::list<org::entities::headline>& headlines,
     entities::element& current) {
+
     /*
      * Process all top-level headlines.
      */
-    bool found_element(false);
-    bool found_attribute(false);
+    headline_type previous_ht(headline_type::ignore);
     std::list<entities::element> r;
     for (const auto& h : headlines) {
         BOOST_LOG_SEV(lg, debug) << "Processing headline: '"
@@ -196,60 +230,60 @@ make_elements(const std::list<org::entities::headline>& headlines,
          * note that if the user decided to use tags in sub-headlines
          * these are ignored as well.
          */
-        const auto ht(get_headline_type(h));
-        if (ht == headline_type::ignore) {
+        const auto current_ht(get_headline_type(h));
+        if (current_ht == headline_type::ignore) {
             BOOST_LOG_SEV(lg, debug) << "Ignoring headline: " << h.title();
-            continue;
-        }
-
-        /*
-         * If we found an attribute, all other headlines processed
-         * thus far must also be attributes.
-         */
-        if (ht == headline_type::attribute) {
-            found_attribute = true;
-            if (found_element) {
+        } else if (current_ht == headline_type::attribute) {
+            /*
+             * All other headlines processed thus far must also be
+             * attributes.
+             */
+            if (previous_ht == headline_type::element ||
+                previous_ht == headline_type::module) {
                 BOOST_LOG_SEV(lg, error) << unexpected_attribute << h.title();
                 BOOST_THROW_EXCEPTION(
                     transformation_error(unexpected_attribute + h.title()));
             }
 
-            current.attributes().push_back(make_attribute(h));
-            continue;
-        }
+            /*
+             * The container for attribute must be an element.
+             */
+            if (current.fallback_element_type() != object_element_type) {
+                BOOST_LOG_SEV(lg, error) << unexpected_composition << h.title();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(unexpected_composition + h.title()));
+            }
 
-        /*
-         * If the headline type is element, we don't expect to have
-         * already seen attributes.
-         */
-        if (ht == headline_type::element) {
-            found_element = true;
-            if (found_attribute) {
+            previous_ht = current_ht;
+            current.attributes().push_back(make_attribute(h));
+        } else if (current_ht == headline_type::element ||
+            current_ht == headline_type::module) {
+            /*
+             * We don't expect to have seen attributes.
+             */
+            if (previous_ht == headline_type::attribute) {
                 BOOST_LOG_SEV(lg, error) << unexpected_element << h.title();
                 BOOST_THROW_EXCEPTION(
                     transformation_error(unexpected_element + h.title()));
             }
 
             /*
-             * Since we contain elements, we must be a module.
+             * The container for modules and elements must be a
+             * module.
              */
-            current.fallback_element_type(module_element_type);
+            if (current.fallback_element_type() != module_element_type) {
+                BOOST_LOG_SEV(lg, error) << unexpected_composition << h.title();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(unexpected_composition + h.title()));
+            }
 
-            entities::element child;
-            child.fallback_element_type(object_element_type);
-            child.comment().original_content(section_to_text(h.section()));
-            child.documentation(child.comment().original_content());
-            child.name().simple(h.title());
-            child.name().qualified(current.name().qualified() + "::" +
-                child.name().simple());
-
-            /*
-             * Elements may not have drawers.
-             */
-            if (!h.drawers().empty())
-                child.tagged_values(make_tagged_values(h.drawers()));
-
+            previous_ht = current_ht;
+            auto child(make_element(current_ht, current.name().qualified(), h));
             r.splice(r.end(), make_elements(h.headlines(), child));
+        } else {
+            BOOST_LOG_SEV(lg, error) << unexpected_headline_type << h.title();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(unexpected_headline_type + h.title()));
         }
     }
 
@@ -295,8 +329,8 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         }
 
         /*
-         * We are only expecting "element" as our children, so if it's
-         * not throw.
+         * We are only expecting elements and modules as our children,
+         * so if we spot an attribute we need to throw.
          */
         if (ht == headline_type::attribute) {
             BOOST_LOG_SEV(lg, error) << unexpected_attribute << h.title();
@@ -307,21 +341,9 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         /*
          * Process the current element.
          */
-        entities::element current;
-        current.name().simple(h.title());
-        current.name().qualified(current.name().simple());
-        current.fallback_element_type(object_element_type);
-        current.comment().original_content(section_to_text(h.section()));
-        current.documentation(current.comment().original_content());
-
-        /*
-         * Elements may not have drawers.
-         */
-        if (!h.drawers().empty())
-            current.tagged_values(make_tagged_values(h.drawers()));
-
-        r.elements().splice(r.elements().end(),
-            make_elements(h.headlines(), current));
+        entities::element current(make_element(ht, empty, h));
+        auto& es(r.elements());
+        es.splice(es.end(), make_elements(h.headlines(), current));
     }
 
     stp.end_transform(r);

@@ -45,7 +45,7 @@ complete).
 In general, codecs use file extensions to determine the type of the
 codec.
 
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
 ** model_production_chain                                      :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -154,7 +154,7 @@ Raw set of variability overrides.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -515,7 +515,7 @@ Name of the codec to process this artefact.
 Contents of the artefact.
 
 #+end_src
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
 ** references_resolver                                         :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -535,7 +535,7 @@ Contents of the artefact.
 
 A cycle was detected in the references graph.
 
-* features                                                     :masd_element:
+* features                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

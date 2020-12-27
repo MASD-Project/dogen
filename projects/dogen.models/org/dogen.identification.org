@@ -15,7 +15,7 @@
 Collection of types related to naming, labelling and general
 identification within Dogen.
 
-* entities                                                     :masd_element:
+* entities                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -670,7 +670,7 @@ Version of the technical space to use.
 *** cpp_11                                                   :masd_attribute:
 *** cpp_14                                                   :masd_attribute:
 *** cpp_17                                                   :masd_attribute:
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

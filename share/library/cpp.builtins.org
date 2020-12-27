@@ -8,148 +8,148 @@
 
 Hardware-provided built-in types.
 * bool                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.boolean
-:masd.helper.family: Boolean
-:masd.cpp.aspect.requires_stream_manipulators: true
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.boolean
+  :masd.helper.family: Boolean
+  :masd.cpp.aspect.requires_stream_manipulators: true
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * char                                                         :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.text.character
-:masd.helper.family: Character
-:masd.cpp.streaming.remove_unprintable_characters: false
-:masd.cpp.streaming.requires_quoting: true
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.text.character
+  :masd.helper.family: Character
+  :masd.cpp.streaming.remove_unprintable_characters: false
+  :masd.cpp.streaming.requires_quoting: true
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * unsigned char                                                :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.core.byte
-:masd.helper.family: Character
-:masd.cpp.streaming.remove_unprintable_characters: false
-:masd.cpp.streaming.requires_quoting: true
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.core.byte
+  :masd.helper.family: Character
+  :masd.cpp.streaming.remove_unprintable_characters: false
+  :masd.cpp.streaming.requires_quoting: true
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:
 * int                                                          :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.integer
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.integer
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * unsigned int                                                 :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:masd.codec.is_default_enumeration_type: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :masd.codec.is_default_enumeration_type: true
+  :END:
 * short                                                        :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * unsigned short                                               :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * long                                                         :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * unsigned long                                                :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.can_be_enumeration_underlier: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.can_be_enumeration_underlier: true
+  :END:
 * long long                                                    :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.in_global_module: true
+  :END:
 * unsigned long long                                           :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.in_global_module: true
+  :END:
 * float                                                        :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.single_float
-:masd.helper.family: Number
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.is_floating_point: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.single_float
+  :masd.helper.family: Number
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.is_floating_point: true
+  :END:
 * double                                                       :masd_element:
-:PROPERTIES:
-:masd.mapping.target: masd.lam.numeric.double_float
-:masd.helper.family: Number
-:masd.cpp.aspect.requires_stream_manipulators: true
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:masd.codec.is_floating_point: true
-:END:
+  :PROPERTIES:
+  :masd.mapping.target: masd.lam.numeric.double_float
+  :masd.helper.family: Number
+  :masd.cpp.aspect.requires_stream_manipulators: true
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.cpp.io.builtin_header.primary_inclusion_directive: <boost/io/ios_state.hpp>
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :masd.codec.is_floating_point: true
+  :END:
 * long double                                                  :masd_element:
-:PROPERTIES:
-:masd.helper.family: Number
-:masd.cpp.inclusion_required: false
-:masd.cpp.aspect.requires_stream_manipulators: true
-:masd.cpp.aspect.requires_manual_default_constructor: true
-:masd.codec.stereotypes: masd::builtin
-:masd.codec.can_be_primitive_underlier: true
-:masd.codec.in_global_module: true
-:END:
+  :PROPERTIES:
+  :masd.helper.family: Number
+  :masd.cpp.inclusion_required: false
+  :masd.cpp.aspect.requires_stream_manipulators: true
+  :masd.cpp.aspect.requires_manual_default_constructor: true
+  :masd.codec.stereotypes: masd::builtin
+  :masd.codec.can_be_primitive_underlier: true
+  :masd.codec.in_global_module: true
+  :END:

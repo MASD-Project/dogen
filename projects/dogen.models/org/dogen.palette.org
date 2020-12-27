@@ -34,7 +34,7 @@ as possible, so we can evaluate how they work together.
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
   :END:
-* package                                                      :masd_element:
+* package                                                       :masd_module:
 ** palette_test_one_one                                        :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable

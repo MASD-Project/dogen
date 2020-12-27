@@ -22,143 +22,143 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-* core                                                         :masd_element:
-:PROPERTIES:
-:masd.codec.dia.comment: true
-:END:
+* core                                                          :masd_module:
+  :PROPERTIES:
+  :masd.codec.dia.comment: true
+  :END:
 
 Types that don't belong to any of the more
 specific buckets.
 
 ** object                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::mapping::extensible_mappable
+  :END:
 ** byte                                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::mapping::extensible_mappable
+  :END:
 ** boolean                                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::mapping::extensible_mappable
+  :END:
 ** pointer                                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
-* text                                                         :masd_element:
-:PROPERTIES:
-:masd.codec.dia.comment: true
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::mapping::extensible_mappable
+  :END:
+* text                                                         :masd_module:
+  :PROPERTIES:
+  :masd.codec.dia.comment: true
+  :END:
 
 Types related to text.
 
 ** character                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** string                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
-* numeric                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.dia.comment: true
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
+* numeric                                                       :masd_module:
+  :PROPERTIES:
+  :masd.codec.dia.comment: true
+  :END:
 
 Types that represent numeric quantities.
 
 ** integer8                                                    :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** integer32                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** integer16                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** integer64                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** integer                                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** single_float                                                :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** double_float                                                :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** decimal                                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
-* chrono                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.dia.comment: true
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
+* chrono                                                        :masd_module:
+  :PROPERTIES:
+  :masd.codec.dia.comment: true
+  :END:
 
 Types related to time representation.
 
 ** date                                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** time                                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** date_time                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
-* container                                                    :masd_element:
-:PROPERTIES:
-:masd.codec.dia.comment: true
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
+* container                                                     :masd_module:
+  :PROPERTIES:
+  :masd.codec.dia.comment: true
+  :END:
 
 Types that contain other types.
 
 ** unordered_dictionary                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** ordered_dictionary                                          :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** ordered_set                                                 :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** static_array                                                :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** linked_list                                                 :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** dynamic_array                                               :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** unordered_set                                               :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** stack                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::mapping::extensible_mappable
+   :END:
 ** queue                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::mapping::extensible_mappable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::mapping::extensible_mappable
+  :END:

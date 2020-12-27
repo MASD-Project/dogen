@@ -22,7 +22,7 @@
 
 Orchestration-based imlementation of the Dogen product API.
 
-* transforms                                                   :masd_element:
+* transforms                                                    :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -128,7 +128,7 @@ An error occurred in the factory whilst making.
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -158,7 +158,7 @@ An error ocurred whilst projecting elements from one space into another.
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
-* features                                                     :masd_element:
+* features                                                      :masd_module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:

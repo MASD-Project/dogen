@@ -14,7 +14,7 @@
 :masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
-* wale                                                         :masd_element:
+* wale                                                          :masd_module:
 ** text_template                                               :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: ConfigurableViaKvps
@@ -57,7 +57,7 @@ An error occurred whilst formatting.
 
 An error occurred whilst extracting a key.
 
-* stitch                                                       :masd_element:
+* stitch                                                        :masd_module:
 ** parser                                                      :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -241,7 +241,7 @@ Set of keys that are expected to be supplied.
 
 Key value pairs that were supplied for instantiation.
 
-* helpers                                                      :masd_element:
+* helpers                                                       :masd_module:
 ** kvp_validator                                               :masd_element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable

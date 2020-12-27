@@ -44,7 +44,8 @@ private:
     enum class headline_type {
         ignore,
         attribute,
-        element
+        element,
+        module
     };
 
     /**
@@ -65,12 +66,19 @@ private:
     static std::list<identification::entities::tagged_value>
     make_tagged_values(const std::list<org::entities::drawer>& drawers);
 
-
     /**
      * @brief Processes the headline as if containing a codec
      * attribute.
      */
     static entities::attribute make_attribute(const org::entities::headline& h);
+
+    /**
+     * @brief Processes the headline as if containing a codec
+     * element.
+     */
+    static entities::element make_element(const headline_type ht,
+        const std::string& qualified_parent,
+        const org::entities::headline& h);
 
     /**
      * @brief Processes the headline as if containing an element.
