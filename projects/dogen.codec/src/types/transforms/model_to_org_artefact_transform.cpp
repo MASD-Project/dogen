@@ -145,6 +145,30 @@ void model_to_org_artefact_transform::insert_attribute(std::ostream& s,
     }
 }
 
+void model_to_org_artefact_transform::insert_element_attributes(std::ostream& s,
+    const entities::element& e) {
+    /*
+     * Don't bother outputting any of these flags if they are false.
+     */
+    if (e.can_be_enumeration_underlier())
+        s << ":masd.codec.can_be_primitive_underlier: true" << std::endl;
+
+    if (e.in_global_module())
+        s << ":masd.codec.in_global_module: true" << std::endl;
+
+    if (e.can_be_enumeration_underlier())
+        s << ":masd.codec.can_be_enumeration_underlier: true" << std::endl;
+
+    if (e.is_default_enumeration_type())
+        s << ":masd.codec.is_default_enumeration_type: true" << std::endl;
+
+    if (e.is_associative_container())
+        s << ":masd.codec.is_associative_container: true" << std::endl;
+
+    if (e.is_floating_point())
+        s << ":masd.codec.is_floating_point: true" << std::endl;
+}
+
 void model_to_org_artefact_transform::insert_element(std::ostream& s,
     const unsigned int level, const entities::element& e) {
     s << make_headline(level, e.name().simple(), element_tag);
@@ -155,6 +179,7 @@ void model_to_org_artefact_transform::insert_element(std::ostream& s,
         insert_tagged_values(s, tv);
         insert_parents(s, e.parents());
         insert_stereotypes(s, e.stereotypes());
+        insert_element_attributes(s, e);
         s << ":END:" << std::endl;
 
         if (!e.documentation().empty())

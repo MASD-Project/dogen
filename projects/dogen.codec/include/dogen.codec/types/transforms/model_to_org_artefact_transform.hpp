@@ -57,6 +57,8 @@ private:
         const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,
         const unsigned int level, const entities::attribute& a);
+    static void insert_element_attributes(std::ostream& s,
+        const entities::element& e);
     static void insert_element(std::ostream& s,
         const unsigned int level, const entities::element& e);
     static void walk_parent_to_child(std::ostream& s, const unsigned int level,
