@@ -50,7 +50,7 @@ apply(const features::meta_data::feature_group& fg, entities::element& e) {
         e.parents().push_back(p);
 
     if (scfg.can_be_primitive_underlier)
-        e.can_be_enumeration_underlier(*scfg.can_be_primitive_underlier);
+        e.can_be_primitive_underlier(*scfg.can_be_primitive_underlier);
 
     if (scfg.in_global_module)
         e.in_global_module(*scfg.in_global_module);

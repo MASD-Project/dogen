@@ -150,7 +150,7 @@ void model_to_org_artefact_transform::insert_element_attributes(std::ostream& s,
     /*
      * Don't bother outputting any of these flags if they are false.
      */
-    if (e.can_be_enumeration_underlier())
+    if (e.can_be_primitive_underlier())
         s << ":masd.codec.can_be_primitive_underlier: true" << std::endl;
 
     if (e.in_global_module())
