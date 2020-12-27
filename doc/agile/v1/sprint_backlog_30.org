@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-27 Sun 11:47]
+#+CAPTION: Clock summary at [2020-12-27 Sun 12:43]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *39:38* |       |       | 100.0 |
+| *Total time*                                        | *40:31* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 39:38   |       |       | 100.0 |
-| Active                                              |         | 39:38 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  15.3 |
+| Stories                                             | 40:31   |       |       | 100.0 |
+| Active                                              |         | 40:31 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  15.0 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.4 |
-| Sprint and product backlog grooming                 |         |       |  0:39 |   1.6 |
-| Add support for reading org mode documents          |         |       | 19:46 |  49.9 |
+| Sprint and product backlog grooming                 |         |       |  0:46 |   1.9 |
+| Add support for reading org mode documents          |         |       | 19:46 |  48.8 |
 | Remove leading and trailing new lines from comments |         |       |  1:03 |   2.6 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.9 |
-| Add org-mode codec for input                        |         |       |  8:10 |  20.6 |
-| Convert library models into org                     |         |       |  1:26 |   3.6 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.8 |
+| Add org-mode codec for input                        |         |       |  8:56 |  22.0 |
+| Convert library models into org                     |         |       |  1:26 |   3.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -283,6 +283,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 12:35]--[2020-12-27 Sun 12:42] =>  0:07
     CLOCK: [2020-12-27 Sun 11:44]--[2020-12-27 Sun 11:47] =>  0:03
     CLOCK: [2020-12-26 Sat 20:38]--[2020-12-26 Sat 20:39] =>  0:01
     CLOCK: [2020-12-16 Wed 19:02]--[2020-12-16 Wed 19:11] =>  0:09
@@ -290,6 +291,12 @@ Time spent creating the demo and presentation.
     :END:
 
 Updates to sprint and product backlog.
+
+Notes:
+
+- create a v4 in product backlog that captures new features. v2 should
+  only have bugs and structural changes that impact the architecture;
+  v3 is tooling related features only.
 
 *** COMPLETED Stitch formatter updates                                :story:
     CLOSED: [2020-12-18 Fri 09:05]
@@ -477,6 +484,7 @@ problem at hand.
 *** COMPLETED Add org-mode codec for input                            :story:
     CLOSED: [2020-12-26 Sat 20:58]
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 11:48]--[2020-12-27 Sun 12:34] =>  0:46
     CLOCK: [2020-12-26 Sat 20:39]--[2020-12-26 Sat 20:53] =>  0:14
     CLOCK: [2020-12-26 Sat 10:01]--[2020-12-26 Sat 10:26] =>  0:25
     CLOCK: [2020-12-25 Fri 21:02]--[2020-12-25 Fri 21:14] =>  0:12

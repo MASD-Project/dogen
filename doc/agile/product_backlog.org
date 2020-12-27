@@ -78,6 +78,32 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Reorganise dogen output                                           :story:
+
+At present we have many different artefacts we're interested in:
+
+- the target model;
+- the reference models;
+- log file;
+- tracing data;
+- reports;
+- etc.
+
+In the past we decided to place all references in either the shared
+library directory, or the same directory as the target models. In
+terms of the output, we created the "by-products" directory where all
+files other than log files go, and the directory for the log
+file. However, it perhaps makes more sense to have an holistic view:
+why not place _all_ files, except for references, in the same
+directory as the target model? If we did this, we would be able to
+create org files that cross reference artefacts:
+
+- link to all tracing files in the org file with all transforms.
+- link to log file.
+
+This only makes sense when we move all models into the component
+directory, under =modeling=.
+
 *** Consider adding support for C++ container generation              :story:
 
 At present we are creating a lot of maps etc. These have common access
