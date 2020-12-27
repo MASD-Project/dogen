@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-27 Sun 14:34]
+#+CAPTION: Clock summary at [2020-12-27 Sun 18:22]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *41:39* |       |       | 100.0 |
+| *Total time*                                        | *43:29* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 41:39   |       |       | 100.0 |
-| Active                                              |         | 41:39 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  14.6 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.4 |
-| Sprint and product backlog grooming                 |         |       |  0:46 |   1.8 |
-| Add support for reading org mode documents          |         |       | 19:46 |  47.5 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.5 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.6 |
-| Add org-mode codec for input                        |         |       |  8:56 |  21.4 |
-| Convert library models into org                     |         |       |  1:26 |   3.4 |
-| Convert reference models into org                   |         |       |  1:08 |   2.7 |
+| Stories                                             | 43:29   |       |       | 100.0 |
+| Active                                              |         | 43:29 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  14.0 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.3 |
+| Sprint and product backlog grooming                 |         |       |  0:48 |   1.8 |
+| Add support for reading org mode documents          |         |       | 19:46 |  45.5 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.4 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.4 |
+| Add org-mode codec for input                        |         |       |  8:56 |  20.5 |
+| Convert library models into org                     |         |       |  1:26 |   3.3 |
+| Convert reference models into org                   |         |       |  2:56 |   6.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -284,6 +284,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 18:20]--[2020-12-27 Sun 18:22] =>  0:02
     CLOCK: [2020-12-27 Sun 12:35]--[2020-12-27 Sun 12:42] =>  0:07
     CLOCK: [2020-12-27 Sun 11:44]--[2020-12-27 Sun 11:47] =>  0:03
     CLOCK: [2020-12-26 Sat 20:38]--[2020-12-26 Sat 20:39] =>  0:01
@@ -606,8 +607,11 @@ Notes:
   bit of work to port this into codec. Instead, we can just convert
   the models that require this manually.
 
-*** STARTED Convert reference models into org                         :story:
+*** COMPLETED Convert reference models into org                       :story:
+    CLOSED: [2020-12-27 Sun 18:19]
     :LOGBOOK:
+    CLOCK: [2020-12-27 Sun 18:02]--[2020-12-27 Sun 18:19] =>  0:17
+    CLOCK: [2020-12-27 Sun 16:30]--[2020-12-27 Sun 18:01] =>  1:31
     CLOCK: [2020-12-27 Sun 13:26]--[2020-12-27 Sun 14:34] =>  1:08
     :END:
 
@@ -620,6 +624,14 @@ Notes:
   know what is what, other than creating the notion of packages in the
   codec model. We need to read the fallback type and use it to
   populate a new tag for modules.
+
+*** COMPLETED Rename =org_mode= model                                 :story:
+    CLOSED: [2020-12-27 Sun 18:21]
+
+*Rationale*: implemented as part of the org codec work.
+
+Seems like a better name is needed for this model. Perhaps =orgmode=?
+Or just =org=? Just don't like =org_mode=.
 
 *** JSON models do not create containment structure                   :story:
 
@@ -796,11 +808,6 @@ and a closing bracket:
 
 However, maybe this is just too much work for just a few lines of code
 and it will increase the complexity a lot for a small win.
-
-*** Rename =org_mode= model                                           :story:
-
-Seems like a better name is needed for this model. Perhaps =orgmode=?
-Or just =org=? Just don't like =org_mode=.
 
 *** Remove dia-specific types in dia model                            :story:
 
