@@ -1321,6 +1321,9 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_org_produces_expected_model) {
 
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
 
+/*
+ * Dia Models
+*/
 BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_json_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_csharpmodel_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_product;
@@ -1343,6 +1346,36 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_json_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_lammodel_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_product;
     const auto t(csharp_ref_impl_product::input_csharprefimpl_lammodel_json());
+    const auto od(csharp_ref_impl_product::project_directory());
+    const auto m(apply_physical_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
+}
+
+/*
+ * Org Models
+*/
+BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_org_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_csharpmodel_org_produces_expected_model");
+    using dogen::utility::test_data::csharp_ref_impl_product;
+    const auto t(csharp_ref_impl_product::input_csharprefimpl_csharpmodel_org());
+    const auto od(csharp_ref_impl_product::project_directory());
+    const auto m(apply_physical_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_org_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_directorysettings_org_produces_expected_model");
+    using dogen::utility::test_data::csharp_ref_impl_product;
+    const auto t(csharp_ref_impl_product::input_csharprefimpl_directory_settings_org());
+    const auto od(csharp_ref_impl_product::project_directory());
+    const auto m(apply_physical_model_production(t, od));
+    BOOST_CHECK(check_for_differences(od, m));
+}
+
+BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_org_produces_expected_model) {
+    SETUP_TEST_LOG("csharprefimpl_lammodel_org_produces_expected_model");
+    using dogen::utility::test_data::csharp_ref_impl_product;
+    const auto t(csharp_ref_impl_product::input_csharprefimpl_lammodel_org());
     const auto od(csharp_ref_impl_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
