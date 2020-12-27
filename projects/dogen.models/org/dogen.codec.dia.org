@@ -93,120 +93,121 @@ entity.
 For details on the stereotypes see the MASD UML profile.
 
 * adaptation_error                                             :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::exception
+  :END:
 
 A fatal error has occurred while adapting a Dia model object
 into its masd representation.
 
 * grapher                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * graphing_error                                               :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::exception
+  :END:
 
 An error has occurred while building the dia object graph.
 
 * processed_comment_factory                                    :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * processed_object_factory                                     :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * processed_attribute                                          :masd_element:
 ** name                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Name of the property.
 
 ** type                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Type of the property.
 
 ** comment                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: processed_comment
-:END:
+   :PROPERTIES:
+   :masd.codec.type: processed_comment
+   :END:
 
 Any comments associated with the property.
 
 ** value                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 * processed_object                                             :masd_element:
+
 Representation of a dia object after first stage processing.
 
 ** id                                                        :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Dia object id.
 
 ** name                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Name of the object in dia format.
 
 ** dia_object_type                                           :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: dia_object_types
-:END:
+   :PROPERTIES:
+   :masd.codec.type: dia_object_types
+   :END:
 
 Type of the dia object.
 
 ** stereotypes                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 ** comment                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: processed_comment
-:END:
+   :PROPERTIES:
+   :masd.codec.type: processed_comment
+   :END:
 
 Any comments associated with the object.
 
 On the case of a UML note, represents the text of the note.
 
 ** child_node_id                                             :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 If the object is contained in another object, its node id.
 
 ** connection                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: boost::optional<std::pair<std::string,std::string>>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: boost::optional<std::pair<std::string,std::string>>
+   :END:
 
 Connections this object may have with other objects.
 
 ** attributes                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::list<processed_attribute>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::list<processed_attribute>
+   :END:
 
 All attributes associated with dia object.
 
 * dia_object_types                                             :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::enumeration
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::enumeration
+  :END:
 
 Identifier for the type of Dia object.
 
@@ -232,76 +233,77 @@ UML Message
 UML Realization
 
 * validator                                                    :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * validation_error                                             :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::exception
+  :END:
 
 The object profile is not valid.
 
 * traits                                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * processed_comment                                            :masd_element:
+
 Contains the same content as the original dia comment, but split by type of data.
 
 ** documentation                                             :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Text of the comment, excluding all Dogen instructions.
 
 ** tagged_values                                             :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::list<identification::entities::tagged_value>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::list<identification::entities::tagged_value>
+   :END:
 
 Tagged values extracted from this comment.
 
 ** applicable_to_parent_object                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
+   :PROPERTIES:
+   :masd.codec.type: bool
+   :END:
 
 If true, the comment should be attached to the dia object containing it.
 
 ** original_content                                          :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 Content of the field as it was read from the dia object.
 
 * building_error                                               :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::exception
+  :END:
 * visitor                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :END:
 ** builder_                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: builder
-:END:
+   :PROPERTIES:
+   :masd.codec.type: builder
+   :END:
 * builder                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * adapter                                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * main                                                         :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::entry_point, dogen::untypable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :END:
 * CMakeLists                                                   :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:

@@ -2,188 +2,188 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 * document                                                     :masd_element:
 ** openapi                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The semantic version number of the OpenAPI Specification version that the OpenAPI document uses.
 
 ** info                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: info
-:END:
+   :PROPERTIES:
+   :masd.codec.type: info
+   :END:
 
 Provides metadata about the API.
 
 ** servers                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::list<server>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::list<server>
+   :END:
 
 An array of Server Objects, which provide connectivity information to a target server.
 
 ** paths                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: paths
-:END:
+   :PROPERTIES:
+   :masd.codec.type: paths
+   :END:
 
 The available paths and operations for the API.
 
 ** components                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: components
-:END:
+   :PROPERTIES:
+   :masd.codec.type: components
+   :END:
 
 An element to hold various schemas for the specification.
 
 ** security                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: security_requirements
-:END:
+   :PROPERTIES:
+   :masd.codec.type: security_requirements
+   :END:
 
 A declaration of which security mechanisms can be used across the API.
 
 ** tags                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: tags
-:END:
+   :PROPERTIES:
+   :masd.codec.type: tags
+   :END:
 
 A list of tags used by the specification with additional metadata.
 
 ** external_docs                                             :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: external_documentation
-:END:
+   :PROPERTIES:
+   :masd.codec.type: external_documentation
+   :END:
 
 Additional external documentation.
 
 * info                                                         :masd_element:
 ** title                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The title of the application.
 
 ** description                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 A short description of the application. CommonMark syntax may be used for rich text representation.
 
 ** terms_of_service                                          :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 A URL to the Terms of Service for the API.
 
 ** contact                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: contact
-:END:
+   :PROPERTIES:
+   :masd.codec.type: contact
+   :END:
 
 The contact information for the exposed API.
 
 ** license                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: license
-:END:
+   :PROPERTIES:
+   :masd.codec.type: license
+   :END:
 
 The license information for the exposed API.
 
 ** version                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The version of the OpenAPI document itself.
 
 * server                                                       :masd_element:
 ** url                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 A URL to the target host.
 
 ** description                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 An optional string describing the host designated by the URL.
 
 ** variables                                                 :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, server_variable>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, server_variable>
+   :END:
 
 A map between a variable name and its value. The value is used for substitution in the server's URL template.
 
 * paths                                                        :masd_element:
 * components                                                   :masd_element:
 ** schemas                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, schema>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, schema>
+   :END:
 
 An object to hold reusable schema objects.
 
 ** responses                                                 :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, response>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, response>
+   :END:
 
 An object to hold reusable response objects.
 
 ** parameters                                                :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, parameter>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, parameter>
+   :END:
 
 An object to hold reusable parameter objects.
 
 ** examples                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, example>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, example>
+   :END:
 
 An object to hold reusable examples objects.
 
 ** request_bodies                                            :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, request_body>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, request_body>
+   :END:
 
 An object to hold reusable request bodies objects.
 
 ** headers                                                   :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, request_header>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, request_header>
+   :END:
 
 An object to hold reusable header objects.
 
 ** security_schemes                                          :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, security_scheme>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, security_scheme>
+   :END:
 
 An object to hold reusable security scheme objects.
 
 ** links                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, link>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, link>
+   :END:
 
 An object to hold reusable links objects.
 
 ** callbacks                                                 :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, callback>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::unordered_map<std::string, callback>
+   :END:
 
 An object to hold reusable callbacks objects.
 
@@ -193,60 +193,60 @@ An object to hold reusable callbacks objects.
 * external_documentation                                       :masd_element:
 * contact                                                      :masd_element:
 ** name                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The identifying name of the contact person/organization.
 
 ** url                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The URL pointing to the contact information.
 
 ** email                                                     :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The email address of the contact person/organization.
 
 * licence                                                      :masd_element:
 ** name                                                      :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The license name used for the API.
 
 ** url                                                       :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 A URL to the license used for the API.
 
 * server_variable                                              :masd_element:
 ** enumeration                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::list<std::string>
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::list<std::string>
+   :END:
 
 An enumeration of string values to be used if the substitution options are from a limited set.
 
 ** default_value                                             :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 The default value to use for substitution.
 
 ** description                                               :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 An optional description for the server variable.
 

@@ -23,27 +23,27 @@ We should try to keep all elements in one screen as much
 as possible, so we can evaluate how they work together.
 
 * palette_test_one_one                                         :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
 * palette_test_one_two                                         :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :END:
 * palette_test_one_three                                       :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
-:END:
+  :PROPERTIES:
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
+  :END:
 * package                                                      :masd_element:
 ** palette_test_one_one                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 ** palette_test_one_two                                        :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+   :END:
 ** palette_test_one_three                                      :masd_element:
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
-:END:
+   :PROPERTIES:
+   :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
+   :END:

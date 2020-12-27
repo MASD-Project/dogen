@@ -20,12 +20,13 @@ property. You can see the use of comments at the class level and property
 level.
 
 * one_property                                                 :masd_element:
+
 Hello World class.
 
 ** property                                                  :masd_attribute:
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
+   :PROPERTIES:
+   :masd.codec.type: std::string
+   :END:
 
 This is a sample property.
 
