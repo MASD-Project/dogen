@@ -243,7 +243,6 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
     return s.str();
 }
 
-
 entities::artefact model_to_org_artefact_transform::
 apply(const transforms::context& ctx, const boost::filesystem::path& p,
     const entities::model& m) {
