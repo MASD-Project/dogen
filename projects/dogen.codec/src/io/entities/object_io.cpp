@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.codec/io/entities/comment_io.hpp"
@@ -78,12 +77,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::codec::e
 namespace dogen::codec::entities {
 
 std::ostream& operator<<(std::ostream& s, const object& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::codec::entities::object\"" << ", "
       << "\"comment\": " << v.comment() << ", "
@@ -93,8 +86,7 @@ std::ostream& operator<<(std::ostream& s, const object& v) {
       << "\"stereotypes\": " << "\"" << tidy_up_string(v.stereotypes()) << "\"" << ", "
       << "\"container_id\": " << "\"" << tidy_up_string(v.container_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "
-      << "\"attributes\": " << v.attributes() << ", "
-      << "\"is_package\": " << v.is_package()
+      << "\"attributes\": " << v.attributes()
       << " }";
     return(s);
 }

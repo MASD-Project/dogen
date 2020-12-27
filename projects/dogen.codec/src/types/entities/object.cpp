@@ -22,9 +22,6 @@
 
 namespace dogen::codec::entities {
 
-object::object()
-    : is_package_(static_cast<bool>(0)) { }
-
 object::object(object&& rhs)
     : comment_(std::move(rhs.comment_)),
       id_(std::move(rhs.id_)),
@@ -33,8 +30,7 @@ object::object(object&& rhs)
       stereotypes_(std::move(rhs.stereotypes_)),
       container_id_(std::move(rhs.container_id_)),
       connection_(std::move(rhs.connection_)),
-      attributes_(std::move(rhs.attributes_)),
-      is_package_(std::move(rhs.is_package_)) { }
+      attributes_(std::move(rhs.attributes_)) { }
 
 object::object(
     const dogen::codec::entities::comment& comment,
@@ -44,8 +40,7 @@ object::object(
     const std::string& stereotypes,
     const std::string& container_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::list<dogen::codec::entities::attribute>& attributes,
-    const bool is_package)
+    const std::list<dogen::codec::entities::attribute>& attributes)
     : comment_(comment),
       id_(id),
       name_(name),
@@ -53,8 +48,7 @@ object::object(
       stereotypes_(stereotypes),
       container_id_(container_id),
       connection_(connection),
-      attributes_(attributes),
-      is_package_(is_package) { }
+      attributes_(attributes) { }
 
 void object::swap(object& other) noexcept {
     using std::swap;
@@ -66,7 +60,6 @@ void object::swap(object& other) noexcept {
     swap(container_id_, other.container_id_);
     swap(connection_, other.connection_);
     swap(attributes_, other.attributes_);
-    swap(is_package_, other.is_package_);
 }
 
 bool object::operator==(const object& rhs) const {
@@ -77,8 +70,7 @@ bool object::operator==(const object& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         container_id_ == rhs.container_id_ &&
         connection_ == rhs.connection_ &&
-        attributes_ == rhs.attributes_ &&
-        is_package_ == rhs.is_package_;
+        attributes_ == rhs.attributes_;
 }
 
 object& object::operator=(object other) {
@@ -213,14 +205,6 @@ void object::attributes(const std::list<dogen::codec::entities::attribute>& v) {
 
 void object::attributes(const std::list<dogen::codec::entities::attribute>&& v) {
     attributes_ = std::move(v);
-}
-
-bool object::is_package() const {
-    return is_package_;
-}
-
-void object::is_package(const bool v) {
-    is_package_ = v;
 }
 
 }

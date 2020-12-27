@@ -71,8 +71,7 @@ public:
         const bool is_default_enumeration_type,
         const bool is_associative_container,
         const bool is_floating_point,
-        const dogen::identification::entities::codec_id& containing_element_id,
-        const bool is_package);
+        const dogen::identification::entities::codec_id& containing_element_id);
 
 public:
     const std::list<dogen::identification::entities::tagged_value>& tagged_values() const;
@@ -197,14 +196,6 @@ public:
     void containing_element_id(const dogen::identification::entities::codec_id&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the element represents a package.
-     */
-    /**@{*/
-    bool is_package() const;
-    void is_package(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const element& rhs) const;
     bool operator!=(const element& rhs) const {
@@ -234,7 +225,6 @@ private:
     bool is_associative_container_;
     bool is_floating_point_;
     dogen::identification::entities::codec_id containing_element_id_;
-    bool is_package_;
 };
 
 }
