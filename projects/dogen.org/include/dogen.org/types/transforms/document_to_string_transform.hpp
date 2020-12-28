@@ -26,8 +26,11 @@
 #endif
 
 #include <string>
+#include <ostream>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.org/types/entities/drawer.hpp"
+#include "dogen.org/types/entities/headline.hpp"
 #include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::transforms {
@@ -36,6 +39,14 @@ namespace dogen::org::transforms {
  * @brief Converts an org model document into a string.
  */
 class document_to_string_transform final {
+private:
+    static void render_drawers(std::ostream& os,
+        const unsigned int level,
+        const std::list<entities::drawer>& ds);
+    static void render_section(std::ostream& os,
+        const entities::section& sec);
+    static void render_headline(std::ostream& os, const entities::headline& h);
+
 public:
     static std::string apply(boost::shared_ptr<tracing::tracer> tracer,
         const entities::document& doc);
