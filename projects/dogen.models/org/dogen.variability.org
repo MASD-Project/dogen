@@ -86,18 +86,23 @@ Feature name can be matched partially.
 Determines how a feature can be bound to a modeling element.
 
 *** any                                                      :masd_attribute:
+
 Feature can be configured anywhere.
 
 *** global                                                   :masd_attribute:
+
 Feature can only be configured in the root module.
 
 *** element                                                  :masd_attribute:
+
 Feature can be configured in any modeling element.
 
 *** property                                                 :masd_attribute:
+
 Feature can only be configured in a property of a modeling element.
 
 *** operation                                                :masd_attribute:
+
 Feature can only be configured in an operation of a modeling element.
 
 ** feature_model                                               :masd_element:
@@ -145,24 +150,31 @@ Overrides for the default value, if any.
 What values can a feature have.
 
 *** text                                                     :masd_attribute:
+
 Represents a text value.
 
 *** text_collection                                          :masd_attribute:
+
 Represents a collection of text values.
 
 *** number                                                   :masd_attribute:
+
 Represents a numeric integral value.
 
 *** boolean                                                  :masd_attribute:
+
 Represents a boolean value.
 
 *** key_value_pair                                           :masd_attribute:
+
 Represents a pair of key and value.
 
 *** comma_separated                                          :masd_attribute:
+
 Represents a CSV input that is split into a collection of text values.
 
 *** comma_separated_collection                               :masd_attribute:
+
 Represents a collection of CSV input that is split into a collection of text values.
 
 ** profile_template                                            :masd_element:
@@ -442,9 +454,11 @@ Which base layer does this profile rely on, if any.
 What action to take when binding.
 
 *** ignore                                                   :masd_attribute:
+
 Ignores the implict relationship.
 
 *** copy                                                     :masd_attribute:
+
 Copy across the value of the feature from the related element
 
 ** profile_repository                                          :masd_element:

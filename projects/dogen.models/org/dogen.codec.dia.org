@@ -212,24 +212,31 @@ All attributes associated with dia object.
 Identifier for the type of Dia object.
 
 ** uml_large_package                                         :masd_attribute:
+
 A UML package
 
 ** uml_class                                                 :masd_attribute:
+
 A UML class
 
 ** uml_generalization                                        :masd_attribute:
+
 UML Inheritance
 
 ** uml_association                                           :masd_attribute:
+
 UML Association
 
 ** uml_note                                                  :masd_attribute:
+
 UML Note
 
 ** uml_message                                               :masd_attribute:
+
 UML Message
 
 ** uml_realization                                           :masd_attribute:
+
 UML Realization
 
 * validator                                                    :masd_element:

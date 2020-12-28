@@ -294,6 +294,7 @@ C++ technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -339,6 +340,7 @@ const <#= qn #>& rhs) {
 Generates header files for archetypes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -409,6 +411,7 @@ void apply(const text::transforms::context& ctx, const text::entities::model& lp
 Generates implementation files for archetypes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -459,6 +462,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates header files for archetype factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -533,6 +537,7 @@ public:
 Generates implementation files for archetype factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -667,6 +672,7 @@ physical::entities::archetype <#= sn #>::make() {
 Generates header files for facet transforms.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -741,6 +747,7 @@ public:
 Generates implementation files for facet transforms.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -833,6 +840,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
 Generates header files for facet factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -907,6 +915,7 @@ public:
 Generates implementation files for facet factory.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1036,6 +1045,7 @@ physical::entities::facet <#= sn #>::make() {
 Generates header files for archetypes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1105,6 +1115,7 @@ public:
 Generates implementation files for archetypes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1217,6 +1228,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 Generates header files for backend factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1286,6 +1298,7 @@ public:
 Generates header files for parts.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1348,6 +1361,7 @@ public:
 Generates header files for part factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1417,6 +1431,7 @@ public:
 Generates header files for helpers.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1494,6 +1509,7 @@ public:
 Generates header files for helper factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1568,6 +1584,7 @@ public:
 Generates header files for archetype_kind factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1637,6 +1654,7 @@ public:
 Generates implementation files for backend factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1794,6 +1812,7 @@ physical::entities::backend <#= sn #>::make() {
 Generates implementation files for parts.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1840,6 +1859,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates implementation files for part factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1932,6 +1952,7 @@ physical::entities::part <#= sn #>::make() {
 Generates implementation files for helpers.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -1979,6 +2000,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates implementation files for helper factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2132,6 +2154,7 @@ physical::entities::helper <#= sn #>::make() {
 Generates implementation files for archetype_kind factories.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2207,6 +2230,7 @@ physical::entities::archetype_kind <#= sn #>::make() {
 Generates header files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2633,6 +2657,7 @@ inline void swap(
 Generates forward declarations for classes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2692,6 +2717,7 @@ class <#= o.name().simple() #>;
 Generates header files for namespaces.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2763,6 +2789,7 @@ namespace <#= m.name().simple() #> {
 Generates header files for visitors.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -2870,6 +2897,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcep
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3099,6 +3127,7 @@ inline void swap(
 Generates forward declarations for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3158,6 +3187,7 @@ class <#= p.name().simple() #>;
 Generates implementation files for feature template bundles
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3303,6 +3333,7 @@ public:
 Generates header files for feature bundles.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3449,6 +3480,7 @@ public:
 Generates header files for feature bundles.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3516,6 +3548,7 @@ public:
 Generates implementation file for entry point.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -3578,6 +3611,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4070,6 +4104,7 @@ const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.nam
 Generates header files for exceptions.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4173,6 +4208,7 @@ private:
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4266,6 +4302,7 @@ enum class <#= ye.name().simple() #> : <#= ast.get_qualified_name(ye.underlying_
 Generates forward declarations for visitors.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4323,6 +4360,7 @@ class <#= o.name().simple() #>;
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4481,6 +4519,7 @@ void <#= sn #>::swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #> {
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4521,6 +4560,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates implementation files for feature templates.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4711,6 +4751,7 @@ std::list<dogen::variability::entities::feature_template>
 Generates implementation files for feature bundles.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -4898,6 +4939,7 @@ std::list<dogen::variability::entities::feature>
 Generates header files for feature bundles.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
@@ -5194,6 +5236,7 @@ C++ technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5233,6 +5276,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5274,6 +5318,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5355,6 +5400,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5406,6 +5452,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5455,6 +5502,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5518,6 +5566,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5557,6 +5606,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5601,6 +5651,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5659,6 +5710,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5706,6 +5758,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5740,6 +5793,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 Generates header files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5815,6 +5869,7 @@ public:
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5932,6 +5987,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -5993,6 +6049,7 @@ public:
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -6031,6 +6088,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -6104,6 +6162,7 @@ public:
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::hash #>
@@ -6215,6 +6274,7 @@ M2T transforms related to build files.
 Generates cmakelists for tests.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::build #>
@@ -6293,6 +6353,7 @@ install(
 Generates cmakelists for tests.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::build #>
@@ -6450,6 +6511,7 @@ C++ technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6505,6 +6567,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6558,6 +6621,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6598,6 +6662,7 @@ inline std::string tidy_up_string(std::string s) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6651,6 +6716,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6727,6 +6793,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6779,6 +6846,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6834,6 +6902,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6910,6 +6979,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified
 Generates header files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -6970,6 +7040,7 @@ operator<<(std::ostream& s,
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7045,6 +7116,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7103,6 +7175,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
 Generates implementation files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7185,6 +7258,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7247,6 +7321,7 @@ operator<<(std::ostream& s, const <#= qn #>& v);
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7285,6 +7360,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::io #>
@@ -7389,6 +7465,7 @@ support.
 Generates visual studio solutions.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::visual_studio #>
@@ -7474,6 +7551,7 @@ EndGlobal
 Generates msbuild targets.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::visual_studio #>
@@ -7589,6 +7667,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates visual studio project.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::visual_studio #>
@@ -7702,6 +7781,7 @@ facet of the C++ technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -7747,6 +7827,7 @@ void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
 Generates header files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -7837,6 +7918,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 Generates forward declarations for classes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -7898,6 +7980,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -7966,6 +8049,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 Generates forward declarations for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8029,6 +8113,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 Generates header files for type registrars.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8093,6 +8178,7 @@ static void register_types(Archive& ar);
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8242,6 +8328,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8281,6 +8368,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8378,6 +8466,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8434,6 +8523,7 @@ void serialize(Archive& ar, <#= ast.get_qualified_name(ye.name()) #>& v, unsigne
 Generates header files for feature bundles.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::serialization #>
@@ -8551,6 +8641,7 @@ of the C++ technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8590,6 +8681,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8623,6 +8715,7 @@ bool create_bool(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8660,6 +8753,7 @@ void char_helper_transform::apply(std::ostream& os, const logical::entities::mod
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8702,6 +8796,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8756,6 +8851,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8798,6 +8894,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8834,6 +8931,7 @@ void number_helper_transform::apply(std::ostream& os, const logical::entities::m
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8894,6 +8992,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8933,6 +9032,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -8976,6 +9076,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9016,6 +9117,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9056,6 +9158,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9097,6 +9200,7 @@ void sequence_container_helper_transform::apply(std::ostream& os, const logical:
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9132,6 +9236,7 @@ std::string create_std_string(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9192,6 +9297,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9228,6 +9334,7 @@ create_<#= ident #>(const unsigned int position) {
 Generates header files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9318,6 +9425,7 @@ public:
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9390,6 +9498,7 @@ private:
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9470,6 +9579,7 @@ public:
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9508,6 +9618,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9723,6 +9834,7 @@ populate(const unsigned int position, result_type& v) {
 Generates implementation files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9797,6 +9909,7 @@ populate(const unsigned int position, result_type& v) {
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::test_data #>
@@ -9957,6 +10070,7 @@ generated code, in the C++ technical space.
 Generates tests for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::tests #>
@@ -10457,6 +10571,7 @@ BOOST_AUTO_TEST_SUITE_END()
 Generates entry point for tests.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::tests #>
@@ -10535,6 +10650,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 Generates tests for enumeration.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::tests #>
@@ -10804,6 +10920,7 @@ BOOST_AUTO_TEST_SUITE_END()
 Generates cmakelists for tests.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::tests #>
@@ -10940,6 +11057,7 @@ C++ technical space.
 Generates header files for archetypes.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11036,6 +11154,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates header files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11074,6 +11193,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11134,6 +11254,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates header files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11233,6 +11354,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates object options for odb.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11323,6 +11445,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates object options for odb.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11412,6 +11535,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates object options for odb.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::odb #>
@@ -11533,6 +11657,7 @@ and to string.
 Generates header files for enumerations.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::lexical_cast #>
@@ -11874,6 +11999,7 @@ the C# technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -11910,6 +12036,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -12220,6 +12347,7 @@ using System;
 Generates implementation files for exceptions.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -12282,6 +12410,7 @@ using System;
 Generates implementation files for builtins.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -12320,6 +12449,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 Generates implementation files for enums.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -12399,6 +12529,7 @@ using System;
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::types #>
@@ -12581,6 +12712,7 @@ C# technical space.
      :masd.codec.stereotypes: masd::physical::helper
      :END:
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #>
@@ -12616,6 +12748,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #>
@@ -12755,6 +12888,7 @@ using System;
 Generates implementation files for enums.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #>
@@ -12848,6 +12982,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #>
@@ -12960,6 +13095,7 @@ using System;
 Generates implementation files for assistants.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::io #>
@@ -13520,6 +13656,7 @@ the C# technical space.
 Generates implementation files for objects.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::test_data #>
@@ -13734,6 +13871,7 @@ using System.Collections.Generic;
 Generates implementation files for assistants.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::test_data #>
@@ -13981,6 +14119,7 @@ using System.Collections.Specialized;
 Generates implementation files for enums.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::test_data #>
@@ -14127,6 +14266,7 @@ using System.Collections.Generic;
 Generates implementation files for primitives.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::test_data #>
@@ -14315,6 +14455,7 @@ facet of the C# technical space.
 Generates visual studio project.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::visual_studio #>
@@ -14414,6 +14555,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 Generates visual studio solutions.
 
 ***** stitch_template_content                                :masd_attribute:
+
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::transforms::csharp::visual_studio #>
@@ -14584,6 +14726,7 @@ An error has occurred while formatting.
   :masd.codec.stereotypes: masd::templating::logic_less_templates
   :END:
 ** content                                                   :masd_attribute:
+
 #+begin_src mustache
 namespace {
 
@@ -14613,6 +14756,7 @@ const physical::entities::archetype& {{archetype.simple_name}}_transform::archet
   :masd.codec.stereotypes: masd::templating::logic_less_templates
   :END:
 ** content                                                   :masd_attribute:
+
 #+begin_src mustache
 namespace {
 
@@ -14638,6 +14782,7 @@ const physical::entities::archetype& {{archetype.simple_name}}_transform::archet
   :masd.codec.stereotypes: masd::templating::logic_less_templates
   :END:
 ** content                                                   :masd_attribute:
+
 #+begin_src mustache
 std::string {{class.simple_name}}::id() const {
     static auto r(std::string("<{{facet.qualified_name}}>") +
@@ -14686,6 +14831,7 @@ bool {{class.simple_name}}::is_enabled(
   :masd.codec.stereotypes: masd::templating::logic_less_templates
   :END:
 ** content                                                   :masd_attribute:
+
 #+begin_src mustache
 std::string {{class.simple_name}}::id() const {
     static auto r(std::string("<{{facet.qualified_name}}>") +
@@ -14736,6 +14882,7 @@ bool {{class.simple_name}}::is_enabled(
   :masd.codec.stereotypes: masd::templating::logic_less_templates
   :END:
 ** content                                                   :masd_attribute:
+
 #+begin_src mustache
 std::string {{class.simple_name}}::id() const {
     static auto r(std::string("<{{facet.qualified_name}}>") +

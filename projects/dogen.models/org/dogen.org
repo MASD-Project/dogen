@@ -144,12 +144,15 @@ If supplied, ignore all traces except those which match the supplied regexes.
 Available formats for tracing transformations.
 
 ** plain                                                     :masd_attribute:
+
 Plain text format.
 
 ** org_mode                                                  :masd_attribute:
+
 Emacs Org mode.
 
 ** graphviz                                                  :masd_attribute:
+
 Dot notation for GraphViz
 
 * configuration_builder                                        :masd_element:
@@ -257,9 +260,11 @@ The values supplied for the configuration are not valid.
 Where to place the diffing results.
 
 ** file                                                      :masd_attribute:
+
 Generates a patch file.
 
 ** console                                                   :masd_attribute:
+
 Outputs the diff to the console.
 
 * reporting_configuration                                      :masd_element:
@@ -282,9 +287,11 @@ Configuration related to operational reports.
 Available formats for operational reports.
 
 ** plain                                                     :masd_attribute:
+
 Plain text format.
 
 ** org_mode                                                  :masd_attribute:
+
 Emacs Org mode.
 
 * mock_configuration_factory                                   :masd_element:
@@ -349,9 +356,11 @@ If true, deletes all tables and recreates them. Otherwise, assumes their presenc
 Available backends to manage tracing information.
 
 ** file                                                      :masd_attribute:
+
 Write tracing information to files.
 
 ** relational_database                                       :masd_attribute:
+
 Write tracing information to a relational database.
 
 * database_engine                                              :masd_element:
@@ -362,9 +371,11 @@ Write tracing information to a relational database.
 Supported relational databases engines.
 
 ** postgres                                                  :masd_attribute:
+
 Connect to a PostgreSQL database.
 
 ** sqlite                                                    :masd_attribute:
+
 Connect to a SQLite database.
 
 * main                                                         :masd_element:

@@ -380,21 +380,27 @@ Types of quotes that can be used in streaming.
 Supported styles of comments.
 
 *** c_style                                                  :masd_attribute:
+
 Original C programming language style.
 
 *** cpp_style                                                :masd_attribute:
+
 One line, C++ style.
 
 *** csharp_style                                             :masd_attribute:
+
 C# programming language style.
 
 *** shell_style                                              :masd_attribute:
+
 UNIX shell scripting comments.
 
 *** sql_style                                                :masd_attribute:
+
 Comments start with a double-dash.
 
 *** xml_style                                                :masd_attribute:
+
 Comments using XML syntax.
 
 ** comment_formatter                                           :masd_element:

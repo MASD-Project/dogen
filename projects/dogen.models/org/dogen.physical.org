@@ -225,12 +225,15 @@ What kind of contribution do the internal modules make to the final path.
 Different kinds of contributions that can be made to the final path computation.
 
 *** none                                                     :masd_attribute:
+
 The item does not contribute at all to the path.
 
 *** as_directories                                           :masd_attribute:
+
 The item contributes folders to the path.
 
 *** as_path_components                                       :masd_attribute:
+
 The item contributes a single folder to the path, as a delimited string.
 
 ** facet                                                       :masd_element:
@@ -595,15 +598,19 @@ Operation to apply to an artefact.
 Operation to perform to a given artefact.
 
 *** create_only                                              :masd_attribute:
+
 Creates a file from an artefact only if it does not yet exist.
 
 *** write                                                    :masd_attribute:
+
 Unconditionally writes an artefact into file.
 
 *** ignore                                                   :masd_attribute:
+
 Ingores an artefact.
 
 *** remove                                                   :masd_attribute:
+
 Deletes a file.
 
 ** operation_reason                                            :masd_element:
@@ -615,30 +622,39 @@ Deletes a file.
 Reasons for performing an operation.
 
 *** newly_generated                                          :masd_attribute:
+
 Artefact will produce a new generated file.
 
 *** changed_generated                                        :masd_attribute:
+
 Artefact will produce a changed generated file.
 
 *** unchanged_generated                                      :masd_attribute:
+
 Generated artefact contents match file contents.
 
 *** already_exists                                           :masd_attribute:
+
 The file already exists and we we're asked to create only.
 
 *** ignore_generated                                         :masd_attribute:
+
 User requested artefact to be ignored.
 
 *** force_write                                              :masd_attribute:
+
 User requested to always write generated artefacts.
 
 *** unexpected                                               :masd_attribute:
+
 Artefact represents an unexpected file in project.
 
 *** ignore_unexpected                                        :masd_attribute:
+
 File is unexpected but the user asked us not to delete it.
 
 *** ignore_regex                                             :masd_attribute:
+
 File is unexpected but the user asked us to ignore it via regexes.
 
 ** Associatable                                                :masd_element:
@@ -691,12 +707,15 @@ All models that are a member of this set.
 Status of a given archetype with regards to being related to other archetypes.
 
 *** not_relatable                                            :masd_attribute:
+
 Archertype cannot be legally related to other archetypes.
 
 *** relatable                                                :masd_attribute:
+
 Archetype can be related to archetypes.
 
 *** facet_default                                            :masd_attribute:
+
 FIXME: hack for now
 
 ** constant_relation                                           :masd_element:
@@ -758,24 +777,31 @@ URN pointing to the archetype.
 Lists all of the valid variable relation types.
 
 *** self                                                     :masd_attribute:
+
 Logical element is related to itself across different projections.
 
 *** parent                                                   :masd_attribute:
+
 Parent of logical element.
 
 *** child                                                    :masd_attribute:
+
 Child of logical element.
 
 *** transparent                                              :masd_attribute:
+
 The relation with another logical element requires the element's full definition.
 
 *** opaque                                                   :masd_attribute:
+
 The relation with another logical element does not requires its full definition.
 
 *** associative_key                                          :masd_attribute:
+
 The associated element is used as an associative key.
 
 *** visitation                                               :masd_attribute:
+
 The associated element visits or is visited by the current element.
 
 ** relations                                                   :masd_element:

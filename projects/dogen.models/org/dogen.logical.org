@@ -849,15 +849,19 @@ Technical space that this modeline targets.
 Supported editors for modelines.
 
 **** emacs                                                   :masd_attribute:
+
 The emacs editor.
 
 **** vi                                                      :masd_attribute:
+
 The generic vi editor.
 
 **** vim                                                     :masd_attribute:
+
 The vi-like editor vim.
 
 **** ex                                                      :masd_attribute:
+
 The old ex editor.
 
 *** modeline_field                                             :masd_element:
@@ -883,9 +887,11 @@ Value of the field.
 Location in the file to place the modeline.
 
 **** top                                                     :masd_attribute:
+
 Very first line in file.
 
 **** bottom                                                  :masd_attribute:
+
 Very last line in file.
 
 *** generation_marker                                          :masd_element:
@@ -2777,21 +2783,27 @@ All models in this model set.
 The status of this element with regards to generability.
 
 *** non_generatable_source                                   :masd_attribute:
+
 The element was sourced from a non-target model.
 
 *** generation_not_expected                                  :masd_attribute:
+
 The element is of a type that is expected to have support for generation.
 
 *** non_generatable_state                                    :masd_attribute:
+
 The element is normally generatable, but is in a state that precludes generation.
 
 *** generation_disabled                                      :masd_attribute:
+
 The user requested generation to be disabled.
 
 *** generation_ignored                                       :masd_attribute:
+
 User requested that any changes to this element are to be ignored.
 
 *** generatable                                              :masd_attribute:
+
 The element is generatable.
 
 ** stereotypes                                                 :masd_element:

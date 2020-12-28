@@ -84,15 +84,19 @@ Where the element was located in the original source.
 Types of models with regards to the current generation taking place.
 
 *** target                                                   :masd_attribute:
+
 The element is part of the target model.
 
 *** pdm_reference                                            :masd_attribute:
+
 The element was part of a reference model which is a PDM.
 
 *** non_pdm_reference                                        :masd_attribute:
+
 The element was part of a reference model which is regular dogen model.
 
 *** not_yet_determined                                       :masd_attribute:
+
 The origin of the element is not yet known.
 
 ** sha1_hash                                                   :masd_element:
@@ -422,27 +426,35 @@ Identifier for this logical meta-element.
 Models need to declare upfront the technical space they will target.
 
 *** agnostic                                                 :masd_attribute:
+
 Abstract technical space which is mapped to concrete technical spaces.
 
 *** cpp                                                      :masd_attribute:
+
 The C++ programming language.
 
 *** csharp                                                   :masd_attribute:
+
 The C# programming language.
 
 *** cmake                                                    :masd_attribute:
+
 CMake meta build system.
 
 *** xml                                                      :masd_attribute:
+
 Extensible Markup Language.
 
 *** odb                                                      :masd_attribute:
+
 ODB options.
 
 *** sln                                                      :masd_attribute:
+
 Visual studio solution.
 
 *** mustache                                                 :masd_attribute:
+
 Mustache templates.
 
 ** physical_name                                               :masd_element:
@@ -750,12 +762,15 @@ An error occurred whilst pretty printing.
 Available separators to be used by the pretty printer.
 
 *** angle_brackets                                           :masd_attribute:
+
 Enclose name elements in '<' and '>'.
 
 *** double_colons                                            :masd_attribute:
+
 Separate name elements with a '::'.
 
 *** dots                                                     :masd_attribute:
+
 Separate name elements with a '.'.
 
 ** physical_meta_name_factory                                  :masd_element:

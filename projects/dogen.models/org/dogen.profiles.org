@@ -465,5 +465,6 @@ Element has forward declarations.
    :masd.codec.value: true
    :END:
 ** message                                                   :masd_attribute:
+
 These files are code-generated via overrides to test dogen. Do not commit them.
 
