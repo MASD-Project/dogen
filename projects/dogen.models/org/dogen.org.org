@@ -214,6 +214,13 @@ Original name used by the property.
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** transformation_error                                        :masd_element:
+   :PROPERTIES:
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred whilst transforming.
+
 * helpers                                                       :masd_module:
 ** parser                                                      :masd_element:
    :PROPERTIES:
