@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <istream>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.org/types/entities/document.hpp"
