@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.org/types/entities/document.hpp"
 
 namespace dogen::org::transforms {
 
+/**
+ * @brief Converts an org model document into a string.
+ */
 class document_to_string_transform final {
 public:
-    document_to_string_transform() = default;
-    document_to_string_transform(const document_to_string_transform&) = default;
-    document_to_string_transform(document_to_string_transform&&) = default;
-    ~document_to_string_transform() = default;
-    document_to_string_transform& operator=(const document_to_string_transform&) = default;
-
-public:
-    bool operator==(const document_to_string_transform& rhs) const;
-    bool operator!=(const document_to_string_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string apply(boost::shared_ptr<tracing::tracer> tracer,
+        const entities::document& doc);
 };
 
 }
