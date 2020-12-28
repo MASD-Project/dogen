@@ -1,13 +1,13 @@
 #+title: masd
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.codec.dia.comment: true
-:masd.codec.model_modules: masd
-:masd.codec.input_technical_space: agnostic
-:masd.codec.is_proxy_model: true
-:masd.cpp.enabled: false
-:masd.cpp.serialization.enabled: false
-:masd.csharp.enabled: false
+:MASD.CODEC.DIA.COMMENT: true
+:MASD.CODEC.MODEL_MODULES: masd
+:MASD.CODEC.INPUT_TECHNICAL_SPACE: agnostic
+:MASD.CODEC.IS_PROXY_MODEL: true
+:MASD.CPP.ENABLED: false
+:MASD.CPP.SERIALIZATION.ENABLED: false
+:MASD.CSHARP.ENABLED: false
 :END:
 
 Top-level model in MASD. Contains all of the shared types.
@@ -20,41 +20,41 @@ space; keep it technical space agnostic.
 
 * emacs                                                         :masd_module:
   :PROPERTIES:
-  :masd.codec.stereotypes: masd::decoration::modeline_group
+  :MASD.CODEC.STEREOTYPES: masd::decoration::modeline_group
   :END:
 ** cpp                                                         :masd_element:
    :PROPERTIES:
-   :masd.decoration.modeline.editor: emacs
-   :masd.decoration.modeline.location: top
-   :masd.decoration.modeline.technical_space: cpp
-   :masd.codec.stereotypes: masd::decoration::modeline
+   :MASD.DECORATION.MODELINE.EDITOR: emacs
+   :MASD.DECORATION.MODELINE.LOCATION: top
+   :MASD.DECORATION.MODELINE.TECHNICAL_SPACE: cpp
+   :MASD.CODEC.STEREOTYPES: masd::decoration::modeline
    :END:
 *** mode                                                     :masd_attribute:
     :PROPERTIES:
-    :masd.codec.value: c++
+    :MASD.CODEC.VALUE: c++
     :END:
 *** tab-width                                                :masd_attribute:
     :PROPERTIES:
-    :masd.codec.value: 4
+    :MASD.CODEC.VALUE: 4
     :END:
 *** indent-tabs-mode                                         :masd_attribute:
     :PROPERTIES:
-    :masd.codec.value: nil
+    :MASD.CODEC.VALUE: nil
     :END:
 *** c-basic-offset                                           :masd_attribute:
     :PROPERTIES:
-    :masd.codec.value: 4
+    :MASD.CODEC.VALUE: 4
     :END:
 ** cs                                                          :masd_element:
     :PROPERTIES:
-    :masd.decoration.modeline.editor: emacs
-    :masd.decoration.modeline.location: top
-    :masd.decoration.modeline.technical_space: csharp
-    :masd.codec.stereotypes: masd::decoration::modeline
+    :MASD.DECORATION.MODELINE.EDITOR: emacs
+    :MASD.DECORATION.MODELINE.LOCATION: top
+    :MASD.DECORATION.MODELINE.TECHNICAL_SPACE: csharp
+    :MASD.CODEC.STEREOTYPES: masd::decoration::modeline
     :END:
 *** mode                                                     :masd_attribute:
     :PROPERTIES:
-    :masd.codec.value: csharp
+    :MASD.CODEC.VALUE: csharp
     :END:
 *** tab-width                                                :masd_attribute:
     :PROPERTIES:
