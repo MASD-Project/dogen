@@ -22,6 +22,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/physical/archetype_fwd.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template_fwd.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -70,6 +71,10 @@ private:
         af.documentation(trim(af.documentation()));
     }
 
+    void trim(logical::entities::structural::enumerator& enu) {
+        enu.documentation(trim(enu.documentation()));
+    }
+
 public:
     void operator()(logical::entities::element& v) { trim(v); }
     void operator()(logical::entities::structural::object_template &v) {
@@ -81,6 +86,12 @@ public:
     void operator()(logical::entities::structural::object& v) {
         trim(v);
         for (auto& attr : v.local_attributes())
+            trim(attr);
+    }
+
+    void operator()(logical::entities::structural::enumeration& v) {
+        trim(v);
+        for (auto& attr : v.enumerators())
             trim(attr);
     }
 
