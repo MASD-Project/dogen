@@ -289,7 +289,8 @@ model_to_org_artefact_transform::to_string(const codec::entities::model& m) {
 /*
  * New methods
 */
-org::entities::drawer_content to_drawer_content(
+org::entities::drawer_content
+model_to_org_artefact_transform::to_drawer_content(
     const std::string& key, const std::string& value) {
     org::entities::drawer_content r;
     r.key(key);
@@ -421,27 +422,29 @@ model_to_org_artefact_transform::to_headline(const unsigned int level,
     if (!d.contents().empty())
         r.drawers().push_back(d);
 
-    if (!attr.documentation().empty()) {
-        org::entities::block tb;
-        const auto sn(attr.name().simple());
-        if (sn == "content") {
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("mustache");
-            tb.parameters().push_back(p);
-        } else if (sn == "stitch_template_content") {
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("fundamental");
-            tb.parameters().push_back(p);
-        } else if (sn == "short_form" || sn == "long_form") {
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("fundamental");
-            tb.parameters().push_back(p);
-        } else
-            tb.type(org::entities::block_type::text_block);
+    if (attr.documentation().empty())
+        return r;
 
-        tb.contents(attr.documentation());
-        r.section().blocks().push_back(tb);
-    }
+    org::entities::block tb;
+    const auto sn(attr.name().simple());
+    if (sn == "content") {
+        tb.type(org::entities::block_type::greater_block);
+        org::entities::parameter p("mustache");
+        tb.parameters().push_back(p);
+    } else if (sn == "stitch_template_content") {
+        tb.type(org::entities::block_type::greater_block);
+        org::entities::parameter p("fundamental");
+        tb.parameters().push_back(p);
+    } else if (sn == "short_form" || sn == "long_form") {
+        tb.type(org::entities::block_type::greater_block);
+        org::entities::parameter p("fundamental");
+        tb.parameters().push_back(p);
+    } else
+        tb.type(org::entities::block_type::text_block);
+
+    tb.contents(attr.documentation());
+    r.section().blocks().push_back(tb);
+
     return r;
 }
 
@@ -472,8 +475,8 @@ model_to_org_artefact_transform::to_headline(const unsigned int level,
         r.section().blocks().push_back(tb);
     }
 
-    for (const auto& a : e.attributes())
-        r.headlines().push_back(to_headline(level + 1, a));
+    for (const auto& attr : e.attributes())
+        r.headlines().push_back(to_headline(level + 1, attr));
 
     return r;
 }
@@ -484,23 +487,19 @@ walk_parent_to_child(const unsigned int level,
     std::list<entities::element>>& parent_to_child_map) {
 
     std::list<org::entities::headline> r;
-    /*
-     * Child must exist in parent to child map.
-     */
     const auto i(parent_to_child_map.find(id));
-    if (i == parent_to_child_map.end()) {
-        BOOST_LOG_SEV(lg, error) << child_not_found << id;
-        BOOST_THROW_EXCEPTION(transformation_error(child_not_found + id));
-    }
-
-    /*
-     * Loop through all the elements at this level and recurse to
-     * their children.
-     */
-    for (const auto& e : i->second) {
-        to_headline(level, e);
-        const auto id(e.provenance().codec_id().value());
-        walk_parent_to_child(level + 1, id, parent_to_child_map);
+    if (i != parent_to_child_map.end()) {
+        /*
+         * Loop through all the elements at this level and recurse to
+         * their children.
+         */
+        const auto& map(parent_to_child_map);
+        for (const auto& e : i->second) {
+            auto h(to_headline(level, e));
+            const auto id(e.provenance().codec_id().value());
+            h.headlines(walk_parent_to_child(level + 1, id, map));
+            r.push_back(h);
+        }
     }
 
     return r;
@@ -535,6 +534,10 @@ model_to_org_artefact_transform::to_document(const codec::entities::model& m) {
         r.section().blocks().push_back(tb);
     }
 
+    /*
+     * Construct a map with the ID of the parent pointing to a list of
+     * its children.
+     */
     std::unordered_map<std::string,
                        std::list<entities::element>> parent_to_child_map;
     for (const auto& e : m.elements()) {
