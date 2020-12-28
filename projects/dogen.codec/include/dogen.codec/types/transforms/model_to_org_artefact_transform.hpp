@@ -21,6 +21,7 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 
+#include "dogen.org/types/entities/drawer_content.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -31,6 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.org/types/entities/document.hpp"
 #include "dogen.codec/types/entities/element.hpp"
 #include "dogen.codec/types/entities/attribute.hpp"
 #include "dogen.codec/types/entities/model.hpp"
@@ -66,7 +68,70 @@ private:
         std::list<entities::element>>& parent_to_child_map);
     static std::string to_string(const codec::entities::model& m);
 
+private:
+    /**
+     * @brief Creates a KVP content for a drawer based on supplied
+     * inputs.
+     */
+    static org::entities::drawer_content to_drawer_content(
+        const std::string& key, const std::string& value);
+
+    /**
+     * @brief Converts different kinds of codec elements into the
+     * contents of a property drawer.
+     *
+     * @pre Drawer is already setup externally.
+     */
+    /**@{*/
+    static void add_to_property_drawer(
+        const std::list<identification::entities::stereotype>& sts,
+        org::entities::drawer& d);
+    static void add_to_property_drawer(const std::list<std::string>& parents,
+        org::entities::drawer& d);
+    static void add_to_property_drawer(const entities::element& e,
+        org::entities::drawer& d);
+    static void add_to_property_drawer(
+        const std::list<identification::entities::tagged_value>& tvs,
+        org::entities::drawer& d);
+    /**@}*/
+
+    /**
+     * @brief Creates a tag for the element type.
+     */
+    static org::entities::tag to_tag(const entities::element& e);
+
+    /**
+     * @brief Creates an org-mode headline representing the attribute.
+     */
+    static org::entities::headline to_headline(const unsigned int level,
+        const entities::attribute& attr);
+
+    /**
+     * @brief Creates an org-mode headline representing the element.
+     */
+    static org::entities::headline to_headline(const unsigned int level,
+        const entities::element& e);
+
+    /**
+     * @brief Walks up the codec model, from parent to children,
+     * recursively and generates org mode headlines for each one.
+     */
+    static std::list<org::entities::headline>
+    walk_parent_to_child(const unsigned int level,
+    const std::string& id, const std::unordered_map<std::string,
+    std::list<entities::element>>& parent_to_child_map);
+
+
+    /**
+     * @brief Creates an org mode document from a codec model.
+     */
+    static org::entities::document to_document(const codec::entities::model& m);
+
 public:
+    static entities::artefact
+    apply_new(const transforms::context& ctx, const boost::filesystem::path& p,
+        const entities::model& m);
+
     static entities::artefact
     apply(const transforms::context& ctx, const boost::filesystem::path& p,
         const entities::model& m);
