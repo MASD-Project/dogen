@@ -78,6 +78,41 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Inject custom IDs into org documents                              :story:
+
+All models should have a unique ID for each element. The ID should be
+based on GUIDs where possible, though there are some difficulties for
+cases like Dia. We could create a "fixed" function that generates
+GUIDs from dia IDs. For example:
+
+: <dia:childnode parent="O64"/>
+
+We could take the id =O64= and normalise it to say 4 digits: =6400=
+(noticed we removed the =O= as its not valid in hex); and then use a
+well-defined GUID prefix:
+
+: 3dddc237-3771-45be-82c9-937c5cef
+
+Then we can append the normalised Dia ID to the prefix. This would
+ensure we always generate the same GUIDs on conversion from Dia. If
+the GUIds change within Dia, then they will also change in the
+conversion. This ID is then used as the codec ID. Note that its the
+responsibility of the decoder to assign "child node IDs". For JSON
+this must already be populated. For Dia its the =childnode= field. For
+org-mode, we need to infer it from the structure of the file. In
+org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+*** Add references as links to org documents                          :story:
+
+Try adding a =references= tag. Content is a list of links to org
+models. However, because of the way our referencing works in dogen, we
+need to do some kind of hack. Perhaps the "text" of the link could be
+the simple path to the file and the link the relative path. To start
+off with, it can be ignored and managed manually. This will be spun
+into its own story for the future.
+
 *** Empty model generation produces no diffs                          :story:
 
 At present if we do not generate any files at all, the diffing system
@@ -160,6 +195,10 @@ model. This means that if you have a JSON model with namespaces, it
 will result in an org model (say) without namespaces. We need to
 figure out what we did for Dia. Perhaps we can use the qualified names
 to create packages.
+
+We have a similar problem with org-mode models; the containment
+properties are not populated, so rountripping of org to org will not
+work.
 
 *** Running convert without parameters should work                    :story:
 
