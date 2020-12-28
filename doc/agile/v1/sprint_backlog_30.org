@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-28 Mon 14:14]
+#+CAPTION: Clock summary at [2020-12-28 Mon 16:37]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *47:18* |       |       | 100.0 |
+| *Total time*                                        | *48:52* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 47:18   |       |       | 100.0 |
-| Active                                              |         | 47:18 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  12.8 |
+| Stories                                             | 48:52   |       |       | 100.0 |
+| Active                                              |         | 48:52 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  12.4 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.2 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   2.6 |
-| Add support for reading org mode documents          |         |       | 19:46 |  41.8 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.2 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.1 |
-| Add org-mode codec for input                        |         |       |  8:56 |  18.9 |
-| Convert library models into org                     |         |       |  1:26 |   3.0 |
-| Convert reference models into org                   |         |       |  2:56 |   6.2 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   2.5 |
+| Add support for reading org mode documents          |         |       | 19:46 |  40.5 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.1 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.0 |
+| Add org-mode codec for input                        |         |       |  8:56 |  18.3 |
+| Convert library models into org                     |         |       |  1:26 |   2.9 |
+| Convert reference models into org                   |         |       |  2:56 |   6.0 |
 | Assorted improvements to org model                  |         |       |  0:37 |   1.3 |
-| Create a model to org transform                     |         |       |  2:36 |   5.5 |
-| Remove JSON and Dia models for Dogen                |         |       |  0:11 |   0.4 |
+| Create a model to org transform                     |         |       |  3:57 |   8.1 |
+| Remove JSON and Dia models for Dogen                |         |       |  0:24 |   0.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -732,8 +732,10 @@ List of problems found in current models:
 - inject the custom ID into all headlines. See previous analysis on
   this. Spun into its own story, not deemed critical.
 
-*** STARTED Create a model to org transform                           :story:
+*** COMPLETED Create a model to org transform                         :story:
+    CLOSED: [2020-12-28 Mon 16:22]
     :LOGBOOK:
+    CLOCK: [2020-12-28 Mon 15:01]--[2020-12-28 Mon 16:22] =>  1:21
     CLOCK: [2020-12-28 Mon 11:38]--[2020-12-28 Mon 14:14] =>  2:36
     :END:
 
@@ -741,8 +743,10 @@ At present we are manually constructing org mode documents. We should
 use the =org= model to do this. First, get it to work via tests and
 then replace the "stringified" uses of org with the proper model.
 
-*** STARTED Remove JSON and Dia models for Dogen                      :story:
+*** COMPLETED Remove JSON and Dia models for Dogen                    :story:
+    CLOSED: [2020-12-28 Mon 16:37]
     :LOGBOOK:
+    CLOCK: [2020-12-28 Mon 16:24]--[2020-12-28 Mon 16:37] =>  0:13
     CLOCK: [2020-12-28 Mon 11:27]--[2020-12-28 Mon 11:38] =>  0:11
     :END:
 
