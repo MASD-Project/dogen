@@ -47,28 +47,6 @@ namespace dogen::codec::transforms {
  */
 class model_to_org_artefact_transform final {
 private:
-    static std::string make_headline(const unsigned int level,
-        const std::string& title, const std::string& tag);
-
-private:
-    static void insert_tagged_values(std::ostream& s, const std::string& spaces,
-        const std::list<identification::entities::tagged_value>& tvs);
-    static void insert_stereotypes(std::ostream& s, const std::string& spaces,
-        const std::list<identification::entities::stereotype>& sts);
-    static void insert_parents(std::ostream& s, const std::string& spaces,
-        const std::list<std::string>& parents);
-    static void insert_element_attributes(std::ostream& s,
-        const std::string& spaces, const entities::element& e);
-    static void insert_attribute(std::ostream& s,
-        const unsigned int level, const entities::attribute& a);
-    static void insert_element(std::ostream& s,
-        const unsigned int level, const entities::element& e);
-    static void walk_parent_to_child(std::ostream& s, const unsigned int level,
-        const std::string& id, const std::unordered_map<std::string,
-        std::list<entities::element>>& parent_to_child_map);
-    static std::string to_string(const codec::entities::model& m);
-
-private:
     /**
      * @brief Creates a KVP content for a drawer based on supplied
      * inputs.
@@ -128,10 +106,6 @@ private:
     static org::entities::document to_document(const codec::entities::model& m);
 
 public:
-    static entities::artefact
-    apply_new(const transforms::context& ctx, const boost::filesystem::path& p,
-        const entities::model& m);
-
     static entities::artefact
     apply(const transforms::context& ctx, const boost::filesystem::path& p,
         const entities::model& m);

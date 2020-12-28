@@ -69,7 +69,7 @@ apply(const context& ctx, const boost::filesystem::path& p,
         stp.end_chain(r);
         return r;
     } else if (codec_name == org_codec_name) {
-        const auto r(model_to_org_artefact_transform::apply_new(ctx, p, m));
+        const auto r(model_to_org_artefact_transform::apply(ctx, p, m));
         stp.end_chain(r);
         return r;
     }
