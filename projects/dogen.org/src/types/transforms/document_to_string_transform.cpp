@@ -103,7 +103,7 @@ void document_to_string_transform::render_headline(std::ostream& os,
         BOOST_LOG_SEV(lg, error) << unexpected_tag_count;
         BOOST_THROW_EXCEPTION(transformation_error(unexpected_tag_count));
     } else if (h.tags().size() == 1) {
-        const auto tag(h.tags().front().value());
+        const auto tag(":" + h.tags().front().value() + ":");
         const auto tag_space_count(77 - tag.size() - h.title().size() - 1
             - stars.size());
         const std::string tag_spaces(tag_space_count > 0 ?
