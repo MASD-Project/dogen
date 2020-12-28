@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-27 Sun 18:22]
+#+CAPTION: Clock summary at [2020-12-28 Mon 09:38]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *43:29* |       |       | 100.0 |
+| *Total time*                                        | *43:54* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 43:29   |       |       | 100.0 |
-| Active                                              |         | 43:29 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  14.0 |
+| Stories                                             | 43:54   |       |       | 100.0 |
+| Active                                              |         | 43:54 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  13.8 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.3 |
-| Sprint and product backlog grooming                 |         |       |  0:48 |   1.8 |
-| Add support for reading org mode documents          |         |       | 19:46 |  45.5 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   2.8 |
+| Add support for reading org mode documents          |         |       | 19:46 |  45.0 |
 | Remove leading and trailing new lines from comments |         |       |  1:03 |   2.4 |
 | Stitch templates are consuming whitespace           |         |       |  1:56 |   4.4 |
-| Add org-mode codec for input                        |         |       |  8:56 |  20.5 |
+| Add org-mode codec for input                        |         |       |  8:56 |  20.3 |
 | Convert library models into org                     |         |       |  1:26 |   3.3 |
 | Convert reference models into org                   |         |       |  2:56 |   6.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -284,6 +284,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-28 Mon 09:31]--[2020-12-28 Mon 09:38] =>  0:07
+    CLOCK: [2020-12-28 Mon 09:12]--[2020-12-28 Mon 09:30] =>  0:18
     CLOCK: [2020-12-27 Sun 18:20]--[2020-12-27 Sun 18:22] =>  0:02
     CLOCK: [2020-12-27 Sun 12:35]--[2020-12-27 Sun 12:42] =>  0:07
     CLOCK: [2020-12-27 Sun 11:44]--[2020-12-27 Sun 11:47] =>  0:03
@@ -633,71 +635,10 @@ Notes:
 Seems like a better name is needed for this model. Perhaps =orgmode=?
 Or just =org=? Just don't like =org_mode=.
 
-*** JSON models do not create containment structure                   :story:
+*** COMPLETED Analysis on org-mode outstanding work                   :story:
+    CLOSED: [2020-12-28 Mon 09:27]
 
-At present the JSON models represent containment via qualified names,
-e.g.:
-
-:       "name": "posix_time::ptime",
-
-However, this is then not propagated correctly into the codec
-model. This means that if you have a JSON model with namespaces, it
-will result in an org model (say) without namespaces. We need to
-figure out what we did for Dia. Perhaps we can use the qualified names
-to create packages.
-
-*** Running convert without parameters should work                    :story:
-
-We tried converting like so:
-
-: $ dogen.cli convert cpp.boost.json cpp.boost.org
-: Error: File not found:
-: Failed to execute command.
-
-It seems we ended up with empty source and target. The correct
-incantation is as follows:
-
-: $ dogen.cli convert --help
-: Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
-: Dogen is created by the MASD project.
-: Displaying options specific to the convert command.
-: For global options, type --help.
-:
-: Convert:
-:   -s [ --source ] arg      Input model to read, in any of the supported
-:                            formats.
-:   -d [ --destination ] arg Output model to convert to, in any of the supported
-:                           formats.
-
-We should at least give a proper error message. Ideally we should be
-able to infer source and destination from the positional arguments.
-
-*** Refactor the templating model                                     :story:
-
-We should use "standard" conventions in this model as well:
-
-- add entities namespace. Name entities after their "type",
-  e.g. =stitch_template=, etc.
-- add transforms for the template expansion.
-
-*** Empty model generation produces no diffs                          :story:
-
-At present if we do not generate any files at all, the diffing system
-breaks down. This is because we always diff the generated files
-against the actual files but if there are no generated files then we
-have nothing to diff. Logs:
-
-: 2020-12-24 11:09:56.742871 [INFO] [physical.helpers.file_status_collector] Started collecting status for model: dogen
-: 2020-12-24 11:09:56.742874 [DEBUG] [physical.helpers.file_status_collector] Initial directories: [ "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/cpp" ]
-: 2020-12-24 11:09:56.742888 [DEBUG] [physical.helpers.file_status_collector] Filtered directories: [  ]
-: 2020-12-24 11:09:56.742892 [DEBUG] [physical.helpers.file_status_collector] No directories to analyse.
-: 2020-12-24 11:09:56.742895 [DEBUG] [physical.transforms.gather_external_artefacts_transform] No files found.
-: 2020-12-24 11:09:56.742898 [DEBUG] [physical.transforms.gather_external_artefacts_transform] Finished transform: gather external artefacts transform.
-
-We need to look at the actual files and report all of those that
-exist but have not match in the generated files collection.
-
-*** Analysis on org-mode outstanding work                             :story:
+*Rationale*: implemented as separate stories.
 
 Notes:
 
@@ -747,8 +688,9 @@ Notes:
   model. Fixed.
 - packages/namespaces do not have a stereotype in org document. In
   fact nor do regular objects. We need to figure out the logic for
-  meta-types.
-- no space between headline and comment when there are no properties.
+  meta-types. Done.
+- no space between headline and comment when there are no
+  properties. Done.
 
 Links:
 
@@ -756,58 +698,45 @@ Links:
 - [[https://karl-voit.at/2017/09/23/orgmode-as-markup-only/][Org-Mode Is One of the Most Reasonable Markup Languages to Use for
   Text]]
 
-*** Analysis on org mode round-tripping                               :story:
+*** Improvements to org model                                         :story:
 
-We should try to ensure that org mode documents round-trip. Some of the
-use cases:
+List of problems found in current models:
 
-- we could inject the physical paths for each element after we done
-  the generation. This would make finding files very
-  easy. Alternatively, we could generate another org mode document for
+- consider removing =masd_= in tags. Just makes them longer and adds
+  no value.
+- try adding =references= tag. Content is a list of links to org
+  models. However, because of the way our referencing works in dogen,
+  we need to do some kind of hack. Perhaps the "text" of the link
+  could be the simple path to the file and the link the relative
+  path. To start off with, it can be ignored and managed manually.
+- upper case all drawer contents to see if it fixes github
+  rendering. We need to downcase when transforming into codec. We can
+  keep tags in lower-case at it seems to work ok with
+  github. Actually, maybe we should add support for both lower and
+  upper case just as a test before we update all drawers. It looks
+  pretty bad all in upper case as well.
+- add spaces between drawers and comments.
+- inject the custom ID into all headlines. See previous analysis on
   this.
-- we could inject tests. These can be obtained via an LSP query (see
-  backlog).
-- we could create lists of generated and hand-crafted files and
-  elements. We could also inform the user about which elements are
-  only used by generated elements.
-- we could create lists in lisp that could be used for grepping.
 
-It is not clear if we need round tripping for all of these use cases,
-or if these are just different projections of the model. Round
-tripping does add a lot of complexity so we should take this into account.
+*** Create a model to org transform                                   :story:
 
-*** Generated CMakefiles do not take tests into account               :story:
+At present we are manually constructing org mode documents. We should
+use the =org= model to do this. First, get it to work via tests and
+then replace the "stringified" uses of org with the proper model.
 
-At present most models have:
+*** Remove JSON and Dia models for Dogen                              :story:
 
-: masd::build::cmakelists, dogen::handcrafted::cmake
+After getting org inot the final shape, remove all non-org
+models. Also remove the associated tests, and utility classes.
 
-One of the reasons is because the template is not taking generated
-tests into account. It should have:
+*** Refactor the templating model                                     :story:
 
-: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-: endif()
+We should use "standard" conventions in this model as well:
 
-*** Consider creating a "combined" template                           :story:
-
-We have a large number of templates that look very similar: the M2T
-transforms. We could support them with a "clever" combination of wale
-and stitch templates: the top-level wale template could stay as it is,
-plus a "preamble" and "postamble":
-
-: void primitive_implementation_transform::
-: apply(const text::transforms::context& ctx, const text::entities::model& lps,
-:     const logical::entities::element& e, physical::entities::artefact& a) const {
-:     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
-:         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
-
-and a closing bracket:
-
-: }
-
-However, maybe this is just too much work for just a few lines of code
-and it will increase the complexity a lot for a small win.
+- add entities namespace. Name entities after their "type",
+  e.g. =stitch_template=, etc.
+- add transforms for the template expansion.
 
 *** Remove dia-specific types in dia model                            :story:
 

@@ -78,6 +78,115 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Empty model generation produces no diffs                          :story:
+
+At present if we do not generate any files at all, the diffing system
+breaks down. This is because we always diff the generated files
+against the actual files but if there are no generated files then we
+have nothing to diff. Logs:
+
+: 2020-12-24 11:09:56.742871 [INFO] [physical.helpers.file_status_collector] Started collecting status for model: dogen
+: 2020-12-24 11:09:56.742874 [DEBUG] [physical.helpers.file_status_collector] Initial directories: [ "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/cpp" ]
+: 2020-12-24 11:09:56.742888 [DEBUG] [physical.helpers.file_status_collector] Filtered directories: [  ]
+: 2020-12-24 11:09:56.742892 [DEBUG] [physical.helpers.file_status_collector] No directories to analyse.
+: 2020-12-24 11:09:56.742895 [DEBUG] [physical.transforms.gather_external_artefacts_transform] No files found.
+: 2020-12-24 11:09:56.742898 [DEBUG] [physical.transforms.gather_external_artefacts_transform] Finished transform: gather external artefacts transform.
+
+We need to look at the actual files and report all of those that
+exist but have not match in the generated files collection.
+
+*** Analysis on org mode round-tripping                               :story:
+
+We should try to ensure that org mode documents round-trip. Some of the
+use cases:
+
+- we could inject the physical paths for each element after we done
+  the generation. This would make finding files very
+  easy. Alternatively, we could generate another org mode document for
+  this.
+- we could inject tests. These can be obtained via an LSP query (see
+  backlog).
+- we could create lists of generated and hand-crafted files and
+  elements. We could also inform the user about which elements are
+  only used by generated elements.
+- we could create lists in lisp that could be used for grepping.
+
+It is not clear if we need round tripping for all of these use cases,
+or if these are just different projections of the model. Round
+tripping does add a lot of complexity so we should take this into account.
+
+*** Generated CMakefiles do not take tests into account               :story:
+
+At present most models have:
+
+: masd::build::cmakelists, dogen::handcrafted::cmake
+
+One of the reasons is because the template is not taking generated
+tests into account. It should have:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** Consider creating a "combined" template                           :story:
+
+We have a large number of templates that look very similar: the M2T
+transforms. We could support them with a "clever" combination of wale
+and stitch templates: the top-level wale template could stay as it is,
+plus a "preamble" and "postamble":
+
+: void primitive_implementation_transform::
+: apply(const text::transforms::context& ctx, const text::entities::model& lps,
+:     const logical::entities::element& e, physical::entities::artefact& a) const {
+:     tracing::scoped_transform_tracer stp(lg, "primitive implementation",
+:         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+and a closing bracket:
+
+: }
+
+However, maybe this is just too much work for just a few lines of code
+and it will increase the complexity a lot for a small win.
+
+*** JSON models do not create containment structure                   :story:
+
+At present the JSON models represent containment via qualified names,
+e.g.:
+
+:       "name": "posix_time::ptime",
+
+However, this is then not propagated correctly into the codec
+model. This means that if you have a JSON model with namespaces, it
+will result in an org model (say) without namespaces. We need to
+figure out what we did for Dia. Perhaps we can use the qualified names
+to create packages.
+
+*** Running convert without parameters should work                    :story:
+
+We tried converting like so:
+
+: $ dogen.cli convert cpp.boost.json cpp.boost.org
+: Error: File not found:
+: Failed to execute command.
+
+It seems we ended up with empty source and target. The correct
+incantation is as follows:
+
+: $ dogen.cli convert --help
+: Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
+: Dogen is created by the MASD project.
+: Displaying options specific to the convert command.
+: For global options, type --help.
+:
+: Convert:
+:   -s [ --source ] arg      Input model to read, in any of the supported
+:                            formats.
+:   -d [ --destination ] arg Output model to convert to, in any of the supported
+:                           formats.
+
+We should at least give a proper error message. Ideally we should be
+able to infer source and destination from the positional arguments.
+
 *** Reorganise dogen output                                           :story:
 
 At present we have many different artefacts we're interested in:
