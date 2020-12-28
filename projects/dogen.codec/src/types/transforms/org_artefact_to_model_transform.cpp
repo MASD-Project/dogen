@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/case_conv.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <sstream>
@@ -150,7 +151,11 @@ make_tagged_values(const std::list<org::entities::drawer>& drawers) {
         }
 
         tagged_value tv;
-        tv.tag(dc.key());
+        /*
+         * Normalise the key to lower case. This allows having keys in
+         * upper case in org documents.
+         */
+        tv.tag(boost::to_lower_copy(dc.key()));
         tv.value(dc.value());
         r.push_back(tv);
     }
