@@ -74,7 +74,7 @@ export DOGEN_PROJECTS_DIRECTORY="${pristine_dir}/projects"
 cd ${git_dir}
 build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} dogen.cli > ${logs_dir}/dogen.cli.log
 export DOGEN_FULL_GENERATION="1"
-build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gad > ${logs_dir}/gad.log
+build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gao > ${logs_dir}/gao.log
 git add -A > ${logs_dir}/git_add.log
 git commit -m "Generated code." > ${logs_dir}/git_add.log
 
