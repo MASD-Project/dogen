@@ -70,6 +70,7 @@ addons:
 install:
   - export DOGEN_PROJECTS_DIRECTORY=${TRAVIS_BUILD_DIR}/projects
   - export CPP_REF_IMPL_PROJECTS_DIRECTORY=/tmp/cpp_ref_impl-master/projects
+  - export FROZEN_PROJECTS_DIRECTORY=/tmp/frozen-master/projects
   - export CSHARP_REF_IMPL_PROJECTS_DIRECTORY=/tmp/csharp_ref_impl-master/Src/
   - export STAGE_DIR=${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage
   - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
