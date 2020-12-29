@@ -21,9 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/decoration/generation_marker_fwd.hpp"
 #include "dogen.logical/types/entities/physical/archetype_fwd.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template_fwd.hpp"
+#include "dogen.logical/types/entities/variability/profile_fwd.hpp"
+#include "dogen.logical/types/entities/variability/profile_template_fwd.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -59,20 +62,24 @@ private:
         return s;
     }
 
-    void trim(logical::entities::element& e) {
-        e.documentation(trim(e.documentation()));
+    void trim(logical::entities::element& v) {
+        v.documentation(trim(v.documentation()));
     }
 
-    void trim(logical::entities::attribute& attr) {
-        attr.documentation(trim(attr.documentation()));
+    void trim(logical::entities::attribute& v) {
+        v.documentation(trim(v.documentation()));
     }
 
-    void trim(logical::entities::variability::abstract_feature& af) {
-        af.documentation(trim(af.documentation()));
+    void trim(logical::entities::variability::abstract_feature& v) {
+        v.documentation(trim(v.documentation()));
     }
 
-    void trim(logical::entities::structural::enumerator& enu) {
-        enu.documentation(trim(enu.documentation()));
+    void trim(logical::entities::variability::abstract_profile_entry& v) {
+        v.documentation(trim(v.documentation()));
+    }
+
+    void trim(logical::entities::structural::enumerator& v) {
+        v.documentation(trim(v.documentation()));
     }
 
 public:
@@ -104,6 +111,35 @@ public:
         trim(v);
         for (auto& attr : v.features())
             trim(attr);
+    }
+
+    void operator()(entities::variability::profile& v) {
+        trim(v);
+        for (auto& attr : v.entries())
+            trim(attr);
+    }
+
+    void operator()(entities::variability::profile_template& v) {
+        trim(v);
+        for (auto& attr : v.entries())
+            trim(attr);
+    }
+
+    void operator()(entities::decoration::generation_marker& v) {
+        trim(v);
+
+        /*
+         * The message in the generation marker will lose its end-line
+         * due to trimming. However, the end-line is required to
+         * separate the different components of the generation
+         * marker. So we need to reintroduce the new-line
+         * manually. This is a hack to accommodate for how new lines
+         * work in org-mode.
+         */
+        const auto msg(trim(v.message()));
+        std::ostringstream os;
+        os << msg << std::endl;
+        v.message(os.str());
     }
 
     void operator()(entities::physical::archetype& v) {
