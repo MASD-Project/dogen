@@ -159,7 +159,7 @@ insert_element(std::ostream& s, const codec::entities::element& e) {
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
     s << " : ";
-    uf.insert_quoted_escaped(e.name().simple());
+    uf.insert_quoted_escaped(e.name().qualified());
 
     if (!e.parents().empty()) {
         s << comma_space;
