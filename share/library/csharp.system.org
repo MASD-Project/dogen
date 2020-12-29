@@ -1,5 +1,6 @@
 #+title: csharp.system
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.input_technical_space: csharp
 :masd.codec.is_proxy_model: true
@@ -8,7 +9,7 @@
 
 System types.
 
-* Int16                                                        :masd_element:
+* Int16                                                             :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer16
   :masd.csharp.aspect.requires_static_reference_equals: false
@@ -18,7 +19,7 @@ System types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* Int32                                                        :masd_element:
+* Int32                                                             :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer32
   :masd.csharp.aspect.requires_static_reference_equals: false
@@ -28,7 +29,7 @@ System types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* Int64                                                        :masd_element:
+* Int64                                                             :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer64
   :masd.csharp.aspect.requires_static_reference_equals: false

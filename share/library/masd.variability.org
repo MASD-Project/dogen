@@ -1,5 +1,6 @@
 #+title: masd.variability
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: masd.variability
@@ -18,37 +19,37 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-* text                                                         :masd_element:
+* text                                                              :element:
   :PROPERTIES:
   :masd.mapping.destination: std::string
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* number                                                       :masd_element:
+* number                                                            :element:
   :PROPERTIES:
   :masd.mapping.destination: int
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* text_collection                                              :masd_element:
+* text_collection                                                   :element:
   :PROPERTIES:
   :masd.mapping.destination: std::list<std::string>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* key_value_pair                                               :masd_element:
+* key_value_pair                                                    :element:
   :PROPERTIES:
   :masd.mapping.destination: std::list<std::pair<std::string, std::string>>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* boolean                                                      :masd_element:
+* boolean                                                           :element:
   :PROPERTIES:
   :masd.mapping.destination: bool
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* comma_separated                                              :masd_element:
+* comma_separated                                                   :element:
   :PROPERTIES:
   :masd.mapping.destination: std::list<std::string>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* comma_separated_collection                                   :masd_element:
+* comma_separated_collection                                        :element:
   :PROPERTIES:
   :masd.mapping.destination: std::list<std::list<std::string>>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable

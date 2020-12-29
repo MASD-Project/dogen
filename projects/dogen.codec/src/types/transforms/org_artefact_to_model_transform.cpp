@@ -41,9 +41,9 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
-const std::string element_tag("masd_element");
-const std::string attribute_tag("masd_attribute");
-const std::string module_tag("masd_module");
+const std::string element_tag("element");
+const std::string attribute_tag("attribute");
+const std::string module_tag("module");
 const std::string object_element_type("masd::object");
 const std::string module_element_type("masd::module");
 

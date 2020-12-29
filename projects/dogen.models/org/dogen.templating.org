@@ -1,5 +1,6 @@
 #+title: dogen.templating
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.templating
@@ -14,15 +15,15 @@
 :masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
-* wale                                                          :masd_module:
-** text_template                                               :masd_element:
+* wale                                                               :module:
+** text_template                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: ConfigurableViaKvps
    :END:
 
 Represents a wale text template.
 
-*** content                                                  :masd_attribute:
+*** content                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -31,140 +32,140 @@ Represents a wale text template.
 Textual content of the wale template.
 
 #+end_src
-** key_extractor                                               :masd_element:
+** key_extractor                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** instantiator                                                :masd_element:
+** instantiator                                                     :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** formatter                                                   :masd_element:
+** formatter                                                        :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** formatting_error                                            :masd_element:
+** formatting_error                                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst formatting.
 
-** extraction_error                                            :masd_element:
+** extraction_error                                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst extracting a key.
 
-* stitch                                                        :masd_module:
-** parser                                                      :masd_element:
+* stitch                                                             :module:
+** parser                                                           :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** block                                                       :masd_element:
-*** type                                                     :masd_attribute:
+** block                                                            :element:
+*** type                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: block_types
     :END:
-*** content                                                  :masd_attribute:
+*** content                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-** text_template                                               :masd_element:
+** text_template                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: ConfigurableViaKvps
    :END:
 
 Domain representation of a stitch template.
 
-*** properties                                               :masd_attribute:
+*** properties                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: properties
     :END:
 
 Properties of the template.
 
-*** body                                                     :masd_attribute:
+*** body                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: text_template_body
     :END:
 
 Body of the text template.
 
-** formatter                                                   :masd_element:
+** formatter                                                        :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** parsing_error                                               :masd_element:
+** parsing_error                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst parsing.
 
-** formatting_error                                            :masd_element:
+** formatting_error                                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst formatting.
 
-** properties                                                  :masd_element:
-*** stream_variable_name                                     :masd_attribute:
+** properties                                                       :element:
+*** stream_variable_name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** inclusion_dependencies                                   :masd_attribute:
+*** inclusion_dependencies                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** containing_namespaces                                    :masd_attribute:
+*** containing_namespaces                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** wale_template                                            :masd_attribute:
+*** wale_template                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** wale_kvps                                                :masd_attribute:
+*** wale_kvps                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<std::string, std::string>
     :END:
-** line                                                        :masd_element:
-*** blocks                                                   :masd_attribute:
+** line                                                             :element:
+*** blocks                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
-** block_types                                                 :masd_element:
+** block_types                                                      :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::enumeration
    :END:
-*** text_block                                               :masd_attribute:
-*** standard_control_block                                   :masd_attribute:
-*** expression_block                                         :masd_attribute:
-*** variable_block                                           :masd_attribute:
-** instantiator                                                :masd_element:
+*** text_block                                                    :attribute:
+*** standard_control_block                                        :attribute:
+*** expression_block                                              :attribute:
+*** variable_block                                                :attribute:
+** instantiator                                                     :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** text_template_body                                          :masd_element:
-*** tagged_values                                            :masd_attribute:
+** text_template_body                                               :element:
+*** tagged_values                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
     :END:
 
 Set of tagged values read from the template.
 
-*** lines                                                    :masd_attribute:
+*** lines                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<line>
     :END:
-** instantiation_error                                         :masd_element:
+** instantiation_error                                              :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
-** features                                                    :masd_element:
+** features                                                         :element:
    :PROPERTIES:
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.stitch
@@ -173,7 +174,7 @@ Set of tagged values read from the template.
 
 Stitch templating features.
 
-*** stream_variable_name                                     :masd_attribute:
+*** stream_variable_name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::text
     :masd.codec.value: "stream_"
@@ -181,7 +182,7 @@ Stitch templating features.
 
 Which name to use for the variable with the stream.
 
-*** relative_output_directory                                :masd_attribute:
+*** relative_output_directory                                     :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -189,7 +190,7 @@ Which name to use for the variable with the stream.
 
 Relative path to the output directory.
 
-*** inclusion_dependency                                     :masd_attribute:
+*** inclusion_dependency                                          :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text_collection
@@ -197,14 +198,14 @@ Relative path to the output directory.
 
 C++ Include header.
 
-*** containing_namespaces                                    :masd_attribute:
+*** containing_namespaces                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::text
     :END:
 
 Namespaces that contain the class represented by the template.
 
-*** wale.text_template                                       :masd_attribute:
+*** wale.text_template                                            :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -212,7 +213,7 @@ Namespaces that contain the class represented by the template.
 
 Name of the wale text template to instantiate, if any.
 
-*** wale.kvp                                                 :masd_attribute:
+*** wale.kvp                                                      :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::key_value_pair
@@ -220,59 +221,59 @@ Name of the wale text template to instantiate, if any.
 
 Array of wale KVPs to use in template instantiation.
 
-* ConfigurableViaKvps                                          :masd_element:
+* ConfigurableViaKvps                                               :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::object_template
   :END:
 
 Element has the ability to recieve configuration arguments as a set of KVPs.
 
-** expected_keys                                             :masd_attribute:
+** expected_keys                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_set<std::string>
    :END:
 
 Set of keys that are expected to be supplied.
 
-** supplied_kvps                                             :masd_attribute:
+** supplied_kvps                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<std::string, std::string>
    :END:
 
 Key value pairs that were supplied for instantiation.
 
-* helpers                                                       :masd_module:
-** kvp_validator                                               :masd_element:
+* helpers                                                            :module:
+** kvp_validator                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** validation_error                                            :masd_element:
+** validation_error                                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred with the supplied KVPs.
 
-** kvp_resolver                                                :masd_element:
+** kvp_resolver                                                     :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** resolution_error                                            :masd_element:
+** resolution_error                                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred when trying to resolve a key.
 
-* initializer                                                  :masd_element:
+* initializer                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::variability::initializer
   :END:
-* main                                                         :masd_element:
+* main                                                              :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
-* CMakeLists                                                   :masd_element:
+* CMakeLists                                                        :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

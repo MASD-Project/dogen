@@ -1,5 +1,6 @@
 #+title: hello_world
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.hello_world
@@ -19,11 +20,11 @@ This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
 
-* one_property                                                 :masd_element:
+* one_property                                                      :element:
 
 Hello World class.
 
-** property                                                  :masd_attribute:
+** property                                                       :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:

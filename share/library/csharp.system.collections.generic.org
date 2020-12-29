@@ -1,5 +1,6 @@
 #+title: csharp.system.collections.generic
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.input_technical_space: csharp
 :masd.codec.is_proxy_model: true
@@ -8,27 +9,27 @@
 
 Basic generic collection types.
 
-* IEnumerable                                                  :masd_element:
+* IEnumerable                                                       :element:
   :PROPERTIES:
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
   :END:
-* ICollection                                                  :masd_element:
+* ICollection                                                       :element:
   :PROPERTIES:
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
   :masd.codec.parent: IEnumerable
   :END:
-* IList                                                        :masd_element:
+* IList                                                             :element:
   :PROPERTIES:
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
   :masd.codec.parent: ICollection
   :END:
-* List                                                         :masd_element:
+* List                                                              :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.linked_list
   :masd.type_parameters.count: 1
@@ -36,7 +37,7 @@ Basic generic collection types.
   :masd.helper.family: Enumerable
   :masd.codec.parent: ICollection
   :END:
-* Array                                                        :masd_element:
+* Array                                                             :element:
   :PROPERTIES:
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true

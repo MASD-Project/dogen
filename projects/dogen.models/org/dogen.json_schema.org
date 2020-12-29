@@ -1,74 +1,75 @@
 #+title: dogen.json_schema
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-* schema_document                                              :masd_element:
-** id_keyword                                                :masd_attribute:
+#+tags: { element(e) attribute(a) module(m) }
+* schema_document                                                   :element:
+** id_keyword                                                     :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
 
 Defines a URI for the schema.
 
-** schema_keyword                                            :masd_attribute:
+** schema_keyword                                                 :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** title                                                     :masd_attribute:
+** title                                                          :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** type                                                      :masd_attribute:
+** type                                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: type
    :END:
-** description                                               :masd_attribute:
+** description                                                    :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-* type                                                         :masd_element:
+* type                                                              :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::enumeration
   :END:
-** object                                                    :masd_attribute:
-** array                                                     :masd_attribute:
-** string                                                    :masd_attribute:
-** number                                                    :masd_attribute:
-** boolean                                                   :masd_attribute:
-** null                                                      :masd_attribute:
-* properties                                                   :masd_element:
-** type                                                      :masd_attribute:
+** object                                                         :attribute:
+** array                                                          :attribute:
+** string                                                         :attribute:
+** number                                                         :attribute:
+** boolean                                                        :attribute:
+** null                                                           :attribute:
+* properties                                                        :element:
+** type                                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: type
    :END:
-** minimum                                                   :masd_attribute:
+** minimum                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: unsigned int
    :END:
-** maximum                                                   :masd_attribute:
+** maximum                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: unsigned int
    :END:
-** description                                               :masd_attribute:
+** description                                                    :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-* value                                                        :masd_element:
-* object                                                       :masd_element:
+* value                                                             :element:
+* object                                                            :element:
   :PROPERTIES:
   :masd.codec.parent: value
   :END:
-* array                                                        :masd_element:
+* array                                                             :element:
   :PROPERTIES:
   :masd.codec.parent: value
   :END:
-* string                                                       :masd_element:
+* string                                                            :element:
   :PROPERTIES:
   :masd.codec.parent: value
   :END:
-* number                                                       :masd_element:
+* number                                                            :element:
   :PROPERTIES:
   :masd.codec.parent: value
   :END:
-* boolean                                                      :masd_element:
+* boolean                                                           :element:
   :PROPERTIES:
   :masd.codec.parent: value
   :END:

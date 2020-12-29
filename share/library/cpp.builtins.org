@@ -1,5 +1,6 @@
 #+title: cpp.builtins
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.input_technical_space: cpp
 :masd.codec.is_proxy_model: true
@@ -7,7 +8,7 @@
 :END:
 
 Hardware-provided built-in types.
-* bool                                                         :masd_element:
+* bool                                                              :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.core.boolean
   :masd.helper.family: Boolean
@@ -18,7 +19,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
-* char                                                         :masd_element:
+* char                                                              :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.text.character
   :masd.helper.family: Character
@@ -30,7 +31,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
-* unsigned char                                                :masd_element:
+* unsigned char                                                     :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.core.byte
   :masd.helper.family: Character
@@ -42,7 +43,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
-* int                                                          :masd_element:
+* int                                                               :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer
   :masd.helper.family: Number
@@ -53,7 +54,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* unsigned int                                                 :masd_element:
+* unsigned int                                                      :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -64,7 +65,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_enumeration_underlier: true
   :masd.codec.is_default_enumeration_type: true
   :END:
-* short                                                        :masd_element:
+* short                                                             :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -74,7 +75,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* unsigned short                                               :masd_element:
+* unsigned short                                                    :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -84,7 +85,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* long                                                         :masd_element:
+* long                                                              :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -94,7 +95,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* unsigned long                                                :masd_element:
+* unsigned long                                                     :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -104,7 +105,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* long long                                                    :masd_element:
+* long long                                                         :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -112,7 +113,7 @@ Hardware-provided built-in types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.in_global_module: true
   :END:
-* unsigned long long                                           :masd_element:
+* unsigned long long                                                :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -120,7 +121,7 @@ Hardware-provided built-in types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.in_global_module: true
   :END:
-* float                                                        :masd_element:
+* float                                                             :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.single_float
   :masd.helper.family: Number
@@ -131,7 +132,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.is_floating_point: true
   :END:
-* double                                                       :masd_element:
+* double                                                            :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.double_float
   :masd.helper.family: Number
@@ -143,7 +144,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.is_floating_point: true
   :END:
-* long double                                                  :masd_element:
+* long double                                                       :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false

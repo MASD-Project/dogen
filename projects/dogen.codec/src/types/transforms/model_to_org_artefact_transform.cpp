@@ -46,12 +46,9 @@ auto lg(logger_factory(transform_id));
 const std::string empty;
 const std::string scope("::");
 const std::string comma_space(", ");
-const std::string element_tag(":masd_element:");
-const std::string attribute_tag(":masd_attribute:");
-const std::string module_tag(":masd_module:");
-const std::string element_tag_new("masd_element");
-const std::string attribute_tag_new("masd_attribute");
-const std::string module_tag_new("masd_module");
+const std::string element_tag("element");
+const std::string attribute_tag("attribute");
+const std::string module_tag("module");
 const std::string module_element_type("masd::module");
 
 const std::string primitive_underlier("masd.codec.can_be_primitive_underlier");
@@ -199,9 +196,9 @@ void model_to_org_artefact_transform::add_to_property_drawer(
 org::entities::tag
 model_to_org_artefact_transform::to_tag(const entities::element& e) {
     if (e.fallback_element_type() == module_element_type)
-        return org::entities::tag(module_tag_new);
+        return org::entities::tag(module_tag);
     else
-        return org::entities::tag(element_tag_new);
+        return org::entities::tag(element_tag);
 }
 
 org::entities::headline model_to_org_artefact_transform::
@@ -212,7 +209,7 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
     org::entities::headline r;
     r.level(level);
     r.title(attr.name().simple());
-    r.tags().push_back(org::entities::tag(attribute_tag_new));
+    r.tags().push_back(org::entities::tag(attribute_tag));
 
     org::entities::drawer d;
     d.type(org::entities::drawer_type::property_drawer);
@@ -352,6 +349,10 @@ to_document(const codec::entities::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Converting model to org document: "
                              << m.name().simple();
+
+    /*
+     * Inject all of the affiliated keywords into the document.
+     */
     org::entities::affiliated_keyword title;
     title.key("title");
     title.value(m.name().simple());
@@ -362,6 +363,14 @@ to_document(const codec::entities::model& m) {
     options.value("<:nil c:nil todo:nil ^:nil d:nil date:nil author:nil");
     r.affiliated_keywords().push_back(options);
 
+    org::entities::affiliated_keyword tags;
+    tags.key("tags");
+    tags.value("{ element(e) attribute(a) module(m) }");
+    r.affiliated_keywords().push_back(tags);
+
+    /*
+     * Handle tagged values and documentation.
+     */
     const auto& tvs(m.tagged_values());
     if (!tvs.empty()) {
         BOOST_LOG_SEV(lg, debug) << "Model has tagged values.";
@@ -392,6 +401,9 @@ to_document(const codec::entities::model& m) {
         n.push_back(e);
     }
 
+    /*
+     * Process all elements into headlines, recursively.
+     */
     std::string empty;
     r.headlines(walk_parent_to_child(1, empty, parent_to_child_map));
     BOOST_LOG_SEV(lg, debug) << "Converted model to org document. Result: "

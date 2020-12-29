@@ -1,5 +1,6 @@
 #+title: cpp.std
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.input_technical_space: cpp
 :masd.codec.is_proxy_model: true
@@ -8,7 +9,7 @@
 
 C++ Standard Library types.
 
-* int8_t                                                       :masd_element:
+* int8_t                                                            :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer8
   :masd.helper.family: Character
@@ -19,7 +20,7 @@ C++ Standard Library types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
-* int16_t                                                      :masd_element:
+* int16_t                                                           :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer16
   :masd.helper.family: Number
@@ -28,7 +29,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* int32_t                                                      :masd_element:
+* int32_t                                                           :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer32
   :masd.helper.family: Number
@@ -37,7 +38,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* int64_t                                                      :masd_element:
+* int64_t                                                           :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.numeric.integer64
   :masd.helper.family: Number
@@ -46,7 +47,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* uint8_t                                                      :masd_element:
+* uint8_t                                                           :element:
   :PROPERTIES:
   :masd.helper.family: Character
   :masd.cpp.streaming.requires_quoting: true
@@ -55,7 +56,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* uint16_t                                                     :masd_element:
+* uint16_t                                                          :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -63,7 +64,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* uint32_t                                                     :masd_element:
+* uint32_t                                                          :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -71,7 +72,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* uint64_t                                                     :masd_element:
+* uint64_t                                                          :element:
   :PROPERTIES:
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -79,7 +80,7 @@ C++ Standard Library types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* string                                                       :masd_element:
+* string                                                            :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.core.text.string
   :masd.helper.family: String
@@ -94,7 +95,7 @@ C++ Standard Library types.
   :masd.cpp.test_data.primitive_header.primary_inclusion_directive: <sstream>
   :masd.codec.can_be_primitive_underlier: true
   :END:
-* vector                                                       :masd_element:
+* vector                                                            :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.dynamic_array
   :masd.helper.family: SequenceContainer
@@ -102,21 +103,21 @@ C++ Standard Library types.
   :masd.cpp.types.class_header.primary_inclusion_directive: <vector>
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/vector.hpp>
   :END:
-* deque                                                        :masd_element:
+* deque                                                             :element:
   :PROPERTIES:
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <deque>
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/deque.hpp>
   :END:
-* array                                                        :masd_element:
+* array                                                             :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.static_array
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <array>
  :END:
-* list                                                         :masd_element:
+* list                                                              :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.linked_list
   :masd.helper.family: SequenceContainer
@@ -124,13 +125,13 @@ C++ Standard Library types.
   :masd.cpp.types.class_header.primary_inclusion_directive: <list>
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/list.hpp>
   :END:
-* forward_list                                                 :masd_element:
+* forward_list                                                      :element:
   :PROPERTIES:
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <forward_list>
   :END:
-* set                                                          :masd_element:
+* set                                                               :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.ordered_set
   :masd.helper.family: AssociativeContainer
@@ -139,7 +140,7 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/set.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* multiset                                                     :masd_element:
+* multiset                                                          :element:
   :PROPERTIES:
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
@@ -147,7 +148,7 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/multiset.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* unordered_set                                                :masd_element:
+* unordered_set                                                     :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.unordered_set
   :masd.helper.family: AssociativeContainer
@@ -156,7 +157,7 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/unordered_set.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* map                                                          :masd_element:
+* map                                                               :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.ordered_dictionary
   :masd.helper.family: AssociativeContainer
@@ -165,7 +166,7 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/map.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* multimap                                                     :masd_element:
+* multimap                                                          :element:
   :PROPERTIES:
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 2
@@ -173,7 +174,7 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/multimap.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* unordered_map                                                :masd_element:
+* unordered_map                                                     :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.container.unordered_dictionary
   :masd.helper.family: AssociativeContainer
@@ -182,53 +183,53 @@ C++ Standard Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/unordered_map.hpp>
   :masd.codec.is_associative_container: true
   :END:
-* pair                                                         :masd_element:
+* pair                                                              :element:
   :PROPERTIES:
   :masd.helper.family: Pair
   :masd.type_parameters.count: 2
   :masd.cpp.types.class_header.primary_inclusion_directive: <utility>
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/utility.hpp>
   :END:
-* shared_ptr                                                   :masd_element:
+* shared_ptr                                                        :element:
   :PROPERTIES:
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
   :masd.cpp.types.class_header.primary_inclusion_directive: <memory>
   :END:
-* weak_ptr                                                     :masd_element:
+* weak_ptr                                                          :element:
   :PROPERTIES:
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
   :masd.cpp.types.class_header.primary_inclusion_directive: <memory>
   :END:
-* unique_ptr                                                   :masd_element:
+* unique_ptr                                                        :element:
   :PROPERTIES:
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
   :masd.cpp.types.class_header.primary_inclusion_directive: <memory>
   :END:
-* function                                                     :masd_element:
+* function                                                          :element:
   :PROPERTIES:
   :masd.cpp.types.class_header.primary_inclusion_directive: <functional>
   :END:
-* optional                                                     :masd_element:
+* optional                                                          :element:
   :PROPERTIES:
   :masd.helper.family: Optional
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <functional>
   :END:
-* ostream                                                      :masd_element:
+* ostream                                                           :element:
   :PROPERTIES:
   :masd.cpp.types.class_header.primary_inclusion_directive: <ostream>
   :END:
-* ostringstream                                                :masd_element:
+* ostringstream                                                     :element:
   :PROPERTIES:
   :masd.cpp.types.class_header.primary_inclusion_directive: <sstream>
   :END:
-* type_index                                                   :masd_element:
+* type_index                                                        :element:
   :PROPERTIES:
   :masd.cpp.types.class_header.primary_inclusion_directive: <typeindex>
   :END:

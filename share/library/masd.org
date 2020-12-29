@@ -1,5 +1,6 @@
 #+title: masd
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: masd
@@ -18,259 +19,259 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-* emacs                                                         :masd_module:
+* emacs                                                              :module:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::modeline_group
   :END:
-** cpp                                                         :masd_element:
+** cpp                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cpp
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** mode                                                     :masd_attribute:
+*** mode                                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: c++
     :END:
-*** tab-width                                                :masd_attribute:
+*** tab-width                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** indent-tabs-mode                                         :masd_attribute:
+*** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
     :masd.codec.value: nil
     :END:
-*** c-basic-offset                                           :masd_attribute:
+*** c-basic-offset                                                :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** cs                                                          :masd_element:
+** cs                                                               :element:
     :PROPERTIES:
     :masd.decoration.modeline.editor: emacs
     :masd.decoration.modeline.location: top
     :masd.decoration.modeline.technical_space: csharp
     :masd.codec.stereotypes: masd::decoration::modeline
     :END:
-*** mode                                                     :masd_attribute:
+*** mode                                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: csharp
     :END:
-*** tab-width                                                :masd_attribute:
+*** tab-width                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** indent-tabs-mode                                         :masd_attribute:
+*** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
     :masd.codec.value: nil
     :END:
-*** c-basic-offset                                           :masd_attribute:
+*** c-basic-offset                                                :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** cmake                                                       :masd_element:
+** cmake                                                            :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cmake
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** mode                                                     :masd_attribute:
+*** mode                                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: cmake
     :END:
-*** cmake-tab-width                                          :masd_attribute:
+*** cmake-tab-width                                               :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** indent-tabs-mode                                         :masd_attribute:
+*** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
     :masd.codec.value: nil
     :END:
-** odb                                                         :masd_element:
+** odb                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: odb
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** mode                                                     :masd_attribute:
+*** mode                                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: sh
     :END:
-*** tab-width                                                :masd_attribute:
+*** tab-width                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** indent-tabs-mode                                         :masd_attribute:
+*** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
     :masd.codec.value: nil
     :END:
-** xml                                                         :masd_element:
+** xml                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: xml
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** mode                                                     :masd_attribute:
+*** mode                                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: nxml
     :END:
-*** tab-width                                                :masd_attribute:
+*** tab-width                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** indent-tabs-mode                                         :masd_attribute:
+*** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
     :masd.codec.value: nil
     :END:
-** sln                                                         :masd_element:
+** sln                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: sln
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-* vim                                                           :masd_module:
+* vim                                                                :module:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::modeline_group
   :END:
-** xml                                                         :masd_element:
+** xml                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: xml
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** ft                                                       :masd_attribute:
+*** ft                                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: xml
     :END:
-*** tabstop                                                  :masd_attribute:
+*** tabstop                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** expandtab                                                :masd_attribute:
-*** shiftwidth                                               :masd_attribute:
+*** expandtab                                                     :attribute:
+*** shiftwidth                                                    :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** softtabstop                                              :masd_attribute:
+*** softtabstop                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** odb                                                         :masd_element:
+** odb                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: odb
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** ft                                                       :masd_attribute:
+*** ft                                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: sh
     :END:
-*** tabstop                                                  :masd_attribute:
+*** tabstop                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** expandtab                                                :masd_attribute:
-*** shiftwidth                                               :masd_attribute:
+*** expandtab                                                     :attribute:
+*** shiftwidth                                                    :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** softtabstop                                              :masd_attribute:
+*** softtabstop                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** cmake                                                       :masd_element:
+** cmake                                                            :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cmake
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** ft                                                       :masd_attribute:
+*** ft                                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: cmake
     :END:
-*** tabstop                                                  :masd_attribute:
+*** tabstop                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** expandtab                                                :masd_attribute:
-*** shiftwidth                                               :masd_attribute:
+*** expandtab                                                     :attribute:
+*** shiftwidth                                                    :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** softtabstop                                              :masd_attribute:
+*** softtabstop                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** cs                                                          :masd_element:
+** cs                                                               :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: csharp
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** ft                                                       :masd_attribute:
+*** ft                                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: csharp
     :END:
-*** tabstop                                                  :masd_attribute:
+*** tabstop                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** expandtab                                                :masd_attribute:
-*** shiftwidth                                               :masd_attribute:
+*** expandtab                                                     :attribute:
+*** shiftwidth                                                    :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** softtabstop                                              :masd_attribute:
+*** softtabstop                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** cpp                                                         :masd_element:
+** cpp                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cpp
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-*** ft                                                       :masd_attribute:
+*** ft                                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: cpp
     :END:
-*** tabstop                                                  :masd_attribute:
+*** tabstop                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** expandtab                                                :masd_attribute:
-*** shiftwidth                                               :masd_attribute:
+*** expandtab                                                     :attribute:
+*** shiftwidth                                                    :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-*** softtabstop                                              :masd_attribute:
+*** softtabstop                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: 4
     :END:
-** sln                                                         :masd_element:
+** sln                                                              :element:
    :PROPERTIES:
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: sln
    :masd.codec.stereotypes: masd::decoration::modeline
    :END:
-* apache_v2_0                                                  :masd_element:
+* apache_v2_0                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
 Apache Licence, version 2.
 
-** short_form                                                :masd_attribute:
+** short_form                                                     :attribute:
 #+begin_src fundamental
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements.  See the NOTICE file distributed with
@@ -288,7 +289,7 @@ implied.  See the License for the specific language governing
 permissions and limitations under the License.
 
 #+end_src
-** long_form                                                 :masd_attribute:
+** long_form                                                      :attribute:
 #+begin_src fundamental
 Apache License
                            Version 2.0, January 2004
@@ -493,14 +494,14 @@ Apache License
    limitations under the License.
 
 #+end_src
-* bsl_v1_0                                                     :masd_element:
+* bsl_v1_0                                                          :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
 Boost Software Licence, version 1.
 
-** short_form                                                :masd_attribute:
+** short_form                                                     :attribute:
 #+begin_src fundamental
 Distributed under the Boost Software License, Version 1.0. (See
 accompanying file LICENSE_1_0.txt or copy at
@@ -509,7 +510,7 @@ http://www.boost.org/LICENSE_1_0.txt)
 See www.boost.org/libs/asio for documentation.
 
 #+end_src
-** long_form                                                 :masd_attribute:
+** long_form                                                      :attribute:
 #+begin_src fundamental
 Boost Software License - Version 1.0 - August 17th, 2003
 
@@ -536,14 +537,14 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
 #+end_src
-* gpl_v2                                                       :masd_element:
+* gpl_v2                                                            :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
 GNU Public Licence, version 2.
 
-** short_form                                                :masd_attribute:
+** short_form                                                     :attribute:
 #+begin_src fundamental
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License version 2 as
@@ -560,7 +561,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.
 
 #+end_src
-** long_form                                                 :masd_attribute:
+** long_form                                                      :attribute:
 #+begin_src fundamental
 GNU GENERAL PUBLIC LICENSE
                Version 2, June 1991
@@ -903,14 +904,14 @@ library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 
 #+end_src
-* gpl_v3                                                       :masd_element:
+* gpl_v3                                                            :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
 GNU Public Licence, version 3.
 
-** short_form                                                :masd_attribute:
+** short_form                                                     :attribute:
 #+begin_src fundamental
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -928,7 +929,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA.
 
 #+end_src
-** long_form                                                 :masd_attribute:
+** long_form                                                      :attribute:
 #+begin_src fundamental
 You may use, distribute and copy Dogen under the terms of GNU General
 Public License Version 3, which is displayed below.
@@ -1610,14 +1611,14 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
 #+end_src
-* proprietary                                                  :masd_element:
+* proprietary                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
 Sample properietary licence.
 
-** short_form                                                :masd_attribute:
+** short_form                                                     :attribute:
 #+begin_src fundamental
 CONFIDENTIAL
 
@@ -1631,7 +1632,7 @@ this material is strictly forbidden unless prior written permission is
 obtained from the copyright holder.
 
 #+end_src
-** long_form                                                 :masd_attribute:
+** long_form                                                      :attribute:
 #+begin_src fundamental
 CONFIDENTIAL
 

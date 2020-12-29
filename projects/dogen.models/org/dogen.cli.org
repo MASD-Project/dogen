@@ -1,5 +1,6 @@
 #+title: dogen.cli
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.cli
@@ -17,143 +18,143 @@
 
 Implements the command-line interface for Dogen.
 
-* parser_exception                                             :masd_element:
+* parser_exception                                                  :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::exception
   :END:
 
 A fatal error has occurred during option parsing.
 
-* application                                                  :masd_element:
+* application                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* command_line_parser                                          :masd_element:
+* command_line_parser                                               :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* program_options_parser                                       :masd_element:
+* program_options_parser                                            :element:
   :PROPERTIES:
   :masd.codec.parent: command_line_parser
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* injector_factory                                             :masd_element:
+* injector_factory                                                  :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* application_exception                                        :masd_element:
+* application_exception                                             :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::exception
   :END:
 
 A fatal error has occurred whilst executing the application.
 
-* configuration                                                :masd_element:
+* configuration                                                     :element:
 
 All of the configuration required by the command line application.
 
-** logging                                                   :masd_attribute:
+** logging                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::optional<utility::log::logging_configuration>
    :END:
 
 Configuration related to logging, if any.
 
-** api                                                       :masd_attribute:
+** api                                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: dogen::configuration
    :END:
-** cli                                                       :masd_attribute:
+** cli                                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: cli_configuration
    :END:
-* generation_configuration                                     :masd_element:
+* generation_configuration                                          :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::fluent
   :END:
 
 Configuration related to code generation.
 
-** reference_model_directories                               :masd_attribute:
+** reference_model_directories                                    :attribute:
    :PROPERTIES:
    :masd.codec.type: std::vector<boost::filesystem::path>
    :END:
 
 Directories to search for reference models.
 
-** target                                                    :masd_attribute:
+** target                                                         :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
 
 Target model for generation.
 
-** output_directory                                          :masd_attribute:
+** output_directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
-* conversion_configuration                                     :masd_element:
+* conversion_configuration                                          :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::fluent
   :END:
 
 Configuration for the model conversion.
 
-** source                                                    :masd_attribute:
+** source                                                         :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
-** destination                                               :masd_attribute:
+** destination                                                    :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
 
 Name of the file to output the conversion to.
 
-* configuration_validator                                      :masd_element:
+* configuration_validator                                           :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* initializer                                                  :masd_element:
+* initializer                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* cli_configuration                                            :masd_element:
+* cli_configuration                                                 :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::fluent
   :END:
 
 Configuration specific to the CLI application.
 
-** activity                                                  :masd_attribute:
+** activity                                                       :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
    :END:
-** byproduct_directory                                       :masd_attribute:
+** byproduct_directory                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
 
 Directory in which to place all files not directly related to generated code.
 
-* main                                                         :masd_element:
+* main                                                              :element:
   :PROPERTIES:
   :masd.cpp.types.enabled: true
   :masd.cpp.types.overwrite: false
   :masd.codec.stereotypes: masd::entry_point
   :END:
-* CMakeLists                                                   :masd_element:
+* CMakeLists                                                        :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-* dumpspecs_configuration                                      :masd_element:
+* dumpspecs_configuration                                           :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::fluent
   :END:
 
 Dumps all the specs about this version of dogen.
 
-** style                                                     :masd_attribute:
+** style                                                          :attribute:
    :PROPERTIES:
    :masd.codec.type: reporting_style
    :END:

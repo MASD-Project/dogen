@@ -1,5 +1,6 @@
 #+title: dogen.codec
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.codec
@@ -45,116 +46,116 @@ complete).
 In general, codecs use file extensions to determine the type of the
 codec.
 
-* transforms                                                    :masd_module:
-** model_production_chain                                      :masd_element:
+* transforms                                                         :module:
+** model_production_chain                                           :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** model_to_model_chain                                        :masd_element:
+** model_to_model_chain                                             :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** context                                                     :masd_element:
+** context                                                          :element:
    :PROPERTIES:
    :masd.cpp.types.class_forward_declarations.enabled: true
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
-*** data_directories                                         :masd_attribute:
+*** data_directories                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: std::vector<boost::filesystem::path>
     :END:
-*** feature_model                                            :masd_attribute:
+*** feature_model                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
     :END:
-*** tracer                                                   :masd_attribute:
+*** tracer                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<tracing::tracer>
     :END:
-*** compatibility_mode                                       :masd_attribute:
+*** compatibility_mode                                            :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** variability_overrides                                    :masd_attribute:
+*** variability_overrides                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::vector<std::string>
     :END:
 
 Raw set of variability overrides.
 
-** transformation_error                                        :masd_element:
+** transformation_error                                             :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
-** model_set_production_chain                                  :masd_element:
+** model_set_production_chain                                       :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** input_technical_space_transform                             :masd_element:
+** input_technical_space_transform                                  :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** references_transform                                        :masd_element:
+** references_transform                                             :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** configuration_transform                                     :masd_element:
+** configuration_transform                                          :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** reference_graph_data_transform                              :masd_element:
+** reference_graph_data_transform                                   :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** tagged_values_overrides_transform                           :masd_element:
+** tagged_values_overrides_transform                                :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** provenance_transform                                        :masd_element:
+** provenance_transform                                             :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** file_to_artefact_transform                                  :masd_element:
+** file_to_artefact_transform                                       :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** json_artefact_to_model_transform                            :masd_element:
+** json_artefact_to_model_transform                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** model_to_json_artefact_transform                            :masd_element:
+** model_to_json_artefact_transform                                 :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** dia_artefact_to_model_transform                             :masd_element:
+** dia_artefact_to_model_transform                                  :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** org_artefact_to_model_transform                             :masd_element:
+** org_artefact_to_model_transform                                  :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** model_to_org_artefact_transform                             :masd_element:
+** model_to_org_artefact_transform                                  :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** artefact_to_file_transform                                  :masd_element:
+** artefact_to_file_transform                                       :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** artefact_to_model_chain                                     :masd_element:
+** artefact_to_model_chain                                          :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** model_to_artefact_chain                                     :masd_element:
+** model_to_artefact_chain                                          :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** meta_data_transform                                         :masd_element:
+** meta_data_transform                                              :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-* entities                                                      :masd_module:
+* entities                                                           :module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -164,51 +165,51 @@ a representation of the core entities needed by all codecs.
 
 Not all codecs will make use of all entities.
 
-** model                                                       :masd_element:
+** model                                                            :element:
    :PROPERTIES:
    :masd.codec.stereotypes: Element
    :END:
 
 Represents an external model.
 
-*** elements                                                 :masd_attribute:
+*** elements                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<element>
     :END:
-*** input_technical_space                                    :masd_attribute:
+*** input_technical_space                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Technical space to which the model belongs, within the codec space.
 
-*** references                                               :masd_attribute:
+*** references                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** processed_variability_overrides                          :masd_attribute:
+*** processed_variability_overrides                               :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_set<std::string>
     :END:
 
 All the variability overrides that were processed by this model.
 
-** element                                                     :masd_element:
+** element                                                          :element:
    :PROPERTIES:
    :masd.codec.stereotypes: Element
    :END:
 
 Represents an element from an external model.
 
-*** parents                                                  :masd_attribute:
+*** parents                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** attributes                                               :masd_attribute:
+*** attributes                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<attribute>
     :END:
-*** fallback_element_type                                    :masd_attribute:
+*** fallback_element_type                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -216,98 +217,98 @@ Represents an element from an external model.
 Stereotype conveying element type, to be used when none is provided with the
 main stereotypes.
 
-*** can_be_primitive_underlier                               :masd_attribute:
+*** can_be_primitive_underlier                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** in_global_module                                         :masd_attribute:
+*** in_global_module                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** can_be_enumeration_underlier                             :masd_attribute:
+*** can_be_enumeration_underlier                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** is_default_enumeration_type                              :masd_attribute:
+*** is_default_enumeration_type                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** is_associative_container                                 :masd_attribute:
+*** is_associative_container                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** is_floating_point                                        :masd_attribute:
+*** is_floating_point                                             :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** containing_element_id                                    :masd_attribute:
+*** containing_element_id                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: identification::entities::codec_id
     :END:
 
 ID of the containing element, if any.
 
-** attribute                                                   :masd_element:
+** attribute                                                        :element:
    :PROPERTIES:
    :masd.codec.stereotypes: Element
    :END:
-*** type                                                     :masd_attribute:
+*** type                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** value                                                    :masd_attribute:
+*** value                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Default value for this attribute, if any.
 
-** model_set                                                   :masd_element:
-*** target                                                   :masd_attribute:
+** model_set                                                        :element:
+*** target                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: model
     :END:
-*** references                                               :masd_attribute:
+*** references                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<model>
     :END:
-*** reference_graph_data                                     :masd_attribute:
+*** reference_graph_data                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: reference_graph_data
     :END:
 
 Stores the data required to build a graph of references for a model set.
 
-** Taggable                                                    :masd_element:
+** Taggable                                                         :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to contain tagged values.
 
-*** tagged_values                                            :masd_attribute:
+*** tagged_values                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
     :END:
-** Stereotypable                                               :masd_element:
+** Stereotypable                                                    :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to have stereotypes.
 
-*** stereotypes                                              :masd_attribute:
+*** stereotypes                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::stereotype>
     :END:
-** Documentable                                                :masd_element:
+** Documentable                                                     :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to provide documentation.
 
-*** documentation                                            :masd_attribute:
+*** documentation                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -317,77 +318,77 @@ Code comments.
 These are expected to follow the grammar of the comment processing tools
 of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
 
-** Nameable                                                    :masd_element:
+** Nameable                                                         :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to have a name.
 
-*** name                                                     :masd_attribute:
+*** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: identification::entities::name
     :END:
 
 Name of the codec element.
 
-** Configurable                                                :masd_element:
+** Configurable                                                     :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to have meta-data associated.
 
-*** configuration                                            :masd_attribute:
+*** configuration                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
     :END:
 
 Configuration for this element.
 
-** DeterminableOrigin                                          :masd_element:
+** DeterminableOrigin                                               :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Properties related to the origin of the modeling element.
 
-*** provenance                                               :masd_attribute:
+*** provenance                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: identification::entities::codec_provenance
     :END:
 
 Provenance details of this codec element.
 
-** TaggableOverridable                                         :masd_element:
+** TaggableOverridable                                              :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Ability to contain tagged values.
 
-*** tagged_values_overrides                                  :masd_attribute:
+*** tagged_values_overrides                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
     :END:
 
 Meta-data sourced externally that can be used to override meta-data in model.
 
-** Commentable                                                 :masd_element:
+** Commentable                                                      :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 Has the ability to have an associated comment.
 
-*** comment                                                  :masd_attribute:
+*** comment                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: comment
     :END:
 
 Properties associated with the codec comment.
 
-** Element                                                     :masd_element:
+** Element                                                          :element:
    :PROPERTIES:
    :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
    :masd.codec.stereotypes: masd::object_template
@@ -395,11 +396,11 @@ Properties associated with the codec comment.
 
 Consolidates a number of related object templates.
 
-** reference_graph_data                                        :masd_element:
+** reference_graph_data                                             :element:
 
 Contains all the data required to build the graph of references.
 
-*** root                                                     :masd_attribute:
+*** root                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -407,106 +408,106 @@ Contains all the data required to build the graph of references.
 Has the name of the target model, which is the entry point to the references
 graph.
 
-*** edges_per_model                                          :masd_attribute:
+*** edges_per_model                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<std::string, std::list<std::string>>
     :END:
 
 Contains the list of referenced models for a particular model name.
 
-** comment                                                     :masd_element:
+** comment                                                          :element:
    :PROPERTIES:
    :masd.codec.stereotypes: Documentable, Taggable
    :END:
 
 Represents a comment block as read out from the codec representation.
 
-*** applies_to_container                                     :masd_attribute:
+*** applies_to_container                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
 Content of the field as it belonged to the containing object.
 
-*** original_content                                         :masd_attribute:
+*** original_content                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Content, as read from the codec representation.
 
-** object                                                      :masd_element:
+** object                                                           :element:
    :PROPERTIES:
    :masd.codec.stereotypes: Commentable
    :END:
 
 Represents an "raw" codec object which may or may not contain a modeling element of interest.
 
-*** id                                                       :masd_attribute:
+*** id                                                            :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Original ID available in the codec representation, if any.
 
-*** name                                                     :masd_attribute:
+*** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Original name in codec representation. May be qualified or simple; its nature is codec dependent.
 
-*** object_type                                              :masd_attribute:
+*** object_type                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Native codec representation for the object type. Its interpretation is codec dependent.
 
-*** stereotypes                                              :masd_attribute:
+*** stereotypes                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Original steoreotypes assigned to the object, if any.
 
-*** container_id                                             :masd_attribute:
+*** container_id                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Codec ID of the container of this object, if any.
 
-*** connection                                               :masd_attribute:
+*** connection                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::optional<std::pair<std::string,std::string>>
     :END:
 
 Connections this object may have with other objects, if any.
 
-*** attributes                                               :masd_attribute:
+*** attributes                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<attribute>
     :END:
 
 All attributes associated with this object.
 
-** artefact                                                    :masd_element:
-*** path                                                     :masd_attribute:
+** artefact                                                         :element:
+*** path                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::filesystem::path
     :END:
 
 Path to the file representing this artefact, if any.
 
-*** codec_name                                               :masd_attribute:
+*** codec_name                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Name of the codec to process this artefact.
 
-*** content                                                  :masd_attribute:
+*** content                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -515,27 +516,27 @@ Name of the codec to process this artefact.
 Contents of the artefact.
 
 #+end_src
-* helpers                                                       :masd_module:
-** references_resolver                                         :masd_element:
+* helpers                                                            :module:
+** references_resolver                                              :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** reference_resolution_exception                              :masd_element:
+** reference_resolution_exception                                   :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
-** references_validator                                        :masd_element:
+** references_validator                                             :element:
    :PROPERTIES:
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** reference_validation_error                                  :masd_element:
+** reference_validation_error                                       :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::exception
    :END:
 
 A cycle was detected in the references graph.
 
-* features                                                      :masd_module:
+* features                                                           :module:
   :PROPERTIES:
   :masd.codec.dia.comment: true
   :END:
@@ -543,7 +544,7 @@ A cycle was detected in the references graph.
 Defines all of the features and feature groups used by
 the codec model.
 
-** input_technical_space                                       :masd_element:
+** input_technical_space                                            :element:
    :PROPERTIES:
    :masd.variability.default_binding_point: global
    :masd.variability.key_prefix: masd.codec
@@ -552,7 +553,7 @@ the codec model.
 
 Feature bundle for the input technical space.
 
-*** input_technical_space                                    :masd_attribute:
+*** input_technical_space                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::text
     :masd.codec.value: "agnostic"
@@ -560,7 +561,7 @@ Feature bundle for the input technical space.
 
 Input technical space for this model.
 
-** reference                                                   :masd_element:
+** reference                                                        :element:
    :PROPERTIES:
    :masd.variability.default_binding_point: global
    :masd.variability.key_prefix: masd.codec
@@ -569,7 +570,7 @@ Input technical space for this model.
 
 Features related to model referencing.
 
-*** reference                                                :masd_attribute:
+*** reference                                                     :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text_collection
@@ -577,11 +578,11 @@ Features related to model referencing.
 
 Imports an external model.
 
-** initializer                                                 :masd_element:
+** initializer                                                      :element:
    :PROPERTIES:
    :masd.codec.stereotypes: masd::variability::initializer
    :END:
-** uml                                                         :masd_element:
+** uml                                                              :element:
    :PROPERTIES:
    :masd.variability.default_binding_point: any
    :masd.variability.generate_static_configuration: false
@@ -591,7 +592,7 @@ Imports an external model.
 
 Features related to all UML injectors.
 
-*** dia.comment                                              :masd_attribute:
+*** dia.comment                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::boolean
     :END:
@@ -600,7 +601,7 @@ If true, the UML comment is linked to the containing package.
 
 If the containing package is the model itself, it is linked to the model's module.
 
-** meta_data                                                   :masd_element:
+** meta_data                                                        :element:
    :PROPERTIES:
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.codec
@@ -609,7 +610,7 @@ If the containing package is the model itself, it is linked to the model's modul
 
 Assorted meta-data.
 
-*** stereotypes                                              :masd_attribute:
+*** stereotypes                                                   :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::comma_separated
@@ -617,7 +618,7 @@ Assorted meta-data.
 
 Stereotypes associated with this element or attribute.
 
-*** type                                                     :masd_attribute:
+*** type                                                          :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -625,7 +626,7 @@ Stereotypes associated with this element or attribute.
 
 Type associated with this attribute.
 
-*** value                                                    :masd_attribute:
+*** value                                                         :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -633,7 +634,7 @@ Type associated with this attribute.
 
 Value associated with this attribute.
 
-*** parent                                                   :masd_attribute:
+*** parent                                                        :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::comma_separated
@@ -641,45 +642,45 @@ Value associated with this attribute.
 
 Parent associated with this element.
 
-*** can_be_primitive_underlier                               :masd_attribute:
+*** can_be_primitive_underlier                                    :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-*** in_global_module                                         :masd_attribute:
+*** in_global_module                                              :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-*** can_be_enumeration_underlier                             :masd_attribute:
+*** can_be_enumeration_underlier                                  :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-*** is_default_enumeration_type                              :masd_attribute:
+*** is_default_enumeration_type                                   :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-*** is_associative_container                                 :masd_attribute:
+*** is_associative_container                                      :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-*** is_floating_point                                        :masd_attribute:
+*** is_floating_point                                             :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::boolean
     :END:
-* registrar                                                    :masd_element:
+* registrar                                                         :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
-* main                                                         :masd_element:
+* main                                                              :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
-* CMakeLists                                                   :masd_element:
+* CMakeLists                                                        :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

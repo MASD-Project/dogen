@@ -1,5 +1,6 @@
 #+title: cpp.boost
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.input_technical_space: cpp
 :masd.codec.is_proxy_model: true
@@ -7,7 +8,7 @@
 :END:
 
 Boost Library types.
-* shared_ptr                                                   :masd_element:
+* shared_ptr                                                        :element:
   :PROPERTIES:
   :masd.mapping.target: masd.lam.core.pointer
   :masd.helper.family: SmartPointer
@@ -18,7 +19,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
   :END:
-* weak_ptr                                                     :masd_element:
+* weak_ptr                                                          :element:
   :PROPERTIES:
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
@@ -28,7 +29,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
   :END:
-* scoped_ptr                                                   :masd_element:
+* scoped_ptr                                                        :element:
   :PROPERTIES:
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
@@ -38,7 +39,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
   :END:
-* optional                                                     :masd_element:
+* optional                                                          :element:
   :PROPERTIES:
   :masd.helper.family: Optional
   :masd.type_parameters.count: 1
@@ -49,7 +50,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
   :END:
-* variant                                                      :masd_element:
+* variant                                                           :element:
   :PROPERTIES:
   :masd.helper.family: BoostVariant
   :masd.type_parameters.variable_number_of_parameters: true
@@ -63,26 +64,26 @@ Boost Library types.
   :masd.cpp.hash.class_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
   :masd.cpp.hash.primitive_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
   :END:
-* asio                                                          :masd_module:
-** io_service                                                  :masd_element:
+* asio                                                               :module:
+** io_service                                                       :element:
    :PROPERTIES:
    :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :END:
-** ip                                                           :masd_module:
-*** tcp                                                         :masd_module:
-**** socket                                                    :masd_element:
+** ip                                                                :module:
+*** tcp                                                              :module:
+**** socket                                                         :element:
      :PROPERTIES:
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
-**** acceptor                                                  :masd_element:
+**** acceptor                                                       :element:
      :PROPERTIES:
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
-* filesystem                                                    :masd_module:
-** path                                                        :masd_element:
+* filesystem                                                         :module:
+** path                                                             :element:
    :PROPERTIES:
    :masd.helper.family: BoostPath
    :masd.cpp.streaming.string_conversion_method: generic_string()
@@ -92,8 +93,8 @@ Boost Library types.
    :masd.cpp.test_data.class_header.primary_inclusion_directive: <sstream>
    :masd.cpp.test_data.primitive_header.primary_inclusion_directive: <sstream>
    :END:
-* gregorian                                                     :masd_module:
-** date                                                        :masd_element:
+* gregorian                                                          :module:
+** date                                                             :element:
    :PROPERTIES:
    :masd.mapping.target: masd.lam.chrono.date
    :masd.helper.family: BoostDate
@@ -108,8 +109,8 @@ Boost Library types.
    :masd.cpp.serialization.primitive_header.secondary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-* posix_time                                                    :masd_module:
-** ptime                                                       :masd_element:
+* posix_time                                                         :module:
+** ptime                                                            :element:
    :PROPERTIES:
    :masd.mapping.target: masd.lam.chrono.date_time
    :masd.helper.family: BoostPTime
@@ -124,7 +125,7 @@ Boost Library types.
    :masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-** time_duration                                               :masd_element:
+** time_duration                                                    :element:
    :PROPERTIES:
    :masd.mapping.target: masd.lam.chrono.time
    :masd.helper.family: BoostTimeDuration
@@ -138,8 +139,8 @@ Boost Library types.
    :masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-* property_tree                                                 :masd_module:
-** ptree                                                       :masd_element:
+* property_tree                                                      :module:
+** ptree                                                            :element:
    :PROPERTIES:
    :masd.helper.family: BoostPTree
    :masd.cpp.aspect.requires_manual_move_constructor: true

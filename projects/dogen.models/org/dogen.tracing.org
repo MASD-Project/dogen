@@ -1,5 +1,6 @@
 #+title: dogen.tracing
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.tracing
@@ -16,107 +17,107 @@
 
 Houses classes common to all transformations.
 
-* tracer                                                       :masd_element:
+* tracer                                                            :element:
   :PROPERTIES:
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
-** backend                                                   :masd_attribute:
+** backend                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::shared_ptr<backend>
    :END:
-* metrics                                                      :masd_element:
+* metrics                                                           :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::untestable
   :END:
-** transform_id                                              :masd_attribute:
+** transform_id                                                   :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** model_id                                                  :masd_attribute:
+** model_id                                                       :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** guid                                                      :masd_attribute:
+** guid                                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** start                                                     :masd_attribute:
+** start                                                          :attribute:
    :PROPERTIES:
    :masd.codec.type: unsigned long
    :END:
-** end                                                       :masd_attribute:
+** end                                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: unsigned long
    :END:
-** children                                                  :masd_attribute:
+** children                                                       :attribute:
    :PROPERTIES:
    :masd.codec.type: std::list<boost::shared_ptr<metrics>>
    :END:
-* metrics_builder                                              :masd_element:
+* metrics_builder                                                   :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* metrics_printer                                              :masd_element:
+* metrics_printer                                                   :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* tracing_error                                                :masd_element:
+* tracing_error                                                     :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::exception
   :END:
 
 An error occurred when trying to generate tracing data.
 
-* scoped_tracer                                                :masd_element:
+* scoped_tracer                                                     :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* references_printer                                           :masd_element:
+* references_printer                                                :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* backend                                                      :masd_element:
+* backend                                                           :element:
   :PROPERTIES:
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
-* file_backend                                                 :masd_element:
+* file_backend                                                      :element:
   :PROPERTIES:
   :masd.codec.parent: backend
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
-* backend_factory_registrar                                    :masd_element:
+* backend_factory_registrar                                         :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-** backend_factories_                                        :masd_attribute:
+** backend_factories_                                             :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
    :END:
-* registrar_error                                              :masd_element:
+* registrar_error                                                   :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::exception
   :END:
-* backend_factory                                              :masd_element:
+* backend_factory                                                   :element:
   :PROPERTIES:
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* file_backend_factory                                         :masd_element:
+* file_backend_factory                                              :element:
   :PROPERTIES:
   :masd.codec.parent: backend_factory
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* initializer                                                  :masd_element:
+* initializer                                                       :element:
   :PROPERTIES:
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* main                                                         :masd_element:
+* main                                                              :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
-* CMakeLists                                                   :masd_element:
+* CMakeLists                                                        :element:
   :PROPERTIES:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
