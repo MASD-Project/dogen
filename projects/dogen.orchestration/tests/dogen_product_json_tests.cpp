@@ -64,13 +64,13 @@ BOOST_AUTO_TEST_CASE(dogen_cli_json_produces_expected_model) {
     BOOST_CHECK(mg::check_for_differences(od, m));
 }
 
-// BOOST_AUTO_IGNORE_TEST_CASE(dogen_dia_json_produces_expected_model) {
-//     SETUP_TEST_LOG("dogen_dia_json_produces_expected_model");
-//     const auto t(dogen_product::input_dogen_dia_json());
-//     const auto od(dogen_product::project_directory());
-//     const auto m(mg::apply_physical_model_production(t, od));
-//     BOOST_CHECK(mg::check_for_differences(od, m));
-// }
+BOOST_AUTO_TEST_CASE(dogen_dia_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_dia_json_produces_expected_model");
+    const auto t(dogen_product::input_dogen_dia_json());
+    const auto od(dogen_product::project_directory());
+    const auto m(mg::apply_physical_model_production(t, od));
+    BOOST_CHECK(mg::check_for_differences(od, m));
+}
 
 BOOST_AUTO_TEST_CASE(dogen_tracing_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_tracing_json_produces_expected_model");
@@ -88,13 +88,13 @@ BOOST_AUTO_TEST_CASE(dogen_codec_json_produces_expected_model) {
     BOOST_CHECK(mg::check_for_differences(od, m));
 }
 
-// BOOST_AUTO_IGNORE_TEST_CASE(dogen_codec_dia_json_produces_expected_model) {
-//     SETUP_TEST_LOG("dogen_codec_dia_json_produces_expected_model");
-//     const auto t(dogen_product::input_dogen_codec_dia_json());
-//     const auto od(dogen_product::project_directory());
-//     const auto m(mg::apply_physical_model_production(t, od));
-//     BOOST_CHECK(mg::check_for_differences(od, m));
-// }
+BOOST_AUTO_TEST_CASE(dogen_codec_dia_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_codec_dia_json_produces_expected_model");
+    const auto t(dogen_product::input_dogen_codec_dia_json());
+    const auto od(dogen_product::project_directory());
+    const auto m(mg::apply_physical_model_production(t, od));
+    BOOST_CHECK(mg::check_for_differences(od, m));
+}
 
 BOOST_AUTO_TEST_CASE(dogen_text_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_text_json_produces_expected_model");
