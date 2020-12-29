@@ -30,7 +30,7 @@ const std::string references_graph_graphviz_fn("references_graph.dot");
 const std::string physical_name_prefix("00000-configuration-");
 const std::string physical_name_postfix("-initial_input.json");
 const std::string codec_transform_prefix(
-    "00000-codec.transforms.dia_artefact_to_model_transform-dogen-");
+    "00000-codec.transforms.org_artefact_to_model_transform-dogen-");
 const std::string first_short_name("00000-initial_input.json");
 const std::string second_short_name("00001-input.json");
 const std::string codec_transform_postfix("-input.json");
@@ -298,7 +298,7 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
     SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("detailed_tracing_org_mode");
     const auto tl(tracing_level::detail);
     const auto tf(tracing_format::org_mode);
@@ -316,7 +316,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("summary_tracing_plain");
     const auto tl(tracing_level::summary);
     const auto tf(tracing_format::plain);
@@ -346,7 +346,7 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expecte
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_graphviz_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("summary_tracing_graphviz");
     const auto tl(tracing_level::summary);
     const auto tf(tracing_format::graphviz);
@@ -376,7 +376,7 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {
     SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("detail_tracing_short_names");
     const auto tl(tracing_level::detail);
     const auto tf(tracing_format::org_mode);
@@ -394,7 +394,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
 BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_diffing_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("diffing");
     const auto cfg(setup_diffing_configuration(t, id));
 
@@ -415,7 +415,7 @@ BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
 BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_reporting_org_mode_style_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("reporting_org_mode");
     const auto rs(reporting_style::org_mode);
     const auto cfg(setup_reporting_configuration(t, id, rs));
@@ -437,7 +437,7 @@ BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace
 BOOST_AUTO_TEST_CASE(enabling_reporting_plain_style_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_reporting_plain_style_results_in_expected_trace_files");
 
-    const auto t(dogen_product::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_org());
     const std::string id("reporting_plain");
     const auto rs(reporting_style::plain);
     const auto cfg(setup_reporting_configuration(t, id, rs));
