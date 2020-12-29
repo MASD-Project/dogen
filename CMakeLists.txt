@@ -50,6 +50,21 @@ else()
 endif()
 
 #
+# Frozen projects directory.
+#
+# Frozen contains a stale copy of Dogen, snapshotted before we removed
+# the JSON and Dia models.
+#
+if (DEFINED ENV{FROZEN_PROJECTS_DIRECTORY})
+    message(STATUS
+        "FROZEN_PROJECTS_DIRECTORY=$ENV{FROZEN_PROJECTS_DIRECTORY}")
+    add_compile_definitions(ENABLE_FROZEN_TESTS)
+else()
+    message(STATUS
+        "FROZEN_PROJECTS_DIRECTORY env variable not defined, disabling Frozen tests.")
+endif()
+
+#
 # C++ Reference Model for system tests.
 #
 if (DEFINED ENV{CPP_REF_IMPL_PROJECTS_DIRECTORY})
