@@ -18,6 +18,7 @@ Provides the top-level API for the dogen product.
 
 * configuration                                                     :element:
   :PROPERTIES:
+  :custom_id: O0
   :masd.codec.stereotypes: masd::fluent
   :END:
 ** model_processing                                               :attribute:
@@ -55,6 +56,7 @@ Configuration related to database connectivity, if any.
 
 * tracing_level                                                     :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -64,6 +66,7 @@ Available levels for tracing transformation.
 ** summary                                                        :attribute:
 * tracing_configuration                                             :element:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -139,6 +142,7 @@ If supplied, ignore all traces except those which match the supplied regexes.
 
 * tracing_format                                                    :element:
   :PROPERTIES:
+  :custom_id: O3
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -158,6 +162,7 @@ Dot notation for GraphViz
 
 * configuration_builder                                             :element:
   :PROPERTIES:
+  :custom_id: O7
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
@@ -165,6 +170,7 @@ masd::builder
 
 * diffing_configuration                                             :element:
   :PROPERTIES:
+  :custom_id: O8
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -180,9 +186,13 @@ Configuration for diff generation.
    :END:
 * configuration_validator                                           :element:
   :PROPERTIES:
+  :custom_id: O9
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * model_processing_configuration                                    :element:
+  :PROPERTIES:
+  :custom_id: O12
+  :END:
 
 Configuration related to the behaviour of Dogen whilst processing models.
 
@@ -231,6 +241,7 @@ Timepoint at which the activity started.
 
 * invalid_configuration_exception                                   :element:
   :PROPERTIES:
+  :custom_id: O14
   :masd.cpp.types.class_forward_declarations.enabled: false
   :masd.codec.stereotypes: masd::exception
   :END:
@@ -239,22 +250,27 @@ The values supplied for the configuration are not valid.
 
 * generator                                                         :element:
   :PROPERTIES:
+  :custom_id: O15
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * converter                                                         :element:
   :PROPERTIES:
+  :custom_id: O17
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * generation_exception                                              :element:
   :PROPERTIES:
+  :custom_id: O20
   :masd.codec.stereotypes: masd::exception
   :END:
 * conversion_exception                                              :element:
   :PROPERTIES:
+  :custom_id: O21
   :masd.codec.stereotypes: masd::exception
   :END:
 * diffing_destination                                               :element:
   :PROPERTIES:
+  :custom_id: O24
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -269,6 +285,9 @@ Generates a patch file.
 Outputs the diff to the console.
 
 * reporting_configuration                                           :element:
+  :PROPERTIES:
+  :custom_id: O32
+  :END:
 
 Configuration related to operational reports.
 
@@ -282,6 +301,7 @@ Configuration related to operational reports.
    :END:
 * reporting_style                                                   :element:
   :PROPERTIES:
+  :custom_id: O33
   :masd.codec.stereotypes: masd::enumeration, dogen::convertible
   :END:
 
@@ -297,9 +317,13 @@ Emacs Org mode.
 
 * mock_configuration_factory                                        :element:
   :PROPERTIES:
+  :custom_id: O35
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * database_configuration                                            :element:
+  :PROPERTIES:
+  :custom_id: O37
+  :END:
 
 Contains the config
 
@@ -351,6 +375,7 @@ If true, deletes all tables and recreates them. Otherwise, assumes their presenc
 
 * tracing_backend                                                   :element:
   :PROPERTIES:
+  :custom_id: O39
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -366,6 +391,7 @@ Write tracing information to a relational database.
 
 * database_engine                                                   :element:
   :PROPERTIES:
+  :custom_id: O41
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -381,13 +407,18 @@ Connect to a SQLite database.
 
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O43
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O44
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * specs                                                             :element:
+  :PROPERTIES:
+  :custom_id: O45
+  :END:
 
 Describes details of the available functionality within this version of Dogen.
 
@@ -399,6 +430,9 @@ Describes details of the available functionality within this version of Dogen.
 All categories of specifications.
 
 * spec_category                                                     :element:
+  :PROPERTIES:
+  :custom_id: O46
+  :END:
 
 Describes a category of dogen specifications.
 
@@ -424,6 +458,9 @@ Entries describing various aspects of this group.
 Purpose of the group.
 
 * spec_entry                                                        :element:
+  :PROPERTIES:
+  :custom_id: O47
+  :END:
 
 Unit of functionality within Dogen.
 
@@ -443,10 +480,12 @@ Human readable text describing this entry.
 
 * spec_dumper                                                       :element:
   :PROPERTIES:
+  :custom_id: O50
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * dumping_exception                                                 :element:
   :PROPERTIES:
+  :custom_id: O52
   :masd.codec.stereotypes: masd::exception
   :END:
 

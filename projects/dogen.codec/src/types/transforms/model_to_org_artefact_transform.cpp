@@ -50,7 +50,7 @@ const std::string element_tag("element");
 const std::string attribute_tag("attribute");
 const std::string module_tag("module");
 const std::string module_element_type("masd::module");
-const std::string custom_id("CUSTOM_ID");
+const std::string custom_id("custom_id");
 
 const std::string primitive_underlier("masd.codec.can_be_primitive_underlier");
 const std::string global_module("masd.codec.in_global_module");

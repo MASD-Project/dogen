@@ -95,6 +95,7 @@ For details on the stereotypes see the MASD UML profile.
 
 * adaptation_error                                                  :element:
   :PROPERTIES:
+  :custom_id: O0
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -103,10 +104,12 @@ into its masd representation.
 
 * grapher                                                           :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * graphing_error                                                    :element:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -114,13 +117,18 @@ An error has occurred while building the dia object graph.
 
 * processed_comment_factory                                         :element:
   :PROPERTIES:
+  :custom_id: O7
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * processed_object_factory                                          :element:
   :PROPERTIES:
+  :custom_id: O10
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * processed_attribute                                               :element:
+  :PROPERTIES:
+  :custom_id: O11
+  :END:
 ** name                                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
@@ -147,6 +155,9 @@ Any comments associated with the property.
    :masd.codec.type: std::string
    :END:
 * processed_object                                                  :element:
+  :PROPERTIES:
+  :custom_id: O12
+  :END:
 
 Representation of a dia object after first stage processing.
 
@@ -207,6 +218,7 @@ All attributes associated with dia object.
 
 * dia_object_types                                                  :element:
   :PROPERTIES:
+  :custom_id: O13
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -242,10 +254,12 @@ UML Realization
 
 * validator                                                         :element:
   :PROPERTIES:
+  :custom_id: O15
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * validation_error                                                  :element:
   :PROPERTIES:
+  :custom_id: O16
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -253,9 +267,13 @@ The object profile is not valid.
 
 * traits                                                            :element:
   :PROPERTIES:
+  :custom_id: O21
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * processed_comment                                                 :element:
+  :PROPERTIES:
+  :custom_id: O22
+  :END:
 
 Contains the same content as the original dia comment, but split by type of data.
 
@@ -289,10 +307,12 @@ Content of the field as it was read from the dia object.
 
 * building_error                                                    :element:
   :PROPERTIES:
+  :custom_id: O26
   :masd.codec.stereotypes: masd::exception
   :END:
 * visitor                                                           :element:
   :PROPERTIES:
+  :custom_id: O36
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 ** builder_                                                       :attribute:
@@ -301,17 +321,21 @@ Content of the field as it was read from the dia object.
    :END:
 * builder                                                           :element:
   :PROPERTIES:
+  :custom_id: O37
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * adapter                                                           :element:
   :PROPERTIES:
+  :custom_id: O38
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O39
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O40
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

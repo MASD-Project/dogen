@@ -20,6 +20,7 @@ Implements the command-line interface for Dogen.
 
 * parser_exception                                                  :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -27,29 +28,37 @@ A fatal error has occurred during option parsing.
 
 * application                                                       :element:
   :PROPERTIES:
+  :custom_id: O4
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * command_line_parser                                               :element:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * program_options_parser                                            :element:
   :PROPERTIES:
+  :custom_id: O6
   :masd.codec.parent: command_line_parser
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * injector_factory                                                  :element:
   :PROPERTIES:
+  :custom_id: O8
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * application_exception                                             :element:
   :PROPERTIES:
+  :custom_id: O9
   :masd.codec.stereotypes: masd::exception
   :END:
 
 A fatal error has occurred whilst executing the application.
 
 * configuration                                                     :element:
+  :PROPERTIES:
+  :custom_id: O13
+  :END:
 
 All of the configuration required by the command line application.
 
@@ -70,6 +79,7 @@ Configuration related to logging, if any.
    :END:
 * generation_configuration                                          :element:
   :PROPERTIES:
+  :custom_id: O15
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -95,6 +105,7 @@ Target model for generation.
    :END:
 * conversion_configuration                                          :element:
   :PROPERTIES:
+  :custom_id: O16
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -113,14 +124,17 @@ Name of the file to output the conversion to.
 
 * configuration_validator                                           :element:
   :PROPERTIES:
+  :custom_id: O20
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * initializer                                                       :element:
   :PROPERTIES:
+  :custom_id: O22
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * cli_configuration                                                 :element:
   :PROPERTIES:
+  :custom_id: O26
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -139,16 +153,19 @@ Directory in which to place all files not directly related to generated code.
 
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O28
   :masd.cpp.types.enabled: true
   :masd.cpp.types.overwrite: false
   :masd.codec.stereotypes: masd::entry_point
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O29
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * dumpspecs_configuration                                           :element:
   :PROPERTIES:
+  :custom_id: O30
   :masd.codec.stereotypes: masd::fluent
   :END:
 

@@ -25,6 +25,7 @@ Orchestration-based imlementation of the Dogen product API.
 
 * transforms                                                         :module:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.dia.comment: true
   :END:
 
@@ -33,10 +34,12 @@ the entry points to all transformations.
 
 ** code_generation_chain                                            :element:
    :PROPERTIES:
+   :custom_id: O2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** context                                                          :element:
    :PROPERTIES:
+   :custom_id: O6
    :masd.cpp.types.class_forward_declarations.enabled: true
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
@@ -62,10 +65,12 @@ the entry points to all transformations.
     :END:
 ** context_factory                                                  :element:
    :PROPERTIES:
+   :custom_id: O7
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** factory_exception                                                :element:
    :PROPERTIES:
+   :custom_id: O8
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -73,64 +78,79 @@ An error occurred in the factory whilst making.
 
 ** codec_model_to_logical_model_transform                           :element:
    :PROPERTIES:
+   :custom_id: O10
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** codec_model_set_to_logical_input_model_set_chain                 :element:
    :PROPERTIES:
+   :custom_id: O11
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** transform_exception                                              :element:
    :PROPERTIES:
+   :custom_id: O15
    :masd.codec.stereotypes: masd::exception
    :END:
 ** logical_model_to_text_model_chain                                :element:
    :PROPERTIES:
+   :custom_id: O16
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** physical_model_production_chain                                  :element:
    :PROPERTIES:
+   :custom_id: O17
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** text_model_to_physical_model_transform                           :element:
    :PROPERTIES:
+   :custom_id: O30
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** context_bootstrapping_chain                                      :element:
    :PROPERTIES:
+   :custom_id: O38
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** text_model_production_chain                                      :element:
    :PROPERTIES:
+   :custom_id: O46
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** legacy_dependencies_transform                                    :element:
    :PROPERTIES:
+   :custom_id: O55
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** physical_to_logical_population_transform                         :element:
    :PROPERTIES:
+   :custom_id: O61
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** elements_removal_transform                                       :element:
    :PROPERTIES:
+   :custom_id: O63
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 * generator                                                         :element:
   :PROPERTIES:
+  :custom_id: O3
   :masd.generalization.parent: dogen::generator
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * converter                                                         :element:
   :PROPERTIES:
+  :custom_id: O4
   :masd.generalization.parent: dogen::converter
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * injector_factory                                                  :element:
   :PROPERTIES:
+  :custom_id: O5
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * helpers                                                            :module:
   :PROPERTIES:
+  :custom_id: O12
   :masd.codec.dia.comment: true
   :END:
 
@@ -138,14 +158,17 @@ Helpers for the orchestration model.
 
 ** codec_to_logical_projector                                       :element:
    :PROPERTIES:
+   :custom_id: O13
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** logical_to_physical_projector                                    :element:
    :PROPERTIES:
+   :custom_id: O50
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** projection_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O52
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -153,14 +176,17 @@ An error ocurred whilst projecting elements from one space into another.
 
 ** dependencies_builder                                             :element:
    :PROPERTIES:
+   :custom_id: O57
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** building_error                                                   :element:
    :PROPERTIES:
+   :custom_id: O59
    :masd.codec.stereotypes: masd::exception
    :END:
 * features                                                           :module:
   :PROPERTIES:
+  :custom_id: O23
   :masd.codec.dia.comment: true
   :END:
 
@@ -168,6 +194,7 @@ Features for the orchestration model.
 
 ** model_location                                                   :element:
    :PROPERTIES:
+   :custom_id: O24
    :masd.variability.default_binding_point: global
    :masd.variability.key_prefix: masd.codec
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -197,22 +224,27 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
 ** initializer                                                      :element:
    :PROPERTIES:
+   :custom_id: O25
    :masd.codec.stereotypes: masd::variability::initializer
    :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O27
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O28
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * spec_dumper                                                       :element:
   :PROPERTIES:
+  :custom_id: O29
   :masd.generalization.parent: dogen::spec_dumper
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * initializer                                                       :element:
   :PROPERTIES:
+  :custom_id: O65
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:

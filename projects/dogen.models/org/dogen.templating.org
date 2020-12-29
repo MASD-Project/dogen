@@ -16,8 +16,12 @@
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 * wale                                                               :module:
+  :PROPERTIES:
+  :custom_id: O0
+  :END:
 ** text_template                                                    :element:
    :PROPERTIES:
+   :custom_id: O2
    :masd.codec.stereotypes: ConfigurableViaKvps
    :END:
 
@@ -34,18 +38,22 @@ Textual content of the wale template.
 #+end_src
 ** key_extractor                                                    :element:
    :PROPERTIES:
+   :custom_id: O3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** instantiator                                                     :element:
    :PROPERTIES:
+   :custom_id: O4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** formatter                                                        :element:
    :PROPERTIES:
+   :custom_id: O5
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** formatting_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O9
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -53,17 +61,25 @@ An error occurred whilst formatting.
 
 ** extraction_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O11
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst extracting a key.
 
 * stitch                                                             :module:
+  :PROPERTIES:
+  :custom_id: O13
+  :END:
 ** parser                                                           :element:
    :PROPERTIES:
+   :custom_id: O14
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** block                                                            :element:
+   :PROPERTIES:
+   :custom_id: O15
+   :END:
 *** type                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: block_types
@@ -74,6 +90,7 @@ An error occurred whilst extracting a key.
     :END:
 ** text_template                                                    :element:
    :PROPERTIES:
+   :custom_id: O16
    :masd.codec.stereotypes: ConfigurableViaKvps
    :END:
 
@@ -95,10 +112,12 @@ Body of the text template.
 
 ** formatter                                                        :element:
    :PROPERTIES:
+   :custom_id: O19
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** parsing_error                                                    :element:
    :PROPERTIES:
+   :custom_id: O21
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -106,12 +125,16 @@ An error occurred whilst parsing.
 
 ** formatting_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O23
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst formatting.
 
 ** properties                                                       :element:
+   :PROPERTIES:
+   :custom_id: O25
+   :END:
 *** stream_variable_name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -133,12 +156,16 @@ An error occurred whilst formatting.
     :masd.codec.type: std::unordered_map<std::string, std::string>
     :END:
 ** line                                                             :element:
+   :PROPERTIES:
+   :custom_id: O27
+   :END:
 *** blocks                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
 ** block_types                                                      :element:
    :PROPERTIES:
+   :custom_id: O28
    :masd.codec.stereotypes: masd::enumeration
    :END:
 *** text_block                                                    :attribute:
@@ -147,9 +174,13 @@ An error occurred whilst formatting.
 *** variable_block                                                :attribute:
 ** instantiator                                                     :element:
    :PROPERTIES:
+   :custom_id: O30
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** text_template_body                                               :element:
+   :PROPERTIES:
+   :custom_id: O32
+   :END:
 *** tagged_values                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
@@ -163,10 +194,12 @@ Set of tagged values read from the template.
     :END:
 ** instantiation_error                                              :element:
    :PROPERTIES:
+   :custom_id: O37
    :masd.codec.stereotypes: masd::exception
    :END:
 ** features                                                         :element:
    :PROPERTIES:
+   :custom_id: O48
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.stitch
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -223,6 +256,7 @@ Array of wale KVPs to use in template instantiation.
 
 * ConfigurableViaKvps                                               :element:
   :PROPERTIES:
+  :custom_id: O39
   :masd.codec.stereotypes: masd::object_template
   :END:
 
@@ -243,12 +277,17 @@ Set of keys that are expected to be supplied.
 Key value pairs that were supplied for instantiation.
 
 * helpers                                                            :module:
+  :PROPERTIES:
+  :custom_id: O40
+  :END:
 ** kvp_validator                                                    :element:
    :PROPERTIES:
+   :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** validation_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O42
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -256,10 +295,12 @@ An error occurred with the supplied KVPs.
 
 ** kvp_resolver                                                     :element:
    :PROPERTIES:
+   :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** resolution_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O45
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -267,13 +308,16 @@ An error occurred when trying to resolve a key.
 
 * initializer                                                       :element:
   :PROPERTIES:
+  :custom_id: O47
   :masd.codec.stereotypes: masd::variability::initializer
   :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O49
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O50
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

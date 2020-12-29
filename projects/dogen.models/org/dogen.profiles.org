@@ -22,6 +22,7 @@ space; keep it technical space agnostic.
 
 * base                                                               :module:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.dia.comment: true
   :END:
 
@@ -33,6 +34,7 @@ other layers can then configure features.
 
 ** decoration                                                       :element:
    :PROPERTIES:
+   :custom_id: O4
    :masd.variability.binding_point: global
    :masd.variability.key_prefix: masd.decoration
    :masd.codec.stereotypes: masd::variability::profile
@@ -58,6 +60,7 @@ Configuration for the decoration elements.
     :END:
 ** extraction                                                       :element:
    :PROPERTIES:
+   :custom_id: O37
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::profile
    :END:
@@ -74,6 +77,7 @@ Configuration for extraction.
     :END:
 ** csharp                                                           :element:
    :PROPERTIES:
+   :custom_id: O39
    :masd.variability.key_prefix: masd.csharp
    :masd.codec.stereotypes: masd::variability::profile
    :END:
@@ -86,6 +90,7 @@ Configures the main options for the C# backend.
     :END:
 ** ignores                                                          :element:
    :PROPERTIES:
+   :custom_id: O44
    :masd.variability.binding_point: global
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::profile
@@ -105,6 +110,7 @@ FIXME: we should remove all ignores related to tests and add a proper facet for 
     :END:
 ** base                                                             :element:
    :PROPERTIES:
+   :custom_id: O38
    :masd.codec.parent: base::decoration, base::extraction, base::csharp, base::ignores
    :masd.codec.stereotypes: masd::variability::profile
    :END:
@@ -114,6 +120,7 @@ FIXME: we should remove all ignores related to tests and add a proper facet for 
     :END:
 ** base_profile                                                     :element:
    :PROPERTIES:
+   :custom_id: O5
    :masd.variability.key_prefix: masd.cpp
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile
@@ -147,6 +154,7 @@ Configures the main options for the C++ backend.
     :END:
 ** default_profile                                                  :element:
    :PROPERTIES:
+   :custom_id: O7
    :masd.variability.binding_point: global
    :masd.codec.parent: base::base_profile
    :masd.codec.stereotypes: masd::variability::profile
@@ -156,6 +164,7 @@ Variability profile for a typical dogen model.
 
 ** disable_all_facets                                               :element:
    :PROPERTIES:
+   :custom_id: O9
    :masd.variability.binding_point: global
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile_template
@@ -171,6 +180,7 @@ Disables all facets in the C++ backend.
     :END:
 ** relational_profile                                               :element:
    :PROPERTIES:
+   :custom_id: O29
    :masd.variability.key_prefix: masd.cpp
    :masd.codec.parent: base::base_profile
    :masd.codec.stereotypes: masd::variability::profile
@@ -185,6 +195,7 @@ Disables all facets in the C++ backend.
     :END:
 ** test_all_facets                                                  :element:
    :PROPERTIES:
+   :custom_id: O31
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile
    :END:
@@ -198,6 +209,7 @@ Disables all facets in the C++ backend.
     :END:
 * composable                                                         :module:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.dia.comment: true
   :END:
 
@@ -208,6 +220,7 @@ for the element.
 
 ** typeable                                                         :element:
    :PROPERTIES:
+   :custom_id: O11
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::typeable
    :masd.codec.stereotypes: masd::variability::profile
@@ -229,6 +242,7 @@ so we disable all facets.
 
 ** pretty_printable                                                 :element:
    :PROPERTIES:
+   :custom_id: O12
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::pretty_printable
    :masd.variability.key_prefix: masd.cpp.io
@@ -243,6 +257,7 @@ The element has the ability to dump itself to a stream.
     :END:
 ** hashable                                                         :element:
    :PROPERTIES:
+   :custom_id: O13
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::hashable
    :masd.variability.key_prefix: masd.cpp.hash
@@ -257,6 +272,7 @@ The element has the ability to generate hashes.
     :END:
 ** serializable                                                     :element:
    :PROPERTIES:
+   :custom_id: O14
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::serializable
    :masd.variability.key_prefix: masd.cpp.serialization
@@ -268,6 +284,7 @@ The element has the ability to generate hashes.
     :END:
 ** handcrafted                                                      :element:
    :PROPERTIES:
+   :custom_id: O16
    :masd.variability.binding_point: element
    :masd.codec.stereotypes: masd::variability::profile
    :END:
@@ -280,6 +297,7 @@ Base profile for model elements that are manually generated.
     :END:
 ** handcrafted_pretty_printable                                     :element:
    :PROPERTIES:
+   :custom_id: O17
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::handcrafted::pretty_printable
    :masd.variability.key_prefix: masd.cpp.io
@@ -296,6 +314,7 @@ Base profile for model elements that are manually generated.
     :END:
 ** handcrafted_typeable                                             :element:
    :PROPERTIES:
+   :custom_id: O15
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::handcrafted::typeable
    :masd.variability.key_prefix: masd.cpp.types
@@ -319,6 +338,7 @@ Configuration for model elements that are generated manually by the user.
     :END:
 ** header_only                                                      :element:
    :PROPERTIES:
+   :custom_id: O18
    :masd.variability.binding_point: global
    :masd.variability.stereotype: dogen::handcrafted::typeable::header_only
    :masd.variability.key_prefix: masd.cpp.types
@@ -334,6 +354,7 @@ This element has only a types header file.
     :END:
 ** inheritable                                                      :element:
    :PROPERTIES:
+   :custom_id: O19
    :masd.variability.binding_point: global
    :masd.variability.stereotype: dogen::inheritable
    :masd.codec.stereotypes: masd::variability::profile
@@ -344,6 +365,7 @@ This element has only a types header file.
     :END:
 ** implementation_only                                              :element:
    :PROPERTIES:
+   :custom_id: O23
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::handcrafted::typeable::implementation_only
    :masd.variability.key_prefix: masd.cpp.types
@@ -367,6 +389,7 @@ This element has only a types implementation file.
     :END:
 ** handcrafted_serializable                                         :element:
    :PROPERTIES:
+   :custom_id: O26
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::handcrafted::serializable
    :masd.variability.key_prefix: masd.cpp.serialization
@@ -383,6 +406,7 @@ This element has only a types implementation file.
     :END:
 ** convertible                                                      :element:
    :PROPERTIES:
+   :custom_id: O28
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::convertible
    :masd.variability.key_prefix: masd.cpp.lexical_cast
@@ -394,6 +418,7 @@ This element has only a types implementation file.
     :END:
 ** untestable                                                       :element:
    :PROPERTIES:
+   :custom_id: O34
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::untestable
    :masd.variability.key_prefix: masd.cpp.tests
@@ -408,6 +433,7 @@ Model element will not be tested via generated tests.
     :END:
 ** untypable                                                        :element:
    :PROPERTIES:
+   :custom_id: O35
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::untypable
    :masd.variability.key_prefix: masd.cpp.types
@@ -422,6 +448,7 @@ The element does not have a types facet.
     :END:
 ** handcrafted_cmake                                                :element:
    :PROPERTIES:
+   :custom_id: O36
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::handcrafted::cmake
    :masd.variability.key_prefix: masd.cpp
@@ -437,6 +464,7 @@ The element does not have a types facet.
     :END:
 ** forward_declarable                                               :element:
    :PROPERTIES:
+   :custom_id: O43
    :masd.variability.binding_point: element
    :masd.variability.stereotype: dogen::forward_declarable
    :masd.variability.key_prefix: masd.cpp.types
@@ -451,6 +479,7 @@ Element has forward declarations.
     :END:
 * test_marker                                                       :element:
   :PROPERTIES:
+  :custom_id: O32
   :masd.codec.stereotypes: masd::decoration::generation_marker
   :END:
 ** add_date_time                                                  :attribute:

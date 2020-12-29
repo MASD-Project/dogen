@@ -19,6 +19,7 @@ Houses classes common to all transformations.
 
 * tracer                                                            :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
@@ -28,6 +29,7 @@ Houses classes common to all transformations.
    :END:
 * metrics                                                           :element:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.stereotypes: dogen::untestable
   :END:
 ** transform_id                                                   :attribute:
@@ -56,14 +58,17 @@ Houses classes common to all transformations.
    :END:
 * metrics_builder                                                   :element:
   :PROPERTIES:
+  :custom_id: O3
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * metrics_printer                                                   :element:
   :PROPERTIES:
+  :custom_id: O4
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * tracing_error                                                     :element:
   :PROPERTIES:
+  :custom_id: O7
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -71,24 +76,29 @@ An error occurred when trying to generate tracing data.
 
 * scoped_tracer                                                     :element:
   :PROPERTIES:
+  :custom_id: O8
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * references_printer                                                :element:
   :PROPERTIES:
+  :custom_id: O10
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * backend                                                           :element:
   :PROPERTIES:
+  :custom_id: O14
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
 * file_backend                                                      :element:
   :PROPERTIES:
+  :custom_id: O11
   :masd.codec.parent: backend
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
 * backend_factory_registrar                                         :element:
   :PROPERTIES:
+  :custom_id: O20
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 ** backend_factories_                                             :attribute:
@@ -97,27 +107,33 @@ An error occurred when trying to generate tracing data.
    :END:
 * registrar_error                                                   :element:
   :PROPERTIES:
+  :custom_id: O23
   :masd.codec.stereotypes: masd::exception
   :END:
 * backend_factory                                                   :element:
   :PROPERTIES:
+  :custom_id: O25
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * file_backend_factory                                              :element:
   :PROPERTIES:
+  :custom_id: O27
   :masd.codec.parent: backend_factory
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * initializer                                                       :element:
   :PROPERTIES:
+  :custom_id: O29
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O31
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O32
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

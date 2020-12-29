@@ -51,6 +51,7 @@ etc.).
 
 * entities                                                           :module:
   :PROPERTIES:
+  :custom_id: O0
   :masd.codec.dia.comment: true
   :END:
 
@@ -58,6 +59,7 @@ Entities that define the logical model.
 
 ** attribute                                                        :element:
    :PROPERTIES:
+   :custom_id: O1
    :masd.codec.stereotypes: Documentable, Configurable, Nameable, Stereotypable
    :END:
 
@@ -116,6 +118,7 @@ Name to use for getter and setter.
 
 ** Nameable                                                         :element:
    :PROPERTIES:
+   :custom_id: O3
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -130,6 +133,7 @@ Fully qualified name.
 
 ** Documentable                                                     :element:
    :PROPERTIES:
+   :custom_id: O4
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -148,6 +152,7 @@ etc.
 
 ** Provenance                                                       :element:
    :PROPERTIES:
+   :custom_id: O10
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -162,6 +167,7 @@ Details of the provenance of this model element.
 
 ** Containable                                                      :element:
    :PROPERTIES:
+   :custom_id: O12
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -183,6 +189,7 @@ If true, the element is located in the global module.
 
 ** Stereotypable                                                    :element:
    :PROPERTIES:
+   :custom_id: O30
    :masd.codec.stereotypes: masd::object_template
    :END:
 *** stereotypes                                                   :attribute:
@@ -194,6 +201,7 @@ All stereotypes associated with this element.
 
 ** MetaNameable                                                     :element:
    :PROPERTIES:
+   :custom_id: O103
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -208,6 +216,7 @@ Name of the element in the meta-model that this instance conforms to.
 
 ** TechnicalSpaceRelationship                                       :element:
    :PROPERTIES:
+   :custom_id: O116
    :masd.codec.stereotypes: masd::object_template
    :END:
 *** intrinsic_technical_space                                     :attribute:
@@ -223,6 +232,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.
 
 ** Configurable                                                     :element:
    :PROPERTIES:
+   :custom_id: O122
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -237,6 +247,7 @@ Configuration for this element.
 
 ** Labelable                                                        :element:
    :PROPERTIES:
+   :custom_id: O377
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -251,6 +262,7 @@ All labels associated with this element.
 
 ** Generatable                                                      :element:
    :PROPERTIES:
+   :custom_id: O395
    :masd.codec.stereotypes: masd::object_template
    :END:
 *** generability_status                                           :attribute:
@@ -262,6 +274,7 @@ The status of this element with regards to generability.
 
 ** Element                                                          :element:
    :PROPERTIES:
+   :custom_id: O7
    :masd.codec.parent: entities::Nameable, entities::Documentable, entities::Provenance, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable, entities::Generatable
    :masd.codec.stereotypes: masd::object_template
    :END:
@@ -274,6 +287,7 @@ purpose.
 
 ** Stateful                                                         :element:
    :PROPERTIES:
+   :custom_id: O9
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -329,6 +343,7 @@ If true, generate fluent setters.
 
 ** element                                                          :element:
    :PROPERTIES:
+   :custom_id: O14
    :masd.codec.stereotypes: masd::visitable, Element
    :END:
 
@@ -351,6 +366,7 @@ If set, decoration to be added to each generated file.
     :END:
 ** model                                                            :element:
    :PROPERTIES:
+   :custom_id: O15
    :masd.codec.stereotypes: Nameable, MetaNameable, Provenance
    :END:
 
@@ -492,14 +508,17 @@ Version of the technical space we are targeting.
     :END:
 ** elements_traversal                                               :element:
    :PROPERTIES:
+   :custom_id: O16
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 ** TraversalVisitor                                                 :element:
    :PROPERTIES:
+   :custom_id: O17
    :masd.codec.stereotypes: masd::object_template
    :END:
 ** Visitable                                                        :element:
    :PROPERTIES:
+   :custom_id: O18
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -529,6 +548,7 @@ Derived class of the visitor that visits the current element, if any.
     :END:
 ** Associatable                                                     :element:
    :PROPERTIES:
+   :custom_id: O19
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -560,6 +580,7 @@ Elements that are keys in an associative container.
 
 ** Generalizable                                                    :element:
    :PROPERTIES:
+   :custom_id: O20
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -643,6 +664,7 @@ Elements that are at the bottom of the inheritance tree.
     :END:
 ** Relatable                                                        :element:
    :PROPERTIES:
+   :custom_id: O21
    :masd.codec.parent: entities::Containable, entities::Visitable, entities::Associatable, entities::Generalizable
    :masd.codec.stereotypes: masd::object_template
    :END:
@@ -651,6 +673,7 @@ Element has the ability to have relationships with other elements.
 
 ** Parameterisable                                                  :element:
    :PROPERTIES:
+   :custom_id: O26
    :masd.codec.stereotypes: masd::object_template
    :END:
 *** type_parameters                                               :attribute:
@@ -658,6 +681,9 @@ Element has the ability to have relationships with other elements.
     :masd.codec.type: type_parameters
     :END:
 ** type_parameters                                                  :element:
+   :PROPERTIES:
+   :custom_id: O27
+   :END:
 *** variable_number_of_parameters                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
@@ -672,6 +698,7 @@ Element has the ability to have relationships with other elements.
     :END:
 ** static_stereotypes                                               :element:
    :PROPERTIES:
+   :custom_id: O107
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -716,6 +743,9 @@ Lists all stereotypes defined in the masd UML profile.
 *** physical_part                                                 :attribute:
 *** physical_helper                                               :attribute:
 ** input_model_set                                                  :element:
+   :PROPERTIES:
+   :custom_id: O108
+   :END:
 
 Represents a set of related logical models used as an input to the logical model chains.
 
@@ -736,6 +766,7 @@ Maps a fixed mappable name, using the scope notation, to its destination.
 
 ** Container                                                        :element:
    :PROPERTIES:
+   :custom_id: O120
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -750,6 +781,7 @@ All elements contained by this element.
 
 ** decoration                                                        :module:
    :PROPERTIES:
+   :custom_id: O125
    :masd.codec.dia.comment: true
    :END:
 
@@ -758,6 +790,7 @@ properties related to decorations.
 
 *** licence                                                         :element:
     :PROPERTIES:
+    :custom_id: O127
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -783,6 +816,7 @@ Long form of the licence text, suitable for generation of LICENCE files.
 #+end_src
 *** modeline_group                                                  :element:
     :PROPERTIES:
+    :custom_id: O129
     :masd.codec.stereotypes: logical::meta_element, Container
     :END:
 
@@ -800,6 +834,7 @@ Modelines that make up the group.
 
 *** modeline                                                        :element:
     :PROPERTIES:
+    :custom_id: O130
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -844,6 +879,7 @@ Technical space that this modeline targets.
 
 *** editor                                                          :element:
     :PROPERTIES:
+    :custom_id: O132
     :masd.codec.stereotypes: masd::enumeration, dogen::convertible
     :END:
 
@@ -866,6 +902,9 @@ The vi-like editor vim.
 The old ex editor.
 
 *** modeline_field                                                  :element:
+    :PROPERTIES:
+    :custom_id: O133
+    :END:
 **** name                                                         :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -882,6 +921,7 @@ Value of the field.
 
 *** modeline_location                                               :element:
     :PROPERTIES:
+    :custom_id: O134
     :masd.codec.stereotypes: masd::enumeration, dogen::convertible
     :END:
 
@@ -897,6 +937,7 @@ Very last line in file.
 
 *** generation_marker                                               :element:
     :PROPERTIES:
+    :custom_id: O138
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -950,6 +991,9 @@ If true, adds the SHA1 hash of the original model to the marker.
 Custom message to add to each generated file.
 
 *** element_properties                                              :element:
+    :PROPERTIES:
+    :custom_id: O159
+    :END:
 
 Decoration for this element.
 
@@ -974,6 +1018,9 @@ The postamble is located at the bottom of an artefact and includes elements such
 as a modeline.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O177
+    :END:
 **** modeline_groups                                              :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
@@ -992,6 +1039,7 @@ as a modeline.
      :END:
 ** meta_element                                                     :element:
    :PROPERTIES:
+   :custom_id: O128
    :masd.variability.binding_point: element
    :masd.variability.stereotype: logical::meta_element
    :masd.codec.stereotypes: masd::variability::profile
@@ -1002,6 +1050,7 @@ as a modeline.
     :END:
 ** variability                                                       :module:
    :PROPERTIES:
+   :custom_id: O139
    :masd.codec.dia.comment: true
    :END:
 
@@ -1053,6 +1102,7 @@ complexity.
 
 *** abstract_feature                                                :element:
     :PROPERTIES:
+    :custom_id: O291
     :masd.codec.stereotypes: Documentable, Configurable, Nameable
     :END:
 
@@ -1147,6 +1197,7 @@ This is only required if the feature template is optional and has no default val
 
 *** feature_template                                                :element:
     :PROPERTIES:
+    :custom_id: O144
     :masd.codec.parent: entities::variability::abstract_feature
     :END:
 
@@ -1160,6 +1211,7 @@ Feature templates are expanded into features within the variability model.
      :END:
 *** initializer                                                     :element:
     :PROPERTIES:
+    :custom_id: O145
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -1180,6 +1232,9 @@ Names of all the templates that this initialiser will register.
 Names of all the features that this initialiser will register.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O178
+    :END:
 **** profile_templates                                            :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
@@ -1202,6 +1257,7 @@ Names of all the features that this initialiser will register.
      :END:
 *** abstract_bundle                                                 :element:
     :PROPERTIES:
+    :custom_id: O143
     :masd.codec.stereotypes: logical::meta_element, Associatable
     :END:
 
@@ -1261,6 +1317,7 @@ their individual binding points.
 
 *** feature_bundle                                                  :element:
     :PROPERTIES:
+    :custom_id: O290
     :masd.codec.parent: entities::variability::abstract_bundle
     :END:
 
@@ -1287,6 +1344,7 @@ Set of features associated with this feature bundle.
 
 *** feature                                                         :element:
     :PROPERTIES:
+    :custom_id: O292
     :masd.codec.parent: entities::variability::abstract_feature
     :END:
 
@@ -1294,6 +1352,7 @@ Represents a feature in variability space.
 
 *** feature_template_bundle                                         :element:
     :PROPERTIES:
+    :custom_id: O295
     :masd.codec.parent: entities::variability::abstract_bundle
     :END:
 
@@ -1325,6 +1384,7 @@ Set of feature templates associated with this feature template bundle.
      :END:
 *** abstract_profile                                                :element:
     :PROPERTIES:
+    :custom_id: O141
     :masd.codec.stereotypes: logical::meta_element
     :END:
 **** stereotype                                                   :attribute:
@@ -1347,6 +1407,7 @@ Prefix to use when composing the key, if any.
 
 *** profile_template                                                :element:
     :PROPERTIES:
+    :custom_id: O304
     :masd.codec.parent: entities::variability::abstract_profile
     :END:
 **** entries                                                      :attribute:
@@ -1355,6 +1416,7 @@ Prefix to use when composing the key, if any.
      :END:
 *** profile                                                         :element:
     :PROPERTIES:
+    :custom_id: O305
     :masd.codec.parent: entities::variability::abstract_profile
     :END:
 
@@ -1376,6 +1438,7 @@ Binding point for the profile.
 
 *** abstract_profile_entry                                          :element:
     :PROPERTIES:
+    :custom_id: O142
     :masd.codec.stereotypes: Documentable, Configurable, Nameable
     :END:
 **** original_key                                                 :attribute:
@@ -1395,10 +1458,12 @@ Key as it was originally provided by the user.
      :END:
 *** profile_entry                                                   :element:
     :PROPERTIES:
+    :custom_id: O311
     :masd.codec.parent: entities::variability::abstract_profile_entry
     :END:
 *** profile_template_entry                                          :element:
     :PROPERTIES:
+    :custom_id: O312
     :masd.codec.parent: entities::variability::abstract_profile_entry
     :END:
 **** instantiation_domain_name                                    :attribute:
@@ -1406,6 +1471,9 @@ Key as it was originally provided by the user.
      :masd.codec.type: std::string
      :END:
 *** default_value_override                                          :element:
+    :PROPERTIES:
+    :custom_id: O334
+    :END:
 **** key_ends_with                                                :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -1416,6 +1484,7 @@ Key as it was originally provided by the user.
      :END:
 ** orm                                                               :module:
    :PROPERTIES:
+   :custom_id: O146
    :masd.codec.dia.comment: true
    :END:
 
@@ -1424,6 +1493,7 @@ support in Dogen.
 
 *** model_properties                                                :element:
     :PROPERTIES:
+    :custom_id: O147
     :masd.codec.stereotypes: Schemable, Caseable
     :END:
 **** database_systems                                             :attribute:
@@ -1432,6 +1502,7 @@ support in Dogen.
      :END:
 *** database_system                                                 :element:
     :PROPERTIES:
+    :custom_id: O148
     :masd.codec.stereotypes: masd::enumeration, dogen::hashable, dogen::convertible
     :END:
 **** mysql                                                        :attribute:
@@ -1441,12 +1512,14 @@ support in Dogen.
 **** sqlite                                                       :attribute:
 *** letter_case                                                     :element:
     :PROPERTIES:
+    :custom_id: O149
     :masd.codec.stereotypes: masd::enumeration, dogen::convertible
     :END:
 **** upper_case                                                   :attribute:
 **** lower_case                                                   :attribute:
 *** object_properties                                               :element:
     :PROPERTIES:
+    :custom_id: O151
     :masd.codec.stereotypes: OrmElement
     :END:
 **** table_name                                                   :attribute:
@@ -1472,14 +1545,17 @@ True if the object has an attribute marked as a primary key, false otherwise.
 
 *** primitive_properties                                            :element:
     :PROPERTIES:
+    :custom_id: O152
     :masd.codec.stereotypes: OrmElement, Overridable
     :END:
 *** module_properties                                               :element:
     :PROPERTIES:
+    :custom_id: O153
     :masd.codec.stereotypes: Schemable, Caseable
     :END:
 *** attribute_properties                                            :element:
     :PROPERTIES:
+    :custom_id: O154
     :masd.codec.stereotypes: Overridable, OdbPragmable
     :END:
 **** column_name                                                  :attribute:
@@ -1512,6 +1588,7 @@ If true, the value of this attribute is a composite value.
 
 *** Schemable                                                       :element:
     :PROPERTIES:
+    :custom_id: O156
     :masd.codec.stereotypes: masd::object_template
     :END:
 
@@ -1533,6 +1610,7 @@ Schema name with the correct capitalisation.
 
 *** Caseable                                                        :element:
     :PROPERTIES:
+    :custom_id: O157
     :masd.codec.stereotypes: masd::object_template
     :END:
 
@@ -1547,6 +1625,7 @@ What case to use for the database identifiers.
 
 *** Mappeable                                                       :element:
     :PROPERTIES:
+    :custom_id: O158
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** generate_mapping                                             :attribute:
@@ -1558,6 +1637,7 @@ If true, object-relational mapping will be generated for this element.
 
 *** TypeMappable                                                    :element:
     :PROPERTIES:
+    :custom_id: O233
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** type_mappings                                                :attribute:
@@ -1569,6 +1649,7 @@ List of mappings of relational database types.
 
 *** OdbPragmable                                                    :element:
     :PROPERTIES:
+    :custom_id: O239
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** odb_pragmas                                                  :attribute:
@@ -1580,6 +1661,7 @@ Pragmas for the ODB ORM backend.
 
 *** OrmElement                                                      :element:
     :PROPERTIES:
+    :custom_id: O226
     :masd.codec.parent: entities::orm::Schemable, entities::orm::Caseable, entities::orm::Mappeable, entities::orm::TypeMappable, entities::orm::OdbPragmable
     :masd.codec.stereotypes: masd::object_template
     :END:
@@ -1589,6 +1671,7 @@ Pragmas for the ODB ORM backend.
      :END:
 *** Overridable                                                     :element:
     :PROPERTIES:
+    :custom_id: O230
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** type_overrides                                               :attribute:
@@ -1599,6 +1682,9 @@ Pragmas for the ODB ORM backend.
 Override the default type for this attribute for a given database system.
 
 *** type_mapping                                                    :element:
+    :PROPERTIES:
+    :custom_id: O234
+    :END:
 **** source_type                                                  :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -1635,6 +1721,9 @@ Function that converts into the destination type.
 Database to which the mapping applies. If none is supplied, it will apply to all.
 
 *** odb_options                                                     :element:
+    :PROPERTIES:
+    :custom_id: O266
+    :END:
 **** epilogue                                                     :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -1649,6 +1738,7 @@ Database to which the mapping applies. If none is supplied, it will apply to all
      :END:
 *** common_odb_options                                              :element:
     :PROPERTIES:
+    :custom_id: O272
     :masd.codec.stereotypes: logical::meta_element
     :END:
 **** sql_name_case                                                :attribute:
@@ -1660,11 +1750,17 @@ Database to which the mapping applies. If none is supplied, it will apply to all
      :masd.codec.type: std::list<std::string>
      :END:
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O273
+    :END:
 **** common_odb_options                                           :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
      :END:
 *** odb_targets                                                     :element:
+    :PROPERTIES:
+    :custom_id: O277
+    :END:
 **** main_target_name                                             :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -1678,6 +1774,9 @@ Database to which the mapping applies. If none is supplied, it will apply to all
      :masd.codec.type: std::list<odb_target>
      :END:
 *** odb_target                                                      :element:
+    :PROPERTIES:
+    :custom_id: O278
+    :END:
 **** name                                                         :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -1704,6 +1803,7 @@ Database to which the mapping applies. If none is supplied, it will apply to all
      :END:
 ** structural                                                        :module:
    :PROPERTIES:
+   :custom_id: O164
    :masd.codec.dia.comment: true
    :END:
 
@@ -1712,6 +1812,7 @@ to structural modeling.
 
 *** object_template                                                 :element:
     :PROPERTIES:
+    :custom_id: O165
     :masd.codec.stereotypes: logical::meta_element, Stateful
     :END:
 
@@ -1733,6 +1834,7 @@ If true, the object template has at least one parent.
 
 *** object                                                          :element:
     :PROPERTIES:
+    :custom_id: O166
     :masd.codec.stereotypes: logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties
     :END:
 
@@ -1777,6 +1879,7 @@ If true, this object can be the underlying element of a primitive.
      :END:
 *** builtin                                                         :element:
     :PROPERTIES:
+    :custom_id: O167
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -1812,6 +1915,7 @@ If true, this built-in can be the underlying element of a primitive.
 
 *** exception                                                       :element:
     :PROPERTIES:
+    :custom_id: O168
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -1819,6 +1923,7 @@ Represents an exception which can be thrown.
 
 *** visitor                                                         :element:
     :PROPERTIES:
+    :custom_id: O169
     :masd.codec.stereotypes: logical::meta_element
     :END:
 **** visits                                                       :attribute:
@@ -1834,6 +1939,7 @@ Elements that are visitable by the visitor.
      :END:
 *** primitive                                                       :element:
     :PROPERTIES:
+    :custom_id: O170
     :masd.codec.stereotypes: logical::meta_element, TechnicalSpaceProperties
     :END:
 
@@ -1873,6 +1979,7 @@ If true, do not generate modifiable operations.
      :END:
 *** module                                                          :element:
     :PROPERTIES:
+    :custom_id: O171
     :masd.codec.stereotypes: logical::meta_element, Container
     :END:
 
@@ -1900,6 +2007,7 @@ If true, this module is the pseudo module that models the global namespace.
      :END:
 *** enumeration                                                     :element:
     :PROPERTIES:
+    :custom_id: O172
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -1943,6 +2051,7 @@ If true, an enumerator for "invalid" will be added.
 
 *** enumerator                                                      :element:
     :PROPERTIES:
+    :custom_id: O173
     :masd.codec.stereotypes: Documentable, Nameable, Configurable, Stereotypable
     :END:
 
@@ -1960,6 +2069,9 @@ Value for the enumerator.
 It must be castable to instance of the type defined in the enumeration.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O179
+    :END:
 **** modules                                                      :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>
@@ -2002,6 +2114,7 @@ It must be castable to instance of the type defined in the enumeration.
      :END:
 *** entry_point                                                     :element:
     :PROPERTIES:
+    :custom_id: O264
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2009,12 +2122,16 @@ Represents an entry point to a binary.
 
 *** assistant                                                       :element:
     :PROPERTIES:
+    :custom_id: O287
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
 General type to provide helpers.
 
 *** technical_space_properties                                      :element:
+    :PROPERTIES:
+    :custom_id: O420
+    :END:
 **** requires_manual_default_constructor                          :attribute:
      :PROPERTIES:
      :masd.codec.type: bool
@@ -2033,6 +2150,7 @@ General type to provide helpers.
      :END:
 *** TechnicalSpaceProperties                                        :element:
     :PROPERTIES:
+    :custom_id: O421
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** technical_space_properties                                   :attribute:
@@ -2041,6 +2159,7 @@ General type to provide helpers.
      :END:
 ** mapping                                                           :module:
    :PROPERTIES:
+   :custom_id: O193
    :masd.codec.dia.comment: true
    :END:
 
@@ -2048,6 +2167,7 @@ Meta-model elements related to mapping domains.
 
 *** extensible_mappable                                             :element:
     :PROPERTIES:
+    :custom_id: O194
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2065,6 +2185,9 @@ extend the mappings as required.
 All the destinations that this source has been mapped to.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O195
+    :END:
 **** extensible_mappables                                         :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
@@ -2074,6 +2197,9 @@ All the destinations that this source has been mapped to.
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
      :END:
 *** destination                                                     :element:
+    :PROPERTIES:
+    :custom_id: O197
+    :END:
 **** name                                                         :attribute:
      :PROPERTIES:
      :masd.codec.type: identification::entities::logical_name
@@ -2084,6 +2210,7 @@ All the destinations that this source has been mapped to.
      :END:
 *** fixed_mappable                                                  :element:
     :PROPERTIES:
+    :custom_id: O210
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2098,6 +2225,7 @@ variability types.
      :END:
 ** templating                                                        :module:
    :PROPERTIES:
+   :custom_id: O211
    :masd.codec.dia.comment: true
    :END:
 
@@ -2105,6 +2233,7 @@ Meta-model elements related to templating .
 
 *** logic_less_template                                             :element:
     :PROPERTIES:
+    :custom_id: O212
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2122,12 +2251,16 @@ Content of the logic-less template.
 
 #+end_src
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O214
+    :END:
 **** logic_less_templates                                         :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
      :END:
 ** serialization                                                     :module:
    :PROPERTIES:
+   :custom_id: O219
    :masd.codec.dia.comment: true
    :END:
 
@@ -2136,6 +2269,7 @@ to serialisation.
 
 *** type_registrar                                                  :element:
     :PROPERTIES:
+    :custom_id: O220
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2162,12 +2296,16 @@ List of all concrete classes which are part of an inheritance tree.
 Registrars on other models this registrar depends on.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O223
+    :END:
 **** type_registrars                                              :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
      :END:
 ** visual_studio                                                     :module:
    :PROPERTIES:
+   :custom_id: O241
    :masd.codec.dia.comment: true
    :END:
 
@@ -2176,6 +2314,7 @@ build systems.
 
 *** project                                                         :element:
     :PROPERTIES:
+    :custom_id: O243
     :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
     :END:
 
@@ -2203,6 +2342,9 @@ Set of item groups in the project.
 Formatted name of the project.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O244
+    :END:
 **** solutions                                                    :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
@@ -2222,6 +2364,9 @@ All projects in this model.
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
      :END:
 *** item_group                                                      :element:
+    :PROPERTIES:
+    :custom_id: O246
+    :END:
 
 Represents an MSBuild ItemGroup.
 
@@ -2236,6 +2381,9 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.
 Set of MSBuild Items that make up this ItemGroup.
 
 *** item                                                            :element:
+    :PROPERTIES:
+    :custom_id: O247
+    :END:
 
 Represents an MSBuild Item, used in Visual Studio projects.
 
@@ -2260,6 +2408,7 @@ Name of the file to include.
 
 *** solution                                                        :element:
     :PROPERTIES:
+    :custom_id: O249
     :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
     :END:
 **** project_persistence_blocks                                   :attribute:
@@ -2271,6 +2420,7 @@ Set of project persistence blocks in this solution.
 
 *** project_persistence_block                                       :element:
     :PROPERTIES:
+    :custom_id: O250
     :masd.codec.stereotypes: UniquelyIdentifiable
     :END:
 **** name                                                         :attribute:
@@ -2296,6 +2446,7 @@ GUID used by Visual Studio to identify projects of this type.
 
 *** UniquelyIdentifiable                                            :element:
     :PROPERTIES:
+    :custom_id: O252
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** guid                                                         :attribute:
@@ -2307,6 +2458,7 @@ GUID that uniquely identifies this element.
 
 *** msbuild_targets                                                 :element:
     :PROPERTIES:
+    :custom_id: O280
     :masd.codec.stereotypes: logical::meta_element
     :END:
 **** odb_targets                                                  :attribute:
@@ -2315,6 +2467,7 @@ GUID that uniquely identifies this element.
      :END:
 ** build                                                             :module:
    :PROPERTIES:
+   :custom_id: O282
    :masd.codec.dia.comment: true
    :END:
 
@@ -2323,12 +2476,16 @@ to building, which don't have their own containing
 namespace.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O284
+    :END:
 **** cmakelists                                                   :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
      :END:
 *** cmakelists                                                      :element:
     :PROPERTIES:
+    :custom_id: O285
     :masd.codec.stereotypes: logical::meta_element
     :END:
 
@@ -2360,12 +2517,16 @@ Represents build CMakeLists files.
      :END:
 ** physical                                                          :module:
    :PROPERTIES:
+   :custom_id: O336
    :masd.codec.dia.comment: true
    :END:
 
 Logical representation of elements in the physical dimension.
 
 *** element_repository                                              :element:
+    :PROPERTIES:
+    :custom_id: O337
+    :END:
 **** backends                                                     :attribute:
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
@@ -2392,6 +2553,7 @@ Logical representation of elements in the physical dimension.
      :END:
 *** archetype                                                       :element:
     :PROPERTIES:
+    :custom_id: O338
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement, HasTechnicalSpace
     :END:
 
@@ -2441,6 +2603,7 @@ Default postfix to use for this archetype.
 
 *** backend                                                         :element:
     :PROPERTIES:
+    :custom_id: O339
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container, HasTechnicalSpace
     :END:
 
@@ -2476,6 +2639,7 @@ Default directory name to use for this backend.
 
 *** facet                                                           :element:
     :PROPERTIES:
+    :custom_id: O340
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement, Container
     :END:
 
@@ -2508,6 +2672,7 @@ Default postfix to use for this facet.
 
 *** part                                                            :element:
     :PROPERTIES:
+    :custom_id: O342
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement
     :END:
 
@@ -2564,6 +2729,7 @@ Default directory name to use for this part.
 
 *** archetype_kind                                                  :element:
     :PROPERTIES:
+    :custom_id: O345
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement
     :END:
 **** file_extension                                               :attribute:
@@ -2575,6 +2741,7 @@ Extension to use for the files of this kind.
 
 *** PhysicalElement                                                 :element:
     :PROPERTIES:
+    :custom_id: O376
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** id                                                           :attribute:
@@ -2607,6 +2774,7 @@ Name of the backend containing this element.
 
 *** variable_relation                                               :element:
     :PROPERTIES:
+    :custom_id: O382
     :masd.codec.stereotypes: Urnable
     :END:
 **** type                                                         :attribute:
@@ -2618,6 +2786,7 @@ Type of the variable relation.
 
 *** constant_relation                                               :element:
     :PROPERTIES:
+    :custom_id: O383
     :masd.codec.stereotypes: Urnable, Labelable
     :END:
 **** logical_model_element_id                                     :attribute:
@@ -2626,6 +2795,7 @@ Type of the variable relation.
      :END:
 *** Urnable                                                         :element:
     :PROPERTIES:
+    :custom_id: O384
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** original_urn                                                 :attribute:
@@ -2640,11 +2810,17 @@ pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
 to a unique archetype.
 
 *** hard_coded_relation                                             :element:
+    :PROPERTIES:
+    :custom_id: O385
+    :END:
 **** value                                                        :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
 *** relations                                                       :element:
+    :PROPERTIES:
+    :custom_id: O386
+    :END:
 **** status                                                       :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
@@ -2670,6 +2846,7 @@ element.
      :END:
 *** text_templating                                                 :element:
     :PROPERTIES:
+    :custom_id: O390
     :masd.codec.stereotypes: Configurable
     :END:
 
@@ -2714,6 +2891,7 @@ Relation information for this archetype.
 
 *** HasTechnicalSpace                                               :element:
     :PROPERTIES:
+    :custom_id: O410
     :masd.codec.stereotypes: masd::object_template
     :END:
 **** technical_space                                              :attribute:
@@ -2725,6 +2903,7 @@ Technical space to which this physical element belongs to.
 
 *** helper                                                          :element:
     :PROPERTIES:
+    :custom_id: O427
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement
     :END:
 **** part_id                                                      :attribute:
@@ -2764,6 +2943,7 @@ Relation information for this helper.
 
 ** output_model_set                                                 :element:
    :PROPERTIES:
+   :custom_id: O349
    :masd.codec.stereotypes: Nameable
    :END:
 
@@ -2778,6 +2958,7 @@ All models in this model set.
 
 ** generability_status                                              :element:
    :PROPERTIES:
+   :custom_id: O394
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -2808,6 +2989,9 @@ User requested that any changes to this element are to be ignored.
 The element is generatable.
 
 ** stereotypes                                                      :element:
+   :PROPERTIES:
+   :custom_id: O401
+   :END:
 
 Stereotype information associated with this element.
 
@@ -2827,6 +3011,9 @@ model.
 Stereotypes that are not part of the masd UML profile. These are user defined.
 
 ** streaming_properties                                             :element:
+   :PROPERTIES:
+   :custom_id: O414
+   :END:
 *** requires_quoting                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
@@ -2840,6 +3027,9 @@ Stereotypes that are not part of the masd UML profile. These are user defined.
     :masd.codec.type: bool
     :END:
 ** helper_properties                                                :element:
+   :PROPERTIES:
+   :custom_id: O423
+   :END:
 *** current                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: helper_descriptor
@@ -2853,6 +3043,9 @@ Stereotypes that are not part of the masd UML profile. These are user defined.
     :masd.codec.type: bool
     :END:
 ** helper_descriptor                                                :element:
+   :PROPERTIES:
+   :custom_id: O425
+   :END:
 *** family                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -2898,11 +3091,17 @@ Stereotypes that are not part of the masd UML profile. These are user defined.
     :masd.codec.type: bool
     :END:
 ** aspect_properties                                                :element:
+   :PROPERTIES:
+   :custom_id: O436
+   :END:
 *** requires_static_reference_equals                              :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 ** assistant_properties                                             :element:
+   :PROPERTIES:
+   :custom_id: O440
+   :END:
 *** requires_assistance                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
@@ -2919,10 +3118,12 @@ Postfix to use to call the appropriate assistant method, if required.
 
 * traits                                                            :element:
   :PROPERTIES:
+  :custom_id: O29
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * transforms                                                         :module:
   :PROPERTIES:
+  :custom_id: O32
   :masd.codec.dia.comment: true
   :END:
 
@@ -2930,6 +3131,7 @@ Houses all of the transformations supported by logical.
 
 ** context                                                          :element:
    :PROPERTIES:
+   :custom_id: O33
    :masd.cpp.types.class_forward_declarations.enabled: true
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
@@ -2974,82 +3176,102 @@ Human readable timestamp of when the activity took place.
 
 ** pre_assembly_chain                                               :element:
    :PROPERTIES:
+   :custom_id: O34
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** model_production_chain                                           :element:
    :PROPERTIES:
+   :custom_id: O35
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** assembly_chain                                                   :element:
    :PROPERTIES:
+   :custom_id: O36
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** post_assembly_chain                                              :element:
    :PROPERTIES:
+   :custom_id: O37
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** merge_transform                                                  :element:
    :PROPERTIES:
+   :custom_id: O38
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** modules_transform                                                :element:
    :PROPERTIES:
+   :custom_id: O39
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** origin_transform                                                 :element:
    :PROPERTIES:
+   :custom_id: O40
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** technical_space_transform                                        :element:
    :PROPERTIES:
+   :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** type_params_transform                                            :element:
    :PROPERTIES:
+   :custom_id: O45
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** parsing_transform                                                :element:
    :PROPERTIES:
+   :custom_id: O47
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** primitives_transform                                             :element:
    :PROPERTIES:
+   :custom_id: O48
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** generalization_transform                                         :element:
    :PROPERTIES:
+   :custom_id: O50
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** stereotypes_transform                                            :element:
    :PROPERTIES:
+   :custom_id: O51
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** object_templates_transform                                       :element:
    :PROPERTIES:
+   :custom_id: O52
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** global_module_transform                                          :element:
    :PROPERTIES:
+   :custom_id: O53
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** orm_transform                                                    :element:
    :PROPERTIES:
+   :custom_id: O54
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** resolver_transform                                               :element:
    :PROPERTIES:
+   :custom_id: O55
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** attributes_transform                                             :element:
    :PROPERTIES:
+   :custom_id: O56
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** associations_transform                                           :element:
    :PROPERTIES:
+   :custom_id: O57
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** transformation_error                                             :element:
    :PROPERTIES:
+   :custom_id: O61
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3057,110 +3279,142 @@ An error occurred whilst applying a transformation.
 
 ** enumerations_transform                                           :element:
    :PROPERTIES:
+   :custom_id: O62
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** extensible_mapping_transform                                     :element:
    :PROPERTIES:
+   :custom_id: O100
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** meta_naming_transform                                            :element:
    :PROPERTIES:
+   :custom_id: O105
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** modelines_transform                                              :element:
    :PROPERTIES:
+   :custom_id: O115
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** containment_transform                                            :element:
    :PROPERTIES:
+   :custom_id: O118
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** variability_features_transform                                   :element:
    :PROPERTIES:
+   :custom_id: O123
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** mapping_elements_transform                                       :element:
    :PROPERTIES:
+   :custom_id: O216
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** type_registrar_transform                                         :element:
    :PROPERTIES:
+   :custom_id: O221
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** visual_studio_transform                                          :element:
    :PROPERTIES:
+   :custom_id: O258
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** visual_studio_project_type_transform                             :element:
    :PROPERTIES:
+   :custom_id: O261
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** odb_options_transform                                            :element:
    :PROPERTIES:
+   :custom_id: O275
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** variability_profiles_chain                                       :element:
    :PROPERTIES:
+   :custom_id: O317
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** dynamic_stereotypes_transform                                    :element:
    :PROPERTIES:
+   :custom_id: O326
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** variability_profiles_transform                                   :element:
    :PROPERTIES:
+   :custom_id: O328
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** physical_entities_transform                                      :element:
    :PROPERTIES:
+   :custom_id: O346
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** template_rendering_transform                                     :element:
    :PROPERTIES:
+   :custom_id: O351
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** decoration_transform                                             :element:
    :PROPERTIES:
+   :custom_id: O360
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** all_technical_spaces_transform                                   :element:
    :PROPERTIES:
+   :custom_id: O373
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** labelling_transform                                              :element:
    :PROPERTIES:
+   :custom_id: O380
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** generability_transform                                           :element:
    :PROPERTIES:
+   :custom_id: O398
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** streaming_properties_transform                                   :element:
    :PROPERTIES:
+   :custom_id: O411
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** technical_space_properties_transform                             :element:
    :PROPERTIES:
+   :custom_id: O417
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** helper_properties_transform                                      :element:
    :PROPERTIES:
+   :custom_id: O434
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** aspect_properties_transform                                      :element:
    :PROPERTIES:
+   :custom_id: O438
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** assistant_properties_transform                                   :element:
    :PROPERTIES:
+   :custom_id: O443
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** documentation_transform                                          :element:
    :PROPERTIES:
+   :custom_id: O449
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 * helpers                                                            :module:
+  :PROPERTIES:
+  :custom_id: O64
+  :END:
 ** decomposition_result                                             :element:
+   :PROPERTIES:
+   :custom_id: O65
+   :END:
 *** names                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
@@ -3175,14 +3429,17 @@ An error occurred whilst applying a transformation.
     :END:
 ** decomposer                                                       :element:
    :PROPERTIES:
+   :custom_id: O66
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** post_assembly_validator                                          :element:
    :PROPERTIES:
+   :custom_id: O68
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** validation_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O70
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3190,9 +3447,13 @@ An error occurred during validation.
 
 ** pre_assembly_validator                                           :element:
    :PROPERTIES:
+   :custom_id: O72
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** indices                                                          :element:
+   :PROPERTIES:
+   :custom_id: O74
+   :END:
 *** objects_always_in_heap                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_set<identification::entities::logical_id>
@@ -3215,6 +3476,7 @@ An error occurred during validation.
     :END:
 ** indexing_error                                                   :element:
    :PROPERTIES:
+   :custom_id: O75
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3222,14 +3484,17 @@ A fatal error has occurred while indexing.
 
 ** indexer                                                          :element:
    :PROPERTIES:
+   :custom_id: O76
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** resolver                                                         :element:
    :PROPERTIES:
+   :custom_id: O80
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** resolution_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O81
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3237,6 +3502,7 @@ An error occurred while trying to resolve a type.
 
 ** mapping_error                                                    :element:
    :PROPERTIES:
+   :custom_id: O85
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3244,9 +3510,13 @@ An error has occurred while mapping element names.
 
 ** mapper                                                           :element:
    :PROPERTIES:
+   :custom_id: O86
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** mapping_context                                                  :element:
+   :PROPERTIES:
+   :custom_id: O87
+   :END:
 *** translations                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
@@ -3260,6 +3530,9 @@ An error has occurred while mapping element names.
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
     :END:
 ** mapping_set                                                      :element:
+   :PROPERTIES:
+   :custom_id: O89
+   :END:
 
 Consistent unit of mapping that can be used to translate a model from one technical
 space to another.
@@ -3277,6 +3550,9 @@ space to another.
     :masd.codec.type: std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
     :END:
 ** mapping_set_repository                                           :element:
+   :PROPERTIES:
+   :custom_id: O90
+   :END:
 
 Stores all available mapping sets.
 
@@ -3290,9 +3566,13 @@ Stores all available mapping sets.
     :END:
 ** mappings_validator                                               :element:
    :PROPERTIES:
+   :custom_id: O93
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** mapping                                                          :element:
+   :PROPERTIES:
+   :custom_id: O94
+   :END:
 
 Stores the mapping of a key (the element id) to its values, organised by technical
 space.
@@ -3312,6 +3592,9 @@ Technical space agnostic ID of the element we're mapping from.
 Values of the mapping, by technical space.
 
 ** mapping_value                                                    :element:
+   :PROPERTIES:
+   :custom_id: O96
+   :END:
 
 Value of a mapping.
 
@@ -3325,27 +3608,35 @@ Value of a mapping.
     :END:
 ** mapping_actions                                                  :element:
    :PROPERTIES:
+   :custom_id: O97
    :masd.codec.stereotypes: masd::enumeration
    :END:
 *** translate                                                     :attribute:
 *** erase                                                         :attribute:
 ** visual_studio_project_type_mapper                                :element:
    :PROPERTIES:
+   :custom_id: O260
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** profile_adapter                                                  :element:
    :PROPERTIES:
+   :custom_id: O318
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** configuration_model_set_adapter                                  :element:
    :PROPERTIES:
+   :custom_id: O319
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** adaptation_exception                                             :element:
    :PROPERTIES:
+   :custom_id: O321
    :masd.codec.stereotypes: masd::exception
    :END:
 ** decoration_repository                                            :element:
+   :PROPERTIES:
+   :custom_id: O354
+   :END:
 *** modelines_by_modeline_group_by_technical_space                :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
@@ -3360,9 +3651,13 @@ Value of a mapping.
     :END:
 ** decoration_repository_factory                                    :element:
    :PROPERTIES:
+   :custom_id: O355
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** decoration_configuration                                         :element:
+   :PROPERTIES:
+   :custom_id: O357
+   :END:
 *** enabled                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::optional<bool>
@@ -3385,18 +3680,22 @@ Value of a mapping.
     :END:
 ** decoration_configuration_factory                                 :element:
    :PROPERTIES:
+   :custom_id: O358
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** decoration_factory                                               :element:
    :PROPERTIES:
+   :custom_id: O370
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** stereotypes_helper                                               :element:
    :PROPERTIES:
+   :custom_id: O405
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** building_error                                                   :element:
    :PROPERTIES:
+   :custom_id: O409
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -3404,6 +3703,7 @@ An error has occurred in a factory.
 
 * features                                                           :module:
   :PROPERTIES:
+  :custom_id: O180
   :masd.codec.dia.comment: true
   :END:
 
@@ -3411,6 +3711,7 @@ Defines all features used by the logical model.
 
 ** type_parameters                                                  :element:
    :PROPERTIES:
+   :custom_id: O181
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.type_parameters
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3435,10 +3736,12 @@ Parameters to configure generic types.
     :END:
 ** initializer                                                      :element:
    :PROPERTIES:
+   :custom_id: O183
    :masd.codec.stereotypes: masd::variability::initializer
    :END:
 ** enumeration                                                      :element:
    :PROPERTIES:
+   :custom_id: O184
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.enumeration
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3481,6 +3784,7 @@ If true, adds an enumerator to represent an invalid choice.
 
 ** enumerator                                                       :element:
    :PROPERTIES:
+   :custom_id: O185
    :masd.variability.default_binding_point: property
    :masd.variability.key_prefix: masd.enumerator
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3498,6 +3802,7 @@ Value to use for this enumerator. Must be unique for an enumeration.
 
 ** generalization                                                   :element:
    :PROPERTIES:
+   :custom_id: O186
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.generalization
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3523,6 +3828,7 @@ Name of the parent of the current element.
 
 ** origin                                                           :element:
    :PROPERTIES:
+   :custom_id: O187
    :masd.variability.default_binding_point: global
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -3539,6 +3845,7 @@ If true, sets the origin of the model to "proxy model".
 
 ** output_technical_space                                           :element:
    :PROPERTIES:
+   :custom_id: O188
    :masd.variability.default_binding_point: global
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3556,6 +3863,7 @@ Set of output technical spaces that this model targets.
 
 ** primitive                                                        :element:
    :PROPERTIES:
+   :custom_id: O189
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.primitive
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3590,6 +3898,7 @@ it.
 
 ** orm                                                              :element:
    :PROPERTIES:
+   :custom_id: O190
    :masd.variability.key_prefix: masd.orm
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -3706,6 +4015,7 @@ ORM in Dogen.
 
 ** decoration_modeline                                              :element:
    :PROPERTIES:
+   :custom_id: O191
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.decoration.modeline
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3739,6 +4049,7 @@ Technical space targeted by the modeline.
 
 ** variability_templates                                            :element:
    :PROPERTIES:
+   :custom_id: O192
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -3797,6 +4108,7 @@ These match on keys ending with the specified string.
 
 ** mapping                                                          :element:
    :PROPERTIES:
+   :custom_id: O209
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.mapping
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3822,6 +4134,7 @@ Type that is the destination of the mapping.
 
 ** variability_bundle                                               :element:
    :PROPERTIES:
+   :custom_id: O218
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -3877,6 +4190,7 @@ Prefix to apply to construct the qualified name, if any.
 
 ** variability_entry                                                :element:
    :PROPERTIES:
+   :custom_id: O308
    :masd.variability.generate_registration: false
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3916,6 +4230,7 @@ Template instantiation domain name to use when instantiating template.
 
 ** variability_profile                                              :element:
    :PROPERTIES:
+   :custom_id: O309
    :masd.variability.generate_registration: false
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -3952,6 +4267,7 @@ Where does this profile or profile template bind to.
 
 ** physical                                                         :element:
    :PROPERTIES:
+   :custom_id: O348
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -4031,6 +4347,7 @@ Postfix to use for this physical element.
 
 ** wale                                                             :element:
    :PROPERTIES:
+   :custom_id: O353
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.wale
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -4056,6 +4373,7 @@ Array of wale KVPs to use in template instantiation.
 
 ** decoration                                                       :element:
    :PROPERTIES:
+   :custom_id: O361
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.decoration
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -4102,6 +4420,7 @@ Name of the decoration marker to use for this modeling element.
 
 ** labelling                                                        :element:
    :PROPERTIES:
+   :custom_id: O379
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
 
@@ -4118,6 +4437,7 @@ Labels to attach to modeling elements. Key must be unique.
 
 ** physical_relations                                               :element:
    :PROPERTIES:
+   :custom_id: O393
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -4151,6 +4471,7 @@ Define a fixed relation between the current archetype and another archetype.
 
 ** streaming                                                        :element:
    :PROPERTIES:
+   :custom_id: O413
    :masd.variability.key_prefix: masd.cpp.streaming
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4183,6 +4504,7 @@ If true, streaming this type requires removing unprintable characters.
 
 ** technical_space_version                                          :element:
    :PROPERTIES:
+   :custom_id: O415
    :masd.variability.key_prefix: masd.cpp
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4197,6 +4519,7 @@ Which version of C++ to use.
 
 ** technical_space_properties                                       :element:
    :PROPERTIES:
+   :custom_id: O419
    :masd.variability.key_prefix: masd
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4229,6 +4552,7 @@ If true, the modeling element requires stream manipulators.
 
 ** helpers                                                          :element:
    :PROPERTIES:
+   :custom_id: O426
    :masd.variability.key_prefix: masd
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4243,6 +4567,7 @@ Which family of helpers to use for this modeling element.
 
 ** physical_helpers                                                 :element:
    :PROPERTIES:
+   :custom_id: O432
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.physical.helpers
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -4274,6 +4599,7 @@ Features related to the helpers in physical domain.
     :END:
 ** aspect                                                           :element:
    :PROPERTIES:
+   :custom_id: O445
    :masd.variability.key_prefix: masd.csharp.aspect
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4285,6 +4611,7 @@ Features related to the helpers in physical domain.
     :END:
 ** assistant                                                        :element:
    :PROPERTIES:
+   :custom_id: O446
    :masd.variability.key_prefix: masd.csharp.assistant
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :END:
@@ -4301,18 +4628,22 @@ Features related to the helpers in physical domain.
     :END:
 * registrar                                                         :element:
   :PROPERTIES:
+  :custom_id: O240
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O271
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O289
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * formatters                                                         :module:
   :PROPERTIES:
+  :custom_id: O362
   :masd.codec.dia.comment: true
   :END:
 
@@ -4320,18 +4651,22 @@ Contains formatting classes for the logical model.
 
 ** decoration_formatter                                             :element:
    :PROPERTIES:
+   :custom_id: O363
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** generation_marker_formatter                                      :element:
    :PROPERTIES:
+   :custom_id: O365
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** modeline_formatter                                               :element:
    :PROPERTIES:
+   :custom_id: O366
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** formatting_error                                                 :element:
    :PROPERTIES:
+   :custom_id: O369
    :masd.codec.stereotypes: masd::exception
    :END:
 

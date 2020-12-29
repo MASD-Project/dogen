@@ -23,17 +23,24 @@ of org mode required by Dogen.
 
 * entities                                                           :module:
   :PROPERTIES:
+  :custom_id: O0
   :masd.codec.dia.comment: true
   :END:
 
 Represents entities from Emacs' org-mode.
 
 ** section                                                          :element:
+   :PROPERTIES:
+   :custom_id: O1
+   :END:
 *** blocks                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
 ** document                                                         :element:
+   :PROPERTIES:
+   :custom_id: O2
+   :END:
 *** affiliated_keywords                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<affiliated_keyword>
@@ -57,6 +64,9 @@ Top-level section in document.
 Top-level headlines in document.
 
 ** headline                                                         :element:
+   :PROPERTIES:
+   :custom_id: O4
+   :END:
 *** affiliated_keywords                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<affiliated_keyword>
@@ -113,15 +123,20 @@ Headline's TODO keyword.
 
 ** tag                                                              :element:
    :PROPERTIES:
+   :custom_id: O5
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 ** todo_keyword                                                     :element:
    :PROPERTIES:
+   :custom_id: O6
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 ** drawer                                                           :element:
+   :PROPERTIES:
+   :custom_id: O7
+   :END:
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -138,6 +153,9 @@ Original name used by the property.
     :masd.codec.type: std::list<drawer_content>
     :END:
 ** drawer_content                                                   :element:
+   :PROPERTIES:
+   :custom_id: O8
+   :END:
 *** key                                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -147,6 +165,9 @@ Original name used by the property.
     :masd.codec.type: std::string
     :END:
 ** affiliated_keyword                                               :element:
+   :PROPERTIES:
+   :custom_id: O9
+   :END:
 *** key                                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -157,16 +178,21 @@ Original name used by the property.
     :END:
 ** drawer_type                                                      :element:
    :PROPERTIES:
+   :custom_id: O11
    :masd.codec.stereotypes: masd::enumeration
    :END:
 *** regular                                                       :attribute:
 *** property_drawer                                               :attribute:
 ** priority_cookie                                                  :element:
    :PROPERTIES:
+   :custom_id: O12
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 ** block                                                            :element:
+   :PROPERTIES:
+   :custom_id: O13
+   :END:
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -185,50 +211,66 @@ Original name used by the property.
     :END:
 ** block_type                                                       :element:
    :PROPERTIES:
+   :custom_id: O14
    :masd.codec.stereotypes: masd::enumeration
    :END:
 *** text_block                                                    :attribute:
 *** greater_block                                                 :attribute:
 ** parameter                                                        :element:
    :PROPERTIES:
+   :custom_id: O30
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 * registrar                                                         :element:
   :PROPERTIES:
+  :custom_id: O24
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O25
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O26
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * transforms                                                         :module:
+  :PROPERTIES:
+  :custom_id: O27
+  :END:
 ** string_to_document_transform                                     :element:
    :PROPERTIES:
+   :custom_id: O28
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** document_to_string_transform                                     :element:
    :PROPERTIES:
+   :custom_id: O29
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** transformation_error                                             :element:
    :PROPERTIES:
+   :custom_id: O51
    :masd.codec.stereotypes: masd::exception
    :END:
 
 An error occurred whilst transforming.
 
 * helpers                                                            :module:
+  :PROPERTIES:
+  :custom_id: O31
+  :END:
 ** parser                                                           :element:
    :PROPERTIES:
+   :custom_id: O32
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** parsing_error                                                    :element:
    :PROPERTIES:
+   :custom_id: O33
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -236,6 +278,7 @@ An error ocurred whilst parsing an org-mode document.
 
 ** node                                                             :element:
    :PROPERTIES:
+   :custom_id: O37
    :masd.codec.stereotypes: dogen::untestable
    :END:
 *** data                                                          :attribute:
@@ -248,6 +291,7 @@ An error ocurred whilst parsing an org-mode document.
     :END:
 ** builder                                                          :element:
    :PROPERTIES:
+   :custom_id: O38
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 *** root_                                                         :attribute:
@@ -256,6 +300,7 @@ An error ocurred whilst parsing an org-mode document.
     :END:
 ** building_error                                                   :element:
    :PROPERTIES:
+   :custom_id: O39
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -263,5 +308,6 @@ An error occurred whilst building.
 
 ** document_factory                                                 :element:
    :PROPERTIES:
+   :custom_id: O47
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:

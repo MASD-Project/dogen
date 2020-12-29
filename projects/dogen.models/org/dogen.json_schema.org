@@ -2,6 +2,9 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 * schema_document                                                   :element:
+  :PROPERTIES:
+  :custom_id: O0
+  :END:
 ** id_keyword                                                     :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
@@ -27,6 +30,7 @@ Defines a URI for the schema.
    :END:
 * type                                                              :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.stereotypes: masd::enumeration
   :END:
 ** object                                                         :attribute:
@@ -36,6 +40,9 @@ Defines a URI for the schema.
 ** boolean                                                        :attribute:
 ** null                                                           :attribute:
 * properties                                                        :element:
+  :PROPERTIES:
+  :custom_id: O2
+  :END:
 ** type                                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: type
@@ -53,23 +60,31 @@ Defines a URI for the schema.
    :masd.codec.type: std::string
    :END:
 * value                                                             :element:
+  :PROPERTIES:
+  :custom_id: O4
+  :END:
 * object                                                            :element:
   :PROPERTIES:
+  :custom_id: O3
   :masd.codec.parent: value
   :END:
 * array                                                             :element:
   :PROPERTIES:
+  :custom_id: O5
   :masd.codec.parent: value
   :END:
 * string                                                            :element:
   :PROPERTIES:
+  :custom_id: O6
   :masd.codec.parent: value
   :END:
 * number                                                            :element:
   :PROPERTIES:
+  :custom_id: O7
   :masd.codec.parent: value
   :END:
 * boolean                                                           :element:
   :PROPERTIES:
+  :custom_id: O8
   :masd.codec.parent: value
   :END:

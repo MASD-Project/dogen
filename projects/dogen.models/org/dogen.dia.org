@@ -19,14 +19,17 @@ Represents the domain of the Dia diagram editor.
 
 * main                                                              :element:
   :PROPERTIES:
+  :custom_id: O1
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 * CMakeLists                                                        :element:
   :PROPERTIES:
+  :custom_id: O2
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 * entities                                                           :module:
   :PROPERTIES:
+  :custom_id: O3
   :masd.codec.dia.comment: true
   :END:
 
@@ -34,6 +37,9 @@ Contains all the entities required by Dogen from the
 domain of the Dia diagram editor.
 
 ** diagram                                                          :element:
+   :PROPERTIES:
+   :custom_id: O4
+   :END:
 
 Represents a diagram in Dia.
 
@@ -52,6 +58,9 @@ Basic diagram definitions.
 Visual layers on the diagram.
 
 ** layer                                                            :element:
+   :PROPERTIES:
+   :custom_id: O6
+   :END:
 
 Represents a layer in a Dia diagram.
 
@@ -84,6 +93,9 @@ Whether the layer is active or not.
 Dia objects contained in layer.
 
 ** object                                                           :element:
+   :PROPERTIES:
+   :custom_id: O7
+   :END:
 
 Represents a Dia object.
 
@@ -127,6 +139,9 @@ Connection details for this object.
 All attributes associated with the object.
 
 ** connection                                                       :element:
+   :PROPERTIES:
+   :custom_id: O8
+   :END:
 
 Connection between entities in a Dia diagram.
 
@@ -155,6 +170,9 @@ This is known in Dia as a connection but to avoid confusion between the class an
 we renamed it.
 
 ** diagram_data                                                     :element:
+   :PROPERTIES:
+   :custom_id: O9
+   :END:
 
 Represents a all the data associated with a diagram.
 
@@ -166,6 +184,9 @@ Represents a all the data associated with a diagram.
 All attributes associated with the diagram data.
 
 ** child_node                                                       :element:
+   :PROPERTIES:
+   :custom_id: O10
+   :END:
 
 Represents a child_node in a diagram.
 
@@ -181,6 +202,9 @@ pointing to O0.
 Parent for this object.
 
 ** attribute                                                        :element:
+   :PROPERTIES:
+   :custom_id: O11
+   :END:
 
 Attribute in a Dia diagram.
 
@@ -199,6 +223,9 @@ Name of the attribute.
 Values for the attribute.
 
 ** font                                                             :element:
+   :PROPERTIES:
+   :custom_id: O12
+   :END:
 
 Represents a font in a diagram.
 
@@ -216,6 +243,7 @@ Represents a font in a diagram.
     :END:
 ** composite                                                        :element:
    :PROPERTIES:
+   :custom_id: O13
    :masd.codec.stereotypes: dogen::untestable
    :END:
 
@@ -243,6 +271,9 @@ Underlying Dia attributes.
 Some composites contain an inner composite field.
 
 ** color                                                            :element:
+   :PROPERTIES:
+   :custom_id: O14
+   :END:
 
 Represents a color in a diagram.
 
@@ -254,6 +285,9 @@ Represents a color in a diagram.
 Text representation of an RGB value in hex.
 
 ** real                                                             :element:
+   :PROPERTIES:
+   :custom_id: O15
+   :END:
 
 Represents a real value.
 
@@ -265,6 +299,9 @@ Represents a real value.
 Text representation of a real value.
 
 ** integer                                                          :element:
+   :PROPERTIES:
+   :custom_id: O16
+   :END:
 
 Represents an integer value.
 
@@ -276,6 +313,9 @@ Represents an integer value.
 Text representation of an integer value.
 
 ** boolean                                                          :element:
+   :PROPERTIES:
+   :custom_id: O17
+   :END:
 
 Represents a boolean value.
 
@@ -287,6 +327,9 @@ Represents a boolean value.
 Text representation of a boolean value.
 
 ** point                                                            :element:
+   :PROPERTIES:
+   :custom_id: O18
+   :END:
 
 Represents a point in a diagram.
 
@@ -298,6 +341,9 @@ Represents a point in a diagram.
 Text representation of a point with X/Y coordinates.
 
 ** enumeration                                                      :element:
+   :PROPERTIES:
+   :custom_id: O19
+   :END:
 
 Represents a enumeration in a diagram.
 
@@ -309,6 +355,9 @@ Represents a enumeration in a diagram.
 Text representation of a enumeration.
 
 ** string                                                           :element:
+   :PROPERTIES:
+   :custom_id: O20
+   :END:
 
 Represents a string value.
 
@@ -320,6 +369,9 @@ Represents a string value.
 Represents a string value.
 
 ** rectangle                                                        :element:
+   :PROPERTIES:
+   :custom_id: O21
+   :END:
 
 Represents a rectangle in a diagram.
 
@@ -331,8 +383,12 @@ Represents a rectangle in a diagram.
 Text representation of a rectangle with a pair of X/Y coordinates.
 
 * transforms                                                         :module:
+  :PROPERTIES:
+  :custom_id: O40
+  :END:
 ** transformation_error                                             :element:
    :PROPERTIES:
+   :custom_id: O41
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -340,5 +396,6 @@ An error occurred whilst applying a transformation.
 
 ** string_to_diagram_transform                                      :element:
    :PROPERTIES:
+   :custom_id: O42
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
