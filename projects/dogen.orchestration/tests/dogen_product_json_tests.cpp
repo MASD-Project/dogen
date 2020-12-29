@@ -38,7 +38,7 @@ const std::string test_suite("dogen_product_json_tests");
 using mg = dogen::orchestration::tests::model_generator;
 using dogen::utility::test_data::dogen_product;
 
-BOOST_AUTO_TEST_SUITE(physical_model_production_chain_tests)
+BOOST_AUTO_TEST_SUITE(dogen_product_json_tests)
 
 BOOST_AUTO_TEST_CASE(dogen_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_json_produces_expected_model");
