@@ -12,27 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-29 Tue 13:33]
+#+CAPTION: Clock summary at [2020-12-29 Tue 17:40]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *51:33* |       |       | 100.0 |
+| *Total time*                                        | *55:10* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 51:33   |       |       | 100.0 |
-| Active                                              |         | 51:33 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  11.8 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.1 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   2.4 |
-| Add support for reading org mode documents          |         |       | 19:46 |  38.3 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.0 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.8 |
-| Add org-mode codec for input                        |         |       |  8:56 |  17.3 |
-| Convert library models into org                     |         |       |  1:26 |   2.8 |
-| Convert reference models into org                   |         |       |  2:56 |   5.7 |
-| Assorted improvements to org model                  |         |       |  0:37 |   1.2 |
-| Create a model to org transform                     |         |       |  3:57 |   7.7 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:07 |   2.2 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   3.8 |
+| Stories                                             | 55:10   |       |       | 100.0 |
+| Active                                              |         | 55:10 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  11.0 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.0 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   2.2 |
+| Add support for reading org mode documents          |         |       | 19:46 |  35.8 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.9 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.5 |
+| Add org-mode codec for input                        |         |       |  8:56 |  16.2 |
+| Convert library models into org                     |         |       |  1:26 |   2.6 |
+| Convert reference models into org                   |         |       |  2:56 |   5.3 |
+| Assorted improvements to org model                  |         |       |  0:37 |   1.1 |
+| Create a model to org transform                     |         |       |  3:57 |   7.2 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.3 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   3.6 |
+| Create a "frozen" project                           |         |       |  1:34 |   2.8 |
+| Add tags to org model                               |         |       |  1:15 |   2.3 |
+| Inject custom IDs into org documents                |         |       |  0:38 |   1.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -745,8 +748,9 @@ use the =org= model to do this. First, get it to work via tests and
 then replace the "stringified" uses of org with the proper model.
 
 *** COMPLETED Remove JSON and Dia models for Dogen                    :story:
-    CLOSED: [2020-12-29 Tue 11:34]
+    CLOSED: [2020-12-29 Tue 17:40]
     :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 17:30]--[2020-12-29 Tue 17:40] =>  0:10
     CLOCK: [2020-12-29 Tue 11:14]--[2020-12-29 Tue 11:34] =>  0:20
     CLOCK: [2020-12-29 Tue 10:50]--[2020-12-29 Tue 11:13] =>  0:23
     CLOCK: [2020-12-28 Mon 16:24]--[2020-12-28 Mon 16:37] =>  0:13
@@ -783,7 +787,37 @@ causing issues with LSP. Split them by product and by codec, e.g.:
 
 etc. Also, make all common code utility methods.
 
-*** Add tags to org model                                             :story:
+*** COMPLETED Create a "frozen" project                               :story:
+    CLOSED: [2020-12-29 Tue 15:34]
+    :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 14:41]--[2020-12-29 Tue 15:34] =>  0:53
+    CLOCK: [2020-12-29 Tue 13:33]--[2020-12-29 Tue 14:14] =>  0:41
+    :END:
+
+We need to create a "frozen" dogen project that keeps the JSON and Dia
+models as they are. They are good tests and we want to make sure we
+don't break anything going forward. We should reinstate the dia and
+JSON models, make sure they are up-to-date and the tests are clean,
+then take the frozen snapshot.
+
+Notes:
+
+- JSON model for relational has errors.
+- output directories are being deleted across test runs, creating race
+  conditions. We need an output path that takes product and codec into
+  account. Even that is not sufficient for a CTest run, but since
+  we've survived this far we can leave it at that. Actually, the
+  deletion happens on initialise, so we're probably OK.
+
+Links:
+
+- [[https://github.com/MASD-Project/frozen][GH repo]]
+
+*** COMPLETED Add tags to org model                                   :story:
+    CLOSED: [2020-12-29 Tue 16:50]
+    :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 15:35]--[2020-12-29 Tue 16:50] =>  1:15
+    :END:
 
 We need something like:
 
@@ -796,15 +830,12 @@ e.g.:
 The converter should add this. Once added, regenerate all models. Also
 take the opportunity to drop the =masd_= prefix.
 
-*** Create a "frozen" dogen project                                   :story:
-
-We need to create a "frozen" dogen project that keeps the JSON and Dia
-models as they are. They are good tests and we want to make sure we
-don't break anything going forward. We should reinstate the dia and
-JSON models, make sure they are up-to-date and the tests are clean,
-then take the frozen snapshot.
-
-*** Inject custom IDs into org documents                              :story:
+*** COMPLETED Inject custom IDs into org documents                    :story:
+    CLOSED: [2020-12-29 Tue 17:30]
+    :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 17:25]--[2020-12-29 Tue 17:30] =>  0:05
+    CLOCK: [2020-12-29 Tue 16:51]--[2020-12-29 Tue 17:24] =>  0:33
+    :END:
 
 All models should have a unique ID for each element. The ID should be
 based on GUIDs where possible, though there are some difficulties for
@@ -830,7 +861,6 @@ org-mode we just need to use the =:CUSTOM_ID:= attribute:
 
 : :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
 
-
 *** Add include directories to models                                 :story:
 
 In some cases we may require additional include directories to be
@@ -839,6 +869,15 @@ component. We need to find a specific use case for this though.
 
 Actually, we should just support a =--include= or =-I= parameter. We
 also need to dump the include directories in dumpspecs.
+
+*** Add models directory to each component                            :story:
+
+Instead of a product level models directory, we should have separate
+component level directories. We can't do the PMM implementation just
+yet but we can use regexes to get the directory in the correct shape
+and then use it to target the changes in the PMM. The directory should
+be called =modeling= to reflect the fact that it will contain more
+than models.
 
 *** Move hello world model from models directory                      :story:
 
