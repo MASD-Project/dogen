@@ -50,6 +50,7 @@ const std::string element_tag("element");
 const std::string attribute_tag("attribute");
 const std::string module_tag("module");
 const std::string module_element_type("masd::module");
+const std::string custom_id("CUSTOM_ID");
 
 const std::string primitive_underlier("masd.codec.can_be_primitive_underlier");
 const std::string global_module("masd.codec.in_global_module");
@@ -278,10 +279,26 @@ to_headline(const unsigned int level, const entities::element& e) {
     r.title(e.name().simple());
     r.tags().push_back(to_tag(e));
 
+    /*
+     * Create a property drawer for the element.
+     */
     BOOST_LOG_SEV(lg, debug) << "Creating drawer for element.";
     org::entities::drawer d;
     d.type(org::entities::drawer_type::property_drawer);
 
+    /*
+     * If we have a unique ID in the element, propagate it into org.
+     */
+    const auto id(e.provenance().codec_id().value());
+    if (!id.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Added ID: " << id;
+        const auto dc(to_drawer_content(custom_id, id));
+        d.contents().push_back(dc);
+    }
+
+    /*
+     * Add all other properties to drawer.
+     */
     add_to_property_drawer(e.tagged_values(), d);
     add_to_property_drawer(e.parents(), d);
     add_to_property_drawer(e.stereotypes(), d);
@@ -293,6 +310,9 @@ to_headline(const unsigned int level, const entities::element& e) {
     } else
         BOOST_LOG_SEV(lg, debug) << "Drawer is empty, ignoring it.";
 
+    /*
+     * Add documentation to element.
+     */
     if (!e.documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Element has documentation.";
         org::entities::block tb;
@@ -301,6 +321,9 @@ to_headline(const unsigned int level, const entities::element& e) {
         r.section().blocks().push_back(tb);
     }
 
+    /*
+     * Add all attributes as headlines.
+     */
     BOOST_LOG_SEV(lg, debug) << "Processing attributes for element.";
     for (const auto& attr : e.attributes())
         r.headlines().push_back(to_headline(level + 1, attr));

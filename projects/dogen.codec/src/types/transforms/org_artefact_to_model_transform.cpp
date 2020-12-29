@@ -46,6 +46,7 @@ const std::string attribute_tag("attribute");
 const std::string module_tag("module");
 const std::string object_element_type("masd::object");
 const std::string module_element_type("masd::module");
+const std::string custom_id("custom_id");
 
 const std::string unexpected_number_of_drawers(
     "Unexpected number of drawers: ");
@@ -64,7 +65,9 @@ const std::string unexpected_composition("Invalid containing element: ");
 
 namespace dogen::codec::transforms {
 
+using identification::entities::codec_id;
 using identification::entities::tagged_value;
+using identification::entities::codec_provenance;
 using org::entities::drawer_type;
 
 org_artefact_to_model_transform::headline_type org_artefact_to_model_transform::
@@ -115,8 +118,9 @@ section_to_text(const org::entities::section& s) {
     return os.str();
 }
 
-std::list<tagged_value> org_artefact_to_model_transform::
-make_tagged_values(const std::list<org::entities::drawer>& drawers) {
+org_artefact_to_model_transform::processed_drawer
+org_artefact_to_model_transform::
+process_drawer(const std::list<org::entities::drawer>& drawers) {
     /*
      * Org models are expected to have exactly one property
      * drawer. Ensure that's the case and read its contents.
@@ -137,7 +141,7 @@ make_tagged_values(const std::list<org::entities::drawer>& drawers) {
                 boost::lexical_cast<std::string>(drawer.type())));
     }
 
-    std::list<tagged_value> r;
+    processed_drawer r;
     for (const auto& dc : drawer.contents()) {
         /*
          * Properties are expected to have both key and value.
@@ -150,14 +154,26 @@ make_tagged_values(const std::list<org::entities::drawer>& drawers) {
                 transformation_error(invalid_property));
         }
 
-        tagged_value tv;
         /*
          * Normalise the key to lower case. This allows having keys in
          * upper case in org documents.
          */
-        tv.tag(boost::to_lower_copy(dc.key()));
-        tv.value(dc.value());
-        r.push_back(tv);
+        const auto k(boost::to_lower_copy(dc.key()));
+
+        /*
+         * Check for any special keys.
+         */
+        if (k == custom_id) {
+            BOOST_LOG_SEV(lg, debug) << "Intercepting custom ID. Key: '" << k
+                                     << "' value: '" << dc.value() << "'";
+            r.custom_id = dc.value();
+        } else  {
+            /*
+             * All other properties are assumed to be dogen meta-data.
+             */
+            const tagged_value tv(k, dc.value());
+            r.tagged_values.push_back(tv);
+        }
     }
     return r;
 }
@@ -182,8 +198,14 @@ make_attribute(const org::entities::headline& h) {
     /*
      * Attributes may not have drawers.
      */
-    if (!h.drawers().empty())
-        r.tagged_values(make_tagged_values(h.drawers()));
+    if (!h.drawers().empty()) {
+        const auto pd(process_drawer(h.drawers()));
+        if (!pd.custom_id.empty()) {
+            codec_provenance p;
+            p.codec_id(codec_id(pd.custom_id));
+        }
+        r.tagged_values(pd.tagged_values);
+    }
 
     return r;
 }
@@ -210,8 +232,17 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
             transformation_error(unexpected_headline_type + h.title()));
     }
 
-    if (!h.drawers().empty())
-        r.tagged_values(make_tagged_values(h.drawers()));
+    /*
+     * Drawers are optional for elements.
+     */
+    if (!h.drawers().empty()) {
+        const auto pd(process_drawer(h.drawers()));
+        if (!pd.custom_id.empty()) {
+            codec_provenance p;
+            p.codec_id(codec_id(pd.custom_id));
+        }
+        r.tagged_values(pd.tagged_values);
+    }
 
     return r;
 }
@@ -310,7 +341,19 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
     BOOST_LOG_SEV(lg, debug) << "Processed org-mode document.";
     entities::model r;
     r.name().simple(fn);
-    r.tagged_values(make_tagged_values(doc.drawers()));
+
+    /*
+     * Handle optional drawers in document.
+     */
+    if (!doc.drawers().empty()) {
+        const auto pd(process_drawer(doc.drawers()));
+        if (!pd.custom_id.empty()) {
+            codec_provenance p;
+            p.codec_id(codec_id(pd.custom_id));
+        }
+        r.tagged_values(pd.tagged_values);
+    }
+
     r.comment().original_content(section_to_text(doc.section()));
     r.documentation(r.comment().original_content());
 

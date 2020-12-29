@@ -60,12 +60,18 @@ private:
     static std::string section_to_text(const org::entities::section& s);
 
 private:
+    struct processed_drawer {
+        std::string custom_id;
+        std::list<identification::entities::tagged_value> tagged_values;
+    };
+
     /**
      * @brief Reads the tagged values, if any exists.
      */
-    static std::list<identification::entities::tagged_value>
-    make_tagged_values(const std::list<org::entities::drawer>& drawers);
+    static processed_drawer
+    process_drawer(const std::list<org::entities::drawer>& drawers);
 
+private:
     /**
      * @brief Processes the headline as if containing a codec
      * attribute.
