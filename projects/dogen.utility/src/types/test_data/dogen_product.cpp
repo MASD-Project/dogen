@@ -58,8 +58,8 @@ const std::string path_dogen_templating_dia("dogen.templating.dia");
 const std::string path_dogen_orchestration_dia("dogen.orchestration.dia");
 const std::string path_dogen_utility_dia("dogen.utility.dia");
 const std::string path_dogen_variability_dia("dogen.variability.dia");
-const std::string path_dogen_relational_dia("dogen.utility.dia");
-const std::string path_dogen_identification_dia("dogen.utility.dia");
+const std::string path_dogen_relational_dia("dogen.relational.dia");
+const std::string path_dogen_identification_dia("dogen.identification.dia");
 
 const std::string path_dogen_org("dogen.org");
 const std::string path_dogen_physical_org("dogen.physical.org");
@@ -75,8 +75,8 @@ const std::string path_dogen_templating_org("dogen.templating.org");
 const std::string path_dogen_orchestration_org("dogen.orchestration.org");
 const std::string path_dogen_utility_org("dogen.utility.org");
 const std::string path_dogen_variability_org("dogen.variability.org");
-const std::string path_dogen_relational_org("dogen.utility.org");
-const std::string path_dogen_identification_org("dogen.utility.org");
+const std::string path_dogen_relational_org("dogen.relational.org");
+const std::string path_dogen_identification_org("dogen.identification.org");
 
 const std::string path_dogen_json("dogen.json");
 const std::string path_dogen_physical_json("dogen.physical.json");
@@ -92,8 +92,8 @@ const std::string path_dogen_templating_json("dogen.templating.json");
 const std::string path_dogen_utility_json("dogen.utility.json");
 const std::string path_dogen_variability_json("dogen.variability.json");
 const std::string path_dogen_orchestration_json("dogen.orchestration.json");
-const std::string path_dogen_relational_json("dogen.utility.json");
-const std::string path_dogen_identification_json("dogen.utility.json");
+const std::string path_dogen_relational_json("dogen.relational.json");
+const std::string path_dogen_identification_json("dogen.identification.json");
 
 }
 
