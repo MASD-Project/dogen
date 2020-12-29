@@ -44,6 +44,12 @@ cpp_ref_impl_extract_dir="/tmp"
 curl -L -o ${cpp_ref_impl_output_location} ${cpp_ref_impl_input_location}
 unzip -q ${cpp_ref_impl_output_location} -d ${cpp_ref_impl_extract_dir}
 
+frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zip"
+frozen_output_location="/tmp/frozen.zip"
+frozen_extract_dir="/tmp"
+curl -L -o ${frozen_output_location} ${frozen_input_location}
+unzip -q ${frozen_output_location} -d ${frozen_extract_dir}
+
 csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl/archive/master.zip"
 csharp_ref_impl_output_location="/tmp/csharp_ref_impl.zip"
 csharp_ref_impl_extract_dir="/tmp"
