@@ -4,6 +4,10 @@
     "masd.codec.dia.comment": "true",
     "masd.codec.model_modules": "dogen.identification",
     "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "masd",
     "masd.codec.reference": "dogen.profiles",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },

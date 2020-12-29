@@ -12,6 +12,7 @@
     "masd.physical.ignore_files_matching_regex": ".*-odb.*",
     "masd.physical.ignore_files_matching_regex": ".*/sql/.*",
     "masd.variability.profile": "dogen.profiles.base.relational_profile",
+    "masd.orm.database_system": "postgresql",
     "masd.orm.database_system": "sqlite",
     "masd.orm.letter_case": "upper_case",
     "masd.orm.schema_name": "dogen"
@@ -88,6 +89,7 @@
       "tagged_values": {
         "masd.primitive.underlying_element": "std::string",
         "masd.orm.type_override": "postgresql,JSONB",
+        "masd.orm.type_mapping": "postgresql,JSONB,TEXT,to_jsonb((?)::jsonb),from_jsonb((?))",
         "masd.orm.type_mapping": "sqlite,JSON_TEXT,TEXT,json((?))"
       },
       "fallback_element_type": "masd::object"
