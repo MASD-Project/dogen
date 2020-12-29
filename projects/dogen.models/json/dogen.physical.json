@@ -566,11 +566,6 @@
           "documentation": "Stores the properties related to the enablement, as read out from configuration.\n"
         },
         {
-          "name": "formatting_style",
-          "type": "formatting_styles",
-          "documentation": "What type of M2T transform to use in order to generate the artefact's content.\n"
-        },
-        {
           "name": "formatting_input",
           "type": "std::string",
           "documentation": "Template used as input in order to generate the artefact's content, if any.\n"
@@ -1021,30 +1016,6 @@
       ]
     },
     {
-      "name": "features::formatting",
-      "documentation": "Features related to formatting.\n",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.instantiation_domain_name": "masd.archetype"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "formatting_style",
-          "type": "masd::variability::text",
-          "documentation": "Style of formatting to use for this archetype.\n"
-        },
-        {
-          "name": "formatting_input",
-          "type": "masd::variability::text",
-          "documentation": "If the formatting style requires a template, the name of the template to use.\n"
-        }
-      ]
-    },
-    {
       "name": "helpers::meta_model_validator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1139,7 +1110,8 @@
       "name": "entities::relation_status",
       "documentation": "Status of a given archetype with regards to being related to other archetypes.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1332,27 +1304,6 @@
       ]
     },
     {
-      "name": "entities::formatting_styles",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stock",
-          "type": ""
-        },
-        {
-          "name": "wale",
-          "type": ""
-        },
-        {
-          "name": "stitch",
-          "type": ""
-        }
-      ]
-    },
-    {
       "name": "entities::enablement_properties",
       "documentation": "Stores the properties related to the enablement.\n",
       "fallback_element_type": "masd::object",
@@ -1411,32 +1362,11 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::formatting_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::generability_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "entities::formatting_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "styles",
-          "type": "formatting_styles"
-        },
-        {
-          "name": "input",
-          "type": "std::string"
-        }
-      ]
     },
     {
       "name": "entities::backend_properties",

@@ -220,13 +220,6 @@
       ]
     },
     {
-      "name": "initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "building_error",
       "stereotypes": [
         "masd::exception"
@@ -255,13 +248,6 @@
     },
     {
       "name": "adapter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "decoding_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

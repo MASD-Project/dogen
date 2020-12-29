@@ -1,0 +1,358 @@
+{
+  "documentation": "Provides support for encoding and decoding Emacs's org-mode\ndocuments.\n\nThe support is very basic and focuses only on the features\nof org mode required by Dogen.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.org",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "dogen.tracing",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "entities",
+      "documentation": "Represents entities from Emacs' org-mode.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::section",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "blocks",
+          "type": "std::list<block>"
+        }
+      ]
+    },
+    {
+      "name": "entities::document",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "affiliated_keywords",
+          "type": "std::list<affiliated_keyword>"
+        },
+        {
+          "name": "drawers",
+          "type": "std::list<drawer>"
+        },
+        {
+          "name": "section",
+          "type": "section",
+          "documentation": "Top-level section in document.\n"
+        },
+        {
+          "name": "headlines",
+          "type": "std::list<headline>",
+          "documentation": "Top-level headlines in document.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::headline",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "affiliated_keywords",
+          "type": "std::list<affiliated_keyword>"
+        },
+        {
+          "name": "drawers",
+          "type": "std::list<drawer>"
+        },
+        {
+          "name": "section",
+          "type": "section"
+        },
+        {
+          "name": "headlines",
+          "type": "std::list<headline>",
+          "documentation": "Top-most headlines within this headline.\n"
+        },
+        {
+          "name": "level",
+          "type": "unsigned int",
+          "documentation": "Reduced level of the headline. STARS in the original org-mode format.\n"
+        },
+        {
+          "name": "priority",
+          "type": "priority_cookie",
+          "documentation": "Headline's priority.\n"
+        },
+        {
+          "name": "title",
+          "type": "std::string",
+          "documentation": "Parsed headline's text, without the stars and the tags.\n"
+        },
+        {
+          "name": "tags",
+          "type": "std::list<tag>",
+          "documentation": "Headline's tags, if any.\n"
+        },
+        {
+          "name": "todo_keyword",
+          "type": "todo_keyword",
+          "documentation": "Headline's TODO keyword.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::tag",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::todo_keyword",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::drawer",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Original name used by the property.\n"
+        },
+        {
+          "name": "type",
+          "type": "drawer_type"
+        },
+        {
+          "name": "contents",
+          "type": "std::list<drawer_content>"
+        }
+      ]
+    },
+    {
+      "name": "entities::drawer_content",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::affiliated_keyword",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::drawer_type",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "regular",
+          "type": ""
+        },
+        {
+          "name": "property_drawer",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::priority_cookie",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::block",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "parameters",
+          "type": "std::list<parameter>"
+        },
+        {
+          "name": "contents",
+          "type": "std::string"
+        },
+        {
+          "name": "type",
+          "type": "block_type"
+        }
+      ]
+    },
+    {
+      "name": "entities::block_type",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "text_block",
+          "type": ""
+        },
+        {
+          "name": "greater_block",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "registrar",
+      "stereotypes": [
+        "masd::serialization::type_registrar"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::string_to_document_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::document_to_string_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::parameter",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::parser",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::parsing_error",
+      "documentation": "An error ocurred whilst parsing an org-mode document.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::node",
+      "stereotypes": [
+        "dogen::untestable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "data",
+          "type": "entities::headline"
+        },
+        {
+          "name": "children",
+          "type": "std::list<boost::shared_ptr<node>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "root_",
+          "type": "boost::shared_ptr<node>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::building_error",
+      "documentation": "An error occurred whilst building.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::document_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst transforming.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

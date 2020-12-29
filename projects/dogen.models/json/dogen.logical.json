@@ -402,6 +402,14 @@
           "name": "technical_space_version",
           "type": "identification::entities::technical_space_version",
           "documentation": "Version of the technical space we are targeting.\n"
+        },
+        {
+          "name": "aspect_properties",
+          "type": "std::unordered_map<identification::entities::logical_id, aspect_properties>"
+        },
+        {
+          "name": "assistant_properties",
+          "type": "std::unordered_map<identification::entities::logical_id, assistant_properties>"
         }
       ]
     },
@@ -4455,14 +4463,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
-        },
-        {
-          "name": "csharp.aspect.requires_static_reference_equals",
-          "type": "masd::variability::boolean",
-          "value": "\"true\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
         }
       ]
     },
@@ -4480,10 +4480,6 @@
         },
         {
           "name": "requires_stream_manipulators",
-          "type": "bool"
-        },
-        {
-          "name": "is_floating_point",
           "type": "bool"
         },
         {
@@ -4584,7 +4580,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "cpp.helper.family",
+          "name": "helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",
           "documentation": "Which family of helpers to use for this modeling element.\n",
@@ -4681,6 +4677,100 @@
     },
     {
       "name": "transforms::helper_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::aspect_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_static_reference_equals",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "transforms::aspect_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::assistant_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_assistance",
+          "type": "bool",
+          "documentation": "If true, the type needs help of an assistant.\n"
+        },
+        {
+          "name": "method_postfix",
+          "type": "std::string",
+          "documentation": "Postfix to use to call the appropriate assistant method, if required.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::assistant_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::aspect",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.csharp.aspect"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_static_reference_equals",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::assistant",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.csharp.assistant"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_assistance",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "method_postfix",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::documentation_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

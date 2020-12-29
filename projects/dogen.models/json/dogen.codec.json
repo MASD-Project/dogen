@@ -1,5 +1,5 @@
 {
-  "documentation": "Provides support for encoding and decoding of external models.\n\nAn external model is defined as:\n\n@li a third-party format that is not owned or controlled by\n    Dogen, such as Dia;\n@li a Dogen format designed for interoperability (JSON).\n\nExternal models are converted into an intermediate format called\nthe @e codec model, because it is the original entry point into\nthe dogen processing pipeline. It also reflects the notion that we\nare injecting external technical spaces into the MASD technical\ntechnical space.\n\nA @e codec must be created for each external model that is to be\ninjected, providing a transformation between the native formats\nand the codec model. The codecs are created in their own models,\nfollowing the naming convention codec.X for a given codec X.\nThey then register against the codec registrar. Note that for a\ngiven file extension, there can only be one and only one codec to\nmanage it.\n",
+  "documentation": "Provides support for encoding and decoding of external models.\n\nAn external model is defined as:\n\n@li a third-party format that is not owned or controlled by\n    Dogen, such as Dia or org-mode.\n@li a Dogen format designed for interoperability (JSON).\n\nExternal models are converted into an intermediate format called\nthe @e codec model, because it is the original entry point into\nthe dogen processing pipeline. It also reflects the notion that we\nare injecting external technical spaces into the MASD technical\ntechnical space.\n\nA @e codec must be created for each external model that is to be\ninjected, providing a transformation between the native formats\nand the codec model. The codecs are created as transforms in the\npresent model, and should reuse common infrastructure where possible.\nThere should also be a \"native\" model representing the original\ncodec format as much as possible (e.g. \"dogen.dia\"). The idea for\nthose models is just to provide a faithful representation of the\nnative codec domain model (though it may not necessarily be\ncomplete).\n\nIn general, codecs use file extensions to determine the type of the\ncodec.\n",
   "tagged_values": {
     "masd.codec.dia.comment": "true",
     "masd.codec.model_modules": "dogen.codec",
@@ -22,28 +22,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "transforms::encoding_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::registrar",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::registrar_error",
-      "documentation": "A registration error has occurred.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::model_production_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -59,6 +37,10 @@
     },
     {
       "name": "entities",
+      "documentation": "Object model that is codec-agnostic but aims to provide\na representation of the core entities needed by all codecs.\n\nNot all codecs will make use of all entities.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -201,13 +183,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::decoding_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "entities::model_set",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -276,11 +251,6 @@
         {
           "name": "tagged_values",
           "type": "std::list<identification::entities::tagged_value>"
-        },
-        {
-          "name": "tagged_values_overrides",
-          "type": "std::list<identification::entities::tagged_value>",
-          "documentation": "Meta-data sourced externally that can be used to override meta-data in model.\n"
         }
       ]
     },
@@ -359,6 +329,36 @@
       ]
     },
     {
+      "name": "entities::TaggableOverridable",
+      "documentation": "Ability to contain tagged values.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "tagged_values_overrides",
+          "type": "std::list<identification::entities::tagged_value>",
+          "documentation": "Meta-data sourced externally that can be used to override meta-data in model.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Commentable",
+      "documentation": "Has the ability to have an associated comment.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "comment",
+          "type": "comment",
+          "documentation": "Properties associated with the codec comment.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::Element",
       "parents": [
         "entities::Taggable",
@@ -366,7 +366,9 @@
         "entities::Documentable",
         "entities::Nameable",
         "entities::Configurable",
-        "entities::DeterminableOrigin"
+        "entities::DeterminableOrigin",
+        "entities::TaggableOverridable",
+        "entities::Commentable"
       ],
       "documentation": "Consolidates a number of related object templates.\n",
       "stereotypes": [
@@ -531,6 +533,251 @@
       "stereotypes": [
         "masd::build::cmakelists",
         "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::comment",
+      "documentation": "Represents a comment block as read out from the codec representation.\n",
+      "stereotypes": [
+        "Documentable",
+        "Taggable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "applies_to_container",
+          "type": "bool",
+          "documentation": "Content of the field as it belonged to the containing object.\n"
+        },
+        {
+          "name": "original_content",
+          "type": "std::string",
+          "documentation": "Content, as read from the codec representation.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::object",
+      "documentation": "Represents an \"raw\" codec object which may or may not contain a modeling element of interest.\n",
+      "stereotypes": [
+        "Commentable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string",
+          "documentation": "Original ID available in the codec representation, if any.\n"
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Original name in codec representation. May be qualified or simple; its nature is codec dependent.\n"
+        },
+        {
+          "name": "object_type",
+          "type": "std::string",
+          "documentation": "Native codec representation for the object type. Its interpretation is codec dependent.\n"
+        },
+        {
+          "name": "stereotypes",
+          "type": "std::string",
+          "documentation": "Original steoreotypes assigned to the object, if any.\n"
+        },
+        {
+          "name": "container_id",
+          "type": "std::string",
+          "documentation": "Codec ID of the container of this object, if any.\n"
+        },
+        {
+          "name": "connection",
+          "type": "boost::optional<std::pair<std::string,std::string>>",
+          "documentation": "Connections this object may have with other objects, if any.\n"
+        },
+        {
+          "name": "attributes",
+          "type": "std::list<attribute>",
+          "documentation": "All attributes associated with this object.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::artefact",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "path",
+          "type": "boost::filesystem::path",
+          "documentation": "Path to the file representing this artefact, if any.\n"
+        },
+        {
+          "name": "codec_name",
+          "type": "std::string",
+          "documentation": "Name of the codec to process this artefact.\n"
+        },
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Contents of the artefact.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::file_to_artefact_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::json_artefact_to_model_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_json_artefact_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::dia_artefact_to_model_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::org_artefact_to_model_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_org_artefact_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::artefact_to_file_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::artefact_to_model_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_artefact_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::meta_data",
+      "documentation": "Assorted meta-data.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.codec"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stereotypes",
+          "type": "masd::variability::comma_separated",
+          "documentation": "Stereotypes associated with this element or attribute.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "type",
+          "type": "masd::variability::text",
+          "documentation": "Type associated with this attribute.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "value",
+          "type": "masd::variability::text",
+          "documentation": "Value associated with this attribute.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "parent",
+          "type": "masd::variability::comma_separated",
+          "documentation": "Parent associated with this element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "in_global_module",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "can_be_enumeration_underlier",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_default_enumeration_type",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_associative_container",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_floating_point",
+          "type": "masd::variability::boolean",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::meta_data_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }

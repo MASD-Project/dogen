@@ -97,7 +97,7 @@
     },
     {
       "name": "base::ignores",
-      "documentation": "Regexes to ignore.\n",
+      "documentation": "Regexes to ignore.\n\nFIXME: we should remove all ignores related to tests and add a proper facet for manual tests.\n",
       "stereotypes": [
         "masd::variability::profile"
       ],
@@ -182,11 +182,6 @@
           "name": "test_data.enabled",
           "type": "",
           "value": "false"
-        },
-        {
-          "name": "templates.enabled",
-          "type": "",
-          "value": "true"
         }
       ]
     },
@@ -467,107 +462,6 @@
         },
         {
           "name": "class_implementation.enabled",
-          "type": "",
-          "value": "true"
-        }
-      ]
-    },
-    {
-      "name": "composable::base_helper_formatter",
-      "parents": [
-        "composable::handcrafted_typeable"
-      ],
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.generalization.parent",
-          "type": "",
-          "value": "transforms::helper_transform"
-        }
-      ]
-    },
-    {
-      "name": "composable::cpp_helper_transform",
-      "parents": [
-        "composable::base_helper_formatter"
-      ],
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::helper_transform",
-        "masd.variability.key_prefix": "masd.cpp.types"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "class_header.formatting_style",
-          "type": "",
-          "value": "wale"
-        },
-        {
-          "name": "class_header.formatting_input",
-          "type": "",
-          "value": "cpp_helper_transform_header.wale"
-        },
-        {
-          "name": "class_header.overwrite",
-          "type": "",
-          "value": "true"
-        },
-        {
-          "name": "class_implementation.formatting_style",
-          "type": "",
-          "value": "stitch"
-        },
-        {
-          "name": "class_implementation.overwrite",
-          "type": "",
-          "value": "true"
-        }
-      ]
-    },
-    {
-      "name": "composable::csharp_helper_transform",
-      "parents": [
-        "composable::base_helper_formatter"
-      ],
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::csharp::helper_transform",
-        "masd.variability.key_prefix": "masd.cpp.types"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "class_header.formatting_style",
-          "type": "",
-          "value": "wale"
-        },
-        {
-          "name": "class_header.formatting_input",
-          "type": "",
-          "value": "csharp_helper_transform_header.wale"
-        },
-        {
-          "name": "class_header.overwrite",
-          "type": "",
-          "value": "true"
-        },
-        {
-          "name": "class_implementation.formatting_style",
-          "type": "",
-          "value": "stitch"
-        },
-        {
-          "name": "class_implementation.overwrite",
           "type": "",
           "value": "true"
         }

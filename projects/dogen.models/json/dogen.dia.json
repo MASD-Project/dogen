@@ -1,4 +1,5 @@
 {
+  "documentation": "Represents the domain of the Dia diagram editor.\n",
   "tagged_values": {
     "masd.codec.dia.comment": "true",
     "masd.codec.model_modules": "dogen.dia",
@@ -97,7 +98,7 @@
       ]
     },
     {
-      "name": "layer",
+      "name": "entities::layer",
       "documentation": "Represents a layer in a Dia diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -124,34 +125,15 @@
       ]
     },
     {
-      "name": "real",
-      "documentation": "Represents a real value.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Text representation of a real value.\n"
-        }
-      ]
-    },
-    {
-      "name": "integer",
-      "documentation": "Represents an integer value.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Text representation of an integer value.\n"
-        }
-      ]
-    },
-    {
-      "name": "object",
+      "name": "entities::object",
       "documentation": "Represents a Dia object.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "id",
+          "type": "std::string",
+          "documentation": "Unique identifier for the object in this diagram.\n"
+        },
         {
           "name": "type",
           "type": "std::string",
@@ -163,19 +145,13 @@
           "documentation": "Version of the object.\n"
         },
         {
-          "name": "id",
-          "type": "std::string",
-          "documentation": "Unique identifier for the object in this diagram.\n"
-        },
-        {
           "name": "connections",
           "type": "std::vector<connection>",
           "documentation": "Connection details for this object.\n"
         },
         {
           "name": "child_node",
-          "type": "boost::optional<child_node>",
-          "documentation": "Parenting information for this object.\n"
+          "type": "boost::optional<child_node>"
         },
         {
           "name": "attributes",
@@ -185,32 +161,42 @@
       ]
     },
     {
-      "name": "point",
-      "documentation": "Represents a point in a diagram.\n",
+      "name": "entities::connection",
+      "documentation": "Connection between entities in a Dia diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "value",
+          "name": "handle",
           "type": "std::string",
-          "documentation": "Text representation of a point with X/Y coordinates.\n"
+          "documentation": "Internal handle for the connection.\n"
+        },
+        {
+          "name": "to",
+          "type": "std::string",
+          "documentation": "Object we're connected to.\n"
+        },
+        {
+          "name": "connection_slot",
+          "type": "std::string",
+          "documentation": "Number of the connection slot we're connected to.\n\nThis is known in Dia as a connection but to avoid confusion between the class and the slot concepts,\nwe renamed it.\n"
         }
       ]
     },
     {
-      "name": "boolean",
-      "documentation": "Represents a boolean value.\n",
+      "name": "entities::diagram_data",
+      "documentation": "Represents a all the data associated with a diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Text representation of a boolean value.\n"
+          "name": "attributes",
+          "type": "std::vector<attribute>",
+          "documentation": "All attributes associated with the diagram data.\n"
         }
       ]
     },
     {
-      "name": "child_node",
-      "documentation": "Represents a child_node in a diagram.\n\nChild nodes are used in Dia to represent the relationship between a\npackage and the entities it contains. For example, if class O1 is\ninside package O0 then class O1 will have a child node element with\na parent pointing to O0.\n",
+      "name": "entities::child_node",
+      "documentation": "Represents a child_node in a diagram.\n\nChild nodes are used in Dia to represent the relationship between a package and the entities it contains.\nFor example, if class O1 is inside package O0 then class O1 will have a child node element with a parent\npointing to O0.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -221,19 +207,24 @@
       ]
     },
     {
-      "name": "string",
-      "documentation": "Represents a string value.\n",
+      "name": "entities::attribute",
+      "documentation": "Attribute in a Dia diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "value",
+          "name": "name",
           "type": "std::string",
-          "documentation": "Text representation of a string value.\n"
+          "documentation": "Name of the attribute.\n"
+        },
+        {
+          "name": "values",
+          "type": "std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>",
+          "documentation": "Values for the attribute.\n"
         }
       ]
     },
     {
-      "name": "font",
+      "name": "entities::font",
       "documentation": "Represents a font in a diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -252,7 +243,92 @@
       ]
     },
     {
-      "name": "enumeration",
+      "name": "entities::composite",
+      "documentation": "Attribute value which is made up of other attributes.\n",
+      "stereotypes": [
+        "dogen::untestable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string",
+          "documentation": "Type of the composite node\n"
+        },
+        {
+          "name": "value",
+          "type": "std::vector<boost::shared_ptr<attribute>>",
+          "documentation": "Underlying Dia attributes.\n"
+        },
+        {
+          "name": "inner_composite",
+          "type": "boost::shared_ptr<composite>",
+          "documentation": "Some composites contain an inner composite field.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::color",
+      "documentation": "Represents a color in a diagram.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Text representation of an RGB value in hex.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::real",
+      "documentation": "Represents a real value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Text representation of a real value.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::integer",
+      "documentation": "Represents an integer value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Text representation of an integer value.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::boolean",
+      "documentation": "Represents a boolean value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Text representation of a boolean value.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::point",
+      "documentation": "Represents a point in a diagram.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Text representation of a point with X/Y coordinates.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::enumeration",
       "documentation": "Represents a enumeration in a diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -264,29 +340,19 @@
       ]
     },
     {
-      "name": "connection",
-      "documentation": "Connection between entities in a Dia diagram.\n",
+      "name": "entities::string",
+      "documentation": "Represents a string value.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "handle",
+          "name": "value",
           "type": "std::string",
-          "documentation": "Internal handle for the connection.\n"
-        },
-        {
-          "name": "to",
-          "type": "std::string",
-          "documentation": "Object we're connected to.\n"
-        },
-        {
-          "name": "connection_slot",
-          "type": "std::string",
-          "documentation": "Number of the connection slot we're connected to.\n\nThis is known in Dia as a connection but to avoid confusion\nbetween the class and the slot concepts, we renamed it.\n"
+          "documentation": "Represents a string value.\n"
         }
       ]
     },
     {
-      "name": "rectangle",
+      "name": "entities::rectangle",
       "documentation": "Represents a rectangle in a diagram.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -298,34 +364,21 @@
       ]
     },
     {
-      "name": "hydrator",
-      "documentation": "Reads a Dia diagram and instatiates the dia model objects.\n",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
     },
     {
-      "name": "hydration_error",
-      "documentation": "An error occurred while reading a diagram.\n",
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst applying a transformation.\n",
       "stereotypes": [
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "main",
+      "name": "transforms::string_to_diagram_transform",
       "stereotypes": [
-        "masd::entry_point",
-        "dogen::untypable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "CMakeLists",
-      "stereotypes": [
-        "masd::build::cmakelists",
-        "dogen::handcrafted::cmake"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }
