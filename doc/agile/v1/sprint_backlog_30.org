@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-28 Mon 16:37]
+#+CAPTION: Clock summary at [2020-12-29 Tue 13:33]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *48:52* |       |       | 100.0 |
+| *Total time*                                        | *51:33* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 48:52   |       |       | 100.0 |
-| Active                                              |         | 48:52 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  12.4 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.2 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   2.5 |
-| Add support for reading org mode documents          |         |       | 19:46 |  40.5 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.1 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   4.0 |
-| Add org-mode codec for input                        |         |       |  8:56 |  18.3 |
-| Convert library models into org                     |         |       |  1:26 |   2.9 |
-| Convert reference models into org                   |         |       |  2:56 |   6.0 |
-| Assorted improvements to org model                  |         |       |  0:37 |   1.3 |
-| Create a model to org transform                     |         |       |  3:57 |   8.1 |
-| Remove JSON and Dia models for Dogen                |         |       |  0:24 |   0.8 |
+| Stories                                             | 51:33   |       |       | 100.0 |
+| Active                                              |         | 51:33 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |  11.8 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.1 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   2.4 |
+| Add support for reading org mode documents          |         |       | 19:46 |  38.3 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   2.0 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.8 |
+| Add org-mode codec for input                        |         |       |  8:56 |  17.3 |
+| Convert library models into org                     |         |       |  1:26 |   2.8 |
+| Convert reference models into org                   |         |       |  2:56 |   5.7 |
+| Assorted improvements to org model                  |         |       |  0:37 |   1.2 |
+| Create a model to org transform                     |         |       |  3:57 |   7.7 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:07 |   2.2 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   3.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -744,14 +745,132 @@ use the =org= model to do this. First, get it to work via tests and
 then replace the "stringified" uses of org with the proper model.
 
 *** COMPLETED Remove JSON and Dia models for Dogen                    :story:
-    CLOSED: [2020-12-28 Mon 16:37]
+    CLOSED: [2020-12-29 Tue 11:34]
     :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 11:14]--[2020-12-29 Tue 11:34] =>  0:20
+    CLOCK: [2020-12-29 Tue 10:50]--[2020-12-29 Tue 11:13] =>  0:23
     CLOCK: [2020-12-28 Mon 16:24]--[2020-12-28 Mon 16:37] =>  0:13
     CLOCK: [2020-12-28 Mon 11:27]--[2020-12-28 Mon 11:38] =>  0:11
     :END:
 
 After getting org inot the final shape, remove all non-org
 models. Also remove the associated tests, and utility classes.
+
+Problems after removal:
+
+- nightly is borked; still running dia target. Fixed.
+- example is using hello world from dia. Need to use org. Fixed.
+- need to add containing element ID from Dia or else we will have to
+  do this manually to every model. Spun into story.
+- we need to create a "frozen" dogen project that keeps the JSON and
+  Dia models as they are. They are good tests and we want to make sure
+  we don't break anything going forward. We should reinstate the dia
+  and JSON models, make sure they are up-to-date and the tests are
+  clean, then take the frozen snapshot. Spun into story.
+- split tests by model and by codec to avoid LSP problems.
+
+*** COMPLETED Split orchestration tests by model and codec            :story:
+    CLOSED: [2020-12-29 Tue 13:32]
+    :LOGBOOK:
+    CLOCK: [2020-12-29 Tue 11:34]--[2020-12-29 Tue 13:32] =>  1:58
+    :END:
+
+At present we have a single set of tests for all models. This is
+causing issues with LSP. Split them by product and by codec, e.g.:
+
+: cpp_ref_impl_json
+: cpp_ref_impl_dia
+
+etc. Also, make all common code utility methods.
+
+*** Add tags to org model                                             :story:
+
+We need something like:
+
+: #+tags: { story(s) epic(e) spike(p) }
+
+e.g.:
+
+: #+tags: { element(e) attribute(a) module(m) }
+
+The converter should add this. Once added, regenerate all models. Also
+take the opportunity to drop the =masd_= prefix.
+
+*** Create a "frozen" dogen project                                   :story:
+
+We need to create a "frozen" dogen project that keeps the JSON and Dia
+models as they are. They are good tests and we want to make sure we
+don't break anything going forward. We should reinstate the dia and
+JSON models, make sure they are up-to-date and the tests are clean,
+then take the frozen snapshot.
+
+*** Inject custom IDs into org documents                              :story:
+
+All models should have a unique ID for each element. The ID should be
+based on GUIDs where possible, though there are some difficulties for
+cases like Dia. We could create a "fixed" function that generates
+GUIDs from dia IDs. For example:
+
+: <dia:childnode parent="O64"/>
+
+We could take the id =O64= and normalise it to say 4 digits: =6400=
+(noticed we removed the =O= as its not valid in hex); and then use a
+well-defined GUID prefix:
+
+: 3dddc237-3771-45be-82c9-937c5cef
+
+Then we can append the normalised Dia ID to the prefix. This would
+ensure we always generate the same GUIDs on conversion from Dia. If
+the GUIds change within Dia, then they will also change in the
+conversion. This ID is then used as the codec ID. Note that its the
+responsibility of the decoder to assign "child node IDs". For JSON
+this must already be populated. For Dia its the =childnode= field. For
+org-mode, we need to infer it from the structure of the file. In
+org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+
+*** Add include directories to models                                 :story:
+
+In some cases we may require additional include directories to be
+added to a project. It should be possible to add these to a product or
+component. We need to find a specific use case for this though.
+
+Actually, we should just support a =--include= or =-I= parameter. We
+also need to dump the include directories in dumpspecs.
+
+*** Move hello world model from models directory                      :story:
+
+It is confusing to have it mixed up with product models. Use a regular
+dogen model to test the package. We could have it on the reference
+model as a stand alone example, or we could create a "hello dogen"
+product for a trivial example of dogen usage.
+
+Actually, we need to address the entire samples use case. The easy
+thing to do is just to add all dogen org models as examples. Or we
+could just add the hello world model.
+
+Merged stories:
+
+*Create or update samples folder*
+
+We should add samples to the package. These could be organsided by
+injector (dia, json), then by language type (lam, cpp, csharp) or vice
+versa.
+
+We could also try to generate all of these models when testing the
+package.
+
+On the other hand, once we create a proper package for dogen headers,
+with SOs etc, we should really include the dogen models there. In
+effect, it will be symmetric with PDM packages.
+
+
+*** Remove dia-specific types in dia model                            :story:
+
+We probably don't need the "processed" types, we can just use the
+codec types directly.
 
 *** Refactor the templating model                                     :story:
 
@@ -760,11 +879,6 @@ We should use "standard" conventions in this model as well:
 - add entities namespace. Name entities after their "type",
   e.g. =stitch_template=, etc.
 - add transforms for the template expansion.
-
-*** Remove dia-specific types in dia model                            :story:
-
-We probably don't need the "processed" types, we can just use the
-codec types directly.
 
 *** Consider handling "dia comments" in a general manner              :story:
 

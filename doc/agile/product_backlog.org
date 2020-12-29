@@ -78,32 +78,6 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Inject custom IDs into org documents                              :story:
-
-All models should have a unique ID for each element. The ID should be
-based on GUIDs where possible, though there are some difficulties for
-cases like Dia. We could create a "fixed" function that generates
-GUIDs from dia IDs. For example:
-
-: <dia:childnode parent="O64"/>
-
-We could take the id =O64= and normalise it to say 4 digits: =6400=
-(noticed we removed the =O= as its not valid in hex); and then use a
-well-defined GUID prefix:
-
-: 3dddc237-3771-45be-82c9-937c5cef
-
-Then we can append the normalised Dia ID to the prefix. This would
-ensure we always generate the same GUIDs on conversion from Dia. If
-the GUIds change within Dia, then they will also change in the
-conversion. This ID is then used as the codec ID. Note that its the
-responsibility of the decoder to assign "child node IDs". For JSON
-this must already be populated. For Dia its the =childnode= field. For
-org-mode, we need to infer it from the structure of the file. In
-org-mode we just need to use the =:CUSTOM_ID:= attribute:
-
-: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
-
 *** Add references as links to org documents                          :story:
 
 Try adding a =references= tag. Content is a list of links to org
@@ -5099,12 +5073,6 @@ different locations (i.e. dogen vs reference model).
 
 We should add some meta-data flag to suppress/enable logging.
 
-*** Add include directories to models                                 :story:
-
-In some cases we may require additional include directories to be
-added to a project. It should be possible to add these to a product or
-component. We need to find a specific use case for this though.
-
 *** Create a "manual tests" stereotype with profiles                  :story:
 
 At present we have a =tests= facet that contains only the generated
@@ -6637,13 +6605,6 @@ At present all masd stereotypes are namespaced correctly, according to
 the matching meta-model elements, except for the structural ones. That
 is, we do =masd::entry_point= instead of
 =masd::structural::entry_point= etc.
-
-*** Move hello world model from models directory                      :story:
-
-It is confusing to have it mixed up with product models. Use a regular
-dogen model to test the package. We could have it on the reference
-model as a stand alone example, or we could create a "hello dogen"
-product for a trivial example of dogen usage.
 
 *** Mop-up nested namespaces using legacy syntax                      :story:
 
@@ -8832,19 +8793,6 @@ become very readable.
 
 At present we are validating that all built-in types work but we don't
 check that an invalid type doesn't work.
-
-*** Create or update samples folder                                   :story:
-
-We should add samples to the package. These could be organsided by
-injector (dia, json), then by language type (lam, cpp, csharp) or vice
-versa.
-
-We could also try to generate all of these models when testing the
-package.
-
-On the other hand, once we create a proper package for dogen headers,
-with SOs etc, we should really include the dogen models there. In
-effect, it will be symmetric with PDM packages.
 
 ** Infrastructure
 
