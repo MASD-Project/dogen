@@ -92,6 +92,8 @@ const std::string path_dogen_templating_json("dogen.templating.json");
 const std::string path_dogen_utility_json("dogen.utility.json");
 const std::string path_dogen_variability_json("dogen.variability.json");
 const std::string path_dogen_orchestration_json("dogen.orchestration.json");
+const std::string path_dogen_relational_json("dogen.utility.json");
+const std::string path_dogen_identification_json("dogen.utility.json");
 
 }
 
@@ -401,4 +403,13 @@ path dogen_product::input_dogen_variability_json() {
     return json_models_directory_ / path_dogen_variability_json;
 }
 
+path dogen_product::input_dogen_relational_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_dogen_relational_json;
+}
+
+path dogen_product::input_dogen_identification_json() {
+    ensure_initialized();
+    return json_models_directory_ / path_dogen_identification_json;
+}
 }

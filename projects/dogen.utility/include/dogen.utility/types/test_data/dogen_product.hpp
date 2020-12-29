@@ -98,6 +98,8 @@ public:
     static boost::filesystem::path input_dogen_templating_json();
     static boost::filesystem::path input_dogen_utility_json();
     static boost::filesystem::path input_dogen_variability_json();
+    static boost::filesystem::path input_dogen_relational_json();
+    static boost::filesystem::path input_dogen_identification_json();
 
 private:
     static boost::filesystem::path project_directory_;
