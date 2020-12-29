@@ -9,79 +9,38 @@
     "masd.codec.reference": "cpp.boost",
     "masd.codec.reference": "masd",
     "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.tracing",
     "masd.codec.reference": "dogen.profiles",
     "masd.physical.ignore_files_matching_regex": ".*/*.py",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
     {
-      "name": "diagram_data",
-      "documentation": "Represents a all the data associated with a diagram.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "attributes",
-          "type": "std::vector<attribute>",
-          "documentation": "All attributes associated with the diagram data.\n"
-        }
-      ]
-    },
-    {
-      "name": "attribute",
-      "documentation": "Attribute in a Dia diagram.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the attribute.\n"
-        },
-        {
-          "name": "values",
-          "type": "std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>",
-          "documentation": "Values for the attribute.\n"
-        }
-      ]
-    },
-    {
-      "name": "composite",
-      "documentation": "Attribute value which is made up of other attributes.\n",
+      "name": "main",
       "stereotypes": [
-        "dogen::untestable"
+        "masd::entry_point",
+        "dogen::untypable"
       ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "type",
-          "type": "std::string",
-          "documentation": "Type of the composite node\n"
-        },
-        {
-          "name": "value",
-          "type": "std::vector<boost::shared_ptr<attribute>>",
-          "documentation": "Underlying Dia attributes.\n"
-        },
-        {
-          "name": "inner_composite",
-          "type": "boost::shared_ptr<composite>",
-          "documentation": "Some composites contain an inner composite field.\n"
-        }
-      ]
+      "fallback_element_type": "masd::object"
     },
     {
-      "name": "color",
-      "documentation": "Represents a color in a diagram.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Text representation of an RGB value in hex.\n"
-        }
-      ]
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
     },
     {
-      "name": "diagram",
+      "name": "entities",
+      "documentation": "Contains all the entities required by Dogen from the\ndomain of the Dia diagram editor.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::diagram",
       "documentation": "Represents a diagram in Dia.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
