@@ -1,0 +1,921 @@
+{
+  "documentation": "Collection of types related to naming, labelling and general\nidentification within Dogen.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.identification",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "entities",
+      "documentation": "Stores all of the entities related to identification\nof Dogen elements.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::name",
+      "documentation": "General name for modeling elements which do not need any specialisation.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "qualified",
+          "type": "std::string",
+          "documentation": "Qualified name for an element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::codec_provenance",
+      "documentation": "Source of a model element in the codec dimension.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "model_id",
+          "type": "model_id",
+          "documentation": "ID for a model.\n"
+        },
+        {
+          "name": "model_type",
+          "type": "model_type",
+          "documentation": "Type of the model where this element originates from.\n"
+        },
+        {
+          "name": "model_sha1_hash",
+          "type": "sha1_hash",
+          "documentation": "SHA1 key of the original codec model.\n"
+        },
+        {
+          "name": "codec_id",
+          "type": "codec_id",
+          "documentation": "Identifier for the modeling element in the codec dimension.\n"
+        },
+        {
+          "name": "location",
+          "type": "codec_location",
+          "documentation": "Where the element was located in the original source.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::model_type",
+      "documentation": "Types of models with regards to the current generation taking place.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "target",
+          "type": "",
+          "documentation": "The element is part of the target model.\n"
+        },
+        {
+          "name": "pdm_reference",
+          "type": "",
+          "documentation": "The element was part of a reference model which is a PDM.\n"
+        },
+        {
+          "name": "non_pdm_reference",
+          "type": "",
+          "documentation": "The element was part of a reference model which is regular dogen model.\n"
+        },
+        {
+          "name": "not_yet_determined",
+          "type": "",
+          "documentation": "The origin of the element is not yet known.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::sha1_hash",
+      "documentation": "Stores a SHA1 hash.\n",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::codec_id",
+      "documentation": "ID of the elment as sourced from the codec model, if any.\n",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::logical_id",
+      "documentation": "ID of the elment in the logical dimension.\n",
+      "stereotypes": [
+        "masd::primitive",
+        "dogen::hashable"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical_meta_id",
+      "documentation": "ID of the meta-element in the physical dimension.\n",
+      "stereotypes": [
+        "masd::primitive",
+        "dogen::hashable"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::codec_location",
+      "documentation": "Location of a modeling element in the codec dimension.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "line",
+          "type": "long",
+          "documentation": "Line number where the element was defined.\n"
+        },
+        {
+          "name": "column",
+          "type": "long",
+          "documentation": "Column number where the element was defined.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_provenance",
+      "documentation": "Source of a model element in the logical dimension.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "codec",
+          "type": "codec_provenance",
+          "documentation": "Provenance of the current element in the codec dimension.\n"
+        },
+        {
+          "name": "logical_name",
+          "type": "logical_name",
+          "documentation": "Provenance of the current element in the logical dimension.\n"
+        },
+        {
+          "name": "logical_meta_name",
+          "type": "logical_meta_name",
+          "documentation": "Provenance of the current element in the logical dimension as a meta-element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_meta_id",
+      "documentation": "ID for a logical meta-element.\n",
+      "stereotypes": [
+        "masd::primitive",
+        "dogen::hashable"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::label",
+      "documentation": "A label is a key-value pair that can be used by the processing engine in a flexible way.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string",
+          "documentation": "Key of the label.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value associated with this label.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::tagged_value",
+      "documentation": "Represents a tagged value in a similar spirit to UMLs.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "tag",
+          "type": "std::string",
+          "documentation": "Tag name.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value associated with this tag.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_name",
+      "documentation": "Name of an element in logical space.\n\nA name represents a point or a region in logical space, and this point or region can\nonly be used by one element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regions in logical\nspace cannot have the same name and b) the same point in logical space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
+      "stereotypes": [
+        "Nameable",
+        "QualifiedRepresentations",
+        "dogen::hashable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "logical_id",
+          "documentation": "Identifier for this logical element.\n"
+        },
+        {
+          "name": "location",
+          "type": "logical_location",
+          "documentation": "Where the name is located in element space.\n"
+        },
+        {
+          "name": "is_container",
+          "type": "bool",
+          "documentation": "If true, the name indicates an element that can contain other elements.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_location",
+      "documentation": "Identifies a hierarchy of containment within the logical space.\n",
+      "stereotypes": [
+        "dogen::hashable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "external_modules",
+          "type": "std::list<std::string>",
+          "documentation": "All modules external to the model itself.\n\nIt is sometimes useful to create a model within a set of existing\nmodules. In this case, the model does not own the existing modules and\nthey are considered \"external\" to the model. This is useful, for\nexample, when declaring a model within a larger project such as @e\ndogen::logical. In this case, @e dogen is the external module.\n"
+        },
+        {
+          "name": "model_modules",
+          "type": "std::list<std::string>",
+          "documentation": "Modules related to just the model itself.\n\nIt is only different from the model name if the model name is composite;\nthat is, if the model name has multiple fields separated by dots, e.g. @ a.b.\n"
+        },
+        {
+          "name": "internal_modules",
+          "type": "std::list<std::string>",
+          "documentation": "Sub-modules within a model.\n"
+        },
+        {
+          "name": "element",
+          "type": "std::string",
+          "documentation": "Name of the owning element, if any.\n\nFor coding elements which are located within other logical elements\nthat are not modules, such as attributes, inner classes, etc.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::qualified_representations",
+      "documentation": "All available qualified representations of a name.\n",
+      "stereotypes": [
+        "dogen::hashable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "dot",
+          "type": "std::string",
+          "documentation": "Qualified identifier using \".\" as the separator.\n"
+        },
+        {
+          "name": "colon",
+          "type": "std::string",
+          "documentation": "Qualified identifier using \"::\" as the separator.\n"
+        },
+        {
+          "name": "identifiable",
+          "type": "std::string",
+          "documentation": "Representation of the identifier that can usable as an identifier on all of the\nsupported technical spaces, using the entire name structure.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_meta_location",
+      "documentation": "Location of an entity or set of entities in the physical meta-model.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nmeta-model; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "meta_model",
+          "type": "std::string",
+          "documentation": "Top-most container for the physical space.\n\nThe meta-model is always expected to be  @e masd.\n"
+        },
+        {
+          "name": "backend",
+          "type": "std::string",
+          "documentation": "Name of the backend where this element is located, if any.\n"
+        },
+        {
+          "name": "part",
+          "type": "std::string",
+          "documentation": "Name of the part where this element is located, if any.\n"
+        },
+        {
+          "name": "facet",
+          "type": "std::string",
+          "documentation": "Name of the facet where this element is located, if any.\n"
+        },
+        {
+          "name": "archetype",
+          "type": "std::string",
+          "documentation": "Name of the archetype for this element, if applicable.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_meta_name",
+      "documentation": "Name of an element in physical space.\n\nA name represents a point or a region in physical space. It can only be used by one\nphysical element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regionsin physical\nspace cannot have the same name and b) the same point or region in physical space\ncan only have one and only one name.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "physical_meta_id",
+          "documentation": "Identifier for this physical meta-element.\n"
+        },
+        {
+          "name": "location",
+          "type": "physical_meta_location",
+          "documentation": "Location for a meta-name in physical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_meta_name",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "logical_meta_id",
+          "documentation": "Identifier for this logical meta-element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::technical_space",
+      "documentation": "Models need to declare upfront the technical space they will target.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::convertible"
+      ],
+      "tagged_values": {
+        "masd.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "agnostic",
+          "type": "",
+          "documentation": "Abstract technical space which is mapped to concrete technical spaces.\n"
+        },
+        {
+          "name": "cpp",
+          "type": "",
+          "documentation": "The C++ programming language.\n"
+        },
+        {
+          "name": "csharp",
+          "type": "",
+          "documentation": "The C# programming language.\n"
+        },
+        {
+          "name": "cmake",
+          "type": "",
+          "documentation": "CMake meta build system.\n"
+        },
+        {
+          "name": "xml",
+          "type": "",
+          "documentation": "Extensible Markup Language.\n"
+        },
+        {
+          "name": "odb",
+          "type": "",
+          "documentation": "ODB options.\n"
+        },
+        {
+          "name": "sln",
+          "type": "",
+          "documentation": "Visual studio solution.\n"
+        },
+        {
+          "name": "mustache",
+          "type": "",
+          "documentation": "Mustache templates.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_name",
+      "documentation": "Name of a physical model element.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "physical_id",
+          "documentation": "ID for a physical element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Nameable",
+      "documentation": "Ability to have a name.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "simple",
+          "type": "std::string",
+          "documentation": "Simple name for a modeling element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::logical_meta_physical_id",
+      "documentation": "ID in the logical-physical space.\n",
+      "stereotypes": [
+        "dogen::hashable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_id",
+          "type": "logical_id",
+          "documentation": "ID of the element in the logical dimension.\n"
+        },
+        {
+          "name": "physical_meta_id",
+          "type": "physical_meta_id",
+          "documentation": "ID of the element in the physical dimension.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_id",
+      "documentation": "ID for a physical element.\n",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "documentation": "Assorted helpers used to construct domain entities.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::identifiable_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_error",
+      "documentation": "An error occurred whilst building.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::qualified_representations_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "dot_printer_",
+          "type": "pretty_printer"
+        },
+        {
+          "name": "colon_printer_",
+          "type": "pretty_printer"
+        }
+      ]
+    },
+    {
+      "name": "helpers::logical_name_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::logical_name_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name_",
+          "type": "entities::logical_name"
+        }
+      ]
+    },
+    {
+      "name": "helpers::logical_name_flattener",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::logical_location_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "location_",
+          "type": "entities::logical_location"
+        }
+      ]
+    },
+    {
+      "name": "helpers::flattening_error",
+      "documentation": "An error occurred whilst flattening a name.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::printing_error",
+      "documentation": "An error occurred whilst pretty printing.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::pretty_printer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::separators",
+      "documentation": "Available separators to be used by the pretty printer.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "angle_brackets",
+          "type": "",
+          "documentation": "Enclose name elements in '<' and '>'.\n"
+        },
+        {
+          "name": "double_colons",
+          "type": "",
+          "documentation": "Separate name elements with a '::'.\n"
+        },
+        {
+          "name": "dots",
+          "type": "",
+          "documentation": "Separate name elements with a '.'.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::physical_meta_name_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::physical_meta_name_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::physical_meta_id_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::model_id",
+      "documentation": "ID for a model.\n",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::stereotype",
+      "documentation": "Stereotype.\n",
+      "stereotypes": [
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::logical_name_tree",
+      "documentation": "Adds support for name composition as a tree-like structure.\n\nA logical name tree has the responsibility of representing an instantiation of a\ngeneric type with all of its type parameters, which themselves can also be generic\ntypes and so on. It may also represent the simpler case of a non-generic type, in\nwhich case only the parent name is populated and there are no children.\n",
+      "stereotypes": [
+        "QualifiedRepresentations"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "current",
+          "type": "logical_name",
+          "documentation": "Name for the current level of the tree.\n"
+        },
+        {
+          "name": "children",
+          "type": "std::list<logical_name_tree>",
+          "documentation": "Names of the child elements.\n"
+        },
+        {
+          "name": "are_children_opaque",
+          "type": "bool",
+          "documentation": "If true, the association with its children can be opaque.\n\nChildren are considered opaque when the parent does not require knowledge\nabout the childs' internal structure. This is the case, for example, with C and\nC++ pointers, references and so on.\n"
+        },
+        {
+          "name": "is_circular_dependency",
+          "type": "bool",
+          "documentation": "If true, the presence of the current name causes a circular dependency.\n"
+        },
+        {
+          "name": "is_current_simple_type",
+          "type": "bool",
+          "documentation": "Returns true if @e current is a simple type such as a built-in or an enumeration.\n"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool",
+          "documentation": "If true, \"current\" stores a floating point type.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::QualifiedRepresentations",
+      "documentation": "Name with multiple qualified representations.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "qualified",
+          "type": "qualified_representations",
+          "documentation": "Contains the name according to different representations.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::logical_name_tree_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "names_",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "root_",
+          "type": "boost::shared_ptr<node>"
+        },
+        {
+          "name": "current_",
+          "type": "boost::shared_ptr<node>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::legacy_logical_name_tree_parser",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::node",
+      "documentation": "Node in a tree of logical names.\n\nTemporary data structure used to build trees of logical names.\n",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parent",
+          "type": "boost::weak_ptr<node>",
+          "documentation": "Parent in a tree.\n"
+        },
+        {
+          "name": "data",
+          "type": "entities::logical_name",
+          "documentation": "Current node.\n"
+        },
+        {
+          "name": "children",
+          "type": "std::list<boost::shared_ptr<node>>",
+          "documentation": "Child nodes in a tree.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::new_logical_name_tree_parser",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::parsing_error",
+      "documentation": "A fatal error has occurred while parsing.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::physical_meta_name_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::validation_error",
+      "documentation": "An error occurred during validation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::physical_id_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::archetype_name_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_meta_id",
+          "type": "logical_meta_id",
+          "documentation": "Identifier of the meta-element in the logical dimension.\n"
+        },
+        {
+          "name": "meta_names",
+          "type": "std::list<physical_meta_name>",
+          "documentation": "All meta-names that belong to this group.\n"
+        },
+        {
+          "name": "canonical_locations",
+          "type": "std::unordered_map<physical_meta_id, physical_meta_id>",
+          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
+        },
+        {
+          "name": "archetype_for_label",
+          "type": "std::unordered_map<physical_meta_id, physical_meta_id>",
+          "documentation": "Maps a label to archetype ID within the present logical manifold.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_meta_name_indices",
+      "documentation": "Containing physical meta-names, indexed as required by use cases.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "all",
+          "type": "std::list<physical_meta_name>",
+          "documentation": "All meta-names.\n"
+        },
+        {
+          "name": "facet_names_by_backend_name",
+          "type": "std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>",
+          "documentation": "Qualified names of facets by qualified names of backends.\n"
+        },
+        {
+          "name": "archetype_names_by_logical_meta_name",
+          "type": "std::unordered_map<logical_meta_id, archetype_name_set>",
+          "documentation": "Physical meta-names by logical meta-names.\n"
+        },
+        {
+          "name": "archetype_names_by_backend_by_facet",
+          "type": "std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>",
+          "documentation": "Archetype names by qualified backend and facet names\n"
+        },
+        {
+          "name": "technical_space_for_archetype",
+          "type": "std::unordered_map<physical_meta_id, technical_space>",
+          "documentation": "Resolves a given physical meta-model element ID into its technical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::meta_name_index_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::logical_meta_name_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::technical_space_version",
+      "documentation": "Version of the technical space to use.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp_98",
+          "type": ""
+        },
+        {
+          "name": "cpp_11",
+          "type": ""
+        },
+        {
+          "name": "cpp_14",
+          "type": ""
+        },
+        {
+          "name": "cpp_17",
+          "type": ""
+        }
+      ]
+    }
+  ]
+}

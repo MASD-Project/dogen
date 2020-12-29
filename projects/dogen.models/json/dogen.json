@@ -1,0 +1,475 @@
+{
+  "documentation": "Provides the top-level API for the dogen product.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "configuration",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "model_processing",
+          "type": "model_processing_configuration"
+        },
+        {
+          "name": "tracing",
+          "type": "boost::optional<tracing_configuration>",
+          "documentation": "Configuration for tracing.\n"
+        },
+        {
+          "name": "diffing",
+          "type": "boost::optional<diffing_configuration>"
+        },
+        {
+          "name": "reporting",
+          "type": "boost::optional<reporting_configuration>"
+        },
+        {
+          "name": "byproduct_directory",
+          "type": "boost::filesystem::path",
+          "documentation": "Directory in which to place all files not directly related to generated code.\n"
+        },
+        {
+          "name": "database",
+          "type": "boost::optional<database_configuration>",
+          "documentation": "Configuration related to database connectivity, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "tracing_level",
+      "documentation": "Available levels for tracing transformation.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "detail",
+          "type": ""
+        },
+        {
+          "name": "summary",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "tracing_configuration",
+      "documentation": "Configuration related to transform tracing.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "level",
+          "type": "tracing_level",
+          "documentation": "Dump all available tracing information about transforms.\n"
+        },
+        {
+          "name": "format",
+          "type": "tracing_format",
+          "documentation": "Format to use when writting trace files.\n\nOnly valid for the file backend.\n"
+        },
+        {
+          "name": "guids_enabled",
+          "type": "bool",
+          "documentation": "Enable GUIDs in probe stats.\n\nDisabling GUIDs makes comparisons easier.\n"
+        },
+        {
+          "name": "logging_impact",
+          "type": "std::string",
+          "documentation": "Additional information to tell tracing about the possible impact of logging.\n\nInformative string detailing whether logging was off, or set to debug etc. This is\nrequired in order to be able to compare like-for-like numbers.\n"
+        },
+        {
+          "name": "use_short_names",
+          "type": "bool",
+          "documentation": "Use short directory and file names. Useful mainly on windows due to path\nsize limitations.\n"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "backend",
+          "type": "tracing_backend",
+          "documentation": "Which backend to use for tracing.\n"
+        },
+        {
+          "name": "run_id",
+          "type": "std::string",
+          "documentation": "Identifier to use for the present run.\n"
+        },
+        {
+          "name": "filter_regexes",
+          "type": "std::vector<std::string>",
+          "documentation": "If supplied, ignore all traces except those which match the supplied regexes.\n"
+        }
+      ]
+    },
+    {
+      "name": "tracing_format",
+      "documentation": "Available formats for tracing transformations.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "plain",
+          "type": "",
+          "documentation": "Plain text format.\n"
+        },
+        {
+          "name": "org_mode",
+          "type": "",
+          "documentation": "Emacs Org mode.\n"
+        },
+        {
+          "name": "graphviz",
+          "type": "",
+          "documentation": "Dot notation for GraphViz\n"
+        }
+      ]
+    },
+    {
+      "name": "configuration_builder",
+      "documentation": "masd::builder\n",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "diffing_configuration",
+      "documentation": "Configuration for diff generation.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "destination",
+          "type": "diffing_destination"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": "configuration_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "model_processing_configuration",
+      "documentation": "Configuration related to the behaviour of Dogen whilst processing models.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "compatibility_mode_enabled",
+          "type": "bool",
+          "documentation": "Try to process models even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+        },
+        {
+          "name": "dry_run_mode_enabled",
+          "type": "bool",
+          "documentation": "If true, all transforms wil be executed but no code will be emitted.\n"
+        },
+        {
+          "name": "variability_overrides",
+          "type": "std::vector<std::string>",
+          "documentation": "Raw set of variability overrides.\n\nOverrides are CSV strings in the following format:\n\nMODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE\n\nELEMENT_NAME and ATTRIBUTE_NAME can be left blank.\n\nPlease note that you can only override elements in the following cases:\n\n- they must have been supplied by the user *directly* on a modeling element (e.g.\nnot as part of a profile).\n- the type of the feature being overriden must be scalar.\n"
+        },
+        {
+          "name": "activity_timestamp",
+          "type": "boost::posix_time::ptime",
+          "documentation": "Timepoint at which the activity started.\n"
+        }
+      ]
+    },
+    {
+      "name": "invalid_configuration_exception",
+      "documentation": "The values supplied for the configuration are not valid.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "false"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "generator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "converter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "generation_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "conversion_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "diffing_destination",
+      "documentation": "Where to place the diffing results.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file",
+          "type": "",
+          "documentation": "Generates a patch file.\n"
+        },
+        {
+          "name": "console",
+          "type": "",
+          "documentation": "Outputs the diff to the console.\n"
+        }
+      ]
+    },
+    {
+      "name": "reporting_configuration",
+      "documentation": "Configuration related to operational reports.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "reporting_style"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": "reporting_style",
+      "documentation": "Available formats for operational reports.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::convertible"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "plain",
+          "type": "",
+          "documentation": "Plain text format.\n"
+        },
+        {
+          "name": "org_mode",
+          "type": "",
+          "documentation": "Emacs Org mode.\n"
+        }
+      ]
+    },
+    {
+      "name": "mock_configuration_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "database_configuration",
+      "documentation": "Contains the config\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "host",
+          "type": "std::string",
+          "documentation": "Database host to connect to.\n"
+        },
+        {
+          "name": "port",
+          "type": "unsigned int",
+          "documentation": "Database port to connect to.\n"
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the database to connect to.\n"
+        },
+        {
+          "name": "user",
+          "type": "std::string",
+          "documentation": "User to use in thedatabase connection.\n"
+        },
+        {
+          "name": "password",
+          "type": "std::string"
+        },
+        {
+          "name": "engine",
+          "type": "database_engine",
+          "documentation": "Which relational database engine to connect to.\n"
+        },
+        {
+          "name": "generate_schema",
+          "type": "bool",
+          "documentation": "If true, deletes all tables and recreates them. Otherwise, assumes their presence.\n"
+        }
+      ]
+    },
+    {
+      "name": "tracing_backend",
+      "documentation": "Available backends to manage tracing information.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file",
+          "type": "",
+          "documentation": "Write tracing information to files.\n"
+        },
+        {
+          "name": "relational_database",
+          "type": "",
+          "documentation": "Write tracing information to a relational database.\n"
+        }
+      ]
+    },
+    {
+      "name": "database_engine",
+      "documentation": "Supported relational databases engines.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "postgres",
+          "type": "",
+          "documentation": "Connect to a PostgreSQL database.\n"
+        },
+        {
+          "name": "sqlite",
+          "type": "",
+          "documentation": "Connect to a SQLite database.\n"
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "specs",
+      "documentation": "Describes details of the available functionality within this version of Dogen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "categories",
+          "type": "std::list<spec_category>",
+          "documentation": "All categories of specifications.\n"
+        }
+      ]
+    },
+    {
+      "name": "spec_category",
+      "documentation": "Describes a category of dogen specifications.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of this group of specs.\n"
+        },
+        {
+          "name": "entries",
+          "type": "std::list<spec_entry>",
+          "documentation": "Entries describing various aspects of this group.\n"
+        },
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Purpose of the group.\n"
+        }
+      ]
+    },
+    {
+      "name": "spec_entry",
+      "documentation": "Unit of functionality within Dogen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name for this spec entry.\n"
+        },
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Human readable text describing this entry.\n"
+        }
+      ]
+    },
+    {
+      "name": "spec_dumper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "dumping_exception",
+      "documentation": "An error ocurred when dumping dogen's specs.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

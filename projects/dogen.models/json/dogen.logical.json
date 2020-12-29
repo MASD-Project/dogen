@@ -1,0 +1,4690 @@
+{
+  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section logical_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Codec models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.logical",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "dogen",
+    "masd.codec.reference": "dogen.variability",
+    "masd.codec.reference": "dogen.tracing",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.codec.reference": "dogen.physical",
+    "masd.codec.reference": "dogen.identification",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "entities",
+      "documentation": "Entities that define the logical model.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::attribute",
+      "documentation": "Represents an attribute in an object.\n",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable",
+        "Stereotypable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "unparsed_type",
+          "type": "std::string",
+          "documentation": "Original type name as it appeared in the source, without any parsing.\n\nName must be in one of the supported notations.\n"
+        },
+        {
+          "name": "parsed_type",
+          "type": "identification::entities::logical_name_tree",
+          "documentation": "Tree of names that represent the type of the attribute, after suitable parsing.\n"
+        },
+        {
+          "name": "is_immutable",
+          "type": "bool",
+          "documentation": "If true, the attribute can only be read but not set.\n"
+        },
+        {
+          "name": "is_fluent",
+          "type": "bool",
+          "documentation": "If true, the attribute's setter will return the object iteself.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<orm::attribute_properties>"
+        },
+        {
+          "name": "member_variable_name",
+          "type": "std::string",
+          "documentation": "Representation of the attribute name as a member variable.\n\nNote that at present we only support a single style for naming member variables,\nacross all languages. This will have to be revisited in the future.\n"
+        },
+        {
+          "name": "getter_setter_name",
+          "type": "std::string",
+          "documentation": "Name to use for getter and setter.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Nameable",
+      "documentation": "Ability to have a name.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "identification::entities::logical_name",
+          "documentation": "Fully qualified name.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Documentable",
+      "documentation": "Ability to provide documentation.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "documentation",
+          "type": "std::string",
+          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,\netc.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Provenance",
+      "documentation": "Details of the origin of this model element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "provenance",
+          "type": "identification::entities::codec_provenance",
+          "documentation": "Details of the provenance of this model element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Containable",
+      "documentation": "The ability to be contained inside a module.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "contained_by",
+          "type": "identification::entities::logical_id",
+          "documentation": "ID of the element in which we are contained, if any.\n"
+        },
+        {
+          "name": "in_global_module",
+          "type": "bool",
+          "documentation": "If true, the element is located in the global module.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Stereotypable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stereotypes",
+          "type": "stereotypes",
+          "documentation": "All stereotypes associated with this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::MetaNameable",
+      "documentation": "Ability to have a meta-name.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "meta_name",
+          "type": "identification::entities::logical_meta_name",
+          "documentation": "Name of the element in the meta-model that this instance conforms to.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::TechnicalSpaceRelationship",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "intrinsic_technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Describes the intrinsic nature of the modeling element with regards to technical\nspaces.\n\nIf the element can be mapped to a technical space then its intrinsic nature is\nagnostic. Otherwise, the element belongs to a concrete technical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Configurable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::shared_ptr<variability::entities::configuration>",
+          "documentation": "Configuration for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Labelable",
+      "documentation": "The ability to attach labels to an element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::list<identification::entities::label>",
+          "documentation": "All labels associated with this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Generatable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generability_status",
+          "type": "generability_status",
+          "documentation": "The status of this element with regards to generability.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Element",
+      "parents": [
+        "entities::Nameable",
+        "entities::Documentable",
+        "entities::Provenance",
+        "entities::Containable",
+        "entities::Stereotypable",
+        "entities::MetaNameable",
+        "entities::TechnicalSpaceRelationship",
+        "entities::Configurable",
+        "entities::Labelable",
+        "entities::Generatable"
+      ],
+      "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::Stateful",
+      "documentation": "Ability to have a state.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "all_attributes",
+          "type": "std::list<attribute>",
+          "documentation": "All attributes associated with this type.\n\nThis is a union of the following sets:\n\n@li the set of all attributes obtained via inheritance relationships;\n@li the set of all attributes obtained via instantiating object templates,\n    including their inheritance tree;\n@li the set of all attributes directly associated with the type (local).\n\nThe first and third sets are cached in this object. The second isn't as we do\nnot have a need for it.\n"
+        },
+        {
+          "name": "local_attributes",
+          "type": "std::list<attribute>",
+          "documentation": "The set of all attributes directly associated with the type.\n"
+        },
+        {
+          "name": "inherited_attributes",
+          "type": "std::unordered_map<identification::entities::logical_name, std::list<attribute>>",
+          "documentation": "The set of all attributes obtained via inheritance, by parent name.\n\nNote that we are using name as a key by design (instead of id); it is required for\nformatting.\n"
+        },
+        {
+          "name": "is_immutable",
+          "type": "bool",
+          "documentation": "If true, do not generate setters for the element's attributes.\n"
+        },
+        {
+          "name": "is_fluent",
+          "type": "bool",
+          "documentation": "If true, generate fluent setters.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::element",
+      "documentation": "Represents a generic logical construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
+      "stereotypes": [
+        "masd::visitable",
+        "Element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "decoration",
+          "type": "std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>",
+          "documentation": "If set, decoration to be added to each generated file.\n"
+        },
+        {
+          "name": "helper_properties",
+          "type": "std::list<helper_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::model",
+      "documentation": "Intermediate representation of a masd model.\n",
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable",
+        "Provenance"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "references",
+          "type": "std::unordered_map<identification::entities::logical_name, identification::entities::model_type>",
+          "documentation": "All other intermediate models that this model depends on, mapped to their\norigin.\n"
+        },
+        {
+          "name": "leaves",
+          "type": "std::unordered_set<identification::entities::logical_name>",
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
+        },
+        {
+          "name": "root_module",
+          "type": "boost::shared_ptr<structural::module>"
+        },
+        {
+          "name": "input_technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Technical space in which this model was written.\n"
+        },
+        {
+          "name": "output_technical_spaces",
+          "type": "std::list<identification::entities::technical_space>",
+          "documentation": "Technical spaces into which to extract the final model.\n"
+        },
+        {
+          "name": "all_technical_spaces",
+          "type": "std::unordered_set<identification::entities::technical_space>",
+          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<orm::model_properties>"
+        },
+        {
+          "name": "structural_elements",
+          "type": "structural::element_repository",
+          "documentation": "All structural elements in this model.\n"
+        },
+        {
+          "name": "decoration_elements",
+          "type": "decoration::element_repository",
+          "documentation": "All decoration elements in this model.\n"
+        },
+        {
+          "name": "variability_elements",
+          "type": "variability::element_repository",
+          "documentation": "All variability elements in this model.\n"
+        },
+        {
+          "name": "mapping_elements",
+          "type": "mapping::element_repository",
+          "documentation": "Model elements related to element mapping.\n"
+        },
+        {
+          "name": "templating_elements",
+          "type": "templating::element_repository",
+          "documentation": "Elements related to text templates.\n"
+        },
+        {
+          "name": "serialization_elements",
+          "type": "serialization::element_repository",
+          "documentation": "Elements related to serialization.\n"
+        },
+        {
+          "name": "visual_studio_elements",
+          "type": "visual_studio::element_repository"
+        },
+        {
+          "name": "orm_elements",
+          "type": "orm::element_repository"
+        },
+        {
+          "name": "build_elements",
+          "type": "build::element_repository"
+        },
+        {
+          "name": "physical_elements",
+          "type": "physical::element_repository"
+        },
+        {
+          "name": "meta_names",
+          "type": "std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>",
+          "documentation": "All meta-names by qualified name.\n"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<identification::entities::logical_id, streaming_properties>"
+        },
+        {
+          "name": "technical_space_version",
+          "type": "identification::entities::technical_space_version",
+          "documentation": "Version of the technical space we are targeting.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::elements_traversal",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::TraversalVisitor",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::Visitable",
+      "documentation": "The ability to handle visitation.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "base_visitor",
+          "type": "boost::optional<identification::entities::logical_name>",
+          "documentation": "Base class of the visitor that visits the current element, if any.\n"
+        },
+        {
+          "name": "derived_visitor",
+          "type": "boost::optional<identification::entities::logical_name>",
+          "documentation": "Derived class of the visitor that visits the current element, if any.\n"
+        },
+        {
+          "name": "is_visitation_root",
+          "type": "bool"
+        },
+        {
+          "name": "is_visitation_leaf",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::Associatable",
+      "documentation": "The element has the ability to associate itself with other elements.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transparent_associations",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Elements that are involved in aggregation or composition relationships.\n"
+        },
+        {
+          "name": "opaque_associations",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Elements that are involved in aggregation or composition relationships via\nindirection.\n\nThis is used to break cycles where required.\n"
+        },
+        {
+          "name": "associative_container_keys",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Elements that are keys in an associative container.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Generalizable",
+      "documentation": "The element has the ability to be part of a generalization relationship.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_parent",
+          "type": "bool",
+          "documentation": "True if this element is the parent of one or more elements, false otherwise.\n"
+        },
+        {
+          "name": "is_child",
+          "type": "bool",
+          "documentation": "If true, the element has at least one parent.\n"
+        },
+        {
+          "name": "is_leaf",
+          "type": "bool",
+          "documentation": "True if the type has a parent but no children.\n"
+        },
+        {
+          "name": "is_final",
+          "type": "bool",
+          "documentation": "If true, the element cannot be inherited from.\n"
+        },
+        {
+          "name": "is_final_requested",
+          "type": "boost::optional<bool>",
+          "documentation": "If present and true/false, user has requested is_final to be true/false.\n\nIf not present, user did not make any statements with regards to finality.\n"
+        },
+        {
+          "name": "is_abstract",
+          "type": "bool",
+          "documentation": "If true, the type is an abstract type.\n"
+        },
+        {
+          "name": "in_inheritance_relationship",
+          "type": "bool",
+          "documentation": "True if the object is related to at least one other object as a parent or a child.\n"
+        },
+        {
+          "name": "root_parents",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Top-most parents at the root of the inheritance hierarchy, if any.\n"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Direct parent of this element, if any.\n"
+        },
+        {
+          "name": "leaves",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Elements that are at the bottom of the inheritance tree.\n"
+        },
+        {
+          "name": "type_registrar",
+          "type": "boost::optional<identification::entities::logical_name>"
+        }
+      ]
+    },
+    {
+      "name": "entities::Relatable",
+      "parents": [
+        "entities::Containable",
+        "entities::Visitable",
+        "entities::Associatable",
+        "entities::Generalizable"
+      ],
+      "documentation": "Element has the ability to have relationships with other elements.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::Parameterisable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_parameters",
+          "type": "type_parameters"
+        }
+      ]
+    },
+    {
+      "name": "entities::type_parameters",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "variable_number_of_parameters",
+          "type": "bool"
+        },
+        {
+          "name": "count",
+          "type": "unsigned int"
+        },
+        {
+          "name": "always_in_heap",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "traits",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms",
+      "documentation": "Houses all of the transformations supported by logical.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::context",
+      "documentation": "Context for all logical transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
+      "stereotypes": [
+        "dogen::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "compatibility_mode",
+          "type": "bool"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
+        },
+        {
+          "name": "physical_meta_model",
+          "type": "boost::shared_ptr<physical::entities::meta_model>",
+          "documentation": "Meta-model for the physical dimension.\n"
+        },
+        {
+          "name": "mapping_repository",
+          "type": "boost::shared_ptr<helpers::mapping_set_repository>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "activity_timestamp",
+          "type": "std::string",
+          "documentation": "Human readable timestamp of when the activity took place.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::pre_assembly_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_production_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::assembly_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::post_assembly_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::merge_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::modules_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::origin_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::technical_space_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::type_params_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::parsing_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::primitives_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generalization_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::stereotypes_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::object_templates_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::global_module_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::orm_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::resolver_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::attributes_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::associations_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst applying a transformation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::enumerations_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::decomposition_result",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "names",
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>"
+        },
+        {
+          "name": "meta_names",
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>"
+        },
+        {
+          "name": "name_trees",
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decomposer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::post_assembly_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::validation_error",
+      "documentation": "An error occurred during validation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::pre_assembly_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::indices",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "objects_always_in_heap",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        },
+        {
+          "name": "elements_referable_by_attributes",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        },
+        {
+          "name": "primitive_underliers",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        },
+        {
+          "name": "enumeration_underliers",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        },
+        {
+          "name": "abstract_elements",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::indexing_error",
+      "documentation": "A fatal error has occurred while indexing.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::indexer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::resolver",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::resolution_error",
+      "documentation": "An error occurred while trying to resolve a type.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::mapping_error",
+      "documentation": "An error has occurred while mapping element names.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::mapper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::mapping_context",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "translations",
+          "type": "std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>"
+        },
+        {
+          "name": "erasures",
+          "type": "std::unordered_set<identification::entities::logical_id>"
+        },
+        {
+          "name": "codecs",
+          "type": "std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::mapping_set",
+      "documentation": "Consistent unit of mapping that can be used to translate a model from one technical\nspace to another.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "by_agnostic_id",
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>"
+        },
+        {
+          "name": "erasures_by_technical_space",
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::mapping_set_repository",
+      "documentation": "Stores all available mapping sets.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "default_mapping_set",
+          "type": "mapping_set"
+        },
+        {
+          "name": "by_name",
+          "type": "std::unordered_map<std::string, mapping_set>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::mappings_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::mapping",
+      "documentation": "Stores the mapping of a key (the element id) to its values, organised by technical\nspace.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "agnostic_id",
+          "type": "identification::entities::logical_id",
+          "documentation": "Technical space agnostic ID of the element we're mapping from.\n"
+        },
+        {
+          "name": "by_technical_space",
+          "type": "std::unordered_map<identification::entities::technical_space, mapping_value>",
+          "documentation": "Values of the mapping, by technical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::mapping_value",
+      "documentation": "Value of a mapping.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "mapping_action",
+          "type": "mapping_actions"
+        },
+        {
+          "name": "default_name",
+          "type": "boost::optional<identification::entities::logical_name>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::mapping_actions",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "translate",
+          "type": ""
+        },
+        {
+          "name": "erase",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "transforms::extensible_mapping_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::meta_naming_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::static_stereotypes",
+      "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "fluent",
+          "type": ""
+        },
+        {
+          "name": "immutable",
+          "type": ""
+        },
+        {
+          "name": "visitable",
+          "type": ""
+        },
+        {
+          "name": "structural_object",
+          "type": ""
+        },
+        {
+          "name": "structural_object_template",
+          "type": ""
+        },
+        {
+          "name": "structural_exception",
+          "type": ""
+        },
+        {
+          "name": "structural_primitive",
+          "type": ""
+        },
+        {
+          "name": "structural_enumeration",
+          "type": ""
+        },
+        {
+          "name": "structural_module",
+          "type": ""
+        },
+        {
+          "name": "structural_builtin",
+          "type": ""
+        },
+        {
+          "name": "structural_entry_point",
+          "type": ""
+        },
+        {
+          "name": "structural_assistant",
+          "type": ""
+        },
+        {
+          "name": "orm_object",
+          "type": ""
+        },
+        {
+          "name": "orm_value",
+          "type": ""
+        },
+        {
+          "name": "decoration_modeline_group",
+          "type": ""
+        },
+        {
+          "name": "decoration_modeline",
+          "type": ""
+        },
+        {
+          "name": "decoration_generation_marker",
+          "type": ""
+        },
+        {
+          "name": "decoration_licence",
+          "type": ""
+        },
+        {
+          "name": "variability_profile",
+          "type": ""
+        },
+        {
+          "name": "variability_profile_template",
+          "type": ""
+        },
+        {
+          "name": "variability_feature_bundle",
+          "type": ""
+        },
+        {
+          "name": "variability_feature_template_bundle",
+          "type": ""
+        },
+        {
+          "name": "variability_initializer",
+          "type": ""
+        },
+        {
+          "name": "mapping_fixed_mappable",
+          "type": ""
+        },
+        {
+          "name": "mapping_extensible_mappable",
+          "type": ""
+        },
+        {
+          "name": "templating_logic_less_template",
+          "type": ""
+        },
+        {
+          "name": "serialization_type_registrar",
+          "type": ""
+        },
+        {
+          "name": "visual_studio_solution",
+          "type": ""
+        },
+        {
+          "name": "visual_studio_project",
+          "type": ""
+        },
+        {
+          "name": "visual_studio_msbuild_targets",
+          "type": ""
+        },
+        {
+          "name": "orm_common_odb_options",
+          "type": ""
+        },
+        {
+          "name": "build_cmakelists",
+          "type": ""
+        },
+        {
+          "name": "physical_backend",
+          "type": ""
+        },
+        {
+          "name": "physical_facet",
+          "type": ""
+        },
+        {
+          "name": "physical_archetype",
+          "type": ""
+        },
+        {
+          "name": "physical_archetype_kind",
+          "type": ""
+        },
+        {
+          "name": "physical_part",
+          "type": ""
+        },
+        {
+          "name": "physical_helper",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::input_model_set",
+      "documentation": "Represents a set of related logical models used as an input to the logical model chains.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "target",
+          "type": "model"
+        },
+        {
+          "name": "references",
+          "type": "std::list<model>"
+        },
+        {
+          "name": "fixed_mappings",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a fixed mappable name, using the scope notation, to its destination.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::modelines_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::containment_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::Container",
+      "documentation": "Has the ability to contain other elements.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "contains",
+          "type": "std::list<identification::entities::logical_id>",
+          "documentation": "All elements contained by this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::variability_features_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::decoration",
+      "documentation": "Houses all of the meta-modeling elements and\nproperties related to decorations.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::decoration::licence",
+      "documentation": "Represents legal licence for software projects.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "short_form",
+          "type": "std::string",
+          "documentation": "Short version of the licence, for inclusion in project files.\n"
+        },
+        {
+          "name": "long_form",
+          "type": "std::string",
+          "documentation": "Long form of the licence text, suitable for generation of LICENCE files.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::meta_element",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "logical::meta_element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generalization.parent",
+          "type": "",
+          "value": "dogen::logical::entities::element"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::modeline_group",
+      "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "Container"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines",
+          "type": "std::list<boost::shared_ptr<modeline>>",
+          "documentation": "Modelines that make up the group.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::modeline",
+      "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "editor",
+          "type": "editor",
+          "documentation": "The modeline will use the syntax for this editor.\n"
+        },
+        {
+          "name": "location",
+          "type": "modeline_location",
+          "documentation": "Where to place the modeline.\n"
+        },
+        {
+          "name": "fields",
+          "type": "std::list<modeline_field>",
+          "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
+        },
+        {
+          "name": "technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Technical space that this modeline targets.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::editor",
+      "documentation": "Supported editors for modelines.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::convertible"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "emacs",
+          "type": "",
+          "documentation": "The emacs editor.\n"
+        },
+        {
+          "name": "vi",
+          "type": "",
+          "documentation": "The generic vi editor.\n"
+        },
+        {
+          "name": "vim",
+          "type": "",
+          "documentation": "The vi-like editor vim.\n"
+        },
+        {
+          "name": "ex",
+          "type": "",
+          "documentation": "The old ex editor.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::modeline_field",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the field.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value of the field.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::modeline_location",
+      "documentation": "Location in the file to place the modeline.\n",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::convertible"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "top",
+          "type": "",
+          "documentation": "Very first line in file.\n"
+        },
+        {
+          "name": "bottom",
+          "type": "",
+          "documentation": "Very last line in file.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::generation_marker",
+      "documentation": "Properties of the \"generation marker\" to add to generated files.\n\nThese are also known as \"location strings\".\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "add_date_time",
+          "type": "bool",
+          "documentation": "If true, the location strings will include the date and time of generation.\n\nThis is not recomended for models that are generated often as it will trigger\nrebuilds for no good reason.\n"
+        },
+        {
+          "name": "add_dogen_version",
+          "type": "bool",
+          "documentation": "If true, adds the version of dogen used to generate the code.\n"
+        },
+        {
+          "name": "add_model_to_text_transform_details",
+          "type": "bool",
+          "documentation": "If true, adds information about the transform used to generate the file.\n"
+        },
+        {
+          "name": "add_warning",
+          "type": "bool",
+          "documentation": "If true, warns users that the file was code-generated.\n"
+        },
+        {
+          "name": "add_origin_sha1_hash",
+          "type": "bool",
+          "documentation": "If true, adds the SHA1 hash of the original model to the marker.\n"
+        },
+        {
+          "name": "message",
+          "type": "std::string",
+          "documentation": "Custom message to add to each generated file.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability",
+      "documentation": "Houses all of the meta-modeling elements related to variability.\n\nThere are two \"kinds\" of entities in this namespace:\n\n@li those that are used to model the data required to code-generate\ndogen's implementation of variability. That is to say, none of these\nelements are directly involved in the processing of variability model\ndata (i.e. the current user model we are processing), but instead they\ngenerate code that injects variability data once compiled and\nintegrated into dogen. These types setup the geometry of variability\nspace: feature bundle and feature bundle templates and related\ntypes.\n\n@li those that inject variability data as part of the processing of\nthe current user model. These types are responsible for instantiating\nconfigurations, within the prevailing geometry of variability\nspace. Example: profile and profile templates.\n\nNow, it is a bit confusing how variability interacts with the\nvariability meta-model elements, and it may appear that we repat\nourselves quite a bit when declaring the variability feature\nbundles. This is a consequence of the two types of uses for\nvariability types described above. Lets explore this in more detail.\n\nIn general, we tend to declare (register) features and create the\nstatic configuration in the same place. This works for almost all\ncases because we normally declare the features where we consume\nthem. Profiles are _different_: a profile is making use of a feature\ndeclared for a feature (simplifying somewhat). That is, at run time, a\nprofile is the instantiation of a feature defined elsewhere. Remember\nthat features are nothing more than a type system designed to give a\n\"strongly typed\" feel to the meta-data. Profiles are just an\ninstantiation of those strong types.\n\nIn theory, profile meta-data should already exist and match exactly\nwhat was defined for features; in practice there is a mismatch, and\nthis is due to how we modeled features and feature bundles: to avoid\nrepetition, we placed some features at the top-level and others in the\nfeatures themselves. This approach does not match the shape required\nfor profiles, so we need to redefine the bundle. However, of course,\nwe do not want to register the features this time around (after all,\nthey already exist) so we need to disable feature registration. In the\nfuture we hope to simplify this by making the shapes align - though\nperhaps it will have the underisable side-effect of hiding all of this\ncomplexity.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::variability::abstract_feature",
+      "documentation": "Contains all of the common attributes between features and feature templates.\n",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "original_key",
+          "type": "std::string",
+          "documentation": "Key as it was originally provided by the user.\n"
+        },
+        {
+          "name": "key",
+          "type": "std::string",
+          "documentation": "Identifier of the feature, as will be seen by the end user.\n"
+        },
+        {
+          "name": "identifiable_key",
+          "type": "std::string",
+          "documentation": "Post-processed key, suitable for use as an identifier.\n"
+        },
+        {
+          "name": "unparsed_type",
+          "type": "std::string",
+          "documentation": "Type of the static configuration field, as read out from original model.\n\nThis is the type before mapping and parsing.\n"
+        },
+        {
+          "name": "mapped_type",
+          "type": "std::string",
+          "documentation": "Unparsed type, after mapping has taken place.\n"
+        },
+        {
+          "name": "parsed_type",
+          "type": "identification::entities::logical_name_tree",
+          "documentation": "Mapped type, after parsing has taken place.\n"
+        },
+        {
+          "name": "default_value",
+          "type": "std::string",
+          "documentation": "String representing the default value set on the model.\n"
+        },
+        {
+          "name": "value_type",
+          "type": "variability::entities::value_type",
+          "documentation": "Type of the value pointed to by the feature.\n\nBy implication, this also determines the type of the default value.\n"
+        },
+        {
+          "name": "binding_point",
+          "type": "boost::optional<variability::entities::binding_point>",
+          "documentation": "Override binding point for this feature.\n\nIf the default binding point is supplied for a bundle, the features cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+        },
+        {
+          "name": "is_optional",
+          "type": "bool",
+          "documentation": "If true, the feature generated by the feature template is optional.\n"
+        },
+        {
+          "name": "requires_optionality",
+          "type": "bool",
+          "documentation": "If true, the feature's static configuration will have an optional type.\n\nThis is only required if the feature template is optional and has no default value.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::feature_template",
+      "parents": [
+        "entities::variability::abstract_feature"
+      ],
+      "documentation": "Represents a feature template in variability space.\n\nFeature templates are expanded into features within the variability model.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "default_value_overrides",
+          "type": "std::list<default_value_override>"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::initializer",
+      "documentation": "Responsible for initialising features and feature templates.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "feature_template_bundles",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Names of all the templates that this initialiser will register.\n"
+        },
+        {
+          "name": "feature_bundles",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Names of all the features that this initialiser will register.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm",
+      "documentation": "Houses all of the properties related to ORM\nsupport in Dogen.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::orm::model_properties",
+      "stereotypes": [
+        "Schemable",
+        "Caseable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "database_systems",
+          "type": "std::vector<database_system>"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::database_system",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::hashable",
+        "dogen::convertible"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "mysql",
+          "type": ""
+        },
+        {
+          "name": "postgresql",
+          "type": ""
+        },
+        {
+          "name": "oracle",
+          "type": ""
+        },
+        {
+          "name": "sql_server",
+          "type": ""
+        },
+        {
+          "name": "sqlite",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::letter_case",
+      "stereotypes": [
+        "masd::enumeration",
+        "dogen::convertible"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "upper_case",
+          "type": ""
+        },
+        {
+          "name": "lower_case",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::object_properties",
+      "stereotypes": [
+        "OrmElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "table_name",
+          "type": "std::string",
+          "documentation": "Name of the table to map this element to.\n"
+        },
+        {
+          "name": "is_value",
+          "type": "bool",
+          "documentation": "If true, treat this object as a value type (e.g. simple type) rather than as an object.\n"
+        },
+        {
+          "name": "has_primary_key",
+          "type": "bool",
+          "documentation": "True if the object has an attribute marked as a primary key, false otherwise.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::primitive_properties",
+      "stereotypes": [
+        "OrmElement",
+        "Overridable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::orm::module_properties",
+      "stereotypes": [
+        "Schemable",
+        "Caseable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::orm::attribute_properties",
+      "stereotypes": [
+        "Overridable",
+        "OdbPragmable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "column_name",
+          "type": "std::string",
+          "documentation": "Name of the column to use for this attribute. If populated, will override the attribute name.\n"
+        },
+        {
+          "name": "is_primary_key",
+          "type": "bool",
+          "documentation": "If true, this attribute is a primary key for the relation.\n"
+        },
+        {
+          "name": "is_nullable",
+          "type": "boost::optional<bool>",
+          "documentation": "If true, the attribute can be NULL.\n"
+        },
+        {
+          "name": "is_composite",
+          "type": "bool",
+          "documentation": "If true, the value of this attribute is a composite value.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::element_properties",
+      "documentation": "Decoration for this element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "preamble",
+          "type": "std::string",
+          "documentation": "Preamble for all artefacts created from this element.\n\nThe preamble is located at the top of an artefact and includes elements such as a\nmodeline, licence,  copyrights, etc.\n"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string",
+          "documentation": "Postamble for all artefacts created from this element.\n\nThe postamble is located at the bottom of an artefact and includes elements such\nas a modeline.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural",
+      "documentation": "Houses all of the meta-modeling elements related\nto structural modeling.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::structural::object_template",
+      "documentation": "Represents a structural template for masd objects.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "Stateful"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "List of object templates that this object template inherits from, if any.\n"
+        },
+        {
+          "name": "is_child",
+          "type": "bool",
+          "documentation": "If true, the object template has at least one parent.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::object",
+      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, logical\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "Stateful",
+        "Relatable",
+        "Parameterisable",
+        "TechnicalSpaceProperties"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_associative_container",
+          "type": "bool",
+          "documentation": "Object is an associative container.\n"
+        },
+        {
+          "name": "object_templates",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "All object templates associated with this object.\n"
+        },
+        {
+          "name": "provides_opaqueness",
+          "type": "bool",
+          "documentation": "If true, this type provides opaqueness to any type parameters it may have.\n"
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "bool",
+          "documentation": "If true, this object can be the underlying element of a primitive.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<dogen::logical::entities::orm::object_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::builtin",
+      "documentation": "Represents a value type that is built-in at the hardware level.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_default_enumeration_type",
+          "type": "bool",
+          "documentation": "If true, this built-in is the default type to be used on enumerations.\n"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool",
+          "documentation": "If true, this built-in represents a floating point number.\n"
+        },
+        {
+          "name": "can_be_enumeration_underlier",
+          "type": "bool",
+          "documentation": "If true, this element can be the underlying element of an enumeration.\n"
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "bool",
+          "documentation": "If true, this built-in can be the underlying element of a primitive.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::exception",
+      "documentation": "Represents an exception which can be thrown.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::structural::visitor",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "visits",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Elements that are visitable by the visitor.\n"
+        },
+        {
+          "name": "parent",
+          "type": "boost::optional<identification::entities::logical_name>"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::primitive",
+      "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "TechnicalSpaceProperties"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_nullable",
+          "type": "bool",
+          "documentation": "If true, this element can be null (empty).\n"
+        },
+        {
+          "name": "value_attribute",
+          "type": "attribute",
+          "documentation": "Attribute that represents the value of the primitive.\n"
+        },
+        {
+          "name": "use_type_aliasing",
+          "type": "bool",
+          "documentation": "If set to true, and if the owning technical space supports it, use type aliasing.\n"
+        },
+        {
+          "name": "is_immutable",
+          "type": "bool",
+          "documentation": "If true, do not generate modifiable operations.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<dogen::logical::entities::orm::primitive_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::module",
+      "documentation": "Container for other logical elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "Container"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_root",
+          "type": "bool",
+          "documentation": "If true, this module is thee root module of the model.\n"
+        },
+        {
+          "name": "is_global_module",
+          "type": "bool",
+          "documentation": "If true, this module is the pseudo module that models the global namespace.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<dogen::logical::entities::orm::module_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::enumeration",
+      "documentation": "Defines a bounded set of logically related values for a built-in type\nor a string.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "underlying_element",
+          "type": "identification::entities::logical_name",
+          "documentation": "Underlying element of each instance of the enumeration.\n"
+        },
+        {
+          "name": "enumerators",
+          "type": "std::list<enumerator>",
+          "documentation": "Enumerators for this enumeration.\n"
+        },
+        {
+          "name": "use_implementation_defined_underlying_element",
+          "type": "bool",
+          "documentation": "If true, we will use the implementation specific default enumeration type.\n"
+        },
+        {
+          "name": "use_implementation_defined_enumerator_values",
+          "type": "bool",
+          "documentation": "If true, we will rely on compiler generated enumeration values.\n"
+        },
+        {
+          "name": "add_invalid_enumerator",
+          "type": "bool",
+          "documentation": "If true, an enumerator for \"invalid\" will be added.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::enumerator",
+      "documentation": "One of a set of valid values that an enumeration can assume.\n\nThe enumerator defines an element in the domain of the enumeration.\n",
+      "stereotypes": [
+        "Documentable",
+        "Nameable",
+        "Configurable",
+        "Stereotypable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value for the enumerator.\n\nIt must be castable to instance of the type defined in the enumeration.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::decoration::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modeline_groups",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>"
+        },
+        {
+          "name": "modelines",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>"
+        },
+        {
+          "name": "licences",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>"
+        },
+        {
+          "name": "generation_markers",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "profile_templates",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>"
+        },
+        {
+          "name": "profiles",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>"
+        },
+        {
+          "name": "feature_template_bundles",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>"
+        },
+        {
+          "name": "feature_bundles",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>"
+        },
+        {
+          "name": "initializer",
+          "type": "boost::shared_ptr<initializer>"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modules",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>"
+        },
+        {
+          "name": "object_templates",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>"
+        },
+        {
+          "name": "builtins",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>"
+        },
+        {
+          "name": "enumerations",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>"
+        },
+        {
+          "name": "primitives",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>"
+        },
+        {
+          "name": "objects",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>"
+        },
+        {
+          "name": "exceptions",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>"
+        },
+        {
+          "name": "visitors",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>"
+        },
+        {
+          "name": "entry_points",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>"
+        },
+        {
+          "name": "assistants",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>"
+        }
+      ]
+    },
+    {
+      "name": "features",
+      "documentation": "Defines all features used by the logical model.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::type_parameters",
+      "documentation": "Parameters to configure generic types.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.type_parameters"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "variable_number_of_parameters",
+          "type": "masd::variability::boolean",
+          "value": "\"false\""
+        },
+        {
+          "name": "count",
+          "type": "masd::variability::number",
+          "value": "\"0\""
+        },
+        {
+          "name": "always_in_heap",
+          "type": "masd::variability::boolean",
+          "value": "\"false\""
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::enumeration",
+      "documentation": "Parameters related to enumerations.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.enumeration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "use_implementation_defined_underlying_element",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n"
+        },
+        {
+          "name": "underlying_element",
+          "type": "masd::variability::text",
+          "documentation": "Name of the underlying element to use for the enumeration.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "use_implementation_defined_enumerator_values",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n"
+        },
+        {
+          "name": "add_invalid_enumerator",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, adds an enumerator to represent an invalid choice.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::enumerator",
+      "documentation": "Parameters related to enumerators.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "property",
+        "masd.variability.key_prefix": "masd.enumerator"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "masd::variability::text",
+          "documentation": "Value to use for this enumerator. Must be unique for an enumeration.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::generalization",
+      "documentation": "Features related to the generalization relationship.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.generalization"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "is_final",
+          "type": "masd::variability::boolean",
+          "documentation": "Whether to mark a type as final or not.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "parent",
+          "type": "masd::variability::text",
+          "documentation": "Name of the parent of the current element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::origin",
+      "documentation": "Features related to the origin of the model.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.codec.is_proxy_model",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, sets the origin of the model to \"proxy model\".\n"
+        }
+      ]
+    },
+    {
+      "name": "features::output_technical_space",
+      "documentation": "Features related to the output technical space.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "output_technical_space",
+          "type": "masd::variability::text_collection",
+          "documentation": "Set of output technical spaces that this model targets.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::primitive",
+      "documentation": "Features related to primitive elements.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.primitive"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "underlying_element",
+          "type": "masd::variability::text",
+          "documentation": "Name of the underlying element to use for the primitive.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_nullable",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the primitive can be null.\n"
+        },
+        {
+          "name": "use_type_aliasing",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::orm",
+      "documentation": "Features related to ORM support.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.orm"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "database_system",
+          "type": "masd::variability::text_collection",
+          "documentation": "Database system to target for ORM support.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "table_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the database table for this element.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "schema_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the database schema for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_primary_key",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, this property will be used for the primary key.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "column_name",
+          "type": "masd::variability::text",
+          "documentation": "Overrides the name of the column name for the database table.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_nullable",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, the column can be null.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_composite",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, the primary key is a composite key.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "letter_case",
+          "type": "masd::variability::text",
+          "documentation": "Determines the casing to use for identifiers.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "type_override",
+          "type": "masd::variability::text_collection",
+          "documentation": "Overrides to use for the relational type, for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "type_mapping",
+          "type": "masd::variability::text_collection",
+          "documentation": "Type maps to create for the relational type, possibly for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "odb_pragma",
+          "type": "masd::variability::text_collection",
+          "documentation": "Raw ODB pragmas that are applied as-is by the system.\n\nUse these when you need some functionality which is not natively supported by\nORM in Dogen.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::decoration_modeline",
+      "documentation": "Modeline properties.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.decoration.modeline"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "editor",
+          "type": "masd::variability::text",
+          "documentation": "Editor to use in this modeline.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "location",
+          "type": "masd::variability::text",
+          "documentation": "Where to place the modeline.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Technical space targeted by the modeline.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::variability_templates",
+      "documentation": "Features related to the processing of variability for feature and profile templates.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.variability"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this feature bind into.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "stereotype",
+          "type": "masd::variability::text",
+          "documentation": "Stereotype for this profile. Must be globally unique.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "value",
+          "type": "masd::variability::text_collection",
+          "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "is_optional",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the feature template provides an optional feature.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property"
+          }
+        },
+        {
+          "name": "default_value_override",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Default values to override the \"default\" default value.\n\nThese match on keys ending with the specified string.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::mapping",
+      "documentation": "Meta-model elements related to mapping domains.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::mapping::extensible_mappable",
+      "documentation": "A mappable meta-model element for the general purpose of mapping.\n\nMappables can be used to create a Platform Independent Model (PIM), which is then\nmapped to concrete types to form a Platform Specific Model (PSM). Users can\nextend the mappings as required.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "destinations",
+          "type": "std::list<destination>",
+          "documentation": "All the destinations that this source has been mapped to.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::mapping::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "extensible_mappables",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>"
+        },
+        {
+          "name": "fixed_mappables",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::mapping::destination",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "identification::entities::logical_name"
+        },
+        {
+          "name": "technical_space",
+          "type": "identification::entities::technical_space"
+        }
+      ]
+    },
+    {
+      "name": "features::mapping",
+      "documentation": "Meta-data related to element mapping.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.mapping"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "target",
+          "type": "masd::variability::text",
+          "documentation": "Type that is the source of the mapping.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "destination",
+          "type": "masd::variability::text",
+          "documentation": "Type that is the destination of the mapping.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::mapping::fixed_mappable",
+      "documentation": "A mappable meta-model element for a special purpose.\n\nAt present, the only fixed mappables used by Dogen are related to the mapping of\nvariability types.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "destination",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::templating",
+      "documentation": "Meta-model elements related to templating .\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::templating::logic_less_template",
+      "documentation": "Represents a logic-less template.\n\nAt present the system only supports wale templates.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Content of the logic-less template.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::templating::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logic_less_templates",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::mapping_elements_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::variability_bundle",
+      "documentation": "Features related to the processing of variability for feature bundles.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.variability"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_registration",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, generates code to register the features.\n\n@pre Features must not already exist.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "generate_static_configuration",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, generates a c++ class to contain the configuration at compile time.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "default_binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this bundle bind to.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "masd::variability::text",
+          "documentation": "Template instantiation domain name to use when instantiating template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "key_prefix",
+          "type": "masd::variability::text",
+          "documentation": "Prefix to apply to construct the qualified name, if any.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::serialization",
+      "documentation": "Houses all of the meta-modeling elements related\nto serialisation.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::serialization::type_registrar",
+      "documentation": "Responsible for registering types for serialisation purposes.\n\nCertain libraries in certain technical spaces - such as Boost Serialisation, in C++ -\nrequire types that are in an inheritance relationship to be made known to the\nserialisation infrastructure in order for the deserialisation of base and derived\ntypes to work. The type registrar is aware of all types with such requirements and\ngenerates the registration code as needed.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "leaves",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
+        },
+        {
+          "name": "registrar_dependencies",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Registrars on other models this registrar depends on.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::type_registrar_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::serialization::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_registrars",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::Schemable",
+      "documentation": "Model element can belong to a relational database schema.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "schema_name",
+          "type": "std::string",
+          "documentation": "Name of the database schema in which to place this element.\n"
+        },
+        {
+          "name": "capitalised_schema_name",
+          "type": "std::string",
+          "documentation": "Schema name with the correct capitalisation.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::Caseable",
+      "documentation": "The model element supports configuration related to casing.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "letter_case",
+          "type": "boost::optional<letter_case>",
+          "documentation": "What case to use for the database identifiers.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::Mappeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_mapping",
+          "type": "bool",
+          "documentation": "If true, object-relational mapping will be generated for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::TypeMappable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_mappings",
+          "type": "std::list<type_mapping>",
+          "documentation": "List of mappings of relational database types.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::OdbPragmable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_pragmas",
+          "type": "std::list<std::string>",
+          "documentation": "Pragmas for the ODB ORM backend.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::OrmElement",
+      "parents": [
+        "entities::orm::Schemable",
+        "entities::orm::Caseable",
+        "entities::orm::Mappeable",
+        "entities::orm::TypeMappable",
+        "entities::orm::OdbPragmable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_options",
+          "type": "odb_options"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::Overridable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_overrides",
+          "type": "std::unordered_map<database_system, std::string>",
+          "documentation": "Override the default type for this attribute for a given database system.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::type_mapping",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "source_type",
+          "type": "std::string",
+          "documentation": "Type which we intend to map from. Example: TEXT.\n"
+        },
+        {
+          "name": "destination_type",
+          "type": "std::string",
+          "documentation": "Type we intend to map to. Example: JSONB.\n"
+        },
+        {
+          "name": "to_source_type",
+          "type": "std::string",
+          "documentation": "Function that converts into the source type.\n"
+        },
+        {
+          "name": "to_destination_type",
+          "type": "std::string",
+          "documentation": "Function that converts into the destination type.\n"
+        },
+        {
+          "name": "database",
+          "type": "boost::optional<database_system>",
+          "documentation": "Database to which the mapping applies. If none is supplied, it will apply to all.\n"
+        }
+      ]
+    },
+    {
+      "name": "registrar",
+      "stereotypes": [
+        "masd::serialization::type_registrar"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::visual_studio",
+      "documentation": "Houses meta-model elements related to\nbuild systems.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::visual_studio::project",
+      "documentation": "Represents a Visual Studio project.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "UniquelyIdentifiable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_guid",
+          "type": "std::string",
+          "documentation": "GUID used by Visual Studio to identify projects of this type.\n"
+        },
+        {
+          "name": "item_groups",
+          "type": "std::list<item_group>",
+          "documentation": "Set of item groups in the project.\n"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string",
+          "documentation": "Formatted name of the project.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "solutions",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>",
+          "documentation": "All solutions in this model.\n"
+        },
+        {
+          "name": "projects",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>",
+          "documentation": "All projects in this model.\n"
+        },
+        {
+          "name": "msbuild_targets",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::item_group",
+      "documentation": "Represents an MSBuild ItemGroup.\n\nDocumented as follows: Contains a set of user-defined Item elements. Every item\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "items",
+          "type": "std::list<item>",
+          "documentation": "Set of MSBuild Items that make up this ItemGroup.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::item",
+      "documentation": "Represents an MSBuild Item, used in Visual Studio projects.\n\nDocumentation:  Contains a user-defined item and its metadata. Every item that is\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the item, such as \"Compile\", \"CompileCl\", etc.\n\nMaps to a well known MSBuild target.\n"
+        },
+        {
+          "name": "include",
+          "type": "std::string",
+          "documentation": "Name of the file to include.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::solution",
+      "stereotypes": [
+        "logical::meta_element",
+        "UniquelyIdentifiable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_persistence_blocks",
+          "type": "std::list<project_persistence_block>",
+          "documentation": "Set of project persistence blocks in this solution.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::project_persistence_block",
+      "stereotypes": [
+        "UniquelyIdentifiable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the project.\n"
+        },
+        {
+          "name": "relative_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Relative path to the project file.\n"
+        },
+        {
+          "name": "type_guid",
+          "type": "std::string",
+          "documentation": "GUID used by Visual Studio to identify projects of this type.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::UniquelyIdentifiable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "guid",
+          "type": "std::string",
+          "documentation": "GUID that uniquely identifies this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::visual_studio_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::visual_studio_project_type_mapper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::visual_studio_project_type_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::structural::entry_point",
+      "documentation": "Represents an entry point to a binary.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::orm::odb_options",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "epilogue",
+          "type": "std::string"
+        },
+        {
+          "name": "include_regexes",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard_prefix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::orm::common_odb_options",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "databases",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "common_odb_options",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::odb_options_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::orm::odb_targets",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "main_target_name",
+          "type": "std::string"
+        },
+        {
+          "name": "common_odb_options",
+          "type": "std::string"
+        },
+        {
+          "name": "targets",
+          "type": "std::list<odb_target>"
+        }
+      ]
+    },
+    {
+      "name": "entities::orm::odb_target",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "comment",
+          "type": "std::string"
+        },
+        {
+          "name": "output_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "types_file",
+          "type": "std::string"
+        },
+        {
+          "name": "move_parameters",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        },
+        {
+          "name": "object_odb_options",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::visual_studio::msbuild_targets",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_targets",
+          "type": "dogen::logical::entities::orm::odb_targets"
+        }
+      ]
+    },
+    {
+      "name": "entities::build",
+      "documentation": "Houses all of the meta-modeling elements related\nto building, which don't have their own containing\nnamespace.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::build::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cmakelists",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::build::cmakelists",
+      "documentation": "Represents build CMakeLists files.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "include_directory_path",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "odb_targets",
+          "type": "dogen::logical::entities::orm::odb_targets"
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::assistant",
+      "documentation": "General type to provide helpers.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::variability::abstract_bundle",
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "Associatable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key_prefix",
+          "type": "std::string",
+          "documentation": "Prefix to use when composing the key, if any.\n"
+        },
+        {
+          "name": "generate_registration",
+          "type": "bool",
+          "documentation": "If true, code will be generated to perform the registration of the features.\n"
+        },
+        {
+          "name": "generate_static_configuration",
+          "type": "bool",
+          "documentation": "If true, the code generator will output a class to represent the static configuration.\n"
+        },
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool",
+          "documentation": "If true, the code generated for this feature template bundle needs a manually\ngenerated default constructor.\n"
+        },
+        {
+          "name": "default_binding_point",
+          "type": "boost::optional<variability::entities::binding_point>",
+          "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::feature_bundle",
+      "parents": [
+        "entities::variability::abstract_bundle"
+      ],
+      "documentation": "A feature bundle represents an aggregation of features in a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "features",
+          "type": "std::list<feature>",
+          "documentation": "Set of features associated with this feature bundle.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::feature",
+      "parents": [
+        "entities::variability::abstract_feature"
+      ],
+      "documentation": "Represents a feature in variability space.\n",
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::variability::feature_template_bundle",
+      "parents": [
+        "entities::variability::abstract_bundle"
+      ],
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "feature_templates",
+          "type": "std::list<feature_template>",
+          "documentation": "Set of feature templates associated with this feature template bundle.\n"
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::abstract_profile",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stereotype",
+          "type": "std::string"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Parents of this profile template.\n"
+        },
+        {
+          "name": "key_prefix",
+          "type": "std::string",
+          "documentation": "Prefix to use when composing the key, if any.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::profile_template",
+      "parents": [
+        "entities::variability::abstract_profile"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::list<profile_template_entry>"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::profile",
+      "parents": [
+        "entities::variability::abstract_profile"
+      ],
+      "documentation": "Represents a profile from the variability subsystem.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::list<profile_entry>",
+          "documentation": "Configuration entries in this profile.\n"
+        },
+        {
+          "name": "binding_point",
+          "type": "std::string",
+          "documentation": "Binding point for the profile.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::variability_entry",
+      "documentation": "Features related to the processing of variability for profiles and profile templates.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_registration": "false",
+        "masd.variability.key_prefix": "masd.variability"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this profile or profile template bind to.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "value",
+          "type": "masd::variability::text_collection",
+          "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "masd::variability::text",
+          "documentation": "Template instantiation domain name to use when instantiating template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::variability_profile",
+      "documentation": "Features related to the processing of variability for profile entries.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_registration": "false",
+        "masd.variability.key_prefix": "masd.variability"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stereotype",
+          "type": "masd::variability::text",
+          "documentation": "Stereotype for this profile. Must be globally unique.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "key_prefix",
+          "type": "masd::variability::text",
+          "documentation": "Prefix to apply to construct the qualified name, if any.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this profile or profile template bind to.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::abstract_profile_entry",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "original_key",
+          "type": "std::string",
+          "documentation": "Key as it was originally provided by the user.\n"
+        },
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "entities::variability::profile_entry",
+      "parents": [
+        "entities::variability::abstract_profile_entry"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::variability::profile_template_entry",
+      "parents": [
+        "entities::variability::abstract_profile_entry"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "instantiation_domain_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "transforms::variability_profiles_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::profile_adapter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::configuration_model_set_adapter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::adaptation_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::dynamic_stereotypes_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::variability_profiles_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::variability::default_value_override",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key_ends_with",
+          "type": "std::string"
+        },
+        {
+          "name": "default_value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical",
+      "documentation": "Logical representation of elements in the physical dimension.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::physical::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backends",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>"
+        },
+        {
+          "name": "facets",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>"
+        },
+        {
+          "name": "parts",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>"
+        },
+        {
+          "name": "archetype_kinds",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>"
+        },
+        {
+          "name": "helpers",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::archetype",
+      "documentation": "Represents an archetype within a facet.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement",
+        "HasTechnicalSpace"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facet_name",
+          "type": "std::string",
+          "documentation": "Name of the facet containing this element.\n"
+        },
+        {
+          "name": "part_id",
+          "type": "std::string",
+          "documentation": "ID for the part this archetype belongs to.\n"
+        },
+        {
+          "name": "logical_meta_element_id",
+          "type": "identification::entities::logical_meta_id",
+          "documentation": "ID of the meta-element in the logical model this archetype binds to.\n"
+        },
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this archetype.\n"
+        },
+        {
+          "name": "text_templating",
+          "type": "text_templating",
+          "documentation": "Properties related to the text templating for this archetype.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Default postfix to use for this archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::backend",
+      "documentation": "Represents a physical backend, targetting a major technical space such as C++ or C#.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement",
+        "Container",
+        "HasTechnicalSpace"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facets",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "All facets within this backend.\n"
+        },
+        {
+          "name": "parts",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "All parts within this backend.\n"
+        },
+        {
+          "name": "archetype_kinds",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "Kinds of archetypes defined in this backend.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this backend.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::facet",
+      "documentation": "Represents a facet within a backend, such as type definitions.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement",
+        "Container"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetypes",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "All archetypes in this facet.\n"
+        },
+        {
+          "name": "helpers",
+          "type": "std::list<identification::entities::logical_name>"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this facet.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Default postfix to use for this facet.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::part",
+      "documentation": "Part whithin a backend.\n",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "external_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": "model_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        },
+        {
+          "name": "facet_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution does the facet make to the final path.\n"
+        },
+        {
+          "name": "internal_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
+        },
+        {
+          "name": "requires_relative_path",
+          "type": "bool",
+          "documentation": "If true, a relative path should be generated for this part.\n"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::list<identification::entities::logical_name>",
+          "documentation": "All archetypes in this part.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this part.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::archetype_kind",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file_extension",
+          "type": "std::string",
+          "documentation": "Extension to use for the files of this kind.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::physical_entities_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::physical",
+      "documentation": "Features required for physical elements.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_name",
+          "type": "masd::variability::text",
+          "documentation": "Simple name of the backend.\n\nFIXME: temporary until we rename the namespaces.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "part_id",
+          "type": "masd::variability::text",
+          "documentation": "Fully qualified physical name of the part this artefact belongs to.\n\nFIXME: optional for now.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "logical_meta_element_id",
+          "type": "masd::variability::text",
+          "documentation": "Fully qualified name of the logical model element.\n\nFIXME: optional for now.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "major_technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Major technical space to which this element belongs to.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Technical space to which this element belongs to.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "masd::variability::text",
+          "documentation": "Name of the wale template that the archetype uses.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "directory_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the directory to use for this physical element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "postfix",
+          "type": "masd::variability::text",
+          "documentation": "Postfix to use for this physical element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::output_model_set",
+      "documentation": "Represents a set of related logical models produced as ouput of the logical model chains.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<model>",
+          "documentation": "All models in this model set.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::template_rendering_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::wale",
+      "documentation": "Wale related features.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.wale"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "text_template",
+          "type": "masd::variability::text",
+          "documentation": "Name of the wale text template to instantiate, if any.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "kvp",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Array of wale KVPs to use in template instantiation.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_modeline_group_by_technical_space",
+          "type": "std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
+        },
+        {
+          "name": "licences_by_name",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>"
+        },
+        {
+          "name": "generation_markers_by_name",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::decoration_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "identification::entities::logical_id"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "identification::entities::logical_id"
+        },
+        {
+          "name": "marker_name",
+          "type": "identification::entities::logical_id"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_configuration_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::decoration",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.decoration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, decorations are enabled on this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "copyright_notice",
+          "type": "masd::variability::text_collection",
+          "documentation": "Copyright notices for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "licence_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the licence to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the modeline group for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "marker_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the decoration marker to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters",
+      "documentation": "Contains formatting classes for the logical model.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::decoration_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::generation_marker_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::modeline_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error has occurred while formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::decoration_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::all_technical_spaces_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::PhysicalElement",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string",
+          "documentation": "Unique identifier in physical space for this element.\n"
+        },
+        {
+          "name": "major_technical_space",
+          "type": "identification::entities::technical_space",
+          "documentation": "Technical space to which this physical element belongs to.\n"
+        },
+        {
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::labelling",
+      "documentation": "Features related to labels.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.label",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Labels to attach to modeling elements. Key must be unique.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::labelling_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::variable_relation",
+      "stereotypes": [
+        "Urnable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string",
+          "documentation": "Type of the variable relation.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::constant_relation",
+      "stereotypes": [
+        "Urnable",
+        "Labelable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_model_element_id",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::Urnable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "original_urn",
+          "type": "std::string",
+          "documentation": "URN pointing to an archetype or a label, as it was originally created by the user.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if\npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::hard_coded_relation",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::relations",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "status",
+          "type": "std::string",
+          "documentation": "Status of this archetype with regards to relations.\n"
+        },
+        {
+          "name": "constant",
+          "type": "std::list<constant_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
+        },
+        {
+          "name": "variable",
+          "type": "std::list<variable_relation>"
+        },
+        {
+          "name": "hard_coded",
+          "type": "std::list<hard_coded_relation>"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::text_templating",
+      "documentation": "Contains all the properties related to the generation of archetypes themselves.\n",
+      "stereotypes": [
+        "Configurable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "std::string",
+          "documentation": "Content of the stitch template associated with this archetype, if any exists.\n"
+        },
+        {
+          "name": "wale_template",
+          "type": "boost::optional<identification::entities::logical_name>",
+          "documentation": "Parsed name of the wale template linked to this archetype, if any.\n"
+        },
+        {
+          "name": "wale_template_content",
+          "type": "std::string",
+          "documentation": "Content of the wale template associated with this archetype, if any exists.\n"
+        },
+        {
+          "name": "rendered_stitch_template",
+          "type": "std::string",
+          "documentation": "Contains the result of the stitch template after rendering.\n"
+        },
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::physical_relations",
+      "documentation": "Features related to relations at the physical level.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "relation_status",
+          "type": "masd::variability::text",
+          "documentation": "Relation status for the archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "variable_relation",
+          "type": "masd::variability::comma_separated_collection",
+          "documentation": "Define a variable relation between the current archetype and another archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "constant_relation",
+          "type": "masd::variability::comma_separated_collection",
+          "documentation": "Define a fixed relation between the current archetype and another archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::generability_status",
+      "documentation": "The status of this element with regards to generability.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "non_generatable_source",
+          "type": "",
+          "documentation": "The element was sourced from a non-target model.\n"
+        },
+        {
+          "name": "generation_not_expected",
+          "type": "",
+          "documentation": "The element is of a type that is expected to have support for generation.\n"
+        },
+        {
+          "name": "non_generatable_state",
+          "type": "",
+          "documentation": "The element is normally generatable, but is in a state that precludes generation.\n"
+        },
+        {
+          "name": "generation_disabled",
+          "type": "",
+          "documentation": "The user requested generation to be disabled.\n"
+        },
+        {
+          "name": "generation_ignored",
+          "type": "",
+          "documentation": "User requested that any changes to this element are to be ignored.\n"
+        },
+        {
+          "name": "generatable",
+          "type": "",
+          "documentation": "The element is generatable.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::generability_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::stereotypes",
+      "documentation": "Stereotype information associated with this element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "static_stereotypes",
+          "type": "std::list<static_stereotypes>",
+          "documentation": "Stereotypes that are part of the dogen UML profile, and so are well-known to the\nmodel.\n"
+        },
+        {
+          "name": "dynamic_stereotypes",
+          "type": "std::list<identification::entities::stereotype>",
+          "documentation": "Stereotypes that are not part of the masd UML profile. These are user defined.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::stereotypes_helper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_error",
+      "documentation": "An error has occurred in a factory.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::HasTechnicalSpace",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "technical_space",
+          "type": "std::string",
+          "documentation": "Technical space to which this physical element belongs to.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::streaming_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::streaming",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp.streaming"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "string_conversion_method",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Which conversion method to use to convert strings.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "requires_quoting",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, streaming this type must be preceeded by quoting.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, streaming this type requires removing unprintable characters.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::streaming_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_quoting",
+          "type": "bool"
+        },
+        {
+          "name": "string_conversion_method",
+          "type": "std::string"
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "features::technical_space_version",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "standard",
+          "type": "masd::variability::text",
+          "value": "\"c++-14\"",
+          "documentation": "Which version of C++ to use.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::technical_space_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::technical_space_properties",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp.aspect.requires_manual_default_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "cpp.aspect.requires_manual_move_constructor",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires a manual move constructor.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "cpp.aspect.requires_stream_manipulators",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, the modeling element requires stream manipulators.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        },
+        {
+          "name": "csharp.aspect.requires_static_reference_equals",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::technical_space_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "bool"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool"
+        },
+        {
+          "name": "requires_static_reference_equals",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::structural::TechnicalSpaceProperties",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "technical_space_properties",
+          "type": "technical_space_properties"
+        }
+      ]
+    },
+    {
+      "name": "entities::helper_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "current",
+          "type": "helper_descriptor"
+        },
+        {
+          "name": "direct_descendants",
+          "type": "std::list<helper_descriptor>"
+        },
+        {
+          "name": "in_inheritance_relationship",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::helper_descriptor",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "namespaces",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "name_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "name_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "boost::optional<streaming_properties>"
+        },
+        {
+          "name": "is_simple_type",
+          "type": "bool"
+        },
+        {
+          "name": "requires_hashing_helper",
+          "type": "bool"
+        },
+        {
+          "name": "is_circular_dependency",
+          "type": "bool"
+        },
+        {
+          "name": "is_pointer",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "features::helpers",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp.helper.family",
+          "type": "masd::variability::text",
+          "value": "\"Default\"",
+          "documentation": "Which family of helpers to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element"
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::helper",
+      "stereotypes": [
+        "logical::meta_element",
+        "PhysicalElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "part_id",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_name",
+          "type": "std::string"
+        },
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "owning_formatters",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "owning_facets",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "helper_name",
+          "type": "std::string"
+        },
+        {
+          "name": "text_templating",
+          "type": "text_templating"
+        },
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this helper.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::physical_helpers",
+      "documentation": "Features related to the helpers in physical domain.\n\n\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.physical.helpers"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "owning_formatters",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "owning_facets",
+          "type": "masd::variability::text_collection",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transforms::helper_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

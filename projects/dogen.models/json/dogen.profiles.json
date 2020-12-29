@@ -1,0 +1,783 @@
+{
+  "documentation": "Top-level model in Dogen that contains all of the shared\ntypes at the meta-model level.\n\nThis model is not intended to be generated. If generated,\nshould not produce any output.\n\nYou should be able to reference this model from any technical\nspace; keep it technical space agnostic.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.profiles",
+    "masd.codec.reference": "masd",
+    "masd.codec.input_technical_space": "agnostic",
+    "masd.codec.is_proxy_model": "true",
+    "masd.cpp.enabled": "false",
+    "masd.csharp.enabled": "false"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "documentation": "The base layer profiles are designed to be applied first.\nTheir objective is to set the initial state from which\nother layers can then configure features.\n\n\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "base::decoration",
+      "documentation": "Configuration for the decoration elements.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.key_prefix": "masd.decoration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "licence_name",
+          "type": "",
+          "value": "masd.gpl_v3"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "",
+          "value": "masd.emacs"
+        },
+        {
+          "name": "copyright_notice",
+          "type": "",
+          "tagged_values": {
+            "masd.variability.value": "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
+          }
+        }
+      ]
+    },
+    {
+      "name": "base::extraction",
+      "documentation": "Configuration for extraction.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "delete_extra_files",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "delete_empty_directories",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "base::csharp",
+      "documentation": "Configures the main options for the C# backend.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.csharp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "base::ignores",
+      "documentation": "Regexes to ignore.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "",
+          "value": ".*/test/.*"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "",
+          "value": ".*/tests/.*"
+        }
+      ]
+    },
+    {
+      "name": "base::base",
+      "parents": [
+        "base::decoration",
+        "base::extraction",
+        "base::csharp",
+        "base::ignores"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.cpp.standard",
+          "type": "",
+          "value": "c++-17"
+        }
+      ]
+    },
+    {
+      "name": "base::base_profile",
+      "parents": [
+        "base::base"
+      ],
+      "documentation": "Configures the main options for the C++ backend.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "hash.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "serialization.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "lexical_cast.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "tests.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "test_data.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "templates.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "base::default_profile",
+      "parents": [
+        "base::base_profile"
+      ],
+      "documentation": "Variability profile for a typical dogen model.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "base::disable_all_facets",
+      "parents": [
+        "base::base"
+      ],
+      "documentation": "\nDisables all facets in the C++ backend.\n",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.instantiation_domain_name": "masd.facet"
+          }
+        }
+      ]
+    },
+    {
+      "name": "composable",
+      "documentation": "The composable layer is made up of profiles that\nare meant to be applied on top of the base layer.\nThese can be used to compose the final configuration\nfor the element.\n",
+      "tagged_values": {
+        "masd.codec.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "composable::typeable",
+      "documentation": "Model element is defined as a type.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::typeable"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.cpp.types.enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "masd.variability.profile",
+          "type": "",
+          "value": "dogen.profiles.base.disable_all_facets",
+          "documentation": "If you are typeable, it probably means you do not want the default configuration,\nso we disable all facets.\n"
+        }
+      ]
+    },
+    {
+      "name": "composable::pretty_printable",
+      "documentation": "The element has the ability to dump itself to a stream.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::pretty_printable",
+        "masd.variability.key_prefix": "masd.cpp.io"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::hashable",
+      "documentation": "The element has the ability to generate hashes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::hashable",
+        "masd.variability.key_prefix": "masd.cpp.hash"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::serializable",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::serializable",
+        "masd.variability.key_prefix": "masd.cpp.serialization"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::handcrafted",
+      "documentation": "Base profile for model elements that are manually generated.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.profile",
+          "type": "",
+          "value": "dogen.profiles.base.disable_all_facets"
+        }
+      ]
+    },
+    {
+      "name": "composable::handcrafted_pretty_printable",
+      "parents": [
+        "composable::handcrafted"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::handcrafted::pretty_printable",
+        "masd.variability.key_prefix": "masd.cpp.io"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "overwrite",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::handcrafted_typeable",
+      "parents": [
+        "composable::handcrafted"
+      ],
+      "documentation": "Configuration for model elements that are generated manually by the user.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::handcrafted::typeable",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "overwrite",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "class_forward_declarations.enabled",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::header_only",
+      "parents": [
+        "composable::handcrafted_typeable"
+      ],
+      "documentation": "This element has only a types header file.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::handcrafted::typeable::header_only",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_implementation.enabled",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::inheritable",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::inheritable"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generalization.is_final",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::implementation_only",
+      "parents": [
+        "composable::handcrafted_typeable"
+      ],
+      "documentation": "This element has only a types implementation file.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::handcrafted::typeable::implementation_only",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_header.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "class_forward_declarations.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "class_implementation.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::base_helper_formatter",
+      "parents": [
+        "composable::handcrafted_typeable"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generalization.parent",
+          "type": "",
+          "value": "transforms::helper_transform"
+        }
+      ]
+    },
+    {
+      "name": "composable::cpp_helper_transform",
+      "parents": [
+        "composable::base_helper_formatter"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::cpp::helper_transform",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_header.formatting_style",
+          "type": "",
+          "value": "wale"
+        },
+        {
+          "name": "class_header.formatting_input",
+          "type": "",
+          "value": "cpp_helper_transform_header.wale"
+        },
+        {
+          "name": "class_header.overwrite",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "class_implementation.formatting_style",
+          "type": "",
+          "value": "stitch"
+        },
+        {
+          "name": "class_implementation.overwrite",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::csharp_helper_transform",
+      "parents": [
+        "composable::base_helper_formatter"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::csharp::helper_transform",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_header.formatting_style",
+          "type": "",
+          "value": "wale"
+        },
+        {
+          "name": "class_header.formatting_input",
+          "type": "",
+          "value": "csharp_helper_transform_header.wale"
+        },
+        {
+          "name": "class_header.overwrite",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "class_implementation.formatting_style",
+          "type": "",
+          "value": "stitch"
+        },
+        {
+          "name": "class_implementation.overwrite",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "composable::handcrafted_serializable",
+      "parents": [
+        "composable::handcrafted"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::handcrafted::serializable",
+        "masd.variability.key_prefix": "masd.cpp.serialization"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "overwrite",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::convertible",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::convertible",
+        "masd.variability.key_prefix": "masd.cpp.lexical_cast"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "base::relational_profile",
+      "parents": [
+        "base::base_profile"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb.enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "build.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "base::test_all_facets",
+      "parents": [
+        "base::base"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.decoration.marker_name",
+          "type": "",
+          "value": "dogen.profiles.test_marker"
+        },
+        {
+          "name": "masd.cpp.tests.main.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "name": "test_marker",
+      "stereotypes": [
+        "masd::decoration::generation_marker"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "add_date_time",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "add_warning",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "add_dogen_version",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "message",
+          "type": "",
+          "documentation": "These files are code-generated via overrides to test dogen. Do not commit them.\n"
+        }
+      ]
+    },
+    {
+      "name": "composable::untestable",
+      "documentation": "Model element will not be tested via generated tests.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::untestable",
+        "masd.variability.key_prefix": "masd.cpp.tests"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::untypable",
+      "documentation": "The element does not have a types facet.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::untypable",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::handcrafted_cmake",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::handcrafted::cmake",
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "build.enabled",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "build.overwrite",
+          "type": "",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "composable::forward_declarable",
+      "documentation": "Element has forward declarations.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::forward_declarable",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_forward_declarations.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

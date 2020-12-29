@@ -1,0 +1,190 @@
+{
+  "documentation": "Houses classes common to all transformations.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.tracing",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.codec.reference": "dogen.relational",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "tracer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend",
+          "type": "boost::shared_ptr<backend>"
+        }
+      ]
+    },
+    {
+      "name": "metrics",
+      "stereotypes": [
+        "dogen::untestable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transform_id",
+          "type": "std::string"
+        },
+        {
+          "name": "model_id",
+          "type": "std::string"
+        },
+        {
+          "name": "guid",
+          "type": "std::string"
+        },
+        {
+          "name": "start",
+          "type": "unsigned long"
+        },
+        {
+          "name": "end",
+          "type": "unsigned long"
+        },
+        {
+          "name": "children",
+          "type": "std::list<boost::shared_ptr<metrics>>"
+        }
+      ]
+    },
+    {
+      "name": "metrics_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "metrics_printer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "tracing_error",
+      "documentation": "An error occurred when trying to generate tracing data.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "scoped_tracer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "references_printer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "backend",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "file_backend",
+      "parents": [
+        "backend"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "backend_factory_registrar",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_factories_",
+          "type": "std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>"
+        }
+      ]
+    },
+    {
+      "name": "registrar_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "backend_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "file_backend_factory",
+      "parents": [
+        "backend_factory"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

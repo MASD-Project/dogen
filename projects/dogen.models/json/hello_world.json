@@ -1,0 +1,32 @@
+{
+  "documentation": "Welcome to Dogen!\n\nThis is one of the simplest models you can generate, a single class with one\nproperty. You can see the use of comments at the class level and property\nlevel.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.hello_world",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "masd",
+    "masd.physical.delete_extra_files": "true",
+    "masd.physical.delete_empty_directories": "true",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.standard": "c++-17",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false"
+  },
+  "elements": [
+    {
+      "name": "one_property",
+      "documentation": "Hello World class.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "property",
+          "type": "std::string",
+          "documentation": "This is a sample property.\n"
+        }
+      ]
+    }
+  ]
+}

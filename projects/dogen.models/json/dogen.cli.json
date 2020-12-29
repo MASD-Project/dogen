@@ -1,0 +1,196 @@
+{
+  "documentation": "Implements the command-line interface for Dogen.\n",
+  "tagged_values": {
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.cli",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "dogen",
+    "masd.codec.reference": "dogen.utility",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "parser_exception",
+      "documentation": "A fatal error has occurred during option parsing.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "application",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "command_line_parser",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "program_options_parser",
+      "parents": [
+        "command_line_parser"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "injector_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "application_exception",
+      "documentation": "A fatal error has occurred whilst executing the application.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "configuration",
+      "documentation": "All of the configuration required by the command line application.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logging",
+          "type": "boost::optional<utility::log::logging_configuration>",
+          "documentation": "Configuration related to logging, if any.\n"
+        },
+        {
+          "name": "api",
+          "type": "dogen::configuration"
+        },
+        {
+          "name": "cli",
+          "type": "cli_configuration"
+        }
+      ]
+    },
+    {
+      "name": "generation_configuration",
+      "documentation": "Configuration related to code generation.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "reference_model_directories",
+          "type": "std::vector<boost::filesystem::path>",
+          "documentation": "Directories to search for reference models.\n"
+        },
+        {
+          "name": "target",
+          "type": "boost::filesystem::path",
+          "documentation": "Target model for generation.\n"
+        },
+        {
+          "name": "output_directory",
+          "type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": "conversion_configuration",
+      "documentation": "Configuration for the model conversion.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "source",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "destination",
+          "type": "std::string",
+          "documentation": "Name of the file to output the conversion to.\n"
+        }
+      ]
+    },
+    {
+      "name": "configuration_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "cli_configuration",
+      "documentation": "Configuration specific to the CLI application.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "activity",
+          "type": "boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>"
+        },
+        {
+          "name": "byproduct_directory",
+          "type": "boost::filesystem::path",
+          "documentation": "Directory in which to place all files not directly related to generated code.\n"
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.enabled": "true",
+        "masd.cpp.types.overwrite": "false"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "dumpspecs_configuration",
+      "documentation": "Dumps all the specs about this version of dogen.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "reporting_style",
+          "documentation": "Which style to use when dumping the specs.\n"
+        }
+      ]
+    }
+  ]
+}

@@ -478,9 +478,29 @@ add_custom_target(rebase)
 add_custom_target(diff)
 
 if (DOGEN_CLI_EXECUTABLE)
+    add_custom_target(generate_all_dia)
+    add_custom_target(generate_all_json)
     add_custom_target(generate_all_org)
+    add_custom_target(gad)
+    add_dependencies(gad generate_all_dia)
+    add_custom_target(gaj)
+    add_dependencies(gaj generate_all_json)
     add_custom_target(gao)
     add_dependencies(gao generate_all_org)
+
+    add_custom_target(convert_all)
+    add_custom_target(ca)
+    add_dependencies(ca convert_all)
+
+    add_custom_target(convert_all_json)
+    add_custom_target(caj)
+    add_dependencies(caj convert_all_json)
+    add_dependencies(ca caj)
+
+    add_custom_target(convert_all_org)
+    add_custom_target(cao)
+    add_dependencies(cao convert_all_org)
+    add_dependencies(ca cao)
 
     #
     # Options to use for all Dogen invocations
@@ -585,8 +605,10 @@ if(WITH_BENCHMARKS)
     add_custom_target(ba)
     add_dependencies(ba benchmark_all)
 
+    add_custom_target(benchmark_dia)
+    add_custom_target(benchmark_json)
     add_custom_target(benchmark_org)
-    add_dependencies(benchmark_all benchmark_org)
+    add_dependencies(benchmark_all benchmark_dia)
 endif()
 
 #
