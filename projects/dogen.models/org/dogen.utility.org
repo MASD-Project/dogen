@@ -298,6 +298,10 @@ The values supplied for the logging configuration are not valid.
 
 An error occurred whilst obtaining the test data.
 
+** frozen_product                                              :masd_element:
+   :PROPERTIES:
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 * xml                                                           :masd_module:
 ** exception                                                   :masd_element:
    :PROPERTIES:

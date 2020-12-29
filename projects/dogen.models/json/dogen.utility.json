@@ -708,6 +708,13 @@
           "documentation": "Only applicable to the last element of a sequence.\n"
         }
       ]
+    },
+    {
+      "name": "test_data::frozen_product",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
