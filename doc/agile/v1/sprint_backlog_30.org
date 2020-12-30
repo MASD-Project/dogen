@@ -12,32 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-30 Wed 14:28]
+#+CAPTION: Clock summary at [2020-12-30 Wed 17:52]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *59:01* |       |       | 100.0 |
+| *Total time*                                        | *61:22* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 59:01   |       |       | 100.0 |
-| Active                                              |         | 59:01 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |  10.3 |
-| Create a demo and presentation for previous sprint  |         |       |  0:34 |   1.0 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   2.1 |
-| Solve emacs issues                                  |         |       |  2:48 |   4.7 |
-| Add support for reading org mode documents          |         |       | 19:46 |  33.5 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.8 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.3 |
-| Add org-mode codec for input                        |         |       |  8:56 |  15.1 |
-| Convert library models into org                     |         |       |  1:26 |   2.4 |
-| Convert reference models into org                   |         |       |  2:56 |   5.0 |
+| Stories                                             | 61:22   |       |       | 100.0 |
+| Active                                              |         | 61:22 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   9.9 |
+| Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.9 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   2.0 |
+| Solve emacs issues                                  |         |       |  2:48 |   4.6 |
+| Add support for reading org mode documents          |         |       | 19:46 |  32.2 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.7 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.2 |
+| Add org-mode codec for input                        |         |       |  8:56 |  14.6 |
+| Convert library models into org                     |         |       |  1:26 |   2.3 |
+| Convert reference models into org                   |         |       |  2:56 |   4.8 |
 | Assorted improvements to org model                  |         |       |  0:37 |   1.0 |
-| Create a model to org transform                     |         |       |  3:57 |   6.7 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.2 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   3.3 |
-| Create a "frozen" project                           |         |       |  1:49 |   3.1 |
-| Add tags to org model                               |         |       |  1:15 |   2.1 |
-| Inject custom IDs into org documents                |         |       |  0:38 |   1.1 |
-| Add PlantUML markup language support                |         |       |  0:48 |   1.4 |
+| Create a model to org transform                     |         |       |  3:57 |   6.4 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.1 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   3.2 |
+| Create a "frozen" project                           |         |       |  1:49 |   3.0 |
+| Add tags to org model                               |         |       |  1:15 |   2.0 |
+| Inject custom IDs into org documents                |         |       |  0:38 |   1.0 |
+| Add PlantUML markup language support                |         |       |  3:09 |   5.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -886,6 +886,8 @@ org-mode we just need to use the =:CUSTOM_ID:= attribute:
 
 *** STARTED Add PlantUML markup language support                      :story:
     :LOGBOOK:
+    CLOCK: [2020-12-30 Wed 17:50]--[2020-12-30 Wed 17:52] =>  0:02
+    CLOCK: [2020-12-30 Wed 15:30]--[2020-12-30 Wed 17:49] =>  2:19
     CLOCK: [2020-12-30 Wed 13:35]--[2020-12-30 Wed 13:54] =>  0:19
     CLOCK: [2020-12-29 Tue 17:31]--[2020-12-29 Tue 18:00] =>  0:29
     :END:
@@ -904,12 +906,64 @@ Now that we lost dia, this would be really useful.
 (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 #+end_src
 
+List of colours in masd palette:
+
+- =masd::assistant=: #D89EF1
+- =masd::build::cmakelists=: #99CB99
+- =masd::decoration::generation_marker=: #E8D0C5
+- =masd::decoration::licence=: #F9F0EB
+- =masd::decoration::licence_text=: #F9F0EB
+- =masd::decoration::modeline=: #D6B19F
+- =masd::decoration::modeline_group=: #CECECE
+- =masd::entry_point=: #DDA9F3
+- =masd::enumeration=: #F2DAFD
+- =masd::exception=: #E8C2F8
+- =masd::mapping::extensible_mappable=: #FFFF72
+- =masd::mapping::fixed_mappable=: #FFFFAC
+- =masd::object=: #f2dafd, #F7E5FF
+- =masd::object_template=: #E3B6F6
+- =masd::orm::common_odb_options=: #80FFBF
+- =masd::orm::object=: #CCFFE6
+- =masd::orm::value=: #B3FFD9
+- =masd::physical::archetype=: #68D799
+- =masd::physical::archetype_kind=: #A0E6BF
+- =masd::physical::backend=: #EBFAF1
+- =masd::physical::facet=: #C6F0D8
+- =masd::physical::part=: #43CD80
+- =masd::primitive=: #EDCEFB
+- =masd::serialization::type_registrar=: #00FF00
+- =masd::templating::logic_less_templates=: #FFC072
+- =masd::variability::feature_bundle=: #BAD7D7
+- =masd::variability::feature_template_bundle=: #CCE2E2
+- =masd::variability::initializer=: #A9CDCD
+- =masd::variability::profile=: #DDECEC
+- =masd::variability::profile_template=: #EEF6F6
+- =masd::visual_studio::msbuild_targets=: #B3DDB3
+- =masd::visual_studio::project=: #CCEECC
+- =masd::visual_studio::solution=: #E5FFE5
+
+  Notes:
+
+- It seems we need to use proper scoping if we want the elements to
+  come out in the right namespaces. We can take the same approach as
+  we did for org using a recursion on containment. However, we need to
+  make sure the org codec is populating =containing_element_id=
+  correctly.
+- we need to create targets that:
+  1. detect plant uml binary
+  2. generate all plant uml files
+  3. convert files to PNGs.
+- add support for inheritance. We need to somehow know if we are in
+  the same model or not. We could do an element look-up; if found we
+  add the link, if not we ignore it.
+
 Links:
 
-- http://plantuml.com/sitemap-language-specification: specs
-- https://github.com/plantuml/plantuml
-- [[http://plantuml.com/class-diagram][Class Diagrams]]
+- [[http://plantuml.com/sitemap-language-specification][PlantUML Language specification]]
+- [[https://github.com/plantuml/plantuml][GH repo]]
+- [[http://plantuml.com/class-diagram][Class Diagrams]]: examples of class diagrams.
 - [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: emacs mode for plantuml.
+- [[https://forum.plantuml.net/4302/how-to-work-with-nested-namespaces][plant uml: How to work with nested namespaces?]]
 
 *** Add include directories to models                                 :story:
 
