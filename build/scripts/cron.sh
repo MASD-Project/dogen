@@ -29,9 +29,23 @@ if [ ! -d "${git_dir}" ]; then
     git clone ${git_url} ${git_dir}
 fi
 cd ${git_dir}
-
 # update manually as ctest won't do it for us.
 git pull origin master
+
+#
+# Frozen
+#
+product="frozen"
+git_url="https://github.com/MASD-Project/${product}.git"
+git_dir="${workspace}/${product}"
+export FROZEN_PROJECTS_DIRECTORY=${git_dir}/projects
+if [ ! -d "${git_dir}" ]; then
+    git clone ${git_url} ${git_dir}
+fi
+cd ${git_dir}
+# update manually as ctest won't do it for us.
+git pull origin master
+
 
 #
 # C++ Ref Impl
@@ -44,6 +58,7 @@ if [ ! -d "${git_dir}" ]; then
     git clone ${git_url} ${git_dir}
 fi
 cd ${git_dir}
+# update manually as ctest won't do it for us.
 git pull origin master
 
 compiler=${clang_compiler}
