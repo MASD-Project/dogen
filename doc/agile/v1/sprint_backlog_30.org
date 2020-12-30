@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-30 Wed 17:52]
+#+CAPTION: Clock summary at [2020-12-30 Wed 22:56]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *61:22* |       |       | 100.0 |
+| *Total time*                                        | *62:26* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 61:22   |       |       | 100.0 |
-| Active                                              |         | 61:22 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   9.9 |
+| Stories                                             | 62:26   |       |       | 100.0 |
+| Active                                              |         | 62:26 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   9.7 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.9 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   2.0 |
-| Solve emacs issues                                  |         |       |  2:48 |   4.6 |
-| Add support for reading org mode documents          |         |       | 19:46 |  32.2 |
+| Sprint and product backlog grooming                 |         |       |  1:13 |   1.9 |
+| Solve emacs issues                                  |         |       |  2:48 |   4.5 |
+| Add support for reading org mode documents          |         |       | 19:46 |  31.7 |
 | Remove leading and trailing new lines from comments |         |       |  1:03 |   1.7 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.2 |
-| Add org-mode codec for input                        |         |       |  8:56 |  14.6 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.1 |
+| Add org-mode codec for input                        |         |       |  8:56 |  14.3 |
 | Convert library models into org                     |         |       |  1:26 |   2.3 |
-| Convert reference models into org                   |         |       |  2:56 |   4.8 |
+| Convert reference models into org                   |         |       |  2:56 |   4.7 |
 | Assorted improvements to org model                  |         |       |  0:37 |   1.0 |
-| Create a model to org transform                     |         |       |  3:57 |   6.4 |
+| Create a model to org transform                     |         |       |  3:57 |   6.3 |
 | Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.1 |
 | Split orchestration tests by model and codec        |         |       |  1:58 |   3.2 |
-| Create a "frozen" project                           |         |       |  1:49 |   3.0 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.9 |
 | Add tags to org model                               |         |       |  1:15 |   2.0 |
 | Inject custom IDs into org documents                |         |       |  0:38 |   1.0 |
-| Add PlantUML markup language support                |         |       |  3:09 |   5.1 |
+| Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.4 |
+| Add PlantUML markup language support                |         |       |  3:19 |   5.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -884,8 +885,25 @@ org-mode we just need to use the =:CUSTOM_ID:= attribute:
 
 : :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
 
+*** COMPLETED Allow spaces in headlines for org mode documents        :story:
+    CLOSED: [2020-12-30 Wed 22:56]
+    :LOGBOOK:
+    CLOCK: [2020-12-30 Wed 22:02]--[2020-12-30 Wed 22:56] =>  0:54
+    :END:
+
+Org documents would be much more readable if we allowed spaces in the
+headlines; these could then be converted into underscores (or even
+camel case) as part of the pipeline. We could also do the reverse when
+converting the models into org mode.
+
+Notes:
+
+- in order for this to work, we need some kind of flag to skip types
+  where the spaces need to be preserved, e.g. =unsigned int=, etc.
+
 *** STARTED Add PlantUML markup language support                      :story:
     :LOGBOOK:
+    CLOCK: [2020-12-30 Wed 17:53]--[2020-12-30 Wed 18:03] =>  0:10
     CLOCK: [2020-12-30 Wed 17:50]--[2020-12-30 Wed 17:52] =>  0:02
     CLOCK: [2020-12-30 Wed 15:30]--[2020-12-30 Wed 17:49] =>  2:19
     CLOCK: [2020-12-30 Wed 13:35]--[2020-12-30 Wed 13:54] =>  0:19
@@ -905,6 +923,20 @@ Now that we lost dia, this would be really useful.
 (setq plantuml-default-exec-mode 'jar)
 (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
 #+end_src
+
+How to run from the shell for larger diagrams:
+
+#+begin_src
+$ PLANTUML_LIMIT_SIZE=65536 plantuml dogen.logical.plantuml
+#+end_src
+
+Note:
+
+#+begin_quote
+Note that if you generate very big diagrams, (for example, something
+like 20 000 x 10 000 pixels), you can have some memory issues. The
+solution is to add this parameter to the java vm =-Xmx1024m=.
+#+end_quote
 
 List of colours in masd palette:
 
@@ -956,6 +988,11 @@ List of colours in masd palette:
 - add support for inheritance. We need to somehow know if we are in
   the same model or not. We could do an element look-up; if found we
   add the link, if not we ignore it.
+- we could use a similar approach for relationships: only extract the
+  nesting and then create a relationship only if the type is in the
+  model.
+- when we add transforms as meta-elements, we can add the dependencies
+  between them. This would allow us to create the links in UML.
 
 Links:
 
@@ -964,6 +1001,8 @@ Links:
 - [[http://plantuml.com/class-diagram][Class Diagrams]]: examples of class diagrams.
 - [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: emacs mode for plantuml.
 - [[https://forum.plantuml.net/4302/how-to-work-with-nested-namespaces][plant uml: How to work with nested namespaces?]]
+- [[https://plantuml.com/faq][plantuml faq]]
+- [[https://forum.plantuml.net/6971/max-diagram-size][Max diagram size?]]
 
 *** Add include directories to models                                 :story:
 
