@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string/case_conv.hpp>
+#include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <sstream>
+#include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -217,7 +217,11 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
     r.comment().original_content(section_to_text(h.section()));
     r.documentation(r.comment().original_content());
     r.name().simple(h.title());
-    r.name().qualified(qualified_parent + "::" + r.name().simple());
+
+    if (qualified_parent.empty())
+        r.name().qualified(r.name().simple());
+    else
+        r.name().qualified(qualified_parent + "::" + r.name().simple());
 
     /*
      * Determine the fallback based on the headline type.
