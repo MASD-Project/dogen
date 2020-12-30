@@ -41,6 +41,7 @@ before_build:
   - if DEFINED msvc_setup_path call "%msvc_setup_path%" %msvc_setup_arg%
   - set DOGEN_PROJECTS_DIRECTORY=%APPVEYOR_BUILD_FOLDER%\projects
   - set CPP_REF_IMPL_PROJECTS_DIRECTORY=C:\third_party\ref_models\cpp_ref_impl-master\projects
+  - set FROZEN_PROJECTS_DIRECTORY=C:\third_party\ref_models\frozen-master\projects
   - set CSHARP_REF_IMPL_PROJECTS_DIRECTORY=C:\third_party\ref_models\csharp_ref_impl-master\Src
   - cd %APPVEYOR_BUILD_FOLDER%
 
