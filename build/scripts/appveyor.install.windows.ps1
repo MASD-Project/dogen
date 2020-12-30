@@ -75,7 +75,6 @@ Set-Location -Path $ninja_installs_dir | Out-Null
 # Reference models
 #
 $cpp_ref_impl_input_location="https://github.com/MASD-Project/cpp_ref_impl/archive/master.zip"
-$frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zip"
 $cpp_ref_impl_downloads_location="${downloads_dir}\cpp_ref_impl.zip"
 $cpp_ref_impl_installs_dir="$ref_models_dir"
 
@@ -84,6 +83,10 @@ Write-Host "URL: $cpp_ref_impl_input_location"
 Write-Host "Download location: $cpp_ref_impl_downloads_location"
 Set-Location -Path $cpp_ref_impl_installs_dir | Out-Null
 7z x $cpp_ref_impl_downloads_location > $null
+
+$frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zip"
+$frozen_downloads_location="${downloads_dir}\frozen.zip"
+$frozen_installs_dir="$ref_models_dir"
 
 appveyor DownloadFile $frozen_input_location -FileName $frozen_downloads_location
 Write-Host "URL: $frozen_input_location"
