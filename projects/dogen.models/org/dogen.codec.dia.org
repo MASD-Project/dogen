@@ -93,7 +93,7 @@ entity.
 
 For details on the stereotypes see the MASD UML profile.
 
-* adaptation_error                                                  :element:
+* adaptation error                                                  :element:
   :PROPERTIES:
   :custom_id: O0
   :masd.codec.stereotypes: masd::exception
@@ -107,7 +107,7 @@ into its masd representation.
   :custom_id: O1
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* graphing_error                                                    :element:
+* graphing error                                                    :element:
   :PROPERTIES:
   :custom_id: O2
   :masd.codec.stereotypes: masd::exception
@@ -115,17 +115,17 @@ into its masd representation.
 
 An error has occurred while building the dia object graph.
 
-* processed_comment_factory                                         :element:
+* processed comment factory                                         :element:
   :PROPERTIES:
   :custom_id: O7
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* processed_object_factory                                          :element:
+* processed object factory                                          :element:
   :PROPERTIES:
   :custom_id: O10
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* processed_attribute                                               :element:
+* processed attribute                                               :element:
   :PROPERTIES:
   :custom_id: O11
   :END:
@@ -154,7 +154,7 @@ Any comments associated with the property.
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-* processed_object                                                  :element:
+* processed object                                                  :element:
   :PROPERTIES:
   :custom_id: O12
   :END:
@@ -175,7 +175,7 @@ Dia object id.
 
 Name of the object in dia format.
 
-** dia_object_type                                                :attribute:
+** dia object type                                                :attribute:
    :PROPERTIES:
    :masd.codec.type: dia_object_types
    :END:
@@ -195,7 +195,7 @@ Any comments associated with the object.
 
 On the case of a UML note, represents the text of the note.
 
-** child_node_id                                                  :attribute:
+** child node id                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
@@ -216,7 +216,7 @@ Connections this object may have with other objects.
 
 All attributes associated with dia object.
 
-* dia_object_types                                                  :element:
+* dia object types                                                  :element:
   :PROPERTIES:
   :custom_id: O13
   :masd.codec.stereotypes: masd::enumeration
@@ -224,31 +224,31 @@ All attributes associated with dia object.
 
 Identifier for the type of Dia object.
 
-** uml_large_package                                              :attribute:
+** uml large package                                              :attribute:
 
 A UML package
 
-** uml_class                                                      :attribute:
+** uml class                                                      :attribute:
 
 A UML class
 
-** uml_generalization                                             :attribute:
+** uml generalization                                             :attribute:
 
 UML Inheritance
 
-** uml_association                                                :attribute:
+** uml association                                                :attribute:
 
 UML Association
 
-** uml_note                                                       :attribute:
+** uml note                                                       :attribute:
 
 UML Note
 
-** uml_message                                                    :attribute:
+** uml message                                                    :attribute:
 
 UML Message
 
-** uml_realization                                                :attribute:
+** uml realization                                                :attribute:
 
 UML Realization
 
@@ -257,7 +257,7 @@ UML Realization
   :custom_id: O15
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* validation_error                                                  :element:
+* validation error                                                  :element:
   :PROPERTIES:
   :custom_id: O16
   :masd.codec.stereotypes: masd::exception
@@ -270,7 +270,7 @@ The object profile is not valid.
   :custom_id: O21
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* processed_comment                                                 :element:
+* processed comment                                                 :element:
   :PROPERTIES:
   :custom_id: O22
   :END:
@@ -284,28 +284,28 @@ Contains the same content as the original dia comment, but split by type of data
 
 Text of the comment, excluding all Dogen instructions.
 
-** tagged_values                                                  :attribute:
+** tagged values                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::list<identification::entities::tagged_value>
    :END:
 
 Tagged values extracted from this comment.
 
-** applicable_to_parent_object                                    :attribute:
+** applicable to parent object                                    :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
 
 If true, the comment should be attached to the dia object containing it.
 
-** original_content                                               :attribute:
+** original content                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
 
 Content of the field as it was read from the dia object.
 
-* building_error                                                    :element:
+* building error                                                    :element:
   :PROPERTIES:
   :custom_id: O26
   :masd.codec.stereotypes: masd::exception
@@ -315,7 +315,7 @@ Content of the field as it was read from the dia object.
   :custom_id: O36
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-** builder_                                                       :attribute:
+** builder                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: builder
    :END:

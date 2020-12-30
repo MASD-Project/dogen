@@ -43,7 +43,7 @@ domain of the Dia diagram editor.
 
 Represents a diagram in Dia.
 
-*** diagram_data                                                  :attribute:
+*** diagram data                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: diagram_data
     :END:
@@ -127,7 +127,7 @@ Version of the object.
 
 Connection details for this object.
 
-*** child_node                                                    :attribute:
+*** child node                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::optional<child_node>
     :END:
@@ -159,7 +159,7 @@ Internal handle for the connection.
 
 Object we're connected to.
 
-*** connection_slot                                               :attribute:
+*** connection slot                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -169,7 +169,7 @@ Number of the connection slot we're connected to.
 This is known in Dia as a connection but to avoid confusion between the class and the slot concepts,
 we renamed it.
 
-** diagram_data                                                     :element:
+** diagram data                                                     :element:
    :PROPERTIES:
    :custom_id: O9
    :END:
@@ -183,7 +183,7 @@ Represents a all the data associated with a diagram.
 
 All attributes associated with the diagram data.
 
-** child_node                                                       :element:
+** child node                                                       :element:
    :PROPERTIES:
    :custom_id: O10
    :END:
@@ -263,7 +263,7 @@ Type of the composite node
 
 Underlying Dia attributes.
 
-*** inner_composite                                               :attribute:
+*** inner composite                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<composite>
     :END:
@@ -386,7 +386,7 @@ Text representation of a rectangle with a pair of X/Y coordinates.
   :PROPERTIES:
   :custom_id: O40
   :END:
-** transformation_error                                             :element:
+** transformation error                                             :element:
    :PROPERTIES:
    :custom_id: O41
    :masd.codec.stereotypes: masd::exception
@@ -394,7 +394,7 @@ Text representation of a rectangle with a pair of X/Y coordinates.
 
 An error occurred whilst applying a transformation.
 
-** string_to_diagram_transform                                      :element:
+** string to diagram transform                                      :element:
    :PROPERTIES:
    :custom_id: O42
    :masd.codec.stereotypes: dogen::handcrafted::typeable

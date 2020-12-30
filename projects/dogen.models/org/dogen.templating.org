@@ -19,7 +19,7 @@
   :PROPERTIES:
   :custom_id: O0
   :END:
-** text_template                                                    :element:
+** text template                                                    :element:
    :PROPERTIES:
    :custom_id: O2
    :masd.codec.stereotypes: ConfigurableViaKvps
@@ -36,7 +36,7 @@ Represents a wale text template.
 Textual content of the wale template.
 
 #+end_src
-** key_extractor                                                    :element:
+** key extractor                                                    :element:
    :PROPERTIES:
    :custom_id: O3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -51,7 +51,7 @@ Textual content of the wale template.
    :custom_id: O5
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** formatting_error                                                 :element:
+** formatting error                                                 :element:
    :PROPERTIES:
    :custom_id: O9
    :masd.codec.stereotypes: masd::exception
@@ -59,7 +59,7 @@ Textual content of the wale template.
 
 An error occurred whilst formatting.
 
-** extraction_error                                                 :element:
+** extraction error                                                 :element:
    :PROPERTIES:
    :custom_id: O11
    :masd.codec.stereotypes: masd::exception
@@ -88,7 +88,7 @@ An error occurred whilst extracting a key.
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-** text_template                                                    :element:
+** text template                                                    :element:
    :PROPERTIES:
    :custom_id: O16
    :masd.codec.stereotypes: ConfigurableViaKvps
@@ -115,7 +115,7 @@ Body of the text template.
    :custom_id: O19
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** parsing_error                                                    :element:
+** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: O21
    :masd.codec.stereotypes: masd::exception
@@ -123,7 +123,7 @@ Body of the text template.
 
 An error occurred whilst parsing.
 
-** formatting_error                                                 :element:
+** formatting error                                                 :element:
    :PROPERTIES:
    :custom_id: O23
    :masd.codec.stereotypes: masd::exception
@@ -135,23 +135,23 @@ An error occurred whilst formatting.
    :PROPERTIES:
    :custom_id: O25
    :END:
-*** stream_variable_name                                          :attribute:
+*** stream variable name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** inclusion_dependencies                                        :attribute:
+*** inclusion dependencies                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** containing_namespaces                                         :attribute:
+*** containing namespaces                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** wale_template                                                 :attribute:
+*** wale template                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** wale_kvps                                                     :attribute:
+*** wale kvps                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<std::string, std::string>
     :END:
@@ -163,25 +163,25 @@ An error occurred whilst formatting.
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
-** block_types                                                      :element:
+** block types                                                      :element:
    :PROPERTIES:
    :custom_id: O28
    :masd.codec.stereotypes: masd::enumeration
    :END:
-*** text_block                                                    :attribute:
-*** standard_control_block                                        :attribute:
-*** expression_block                                              :attribute:
-*** variable_block                                                :attribute:
+*** text block                                                    :attribute:
+*** standard control block                                        :attribute:
+*** expression block                                              :attribute:
+*** variable block                                                :attribute:
 ** instantiator                                                     :element:
    :PROPERTIES:
    :custom_id: O30
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** text_template_body                                               :element:
+** text template body                                               :element:
    :PROPERTIES:
    :custom_id: O32
    :END:
-*** tagged_values                                                 :attribute:
+*** tagged values                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
     :END:
@@ -192,7 +192,7 @@ Set of tagged values read from the template.
     :PROPERTIES:
     :masd.codec.type: std::list<line>
     :END:
-** instantiation_error                                              :element:
+** instantiation error                                              :element:
    :PROPERTIES:
    :custom_id: O37
    :masd.codec.stereotypes: masd::exception
@@ -207,7 +207,7 @@ Set of tagged values read from the template.
 
 Stitch templating features.
 
-*** stream_variable_name                                          :attribute:
+*** stream variable name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::text
     :masd.codec.value: "stream_"
@@ -215,7 +215,7 @@ Stitch templating features.
 
 Which name to use for the variable with the stream.
 
-*** relative_output_directory                                     :attribute:
+*** relative output directory                                     :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -223,7 +223,7 @@ Which name to use for the variable with the stream.
 
 Relative path to the output directory.
 
-*** inclusion_dependency                                          :attribute:
+*** inclusion dependency                                          :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text_collection
@@ -231,14 +231,14 @@ Relative path to the output directory.
 
 C++ Include header.
 
-*** containing_namespaces                                         :attribute:
+*** containing namespaces                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: masd::variability::text
     :END:
 
 Namespaces that contain the class represented by the template.
 
-*** wale.text_template                                            :attribute:
+*** wale.text template                                            :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
@@ -262,14 +262,14 @@ Array of wale KVPs to use in template instantiation.
 
 Element has the ability to recieve configuration arguments as a set of KVPs.
 
-** expected_keys                                                  :attribute:
+** expected keys                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_set<std::string>
    :END:
 
 Set of keys that are expected to be supplied.
 
-** supplied_kvps                                                  :attribute:
+** supplied kvps                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<std::string, std::string>
    :END:
@@ -280,12 +280,12 @@ Key value pairs that were supplied for instantiation.
   :PROPERTIES:
   :custom_id: O40
   :END:
-** kvp_validator                                                    :element:
+** kvp validator                                                    :element:
    :PROPERTIES:
    :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** validation_error                                                 :element:
+** validation error                                                 :element:
    :PROPERTIES:
    :custom_id: O42
    :masd.codec.stereotypes: masd::exception
@@ -293,12 +293,12 @@ Key value pairs that were supplied for instantiation.
 
 An error occurred with the supplied KVPs.
 
-** kvp_resolver                                                     :element:
+** kvp resolver                                                     :element:
    :PROPERTIES:
    :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** resolution_error                                                 :element:
+** resolution error                                                 :element:
    :PROPERTIES:
    :custom_id: O45
    :masd.codec.stereotypes: masd::exception

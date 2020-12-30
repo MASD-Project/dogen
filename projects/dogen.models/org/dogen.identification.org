@@ -40,35 +40,35 @@ General name for modeling elements which do not need any specialisation.
 
 Qualified name for an element.
 
-** codec_provenance                                                 :element:
+** codec provenance                                                 :element:
    :PROPERTIES:
    :custom_id: O3
    :END:
 
 Source of a model element in the codec dimension.
 
-*** model_id                                                      :attribute:
+*** model id                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: model_id
     :END:
 
 ID for a model.
 
-*** model_type                                                    :attribute:
+*** model type                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: model_type
     :END:
 
 Type of the model where this element originates from.
 
-*** model_sha1_hash                                               :attribute:
+*** model sha1 hash                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: sha1_hash
     :END:
 
 SHA1 key of the original codec model.
 
-*** codec_id                                                      :attribute:
+*** codec id                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: codec_id
     :END:
@@ -82,7 +82,7 @@ Identifier for the modeling element in the codec dimension.
 
 Where the element was located in the original source.
 
-** model_type                                                       :element:
+** model type                                                       :element:
    :PROPERTIES:
    :custom_id: O4
    :masd.codec.stereotypes: masd::enumeration
@@ -94,19 +94,19 @@ Types of models with regards to the current generation taking place.
 
 The element is part of the target model.
 
-*** pdm_reference                                                 :attribute:
+*** pdm reference                                                 :attribute:
 
 The element was part of a reference model which is a PDM.
 
-*** non_pdm_reference                                             :attribute:
+*** non pdm reference                                             :attribute:
 
 The element was part of a reference model which is regular dogen model.
 
-*** not_yet_determined                                            :attribute:
+*** not yet determined                                            :attribute:
 
 The origin of the element is not yet known.
 
-** sha1_hash                                                        :element:
+** sha1 hash                                                        :element:
    :PROPERTIES:
    :custom_id: O5
    :masd.primitive.underlying_element: std::string
@@ -115,7 +115,7 @@ The origin of the element is not yet known.
 
 Stores a SHA1 hash.
 
-** codec_id                                                         :element:
+** codec id                                                         :element:
    :PROPERTIES:
    :custom_id: O6
    :masd.primitive.underlying_element: std::string
@@ -124,7 +124,7 @@ Stores a SHA1 hash.
 
 ID of the elment as sourced from the codec model, if any.
 
-** logical_id                                                       :element:
+** logical id                                                       :element:
    :PROPERTIES:
    :custom_id: O7
    :masd.primitive.underlying_element: std::string
@@ -133,7 +133,7 @@ ID of the elment as sourced from the codec model, if any.
 
 ID of the elment in the logical dimension.
 
-** physical_meta_id                                                 :element:
+** physical meta id                                                 :element:
    :PROPERTIES:
    :custom_id: O8
    :masd.primitive.underlying_element: std::string
@@ -142,7 +142,7 @@ ID of the elment in the logical dimension.
 
 ID of the meta-element in the physical dimension.
 
-** codec_location                                                   :element:
+** codec location                                                   :element:
    :PROPERTIES:
    :custom_id: O9
    :END:
@@ -163,7 +163,7 @@ Line number where the element was defined.
 
 Column number where the element was defined.
 
-** logical_provenance                                               :element:
+** logical provenance                                               :element:
    :PROPERTIES:
    :custom_id: O10
    :END:
@@ -177,21 +177,21 @@ Source of a model element in the logical dimension.
 
 Provenance of the current element in the codec dimension.
 
-*** logical_name                                                  :attribute:
+*** logical name                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_name
     :END:
 
 Provenance of the current element in the logical dimension.
 
-*** logical_meta_name                                             :attribute:
+*** logical meta name                                             :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_meta_name
     :END:
 
 Provenance of the current element in the logical dimension as a meta-element.
 
-** logical_meta_id                                                  :element:
+** logical meta id                                                  :element:
    :PROPERTIES:
    :custom_id: O15
    :masd.primitive.underlying_element: std::string
@@ -221,7 +221,7 @@ Key of the label.
 
 Value associated with this label.
 
-** tagged_value                                                     :element:
+** tagged value                                                     :element:
    :PROPERTIES:
    :custom_id: O17
    :END:
@@ -242,7 +242,7 @@ Tag name.
 
 Value associated with this tag.
 
-** logical_name                                                     :element:
+** logical name                                                     :element:
    :PROPERTIES:
    :custom_id: O18
    :masd.codec.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
@@ -275,14 +275,14 @@ Identifier for this logical element.
 
 Where the name is located in element space.
 
-*** is_container                                                  :attribute:
+*** is container                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
 If true, the name indicates an element that can contain other elements.
 
-** logical_location                                                 :element:
+** logical location                                                 :element:
    :PROPERTIES:
    :custom_id: O19
    :masd.codec.stereotypes: dogen::hashable
@@ -290,7 +290,7 @@ If true, the name indicates an element that can contain other elements.
 
 Identifies a hierarchy of containment within the logical space.
 
-*** external_modules                                              :attribute:
+*** external modules                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
@@ -303,7 +303,7 @@ they are considered "external" to the model. This is useful, for
 example, when declaring a model within a larger project such as @e
 dogen::logical. In this case, @e dogen is the external module.
 
-*** model_modules                                                 :attribute:
+*** model modules                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
@@ -313,7 +313,7 @@ Modules related to just the model itself.
 It is only different from the model name if the model name is composite;
 that is, if the model name has multiple fields separated by dots, e.g. @ a.b.
 
-*** internal_modules                                              :attribute:
+*** internal modules                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
@@ -330,7 +330,7 @@ Name of the owning element, if any.
 For coding elements which are located within other logical elements
 that are not modules, such as attributes, inner classes, etc.
 
-** qualified_representations                                        :element:
+** qualified representations                                        :element:
    :PROPERTIES:
    :custom_id: O20
    :masd.codec.stereotypes: dogen::hashable
@@ -360,7 +360,7 @@ Qualified identifier using "::" as the separator.
 Representation of the identifier that can usable as an identifier on all of the
 supported technical spaces, using the entire name structure.
 
-** physical_meta_location                                           :element:
+** physical meta location                                           :element:
    :PROPERTIES:
    :custom_id: O21
    :END:
@@ -371,7 +371,7 @@ These must be populated in order, e.g. in order to have a backend we must have a
 meta-model; in order to have a facet we must have a backend and in order to have a
 formatter we must have a facet. We may not have any.
 
-*** meta_model                                                    :attribute:
+*** meta model                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
@@ -408,7 +408,7 @@ Name of the facet where this element is located, if any.
 
 Name of the archetype for this element, if applicable.
 
-** physical_meta_name                                               :element:
+** physical meta name                                               :element:
    :PROPERTIES:
    :custom_id: O22
    :masd.codec.stereotypes: Nameable
@@ -437,7 +437,7 @@ Identifier for this physical meta-element.
 
 Location for a meta-name in physical space.
 
-** logical_meta_name                                                :element:
+** logical meta name                                                :element:
    :PROPERTIES:
    :custom_id: O26
    :masd.codec.stereotypes: Nameable
@@ -449,7 +449,7 @@ Location for a meta-name in physical space.
 
 Identifier for this logical meta-element.
 
-** technical_space                                                  :element:
+** technical space                                                  :element:
    :PROPERTIES:
    :custom_id: O27
    :masd.cpp.hash.enabled: true
@@ -490,7 +490,7 @@ Visual studio solution.
 
 Mustache templates.
 
-** physical_name                                                    :element:
+** physical name                                                    :element:
    :PROPERTIES:
    :custom_id: O28
    :masd.codec.stereotypes: Nameable
@@ -520,7 +520,7 @@ Ability to have a name.
 
 Simple name for a modeling element.
 
-** logical_meta_physical_id                                         :element:
+** logical meta physical id                                         :element:
    :PROPERTIES:
    :custom_id: O30
    :masd.codec.stereotypes: dogen::hashable
@@ -528,21 +528,21 @@ Simple name for a modeling element.
 
 ID in the logical-physical space.
 
-*** logical_id                                                    :attribute:
+*** logical id                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_id
     :END:
 
 ID of the element in the logical dimension.
 
-*** physical_meta_id                                              :attribute:
+*** physical meta id                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: physical_meta_id
     :END:
 
 ID of the element in the physical dimension.
 
-** physical_id                                                      :element:
+** physical id                                                      :element:
    :PROPERTIES:
    :custom_id: O32
    :masd.primitive.underlying_element: std::string
@@ -551,7 +551,7 @@ ID of the element in the physical dimension.
 
 ID for a physical element.
 
-** model_id                                                         :element:
+** model id                                                         :element:
    :PROPERTIES:
    :custom_id: O69
    :masd.primitive.underlying_element: std::string
@@ -569,7 +569,7 @@ ID for a model.
 
 Stereotype.
 
-** logical_name_tree                                                :element:
+** logical name tree                                                :element:
    :PROPERTIES:
    :custom_id: O72
    :masd.codec.stereotypes: QualifiedRepresentations
@@ -596,7 +596,7 @@ Name for the current level of the tree.
 
 Names of the child elements.
 
-*** are_children_opaque                                           :attribute:
+*** are children opaque                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
@@ -607,21 +607,21 @@ Children are considered opaque when the parent does not require knowledge
 about the childs' internal structure. This is the case, for example, with C and
 C++ pointers, references and so on.
 
-*** is_circular_dependency                                        :attribute:
+*** is circular dependency                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
 If true, the presence of the current name causes a circular dependency.
 
-*** is_current_simple_type                                        :attribute:
+*** is current simple type                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
 Returns true if @e current is a simple type such as a built-in or an enumeration.
 
-*** is_floating_point                                             :attribute:
+*** is floating point                                             :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
@@ -643,25 +643,25 @@ Name with multiple qualified representations.
 
 Contains the name according to different representations.
 
-** archetype_name_set                                               :element:
+** archetype name set                                               :element:
    :PROPERTIES:
    :custom_id: O95
    :END:
-*** logical_meta_id                                               :attribute:
+*** logical meta id                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_meta_id
     :END:
 
 Identifier of the meta-element in the logical dimension.
 
-*** meta_names                                                    :attribute:
+*** meta names                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<physical_meta_name>
     :END:
 
 All meta-names that belong to this group.
 
-*** canonical_locations                                           :attribute:
+*** canonical locations                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
     :END:
@@ -669,14 +669,14 @@ All meta-names that belong to this group.
 Maps a concrete archetype location to its canonical form, if the canonical
 form is supported. Otherwise no such mapping will exist.
 
-*** archetype_for_label                                           :attribute:
+*** archetype for label                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
     :END:
 
 Maps a label to archetype ID within the present logical manifold.
 
-** physical_meta_name_indices                                       :element:
+** physical meta name indices                                       :element:
    :PROPERTIES:
    :custom_id: O97
    :END:
@@ -690,35 +690,35 @@ Containing physical meta-names, indexed as required by use cases.
 
 All meta-names.
 
-*** facet_names_by_backend_name                                   :attribute:
+*** facet names by backend name                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
     :END:
 
 Qualified names of facets by qualified names of backends.
 
-*** archetype_names_by_logical_meta_name                          :attribute:
+*** archetype names by logical meta name                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<logical_meta_id, archetype_name_set>
     :END:
 
 Physical meta-names by logical meta-names.
 
-*** archetype_names_by_backend_by_facet                           :attribute:
+*** archetype names by backend by facet                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
     :END:
 
 Archetype names by qualified backend and facet names
 
-*** technical_space_for_archetype                                 :attribute:
+*** technical space for archetype                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<physical_meta_id, technical_space>
     :END:
 
 Resolves a given physical meta-model element ID into its technical space.
 
-** technical_space_version                                          :element:
+** technical space version                                          :element:
    :PROPERTIES:
    :custom_id: O102
    :masd.codec.stereotypes: masd::enumeration
@@ -726,10 +726,10 @@ Resolves a given physical meta-model element ID into its technical space.
 
 Version of the technical space to use.
 
-*** cpp_98                                                        :attribute:
-*** cpp_11                                                        :attribute:
-*** cpp_14                                                        :attribute:
-*** cpp_17                                                        :attribute:
+*** cpp 98                                                        :attribute:
+*** cpp 11                                                        :attribute:
+*** cpp 14                                                        :attribute:
+*** cpp 17                                                        :attribute:
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: O36
@@ -738,12 +738,12 @@ Version of the technical space to use.
 
 Assorted helpers used to construct domain entities.
 
-** identifiable_factory                                             :element:
+** identifiable factory                                             :element:
    :PROPERTIES:
    :custom_id: O37
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** building_error                                                   :element:
+** building error                                                   :element:
    :PROPERTIES:
    :custom_id: O38
    :masd.codec.stereotypes: masd::exception
@@ -751,48 +751,48 @@ Assorted helpers used to construct domain entities.
 
 An error occurred whilst building.
 
-** qualified_representations_builder                                :element:
+** qualified representations builder                                :element:
    :PROPERTIES:
    :custom_id: O39
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** dot_printer_                                                  :attribute:
+*** dot printer                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: pretty_printer
     :END:
-*** colon_printer_                                                :attribute:
+*** colon printer                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: pretty_printer
     :END:
-** logical_name_factory                                             :element:
+** logical name factory                                             :element:
    :PROPERTIES:
    :custom_id: O40
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** logical_name_builder                                             :element:
+** logical name builder                                             :element:
    :PROPERTIES:
    :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** name_                                                         :attribute:
+*** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: entities::logical_name
     :END:
-** logical_name_flattener                                           :element:
+** logical name flattener                                           :element:
    :PROPERTIES:
    :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** logical_location_builder                                         :element:
+** logical location builder                                         :element:
    :PROPERTIES:
    :custom_id: O45
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** location_                                                     :attribute:
+*** location                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: entities::logical_location
     :END:
-** flattening_error                                                 :element:
+** flattening error                                                 :element:
    :PROPERTIES:
    :custom_id: O47
    :masd.codec.stereotypes: masd::exception
@@ -800,7 +800,7 @@ An error occurred whilst building.
 
 An error occurred whilst flattening a name.
 
-** printing_error                                                   :element:
+** printing error                                                   :element:
    :PROPERTIES:
    :custom_id: O48
    :masd.codec.stereotypes: masd::exception
@@ -808,7 +808,7 @@ An error occurred whilst flattening a name.
 
 An error occurred whilst pretty printing.
 
-** pretty_printer                                                   :element:
+** pretty printer                                                   :element:
    :PROPERTIES:
    :custom_id: O49
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -821,11 +821,11 @@ An error occurred whilst pretty printing.
 
 Available separators to be used by the pretty printer.
 
-*** angle_brackets                                                :attribute:
+*** angle brackets                                                :attribute:
 
 Enclose name elements in '<' and '>'.
 
-*** double_colons                                                 :attribute:
+*** double colons                                                 :attribute:
 
 Separate name elements with a '::'.
 
@@ -833,39 +833,39 @@ Separate name elements with a '::'.
 
 Separate name elements with a '.'.
 
-** physical_meta_name_factory                                       :element:
+** physical meta name factory                                       :element:
    :PROPERTIES:
    :custom_id: O54
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** physical_meta_name_builder                                       :element:
+** physical meta name builder                                       :element:
    :PROPERTIES:
    :custom_id: O55
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** physical_meta_id_builder                                         :element:
+** physical meta id builder                                         :element:
    :PROPERTIES:
    :custom_id: O56
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** logical_name_tree_builder                                        :element:
+** logical name tree builder                                        :element:
    :PROPERTIES:
    :custom_id: O77
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** names_                                                        :attribute:
+*** names                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** root_                                                         :attribute:
+*** root                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<node>
     :END:
-*** current_                                                      :attribute:
+*** current                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<node>
     :END:
-** legacy_logical_name_tree_parser                                  :element:
+** legacy logical name tree parser                                  :element:
    :PROPERTIES:
    :custom_id: O78
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -901,12 +901,12 @@ Current node.
 
 Child nodes in a tree.
 
-** new_logical_name_tree_parser                                     :element:
+** new logical name tree parser                                     :element:
    :PROPERTIES:
    :custom_id: O80
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** parsing_error                                                    :element:
+** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: O82
    :masd.codec.stereotypes: masd::exception
@@ -914,12 +914,12 @@ Child nodes in a tree.
 
 A fatal error has occurred while parsing.
 
-** physical_meta_name_validator                                     :element:
+** physical meta name validator                                     :element:
    :PROPERTIES:
    :custom_id: O88
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** validation_error                                                 :element:
+** validation error                                                 :element:
    :PROPERTIES:
    :custom_id: O90
    :masd.codec.stereotypes: masd::exception
@@ -927,17 +927,17 @@ A fatal error has occurred while parsing.
 
 An error occurred during validation.
 
-** physical_id_factory                                              :element:
+** physical id factory                                              :element:
    :PROPERTIES:
    :custom_id: O93
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** meta_name_index_builder                                          :element:
+** meta name index builder                                          :element:
    :PROPERTIES:
    :custom_id: O99
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** logical_meta_name_factory                                        :element:
+** logical meta name factory                                        :element:
    :PROPERTIES:
    :custom_id: O100
    :masd.codec.stereotypes: dogen::handcrafted::typeable

@@ -46,7 +46,7 @@ The logical model representation in the logical-physical space.
 
 The physical model representation in the logical-physical space.
 
-*** logical_physical_regions                                      :attribute:
+*** logical physical regions                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<logical_physical_region>
     :END:
@@ -69,7 +69,7 @@ Details of the origin of this model element.
 
 Details of the provenance of this model element.
 
-** logical_physical_region                                          :element:
+** logical physical region                                          :element:
    :PROPERTIES:
    :custom_id: O29
    :END:
@@ -77,21 +77,21 @@ Details of the provenance of this model element.
 Represents a region of logical-physical space with a single logical element and
 its associated physical elements.
 
-*** logical_element                                               :attribute:
+*** logical element                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<logical::entities::element>
     :END:
 
 Logical element that gives rise to the artefact.
 
-*** physical_region                                               :attribute:
+*** physical region                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: physical::entities::region
     :END:
 
 Physical artefacts that will be produced from the logical element.
 
-** model_set                                                        :element:
+** model set                                                        :element:
    :PROPERTIES:
    :custom_id: O32
    :masd.codec.stereotypes: Provenance
@@ -114,12 +114,12 @@ Models that belong to this set.
 
 Contains all of the text transforms available.
 
-** model_to_text_chain                                              :element:
+** model to text chain                                              :element:
    :PROPERTIES:
    :custom_id: O4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** model_generation_chain                                           :element:
+** model generation chain                                           :element:
    :PROPERTIES:
    :custom_id: O5
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -130,14 +130,14 @@ Contains all of the text transforms available.
    :masd.cpp.types.class_forward_declarations.enabled: true
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
-*** physical_meta_model                                           :attribute:
+*** physical meta model                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<physical::entities::meta_model>
     :END:
 
 Meta-model for the physical dimension.
 
-*** output_directory_path                                         :attribute:
+*** output directory path                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::filesystem::path
     :END:
@@ -148,14 +148,14 @@ FIXME: to be removed
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<tracing::tracer>
     :END:
-*** generation_timestamp                                          :attribute:
+*** generation timestamp                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
 Human readable timestamp of when the generation took place.
 
-** transformation_error                                             :element:
+** transformation error                                             :element:
    :PROPERTIES:
    :custom_id: O7
    :masd.codec.stereotypes: masd::exception
@@ -163,12 +163,12 @@ Human readable timestamp of when the generation took place.
 
 An error occurred whilst applying a transformation.
 
-** registrar_error                                                  :element:
+** registrar error                                                  :element:
    :PROPERTIES:
    :custom_id: O8
    :masd.codec.stereotypes: masd::exception
    :END:
-** model_to_text_transform                                          :element:
+** model to text transform                                          :element:
    :PROPERTIES:
    :custom_id: O31
    :masd.cpp.types.class_forward_declarations.enabled: true
@@ -200,27 +200,27 @@ C++ technical space, or associated minor technical spaces.
 
 Contains the implementation files.
 
-**** external_modules_path_contribution                           :attribute:
+**** external modules path contribution                           :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** model_modules_path_contribution                              :attribute:
+**** model modules path contribution                              :attribute:
      :PROPERTIES:
      :masd.codec.value: as_path_components
      :END:
-**** facet_path_contribution                                      :attribute:
+**** facet path contribution                                      :attribute:
      :PROPERTIES:
      :masd.codec.value: as_directories
      :END:
-**** requires_relative_path                                       :attribute:
+**** requires relative path                                       :attribute:
      :PROPERTIES:
      :masd.codec.value: false
      :END:
-**** directory_name                                               :attribute:
+**** directory name                                               :attribute:
      :PROPERTIES:
      :masd.codec.value: src
      :END:
-*** public_headers                                                  :element:
+*** public headers                                                  :element:
     :PROPERTIES:
     :custom_id: O40
     :masd.codec.stereotypes: masd::physical::part
@@ -228,23 +228,23 @@ Contains the implementation files.
 
 Contains the header files that are publicly visible.
 
-**** external_modules_path_contribution                           :attribute:
+**** external modules path contribution                           :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** model_modules_path_contribution                              :attribute:
+**** model modules path contribution                              :attribute:
      :PROPERTIES:
      :masd.codec.value: as_path_components
      :END:
-**** facet_path_contribution                                      :attribute:
+**** facet path contribution                                      :attribute:
      :PROPERTIES:
      :masd.codec.value: as_directories
      :END:
-**** requires_relative_path                                       :attribute:
+**** requires relative path                                       :attribute:
      :PROPERTIES:
      :masd.codec.value: true
      :END:
-**** directory_name                                               :attribute:
+**** directory name                                               :attribute:
      :PROPERTIES:
      :masd.codec.value: include
      :END:
@@ -256,27 +256,27 @@ Contains the header files that are publicly visible.
 
 Contains the generated test files.
 
-**** external_modules_path_contribution                           :attribute:
+**** external modules path contribution                           :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** model_modules_path_contribution                              :attribute:
+**** model modules path contribution                              :attribute:
      :PROPERTIES:
      :masd.codec.value: as_path_components
      :END:
-**** facet_path_contribution                                      :attribute:
+**** facet path contribution                                      :attribute:
      :PROPERTIES:
      :masd.codec.value: as_directories
      :END:
-**** requires_relative_path                                       :attribute:
+**** requires relative path                                       :attribute:
      :PROPERTIES:
      :masd.codec.value: false
      :END:
-**** directory_name                                               :attribute:
+**** directory name                                               :attribute:
      :PROPERTIES:
      :masd.codec.value: generated_tests
      :END:
-*** standard_header_file                                            :element:
+*** standard header file                                            :element:
     :PROPERTIES:
     :custom_id: O42
     :masd.codec.stereotypes: masd::physical::archetype_kind
@@ -284,7 +284,7 @@ Contains the generated test files.
 
 Header file generated by Dogen.
 
-**** file_extension                                               :attribute:
+**** file extension                                               :attribute:
      :PROPERTIES:
      :masd.codec.value: hpp
      :END:
@@ -305,7 +305,7 @@ C++ technical space.
      :custom_id: O54
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** smart_pointer_helper                                           :element:
+**** smart pointer helper                                           :element:
      :PROPERTIES:
      :custom_id: O137
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -318,7 +318,7 @@ C++ technical space.
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -351,7 +351,7 @@ const <#= qn #>& rhs) {
 #>
 
 #+end_src
-**** archetype_class_header_transform                               :element:
+**** archetype class header transform                               :element:
      :PROPERTIES:
      :custom_id: O187
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype
@@ -365,7 +365,7 @@ const <#= qn #>& rhs) {
 
 Generates header files for archetypes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -425,7 +425,7 @@ void apply(const text::transforms::context& ctx, const text::entities::model& lp
 #>
 
 #+end_src
-**** archetype_class_implementation_transform                       :element:
+**** archetype class implementation transform                       :element:
      :PROPERTIES:
      :custom_id: O188
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype
@@ -437,7 +437,7 @@ void apply(const text::transforms::context& ctx, const text::entities::model& lp
 
 Generates implementation files for archetypes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -474,7 +474,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** archetype_class_header_factory                                 :element:
+**** archetype class header factory                                 :element:
      :PROPERTIES:
      :custom_id: O189
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype
@@ -489,7 +489,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates header files for archetype factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -551,7 +551,7 @@ public:
 #>
 
 #+end_src
-**** archetype_class_implementation_factory                         :element:
+**** archetype class implementation factory                         :element:
      :PROPERTIES:
      :custom_id: O190
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype
@@ -565,7 +565,7 @@ public:
 
 Generates implementation files for archetype factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -686,7 +686,7 @@ physical::entities::archetype <#= sn #>::make() {
 #>
 
 #+end_src
-**** facet_class_header_transform                                   :element:
+**** facet class header transform                                   :element:
      :PROPERTIES:
      :custom_id: O191
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_facet
@@ -701,7 +701,7 @@ physical::entities::archetype <#= sn #>::make() {
 
 Generates header files for facet transforms.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -760,7 +760,7 @@ public:
 #>
 
 #+end_src
-**** facet_class_implementation_transform                           :element:
+**** facet class implementation transform                           :element:
      :PROPERTIES:
      :custom_id: O192
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_facet
@@ -777,7 +777,7 @@ public:
 
 Generates implementation files for facet transforms.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -856,7 +856,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
 #>
 
 #+end_src
-**** facet_class_header_factory                                     :element:
+**** facet class header factory                                     :element:
      :PROPERTIES:
      :custom_id: O193
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_facet
@@ -871,7 +871,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
 
 Generates header files for facet factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -930,7 +930,7 @@ public:
 #>
 
 #+end_src
-**** facet_class_implementation_factory                             :element:
+**** facet class implementation factory                             :element:
      :PROPERTIES:
      :custom_id: O194
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_facet
@@ -947,7 +947,7 @@ public:
 
 Generates implementation files for facet factory.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1066,7 +1066,7 @@ physical::entities::facet <#= sn #>::make() {
 #>
 
 #+end_src
-**** backend_class_header_transform                                 :element:
+**** backend class header transform                                 :element:
      :PROPERTIES:
      :custom_id: O195
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_backend
@@ -1078,7 +1078,7 @@ physical::entities::facet <#= sn #>::make() {
 
 Generates header files for archetypes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1137,7 +1137,7 @@ public:
 #>
 
 #+end_src
-**** backend_class_implementation_transform                         :element:
+**** backend class implementation transform                         :element:
      :PROPERTIES:
      :custom_id: O196
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_backend
@@ -1149,7 +1149,7 @@ public:
 
 Generates implementation files for archetypes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1249,7 +1249,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 #>
 
 #+end_src
-**** backend_class_header_factory                                   :element:
+**** backend class header factory                                   :element:
      :PROPERTIES:
      :custom_id: O197
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_backend
@@ -1263,7 +1263,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 
 Generates header files for backend factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1322,7 +1322,7 @@ public:
 #>
 
 #+end_src
-**** part_class_header_transform                                    :element:
+**** part class header transform                                    :element:
      :PROPERTIES:
      :custom_id: O198
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
@@ -1334,7 +1334,7 @@ public:
 
 Generates header files for parts.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1384,7 +1384,7 @@ public:
 #>
 
 #+end_src
-**** part_class_header_factory                                      :element:
+**** part class header factory                                      :element:
      :PROPERTIES:
      :custom_id: O199
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
@@ -1398,7 +1398,7 @@ public:
 
 Generates header files for part factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1457,7 +1457,7 @@ public:
 #>
 
 #+end_src
-**** helper_class_header_transform                                  :element:
+**** helper class header transform                                  :element:
      :PROPERTIES:
      :custom_id: O200
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
@@ -1469,7 +1469,7 @@ public:
 
 Generates header files for helpers.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1534,7 +1534,7 @@ public:
 #>
 
 #+end_src
-**** helper_class_header_factory                                    :element:
+**** helper class header factory                                    :element:
      :PROPERTIES:
      :custom_id: O201
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
@@ -1548,7 +1548,7 @@ public:
 
 Generates header files for helper factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1610,7 +1610,7 @@ public:
 #>
 
 #+end_src
-**** archetype_kind_class_header_factory                            :element:
+**** archetype kind class header factory                            :element:
      :PROPERTIES:
      :custom_id: O202
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
@@ -1624,7 +1624,7 @@ public:
 
 Generates header files for archetype_kind factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1683,7 +1683,7 @@ public:
 #>
 
 #+end_src
-**** backend_class_implementation_factory                           :element:
+**** backend class implementation factory                           :element:
      :PROPERTIES:
      :custom_id: O203
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_backend
@@ -1695,7 +1695,7 @@ public:
 
 Generates implementation files for backend factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1842,7 +1842,7 @@ physical::entities::backend <#= sn #>::make() {
 #>
 
 #+end_src
-**** part_class_implementation_transform                            :element:
+**** part class implementation transform                            :element:
      :PROPERTIES:
      :custom_id: O204
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
@@ -1854,7 +1854,7 @@ physical::entities::backend <#= sn #>::make() {
 
 Generates implementation files for parts.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1890,7 +1890,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** part_class_implementation_factory                              :element:
+**** part class implementation factory                              :element:
      :PROPERTIES:
      :custom_id: O205
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_part
@@ -1902,7 +1902,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates implementation files for part factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -1984,7 +1984,7 @@ physical::entities::part <#= sn #>::make() {
 #>
 
 #+end_src
-**** helper_class_implementation_transform                          :element:
+**** helper class implementation transform                          :element:
      :PROPERTIES:
      :custom_id: O206
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
@@ -1996,7 +1996,7 @@ physical::entities::part <#= sn #>::make() {
 
 Generates implementation files for helpers.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2033,7 +2033,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** helper_class_implementation_factory                            :element:
+**** helper class implementation factory                            :element:
      :PROPERTIES:
      :custom_id: O207
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_helper
@@ -2045,7 +2045,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates implementation files for helper factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2188,7 +2188,7 @@ physical::entities::helper <#= sn #>::make() {
 #>
 
 #+end_src
-**** archetype_kind_class_implementation_factory                    :element:
+**** archetype kind class implementation factory                    :element:
      :PROPERTIES:
      :custom_id: O208
      :masd.physical.logical_meta_element_id: dogen.logical.entities.physical_archetype_kind
@@ -2200,7 +2200,7 @@ physical::entities::helper <#= sn #>::make() {
 
 Generates implementation files for archetype_kind factories.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2267,7 +2267,7 @@ physical::entities::archetype_kind <#= sn #>::make() {
 #>
 
 #+end_src
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O209
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -2277,7 +2277,7 @@ physical::entities::archetype_kind <#= sn #>::make() {
 
 Generates header files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2691,7 +2691,7 @@ inline void swap(
 #>
 
 #+end_src
-**** class_forward_declarations                                     :element:
+**** class forward declarations                                     :element:
      :PROPERTIES:
      :custom_id: O210
      :masd.physical.logical_meta_element_id: dogen.logical.entities.object
@@ -2705,7 +2705,7 @@ inline void swap(
 
 Generates forward declarations for classes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2755,7 +2755,7 @@ class <#= o.name().simple() #>;
 #>
 
 #+end_src
-**** namespace_header                                               :element:
+**** namespace header                                               :element:
      :PROPERTIES:
      :custom_id: O211
      :masd.physical.logical_meta_element_id: dogen.logical.entities.module
@@ -2766,7 +2766,7 @@ class <#= o.name().simple() #>;
 
 Generates header files for namespaces.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2827,7 +2827,7 @@ namespace <#= m.name().simple() #> {
 #>
 
 #+end_src
-**** visitor_header                                                 :element:
+**** visitor header                                                 :element:
      :PROPERTIES:
      :custom_id: O212
      :masd.physical.logical_meta_element_id: dogen.logical.entities.visitor
@@ -2839,7 +2839,7 @@ namespace <#= m.name().simple() #> {
 
 Generates header files for visitors.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -2938,7 +2938,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcep
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O213
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -2948,7 +2948,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcep
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3165,7 +3165,7 @@ inline void swap(
 #>
 
 #+end_src
-**** primitive_forward_declarations                                 :element:
+**** primitive forward declarations                                 :element:
      :PROPERTIES:
      :custom_id: O214
      :masd.physical.logical_meta_element_id: dogen.logical.entities.primitive
@@ -3179,7 +3179,7 @@ inline void swap(
 
 Generates forward declarations for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3229,7 +3229,7 @@ class <#= p.name().simple() #>;
 #>
 
 #+end_src
-**** feature_template_bundle_header                                 :element:
+**** feature template bundle header                                 :element:
      :PROPERTIES:
      :custom_id: O215
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_feature_template_bundle
@@ -3240,7 +3240,7 @@ class <#= p.name().simple() #>;
 
 Generates implementation files for feature template bundles
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3376,7 +3376,7 @@ public:
 #>
 
 #+end_src
-**** feature_bundle_header                                          :element:
+**** feature bundle header                                          :element:
      :PROPERTIES:
      :custom_id: O216
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_feature_bundle
@@ -3387,7 +3387,7 @@ public:
 
 Generates header files for feature bundles.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3524,7 +3524,7 @@ public:
 #>
 
 #+end_src
-**** variability_initializer_header                                 :element:
+**** variability initializer header                                 :element:
      :PROPERTIES:
      :custom_id: O217
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_initializer
@@ -3535,7 +3535,7 @@ public:
 
 Generates header files for feature bundles.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3604,7 +3604,7 @@ public:
 
 Generates implementation file for entry point.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -3659,7 +3659,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #>
 
 #+end_src
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O219
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -3668,7 +3668,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4150,7 +4150,7 @@ const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.nam
 #>
 
 #+end_src
-**** exception_header                                               :element:
+**** exception header                                               :element:
      :PROPERTIES:
      :custom_id: O220
      :masd.physical.logical_meta_element_id: dogen.logical.entities.exception
@@ -4162,7 +4162,7 @@ const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.nam
 
 Generates header files for exceptions.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4257,7 +4257,7 @@ private:
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O221
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -4267,7 +4267,7 @@ private:
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4348,7 +4348,7 @@ enum class <#= ye.name().simple() #> : <#= ast.get_qualified_name(ye.underlying_
 #>
 
 #+end_src
-**** visitor_forward_declarations                                   :element:
+**** visitor forward declarations                                   :element:
      :PROPERTIES:
      :custom_id: O222
      :masd.physical.logical_meta_element_id: dogen.logical.entities.visitor
@@ -4362,7 +4362,7 @@ enum class <#= ye.name().simple() #> : <#= ast.get_qualified_name(ye.underlying_
 
 Generates forward declarations for visitors.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4412,7 +4412,7 @@ class <#= o.name().simple() #>;
 #>
 
 #+end_src
-**** primitive_implementation                                       :element:
+**** primitive implementation                                       :element:
      :PROPERTIES:
      :custom_id: O223
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -4421,7 +4421,7 @@ class <#= o.name().simple() #>;
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4571,7 +4571,7 @@ void <#= sn #>::swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #> {
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O224
      :masd.wale.kvp.containing_namespace: text.transforms.types
@@ -4581,7 +4581,7 @@ void <#= sn #>::swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #> {
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4612,7 +4612,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** feature_template_bundle_implementation                         :element:
+**** feature template bundle implementation                         :element:
      :PROPERTIES:
      :custom_id: O225
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_feature_template_bundle
@@ -4623,7 +4623,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates implementation files for feature templates.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4804,7 +4804,7 @@ std::list<dogen::variability::entities::feature_template>
 #>
 
 #+end_src
-**** feature_bundle_implementation                                  :element:
+**** feature bundle implementation                                  :element:
      :PROPERTIES:
      :custom_id: O226
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_feature_bundle
@@ -4815,7 +4815,7 @@ std::list<dogen::variability::entities::feature_template>
 
 Generates implementation files for feature bundles.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -4993,7 +4993,7 @@ std::list<dogen::variability::entities::feature>
 #>
 
 #+end_src
-**** variability_initializer_implementation                         :element:
+**** variability initializer implementation                         :element:
      :PROPERTIES:
      :custom_id: O227
      :masd.physical.logical_meta_element_id: dogen.logical.entities.variability_initializer
@@ -5004,7 +5004,7 @@ std::list<dogen::variability::entities::feature>
 
 Generates header files for feature bundles.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -5073,7 +5073,7 @@ register_entities(variability::helpers::registrar& rg) {
 #>
 
 #+end_src
-*** base_archetype_configuration                                    :element:
+*** base archetype configuration                                    :element:
     :PROPERTIES:
     :custom_id: O55
     :masd.codec.stereotypes: masd::variability::profile
@@ -5081,11 +5081,11 @@ register_entities(variability::helpers::registrar& rg) {
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.technical_space                                :attribute:
+**** masd.physical.technical space                                :attribute:
      :PROPERTIES:
      :masd.codec.value: cpp
      :END:
-*** tests_configuration                                             :element:
+*** tests configuration                                             :element:
     :PROPERTIES:
     :custom_id: O56
     :masd.variability.binding_point: entity
@@ -5096,19 +5096,19 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to most archetypes in tests.
 
-**** masd.physical.part_id                                        :attribute:
+**** masd.physical.part id                                        :attribute:
      :PROPERTIES:
      :masd.codec.value: masd.cpp.testing
      :END:
-**** masd.physical.wale_template_reference                        :attribute:
+**** masd.physical.wale template reference                        :attribute:
      :PROPERTIES:
      :masd.codec.value: cpp_artefact_transform_implementation
      :END:
-**** masd.physical.relation_status                                :attribute:
+**** masd.physical.relation status                                :attribute:
      :PROPERTIES:
      :masd.codec.value: not_relatable
      :END:
-*** header_configuration                                            :element:
+*** header configuration                                            :element:
     :PROPERTIES:
     :custom_id: O57
     :masd.variability.binding_point: entity
@@ -5119,15 +5119,15 @@ Contains the configuration common to most archetypes in tests.
 
 Contains the configuration common to all c++ header archetypes.
 
-**** masd.physical.part_id                                        :attribute:
+**** masd.physical.part id                                        :attribute:
      :PROPERTIES:
      :masd.codec.value: masd.cpp.public_headers
      :END:
-**** masd.physical.wale_template_reference                        :attribute:
+**** masd.physical.wale template reference                        :attribute:
      :PROPERTIES:
      :masd.codec.value: cpp_artefact_transform_implementation
      :END:
-*** header_facet_default_configuration                              :element:
+*** header facet default configuration                              :element:
     :PROPERTIES:
     :custom_id: O59
     :masd.variability.binding_point: entity
@@ -5135,11 +5135,11 @@ Contains the configuration common to all c++ header archetypes.
     :masd.codec.parent: transforms::cpp::header_configuration
     :masd.codec.stereotypes: masd::variability::profile
     :END:
-**** masd.physical.relation_status                                :attribute:
+**** masd.physical.relation status                                :attribute:
      :PROPERTIES:
      :masd.codec.value: facet_default
      :END:
-*** enumeration_header_configuration                                :element:
+*** enumeration header configuration                                :element:
     :PROPERTIES:
     :custom_id: O60
     :masd.variability.binding_point: entity
@@ -5150,15 +5150,15 @@ Contains the configuration common to all c++ header archetypes.
 
 Contains the configuration common to all enumeration header archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.enumeration
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: enum_header
      :END:
-*** object_header_configuration                                     :element:
+*** object header configuration                                     :element:
     :PROPERTIES:
     :custom_id: O61
     :masd.variability.binding_point: entity
@@ -5169,15 +5169,15 @@ Contains the configuration common to all enumeration header archetypes.
 
 Contains the configuration common to all object header archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.object
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: class_header
      :END:
-*** primitive_header_configuration                                  :element:
+*** primitive header configuration                                  :element:
     :PROPERTIES:
     :custom_id: O62
     :masd.variability.binding_point: entity
@@ -5188,15 +5188,15 @@ Contains the configuration common to all object header archetypes.
 
 Contains the configuration common to all built header archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.primitive
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: primitive_header
      :END:
-*** builtin_header_configuration                                    :element:
+*** builtin header configuration                                    :element:
     :PROPERTIES:
     :custom_id: O63
     :masd.variability.binding_point: entity
@@ -5207,15 +5207,15 @@ Contains the configuration common to all built header archetypes.
 
 Contains the configuration common to all built header archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.builtin
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: builtin_header
      :END:
-*** implementation_configuration                                    :element:
+*** implementation configuration                                    :element:
     :PROPERTIES:
     :custom_id: O58
     :masd.variability.binding_point: entity
@@ -5226,19 +5226,19 @@ Contains the configuration common to all built header archetypes.
 
 Contains the configuration common to all c++ implementation archetypes.
 
-**** masd.physical.part_id                                        :attribute:
+**** masd.physical.part id                                        :attribute:
      :PROPERTIES:
      :masd.codec.value: masd.cpp.implementation
      :END:
-**** masd.physical.wale_template_reference                        :attribute:
+**** masd.physical.wale template reference                        :attribute:
      :PROPERTIES:
      :masd.codec.value: cpp_artefact_transform_implementation
      :END:
-**** masd.physical.relation_status                                :attribute:
+**** masd.physical.relation status                                :attribute:
      :PROPERTIES:
      :masd.codec.value: not_relatable
      :END:
-*** object_implementation_configuration                             :element:
+*** object implementation configuration                             :element:
     :PROPERTIES:
     :custom_id: O72
     :masd.variability.binding_point: entity
@@ -5246,15 +5246,15 @@ Contains the configuration common to all c++ implementation archetypes.
     :masd.codec.parent: transforms::cpp::implementation_configuration
     :masd.codec.stereotypes: masd::variability::profile
     :END:
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.object
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: class_implementation
      :END:
-*** primitive_implementation_configuration                          :element:
+*** primitive implementation configuration                          :element:
     :PROPERTIES:
     :custom_id: O73
     :masd.variability.binding_point: entity
@@ -5262,15 +5262,15 @@ Contains the configuration common to all c++ implementation archetypes.
     :masd.codec.parent: transforms::cpp::implementation_configuration
     :masd.codec.stereotypes: masd::variability::profile
     :END:
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.primitive
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: primitive_implementation
      :END:
-*** enumeration_implementation_configuration                        :element:
+*** enumeration implementation configuration                        :element:
     :PROPERTIES:
     :custom_id: O74
     :masd.variability.binding_point: entity
@@ -5278,11 +5278,11 @@ Contains the configuration common to all c++ implementation archetypes.
     :masd.codec.parent: transforms::cpp::implementation_configuration
     :masd.codec.stereotypes: masd::variability::profile
     :END:
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.enumeration
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: enum_implementation
      :END:
@@ -5303,7 +5303,7 @@ C++ technical space.
      :custom_id: O80
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** date_helper                                                    :element:
+**** date helper                                                    :element:
      :PROPERTIES:
      :custom_id: O140
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5316,7 +5316,7 @@ C++ technical space.
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5344,7 +5344,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** ptime_helper                                                   :element:
+**** ptime helper                                                   :element:
      :PROPERTIES:
      :custom_id: O141
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5357,7 +5357,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5387,7 +5387,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** associative_container_helper                                   :element:
+**** associative container helper                                   :element:
      :PROPERTIES:
      :custom_id: O142
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5400,7 +5400,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5470,7 +5470,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** optional_helper                                                :element:
+**** optional helper                                                :element:
      :PROPERTIES:
      :custom_id: O143
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5483,7 +5483,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5523,7 +5523,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** sequence_container_helper                                      :element:
+**** sequence container helper                                      :element:
      :PROPERTIES:
      :custom_id: O144
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5536,7 +5536,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5574,7 +5574,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** variant_helper                                                 :element:
+**** variant helper                                                 :element:
      :PROPERTIES:
      :custom_id: O145
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5587,7 +5587,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5639,7 +5639,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** time_duration_helper                                           :element:
+**** time duration helper                                           :element:
      :PROPERTIES:
      :custom_id: O146
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5652,7 +5652,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5680,7 +5680,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** ptree_helper                                                   :element:
+**** ptree helper                                                   :element:
      :PROPERTIES:
      :custom_id: O147
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5693,7 +5693,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5726,7 +5726,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** pair_helper                                                    :element:
+**** pair helper                                                    :element:
      :PROPERTIES:
      :custom_id: O148
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5739,7 +5739,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5786,7 +5786,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** smart_pointer_helper                                           :element:
+**** smart pointer helper                                           :element:
      :PROPERTIES:
      :custom_id: O149
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5799,7 +5799,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5835,7 +5835,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** path_helper                                                    :element:
+**** path helper                                                    :element:
      :PROPERTIES:
      :custom_id: O150
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -5848,7 +5848,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.hash
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -5875,7 +5875,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 #>
 
 #+end_src
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O229
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -5884,7 +5884,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 
 Generates header files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -5952,7 +5952,7 @@ public:
 #>
 
 #+end_src
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O230
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -5961,7 +5961,7 @@ public:
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6071,7 +6071,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O231
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -6080,7 +6080,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6134,7 +6134,7 @@ public:
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O232
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -6143,7 +6143,7 @@ public:
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6174,7 +6174,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O233
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -6183,7 +6183,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6249,7 +6249,7 @@ public:
 #>
 
 #+end_src
-**** primitive_implementation                                       :element:
+**** primitive implementation                                       :element:
      :PROPERTIES:
      :custom_id: O234
      :masd.wale.kvp.containing_namespace: text.transforms.hash
@@ -6258,7 +6258,7 @@ public:
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6355,7 +6355,7 @@ M2T transforms related to build files.
      :custom_id: O97
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** include_cmakelists                                             :element:
+**** include cmakelists                                             :element:
      :PROPERTIES:
      :custom_id: O235
      :masd.physical.logical_meta_element_id: dogen.logical.entities.build_cmakelists
@@ -6373,7 +6373,7 @@ M2T transforms related to build files.
 
 Generates cmakelists for tests.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6435,7 +6435,7 @@ install(
 #>
 
 #+end_src
-**** source_cmakelists                                              :element:
+**** source cmakelists                                              :element:
      :PROPERTIES:
      :custom_id: O236
      :masd.physical.logical_meta_element_id: dogen.logical.entities.build_cmakelists
@@ -6453,7 +6453,7 @@ install(
 
 Generates cmakelists for tests.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -6598,7 +6598,7 @@ C++ technical space.
      :custom_id: O98
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** optional_helper                                                :element:
+**** optional helper                                                :element:
      :PROPERTIES:
      :custom_id: O151
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6614,7 +6614,7 @@ C++ technical space.
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6655,7 +6655,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 #>
 
 #+end_src
-**** pair_helper                                                    :element:
+**** pair helper                                                    :element:
      :PROPERTIES:
      :custom_id: O152
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6671,7 +6671,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6710,7 +6710,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 #>
 
 #+end_src
-**** string_helper                                                  :element:
+**** string helper                                                  :element:
      :PROPERTIES:
      :custom_id: O153
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6726,7 +6726,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6752,7 +6752,7 @@ inline std::string tidy_up_string(std::string s) {
 #>
 
 #+end_src
-**** ptree_helper                                                   :element:
+**** ptree helper                                                   :element:
      :PROPERTIES:
      :custom_id: O154
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6768,7 +6768,7 @@ inline std::string tidy_up_string(std::string s) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6807,7 +6807,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 #>
 
 #+end_src
-**** associative_container_helper                                   :element:
+**** associative container helper                                   :element:
      :PROPERTIES:
      :custom_id: O155
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6823,7 +6823,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6885,7 +6885,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 #>
 
 #+end_src
-**** sequence_container_helper                                      :element:
+**** sequence container helper                                      :element:
      :PROPERTIES:
      :custom_id: O156
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6901,7 +6901,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6939,7 +6939,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
 #>
 
 #+end_src
-**** smart_pointer_helper                                           :element:
+**** smart pointer helper                                           :element:
      :PROPERTIES:
      :custom_id: O157
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -6955,7 +6955,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -6996,7 +6996,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
 #>
 
 #+end_src
-**** variant_helper                                                 :element:
+**** variant helper                                                 :element:
      :PROPERTIES:
      :custom_id: O158
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation
@@ -7012,7 +7012,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -7077,12 +7077,12 @@ inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified
 #>
 
 #+end_src
-**** inserter_implementation_helper                                 :element:
+**** inserter implementation helper                                 :element:
      :PROPERTIES:
      :custom_id: O228
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O238
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7091,7 +7091,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= d.name_tree_qualified
 
 Generates header files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7144,7 +7144,7 @@ operator<<(std::ostream& s,
 #>
 
 #+end_src
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O239
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7153,7 +7153,7 @@ operator<<(std::ostream& s,
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7221,7 +7221,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O240
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7230,7 +7230,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7281,7 +7281,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
 #>
 
 #+end_src
-**** enum_implementation                                            :element:
+**** enum implementation                                            :element:
      :PROPERTIES:
      :custom_id: O241
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7290,7 +7290,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
 
 Generates implementation files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7365,7 +7365,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O242
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7374,7 +7374,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7429,7 +7429,7 @@ operator<<(std::ostream& s, const <#= qn #>& v);
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O243
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7438,7 +7438,7 @@ operator<<(std::ostream& s, const <#= qn #>& v);
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7469,7 +7469,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** primitive_implementation                                       :element:
+**** primitive implementation                                       :element:
      :PROPERTIES:
      :custom_id: O244
      :masd.wale.kvp.containing_namespace: text.transforms.io
@@ -7478,7 +7478,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7556,7 +7556,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 #>
 
 #+end_src
-*** visual_studio                                                    :module:
+*** visual studio                                                    :module:
     :PROPERTIES:
     :custom_id: O87
     :masd.codec.dia.comment: true
@@ -7586,7 +7586,7 @@ support.
 
 Generates visual studio solutions.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7658,7 +7658,7 @@ EndGlobal
 #>
 
 #+end_src
-**** msbuild_targets                                                :element:
+**** msbuild targets                                                :element:
      :PROPERTIES:
      :custom_id: O274
      :masd.physical.logical_meta_element_id: dogen.logical.entities.visual_studio_msbuild_targets
@@ -7673,7 +7673,7 @@ EndGlobal
 
 Generates msbuild targets.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7790,7 +7790,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates visual studio project.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -7894,7 +7894,7 @@ facet of the C++ technical space.
      :custom_id: O102
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** path_helper                                                    :element:
+**** path helper                                                    :element:
      :PROPERTIES:
      :custom_id: O175
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -7907,7 +7907,7 @@ facet of the C++ technical space.
      :masd.physical.helpers.owning_facets: masd.cpp.serialization
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -7945,7 +7945,7 @@ void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
 #>
 
 #+end_src
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O263
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -7954,7 +7954,7 @@ void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
 
 Generates header files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8032,7 +8032,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 #>
 
 #+end_src
-**** class_forward_declarations                                     :element:
+**** class forward declarations                                     :element:
      :PROPERTIES:
      :custom_id: O264
      :masd.physical.logical_meta_element_id: dogen.logical.entities.object
@@ -8046,7 +8046,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 
 Generates forward declarations for classes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8100,7 +8100,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O265
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -8109,7 +8109,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8166,7 +8166,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 #>
 
 #+end_src
-**** primitive_forward_declarations                                 :element:
+**** primitive forward declarations                                 :element:
      :PROPERTIES:
      :custom_id: O266
      :masd.physical.logical_meta_element_id: dogen.logical.entities.primitive
@@ -8179,7 +8179,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 
 Generates forward declarations for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8233,7 +8233,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 #>
 
 #+end_src
-**** type_registrar_header                                          :element:
+**** type registrar header                                          :element:
      :PROPERTIES:
      :custom_id: O267
      :masd.physical.logical_meta_element_id: dogen.logical.entities.serialization_type_registrar
@@ -8244,7 +8244,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 
 Generates header files for type registrars.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8301,7 +8301,7 @@ static void register_types(Archive& ar);
 #>
 
 #+end_src
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O268
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -8310,7 +8310,7 @@ static void register_types(Archive& ar);
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8452,7 +8452,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O269
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -8461,7 +8461,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8493,7 +8493,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** primitive_implementation                                       :element:
+**** primitive implementation                                       :element:
      :PROPERTIES:
      :custom_id: O270
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -8502,7 +8502,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8592,7 +8592,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O271
      :masd.wale.kvp.containing_namespace: text.transforms.serialization
@@ -8601,7 +8601,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8648,7 +8648,7 @@ void serialize(Archive& ar, <#= ast.get_qualified_name(ye.name()) #>& v, unsigne
 #>
 
 #+end_src
-**** type_registrar_implementation                                  :element:
+**** type registrar implementation                                  :element:
      :PROPERTIES:
      :custom_id: O272
      :masd.physical.logical_meta_element_id: dogen.logical.entities.serialization_type_registrar
@@ -8659,7 +8659,7 @@ void serialize(Archive& ar, <#= ast.get_qualified_name(ye.name()) #>& v, unsigne
 
 Generates header files for feature bundles.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -8750,7 +8750,7 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 #>
 
 #+end_src
-*** test_data                                                        :module:
+*** test data                                                        :module:
     :PROPERTIES:
     :custom_id: O85
     :masd.codec.dia.comment: true
@@ -8767,7 +8767,7 @@ of the C++ technical space.
      :custom_id: O103
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** date_helper                                                    :element:
+**** date helper                                                    :element:
      :PROPERTIES:
      :custom_id: O159
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8780,7 +8780,7 @@ of the C++ technical space.
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -8808,7 +8808,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** bool_helper                                                    :element:
+**** bool helper                                                    :element:
      :PROPERTIES:
      :custom_id: O160
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8821,7 +8821,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -8843,7 +8843,7 @@ bool create_bool(const unsigned int position) {
 #>
 
 #+end_src
-**** char_helper                                                    :element:
+**** char helper                                                    :element:
      :PROPERTIES:
      :custom_id: O161
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8856,7 +8856,7 @@ bool create_bool(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -8882,7 +8882,7 @@ void char_helper_transform::apply(std::ostream& os, const logical::entities::mod
 #>
 
 #+end_src
-**** ptree_helper                                                   :element:
+**** ptree helper                                                   :element:
      :PROPERTIES:
      :custom_id: O162
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8895,7 +8895,7 @@ void char_helper_transform::apply(std::ostream& os, const logical::entities::mod
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -8926,7 +8926,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** associative_container_helper                                   :element:
+**** associative container helper                                   :element:
      :PROPERTIES:
      :custom_id: O163
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8939,7 +8939,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -8982,7 +8982,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
 #>
 
 #+end_src
-**** pair_helper                                                    :element:
+**** pair helper                                                    :element:
      :PROPERTIES:
      :custom_id: O164
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -8995,7 +8995,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9026,7 +9026,7 @@ create_<#= ident #>(unsigned int position) {
 #>
 
 #+end_src
-**** number_helper                                                  :element:
+**** number helper                                                  :element:
      :PROPERTIES:
      :custom_id: O165
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9039,7 +9039,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9064,7 +9064,7 @@ void number_helper_transform::apply(std::ostream& os, const logical::entities::m
 #>
 
 #+end_src
-**** variant_helper                                                 :element:
+**** variant helper                                                 :element:
      :PROPERTIES:
      :custom_id: O166
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9077,7 +9077,7 @@ void number_helper_transform::apply(std::ostream& os, const logical::entities::m
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9126,7 +9126,7 @@ create_<#= ident #>(unsigned int position) {
 #>
 
 #+end_src
-**** path_helper                                                    :element:
+**** path helper                                                    :element:
      :PROPERTIES:
      :custom_id: O167
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9139,7 +9139,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9167,7 +9167,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** ptime_helper                                                   :element:
+**** ptime helper                                                   :element:
      :PROPERTIES:
      :custom_id: O168
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9180,7 +9180,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9212,7 +9212,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** optional_helper                                                :element:
+**** optional helper                                                :element:
      :PROPERTIES:
      :custom_id: O169
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9225,7 +9225,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9254,7 +9254,7 @@ create_<#= ident #>(unsigned int position) {
 #>
 
 #+end_src
-**** smart_pointer_helper                                           :element:
+**** smart pointer helper                                           :element:
      :PROPERTIES:
      :custom_id: O170
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9267,7 +9267,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9296,7 +9296,7 @@ create_<#= ident #>(unsigned int position) {
 #>
 
 #+end_src
-**** sequence_container_helper                                      :element:
+**** sequence container helper                                      :element:
      :PROPERTIES:
      :custom_id: O171
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9309,7 +9309,7 @@ create_<#= ident #>(unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9339,7 +9339,7 @@ void sequence_container_helper_transform::apply(std::ostream& os, const logical:
 #>
 
 #+end_src
-**** string_helper                                                  :element:
+**** string helper                                                  :element:
      :PROPERTIES:
      :custom_id: O172
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9352,7 +9352,7 @@ void sequence_container_helper_transform::apply(std::ostream& os, const logical:
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9376,7 +9376,7 @@ std::string create_std_string(const unsigned int position) {
 #>
 
 #+end_src
-**** domain_type_helper                                             :element:
+**** domain type helper                                             :element:
      :PROPERTIES:
      :custom_id: O173
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9389,7 +9389,7 @@ std::string create_std_string(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9438,7 +9438,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** time_duration_helper                                           :element:
+**** time duration helper                                           :element:
      :PROPERTIES:
      :custom_id: O174
      :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
@@ -9451,7 +9451,7 @@ create_<#= ident #>(const unsigned int position) {
      :masd.physical.helpers.owning_facets: masd.cpp.test_data
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -9480,7 +9480,7 @@ create_<#= ident #>(const unsigned int position) {
 #>
 
 #+end_src
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O256
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9489,7 +9489,7 @@ create_<#= ident #>(const unsigned int position) {
 
 Generates header files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -9572,7 +9572,7 @@ public:
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O257
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9581,7 +9581,7 @@ public:
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -9646,7 +9646,7 @@ private:
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O258
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9655,7 +9655,7 @@ private:
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -9728,7 +9728,7 @@ public:
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O259
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9737,7 +9737,7 @@ public:
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -9768,7 +9768,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O260
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9777,7 +9777,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -9985,7 +9985,7 @@ populate(const unsigned int position, result_type& v) {
 #>
 
 #+end_src
-**** enum_implementation                                            :element:
+**** enum implementation                                            :element:
      :PROPERTIES:
      :custom_id: O261
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -9994,7 +9994,7 @@ populate(const unsigned int position, result_type& v) {
 
 Generates implementation files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -10061,7 +10061,7 @@ populate(const unsigned int position, result_type& v) {
 #>
 
 #+end_src
-**** primitive_implementation                                       :element:
+**** primitive implementation                                       :element:
      :PROPERTIES:
      :custom_id: O262
      :masd.wale.kvp.containing_namespace: text.transforms.test_data
@@ -10070,7 +10070,7 @@ populate(const unsigned int position, result_type& v) {
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -10223,7 +10223,7 @@ generated code, in the C++ technical space.
      :custom_id: O104
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** class_implementation                                           :element:
+**** class implementation                                           :element:
      :PROPERTIES:
      :custom_id: O252
      :masd.physical.logical_meta_element_id: dogen.logical.entities.object
@@ -10234,7 +10234,7 @@ generated code, in the C++ technical space.
 
 Generates tests for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -10736,7 +10736,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 Generates entry point for tests.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -10805,7 +10805,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 #>
 
 #+end_src
-**** enum_implementation                                            :element:
+**** enum implementation                                            :element:
      :PROPERTIES:
      :custom_id: O254
      :masd.physical.logical_meta_element_id: dogen.logical.entities.enumeration
@@ -10816,7 +10816,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 
 Generates tests for enumeration.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11087,7 +11087,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 Generates cmakelists for tests.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11218,7 +11218,7 @@ C++ technical space.
      :custom_id: O99
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** class_header                                                   :element:
+**** class header                                                   :element:
      :PROPERTIES:
      :custom_id: O245
      :masd.wale.kvp.containing_namespace: text.transforms.odb
@@ -11227,7 +11227,7 @@ C++ technical space.
 
 Generates header files for archetypes.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11316,7 +11316,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** builtin_header                                                 :element:
+**** builtin header                                                 :element:
      :PROPERTIES:
      :custom_id: O246
      :masd.wale.kvp.containing_namespace: text.transforms.odb
@@ -11325,7 +11325,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates header files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11356,7 +11356,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 #>
 
 #+end_src
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O247
      :masd.wale.kvp.containing_namespace: text.transforms.odb
@@ -11365,7 +11365,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11418,7 +11418,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** primitive_header                                               :element:
+**** primitive header                                               :element:
      :PROPERTIES:
      :custom_id: O248
      :masd.wale.kvp.containing_namespace: text.transforms.odb
@@ -11427,7 +11427,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates header files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11512,7 +11512,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** object_odb_options                                             :element:
+**** object odb options                                             :element:
      :PROPERTIES:
      :custom_id: O249
      :masd.physical.logical_meta_element_id: dogen.logical.entities.object
@@ -11528,7 +11528,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates object options for odb.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11604,7 +11604,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** primitive_odb_options                                          :element:
+**** primitive odb options                                          :element:
      :PROPERTIES:
      :custom_id: O250
      :masd.physical.logical_meta_element_id: dogen.logical.entities.primitive
@@ -11620,7 +11620,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates object options for odb.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11696,7 +11696,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-**** common_odb_options                                             :element:
+**** common odb options                                             :element:
      :PROPERTIES:
      :custom_id: O251
      :masd.physical.logical_meta_element_id: dogen.logical.entities.orm_common_odb_options
@@ -11711,7 +11711,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates object options for odb.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11810,7 +11810,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 #>
 
 #+end_src
-*** lexical_cast                                                     :module:
+*** lexical cast                                                     :module:
     :PROPERTIES:
     :custom_id: O88
     :masd.codec.dia.comment: true
@@ -11827,7 +11827,7 @@ and to string.
      :custom_id: O100
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** enum_header                                                    :element:
+**** enum header                                                    :element:
      :PROPERTIES:
      :custom_id: O276
      :masd.wale.kvp.containing_namespace: text.transforms.lexical_cast
@@ -11836,7 +11836,7 @@ and to string.
 
 Generates header files for enumerations.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -11955,52 +11955,52 @@ inline <#= qn #> lexical_cast(const std::string & s) {
 
 FIXME: to be removed.
 
-**** external_modules_path_contribution                           :attribute:
+**** external modules path contribution                           :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** model_modules_path_contribution                              :attribute:
+**** model modules path contribution                              :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** facet_path_contribution                                      :attribute:
+**** facet path contribution                                      :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** requires_relative_path                                       :attribute:
+**** requires relative path                                       :attribute:
      :PROPERTIES:
      :masd.codec.value: false
      :END:
-** helper_transform                                                 :element:
+** helper transform                                                 :element:
    :PROPERTIES:
    :custom_id: O43
    :masd.cpp.types.class_forward_declarations.enabled: true
    :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
    :END:
-** helper_chain                                                     :element:
+** helper chain                                                     :element:
    :PROPERTIES:
    :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** physical_model                                                :attribute:
+*** physical model                                                :attribute:
     :PROPERTIES:
     :masd.codec.type: physical::entities::meta_model
     :END:
-** helper_repository                                                :element:
+** helper repository                                                :element:
    :PROPERTIES:
    :custom_id: O45
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
-*** helpers_by_family                                             :attribute:
+*** helpers by family                                             :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<std::string, std::unordered_map<identification::entities::physical_meta_id, std::list<std::shared_ptr<helper_transform>>>>
     :END:
-** helper_registrar                                                 :element:
+** helper registrar                                                 :element:
    :PROPERTIES:
    :custom_id: O46
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-*** repository_                                                   :attribute:
+*** repository                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: helper_repository
     :END:
@@ -12021,7 +12021,7 @@ Takes types in the logical model and creates text
 representations of the these types according to the grammar
 of the C# technical space.
 
-*** archetype_configuration                                         :element:
+*** archetype configuration                                         :element:
     :PROPERTIES:
     :custom_id: O107
     :masd.variability.binding_point: entity
@@ -12031,23 +12031,23 @@ of the C# technical space.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.part_id                                        :attribute:
+**** masd.physical.part id                                        :attribute:
      :PROPERTIES:
      :masd.codec.value: masd.csharp.implementation
      :END:
-**** masd.physical.wale_template_reference                        :attribute:
+**** masd.physical.wale template reference                        :attribute:
      :PROPERTIES:
      :masd.codec.value: csharp_transform_implementation
      :END:
-**** masd.physical.relation_status                                :attribute:
+**** masd.physical.relation status                                :attribute:
      :PROPERTIES:
      :masd.codec.value: facet_default
      :END:
-**** masd.physical.technical_space                                :attribute:
+**** masd.physical.technical space                                :attribute:
      :PROPERTIES:
      :masd.codec.value: csharp
      :END:
-*** primitive_configuration                                         :element:
+*** primitive configuration                                         :element:
     :PROPERTIES:
     :custom_id: O108
     :masd.variability.binding_point: entity
@@ -12058,15 +12058,15 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.primitive
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: primitive
      :END:
-*** enumeration_configuration                                       :element:
+*** enumeration configuration                                       :element:
     :PROPERTIES:
     :custom_id: O109
     :masd.variability.binding_point: entity
@@ -12077,15 +12077,15 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.enumeration
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: enum
      :END:
-*** object_configuration                                            :element:
+*** object configuration                                            :element:
     :PROPERTIES:
     :custom_id: O110
     :masd.variability.binding_point: entity
@@ -12096,15 +12096,15 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.object
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: class
      :END:
-*** exception_configuration                                         :element:
+*** exception configuration                                         :element:
     :PROPERTIES:
     :custom_id: O111
     :masd.variability.binding_point: entity
@@ -12115,15 +12115,15 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.exception
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: exception
      :END:
-*** builtin_configuration                                           :element:
+*** builtin configuration                                           :element:
     :PROPERTIES:
     :custom_id: O112
     :masd.variability.binding_point: entity
@@ -12134,11 +12134,11 @@ Contains the configuration common to all archetypes.
 
 Contains the configuration common to all archetypes.
 
-**** masd.physical.logical_meta_element_id                        :attribute:
+**** masd.physical.logical meta element id                        :attribute:
      :PROPERTIES:
      :masd.codec.value: dogen.logical.entities.builtin
      :END:
-**** masd.wale.kvp.archetype.simple_name                          :attribute:
+**** masd.wale.kvp.archetype.simple name                          :attribute:
      :PROPERTIES:
      :masd.codec.value: builtin
      :END:
@@ -12150,19 +12150,19 @@ Contains the configuration common to all archetypes.
 
 Contains the implementation files.
 
-**** external_modules_path_contribution                           :attribute:
+**** external modules path contribution                           :attribute:
      :PROPERTIES:
      :masd.codec.value: none
      :END:
-**** model_modules_path_contribution                              :attribute:
+**** model modules path contribution                              :attribute:
      :PROPERTIES:
      :masd.codec.value: as_path_components
      :END:
-**** facet_path_contribution                                      :attribute:
+**** facet path contribution                                      :attribute:
      :PROPERTIES:
      :masd.codec.value: as_directories
      :END:
-**** requires_relative_path                                       :attribute:
+**** requires relative path                                       :attribute:
      :PROPERTIES:
      :masd.codec.value: false
      :END:
@@ -12182,7 +12182,7 @@ the C# technical space.
      :custom_id: O127
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** floating_point_number_helper                                   :element:
+**** floating point number helper                                   :element:
      :PROPERTIES:
      :custom_id: O176
      :masd.physical.wale_template_reference: csharp_helper_transform_implementation
@@ -12195,7 +12195,7 @@ the C# technical space.
      :masd.physical.helpers.owning_facets: masd.csharp.types
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -12233,7 +12233,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -12545,7 +12545,7 @@ using System;
 
 Generates implementation files for exceptions.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -12609,7 +12609,7 @@ using System;
 
 Generates implementation files for builtins.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -12649,7 +12649,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& /*lps*/
 
 Generates implementation files for enums.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -12730,7 +12730,7 @@ using System;
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -12903,7 +12903,7 @@ C# technical space.
      :custom_id: O128
      :masd.codec.stereotypes: dogen::handcrafted::typeable
      :END:
-**** enumerable_helper                                              :element:
+**** enumerable helper                                              :element:
      :PROPERTIES:
      :custom_id: O177
      :masd.physical.wale_template_reference: csharp_helper_transform_implementation
@@ -12916,7 +12916,7 @@ C# technical space.
      :masd.physical.helpers.owning_facets: masd.csharp.io
      :masd.codec.stereotypes: masd::physical::helper
      :END:
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=os #>
@@ -12953,7 +12953,7 @@ apply(std::ostream& os, const logical::entities::model& /*m*/,
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -13094,7 +13094,7 @@ using System;
 
 Generates implementation files for enums.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -13189,7 +13189,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -13303,7 +13303,7 @@ using System;
 
 Generates implementation files for assistants.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -13841,7 +13841,7 @@ using System.Collections;
 #>
 
 #+end_src
-*** test_data                                                        :module:
+*** test data                                                        :module:
     :PROPERTIES:
     :custom_id: O121
     :masd.codec.dia.comment: true
@@ -13867,7 +13867,7 @@ the C# technical space.
 
 Generates implementation files for objects.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14083,7 +14083,7 @@ using System.Collections.Generic;
 
 Generates implementation files for assistants.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14332,7 +14332,7 @@ using System.Collections.Specialized;
 
 Generates implementation files for enums.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14480,7 +14480,7 @@ using System.Collections.Generic;
 
 Generates implementation files for primitives.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14640,7 +14640,7 @@ using System.Collections.Generic;
 #>
 
 #+end_src
-*** visual_studio                                                    :module:
+*** visual studio                                                    :module:
     :PROPERTIES:
     :custom_id: O122
     :masd.codec.dia.comment: true
@@ -14672,7 +14672,7 @@ facet of the C# technical space.
 
 Generates visual studio project.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14773,7 +14773,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
 Generates visual studio solutions.
 
-***** stitch_template_content                                     :attribute:
+***** stitch template content                                     :attribute:
 
 #+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
@@ -14853,16 +14853,16 @@ EndGlobal
    :custom_id: O132
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** text_transform_repository                                        :element:
+** text transform repository                                        :element:
    :PROPERTIES:
    :custom_id: O179
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
-*** model_to_text_transforms_by_meta_name                         :attribute:
+*** model to text transforms by meta name                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<model_to_text_transform>>>
     :END:
-** text_transform_registrar                                         :element:
+** text transform registrar                                         :element:
    :PROPERTIES:
    :custom_id: O182
    :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -14871,7 +14871,7 @@ EndGlobal
   :PROPERTIES:
   :custom_id: O9
   :END:
-** formatting_error                                                 :element:
+** formatting error                                                 :element:
    :PROPERTIES:
    :custom_id: O10
    :masd.codec.stereotypes: masd::exception
@@ -14879,37 +14879,37 @@ EndGlobal
 
 An error has occurred while formatting.
 
-** namespace_formatter                                              :element:
+** namespace formatter                                              :element:
    :PROPERTIES:
    :custom_id: O11
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** scoped_namespace_formatter                                       :element:
+** scoped namespace formatter                                       :element:
    :PROPERTIES:
    :custom_id: O12
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** boilerplate_formatter                                            :element:
+** boilerplate formatter                                            :element:
    :PROPERTIES:
    :custom_id: O14
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** scoped_boilerplate_formatter                                     :element:
+** scoped boilerplate formatter                                     :element:
    :PROPERTIES:
    :custom_id: O15
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** dependencies_formatter                                           :element:
+** dependencies formatter                                           :element:
    :PROPERTIES:
    :custom_id: O16
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** header_guard_formatter                                           :element:
+** header guard formatter                                           :element:
    :PROPERTIES:
    :custom_id: O17
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** boilerplate_properties                                           :element:
+** boilerplate properties                                           :element:
    :PROPERTIES:
    :custom_id: O18
    :END:
@@ -14925,19 +14925,19 @@ An error has occurred while formatting.
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
-*** header_guard                                                  :attribute:
+*** header guard                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
-*** technical_space                                               :attribute:
+*** technical space                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: identification::entities::technical_space
     :END:
-*** generate_preamble                                             :attribute:
+*** generate preamble                                             :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-*** generate_header_guards                                        :attribute:
+*** generate header guards                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
@@ -14961,7 +14961,7 @@ An error has occurred while formatting.
   :custom_id: O28
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-* cpp_artefact_transform_implementation                             :element:
+* cpp artefact transform implementation                             :element:
   :PROPERTIES:
   :custom_id: O37
   :masd.codec.stereotypes: masd::templating::logic_less_templates
@@ -14993,7 +14993,7 @@ const physical::entities::archetype& {{archetype.simple_name}}_transform::archet
   :custom_id: O131
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* csharp_transform_implementation                                   :element:
+* csharp transform implementation                                   :element:
   :PROPERTIES:
   :custom_id: O133
   :masd.codec.stereotypes: masd::templating::logic_less_templates
@@ -15020,7 +15020,7 @@ const physical::entities::archetype& {{archetype.simple_name}}_transform::archet
 }
 
 #+end_src
-* csharp_helper_transform_implementation                            :element:
+* csharp helper transform implementation                            :element:
   :PROPERTIES:
   :custom_id: O134
   :masd.codec.stereotypes: masd::templating::logic_less_templates
@@ -15070,7 +15070,7 @@ bool {{class.simple_name}}::is_enabled(
 }
 
 #+end_src
-* cpp_helper_transform_implementation                               :element:
+* cpp helper transform implementation                               :element:
   :PROPERTIES:
   :custom_id: O138
   :masd.codec.stereotypes: masd::templating::logic_less_templates
@@ -15122,7 +15122,7 @@ bool {{class.simple_name}}::is_enabled(
 }
 
 #+end_src
-* cpp_helper_transform_implementation_enabled                       :element:
+* cpp helper transform implementation enabled                       :element:
   :PROPERTIES:
   :custom_id: O139
   :masd.codec.stereotypes: masd::templating::logic_less_templates

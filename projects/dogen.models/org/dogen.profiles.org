@@ -46,15 +46,15 @@ Configuration for the decoration elements.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-*** licence_name                                                  :attribute:
+*** licence name                                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: masd.gpl_v3
     :END:
-*** modeline_group_name                                           :attribute:
+*** modeline group name                                           :attribute:
     :PROPERTIES:
     :masd.codec.value: masd.emacs
     :END:
-*** copyright_notice                                              :attribute:
+*** copyright notice                                              :attribute:
     :PROPERTIES:
     :masd.variability.value: Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
     :END:
@@ -67,11 +67,11 @@ Configuration for the decoration elements.
 
 Configuration for extraction.
 
-*** delete_extra_files                                            :attribute:
+*** delete extra files                                            :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-*** delete_empty_directories                                      :attribute:
+*** delete empty directories                                      :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
@@ -100,11 +100,11 @@ Regexes to ignore.
 
 FIXME: we should remove all ignores related to tests and add a proper facet for manual tests.
 
-*** ignore_files_matching_regex                                   :attribute:
+*** ignore files matching regex                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: .*/test/.*
     :END:
-*** ignore_files_matching_regex                                   :attribute:
+*** ignore files matching regex                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: .*/tests/.*
     :END:
@@ -118,7 +118,7 @@ FIXME: we should remove all ignores related to tests and add a proper facet for 
     :PROPERTIES:
     :masd.codec.value: c++-17
     :END:
-** base_profile                                                     :element:
+** base profile                                                     :element:
    :PROPERTIES:
    :custom_id: O5
    :masd.variability.key_prefix: masd.cpp
@@ -140,7 +140,7 @@ Configures the main options for the C++ backend.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-*** lexical_cast.enabled                                          :attribute:
+*** lexical cast.enabled                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
@@ -148,11 +148,11 @@ Configures the main options for the C++ backend.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-*** test_data.enabled                                             :attribute:
+*** test data.enabled                                             :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** default_profile                                                  :element:
+** default profile                                                  :element:
    :PROPERTIES:
    :custom_id: O7
    :masd.variability.binding_point: global
@@ -162,7 +162,7 @@ Configures the main options for the C++ backend.
 
 Variability profile for a typical dogen model.
 
-** disable_all_facets                                               :element:
+** disable all facets                                               :element:
    :PROPERTIES:
    :custom_id: O9
    :masd.variability.binding_point: global
@@ -178,7 +178,7 @@ Disables all facets in the C++ backend.
     :masd.variability.instantiation_domain_name: masd.facet
     :masd.codec.value: false
     :END:
-** relational_profile                                               :element:
+** relational profile                                               :element:
    :PROPERTIES:
    :custom_id: O29
    :masd.variability.key_prefix: masd.cpp
@@ -193,13 +193,13 @@ Disables all facets in the C++ backend.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-** test_all_facets                                                  :element:
+** test all facets                                                  :element:
    :PROPERTIES:
    :custom_id: O31
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile
    :END:
-*** masd.decoration.marker_name                                   :attribute:
+*** masd.decoration.marker name                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: dogen.profiles.test_marker
     :END:
@@ -240,7 +240,7 @@ Model element is defined as a type.
 If you are typeable, it probably means you do not want the default configuration,
 so we disable all facets.
 
-** pretty_printable                                                 :element:
+** pretty printable                                                 :element:
    :PROPERTIES:
    :custom_id: O12
    :masd.variability.binding_point: element
@@ -295,7 +295,7 @@ Base profile for model elements that are manually generated.
     :PROPERTIES:
     :masd.codec.value: dogen.profiles.base.disable_all_facets
     :END:
-** handcrafted_pretty_printable                                     :element:
+** handcrafted pretty printable                                     :element:
    :PROPERTIES:
    :custom_id: O17
    :masd.variability.binding_point: element
@@ -312,7 +312,7 @@ Base profile for model elements that are manually generated.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** handcrafted_typeable                                             :element:
+** handcrafted typeable                                             :element:
    :PROPERTIES:
    :custom_id: O15
    :masd.variability.binding_point: element
@@ -332,11 +332,11 @@ Configuration for model elements that are generated manually by the user.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-*** class_forward_declarations.enabled                            :attribute:
+*** class forward declarations.enabled                            :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** header_only                                                      :element:
+** header only                                                      :element:
    :PROPERTIES:
    :custom_id: O18
    :masd.variability.binding_point: global
@@ -348,7 +348,7 @@ Configuration for model elements that are generated manually by the user.
 
 This element has only a types header file.
 
-*** class_implementation.enabled                                  :attribute:
+*** class implementation.enabled                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
@@ -359,11 +359,11 @@ This element has only a types header file.
    :masd.variability.stereotype: dogen::inheritable
    :masd.codec.stereotypes: masd::variability::profile
    :END:
-*** masd.generalization.is_final                                  :attribute:
+*** masd.generalization.is final                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** implementation_only                                              :element:
+** implementation only                                              :element:
    :PROPERTIES:
    :custom_id: O23
    :masd.variability.binding_point: element
@@ -375,19 +375,19 @@ This element has only a types header file.
 
 This element has only a types implementation file.
 
-*** class_header.enabled                                          :attribute:
+*** class header.enabled                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-*** class_forward_declarations.enabled                            :attribute:
+*** class forward declarations.enabled                            :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-*** class_implementation.enabled                                  :attribute:
+*** class implementation.enabled                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-** handcrafted_serializable                                         :element:
+** handcrafted serializable                                         :element:
    :PROPERTIES:
    :custom_id: O26
    :masd.variability.binding_point: element
@@ -446,7 +446,7 @@ The element does not have a types facet.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** handcrafted_cmake                                                :element:
+** handcrafted cmake                                                :element:
    :PROPERTIES:
    :custom_id: O36
    :masd.variability.binding_point: element
@@ -462,7 +462,7 @@ The element does not have a types facet.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
-** forward_declarable                                               :element:
+** forward declarable                                               :element:
    :PROPERTIES:
    :custom_id: O43
    :masd.variability.binding_point: element
@@ -473,24 +473,24 @@ The element does not have a types facet.
 
 Element has forward declarations.
 
-*** class_forward_declarations.enabled                            :attribute:
+*** class forward declarations.enabled                            :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
-* test_marker                                                       :element:
+* test marker                                                       :element:
   :PROPERTIES:
   :custom_id: O32
   :masd.codec.stereotypes: masd::decoration::generation_marker
   :END:
-** add_date_time                                                  :attribute:
+** add date time                                                  :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:
-** add_warning                                                    :attribute:
+** add warning                                                    :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:
-** add_dogen_version                                              :attribute:
+** add dogen version                                              :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:

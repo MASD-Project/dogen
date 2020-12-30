@@ -20,7 +20,7 @@ This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
 
-* one_property                                                      :element:
+* one property                                                      :element:
   :PROPERTIES:
   :custom_id: O0
   :END:

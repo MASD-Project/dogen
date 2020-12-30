@@ -23,17 +23,17 @@ it looks good, then run it against all other dogen models.
 We should try to keep all elements in one screen as much
 as possible, so we can evaluate how they work together.
 
-* palette_test_one_one                                              :element:
+* palette test one one                                              :element:
   :PROPERTIES:
   :custom_id: O1
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* palette_test_one_two                                              :element:
+* palette test one two                                              :element:
   :PROPERTIES:
   :custom_id: O2
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* palette_test_one_three                                            :element:
+* palette test one three                                            :element:
   :PROPERTIES:
   :custom_id: O3
   :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
@@ -42,17 +42,17 @@ as possible, so we can evaluate how they work together.
   :PROPERTIES:
   :custom_id: O5
   :END:
-** palette_test_one_one                                             :element:
+** palette test one one                                             :element:
    :PROPERTIES:
    :custom_id: O6
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** palette_test_one_two                                             :element:
+** palette test one two                                             :element:
    :PROPERTIES:
    :custom_id: O7
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
-** palette_test_one_three                                           :element:
+** palette test one three                                           :element:
    :PROPERTIES:
    :custom_id: O8
    :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only

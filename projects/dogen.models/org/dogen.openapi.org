@@ -54,7 +54,7 @@ A declaration of which security mechanisms can be used across the API.
 
 A list of tags used by the specification with additional metadata.
 
-** external_docs                                                  :attribute:
+** external docs                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: external_documentation
    :END:
@@ -79,7 +79,7 @@ The title of the application.
 
 A short description of the application. CommonMark syntax may be used for rich text representation.
 
-** terms_of_service                                               :attribute:
+** terms of service                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
@@ -168,7 +168,7 @@ An object to hold reusable parameter objects.
 
 An object to hold reusable examples objects.
 
-** request_bodies                                                 :attribute:
+** request bodies                                                 :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<std::string, request_body>
    :END:
@@ -182,7 +182,7 @@ An object to hold reusable request bodies objects.
 
 An object to hold reusable header objects.
 
-** security_schemes                                               :attribute:
+** security schemes                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<std::string, security_scheme>
    :END:
@@ -203,7 +203,7 @@ An object to hold reusable links objects.
 
 An object to hold reusable callbacks objects.
 
-* security_requirements                                             :element:
+* security requirements                                             :element:
   :PROPERTIES:
   :custom_id: O5
   :END:
@@ -215,7 +215,7 @@ An object to hold reusable callbacks objects.
   :PROPERTIES:
   :custom_id: O7
   :END:
-* external_documentation                                            :element:
+* external documentation                                            :element:
   :PROPERTIES:
   :custom_id: O8
   :END:
@@ -262,7 +262,7 @@ The license name used for the API.
 
 A URL to the license used for the API.
 
-* server_variable                                                   :element:
+* server variable                                                   :element:
   :PROPERTIES:
   :custom_id: O15
   :END:
@@ -273,7 +273,7 @@ A URL to the license used for the API.
 
 An enumeration of string values to be used if the substitution options are from a limited set.
 
-** default_value                                                  :attribute:
+** default value                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:

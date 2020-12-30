@@ -21,7 +21,7 @@ Provides the top-level API for the dogen product.
   :custom_id: O0
   :masd.codec.stereotypes: masd::fluent
   :END:
-** model_processing                                               :attribute:
+** model processing                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: model_processing_configuration
    :END:
@@ -40,7 +40,7 @@ Configuration for tracing.
    :PROPERTIES:
    :masd.codec.type: boost::optional<reporting_configuration>
    :END:
-** byproduct_directory                                            :attribute:
+** byproduct directory                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
@@ -54,7 +54,7 @@ Directory in which to place all files not directly related to generated code.
 
 Configuration related to database connectivity, if any.
 
-* tracing_level                                                     :element:
+* tracing level                                                     :element:
   :PROPERTIES:
   :custom_id: O1
   :masd.codec.stereotypes: masd::enumeration
@@ -64,7 +64,7 @@ Available levels for tracing transformation.
 
 ** detail                                                         :attribute:
 ** summary                                                        :attribute:
-* tracing_configuration                                             :element:
+* tracing configuration                                             :element:
   :PROPERTIES:
   :custom_id: O2
   :masd.codec.stereotypes: masd::fluent
@@ -88,7 +88,7 @@ Format to use when writting trace files.
 
 Only valid for the file backend.
 
-** guids_enabled                                                  :attribute:
+** guids enabled                                                  :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
@@ -97,7 +97,7 @@ Enable GUIDs in probe stats.
 
 Disabling GUIDs makes comparisons easier.
 
-** logging_impact                                                 :attribute:
+** logging impact                                                 :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
@@ -107,7 +107,7 @@ Additional information to tell tracing about the possible impact of logging.
 Informative string detailing whether logging was off, or set to debug etc. This is
 required in order to be able to compare like-for-like numbers.
 
-** use_short_names                                                :attribute:
+** use short names                                                :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
@@ -115,7 +115,7 @@ required in order to be able to compare like-for-like numbers.
 Use short directory and file names. Useful mainly on windows due to path
 size limitations.
 
-** output_directory                                               :attribute:
+** output directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
@@ -126,21 +126,21 @@ size limitations.
 
 Which backend to use for tracing.
 
-** run_id                                                         :attribute:
+** run id                                                         :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
 
 Identifier to use for the present run.
 
-** filter_regexes                                                 :attribute:
+** filter regexes                                                 :attribute:
    :PROPERTIES:
    :masd.codec.type: std::vector<std::string>
    :END:
 
 If supplied, ignore all traces except those which match the supplied regexes.
 
-* tracing_format                                                    :element:
+* tracing format                                                    :element:
   :PROPERTIES:
   :custom_id: O3
   :masd.codec.stereotypes: masd::enumeration
@@ -152,7 +152,7 @@ Available formats for tracing transformations.
 
 Plain text format.
 
-** org_mode                                                       :attribute:
+** org mode                                                       :attribute:
 
 Emacs Org mode.
 
@@ -160,7 +160,7 @@ Emacs Org mode.
 
 Dot notation for GraphViz
 
-* configuration_builder                                             :element:
+* configuration builder                                             :element:
   :PROPERTIES:
   :custom_id: O7
   :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -168,7 +168,7 @@ Dot notation for GraphViz
 
 masd::builder
 
-* diffing_configuration                                             :element:
+* diffing configuration                                             :element:
   :PROPERTIES:
   :custom_id: O8
   :masd.codec.stereotypes: masd::fluent
@@ -180,23 +180,23 @@ Configuration for diff generation.
    :PROPERTIES:
    :masd.codec.type: diffing_destination
    :END:
-** output_directory                                               :attribute:
+** output directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
-* configuration_validator                                           :element:
+* configuration validator                                           :element:
   :PROPERTIES:
   :custom_id: O9
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* model_processing_configuration                                    :element:
+* model processing configuration                                    :element:
   :PROPERTIES:
   :custom_id: O12
   :END:
 
 Configuration related to the behaviour of Dogen whilst processing models.
 
-** compatibility_mode_enabled                                     :attribute:
+** compatibility mode enabled                                     :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
@@ -206,14 +206,14 @@ Try to process models even if there are errors.
 Only a certain class of errors are allowed, believed to be caused by backwards or
 forwards compatibility problems: missing types or types that do not exist.
 
-** dry_run_mode_enabled                                           :attribute:
+** dry run mode enabled                                           :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
 
 If true, all transforms wil be executed but no code will be emitted.
 
-** variability_overrides                                          :attribute:
+** variability overrides                                          :attribute:
    :PROPERTIES:
    :masd.codec.type: std::vector<std::string>
    :END:
@@ -232,14 +232,14 @@ Please note that you can only override elements in the following cases:
 not as part of a profile).
 - the type of the feature being overriden must be scalar.
 
-** activity_timestamp                                             :attribute:
+** activity timestamp                                             :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::posix_time::ptime
    :END:
 
 Timepoint at which the activity started.
 
-* invalid_configuration_exception                                   :element:
+* invalid configuration exception                                   :element:
   :PROPERTIES:
   :custom_id: O14
   :masd.cpp.types.class_forward_declarations.enabled: false
@@ -258,17 +258,17 @@ The values supplied for the configuration are not valid.
   :custom_id: O17
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* generation_exception                                              :element:
+* generation exception                                              :element:
   :PROPERTIES:
   :custom_id: O20
   :masd.codec.stereotypes: masd::exception
   :END:
-* conversion_exception                                              :element:
+* conversion exception                                              :element:
   :PROPERTIES:
   :custom_id: O21
   :masd.codec.stereotypes: masd::exception
   :END:
-* diffing_destination                                               :element:
+* diffing destination                                               :element:
   :PROPERTIES:
   :custom_id: O24
   :masd.codec.stereotypes: masd::enumeration
@@ -284,7 +284,7 @@ Generates a patch file.
 
 Outputs the diff to the console.
 
-* reporting_configuration                                           :element:
+* reporting configuration                                           :element:
   :PROPERTIES:
   :custom_id: O32
   :END:
@@ -295,11 +295,11 @@ Configuration related to operational reports.
    :PROPERTIES:
    :masd.codec.type: reporting_style
    :END:
-** output_directory                                               :attribute:
+** output directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
-* reporting_style                                                   :element:
+* reporting style                                                   :element:
   :PROPERTIES:
   :custom_id: O33
   :masd.codec.stereotypes: masd::enumeration, dogen::convertible
@@ -311,16 +311,16 @@ Available formats for operational reports.
 
 Plain text format.
 
-** org_mode                                                       :attribute:
+** org mode                                                       :attribute:
 
 Emacs Org mode.
 
-* mock_configuration_factory                                        :element:
+* mock configuration factory                                        :element:
   :PROPERTIES:
   :custom_id: O35
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* database_configuration                                            :element:
+* database configuration                                            :element:
   :PROPERTIES:
   :custom_id: O37
   :END:
@@ -366,14 +366,14 @@ User to use in thedatabase connection.
 
 Which relational database engine to connect to.
 
-** generate_schema                                                :attribute:
+** generate schema                                                :attribute:
    :PROPERTIES:
    :masd.codec.type: bool
    :END:
 
 If true, deletes all tables and recreates them. Otherwise, assumes their presence.
 
-* tracing_backend                                                   :element:
+* tracing backend                                                   :element:
   :PROPERTIES:
   :custom_id: O39
   :masd.codec.stereotypes: masd::enumeration
@@ -385,11 +385,11 @@ Available backends to manage tracing information.
 
 Write tracing information to files.
 
-** relational_database                                            :attribute:
+** relational database                                            :attribute:
 
 Write tracing information to a relational database.
 
-* database_engine                                                   :element:
+* database engine                                                   :element:
   :PROPERTIES:
   :custom_id: O41
   :masd.codec.stereotypes: masd::enumeration
@@ -429,7 +429,7 @@ Describes details of the available functionality within this version of Dogen.
 
 All categories of specifications.
 
-* spec_category                                                     :element:
+* spec category                                                     :element:
   :PROPERTIES:
   :custom_id: O46
   :END:
@@ -457,7 +457,7 @@ Entries describing various aspects of this group.
 
 Purpose of the group.
 
-* spec_entry                                                        :element:
+* spec entry                                                        :element:
   :PROPERTIES:
   :custom_id: O47
   :END:
@@ -478,12 +478,12 @@ Name for this spec entry.
 
 Human readable text describing this entry.
 
-* spec_dumper                                                       :element:
+* spec dumper                                                       :element:
   :PROPERTIES:
   :custom_id: O50
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* dumping_exception                                                 :element:
+* dumping exception                                                 :element:
   :PROPERTIES:
   :custom_id: O52
   :masd.codec.stereotypes: masd::exception

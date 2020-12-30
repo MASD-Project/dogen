@@ -32,11 +32,11 @@ Houses classes common to all transformations.
   :custom_id: O2
   :masd.codec.stereotypes: dogen::untestable
   :END:
-** transform_id                                                   :attribute:
+** transform id                                                   :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
-** model_id                                                       :attribute:
+** model id                                                       :attribute:
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
@@ -56,17 +56,17 @@ Houses classes common to all transformations.
    :PROPERTIES:
    :masd.codec.type: std::list<boost::shared_ptr<metrics>>
    :END:
-* metrics_builder                                                   :element:
+* metrics builder                                                   :element:
   :PROPERTIES:
   :custom_id: O3
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* metrics_printer                                                   :element:
+* metrics printer                                                   :element:
   :PROPERTIES:
   :custom_id: O4
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* tracing_error                                                     :element:
+* tracing error                                                     :element:
   :PROPERTIES:
   :custom_id: O7
   :masd.codec.stereotypes: masd::exception
@@ -74,12 +74,12 @@ Houses classes common to all transformations.
 
 An error occurred when trying to generate tracing data.
 
-* scoped_tracer                                                     :element:
+* scoped tracer                                                     :element:
   :PROPERTIES:
   :custom_id: O8
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* references_printer                                                :element:
+* references printer                                                :element:
   :PROPERTIES:
   :custom_id: O10
   :masd.codec.stereotypes: dogen::handcrafted::typeable
@@ -90,33 +90,33 @@ An error occurred when trying to generate tracing data.
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
-* file_backend                                                      :element:
+* file backend                                                      :element:
   :PROPERTIES:
   :custom_id: O11
   :masd.codec.parent: backend
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
-* backend_factory_registrar                                         :element:
+* backend factory registrar                                         :element:
   :PROPERTIES:
   :custom_id: O20
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-** backend_factories_                                             :attribute:
+** backend factories                                              :attribute:
    :PROPERTIES:
    :masd.codec.type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
    :END:
-* registrar_error                                                   :element:
+* registrar error                                                   :element:
   :PROPERTIES:
   :custom_id: O23
   :masd.codec.stereotypes: masd::exception
   :END:
-* backend_factory                                                   :element:
+* backend factory                                                   :element:
   :PROPERTIES:
   :custom_id: O25
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
-* file_backend_factory                                              :element:
+* file backend factory                                              :element:
   :PROPERTIES:
   :custom_id: O27
   :masd.codec.parent: backend_factory
