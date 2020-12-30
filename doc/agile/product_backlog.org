@@ -78,6 +78,34 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Processing of boost tests                                         :story:
+
+We could create a meta-model element to represent the handcrafted
+tests. These could then be populated by locating the physical file and
+looking for patterns:
+
+: BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
+: BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template)
+
+We could then read up these strings into the model element and then
+create:
+
+- the CDash runner. We wouldn't need any CMake magic for this any
+  more.
+- org file with all the tests. If there is an environment variable to
+  set the log level, we could then control it from org-babel.
+
+*** Model projections                                                 :story:
+
+When we have a model element for models themselves, we could add
+support for model projections.
+
+Notes:
+
+- model to PlantUML diagram.
+- is the project file not a model projection?
+- look for a similar story on this.
+
 *** Add references as links to org documents                          :story:
 
 Try adding a =references= tag. Content is a list of links to org
@@ -19816,22 +19844,6 @@ that I don't have to install Dia.
 
 It should be fairly straightforward to add a yuml front end that reads
 a file using their markup language and generates an yarn model from it.
-
-*** Add PlantUML markup language support                              :story:
-
-It would be nice to support PlantUML as a frontend:
-
-- http://plantuml.com/
-
-It would also be nice to be able to export models into PlantUML for
-visualisation. This would make JSON models more compelling.
-
-Links:
-
-- http://plantuml.com/sitemap-language-specification: specs
-- https://github.com/plantuml/plantuml
-- [[http://plantuml.com/class-diagram][Class Diagrams]]
-- [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: emacs mode for plantuml.
 
 *** Automatic generation of C interfaces for C++ code                  :epic:
 
