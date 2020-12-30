@@ -26,6 +26,7 @@
 #include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/types/transforms/model_to_json_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/model_to_org_artefact_transform.hpp"
+#include "dogen.codec/types/transforms/model_to_plantuml_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/model_to_artefact_chain.hpp"
 
@@ -39,8 +40,9 @@ static logger lg(logger_factory(transform_id));
 const char dot('.');
 const std::string json_codec_name("json");
 const std::string org_codec_name("org");
+const std::string plantuml_codec_name("plantuml");
 
-const std::string unsupported_codec("No transform are available for codec: ");
+const std::string unsupported_codec("No transform available for codec: ");
 
 }
 
@@ -70,6 +72,10 @@ apply(const context& ctx, const boost::filesystem::path& p,
         return r;
     } else if (codec_name == org_codec_name) {
         const auto r(model_to_org_artefact_transform::apply(ctx, p, m));
+        stp.end_chain(r);
+        return r;
+    } else if (codec_name == plantuml_codec_name) {
+        const auto r(model_to_plantuml_artefact_transform::apply(ctx, p, m));
         stp.end_chain(r);
         return r;
     }
