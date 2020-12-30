@@ -25,24 +25,42 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <ostream>
+#include <boost/filesystem/path.hpp>
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Transforms a codec model into an artefact in PlantUML
+ * syntax.
+ */
 class model_to_plantuml_artefact_transform final {
-public:
-    model_to_plantuml_artefact_transform() = default;
-    model_to_plantuml_artefact_transform(const model_to_plantuml_artefact_transform&) = default;
-    model_to_plantuml_artefact_transform(model_to_plantuml_artefact_transform&&) = default;
-    ~model_to_plantuml_artefact_transform() = default;
-    model_to_plantuml_artefact_transform& operator=(const model_to_plantuml_artefact_transform&) = default;
+private:
+    struct properties {
+        std::string parents;
+        std::string stereotypes;
+        std::string type;
+    };
+
+private:
+    static properties extract_properties(
+        const std::list<identification::entities::tagged_value>& tvs);
+    static std::string stereotype_to_colour(const std::string& stereotypes);
+
+private:
+    static void to_stream(std::ostream& os, const entities::attribute& attr);
+    static void to_stream(std::ostream& os, const entities::element& e);
 
 public:
-    bool operator==(const model_to_plantuml_artefact_transform& rhs) const;
-    bool operator!=(const model_to_plantuml_artefact_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::artefact
+    apply(const transforms::context& ctx, const boost::filesystem::path& p,
+        const entities::model& m);
 };
 
 }
