@@ -42,6 +42,7 @@ Hardware-provided built-in types.
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
+  :masd.codec.preserve_original: true
   :END:
 * int                                                               :element:
   :PROPERTIES:
@@ -64,6 +65,7 @@ Hardware-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :masd.codec.is_default_enumeration_type: true
+  :masd.codec.preserve_original: true
   :END:
 * short                                                             :element:
   :PROPERTIES:
@@ -84,6 +86,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
+  :masd.codec.preserve_original: true
   :END:
 * long                                                              :element:
   :PROPERTIES:
@@ -104,6 +107,7 @@ Hardware-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
+  :masd.codec.preserve_original: true
   :END:
 * long long                                                         :element:
   :PROPERTIES:
@@ -112,6 +116,7 @@ Hardware-provided built-in types.
   :masd.cpp.aspect.requires_manual_default_constructor: true
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.in_global_module: true
+  :masd.codec.preserve_original: true
   :END:
 * unsigned long long                                                :element:
   :PROPERTIES:
@@ -120,6 +125,7 @@ Hardware-provided built-in types.
   :masd.cpp.aspect.requires_manual_default_constructor: true
   :masd.codec.stereotypes: masd::builtin
   :masd.codec.in_global_module: true
+  :masd.codec.preserve_original: true
   :END:
 * float                                                             :element:
   :PROPERTIES:
