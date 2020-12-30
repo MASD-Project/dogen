@@ -1,0 +1,41 @@
+@startuml
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+note top of Object : In java, every class\nextends this one.
+
+class Dummy <<Serializable>> {
+        +{field} String data
+        +{method} void methods()
+}
+
+class Flight {
+        flightNumber : Integer
+        departureTime : Date
+}
+
+package "xClassic Collections" #DDDDDD {
+        Object <|-- ArrayList
+}
+
+class BaseClass
+
+namespace xnet.dummy #DDDDDD {
+        .BaseClass <|-- Person
+        Meeting o-- Person
+
+        .BaseClass <|- Meeting
+}
+
+class System << (S,#FF7700) Singleton >>
+class Date << (D,orchid) >>
+
+@enduml
