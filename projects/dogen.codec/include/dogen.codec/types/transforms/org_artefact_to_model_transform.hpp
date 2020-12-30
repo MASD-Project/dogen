@@ -55,6 +55,11 @@ private:
     static headline_type get_headline_type(const org::entities::headline& h);
 
     /**
+     * @brief Converts the headline title to a programming identifier.
+     */
+    static std::string headline_title_to_identifier(const std::string& title);
+
+    /**
      * @brief Converts an org section into text.
      */
     static std::string section_to_text(const org::entities::section& s);
@@ -62,7 +67,9 @@ private:
 private:
     struct processed_drawer {
         std::string custom_id;
+        bool preserve_original;
         std::list<identification::entities::tagged_value> tagged_values;
+        processed_drawer() : preserve_original(false) {}
     };
 
     /**

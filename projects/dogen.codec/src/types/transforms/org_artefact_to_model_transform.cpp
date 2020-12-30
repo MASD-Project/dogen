@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/replace.hpp>
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -47,6 +48,7 @@ const std::string module_tag("module");
 const std::string object_element_type("masd::object");
 const std::string module_element_type("masd::module");
 const std::string custom_id("custom_id");
+const std::string preserve_original("masd.codec.preserve_original");
 
 const std::string unexpected_number_of_drawers(
     "Unexpected number of drawers: ");
@@ -103,6 +105,12 @@ get_headline_type(const org::entities::headline& h) {
         }
         found = true;
     }
+    return r;
+}
+
+std::string org_artefact_to_model_transform::
+headline_title_to_identifier(const std::string& title) {
+    const auto r(boost::replace_all_copy(title, " ", "_"));
     return r;
 }
 
@@ -173,6 +181,9 @@ process_drawer(const std::list<org::entities::drawer>& drawers) {
              */
             const tagged_value tv(k, dc.value());
             r.tagged_values.push_back(tv);
+
+            if (k == preserve_original)
+                r.preserve_original = true;
         }
     }
     return r;
@@ -189,15 +200,10 @@ make_attribute(const org::entities::headline& h) {
             transformation_error(unexpected_children + h.title()));
     }
 
-    entities::attribute r;
-    r.name().simple(h.title());
-    r.name().qualified(h.title()); // FIXME
-    r.comment().original_content(section_to_text(h.section()));
-    r.documentation(r.comment().original_content());
-
     /*
-     * Attributes may not have drawers.
+     * Attributes may or may not have drawers.
      */
+    entities::attribute r;
     if (!h.drawers().empty()) {
         const auto pd(process_drawer(h.drawers()));
         if (!pd.custom_id.empty()) {
@@ -205,7 +211,19 @@ make_attribute(const org::entities::headline& h) {
             p.codec_id(codec_id(pd.custom_id));
         }
         r.tagged_values(pd.tagged_values);
-    }
+
+        if (!pd.preserve_original)
+            r.name().simple(headline_title_to_identifier(h.title()));
+        else
+            r.name().simple(h.title());
+    } else
+        r.name().simple(h.title());
+
+    r.name().simple(headline_title_to_identifier(h.title()));
+    r.name().qualified(r.name().simple()); // FIXME
+    r.comment().original_content(section_to_text(h.section()));
+    r.documentation(r.comment().original_content());
+
 
     return r;
 }
@@ -216,12 +234,6 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
     entities::element r;
     r.comment().original_content(section_to_text(h.section()));
     r.documentation(r.comment().original_content());
-    r.name().simple(h.title());
-
-    if (qualified_parent.empty())
-        r.name().qualified(r.name().simple());
-    else
-        r.name().qualified(qualified_parent + "::" + r.name().simple());
 
     /*
      * Determine the fallback based on the headline type.
@@ -246,7 +258,18 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
             p.codec_id(codec_id(pd.custom_id));
         }
         r.tagged_values(pd.tagged_values);
-    }
+
+        if (!pd.preserve_original)
+            r.name().simple(headline_title_to_identifier(h.title()));
+        else
+            r.name().simple(h.title());
+    } else
+        r.name().simple(h.title());
+
+    if (qualified_parent.empty())
+        r.name().qualified(r.name().simple());
+    else
+        r.name().qualified(qualified_parent + "::" + r.name().simple());
 
     return r;
 }

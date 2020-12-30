@@ -74,6 +74,12 @@ private:
     /**@}*/
 
     /**
+     * @brief Converts the identifier to a headline title.
+     */
+    static std::string identifier_to_headline_title(
+        const std::string& identifier);
+
+    /**
      * @brief Creates a tag for the element type.
      */
     static org::entities::tag to_tag(const entities::element& e);

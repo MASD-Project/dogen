@@ -202,6 +202,12 @@ model_to_org_artefact_transform::to_tag(const entities::element& e) {
         return org::entities::tag(element_tag);
 }
 
+std::string model_to_org_artefact_transform::identifier_to_headline_title(
+    const std::string& identifier) {
+    const auto r(boost::replace_all_copy(identifier, "_", " "));
+    return r;
+}
+
 org::entities::headline model_to_org_artefact_transform::
 to_headline(const unsigned int level, const entities::attribute& attr) {
     BOOST_LOG_SEV(lg, debug) << "Creating headline for attribute: "
@@ -209,7 +215,7 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
 
     org::entities::headline r;
     r.level(level);
-    r.title(attr.name().simple());
+    r.title(identifier_to_headline_title(attr.name().simple()));
     r.tags().push_back(org::entities::tag(attribute_tag));
 
     org::entities::drawer d;
@@ -276,7 +282,7 @@ to_headline(const unsigned int level, const entities::element& e) {
 
     org::entities::headline r;
     r.level(level);
-    r.title(e.name().simple());
+    r.title(identifier_to_headline_title(e.name().simple()));
     r.tags().push_back(to_tag(e));
 
     /*
