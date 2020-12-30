@@ -157,6 +157,19 @@ make_masd_codec_is_floating_point() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_codec_preserve_original() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("preserve_original");
+    r.name().qualified("masd.codec.preserve_original");
+    r.description(R"()");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
 }
 
 meta_data::feature_group
@@ -174,6 +187,7 @@ meta_data::make_feature_group(const dogen::variability::entities::feature_model&
     r.is_default_enumeration_type = s.get_by_name("masd.codec.is_default_enumeration_type");
     r.is_associative_container = s.get_by_name("masd.codec.is_associative_container");
     r.is_floating_point = s.get_by_name("masd.codec.is_floating_point");
+    r.preserve_original = s.get_by_name("masd.codec.preserve_original");
 
     return r;
 }
@@ -204,6 +218,8 @@ meta_data::static_configuration meta_data::make_static_configuration(
         r.is_associative_container = s.get_boolean_content(fg.is_associative_container);
     if (s.has_configuration_point(fg.is_floating_point))
         r.is_floating_point = s.get_boolean_content(fg.is_floating_point);
+    if (s.has_configuration_point(fg.preserve_original))
+        r.preserve_original = s.get_boolean_content(fg.preserve_original);
     return r;
 }
 
@@ -221,6 +237,7 @@ meta_data::make_features() {
     r.push_back(make_masd_codec_is_default_enumeration_type());
     r.push_back(make_masd_codec_is_associative_container());
     r.push_back(make_masd_codec_is_floating_point());
+    r.push_back(make_masd_codec_preserve_original());
     return r;
 }
 

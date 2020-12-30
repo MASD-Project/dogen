@@ -50,6 +50,7 @@ public:
         variability::entities::feature is_default_enumeration_type;
         variability::entities::feature is_associative_container;
         variability::entities::feature is_floating_point;
+        variability::entities::feature preserve_original;
     };
 
     static feature_group
@@ -67,6 +68,7 @@ public:
         boost::optional<bool> is_default_enumeration_type;
         boost::optional<bool> is_associative_container;
         boost::optional<bool> is_floating_point;
+        boost::optional<bool> preserve_original;
     };
 
     static static_configuration make_static_configuration(
