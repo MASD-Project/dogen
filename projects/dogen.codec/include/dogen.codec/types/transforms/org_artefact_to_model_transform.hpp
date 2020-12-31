@@ -21,6 +21,7 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_ORG_ARTEFACT_TO_MODEL_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_ORG_ARTEFACT_TO_MODEL_TRANSFORM_HPP
 
+#include "dogen.identification/types/entities/codec_id.hpp"
 #include "dogen.org/types/entities/section.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -90,7 +91,8 @@ private:
      * element.
      */
     static entities::element make_element(const headline_type ht,
-        const std::string& qualified_parent,
+        const identification::entities::codec_id& containing_element_id,
+        const std::string& containing_element_qn,
         const org::entities::headline& h);
 
     /**

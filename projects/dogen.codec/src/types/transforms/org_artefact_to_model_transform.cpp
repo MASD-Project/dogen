@@ -23,6 +23,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
+#include "dogen.identification/types/entities/codec_id.hpp"
 #include "dogen.org/types/entities/drawer_type.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -209,6 +210,7 @@ make_attribute(const org::entities::headline& h) {
         if (!pd.custom_id.empty()) {
             codec_provenance p;
             p.codec_id(codec_id(pd.custom_id));
+            r.provenance(p);
         }
         r.tagged_values(pd.tagged_values);
 
@@ -230,7 +232,9 @@ make_attribute(const org::entities::headline& h) {
 
 entities::element
 org_artefact_to_model_transform::make_element(const headline_type ht,
-    const std::string& qualified_parent, const org::entities::headline& h) {
+    const identification::entities::codec_id& containing_element_id,
+    const std::string& containing_element_qn,
+    const org::entities::headline& h) {
     entities::element r;
     r.comment().original_content(section_to_text(h.section()));
     r.documentation(r.comment().original_content());
@@ -256,6 +260,7 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
         if (!pd.custom_id.empty()) {
             codec_provenance p;
             p.codec_id(codec_id(pd.custom_id));
+            r.provenance(p);
         }
         r.tagged_values(pd.tagged_values);
 
@@ -266,10 +271,11 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
     } else
         r.name().simple(h.title());
 
-    if (qualified_parent.empty())
+    r.containing_element_id(containing_element_id);
+    if (containing_element_qn.empty())
         r.name().qualified(r.name().simple());
     else
-        r.name().qualified(qualified_parent + "::" + r.name().simple());
+        r.name().qualified(containing_element_qn + "::" + r.name().simple());
 
     return r;
 }
@@ -341,7 +347,9 @@ make_elements(const std::list<org::entities::headline>& headlines,
             }
 
             previous_ht = current_ht;
-            auto child(make_element(current_ht, current.name().qualified(), h));
+            const auto qn(current.name().qualified());
+            const auto id(current.provenance().codec_id());
+            auto child(make_element(current_ht, id, qn, h));
             r.splice(r.end(), make_elements(h.headlines(), child));
         } else {
             BOOST_LOG_SEV(lg, error) << unexpected_headline_type << h.title();
@@ -416,7 +424,8 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         /*
          * Process the current element.
          */
-        entities::element current(make_element(ht, empty, h));
+        const identification::entities::codec_id id;
+        entities::element current(make_element(ht, id, empty, h));
         auto& es(r.elements());
         es.splice(es.end(), make_elements(h.headlines(), current));
     }
