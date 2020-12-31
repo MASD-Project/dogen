@@ -24,14 +24,13 @@
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.dia/io/entities/object_io.hpp"
-#include "dogen.codec.dia/types/processed_object.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec.dia/types/processed_object_factory.hpp"
-#include "dogen.codec.dia/io/processed_object_io.hpp"
+#include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.dia/test/mock_object_factory.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
 
 using namespace dogen::codec::dia;
-using dogen::utility::test::asserter;
 
 namespace  {
 
@@ -41,14 +40,20 @@ const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 
+const std::string uml_large_package("UML - LargePackage");
+const std::string uml_class("UML - Class");
+const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
+const std::string uml_realization("UML - Realizes");
+
 const std::string enumeration_stereotype("yarn::enumeration");
 const std::string exception_stereotype("yarn::exception");
 
 }
 
-using dogen::utility::test::contains_checker;
 using dogen::dia::test::mock_object_factory;
-using dogen::codec::dia::dia_object_types;
 
 BOOST_AUTO_TEST_SUITE(processed_object_factory_tests)
 
@@ -62,7 +67,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_proce
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
+    BOOST_CHECK(po.object_type() == uml_class);
     BOOST_CHECK(po.stereotypes().empty());
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
@@ -77,7 +82,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
+    BOOST_CHECK(po.object_type() == uml_class);
     BOOST_REQUIRE(!po.stereotypes().empty());
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
@@ -92,7 +97,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
+    BOOST_CHECK(po.object_type() == uml_class);
     BOOST_CHECK(!po.stereotypes().empty());
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
@@ -107,7 +112,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_processed_object
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(!po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_large_package);
+    BOOST_CHECK(po.object_type() == uml_large_package);
     BOOST_CHECK(po.stereotypes().empty());
     BOOST_CHECK(po.comment().original_content().empty());
     BOOST_CHECK(po.comment().documentation().empty());
@@ -122,9 +127,9 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_processed_obj
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(1));
     BOOST_CHECK(!po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
+    BOOST_CHECK(po.object_type() == uml_class);
     BOOST_CHECK(po.stereotypes().empty());
-    BOOST_CHECK(po.child_node_id() == o[0].id());
+    BOOST_CHECK(po.container_id() == o[0].id());
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
 }
@@ -137,7 +142,7 @@ BOOST_AUTO_TEST_CASE(uml_generalization_transforms_into_expected_processed_objec
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_generalization);
+    BOOST_CHECK(po.object_type() == uml_generalization);
     BOOST_CHECK(po.stereotypes().empty());
     BOOST_REQUIRE(po.connection());
     BOOST_REQUIRE(po.connection()->first == o[1].id());
@@ -152,7 +157,7 @@ BOOST_AUTO_TEST_CASE(uml_note_transforms_into_expected_processed_object) {
     BOOST_LOG_SEV(lg, debug) << "actual:" << po;
     BOOST_CHECK(po.id() == mock_object_factory::to_oject_id(0));
     BOOST_CHECK(po.name().empty());
-    BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_note);
+    BOOST_CHECK(po.object_type() == uml_note);
     BOOST_CHECK(po.stereotypes().empty());
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());

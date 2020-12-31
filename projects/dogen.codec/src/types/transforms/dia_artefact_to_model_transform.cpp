@@ -34,8 +34,8 @@
 #include "dogen.codec.dia/types/builder.hpp"
 #include "dogen.codec.dia/types/visitor.hpp"
 #include "dogen.codec.dia/types/validator.hpp"
-#include "dogen.codec.dia/types/processed_object.hpp"
-#include "dogen.codec.dia/types/processed_comment.hpp"
+#include "dogen.codec/types/entities/object.hpp"
+#include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec.dia/types/processed_object_factory.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
 
@@ -47,24 +47,30 @@ transform_id("codec.transforms.dia_artefact_to_model_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string uml_large_package("UML - LargePackage");
+const std::string uml_class("UML - Class");
+const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
+const std::string uml_realization("UML - Realizes");
+
 }
 
 namespace dogen::codec::transforms {
 
 using namespace dogen::codec::dia;
 
-inline bool is_not_relevant(const processed_object& po) {
-    const auto ot(po.dia_object_type());
+inline bool is_not_relevant(const entities::object& po) {
+    const auto ot(po.object_type());
     const bool is_relevant(
-        ot == dia_object_types::uml_large_package ||
-        ot == dia_object_types::uml_generalization ||
-        ot == dia_object_types::uml_class ||
-        ot == dia_object_types::uml_note);
+        ot == uml_large_package || ot == uml_generalization ||
+        ot == uml_class ||  ot == uml_note);
 
     return !is_relevant;
 }
 
-std::list<processed_object>
+std::list<entities::object>
 obtain_processed_objects(const dogen::dia::entities::diagram& d) {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
 
@@ -89,7 +95,7 @@ obtain_processed_objects(const dogen::dia::entities::diagram& d) {
 }
 
 codec::entities::model
-obtain_model(const std::string& name, const std::list<processed_object>& pos) {
+obtain_model(const std::string& name, const std::list<entities::object>& pos) {
     BOOST_LOG_SEV(lg, debug) << "Generating codec model.";
 
     /*

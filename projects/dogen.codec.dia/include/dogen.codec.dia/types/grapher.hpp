@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen.codec.dia/types/processed_object.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 
 namespace dogen::codec::dia {
 
@@ -37,7 +37,7 @@ namespace dogen::codec::dia {
  * @brief Graph of dependencies between dia objects.
  */
 typedef boost::adjacency_list<
-    boost::setS, boost::vecS, boost::directedS, processed_object
+    boost::setS, boost::vecS, boost::directedS, entities::object
     > graph_type;
 
 /**
@@ -78,12 +78,12 @@ private:
      * @brief Handle relationships derived from child node.
      */
     void process_child_node(const vertex_descriptor_type& v,
-        const processed_object& po);
+        const entities::object& po);
 
     /**
      * @brief Handle relationships derived from connections.
      */
-    void process_connections(const processed_object& po);
+    void process_connections(const entities::object& po);
 
 public:
     /**
@@ -100,7 +100,7 @@ public:
      * @pre The graph must not yet have been generated.
      * @pre The object must be relevant to the graph.
      */
-    void add(const processed_object& o);
+    void add(const entities::object& o);
 
     /**
      * @brief Adds a container of objects to the graph.

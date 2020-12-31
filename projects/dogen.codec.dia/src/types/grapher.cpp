@@ -88,7 +88,7 @@ private:
 
 grapher::grapher()
     : generated_(false), root_vertex_(boost::add_vertex(graph_)) {
-    processed_object root;
+    entities::object root;
     root.id(::root_id);
     graph_[root_vertex_] = root;
     id_to_vertex_.insert(std::make_pair(::root_id, root_vertex_));
@@ -128,9 +128,9 @@ void grapher::require_generated() const {
 }
 
 void grapher::
-process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
-    if (!o.child_node_id().empty()) {
-        const std::string id(o.child_node_id());
+process_child_node(const vertex_descriptor_type& v, const entities::object& o) {
+    if (!o.container_id().empty()) {
+        const std::string id(o.container_id());
         const auto cv(vertex_for_id(id));
         boost::add_edge(v, cv, graph_);
         BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
@@ -152,10 +152,10 @@ process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
     }
 }
 
-void grapher::process_connections(const processed_object& o) {
+void grapher::process_connections(const entities::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing connections for object: '"
                              << o.id() << "' of type: '"
-                             << o.dia_object_type() << "'";
+                             << o.object_type() << "'";
 
     const auto parent_id(o.connection()->first);
     const auto child_id(o.connection()->second);
@@ -182,7 +182,7 @@ void grapher::process_connections(const processed_object& o) {
     }
 }
 
-void grapher::add(const processed_object& po) {
+void grapher::add(const entities::object& po) {
     require_not_generated();
 
     if (po.connection()) {

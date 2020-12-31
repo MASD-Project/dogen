@@ -24,7 +24,7 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/logging.hpp"
-#include "dogen.codec.dia/io/processed_object_io.hpp"
+#include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.codec.dia/test/mock_processed_object_factory.hpp"
 #include "dogen.codec.dia/types/graphing_error.hpp"
 #include "dogen.codec.dia/types/grapher.hpp"
@@ -32,7 +32,6 @@
 #include "dogen.utility/types/test/exception_checkers.hpp"
 
 using namespace dogen::codec::dia;
-using dogen::utility::test::asserter;
 using dogen::utility::test::contains_checker;
 using factory = dogen::codec::dia::test::mock_processed_object_factory;
 
@@ -51,7 +50,7 @@ bool is_root_id(const std::string id) {
 class visitor : public boost::default_dfs_visitor {
 public:
     visitor() : objects_(
-        new std::list<dogen::codec::dia::processed_object>()) {}
+        new std::list<dogen::codec::entities::object>()) {}
 
 public:
     template<typename Vertex, typename Graph>
@@ -59,12 +58,12 @@ public:
         objects_->push_back(g[u]);
     }
 
-    const std::list<dogen::codec::dia::processed_object>& result() {
+    const std::list<dogen::codec::entities::object>& result() {
         return *objects_;
     }
 
 private:
-    std::shared_ptr<std::list<dogen::codec::dia::processed_object>>
+    std::shared_ptr<std::list<dogen::codec::entities::object>>
     objects_;
 };
 

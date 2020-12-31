@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.codec.dia/types/processed_comment.hpp"
+#include "dogen.codec/types/entities/comment.hpp"
 
 namespace dogen::codec::dia {
 
@@ -54,7 +54,7 @@ public:
      * @pre lines starting with the instruction marker must follow the
      * defined syntax or else a parsing_error is thrown.
      */
-    static processed_comment make(const std::string& c);
+    static entities::comment make(const std::string& c);
 };
 
 }

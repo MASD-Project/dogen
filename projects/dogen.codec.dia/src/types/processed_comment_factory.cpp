@@ -24,7 +24,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.codec.dia/types/traits.hpp"
 #include "dogen.codec.dia/types/building_error.hpp"
 #include "dogen.codec.dia/types/processed_comment_factory.hpp"
 
@@ -37,6 +36,7 @@ auto lg(logger_factory("codec.dia.processed_comment_factory"));
 constexpr std::string_view empty;
 constexpr std::string_view instruction_marker("#DOGEN ");
 constexpr std::string_view equals("=");
+const std::string dia_comment("masd.codec.dia.comment");
 
 const std::string separator_not_found("Expected separator on KVP.");
 
@@ -44,8 +44,8 @@ const std::string separator_not_found("Expected separator on KVP.");
 
 namespace dogen::codec::dia {
 
-processed_comment processed_comment_factory::make(const std::string& c) {
-    processed_comment r;
+entities::comment processed_comment_factory::make(const std::string& c) {
+    entities::comment r;
 
     if (c.empty())
         return r;
@@ -81,7 +81,7 @@ processed_comment processed_comment_factory::make(const std::string& c) {
             identification::entities::tagged_value tv;
             tv.tag(line.substr(0, pos));
             tv.value(line.substr(pos + 1));
-            applicable_to_parent_object |= (tv.tag() == traits::comment());
+            applicable_to_parent_object |= (tv.tag() == dia_comment);
             r.tagged_values().push_back(tv);
             continue;
         }
@@ -103,7 +103,7 @@ processed_comment processed_comment_factory::make(const std::string& c) {
     }
 
     r.documentation(documentation_stream.str());
-    r.applicable_to_parent_object(applicable_to_parent_object);
+    r.applies_to_container(applicable_to_parent_object);
     return r;
 }
 

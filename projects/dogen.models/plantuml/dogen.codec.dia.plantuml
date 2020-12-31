@@ -93,24 +93,6 @@ class processed_comment_factory <<dogen::handcrafted::typeable>> #FFFACD {
 class processed_object_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-class processed_attribute #F7E5FF {
-        +{field} name std::string
-        +{field} type std::string
-        +{field} comment processed_comment
-        +{field} value std::string
-}
-
-class processed_object #F7E5FF {
-        +{field} id std::string
-        +{field} name std::string
-        +{field} dia_object_type dia_object_types
-        +{field} stereotypes std::string
-        +{field} comment processed_comment
-        +{field} child_node_id std::string
-        +{field} connection boost::optional<std::pair<std::string,std::string>>
-        +{field} attributes std::list<processed_attribute>
-}
-
 enum dia_object_types <<masd::enumeration>> #F2DAFD {
         +{field} uml_large_package
         +{field} uml_class
@@ -128,13 +110,6 @@ class validation_error <<masd::exception>> #E8C2F8 {
 }
 
 class traits <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class processed_comment #F7E5FF {
-        +{field} documentation std::string
-        +{field} tagged_values std::list<identification::entities::tagged_value>
-        +{field} applicable_to_parent_object bool
-        +{field} original_content std::string
 }
 
 class building_error <<masd::exception>> #E8C2F8 {

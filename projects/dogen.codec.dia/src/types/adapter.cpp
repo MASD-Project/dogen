@@ -35,6 +35,13 @@ static logger lg(logger_factory("codec.dia.adapter"));
 const std::string name_delimiter("::");
 const std::string object_element("masd::object");
 const std::string module_element("masd::module");
+const std::string uml_large_package("UML - LargePackage");
+const std::string uml_class("UML - Class");
+const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
+const std::string uml_realization("UML - Realizes");
 
 const std::string empty_dia_name("Dia name is empty.");
 
@@ -58,13 +65,13 @@ std::string adapter::qualified_name(const std::string& contained_by,
     return contained_by + name_delimiter + simple_name;
 }
 
-codec::entities::attribute adapter::adapt(const processed_attribute& a,
+codec::entities::attribute adapter::adapt(const entities::attribute& a,
     const std::string& qualified_owner) {
-    validate_dia_name(a.name());
+    validate_dia_name(a.name().simple());
 
     codec::entities::attribute r;
-    r.name().simple(a.name());
-    r.name().qualified(qualified_name(qualified_owner, a.name()));
+    r.name(a.name());
+    r.name().qualified(qualified_name(qualified_owner, a.name().simple()));
     r.type(a.type());
     r.value(a.value());
     r.comment().documentation(a.comment().documentation());
@@ -72,18 +79,18 @@ codec::entities::attribute adapter::adapt(const processed_attribute& a,
     return r;
 }
 
-void adapter::process_stereotypes(const processed_object& po,
+void adapter::process_stereotypes(const entities::object& o,
     codec::entities::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
-                             << po.stereotypes() << "'";
+                             << o.stereotypes() << "'";
 
     /*
      * Provide the appropriate element types defaulting based on the
      * dia UML types.
      */
-    if (po.dia_object_type() == dia_object_types::uml_class)
+    if (o.object_type() == uml_class)
         e.fallback_element_type(object_element);
-    else if (po.dia_object_type() == dia_object_types::uml_large_package)
+    else if (o.object_type() == uml_large_package)
         e.fallback_element_type(module_element);
 
     /*
@@ -91,7 +98,7 @@ void adapter::process_stereotypes(const processed_object& po,
      * them to the strong type representation of stereotype.
      */
     using utility::string::splitter;
-    const auto splitted(splitter::split_csv(po.stereotypes()));
+    const auto splitted(splitter::split_csv(o.stereotypes()));
     for(const auto& s : splitted) {
         identification::entities::stereotype st(s);
         e.stereotypes().push_back(st);
@@ -100,23 +107,23 @@ void adapter::process_stereotypes(const processed_object& po,
 }
 
 codec::entities::element
-adapter::adapt(const processed_object& po, const std::string& contained_by,
+adapter::adapt(const entities::object& o, const std::string& contained_by,
     const std::list<std::string>& parents) {
-    validate_dia_name(po.name());
+    validate_dia_name(o.name());
 
     codec::entities::element r;
-    r.name().simple(po.name());
-    r.name().qualified(qualified_name(contained_by, po.name()));
+    r.name().simple(o.name());
+    r.name().qualified(qualified_name(contained_by, o.name()));
     r.parents(parents);
-    r.comment().documentation(po.comment().documentation());
-    r.tagged_values(po.comment().tagged_values());
+    r.comment().documentation(o.comment().documentation());
+    r.tagged_values(o.comment().tagged_values());
 
     using identification::entities::codec_id;
-    r.provenance().codec_id(codec_id(po.id()));
-    r.containing_element_id(codec_id(po.child_node_id()));
-    process_stereotypes(po, r);
+    r.provenance().codec_id(codec_id(o.id()));
+    r.containing_element_id(codec_id(o.container_id()));
+    process_stereotypes(o, r);
 
-    for (const auto& attr : po.attributes())
+    for (const auto& attr : o.attributes())
         r.attributes().push_back(adapt(attr, r.name().qualified()));
 
     return r;

@@ -26,7 +26,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.identification/io/entities/tagged_value_io.hpp"
 #include "dogen.codec.dia/types/building_error.hpp"
-#include "dogen.codec.dia/io/processed_comment_io.hpp"
+#include "dogen.codec/io/entities/comment_io.hpp"
 #include "dogen.codec.dia/types/processed_comment_factory.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
 
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_tagged_val
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.documentation().empty());
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_CHECK(r.tagged_values().empty());
 }
 
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_do
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == line_1);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_CHECK(r.tagged_values().empty());
 }
 
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_docum
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == line_1);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_CHECK(r.tagged_values().empty());
 }
 
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_em
 
     BOOST_CHECK(!std::getline(is, line));
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_CHECK(r.tagged_values().empty());
 }
 
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_e
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.documentation().empty());
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
 
     const auto& tv(*r.tagged_values().begin());
@@ -187,7 +187,7 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empt
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.documentation().empty());
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
 
     const auto& tv(*r.tagged_values().begin());
@@ -234,7 +234,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_crea
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == marker_without_space);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().empty());
 }
 
@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_c
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == marker_with_leading_space);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().empty());
 }
 
@@ -272,7 +272,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_docum
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == marker_in_lower_case);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().empty());
 }
 
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty
     BOOST_LOG_SEV(lg, info) << "first line: " << line;
     BOOST_CHECK(line == unknown_marker);
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().empty());
 }
 
@@ -324,7 +324,7 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_doc
 
     BOOST_CHECK(!std::getline(is, line));
 
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
     const auto& tv(*r.tagged_values().begin());
     BOOST_CHECK(tv.tag() == key_1);
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documen
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.documentation().empty());
-    BOOST_CHECK(!r.applicable_to_parent_object());
+    BOOST_CHECK(!r.applies_to_container());
     BOOST_REQUIRE(r.tagged_values().size() == 4);
 
     auto i(r.tagged_values().begin());

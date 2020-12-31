@@ -30,27 +30,38 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("codec.dia.validator"));
 
+const std::string uml_large_package("UML - LargePackage");
+const std::string uml_class("UML - Class");
+const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
+const std::string uml_realization("UML - Realizes");
+
 const std::string no_uml_type("No UML type.");
 
 }
 
 namespace dogen::codec::dia {
 
-void validator::validate_uml(const processed_object& po) {
+void validator::validate_uml(const entities::object& po) {
     /*
      * All objects must have a valid UML type.
+     *
+     * FIXME: should we check against the list of supported object
+     * types?
      */
-    if (po.dia_object_type() == dia_object_types::invalid) {
+    if (po.object_type().empty()) {
         BOOST_LOG_SEV(lg, error) << no_uml_type;
         BOOST_THROW_EXCEPTION(validation_error(no_uml_type));
     }
 }
 
-void validator::validate(const processed_object& po) {
+void validator::validate(const entities::object& po) {
     validate_uml(po);
 }
 
-void validator::validate(const std::list<processed_object>& pos) {
+void validator::validate(const std::list<entities::object>& pos) {
     for (const auto& po : pos)
         validate(po);
 }

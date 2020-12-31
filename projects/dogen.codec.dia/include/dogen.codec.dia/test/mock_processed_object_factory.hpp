@@ -26,7 +26,7 @@
 #endif
 
 #include <array>
-#include "dogen.codec.dia/types/processed_object.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 
 namespace dogen::codec::dia::test {
 
@@ -51,21 +51,21 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object make_uml_message(const unsigned int n = 0);
+    static entities::object make_uml_message(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note without a dogen marker.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object make_uml_note(const unsigned int n = 0);
+    static entities::object make_uml_note(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note with a dogen comment marker.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object
+    static entities::object
     make_uml_note_with_marker(const unsigned int n = 0);
 
     /**
@@ -73,14 +73,14 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object make_empty_uml_note(const unsigned int n = 0);
+    static entities::object make_empty_uml_note(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML note inside a large package.
      *
      * @param n identifier used for object ID generation.
      */
-    static std::array<processed_object, 2>
+    static std::array<entities::object, 2>
     make_uml_note_inside_large_package(unsigned int n = 0);
 
     /**
@@ -88,7 +88,7 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static std::array<processed_object, 2>
+    static std::array<entities::object, 2>
     make_empty_uml_note_inside_large_package(unsigned int n = 0);
 
     /**
@@ -96,7 +96,7 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static std::array<processed_object, 2>
+    static std::array<entities::object, 2>
     make_uml_note_with_marker_inside_large_package(unsigned int n = 0);
 
     /**
@@ -105,7 +105,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static processed_object make_class(const unsigned int n = 0,
+    static entities::object make_class(const unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -114,7 +114,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static processed_object make_class_with_attribute(const unsigned int n = 0,
+    static entities::object make_class_with_attribute(const unsigned int n = 0,
         const std::string& st = std::string());
 
     /**
@@ -122,14 +122,14 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object make_empty_named_class(const unsigned int n = 0);
+    static entities::object make_empty_named_class(const unsigned int n = 0);
 
     /**
      * @brief Generates a new UML large package.
      *
      * @param n identifier used for object ID generation.
      */
-    static processed_object make_large_package(const unsigned int n = 0);
+    static entities::object make_large_package(const unsigned int n = 0);
 
     /**
      * @brief Generates a UML class inside a large package, plus the
@@ -138,7 +138,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 3>
+    static std::array<entities::object, 3>
     make_class_inside_two_large_packages(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -149,7 +149,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 2>
+    static std::array<entities::object, 2>
     make_class_inside_large_package(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -160,7 +160,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 3>
+    static std::array<entities::object, 3>
     make_realization(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -171,7 +171,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 3>
+    static std::array<entities::object, 3>
     make_generalization(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -182,7 +182,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 4>
+    static std::array<entities::object, 4>
     make_generalization_inside_large_package(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -193,7 +193,7 @@ public:
      * @param n identifier used for object ID generation.
      * @param st stereotype to apply to class.
      */
-    static std::array<processed_object, 3>
+    static std::array<entities::object, 3>
     make_association(unsigned int n = 0,
         const std::string& st = std::string());
 
@@ -202,7 +202,7 @@ public:
      *
      * @param n identifier used for object ID generation.
      */
-    static std::array<processed_object, 4>
+    static std::array<entities::object, 4>
     make_first_degree_cycle(unsigned int n = 0);
 };
 

@@ -29,8 +29,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec/types/entities/model.hpp"
-#include "dogen.codec.dia/types/processed_object.hpp"
 
 namespace dogen::codec::dia {
 
@@ -80,19 +80,19 @@ private:
     /**
      * @brief Handles the processing of UML large packages.
      */
-    void handle_uml_large_package(const processed_object& po,
+    void handle_uml_large_package(const entities::object& o,
         const std::string& n);
 
     /**
      * @brief Handles the processing of UML notes.
      */
-    void handle_uml_note(const processed_object& po);
+    void handle_uml_note(const entities::object& o);
 
 public:
     /**
      * @brief Adds a processed object to the builder.
      */
-    void add(const processed_object& po);
+    void add(const entities::object& o);
 
     /**
      * @brief Generates the external model.

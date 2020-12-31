@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.codec.dia/types/processed_object.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 
 namespace dogen::codec::dia {
 
@@ -57,20 +57,20 @@ private:
     /**
      * @brief Checks all data related to UML.
      */
-    static void validate_uml(const processed_object& p);
+    static void validate_uml(const entities::object& p);
 
 public:
     /**
      * @brief Validates a processed object.
      *
      */
-    static void validate(const processed_object& p);
+    static void validate(const entities::object& p);
 
     /**
      * @brief Throws an exception if any of the processed objects are
      * not considered to be valid.
      */
-    static void validate(const std::list<processed_object>& pos);
+    static void validate(const std::list<entities::object>& pos);
 };
 
 }

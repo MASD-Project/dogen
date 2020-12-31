@@ -27,9 +27,9 @@
 
 #include <string>
 #include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/object.hpp"
+#include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/entities/attribute.hpp"
-#include "dogen.codec.dia/types/processed_object.hpp"
-#include "dogen.codec.dia/types/processed_attribute.hpp"
 
 namespace dogen::codec::dia {
 
@@ -53,7 +53,7 @@ private:
     /**
      * @brief Processes the stereotypes field.
      */
-    static void process_stereotypes(const processed_object& po,
+    static void process_stereotypes(const entities::object& po,
         codec::entities::element& e);
 
 private:
@@ -61,14 +61,14 @@ private:
      * @brief Adapts a processed attribute into a codec attribute.
      */
     static codec::entities::attribute
-    adapt(const processed_attribute& a, const std::string& qualified_owner);
+    adapt(const entities::attribute& a, const std::string& qualified_owner);
 
 public:
     /**
-     * @brief Adapts a processed object into a codec exoelement.
+     * @brief Adapts a processed object into a codec element.
      */
     static codec::entities::element
-    adapt(const processed_object& po, const std::string& contained_by,
+    adapt(const entities::object& po, const std::string& contained_by,
         const std::list<std::string>& parents);
 };
 

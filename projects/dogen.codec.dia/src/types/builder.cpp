@@ -31,6 +31,14 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("codec.dia.builder"));
 
+const std::string uml_large_package("UML - LargePackage");
+const std::string uml_class("UML - Class");
+const std::string uml_generalization("UML - Generalization");
+const std::string uml_association("UML - Association");
+const std::string uml_note("UML - Note");
+const std::string uml_message("UML - Message");
+const std::string uml_realization("UML - Realizes");
+
 const std::string empty_contained_by;
 const std::list<std::string> empty_parents;
 const std::string duplicate_id("Duplicate id: ");
@@ -83,7 +91,7 @@ std::string builder::contained_by(const std::string& id) const {
 }
 
 void builder::
-handle_uml_large_package(const processed_object& po, const std::string& n) {
+handle_uml_large_package(const entities::object& po, const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "Object is a UML Large package: '"
                              << po.id() << "'. Name: " << n;
 
@@ -108,16 +116,16 @@ handle_uml_large_package(const processed_object& po, const std::string& n) {
     }
 }
 
-void builder::handle_uml_note(const processed_object& po) {
-    const auto& c(po.comment());
-    BOOST_LOG_SEV(lg, debug) << "Object is a note: '" << po.id()
+void builder::handle_uml_note(const entities::object& o) {
+    const auto& c(o.comment());
+    BOOST_LOG_SEV(lg, debug) << "Object is a note: '" << o.id()
                              << ";. Note text: '"
                              << c.original_content() << "'";
 
-    if (c.original_content().empty() || !c.applicable_to_parent_object())
+    if (c.original_content().empty() || !c.applies_to_container())
         return;
 
-    if (po.child_node_id().empty()) {
+    if (o.container_id().empty()) {
         /*
          * Since this note does not have a child, it is a top-level
          * note. Thus is may be used to convey both tagged values and
@@ -137,7 +145,7 @@ void builder::handle_uml_note(const processed_object& po) {
      * we update the element for the for that UML package with its
      * tagged values and documentation. The module must already exist.
      */
-    const auto package_id(po.child_node_id());
+    const auto package_id(o.container_id());
     const auto i(id_to_uml_large_package_properties_.find(package_id));
     if (i == id_to_uml_large_package_properties_.end()) {
         BOOST_LOG_SEV(lg, error) << package_not_mapped << package_id;
@@ -149,9 +157,9 @@ void builder::handle_uml_note(const processed_object& po) {
     e.tagged_values(c.tagged_values());
 }
 
-void builder::add(const processed_object& po) {
-    BOOST_LOG_SEV(lg, debug) << "Processing: '" << po.id() << "'"
-                             << " Name: '" << po.name() << "'";
+void builder::add(const entities::object& o) {
+    BOOST_LOG_SEV(lg, debug) << "Processing: '" << o.id() << "'"
+                             << " Name: '" << o.name() << "'";
 
     /*
      * First, we handle UML notes. Since Dia does not support adding
@@ -159,9 +167,9 @@ void builder::add(const processed_object& po) {
      * of UML notes. This means that when we find a note, we need to
      * check if its contents must be added to its containing package.
      */
-    const auto dot(po.dia_object_type());
-    if (dot == dia_object_types::uml_note) {
-        handle_uml_note(po);
+    const auto dot(o.object_type());
+    if (dot == uml_note) {
+        handle_uml_note(o);
         return;
     }
 
@@ -170,8 +178,8 @@ void builder::add(const processed_object& po) {
      * an element. For these, the first thing we need to do is to
      * figure out the containment of the current process object.
      */
-    const auto& id(po.id());
-    const auto cby(contained_by(po.child_node_id()));
+    const auto& id(o.id());
+    const auto cby(contained_by(o.container_id()));
     BOOST_LOG_SEV(lg, debug) << "Contained by: '" << cby << "'";
 
     /*
@@ -183,7 +191,7 @@ void builder::add(const processed_object& po) {
     /*
      * Adapt the processed object and add it to the model.
      */
-    const auto e(adapter::adapt(po, cby, p));
+    const auto e(adapter::adapt(o, cby, p));
     model_.elements().push_back(e);
     BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name().qualified();
 
@@ -192,8 +200,8 @@ void builder::add(const processed_object& po) {
      * we need to remember them for later. As explained above, we need
      * to update them with the contents of UML notes.
      */
-    if (dot == dia_object_types::uml_large_package) {
-        handle_uml_large_package(po, e.name().qualified());
+    if (dot == uml_large_package) {
+        handle_uml_large_package(o, e.name().qualified());
         return;
     }
 
@@ -205,7 +213,7 @@ void builder::add(const processed_object& po) {
      */
     update_parentage(id, e.name().qualified());
 
-    BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
+    BOOST_LOG_SEV(lg, debug) << "Finished processing: " << o.name();
 }
 
 codec::entities::model builder::build() {

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include "dogen.dia/types/entities/attribute_fwd.hpp"
 #include "dogen.dia/types/entities/object_fwd.hpp"
@@ -32,8 +33,8 @@
 #include "dogen.dia/types/entities/composite_fwd.hpp"
 #include "dogen.dia/types/entities/diagram_fwd.hpp"
 #include "dogen.codec.dia/types/dia_object_types.hpp"
-#include "dogen.codec.dia/types/processed_object_fwd.hpp"
-#include "dogen.codec.dia/types/processed_comment_fwd.hpp"
+#include "dogen.codec/types/entities/object_fwd.hpp"
+#include "dogen.codec/types/entities/comment_fwd.hpp"
 
 namespace dogen::codec::dia {
 
@@ -53,7 +54,7 @@ private:
      *
      * @pre Attribute must be of type string.
      */
-    static processed_comment
+    static entities::comment
     create_processed_comment(const dogen::dia::entities::attribute& a);
 
     /**
@@ -66,44 +67,44 @@ private:
      * @brief Parse connection information from Dia object.
      */
     static void parse_connections(const dogen::dia::entities::object& o,
-        processed_object& po);
+        entities::object& po);
 
     /**
      * @brief Parse the attribute as a Dia text.
      */
     static void parse_as_dia_text(const dogen::dia::entities::attribute a,
-        processed_object& po);
+        entities::object& o);
 
     /**
      * @brief Processes the raw Dia stereotypes.
      */
     static void parse_as_stereotypes(dogen::dia::entities::attribute a,
-        processed_object& po);
+        entities::object& o);
 
     /**
      * @brief Parses the contents of the Dia attribute assuming it
      * contains UML attributes.
      */
     static void parse_as_class_attributes(
-        const dogen::dia::entities::attribute a, processed_object& po);
+        const dogen::dia::entities::attribute a, entities::object& o);
 
     /**
      * @brief Parses the Dia attributes from the Dia object.
      */
     static void parse_attributes(const dogen::dia::entities::object& o,
-        processed_object& po);
+        entities::object& po);
 
 public:
     /**
      * @brief Generates a processed object.
      */
-    static processed_object make(const dogen::dia::entities::object& o);
+    static entities::object make(const dogen::dia::entities::object& o);
 
     /**
      * @brief Generates a processed object representation of the
      * diagram.
      */
-    static std::list<processed_object>
+    static std::list<entities::object>
     make(const dogen::dia::entities::diagram& d);
 };
 

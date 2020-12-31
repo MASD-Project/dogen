@@ -31,10 +31,9 @@
 #include "dogen.dia/types/entities/attribute.hpp"
 #include "dogen.dia/types/entities/composite.hpp"
 #include "dogen.dia/types/entities/diagram.hpp"
-#include "dogen.codec.dia/io/dia_object_types_io.hpp"
-#include "dogen.codec.dia/io/processed_object_io.hpp"
+#include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.codec.dia/types/building_error.hpp"
-#include "dogen.codec.dia/types/processed_object.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec.dia/types/processed_comment_factory.hpp"
 #include "dogen.codec.dia/types/processed_object_factory.hpp"
 
@@ -134,7 +133,7 @@ parse_string_attribute(const dogen::dia::entities::attribute& a) {
     return name;
 }
 
-processed_comment processed_object_factory::
+entities::comment processed_object_factory::
 create_processed_comment(const dogen::dia::entities::attribute& a) {
     const auto s(parse_string_attribute(a));
     return processed_comment_factory::make(s);
@@ -168,7 +167,7 @@ parse_object_type(const std::string& ot) {
 }
 
 void processed_object_factory::
-parse_connections(const dogen::dia::entities::object& o, processed_object& po) {
+parse_connections(const dogen::dia::entities::object& o, entities::object& po) {
     /*
      * If there are no connections we have no work to do.
      */
@@ -179,7 +178,7 @@ parse_connections(const dogen::dia::entities::object& o, processed_object& po) {
      * At present we only care about UML generalisation. We are
      * ignoring UML association and realisation.
      */
-    if (po.dia_object_type() != dia_object_types::uml_generalization)
+    if (po.object_type() != uml_generalization)
         return;
 
     /*
@@ -204,7 +203,7 @@ parse_connections(const dogen::dia::entities::object& o, processed_object& po) {
 }
 
 void processed_object_factory::
-parse_as_dia_text(const dogen::dia::entities::attribute a, processed_object& po) {
+parse_as_dia_text(const dogen::dia::entities::attribute a, entities::object& o) {
     if (a.values().size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
                                  << "have a single value but found "
@@ -230,14 +229,14 @@ parse_as_dia_text(const dogen::dia::entities::attribute a, processed_object& po)
 
     for (const auto& a : c->value()) {
         if (a->name() == dia_string)
-            po.comment(create_processed_comment(*a));
+            o.comment(create_processed_comment(*a));
         else
             BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: " << a->name();
     }
 }
 
 void  processed_object_factory::parse_as_class_attributes(
-    const dogen::dia::entities::attribute a, processed_object& po) {
+    const dogen::dia::entities::attribute a, entities::object& o) {
 
     const auto& values(a.values());
     if (values.empty()) {
@@ -257,10 +256,10 @@ void  processed_object_factory::parse_as_class_attributes(
         }
         BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
 
-        processed_attribute pa;
+        entities::attribute pa;
         for (const auto& a : c.value()) {
             if (a->name() == dia_name)
-                pa.name(parse_string_attribute(*a));
+                pa.name().simple(parse_string_attribute(*a));
             else if (a->name() == dia_type)
                 pa.type(parse_string_attribute(*a));
             else if (a->name() == dia_value)
@@ -270,30 +269,29 @@ void  processed_object_factory::parse_as_class_attributes(
             else
                 BOOST_LOG_SEV(lg, warn) << "Ignoring attribute: " << a->name();
         }
-        po.attributes().push_back(pa);
+        o.attributes().push_back(pa);
     }
 }
 
 void processed_object_factory::
-parse_as_stereotypes(dogen::dia::entities::attribute a, processed_object& po) {
+parse_as_stereotypes(dogen::dia::entities::attribute a, entities::object& o) {
     /*
      * When it comes to stereotypes, we only care about objects and
      * packages.
      */
-    if (po.dia_object_type() != dia_object_types::uml_class &&
-        po.dia_object_type() != dia_object_types::uml_large_package) {
+    if (o.object_type() != uml_class && o.object_type() != uml_large_package) {
         BOOST_LOG_SEV(lg, debug) << "Not processing stereotypes for object: "
-                                 << po.id() << " of type: "
-                                 << po.dia_object_type();
+                                 << o.id() << " of type: "
+                                 << o.object_type();
         return;
     }
 
     const auto s(parse_string_attribute(a));
-    po.stereotypes(s);
+    o.stereotypes(s);
 }
 
 void processed_object_factory::
-parse_attributes(const dogen::dia::entities::object& o, processed_object& po) {
+parse_attributes(const dogen::dia::entities::object& o, entities::object& po) {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             po.name(parse_string_attribute(a));
@@ -308,16 +306,16 @@ parse_attributes(const dogen::dia::entities::object& o, processed_object& po) {
     }
 }
 
-processed_object processed_object_factory::
+entities::object processed_object_factory::
 make(const dogen::dia::entities::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
-    processed_object r;
+    entities::object r;
     r.id(o.id());
-    r.dia_object_type(parse_object_type(o.type()));
+    r.object_type(o.type());
 
     if (o.child_node())
-        r.child_node_id(o.child_node()->parent());
+        r.container_id(o.child_node()->parent());
 
     parse_connections(o, r);
     parse_attributes(o, r);
@@ -326,9 +324,9 @@ make(const dogen::dia::entities::object& o) {
     return r;
 }
 
-std::list<processed_object>
+std::list<entities::object>
 processed_object_factory::make(const dogen::dia::entities::diagram& d) {
-    std::list<processed_object> r;
+    std::list<entities::object> r;
     for (const auto& l : d.layers()) {
         for (const auto& o : l.objects())
             r.push_back(make(o));
