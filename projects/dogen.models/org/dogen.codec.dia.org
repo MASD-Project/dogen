@@ -125,42 +125,6 @@ An error has occurred while building the dia object graph.
   :custom_id: O10
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-* dia object types                                                  :element:
-  :PROPERTIES:
-  :custom_id: O13
-  :masd.codec.stereotypes: masd::enumeration
-  :END:
-
-Identifier for the type of Dia object.
-
-** uml large package                                              :attribute:
-
-A UML package
-
-** uml class                                                      :attribute:
-
-A UML class
-
-** uml generalization                                             :attribute:
-
-UML Inheritance
-
-** uml association                                                :attribute:
-
-UML Association
-
-** uml note                                                       :attribute:
-
-UML Note
-
-** uml message                                                    :attribute:
-
-UML Message
-
-** uml realization                                                :attribute:
-
-UML Realization
-
 * validator                                                         :element:
   :PROPERTIES:
   :custom_id: O15

@@ -139,33 +139,6 @@ create_processed_comment(const dogen::dia::entities::attribute& a) {
     return processed_comment_factory::make(s);
 }
 
-dia_object_types processed_object_factory::
-parse_object_type(const std::string& ot) {
-    if (ot == uml_large_package)
-        return dia_object_types::uml_large_package;
-
-    if (ot == uml_class)
-        return dia_object_types::uml_class;
-
-    if (ot == uml_generalization)
-        return dia_object_types::uml_generalization;
-
-    if (ot == uml_association)
-        return dia_object_types::uml_association;
-
-    if (ot == uml_note)
-        return dia_object_types::uml_note;
-
-    if (ot == uml_message)
-        return dia_object_types::uml_message;
-
-    if (ot == uml_realization)
-        return dia_object_types::uml_realization;
-
-    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-    BOOST_THROW_EXCEPTION(building_error(invalid_object_type + ot));
-}
-
 void processed_object_factory::
 parse_connections(const dogen::dia::entities::object& o, entities::object& po) {
     /*

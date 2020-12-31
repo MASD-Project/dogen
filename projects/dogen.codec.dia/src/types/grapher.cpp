@@ -24,7 +24,6 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.codec.dia/io/dia_object_types_io.hpp"
 #include "dogen.codec.dia/types/graphing_error.hpp"
 #include "dogen.codec.dia/types/grapher.hpp"
 

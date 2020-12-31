@@ -32,7 +32,6 @@
 #include "dogen.dia/types/entities/attribute_fwd.hpp"
 #include "dogen.dia/types/entities/composite_fwd.hpp"
 #include "dogen.dia/types/entities/diagram_fwd.hpp"
-#include "dogen.codec.dia/types/dia_object_types.hpp"
 #include "dogen.codec/types/entities/object_fwd.hpp"
 #include "dogen.codec/types/entities/comment_fwd.hpp"
 
@@ -56,12 +55,6 @@ private:
      */
     static entities::comment
     create_processed_comment(const dogen::dia::entities::attribute& a);
-
-    /**
-     * @brief Given a string with a dia object type, returns the
-     * appropriate enum.
-     */
-    static dia_object_types parse_object_type(const std::string& ot);
 
     /**
      * @brief Parse connection information from Dia object.

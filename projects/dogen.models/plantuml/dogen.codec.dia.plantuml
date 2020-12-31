@@ -93,23 +93,10 @@ class processed_comment_factory <<dogen::handcrafted::typeable>> #FFFACD {
 class processed_object_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-enum dia_object_types <<masd::enumeration>> #F2DAFD {
-        +{field} uml_large_package
-        +{field} uml_class
-        +{field} uml_generalization
-        +{field} uml_association
-        +{field} uml_note
-        +{field} uml_message
-        +{field} uml_realization
-}
-
 class validator <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class validation_error <<masd::exception>> #E8C2F8 {
-}
-
-class traits <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class building_error <<masd::exception>> #E8C2F8 {
