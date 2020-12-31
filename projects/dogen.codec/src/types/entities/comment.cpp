@@ -26,50 +26,34 @@ comment::comment()
     : applies_to_container_(static_cast<bool>(0)) { }
 
 comment::comment(
-    const std::string& documentation,
     const std::list<dogen::identification::entities::tagged_value>& tagged_values,
     const bool applies_to_container,
-    const std::string& original_content)
-    : documentation_(documentation),
-      tagged_values_(tagged_values),
+    const std::string& original_content,
+    const std::string& documentation)
+    : tagged_values_(tagged_values),
       applies_to_container_(applies_to_container),
-      original_content_(original_content) { }
+      original_content_(original_content),
+      documentation_(documentation) { }
 
 void comment::swap(comment& other) noexcept {
     using std::swap;
-    swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
     swap(applies_to_container_, other.applies_to_container_);
     swap(original_content_, other.original_content_);
+    swap(documentation_, other.documentation_);
 }
 
 bool comment::operator==(const comment& rhs) const {
-    return documentation_ == rhs.documentation_ &&
-        tagged_values_ == rhs.tagged_values_ &&
+    return tagged_values_ == rhs.tagged_values_ &&
         applies_to_container_ == rhs.applies_to_container_ &&
-        original_content_ == rhs.original_content_;
+        original_content_ == rhs.original_content_ &&
+        documentation_ == rhs.documentation_;
 }
 
 comment& comment::operator=(comment other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& comment::documentation() const {
-    return documentation_;
-}
-
-std::string& comment::documentation() {
-    return documentation_;
-}
-
-void comment::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void comment::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const std::list<dogen::identification::entities::tagged_value>& comment::tagged_values() const {
@@ -110,6 +94,22 @@ void comment::original_content(const std::string& v) {
 
 void comment::original_content(const std::string&& v) {
     original_content_ = std::move(v);
+}
+
+const std::string& comment::documentation() const {
+    return documentation_;
+}
+
+std::string& comment::documentation() {
+    return documentation_;
+}
+
+void comment::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void comment::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
 }
 
 }

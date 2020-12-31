@@ -24,14 +24,6 @@
 #include "dogen.codec/io/entities/comment_io.hpp"
 #include "dogen.identification/io/entities/tagged_value_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::tagged_value>& v) {
@@ -46,6 +38,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace dogen::codec::entities {
 
 std::ostream& operator<<(std::ostream& s, const comment& v) {
@@ -57,10 +57,10 @@ std::ostream& operator<<(std::ostream& s, const comment& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::codec::entities::comment\"" << ", "
-      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"applies_to_container\": " << v.applies_to_container() << ", "
-      << "\"original_content\": " << "\"" << tidy_up_string(v.original_content()) << "\""
+      << "\"original_content\": " << "\"" << tidy_up_string(v.original_content()) << "\"" << ", "
+      << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\""
       << " }";
     return(s);
 }

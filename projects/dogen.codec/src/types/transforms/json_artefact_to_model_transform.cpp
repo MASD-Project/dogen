@@ -100,13 +100,14 @@ read_parents(const boost::property_tree::ptree& pt) {
 }
 
 
-std::string json_artefact_to_model_transform::
-read_documentation(const boost::property_tree::ptree& pt) {
+entities::comment json_artefact_to_model_transform::
+read_comment(const boost::property_tree::ptree& pt) {
+    entities::comment r;
     const auto opt(pt.get_optional<std::string>(documentation_key));
     if (!opt)
-        return empty;
+        return r;
 
-    const auto r(*opt);
+    r.documentation(*opt);
     return r;
 }
 
@@ -150,7 +151,7 @@ read_attribute(const boost::property_tree::ptree& pt) {
 
     r.type(pt.get<std::string>(type_key));
     r.value(pt.get<std::string>(value_key, empty));
-    r.documentation(read_documentation(pt));
+    r.comment(read_comment(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
 
@@ -167,7 +168,7 @@ codec::entities::element json_artefact_to_model_transform::read_element(
     auto tokens(utility::string::splitter::split_scoped(n));
     r.name().simple(tokens.back());
 
-    r.documentation(read_documentation(pt));
+    r.comment(read_comment(pt));
     r.parents(read_parents(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
@@ -205,7 +206,7 @@ json_artefact_to_model_transform::read_stream(std::istream& s) {
     read_json(s, pt);
 
     codec::entities::model r;
-    r.documentation(read_documentation(pt));
+    r.comment(read_comment(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
 

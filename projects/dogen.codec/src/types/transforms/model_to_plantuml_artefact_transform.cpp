@@ -292,9 +292,9 @@ apply(const transforms::context& ctx, const boost::filesystem::path& p,
     os << "@startuml" << std::endl
        << "set namespaceSeparator ::" << std::endl;
 
-    if (!m.documentation().empty()) {
+    if (!m.comment().documentation().empty()) {
         os << "note as N1" << std::endl
-           << m.documentation() << std::endl
+           << m.comment().documentation() << std::endl
            << "end note" << std::endl << std::endl;
     }
 

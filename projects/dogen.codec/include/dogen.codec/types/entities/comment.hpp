@@ -46,25 +46,12 @@ public:
 
 public:
     comment(
-        const std::string& documentation,
         const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const bool applies_to_container,
-        const std::string& original_content);
+        const std::string& original_content,
+        const std::string& documentation);
 
 public:
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
     const std::list<dogen::identification::entities::tagged_value>& tagged_values() const;
     std::list<dogen::identification::entities::tagged_value>& tagged_values();
     void tagged_values(const std::list<dogen::identification::entities::tagged_value>& v);
@@ -88,6 +75,20 @@ public:
     void original_content(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing
+     * tools of the technical space in question, e.g. Doxygen for C++,
+     * JavaDoc for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const comment& rhs) const;
     bool operator!=(const comment& rhs) const {
@@ -99,10 +100,10 @@ public:
     comment& operator=(comment other);
 
 private:
-    std::string documentation_;
     std::list<dogen::identification::entities::tagged_value> tagged_values_;
     bool applies_to_container_;
     std::string original_content_;
+    std::string documentation_;
 };
 
 }

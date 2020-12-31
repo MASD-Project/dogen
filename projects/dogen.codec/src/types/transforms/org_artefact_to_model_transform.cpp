@@ -224,8 +224,7 @@ make_attribute(const org::entities::headline& h) {
     r.name().simple(headline_title_to_identifier(h.title()));
     r.name().qualified(r.name().simple()); // FIXME
     r.comment().original_content(section_to_text(h.section()));
-    r.documentation(r.comment().original_content());
-
+    r.comment().documentation(r.comment().original_content());
 
     return r;
 }
@@ -237,7 +236,7 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
     const org::entities::headline& h) {
     entities::element r;
     r.comment().original_content(section_to_text(h.section()));
-    r.documentation(r.comment().original_content());
+    r.comment().documentation(r.comment().original_content());
 
     /*
      * Determine the fallback based on the headline type.
@@ -390,7 +389,7 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
     }
 
     r.comment().original_content(section_to_text(doc.section()));
-    r.documentation(r.comment().original_content());
+    r.comment().documentation(r.comment().original_content());
 
     /*
      * Process all top-level headlines.

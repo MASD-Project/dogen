@@ -252,7 +252,7 @@ codec_to_logical_projector::to_attribute(const logical_name& owner,
     r.getter_setter_name(r.name().simple());
 
     r.unparsed_type(cattr.type());
-    r.documentation(cattr.documentation());
+    r.documentation(cattr.comment().documentation());
 
     r.configuration(cattr.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
@@ -279,7 +279,7 @@ codec_to_logical_projector::to_enumerator(const logical_name& owner,
     logical_name_factory f;
     logical::entities::structural::enumerator r;
     r.name(f.build_attribute_name(owner, cattr.name().simple()));
-    r.documentation(cattr.documentation());
+    r.documentation(cattr.comment().documentation());
 
     r.configuration(cattr.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
@@ -325,7 +325,7 @@ void codec_to_logical_projector::populate_element(const logical_location& l,
     const auto& mm(l.model_modules());
     e.in_global_module(em.empty() && mm.empty());
     e.provenance(ce.provenance());
-    e.documentation(ce.documentation());
+    e.documentation(ce.comment().documentation());
 }
 
 boost::shared_ptr<logical::entities::structural::object>
@@ -506,7 +506,7 @@ codec_to_logical_projector::to_generation_marker(const logical_location& l,
         else if (n == add_warning_attr_name)
             r->add_warning(str_to_bool(v));
         else if (n == add_message_attr_name)
-            r->message(cattr.documentation());
+            r->message(cattr.comment().documentation());
         else if (n == add_origin_sha1_hash_attr_name)
             r->add_origin_sha1_hash(str_to_bool(v));
         else {
@@ -532,9 +532,9 @@ codec_to_logical_projector::to_licence(const logical_location& l,
         ensure_not_empty(r->name().id(), n);
 
         if (n == short_form_attr_name)
-            r->short_form(cattr.documentation());
+            r->short_form(cattr.comment().documentation());
         else if (n == long_form_attr_name)
-            r->long_form(cattr.documentation());
+            r->long_form(cattr.comment().documentation());
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(projection_error(unsupported_attribute + n));
@@ -562,7 +562,7 @@ void codec_to_logical_projector::populate_abstract_feature(
     af.original_key(n);
     af.default_value(cattr.value());
     af.unparsed_type(cattr.type());
-    af.documentation(cattr.documentation());
+    af.documentation(cattr.comment().documentation());
 
     using variability::helpers::enum_mapper;
     af.value_type(enum_mapper::to_value_type(cattr.type()));
@@ -722,7 +722,7 @@ codec_to_logical_projector::to_logic_less_template(const logical_location& l,
         const auto n(cattr.name().simple());
 
         if (n == content_attr_name)
-            r->content(cattr.documentation());
+            r->content(cattr.comment().documentation());
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
@@ -861,7 +861,7 @@ codec_to_logical_projector::to_physical_archetype(const logical_location& l,
         }
 
         auto& tt(r->text_templating());
-        tt.stitch_template_content(cattr.documentation());
+        tt.stitch_template_content(cattr.comment().documentation());
         tt.configuration(cattr.configuration());
 
         auto& cfg(*tt.configuration());
@@ -993,7 +993,7 @@ codec_to_logical_projector::to_physical_helper(const logical_location& l,
         }
 
         auto& tt(r->text_templating());
-        tt.stitch_template_content(cattr.documentation());
+        tt.stitch_template_content(cattr.comment().documentation());
         tt.configuration(cattr.configuration());
 
         auto& cfg(*tt.configuration());

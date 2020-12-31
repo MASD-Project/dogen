@@ -54,7 +54,6 @@ public:
     model(
         const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const std::list<dogen::identification::entities::stereotype>& stereotypes,
-        const std::string& documentation,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::codec_provenance& provenance,
@@ -75,19 +74,6 @@ public:
     std::list<dogen::identification::entities::stereotype>& stereotypes();
     void stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
     void stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
-
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
 
     /**
      * @brief Name of the codec element.
@@ -182,7 +168,6 @@ public:
 private:
     std::list<dogen::identification::entities::tagged_value> tagged_values_;
     std::list<dogen::identification::entities::stereotype> stereotypes_;
-    std::string documentation_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::codec_provenance provenance_;

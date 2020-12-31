@@ -242,7 +242,7 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
     } else
         BOOST_LOG_SEV(lg, debug) << "Ignoring empty drawer.";
 
-    if (attr.documentation().empty()) {
+    if (attr.comment().documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Attribute has no documentation.";
     } else {
         BOOST_LOG_SEV(lg, debug) << "Processing attribute documentation.";
@@ -266,7 +266,7 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
         } else
             tb.type(org::entities::block_type::text_block);
 
-        tb.contents(attr.documentation());
+        tb.contents(attr.comment().documentation());
         r.section().blocks().push_back(tb);
     }
 
@@ -318,11 +318,11 @@ to_headline(const unsigned int level, const entities::element& e) {
     /*
      * Add documentation to element.
      */
-    if (!e.documentation().empty()) {
+    if (!e.comment().documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Element has documentation.";
         org::entities::block tb;
         tb.type(org::entities::block_type::text_block);
-        tb.contents(e.documentation());
+        tb.contents(e.comment().documentation());
         r.section().blocks().push_back(tb);
     }
 
@@ -409,12 +409,12 @@ to_document(const codec::entities::model& m) {
         r.drawers().push_back(d);
     }
 
-    if (!m.documentation().empty()) {
+    if (!m.comment().documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Model has documentation.";
 
         org::entities::block tb;
         tb.type(org::entities::block_type::text_block);
-        tb.contents(m.documentation());
+        tb.contents(m.comment().documentation());
         r.section().blocks().push_back(tb);
     }
 

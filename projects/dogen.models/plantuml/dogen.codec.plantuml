@@ -145,10 +145,6 @@ namespace entities #F2F2F2 {
                 +{field} stereotypes std::list<identification::entities::stereotype>
 }
 
-        class Documentable <<masd::object_template>> #E3B6F6 {
-                +{field} documentation std::string
-}
-
         class Nameable <<masd::object_template>> #E3B6F6 {
                 +{field} name identification::entities::name
 }
@@ -174,7 +170,6 @@ namespace entities #F2F2F2 {
 
 entities::Taggable <|-- entities::Element
 entities::Stereotypable <|-- entities::Element
-entities::Documentable <|-- entities::Element
 entities::Nameable <|-- entities::Element
 entities::Configurable <|-- entities::Element
 entities::DeterminableOrigin <|-- entities::Element
@@ -185,9 +180,10 @@ entities::Commentable <|-- entities::Element
                 +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
 }
 
-        class comment <<Documentable, Taggable>> #F7E5FF {
+        class comment <<Taggable>> #F7E5FF {
                 +{field} applies_to_container bool
                 +{field} original_content std::string
+                +{field} documentation std::string
 }
 
         class object <<Commentable>> #F7E5FF {

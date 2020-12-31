@@ -67,7 +67,7 @@ codec::entities::attribute adapter::adapt(const processed_attribute& a,
     r.name().qualified(qualified_name(qualified_owner, a.name()));
     r.type(a.type());
     r.value(a.value());
-    r.documentation(a.comment().documentation());
+    r.comment().documentation(a.comment().documentation());
     r.tagged_values(a.comment().tagged_values());
     return r;
 }
@@ -108,7 +108,7 @@ adapter::adapt(const processed_object& po, const std::string& contained_by,
     r.name().simple(po.name());
     r.name().qualified(qualified_name(contained_by, po.name()));
     r.parents(parents);
-    r.documentation(po.comment().documentation());
+    r.comment().documentation(po.comment().documentation());
     r.tagged_values(po.comment().tagged_values());
 
     using identification::entities::codec_id;

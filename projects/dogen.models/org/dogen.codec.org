@@ -339,24 +339,6 @@ Ability to have stereotypes.
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::stereotype>
     :END:
-** Documentable                                                     :element:
-   :PROPERTIES:
-   :custom_id: O10
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to provide documentation.
-
-*** documentation                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Code comments.
-
-These are expected to follow the grammar of the comment processing tools
-of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
-
 ** Nameable                                                         :element:
    :PROPERTIES:
    :custom_id: O11
@@ -435,7 +417,7 @@ Properties associated with the codec comment.
 ** Element                                                          :element:
    :PROPERTIES:
    :custom_id: O28
-   :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
+   :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -466,7 +448,7 @@ Contains the list of referenced models for a particular model name.
 ** comment                                                          :element:
    :PROPERTIES:
    :custom_id: O63
-   :masd.codec.stereotypes: Documentable, Taggable
+   :masd.codec.stereotypes: Taggable
    :END:
 
 Represents a comment block as read out from the codec representation.
@@ -484,6 +466,17 @@ Content of the field as it belonged to the containing object.
     :END:
 
 Content, as read from the codec representation.
+
+*** documentation                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Code comments.
+
+These are expected to follow the grammar of the comment processing
+tools of the technical space in question, e.g. Doxygen for C++,
+JavaDoc for Java, etc.
 
 ** object                                                           :element:
    :PROPERTIES:

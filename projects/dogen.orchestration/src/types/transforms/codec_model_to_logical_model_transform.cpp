@@ -361,7 +361,7 @@ apply(const context& ctx, const codec::entities::model& m) {
     logical::helpers::stereotypes_helper h;
     const auto sts(h.from_primitives(m.stereotypes()));
     rm.stereotypes(sts);
-    rm.documentation(m.documentation());
+    rm.documentation(m.comment().documentation());
     insert(r.root_module(), r.structural_elements().modules());
 
     stp.end_transform(r);

@@ -32,6 +32,7 @@
 #include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/entities/element.hpp"
 #include "dogen.codec/types/entities/attribute.hpp"
 #include "dogen.codec/types/entities/model.hpp"
@@ -61,8 +62,8 @@ private:
     /**
      * @brief Reads the documentation, if any exists.
      */
-    static std::string
-    read_documentation(const boost::property_tree::ptree& pt);
+    static entities::comment
+    read_comment(const boost::property_tree::ptree& pt);
 
     /**
      * @brief Reads the tagged values, if any exists.

@@ -134,9 +134,9 @@ insert_attribute(std::ostream& s, const codec::entities::attribute& a) {
         uf.insert_quoted_escaped(a.value());
     }
 
-    if (!a.documentation().empty()) {
+    if (!a.comment().documentation().empty()) {
         s << comma_space;
-        insert_documentation(s, a.documentation());
+        insert_documentation(s, a.comment().documentation());
     }
 
     if (!a.stereotypes().empty()) {
@@ -166,9 +166,9 @@ insert_element(std::ostream& s, const codec::entities::element& e) {
         insert_parents(s, e.parents());
     }
 
-    if (!e.documentation().empty()) {
+    if (!e.comment().documentation().empty()) {
         s << comma_space;
-        insert_documentation(s, e.documentation());
+        insert_documentation(s, e.comment().documentation());
     }
 
     if (!e.stereotypes().empty()) {
@@ -210,22 +210,22 @@ model_to_json_artefact_transform::to_string(const codec::entities::model& m) {
     std::ostringstream s;
 
     s << "{ ";
-    if (!m.documentation().empty())
-        insert_documentation(s, m.documentation());
+    if (!m.comment().documentation().empty())
+        insert_documentation(s, m.comment().documentation());
 
     if (!m.stereotypes().empty()) {
-        if (!m.documentation().empty())
+        if (!m.comment().documentation().empty())
             s << ", ";
         insert_stereotypes(s, m.stereotypes());
     }
 
     if (!m.tagged_values().empty()) {
-        if (!m.documentation().empty() || !m.stereotypes().empty())
+        if (!m.comment().documentation().empty() || !m.stereotypes().empty())
             s << comma_space;
         insert_tagged_values(s, m.tagged_values());
     }
 
-    if (!m.documentation().empty() || !m.stereotypes().empty() ||
+    if (!m.comment().documentation().empty() || !m.stereotypes().empty() ||
         !m.tagged_values().empty()) {
         s << comma_space;
     }

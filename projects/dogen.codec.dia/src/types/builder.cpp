@@ -123,7 +123,7 @@ void builder::handle_uml_note(const processed_object& po) {
          * note. Thus is may be used to convey both tagged values and
          * documentation for the model.
          */
-        model_.documentation(c.documentation());
+        model_.comment().documentation(c.documentation());
         model_.tagged_values(c.tagged_values());
         BOOST_LOG_SEV(lg, debug) << "Model documentation: '"
                                  << c.documentation() << "'";
@@ -145,7 +145,7 @@ void builder::handle_uml_note(const processed_object& po) {
     }
 
     auto& e(*i->second.element);
-    e.documentation(c.documentation());
+    e.comment().documentation(c.documentation());
     e.tagged_values(c.tagged_values());
 }
 

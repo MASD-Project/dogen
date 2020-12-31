@@ -43,7 +43,6 @@ element::element()
 element::element(
     const std::list<dogen::identification::entities::tagged_value>& tagged_values,
     const std::list<dogen::identification::entities::stereotype>& stereotypes,
-    const std::string& documentation,
     const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::codec_provenance& provenance,
@@ -61,7 +60,6 @@ element::element(
     const dogen::identification::entities::codec_id& containing_element_id)
     : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
-      documentation_(documentation),
       name_(name),
       configuration_(configuration),
       provenance_(provenance),
@@ -82,7 +80,6 @@ void element::swap(element& other) noexcept {
     using std::swap;
     swap(tagged_values_, other.tagged_values_);
     swap(stereotypes_, other.stereotypes_);
-    swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
@@ -103,7 +100,6 @@ void element::swap(element& other) noexcept {
 bool element::operator==(const element& rhs) const {
     return tagged_values_ == rhs.tagged_values_ &&
         stereotypes_ == rhs.stereotypes_ &&
-        documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
@@ -157,22 +153,6 @@ void element::stereotypes(const std::list<dogen::identification::entities::stere
 
 void element::stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
     stereotypes_ = std::move(v);
-}
-
-const std::string& element::documentation() const {
-    return documentation_;
-}
-
-std::string& element::documentation() {
-    return documentation_;
-}
-
-void element::documentation(const std::string& v) {
-    documentation_ = v;
-}
-
-void element::documentation(const std::string&& v) {
-    documentation_ = std::move(v);
 }
 
 const dogen::identification::entities::name& element::name() const {
