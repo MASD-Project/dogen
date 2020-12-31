@@ -17,73 +17,29 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(input_dir "json")
-set(folder "${CMAKE_CURRENT_SOURCE_DIR}/json")
-if (WITH_JSON_VALIDATION)
-    set(files "")
-
-    file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/${input_dir}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/${input_dir}/*.json")
-
-    set(target "models.json")
-    add_custom_target(validate_${target})
-    add_dependencies(validate_all_json validate_${target})
-
-    add_custom_target(indent_${target})
-    add_dependencies(indent_all_json indent_${target})
-
-    foreach(file ${files})
-        add_custom_target(validate_${file}
-            COMMENT "Validating JSON for ${target}/${file}."
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
-        add_dependencies(validate_${target} validate_${file})
-
-        add_custom_target(indent_${file}
-            COMMENT "Indenting JSON for ${target}/${file}."
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
-            COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
-        add_dependencies(indent_${target} indent_${file})
-
-    endforeach()
-endif()
-
+set(input_dir "org")
+set(folder "${CMAKE_CURRENT_SOURCE_DIR}/org")
 if (DOGEN_CLI_EXECUTABLE)
     #
     # Model conversion
     #
-    file(GLOB models "dia/*.dia")
+    file(GLOB models "org/*.org")
     foreach(model ${models})
         set(model_name "")
         get_filename_component(model_name ${model} NAME)
 
-        set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/json")
+        set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/plantuml")
         set(destination_name ${output_dir}/${model_name})
-        string(REGEX REPLACE ".dia$" ".json" destination_name
+        string(REGEX REPLACE ".org$" ".plantuml" destination_name
             ${destination_name})
 
-        add_custom_target(convert_${model_name}_json
-            COMMENT "Converting ${model_name} to JSON."
+        add_custom_target(convert_${model_name}_plantuml
+            COMMENT "Converting ${model_name} to PlantUML."
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${DOGEN_CLI_EXECUTABLE} convert
             --source ${model} --destination ${destination_name}
             ${DOGEN_COMMON_OPTIONS})
-        add_dependencies(convert_all_json convert_${model_name}_json)
-
-        set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/org")
-        set(destination_name ${output_dir}/${model_name})
-        string(REGEX REPLACE ".dia$" ".org" destination_name
-            ${destination_name})
-
-        add_custom_target(convert_${model_name}_org
-            COMMENT "Converting ${model_name} to org-mode."
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${DOGEN_CLI_EXECUTABLE} convert
-            --source ${model} --destination ${destination_name}
-            ${DOGEN_COMMON_OPTIONS})
-        add_dependencies(convert_all_org convert_${model_name}_org)
+        add_dependencies(convert_all_plantuml convert_${model_name}_plantuml)
     endforeach()
 
     #
@@ -109,3 +65,4 @@ if (DOGEN_CLI_EXECUTABLE)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/org)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/plantuml)

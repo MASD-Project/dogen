@@ -113,6 +113,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 #
 # options
 #
+option(WITH_PLANTUML "Build UML representation." on)
 option(WITH_DOXYGEN "Build the project documentation." off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
@@ -460,6 +461,17 @@ endif ()
 message(STATUS "MSVC-specific libraries: ${USE_MSVC_LIBS}")
 
 #
+# PlantUML
+#
+find_program(PLANTUML_PROGRAM plantuml)
+if (PLANTUML_PROGRAM)
+    message(STATUS "Found PlantUML: ${PLANTUML_PROGRAM}")
+    set(WITH_PLANTUML "on")
+else()
+    message(STATUS "PlantUML not found.")
+endif()
+
+#
 # Dogen
 #
 
@@ -480,6 +492,16 @@ if (DOGEN_CLI_EXECUTABLE)
     add_custom_target(generate_all_org)
     add_custom_target(gao)
     add_dependencies(gao generate_all_org)
+
+    add_custom_target(convert_all_plantuml)
+    add_custom_target(cap)
+    add_dependencies(cap convert_all_plantuml)
+
+    if (WITH_PLANTUML)
+        add_custom_target(generate_all_plantuml)
+        add_custom_target(gap)
+        add_dependencies(gap generate_all_plantuml)
+    endif()
 
     #
     # Options to use for all Dogen invocations
