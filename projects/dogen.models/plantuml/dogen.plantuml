@@ -1,0 +1,139 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Provides the top-level API for the dogen product.
+
+end note
+
+class configuration <<masd::fluent>> #F7E5FF {
+        +{field} model_processing model_processing_configuration
+        +{field} tracing boost::optional<tracing_configuration>
+        +{field} diffing boost::optional<diffing_configuration>
+        +{field} reporting boost::optional<reporting_configuration>
+        +{field} byproduct_directory boost::filesystem::path
+        +{field} database boost::optional<database_configuration>
+}
+
+enum tracing_level <<masd::enumeration>> #F2DAFD {
+        +{field} detail
+        +{field} summary
+}
+
+class tracing_configuration <<masd::fluent>> #F7E5FF {
+        +{field} level tracing_level
+        +{field} format tracing_format
+        +{field} guids_enabled bool
+        +{field} logging_impact std::string
+        +{field} use_short_names bool
+        +{field} output_directory boost::filesystem::path
+        +{field} backend tracing_backend
+        +{field} run_id std::string
+        +{field} filter_regexes std::vector<std::string>
+}
+
+enum tracing_format <<masd::enumeration>> #F2DAFD {
+        +{field} plain
+        +{field} org_mode
+        +{field} graphviz
+}
+
+class configuration_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class diffing_configuration <<masd::fluent>> #F7E5FF {
+        +{field} destination diffing_destination
+        +{field} output_directory boost::filesystem::path
+}
+
+class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class model_processing_configuration #F7E5FF {
+        +{field} compatibility_mode_enabled bool
+        +{field} dry_run_mode_enabled bool
+        +{field} variability_overrides std::vector<std::string>
+        +{field} activity_timestamp boost::posix_time::ptime
+}
+
+class invalid_configuration_exception <<masd::exception>> #E8C2F8 {
+}
+
+class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class converter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class generation_exception <<masd::exception>> #E8C2F8 {
+}
+
+class conversion_exception <<masd::exception>> #E8C2F8 {
+}
+
+enum diffing_destination <<masd::enumeration>> #F2DAFD {
+        +{field} file
+        +{field} console
+}
+
+class reporting_configuration #F7E5FF {
+        +{field} style reporting_style
+        +{field} output_directory boost::filesystem::path
+}
+
+enum reporting_style <<masd::enumeration, dogen::convertible>> #F2DAFD {
+        +{field} plain
+        +{field} org_mode
+}
+
+class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class database_configuration #F7E5FF {
+        +{field} host std::string
+        +{field} port unsigned int
+        +{field} name std::string
+        +{field} user std::string
+        +{field} password std::string
+        +{field} engine database_engine
+        +{field} generate_schema bool
+}
+
+enum tracing_backend <<masd::enumeration>> #F2DAFD {
+        +{field} file
+        +{field} relational_database
+}
+
+enum database_engine <<masd::enumeration>> #F2DAFD {
+        +{field} postgres
+        +{field} sqlite
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+class specs #F7E5FF {
+        +{field} categories std::list<spec_category>
+}
+
+class spec_category #F7E5FF {
+        +{field} name std::string
+        +{field} entries std::list<spec_entry>
+        +{field} description std::string
+}
+
+class spec_entry #F7E5FF {
+        +{field} name std::string
+        +{field} description std::string
+}
+
+class spec_dumper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class dumping_exception <<masd::exception>> #E8C2F8 {
+}
+
+@enduml

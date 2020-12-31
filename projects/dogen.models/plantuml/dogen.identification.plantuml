@@ -1,0 +1,266 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Collection of types related to naming, labelling and general
+identification within Dogen.
+
+end note
+
+namespace entities #F2F2F2 {
+        class name <<Nameable>> #F7E5FF {
+                +{field} qualified std::string
+}
+
+        class codec_provenance #F7E5FF {
+                +{field} model_id model_id
+                +{field} model_type model_type
+                +{field} model_sha1_hash sha1_hash
+                +{field} codec_id codec_id
+                +{field} location codec_location
+}
+
+        enum model_type <<masd::enumeration>> #F2DAFD {
+                +{field} target
+                +{field} pdm_reference
+                +{field} non_pdm_reference
+                +{field} not_yet_determined
+}
+
+        class sha1_hash <<masd::primitive>> #EDCEFB {
+}
+
+        class codec_id <<masd::primitive>> #EDCEFB {
+}
+
+        class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+}
+
+        class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+}
+
+        class codec_location #F7E5FF {
+                +{field} line long
+                +{field} column long
+}
+
+        class logical_provenance #F7E5FF {
+                +{field} codec codec_provenance
+                +{field} logical_name logical_name
+                +{field} logical_meta_name logical_meta_name
+}
+
+        class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+}
+
+        class label #F7E5FF {
+                +{field} key std::string
+                +{field} value std::string
+}
+
+        class tagged_value #F7E5FF {
+                +{field} tag std::string
+                +{field} value std::string
+}
+
+        class logical_name <<Nameable, QualifiedRepresentations, dogen::hashable>> #F7E5FF {
+                +{field} id logical_id
+                +{field} location logical_location
+                +{field} is_container bool
+}
+
+        class logical_location <<dogen::hashable>> #F7E5FF {
+                +{field} external_modules std::list<std::string>
+                +{field} model_modules std::list<std::string>
+                +{field} internal_modules std::list<std::string>
+                +{field} element std::string
+}
+
+        class qualified_representations <<dogen::hashable>> #F7E5FF {
+                +{field} dot std::string
+                +{field} colon std::string
+                +{field} identifiable std::string
+}
+
+        class physical_meta_location #F7E5FF {
+                +{field} meta_model std::string
+                +{field} backend std::string
+                +{field} part std::string
+                +{field} facet std::string
+                +{field} archetype std::string
+}
+
+        class physical_meta_name <<Nameable>> #F7E5FF {
+                +{field} id physical_meta_id
+                +{field} location physical_meta_location
+}
+
+        class logical_meta_name <<Nameable>> #F7E5FF {
+                +{field} id logical_meta_id
+}
+
+        enum technical_space <<masd::enumeration, dogen::convertible>> #F2DAFD {
+                +{field} agnostic
+                +{field} cpp
+                +{field} csharp
+                +{field} cmake
+                +{field} xml
+                +{field} odb
+                +{field} sln
+                +{field} mustache
+}
+
+        class physical_name <<Nameable>> #F7E5FF {
+                +{field} id physical_id
+}
+
+        class Nameable <<masd::object_template>> #E3B6F6 {
+                +{field} simple std::string
+}
+
+        class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
+                +{field} logical_id logical_id
+                +{field} physical_meta_id physical_meta_id
+}
+
+        class physical_id <<masd::primitive>> #EDCEFB {
+}
+
+        class model_id <<masd::primitive>> #EDCEFB {
+}
+
+        class stereotype <<masd::primitive>> #EDCEFB {
+}
+
+        class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
+                +{field} current logical_name
+                +{field} children std::list<logical_name_tree>
+                +{field} are_children_opaque bool
+                +{field} is_circular_dependency bool
+                +{field} is_current_simple_type bool
+                +{field} is_floating_point bool
+}
+
+        class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
+                +{field} qualified qualified_representations
+}
+
+        class archetype_name_set #F7E5FF {
+                +{field} logical_meta_id logical_meta_id
+                +{field} meta_names std::list<physical_meta_name>
+                +{field} canonical_locations std::unordered_map<physical_meta_id, physical_meta_id>
+                +{field} archetype_for_label std::unordered_map<physical_meta_id, physical_meta_id>
+}
+
+        class physical_meta_name_indices #F7E5FF {
+                +{field} all std::list<physical_meta_name>
+                +{field} facet_names_by_backend_name std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
+                +{field} archetype_names_by_logical_meta_name std::unordered_map<logical_meta_id, archetype_name_set>
+                +{field} archetype_names_by_backend_by_facet std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
+                +{field} technical_space_for_archetype std::unordered_map<physical_meta_id, technical_space>
+}
+
+        enum technical_space_version <<masd::enumeration>> #F2DAFD {
+                +{field} cpp_98
+                +{field} cpp_11
+                +{field} cpp_14
+                +{field} cpp_17
+}
+
+}
+
+namespace helpers #F2F2F2 {
+        class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class building_error <<masd::exception>> #E8C2F8 {
+}
+
+        class qualified_representations_builder <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} dot_printer pretty_printer
+                +{field} colon_printer pretty_printer
+}
+
+        class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logical_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} name entities::logical_name
+}
+
+        class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} location entities::logical_location
+}
+
+        class flattening_error <<masd::exception>> #E8C2F8 {
+}
+
+        class printing_error <<masd::exception>> #E8C2F8 {
+}
+
+        class pretty_printer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        enum separators <<masd::enumeration>> #F2DAFD {
+                +{field} angle_brackets
+                +{field} double_colons
+                +{field} dots
+}
+
+        class physical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class physical_meta_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class physical_meta_id_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logical_name_tree_builder <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} names std::list<std::string>
+                +{field} root boost::shared_ptr<node>
+                +{field} current boost::shared_ptr<node>
+}
+
+        class legacy_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class node <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} parent boost::weak_ptr<node>
+                +{field} data entities::logical_name
+                +{field} children std::list<boost::shared_ptr<node>>
+}
+
+        class new_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class parsing_error <<masd::exception>> #E8C2F8 {
+}
+
+        class physical_meta_name_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class validation_error <<masd::exception>> #E8C2F8 {
+}
+
+        class physical_id_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class meta_name_index_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+@enduml

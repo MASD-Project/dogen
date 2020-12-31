@@ -1,0 +1,66 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Implements the command-line interface for Dogen.
+
+end note
+
+class parser_exception <<masd::exception>> #E8C2F8 {
+}
+
+class application <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class command_line_parser <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class program_options_parser <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+command_line_parser <|-- program_options_parser
+class injector_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class application_exception <<masd::exception>> #E8C2F8 {
+}
+
+class configuration #F7E5FF {
+        +{field} logging boost::optional<utility::log::logging_configuration>
+        +{field} api dogen::configuration
+        +{field} cli cli_configuration
+}
+
+class generation_configuration <<masd::fluent>> #F7E5FF {
+        +{field} reference_model_directories std::vector<boost::filesystem::path>
+        +{field} target boost::filesystem::path
+        +{field} output_directory boost::filesystem::path
+}
+
+class conversion_configuration <<masd::fluent>> #F7E5FF {
+        +{field} source boost::filesystem::path
+        +{field} destination std::string
+}
+
+class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class cli_configuration <<masd::fluent>> #F7E5FF {
+        +{field} activity boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
+        +{field} byproduct_directory boost::filesystem::path
+}
+
+class main <<masd::entry_point>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+class dumpspecs_configuration <<masd::fluent>> #F7E5FF {
+        +{field} style reporting_style
+}
+
+@enduml

@@ -1,0 +1,293 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Assorted utilities used by Dogen.
+
+end note
+
+namespace exception #F2F2F2 {
+        class invalid_enum_value <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class utility_exception <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+}
+
+namespace filesystem #F2F2F2 {
+        class file <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class file_not_found <<masd::exception>> #E8C2F8 {
+}
+
+        class io_error <<masd::exception>> #E8C2F8 {
+}
+
+        class path <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace hash #F2F2F2 {
+        class combine <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class list_hash <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class sha1_hasher <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace io #F2F2F2 {
+        class array_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class forward_list_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class jsonify_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class list_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class map_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class memory_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class optional_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class pair_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class set_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class shared_ptr_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class typeindex_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class unordered_map_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class unordered_set_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class vector_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+}
+
+namespace log #F2F2F2 {
+        class logger <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class lifecycle_manager <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class scoped_lifecycle_manager <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class severity_level <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logging_configuration <<masd::fluent>> #F7E5FF {
+                +{field} severity std::string
+                +{field} filename std::string
+                +{field} output_to_console bool
+                +{field} output_directory boost::filesystem::path
+}
+
+        class invalid_logging_configuration <<masd::exception>> #E8C2F8 {
+}
+
+        class logging_configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace serialization #F2F2F2 {
+        class archive_types <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class xml_helper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class path <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+}
+
+namespace string #F2F2F2 {
+        class splitter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class differ <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace test #F2F2F2 {
+        class asserter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class bytewise_file_asserter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class file_asserter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class logging <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class xml_serialization_helper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class exception_checkers <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class fixture <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class macros <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+}
+
+namespace test_data #F2F2F2 {
+        class filesystem_tests <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class generate_container <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class northwind <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class resolver <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class sequence <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class tds_test_good <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class test_data <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class validating_resolver <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class xml_reader <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class dogen_product <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class cpp_ref_impl_product <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class csharp_ref_impl_product <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class test_data_exception <<masd::exception>> #E8C2F8 {
+}
+
+        class frozen_product <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace xml #F2F2F2 {
+        class exception <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class node_types <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class node_types_io <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class text_reader <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class text_reader_io <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace environment #F2F2F2 {
+        class environment_exception <<masd::exception>> #E8C2F8 {
+}
+
+        class variable_reader <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+namespace formatters #F2F2F2 {
+        class formatting_error <<masd::exception>> #E8C2F8 {
+}
+
+        enum quote_type <<masd::enumeration>> #F2DAFD {
+                +{field} single_quote
+                +{field} double_quote
+}
+
+        enum spacing_type <<masd::enumeration>> #F2DAFD {
+                +{field} no_space
+                +{field} left_space
+                +{field} right_space
+                +{field} left_and_right_space
+}
+
+        class utility_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class indent_filter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        enum comment_style <<masd::enumeration>> #F2DAFD {
+                +{field} c_style
+                +{field} cpp_style
+                +{field} csharp_style
+                +{field} shell_style
+                +{field} sql_style
+                +{field} xml_style
+}
+
+        class comment_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class sequence_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class infix_configuration <<masd::fluent>> #F7E5FF {
+                +{field} first std::string
+                +{field} not_first std::string
+                +{field} not_last std::string
+                +{field} last std::string
+}
+
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+@enduml

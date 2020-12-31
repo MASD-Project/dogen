@@ -1,0 +1,40 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Exercises all dogen-defined stereotypes that have an impact in
+colour, so we can see how the entire palette looks like.
+
+This model does not need to be code generated, though it
+should remain a valid Dogen model. It must be updated with
+any changes to the colour scheme. To make a change, first
+update the colour.py script then run it in this model. If
+it looks good, then run it against all other dogen models.
+
+We should try to keep all elements in one screen as much
+as possible, so we can evaluate how they work together.
+
+end note
+
+class palette_test_one_one <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class palette_test_one_two <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class palette_test_one_three <<dogen::handcrafted::typeable::implementation_only>> #FFFACD {
+}
+
+namespace package #F2F2F2 {
+        class palette_test_one_one <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class palette_test_one_two <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+        class palette_test_one_three <<dogen::handcrafted::typeable::implementation_only>> #FFFACD {
+}
+
+}
+
+@enduml

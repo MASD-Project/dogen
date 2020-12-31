@@ -1,0 +1,112 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Orchestration-based imlementation of the Dogen product API.
+
+end note
+
+namespace transforms #F2F2F2 {
+        class code_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+                +{field} variability_context variability::transforms::context
+                +{field} codec_context codec::transforms::context
+                +{field} logical_context logical::transforms::context
+                +{field} text_context text::transforms::context
+                +{field} physical_context physical::transforms::context
+}
+
+        class context_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class factory_exception <<masd::exception>> #E8C2F8 {
+}
+
+        class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class codec_model_set_to_logical_input_model_set_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class transform_exception <<masd::exception>> #E8C2F8 {
+}
+
+        class logical_model_to_text_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class physical_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class text_model_to_physical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class text_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class legacy_dependencies_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class physical_to_logical_population_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class elements_removal_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+class generator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class converter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class injector_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+namespace helpers #F2F2F2 {
+        class codec_to_logical_projector <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class logical_to_physical_projector <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class projection_error <<masd::exception>> #E8C2F8 {
+}
+
+        class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class building_error <<masd::exception>> #E8C2F8 {
+}
+
+}
+
+namespace features #F2F2F2 {
+        class model_location <<masd::variability::feature_bundle>> #BAD7D7 {
+                +{field} external_modules masd::variability::text
+                +{field} model_modules masd::variability::text
+}
+
+        class initializer <<masd::variability::initializer>> #A9CDCD {
+}
+
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+class spec_dumper <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+@enduml

@@ -1,0 +1,129 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Provides support for encoding and decoding Emacs's org-mode
+documents.
+
+The support is very basic and focuses only on the features
+of org mode required by Dogen.
+
+end note
+
+namespace entities #F2F2F2 {
+        class section #F7E5FF {
+                +{field} blocks std::list<block>
+}
+
+        class document #F7E5FF {
+                +{field} affiliated_keywords std::list<affiliated_keyword>
+                +{field} drawers std::list<drawer>
+                +{field} section section
+                +{field} headlines std::list<headline>
+}
+
+        class headline #F7E5FF {
+                +{field} affiliated_keywords std::list<affiliated_keyword>
+                +{field} drawers std::list<drawer>
+                +{field} section section
+                +{field} headlines std::list<headline>
+                +{field} level unsigned int
+                +{field} priority priority_cookie
+                +{field} title std::string
+                +{field} tags std::list<tag>
+                +{field} todo_keyword todo_keyword
+}
+
+        class tag <<masd::primitive>> #EDCEFB {
+}
+
+        class todo_keyword <<masd::primitive>> #EDCEFB {
+}
+
+        class drawer #F7E5FF {
+                +{field} name std::string
+                +{field} type drawer_type
+                +{field} contents std::list<drawer_content>
+}
+
+        class drawer_content #F7E5FF {
+                +{field} key std::string
+                +{field} value std::string
+}
+
+        class affiliated_keyword #F7E5FF {
+                +{field} key std::string
+                +{field} value std::string
+}
+
+        enum drawer_type <<masd::enumeration>> #F2DAFD {
+                +{field} regular
+                +{field} property_drawer
+}
+
+        class priority_cookie <<masd::primitive>> #EDCEFB {
+}
+
+        class block #F7E5FF {
+                +{field} name std::string
+                +{field} parameters std::list<parameter>
+                +{field} contents std::string
+                +{field} type block_type
+}
+
+        enum block_type <<masd::enumeration>> #F2DAFD {
+                +{field} text_block
+                +{field} greater_block
+}
+
+        class parameter <<masd::primitive>> #EDCEFB {
+}
+
+}
+
+class registrar <<masd::serialization::type_registrar>> #00FF00 {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+namespace transforms #F2F2F2 {
+        class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class document_to_string_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class transformation_error <<masd::exception>> #E8C2F8 {
+}
+
+}
+
+namespace helpers #F2F2F2 {
+        class parser <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class parsing_error <<masd::exception>> #E8C2F8 {
+}
+
+        class node <<dogen::untestable>> #ED8181 {
+                +{field} data entities::headline
+                +{field} children std::list<boost::shared_ptr<node>>
+}
+
+        class builder <<dogen::handcrafted::typeable>> #FFFACD {
+                +{field} root boost::shared_ptr<node>
+}
+
+        class building_error <<masd::exception>> #E8C2F8 {
+}
+
+        class document_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+@enduml

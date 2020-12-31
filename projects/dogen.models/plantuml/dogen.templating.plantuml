@@ -1,0 +1,118 @@
+@startuml
+set namespaceSeparator ::
+namespace wale #F2F2F2 {
+        class text_template <<ConfigurableViaKvps>> #F7E5FF {
+                +{field} content std::string
+}
+
+        class key_extractor <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class instantiator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class formatter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class formatting_error <<masd::exception>> #E8C2F8 {
+}
+
+        class extraction_error <<masd::exception>> #E8C2F8 {
+}
+
+}
+
+namespace stitch #F2F2F2 {
+        class parser <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class block #F7E5FF {
+                +{field} type block_types
+                +{field} content std::string
+}
+
+        class text_template <<ConfigurableViaKvps>> #F7E5FF {
+                +{field} properties properties
+                +{field} body text_template_body
+}
+
+        class formatter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class parsing_error <<masd::exception>> #E8C2F8 {
+}
+
+        class formatting_error <<masd::exception>> #E8C2F8 {
+}
+
+        class properties #F7E5FF {
+                +{field} stream_variable_name std::string
+                +{field} inclusion_dependencies std::list<std::string>
+                +{field} containing_namespaces std::list<std::string>
+                +{field} wale_template std::string
+                +{field} wale_kvps std::unordered_map<std::string, std::string>
+}
+
+        class line #F7E5FF {
+                +{field} blocks std::list<block>
+}
+
+        enum block_types <<masd::enumeration>> #F2DAFD {
+                +{field} text_block
+                +{field} standard_control_block
+                +{field} expression_block
+                +{field} variable_block
+}
+
+        class instantiator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class text_template_body #F7E5FF {
+                +{field} tagged_values std::list<identification::entities::tagged_value>
+                +{field} lines std::list<line>
+}
+
+        class instantiation_error <<masd::exception>> #E8C2F8 {
+}
+
+        class features <<masd::variability::feature_bundle>> #BAD7D7 {
+                +{field} stream_variable_name masd::variability::text
+                +{field} relative_output_directory masd::variability::text
+                +{field} inclusion_dependency masd::variability::text_collection
+                +{field} containing_namespaces masd::variability::text
+                +{field} wale.text_template masd::variability::text
+                +{field} wale.kvp masd::variability::key_value_pair
+}
+
+}
+
+class ConfigurableViaKvps <<masd::object_template>> #E3B6F6 {
+        +{field} expected_keys std::unordered_set<std::string>
+        +{field} supplied_kvps std::unordered_map<std::string, std::string>
+}
+
+namespace helpers #F2F2F2 {
+        class kvp_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class validation_error <<masd::exception>> #E8C2F8 {
+}
+
+        class kvp_resolver <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class resolution_error <<masd::exception>> #E8C2F8 {
+}
+
+}
+
+class initializer <<masd::variability::initializer>> #A9CDCD {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+@enduml

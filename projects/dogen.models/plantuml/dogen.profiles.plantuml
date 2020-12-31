@@ -1,0 +1,166 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Top-level model in Dogen that contains all of the shared
+types at the meta-model level.
+
+This model is not intended to be generated. If generated,
+should not produce any output.
+
+You should be able to reference this model from any technical
+space; keep it technical space agnostic.
+
+end note
+
+namespace base #F2F2F2 {
+        class decoration <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+                +{field} licence_name
+                +{field} modeline_group_name
+                +{field} copyright_notice
+}
+
+        class extraction <<masd::variability::profile>> #DDECEC {
+                +{field} delete_extra_files
+                +{field} delete_empty_directories
+}
+
+        class csharp <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class ignores <<masd::variability::profile>> #DDECEC {
+                +{field} ignore_files_matching_regex
+                +{field} ignore_files_matching_regex
+}
+
+        class base <<masd::variability::profile>> #DDECEC {
+                +{field} masd.cpp.standard
+}
+
+base::decoration <|-- base::base
+base::extraction <|-- base::base
+base::csharp <|-- base::base
+base::ignores <|-- base::base
+        class base_profile <<masd::variability::profile>> #DDECEC {
+                +{field} odb.enabled
+                +{field} hash.enabled
+                +{field} serialization.enabled
+                +{field} lexical_cast.enabled
+                +{field} tests.enabled
+                +{field} test_data.enabled
+}
+
+base::base <|-- base::base_profile
+        class default_profile <<masd::variability::profile>> #DDECEC {
+}
+
+base::base_profile <|-- base::default_profile
+        class disable_all_facets <<masd::variability::profile_template>> #DDECEC {
+                +{field} enabled
+}
+
+base::base <|-- base::disable_all_facets
+        class relational_profile <<masd::variability::profile>> #DDECEC {
+                +{field} odb.enabled
+                +{field} build.enabled
+}
+
+base::base_profile <|-- base::relational_profile
+        class test_all_facets <<masd::variability::profile>> #DDECEC {
+                +{field} masd.decoration.marker_name
+                +{field} masd.cpp.tests.main.enabled
+}
+
+base::base <|-- base::test_all_facets
+}
+
+namespace composable #F2F2F2 {
+        class typeable <<masd::variability::profile>> #DDECEC {
+                +{field} masd.cpp.types.enabled
+                +{field} masd.variability.profile
+}
+
+        class pretty_printable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class hashable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class serializable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class handcrafted <<masd::variability::profile>> #DDECEC {
+                +{field} masd.variability.profile
+}
+
+        class handcrafted_pretty_printable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+                +{field} overwrite
+}
+
+composable::handcrafted <|-- composable::handcrafted_pretty_printable
+        class handcrafted_typeable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+                +{field} overwrite
+                +{field} class_forward_declarations.enabled
+}
+
+composable::handcrafted <|-- composable::handcrafted_typeable
+        class header_only <<masd::variability::profile>> #DDECEC {
+                +{field} class_implementation.enabled
+}
+
+composable::handcrafted_typeable <|-- composable::header_only
+        class inheritable <<masd::variability::profile>> #DDECEC {
+                +{field} masd.generalization.is_final
+}
+
+        class implementation_only <<masd::variability::profile>> #DDECEC {
+                +{field} class_header.enabled
+                +{field} class_forward_declarations.enabled
+                +{field} class_implementation.enabled
+}
+
+composable::handcrafted_typeable <|-- composable::implementation_only
+        class handcrafted_serializable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+                +{field} overwrite
+}
+
+composable::handcrafted <|-- composable::handcrafted_serializable
+        class convertible <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class untestable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class untypable <<masd::variability::profile>> #DDECEC {
+                +{field} enabled
+}
+
+        class handcrafted_cmake <<masd::variability::profile>> #DDECEC {
+                +{field} build.enabled
+                +{field} build.overwrite
+}
+
+        class forward_declarable <<masd::variability::profile>> #DDECEC {
+                +{field} class_forward_declarations.enabled
+}
+
+}
+
+class test_marker <<masd::decoration::generation_marker>> #E8D0C5 {
+        +{field} add_date_time
+        +{field} add_warning
+        +{field} add_dogen_version
+        +{field} message
+}
+
+@enduml

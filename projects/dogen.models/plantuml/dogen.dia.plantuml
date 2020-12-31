@@ -1,0 +1,111 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Represents the domain of the Dia diagram editor.
+
+end note
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+namespace entities #F2F2F2 {
+        class diagram #F7E5FF {
+                +{field} diagram_data diagram_data
+                +{field} layers std::vector<layer>
+}
+
+        class layer #F7E5FF {
+                +{field} name std::string
+                +{field} visible bool
+                +{field} active bool
+                +{field} objects std::vector<object>
+}
+
+        class object #F7E5FF {
+                +{field} id std::string
+                +{field} type std::string
+                +{field} version int
+                +{field} connections std::vector<connection>
+                +{field} child_node boost::optional<child_node>
+                +{field} attributes std::vector<attribute>
+}
+
+        class connection #F7E5FF {
+                +{field} handle std::string
+                +{field} to std::string
+                +{field} connection_slot std::string
+}
+
+        class diagram_data #F7E5FF {
+                +{field} attributes std::vector<attribute>
+}
+
+        class child_node #F7E5FF {
+                +{field} parent std::string
+}
+
+        class attribute #F7E5FF {
+                +{field} name std::string
+                +{field} values std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
+}
+
+        class font #F7E5FF {
+                +{field} family std::string
+                +{field} style std::string
+                +{field} name std::string
+}
+
+        class composite <<dogen::untestable>> #ED8181 {
+                +{field} type std::string
+                +{field} value std::vector<boost::shared_ptr<attribute>>
+                +{field} inner_composite boost::shared_ptr<composite>
+}
+
+        class color #F7E5FF {
+                +{field} value std::string
+}
+
+        class real #F7E5FF {
+                +{field} value std::string
+}
+
+        class integer #F7E5FF {
+                +{field} value std::string
+}
+
+        class boolean #F7E5FF {
+                +{field} value std::string
+}
+
+        class point #F7E5FF {
+                +{field} value std::string
+}
+
+        class enumeration #F7E5FF {
+                +{field} value std::string
+}
+
+        class string #F7E5FF {
+                +{field} value std::string
+}
+
+        class rectangle #F7E5FF {
+                +{field} value std::string
+}
+
+}
+
+namespace transforms #F2F2F2 {
+        class transformation_error <<masd::exception>> #E8C2F8 {
+}
+
+        class string_to_diagram_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+}
+
+@enduml

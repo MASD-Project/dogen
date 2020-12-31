@@ -1,0 +1,67 @@
+@startuml
+set namespaceSeparator ::
+note as N1
+
+Houses classes common to all transformations.
+
+end note
+
+class tracer <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
+        +{field} backend boost::shared_ptr<backend>
+}
+
+class metrics <<dogen::untestable>> #ED8181 {
+        +{field} transform_id std::string
+        +{field} model_id std::string
+        +{field} guid std::string
+        +{field} start unsigned long
+        +{field} end unsigned long
+        +{field} children std::list<boost::shared_ptr<metrics>>
+}
+
+class metrics_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class metrics_printer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class tracing_error <<masd::exception>> #E8C2F8 {
+}
+
+class scoped_tracer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class references_printer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class backend <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
+}
+
+class file_backend <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
+}
+
+backend <|-- file_backend
+class backend_factory_registrar <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} backend_factories std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
+}
+
+class registrar_error <<masd::exception>> #E8C2F8 {
+}
+
+class backend_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+class file_backend_factory <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+backend_factory <|-- file_backend_factory
+class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+@enduml
