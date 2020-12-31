@@ -461,6 +461,14 @@ Links:
   caching]]
 - [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
 
+*** Refactor the templating model                                     :story:
+
+We should use "standard" conventions in this model as well:
+
+- add entities namespace. Name entities after their "type",
+  e.g. =stitch_template=, etc.
+- add transforms for the template expansion.
+
 *** Remove annotations from stitch templates                          :story:
 
 In the new world, stitch templates don't have all of the required

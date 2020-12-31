@@ -12,33 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-31 Thu 14:44]
+#+CAPTION: Clock summary at [2020-12-31 Thu 17:05]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *65:10* |       |       | 100.0 |
+| *Total time*                                        | *66:39* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 65:10   |       |       | 100.0 |
-| Active                                              |         | 65:10 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   9.3 |
+| Stories                                             | 66:39   |       |       | 100.0 |
+| Active                                              |         | 66:39 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   9.1 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.9 |
-| Sprint and product backlog grooming                 |         |       |  2:02 |   3.1 |
-| Solve emacs issues                                  |         |       |  2:48 |   4.3 |
-| Add support for reading org mode documents          |         |       | 19:46 |  30.3 |
+| Sprint and product backlog grooming                 |         |       |  2:17 |   3.4 |
+| Solve emacs issues                                  |         |       |  2:48 |   4.2 |
+| Add support for reading org mode documents          |         |       | 19:46 |  29.7 |
 | Remove leading and trailing new lines from comments |         |       |  1:03 |   1.6 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.0 |
-| Add org-mode codec for input                        |         |       |  8:56 |  13.7 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.9 |
+| Add org-mode codec for input                        |         |       |  8:56 |  13.4 |
 | Convert library models into org                     |         |       |  1:26 |   2.2 |
-| Convert reference models into org                   |         |       |  2:56 |   4.5 |
+| Convert reference models into org                   |         |       |  2:56 |   4.4 |
 | Assorted improvements to org model                  |         |       |  0:37 |   0.9 |
-| Create a model to org transform                     |         |       |  3:57 |   6.1 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.0 |
+| Create a model to org transform                     |         |       |  3:57 |   5.9 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.9 |
 | Split orchestration tests by model and codec        |         |       |  1:58 |   3.0 |
-| Create a "frozen" project                           |         |       |  1:49 |   2.8 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.7 |
 | Add tags to org model                               |         |       |  1:15 |   1.9 |
 | Inject custom IDs into org documents                |         |       |  0:38 |   1.0 |
 | Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.4 |
-| Add PlantUML markup language support                |         |       |  5:14 |   8.0 |
+| Add PlantUML markup language support                |         |       |  5:14 |   7.9 |
+| Merge dia codec model into main codec model         |         |       |  1:14 |   1.9 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -294,6 +295,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-31 Thu 15:46]--[2020-12-31 Thu 15:49] =>  0:03
+    CLOCK: [2020-12-31 Thu 15:34]--[2020-12-31 Thu 15:46] =>  0:12
     CLOCK: [2020-12-31 Thu 14:39]--[2020-12-31 Thu 14:44] =>  0:05
     CLOCK: [2020-12-31 Thu 11:12]--[2020-12-31 Thu 11:27] =>  0:15
     CLOCK: [2020-12-31 Thu 10:26]--[2020-12-31 Thu 10:55] =>  0:29
@@ -1010,7 +1013,41 @@ Links:
 - [[https://plantuml.com/faq][plantuml faq]]
 - [[https://forum.plantuml.net/6971/max-diagram-size][Max diagram size?]]
 
-*** Missing features into PlantUML                                    :story:
+*** COMPLETED codecs: encoders and decoders should work in terms of strings :story:
+    CLOSED: [2020-12-31 Thu 15:52]
+
+*Rationale*: largely implemented as part of previous refactors. The
+remaining just needs tidy-up as we go along.
+
+We should only have strings (or perhaps streams) in the encoder and
+decoder interfaces. The handling of files should be the responsibility
+of the caller.
+
+*** STARTED Merge dia codec model into main codec model               :story:
+    :LOGBOOK:
+    CLOCK: [2020-12-31 Thu 15:51]--[2020-12-31 Thu 17:05] =>  1:14
+    :END:
+
+Merge the models.
+
+Notes:
+
+- remove the documentation concept and associated code.
+
+Previous understanding:
+
+We probably don't need the "processed" types, we can just use the
+codec types directly.
+
+Merged stories:
+
+*Move graph of containment to codec model*
+
+At present we are doing the containment graph within the dia codec. We
+should really do this in the main codec model so we can reuse it for
+org-mode.
+
+*** Missing PlantUML features                                         :story:
 
 This story keeps track of features that we need to implement when
 exporting into PlantUML.
@@ -1020,8 +1057,15 @@ exporting into PlantUML.
   the value and then look for all classes with the stereotype of the
   concept (e.g. =meta_element= for logical model).
 - we need to unpack all properties and resolve those into types for
-  the current model in order to model associations.
-- add tests to check that PlantUML output has not changed.
+  the current model in order to model associations. Also, we need a
+  simple resolver to find the types in the right namespaces. The
+  logic would be very similar to the existing resolver. One possible
+  solution is to move name trees into the codec model and perform
+  these transforms earlier in the pipeline.
+- add tests to check that PlantUML output has not changed. We need to
+  have support for diffing on conversion, which we may not yet
+  have. Also the existing tests do not take into account the action.
+- add plantuml representations to reference models.
 
 *** Consider replacing properties drawer with tables                  :story:
 
@@ -1082,6 +1126,13 @@ component. We need to find a specific use case for this though.
 Actually, we should just support a =--include-dir= or =-I=
 parameter. We also need to dump the include directories in dumpspecs.
 
+*** Deprecate managed directories                                     :story:
+
+There should only be one "managed directory" at the input stage, which
+is the component directory (for component models). If parts have
+relative directories off of the component directory then we should add
+to the list of managed directories inside the PM pipeline.
+
 *** Add models directory to each component                            :story:
 
 Instead of a product level models directory, we should have separate
@@ -1094,6 +1145,8 @@ than models.
 Notes:
 
 - when we do this we will break the dogen product unit tests.
+- we need to add the targets to each component (generation,
+  conversion).
 
 *** Move hello world model from models directory                      :story:
 
@@ -1121,19 +1174,6 @@ On the other hand, once we create a proper package for dogen headers,
 with SOs etc, we should really include the dogen models there. In
 effect, it will be symmetric with PDM packages.
 
-*** Remove dia-specific types in dia model                            :story:
-
-We probably don't need the "processed" types, we can just use the
-codec types directly.
-
-*** Refactor the templating model                                     :story:
-
-We should use "standard" conventions in this model as well:
-
-- add entities namespace. Name entities after their "type",
-  e.g. =stitch_template=, etc.
-- add transforms for the template expansion.
-
 *** Consider handling "dia comments" in a general manner              :story:
 
 At present we allow comments with:
@@ -1143,12 +1183,6 @@ At present we allow comments with:
 to be processed as part of the containing object. We should try to
 generalise this notion so that any codec could make use of this
 feature.
-
-*** Move graph of containment to codec model                          :story:
-
-At present we are doing the containment graph within the dia codec. We
-should really do this in the main codec model so we can reuse it for
-org-mode.
 
 *** Move wale templates to TS namespaces                              :story:
 
@@ -1208,13 +1242,6 @@ Notes:
   probably be 2 or 3 types whereas the M2T transforms will be 99% of
   the types. We probably should name the model after lps and the
   component after the M2Ts. So rename instead the model to LPS.
-
-*** Deprecate managed directories                                     :story:
-
-There should only be one "managed directory" at the input stage, which
-is the component directory (for component models). If parts have
-relative directories off of the component directory then we should add
-to the list of managed directories inside the PM pipeline.
 
 *** Validate no two artefacts have the same ID                        :story:
 
@@ -1288,12 +1315,6 @@ instead of being a list of artefacts.
 
 We already created =logical_meta_physical_id= type so maybe we don't
 need this ID as well.
-
-*** codecs: encoders and decoders should work in terms of strings     :story:
-
-We should only have strings (or perhaps streams) in the encoder and
-decoder interfaces. The handling of files should be the responsibility
-of the caller.
 
 *** Factor out duplication in stitch and wale templates               :story:
 
