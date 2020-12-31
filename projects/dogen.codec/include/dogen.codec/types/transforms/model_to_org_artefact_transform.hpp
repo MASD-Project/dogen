@@ -105,7 +105,6 @@ private:
     const std::string& id, const std::unordered_map<std::string,
     std::list<entities::element>>& parent_to_child_map);
 
-
     /**
      * @brief Creates an org mode document from a codec model.
      */
