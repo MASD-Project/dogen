@@ -12,33 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-12-30 Wed 22:56]
+#+CAPTION: Clock summary at [2020-12-31 Thu 14:44]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *62:26* |       |       | 100.0 |
+| *Total time*                                        | *65:10* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 62:26   |       |       | 100.0 |
-| Active                                              |         | 62:26 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   9.7 |
+| Stories                                             | 65:10   |       |       | 100.0 |
+| Active                                              |         | 65:10 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   9.3 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.9 |
-| Sprint and product backlog grooming                 |         |       |  1:13 |   1.9 |
-| Solve emacs issues                                  |         |       |  2:48 |   4.5 |
-| Add support for reading org mode documents          |         |       | 19:46 |  31.7 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.7 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.1 |
-| Add org-mode codec for input                        |         |       |  8:56 |  14.3 |
-| Convert library models into org                     |         |       |  1:26 |   2.3 |
-| Convert reference models into org                   |         |       |  2:56 |   4.7 |
-| Assorted improvements to org model                  |         |       |  0:37 |   1.0 |
-| Create a model to org transform                     |         |       |  3:57 |   6.3 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.1 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   3.2 |
-| Create a "frozen" project                           |         |       |  1:49 |   2.9 |
-| Add tags to org model                               |         |       |  1:15 |   2.0 |
+| Sprint and product backlog grooming                 |         |       |  2:02 |   3.1 |
+| Solve emacs issues                                  |         |       |  2:48 |   4.3 |
+| Add support for reading org mode documents          |         |       | 19:46 |  30.3 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.6 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   3.0 |
+| Add org-mode codec for input                        |         |       |  8:56 |  13.7 |
+| Convert library models into org                     |         |       |  1:26 |   2.2 |
+| Convert reference models into org                   |         |       |  2:56 |   4.5 |
+| Assorted improvements to org model                  |         |       |  0:37 |   0.9 |
+| Create a model to org transform                     |         |       |  3:57 |   6.1 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   2.0 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   3.0 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.8 |
+| Add tags to org model                               |         |       |  1:15 |   1.9 |
 | Inject custom IDs into org documents                |         |       |  0:38 |   1.0 |
 | Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.4 |
-| Add PlantUML markup language support                |         |       |  3:19 |   5.3 |
+| Add PlantUML markup language support                |         |       |  5:14 |   8.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -294,6 +294,9 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-12-31 Thu 14:39]--[2020-12-31 Thu 14:44] =>  0:05
+    CLOCK: [2020-12-31 Thu 11:12]--[2020-12-31 Thu 11:27] =>  0:15
+    CLOCK: [2020-12-31 Thu 10:26]--[2020-12-31 Thu 10:55] =>  0:29
     CLOCK: [2020-12-28 Mon 09:31]--[2020-12-28 Mon 09:38] =>  0:07
     CLOCK: [2020-12-28 Mon 09:12]--[2020-12-28 Mon 09:30] =>  0:18
     CLOCK: [2020-12-27 Sun 18:20]--[2020-12-27 Sun 18:22] =>  0:02
@@ -436,7 +439,7 @@ Links:
 - [[https://github.com/federicotdn/verb][verb]]: Verb is a package for Emacs which allows you to organize and
   send HTTP requests.
 - [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
-- [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools!]]
+- [[https://orgmode.org/worg/org-tools/index.html][Org Mode tools]]
 
 *** COMPLETED Remove leading and trailing new lines from comments     :story:
     CLOSED: [2020-12-25 Fri 20:15]
@@ -901,8 +904,11 @@ Notes:
 - in order for this to work, we need some kind of flag to skip types
   where the spaces need to be preserved, e.g. =unsigned int=, etc.
 
-*** STARTED Add PlantUML markup language support                      :story:
+*** COMPLETED Add PlantUML markup language support                    :story:
+    CLOSED: [2020-12-31 Thu 14:44]
     :LOGBOOK:
+    CLOCK: [2020-12-31 Thu 13:27]--[2020-12-31 Thu 14:38] =>  1:11
+    CLOCK: [2020-12-31 Thu 12:21]--[2020-12-31 Thu 13:05] =>  0:44
     CLOCK: [2020-12-30 Wed 17:53]--[2020-12-30 Wed 18:03] =>  0:10
     CLOCK: [2020-12-30 Wed 17:50]--[2020-12-30 Wed 17:52] =>  0:02
     CLOCK: [2020-12-30 Wed 15:30]--[2020-12-30 Wed 17:49] =>  2:19
@@ -1003,6 +1009,69 @@ Links:
 - [[https://forum.plantuml.net/4302/how-to-work-with-nested-namespaces][plant uml: How to work with nested namespaces?]]
 - [[https://plantuml.com/faq][plantuml faq]]
 - [[https://forum.plantuml.net/6971/max-diagram-size][Max diagram size?]]
+
+*** Missing features into PlantUML                                    :story:
+
+This story keeps track of features that we need to implement when
+exporting into PlantUML.
+
+- generalisation via meta-data does not work. This would be very
+  complicated: we need to resolve =masd.generalization.parent= into
+  the value and then look for all classes with the stereotype of the
+  concept (e.g. =meta_element= for logical model).
+- we need to unpack all properties and resolve those into types for
+  the current model in order to model associations.
+- add tests to check that PlantUML output has not changed.
+
+*** Consider replacing properties drawer with tables                  :story:
+
+We originally decided to use an org properties drawer because it
+seemed like the more "native" way of expressing meta data. However it
+does have some downsides:
+
+- drawers are not naturally rendered into HTML or latex.
+
+An alternative would be to make these tables:
+
+#+begin_dogen
+| Key                              | Value                               |
+|----------------------------------+-------------------------------------|
+| masd.codec.dia.comment           | true                                |
+| masd.codec.model_modules         | dogen                               |
+| masd.codec.input_technical_space | cpp                                 |
+| masd.codec.reference             | cpp.builtins                        |
+| masd.codec.reference             | cpp.std                             |
+| masd.codec.reference             | cpp.boost                           |
+| masd.codec.reference             | masd                                |
+| masd.codec.reference             | masd.variability                    |
+| masd.codec.reference             | dogen.profiles                      |
+| masd.variability.profile         | dogen.profiles.base.default_profile |
+#+end_dogen
+
+The table would be fairly easy to parse - more or less just a pipe
+separated input, with trimming. We should try to generate these and
+see if its an improvement. Here we create a greater block =dogen=
+which could easily be intercepted in parsing. We could probably have a
+better name:
+
+- dogen variability?
+
+Note also that we have a lot of duplication (e.g. =reference=). There
+may be a more appropriate org mode structure for this. For example, a
+list:
+
+#+begin_dogen
+- masd.codec.dia.comment: true
+- masd.codec.model_modules: dogen
+- masd.codec.input_technical_space: cpp
+- masd.codec.reference: cpp.builtins, cpp.std, cpp.boost, masd,
+  masd.variability, dogen.profiles                      |
+- masd.variability.profile: dogen.profiles.base.default_profile
+#+end_dogen
+
+Notes:
+
+- custom id can remain as a property.
 
 *** Add include directories to models                                 :story:
 

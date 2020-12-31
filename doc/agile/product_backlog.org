@@ -150,7 +150,15 @@ use cases:
 
 It is not clear if we need round tripping for all of these use cases,
 or if these are just different projections of the model. Round
-tripping does add a lot of complexity so we should take this into account.
+tripping does add a lot of complexity so we should take this into
+account.
+
+Notes:
+
+- a big advantage of round tripping is that every time we want to test
+  a new feature in org, we could just implement it in the codec and
+  then convert from org to org. This way we wouldn't need to go back
+  to the dia diagrams in frozen all the time.
 
 *** Generated CMakefiles do not take tests into account               :story:
 
@@ -13487,6 +13495,12 @@ Links:
 
 - [[https://github.com/protobuf-c/protobuf-c][protobuf-c]]: protobuf stand alone library in C.
 - [[https://github.com/mapbox/protozero][protozero]]: Minimalist protocol buffer decoder and encoder in C++
+- [[https://github.com/protocolbuffers/upb][GH upb]]: a small protobuf implementation in C.
+- [[https://richardstartin.github.io/posts/dont-use-protobuf-for-telemetry][Don't use Protobuf for Telemetry]]
+- [[https://codeburst.io/json-vs-protocol-buffers-vs-flatbuffers-a4247f8bda6f][JSON vs Protocol Buffers vs FlatBuffers]]
+- [[https://github.com/nanopb/nanopb][nanopb GH]]: Nanopb is a small code-size Protocol Buffers
+  implementation in ansi C.
+- [[https://github.com/StandardCyborg/protobag][protobag GH]]: Protobag: A bag of Serialized Protobuf Messages
 
 *** Add support for flatbuffers                                       :story:
 
