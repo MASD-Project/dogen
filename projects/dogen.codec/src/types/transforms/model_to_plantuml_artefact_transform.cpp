@@ -18,14 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string/predicate.hpp>
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
+#include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/model_to_plantuml_artefact_transform.hpp"
 
 namespace {
@@ -36,7 +38,7 @@ transform_id("codec.transforms.model_to_plantuml_artefact_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string indent("        ");
+const std::string empty;
 const std::string default_colour("#F7E5FF");
 const std::string parent_tag("masd.codec.parent");
 const std::string stereotypes_tag("masd.codec.stereotypes");
@@ -92,6 +94,8 @@ const std::string dogen_handcrafted_typeable_implementation_only (
     "dogen::handcrafted::typeable::implementation_only");
 const std::string dogen_untestable("dogen::untestable");
 
+const std::string empty_id("Element has an empty ID: ");
+
 }
 
 namespace dogen::codec::transforms {
@@ -140,10 +144,10 @@ stereotype_to_colour(const std::string& stereotypes) {
         return std::string("#FFFF72");
     else if (boost::contains(stereotypes, masd_mapping_fixed_mappable))
         return std::string("#FFFFAC");
-    else if (boost::contains(stereotypes, masd_object))
-        return std::string("#F7E5FF");
     else if (boost::contains(stereotypes, masd_object_template))
         return std::string("#E3B6F6");
+    else if (boost::contains(stereotypes, masd_object))
+        return std::string("#F7E5FF");
     else if (boost::contains(stereotypes, masd_orm_common_odb_options))
         return std::string("#80FFBF");
     else if (boost::contains(stereotypes, masd_orm_object))
@@ -197,44 +201,85 @@ stereotype_to_colour(const std::string& stereotypes) {
     return default_colour;
 }
 
-void model_to_plantuml_artefact_transform::
-to_stream(std::ostream& os, const entities::attribute& attr) {
-    os << indent << "+{field} " << attr.name().simple();
+void model_to_plantuml_artefact_transform::walk_parent_to_child(
+    std::ostream& os, const unsigned int level,
+    const std::string& id, const std::unordered_map<std::string,
+    std::list<entities::element>>& parent_to_child_map) {
+    BOOST_LOG_SEV(lg, debug) << "Processing ID: '" << id << "'";
 
-    const auto props(extract_properties(attr.tagged_values()));
-    if (!props.type.empty())
-        os << " " << props.type;
+    const auto i(parent_to_child_map.find(id));
+    if (i != parent_to_child_map.end()) {
+        /*
+         * Loop through all the elements at this level and recurse to
+         * their children.
+         */
+        BOOST_LOG_SEV(lg, debug) << "Found ID in map.";
+        const auto lambda([](const unsigned int level) {
+            if (level == 0)
+                return empty;
+            return std::string(level * 8, ' ');
+        });
+        const auto indent(lambda(level));
+        const std::string inner_indent(lambda(level + 1));
+        for (const auto& e : i->second) {
+            BOOST_LOG_SEV(lg, debug) << "Processing element: "
+                                     << e.name().qualified();
 
-    os << std::endl;
-}
+            const auto props(extract_properties(e.tagged_values()));
+            if (boost::contains(props.stereotypes, masd_enumeration))
+                os << indent << "enum ";
+            else if (e.fallback_element_type() == masd_module)
+                os << indent << "namespace ";
+            else
+                os << indent << "class ";
+            os << e.name().simple();
 
-void model_to_plantuml_artefact_transform::
-to_stream(std::ostream& os, const entities::element& e) {
+            if (!props.stereotypes.empty()) {
+                os << " <<" << props.stereotypes << ">>";
+            }
 
-    const auto props(extract_properties(e.tagged_values()));
-    if (boost::contains(props.stereotypes, masd_enumeration))
-        os << "enum ";
-    else if (e.fallback_element_type() == masd_module)
-        os << "namespace ";
-    else
-        os << "class ";
-    os << e.name().qualified();
+            if (e.fallback_element_type() == masd_module) {
+                os << " #F2F2F2";
+            } else {
+                const auto colour(stereotype_to_colour(props.stereotypes));
+                os << " " << colour;
+            }
 
-    if (!props.stereotypes.empty()) {
-        os << " <<" << props.stereotypes << ">>";
+            os << " {" << std::endl;
+            for (const auto& attr : e.attributes()) {
+                os << inner_indent << "+{field} " << attr.name().simple();
+
+                const auto props(extract_properties(attr.tagged_values()));
+                if (!props.type.empty())
+                    os << " " << props.type;
+
+                os << std::endl;
+            }
+
+            const auto& map(parent_to_child_map);
+            const auto inner_id(e.provenance().codec_id().value());
+            if (inner_id.empty()) {
+                BOOST_LOG_SEV(lg, error) << empty_id << e.name().qualified();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(empty_id + e.name().qualified()));
+            }
+            walk_parent_to_child(os, level + 1, inner_id, map);
+
+            os << "}" << std::endl << std::endl;
+
+            if (!props.parents.empty()) {
+                using utility::string::splitter;
+                const auto parents(splitter::split_csv(props.parents));
+                for (const auto& parent : parents) {
+                    os << parent << " <|-- "
+                       << e.name().qualified()
+                       << std::endl;
+                }
+            }
+        }
     }
 
-    if (e.fallback_element_type() == masd_module) {
-        os << " #F2F2F2";
-    } else {
-        const auto colour(stereotype_to_colour(props.stereotypes));
-        os << " " << colour;
-    }
-
-    os << " {" << std::endl;
-    for (const auto& attr : e.attributes())
-        to_stream(os, attr);
-    os << "}" << std::endl << std::endl;
+    BOOST_LOG_SEV(lg, debug) << "Finished processing ID.";
 }
 
 entities::artefact model_to_plantuml_artefact_transform::
@@ -250,11 +295,21 @@ apply(const transforms::context& ctx, const boost::filesystem::path& p,
     if (!m.documentation().empty()) {
         os << "note as N1" << std::endl
            << m.documentation() << std::endl
-           << "end note" << std::endl;
+           << "end note" << std::endl << std::endl;
     }
 
-    for (const auto& e : m.elements())
-        to_stream(os, e);
+    /*
+     * Construct a map with the ID of the parent pointing to a list of
+     * its children.
+     */
+    std::unordered_map<std::string,
+                       std::list<entities::element>> parent_to_child_map;
+    for (const auto& e : m.elements()) {
+        auto& n(parent_to_child_map[e.containing_element_id().value()]);
+        n.push_back(e);
+    }
+
+    walk_parent_to_child(os, 0, empty, parent_to_child_map);
 
     os << "@enduml" << std::endl;
 

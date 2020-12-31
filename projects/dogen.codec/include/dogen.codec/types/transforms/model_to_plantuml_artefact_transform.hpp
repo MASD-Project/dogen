@@ -54,8 +54,9 @@ private:
     static std::string stereotype_to_colour(const std::string& stereotypes);
 
 private:
-    static void to_stream(std::ostream& os, const entities::attribute& attr);
-    static void to_stream(std::ostream& os, const entities::element& e);
+    static void walk_parent_to_child(std::ostream& os, const unsigned int level,
+        const std::string& id, const std::unordered_map<std::string,
+        std::list<entities::element>>& parent_to_child_map);
 
 public:
     static entities::artefact
