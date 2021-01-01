@@ -26,7 +26,6 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.dia/types/transforms/string_to_diagram_transform.hpp"
 #include "dogen.dia/io/entities/diagram_io.hpp"
-#include "dogen.dia/types/entities/diagram.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
@@ -34,7 +33,6 @@
 #include "dogen.codec.dia/types/builder.hpp"
 #include "dogen.codec.dia/types/visitor.hpp"
 #include "dogen.codec.dia/types/validator.hpp"
-#include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
@@ -61,7 +59,8 @@ namespace dogen::codec::transforms {
 
 using namespace dogen::codec::dia;
 
-inline bool is_not_relevant(const entities::object& po) {
+bool dia_artefact_to_model_transform::
+is_not_relevant(const entities::object& po) {
     const auto ot(po.object_type());
     const bool is_relevant(
         ot == uml_large_package || ot == uml_generalization ||
@@ -70,8 +69,8 @@ inline bool is_not_relevant(const entities::object& po) {
     return !is_relevant;
 }
 
-std::list<entities::object>
-obtain_processed_objects(const dogen::dia::entities::diagram& d) {
+std::list<entities::object> dia_artefact_to_model_transform::
+obtain_objects(const dogen::dia::entities::diagram& d) {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
 
     /*
@@ -94,8 +93,8 @@ obtain_processed_objects(const dogen::dia::entities::diagram& d) {
     return r;
 }
 
-codec::entities::model
-obtain_model(const std::string& name, const std::list<entities::object>& pos) {
+codec::entities::model dia_artefact_to_model_transform::
+obtain_model(const std::string& name, const std::list<entities::object>& os) {
     BOOST_LOG_SEV(lg, debug) << "Generating codec model.";
 
     /*
@@ -103,7 +102,7 @@ obtain_model(const std::string& name, const std::list<entities::object>& pos) {
      * to their respective parents.
      */
     grapher g;
-    g.generate(pos);
+    g.generate(os);
 
     /*
      * Go through the dependency graph and build a codec model from
@@ -119,7 +118,6 @@ obtain_model(const std::string& name, const std::list<entities::object>& pos) {
     return r;
 }
 
-
 entities::model dia_artefact_to_model_transform::
 apply(const transforms::context& ctx, const entities::artefact& a) {
     const auto fn(a.path().filename().stem().generic_string());
@@ -132,8 +130,8 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Processed Dia diagram.";
 
-    const auto pos(obtain_processed_objects(d));
-    const auto r(obtain_model(fn, pos));
+    const auto os(obtain_objects(d));
+    const auto r(obtain_model(fn, os));
 
     stp.end_transform(r);
     return r;

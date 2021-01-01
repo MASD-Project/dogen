@@ -26,8 +26,10 @@
 #endif
 
 #include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec/types/entities/artefact.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
+#include "dogen.dia/types/entities/diagram.hpp"
 
 namespace dogen::codec::transforms {
 
@@ -103,6 +105,25 @@ namespace dogen::codec::transforms {
  *
  */
 class dia_artefact_to_model_transform final {
+private:
+    /**
+     * @brief Returns true if the object is not relevant for the
+     * current processing.
+     */
+    static bool is_not_relevant(const entities::object& po);
+
+    /**
+     * @brief Converts the Dia objects into codec objects.
+     */
+    static std::list<entities::object>
+    obtain_objects(const dogen::dia::entities::diagram& d);
+
+    /**
+     * @brief Generates the codec model.
+     */
+    static codec::entities::model obtain_model(const std::string& name,
+        const std::list<entities::object>& os);
+
 public:
     static entities::model
     apply(const transforms::context& ctx, const entities::artefact& a);
