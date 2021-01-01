@@ -83,6 +83,7 @@ model_generator::gather_artefacts(const dogen::physical::entities::model& m) {
 
 dogen::physical::entities::model model_generator::
 apply_physical_model_production(const boost::filesystem::path& target,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_dir,
     const bool enable_tracing_locally, const bool enable_reporting_locally,
     const bool enable_diffing_locally) {
@@ -104,7 +105,8 @@ apply_physical_model_production(const boost::filesystem::path& target,
     using cbc = context_bootstrapping_chain;
     const auto& od(output_dir);
     const auto& a(run_activity);
-    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
+    const auto& rds(reference_directories);
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
 
     /*
      * Bind the tracer to the current scope.
@@ -117,6 +119,18 @@ apply_physical_model_production(const boost::filesystem::path& target,
      */
     const auto r(physical_model_production_chain::apply(ctx, target));
     return r;
+}
+
+dogen::physical::entities::model model_generator::
+apply_physical_model_production(const boost::filesystem::path& target,
+    const boost::filesystem::path& output_dir,
+    const bool enable_tracing_locally, const bool enable_reporting_locally,
+    const bool enable_diffing_locally) {
+
+    const std::vector<boost::filesystem::path> reference_directories;
+    return apply_physical_model_production(target, reference_directories,
+        output_dir, enable_tracing_locally, enable_reporting_locally,
+        enable_diffing_locally);
 }
 
 /**

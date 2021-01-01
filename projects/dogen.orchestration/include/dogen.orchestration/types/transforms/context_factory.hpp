@@ -69,6 +69,7 @@ public:
      */
     static context make_context(const configuration& cfg,
         const std::string& activity,
+        const std::vector<boost::filesystem::path>& reference_directories,
         const boost::filesystem::path& output_directory,
         const variability::transforms::context& vctx,
         boost::shared_ptr<variability::entities::feature_model> fm,

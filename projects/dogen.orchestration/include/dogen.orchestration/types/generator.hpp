@@ -40,6 +40,7 @@ public:
 public:
     void generate(const configuration& cfg,
         const boost::filesystem::path& target,
+        const std::vector<boost::filesystem::path>& reference_directories,
         const boost::filesystem::path& output_directory) const override;
 };
 

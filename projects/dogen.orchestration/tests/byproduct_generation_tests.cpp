@@ -123,6 +123,7 @@ configuration setup_reporting_configuration(const path& target,
  * @brief Applies the transform chains.
  */
 void apply_transforms(const configuration& cfg, const path& output_dir,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const path& target) {
 
     /*
@@ -132,7 +133,8 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     using cbc = context_bootstrapping_chain;
     const auto& od(output_dir);
     const auto& a(run_activity);
-    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
+    const auto& rds(reference_directories);
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
 
     /*
      * Bind the tracer to the current scope.
@@ -307,7 +309,8 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
     remove_byproducts_directory(cfg);
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
 }
@@ -324,7 +327,8 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expecte
     remove_byproducts_directory(cfg);
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
 
@@ -354,7 +358,8 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
     remove_byproducts_directory(cfg);
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
 
@@ -386,7 +391,8 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
     remove_byproducts_directory(cfg);
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
 }
@@ -399,7 +405,8 @@ BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
     const auto cfg(setup_diffing_configuration(t, id));
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
 
@@ -421,7 +428,8 @@ BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace
     const auto cfg(setup_reporting_configuration(t, id, rs));
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
 
@@ -443,7 +451,8 @@ BOOST_AUTO_TEST_CASE(enabling_reporting_plain_style_results_in_expected_trace_fi
     const auto cfg(setup_reporting_configuration(t, id, rs));
 
     const auto od(dogen_product::output_directory() / id);
-    apply_transforms(cfg, od, t);
+    const auto rds(dogen_product::reference_directories());
+    apply_transforms(cfg, od, rds, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
 

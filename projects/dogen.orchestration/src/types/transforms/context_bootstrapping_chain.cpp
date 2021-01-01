@@ -151,6 +151,7 @@ context_bootstrapping_chain::bootstrap_codec_context(
 
 context context_bootstrapping_chain::
 bootstrap_full_context(const configuration& cfg, const std::string& activity,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_directory) {
     /*
      * Obtain the tracer.
@@ -181,7 +182,8 @@ bootstrap_full_context(const configuration& cfg, const std::string& activity,
      */
     const auto& a(activity);
     const auto& od(output_directory);
-    const auto r(context_factory::make_context(cfg, a, od, vctx, fm, pmm));
+    const auto& rds(reference_directories);
+    const auto r(context_factory::make_context(cfg, a, rds, od, vctx, fm, pmm));
 
     stp.end_chain(r);
     return r;

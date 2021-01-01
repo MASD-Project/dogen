@@ -152,7 +152,7 @@ public:
      */
     void operator()(const generation_configuration& cfg) const {
         generator_.generate(configuration_.api(), cfg.target(),
-            cfg.output_directory());
+            cfg.reference_model_directories(), cfg.output_directory());
     }
 
     /**

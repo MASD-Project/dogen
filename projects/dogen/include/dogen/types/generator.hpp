@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
 
@@ -44,6 +45,7 @@ public:
 public:
     virtual void generate(const configuration& cfg,
         const boost::filesystem::path& target,
+        const std::vector<boost::filesystem::path>& reference_directories,
         const boost::filesystem::path& output_directory) const = 0;
 };
 

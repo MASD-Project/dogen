@@ -83,6 +83,7 @@ codec::transforms::context context_factory::make_codec_context(
 
 context context_factory::
 make_context(const configuration& cfg, const std::string& activity,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_directory,
     const variability::transforms::context& vctx,
     boost::shared_ptr<variability::entities::feature_model> fm,
@@ -98,11 +99,16 @@ make_context(const configuration& cfg, const std::string& activity,
     r.variability_context(vctx);
 
     /*
-     * Obtain the data directories.
+     * Obtain the data directories. These are made up of the system
+     * include directories, plus any additional reference directories
+     * the user may have supplied.
      */
     const auto lib_dir(utility::filesystem::library_directory());
-    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
-    r.codec_context().data_directories(lib_dirs);
+    std::vector<boost::filesystem::path> data_dirs;
+    data_dirs.push_back(lib_dir);
+    for (const auto& rd : reference_directories)
+        data_dirs.push_back(rd);
+    r.codec_context().data_directories(data_dirs);
 
     /*
      * Handle the feature model.

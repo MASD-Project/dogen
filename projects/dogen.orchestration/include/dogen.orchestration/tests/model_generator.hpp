@@ -53,10 +53,19 @@ private:
 public:
     static dogen::physical::entities::model
     apply_physical_model_production(const boost::filesystem::path& target,
+        const std::vector<boost::filesystem::path>& reference_directories,
         const boost::filesystem::path& output_dir,
         const bool enable_tracing_locally = false,
         const bool enable_reporting_locally = false,
         const bool enable_diffing_locally = false);
+
+    static dogen::physical::entities::model
+    apply_physical_model_production(const boost::filesystem::path& target,
+        const boost::filesystem::path& output_dir,
+        const bool enable_tracing_locally = false,
+        const bool enable_reporting_locally = false,
+        const bool enable_diffing_locally = false);
+
 public:
 
     /**

@@ -100,6 +100,7 @@ bool are_generated_files_healthy(const boost::filesystem::path& output_dir,
  * don't need to worry about its state.
  */
 void execute_code_generation_transform(const boost::filesystem::path& target,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_dir,
     const bool enable_tracing_locally = false,
     const bool enable_reporting_locally = false,
@@ -121,8 +122,9 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
     using namespace dogen::orchestration::transforms;
     using cbc = context_bootstrapping_chain;
     const auto& od(output_dir);
+    const auto& rds(reference_directories);
     const auto& a(run_activity);
-    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
 
     /*
      * Bind the tracer to the current scope.
@@ -146,7 +148,8 @@ BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_code) {
     using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_variability_org());
     const auto od(dogen_product::output_directory());
-    execute_code_generation_transform(t, od);
+    const auto rds(dogen_product::reference_directories());
+    execute_code_generation_transform(t, rds, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
 
@@ -161,7 +164,8 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
     using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_org());
     const auto od(dogen_product::output_directory());
-    execute_code_generation_transform(t, od);
+    const auto rds(dogen_product::reference_directories());
+    execute_code_generation_transform(t, rds, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 60/*minimum_number*/));
 
     auto n(t.filename().stem());
@@ -176,7 +180,7 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
     create_directories(second_empty_folders);
     BOOST_CHECK(exists(second_empty_folders));
 
-    execute_code_generation_transform(t, od);
+    execute_code_generation_transform(t, rds, od);
 
     BOOST_CHECK(!exists(first_empty_folders));
     BOOST_CHECK(!exists(second_empty_folders));
@@ -197,7 +201,8 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_fla
     const auto t(cpp_ref_impl_product::
         input_cpp_ref_impl_do_not_delete_empty_dirs_json());
     const auto od(cpp_ref_impl_product::output_directory());
-    execute_code_generation_transform(t, od);
+    const std::vector<boost::filesystem::path> rds;
+    execute_code_generation_transform(t, rds, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 15/*minimum_number*/));
 
     auto n(t.filename().stem());
@@ -212,7 +217,7 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_fla
     create_directories(second_empty_folders);
     BOOST_CHECK(exists(second_empty_folders));
 
-    execute_code_generation_transform(t, od);
+    execute_code_generation_transform(t, rds, od);
 
     BOOST_CHECK(exists(first_empty_folders));
     BOOST_CHECK(exists(second_empty_folders));

@@ -37,6 +37,7 @@ namespace dogen::orchestration {
 
 void generator::generate(const configuration& cfg,
     const boost::filesystem::path& target,
+    const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_directory) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started generation.";
@@ -49,7 +50,8 @@ void generator::generate(const configuration& cfg,
         using cbc = context_bootstrapping_chain;
         const auto& od(output_directory);
         const auto& a(generation_activity);
-        const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
+        const auto& rds(reference_directories);
+        const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
 
         /*
          * Bind the tracer to the current scope.
