@@ -31,7 +31,7 @@
 #include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec.dia/types/builder.hpp"
-#include "dogen.codec.dia/types/visitor.hpp"
+#include "dogen.codec/types/helpers/visitor.hpp"
 #include "dogen.codec/types/helpers/grapher.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
@@ -124,7 +124,7 @@ obtain_model(const std::string& name, const std::list<entities::object>& os) {
      * it.
      */
     builder b(g.parent_id_to_child_ids());
-    visitor v(b);
+    helpers::visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(b.build());
     r.name().simple(name);
