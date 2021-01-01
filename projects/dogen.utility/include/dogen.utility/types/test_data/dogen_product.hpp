@@ -56,7 +56,6 @@ public:
     static boost::filesystem::path input_dogen_org_org();
     static boost::filesystem::path input_dogen_tracing_org();
     static boost::filesystem::path input_dogen_codec_org();
-    static boost::filesystem::path input_dogen_codec_dia_org();
     static boost::filesystem::path input_dogen_text_org();
     static boost::filesystem::path input_dogen_logical_org();
     static boost::filesystem::path input_dogen_templating_org();

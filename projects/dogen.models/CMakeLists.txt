@@ -47,7 +47,6 @@ if (DOGEN_CLI_EXECUTABLE)
     #
     set(prefix "dogen")
     set(models "")
-    set(models ${models} ${prefix}.text)
     set(models ${models} ${prefix}.profiles)
     set(models ${models} ${prefix}.logical)
     set(models ${models} ${prefix}.templating)
