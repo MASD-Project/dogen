@@ -68,6 +68,7 @@ namespace dogen::utility::test_data {
 path dogen_product::project_directory_;
 path dogen_product::org_models_directory_;
 path dogen_product::output_directory_;
+std::vector<path> dogen_product::reference_directories_;
 
 void dogen_product::initialize() {
     using environment::variable_reader;
@@ -122,6 +123,12 @@ path dogen_product::project_directory() {
 path dogen_product::output_directory() {
     ensure_initialized();
     return output_directory_;
+}
+
+
+const std::vector<boost::filesystem::path>&
+dogen_product::reference_directories() {
+    return reference_directories_;
 }
 
 /*

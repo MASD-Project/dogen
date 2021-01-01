@@ -46,6 +46,7 @@ private:
 public:
     static boost::filesystem::path project_directory();
     static boost::filesystem::path output_directory();
+    static const std::vector<boost::filesystem::path>& reference_directories();
 
 public:
     static boost::filesystem::path input_dogen_org();
@@ -69,6 +70,7 @@ private:
     static boost::filesystem::path project_directory_;
     static boost::filesystem::path org_models_directory_;
     static boost::filesystem::path output_directory_;
+    static std::vector<boost::filesystem::path> reference_directories_;
 };
 
 }
