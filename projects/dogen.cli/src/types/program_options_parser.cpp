@@ -64,6 +64,8 @@ const std::string dumpspecs_command_desc(
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
+const std::string reference_directory_arg("reference-directory");
+
 const std::string logging_log_enabled_arg("log-enabled");
 const std::string logging_log_to_console_arg("log-to-console");
 const std::string logging_log_level_arg("log-level");
@@ -290,7 +292,10 @@ options_description make_generate_options_description() {
             "Model to generate code for, in any of the supported formats.")
         ("output-directory,o",
             value<std::string>(), "Output directory for the generated code. "
-            "Defaults to the current working directory.");
+            "Defaults to the current working directory.")
+        ("reference-directory,r",
+            value<std::vector<std::string>>(), "One or moer directories to check"
+            " for referenced models.");
 
     return r;
 }
@@ -743,6 +748,15 @@ read_generation_configuration(const variables_map& vm) {
     else {
         const auto s(vm[generate_output_dir_arg].as<std::string>());
         r.output_directory(absolute(s));
+    }
+
+    if (vm.count(reference_directory_arg)) {
+        const auto rds(vm[reference_directory_arg].
+            as<std::vector<std::string>>());
+        for (const auto& rd : rds) {
+            const boost::filesystem::path p(rd);
+            r.reference_model_directories().push_back(p);
+        }
     }
 
     return r;
