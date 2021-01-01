@@ -25,24 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/graph/depth_first_search.hpp>
+#include "dogen.codec/types/helpers/grapher.hpp"
+#include "dogen.codec.dia/types/builder.hpp"
 
 namespace dogen::codec::helpers {
 
-class visitor final {
+class visitor : public boost::default_dfs_visitor {
 public:
-    visitor() = default;
+    visitor() = delete;
+    visitor& operator=(const visitor&) = delete;
     visitor(const visitor&) = default;
     visitor(visitor&&) = default;
-    ~visitor() = default;
-    visitor& operator=(const visitor&) = default;
 
 public:
-    bool operator==(const visitor& rhs) const;
-    bool operator!=(const visitor& rhs) const {
-        return !this->operator==(rhs);
+    explicit visitor(codec::dia::builder& b) : builder_(b) {}
+
+public:
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        const auto& o(g[u]);
+        if (o.id() != helpers::grapher::root_id())
+            builder_.add(o);
     }
 
+private:
+    codec::dia::builder& builder_;
 };
 
 }
