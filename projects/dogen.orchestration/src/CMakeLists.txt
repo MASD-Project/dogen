@@ -49,10 +49,8 @@ endif()
 
 target_link_libraries(${lib_target_name}
     dogen.variability.lib
-    dogen.dia.lib
     dogen.physical.lib
     dogen.codec.lib
-    dogen.codec.dia.lib
     dogen.logical.lib
     dogen.text.lib
     ${relational_lib}

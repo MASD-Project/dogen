@@ -1311,12 +1311,6 @@ BOOST_AUTO_TEST_CASE(dogen_codec_org_does_not_throw) {
     BOOST_CHECK(!document.headlines().empty());
 }
 
-BOOST_AUTO_TEST_CASE(dogen_codec_dia_org_does_not_throw) {
-    SETUP_TEST_LOG_SOURCE("dogen_codec_dia_org_does_not_throw");
-    const auto document(make(dogen_product::input_dogen_codec_dia_org()));
-    BOOST_CHECK(!document.headlines().empty());
-}
-
 BOOST_AUTO_TEST_CASE(dogen_text_org_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("dogen_text_org_does_not_throw");
     const auto document(make(dogen_product::input_dogen_text_org()));
