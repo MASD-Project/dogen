@@ -12,35 +12,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-01 Fri 14:50]
+#+CAPTION: Clock summary at [2021-01-01 Fri 18:34]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *69:52* |       |       | 100.0 |
+| *Total time*                                        | *72:37* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 69:52   |       |       | 100.0 |
-| Active                                              |         | 69:52 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   8.7 |
+| Stories                                             | 72:37   |       |       | 100.0 |
+| Active                                              |         | 72:37 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   8.4 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.8 |
-| Sprint and product backlog grooming                 |         |       |  2:17 |   3.3 |
-| Solve emacs issues                                  |         |       |  2:48 |   4.0 |
-| Add support for reading org mode documents          |         |       | 19:46 |  28.3 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.5 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.8 |
-| Add org-mode codec for input                        |         |       |  8:56 |  12.8 |
-| Convert library models into org                     |         |       |  1:26 |   2.1 |
-| Convert reference models into org                   |         |       |  2:56 |   4.2 |
-| Assorted improvements to org model                  |         |       |  0:37 |   0.9 |
-| Create a model to org transform                     |         |       |  3:57 |   5.7 |
+| Sprint and product backlog grooming                 |         |       |  2:27 |   3.4 |
+| Solve emacs issues                                  |         |       |  2:48 |   3.9 |
+| Add support for reading org mode documents          |         |       | 19:46 |  27.2 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.4 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.7 |
+| Add org-mode codec for input                        |         |       |  8:56 |  12.3 |
+| Convert library models into org                     |         |       |  1:26 |   2.0 |
+| Convert reference models into org                   |         |       |  2:56 |   4.0 |
+| Assorted improvements to org model                  |         |       |  0:37 |   0.8 |
+| Create a model to org transform                     |         |       |  3:57 |   5.4 |
 | Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.8 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   2.8 |
-| Create a "frozen" project                           |         |       |  1:49 |   2.6 |
-| Add tags to org model                               |         |       |  1:15 |   1.8 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   2.7 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.5 |
+| Add tags to org model                               |         |       |  1:15 |   1.7 |
 | Inject custom IDs into org documents                |         |       |  0:38 |   0.9 |
-| Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.3 |
-| Add PlantUML markup language support                |         |       |  5:29 |   7.8 |
-| Merge dia codec model into main codec model         |         |       |  3:04 |   4.4 |
-| Add include directories to models                   |         |       |  1:08 |   1.6 |
+| Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.2 |
+| Add PlantUML markup language support                |         |       |  5:29 |   7.6 |
+| Merge dia codec model into main codec model         |         |       |  3:04 |   4.2 |
+| Add include directories to models                   |         |       |  3:31 |   4.8 |
+| Add comments to PlantUML diagrams                   |         |       |  0:12 |   0.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -296,6 +297,9 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2021-01-01 Fri 18:17]--[2021-01-01 Fri 18:21] =>  0:04
+    CLOCK: [2021-01-01 Fri 18:13]--[2021-01-01 Fri 18:16] =>  0:03
+    CLOCK: [2021-01-01 Fri 18:09]--[2021-01-01 Fri 18:12] =>  0:03
     CLOCK: [2020-12-31 Thu 15:46]--[2020-12-31 Thu 15:49] =>  0:03
     CLOCK: [2020-12-31 Thu 15:34]--[2020-12-31 Thu 15:46] =>  0:12
     CLOCK: [2020-12-31 Thu 14:39]--[2020-12-31 Thu 14:44] =>  0:05
@@ -1053,8 +1057,10 @@ At present we are doing the containment graph within the dia codec. We
 should really do this in the main codec model so we can reuse it for
 org-mode.
 
-*** STARTED Add include directories to models                         :story:
+*** COMPLETED Add include directories to models                       :story:
+    CLOSED: [2021-01-01 Fri 18:12]
     :LOGBOOK:
+    CLOCK: [2021-01-01 Fri 15:45]--[2021-01-01 Fri 18:08] =>  2:23
     CLOCK: [2021-01-01 Fri 14:47]--[2021-01-01 Fri 14:50] =>  0:03
     CLOCK: [2021-01-01 Fri 13:41]--[2021-01-01 Fri 14:46] =>  1:05
     :END:
@@ -1067,6 +1073,175 @@ Actually, we should just support a =--include-dir= or =-I=
 parameter. We also need to dump the include directories in
 dumpspecs. Actually lets call it =--reference-dir= instead since it is
 used for the reference directories.
+
+Notes:
+
+- relational model is using generated cmake files. We need to add
+  modeling to the generated file. However, we can't always add it
+  because in some cases we won't be using this directory layout. It is
+  not clear how we would solve this problem; it may need to wait until
+  we support the =model= element.
+
+*** STARTED Add comments to PlantUML diagrams                         :story:
+    :LOGBOOK:
+    CLOCK: [2021-01-01 Fri 18:33]
+    CLOCK: [2021-01-01 Fri 18:21]--[2021-01-01 Fri 18:33] =>  0:12
+    :END:
+
+It would be nice to be able to output element commentary on the UML
+diagram.
+
+*** Create a "manual tests" stereotype with profiles                  :story:
+
+At present we have a =tests= facet that contains only the generated
+tests, and writes to the =generated_tests= directory. We also have
+created folders for manual tests under the =tests= directory. However,
+the problem is that we still have no way to tell dogen about the
+manual tests. This means we must use a regex to ignore the contents of
+the folder. A better approach is:
+
+- create two distinct test facets:
+  - manual tests
+  - generated tests
+- create a profile that enables manual tests. When enabled, we simply
+  create a skeleton boost test file. We must set it to override so
+  that we update the contents of the file manually with real tests.
+
+Tasks:
+
+- rename tests facet to =generated_tests=
+- create a new facet =manual_tests=. Copy most of the contents of the
+  existing facet (main, cmake). Make the directory name =tests=.
+- create a template for tests with associated meta-model entity
+  (e.g. =masd::test=). It probably will also need its own namespace
+  (=test=).
+- create a stereotype that enables manual tests in the dogen model.
+- update all models, adding =masd::test= for each manual test, with
+  the new stereotype.
+
+Notes:
+
+- the present situation of ignoring regexes is a bit dangerous, e.g.:
+
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+
+  This means any type in a model in the path "tests" will be
+  ignored. This results in a lot of surprising behaviour because some
+  times we create packages called tests (for example the "tests"
+  facet).
+
+*Previous understanding*
+
+*Rationale*: the right solution for this is to split generated tests
+from manual tests such that we do not have to mix and match the two
+types of code.
+
+At present we are ignoring all of the contents of =tests=. This means
+whenever we delete a type we are left behind with its tests. A better
+solution is to create model elements for each handcrafted test marked
+as "masd::handcrafted_test". This disables all facets except for
+tests. We can then remove the regex.
+
+Whilst variability overrides will address the underlying issue in a
+more maintainable way (e.g. the deletion of generated tests), we
+should still create a profile and model all tests as proper entities
+instead of bypassing the modeling system. We want to move to a world
+were *all* files in the system can be attributable to modeling
+entities.
+
+*** Modeling of dogen models themselves                               :story:
+
+*Note*: we probably already have this story in the backlog, or at
+least some of its ideas. Do a grep and merge as required.
+
+At present we have placed the dogen models in a top-level =models=
+directory. However, if we think about it, it makes more sense to
+consider the model itself a file that belongs to the component. For
+this we need:
+
+- a models facet;
+- an assets type of model. The model type can be Dia or JSON; actually
+  we should not name this "model", it is a component model. We can
+  also have "product models".
+- an associated CMakeLists in the facet, responsible for generating
+  the model.
+
+We are no longer worried about Dia and JSON directories because we
+expect that JSON models are automatically generated from Dia models in
+the nightly build for testing purposes.
+
+As we did with generated tests, when the model facet is enabled (which
+should be by default, lest we confuse everyone), we generate the
+model.
+
+Notes:
+
+- this could enable a bootstrapping scenario: supply a model name and
+  a directory to dogen and it will first generate the model itself and
+  then generate it. Actually this may not be a good idea as we did not
+  choose a profile. We probably would also need to supply the
+  profile. We should look at build2 to see how the bootstrapping
+  works. We should also keep in mind that there are two bootstrapping
+  cases: the product case and the component case. Since the product
+  itself will have a model, we need to make sure these are
+  consistent. See [[*Introduce dogen projects][Introduce dogen projects]].
+
+Merged stories:
+
+*Consider creating a =modeling= folder/part*
+
+At present we were thinking about having several folders related to
+modeling, for each component:
+
+- templates
+- models
+- etc
+
+It may make more sense to gather them all under =modeling=. We could
+also have a product level folder with the same name.
+
+So =modeling= is the part, and =templates=, =models= etc are facets.
+
+*Consider creating a "model" meta-model element*
+
+This is not yet particularly clear, and we may already have something
+on the backlog for this, but the gist of it is that we have a number
+of elements in the meta-model that are functions of the model itself:
+
+- the root module.
+- projects and solutions for the model itself.
+- common ODB options.
+- top-level CMakefile (and perhaps others).
+- msbuild
+
+In all those cases we are duplicating information available at the
+model level, with perhaps a tiny bit of extra processing. It would
+make more sense for there to be an element that models the model
+itself and then to have formatters for this element. We should wait
+until we finish with the fabric refactor (and possibly the generation
+refactor too) until we look into this. We should also take into
+account the product models.
+
+In addition, cases such as common ODB options need to be rethought; if
+all we are supplying is a different representation of data that
+already exists in the model itself, then we should either rely on the
+model meta-type or move those properties to the new meta-type. Seems a
+tad excessive having common ODB options just for a "post-processed"
+set of properties.
+
+*** Allow defaulting to target directory                              :story:
+
+At present we default the location of the log file and the byproduct
+directory to the location of the binary. It may make more sense to
+default it to the location of the target model, allowing us to keep
+all generated data next to the model now that we have the
+=PRODUCT.modeling= directories. We probably want to make this optional
+in case the old behaviour was more sensible.
+
+Names:
+
+- =default-to-target-directory=?
 
 *** Missing PlantUML features                                         :story:
 
