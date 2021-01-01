@@ -40,8 +40,6 @@ const std::string failed_create("Failed to create output directory.");
 
 const std::string output_dir("dogen.code_generation_test_output");
 
-const std::string models_org_dir("dogen.models/org");
-
 const std::string path_dogen("dogen");
 const std::string path_dogen_cli("dogen.cli");
 const std::string path_dogen_physical("dogen.physical");
@@ -65,7 +63,6 @@ using boost::filesystem::path;
 namespace dogen::utility::test_data {
 
 path dogen_product::project_directory_;
-path dogen_product::org_models_directory_;
 path dogen_product::output_directory_;
 std::vector<path> dogen_product::reference_directories_;
 
@@ -114,9 +111,7 @@ void dogen_product::initialize() {
     reference_directories_.
         push_back(project_directory_ / path_dogen_identification / "modeling");
     reference_directories_.
-        push_back(project_directory_ / "dogen.models" / "org");
-
-    org_models_directory_ = project_directory_ / models_org_dir;
+        push_back(project_directory_ / "dogen.modeling" / "org");
 
     output_directory_ = boost::filesystem::absolute(output_dir);
     if (boost::filesystem::exists(output_directory_)) {

@@ -324,7 +324,7 @@ list(APPEND DOGEN_REFERENCE_OPTIONS
 list(APPEND DOGEN_REFERENCE_OPTIONS
     --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.identification/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.models/org)
+    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling/org)
 
 get_directory_property(dirs INCLUDE_DIRECTORIES)
 set(global_includes "")
@@ -347,7 +347,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.logical)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.text)
 

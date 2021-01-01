@@ -69,7 +69,7 @@ build_type_dir="${compiler_dir}/${build_type}";
 # Test the package
 #
 sudo dpkg -i ${build_type_dir}/stage/pkg/dogen_*_amd64-applications.deb
-cp ${product_dir}/projects/dogen.models/org/hello_world.org /tmp
+cp ${product_dir}/projects/dogen.modeling/org/hello_world.org /tmp
 cd /tmp
 /usr/bin/dogen.cli --version
 /usr/bin/dogen.cli generate -t hello_world.org
