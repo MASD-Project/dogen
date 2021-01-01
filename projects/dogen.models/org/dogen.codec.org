@@ -576,6 +576,14 @@ Contents of the artefact.
    :custom_id: a829e94b-1c8c-4f97-9f7f-f41b75b1a5ed
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** projection error                                                 :element:
+   :PROPERTIES:
+   :custom_id: 914303b5-42c2-4654-9918-5489039ea71f
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred whilst projecting elements from one space to another.
+
 ** reference resolution exception                                   :element:
    :PROPERTIES:
    :custom_id: O26
