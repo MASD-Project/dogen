@@ -115,16 +115,6 @@ into its masd representation.
 
 An error has occurred while building the dia object graph.
 
-* processed comment factory                                         :element:
-  :PROPERTIES:
-  :custom_id: O7
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-* processed object factory                                          :element:
-  :PROPERTIES:
-  :custom_id: O10
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
 * validator                                                         :element:
   :PROPERTIES:
   :custom_id: O15
