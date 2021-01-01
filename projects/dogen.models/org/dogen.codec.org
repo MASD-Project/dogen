@@ -566,6 +566,19 @@ Contents of the artefact.
   :PROPERTIES:
   :custom_id: O17
   :END:
+** grapher                                                          :element:
+   :PROPERTIES:
+   :custom_id: 9f049e37-e0d7-4135-8447-ddfbc383456e
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+** graphing error                                                   :element:
+   :PROPERTIES:
+   :custom_id: 970d205b-3d12-4d65-8df7-8fa587ce977f
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error has occurred while building the dia object graph.
+
 ** references resolver                                              :element:
    :PROPERTIES:
    :custom_id: O18
