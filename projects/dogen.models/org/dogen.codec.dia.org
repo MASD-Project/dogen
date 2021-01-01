@@ -93,15 +93,6 @@ entity.
 
 For details on the stereotypes see the MASD UML profile.
 
-* adaptation error                                                  :element:
-  :PROPERTIES:
-  :custom_id: O0
-  :masd.codec.stereotypes: masd::exception
-  :END:
-
-A fatal error has occurred while adapting a Dia model object
-into its masd representation.
-
 * grapher                                                           :element:
   :PROPERTIES:
   :custom_id: O1
@@ -145,11 +136,6 @@ The object profile is not valid.
 * builder                                                           :element:
   :PROPERTIES:
   :custom_id: O37
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-* adapter                                                           :element:
-  :PROPERTIES:
-  :custom_id: O38
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * main                                                              :element:
