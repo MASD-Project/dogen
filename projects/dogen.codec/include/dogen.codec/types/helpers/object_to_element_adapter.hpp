@@ -25,24 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/object.hpp"
+#include "dogen.codec/types/entities/comment.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
 
 namespace dogen::codec::helpers {
 
+/**
+ * @brief Adapts objects into elements.
+ */
 class object_to_element_adapter final {
-public:
-    object_to_element_adapter() = default;
-    object_to_element_adapter(const object_to_element_adapter&) = default;
-    object_to_element_adapter(object_to_element_adapter&&) = default;
-    ~object_to_element_adapter() = default;
-    object_to_element_adapter& operator=(const object_to_element_adapter&) = default;
+private:
+    /**
+     * @brief Ensure the name is valid.
+     */
+    static void validate_name(const std::string& n);
+
+    /**
+     * @brief Constructs a qualified name, taking into account the
+     * contents of the contained by parameter.
+     */
+    static std::string qualified_name(const std::string& contained_by,
+        const std::string& simple_name);
+
+    /**
+     * @brief Processes the stereotypes field.
+     */
+    static void process_stereotypes(const entities::object& po,
+        codec::entities::element& e);
+
+private:
+    /**
+     * @brief Adapts attributes.
+     */
+    static codec::entities::attribute
+    adapt(const entities::attribute& a, const std::string& qualified_owner);
 
 public:
-    bool operator==(const object_to_element_adapter& rhs) const;
-    bool operator!=(const object_to_element_adapter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Adapts an object into an element.
+     */
+    static codec::entities::element
+    adapt(const entities::object& po, const std::string& contained_by,
+        const std::list<std::string>& parents);
 };
 
 }
