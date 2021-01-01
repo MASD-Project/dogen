@@ -32,6 +32,7 @@
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec.dia/types/builder.hpp"
 #include "dogen.codec.dia/types/visitor.hpp"
+#include "dogen.codec/types/helpers/grapher.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
@@ -115,7 +116,7 @@ obtain_model(const std::string& name, const std::list<entities::object>& os) {
      * Create a dependency graph of the objects, and a map of children
      * to their respective parents.
      */
-    grapher g;
+    helpers::grapher g;
     g.generate(os);
 
     /*
