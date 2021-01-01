@@ -39,7 +39,7 @@ private:
     /**
      * @brief Removes any duplicates that may exist in the list of directories.
      */
-    const std::list<boost::filesystem::path> deduplicate_directories(
+    static const std::list<boost::filesystem::path> deduplicate_directories(
         const std::list<boost::filesystem::path> directories);
 
 public:
