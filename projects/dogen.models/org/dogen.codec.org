@@ -571,6 +571,11 @@ Contents of the artefact.
    :custom_id: O18
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** dia to codec projector                                           :element:
+   :PROPERTIES:
+   :custom_id: a829e94b-1c8c-4f97-9f7f-f41b75b1a5ed
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 ** reference resolution exception                                   :element:
    :PROPERTIES:
    :custom_id: O26
