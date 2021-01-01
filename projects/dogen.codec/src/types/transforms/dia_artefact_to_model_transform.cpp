@@ -36,7 +36,7 @@
 #include "dogen.codec.dia/types/validator.hpp"
 #include "dogen.codec/types/entities/object.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
-#include "dogen.codec.dia/types/processed_object_factory.hpp"
+#include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
 
 namespace {
@@ -78,7 +78,7 @@ obtain_processed_objects(const dogen::dia::entities::diagram& d) {
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.
      */
-    auto r(processed_object_factory::make(d));
+    auto r(helpers::dia_to_codec_projector::project(d));
 
     /*
      * Remove all the non-relevant process objects.
