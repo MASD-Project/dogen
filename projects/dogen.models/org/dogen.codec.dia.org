@@ -98,15 +98,6 @@ For details on the stereotypes see the MASD UML profile.
   :custom_id: O26
   :masd.codec.stereotypes: masd::exception
   :END:
-* visitor                                                           :element:
-  :PROPERTIES:
-  :custom_id: O36
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
-** builder                                                        :attribute:
-   :PROPERTIES:
-   :masd.codec.type: builder
-   :END:
 * builder                                                           :element:
   :PROPERTIES:
   :custom_id: O37
