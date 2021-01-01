@@ -20,6 +20,12 @@ enum tracing_level <<masd::enumeration>> #F2DAFD {
         +{field} summary
 }
 
+note top of  tracing_level
+
+Available levels for tracing transformation.
+
+end note
+
 class tracing_configuration <<masd::fluent>> #F7E5FF {
         +{field} level tracing_level
         +{field} format tracing_format
@@ -32,19 +38,43 @@ class tracing_configuration <<masd::fluent>> #F7E5FF {
         +{field} filter_regexes std::vector<std::string>
 }
 
+note top of  tracing_configuration
+
+Configuration related to transform tracing.
+
+end note
+
 enum tracing_format <<masd::enumeration>> #F2DAFD {
         +{field} plain
         +{field} org_mode
         +{field} graphviz
 }
 
+note top of  tracing_format
+
+Available formats for tracing transformations.
+
+end note
+
 class configuration_builder <<dogen::handcrafted::typeable>> #FFFACD {
 }
+
+note top of  configuration_builder
+
+masd::builder
+
+end note
 
 class diffing_configuration <<masd::fluent>> #F7E5FF {
         +{field} destination diffing_destination
         +{field} output_directory boost::filesystem::path
 }
+
+note top of  diffing_configuration
+
+Configuration for diff generation.
+
+end note
 
 class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
 }
@@ -56,8 +86,20 @@ class model_processing_configuration #F7E5FF {
         +{field} activity_timestamp boost::posix_time::ptime
 }
 
+note top of  model_processing_configuration
+
+Configuration related to the behaviour of Dogen whilst processing models.
+
+end note
+
 class invalid_configuration_exception <<masd::exception>> #E8C2F8 {
 }
+
+note top of  invalid_configuration_exception
+
+The values supplied for the configuration are not valid.
+
+end note
 
 class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 }
@@ -76,15 +118,33 @@ enum diffing_destination <<masd::enumeration>> #F2DAFD {
         +{field} console
 }
 
+note top of  diffing_destination
+
+Where to place the diffing results.
+
+end note
+
 class reporting_configuration #F7E5FF {
         +{field} style reporting_style
         +{field} output_directory boost::filesystem::path
 }
 
+note top of  reporting_configuration
+
+Configuration related to operational reports.
+
+end note
+
 enum reporting_style <<masd::enumeration, dogen::convertible>> #F2DAFD {
         +{field} plain
         +{field} org_mode
 }
+
+note top of  reporting_style
+
+Available formats for operational reports.
+
+end note
 
 class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
@@ -99,15 +159,33 @@ class database_configuration #F7E5FF {
         +{field} generate_schema bool
 }
 
+note top of  database_configuration
+
+Contains the config
+
+end note
+
 enum tracing_backend <<masd::enumeration>> #F2DAFD {
         +{field} file
         +{field} relational_database
 }
 
+note top of  tracing_backend
+
+Available backends to manage tracing information.
+
+end note
+
 enum database_engine <<masd::enumeration>> #F2DAFD {
         +{field} postgres
         +{field} sqlite
 }
+
+note top of  database_engine
+
+Supported relational databases engines.
+
+end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 }
@@ -119,21 +197,46 @@ class specs #F7E5FF {
         +{field} categories std::list<spec_category>
 }
 
+note top of  specs
+
+Describes details of the available functionality within this version of Dogen.
+
+end note
+
 class spec_category #F7E5FF {
         +{field} name std::string
         +{field} entries std::list<spec_entry>
         +{field} description std::string
 }
 
+note top of  spec_category
+
+Describes a category of dogen specifications.
+
+end note
+
 class spec_entry #F7E5FF {
         +{field} name std::string
         +{field} description std::string
 }
+
+note top of  spec_entry
+
+Unit of functionality within Dogen.
+
+end note
 
 class spec_dumper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 }
 
 class dumping_exception <<masd::exception>> #E8C2F8 {
 }
+
+note top of  dumping_exception
+
+An error ocurred when dumping dogen's specs.
+
+
+end note
 
 @enduml

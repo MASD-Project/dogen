@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/replace.hpp>
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
@@ -270,7 +271,7 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
             }
             walk_parent_to_child(os, level + 1, inner_id, map);
 
-            os << "}" << std::endl << std::endl;
+            os << indent << "}" << std::endl << std::endl;
 
             if (!props.parents.empty()) {
                 using utility::string::splitter;
@@ -281,6 +282,13 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                        << std::endl;
                 }
             }
+
+            if (!e.comment().documentation().empty()) {
+                os << "note top of  " << e.name().simple() << std::endl
+                   << e.comment().documentation() << std::endl
+                   << "end note" << std::endl << std::endl;
+            }
+
         }
     }
 

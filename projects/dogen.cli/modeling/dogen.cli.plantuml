@@ -9,6 +9,12 @@ end note
 class parser_exception <<masd::exception>> #E8C2F8 {
 }
 
+note top of  parser_exception
+
+A fatal error has occurred during option parsing.
+
+end note
+
 class application <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -25,11 +31,23 @@ class injector_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 class application_exception <<masd::exception>> #E8C2F8 {
 }
 
+note top of  application_exception
+
+A fatal error has occurred whilst executing the application.
+
+end note
+
 class configuration #F7E5FF {
         +{field} logging boost::optional<utility::log::logging_configuration>
         +{field} api dogen::configuration
         +{field} cli cli_configuration
 }
+
+note top of  configuration
+
+All of the configuration required by the command line application.
+
+end note
 
 class generation_configuration <<masd::fluent>> #F7E5FF {
         +{field} reference_model_directories std::vector<boost::filesystem::path>
@@ -37,10 +55,22 @@ class generation_configuration <<masd::fluent>> #F7E5FF {
         +{field} output_directory boost::filesystem::path
 }
 
+note top of  generation_configuration
+
+Configuration related to code generation.
+
+end note
+
 class conversion_configuration <<masd::fluent>> #F7E5FF {
         +{field} source boost::filesystem::path
         +{field} destination std::string
 }
+
+note top of  conversion_configuration
+
+Configuration for the model conversion.
+
+end note
 
 class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
 }
@@ -53,6 +83,12 @@ class cli_configuration <<masd::fluent>> #F7E5FF {
         +{field} byproduct_directory boost::filesystem::path
 }
 
+note top of  cli_configuration
+
+Configuration specific to the CLI application.
+
+end note
+
 class main <<masd::entry_point>> #DDA9F3 {
 }
 
@@ -62,5 +98,11 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 class dumpspecs_configuration <<masd::fluent>> #F7E5FF {
         +{field} style reporting_style
 }
+
+note top of  dumpspecs_configuration
+
+Dumps all the specs about this version of dogen.
+
+end note
 
 @enduml

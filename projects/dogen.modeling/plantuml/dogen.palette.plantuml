@@ -27,13 +27,18 @@ class palette_test_one_three <<dogen::handcrafted::typeable::implementation_only
 
 namespace package #F2F2F2 {
         class palette_test_one_one <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class palette_test_one_two <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
+        }
 
         class palette_test_one_three <<dogen::handcrafted::typeable::implementation_only>> #FFFACD {
-}
+        }
+
+note top of  palette_test_one_three
+
+
+end note
 
 }
 

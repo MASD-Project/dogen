@@ -33,10 +33,10 @@ end note
 
 namespace transforms #F2F2F2 {
         class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
                 +{field} data_directories std::vector<boost::filesystem::path>
@@ -44,64 +44,64 @@ namespace transforms #F2F2F2 {
                 +{field} tracer boost::shared_ptr<tracing::tracer>
                 +{field} compatibility_mode bool
                 +{field} variability_overrides std::vector<std::string>
-}
+        }
 
         class transformation_error <<masd::exception>> #E8C2F8 {
-}
+        }
 
         class model_set_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class artefact_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
 }
 
@@ -111,7 +111,13 @@ namespace entities #F2F2F2 {
                 +{field} input_technical_space std::string
                 +{field} references std::list<std::string>
                 +{field} processed_variability_overrides std::unordered_set<std::string>
-}
+        }
+
+note top of  model
+
+Represents an external model.
+
+end note
 
         class element <<Element>> #F7E5FF {
                 +{field} parents std::list<std::string>
@@ -124,49 +130,97 @@ namespace entities #F2F2F2 {
                 +{field} is_associative_container bool
                 +{field} is_floating_point bool
                 +{field} containing_element_id identification::entities::codec_id
-}
+        }
+
+note top of  element
+
+Represents an element from an external model.
+
+end note
 
         class attribute <<Element>> #F7E5FF {
                 +{field} type std::string
                 +{field} value std::string
-}
+        }
 
         class model_set #F7E5FF {
                 +{field} target model
                 +{field} references std::list<model>
                 +{field} reference_graph_data reference_graph_data
-}
+        }
 
         class Taggable <<masd::object_template>> #E3B6F6 {
                 +{field} tagged_values std::list<identification::entities::tagged_value>
-}
+        }
+
+note top of  Taggable
+
+Ability to contain tagged values.
+
+end note
 
         class Stereotypable <<masd::object_template>> #E3B6F6 {
                 +{field} stereotypes std::list<identification::entities::stereotype>
-}
+        }
+
+note top of  Stereotypable
+
+Ability to have stereotypes.
+
+end note
 
         class Nameable <<masd::object_template>> #E3B6F6 {
                 +{field} name identification::entities::name
-}
+        }
+
+note top of  Nameable
+
+Ability to have a name.
+
+end note
 
         class Configurable <<masd::object_template>> #E3B6F6 {
                 +{field} configuration boost::shared_ptr<variability::entities::configuration>
-}
+        }
+
+note top of  Configurable
+
+Ability to have meta-data associated.
+
+end note
 
         class DeterminableOrigin <<masd::object_template>> #E3B6F6 {
                 +{field} provenance identification::entities::codec_provenance
-}
+        }
+
+note top of  DeterminableOrigin
+
+Properties related to the origin of the modeling element.
+
+end note
 
         class TaggableOverridable <<masd::object_template>> #E3B6F6 {
                 +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
-}
+        }
+
+note top of  TaggableOverridable
+
+Ability to contain tagged values.
+
+end note
 
         class Commentable <<masd::object_template>> #E3B6F6 {
                 +{field} comment comment
-}
+        }
+
+note top of  Commentable
+
+Has the ability to have an associated comment.
+
+end note
 
         class Element <<masd::object_template>> #E3B6F6 {
-}
+        }
 
 entities::Taggable <|-- entities::Element
 entities::Stereotypable <|-- entities::Element
@@ -175,16 +229,34 @@ entities::Configurable <|-- entities::Element
 entities::DeterminableOrigin <|-- entities::Element
 entities::TaggableOverridable <|-- entities::Element
 entities::Commentable <|-- entities::Element
+note top of  Element
+
+Consolidates a number of related object templates.
+
+end note
+
         class reference_graph_data #F7E5FF {
                 +{field} root std::string
                 +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
-}
+        }
+
+note top of  reference_graph_data
+
+Contains all the data required to build the graph of references.
+
+end note
 
         class comment <<Taggable>> #F7E5FF {
                 +{field} applies_to_container bool
                 +{field} original_content std::string
                 +{field} documentation std::string
-}
+        }
+
+note top of  comment
+
+Represents a comment block as read out from the codec representation.
+
+end note
 
         class object <<Commentable>> #F7E5FF {
                 +{field} id std::string
@@ -194,73 +266,131 @@ entities::Commentable <|-- entities::Element
                 +{field} container_id std::string
                 +{field} connection boost::optional<std::pair<std::string,std::string>>
                 +{field} attributes std::list<attribute>
-}
+        }
+
+note top of  object
+
+Represents an "raw" codec object which may or may not contain a modeling element of interest.
+
+end note
 
         class artefact #F7E5FF {
                 +{field} path boost::filesystem::path
                 +{field} codec_name std::string
                 +{field} content std::string
-}
+        }
 
 }
+
+note top of  entities
+
+Object model that is codec-agnostic but aims to provide
+a representation of the core entities needed by all codecs.
+
+Not all codecs will make use of all entities.
+
+end note
 
 namespace helpers #F2F2F2 {
         class building_error <<masd::exception>> #E8C2F8 {
-}
+        }
 
         class builder <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
+        }
 
         class grapher <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class graphing_error <<masd::exception>> #E8C2F8 {
-}
+        }
+
+note top of  graphing_error
+
+An error has occurred while building the dia object graph.
+
+end note
 
         class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class dia_to_codec_projector <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class projection_error <<masd::exception>> #E8C2F8 {
-}
+        }
+
+note top of  projection_error
+
+An error occurred whilst projecting elements from one space to another.
+
+end note
 
         class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class adaptation_error <<masd::exception>> #E8C2F8 {
-}
+        }
+
+note top of  adaptation_error
+
+
+A fatal error has occurred while adapting an object into an element.
+
+end note
 
         class reference_resolution_exception <<masd::exception>> #E8C2F8 {
-}
+        }
 
         class references_validator <<dogen::handcrafted::typeable>> #FFFACD {
-}
+        }
 
         class reference_validation_error <<masd::exception>> #E8C2F8 {
-}
+        }
+
+note top of  reference_validation_error
+
+A cycle was detected in the references graph.
+
+end note
 
 }
 
 namespace features #F2F2F2 {
         class input_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
                 +{field} input_technical_space masd::variability::text
-}
+        }
+
+note top of  input_technical_space
+
+Feature bundle for the input technical space.
+
+end note
 
         class reference <<masd::variability::feature_bundle>> #BAD7D7 {
                 +{field} reference masd::variability::text_collection
-}
+        }
+
+note top of  reference
+
+Features related to model referencing.
+
+end note
 
         class initializer <<masd::variability::initializer>> #A9CDCD {
-}
+        }
 
         class uml <<masd::variability::feature_bundle>> #BAD7D7 {
                 +{field} dia.comment masd::variability::boolean
-}
+        }
+
+note top of  uml
+
+Features related to all UML injectors.
+
+end note
 
         class meta_data <<masd::variability::feature_bundle>> #BAD7D7 {
                 +{field} stereotypes masd::variability::comma_separated
@@ -274,9 +404,22 @@ namespace features #F2F2F2 {
                 +{field} is_associative_container masd::variability::boolean
                 +{field} is_floating_point masd::variability::boolean
                 +{field} preserve_original masd::variability::boolean
-}
+        }
+
+note top of  meta_data
+
+Assorted meta-data.
+
+end note
 
 }
+
+note top of  features
+
+Defines all of the features and feature groups used by
+the codec model.
+
+end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
 }
@@ -286,5 +429,10 @@ class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
+
+note top of  CMakeLists
+
+
+end note
 
 @enduml
