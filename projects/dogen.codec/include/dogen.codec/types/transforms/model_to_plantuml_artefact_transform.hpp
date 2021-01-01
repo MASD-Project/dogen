@@ -51,7 +51,8 @@ private:
 private:
     static properties extract_properties(
         const std::list<identification::entities::tagged_value>& tvs);
-    static std::string stereotype_to_colour(const std::string& stereotypes);
+    static std::string stereotype_to_colour(const std::string& stereotypes,
+        const bool is_module);
 
 private:
     static void walk_parent_to_child(std::ostream& os, const unsigned int level,

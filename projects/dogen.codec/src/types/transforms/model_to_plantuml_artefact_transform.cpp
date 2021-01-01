@@ -39,7 +39,8 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
-const std::string default_colour("#F7E5FF");
+const std::string default_element_colour("#F7E5FF");
+const std::string default_module_colour("#F2F2F2");
 const std::string parent_tag("masd.codec.parent");
 const std::string stereotypes_tag("masd.codec.stereotypes");
 const std::string type_tag("masd.codec.type");
@@ -118,7 +119,7 @@ model_to_plantuml_artefact_transform::extract_properties(
 }
 
 std::string model_to_plantuml_artefact_transform::
-stereotype_to_colour(const std::string& stereotypes) {
+stereotype_to_colour(const std::string& stereotypes, const bool is_module) {
     std::string r;
 
     if (boost::contains(stereotypes, masd_assistant))
@@ -201,7 +202,11 @@ stereotype_to_colour(const std::string& stereotypes) {
     else if (boost::contains(stereotypes, dogen_untestable))
         return std::string("#ED8181");
 
-    return default_colour;
+    /*
+     * If we did not match any stereotype, use the default colours for
+     * modules and elements.
+     */
+    return is_module ? default_module_colour : default_element_colour;
 }
 
 void model_to_plantuml_artefact_transform::walk_parent_to_child(
@@ -229,7 +234,8 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                                      << e.name().qualified();
 
             const auto props(extract_properties(e.tagged_values()));
-            if (boost::contains(props.stereotypes, masd_enumeration))
+            const auto sts(props.stereotypes);
+            if (boost::contains(sts, masd_enumeration))
                 os << indent << "enum ";
             else if (e.fallback_element_type() == masd_module)
                 os << indent << "namespace ";
@@ -237,16 +243,12 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                 os << indent << "class ";
             os << e.name().simple();
 
-            if (!props.stereotypes.empty()) {
-                os << " <<" << props.stereotypes << ">>";
-            }
+            if (!sts.empty())
+                os << " <<" << sts << ">>";
 
-            if (e.fallback_element_type() == masd_module) {
-                os << " #F2F2F2";
-            } else {
-                const auto colour(stereotype_to_colour(props.stereotypes));
-                os << " " << colour;
-            }
+            const bool is_module(e.fallback_element_type() == masd_module);
+            const auto colour(stereotype_to_colour(sts, is_module));
+            os << " " << colour;
 
             os << " {" << std::endl;
             for (const auto& attr : e.attributes()) {
