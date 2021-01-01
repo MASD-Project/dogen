@@ -17546,6 +17546,16 @@ visualisation for this.
 
 We should also see C++ Depend.
 
+Notes:
+
+- this could be implemented as an emacs mode that calls dogen behind
+  the scenes to generate the lisp representing the portion of the
+  diagram we're interested in. In fact, better than COGRE would be to
+  just do a partial PlantUML diagram with classes "near" the current
+  class; as you are moving in the org mode file, the dogen LSP server
+  is returning the svg for the "nearby" classes. This could be
+  implemented in a generic way so that any LSP server could use it.
+
 Links:
 
 - [[https://www.youtube.com/watch?v=Cfu6f0uyzc8][SourceTrail demo]]
@@ -20019,6 +20029,7 @@ See also:
 - There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
 - See ragel as well: http://www.colm.net/open-source/ragel/
 - [[https://github.com/josteink/wsd-mode][Web Sequence Diagrams emacs mode]]: not exactly directly related.
+-
 
 *** Add reflection support by using model and type enums               :epic:
 
