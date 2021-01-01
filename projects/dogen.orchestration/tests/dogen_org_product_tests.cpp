@@ -35,8 +35,6 @@ const std::string test_suite("dogen_product_org_tests");
 
 }
 
-#ifdef ENABLE_DOGEN_TESTS
-
 using mg = dogen::orchestration::tests::model_generator;
 using dogen::utility::test_data::dogen_product;
 
@@ -163,5 +161,3 @@ BOOST_AUTO_TEST_CASE(dogen_identification_org_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-#endif // ENABLE_DOGEN_TESTS
