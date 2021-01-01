@@ -23,7 +23,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.identification/io/entities/tagged_value_io.hpp"
 #include "dogen.codec.dia/types/building_error.hpp"
-#include "dogen.codec.dia/types/adapter.hpp"
+#include "dogen.codec/types/helpers/object_to_element_adapter.hpp"
 #include "dogen.codec.dia/types/builder.hpp"
 
 namespace {
@@ -191,7 +191,8 @@ void builder::add(const entities::object& o) {
     /*
      * Adapt the processed object and add it to the model.
      */
-    const auto e(adapter::adapt(o, cby, p));
+    using codec::helpers::object_to_element_adapter;
+    const auto e(object_to_element_adapter::adapt(o, cby, p));
     model_.elements().push_back(e);
     BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name().qualified();
 
