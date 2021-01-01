@@ -93,19 +93,6 @@ entity.
 
 For details on the stereotypes see the MASD UML profile.
 
-* grapher                                                           :element:
-  :PROPERTIES:
-  :custom_id: O1
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-* graphing error                                                    :element:
-  :PROPERTIES:
-  :custom_id: O2
-  :masd.codec.stereotypes: masd::exception
-  :END:
-
-An error has occurred while building the dia object graph.
-
 * building error                                                    :element:
   :PROPERTIES:
   :custom_id: O26

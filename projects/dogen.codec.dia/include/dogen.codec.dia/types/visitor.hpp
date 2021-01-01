@@ -28,7 +28,7 @@
 #include <memory>
 #include <functional>
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen.codec.dia/types/grapher.hpp"
+#include "dogen.codec/types/helpers/grapher.hpp"
 #include "dogen.codec.dia/types/builder.hpp"
 
 namespace dogen::codec::dia {
@@ -47,7 +47,7 @@ public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto& o(g[u]);
-        if (o.id() != grapher::root_id())
+        if (o.id() != helpers::grapher::root_id())
             builder_.add(o);
     }
 

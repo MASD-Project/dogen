@@ -78,12 +78,6 @@ For details on the stereotypes see the MASD UML profile.
 
 end note
 
-class grapher <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class graphing_error <<masd::exception>> #E8C2F8 {
-}
-
 class building_error <<masd::exception>> #E8C2F8 {
 }
 
