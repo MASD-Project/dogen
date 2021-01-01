@@ -51,7 +51,7 @@ namespace transforms #F2F2F2 {
         class model_to_text_transform <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
 }
 
-        namespace cpp <<masd::physical::backend>> #F2F2F2 {
+        namespace cpp <<masd::physical::backend>> #EBFAF1 {
                 class implementation <<masd::physical::part>> #43CD80 {
                         +{field} external_modules_path_contribution
                         +{field} model_modules_path_contribution
@@ -80,7 +80,7 @@ namespace transforms #F2F2F2 {
                         +{field} file_extension
 }
 
-                namespace types <<masd::physical::facet>> #F2F2F2 {
+                namespace types <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -325,7 +325,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::primitive_im
 }
 
 transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_implementation_configuration
-                namespace hash <<masd::physical::facet>> #F2F2F2 {
+                namespace hash <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -399,7 +399,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace build <<masd::physical::facet>> #F2F2F2 {
+                namespace build <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -413,7 +413,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace io <<masd::physical::facet>> #F2F2F2 {
+                namespace io <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -482,7 +482,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace visual_studio <<masd::physical::facet>> #F2F2F2 {
+                namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -500,7 +500,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace serialization <<masd::physical::facet>> #F2F2F2 {
+                namespace serialization <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -550,7 +550,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace test_data <<masd::physical::facet>> #F2F2F2 {
+                namespace test_data <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -648,7 +648,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace tests <<masd::physical::facet>> #F2F2F2 {
+                namespace tests <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -670,7 +670,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace odb <<masd::physical::facet>> #F2F2F2 {
+                namespace odb <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -704,7 +704,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
 
 }
 
-                namespace lexical_cast <<masd::physical::facet>> #F2F2F2 {
+                namespace lexical_cast <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -741,7 +741,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
                 +{field} repository helper_repository
 }
 
-        namespace csharp <<masd::physical::backend>> #F2F2F2 {
+        namespace csharp <<masd::physical::backend>> #EBFAF1 {
                 class archetype_configuration <<masd::variability::profile>> #DDECEC {
                         +{field} masd.physical.part_id
                         +{field} masd.physical.wale_template_reference
@@ -786,7 +786,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
                         +{field} requires_relative_path
 }
 
-                namespace types <<masd::physical::facet>> #F2F2F2 {
+                namespace types <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -816,7 +816,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
 
 }
 
-                namespace io <<masd::physical::facet>> #F2F2F2 {
+                namespace io <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -842,7 +842,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
 
 }
 
-                namespace test_data <<masd::physical::facet>> #F2F2F2 {
+                namespace test_data <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -864,7 +864,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
 
 }
 
-                namespace visual_studio <<masd::physical::facet>> #F2F2F2 {
+                namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
