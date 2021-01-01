@@ -48,7 +48,6 @@ if (DOGEN_CLI_EXECUTABLE)
     set(prefix "dogen")
     set(models "")
     set(models ${models} ${prefix}.profiles)
-    set(models ${models} ${prefix}.identification)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/org)
