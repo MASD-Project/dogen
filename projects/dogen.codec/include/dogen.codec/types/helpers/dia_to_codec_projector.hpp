@@ -41,6 +41,22 @@ namespace dogen::codec::helpers {
  * @brief Projects dia objects into the codec space.
  */
 class dia_to_codec_projector final {
+public:
+    /**
+     * @brief Processes comments in dia diagrams.
+     *
+     * Comments can be stored in class objects, member functions, note
+     * objects, etc.
+     *
+     * Any line starting with the well defined marker @e #DOGEN -
+     * known as the instruction marker - will be interpreted as
+     * carrying an instruction in a key-value pair form, where the key
+     * and the value are separated by the assignment operator @e =.
+     *
+     * @note public just for testing purposes.
+     */
+    static entities::comment process_comment(const std::string& c);
+
 private:
     /**
      * @brief Parses the dia attribute as a string, returning its value.

@@ -119,30 +119,8 @@ boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
 
 namespace dogen::codec::helpers {
 
-std::string dia_to_codec_projector::
-parse_string_attribute(const dogen::dia::entities::attribute& a) {
-    const auto values(a.values());
-    if (values.size() != 1) {
-        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
-                                 << " value but found " << values.size();
-        BOOST_THROW_EXCEPTION(
-            projection_error(unexpected_attribute_value_size +
-                boost::lexical_cast<std::string>(values.size())));
-    }
-
-    using dogen::dia::entities::string;
-    const auto v(get_attribute_value<string>(values.front(), dia_string));
-    std::string name(v.value());
-    boost::erase_first(name, hash_character);
-    boost::erase_last(name, hash_character);
-    boost::trim(name);
-    return name;
-}
-
-entities::comment dia_to_codec_projector::
-create_comment(const dogen::dia::entities::attribute& a) {
-    const auto s(parse_string_attribute(a));
-
+entities::comment
+dia_to_codec_projector::process_comment(const std::string& s) {
     entities::comment r;
     if (s.empty())
         return r;
@@ -201,6 +179,33 @@ create_comment(const dogen::dia::entities::attribute& a) {
 
     r.documentation(documentation_stream.str());
     r.applies_to_container(applicable_to_parent_object);
+    return r;
+}
+
+std::string dia_to_codec_projector::
+parse_string_attribute(const dogen::dia::entities::attribute& a) {
+    const auto values(a.values());
+    if (values.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
+                                 << " value but found " << values.size();
+        BOOST_THROW_EXCEPTION(
+            projection_error(unexpected_attribute_value_size +
+                boost::lexical_cast<std::string>(values.size())));
+    }
+
+    using dogen::dia::entities::string;
+    const auto v(get_attribute_value<string>(values.front(), dia_string));
+    std::string name(v.value());
+    boost::erase_first(name, hash_character);
+    boost::erase_last(name, hash_character);
+    boost::trim(name);
+    return name;
+}
+
+entities::comment dia_to_codec_projector::
+create_comment(const dogen::dia::entities::attribute& a) {
+    const auto s(parse_string_attribute(a));
+    const auto r(process_comment(s));
     return r;
 }
 
