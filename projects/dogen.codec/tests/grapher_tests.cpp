@@ -25,7 +25,7 @@
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.codec/io/entities/object_io.hpp"
-#include "dogen.codec.dia/test/mock_processed_object_factory.hpp"
+#include "dogen.codec/test/mock_object_factory.hpp"
 #include "dogen.codec/types/helpers/graphing_error.hpp"
 #include "dogen.codec/types/helpers/grapher.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
@@ -33,7 +33,7 @@
 
 using namespace dogen::codec::helpers;
 using dogen::utility::test::contains_checker;
-using factory = dogen::codec::dia::test::mock_processed_object_factory;
+using factory = dogen::codec::test::mock_object_factory;
 
 namespace  {
 
