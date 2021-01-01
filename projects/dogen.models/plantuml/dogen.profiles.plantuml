@@ -33,6 +33,7 @@ namespace base #F2F2F2 {
         class ignores <<masd::variability::profile>> #DDECEC {
                 +{field} ignore_files_matching_regex
                 +{field} ignore_files_matching_regex
+                +{field} ignore_files_matching_regex
 }
 
         class base <<masd::variability::profile>> #DDECEC {
