@@ -25,24 +25,80 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include "dogen.dia/types/entities/attribute_fwd.hpp"
+#include "dogen.dia/types/entities/object_fwd.hpp"
+#include "dogen.dia/types/entities/attribute_fwd.hpp"
+#include "dogen.dia/types/entities/composite_fwd.hpp"
+#include "dogen.dia/types/entities/diagram_fwd.hpp"
+#include "dogen.codec/types/entities/object_fwd.hpp"
+#include "dogen.codec/types/entities/comment_fwd.hpp"
 
 namespace dogen::codec::helpers {
 
+/**
+ * @brief Projects dia objects into the codec space.
+ */
 class dia_to_codec_projector final {
-public:
-    dia_to_codec_projector() = default;
-    dia_to_codec_projector(const dia_to_codec_projector&) = default;
-    dia_to_codec_projector(dia_to_codec_projector&&) = default;
-    ~dia_to_codec_projector() = default;
-    dia_to_codec_projector& operator=(const dia_to_codec_projector&) = default;
+private:
+    /**
+     * @brief Parses the dia attribute as a string, returning its value.
+     */
+    static std::string parse_string_attribute(
+        const dogen::dia::entities::attribute& a);
+
+    /**
+     * @brief Makes a comment from the input attribute.
+     *
+     * @pre Attribute must be of type string.
+     */
+    static entities::comment
+    create_comment(const dogen::dia::entities::attribute& a);
+
+    /**
+     * @brief Parse connection information from Dia object.
+     */
+    static void parse_connections(const dogen::dia::entities::object& o,
+        entities::object& co);
+
+    /**
+     * @brief Parse the attribute as a Dia text.
+     */
+    static void parse_as_dia_text(const dogen::dia::entities::attribute a,
+        entities::object& o);
+
+    /**
+     * @brief Processes the raw Dia stereotypes.
+     */
+    static void parse_as_stereotypes(dogen::dia::entities::attribute a,
+        entities::object& o);
+
+    /**
+     * @brief Parses the contents of the Dia attribute assuming it
+     * contains UML attributes.
+     */
+    static void parse_as_class_attributes(
+        const dogen::dia::entities::attribute a, entities::object& o);
+
+    /**
+     * @brief Parses the Dia attributes from the Dia object.
+     */
+    static void parse_attributes(const dogen::dia::entities::object& o,
+        entities::object& co);
 
 public:
-    bool operator==(const dia_to_codec_projector& rhs) const;
-    bool operator!=(const dia_to_codec_projector& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Projects a dia object into a codec object.
+     */
+    static entities::object project(const dogen::dia::entities::object& o);
 
+    /**
+     * @brief Generates a codec object representation of the Dia
+     * diagram.
+     */
+    static std::list<entities::object>
+    project(const dogen::dia::entities::diagram& d);
 };
 
 }
