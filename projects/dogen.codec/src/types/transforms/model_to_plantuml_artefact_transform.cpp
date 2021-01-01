@@ -64,6 +64,7 @@ const std::string masd_object_template("masd::object_template");
 const std::string masd_orm_common_odb_options("masd::orm::common_odb_options");
 const std::string masd_orm_object("masd::orm::object");
 const std::string masd_orm_value("masd::orm::value");
+const std::string masd_physical_helper("masd::physical::helper");
 const std::string masd_physical_archetype("masd::physical::archetype");
 const std::string masd_physical_archetype_kind("masd::physical::archetype_kind");
 const std::string masd_physical_backend("masd::physical::backend");
@@ -154,6 +155,8 @@ stereotype_to_colour(const std::string& stereotypes) {
         return std::string("#CCFFE6");
     else if (boost::contains(stereotypes, masd_orm_value))
         return std::string("#B3FFD9");
+    else if (boost::contains(stereotypes, masd_physical_helper))
+        return std::string("#68D7BB");
     else if (boost::contains(stereotypes, masd_physical_archetype))
         return std::string("#68D799");
     else if (boost::contains(stereotypes, masd_physical_archetype_kind))
