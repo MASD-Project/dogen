@@ -55,8 +55,8 @@ const std::string path_dogen_templating("dogen.templating");
 const std::string path_dogen_orchestration("dogen.orchestration");
 const std::string path_dogen_utility("dogen.utility");
 const std::string path_dogen_variability("dogen.variability");
+const std::string path_dogen_relational("dogen.relational");
 
-const std::string path_dogen_relational_org("dogen.relational.org");
 const std::string path_dogen_identification_org("dogen.identification.org");
 
 }
@@ -110,6 +110,8 @@ void dogen_product::initialize() {
         push_back(project_directory_ / path_dogen_utility / "modeling");
     reference_directories_.
         push_back(project_directory_ / path_dogen_variability / "modeling");
+    reference_directories_.
+        push_back(project_directory_ / path_dogen_relational / "modeling");
     reference_directories_.
         push_back(project_directory_ / "dogen.models" / "org");
 
@@ -243,7 +245,8 @@ path dogen_product::input_dogen_variability_org() {
 
 path dogen_product::input_dogen_relational_org() {
     ensure_initialized();
-    return org_models_directory_ / path_dogen_relational_org;
+    const std::string fn(path_dogen_relational + ".org");
+    return project_directory_ / path_dogen_relational / "modeling" / fn;
 }
 
 path dogen_product::input_dogen_identification_org() {
