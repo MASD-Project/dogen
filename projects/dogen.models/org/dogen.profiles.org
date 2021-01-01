@@ -497,4 +497,3 @@ Element has forward declarations.
 ** message                                                        :attribute:
 
 These files are code-generated via overrides to test dogen. Do not commit them.
-
