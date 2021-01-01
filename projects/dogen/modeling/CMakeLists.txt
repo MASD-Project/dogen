@@ -22,7 +22,6 @@ if (DOGEN_CLI_EXECUTABLE)
     set(target "dogen")
     set(target_ext ${target}.${frontend})
     set(target_path ${models_dir}/${target_ext})
-    message(STATUS "HERE: ${DOGEN_REFERENCE_OPTIONS}")
     add_custom_target(generate_${target_ext}
         COMMENT "Generating ${target_ext} model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -43,16 +42,27 @@ if (DOGEN_CLI_EXECUTABLE)
             benchmark_generate_${target_ext})
     endif()
 
+    set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}")
+    set(source ${output_dir}/${target}.org)
+    set(destination ${output_dir}/${target}.plantuml)
+    add_custom_target(convert_${target_ext}_plantuml
+        COMMENT "Converting ${target}.org to PlantUML."
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_CLI_EXECUTABLE} convert
+        --source ${source} --destination ${destination}
+        ${DOGEN_COMMON_OPTIONS})
+    add_dependencies(convert_all_plantuml convert_${target_ext}_plantuml)
+
     if (WITH_PLANTUML)
         set(frontend "plantuml")
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
-        add_custom_target(generate_${target_ext}_${frontend}
+        add_custom_target(generate_${target_ext}
             COMMENT "Generating UML for ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND PLANTUML_LIMIT_SIZE=65536 ${PLANTUML_PROGRAM}
             ${target_path} -tsvg)
-        add_dependencies(generate_all_${frontend} generate_${target_ext}_${frontend})
+        add_dependencies(generate_all_${frontend} generate_${target_ext})
     endif()
 
 endif()
