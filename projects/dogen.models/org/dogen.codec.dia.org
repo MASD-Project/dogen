@@ -106,19 +106,6 @@ For details on the stereotypes see the MASD UML profile.
 
 An error has occurred while building the dia object graph.
 
-* validator                                                         :element:
-  :PROPERTIES:
-  :custom_id: O15
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-* validation error                                                  :element:
-  :PROPERTIES:
-  :custom_id: O16
-  :masd.codec.stereotypes: masd::exception
-  :END:
-
-The object profile is not valid.
-
 * building error                                                    :element:
   :PROPERTIES:
   :custom_id: O26

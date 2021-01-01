@@ -78,19 +78,10 @@ For details on the stereotypes see the MASD UML profile.
 
 end note
 
-class adaptation_error <<masd::exception>> #E8C2F8 {
-}
-
 class grapher <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class graphing_error <<masd::exception>> #E8C2F8 {
-}
-
-class validator <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class validation_error <<masd::exception>> #E8C2F8 {
 }
 
 class building_error <<masd::exception>> #E8C2F8 {
@@ -101,9 +92,6 @@ class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 }
 
 class builder <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class adapter <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
