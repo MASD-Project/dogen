@@ -584,6 +584,20 @@ Contents of the artefact.
 
 An error occurred whilst projecting elements from one space to another.
 
+** object to element adapter                                        :element:
+   :PROPERTIES:
+   :custom_id: 6bd2afaf-7470-47a1-ab97-743cda6d5f82
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** adaptation error                                                 :element:
+  :PROPERTIES:
+  :custom_id: 8e5ad11b-e37c-4c26-9630-217dba062c95
+  :masd.codec.stereotypes: masd::exception
+  :END:
+
+A fatal error has occurred while adapting an object into an element.
+
 ** reference resolution exception                                   :element:
    :PROPERTIES:
    :custom_id: O26
