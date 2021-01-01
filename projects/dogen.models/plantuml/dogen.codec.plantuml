@@ -205,6 +205,15 @@ entities::Commentable <|-- entities::Element
 }
 
 namespace helpers #F2F2F2 {
+        class building_error <<masd::exception>> #E8C2F8 {
+}
+
+        class builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+        class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
         class grapher <<dogen::handcrafted::typeable>> #FFFACD {
 }
 

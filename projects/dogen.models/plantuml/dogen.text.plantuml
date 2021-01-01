@@ -84,7 +84,7 @@ namespace transforms #F2F2F2 {
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #F7E5FF {
+                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -329,47 +329,47 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class date_helper <<masd::physical::helper>> #F7E5FF {
+                        class date_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class ptime_helper <<masd::physical::helper>> #F7E5FF {
+                        class ptime_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class associative_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class optional_helper <<masd::physical::helper>> #F7E5FF {
+                        class optional_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class sequence_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class variant_helper <<masd::physical::helper>> #F7E5FF {
+                        class variant_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class time_duration_helper <<masd::physical::helper>> #F7E5FF {
+                        class time_duration_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class ptree_helper <<masd::physical::helper>> #F7E5FF {
+                        class ptree_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class pair_helper <<masd::physical::helper>> #F7E5FF {
+                        class pair_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #F7E5FF {
+                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class path_helper <<masd::physical::helper>> #F7E5FF {
+                        class path_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -417,35 +417,35 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class optional_helper <<masd::physical::helper>> #F7E5FF {
+                        class optional_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class pair_helper <<masd::physical::helper>> #F7E5FF {
+                        class pair_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class string_helper <<masd::physical::helper>> #F7E5FF {
+                        class string_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class ptree_helper <<masd::physical::helper>> #F7E5FF {
+                        class ptree_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class associative_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class sequence_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #F7E5FF {
+                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class variant_helper <<masd::physical::helper>> #F7E5FF {
+                        class variant_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -504,7 +504,7 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class path_helper <<masd::physical::helper>> #F7E5FF {
+                        class path_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -554,67 +554,67 @@ transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class date_helper <<masd::physical::helper>> #F7E5FF {
+                        class date_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class bool_helper <<masd::physical::helper>> #F7E5FF {
+                        class bool_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class char_helper <<masd::physical::helper>> #F7E5FF {
+                        class char_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class ptree_helper <<masd::physical::helper>> #F7E5FF {
+                        class ptree_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class associative_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class pair_helper <<masd::physical::helper>> #F7E5FF {
+                        class pair_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class number_helper <<masd::physical::helper>> #F7E5FF {
+                        class number_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class variant_helper <<masd::physical::helper>> #F7E5FF {
+                        class variant_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class path_helper <<masd::physical::helper>> #F7E5FF {
+                        class path_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class ptime_helper <<masd::physical::helper>> #F7E5FF {
+                        class ptime_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class optional_helper <<masd::physical::helper>> #F7E5FF {
+                        class optional_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #F7E5FF {
+                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class sequence_container_helper <<masd::physical::helper>> #F7E5FF {
+                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class string_helper <<masd::physical::helper>> #F7E5FF {
+                        class string_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class domain_type_helper <<masd::physical::helper>> #F7E5FF {
+                        class domain_type_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
-                        class time_duration_helper <<masd::physical::helper>> #F7E5FF {
+                        class time_duration_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -790,7 +790,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class floating_point_number_helper <<masd::physical::helper>> #F7E5FF {
+                        class floating_point_number_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
@@ -820,7 +820,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_con
                         class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-                        class enumerable_helper <<masd::physical::helper>> #F7E5FF {
+                        class enumerable_helper <<masd::physical::helper>> #68D7BB {
                                 +{field} stitch_template_content
 }
 
