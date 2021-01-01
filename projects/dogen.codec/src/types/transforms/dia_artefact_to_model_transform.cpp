@@ -32,7 +32,6 @@
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec.dia/types/builder.hpp"
 #include "dogen.codec.dia/types/visitor.hpp"
-#include "dogen.codec.dia/types/validator.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
 #include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
 #include "dogen.codec/types/transforms/dia_artefact_to_model_transform.hpp"
@@ -53,6 +52,8 @@ const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 
+const std::string no_uml_type("No UML type.");
+
 }
 
 namespace dogen::codec::transforms {
@@ -69,6 +70,19 @@ is_not_relevant(const entities::object& po) {
     return !is_relevant;
 }
 
+void dia_artefact_to_model_transform::
+validate(const std::list<entities::object>& os) {
+    for (const auto& po : os) {
+        /*
+         * All objects must have a valid UML type.
+         */
+        if (po.object_type().empty()) {
+            BOOST_LOG_SEV(lg, error) << no_uml_type;
+            BOOST_THROW_EXCEPTION(transformation_error(no_uml_type));
+        }
+    }
+}
+
 std::list<entities::object> dia_artefact_to_model_transform::
 obtain_objects(const dogen::dia::entities::diagram& d) {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
@@ -80,14 +94,14 @@ obtain_objects(const dogen::dia::entities::diagram& d) {
     auto r(helpers::dia_to_codec_projector::project(d));
 
     /*
+     * Sanity check the processed objects to make sure they are valid.
+     */
+    validate(r);
+
+    /*
      * Remove all the non-relevant process objects.
      */
     boost::range::remove_erase_if(r, is_not_relevant);
-
-    /*
-     * Sanity check the processed objects to make sure they are valid.
-     */
-    validator::validate(r);
 
     BOOST_LOG_SEV(lg, debug) << "Converted diagram into processed objects.";
     return r;

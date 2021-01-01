@@ -107,6 +107,11 @@ namespace dogen::codec::transforms {
 class dia_artefact_to_model_transform final {
 private:
     /**
+     * @brief Validates objects.
+     */
+    static void validate(const std::list<entities::object>& os);
+
+    /**
      * @brief Returns true if the object is not relevant for the
      * current processing.
      */
