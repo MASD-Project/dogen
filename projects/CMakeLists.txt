@@ -302,6 +302,8 @@ list(APPEND DOGEN_REFERENCE_OPTIONS
 list(APPEND DOGEN_REFERENCE_OPTIONS
     --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS
+    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.org/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS
     --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.models/org)
 
 get_directory_property(dirs INCLUDE_DIRECTORIES)
