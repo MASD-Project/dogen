@@ -566,6 +566,16 @@ Contents of the artefact.
   :PROPERTIES:
   :custom_id: O17
   :END:
+** building error                                                   :element:
+   :PROPERTIES:
+   :custom_id: 294afe4c-b817-4316-bd60-fda64f9e3a9f
+   :masd.codec.stereotypes: masd::exception
+   :END:
+** builder                                                          :element:
+   :PROPERTIES:
+   :custom_id: 8ef3c0ed-80c8-4feb-a770-2473a2e8d955
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 ** visitor                                                          :element:
    :PROPERTIES:
    :custom_id: 58fb9de7-c08a-40fd-b469-7217bd0c8a55
