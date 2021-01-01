@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <unordered_set>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -40,10 +41,24 @@ const std::string no_dirs("No directories supplied.");
 
 namespace dogen::codec::helpers {
 
+const std::list<boost::filesystem::path>
+references_resolver::deduplicate_directories(
+    const std::list<boost::filesystem::path> directories) {
+    std::unordered_set<std::string> unique;
+    for (const auto& d : directories)
+        unique.insert(d.generic_string());
+
+    std::list<boost::filesystem::path> r;
+    for( const auto& s : unique)
+        r.push_back(boost::filesystem::path(s));
+    return r;
+}
+
 references_resolver::references_resolver(
         const std::list<std::string>& extensions,
         const std::list<boost::filesystem::path>& directories)
-    : extensions_(extensions), directories_(directories) {
+    : extensions_(extensions),
+      directories_(deduplicate_directories(directories)) {
 
     if (extensions_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_extensions;
@@ -55,6 +70,7 @@ references_resolver::references_resolver(
         BOOST_LOG_SEV(lg, error) << no_dirs;
         BOOST_THROW_EXCEPTION(reference_resolution_exception(no_dirs));
     }
+
     BOOST_LOG_SEV(lg, debug) << "Directories: " << directories_;
 }
 

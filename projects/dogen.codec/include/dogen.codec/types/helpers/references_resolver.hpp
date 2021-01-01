@@ -31,7 +31,17 @@
 
 namespace dogen::codec::helpers {
 
+/**
+ * @brief Resolves a set of references to concrete paths to models.
+ */
 class references_resolver final {
+private:
+    /**
+     * @brief Removes any duplicates that may exist in the list of directories.
+     */
+    const std::list<boost::filesystem::path> deduplicate_directories(
+        const std::list<boost::filesystem::path> directories);
+
 public:
     references_resolver(
         const std::list<std::string>& extensions,
