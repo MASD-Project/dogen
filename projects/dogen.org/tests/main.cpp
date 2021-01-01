@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE dogen.templating.tests
+#define BOOST_TEST_MODULE dogen.org.tests
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
