@@ -46,7 +46,7 @@ if (DOGEN_CLI_EXECUTABLE)
     # Input models for generation
     #
     set(prefix "dogen")
-    set(models ${prefix})
+    set(models "")
     set(models ${models} ${prefix}.physical)
     set(models ${models} ${prefix}.cli)
     set(models ${models} ${prefix}.dia)

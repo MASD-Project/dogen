@@ -31,7 +31,7 @@ if (DOGEN_CLI_EXECUTABLE)
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                 COMMAND ${DOGEN_CLI_EXECUTABLE} generate
                 --target ${target_path} ${DOGEN_COMMON_OPTIONS}
-                ${DOGEN_GENERATION_OPTIONS})
+                ${DOGEN_GENERATION_OPTIONS} ${DOGEN_REFERENCE_OPTIONS})
             add_dependencies(generate_all_${frontend} generate_${target_ext})
 
             if (WITH_BENCHMARKS)

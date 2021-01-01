@@ -42,6 +42,8 @@ const std::string output_dir("dogen.code_generation_test_output");
 
 const std::string models_org_dir("dogen.models/org");
 
+const std::string path_dogen("dogen");
+
 const std::string path_dogen_org("dogen.org");
 const std::string path_dogen_physical_org("dogen.physical.org");
 const std::string path_dogen_cli_org("dogen.cli.org");
@@ -83,6 +85,11 @@ void dogen_product::initialize() {
         BOOST_THROW_EXCEPTION(
             test_data_exception(project_dir_not_found + proj_dir_env));
     }
+
+    reference_directories_.
+        push_back(project_directory_ / path_dogen / "modeling");
+    reference_directories_.
+        push_back(project_directory_ / "dogen.models" / "org");
 
     org_models_directory_ = project_directory_ / models_org_dir;
 
@@ -136,7 +143,8 @@ dogen_product::reference_directories() {
  */
 path dogen_product::input_dogen_org() {
     ensure_initialized();
-    return org_models_directory_ / path_dogen_org;
+    const std::string fn(path_dogen + ".org");
+    return project_directory_ / path_dogen / "modeling" / fn;
 }
 
 path dogen_product::input_dogen_physical_org() {
