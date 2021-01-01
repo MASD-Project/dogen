@@ -27,7 +27,7 @@
 
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen.codec/types/helpers/grapher.hpp"
-#include "dogen.codec.dia/types/builder.hpp"
+#include "dogen.codec/types/helpers/builder.hpp"
 
 namespace dogen::codec::helpers {
 
@@ -39,7 +39,7 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    explicit visitor(codec::dia::builder& b) : builder_(b) {}
+    explicit visitor(builder& b) : builder_(b) {}
 
 public:
     template<typename Vertex, typename Graph>
@@ -50,7 +50,7 @@ public:
     }
 
 private:
-    codec::dia::builder& builder_;
+    builder& builder_;
 };
 
 }

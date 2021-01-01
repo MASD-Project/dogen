@@ -30,7 +30,7 @@
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
-#include "dogen.codec.dia/types/builder.hpp"
+#include "dogen.codec/types/helpers/builder.hpp"
 #include "dogen.codec/types/helpers/visitor.hpp"
 #include "dogen.codec/types/helpers/grapher.hpp"
 #include "dogen.codec/types/entities/comment.hpp"
@@ -58,8 +58,6 @@ const std::string no_uml_type("No UML type.");
 }
 
 namespace dogen::codec::transforms {
-
-using namespace dogen::codec::dia;
 
 bool dia_artefact_to_model_transform::
 is_not_relevant(const entities::object& po) {
@@ -123,7 +121,7 @@ obtain_model(const std::string& name, const std::list<entities::object>& os) {
      * Go through the dependency graph and build a codec model from
      * it.
      */
-    builder b(g.parent_id_to_child_ids());
+    helpers::builder b(g.parent_id_to_child_ids());
     helpers::visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(b.build());
