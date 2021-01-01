@@ -95,7 +95,6 @@ model_set_production_chain::apply(const context& ctx,
     /*
      * Create the references resolver.
      */
-    // FIXME: waiting for codec meta-model support.
     const auto exts(std::list<std::string> { ".json", ".dia", ".org" });
     const auto dirs(obtain_directory_list(ctx, p));
     helpers::references_resolver res(exts, dirs);
