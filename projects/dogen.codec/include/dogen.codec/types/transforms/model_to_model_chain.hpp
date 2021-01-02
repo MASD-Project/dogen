@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include <utility>
-#include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.codec/types/transforms/context_fwd.hpp"
 

@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen.codec/types/entities/artefact.hpp"
+#include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Converts an external model of a given type into another
+ * external model of another type and writes it to the filesystem.
+ */
 class artefact_to_artefact_chain final {
 public:
-    artefact_to_artefact_chain() = default;
-    artefact_to_artefact_chain(const artefact_to_artefact_chain&) = default;
-    artefact_to_artefact_chain(artefact_to_artefact_chain&&) = default;
-    ~artefact_to_artefact_chain() = default;
-    artefact_to_artefact_chain& operator=(const artefact_to_artefact_chain&) = default;
-
-public:
-    bool operator==(const artefact_to_artefact_chain& rhs) const;
-    bool operator!=(const artefact_to_artefact_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::artefact apply(const transforms::context& ctx,
+        const entities::artefact& input,
+        const boost::filesystem::path& output_path);
 };
 
 }

@@ -30,7 +30,7 @@
 #include "dogen.codec/types/transforms/model_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/documentation_trimming_transform.hpp"
-#include <boost/test/tree/test_unit.hpp>
+#include "dogen.codec/types/transforms/file_to_file_chain.hpp"
 
 namespace {
 
@@ -38,8 +38,6 @@ const std::string transform_id("codec.transforms.model_to_model_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
-
-const std::string transform_not_supported("Cannot transform into: ");
 
 }
 
@@ -49,35 +47,10 @@ using boost::filesystem::path;
 
 void model_to_model_chain::apply(const transforms::context& ctx,
     const path& src, const path& dst) {
-    tracing::scoped_chain_tracer stp(lg, "model to model chain",
+    tracing::scoped_chain_tracer stp(lg, "model to model",
         transform_id, *ctx.tracer());
 
-    /*
-     * Convert the source path into an artefact. Note that we infer
-     * the codec to use from the supplied path.
-     */
-    const auto src_a(file_to_artefact_transform::apply(ctx, src));
-
-    /*
-     * Convert the source artefact into a model.
-     */
-    auto src_m(artefact_to_model_chain::apply(ctx, src_a));
-
-    /*
-     * Trim all the unnecessary whitespace.
-     */
-    documentation_trimming_transform::apply(ctx, src_m);
-
-    /*
-     * Convert the source model into the destination model. Note that
-     * we infer the codec to use from the requested path.
-     */
-    const auto dst_a(model_to_artefact_chain::apply(ctx, dst, src_m));
-
-    /*
-     * Write the destination artefact into a file.
-     */
-    artefact_to_file_transform::apply(ctx, dst_a);
+    file_to_file_chain::apply(ctx, src, dst);
 }
 
 }

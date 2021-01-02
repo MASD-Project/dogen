@@ -18,12 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
+#include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
+#include "dogen.codec/types/transforms/artefact_to_file_transform.hpp"
+#include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_file_chain.hpp"
+
+namespace {
+
+const std::string transform_id("codec.transforms.file_to_file_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::codec::transforms {
 
-bool file_to_file_chain::operator==(const file_to_file_chain& /*rhs*/) const {
-    return true;
+using boost::filesystem::path;
+
+void file_to_file_chain::apply(const transforms::context& ctx,
+    const path& src, const path& dst) {
+    tracing::scoped_chain_tracer stp(lg, "model to model",
+        transform_id, *ctx.tracer());
+
+    /*
+     * Convert the source path into an artefact. Note that we infer
+     * the codec to use from the supplied path.
+     */
+    const auto src_a(file_to_artefact_transform::apply(ctx, src));
+
+    /*
+     * Convert the source artefact to the destination artefact.
+     */
+    const auto dst_a(artefact_to_artefact_chain::apply(ctx, src_a, dst));
+
+    /*
+     * Write the destination artefact into a file.
+     */
+    artefact_to_file_transform::apply(ctx, dst_a);
+
+
 }
 
 }

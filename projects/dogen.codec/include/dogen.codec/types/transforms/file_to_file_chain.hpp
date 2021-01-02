@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Converts an external model of a given type into another
+ * external model of another type in the filesystem.
+ */
 class file_to_file_chain final {
 public:
-    file_to_file_chain() = default;
-    file_to_file_chain(const file_to_file_chain&) = default;
-    file_to_file_chain(file_to_file_chain&&) = default;
-    ~file_to_file_chain() = default;
-    file_to_file_chain& operator=(const file_to_file_chain&) = default;
-
-public:
-    bool operator==(const file_to_file_chain& rhs) const;
-    bool operator!=(const file_to_file_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const transforms::context& ctx,
+        const boost::filesystem::path& src_path,
+        const boost::filesystem::path& dst_path);
 };
 
 }
