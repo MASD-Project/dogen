@@ -132,34 +132,6 @@ have nothing to diff. Logs:
 We need to look at the actual files and report all of those that
 exist but have not match in the generated files collection.
 
-*** Analysis on org mode round-tripping                               :story:
-
-We should try to ensure that org mode documents round-trip. Some of the
-use cases:
-
-- we could inject the physical paths for each element after we done
-  the generation. This would make finding files very
-  easy. Alternatively, we could generate another org mode document for
-  this.
-- we could inject tests. These can be obtained via an LSP query (see
-  backlog).
-- we could create lists of generated and hand-crafted files and
-  elements. We could also inform the user about which elements are
-  only used by generated elements.
-- we could create lists in lisp that could be used for grepping.
-
-It is not clear if we need round tripping for all of these use cases,
-or if these are just different projections of the model. Round
-tripping does add a lot of complexity so we should take this into
-account.
-
-Notes:
-
-- a big advantage of round tripping is that every time we want to test
-  a new feature in org, we could just implement it in the codec and
-  then convert from org to org. This way we wouldn't need to go back
-  to the dia diagrams in frozen all the time.
-
 *** Generated CMakefiles do not take tests into account               :story:
 
 At present most models have:

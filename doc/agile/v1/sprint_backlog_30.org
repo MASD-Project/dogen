@@ -12,36 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-01 Fri 18:34]
+#+CAPTION: Clock summary at [2021-01-02 Sat 12:45]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *72:37* |       |       | 100.0 |
+| *Total time*                                        | *75:00* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 72:37   |       |       | 100.0 |
-| Active                                              |         | 72:37 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   8.4 |
+| Stories                                             | 75:00   |       |       | 100.0 |
+| Active                                              |         | 75:00 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   8.1 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.8 |
-| Sprint and product backlog grooming                 |         |       |  2:27 |   3.4 |
-| Solve emacs issues                                  |         |       |  2:48 |   3.9 |
-| Add support for reading org mode documents          |         |       | 19:46 |  27.2 |
+| Sprint and product backlog grooming                 |         |       |  2:33 |   3.4 |
+| Solve emacs issues                                  |         |       |  2:48 |   3.7 |
+| Add support for reading org mode documents          |         |       | 19:46 |  26.4 |
 | Remove leading and trailing new lines from comments |         |       |  1:03 |   1.4 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.7 |
-| Add org-mode codec for input                        |         |       |  8:56 |  12.3 |
-| Convert library models into org                     |         |       |  1:26 |   2.0 |
-| Convert reference models into org                   |         |       |  2:56 |   4.0 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.6 |
+| Add org-mode codec for input                        |         |       |  8:56 |  11.9 |
+| Convert library models into org                     |         |       |  1:26 |   1.9 |
+| Convert reference models into org                   |         |       |  2:56 |   3.9 |
 | Assorted improvements to org model                  |         |       |  0:37 |   0.8 |
-| Create a model to org transform                     |         |       |  3:57 |   5.4 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.8 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   2.7 |
-| Create a "frozen" project                           |         |       |  1:49 |   2.5 |
+| Create a model to org transform                     |         |       |  3:57 |   5.3 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.7 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   2.6 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.4 |
 | Add tags to org model                               |         |       |  1:15 |   1.7 |
-| Inject custom IDs into org documents                |         |       |  0:38 |   0.9 |
+| Inject custom IDs into org documents                |         |       |  0:38 |   0.8 |
 | Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.2 |
-| Add PlantUML markup language support                |         |       |  5:29 |   7.6 |
-| Merge dia codec model into main codec model         |         |       |  3:04 |   4.2 |
-| Add include directories to models                   |         |       |  3:31 |   4.8 |
-| Add comments to PlantUML diagrams                   |         |       |  0:12 |   0.3 |
+| Add PlantUML markup language support                |         |       |  5:29 |   7.3 |
+| Merge dia codec model into main codec model         |         |       |  3:04 |   4.1 |
+| Add include directories to models                   |         |       |  3:31 |   4.7 |
+| Move documentation transform to codec model         |         |       |  1:36 |   2.1 |
+| Analysis on org mode round-tripping                 |         |       |  0:32 |   0.7 |
+| Add comments to PlantUML diagrams                   |         |       |  0:15 |   0.3 |
+| Consider replacing properties drawer with tables    |         |       |  0:06 |   0.1 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -297,6 +300,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2021-01-02 Sat 10:20]--[2021-01-02 Sat 10:26] =>  0:06
     CLOCK: [2021-01-01 Fri 18:17]--[2021-01-01 Fri 18:21] =>  0:04
     CLOCK: [2021-01-01 Fri 18:13]--[2021-01-01 Fri 18:16] =>  0:03
     CLOCK: [2021-01-01 Fri 18:09]--[2021-01-01 Fri 18:12] =>  0:03
@@ -1082,14 +1086,118 @@ Notes:
   not clear how we would solve this problem; it may need to wait until
   we support the =model= element.
 
+*** COMPLETED Move documentation transform to codec model             :story:
+    CLOSED: [2021-01-02 Sat 12:43]
+    :LOGBOOK:
+    CLOCK: [2021-01-02 Sat 10:46]--[2021-01-02 Sat 12:22] =>  1:36
+    :END:
+
+We initially added the documentation transform to the logical model,
+but there is no particular reason for that. In addition, we already
+have multiple types, making the transform much more complicated. Try
+instead to perform the trimming in the codec model. Also, name the
+transform more appropriately.
+
+*** COMPLETED Analysis on org mode round-tripping                     :story:
+    CLOSED: [2021-01-02 Sat 12:43]
+    :LOGBOOK:
+    CLOCK: [2021-01-02 Sat 12:23]--[2021-01-02 Sat 12:43] =>  0:20
+    CLOCK: [2021-01-02 Sat 10:33]--[2021-01-02 Sat 10:45] =>  0:12
+    :END:
+
+We should try to ensure that org mode documents round-trip. Some of the
+use cases:
+
+- we could inject the physical paths for each element after we done
+  the generation. This would make finding files very
+  easy. Alternatively, we could generate another org mode document for
+  this.
+- we could inject tests. These can be obtained via an LSP query (see
+  backlog).
+- we could create lists of generated and hand-crafted files and
+  elements. We could also inform the user about which elements are
+  only used by generated elements.
+- we could create lists in lisp that could be used for grepping.
+
+It is not clear if we need round tripping for all of these use cases,
+or if these are just different projections of the model. Round
+tripping does add a lot of complexity so we should take this into
+account.
+
+Notes:
+
+- a big advantage of round tripping is that every time we want to test
+  a new feature in org, we could just implement it in the codec and
+  then convert from org to org. This way we wouldn't need to go back
+  to the dia diagrams in frozen all the time.
+
 *** STARTED Add comments to PlantUML diagrams                         :story:
     :LOGBOOK:
-    CLOCK: [2021-01-01 Fri 18:33]
+    CLOCK: [2021-01-01 Fri 18:33]--[2021-01-01 Fri 18:36] =>  0:03
     CLOCK: [2021-01-01 Fri 18:21]--[2021-01-01 Fri 18:33] =>  0:12
     :END:
 
 It would be nice to be able to output element commentary on the UML
 diagram.
+
+*** STARTED Consider replacing properties drawer with tables          :story:
+    :LOGBOOK:
+    CLOCK: [2021-01-02 Sat 10:27]--[2021-01-02 Sat 10:33] =>  0:06
+    :END:
+
+We originally decided to use an org properties drawer because it
+seemed like the more "native" way of expressing meta data. However it
+does have some downsides:
+
+- drawers are not naturally rendered into HTML or latex.
+
+An alternative would be to make these tables:
+
+#+begin_dogen
+| Key                              | Value                               |
+|----------------------------------+-------------------------------------|
+| masd.codec.dia.comment           | true                                |
+| masd.codec.model_modules         | dogen                               |
+| masd.codec.input_technical_space | cpp                                 |
+| masd.codec.reference             | cpp.builtins                        |
+| masd.codec.reference             | cpp.std                             |
+| masd.codec.reference             | cpp.boost                           |
+| masd.codec.reference             | masd                                |
+| masd.codec.reference             | masd.variability                    |
+| masd.codec.reference             | dogen.profiles                      |
+| masd.variability.profile         | dogen.profiles.base.default_profile |
+#+end_dogen
+
+The table would be fairly easy to parse - more or less just a pipe
+separated input, with trimming. We should try to generate these and
+see if its an improvement. Here we create a greater block =dogen=
+which could easily be intercepted in parsing. We could probably have a
+better name:
+
+- dogen variability?
+
+Note also that we have a lot of duplication (e.g. =reference=). There
+may be a more appropriate org mode structure for this. For example, a
+list:
+
+#+begin_dogen
+- masd.codec.dia.comment: true
+- masd.codec.model_modules: dogen
+- masd.codec.input_technical_space: cpp
+- masd.codec.reference: cpp.builtins, cpp.std, cpp.boost, masd,
+  masd.variability, dogen.profiles                      |
+- masd.variability.profile: dogen.profiles.base.default_profile
+#+end_dogen
+
+Notes:
+
+- custom id can remain as a property.
+
+*** Add model name as title in PlantUML diagram                       :story:
+
+At present its not possible to know the name of the model by looking
+at the SVG. We should have a comment with the title. It could be added
+to the existing model level comment with documentation.
 
 *** Create a "manual tests" stereotype with profiles                  :story:
 
@@ -1262,56 +1370,6 @@ exporting into PlantUML.
   have support for diffing on conversion, which we may not yet
   have. Also the existing tests do not take into account the action.
 - add plantuml representations to reference models.
-
-*** Consider replacing properties drawer with tables                  :story:
-
-We originally decided to use an org properties drawer because it
-seemed like the more "native" way of expressing meta data. However it
-does have some downsides:
-
-- drawers are not naturally rendered into HTML or latex.
-
-An alternative would be to make these tables:
-
-#+begin_dogen
-| Key                              | Value                               |
-|----------------------------------+-------------------------------------|
-| masd.codec.dia.comment           | true                                |
-| masd.codec.model_modules         | dogen                               |
-| masd.codec.input_technical_space | cpp                                 |
-| masd.codec.reference             | cpp.builtins                        |
-| masd.codec.reference             | cpp.std                             |
-| masd.codec.reference             | cpp.boost                           |
-| masd.codec.reference             | masd                                |
-| masd.codec.reference             | masd.variability                    |
-| masd.codec.reference             | dogen.profiles                      |
-| masd.variability.profile         | dogen.profiles.base.default_profile |
-#+end_dogen
-
-The table would be fairly easy to parse - more or less just a pipe
-separated input, with trimming. We should try to generate these and
-see if its an improvement. Here we create a greater block =dogen=
-which could easily be intercepted in parsing. We could probably have a
-better name:
-
-- dogen variability?
-
-Note also that we have a lot of duplication (e.g. =reference=). There
-may be a more appropriate org mode structure for this. For example, a
-list:
-
-#+begin_dogen
-- masd.codec.dia.comment: true
-- masd.codec.model_modules: dogen
-- masd.codec.input_technical_space: cpp
-- masd.codec.reference: cpp.builtins, cpp.std, cpp.boost, masd,
-  masd.variability, dogen.profiles                      |
-- masd.variability.profile: dogen.profiles.base.default_profile
-#+end_dogen
-
-Notes:
-
-- custom id can remain as a property.
 
 *** Deprecate managed directories                                     :story:
 
