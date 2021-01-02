@@ -21,28 +21,51 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_DOCUMENTATION_TRIMMING_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_DOCUMENTATION_TRIMMING_TRANSFORM_HPP
 
+#include "dogen.codec/types/entities/comment.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <sstream>
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.codec/types/entities/model.hpp"
+#include "dogen.codec/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/features/meta_data.hpp"
+#include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
 
+/**
+ * @brief Removes any leading and trailing whitespace from all the
+ * documentation.
+ */
 class documentation_trimming_transform final {
-public:
-    documentation_trimming_transform() = default;
-    documentation_trimming_transform(const documentation_trimming_transform&) = default;
-    documentation_trimming_transform(documentation_trimming_transform&&) = default;
-    ~documentation_trimming_transform() = default;
-    documentation_trimming_transform& operator=(const documentation_trimming_transform&) = default;
+private:
+    /**
+     * @brief Performs a left and right trim of the string.
+     */
+    static void trim(std::string& s);
+
+    /**
+     * @brief Trims the comment.
+     */
+    static void trim(entities::comment& c,
+        const bool add_trailing_new_line = false);
+
+    /**
+     * @brief Returns true if the element has a stereotype of
+     * generation marker.
+     */
+    static bool is_generation_marker(const entities::element& e);
+
+    /**
+     * @brief Process the supplied element.
+     */
+    static void process_element(entities::element& e);
 
 public:
-    bool operator==(const documentation_trimming_transform& rhs) const;
-    bool operator!=(const documentation_trimming_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
