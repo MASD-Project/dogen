@@ -497,6 +497,10 @@ if (DOGEN_CLI_EXECUTABLE)
     add_custom_target(cap)
     add_dependencies(cap convert_all_plantuml)
 
+    add_custom_target(convert_all_org)
+    add_custom_target(cao)
+    add_dependencies(cao convert_all_org)
+
     if (WITH_PLANTUML)
         add_custom_target(generate_all_plantuml)
         add_custom_target(gap)
