@@ -71,9 +71,140 @@ using identification::entities::tagged_value;
 using identification::entities::stereotype;
 using org::entities::block_type;
 
-org::entities::drawer_content
-model_to_org_artefact_transform::to_drawer_content(
-    const std::string& key, const std::string& value) {
+void model_to_org_artefact_transform::add_kvp(const std::string& key,
+    const std::string& value, key_value_pairs& kvps) {
+
+    std::pair<std::string, std::string> pair;
+    pair.first = key;
+    if (kvps.max_key < pair.first.size())
+        kvps.max_key = pair.first.size();
+
+    pair.second = value;
+    if (kvps.max_key < pair.second.size())
+        kvps.max_key = pair.second.size();
+
+    kvps.contents.push_back(pair);
+}
+
+void model_to_org_artefact_transform::
+add_kvp(const std::list<identification::entities::stereotype>& sts,
+    key_value_pairs& kvps) {
+
+    BOOST_LOG_SEV(lg, debug) << "Adding stereotypes to property drawer.";
+    if (sts.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
+        return;
+    }
+
+    std::ostringstream os;
+    bool is_first(true);
+    for (const auto& st : sts) {
+        if (!is_first)
+            os << ", ";
+        os << st.value();
+        is_first = false;
+    }
+
+    add_kvp("masd.codec.stereotypes", os.str(), kvps);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished adding stereotypes to drawer.";
+}
+
+void model_to_org_artefact_transform::
+add_kvp(const std::list<std::string>& parents, key_value_pairs& kvps) {
+    BOOST_LOG_SEV(lg, debug) << "Adding parents to property drawer.";
+
+    if (parents.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No parents found.";
+        return;
+    }
+
+    std::ostringstream os;
+    bool is_first(true);
+    for (const auto& p : parents) {
+        if (!is_first)
+            os << ", ";
+        os << p;
+        is_first = false;
+    }
+
+    add_kvp("masd.codec.parent", os.str(), kvps);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished adding parents to drawer.";
+}
+
+void model_to_org_artefact_transform::add_kvp(const entities::element& e,
+    key_value_pairs& kvps) {
+    BOOST_LOG_SEV(lg, debug) << "Adding element properties to property drawer.";
+
+    /*
+     * Don't bother outputting any of these flags if they are false.
+     */
+    if (e.can_be_primitive_underlier()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << primitive_underlier;
+        add_kvp(primitive_underlier, "true", kvps);
+    }
+
+    if (e.in_global_module()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << global_module;
+        add_kvp(global_module, "true", kvps);
+    }
+
+    if (e.can_be_enumeration_underlier()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << enumeration_underlier;
+        add_kvp(enumeration_underlier, "true", kvps);
+    }
+
+    if (e.is_default_enumeration_type()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << default_enumeration_type;
+        add_kvp(default_enumeration_type, "true", kvps);
+    }
+
+    if (e.is_associative_container()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << associative_container;
+        add_kvp(associative_container, "true", kvps);
+    }
+
+    if (e.is_floating_point()) {
+        BOOST_LOG_SEV(lg, debug) << "Added " << floating_point;
+        add_kvp(floating_point, "true", kvps);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished adding element properties to drawer.";
+
+}
+
+void model_to_org_artefact_transform::
+add_kvp(const std::list<identification::entities::tagged_value>& tvs,
+    key_value_pairs& kvps) {
+    BOOST_LOG_SEV(lg, debug) << "Adding tagged values to property drawer.";
+
+    if (tvs.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No tagged values to add.";
+        return;
+    }
+
+    for (const auto& tv : tvs)
+        add_kvp(tv.tag(), tv.value(), kvps);
+
+    BOOST_LOG_SEV(lg, debug) << "Added tagged values to property drawer.";
+}
+
+org::entities::drawer model_to_org_artefact_transform::
+to_property_drawer(const key_value_pairs& kvps) {
+    org::entities::drawer r;
+    r.type(org::entities::drawer_type::property_drawer);
+    for (const auto& pair : kvps.contents) {
+        org::entities::drawer_content dc;
+        dc.key(pair.first);
+        dc.value(pair.second);
+        r.contents().push_back(dc);
+    }
+    return r;
+}
+
+org::entities::drawer_content model_to_org_artefact_transform::
+to_drawer_content(const std::string& key, const std::string& value) {
     BOOST_LOG_SEV(lg, debug) << "Creating drawer content. Key '" << key
                              << "' value: '" << value << "'";
 

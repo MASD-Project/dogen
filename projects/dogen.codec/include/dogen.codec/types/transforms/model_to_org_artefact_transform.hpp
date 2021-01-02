@@ -49,6 +49,38 @@ namespace dogen::codec::transforms {
  */
 class model_to_org_artefact_transform final {
 private:
+    struct key_value_pairs {
+        std::size_t max_key;
+        std::size_t max_value;
+        std::list<std::pair<std::string, std::string>> contents;
+        key_value_pairs() : max_key(), max_value() {}
+    };
+
+    /**
+     * @brief Adds key value pairs to the KVP collection.
+     */
+    /**@{*/
+    static void add_kvp(const std::string& key, const std::string& value,
+        key_value_pairs& kvps);
+    static void add_kvp(
+        const std::list<identification::entities::stereotype>& sts,
+        key_value_pairs& kvps);
+    static void add_kvp(const std::list<std::string>& parents,
+        key_value_pairs& kvps);
+    static void add_kvp(const entities::element& e,
+        key_value_pairs& kvps);
+    static void add_kvp(
+        const std::list<identification::entities::tagged_value>& tvs,
+        key_value_pairs& kvps);
+    /**@}*/
+
+    /**
+     * @brief Converts the KVPs to a property drawer.
+     */
+    static org::entities::drawer
+    to_property_drawer(const key_value_pairs& kvps);
+
+private:
     /**
      * @brief Creates a KVP content for a drawer based on supplied
      * inputs.
