@@ -27,6 +27,9 @@
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen/types/mock_configuration_factory.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
+#include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
+#include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
+#include "dogen.utility/types/string/differ.hpp"
 #include "dogen.orchestration/tests/model_generator.hpp"
 
 namespace  {
@@ -34,6 +37,7 @@ namespace  {
 const std::string test_module("dogen.orchestration.tests");
 const std::string test_suite("physical_model_production_chain_tests");
 
+const std::string conversion_activity("model_to_model");
 const std::string run_activity("physical_production");
 const std::string unexpected_ignore_fn("unexpected_ignore.hpp");
 const std::string expected_ignore_fn("expected_ignore.hpp");
@@ -133,13 +137,44 @@ apply_physical_model_production(const boost::filesystem::path& target,
         enable_diffing_locally);
 }
 
-/**
- * @brief Checks to see if the model contains any artefacts which are
- * different from the files in the filesystem.
- *
- * @note We're using std::cout here by design as we always want the
- * output to show up in CDash.
- */
+std::string model_generator::
+apply_artefact_to_artefact_chain(const boost::filesystem::path& src,
+    const bool enable_tracing_locally, const bool enable_reporting_locally,
+    const bool enable_diffing_locally) {
+
+    /*
+     * Create the configuration.
+     */
+    const bool et(enable_tracing_globally || enable_tracing_locally);
+    const bool er(enable_reporting_globally || enable_reporting_locally);
+    const bool ed(enable_diffing_globally || enable_diffing_locally);
+    using dogen::mock_configuration_factory;
+    mock_configuration_factory f(et, er, ed);
+    const auto cfg(f.make(src, run_activity));
+
+    /*
+     * Bootstrap the top-level context.
+     */
+    using namespace dogen::orchestration::transforms;
+    using cbc = context_bootstrapping_chain;
+    const auto ctx(cbc::bootstrap_codec_context(cfg, conversion_activity));
+
+    using codec::transforms::file_to_artefact_transform;
+    const auto src_a(file_to_artefact_transform::apply(ctx, src));
+
+    using codec::transforms::artefact_to_artefact_chain;
+    const auto dst_a(artefact_to_artefact_chain::apply(ctx, src_a, src));
+
+    using dogen::utility::string::differ;
+    const auto r(differ::diff(src_a.content(), dst_a.content()));
+    if (!r.empty()) {
+        std::cout << "Conversion generated differences: "
+                  << src.generic_path() << std::endl
+                  << r << std::endl;
+    }
+    return r;
+}
+
 bool model_generator::check_for_differences(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
