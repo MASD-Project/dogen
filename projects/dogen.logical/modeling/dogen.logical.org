@@ -4570,8 +4570,6 @@ Which family of helpers to use for this modeling element.
 
 Features related to the helpers in physical domain.
 
-
-
 *** family                                                        :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
@@ -4666,3 +4664,4 @@ Contains formatting classes for the logical model.
    :END:
 
 An error has occurred while formatting.
+

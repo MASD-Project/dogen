@@ -10216,8 +10216,6 @@ populate(const unsigned int position, result_type& v) {
 M2T transforms that generate tests for
 generated code, in the C++ technical space.
 
-
-
 **** initializer                                                    :element:
      :PROPERTIES:
      :custom_id: O104
@@ -14649,8 +14647,6 @@ using System.Collections.Generic;
 
 M2T transforms for the visual studio
 facet of the C# technical space.
-
-
 
 **** initializer                                                    :element:
      :PROPERTIES:

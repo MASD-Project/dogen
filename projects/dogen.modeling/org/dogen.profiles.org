@@ -30,8 +30,6 @@ The base layer profiles are designed to be applied first.
 Their objective is to set the initial state from which
 other layers can then configure features.
 
-
-
 ** decoration                                                       :element:
    :PROPERTIES:
    :custom_id: O4
@@ -174,7 +172,6 @@ Variability profile for a typical dogen model.
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile_template
    :END:
-
 
 Disables all facets in the C++ backend.
 
@@ -502,3 +499,5 @@ Element has forward declarations.
 ** message                                                        :attribute:
 
 These files are code-generated via overrides to test dogen. Do not commit them.
+
+
