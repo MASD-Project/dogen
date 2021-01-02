@@ -3402,11 +3402,6 @@ An error occurred whilst applying a transformation.
    :custom_id: O443
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-** documentation transform                                          :element:
-   :PROPERTIES:
-   :custom_id: O449
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: O64
@@ -4671,4 +4666,3 @@ Contains formatting classes for the logical model.
    :END:
 
 An error has occurred while formatting.
-
