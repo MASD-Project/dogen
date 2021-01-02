@@ -30,6 +30,17 @@ if (DOGEN_CLI_EXECUTABLE)
         ${DOGEN_GENERATION_OPTIONS} ${DOGEN_REFERENCE_OPTIONS})
     add_dependencies(generate_all_${frontend} generate_${target_ext})
 
+    set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}")
+    set(source ${output_dir}/${target}.org)
+    set(destination ${output_dir}/${target}.org)
+    add_custom_target(convert_${target_ext}_org
+        COMMENT "Converting ${target}.org to Org."
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_CLI_EXECUTABLE} convert
+        --source ${source} --destination ${destination}
+        ${DOGEN_COMMON_OPTIONS})
+    add_dependencies(convert_all_org convert_${target_ext}_org)
+
     if (WITH_BENCHMARKS)
         add_custom_target(benchmark_generate_${target_ext}
             COMMENT "Benchmarking generating ${target_ext} model" VERBATIM
