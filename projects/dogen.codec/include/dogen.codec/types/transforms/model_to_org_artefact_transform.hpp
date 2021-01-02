@@ -82,32 +82,6 @@ private:
 
 private:
     /**
-     * @brief Creates a KVP content for a drawer based on supplied
-     * inputs.
-     */
-    static org::entities::drawer_content to_drawer_content(
-        const std::string& key, const std::string& value);
-
-    /**
-     * @brief Converts different kinds of codec elements into the
-     * contents of a property drawer.
-     *
-     * @pre Drawer is already setup externally.
-     */
-    /**@{*/
-    static void add_to_property_drawer(
-        const std::list<identification::entities::stereotype>& sts,
-        org::entities::drawer& d);
-    static void add_to_property_drawer(const std::list<std::string>& parents,
-        org::entities::drawer& d);
-    static void add_to_property_drawer(const entities::element& e,
-        org::entities::drawer& d);
-    static void add_to_property_drawer(
-        const std::list<identification::entities::tagged_value>& tvs,
-        org::entities::drawer& d);
-    /**@}*/
-
-    /**
      * @brief Converts the identifier to a headline title.
      */
     static std::string identifier_to_headline_title(

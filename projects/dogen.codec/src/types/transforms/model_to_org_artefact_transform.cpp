@@ -203,128 +203,6 @@ to_property_drawer(const key_value_pairs& kvps) {
     return r;
 }
 
-org::entities::drawer_content model_to_org_artefact_transform::
-to_drawer_content(const std::string& key, const std::string& value) {
-    BOOST_LOG_SEV(lg, debug) << "Creating drawer content. Key '" << key
-                             << "' value: '" << value << "'";
-
-    org::entities::drawer_content r;
-    r.key(key);
-    r.value(value);
-    return r;
-}
-
-void model_to_org_artefact_transform::add_to_property_drawer(
-    const std::list<identification::entities::stereotype>& sts,
-    org::entities::drawer& d) {
-
-    BOOST_LOG_SEV(lg, debug) << "Adding stereotypes to property drawer.";
-    if (sts.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
-        return;
-    }
-
-    std::ostringstream os;
-    bool is_first(true);
-    for (const auto& st : sts) {
-        if (!is_first)
-            os << ", ";
-        os << st.value();
-        is_first = false;
-    }
-
-    const auto dc(to_drawer_content("masd.codec.stereotypes", os.str()));
-    d.contents().push_back(dc);
-    BOOST_LOG_SEV(lg, debug) << "Finished adding stereotypes to drawer.";
-}
-
-void model_to_org_artefact_transform::add_to_property_drawer(
-    const std::list<std::string>& parents, org::entities::drawer& d) {
-    BOOST_LOG_SEV(lg, debug) << "Adding parents to property drawer.";
-
-    if (parents.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No parents found.";
-        return;
-    }
-
-    std::ostringstream os;
-    bool is_first(true);
-    for (const auto& p : parents) {
-        if (!is_first)
-            os << ", ";
-        os << p;
-        is_first = false;
-    }
-
-    const auto dc(to_drawer_content("masd.codec.parent", os.str()));
-    d.contents().push_back(dc);
-    BOOST_LOG_SEV(lg, debug) << "Finished adding parents to drawer.";
-}
-
-void model_to_org_artefact_transform::add_to_property_drawer(
-    const entities::element& e, org::entities::drawer& d) {
-    BOOST_LOG_SEV(lg, debug) << "Adding element properties to property drawer.";
-
-    /*
-     * Don't bother outputting any of these flags if they are false.
-     */
-    if (e.can_be_primitive_underlier()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << primitive_underlier;
-        const auto dc(to_drawer_content(primitive_underlier, "true"));
-        d.contents().push_back(dc);
-    }
-
-    if (e.in_global_module()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << global_module;
-        const auto dc(to_drawer_content(global_module, "true"));
-        d.contents().push_back(dc);
-    }
-
-    if (e.can_be_enumeration_underlier()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << enumeration_underlier;
-        const auto dc(to_drawer_content(enumeration_underlier, "true"));
-        d.contents().push_back(dc);
-    }
-
-    if (e.is_default_enumeration_type()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << default_enumeration_type;
-        const auto dc(to_drawer_content(default_enumeration_type, "true"));
-        d.contents().push_back(dc);
-    }
-
-    if (e.is_associative_container()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << associative_container;
-        const auto dc(to_drawer_content(associative_container, "true"));
-        d.contents().push_back(dc);
-    }
-
-    if (e.is_floating_point()) {
-        BOOST_LOG_SEV(lg, debug) << "Added " << floating_point;
-        const auto dc(to_drawer_content(floating_point, "true"));
-        d.contents().push_back(dc);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished adding element properties to drawer.";
-}
-
-void model_to_org_artefact_transform::add_to_property_drawer(
-    const std::list<identification::entities::tagged_value>& tvs,
-    org::entities::drawer& d) {
-    BOOST_LOG_SEV(lg, debug) << "Adding tagged values to property drawer.";
-
-    if (tvs.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No tagged values to add.";
-        return;
-    }
-
-    for (const auto& tv : tvs) {
-        const auto dc(to_drawer_content(tv.tag(), tv.value()));
-        d.contents().push_back(dc);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Added tagged values to property drawer.";
-}
-
 org::entities::tag
 model_to_org_artefact_transform::to_tag(const entities::element& e) {
     if (e.fallback_element_type() == module_element_type)
@@ -349,25 +227,22 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
     r.title(identifier_to_headline_title(attr.name().simple()));
     r.tags().push_back(org::entities::tag(attribute_tag));
 
-    org::entities::drawer d;
-    d.type(org::entities::drawer_type::property_drawer);
-
-    add_to_property_drawer(attr.tagged_values(), d);
+    key_value_pairs kvps;
+    add_kvp(attr.tagged_values(), kvps);
     if (!attr.type().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Adding type.";
-        const auto dc(to_drawer_content("masd.codec.type", attr.type()));
-        d.contents().push_back(dc);
+        add_kvp("masd.codec.type", attr.type(), kvps);
     }
 
     if (!attr.value().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Adding value.";
-        const auto dc(to_drawer_content("masd.codec.value", attr.value()));
-        d.contents().push_back(dc);
+        add_kvp("masd.codec.value", attr.value(), kvps);
     }
 
     /*
      * Only add the drawer if we have some content.
      */
+    const auto d(to_property_drawer(kvps));
     if (!d.contents().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Adding drawer.";
         r.drawers().push_back(d);
@@ -418,27 +293,26 @@ to_headline(const unsigned int level, const entities::element& e) {
      * Create a property drawer for the element.
      */
     BOOST_LOG_SEV(lg, debug) << "Creating drawer for element.";
-    org::entities::drawer d;
-    d.type(org::entities::drawer_type::property_drawer);
 
     /*
      * If we have a unique ID in the element, propagate it into org.
      */
+    key_value_pairs kvps;
     const auto id(e.provenance().codec_id().value());
     if (!id.empty()) {
         BOOST_LOG_SEV(lg, debug) << "Added ID: " << id;
-        const auto dc(to_drawer_content(custom_id, id));
-        d.contents().push_back(dc);
+        add_kvp(custom_id, id, kvps);
     }
 
     /*
      * Add all other properties to drawer.
      */
-    add_to_property_drawer(e.tagged_values(), d);
-    add_to_property_drawer(e.parents(), d);
-    add_to_property_drawer(e.stereotypes(), d);
-    add_to_property_drawer(e, d);
+    add_kvp(e.tagged_values(), kvps);
+    add_kvp(e.parents(), kvps);
+    add_kvp(e.stereotypes(), kvps);
+    add_kvp(e, kvps);
 
+    const auto d(to_property_drawer(kvps));
     if (!d.contents().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Drawer has contents.";
         r.drawers().push_back(d);
@@ -557,9 +431,9 @@ to_document(const codec::entities::model& m) {
     if (!tvs.empty()) {
         BOOST_LOG_SEV(lg, debug) << "Model has tagged values.";
 
-        org::entities::drawer d;
-        d.type(org::entities::drawer_type::property_drawer);
-        add_to_property_drawer(tvs, d);
+        key_value_pairs kvps;
+        add_kvp(tvs, kvps);
+        const auto d(to_property_drawer(kvps));
         r.drawers().push_back(d);
     }
 
