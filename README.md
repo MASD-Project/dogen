@@ -40,12 +40,13 @@ available to all.
 
 In lay terms, Dogen's objective is to automate the development process
 as much as possible: the user creates models in one of the supported
-frontend formats and respecting a set of predefined restrictions;
-Dogen then uses this input to generate a source code representation of
-the model. At present the main frontend is
-[Dia](https://en.wikipedia.org/wiki/Dia_(software)), but we also
-support [JSON](http://json.org/). Depending on use cases and user
-demand, other frontends may follow.
+codecs and respecting a set of predefined restrictions; Dogen then
+uses this input to generate a source code representation of the
+model. At present the main frontend is [Org
+Mode](https://orgmode.org/), though there is also support for
+[Dia](https://en.wikipedia.org/wiki/Dia_(software)) and
+[JSON](http://json.org/). Depending on use cases and user demand,
+other frontends may follow.
 
 The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
