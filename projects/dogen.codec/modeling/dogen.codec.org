@@ -65,6 +65,11 @@ codec.
    :custom_id: e248cd13-f34b-4232-801d-56f19f22c846
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** file to file chain                                               :element:
+   :PROPERTIES:
+   :custom_id: dd84b625-fdf9-4ae9-9920-1039a1dfd17f
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 ** context                                                          :element:
    :PROPERTIES:
    :custom_id: O13
