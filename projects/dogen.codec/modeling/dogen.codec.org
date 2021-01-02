@@ -60,6 +60,11 @@ codec.
    :custom_id: O3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** artefact to artefact chain                                       :element:
+   :PROPERTIES:
+   :custom_id: e248cd13-f34b-4232-801d-56f19f22c846
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 ** context                                                          :element:
    :PROPERTIES:
    :custom_id: O13
