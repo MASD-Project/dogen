@@ -1,13 +1,11 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-
 Welcome to Dogen!
 
 This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
-
 end note
 
 class one_property #F7E5FF {
@@ -15,9 +13,7 @@ class one_property #F7E5FF {
 }
 
 note top of  one_property
-
 Hello World class.
-
 end note
 
 @enduml

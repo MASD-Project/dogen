@@ -1,7 +1,6 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-
 The logcal model defines the core entities that live in the logical
 dimension of MASD's conceptual model.
 
@@ -31,7 +30,6 @@ together into a bigger model - called the @e merged model.
 @li to ensure the consistency of the merged model via validation
 rules (such as verifying that all types have a definitions,
 etc.).
-
 end note
 
 namespace entities #F2F2F2 {
@@ -46,9 +44,7 @@ namespace entities #F2F2F2 {
         }
 
 note top of  attribute
-
 Represents an attribute in an object.
-
 end note
 
         class Nameable <<masd::object_template>> #E3B6F6 {
@@ -56,9 +52,7 @@ end note
         }
 
 note top of  Nameable
-
 Ability to have a name.
-
 end note
 
         class Documentable <<masd::object_template>> #E3B6F6 {
@@ -66,9 +60,7 @@ end note
         }
 
 note top of  Documentable
-
 Ability to provide documentation.
-
 end note
 
         class Provenance <<masd::object_template>> #E3B6F6 {
@@ -76,9 +68,7 @@ end note
         }
 
 note top of  Provenance
-
 Details of the origin of this model element.
-
 end note
 
         class Containable <<masd::object_template>> #E3B6F6 {
@@ -87,9 +77,7 @@ end note
         }
 
 note top of  Containable
-
 The ability to be contained inside a module.
-
 end note
 
         class Stereotypable <<masd::object_template>> #E3B6F6 {
@@ -101,9 +89,7 @@ end note
         }
 
 note top of  MetaNameable
-
 Ability to have a meta-name.
-
 end note
 
         class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
@@ -115,9 +101,7 @@ end note
         }
 
 note top of  Configurable
-
 Ability to have meta-data associated.
-
 end note
 
         class Labelable <<masd::object_template>> #E3B6F6 {
@@ -125,9 +109,7 @@ end note
         }
 
 note top of  Labelable
-
 The ability to attach labels to an element.
-
 end note
 
         class Generatable <<masd::object_template>> #E3B6F6 {
@@ -148,13 +130,11 @@ entities::Configurable <|-- entities::Element
 entities::Labelable <|-- entities::Element
 entities::Generatable <|-- entities::Element
 note top of  Element
-
 A unit of coding that can be code generated.
 
 We define the Element object template purely to make our life easier
 when creating the element class. It is not required for any other
 purpose.
-
 end note
 
         class Stateful <<masd::object_template>> #E3B6F6 {
@@ -166,9 +146,7 @@ end note
         }
 
 note top of  Stateful
-
 Ability to have a state.
-
 end note
 
         class element <<masd::visitable, Element>> #F7E5FF {
@@ -177,13 +155,11 @@ end note
         }
 
 note top of  element
-
 Represents a generic logical construct.
 
 An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
 meta-types (object templates) and non-types (modules and backend specific entities).
-
 end note
 
         class model <<Nameable, MetaNameable, Provenance>> #F7E5FF {
@@ -212,9 +188,7 @@ end note
         }
 
 note top of  model
-
 Intermediate representation of a masd model.
-
 end note
 
         class elements_traversal <<dogen::handcrafted::typeable::header_only>> #FFFACD {
@@ -231,9 +205,7 @@ end note
         }
 
 note top of  Visitable
-
 The ability to handle visitation.
-
 end note
 
         class Associatable <<masd::object_template>> #E3B6F6 {
@@ -243,9 +215,7 @@ end note
         }
 
 note top of  Associatable
-
 The element has the ability to associate itself with other elements.
-
 end note
 
         class Generalizable <<masd::object_template>> #E3B6F6 {
@@ -263,9 +233,7 @@ end note
         }
 
 note top of  Generalizable
-
 The element has the ability to be part of a generalization relationship.
-
 end note
 
         class Relatable <<masd::object_template>> #E3B6F6 {
@@ -276,9 +244,7 @@ entities::Visitable <|-- entities::Relatable
 entities::Associatable <|-- entities::Relatable
 entities::Generalizable <|-- entities::Relatable
 note top of  Relatable
-
 Element has the ability to have relationships with other elements.
-
 end note
 
         class Parameterisable <<masd::object_template>> #E3B6F6 {
@@ -333,9 +299,7 @@ end note
         }
 
 note top of  static_stereotypes
-
 Lists all stereotypes defined in the masd UML profile.
-
 end note
 
         class input_model_set #F7E5FF {
@@ -345,9 +309,7 @@ end note
         }
 
 note top of  input_model_set
-
 Represents a set of related logical models used as an input to the logical model chains.
-
 end note
 
         class Container <<masd::object_template>> #E3B6F6 {
@@ -355,9 +317,7 @@ end note
         }
 
 note top of  Container
-
 Has the ability to contain other elements.
-
 end note
 
         namespace decoration #F2F2F2 {
@@ -367,9 +327,7 @@ end note
                 }
 
 note top of  licence
-
 Represents legal licence for software projects.
-
 end note
 
                 class modeline_group <<logical::meta_element, Container>> #F7E5FF {
@@ -377,12 +335,10 @@ end note
                 }
 
 note top of  modeline_group
-
 Group of modelines, logically associated.
 
 For example, one may choose to have a set of modelines for @e emacs , or for
 @e vi, etc.
-
 end note
 
                 class modeline <<logical::meta_element>> #F7E5FF {
@@ -393,7 +349,6 @@ end note
                 }
 
 note top of  modeline
-
 Groups all the fields representing editor variables for emacs, vi, etc.
 
 A field is a key-value pair (KVP), where name is the first element and its value
@@ -404,7 +359,6 @@ Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -
 In this particular case, both prefix and postfix are @e -*-; @e mode is the first
 field name and its value is @e c++; the KVP separator is @e : and the field
 separator is @e ;.
-
 end note
 
                 enum editor <<masd::enumeration, dogen::convertible>> #F2DAFD {
@@ -415,9 +369,7 @@ end note
                 }
 
 note top of  editor
-
 Supported editors for modelines.
-
 end note
 
                 class modeline_field #F7E5FF {
@@ -431,9 +383,7 @@ end note
                 }
 
 note top of  modeline_location
-
 Location in the file to place the modeline.
-
 end note
 
                 class generation_marker <<logical::meta_element>> #F7E5FF {
@@ -446,11 +396,9 @@ end note
                 }
 
 note top of  generation_marker
-
 Properties of the "generation marker" to add to generated files.
 
 These are also known as "location strings".
-
 end note
 
                 class element_properties #F7E5FF {
@@ -459,9 +407,7 @@ end note
                 }
 
 note top of  element_properties
-
 Decoration for this element.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -474,10 +420,8 @@ end note
         }
 
 note top of  decoration
-
 Houses all of the meta-modeling elements and
 properties related to decorations.
-
 end note
 
         class meta_element <<masd::variability::profile>> #DDECEC {
@@ -500,9 +444,7 @@ end note
                 }
 
 note top of  abstract_feature
-
 Contains all of the common attributes between features and feature templates.
-
 end note
 
                 class feature_template #F7E5FF {
@@ -511,11 +453,9 @@ end note
 
 entities::variability::abstract_feature <|-- entities::variability::feature_template
 note top of  feature_template
-
 Represents a feature template in variability space.
 
 Feature templates are expanded into features within the variability model.
-
 end note
 
                 class initializer <<logical::meta_element>> #F7E5FF {
@@ -524,9 +464,7 @@ end note
                 }
 
 note top of  initializer
-
 Responsible for initialising features and feature templates.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -546,7 +484,6 @@ end note
                 }
 
 note top of  abstract_bundle
-
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
@@ -559,7 +496,6 @@ Generated code comprises of two aspects:
 @li the registration of the feature template for the dynamic part of the processing;
 @li the generation of a static configuration class to  represent the feature once
  read out from the dynamic configuration - if requested.
-
 end note
 
                 class feature_bundle #F7E5FF {
@@ -568,7 +504,6 @@ end note
 
 entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
 note top of  feature_bundle
-
 A feature bundle represents an aggregation of features in a model.
 
 The features should be "semantically related", that is, belong to a related
@@ -582,7 +517,6 @@ Generated code comprises of two aspects:
  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
-
 end note
 
                 class feature #F7E5FF {
@@ -590,9 +524,7 @@ end note
 
 entities::variability::abstract_feature <|-- entities::variability::feature
 note top of  feature
-
 Represents a feature in variability space.
-
 end note
 
                 class feature_template_bundle #F7E5FF {
@@ -602,7 +534,6 @@ end note
 
 entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
 note top of  feature_template_bundle
-
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
@@ -617,7 +548,6 @@ Generated code comprises of two aspects:
  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
-
 end note
 
                 class abstract_profile <<logical::meta_element>> #F7E5FF {
@@ -638,9 +568,7 @@ entities::variability::abstract_profile <|-- entities::variability::profile_temp
 
 entities::variability::abstract_profile <|-- entities::variability::profile
 note top of  profile
-
 Represents a profile from the variability subsystem.
-
 end note
 
                 class abstract_profile_entry <<Documentable, Configurable, Nameable>> #F7E5FF {
@@ -666,7 +594,6 @@ entities::variability::abstract_profile_entry <|-- entities::variability::profil
         }
 
 note top of  variability
-
 Houses all of the meta-modeling elements related to variability.
 
 There are two "kinds" of entities in this namespace:
@@ -712,7 +639,6 @@ they already exist) so we need to disable feature registration. In the
 future we hope to simplify this by making the shapes align - though
 perhaps it will have the underisable side-effect of hiding all of this
 complexity.
-
 end note
 
         namespace orm #F2F2F2 {
@@ -758,9 +684,7 @@ end note
                 }
 
 note top of  Schemable
-
 Model element can belong to a relational database schema.
-
 end note
 
                 class Caseable <<masd::object_template>> #E3B6F6 {
@@ -768,9 +692,7 @@ end note
                 }
 
 note top of  Caseable
-
 The model element supports configuration related to casing.
-
 end note
 
                 class Mappeable <<masd::object_template>> #E3B6F6 {
@@ -839,10 +761,8 @@ entities::orm::OdbPragmable <|-- entities::orm::OrmElement
         }
 
 note top of  orm
-
 Houses all of the properties related to ORM
 support in Dogen.
-
 end note
 
         namespace structural #F2F2F2 {
@@ -852,9 +772,7 @@ end note
                 }
 
 note top of  object_template
-
 Represents a structural template for masd objects.
-
 end note
 
                 class object <<logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties>> #F7E5FF {
@@ -866,14 +784,12 @@ end note
                 }
 
 note top of  object
-
 Representation of the class notion in the OOP paradigm.
 
 The @e object is equivalent to a meta-class, but we decided against this
 name because all elements should also have the prefix meta - after all, logical
 is ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.
-
 end note
 
                 class builtin <<logical::meta_element>> #F7E5FF {
@@ -884,18 +800,14 @@ end note
                 }
 
 note top of  builtin
-
 Represents a value type that is built-in at the hardware level.
-
 end note
 
                 class exception <<logical::meta_element>> #F7E5FF {
                 }
 
 note top of  exception
-
 Represents an exception which can be thrown.
-
 end note
 
                 class visitor <<logical::meta_element>> #F7E5FF {
@@ -912,9 +824,7 @@ end note
                 }
 
 note top of  primitive
-
 Defines an element created by the user to wrap another element, most likely a built-in.
-
 end note
 
                 class module <<logical::meta_element, Container>> #F7E5FF {
@@ -924,11 +834,9 @@ end note
                 }
 
 note top of  module
-
 Container for other logical elements.
 
 Aggregates a group of logically related elements into a unit.
-
 end note
 
                 class enumeration <<logical::meta_element>> #F7E5FF {
@@ -940,10 +848,8 @@ end note
                 }
 
 note top of  enumeration
-
 Defines a bounded set of logically related values for a built-in type
 or a string.
-
 end note
 
                 class enumerator <<Documentable, Nameable, Configurable, Stereotypable>> #F7E5FF {
@@ -951,11 +857,9 @@ end note
                 }
 
 note top of  enumerator
-
 One of a set of valid values that an enumeration can assume.
 
 The enumerator defines an element in the domain of the enumeration.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -975,18 +879,14 @@ end note
                 }
 
 note top of  entry_point
-
 Represents an entry point to a binary.
-
 end note
 
                 class assistant <<logical::meta_element>> #F7E5FF {
                 }
 
 note top of  assistant
-
 General type to provide helpers.
-
 end note
 
                 class technical_space_properties #F7E5FF {
@@ -1003,10 +903,8 @@ end note
         }
 
 note top of  structural
-
 Houses all of the meta-modeling elements related
 to structural modeling.
-
 end note
 
         namespace mapping #F2F2F2 {
@@ -1015,13 +913,11 @@ end note
                 }
 
 note top of  extensible_mappable
-
 A mappable meta-model element for the general purpose of mapping.
 
 Mappables can be used to create a Platform Independent Model (PIM), which is then
 mapped to concrete types to form a Platform Specific Model (PSM). Users can
 extend the mappings as required.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -1039,20 +935,16 @@ end note
                 }
 
 note top of  fixed_mappable
-
 A mappable meta-model element for a special purpose.
 
 At present, the only fixed mappables used by Dogen are related to the mapping of
 variability types.
-
 end note
 
         }
 
 note top of  mapping
-
 Meta-model elements related to mapping domains.
-
 end note
 
         namespace templating #F2F2F2 {
@@ -1061,11 +953,9 @@ end note
                 }
 
 note top of  logic_less_template
-
 Represents a logic-less template.
 
 At present the system only supports wale templates.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -1075,9 +965,7 @@ end note
         }
 
 note top of  templating
-
 Meta-model elements related to templating .
-
 end note
 
         namespace serialization #F2F2F2 {
@@ -1087,7 +975,6 @@ end note
                 }
 
 note top of  type_registrar
-
 Responsible for registering types for serialisation purposes.
 
 Certain libraries in certain technical spaces - such as Boost Serialisation, in C++ -
@@ -1095,7 +982,6 @@ require types that are in an inheritance relationship to be made known to the
 serialisation infrastructure in order for the deserialisation of base and derived
 types to work. The type registrar is aware of all types with such requirements and
 generates the registration code as needed.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -1105,10 +991,8 @@ end note
         }
 
 note top of  serialization
-
 Houses all of the meta-modeling elements related
 to serialisation.
-
 end note
 
         namespace visual_studio #F2F2F2 {
@@ -1119,9 +1003,7 @@ end note
                 }
 
 note top of  project
-
 Represents a Visual Studio project.
-
 end note
 
                 class element_repository #F7E5FF {
@@ -1135,12 +1017,10 @@ end note
                 }
 
 note top of  item_group
-
 Represents an MSBuild ItemGroup.
 
 Documented as follows: Contains a set of user-defined Item elements. Every item
 used in a MSBuild project must be specified as a child of an ItemGroup element.
-
 end note
 
                 class item #F7E5FF {
@@ -1149,12 +1029,10 @@ end note
                 }
 
 note top of  item
-
 Represents an MSBuild Item, used in Visual Studio projects.
 
 Documentation:  Contains a user-defined item and its metadata. Every item that is
 used in a MSBuild project must be specified as a child of an ItemGroup element.
-
 end note
 
                 class solution <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
@@ -1178,10 +1056,8 @@ end note
         }
 
 note top of  visual_studio
-
 Houses meta-model elements related to
 build systems.
-
 end note
 
         namespace build #F2F2F2 {
@@ -1199,19 +1075,15 @@ end note
                 }
 
 note top of  cmakelists
-
 Represents build CMakeLists files.
-
 end note
 
         }
 
 note top of  build
-
 Houses all of the meta-modeling elements related
 to building, which don't have their own containing
 namespace.
-
 end note
 
         namespace physical #F2F2F2 {
@@ -1234,9 +1106,7 @@ end note
                 }
 
 note top of  archetype
-
 Represents an archetype within a facet.
-
 end note
 
                 class backend <<logical::meta_element, PhysicalElement, Container, HasTechnicalSpace>> #F7E5FF {
@@ -1247,9 +1117,7 @@ end note
                 }
 
 note top of  backend
-
 Represents a physical backend, targetting a major technical space such as C++ or C#.
-
 end note
 
                 class facet <<logical::meta_element, PhysicalElement, Container>> #F7E5FF {
@@ -1260,9 +1128,7 @@ end note
                 }
 
 note top of  facet
-
 Represents a facet within a backend, such as type definitions.
-
 end note
 
                 class part <<logical::meta_element, PhysicalElement>> #F7E5FF {
@@ -1276,9 +1142,7 @@ end note
                 }
 
 note top of  part
-
 Part whithin a backend.
-
 end note
 
                 class archetype_kind <<logical::meta_element, PhysicalElement>> #F7E5FF {
@@ -1324,9 +1188,7 @@ end note
                 }
 
 note top of  text_templating
-
 Contains all the properties related to the generation of archetypes themselves.
-
 end note
 
                 class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
@@ -1347,9 +1209,7 @@ end note
         }
 
 note top of  physical
-
 Logical representation of elements in the physical dimension.
-
 end note
 
         class output_model_set <<Nameable>> #F7E5FF {
@@ -1357,9 +1217,7 @@ end note
         }
 
 note top of  output_model_set
-
 Represents a set of related logical models produced as ouput of the logical model chains.
-
 end note
 
         enum generability_status <<masd::enumeration>> #F2DAFD {
@@ -1372,9 +1230,7 @@ end note
         }
 
 note top of  generability_status
-
 The status of this element with regards to generability.
-
 end note
 
         class stereotypes #F7E5FF {
@@ -1383,9 +1239,7 @@ end note
         }
 
 note top of  stereotypes
-
 Stereotype information associated with this element.
-
 end note
 
         class streaming_properties #F7E5FF {
@@ -1426,9 +1280,7 @@ end note
 }
 
 note top of  entities
-
 Entities that define the logical model.
-
 end note
 
 class traits <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1445,7 +1297,6 @@ namespace transforms #F2F2F2 {
         }
 
 note top of  context
-
 Context for all logical transformations.
 
 Contains all of the external data required for the transformations
@@ -1453,7 +1304,6 @@ to execute. It's not ideal to have a huge "global" class, with lots
 of unrelated state; however, over time, we found that a number of
 arguments were being supplied across the call graph, resulting in a
 lot of repetitive code. The context gathers together all of these.
-
 end note
 
         class pre_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1517,9 +1367,7 @@ end note
         }
 
 note top of  transformation_error
-
 An error occurred whilst applying a transformation.
-
 end note
 
         class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1597,15 +1445,10 @@ end note
         class assistant_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
         }
 
-        class documentation_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
-
 }
 
 note top of  transforms
-
 Houses all of the transformations supported by logical.
-
 end note
 
 namespace helpers #F2F2F2 {
@@ -1625,9 +1468,7 @@ namespace helpers #F2F2F2 {
         }
 
 note top of  validation_error
-
 An error occurred during validation.
-
 end note
 
         class pre_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1645,9 +1486,7 @@ end note
         }
 
 note top of  indexing_error
-
 A fatal error has occurred while indexing.
-
 end note
 
         class indexer <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1660,18 +1499,14 @@ end note
         }
 
 note top of  resolution_error
-
 An error occurred while trying to resolve a type.
-
 end note
 
         class mapping_error <<masd::exception>> #E8C2F8 {
         }
 
 note top of  mapping_error
-
 An error has occurred while mapping element names.
-
 end note
 
         class mapper <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1690,10 +1525,8 @@ end note
         }
 
 note top of  mapping_set
-
 Consistent unit of mapping that can be used to translate a model from one technical
 space to another.
-
 end note
 
         class mapping_set_repository #F7E5FF {
@@ -1702,9 +1535,7 @@ end note
         }
 
 note top of  mapping_set_repository
-
 Stores all available mapping sets.
-
 end note
 
         class mappings_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1716,10 +1547,8 @@ end note
         }
 
 note top of  mapping
-
 Stores the mapping of a key (the element id) to its values, organised by technical
 space.
-
 end note
 
         class mapping_value #F7E5FF {
@@ -1728,9 +1557,7 @@ end note
         }
 
 note top of  mapping_value
-
 Value of a mapping.
-
 end note
 
         enum mapping_actions <<masd::enumeration>> #F2DAFD {
@@ -1780,9 +1607,7 @@ end note
         }
 
 note top of  building_error
-
 An error has occurred in a factory.
-
 end note
 
 }
@@ -1795,9 +1620,7 @@ namespace features #F2F2F2 {
         }
 
 note top of  type_parameters
-
 Parameters to configure generic types.
-
 end note
 
         class initializer <<masd::variability::initializer>> #A9CDCD {
@@ -1811,9 +1634,7 @@ end note
         }
 
 note top of  enumeration
-
 Parameters related to enumerations.
-
 end note
 
         class enumerator <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1821,9 +1642,7 @@ end note
         }
 
 note top of  enumerator
-
 Parameters related to enumerators.
-
 end note
 
         class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1832,9 +1651,7 @@ end note
         }
 
 note top of  generalization
-
 Features related to the generalization relationship.
-
 end note
 
         class origin <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1842,9 +1659,7 @@ end note
         }
 
 note top of  origin
-
 Features related to the origin of the model.
-
 end note
 
         class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1852,9 +1667,7 @@ end note
         }
 
 note top of  output_technical_space
-
 Features related to the output technical space.
-
 end note
 
         class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1864,9 +1677,7 @@ end note
         }
 
 note top of  primitive
-
 Features related to primitive elements.
-
 end note
 
         class orm <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1884,9 +1695,7 @@ end note
         }
 
 note top of  orm
-
 Features related to ORM support.
-
 end note
 
         class decoration_modeline <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1896,9 +1705,7 @@ end note
         }
 
 note top of  decoration_modeline
-
 Modeline properties.
-
 end note
 
         class variability_templates <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1910,9 +1717,7 @@ end note
         }
 
 note top of  variability_templates
-
 Features related to the processing of variability for feature and profile templates.
-
 end note
 
         class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1921,9 +1726,7 @@ end note
         }
 
 note top of  mapping
-
 Meta-data related to element mapping.
-
 end note
 
         class variability_bundle <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1935,9 +1738,7 @@ end note
         }
 
 note top of  variability_bundle
-
 Features related to the processing of variability for feature bundles.
-
 end note
 
         class variability_entry <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1947,9 +1748,7 @@ end note
         }
 
 note top of  variability_entry
-
 Features related to the processing of variability for profiles and profile templates.
-
 end note
 
         class variability_profile <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1959,9 +1758,7 @@ end note
         }
 
 note top of  variability_profile
-
 Features related to the processing of variability for profile entries.
-
 end note
 
         class physical <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1976,9 +1773,7 @@ end note
         }
 
 note top of  physical
-
 Features required for physical elements.
-
 end note
 
         class wale <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1987,9 +1782,7 @@ end note
         }
 
 note top of  wale
-
 Wale related features.
-
 end note
 
         class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -2005,9 +1798,7 @@ end note
         }
 
 note top of  labelling
-
 Features related to labels.
-
 end note
 
         class physical_relations <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -2017,9 +1808,7 @@ end note
         }
 
 note top of  physical_relations
-
 Features related to relations at the physical level.
-
 end note
 
         class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -2050,11 +1839,7 @@ end note
         }
 
 note top of  physical_helpers
-
 Features related to the helpers in physical domain.
-
-
-
 end note
 
         class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -2069,9 +1854,7 @@ end note
 }
 
 note top of  features
-
 Defines all features used by the logical model.
-
 end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
@@ -2097,18 +1880,13 @@ namespace formatters #F2F2F2 {
         }
 
 note top of  formatting_error
-
 An error has occurred while formatting.
-
-
 end note
 
 }
 
 note top of  formatters
-
 Contains formatting classes for the logical model.
-
 end note
 
 @enduml

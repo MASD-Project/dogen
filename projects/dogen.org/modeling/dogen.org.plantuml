@@ -1,13 +1,11 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-
 Provides support for encoding and decoding Emacs's org-mode
 documents.
 
 The support is very basic and focuses only on the features
 of org mode required by Dogen.
-
 end note
 
 namespace entities #F2F2F2 {
@@ -82,9 +80,7 @@ namespace entities #F2F2F2 {
 }
 
 note top of  entities
-
 Represents entities from Emacs' org-mode.
-
 end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
@@ -107,9 +103,7 @@ namespace transforms #F2F2F2 {
         }
 
 note top of  transformation_error
-
 An error occurred whilst transforming.
-
 end note
 
 }
@@ -122,9 +116,7 @@ namespace helpers #F2F2F2 {
         }
 
 note top of  parsing_error
-
 An error ocurred whilst parsing an org-mode document.
-
 end note
 
         class node <<dogen::untestable>> #ED8181 {
@@ -140,18 +132,11 @@ end note
         }
 
 note top of  building_error
-
 An error occurred whilst building.
-
 end note
 
         class document_factory <<dogen::handcrafted::typeable>> #FFFACD {
         }
-
-note top of  document_factory
-
-
-end note
 
 }
 

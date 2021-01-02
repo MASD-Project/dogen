@@ -1,7 +1,6 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-
 The varibility model is responsible for managing variation in MASD.
 
 One of the core principles of MASD is to enable the development of
@@ -34,7 +33,6 @@ the geometry of physical space, but this is not a concern o veriability -
 only of its user. This decoupling was achieved by creating the concept
 of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
-
 end note
 
 namespace entities #F2F2F2 {
@@ -42,9 +40,7 @@ namespace entities #F2F2F2 {
         }
 
 note top of  element
-
 Represents an element modeling some aspect of variability.
-
 end note
 
         class feature <<FeatureElement>> #F7E5FF {
@@ -53,9 +49,7 @@ end note
 
 entities::element <|-- entities::feature
 note top of  feature
-
 Unit of configuration within Dogen. Defines the domain of values.
-
 end note
 
         enum binding_point <<masd::enumeration, dogen::convertible>> #F2DAFD {
@@ -67,9 +61,7 @@ end note
         }
 
 note top of  binding_point
-
 Determines how a feature can be bound to a modeling element.
-
 end note
 
         class feature_model #F7E5FF {
@@ -79,9 +71,7 @@ end note
         }
 
 note top of  feature_model
-
 Container of all available features, organised for querying.
-
 end note
 
         class feature_template <<FeatureElement, Templateable>> #F7E5FF {
@@ -90,9 +80,7 @@ end note
 
 entities::element <|-- entities::feature_template
 note top of  feature_template
-
 Defines a template that can be used to instantiate features.
-
 end note
 
         enum value_type <<masd::enumeration, dogen::convertible>> #F2DAFD {
@@ -106,9 +94,7 @@ end note
         }
 
 note top of  value_type
-
 What values can a feature have.
-
 end note
 
         class profile_template <<Profilable>> #F7E5FF {
@@ -117,9 +103,7 @@ end note
 
 entities::element <|-- entities::profile_template
 note top of  profile_template
-
 Holds a set of templates for configuration points.
-
 end note
 
         class configuration_point_template <<Templateable>> #F7E5FF {
@@ -131,11 +115,9 @@ entities::element <|-- entities::configuration_point_template
         }
 
 note top of  value
-
 Base class of all value types.
 
 Represents a value for a configuration point, a default value for a feature, etc.
-
 end note
 
         class number #F7E5FF {
@@ -144,9 +126,7 @@ end note
 
 entities::value <|-- entities::number
 note top of  number
-
 Represents a numeric integral value.
-
 end note
 
         class text #F7E5FF {
@@ -155,9 +135,7 @@ end note
 
 entities::value <|-- entities::text
 note top of  text
-
 Represents a text value.
-
 end note
 
         class text_collection #F7E5FF {
@@ -166,9 +144,7 @@ end note
 
 entities::value <|-- entities::text_collection
 note top of  text_collection
-
 Represents a collection of text values.
-
 end note
 
         class boolean #F7E5FF {
@@ -177,9 +153,7 @@ end note
 
 entities::value <|-- entities::boolean
 note top of  boolean
-
 Represents a boolean value.
-
 end note
 
         class key_value_pair #F7E5FF {
@@ -188,9 +162,7 @@ end note
 
 entities::value <|-- entities::key_value_pair
 note top of  key_value_pair
-
 Represents a pair of key and value.
-
 end note
 
         class configuration <<ConfigurationStore>> #F7E5FF {
@@ -206,9 +178,7 @@ entities::element <|-- entities::configuration
 
 entities::element <|-- entities::configuration_point
 note top of  configuration_point
-
 Maps a feature name to an instance value
-
 end note
 
         class Nameable <<masd::object_template>> #E3B6F6 {
@@ -216,9 +186,7 @@ end note
         }
 
 note top of  Nameable
-
 Elements with the ability of being named.
-
 end note
 
         class Describable <<masd::object_template>> #E3B6F6 {
@@ -279,9 +247,7 @@ entities::element <|-- entities::profile
         }
 
 note top of  binding_action
-
 What action to take when binding.
-
 end note
 
         class profile_repository #F7E5FF {
@@ -308,9 +274,7 @@ end note
         }
 
 note top of  potential_binding
-
 Contains information about a potential binding.
-
 end note
 
         class feature_template_repository #F7E5FF {
@@ -318,9 +282,7 @@ end note
         }
 
 note top of  feature_template_repository
-
 Stores a set of feature templates.
-
 end note
 
         class feature_repository #F7E5FF {
@@ -328,9 +290,7 @@ end note
         }
 
 note top of  feature_repository
-
 Stores a set of features.
-
 end note
 
         class default_value_override #F7E5FF {
@@ -339,9 +299,7 @@ end note
         }
 
 note top of  default_value_override
-
 Stores an override for a default value.
-
 end note
 
         class Generalizable <<masd::object_template>> #E3B6F6 {
@@ -364,9 +322,7 @@ entities::Stereotypable <|-- entities::Profilable
 
 entities::value <|-- entities::comma_separated
 note top of  comma_separated
-
 Represents a CSV input that is split into a collection of text values.
-
 end note
 
         class comma_separated_collection #F7E5FF {
@@ -375,18 +331,14 @@ end note
 
 entities::value <|-- entities::comma_separated_collection
 note top of  comma_separated_collection
-
 Represents a collection of CSV input that is split into a collection of text values.
-
 end note
 
 }
 
 note top of  entities
-
 Contains all of the types describing variability
 with Masd.
-
 end note
 
 namespace helpers #F2F2F2 {
@@ -418,9 +370,7 @@ namespace helpers #F2F2F2 {
         }
 
 note top of  instantiation_exception
-
 An error occurred whilst instantiating templates.
-
 end note
 
         class registrar <<dogen::handcrafted::typeable>> #FFFACD {
@@ -435,9 +385,7 @@ end note
         }
 
 note top of  enum_mapping_exception
-
 An error occurred whilst mapping enums to or from strings.
-
 end note
 
         class relational_adapter <<dogen::handcrafted::typeable>> #FFFACD {
@@ -447,9 +395,7 @@ end note
         }
 
 note top of  adaption_exception
-
 An error occurred whilst adapting a model.
-
 end note
 
         class configuration_points_factory <<dogen::handcrafted::typeable>> #FFFACD {
@@ -459,9 +405,7 @@ end note
         }
 
 note top of  merging_exception
-
 An error occurred whilst merging.
-
 end note
 
 }
@@ -492,9 +436,7 @@ namespace transforms #F2F2F2 {
         }
 
 note top of  context
-
 Context for transformations.
-
 end note
 
         class profile_merging_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -504,9 +446,7 @@ end note
         }
 
 note top of  transformation_error
-
 An error occurred whilst applying a transformation.
-
 end note
 
         class global_configuration_binding_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -525,9 +465,7 @@ namespace features #F2F2F2 {
         }
 
 note top of  profile
-
 Features related to profile processing.
-
 end note
 
         class initializer <<masd::variability::initializer>> #A9CDCD {
@@ -536,9 +474,7 @@ end note
 }
 
 note top of  features
-
 Features used by the variability model.
-
 end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
@@ -549,10 +485,5 @@ class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
-
-note top of  CMakeLists
-
-
-end note
 
 @enduml

@@ -1,9 +1,7 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-
 Orchestration-based imlementation of the Dogen product API.
-
 end note
 
 namespace transforms #F2F2F2 {
@@ -25,9 +23,7 @@ namespace transforms #F2F2F2 {
         }
 
 note top of  factory_exception
-
 An error occurred in the factory whilst making.
-
 end note
 
         class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -66,10 +62,8 @@ end note
 }
 
 note top of  transforms
-
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
-
 end note
 
 class generator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -92,9 +86,7 @@ namespace helpers #F2F2F2 {
         }
 
 note top of  projection_error
-
 An error ocurred whilst projecting elements from one space into another.
-
 end note
 
         class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {
@@ -106,9 +98,7 @@ end note
 }
 
 note top of  helpers
-
 Helpers for the orchestration model.
-
 end note
 
 namespace features #F2F2F2 {
@@ -118,9 +108,7 @@ namespace features #F2F2F2 {
         }
 
 note top of  model_location
-
 Feature group for model location related features.
-
 end note
 
         class initializer <<masd::variability::initializer>> #A9CDCD {
@@ -129,9 +117,7 @@ end note
 }
 
 note top of  features
-
 Features for the orchestration model.
-
 end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
@@ -145,10 +131,5 @@ class spec_dumper <<dogen::handcrafted::typeable>> #FFFACD {
 
 class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
-
-note top of  initializer
-
-
-end note
 
 @enduml
