@@ -26,10 +26,10 @@
 #endif
 
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.codec/types/entities/model.hpp"
 #include "dogen.codec/types/entities/element.hpp"
 #include "dogen.codec/types/entities/attribute.hpp"
 #include "dogen.codec/types/features/meta_data.hpp"
-#include "dogen.codec/types/entities/model.hpp"
 #include "dogen.codec/types/transforms/context_fwd.hpp"
 
 namespace dogen::codec::transforms {
