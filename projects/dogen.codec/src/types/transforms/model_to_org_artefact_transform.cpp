@@ -343,7 +343,10 @@ to_block(const std::string& content, const block_type bt,
 
     org::entities::block r;
     r.type(bt);
-    r.contents(content);
+
+    std::ostringstream os;
+    os << content << std::endl;
+    r.contents(os.str());
 
     if (!parameter.empty()) {
         org::entities::parameter p(parameter);
