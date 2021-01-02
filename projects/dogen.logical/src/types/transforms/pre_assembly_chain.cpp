@@ -41,7 +41,6 @@
 #include "dogen.logical/types/transforms/aspect_properties_transform.hpp"
 #include "dogen.logical/types/transforms/assistant_properties_transform.hpp"
 #include "dogen.logical/types/transforms/streaming_properties_transform.hpp"
-#include "dogen.logical/types/transforms/documentation_transform.hpp"
 #include "dogen.logical/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -78,12 +77,6 @@ void pre_assembly_chain::apply(const context& ctx,
      * transform to ensure we can see the modelines for a group.
      */
     modelines_transform::apply(ctx, m);
-
-    /*
-     * Documentation transform must be executed before the variability
-     * transform.
-     */
-    documentation_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of

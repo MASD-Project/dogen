@@ -34,6 +34,7 @@
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/meta_data_transform.hpp"
+#include "dogen.codec/types/transforms/documentation_trimming_transform.hpp"
 #include "dogen.codec/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -68,6 +69,11 @@ apply(const context& ctx, const boost::filesystem::path& p) {
      * a codec model.
      */
     auto r(artefact_to_model_chain::apply(ctx, a));
+
+    /*
+     * Trim all the unnecessary whitespace.
+     */
+    documentation_trimming_transform::apply(ctx, r);
 
     /*
      * Update the provenance properties.
