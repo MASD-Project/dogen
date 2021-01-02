@@ -184,6 +184,11 @@ Raw set of variability overrides.
    :custom_id: 09abf389-0494-402a-b8a8-fa89bff3a8c8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+** documentation trimming transform                                 :element:
+   :PROPERTIES:
+   :custom_id: bc986748-830c-4a13-8e95-de6df81764ca
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: O4
