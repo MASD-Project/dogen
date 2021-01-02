@@ -69,6 +69,7 @@ namespace dogen::codec::transforms {
 
 using identification::entities::tagged_value;
 using identification::entities::stereotype;
+using org::entities::block_type;
 
 org::entities::drawer_content
 model_to_org_artefact_transform::to_drawer_content(
@@ -248,26 +249,24 @@ to_headline(const unsigned int level, const entities::attribute& attr) {
         BOOST_LOG_SEV(lg, debug) << "Processing attribute documentation.";
         org::entities::block tb;
         const auto sn(attr.name().simple());
+        const auto& doc(attr.comment().documentation());
+        const auto gbt(block_type::greater_block);
         if (sn == "content") {
             BOOST_LOG_SEV(lg, debug) << "Found mustache template.";
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("mustache");
-            tb.parameters().push_back(p);
+            const auto b(to_block(doc, gbt, "mustache"));
+            r.section().blocks().push_back(b);
         } else if (sn == "stitch_template_content") {
             BOOST_LOG_SEV(lg, debug) << "Found stitch template.";
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("fundamental");
-            tb.parameters().push_back(p);
+            const auto b(to_block(doc, gbt, "fundamental"));
+            r.section().blocks().push_back(b);
         } else if (sn == "short_form" || sn == "long_form") {
             BOOST_LOG_SEV(lg, debug) << "Found licence.";
-            tb.type(org::entities::block_type::greater_block);
-            org::entities::parameter p("fundamental");
-            tb.parameters().push_back(p);
-        } else
-            tb.type(org::entities::block_type::text_block);
-
-        tb.contents(attr.comment().documentation());
-        r.section().blocks().push_back(tb);
+            const auto b(to_block(doc, gbt, "fundamental"));
+            r.section().blocks().push_back(b);
+        } else {
+            const auto b(to_block(doc, block_type::text_block));
+            r.section().blocks().push_back(b);
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generating headline for attribute.";
@@ -320,9 +319,8 @@ to_headline(const unsigned int level, const entities::element& e) {
      */
     if (!e.comment().documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Element has documentation.";
-        org::entities::block tb;
-        tb.type(org::entities::block_type::text_block);
-        tb.contents(e.comment().documentation());
+        const auto& doc(e.comment().documentation());
+        const auto tb(to_block(doc, block_type::text_block));
         r.section().blocks().push_back(tb);
     }
 
@@ -337,6 +335,28 @@ to_headline(const unsigned int level, const entities::element& e) {
                              << r.headlines().size();
     BOOST_LOG_SEV(lg, debug) << "Finished creating headline for element.";
     return r;
+}
+
+org::entities::block model_to_org_artefact_transform::
+to_block(const std::string& content, const block_type bt,
+    const std::string& parameter) {
+
+    org::entities::block r;
+    r.type(bt);
+    r.contents(content);
+
+    if (!parameter.empty()) {
+        org::entities::parameter p(parameter);
+        r.parameters().push_back(p);
+    }
+
+    return r;
+}
+
+org::entities::block
+model_to_org_artefact_transform::to_block(const std::string& content,
+    const block_type bt) {
+    return to_block(content, bt, empty);
 }
 
 std::list<org::entities::headline> model_to_org_artefact_transform::
@@ -411,10 +431,8 @@ to_document(const codec::entities::model& m) {
 
     if (!m.comment().documentation().empty()) {
         BOOST_LOG_SEV(lg, debug) << "Model has documentation.";
-
-        org::entities::block tb;
-        tb.type(org::entities::block_type::text_block);
-        tb.contents(m.comment().documentation());
+        const auto& doc(m.comment().documentation());
+        const auto tb(to_block(doc, block_type::text_block));
         r.section().blocks().push_back(tb);
     }
 

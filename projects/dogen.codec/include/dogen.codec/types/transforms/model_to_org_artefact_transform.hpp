@@ -21,6 +21,8 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 
+#include "dogen.org/types/entities/block.hpp"
+#include "dogen.org/types/entities/block_type.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -95,6 +97,16 @@ private:
      */
     static org::entities::headline to_headline(const unsigned int level,
         const entities::element& e);
+
+    /**
+     * @brief Creates an org mode block.
+     */
+    /**@{*/
+    static org::entities::block to_block(const std::string& content,
+        const org::entities::block_type bt, const std::string& parameter);
+    static org::entities::block to_block(const std::string& content,
+        const org::entities::block_type bt);
+    /**@}*/
 
     /**
      * @brief Walks up the codec model, from parent to children,
