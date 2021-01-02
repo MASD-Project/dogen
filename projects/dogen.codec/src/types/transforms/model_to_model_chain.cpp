@@ -29,6 +29,7 @@
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/model_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
+#include "dogen.codec/types/transforms/documentation_trimming_transform.hpp"
 #include <boost/test/tree/test_unit.hpp>
 
 namespace {
@@ -60,7 +61,12 @@ void model_to_model_chain::apply(const transforms::context& ctx,
     /*
      * Convert the source artefact into a model.
      */
-    const auto src_m(artefact_to_model_chain::apply(ctx, src_a));
+    auto src_m(artefact_to_model_chain::apply(ctx, src_a));
+
+    /*
+     * Trim all the unnecessary whitespace.
+     */
+    documentation_trimming_transform::apply(ctx, src_m);
 
     /*
      * Convert the source model into the destination model. Note that
