@@ -62,12 +62,24 @@ void provenance_transform::apply(const transforms::context& ctx,
     mp.model_sha1_hash(compute_shah1_hash(p));
     using identification::entities::model_type;
     mp.model_type(model_type::not_yet_determined);
+    mp.location().full_path(p);
 
     /*
      * Update elements provenance with the models properties.
      */
-    for (auto& e : m.elements())
-        e.provenance(mp);
+    for (auto& e : m.elements()) {
+        auto& ep(e.provenance());
+        ep.model_sha1_hash(mp.model_sha1_hash());
+        ep.model_type(mp.model_type());
+        ep.location().full_path(mp.location().full_path());
+
+        for (auto& attr : e.attributes()) {
+            auto& ap(attr.provenance());
+            ap.model_sha1_hash(mp.model_sha1_hash());
+            ap.model_type(mp.model_type());
+            ap.location().full_path(mp.location().full_path());
+        }
+    }
 
     stp.end_transform(m);
 }
