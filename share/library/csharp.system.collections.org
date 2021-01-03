@@ -56,6 +56,9 @@ Basic collection types.
   :masd.codec.parent: IDictionary
   :END:
 * Specialized                                                        :module:
+  :PROPERTIES:
+  :custom_id: 3c98a1cc-7aa1-4bfe-b50f-45925856af73
+  :END:
 ** HybridDictionary                                                 :element:
    :PROPERTIES:
    :custom_id: 67a80d90-c3fc-41cf-834f-1553214f3337
