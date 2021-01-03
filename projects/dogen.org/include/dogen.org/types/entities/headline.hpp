@@ -49,6 +49,7 @@ public:
 
 public:
     headline(
+        const unsigned int line_number,
         const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords,
         const std::list<dogen::org::entities::drawer>& drawers,
         const dogen::org::entities::section& section,
@@ -60,6 +61,14 @@ public:
         const dogen::org::entities::todo_keyword& todo_keyword);
 
 public:
+    /**
+     * @brief Number of the line in the file which contained this headline.
+     */
+    /**@{*/
+    unsigned int line_number() const;
+    void line_number(const unsigned int v);
+    /**@}*/
+
     const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords() const;
     std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords();
     void affiliated_keywords(const std::list<dogen::org::entities::affiliated_keyword>& v);
@@ -144,6 +153,7 @@ public:
     headline& operator=(headline other);
 
 private:
+    unsigned int line_number_;
     std::list<dogen::org::entities::affiliated_keyword> affiliated_keywords_;
     std::list<dogen::org::entities::drawer> drawers_;
     dogen::org::entities::section section_;

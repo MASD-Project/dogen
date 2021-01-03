@@ -67,6 +67,13 @@ Top-level headlines in document.
    :PROPERTIES:
    :custom_id: O4
    :END:
+*** line number                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: unsigned int
+    :END:
+
+Number of the line in the file which contained this headline.
+
 *** affiliated keywords                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<affiliated_keyword>

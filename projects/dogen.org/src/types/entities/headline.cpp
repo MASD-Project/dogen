@@ -23,9 +23,11 @@
 namespace dogen::org::entities {
 
 headline::headline()
-    : level_(static_cast<unsigned int>(0)) { }
+    : line_number_(static_cast<unsigned int>(0)),
+      level_(static_cast<unsigned int>(0)) { }
 
 headline::headline(
+    const unsigned int line_number,
     const std::list<dogen::org::entities::affiliated_keyword>& affiliated_keywords,
     const std::list<dogen::org::entities::drawer>& drawers,
     const dogen::org::entities::section& section,
@@ -35,7 +37,8 @@ headline::headline(
     const std::string& title,
     const std::list<dogen::org::entities::tag>& tags,
     const dogen::org::entities::todo_keyword& todo_keyword)
-    : affiliated_keywords_(affiliated_keywords),
+    : line_number_(line_number),
+      affiliated_keywords_(affiliated_keywords),
       drawers_(drawers),
       section_(section),
       headlines_(headlines),
@@ -47,6 +50,7 @@ headline::headline(
 
 void headline::swap(headline& other) noexcept {
     using std::swap;
+    swap(line_number_, other.line_number_);
     swap(affiliated_keywords_, other.affiliated_keywords_);
     swap(drawers_, other.drawers_);
     swap(section_, other.section_);
@@ -59,7 +63,8 @@ void headline::swap(headline& other) noexcept {
 }
 
 bool headline::operator==(const headline& rhs) const {
-    return affiliated_keywords_ == rhs.affiliated_keywords_ &&
+    return line_number_ == rhs.line_number_ &&
+        affiliated_keywords_ == rhs.affiliated_keywords_ &&
         drawers_ == rhs.drawers_ &&
         section_ == rhs.section_ &&
         headlines_ == rhs.headlines_ &&
@@ -74,6 +79,14 @@ headline& headline::operator=(headline other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+unsigned int headline::line_number() const {
+    return line_number_;
+}
+
+void headline::line_number(const unsigned int v) {
+    line_number_ = v;
 }
 
 const std::list<dogen::org::entities::affiliated_keyword>& headline::affiliated_keywords() const {

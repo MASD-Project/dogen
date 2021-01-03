@@ -21,6 +21,7 @@ namespace entities #F2F2F2 {
         }
 
         class headline #F7E5FF {
+                +{field} line_number unsigned int
                 +{field} affiliated_keywords std::list<affiliated_keyword>
                 +{field} drawers std::list<drawer>
                 +{field} section section

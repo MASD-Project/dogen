@@ -97,6 +97,7 @@ namespace dogen::org::entities {
 std::ostream& operator<<(std::ostream& s, const headline& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::org::entities::headline\"" << ", "
+      << "\"line_number\": " << v.line_number() << ", "
       << "\"affiliated_keywords\": " << v.affiliated_keywords() << ", "
       << "\"drawers\": " << v.drawers() << ", "
       << "\"section\": " << v.section() << ", "
