@@ -16,21 +16,19 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-#
-set(curdir ${CMAKE_CURRENT_SOURCE_DIR})
-file(GLOB subdir RELATIVE ${curdir} *)
+if (DOGEN_CLI_EXECUTABLE)
+  file(GLOB models "*.org")
+  foreach(model ${models})
+    set(model_name "")
+    get_filename_component(model_name ${model} NAME)
+    set(destination_name ${model_name})
 
-set(share_directory "share/dogen")
-foreach(dir ${subdir})
-    if(IS_DIRECTORY ${curdir}/${dir})
-        file(COPY ${curdir}/${dir} DESTINATION ${stage_dir}/share)
-        install(
-            DIRECTORY ${dir}/
-            DESTINATION ${share_directory}/${dir}
-            COMPONENT applications
-            FILES_MATCHING PATTERN "*")
-    endif()
-endforeach()
-message(STATUS "Copied all data files.")
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/library)
+    add_custom_target(convert_${model_name}_org
+      COMMENT "Converting ${model_name} to org-mode."
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      COMMAND ${DOGEN_CLI_EXECUTABLE} convert
+      --source ${model} --destination ${model}
+      ${DOGEN_COMMON_OPTIONS})
+    add_dependencies(convert_all_org convert_${model_name}_org)
+  endforeach()
+endif()
