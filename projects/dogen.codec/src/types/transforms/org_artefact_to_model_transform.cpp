@@ -210,6 +210,7 @@ make_attribute(const org::entities::headline& h) {
         if (!pd.custom_id.empty()) {
             codec_provenance p;
             p.codec_id(codec_id(pd.custom_id));
+            p.location().line(h.line_number());
             r.provenance(p);
         }
         r.tagged_values(pd.tagged_values);
@@ -259,6 +260,7 @@ org_artefact_to_model_transform::make_element(const headline_type ht,
         if (!pd.custom_id.empty()) {
             codec_provenance p;
             p.codec_id(codec_id(pd.custom_id));
+            p.location().line(h.line_number());
             r.provenance(p);
         }
         r.tagged_values(pd.tagged_values);
@@ -383,6 +385,7 @@ apply(const transforms::context& ctx, const entities::artefact& a) {
         const auto pd(process_drawer(doc.drawers()));
         if (!pd.custom_id.empty()) {
             codec_provenance p;
+            p.location().line(1);
             p.codec_id(codec_id(pd.custom_id));
         }
         r.tagged_values(pd.tagged_values);
