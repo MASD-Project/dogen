@@ -313,9 +313,10 @@ process_element(const helpers::codec_to_logical_projector& p,
 
 logical::entities::model codec_model_to_logical_model_transform::
 apply(const context& ctx, const codec::entities::model& m) {
+    const auto& l(m.provenance().location());
+    const auto id(l.full_path().filename().generic_string());
     tracing::scoped_transform_tracer stp(lg,
-        "codec model to logical model transform",
-        transform_id, m.name().simple(),
+        "codec model to logical model transform", transform_id, id,
         *ctx.logical_context().tracer(), m);
 
     /*
