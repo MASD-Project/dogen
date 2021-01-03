@@ -38,9 +38,10 @@ namespace dogen::orchestration::transforms {
 logical::entities::input_model_set
 codec_model_set_to_logical_input_model_set_chain::
 apply(const context& ctx, const codec::entities::model_set& ms) {
-    const auto model_name(ms.target().name().simple());
+    const auto& l(ms.target().provenance().location());
+    const auto id(l.full_path().filename().generic_string());
     tracing::scoped_chain_tracer stp(lg,
-        "codec model set to logical model set", transform_id, model_name,
+        "codec model set to logical model set", transform_id, id,
         *ctx.logical_context().tracer());
 
     /*
