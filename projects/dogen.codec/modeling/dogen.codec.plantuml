@@ -36,6 +36,12 @@ namespace transforms #F2F2F2 {
         class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
         }
 
+        class artefact_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
+        }
+
+        class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
+        }
+
         class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
                 +{field} data_directories std::vector<boost::filesystem::path>
                 +{field} feature_model boost::shared_ptr<variability::entities::feature_model>

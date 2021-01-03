@@ -15,7 +15,6 @@ General name for modeling elements which do not need any specialisation.
 end note
 
         class codec_provenance #F7E5FF {
-                +{field} model_id model_id
                 +{field} model_type model_type
                 +{field} model_sha1_hash sha1_hash
                 +{field} codec_id codec_id
@@ -66,8 +65,8 @@ ID of the meta-element in the physical dimension.
 end note
 
         class codec_location #F7E5FF {
+                +{field} filename boost::filesystem::path
                 +{field} line long
-                +{field} column long
         }
 
 note top of  codec_location
