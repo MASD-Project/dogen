@@ -67,7 +67,8 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started chain: " << description << ".";
+        BOOST_LOG_SEV(lg_, debug) << "Started chain: " << description
+                                  << ". Model: " << model_id_;
         tracer_.start_chain(id, transform_instance_id_, model_id_);
     }
 
@@ -130,7 +131,8 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started transform:" << description;
+        BOOST_LOG_SEV(lg_, debug) << "Started transform:" << description
+                                  << ". Model: " << model_id_;
         tracer_.start_transform(id, transform_instance_id_, model_id);
     }
 
@@ -154,7 +156,8 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started transform: " << description;
+        BOOST_LOG_SEV(lg_, debug) << "Started transform: " << description
+                                  << ". Model: " << model_id_;
         tracer_.start_transform(id, transform_instance_id_, model_id, input);
     }
 
