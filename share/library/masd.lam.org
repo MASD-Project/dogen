@@ -25,6 +25,7 @@ space; keep it technical space agnostic.
 
 * core                                                               :module:
   :PROPERTIES:
+  :custom_id: bb71fdc0-5099-486f-86fe-95f21564e62f
   :masd.codec.dia.comment: true
   :END:
 
@@ -33,22 +34,27 @@ specific buckets.
 
 ** object                                                           :element:
   :PROPERTIES:
+  :custom_id: 2062409e-5c8c-4146-9dd1-4f6b71df0c0d
   :masd.codec.stereotypes: masd::mapping::extensible_mappable
   :END:
 ** byte                                                             :element:
   :PROPERTIES:
+  :custom_id: 59f50317-e220-4df7-9b40-5c438c42a9c6
   :masd.codec.stereotypes: masd::mapping::extensible_mappable
   :END:
 ** boolean                                                          :element:
   :PROPERTIES:
+  :custom_id: ddac4931-d71a-4444-b7e3-342a8b5b1703
   :masd.codec.stereotypes: masd::mapping::extensible_mappable
   :END:
 ** pointer                                                          :element:
   :PROPERTIES:
+  :custom_id: 20f8f5bf-0f71-4ca7-8e04-aa8ba24e59be
   :masd.codec.stereotypes: masd::mapping::extensible_mappable
   :END:
 * text                                                              :module:
   :PROPERTIES:
+  :custom_id: 8c7a5d91-eb66-4bd3-ab2f-d9bc52313d47
   :masd.codec.dia.comment: true
   :END:
 
@@ -56,14 +62,17 @@ Types related to text.
 
 ** character                                                        :element:
    :PROPERTIES:
+   :custom_id: a74363e3-e4ee-4854-840a-338aaf01bec0
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** string                                                           :element:
    :PROPERTIES:
+   :custom_id: 3257c2b1-4009-4069-a3e5-5c33208e514f
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 * numeric                                                            :module:
   :PROPERTIES:
+  :custom_id: 1baac5de-1dac-4e02-b88c-0d7e9fbaea38
   :masd.codec.dia.comment: true
   :END:
 
@@ -71,38 +80,47 @@ Types that represent numeric quantities.
 
 ** integer8                                                         :element:
    :PROPERTIES:
+   :custom_id: 6c840c17-6db2-4b20-b091-4d54b866c1ea
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** integer32                                                        :element:
    :PROPERTIES:
+   :custom_id: 3db31b2a-8cda-490d-a48c-42ccbf5bdb27
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** integer16                                                        :element:
    :PROPERTIES:
+   :custom_id: 9521502c-0321-48a4-9808-e3cc05bb3e5e
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** integer64                                                        :element:
    :PROPERTIES:
+   :custom_id: 46643093-964f-4e48-b70f-d27d03c32bac
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** integer                                                          :element:
    :PROPERTIES:
+   :custom_id: 2dd069f5-3343-4b1c-9f56-932d821b9275
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** single_float                                                     :element:
    :PROPERTIES:
+   :custom_id: d245a2dd-732e-458d-8dea-10c38fe706d3
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** double_float                                                     :element:
    :PROPERTIES:
+   :custom_id: bd67992e-4a55-4481-afb9-baa66c97943f
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** decimal                                                          :element:
    :PROPERTIES:
+   :custom_id: 6e9d867e-a212-4131-b834-99ee27dac6c9
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 * chrono                                                             :module:
   :PROPERTIES:
+  :custom_id: 754cf605-5e8c-45b5-ab7b-469df83c54fc
   :masd.codec.dia.comment: true
   :END:
 
@@ -110,18 +128,22 @@ Types related to time representation.
 
 ** date                                                             :element:
    :PROPERTIES:
+   :custom_id: 9c858a63-1c23-47fe-993c-f95b41d541e3
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** time                                                             :element:
    :PROPERTIES:
+   :custom_id: e9dc570d-e57f-435c-92c0-52db2de9dd07
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** date_time                                                        :element:
    :PROPERTIES:
+   :custom_id: 61dd8b6a-9be1-474c-913a-43c75257f03c
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 * container                                                          :module:
   :PROPERTIES:
+  :custom_id: 4f194767-2deb-4028-be36-8fb31fe86e2e
   :masd.codec.dia.comment: true
   :END:
 
@@ -129,37 +151,46 @@ Types that contain other types.
 
 ** unordered_dictionary                                             :element:
    :PROPERTIES:
+   :custom_id: 76adfc54-8124-4f15-9465-f6b67b6d1244
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** ordered_dictionary                                               :element:
    :PROPERTIES:
+   :custom_id: 6f351cf0-9512-42b5-8f7b-95f7cfc77104
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** ordered_set                                                      :element:
    :PROPERTIES:
+   :custom_id: 8a448036-7aac-4bb6-8128-6195b016bc2e
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** static_array                                                     :element:
    :PROPERTIES:
+   :custom_id: 4f8f3e19-4913-4aac-955d-3203242c533b
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** linked_list                                                      :element:
    :PROPERTIES:
+   :custom_id: ec27d058-d5c0-40b1-99bf-d4d1c8a12f5c
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** dynamic_array                                                    :element:
    :PROPERTIES:
+   :custom_id: cae7d896-045f-4b29-9f69-6456c4e793fe
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** unordered_set                                                    :element:
    :PROPERTIES:
+   :custom_id: fcf0ba3b-86fd-42bc-a144-69bee60bc60a
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** stack                                                            :element:
    :PROPERTIES:
+   :custom_id: 8cde8001-d613-41a5-8b07-e8fe23b2cb99
    :masd.codec.stereotypes: masd::mapping::extensible_mappable
    :END:
 ** queue                                                            :element:
   :PROPERTIES:
+  :custom_id: c140ae77-22ac-4481-8d61-68bc8bf9be16
   :masd.codec.stereotypes: masd::mapping::extensible_mappable
   :END:

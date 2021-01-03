@@ -11,6 +11,7 @@ C++ Standard Library types.
 
 * int8_t                                                            :element:
   :PROPERTIES:
+  :custom_id: f6f6dd04-f079-45db-83cf-e955f077f616
   :masd.mapping.target: masd.lam.numeric.integer8
   :masd.helper.family: Character
   :masd.cpp.streaming.requires_quoting: true
@@ -22,6 +23,7 @@ C++ Standard Library types.
   :END:
 * int16_t                                                           :element:
   :PROPERTIES:
+  :custom_id: 8099d349-2802-4a47-a029-6e236cadb299
   :masd.mapping.target: masd.lam.numeric.integer16
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -31,6 +33,7 @@ C++ Standard Library types.
   :END:
 * int32_t                                                           :element:
   :PROPERTIES:
+  :custom_id: d5251991-e460-4c5c-b1ab-0ffb24656a2c
   :masd.mapping.target: masd.lam.numeric.integer32
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -40,6 +43,7 @@ C++ Standard Library types.
   :END:
 * int64_t                                                           :element:
   :PROPERTIES:
+  :custom_id: 1b5dc835-6033-400b-b0a6-62acb2fa78cb
   :masd.mapping.target: masd.lam.numeric.integer64
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -49,6 +53,7 @@ C++ Standard Library types.
   :END:
 * uint8_t                                                           :element:
   :PROPERTIES:
+  :custom_id: 31bc9b76-9a45-4c94-a7c3-021bca1f1b79
   :masd.helper.family: Character
   :masd.cpp.streaming.requires_quoting: true
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -58,6 +63,7 @@ C++ Standard Library types.
   :END:
 * uint16_t                                                          :element:
   :PROPERTIES:
+  :custom_id: a317bcac-2074-49f9-ae3e-1e7292755c5a
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
   :masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
@@ -66,6 +72,7 @@ C++ Standard Library types.
   :END:
 * uint32_t                                                          :element:
   :PROPERTIES:
+  :custom_id: b76aee94-3968-45e9-92aa-f12f8fde55e0
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
   :masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
@@ -74,6 +81,7 @@ C++ Standard Library types.
   :END:
 * uint64_t                                                          :element:
   :PROPERTIES:
+  :custom_id: 63cd29d3-4fe4-4789-afa4-9c33b14cdadb
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
   :masd.cpp.types.builtin_header.primary_inclusion_directive: <cstdint>
@@ -82,6 +90,7 @@ C++ Standard Library types.
   :END:
 * string                                                            :element:
   :PROPERTIES:
+  :custom_id: 955441ea-4911-46e2-a88b-cd75b3711d3e
   :masd.mapping.target: masd.lam.core.text.string
   :masd.helper.family: String
   :masd.cpp.streaming.remove_unprintable_characters: true
@@ -97,6 +106,7 @@ C++ Standard Library types.
   :END:
 * vector                                                            :element:
   :PROPERTIES:
+  :custom_id: b7bdf399-b696-46d5-bde7-60da10bae083
   :masd.mapping.target: masd.lam.container.dynamic_array
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
@@ -105,6 +115,7 @@ C++ Standard Library types.
   :END:
 * deque                                                             :element:
   :PROPERTIES:
+  :custom_id: 6607c293-28ce-46ca-9c42-ddca71499018
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <deque>
@@ -112,6 +123,7 @@ C++ Standard Library types.
   :END:
 * array                                                             :element:
   :PROPERTIES:
+  :custom_id: 710ba027-3329-4a4b-85c2-5ce74ccf89c5
   :masd.mapping.target: masd.lam.container.static_array
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
@@ -119,6 +131,7 @@ C++ Standard Library types.
  :END:
 * list                                                              :element:
   :PROPERTIES:
+  :custom_id: 9c3f0afe-b7cc-4289-906d-4bd1a214b1a1
   :masd.mapping.target: masd.lam.container.linked_list
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
@@ -127,12 +140,14 @@ C++ Standard Library types.
   :END:
 * forward_list                                                      :element:
   :PROPERTIES:
+  :custom_id: d66debd6-b215-41ae-91ee-2a0090b08a31
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <forward_list>
   :END:
 * set                                                               :element:
   :PROPERTIES:
+  :custom_id: c4df0590-e8a2-4d31-970b-f5ff7a17f2ab
   :masd.mapping.target: masd.lam.container.ordered_set
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 1
@@ -142,6 +157,7 @@ C++ Standard Library types.
   :END:
 * multiset                                                          :element:
   :PROPERTIES:
+  :custom_id: a056b405-e867-4367-8ed6-7c9b6c887bc2
   :masd.helper.family: SequenceContainer
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <multiset>
@@ -150,6 +166,7 @@ C++ Standard Library types.
   :END:
 * unordered_set                                                     :element:
   :PROPERTIES:
+  :custom_id: 8b2b2f9c-e396-49f5-8803-f96ee0cd02e1
   :masd.mapping.target: masd.lam.container.unordered_set
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 1
@@ -159,6 +176,7 @@ C++ Standard Library types.
   :END:
 * map                                                               :element:
   :PROPERTIES:
+  :custom_id: 7c8c093f-e8c3-4474-8261-c74f25c29751
   :masd.mapping.target: masd.lam.container.ordered_dictionary
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 2
@@ -168,6 +186,7 @@ C++ Standard Library types.
   :END:
 * multimap                                                          :element:
   :PROPERTIES:
+  :custom_id: 5d4baaf0-4d7d-497c-b10d-afae507013b4
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 2
   :masd.cpp.types.class_header.primary_inclusion_directive: <multimap>
@@ -176,6 +195,7 @@ C++ Standard Library types.
   :END:
 * unordered_map                                                     :element:
   :PROPERTIES:
+  :custom_id: 90e75103-1a29-4dad-a194-f455a68d7653
   :masd.mapping.target: masd.lam.container.unordered_dictionary
   :masd.helper.family: AssociativeContainer
   :masd.type_parameters.count: 2
@@ -185,6 +205,7 @@ C++ Standard Library types.
   :END:
 * pair                                                              :element:
   :PROPERTIES:
+  :custom_id: 10e246c1-8ef2-4f89-b27b-4f99bfe60eec
   :masd.helper.family: Pair
   :masd.type_parameters.count: 2
   :masd.cpp.types.class_header.primary_inclusion_directive: <utility>
@@ -192,6 +213,7 @@ C++ Standard Library types.
   :END:
 * shared_ptr                                                        :element:
   :PROPERTIES:
+  :custom_id: 504ee049-5bb9-4f9a-85e1-b2f074703b25
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
@@ -199,6 +221,7 @@ C++ Standard Library types.
   :END:
 * weak_ptr                                                          :element:
   :PROPERTIES:
+  :custom_id: d2794ba8-a82e-42a2-b19a-4c69e74a51e1
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
@@ -206,6 +229,7 @@ C++ Standard Library types.
   :END:
 * unique_ptr                                                        :element:
   :PROPERTIES:
+  :custom_id: 71f01753-753a-4409-816d-35b7bc9e9711
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
@@ -213,23 +237,28 @@ C++ Standard Library types.
   :END:
 * function                                                          :element:
   :PROPERTIES:
+  :custom_id: 4b6cdea8-18a0-46d3-9f76-d387e1dfbde6
   :masd.cpp.types.class_header.primary_inclusion_directive: <functional>
   :END:
 * optional                                                          :element:
   :PROPERTIES:
+  :custom_id: ae162275-e7b4-416f-ae16-f85a7f0fffa4
   :masd.helper.family: Optional
   :masd.type_parameters.count: 1
   :masd.cpp.types.class_header.primary_inclusion_directive: <functional>
   :END:
 * ostream                                                           :element:
   :PROPERTIES:
+  :custom_id: fbd9d245-9661-43ba-af89-adb049d1f048
   :masd.cpp.types.class_header.primary_inclusion_directive: <ostream>
   :END:
 * ostringstream                                                     :element:
   :PROPERTIES:
+  :custom_id: 3d4c720f-380f-4777-b91a-2d55b0bc1c3b
   :masd.cpp.types.class_header.primary_inclusion_directive: <sstream>
   :END:
 * type_index                                                        :element:
   :PROPERTIES:
+  :custom_id: cd1dff9b-69a8-4fba-8532-4ad85e777ec8
   :masd.cpp.types.class_header.primary_inclusion_directive: <typeindex>
   :END:

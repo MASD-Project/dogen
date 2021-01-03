@@ -21,10 +21,12 @@ space; keep it technical space agnostic.
 
 * emacs                                                              :module:
   :PROPERTIES:
+  :custom_id: 14c96305-8acf-40f2-bcd0-99832e6369db
   :masd.codec.stereotypes: masd::decoration::modeline_group
   :END:
 ** cpp                                                              :element:
    :PROPERTIES:
+   :custom_id: e19de77e-55ed-4768-9e31-8f9ca9ee2c7f
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cpp
@@ -32,22 +34,27 @@ space; keep it technical space agnostic.
    :END:
 *** mode                                                          :attribute:
     :PROPERTIES:
+    :custom_id: 4e770d9b-44b4-4a6d-8504-49629f4d29c1
     :masd.codec.value: c++
     :END:
 *** tab-width                                                     :attribute:
     :PROPERTIES:
+    :custom_id: 9ef81a09-6ce5-403c-988c-8591571190d4
     :masd.codec.value: 4
     :END:
 *** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
+    :custom_id: 0edebdb8-977d-4289-b4c9-ef4fd96c52b3
     :masd.codec.value: nil
     :END:
 *** c-basic-offset                                                :attribute:
     :PROPERTIES:
+    :custom_id: 36f37e2a-06b7-403f-a12f-db4d53a1e665
     :masd.codec.value: 4
     :END:
 ** cs                                                               :element:
     :PROPERTIES:
+    :custom_id: 36a482ff-75d5-4e49-ae88-fb82a8b88933
     :masd.decoration.modeline.editor: emacs
     :masd.decoration.modeline.location: top
     :masd.decoration.modeline.technical_space: csharp
@@ -55,22 +62,27 @@ space; keep it technical space agnostic.
     :END:
 *** mode                                                          :attribute:
     :PROPERTIES:
+    :custom_id: 6bc8c911-4da7-4e6d-93f2-a8be02486a4f
     :masd.codec.value: csharp
     :END:
 *** tab-width                                                     :attribute:
     :PROPERTIES:
+    :custom_id: 53dc2864-bc96-46b3-99cc-dca3c2c7a9a2
     :masd.codec.value: 4
     :END:
 *** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
+    :custom_id: ef582497-eec8-4dfe-8486-2d6c30b55245
     :masd.codec.value: nil
     :END:
 *** c-basic-offset                                                :attribute:
     :PROPERTIES:
+    :custom_id: 80f88b37-8745-48d7-9d4f-7d1141cfb342
     :masd.codec.value: 4
     :END:
 ** cmake                                                            :element:
    :PROPERTIES:
+   :custom_id: 6b3a0564-49eb-40f0-92a4-f28f96c6f5c1
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cmake
@@ -78,18 +90,22 @@ space; keep it technical space agnostic.
    :END:
 *** mode                                                          :attribute:
     :PROPERTIES:
+    :custom_id: 06321620-b5d4-4479-a983-0592cb705c6c
     :masd.codec.value: cmake
     :END:
 *** cmake-tab-width                                               :attribute:
     :PROPERTIES:
+    :custom_id: 031c4e5c-9b14-4902-98da-7d62512705d1
     :masd.codec.value: 4
     :END:
 *** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
+    :custom_id: 90c27b2b-f43f-463d-a2f4-ee5c917b5d96
     :masd.codec.value: nil
     :END:
 ** odb                                                              :element:
    :PROPERTIES:
+   :custom_id: 0bf60608-e906-418e-8c61-a8f78663bbf3
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: odb
@@ -97,18 +113,22 @@ space; keep it technical space agnostic.
    :END:
 *** mode                                                          :attribute:
     :PROPERTIES:
+    :custom_id: 8d14302d-98c4-4b93-a66d-b13c270f2e9a
     :masd.codec.value: sh
     :END:
 *** tab-width                                                     :attribute:
     :PROPERTIES:
+    :custom_id: 5f8f82b9-2c00-4d76-b3ca-f14b5ee051e9
     :masd.codec.value: 4
     :END:
 *** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
+    :custom_id: 6fc4aa2d-e521-4d2a-8acc-d99b4acf04d3
     :masd.codec.value: nil
     :END:
 ** xml                                                              :element:
    :PROPERTIES:
+   :custom_id: fb63e2c9-8b18-4f6a-8d0c-9779c9f8efbd
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: xml
@@ -116,18 +136,22 @@ space; keep it technical space agnostic.
    :END:
 *** mode                                                          :attribute:
     :PROPERTIES:
+    :custom_id: 70b66e4d-2671-4e62-b63a-9fe7e4f6d238
     :masd.codec.value: nxml
     :END:
 *** tab-width                                                     :attribute:
     :PROPERTIES:
+    :custom_id: 78354474-9e1e-4415-a0c7-1848d0e37be8
     :masd.codec.value: 4
     :END:
 *** indent-tabs-mode                                              :attribute:
     :PROPERTIES:
+    :custom_id: 247c375b-8400-4fc1-a727-a47ae9a65e03
     :masd.codec.value: nil
     :END:
 ** sln                                                              :element:
    :PROPERTIES:
+   :custom_id: f44af9e7-434b-4938-a036-6e340f65c5ac
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: sln
@@ -135,10 +159,12 @@ space; keep it technical space agnostic.
    :END:
 * vim                                                                :module:
   :PROPERTIES:
+  :custom_id: 5c11967e-ac64-40ac-a23b-5fedafd06926
   :masd.codec.stereotypes: masd::decoration::modeline_group
   :END:
 ** xml                                                              :element:
    :PROPERTIES:
+   :custom_id: c4d4c4bc-5784-4291-af83-a98bb1bb62f0
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: xml
@@ -146,23 +172,31 @@ space; keep it technical space agnostic.
    :END:
 *** ft                                                            :attribute:
     :PROPERTIES:
+    :custom_id: d3c29d83-962c-47fa-8701-f22c63a05b7e
     :masd.codec.value: xml
     :END:
 *** tabstop                                                       :attribute:
     :PROPERTIES:
+    :custom_id: f637d3c0-d81a-4a17-83fb-45be83b632e4
     :masd.codec.value: 4
     :END:
 *** expandtab                                                     :attribute:
+    :PROPERTIES:
+    :custom_id: 054ce84d-7f92-4f82-801b-33c054308797
+    :END:
 *** shiftwidth                                                    :attribute:
     :PROPERTIES:
+    :custom_id: f7202f1e-5465-46cc-a053-b3ea374df8db
     :masd.codec.value: 4
     :END:
 *** softtabstop                                                   :attribute:
     :PROPERTIES:
+    :custom_id: 626e6f17-29f3-4a76-b0ca-e9b63d73b6ec
     :masd.codec.value: 4
     :END:
 ** odb                                                              :element:
    :PROPERTIES:
+   :custom_id: 416bbf90-a2bb-48c2-9315-44b0f2d1f04b
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: odb
@@ -170,23 +204,31 @@ space; keep it technical space agnostic.
    :END:
 *** ft                                                            :attribute:
     :PROPERTIES:
+    :custom_id: 6ccc91c1-2ca1-4f5e-91f5-cd4bf80ef14d
     :masd.codec.value: sh
     :END:
 *** tabstop                                                       :attribute:
     :PROPERTIES:
+    :custom_id: 22950c80-7bad-4fba-9891-e9a048372214
     :masd.codec.value: 4
     :END:
 *** expandtab                                                     :attribute:
+    :PROPERTIES:
+    :custom_id: 3db020bb-9781-479d-b2ae-68b28803c22d
+    :END:
 *** shiftwidth                                                    :attribute:
     :PROPERTIES:
+    :custom_id: 72320d4a-a510-4089-8c32-4a12a9c580ef
     :masd.codec.value: 4
     :END:
 *** softtabstop                                                   :attribute:
     :PROPERTIES:
+    :custom_id: 194a4bef-b7b3-4501-bb4c-ac4468409b40
     :masd.codec.value: 4
     :END:
 ** cmake                                                            :element:
    :PROPERTIES:
+   :custom_id: c9789d51-7c7b-48cc-86a9-249f86f29d81
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cmake
@@ -194,23 +236,31 @@ space; keep it technical space agnostic.
    :END:
 *** ft                                                            :attribute:
     :PROPERTIES:
+    :custom_id: 63fdba40-69a3-457d-b6aa-27dc187d8967
     :masd.codec.value: cmake
     :END:
 *** tabstop                                                       :attribute:
     :PROPERTIES:
+    :custom_id: 153950b2-a9fe-41c6-864a-58183d4f0b23
     :masd.codec.value: 4
     :END:
 *** expandtab                                                     :attribute:
+    :PROPERTIES:
+    :custom_id: 865037fd-ecf8-454a-a462-3745a2948d40
+    :END:
 *** shiftwidth                                                    :attribute:
     :PROPERTIES:
+    :custom_id: aa21ccf2-1dd7-49b3-a284-a7954895eede
     :masd.codec.value: 4
     :END:
 *** softtabstop                                                   :attribute:
     :PROPERTIES:
+    :custom_id: 0b7c18a4-4288-4629-bae5-0179b03c0d50
     :masd.codec.value: 4
     :END:
 ** cs                                                               :element:
    :PROPERTIES:
+   :custom_id: 55392a3a-de73-410b-8158-4379de1f34ac
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: csharp
@@ -218,23 +268,31 @@ space; keep it technical space agnostic.
    :END:
 *** ft                                                            :attribute:
     :PROPERTIES:
+    :custom_id: cf0d5a60-9871-4817-b7fa-209e95e122f4
     :masd.codec.value: csharp
     :END:
 *** tabstop                                                       :attribute:
     :PROPERTIES:
+    :custom_id: 1b561088-994c-4e03-a671-205f5f7fccd5
     :masd.codec.value: 4
     :END:
 *** expandtab                                                     :attribute:
+    :PROPERTIES:
+    :custom_id: b6c5aab0-0091-4198-9cac-981a1f19e0b2
+    :END:
 *** shiftwidth                                                    :attribute:
     :PROPERTIES:
+    :custom_id: 28ae6392-7875-4231-ac2f-ca8f91dca5c6
     :masd.codec.value: 4
     :END:
 *** softtabstop                                                   :attribute:
     :PROPERTIES:
+    :custom_id: 82d236f4-9634-49d3-837a-a870f3cdde92
     :masd.codec.value: 4
     :END:
 ** cpp                                                              :element:
    :PROPERTIES:
+   :custom_id: ea367869-3438-427f-9df5-925ecaa58553
    :masd.decoration.modeline.editor: vim
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: cpp
@@ -242,23 +300,31 @@ space; keep it technical space agnostic.
    :END:
 *** ft                                                            :attribute:
     :PROPERTIES:
+    :custom_id: d33545f1-a250-4c59-91f1-a76fb26fe51a
     :masd.codec.value: cpp
     :END:
 *** tabstop                                                       :attribute:
     :PROPERTIES:
+    :custom_id: 5f495c1c-82d1-43fd-b1cd-61994833e1f0
     :masd.codec.value: 4
     :END:
 *** expandtab                                                     :attribute:
+    :PROPERTIES:
+    :custom_id: e355f58e-5c15-41b1-9d29-40effe7294a2
+    :END:
 *** shiftwidth                                                    :attribute:
     :PROPERTIES:
+    :custom_id: a207100f-e655-4731-b6f6-9b1a7619bbf0
     :masd.codec.value: 4
     :END:
 *** softtabstop                                                   :attribute:
     :PROPERTIES:
+    :custom_id: 1af26d5c-b615-43ac-9091-c3f2febdac06
     :masd.codec.value: 4
     :END:
 ** sln                                                              :element:
    :PROPERTIES:
+   :custom_id: 6b3f3d15-1eeb-44bd-8a59-21d292bbb7a0
    :masd.decoration.modeline.editor: emacs
    :masd.decoration.modeline.location: top
    :masd.decoration.modeline.technical_space: sln
@@ -266,6 +332,7 @@ space; keep it technical space agnostic.
    :END:
 * apache_v2_0                                                       :element:
   :PROPERTIES:
+  :custom_id: 8c67c729-d906-4cd7-a4ed-96855cef0626
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
@@ -496,6 +563,7 @@ Apache License
 #+end_src
 * bsl_v1_0                                                          :element:
   :PROPERTIES:
+  :custom_id: 8a0fc10a-4c62-4854-9817-5914bcc3f4c1
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
@@ -539,6 +607,7 @@ DEALINGS IN THE SOFTWARE.
 #+end_src
 * gpl_v2                                                            :element:
   :PROPERTIES:
+  :custom_id: 6bf7d3b9-50d1-494e-83d7-af63e47990e8
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
@@ -906,6 +975,7 @@ Public License instead of this License.
 #+end_src
 * gpl_v3                                                            :element:
   :PROPERTIES:
+  :custom_id: a23e266b-ac94-4f85-b6f0-5128c6df63e3
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 
@@ -1613,6 +1683,7 @@ Public License instead of this License.  But first, please read
 #+end_src
 * proprietary                                                       :element:
   :PROPERTIES:
+  :custom_id: 798fdf6c-aa17-46d7-89d4-db51a1925e97
   :masd.codec.stereotypes: masd::decoration::licence
   :END:
 

@@ -10,12 +10,14 @@
 Basic collection types.
 * IEnumerable                                                       :element:
   :PROPERTIES:
+  :custom_id: 8f63b6f7-fa43-4354-9449-0ad5c55077b2
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: IEnumerable
   :END:
 * ICollection                                                       :element:
   :PROPERTIES:
+  :custom_id: 41adf1cb-d4ec-472f-b00a-65d582a06bda
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: ICollection
@@ -23,6 +25,7 @@ Basic collection types.
   :END:
 * IList                                                             :element:
   :PROPERTIES:
+  :custom_id: 87d2b50b-bf93-4fe1-a20a-362aabd52bc6
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: IList
@@ -30,6 +33,7 @@ Basic collection types.
   :END:
 * ArrayList                                                         :element:
   :PROPERTIES:
+  :custom_id: ef464894-e7b2-4343-bfaa-8e77f245c4a3
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: ArrayList
@@ -37,6 +41,7 @@ Basic collection types.
   :END:
 * IDictionary                                                       :element:
   :PROPERTIES:
+  :custom_id: 45ca5b4b-6b09-4df2-a575-c23f825e4d25
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: IDictionary
@@ -44,6 +49,7 @@ Basic collection types.
   :END:
 * Hashtable                                                         :element:
   :PROPERTIES:
+  :custom_id: bc8c359b-595b-48f3-8933-9deaa014ad28
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: Hashtable
@@ -52,6 +58,7 @@ Basic collection types.
 * Specialized                                                        :module:
 ** HybridDictionary                                                 :element:
    :PROPERTIES:
+   :custom_id: 67a80d90-c3fc-41cf-834f-1553214f3337
    :masd.csharp.aspect.requires_static_reference_equals: true
    :masd.csharp.assistant.requires_assistance: true
    :masd.csharp.assistant.method_postfix: HybridDictionary
@@ -59,6 +66,7 @@ Basic collection types.
    :END:
 ** NameValueCollection                                              :element:
    :PROPERTIES:
+   :custom_id: c4ad53e7-c5fc-4fc3-8305-acab89a251fe
    :masd.csharp.aspect.requires_static_reference_equals: true
    :masd.csharp.assistant.requires_assistance: true
    :masd.csharp.assistant.method_postfix: NameValueCollection
@@ -66,6 +74,7 @@ Basic collection types.
    :END:
 * BitArray                                                          :element:
   :PROPERTIES:
+  :custom_id: 3da9364c-0854-4ef7-a6b2-37e56fc750f2
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: BitArray
@@ -73,6 +82,7 @@ Basic collection types.
   :END:
 * Queue                                                             :element:
   :PROPERTIES:
+  :custom_id: 07cca3e7-3b0c-43ba-a63a-41a97e95d3e0
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: Queue
@@ -80,6 +90,7 @@ Basic collection types.
   :END:
 * Stack                                                             :element:
   :PROPERTIES:
+  :custom_id: b8f5f25b-4a31-47ce-854d-97c55ab28d0d
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: Stack
@@ -87,6 +98,7 @@ Basic collection types.
   :END:
 * SortedList                                                        :element:
   :PROPERTIES:
+  :custom_id: e3ce8684-9f15-4079-9e60-7c03a85e6325
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: SortedList

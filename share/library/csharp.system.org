@@ -11,6 +11,7 @@ System types.
 
 * Int16                                                             :element:
   :PROPERTIES:
+  :custom_id: 21e7d9db-28ab-460a-b9d8-92b2bfecfdef
   :masd.mapping.target: masd.lam.numeric.integer16
   :masd.csharp.aspect.requires_static_reference_equals: false
   :masd.csharp.assistant.requires_assistance: true
@@ -21,6 +22,7 @@ System types.
   :END:
 * Int32                                                             :element:
   :PROPERTIES:
+  :custom_id: 3fb4f124-9211-4ed7-9c56-50a7ce92e094
   :masd.mapping.target: masd.lam.numeric.integer32
   :masd.csharp.aspect.requires_static_reference_equals: false
   :masd.csharp.assistant.requires_assistance: true
@@ -31,6 +33,7 @@ System types.
   :END:
 * Int64                                                             :element:
   :PROPERTIES:
+  :custom_id: 4ef72ebe-7361-4b61-bd50-3420e9343f28
   :masd.mapping.target: masd.lam.numeric.integer64
   :masd.csharp.aspect.requires_static_reference_equals: false
   :masd.csharp.assistant.requires_assistance: true

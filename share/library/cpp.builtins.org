@@ -10,6 +10,7 @@
 Hardware-provided built-in types.
 * bool                                                              :element:
   :PROPERTIES:
+  :custom_id: ef048842-de74-48a3-a993-699d86ee8fdd
   :masd.mapping.target: masd.lam.core.boolean
   :masd.helper.family: Boolean
   :masd.cpp.aspect.requires_stream_manipulators: true
@@ -21,6 +22,7 @@ Hardware-provided built-in types.
   :END:
 * char                                                              :element:
   :PROPERTIES:
+  :custom_id: 16d00cbe-ee8d-4bde-a392-eb8cc1d0478a
   :masd.mapping.target: masd.lam.text.character
   :masd.helper.family: Character
   :masd.cpp.streaming.remove_unprintable_characters: false
@@ -33,6 +35,7 @@ Hardware-provided built-in types.
   :END:
 * unsigned char                                                     :element:
   :PROPERTIES:
+  :custom_id: 0dc43db0-ee0b-43a1-a4bb-37dd8bc6b9f6
   :masd.mapping.target: masd.lam.core.byte
   :masd.helper.family: Character
   :masd.cpp.streaming.remove_unprintable_characters: false
@@ -46,6 +49,7 @@ Hardware-provided built-in types.
   :END:
 * int                                                               :element:
   :PROPERTIES:
+  :custom_id: 89f65b31-d470-4130-83ce-a511ed8cb60d
   :masd.mapping.target: masd.lam.numeric.integer
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
@@ -57,6 +61,7 @@ Hardware-provided built-in types.
   :END:
 * unsigned int                                                      :element:
   :PROPERTIES:
+  :custom_id: f84a09d4-c404-44d7-9aa1-f5fd4873efe8
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -69,6 +74,7 @@ Hardware-provided built-in types.
   :END:
 * short                                                             :element:
   :PROPERTIES:
+  :custom_id: d76739df-705c-47c9-96c1-8dfb69daf3cc
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -79,6 +85,7 @@ Hardware-provided built-in types.
   :END:
 * unsigned short                                                    :element:
   :PROPERTIES:
+  :custom_id: b3cf2d13-7ed5-4a2b-942d-eadb8ec97574
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -90,6 +97,7 @@ Hardware-provided built-in types.
   :END:
 * long                                                              :element:
   :PROPERTIES:
+  :custom_id: 078f620a-9b30-4c9d-9d41-08ed86b99a72
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -100,6 +108,7 @@ Hardware-provided built-in types.
   :END:
 * unsigned long                                                     :element:
   :PROPERTIES:
+  :custom_id: dd2a696d-cb59-471b-82a7-251faeea3744
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -111,6 +120,7 @@ Hardware-provided built-in types.
   :END:
 * long long                                                         :element:
   :PROPERTIES:
+  :custom_id: cdac5941-869a-434e-a554-4c0cde40e301
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -120,6 +130,7 @@ Hardware-provided built-in types.
   :END:
 * unsigned long long                                                :element:
   :PROPERTIES:
+  :custom_id: 8807fbf9-7d29-4ead-b9e4-b8a5aa492b25
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -129,6 +140,7 @@ Hardware-provided built-in types.
   :END:
 * float                                                             :element:
   :PROPERTIES:
+  :custom_id: 276f37a1-efe5-41bb-9aad-8dc4cbf65b3c
   :masd.mapping.target: masd.lam.numeric.single_float
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_manual_default_constructor: true
@@ -140,6 +152,7 @@ Hardware-provided built-in types.
   :END:
 * double                                                            :element:
   :PROPERTIES:
+  :custom_id: a103b14e-6466-4cc3-8fb1-09626c297b12
   :masd.mapping.target: masd.lam.numeric.double_float
   :masd.helper.family: Number
   :masd.cpp.aspect.requires_stream_manipulators: true
@@ -152,6 +165,7 @@ Hardware-provided built-in types.
   :END:
 * long double                                                       :element:
   :PROPERTIES:
+  :custom_id: 25c54321-3951-4c3c-b8bd-9b546a0d2711
   :masd.helper.family: Number
   :masd.cpp.inclusion_required: false
   :masd.cpp.aspect.requires_stream_manipulators: true

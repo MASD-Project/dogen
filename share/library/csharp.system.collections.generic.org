@@ -11,12 +11,14 @@ Basic generic collection types.
 
 * IEnumerable                                                       :element:
   :PROPERTIES:
+  :custom_id: 9a4bec2f-873b-4a43-8721-9a3c17bfc2e8
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
   :END:
 * ICollection                                                       :element:
   :PROPERTIES:
+  :custom_id: 9cb58500-d33a-4f9e-9005-d3a7e51d241f
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
@@ -24,6 +26,7 @@ Basic generic collection types.
   :END:
 * IList                                                             :element:
   :PROPERTIES:
+  :custom_id: 817119ba-2ee7-4866-a32e-15f71d1e84d5
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable
@@ -31,6 +34,7 @@ Basic generic collection types.
   :END:
 * List                                                              :element:
   :PROPERTIES:
+  :custom_id: 6fb84a41-6cc6-47fc-a8df-074402ba7f08
   :masd.mapping.target: masd.lam.container.linked_list
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
@@ -39,6 +43,7 @@ Basic generic collection types.
   :END:
 * Array                                                             :element:
   :PROPERTIES:
+  :custom_id: 1897c573-a858-44c1-b868-1e579cf54d77
   :masd.type_parameters.count: 1
   :masd.csharp.aspect.requires_static_reference_equals: true
   :masd.helper.family: Enumerable

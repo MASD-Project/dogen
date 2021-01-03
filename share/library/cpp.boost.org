@@ -10,6 +10,7 @@
 Boost Library types.
 * shared_ptr                                                        :element:
   :PROPERTIES:
+  :custom_id: d7ea9a93-4fee-456a-b0e1-ad2563406e47
   :masd.mapping.target: masd.lam.core.pointer
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
@@ -21,6 +22,7 @@ Boost Library types.
   :END:
 * weak_ptr                                                          :element:
   :PROPERTIES:
+  :custom_id: c43cd093-561a-4554-82a1-e5aa8751dad0
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
@@ -31,6 +33,7 @@ Boost Library types.
   :END:
 * scoped_ptr                                                        :element:
   :PROPERTIES:
+  :custom_id: e13b4476-5ef1-4eb6-981d-cd9023e33e5e
   :masd.helper.family: SmartPointer
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: true
@@ -41,6 +44,7 @@ Boost Library types.
   :END:
 * optional                                                          :element:
   :PROPERTIES:
+  :custom_id: 43f6e516-0bff-4f81-b43a-07be0aa7a67d
   :masd.helper.family: Optional
   :masd.type_parameters.count: 1
   :masd.type_parameters.always_in_heap: false
@@ -52,6 +56,7 @@ Boost Library types.
   :END:
 * variant                                                           :element:
   :PROPERTIES:
+  :custom_id: dff97ad8-bd93-49c0-9d5a-0efd68c719e5
   :masd.helper.family: BoostVariant
   :masd.type_parameters.variable_number_of_parameters: true
   :masd.cpp.aspect.requires_manual_move_constructor: true
@@ -67,6 +72,7 @@ Boost Library types.
 * asio                                                               :module:
 ** io_service                                                       :element:
    :PROPERTIES:
+   :custom_id: 07d984e4-8205-4fed-8688-755434501a2f
    :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :END:
@@ -74,17 +80,20 @@ Boost Library types.
 *** tcp                                                              :module:
 **** socket                                                         :element:
      :PROPERTIES:
+     :custom_id: 7c7ef44a-e9e3-4287-9cac-cef943b17ba9
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
 **** acceptor                                                       :element:
      :PROPERTIES:
+     :custom_id: a5ced8b6-7a1c-44b3-93cd-8488721f3339
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
 * filesystem                                                         :module:
 ** path                                                             :element:
    :PROPERTIES:
+   :custom_id: 7ee6042b-81d3-49d4-9ce8-bc0151f3b007
    :masd.helper.family: BoostPath
    :masd.cpp.streaming.string_conversion_method: generic_string()
    :masd.cpp.aspect.requires_manual_move_constructor: true
@@ -96,6 +105,7 @@ Boost Library types.
 * gregorian                                                          :module:
 ** date                                                             :element:
    :PROPERTIES:
+   :custom_id: 5e503ef3-18c6-4dee-903a-61f94430322b
    :masd.mapping.target: masd.lam.chrono.date
    :masd.helper.family: BoostDate
    :masd.cpp.streaming.requires_quoting: true
@@ -112,6 +122,7 @@ Boost Library types.
 * posix_time                                                         :module:
 ** ptime                                                            :element:
    :PROPERTIES:
+   :custom_id: 1455d85e-7bd5-4ef8-8e8d-12ccadd36d1d
    :masd.mapping.target: masd.lam.chrono.date_time
    :masd.helper.family: BoostPTime
    :masd.cpp.streaming.requires_quoting: true
@@ -127,6 +138,7 @@ Boost Library types.
    :END:
 ** time_duration                                                    :element:
    :PROPERTIES:
+   :custom_id: d1b4dc62-422c-4c81-a293-9f197527957e
    :masd.mapping.target: masd.lam.chrono.time
    :masd.helper.family: BoostTimeDuration
    :masd.cpp.streaming.requires_quoting: true
@@ -142,6 +154,7 @@ Boost Library types.
 * property_tree                                                      :module:
 ** ptree                                                            :element:
    :PROPERTIES:
+   :custom_id: c30a9aa0-5e0f-443e-a1d3-77692769b4fa
    :masd.helper.family: BoostPTree
    :masd.cpp.aspect.requires_manual_move_constructor: true
    :masd.cpp.types.class_header.primary_inclusion_directive: <boost/property_tree/ptree.hpp>
