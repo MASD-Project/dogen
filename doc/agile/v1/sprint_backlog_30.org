@@ -12,40 +12,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-02 Sat 14:17]
+#+CAPTION: Clock summary at [2021-01-03 Sun 14:36]
 | <75>                                                |         |       |       |       |
 | Headline                                            | Time    |       |       |     % |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                        | *76:09* |       |       | 100.0 |
+| *Total time*                                        | *80:27* |       |       | 100.0 |
 |-----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                             | 76:09   |       |       | 100.0 |
-| Active                                              |         | 76:09 |       | 100.0 |
-| Edit release notes for previous sprint              |         |       |  6:04 |   8.0 |
+| Stories                                             | 80:27   |       |       | 100.0 |
+| Active                                              |         | 80:27 |       | 100.0 |
+| Edit release notes for previous sprint              |         |       |  6:04 |   7.5 |
 | Create a demo and presentation for previous sprint  |         |       |  0:34 |   0.7 |
-| Sprint and product backlog grooming                 |         |       |  2:52 |   3.8 |
-| Solve emacs issues                                  |         |       |  2:48 |   3.7 |
-| Add support for reading org mode documents          |         |       | 19:46 |  26.0 |
-| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.4 |
-| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.5 |
-| Add org-mode codec for input                        |         |       |  8:56 |  11.7 |
-| Convert library models into org                     |         |       |  1:26 |   1.9 |
-| Convert reference models into org                   |         |       |  2:56 |   3.9 |
+| Sprint and product backlog grooming                 |         |       |  2:52 |   3.6 |
+| Solve emacs issues                                  |         |       |  2:48 |   3.5 |
+| Add support for reading org mode documents          |         |       | 19:46 |  24.6 |
+| Remove leading and trailing new lines from comments |         |       |  1:03 |   1.3 |
+| Stitch templates are consuming whitespace           |         |       |  1:56 |   2.4 |
+| Add org-mode codec for input                        |         |       |  8:56 |  11.1 |
+| Convert library models into org                     |         |       |  1:26 |   1.8 |
+| Convert reference models into org                   |         |       |  2:56 |   3.6 |
 | Assorted improvements to org model                  |         |       |  0:37 |   0.8 |
-| Create a model to org transform                     |         |       |  3:57 |   5.2 |
-| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.7 |
-| Split orchestration tests by model and codec        |         |       |  1:58 |   2.6 |
-| Create a "frozen" project                           |         |       |  1:49 |   2.4 |
+| Create a model to org transform                     |         |       |  3:57 |   4.9 |
+| Remove JSON and Dia models for Dogen                |         |       |  1:17 |   1.6 |
+| Split orchestration tests by model and codec        |         |       |  1:58 |   2.4 |
+| Create a "frozen" project                           |         |       |  1:49 |   2.3 |
 | Add tags to org model                               |         |       |  1:15 |   1.6 |
 | Inject custom IDs into org documents                |         |       |  0:38 |   0.8 |
-| Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.2 |
-| Add PlantUML markup language support                |         |       |  5:29 |   7.2 |
-| Merge dia codec model into main codec model         |         |       |  3:04 |   4.0 |
-| Add include directories to models                   |         |       |  3:31 |   4.6 |
-| Move documentation transform to codec model         |         |       |  1:36 |   2.1 |
+| Allow spaces in headlines for org mode documents    |         |       |  0:54 |   1.1 |
+| Add PlantUML markup language support                |         |       |  5:29 |   6.8 |
+| Merge dia codec model into main codec model         |         |       |  3:04 |   3.8 |
+| Add include directories to models                   |         |       |  3:31 |   4.4 |
+| Move documentation transform to codec model         |         |       |  1:36 |   2.0 |
 | Analysis on org mode round-tripping                 |         |       |  0:32 |   0.7 |
-| Add org-to-org tests                                |         |       |  0:50 |   1.1 |
+| Add org-to-org tests                                |         |       |  0:50 |   1.0 |
+| Add missing provenance details to codec models      |         |       |  0:54 |   1.1 |
 | Add comments to PlantUML diagrams                   |         |       |  0:15 |   0.3 |
-| Consider replacing properties drawer with tables    |         |       |  0:06 |   0.1 |
+| Consider replacing properties drawer with tables    |         |       |  3:30 |   4.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1145,6 +1146,22 @@ there are no diffs. We need to create some hacks around the current
 implementation of artefacts in the codec model; this will be fixed
 when we start using the PM properly.
 
+*** COMPLETED Add missing provenance details to codec models          :story:
+    CLOSED: [2021-01-03 Sun 14:19]
+    :LOGBOOK:
+    CLOCK: [2021-01-03 Sun 13:25]--[2021-01-03 Sun 14:19] =>  0:54
+    :END:
+
+At present we are not populating:
+
+- file name
+- line number
+
+For codec elements. This makes logging harder, especially prior to
+reading the model name from meta-data. We should be able to populate
+these properties for almost all codecs (not possible in Dia). We
+should at least add support for org and perhaps JSON.
+
 *** STARTED Add comments to PlantUML diagrams                         :story:
     :LOGBOOK:
     CLOCK: [2021-01-01 Fri 18:33]--[2021-01-01 Fri 18:36] =>  0:03
@@ -1156,6 +1173,10 @@ diagram.
 
 *** STARTED Consider replacing properties drawer with tables          :story:
     :LOGBOOK:
+    CLOCK: [2021-01-03 Sun 14:20]--[2021-01-03 Sun 14:36] =>  0:16
+    CLOCK: [2021-01-03 Sun 11:55]--[2021-01-03 Sun 13:24] =>  1:29
+    CLOCK: [2021-01-02 Sat 19:00]--[2021-01-02 Sat 19:48] =>  0:48
+    CLOCK: [2021-01-02 Sat 16:39]--[2021-01-02 Sat 17:30] =>  0:51
     CLOCK: [2021-01-02 Sat 10:27]--[2021-01-02 Sat 10:33] =>  0:06
     :END:
 
@@ -1167,7 +1188,6 @@ does have some downsides:
 
 An alternative would be to make these tables:
 
-#+begin_dogen
 | Key                              | Value                               |
 |----------------------------------+-------------------------------------|
 | masd.codec.dia.comment           | true                                |
@@ -1180,7 +1200,6 @@ An alternative would be to make these tables:
 | masd.codec.reference             | masd.variability                    |
 | masd.codec.reference             | dogen.profiles                      |
 | masd.variability.profile         | dogen.profiles.base.default_profile |
-#+end_dogen
 
 The table would be fairly easy to parse - more or less just a pipe
 separated input, with trimming. We should try to generate these and
@@ -1206,6 +1225,13 @@ list:
 Notes:
 
 - custom id can remain as a property.
+- add caption.
+
+*** Add custom IDs to attributes in org model                         :story:
+
+At present we do not seem to be reading the custom id properties in
+attributes. This means that if we add them to a model, rountripping
+will fail. We should read them in.
 
 *** Artefacts do not belong in codec models                           :story:
 
