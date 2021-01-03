@@ -26,20 +26,17 @@ codec_provenance::codec_provenance()
     : model_type_(static_cast<dogen::identification::entities::model_type>(0)) { }
 
 codec_provenance::codec_provenance(
-    const dogen::identification::entities::model_id& model_id,
     const dogen::identification::entities::model_type model_type,
     const dogen::identification::entities::sha1_hash& model_sha1_hash,
     const dogen::identification::entities::codec_id& codec_id,
     const dogen::identification::entities::codec_location& location)
-    : model_id_(model_id),
-      model_type_(model_type),
+    : model_type_(model_type),
       model_sha1_hash_(model_sha1_hash),
       codec_id_(codec_id),
       location_(location) { }
 
 void codec_provenance::swap(codec_provenance& other) noexcept {
     using std::swap;
-    swap(model_id_, other.model_id_);
     swap(model_type_, other.model_type_);
     swap(model_sha1_hash_, other.model_sha1_hash_);
     swap(codec_id_, other.codec_id_);
@@ -47,8 +44,7 @@ void codec_provenance::swap(codec_provenance& other) noexcept {
 }
 
 bool codec_provenance::operator==(const codec_provenance& rhs) const {
-    return model_id_ == rhs.model_id_ &&
-        model_type_ == rhs.model_type_ &&
+    return model_type_ == rhs.model_type_ &&
         model_sha1_hash_ == rhs.model_sha1_hash_ &&
         codec_id_ == rhs.codec_id_ &&
         location_ == rhs.location_;
@@ -58,22 +54,6 @@ codec_provenance& codec_provenance::operator=(codec_provenance other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::identification::entities::model_id& codec_provenance::model_id() const {
-    return model_id_;
-}
-
-dogen::identification::entities::model_id& codec_provenance::model_id() {
-    return model_id_;
-}
-
-void codec_provenance::model_id(const dogen::identification::entities::model_id& v) {
-    model_id_ = v;
-}
-
-void codec_provenance::model_id(const dogen::identification::entities::model_id&& v) {
-    model_id_ = std::move(v);
 }
 
 dogen::identification::entities::model_type codec_provenance::model_type() const {

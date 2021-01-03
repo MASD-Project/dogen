@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include "dogen.identification/types/entities/codec_id.hpp"
-#include "dogen.identification/types/entities/model_id.hpp"
 #include "dogen.identification/types/entities/sha1_hash.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.identification/types/entities/codec_location.hpp"
@@ -48,23 +47,12 @@ public:
 
 public:
     codec_provenance(
-        const dogen::identification::entities::model_id& model_id,
         const dogen::identification::entities::model_type model_type,
         const dogen::identification::entities::sha1_hash& model_sha1_hash,
         const dogen::identification::entities::codec_id& codec_id,
         const dogen::identification::entities::codec_location& location);
 
 public:
-    /**
-     * @brief ID for a model.
-     */
-    /**@{*/
-    const dogen::identification::entities::model_id& model_id() const;
-    dogen::identification::entities::model_id& model_id();
-    void model_id(const dogen::identification::entities::model_id& v);
-    void model_id(const dogen::identification::entities::model_id&& v);
-    /**@}*/
-
     /**
      * @brief Type of the model where this element originates from.
      */
@@ -114,7 +102,6 @@ public:
     codec_provenance& operator=(codec_provenance other);
 
 private:
-    dogen::identification::entities::model_id model_id_;
     dogen::identification::entities::model_type model_type_;
     dogen::identification::entities::sha1_hash model_sha1_hash_;
     dogen::identification::entities::codec_id codec_id_;

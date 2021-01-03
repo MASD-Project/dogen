@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 
 namespace dogen::identification::entities {
 
@@ -35,32 +36,36 @@ namespace dogen::identification::entities {
 class codec_location final {
 public:
     codec_location(const codec_location&) = default;
-    codec_location(codec_location&&) = default;
     ~codec_location() = default;
 
 public:
     codec_location();
 
 public:
-    codec_location(
-        const long line,
-        const long column);
+    codec_location(codec_location&& rhs);
 
 public:
+    codec_location(
+        const boost::filesystem::path& filename,
+        const long line);
+
+public:
+    /**
+     * @brief Full path to the file that was read, if any.
+     */
+    /**@{*/
+    const boost::filesystem::path& filename() const;
+    boost::filesystem::path& filename();
+    void filename(const boost::filesystem::path& v);
+    void filename(const boost::filesystem::path&& v);
+    /**@}*/
+
     /**
      * @brief Line number where the element was defined.
      */
     /**@{*/
     long line() const;
     void line(const long v);
-    /**@}*/
-
-    /**
-     * @brief Column number where the element was defined.
-     */
-    /**@{*/
-    long column() const;
-    void column(const long v);
     /**@}*/
 
 public:
@@ -74,8 +79,8 @@ public:
     codec_location& operator=(codec_location other);
 
 private:
+    boost::filesystem::path filename_;
     long line_;
-    long column_;
 };
 
 }

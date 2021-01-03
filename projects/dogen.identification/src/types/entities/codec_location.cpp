@@ -23,24 +23,27 @@
 namespace dogen::identification::entities {
 
 codec_location::codec_location()
-    : line_(static_cast<long>(0)),
-      column_(static_cast<long>(0)) { }
+    : line_(static_cast<long>(0)) { }
+
+codec_location::codec_location(codec_location&& rhs)
+    : filename_(std::move(rhs.filename_)),
+      line_(std::move(rhs.line_)) { }
 
 codec_location::codec_location(
-    const long line,
-    const long column)
-    : line_(line),
-      column_(column) { }
+    const boost::filesystem::path& filename,
+    const long line)
+    : filename_(filename),
+      line_(line) { }
 
 void codec_location::swap(codec_location& other) noexcept {
     using std::swap;
+    swap(filename_, other.filename_);
     swap(line_, other.line_);
-    swap(column_, other.column_);
 }
 
 bool codec_location::operator==(const codec_location& rhs) const {
-    return line_ == rhs.line_ &&
-        column_ == rhs.column_;
+    return filename_ == rhs.filename_ &&
+        line_ == rhs.line_;
 }
 
 codec_location& codec_location::operator=(codec_location other) {
@@ -49,20 +52,28 @@ codec_location& codec_location::operator=(codec_location other) {
     return *this;
 }
 
+const boost::filesystem::path& codec_location::filename() const {
+    return filename_;
+}
+
+boost::filesystem::path& codec_location::filename() {
+    return filename_;
+}
+
+void codec_location::filename(const boost::filesystem::path& v) {
+    filename_ = v;
+}
+
+void codec_location::filename(const boost::filesystem::path&& v) {
+    filename_ = std::move(v);
+}
+
 long codec_location::line() const {
     return line_;
 }
 
 void codec_location::line(const long v) {
     line_ = v;
-}
-
-long codec_location::column() const {
-    return column_;
-}
-
-void codec_location::column(const long v) {
-    column_ = v;
 }
 
 }

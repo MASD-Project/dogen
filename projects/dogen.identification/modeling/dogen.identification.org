@@ -42,17 +42,10 @@ Qualified name for an element.
 
 ** codec provenance                                                 :element:
    :PROPERTIES:
-   :custom_id: O3
+   :custom_id: 30866ffa-2b2a-4324-9a4a-ba84c8601856
    :END:
 
 Source of a model element in the codec dimension.
-
-*** model id                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: model_id
-    :END:
-
-ID for a model.
 
 *** model type                                                    :attribute:
     :PROPERTIES:
@@ -144,10 +137,17 @@ ID of the meta-element in the physical dimension.
 
 ** codec location                                                   :element:
    :PROPERTIES:
-   :custom_id: O9
+   :custom_id: 9423280e-9b15-45f0-a3b3-612d9a329f36
    :END:
 
 Location of a modeling element in the codec dimension.
+
+*** filename                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the file that was read, if any.
 
 *** line                                                          :attribute:
     :PROPERTIES:
@@ -155,13 +155,6 @@ Location of a modeling element in the codec dimension.
     :END:
 
 Line number where the element was defined.
-
-*** column                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: long
-    :END:
-
-Column number where the element was defined.
 
 ** logical provenance                                               :element:
    :PROPERTIES:

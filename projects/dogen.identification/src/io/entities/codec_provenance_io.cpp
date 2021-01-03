@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include "dogen.identification/io/entities/codec_id_io.hpp"
-#include "dogen.identification/io/entities/model_id_io.hpp"
 #include "dogen.identification/io/entities/sha1_hash_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.identification/io/entities/codec_location_io.hpp"
@@ -31,7 +30,6 @@ namespace dogen::identification::entities {
 std::ostream& operator<<(std::ostream& s, const codec_provenance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::codec_provenance\"" << ", "
-      << "\"model_id\": " << v.model_id() << ", "
       << "\"model_type\": " << v.model_type() << ", "
       << "\"model_sha1_hash\": " << v.model_sha1_hash() << ", "
       << "\"codec_id\": " << v.codec_id() << ", "

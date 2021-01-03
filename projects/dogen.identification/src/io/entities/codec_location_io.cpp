@@ -26,8 +26,8 @@ namespace dogen::identification::entities {
 std::ostream& operator<<(std::ostream& s, const codec_location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::codec_location\"" << ", "
-      << "\"line\": " << v.line() << ", "
-      << "\"column\": " << v.column()
+      << "\"filename\": " << "\"" << v.filename().generic_string() << "\"" << ", "
+      << "\"line\": " << v.line()
       << " }";
     return(s);
 }
