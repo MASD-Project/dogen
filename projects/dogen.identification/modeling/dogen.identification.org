@@ -142,7 +142,7 @@ ID of the meta-element in the physical dimension.
 
 Location of a modeling element in the codec dimension.
 
-*** filename                                                      :attribute:
+*** full path                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::filesystem::path
     :END:

@@ -65,7 +65,7 @@ ID of the meta-element in the physical dimension.
 end note
 
         class codec_location #F7E5FF {
-                +{field} filename boost::filesystem::path
+                +{field} full_path boost::filesystem::path
                 +{field} line long
         }
 

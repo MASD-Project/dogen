@@ -46,7 +46,7 @@ public:
 
 public:
     codec_location(
-        const boost::filesystem::path& filename,
+        const boost::filesystem::path& full_path,
         const long line);
 
 public:
@@ -54,10 +54,10 @@ public:
      * @brief Full path to the file that was read, if any.
      */
     /**@{*/
-    const boost::filesystem::path& filename() const;
-    boost::filesystem::path& filename();
-    void filename(const boost::filesystem::path& v);
-    void filename(const boost::filesystem::path&& v);
+    const boost::filesystem::path& full_path() const;
+    boost::filesystem::path& full_path();
+    void full_path(const boost::filesystem::path& v);
+    void full_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -79,7 +79,7 @@ public:
     codec_location& operator=(codec_location other);
 
 private:
-    boost::filesystem::path filename_;
+    boost::filesystem::path full_path_;
     long line_;
 };
 
