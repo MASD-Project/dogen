@@ -97,6 +97,7 @@ private:
     bool in_drawer_;
     bool in_greater_block_;
     bool is_first_line_;
+    unsigned int line_number_;
 };
 
 }

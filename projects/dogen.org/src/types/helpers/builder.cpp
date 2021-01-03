@@ -52,7 +52,8 @@ using entities::block_type;
 builder::builder() : root_(boost::make_shared<node>()),
                      in_drawer_(false),
                      in_greater_block_(false),
-                     is_first_line_(true) {
+                     is_first_line_(true),
+                     line_number_(0) {
     root_->data().level(0);
     stack_.push(root_);
 }
@@ -183,12 +184,15 @@ entities::headline builder::make_headline(boost::shared_ptr<node> n) const {
 
 void builder::add_line(const std::string& s) {
     ensure_stack_not_empty();
-    BOOST_LOG_SEV(lg, debug) << "Processing line: '" << s << "'";
+    ++line_number_;
+    BOOST_LOG_SEV(lg, debug) << "Processing line number: "
+                             << line_number_ << ". Contents: "
+                             << s << "'";
 
     /*
      * First we try to parse the line as if it was a headline.
      */
-    const auto oh(parser::try_parse_headline(s));
+    const auto oh(parser::try_parse_headline(s, line_number_));
     if (oh) {
         /*
          * Flush any pending content we may have.

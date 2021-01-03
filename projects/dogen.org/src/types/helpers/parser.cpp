@@ -72,8 +72,8 @@ bool parser::is_empty_or_whitespace(const std::string& s) {
     return false;
 }
 
-boost::optional<entities::headline>
-parser::try_parse_headline(const std::string& s) {
+boost::optional<entities::headline> parser::try_parse_headline(
+    const std::string& s, const unsigned int line_number) {
     /*
      * If there is only white space in the string, there is nothing to
      * worry about.
@@ -104,6 +104,7 @@ parser::try_parse_headline(const std::string& s) {
     is >> token;
 
     entities::headline r;
+    r.line_number(line_number);
     r.level(static_cast<unsigned int>(token.size()));
 
     /*

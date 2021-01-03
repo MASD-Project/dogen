@@ -56,7 +56,7 @@ public:
      * string is not a headline returns an empty optional.
      */
     static boost::optional<entities::headline>
-    try_parse_headline(const std::string& s);
+    try_parse_headline(const std::string& s, const unsigned int line_number);
 
     /**
      * @brief Attempts to parse the string as an affiliated keyword.
