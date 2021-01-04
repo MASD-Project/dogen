@@ -21,8 +21,6 @@
 #ifndef DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 #define DOGEN_CODEC_TYPES_TRANSFORMS_MODEL_TO_ORG_ARTEFACT_TRANSFORM_HPP
 
-#include "dogen.org/types/entities/block.hpp"
-#include "dogen.org/types/entities/block_type.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -33,6 +31,8 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.org/types/entities/block.hpp"
+#include "dogen.org/types/entities/block_type.hpp"
 #include "dogen.org/types/entities/document.hpp"
 #include "dogen.org/types/entities/drawer_content.hpp"
 #include "dogen.codec/types/entities/element.hpp"
