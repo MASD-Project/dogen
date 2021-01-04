@@ -103,7 +103,7 @@ else()
     message(STATUS "CCache NOT found.")
 endif()
 
-project(DOGEN LANGUAGES CXX VERSION 1.0.30)
+project(DOGEN LANGUAGES CXX VERSION 1.0.31)
 
 #
 # add our own modules

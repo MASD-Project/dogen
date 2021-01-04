@@ -17,13 +17,6 @@ task juggler installed:
 
 ** Software Development
 
-*** Move to org-mode
-   :PROPERTIES:
-   :EFFORT:   26d
-   :BLOCKER:  previous-sibling
-   :allocate: s30
-   :END:
-
 *** Physical model clean-up
    :PROPERTIES:
    :EFFORT:   26d
@@ -68,17 +61,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-12-14
+    :start: 2021-01-04
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 30
-   :PROPERTIES:
-   :resource_id: s30
-   :END:
 ** Sprint 31
    :PROPERTIES:
    :resource_id: s31
