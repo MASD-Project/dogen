@@ -15,11 +15,10 @@
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
-Provides support for encoding and decoding Emacs's org-mode
-documents.
+Provides support for encoding and decoding Emacs's org-mode documents.
 
-The support is very basic and focuses only on the features
-of org mode required by Dogen.
+The support is very basic and focuses only on the features of org mode
+required by Dogen.
 
 * entities                                                           :module:
   :PROPERTIES:
@@ -65,8 +64,38 @@ Top-level headlines in document.
 
 ** headline                                                         :element:
    :PROPERTIES:
-   :custom_id: O4
+   :custom_id: 2ae8829f-db42-4ab8-a2c3-627ae2b0431d
    :END:
+
+Represents a headline in org mode.
+
+Headlines and Sections
+
+https://orgmode.org/worg/dev/org-syntax.html#Headlines_and_Sections
+
+A headline is defined as:
+
+STARS KEYWORD PRIORITY TITLE TAGS
+
+STARS is a string starting at column 0, containing at least one
+asterisk (and up to org-inlinetask-min-level if org-inlinetask library
+is loaded) and ended by a space character. The number of asterisks is
+used to define the level of the headline. It’s the sole compulsory
+part of a headline.
+
+KEYWORD is a TODO keyword, which has to belong to the list defined in
+org-todo-keywords-1. Case is significant.
+
+PRIORITY is a priority cookie, i.e. a single letter preceded by a hash
+sign # and enclosed within square brackets.
+
+TITLE can be made of any character but a new line. Though, it will
+match after every other part have been matched.
+
+TAGS is made of words containing any alpha-numeric character,
+underscore, at sign, hash sign or percent sign, and separated with
+colons.
+
 *** line number                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: unsigned int

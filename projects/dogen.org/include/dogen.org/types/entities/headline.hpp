@@ -38,6 +38,36 @@
 
 namespace dogen::org::entities {
 
+/**
+ * @brief Represents a headline in org mode.
+ *
+ * Headlines and Sections
+ *
+ * https://orgmode.org/worg/dev/org-syntax.html#Headlines_and_Sections
+ *
+ * A headline is defined as:
+ *
+ * STARS KEYWORD PRIORITY TITLE TAGS
+ *
+ * STARS is a string starting at column 0, containing at least one
+ * asterisk (and up to org-inlinetask-min-level if org-inlinetask library
+ * is loaded) and ended by a space character. The number of asterisks is
+ * used to define the level of the headline. It’s the sole compulsory
+ * part of a headline.
+ *
+ * KEYWORD is a TODO keyword, which has to belong to the list defined in
+ * org-todo-keywords-1. Case is significant.
+ *
+ * PRIORITY is a priority cookie, i.e. a single letter preceded by a hash
+ * sign # and enclosed within square brackets.
+ *
+ * TITLE can be made of any character but a new line. Though, it will
+ * match after every other part have been matched.
+ *
+ * TAGS is made of words containing any alpha-numeric character,
+ * underscore, at sign, hash sign or percent sign, and separated with
+ * colons.
+ */
 class headline final {
 public:
     headline(const headline&) = default;

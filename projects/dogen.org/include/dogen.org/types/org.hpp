@@ -26,11 +26,10 @@
 #endif
 
 /**
- * @brief Provides support for encoding and decoding Emacs's org-mode
- * documents.
+ * @brief Provides support for encoding and decoding Emacs's org-mode documents.
  *
- * The support is very basic and focuses only on the features
- * of org mode required by Dogen.
+ * The support is very basic and focuses only on the features of org mode
+ * required by Dogen.
  */
 namespace dogen::org {
 }
