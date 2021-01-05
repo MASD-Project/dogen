@@ -15477,7 +15477,20 @@ load testing (requests per second, size, etc).
 
 Links:
 
-- https://github.com/sepehrdaddev/Xerxes: DOS tool
+- [[https://github.com/sepehrdaddev/Xerxes][Xerxes GH]]: DOS tool
+- [[https://ntietz.com/tech-blog/load-testing-is-hard-but-why/][Load testing is hard, and the tools are... not great. But why?]]: blog
+  post on load testing. [[https://news.ycombinator.com/item?id=25641234][HN discussion]].
+- [[https://github.com/tsenart/vegeta][vegeta GH]]: "Vegeta is a versatile HTTP load testing tool built out
+  of a need to drill HTTP services with a constant request rate. It
+  can be used both as a command line utility and a library."
+- [[https://en.wikipedia.org/wiki/Apache_JMeter][Apache JMeter wikipedia]]: "Apache JMeter is an Apache project that
+  can be used as a load testing tool for analyzing and measuring the
+  performance of a variety of services, with a focus on web
+  applications."
+- [[https://en.wikipedia.org/wiki/Gatling_(software)][Gatling wikipedia]]: "Gatling is an open-source load- and
+  performance-testing framework based on Scala, Akka and Netty."
+- https://k6.io/: Open source load testing tool and SaaS
+for engineering teams.
 
 *** Add support for user supplied test data sets                      :story:
 

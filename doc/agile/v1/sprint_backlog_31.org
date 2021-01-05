@@ -11,20 +11,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-05 Tue 00:06]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *3:09* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 3:09   |      |      | 100.0 |
-| Active                                 |        | 3:09 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 3:09 | 100.0 |
+#+CAPTION: Clock summary at [2021-01-05 Tue 22:47]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *6:33* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 6:33   |      |      | 100.0 |
+| Active                                             |        | 6:33 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:06 |  93.1 |
+| Create a demo and presentation for previous sprint |        |      | 0:27 |   6.9 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2021-01-05 Tue 22:06]
     :LOGBOOK:
+    CLOCK: [2021-01-05 Tue 22:34]--[2021-01-05 Tue 22:47] =>  0:13
+    CLOCK: [2021-01-05 Tue 20:07]--[2021-01-05 Tue 21:11] =>  1:04
+    CLOCK: [2021-01-05 Tue 18:27]--[2021-01-05 Tue 20:07] =>  1:40
     CLOCK: [2021-01-04 Mon 22:43]--[2021-01-05 Tue 00:05] =>  1:22
     CLOCK: [2021-01-04 Mon 22:31]--[2021-01-04 Mon 22:42] =>  0:11
     CLOCK: [2021-01-04 Mon 20:25]--[2021-01-04 Mon 22:01] =>  1:36
@@ -34,35 +39,33 @@ Add github release notes for previous sprint.
 
 Release announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1338921450623930373][twitter]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6730489589905154048/][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1346587523187937281][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1030-est%C3%A1dio-joaquim-morais-activity-6752353683461304320-zKp7/][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 #+begin_src markdown
-**NOTE: Draft Release Notes**
-
 ![Estadio](https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/108163652_3035579726477117_9033283849917525599_n.jpg?_nc_cat=106&ccb=2&_nc_sid=8bfeb9&_nc_ohc=q2MqbCT1YhgAX_zmBps&_nc_ht=scontent.flhr4-1.fna&oh=48ca18f3dd13f0a746ea29458f643993&oe=6018A9EA)
 _Municipal stadium in Moçamedes, Namibe. (C) 2020 [Administração Municipal De Moçâmedes](https://www.facebook.com/permalink.php?id=1473211179380654&story_fbid=3035581253143631)._
 
 # Introduction
 
-Happy new year! The first release of the year is a bit of a bumper one: we finally managed to add support for [org-mode](https://orgmode.org), and transitioned _all_ of Dogen to it. It was a mammoth effort, consuming the entirety of the holiday season, but it is somewhat refreshing to finally add a significant user facing feature. Alas, this is also a bit of a bitter-sweet release because we now have more or less run out of coding time, and need to redirect our focus towards writing the PhD thesis. On the plus side, the architecture is now up-to-date with the conceptual model - mostly - and the bits that aren't, are fairly straightforward (famous last words). And this is nothing new; Dogen development has always oscillated between theory and practice. If you recall, a couple of years ago we had to take a nine-month coding break to learn about the theoretical underpinnings of [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) and then resumed coding on [Sprint 8](https://github.com/MASD-Project/dogen/releases/tag/v1.0.08) for what turned out to be a 22-sprint marathon (pun intended) to apply all that was learned. Sprint 30 brings this long cycle to a close - though this time we are hoping our travels through the literature will be a lot shorter. But lets not get too lost talking about the future, and instead focus on the release at hand.
+Happy new year! The first release of the year is a bit of a bumper one: we finally managed to add support for [org-mode](https://orgmode.org), and transitioned _all_ of Dogen to it. It was a mammoth effort, consuming the entirety of the holiday season, but it is refreshing to finally be able to add significant user facing features again. Alas, this is also a bit of a bitter-sweet release because we have more or less run out of coding time, and need to redirect our efforts towards writing the PhD thesis. On the plus side, the architecture is now up-to-date with the conceptual model, mostly, and the bits that aren't are fairly straightforward (famous last words). And this is nothing new; Dogen development has always oscillated between theory and practice. If you recall, a couple of years ago we had to take a nine-month coding break to learn about the theoretical underpinnings of [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) and then resumed coding on [Sprint 8](https://github.com/MASD-Project/dogen/releases/tag/v1.0.08) for what turned out to be a 22-sprint-long marathon (pun intended), where we tried to apply all that was learned to the code base. Sprint 30 brings this long cycle to a close, and begins a new one; though, this time round, we are hoping for far swifter travels around the literature. But I digress. Lets not get lost talking about the future, and focus instead on the release at hand. And _what_ a release it was.
 
 # User visible changes
 
 This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail.
 
-[![Sprint 1.0.30 Demo](https://img.youtube.com/vi/FEqQVCWo0S4/0.jpg)](https://youtu.be/FEqQVCWo0S4)
+[![Sprint 1.0.30 Demo](https://img.youtube.com/vi/ei8B1Pine34/0.jpg)](https://youtu.be/ei8B1Pine34)
 _Video 1: Sprint 30 Demo._
 
 ## Org-mode support
 
-A target that we've been chasing for the longest time is the ability to create models using [org-mode](https://orgmode.org). We use org-mode (and [emacs](https://www.gnu.org/software/emacs)) for pretty much everything in Dogen, such time keeping and task management - it's how we manage our [product](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org) and [sprint backlogs](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org), for one - and we'll soon be using it to write [academic papers](https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/) too. It's just an amazing tool with a great tooling ecosystem, so it seemed only natural to try and see if we could make use of it for modeling too. Now, even though we are very comfortable with org-mode, this is not a decision to be taken lightly because we've been using [Dia](https://wiki.gnome.org/Apps/Dia) since the inception of Dogen, over eight years ago.
+A target that we've been chasing for the longest time is the ability to create models using [org-mode](https://orgmode.org). We use org-mode (and [emacs](https://www.gnu.org/software/emacs)) for pretty much everything in Dogen, such time keeping and task management - it's how we manage our [product](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org) and [sprint backlogs](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org), for one - and we'll soon be using it to write [academic papers](https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/) too. It's just an amazing tool with a great tooling ecosystem, so it seemed only natural to try and see if we could make use of it for modeling too. Now, even though we are very comfortable with org-mode, this is not a decision to be taken lightly because we've been using [Dia](https://wiki.gnome.org/Apps/Dia) since Dogen's inception, over eight years ago.
 
 ![Dia diagram](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/colour_coded_uml_diagrams.png)
 _Figure 1: Dia diagram for a Dogen model with the introduction of colouring, Dogen [v1.0.06](https://github.com/MASD-Project/dogen/releases/tag/v1.0.06)_
 
-As much as we profoundly love Dia, the truth is we've had concerns about relying on it _too much_ due to its [sparse maintenance](https://gitlab.gnome.org/GNOME/dia). In particular, Dia relies on an old version of GTK, meaning it could get pulled from distributions at any time; we've already had a similar experience with [Gnome Referencer](https://tracker.debian.org/news/937606/removed-122-2-from-unstable/), which wasn't at all pleasant. In addition, there are a number of "papercuts" that are mildly annoying, if livable, and which will probably not be addressed; we've curated a list of [such issues](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_28.org#dia-limitations-that-impact-dogen-usage), in the hope of _one day_ fixing these problems upstream. The direction of travel for the maintenance is also not entirely aligned with our needs; for example, we recently saw the removal of python support in Dia - at least in the version which ships with Debian - a feature in which we relied upon. All of this to say that we've had a number of ongoing worries that motivated our decision to move away from Dia. However,  I don't want to sound too negative here - and please don't take any of this as a criticism to Dia or its developers. Dia is an absolutely brilliant tool, and we have used it for over two decades; It is great at what it does, and we'll continue to use it for free modeling. Nonetheless, it has become increasingly clear that the directions of Dia and Dogen have started to diverge over the last few years, and we could not ignore that. I'd like to take this opportunity to give a huge thanks to all of those involved in Dia (past and present); they have certainly created an amazing tool that stood the test of time. Also, although we are moving away from Dia use in mainline Dogen, we will continue to support the Dia codec and we have tests to ensure that the current set of features [will continue to work](https://github.com/MASD-Project/frozen).
+As much as we profoundly love Dia, the truth is we've had concerns about relying on it _too much_ due to its [sparse maintenance](https://gitlab.gnome.org/GNOME/dia). In particular, Dia relies on an old version of GTK, meaning it could get pulled from distributions at any time; we've already had a similar experience with [Gnome Referencer](https://tracker.debian.org/news/937606/removed-122-2-from-unstable/), which wasn't at all pleasant. In addition, there are a number of "papercuts" that are mildly annoying, if livable, and which will probably not be addressed; we've curated a list of [such issues](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_28.org#dia-limitations-that-impact-dogen-usage), in the hope of _one day_ fixing these problems upstream. The direction of travel for the maintenance is also not entirely aligned with our needs. For example, we recently saw the removal of python support in Dia - at least in the version which ships with Debian - a feature in which we relied upon heavily, and intended to do more so in the future. All of this to say that we've had a number of ongoing worries that motivated our decision to move away from Dia. However,  I don't want to sound too negative here - and please don't take any of this as a criticism to Dia or its developers. Dia is an absolutely brilliant tool, and we have used it for over two decades; It is great at what it does, and we'll continue to use it for free modeling. Nonetheless, it has become increasingly clear that the directions of Dia and Dogen have started to diverge over the last few years, and we could not ignore that. I'd like to take this opportunity to give a huge thanks to all of those involved in Dia (past and present); they have certainly created an amazing tool that stood the test of time. Also, although we are moving away from Dia use in mainline Dogen, we will continue to support the Dia codec and we have tests to ensure that the current set of features [will continue to work](https://github.com/MASD-Project/frozen).
 
 That's that for the rationale for moving away from Dia. But why org-mode? We came up with a nice laundry list of reasons:
 
@@ -73,12 +76,12 @@ That's that for the rationale for moving away from Dia. But why org-mode? We cam
 - **Models as documentation**: Dogen aims to take the approach of "Literate Modeling" described in papers such as [Literate Modelling - Capturing Business Knowledge with the UML](https://discovery.ucl.ac.uk/id/eprint/933/1/10.0_Literate_Modelling.pdf). It was clear from the start that a tool like Dia would not be able to capture the wealth of information we intended to add to the models. Org-mode on the other hand is the ideal format to bring disparate types of information together (see [Replacing Jupyter with Orgmode](https://rgoswami.me/posts/jupyter-orgmode) for an example of the sort of thing we have in mind).
 - **Integration with org-babel**: Since models contain fragments of source code, org-mode's support for [working with source code](https://orgmode.org/manual/Working-with-Source-Code.html) will come in handy. This will immediately be really useful for handling text templates, and even more so in the future when we add support for code merging.
 
-Over the past few sprints we've been carrying out a fair bit of experimentation on the side, generating org-mode files from the existing Dia models; it was mostly an exercise in feasibility to see if we could encode all of the required information in a comprehensible manner within the org-mode document.  These efforts convinced us that this was a sensible approach, so this sprint we focused on adding end-to-end support for org-mode. This entailed reading org-mode documents, and using them to generate the exact same code as we had from Dia. Unfortunately, though [C++ support for org-mode exists](https://orgmode.org/worg/org-tools/index.html), we could not find any suitable library for integration in Dogen. So we decided to write a simple parser for org-mode documents. This isn't a "generic parser" by any means, so if you throw invalid documents at it expect it to blow up unceremonially. Figure 2 shows the ```dogen.org``` model represented as a org-mode document.
+Over the past few sprints we've been carrying out a fair bit of experimentation on the side, generating org-mode files from the existing Dia models; it was mostly an exercise in feasibility to see if we could encode all of the required information in a comprehensible manner within the org-mode document.  These efforts convinced us that this was a sensible approach, so this sprint we focused on adding end-to-end support for org-mode. This entailed reading org-mode documents, and using them to generate the exact same code as we had from Dia. Unfortunately, though [C++ support for org-mode exists](https://orgmode.org/worg/org-tools/index.html), we could not find any suitable library for integration in Dogen. So we decided to write a simple parser for org-mode documents. This isn't a "generic parser" by any means, so if you throw invalid documents at it, do expect it to blow up _unceremonially_. Figure 2 shows the ```dogen.org``` model represented as a org-mode document.
 
 ![Org model in org](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_org_model.png)
 _Figure 2: ```dogen.org``` model in the org-mode representation._
 
-We tried as much as possible to leverage native org-mode syntax, for example by using [tags](https://orgmode.org/manual/Tags.html) and [property drawers](https://orgmode.org/manual/Property-Syntax.html) to encode Dogen information. However, this is clearly a first pass and many of the decisions may not survive scrutiny. As always, we need to have a great deal of experience editing models to see what works and what does not, and it's likely we'll end up changing the markup in the future. Nonetheless, the guiding principle is to follow the "spirit" of org-mode, trying to make the documents look like "regular" org-mode documents as much as possible. One advantage of this approach is that the existing tooling for org-mode can then be used with Dogen models - for example, [org-roam](https://www.orgroam.com/), [org-ref](https://github.com/jkitchin/org-ref) _et al._. Sadly, one feature which we did not manage to achieve was the use of ```stitch-mode``` in the org-babel blocks. It appears there is some kind of incompatibility between org-mode and [polymode](https://github.com/polymode/polymode); more investigation is required, such as for instance playing with the interestingly named [poly-org](https://github.com/polymode/poly-org). As Figure 3 demonstrates, the stitch templates are at present marked as ```fundamental```, but users can activate stitch mode when editing the fragment.
+We tried as much as possible to leverage native org-mode syntax, for example by using [tags](https://orgmode.org/manual/Tags.html) and [property drawers](https://orgmode.org/manual/Property-Syntax.html) to encode Dogen information. However, this is clearly a first pass and many of the decisions may not survive scrutiny. As always, we need to have a great deal of experience editing models to see what works and what does not, and it's likely we'll end up changing the markup in the future. Nonetheless, the guiding principle is to follow the "spirit" of org-mode, trying to make the documents look like "regular" org-mode documents as much as possible. One advantage of this approach is that the existing tooling for org-mode can then be used with Dogen models - for example, [org-roam](https://www.orgroam.com/), [org-ref](https://github.com/jkitchin/org-ref) _et al._ Sadly, one feature which we did not manage to achieve was the use of ```stitch-mode``` in the org-babel blocks. It appears there is some kind of incompatibility between org-mode and [polymode](https://github.com/polymode/polymode); more investigation is required, such as for instance playing with the interestingly named [poly-org](https://github.com/polymode/poly-org). As Figure 3 demonstrates, the stitch templates are at present marked as ```fundamental```, but users can activate stitch mode when editing the fragment.
 
 ![Text model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/org_model_text_stitch_template.png)
 _Figure 3: Stitch template in ```dogen.text``` model._
@@ -111,21 +114,200 @@ $ head dogen.cli.org
 :masd.codec.reference: cpp.boost
 ```
 
-This feature was mainly added to make our life easier, but it may also be useful for any users that wish to update their models from Dia to org-mode. We made use of conversion to migrate all of the Dogen core models into org-mode, including the library models - though these required a bit of manual finessing to get them into the right shape. We also performed a number of modeling tasks in the sprint using the new format and the work proceeded as expected. We did miss the ability to visualise models as UML diagrams, which is a nice segway into the next story.
+This feature was mainly added for our benefit, but it may also be useful for any users that wish to update their models from Dia to org-mode. We made use of conversion to migrate all of the Dogen core models into org-mode, including the library models - though these required a bit of manual finessing to get them into the right shape. We also performed a number of modeling tasks in the sprint using the new format and the work proceeded as expected; see the below sections for links to a video series on this subject. However, one thing we did notice is that we missed the ability to visualise models as UML diagrams. And that gives us a nice segway into the second major story of this sprint.
 
 ## Initial PlantUML support
 
+Whilst the advantages of modeling using textual languages over graphical languages are patently obvious, the truth is the modeling process requires _both views_ in order to progress smoothly. Maybe its just me but I get a lot of information about a system very quickly just by looking at a well-curated class diagram. It is especially so when one does not touch a sub-system for extended periods of time; it only takes a few minutes to observe and absorb the structure of the sub-system by looking carefully at its class diagram. In Dogen, we have relied on this since the beginning, particularly because we need to context-switch in-and-out so often. With the move to org-mode we suddenly found ourselves unable to do so, and it was quite disorienting. So we decided to carry out yet another little experiment: to add basic support for [PlantUML](https://plantuml.com/). PlantUML is a textual notation that describes pretty much all types of UML diagrams, as well as a tool that converts files in that notation over to a graphical representation. The syntax is very simple and intuitive. Take for example one of the samples they supply:
+
+```PlantUML
+@startuml
+Class11 <|.. Class12
+Class13 --> Class14
+Class15 ..> Class16
+Class17 ..|> Class18
+Class19 <--* Class20
+@enduml
+```
+
+This very simple and compact notation produces the rather wonderful UML class diagram:
+
+![PlantUML example](https://s.plantuml.com/imgw/img-fa90e8d3b95abb6ff2192dd122b0b7d8.webp)
+_Figure 4: UML Class Diagram generated from PlantUML sample. Source: [PlantUML site](https://plantuml.com/class-diagram)._
+
+Given the notation is so straightforward, we decided to create a codec that outputs PlantUML documents, which can then be processed by their tool. To do so, simply convert the model:
+
+```
+$ dogen.cli convert --source dogen.cli.org --destination dogen.cli.plantuml
+```
+
+The listing below has a fragment of the output produced by Dogen; it contains the PlantUML representation of the ```dogen.org``` model from Figure 2.
+
+```PlantUML
+@startuml
+set namespaceSeparator ::
+note as N1
+Provides support for encoding and decoding Emacs's org-mode
+documents.
+
+The support is very basic and focuses only on the features
+of org mode required by Dogen.
+end note
+
+namespace entities #F2F2F2 {
+        class section #F7E5FF {
+                +{field} blocks std::list<block>
+        }
+
+        class document #F7E5FF {
+                +{field} affiliated_keywords std::list<affiliated_keyword>
+                +{field} drawers std::list<drawer>
+                +{field} section section
+                +{field} headlines std::list<headline>
+        }
+<snip>
+```
+
+You can process it with PlantUML, to produce SVG output (or PNG, etc):
+
+```
+$ plantuml dogen.org.plantuml -tsvg
+```
+
+The SVG output is particularly nice because you can zoom in and out as required. It is also rendered very quickly by the browser, as attested by Figure 5.
+
+![SVG dogen.org](https://raw.githubusercontent.com/MASD-Project/dogen/master/projects/dogen.org/modeling/dogen.org.svg)
+_Figure 5: ```dogen.org``` SVG representation, produced by PlantUML._
+
+While it was fairly straightforward to add _basic_ PlantUML support, the diagrams are still quite far from the nice orderly representations we used to have with Dia. They are definitely an improvement on not having any visual representation at all, mind you, but of course given our OCD nature, we feel compeled to try to get them as close as possible to what we had before. In order to do so we will have to do some re-engineering of the codec model and bring in some of the information that lives in the logical model. In particular:
+
+- generalisation parsing so that we can depict these relationships in the diagram; this is actually quite tricky because some of the information may live on profiles.
+- some level of resolution: all intra-model types must be resolved in order to support associations.
+
+These changes will have to remain on the work stack for the future. For now the diagrams are sufficient to get us going, as Figures 5 and 6 demonstrate. Finally, its also worthwhile pointing out that PlantUML has [great integration with Emacs](https://github.com/skuro/plantuml-mode) and with org-mode in particular, so in the future it is entirely possible we could "inject" a graphical representation of model elements into the model itself. Clearly, there are many possibilities to explore here, but for now these remain firmly archived in the "future directions" section of the product backlog.
+
 ![PlantUML model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/plantuml_profiles_model.png)
-_Figure 4: PlantUML representation of ```dogen.profiles``` model._
+_Figure 6: PlantUML representation of ```dogen.profiles``` model._
+
+### Add support for reference directories
+
+With this release we also managed to add another feature which we have been pinning for: the ability to have models in multiple directories. A new command line parameter was added: ```--reference-directory```.
+
+```
+[marco@lovelace dia]$ /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin/dogen.cli generate --help
+Dogen is a Model Driven Engineering tool that processes models encoded in supported codecs.
+Dogen is created by the MASD project.
+Displaying options specific to the generate command.
+For global options, type --help.
+
+Generation:
+  -t [ --target ] arg              Model to generate code for, in any of the
+                                   supported formats.
+  -o [ --output-directory ] arg    Output directory for the generated code.
+                                   Defaults to the current working directory.
+  -r [ --reference-directory ] arg One or more directories to check for
+                                   referenced models.
+[marco@lovelace dia]$
+```
+
+Users can supply directories containing their models and Dogen will check those directories when resolving references. This means you no longer need to keep all your models in a big jumble on the same directory, but should instead start to keep them together with the code they generate. We used this feature in Dogen to separate the old ```dogen.models``` directory, and created a number of ```modeling``` directories where all the content related to modeling for a given component will be placed. For example, see the ```dogen.org``` [modeling directory](https://github.com/MASD-Project/dogen/tree/master/projects/dogen.org/modeling):
+
+```
+$ ls -l
+total 76
+-rw-r--r--   1 marco          marco     3527 2021-01-02 12:37 CMakeLists.txt
+-rw-r--r--   1 marco          marco    10360 2021-01-03 17:36 dogen.org.org
+-rw-r--r--   1 marco          marco     3881 2021-01-03 13:53 dogen.org.plantuml
+-rw-r--r--   1 marco          marco    60120 2021-01-03 13:54 dogen.org.svg
+```
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the sprint log. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org).
+
+## Milestones and Ephemerides
+
+This sprint saw the 13,000th commit to Dogen.
+
+![13k commit](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/git_commit_13_000th.png)
+_Figure 7_: Commit number 13,000th was made to the Dogen GitHub repository.
+
+## Significant Internal Stories
+
+This sprint had two key goals, both of which were achieved: org-mode and PlantUML support. These were described in the user facing stories above. In this section we shall provide more details about how this work was organised, as well as other stories which were not user facing.
+
+### Org-mode work
+
+The following stories were required to bring about org-mode support:
+
+- **Add support for reading org mode documents**: creation of an org-mode parser, as well as a model to represent the types of this domain.
+- **Add org-mode codec for input**: story to plug in the new org-mode parser into the codec framework, from an input perspective.
+- **Create a model to org transform**: output side of the work; the addition of a transform which takes a Dogen model and generates an org-mode document.
+- **Add tags to org model**: originally we tried to infer the element's meta-type by its position (e.g. package, "regular" element, attribute). However, it soon became obvious this was not possible and we ended up having to add org tags to perform this work. A story related to this one was also **Assorted improvements to org model**, where we sorted out a small number of papercuts with the org documents.
+- **Consider replacing properties drawer with tables**: an attempt to use org-mode tables instead of property drawers to represent meta-data. We had to cancel the effort as we could not get it to work before the end of the sprint.
+- **Convert library models into org**: we spent a fair bit of time in converting all of the JSON models we had on our library into org-mode. The automatic conversion worked fairly well, but it was missing some key bits which had to be added manually.
+-  **Convert reference models into org**: similarly to the library models, we had to convert all of Dogen's models into org-mode. This also includes the work for [C++](https://github.com/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.models/org) and [C#](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/CSharpRefImpl.Models/org) reference models. We managed to use the automatic conversion for all of these, after a fair bit of work on the conversion code.
+- **Create a "frozen" project**: although we were moving away from Dia, we did not want the existing support to degrade. The Dia Dogen models are an exacting test in code generation, which add a lot of value. There has always been an assumption that these would be a significant part of the code generator testing suite, but what we did not anticipate is that we'd move away from using a "core" codec such as Dia. So in order not to lose all of the testing infrastructure we decided to create a ["frozen" version of Dogen](https://github.com/MASD-Project/frozen), which in truth is not completely frozen, but contains a faithful representation across all supported codecs of the Dogen models at that point in time. With Frozen we can guarantee that the JSON and Dia support will not be any worse for all the features used by Dogen at the time the snapshot was taken.
+- **Remove JSON and Dia models for Dogen**: once Frozen was put in place, we decommissioned all of the existing Dia and JSON models within Dogen. This caused a number of breaks which had to be hunted down and fixed.
+- **Add org-to-org tests** and **Analysis on org mode round-tripping**: we added a "special" type of round-tripping: the org-to-org conversion. This just means we can read an org-mode document and then regenerate it without introducing any differences. It may sound quite tautological, but it has its uses; for example, we can introduce new features to org documents by adding it to the output part of the transform chain and then regenerating all documents. This was useful several times this sprint. It will also be quite useful in the future, when we integrate with external tooling; we will be able to append data to user models without breaking any of the user content (hopefully).
+- **Inject custom IDs into org documents**: we tried not to have an identifier in org-mode documents for each element, but this caused problems when recreating the topology of the document. We had to use our org-to-org transform to inject ```custom_id``` (the org-mode attribute [used for this purpose](https://writequit.org/articles/emacs-org-mode-generate-ids.html)), though some had to be injected manually.
+
+### Whitespace handling
+
+Whilst it was introduced in the context of the org-mode, the changes to the handling of whitespace are a veritable epic in its own right. The problem was that in the past we wanted to preserve whitespace as supplied by the user in the original codec model; however, if we did this for org-mode documents, we would end up with very strange looking documents. So instead we decided to trim leading and trailing whitespace for all commentary. It took a while to get it to work such that the generated code had no differences, but this approach now means the org-mode documents look vaguely sensible, as does the generated code. The following stories were involved in adding this feature:
+
+- **Move documentation transform to codec model**: for some reason we had decided to place the documentation trimming transform in the logical model. This made things a lot more complicated. In this sprint we moved it into the codec model, which greatly simplified the transform.
+**Stitch templates are consuming whitespace**: this was a bit of a wild-goose chase. We thought the templates were some how causing problems with the spacing, but in the end it was just to do with how we trim different assets. Some hackery was required to ensure text templates are correctly terminated with a new line.
+- **Remove leading and trailing new lines from comments**: the bulk of the work where we trimmed all commentary.
+- **Allow spaces in headlines for org mode documents**: to make org-mode documents more readable, we decided to allow the use of spaces in headlines. These get translated to underscores as part of the processing. It is possible to disable this translation via the not-particularly-well-named key ```masd.codec.preserve_original```. This was mainly required for types such as ```unsigned int``` and the like.
+
+### PlantUML work
+
+There were a couple of stories involved in adding this feature:
+
+- **Add PlantUML markup language support**: the main story that added the new codec. We also added CMake targets to generate all models.
+- **Add comments to PlantUML diagrams**: with this story we decided to add support for displaying comments in modeling elements. It is somewhat experimental, and its look and feel is not exactly ideal, but it does seem to add some value. More work on the cosmetics is required.
+
+### Smaller stories
+
+A number of smaller stories was also worked on:
+
+- **Merge dia codec model into main codec model**: we finally got rid of the Dia "modelet" that we have been carrying around for a few sprints; all of its code has now been refactored and placed in the ```dogen.codec``` model, as it should be.
+- **Split orchestration tests by model and codec**: our massive file containing all code generation tests was starting to cause problems, particularly with treemacs and lsp-mode in emacs. This story saw the monster file split into a number of small files, organised by codec and product.
+- **Add missing provenance details to codec models**: whilst trobuleshooting an issue we noticed that the provenance details had not been populated correctly at the codec level. This story addresses this shortcoming and paves the way for GCC-style errors, which will allow users to be taken to the line in the org-document where the issue stems from.
+
+### Video series of Dogen coding
+
+This sprint we recorded some videos on the implementation of the org-mode codec, and the subsequent use of these models. The individual videos are listed on Table 2, with a short description. They are also available as a playlist, as per link below.
+
+[![Org-mode codec](https://img.youtube.com/vi/xfJNJ_9uAGU/0.jpg)](https://www.youtube.com/playlist?list=PLwfrwe216gF0wdVhy4fO1_QXJ-njWLSy4)
+_Video 2: Playlist "MASD - Dogen Coding: Formatables Refactor"._
+
+|Video | Description |
+|---------|-----------------|
+| [Part 1](https://youtu.be/xfJNJ_9uAGU) | In this part we provide context about the current task and start off by doing some preliminary work setting up the required infrastructure.|
+| [Part 2](https://youtu.be/HueypBCfwIM) | In this video we review the work done to process org mode documents, and start coding the codec transform. However, we bump into a number of problems.|
+| [Part 3](https://youtu.be/QE7P9s-8Xg0) | In this video we review the work done to get the org codec to generate files, and analyse the problems we're having at present, likely related to errors processing profiles.|
+| [Part 4](https://youtu.be/I-PkSHkpwhI) | In this video we review the work done offline to implement the basic support for reading org-mode documents and start the work to write org mode documents using our org model.|
+| [Part 6](https://youtu.be/ZfpqC9PuEog) | In this part we review the round-trip work made to support org mode, and refactor the tags used in org models. We also add support for org custom IDs.|
+| [Part 7](https://youtu.be/6XDt7lV0k_k) | Addendum video where we demonstrate the use of the new org mode models in a more expansive manner.|
+| [Part 8](https://youtu.be/6wqsbT-jG6Y) | In this second addendum we work on the org-to-org transform, solving a number of issues with whitespacing.|
+| [Part 9](https://youtu.be/GvsI7IGk5sY) | In this video we try to explore moving away from properties to represent meta-data and using tables instead, but we run into a number of difficulties and end up spending most time fixing bugs related to element provenance.|
 
 ## Resourcing
 
+As you can see from the lovely spread of colours of the pie chart, our story-keeping this sprint was much healthier than usual; the biggest story took 24.3% which is also a great sign of health. Our utilisation rate was also the highest since records began, at 70%, and a marked improvement over the measly 35% we clocked last sprint. To be fair, that is mainly an artefact of the holiday season more than anything else, but who are we to complain - one is always happy when the numbers are going in the right direction, regardless of root cause. On the less positive front, we spent around 16.2% on activities that were not related to our core mission - a sizable increase from the 11% last time round, with the main culprit being the 4.5% spent on addressing Emacs issues (including some [low-level elisp investigations](https://github.com/Alexander-Miller/treemacs/issues/752)). On the plus side, we did make a few nice changes to our Emacs setup, which will help with productivity, so its not just sunk costs. Predictably, the _circa_ 84% dedicated to "real work" was dominated by org-mode stories (~54%), with PlantUML coming in at a distant second (7%). All and all, it was a model sprint - if you pardon the pun - from a resourcing perspective.
+
+![Sprint 30 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_pie_chart.jpg)
+_Figure 8_: Cost of stories for sprint 30.
+
 ## Roadmap
 
+The road map has been working like clockwork for the last few sprints, with us ticking stories off as if it was a mere list - clearly no longer the Oracle of Delphi it once was - and this sprint was no exception. Were we to be able to continue with the same release cadence, the next sprint would no doubt also tick off the next story on our list. Alas, we have ran out of coding time, so Sprint 31 will instead be very long running sprint, with very low utilisation rate. In addition, we won't bother creating sprints when the work is completely dedicated to writing; instead, regular service will resume once the writing comes to an end.
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_project_plan.png)
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_project_plan.png)
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_resource_allocation_graph.png)
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_resource_allocation_graph.png)
 
 # Binaries
 
@@ -146,26 +328,60 @@ _Table 3: Binary packages for Dogen._
 
 The goals for the next sprint are:
 
-- to start implement path and dependencies via PMM.
+- to implement path and dependencies via PMM.
 
 That's all for this release. Happy Modeling!
 #+end_src markdown
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2021-01-05 Tue 22:33]
+    :LOGBOOK:
+    CLOCK: [2021-01-05 Tue 22:06]--[2021-01-05 Tue 22:33] =>  0:27
+    :END:
 
 Time spent creating the demo and presentation.
 
 **** Presentation
 
-***** Dogen v1.0.29, "Bar O Stop"
+***** Dogen v1.0.30, "Estádio Joaquim Morais"
 
     Marco Craveiro
     Domain Driven Development
-    Released on 14th December 2020
+    Released on 5th January 2021
+
+***** Org-mode support
+***** PlantUML support
+***** Reference models directory
 
 *** Sprint and product backlog grooming                               :story:
 
 Updates to sprint and product backlog.
 
+*** Partial information extraction from logical model                 :story:
+
+Since we just need generalisation and association information, we
+could probably create a specialised chain in the logical model that
+gives us the bare minimum to populate the relevant properties; we can
+then extract those and map them to the codec ID. We should also make
+the codec ID mandatory and use a map for the codec elements. The
+orchestration model is responsible for stitching the information.
+
+*** PlantUML and hyperlinks                                           :story:
+
+Apparently it is possible to embed HTTP links in SVG diagrams. This
+means it may also be possible to supply these as inputs in the
+PlantUML model. If so, it would be nice to be able to find the model
+definition of an element by clicking on the element. Its not clear if
+this would work in the SVG support we have in Emacs.
+
+Links:
+
+- [[https://alligator.io/svg/hyperlinks-svg/][Hyperlinks/Anchors Inside SVG Graphics]]
+
+*** Type that references itself results in a recursive include
+
+In org-mode headline we seem to be including the headline itself:
+
+: #include "dogen.org/types/entities/headline.hpp"
 
 ** Deprecated
