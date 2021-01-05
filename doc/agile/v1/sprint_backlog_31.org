@@ -11,20 +11,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-04 Mon 22:25]
+#+CAPTION: Clock summary at [2021-01-05 Tue 00:06]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *1:36* |      |      | 100.0 |
+| *Total time*                           | *3:09* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 1:36   |      |      | 100.0 |
-| Active                                 |        | 1:36 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 1:36 | 100.0 |
+| Stories                                | 3:09   |      |      | 100.0 |
+| Active                                 |        | 3:09 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 3:09 | 100.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2021-01-04 Mon 22:43]--[2021-01-05 Tue 00:05] =>  1:22
+    CLOCK: [2021-01-04 Mon 22:31]--[2021-01-04 Mon 22:42] =>  0:11
     CLOCK: [2021-01-04 Mon 20:25]--[2021-01-04 Mon 22:01] =>  1:36
     :END:
 
@@ -55,23 +57,98 @@ _Video 1: Sprint 30 Demo._
 
 ## Org-mode support
 
-A target that we've been chasing for the longest time is the ability to write models using [org-mode](https://orgmode.org). We use org-mode (and [emacs](https://www.gnu.org/software/emacs)) for pretty much everything, such time keeping and task management (_i.e._, its how we manage our  [sprint backlogs](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org) and [product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org)) and we'll soon be using it to write [academic papers](https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/) too. It is just an amazing tool with a great tooling ecosystem, so it seemed only natural to try and see if we could make use of it for modeling too. Now, even though we are very comfortable with org-mode, this is not a decision to be taken lightly because we've been using [Dia](https://wiki.gnome.org/Apps/Dia) since the beginning of Dogen Development some eight or more years ago.
+A target that we've been chasing for the longest time is the ability to create models using [org-mode](https://orgmode.org). We use org-mode (and [emacs](https://www.gnu.org/software/emacs)) for pretty much everything in Dogen, such time keeping and task management - it's how we manage our [product](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org) and [sprint backlogs](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org), for one - and we'll soon be using it to write [academic papers](https://jonathanabennett.github.io/blog/2019/05/29/writing-academic-papers-with-org-mode/) too. It's just an amazing tool with a great tooling ecosystem, so it seemed only natural to try and see if we could make use of it for modeling too. Now, even though we are very comfortable with org-mode, this is not a decision to be taken lightly because we've been using [Dia](https://wiki.gnome.org/Apps/Dia) since the inception of Dogen, over eight years ago.
 
 ![Dia diagram](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/colour_coded_uml_diagrams.png)
 _Figure 1: Dia diagram for a Dogen model with the introduction of colouring, Dogen [v1.0.06](https://github.com/MASD-Project/dogen/releases/tag/v1.0.06)_
 
-However, as much as we profoundly love Dia, we've long had some concerns with relying on it _too much_ due to its [sparse maintenance](https://gitlab.gnome.org/GNOME/dia). In particular, Dia relies on an old version of GTK, meaning it could get pulled from distributions at any time; we've already had a similar experience with [Gnome Referencer](https://tracker.debian.org/news/937606/removed-122-2-from-unstable/), which wasn't at all pleasant. In addition, there are a number of "papercuts" that are mildly annoying, if livable, and which will probably not be addressed; we had a list of [such issues](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_28.org#dia-limitations-that-impact-dogen-usage), in the hopes of eventually fixing these problems upstream. The direction of the maintenance is also not aligned with our needs; for example, we recently saw the removal of python support in Dia - at least in the version which ships with Debian - which we used to use a fair bit. So, as you can see, we had a number of ongoing worries that motivated our decision. However,  I don't want to sound too negative here - and please don't take any of this as a criticism to Dia or its developers. Dia is an absolutely brilliant tool, and we have used it for many, many years; It is great at what it does, and we'll continue to use it for free modeling. Nonetheless, it has become increasingly clear that the directions of Dia and Dogen have started to diverge over the last few years, and we could not ignore that. I'd like to take this opportunity to give a huge thanks to all of those involved in Dia (past and present); they have certainly created an amazing tool that stood the test of time. Also, although we are moving away from Dia use in mainline Dogen, we will continue to support the Dia codec and we have tests to ensure that the current set of features [will continue to work](https://github.com/MASD-Project/frozen).
+As much as we profoundly love Dia, the truth is we've had concerns about relying on it _too much_ due to its [sparse maintenance](https://gitlab.gnome.org/GNOME/dia). In particular, Dia relies on an old version of GTK, meaning it could get pulled from distributions at any time; we've already had a similar experience with [Gnome Referencer](https://tracker.debian.org/news/937606/removed-122-2-from-unstable/), which wasn't at all pleasant. In addition, there are a number of "papercuts" that are mildly annoying, if livable, and which will probably not be addressed; we've curated a list of [such issues](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_28.org#dia-limitations-that-impact-dogen-usage), in the hope of _one day_ fixing these problems upstream. The direction of travel for the maintenance is also not entirely aligned with our needs; for example, we recently saw the removal of python support in Dia - at least in the version which ships with Debian - a feature in which we relied upon. All of this to say that we've had a number of ongoing worries that motivated our decision to move away from Dia. However,  I don't want to sound too negative here - and please don't take any of this as a criticism to Dia or its developers. Dia is an absolutely brilliant tool, and we have used it for over two decades; It is great at what it does, and we'll continue to use it for free modeling. Nonetheless, it has become increasingly clear that the directions of Dia and Dogen have started to diverge over the last few years, and we could not ignore that. I'd like to take this opportunity to give a huge thanks to all of those involved in Dia (past and present); they have certainly created an amazing tool that stood the test of time. Also, although we are moving away from Dia use in mainline Dogen, we will continue to support the Dia codec and we have tests to ensure that the current set of features [will continue to work](https://github.com/MASD-Project/frozen).
 
 That's that for the rationale for moving away from Dia. But why org-mode? We came up with a nice laundry list of reasons:
 
-- org-mode documents are trees, with arbitrary nesting, which makes it a good candidate to represent the nesting of namespaces and classes.
-- within the org-mode document we have full access to Emacs features. For example, we have spell checkers, regular copy-and-pasting, etc. This greatly simplifies the management of models.
-- org-mode documents are regular text files, and thus easy to lifecycle in a similar fashion to code; for example, one can version control and diff these documents very easily. Now, we did have Dia's files in uncompressed XML, bringing some of these advantages, but due to the verbosity of XML it was very hard to see the wood for the trees. Every time we touched a model element, lots of lines would change, making it difficult to understand the nature of the change.
-- org-mode is fairly universal, with support in [Visual Studio Code](https://github.com/vscode-org-mode/vscode-org-mode) and even [Vim](https://github.com/jceb/vim-orgmode). See also [Get started with Org mode without Emacs](https://opensource.com/article/19/1/productivity-tool-org-mode). None of these implementations are as good as Emacs, of course - not that we are biased, or anything - but they are sufficient to at least allow for basic model editing. And installing a simple plugin in your editor of choice is much easier than having to learn a whole new tool.
-- Dogen aims to take the approach of "Literate Modeling" described in papers such as [Literate Modelling - Capturing Business Knowledge
-with the UML](https://discovery.ucl.ac.uk/id/eprint/933/1/10.0_Literate_Modelling.pdf). It was clear from the start that a tool like Dia would not be able to capture the wealth of information we intended to add to the models. Org-mode on the other hand is the ideal format to bring disparate types of information together (see [Replacing Jupyter with Orgmode](https://rgoswami.me/posts/jupyter-orgmode) for an example of the sort of thing we have in mind).
+- **"Natural" Representation**: org-mode documents are trees, with arbitrary nesting, which makes it a good candidate to represent the nesting of namespaces and classes. It's just a _natural_ representation for structural information.
+- **Emacs tooling**: within the org-mode document we have full access to Emacs features. For example, we have spell checkers, regular copy-and-pasting, etc. This greatly simplifies the management of models. Since we already use Emacs for everything else in the development process, this makes the process even more fluid.
+- **Universality**: org-mode is fairly universal, with support in [Visual Studio Code](https://github.com/vscode-org-mode/vscode-org-mode), [Atom](https://atom.io/packages/organized) and even [Vim](https://github.com/jceb/vim-orgmode) (for more details, see [Get started with Org mode without Emacs](https://opensource.com/article/19/1/productivity-tool-org-mode)). None of these implementations are as good as Emacs, of course - not that we are biased, or anything - but they are sufficient to at least allow for basic model editing. And installing a simple plugin in your editor of choice is much easier than having to learn a whole new tool.
+- **"Plainer" plain-text**: org-mode documents are regular text files, and thus easy to life-cycle in a similar fashion to code; for example, one can version control and diff these documents very easily. Now, we did have Dia's files in uncompressed XML, bringing some of these advantages, but due to the verbosity of XML it was very hard to see the wood for the trees. Lots of lines would change every time we touched a model element - and I literally mean "touch" - making it difficult to understand the nature of the change. Bisection for example was not helped by this.
+- **Models as documentation**: Dogen aims to take the approach of "Literate Modeling" described in papers such as [Literate Modelling - Capturing Business Knowledge with the UML](https://discovery.ucl.ac.uk/id/eprint/933/1/10.0_Literate_Modelling.pdf). It was clear from the start that a tool like Dia would not be able to capture the wealth of information we intended to add to the models. Org-mode on the other hand is the ideal format to bring disparate types of information together (see [Replacing Jupyter with Orgmode](https://rgoswami.me/posts/jupyter-orgmode) for an example of the sort of thing we have in mind).
+- **Integration with org-babel**: Since models contain fragments of source code, org-mode's support for [working with source code](https://orgmode.org/manual/Working-with-Source-Code.html) will come in handy. This will immediately be really useful for handling text templates, and even more so in the future when we add support for code merging.
 
-We've had already done a fair bit of experimenting with generating org-mode files from the existing Dia models; it was mostly an exercise in feasibility to see if we could encode all of the required information in a comprehensible manner within the org-mode document. So this sprint we focused on adding end-to-end support for org-mode. This entailed reading org-mode documents, and using them to generate the exact same code as we had from Dia. Unfortunately, though [C++ support for org-mode exists](https://orgmode.org/worg/org-tools/index.html), we could not find any suitable library for integration in Dogen. So we decided to write a simple parser for org-mode documents. This isn't a "generic parser" by any means, so if you throw invalid documents at it expect it to blow up unceremonially. In addition, this is clearly a first pass. As always, we need to have a great deal of experience editing models to see what works and what doesn't, and its likely we'll end up changing the markup in the future. However, the main point we wanted to prove is that it is indeed possible to represent all of the information in Dia in a nice manner in org-mode, and
+Over the past few sprints we've been carrying out a fair bit of experimentation on the side, generating org-mode files from the existing Dia models; it was mostly an exercise in feasibility to see if we could encode all of the required information in a comprehensible manner within the org-mode document.  These efforts convinced us that this was a sensible approach, so this sprint we focused on adding end-to-end support for org-mode. This entailed reading org-mode documents, and using them to generate the exact same code as we had from Dia. Unfortunately, though [C++ support for org-mode exists](https://orgmode.org/worg/org-tools/index.html), we could not find any suitable library for integration in Dogen. So we decided to write a simple parser for org-mode documents. This isn't a "generic parser" by any means, so if you throw invalid documents at it expect it to blow up unceremonially. Figure 2 shows the ```dogen.org``` model represented as a org-mode document.
+
+![Org model in org](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_org_model.png)
+_Figure 2: ```dogen.org``` model in the org-mode representation._
+
+We tried as much as possible to leverage native org-mode syntax, for example by using [tags](https://orgmode.org/manual/Tags.html) and [property drawers](https://orgmode.org/manual/Property-Syntax.html) to encode Dogen information. However, this is clearly a first pass and many of the decisions may not survive scrutiny. As always, we need to have a great deal of experience editing models to see what works and what does not, and it's likely we'll end up changing the markup in the future. Nonetheless, the guiding principle is to follow the "spirit" of org-mode, trying to make the documents look like "regular" org-mode documents as much as possible. One advantage of this approach is that the existing tooling for org-mode can then be used with Dogen models - for example, [org-roam](https://www.orgroam.com/), [org-ref](https://github.com/jkitchin/org-ref) _et al._. Sadly, one feature which we did not manage to achieve was the use of ```stitch-mode``` in the org-babel blocks. It appears there is some kind of incompatibility between org-mode and [polymode](https://github.com/polymode/polymode); more investigation is required, such as for instance playing with the interestingly named [poly-org](https://github.com/polymode/poly-org). As Figure 3 demonstrates, the stitch templates are at present marked as ```fundamental```, but users can activate stitch mode when editing the fragment.
+
+![Text model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/org_model_text_stitch_template.png)
+_Figure 3: Stitch template in ```dogen.text``` model._
+
+In order to make our life easier, we implemented conversion support for org-mode:
+
+```
+$ head dogen.cli.dia
+<?xml version="1.0" encoding="UTF-8"?>
+<dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">
+  <dia:diagramdata>
+    <dia:attribute name="background">
+      <dia:color val="#ffffffff"/>
+    </dia:attribute>
+    <dia:attribute name="pagebreak">
+      <dia:color val="#000099ff"/>
+    </dia:attribute>
+    <dia:attribute name="paper">
+$ dogen.cli convert --source dogen.cli.dia --destination dogen.cli.org
+$ head dogen.cli.org
+#+title: dogen.cli
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
+:PROPERTIES:
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.cli
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+```
+
+This feature was mainly added to make our life easier, but it may also be useful for any users that wish to update their models from Dia to org-mode. We made use of conversion to migrate all of the Dogen core models into org-mode, including the library models - though these required a bit of manual finessing to get them into the right shape. We also performed a number of modeling tasks in the sprint using the new format and the work proceeded as expected. We did miss the ability to visualise models as UML diagrams, which is a nice segway into the next story.
+
+## Initial PlantUML support
+
+![PlantUML model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/plantuml_profiles_model.png)
+_Figure 4: PlantUML representation of ```dogen.profiles``` model._
+
+## Resourcing
+
+## Roadmap
+
+
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_29_resource_allocation_graph.png)
+
+# Binaries
+
+You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.30) or [GitHub](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30), as per Table 3. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.30.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.30.tar.gz) format.
+
+| Operative System | Format | BinTray | GitHub |
+|----------|-------|-----|--------|
+|Linux Debian/Ubuntu | Deb | [dogen_1.0.30_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.30/dogen_1.0.30_amd64-applications.deb) | [dogen_1.0.30_amd64-applications.deb](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/dogen_1.0.30_amd64-applications.deb) |
+|Windows | MSI | [DOGEN-1.0.30-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.30-Windows-AMD64.msi) | [DOGEN-1.0.30-Windows-AMD64.msi](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/DOGEN-1.0.30-Windows-AMD64.msi) |
+
+_Table 3: Binary packages for Dogen._
+
+**Note 1:** The Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
+
+**Note 2:** Due to issues with Travis CI, we did not manage to get OSX to build, so and we could not produce a final build for this sprint. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
+
+# Next Sprint
+
+The goals for the next sprint are:
+
+- to start implement path and dependencies via PMM.
+
+That's all for this release. Happy Modeling!
 #+end_src markdown
 
 *** Create a demo and presentation for previous sprint                :story:

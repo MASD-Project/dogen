@@ -293,6 +293,11 @@ exporting into PlantUML.
   have. Also the existing tests do not take into account the action.
 - add plantuml representations to reference models.
 
+Notes:
+
+- we need to move features such as name trees and generalisation into
+  the codec model.
+
 *** Deprecate managed directories                                     :story:
 
 There should only be one "managed directory" at the input stage, which
