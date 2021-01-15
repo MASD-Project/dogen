@@ -294,8 +294,8 @@ options_description make_generate_options_description() {
             value<std::string>(), "Output directory for the generated code. "
             "Defaults to the current working directory.")
         ("reference-directory,r",
-            value<std::vector<std::string>>(), "One or moer directories to check"
-            " for referenced models.");
+            value<std::vector<std::string>>(), "One or more directories to"
+            " check for referenced models.");
 
     return r;
 }
