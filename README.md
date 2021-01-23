@@ -333,6 +333,10 @@ A number of videos are now available discussing Dogen, gathered under
 - [MASD - Dogen
   Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
   end of sprint demos.
+- [MASD - Dogen Coding: Org
+  Codec](https://www.youtube.com/playlist?list=PLwfrwe216gF0wdVhy4fO1_QXJ-njWLSy4):
+  Series of videos describing the addition of org-mode support to
+  Dogen.
 - [MASD - Dogen Coding: Relational Model for
   Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6):
   Narrates the design and implementation of the relational model for tracing.
