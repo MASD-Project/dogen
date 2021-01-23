@@ -276,30 +276,34 @@ if you just need to gain some confidence on the code generator as we
 perform tests against Dogen's own models. However, if you are trying
 to submit a PR that changes the behaviour of the code generator, you
 must also run the tests against the C++ and C# reference
-implementation models. For this you need to download the zips or clone
-the repositories locally:
+implementation models, as well as a ["Frozen" version of
+Dogen](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30). For
+this you need to download the zips or clone the repositories locally:
 
 - [C++ Reference Implementation](https://github.com/MASD-Project/cpp_ref_impl)
 - [C# Reference Implementation](https://github.com/MASD-Project/csharp_ref_impl)
+- [Frozen](https://github.com/MASD-Project/frozen)
 
 Then, point the corresponding environment variables to the respective
 projects directory, e.g.:
 
 ```
+export FROZEN_PROJECTS_DIRECTORY=${DIR}/frozen/projects
 export MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/cpp_ref_impl/projects
 export MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/csharp_ref_impl/Src
 ```
 
 Where ```DIR``` is set to the local directory where you placed the
 repositories. You should then ensure Dogen correctly recognises the
-additional models (```SOME_PATH``` being your local directory):
+additional models (```${DIR}``` being the local directory):
 
 ```
 ...
 -- CMake Version: 3.13.4
--- MASD_DOGEN_PROJECTS_DIRECTORY=SOME_PATH/dogen/projects
--- MASD_CPP_REF_IMPL_PROJECTS_DIRECTORY=SOME_PATH/cpp_ref_impl/integration/projects
--- MASD_CSHARP_REF_IMPL_PROJECTS_DIRECTORY=SOME_PATH/csharp_ref_impl/master/Src
+-- DOGEN_PROJECTS_DIRECTORY=${DIR}/dogen/projects
+-- FROZEN_PROJECTS_DIRECTORY=${DIR}/frozen/projects
+-- CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/cpp_ref_impl/projects
+-- CSHARP_REF_IMPL_PROJECTS_DIRECTORY=SOME_PATH/csharp_ref_impl/Src
 ...
 
 ```
@@ -310,8 +314,8 @@ reference implementations. Make sure your changes do not break these models.
 ## Generation
 
 If you'd like to run Dogen to regenerate all of its models, you can do
-so by using the target ```generate_all_dia``` or its abbreviation
-```gad```. This is useful, for example, to update the models to the
+so by using the target ```generate_all_org``` or its abbreviation
+```gao```. This is useful, for example, to update the models to the
 latest version of Dogen, or just to see how Dogen works. By default
 Dogen uses the current built version, but you can also use
 another. For this you may need to tell CMake of its location by
