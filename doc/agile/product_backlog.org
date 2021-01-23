@@ -78,6 +78,21 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** "Inferred" models                                                 :story:
+
+[[https://www.reddit.com/r/cpp/comments/ksf2az/code_generation_using_attributes/][This reddit post]] inspired an idea. The gist of it is, one could
+annotate an object with some attributes, e.g.:
+
+: [[Register]]
+: class Service
+
+Via something like LSP one should be able to retrieve both the class,
+the attributes and the properties. With this, it would be "trivial" to
+create a Dogen model on the fly and generate it. The attributes could
+contain stereotypes to configure the object, such as binding it into a
+profile, etc. This would make integration of generated and
+non-generated code much easier.
+
 *** Add custom IDs to attributes in org model                         :story:
 
 At present we do not seem to be reading the custom id properties in
@@ -926,22 +941,6 @@ some kind of facet/formatter level validation for this.
 
 We need to look at all the methods in assistant and see if we can
 replace them by data which is processed in transforms.
-
-*** Consider moving CI to GitHub Actions                              :story:
-
-At present we are using Travis and AppVeyor for our CI. However, it
-would be nice to have a single place with all of the CI (and even more
-ideally, packaging as well). GitHub seems to offer some kind of CI
-support via GitHub actions. However, we need to first move to building
-on [[*Build dogen from docker][docker]].
-
-Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
-
-Links:
-
-- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
-  caching]]
-- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
 
 *** Refactor the templating model                                     :story:
 
@@ -3473,6 +3472,11 @@ Links:
 
 - [[https://arxiv.org/pdf/1509.04498.pdf][A comparison of mechanisms for integrating handwritten and generated
   code for object-oriented programming languages]]
+- [[https://gitlab.com/mtekman/org-tanglesync.el][org-tanglesync GH]]: "A package to pull external changes into an
+  org-mode source block if that block is tangled to an external file."
+- [[https://github.com/xieyuheng/tangle-rs][tangle-rs GH]]: "A collection of tools to do tangle in rust."
+- [[https://emacs.stackexchange.com/questions/45164/does-org-have-any-inverse-tangle-operations-e-g-for-collaborating-with-non-or][Does org have any “inverse-tangle” operations e.g. for collaborating
+  with non-org users?]]
 
 *** Consider renaming profiles                                        :story:
 
@@ -12027,6 +12031,7 @@ We should look at these articles for ideas on how to create generators
 that use coroutines.
 
 - [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
+- [[https://github.com/lewissbaker/cppcoro/blob/master/include/cppcoro/generator.hpp][generator.hpp]]: sample generator for C++ 20.
 
 *** Add support for =std::forward_list=                               :story:
 
@@ -14196,6 +14201,10 @@ support BSON and JSON and boost serialisation. We may want the cache
 facet to support one or more or all of these. We can think of these as
 aspects that are enabled by the user at the model level (but possibly
 overridable at the element level).
+
+Other KVP stores:
+
+- [[https://github.com/microsoft/FASTER/tree/master/cc][FASTER GH]]: see also the [[https://microsoft.github.io/FASTER/docs/fasterkv-cpp/][home page]].
 
 *** Add support for libnop                                            :story:
 
@@ -16541,6 +16550,29 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for =libvineyard=                         :story:
+
+#+begin_quote
+Vineyard is an in-memory immutable data manager that provides
+out-of-box high-level abstraction and zero-copy in-memory sharing for
+distributed data in big data tasks, such as numerical computing,
+machine learning, and graph analytics.
+#+end_quote
+
+Links:
+
+- [[https://github.com/alibaba/libvineyard][libvineyard GH]]
+- [[https://github.com/apache/arrow/blob/master/cpp/apidoc/tutorials/plasma.md][Using the Plasma In-Memory Object Store from C++]]: "Apache Arrow
+  offers the ability to share your data structures among multiple
+  processes simultaneously through Plasma, an in-memory object store."
+
+*** org-block extras
+
+See if we can mine this org documentation for ideas that can be
+applied to Dogen:
+
+- [[https://alhassy.github.io/org-special-block-extras/#Judgements-Inference-rules-and-proof-trees][org-special-block-extras]]
+
 *** Investigate =ganja.js=                                            :story:
 
 It is not entirely clear what exactly this library does, but it is
@@ -17115,7 +17147,13 @@ Notes:
 
 Links:
 
-- https://github.com/alandefreitas/matplotplusplus
+- [[https://github.com/alandefreitas/matplotplusplus][matplotplusplus GH]]
+- [[https://github.com/davecom/SVGChart][SVGChart GH]]: A C++ Library for Making SVG Charts (fork of PPlot)
+- [[https://github.com/pabristow/svg_plot][svg_plot GH]]: Plot data in SVG format using C++ library.
+- [[https://github.com/thclark/cpplot][cpplot GH]]: Interactive graphs and charts for C++ 11 upward, viewable
+  in-browser using cpplot-viewer.
+- [[https://www.researchgate.net/post/What_are_the_best_plot_and_charting_C_package_which_can_be_used_for_data_visualization][What are the best plot and charting C++ package which can be used
+  for data visualization?]]
 
 *** Consider adding support for Crypto3                               :story:
 
@@ -17282,6 +17320,10 @@ Links:
 - [[https://blog.getpelican.com/][Pelican Static Site Generator, Powered by Python]]: Pelican is a
   static site generator that requires no database or server-side
   logic.
+- [[https://github.com/theiceshelf/firn/][firn GH]]: "Firn generates a static site from org-mode files. It is a
+  bit different from other static site generators, in that it intends
+  to be a drop in solution for creating sites from already existing
+  folders of org-files." [[https://firn.theiceshelf.com/tutorial][Example site]].
 
 *** Consider adding support for cpprouter                             :story:
 
@@ -17866,6 +17908,8 @@ when we use relational dumping, for example.
 Links:
 
 - [[https://github.com/p-ranav/indicators][indicators]]
+- [[https://github.com/Llawliet0872/progress_bar_cpp][progress_bar_cpp GH]]: "This is a simple library for progress bars in
+  c++."
 
 *** Consider adding support for tabulate                              :story:
 

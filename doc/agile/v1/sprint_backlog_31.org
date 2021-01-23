@@ -353,7 +353,13 @@ Time spent creating the demo and presentation.
 ***** PlantUML support
 ***** Reference models directory
 
-*** Sprint and product backlog grooming                               :story:
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2021-01-17 Sun 13:15]--[2021-01-17 Sun 13:25] =>  0:10
+    CLOCK: [2021-01-15 Fri 15:02]--[2021-01-15 Fri 15:21] =>  0:19
+    CLOCK: [2021-01-09 Sat 17:15]--[2021-01-09 Sat 17:22] =>  0:07
+    CLOCK: [2021-01-08 Fri 10:30]--[2021-01-08 Fri 10:50] =>  0:20
+    :END:
 
 Updates to sprint and product backlog.
 
@@ -378,10 +384,106 @@ Links:
 
 - [[https://alligator.io/svg/hyperlinks-svg/][Hyperlinks/Anchors Inside SVG Graphics]]
 
-*** Type that references itself results in a recursive include
+*** Type that references itself results in a recursive include        :story:
 
 In org-mode headline we seem to be including the headline itself:
 
 : #include "dogen.org/types/entities/headline.hpp"
+
+In the associations transform, we could do a quick check: if a type
+references itself, the remove the association.
+
+*** Use a Dogen drawer instead of properties                          :story:
+
+Its possible users will want to add their own drawers to Dogen
+documents. For example, maybe you want to clock against model items or
+use org-brain. We need to preserve all of these entries when
+roundtripping. The easiest way to achieve that is to try to separate
+the Dogen information from the non-Dogen one. If we had our own
+drawers it would be much easier, we could simply state that you are
+not allowed to add any non-Dogen stuff there and copy across the Dogen
+drawer into the original document.
+
+We could keep the element ID as a =CUSTOM_ID= in the =PROPERTIES=
+drawer though as that is a org concept.
+
+*** Org Roundtripping is lossy at present                             :story:
+
+One way to roundtrip documents without losing information is to
+preserve the original org document, run the Dogen transforms (for
+example to obtain the generalisation and association information),
+transform that back into an org-model and then copy over the dogen
+elements into the original org document by performing lookups based on
+element ID. This way we ensure we do not lose any information of the
+original model. The way we are roundtripping at present, if you add
+any non-Dogen headlines, these would be dropped on the round trip.
+
+In fact, its like we need a "merge algorithm" to merge the source
+document with the roundtripped document.
+
+*** Copy org documentation from rust implementations                  :story:
+
+The rust module for org-mode seems very well documented. We should try
+to copy across all applicable documentation.
+
+Links:
+
+- [[https://github.com/org-rs/org-rs/blob/master/rust/element/src/headline.rs][org-rs headline example]]
+
+*** Consider moving CI to GitHub Actions                              :story:
+
+At present we are using Travis and AppVeyor for our CI. However, it
+would be nice to have a single place with all of the CI (and even more
+ideally, packaging as well). GitHub seems to offer some kind of CI
+support via GitHub actions. However, we need to first move to building
+on [[*Build dogen from docker][docker]].
+
+Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
+
+Links:
+
+- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
+  caching]]
+- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
+- [[https://github.com/lballabio/QuantLib/tree/master/.github/workflows][quantlib GH]]: support for all operative systems (OSX, Win, Linux) as
+  well as a number of interesting actions.
+
+*** Consider adding support for "literate testing"                    :story:
+
+It would be nice if we could create an org-mode file specifying a
+test, then add the code as an orb-babel clock and then tangle the file
+into a c++ file. Ideally the tangling should be done by Dogen (as well
+as by org-mode).
+
+Actually, we don't need a separate org-mode file, this is just the
+class definition for the test fixture.
+
+Links:
+
+- [[https://github.com/jkitchin/org-ref/blob/master/test/all-org-test.org][all-org-test.org]]: literate test from org-ref.
+
+*** Documentation as the aggregate model view                         :story:
+
+It would be really nice if we could "merge" different types of
+documentation, all written using org-mode:
+
+- user manual
+- developer manual, which is the aggregation of the product model and
+  all the component models.
+
+These should create two separate PDFs. We should also be able to
+create a dynamic site for the product by just pointing to the git
+repository of the project.
+
+*** Reporting with diffs                                              :story:
+
+At present its possible to create a diff with dry run and diffing
+enabled or to do a report showing all operations - which produces an
+org-mode report. However, what would be nice, especially when testing
+is to merge the two: create a report that also includes the diffs.
+
+Links:
+
+- [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.12][Sprint 12]]: introduction of reporting.
 
 ** Deprecated
