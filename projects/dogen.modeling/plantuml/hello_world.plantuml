@@ -9,7 +9,7 @@ level.
 end note
 
 class one_property #F7E5FF {
-        +{field} property std::string
+    +{field} property std::string
 }
 
 note top of  one_property

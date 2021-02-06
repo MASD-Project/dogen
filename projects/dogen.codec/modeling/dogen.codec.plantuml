@@ -30,186 +30,186 @@ codec.
 end note
 
 namespace transforms #F2F2F2 {
-        class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class artefact_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class artefact_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} data_directories std::vector<boost::filesystem::path>
-                +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
-                +{field} tracer boost::shared_ptr<tracing::tracer>
-                +{field} compatibility_mode bool
-                +{field} variability_overrides std::vector<std::string>
-        }
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} data_directories std::vector<boost::filesystem::path>
+        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} compatibility_mode bool
+        +{field} variability_overrides std::vector<std::string>
+    }
 
-        class transformation_error <<masd::exception>> #E8C2F8 {
-        }
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
 
-        class model_set_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_set_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class artefact_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class artefact_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
 namespace entities #F2F2F2 {
-        class model <<Element>> #F7E5FF {
-                +{field} elements std::list<element>
-                +{field} input_technical_space std::string
-                +{field} references std::list<std::string>
-                +{field} processed_variability_overrides std::unordered_set<std::string>
-        }
+    class model <<Element>> #F7E5FF {
+        +{field} elements std::list<element>
+        +{field} input_technical_space std::string
+        +{field} references std::list<std::string>
+        +{field} processed_variability_overrides std::unordered_set<std::string>
+    }
 
 note top of  model
 Represents an external model.
 end note
 
-        class element <<Element>> #F7E5FF {
-                +{field} parents std::list<std::string>
-                +{field} attributes std::list<attribute>
-                +{field} fallback_element_type std::string
-                +{field} can_be_primitive_underlier bool
-                +{field} in_global_module bool
-                +{field} can_be_enumeration_underlier bool
-                +{field} is_default_enumeration_type bool
-                +{field} is_associative_container bool
-                +{field} is_floating_point bool
-                +{field} containing_element_id identification::entities::codec_id
-        }
+    class element <<Element>> #F7E5FF {
+        +{field} parents std::list<std::string>
+        +{field} attributes std::list<attribute>
+        +{field} fallback_element_type std::string
+        +{field} can_be_primitive_underlier bool
+        +{field} in_global_module bool
+        +{field} can_be_enumeration_underlier bool
+        +{field} is_default_enumeration_type bool
+        +{field} is_associative_container bool
+        +{field} is_floating_point bool
+        +{field} containing_element_id identification::entities::codec_id
+    }
 
 note top of  element
 Represents an element from an external model.
 end note
 
-        class attribute <<Element>> #F7E5FF {
-                +{field} type std::string
-                +{field} value std::string
-        }
+    class attribute <<Element>> #F7E5FF {
+        +{field} type std::string
+        +{field} value std::string
+    }
 
-        class model_set #F7E5FF {
-                +{field} target model
-                +{field} references std::list<model>
-                +{field} reference_graph_data reference_graph_data
-        }
+    class model_set #F7E5FF {
+        +{field} target model
+        +{field} references std::list<model>
+        +{field} reference_graph_data reference_graph_data
+    }
 
-        class Taggable <<masd::object_template>> #E3B6F6 {
-                +{field} tagged_values std::list<identification::entities::tagged_value>
-        }
+    class Taggable <<masd::object_template>> #E3B6F6 {
+        +{field} tagged_values std::list<identification::entities::tagged_value>
+    }
 
 note top of  Taggable
 Ability to contain tagged values.
 end note
 
-        class Stereotypable <<masd::object_template>> #E3B6F6 {
-                +{field} stereotypes std::list<identification::entities::stereotype>
-        }
+    class Stereotypable <<masd::object_template>> #E3B6F6 {
+        +{field} stereotypes std::list<identification::entities::stereotype>
+    }
 
 note top of  Stereotypable
 Ability to have stereotypes.
 end note
 
-        class Nameable <<masd::object_template>> #E3B6F6 {
-                +{field} name identification::entities::name
-        }
+    class Nameable <<masd::object_template>> #E3B6F6 {
+        +{field} name identification::entities::name
+    }
 
 note top of  Nameable
 Ability to have a name.
 end note
 
-        class Configurable <<masd::object_template>> #E3B6F6 {
-                +{field} configuration boost::shared_ptr<variability::entities::configuration>
-        }
+    class Configurable <<masd::object_template>> #E3B6F6 {
+        +{field} configuration boost::shared_ptr<variability::entities::configuration>
+    }
 
 note top of  Configurable
 Ability to have meta-data associated.
 end note
 
-        class DeterminableOrigin <<masd::object_template>> #E3B6F6 {
-                +{field} provenance identification::entities::codec_provenance
-        }
+    class DeterminableOrigin <<masd::object_template>> #E3B6F6 {
+        +{field} provenance identification::entities::codec_provenance
+    }
 
 note top of  DeterminableOrigin
 Properties related to the origin of the modeling element.
 end note
 
-        class TaggableOverridable <<masd::object_template>> #E3B6F6 {
-                +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
-        }
+    class TaggableOverridable <<masd::object_template>> #E3B6F6 {
+        +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
+    }
 
 note top of  TaggableOverridable
 Ability to contain tagged values.
 end note
 
-        class Commentable <<masd::object_template>> #E3B6F6 {
-                +{field} comment comment
-        }
+    class Commentable <<masd::object_template>> #E3B6F6 {
+        +{field} comment comment
+    }
 
 note top of  Commentable
 Has the ability to have an associated comment.
 end note
 
-        class Element <<masd::object_template>> #E3B6F6 {
-        }
+    class Element <<masd::object_template>> #E3B6F6 {
+    }
 
 entities::Taggable <|-- entities::Element
 entities::Stereotypable <|-- entities::Element
@@ -222,44 +222,44 @@ note top of  Element
 Consolidates a number of related object templates.
 end note
 
-        class reference_graph_data #F7E5FF {
-                +{field} root std::string
-                +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
-        }
+    class reference_graph_data #F7E5FF {
+        +{field} root std::string
+        +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
+    }
 
 note top of  reference_graph_data
 Contains all the data required to build the graph of references.
 end note
 
-        class comment <<Taggable>> #F7E5FF {
-                +{field} applies_to_container bool
-                +{field} original_content std::string
-                +{field} documentation std::string
-        }
+    class comment <<Taggable>> #F7E5FF {
+        +{field} applies_to_container bool
+        +{field} original_content std::string
+        +{field} documentation std::string
+    }
 
 note top of  comment
 Represents a comment block as read out from the codec representation.
 end note
 
-        class object <<Commentable>> #F7E5FF {
-                +{field} id std::string
-                +{field} name std::string
-                +{field} object_type std::string
-                +{field} stereotypes std::string
-                +{field} container_id std::string
-                +{field} connection boost::optional<std::pair<std::string,std::string>>
-                +{field} attributes std::list<attribute>
-        }
+    class object <<Commentable>> #F7E5FF {
+        +{field} id std::string
+        +{field} name std::string
+        +{field} object_type std::string
+        +{field} stereotypes std::string
+        +{field} container_id std::string
+        +{field} connection boost::optional<std::pair<std::string,std::string>>
+        +{field} attributes std::list<attribute>
+    }
 
 note top of  object
 Represents an "raw" codec object which may or may not contain a modeling element of interest.
 end note
 
-        class artefact #F7E5FF {
-                +{field} path boost::filesystem::path
-                +{field} codec_name std::string
-                +{field} content std::string
-        }
+    class artefact #F7E5FF {
+        +{field} path boost::filesystem::path
+        +{field} codec_name std::string
+        +{field} content std::string
+    }
 
 }
 
@@ -271,56 +271,56 @@ Not all codecs will make use of all entities.
 end note
 
 namespace helpers #F2F2F2 {
-        class building_error <<masd::exception>> #E8C2F8 {
-        }
+    class building_error <<masd::exception>> #E8C2F8 {
+    }
 
-        class builder <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class builder <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-        }
+    class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
 
-        class grapher <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class grapher <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class graphing_error <<masd::exception>> #E8C2F8 {
-        }
+    class graphing_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  graphing_error
 An error has occurred while building the dia object graph.
 end note
 
-        class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class dia_to_codec_projector <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class dia_to_codec_projector <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class projection_error <<masd::exception>> #E8C2F8 {
-        }
+    class projection_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  projection_error
 An error occurred whilst projecting elements from one space to another.
 end note
 
-        class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class adaptation_error <<masd::exception>> #E8C2F8 {
-        }
+    class adaptation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  adaptation_error
 A fatal error has occurred while adapting an object into an element.
 end note
 
-        class reference_resolution_exception <<masd::exception>> #E8C2F8 {
-        }
+    class reference_resolution_exception <<masd::exception>> #E8C2F8 {
+    }
 
-        class references_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class references_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class reference_validation_error <<masd::exception>> #E8C2F8 {
-        }
+    class reference_validation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  reference_validation_error
 A cycle was detected in the references graph.
@@ -329,46 +329,46 @@ end note
 }
 
 namespace features #F2F2F2 {
-        class input_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} input_technical_space masd::variability::text
-        }
+    class input_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} input_technical_space masd::variability::text
+    }
 
 note top of  input_technical_space
 Feature bundle for the input technical space.
 end note
 
-        class reference <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} reference masd::variability::text_collection
-        }
+    class reference <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} reference masd::variability::text_collection
+    }
 
 note top of  reference
 Features related to model referencing.
 end note
 
-        class initializer <<masd::variability::initializer>> #A9CDCD {
-        }
+    class initializer <<masd::variability::initializer>> #A9CDCD {
+    }
 
-        class uml <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} dia.comment masd::variability::boolean
-        }
+    class uml <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} dia.comment masd::variability::boolean
+    }
 
 note top of  uml
 Features related to all UML injectors.
 end note
 
-        class meta_data <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} stereotypes masd::variability::comma_separated
-                +{field} type masd::variability::text
-                +{field} value masd::variability::text
-                +{field} parent masd::variability::comma_separated
-                +{field} can_be_primitive_underlier masd::variability::boolean
-                +{field} in_global_module masd::variability::boolean
-                +{field} can_be_enumeration_underlier masd::variability::boolean
-                +{field} is_default_enumeration_type masd::variability::boolean
-                +{field} is_associative_container masd::variability::boolean
-                +{field} is_floating_point masd::variability::boolean
-                +{field} preserve_original masd::variability::boolean
-        }
+    class meta_data <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} stereotypes masd::variability::comma_separated
+        +{field} type masd::variability::text
+        +{field} value masd::variability::text
+        +{field} parent masd::variability::comma_separated
+        +{field} can_be_primitive_underlier masd::variability::boolean
+        +{field} in_global_module masd::variability::boolean
+        +{field} can_be_enumeration_underlier masd::variability::boolean
+        +{field} is_default_enumeration_type masd::variability::boolean
+        +{field} is_associative_container masd::variability::boolean
+        +{field} is_floating_point masd::variability::boolean
+        +{field} preserve_original masd::variability::boolean
+    }
 
 note top of  meta_data
 Assorted meta-data.

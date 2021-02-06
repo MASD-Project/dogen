@@ -11,60 +11,60 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 namespace entities #F2F2F2 {
-        class diagram #F7E5FF {
-                +{field} diagram_data diagram_data
-                +{field} layers std::vector<layer>
-        }
+    class diagram #F7E5FF {
+        +{field} diagram_data diagram_data
+        +{field} layers std::vector<layer>
+    }
 
 note top of  diagram
 Represents a diagram in Dia.
 end note
 
-        class layer #F7E5FF {
-                +{field} name std::string
-                +{field} visible bool
-                +{field} active bool
-                +{field} objects std::vector<object>
-        }
+    class layer #F7E5FF {
+        +{field} name std::string
+        +{field} visible bool
+        +{field} active bool
+        +{field} objects std::vector<object>
+    }
 
 note top of  layer
 Represents a layer in a Dia diagram.
 end note
 
-        class object #F7E5FF {
-                +{field} id std::string
-                +{field} type std::string
-                +{field} version int
-                +{field} connections std::vector<connection>
-                +{field} child_node boost::optional<child_node>
-                +{field} attributes std::vector<attribute>
-        }
+    class object #F7E5FF {
+        +{field} id std::string
+        +{field} type std::string
+        +{field} version int
+        +{field} connections std::vector<connection>
+        +{field} child_node boost::optional<child_node>
+        +{field} attributes std::vector<attribute>
+    }
 
 note top of  object
 Represents a Dia object.
 end note
 
-        class connection #F7E5FF {
-                +{field} handle std::string
-                +{field} to std::string
-                +{field} connection_slot std::string
-        }
+    class connection #F7E5FF {
+        +{field} handle std::string
+        +{field} to std::string
+        +{field} connection_slot std::string
+    }
 
 note top of  connection
 Connection between entities in a Dia diagram.
 end note
 
-        class diagram_data #F7E5FF {
-                +{field} attributes std::vector<attribute>
-        }
+    class diagram_data #F7E5FF {
+        +{field} attributes std::vector<attribute>
+    }
 
 note top of  diagram_data
 Represents a all the data associated with a diagram.
 end note
 
-        class child_node #F7E5FF {
-                +{field} parent std::string
-        }
+    class child_node #F7E5FF {
+        +{field} parent std::string
+    }
 
 note top of  child_node
 Represents a child_node in a diagram.
@@ -74,94 +74,94 @@ For example, if class O1 is inside package O0 then class O1 will have a child no
 pointing to O0.
 end note
 
-        class attribute #F7E5FF {
-                +{field} name std::string
-                +{field} values std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
-        }
+    class attribute #F7E5FF {
+        +{field} name std::string
+        +{field} values std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
+    }
 
 note top of  attribute
 Attribute in a Dia diagram.
 end note
 
-        class font #F7E5FF {
-                +{field} family std::string
-                +{field} style std::string
-                +{field} name std::string
-        }
+    class font #F7E5FF {
+        +{field} family std::string
+        +{field} style std::string
+        +{field} name std::string
+    }
 
 note top of  font
 Represents a font in a diagram.
 end note
 
-        class composite <<dogen::untestable>> #ED8181 {
-                +{field} type std::string
-                +{field} value std::vector<boost::shared_ptr<attribute>>
-                +{field} inner_composite boost::shared_ptr<composite>
-        }
+    class composite <<dogen::untestable>> #ED8181 {
+        +{field} type std::string
+        +{field} value std::vector<boost::shared_ptr<attribute>>
+        +{field} inner_composite boost::shared_ptr<composite>
+    }
 
 note top of  composite
 Attribute value which is made up of other attributes.
 end note
 
-        class color #F7E5FF {
-                +{field} value std::string
-        }
+    class color #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  color
 Represents a color in a diagram.
 end note
 
-        class real #F7E5FF {
-                +{field} value std::string
-        }
+    class real #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  real
 Represents a real value.
 end note
 
-        class integer #F7E5FF {
-                +{field} value std::string
-        }
+    class integer #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  integer
 Represents an integer value.
 end note
 
-        class boolean #F7E5FF {
-                +{field} value std::string
-        }
+    class boolean #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  boolean
 Represents a boolean value.
 end note
 
-        class point #F7E5FF {
-                +{field} value std::string
-        }
+    class point #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  point
 Represents a point in a diagram.
 end note
 
-        class enumeration #F7E5FF {
-                +{field} value std::string
-        }
+    class enumeration #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  enumeration
 Represents a enumeration in a diagram.
 end note
 
-        class string #F7E5FF {
-                +{field} value std::string
-        }
+    class string #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  string
 Represents a string value.
 end note
 
-        class rectangle #F7E5FF {
-                +{field} value std::string
-        }
+    class rectangle #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  rectangle
 Represents a rectangle in a diagram.
@@ -175,15 +175,15 @@ domain of the Dia diagram editor.
 end note
 
 namespace transforms #F2F2F2 {
-        class transformation_error <<masd::exception>> #E8C2F8 {
-        }
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  transformation_error
 An error occurred whilst applying a transformation.
 end note
 
-        class string_to_diagram_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class string_to_diagram_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 

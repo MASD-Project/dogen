@@ -5,17 +5,17 @@ Provides the top-level API for the dogen product.
 end note
 
 class configuration <<masd::fluent>> #F7E5FF {
-        +{field} model_processing model_processing_configuration
-        +{field} tracing boost::optional<tracing_configuration>
-        +{field} diffing boost::optional<diffing_configuration>
-        +{field} reporting boost::optional<reporting_configuration>
-        +{field} byproduct_directory boost::filesystem::path
-        +{field} database boost::optional<database_configuration>
+    +{field} model_processing model_processing_configuration
+    +{field} tracing boost::optional<tracing_configuration>
+    +{field} diffing boost::optional<diffing_configuration>
+    +{field} reporting boost::optional<reporting_configuration>
+    +{field} byproduct_directory boost::filesystem::path
+    +{field} database boost::optional<database_configuration>
 }
 
 enum tracing_level <<masd::enumeration>> #F2DAFD {
-        +{field} detail
-        +{field} summary
+    +{field} detail
+    +{field} summary
 }
 
 note top of  tracing_level
@@ -23,15 +23,15 @@ Available levels for tracing transformation.
 end note
 
 class tracing_configuration <<masd::fluent>> #F7E5FF {
-        +{field} level tracing_level
-        +{field} format tracing_format
-        +{field} guids_enabled bool
-        +{field} logging_impact std::string
-        +{field} use_short_names bool
-        +{field} output_directory boost::filesystem::path
-        +{field} backend tracing_backend
-        +{field} run_id std::string
-        +{field} filter_regexes std::vector<std::string>
+    +{field} level tracing_level
+    +{field} format tracing_format
+    +{field} guids_enabled bool
+    +{field} logging_impact std::string
+    +{field} use_short_names bool
+    +{field} output_directory boost::filesystem::path
+    +{field} backend tracing_backend
+    +{field} run_id std::string
+    +{field} filter_regexes std::vector<std::string>
 }
 
 note top of  tracing_configuration
@@ -39,9 +39,9 @@ Configuration related to transform tracing.
 end note
 
 enum tracing_format <<masd::enumeration>> #F2DAFD {
-        +{field} plain
-        +{field} org_mode
-        +{field} graphviz
+    +{field} plain
+    +{field} org_mode
+    +{field} graphviz
 }
 
 note top of  tracing_format
@@ -56,8 +56,8 @@ masd::builder
 end note
 
 class diffing_configuration <<masd::fluent>> #F7E5FF {
-        +{field} destination diffing_destination
-        +{field} output_directory boost::filesystem::path
+    +{field} destination diffing_destination
+    +{field} output_directory boost::filesystem::path
 }
 
 note top of  diffing_configuration
@@ -68,10 +68,10 @@ class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class model_processing_configuration #F7E5FF {
-        +{field} compatibility_mode_enabled bool
-        +{field} dry_run_mode_enabled bool
-        +{field} variability_overrides std::vector<std::string>
-        +{field} activity_timestamp boost::posix_time::ptime
+    +{field} compatibility_mode_enabled bool
+    +{field} dry_run_mode_enabled bool
+    +{field} variability_overrides std::vector<std::string>
+    +{field} activity_timestamp boost::posix_time::ptime
 }
 
 note top of  model_processing_configuration
@@ -98,8 +98,8 @@ class conversion_exception <<masd::exception>> #E8C2F8 {
 }
 
 enum diffing_destination <<masd::enumeration>> #F2DAFD {
-        +{field} file
-        +{field} console
+    +{field} file
+    +{field} console
 }
 
 note top of  diffing_destination
@@ -107,8 +107,8 @@ Where to place the diffing results.
 end note
 
 class reporting_configuration #F7E5FF {
-        +{field} style reporting_style
-        +{field} output_directory boost::filesystem::path
+    +{field} style reporting_style
+    +{field} output_directory boost::filesystem::path
 }
 
 note top of  reporting_configuration
@@ -116,8 +116,8 @@ Configuration related to operational reports.
 end note
 
 enum reporting_style <<masd::enumeration, dogen::convertible>> #F2DAFD {
-        +{field} plain
-        +{field} org_mode
+    +{field} plain
+    +{field} org_mode
 }
 
 note top of  reporting_style
@@ -128,13 +128,13 @@ class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class database_configuration #F7E5FF {
-        +{field} host std::string
-        +{field} port unsigned int
-        +{field} name std::string
-        +{field} user std::string
-        +{field} password std::string
-        +{field} engine database_engine
-        +{field} generate_schema bool
+    +{field} host std::string
+    +{field} port unsigned int
+    +{field} name std::string
+    +{field} user std::string
+    +{field} password std::string
+    +{field} engine database_engine
+    +{field} generate_schema bool
 }
 
 note top of  database_configuration
@@ -142,8 +142,8 @@ Contains the config
 end note
 
 enum tracing_backend <<masd::enumeration>> #F2DAFD {
-        +{field} file
-        +{field} relational_database
+    +{field} file
+    +{field} relational_database
 }
 
 note top of  tracing_backend
@@ -151,8 +151,8 @@ Available backends to manage tracing information.
 end note
 
 enum database_engine <<masd::enumeration>> #F2DAFD {
-        +{field} postgres
-        +{field} sqlite
+    +{field} postgres
+    +{field} sqlite
 }
 
 note top of  database_engine
@@ -166,7 +166,7 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 class specs #F7E5FF {
-        +{field} categories std::list<spec_category>
+    +{field} categories std::list<spec_category>
 }
 
 note top of  specs
@@ -174,9 +174,9 @@ Describes details of the available functionality within this version of Dogen.
 end note
 
 class spec_category #F7E5FF {
-        +{field} name std::string
-        +{field} entries std::list<spec_entry>
-        +{field} description std::string
+    +{field} name std::string
+    +{field} entries std::list<spec_entry>
+    +{field} description std::string
 }
 
 note top of  spec_category
@@ -184,8 +184,8 @@ Describes a category of dogen specifications.
 end note
 
 class spec_entry #F7E5FF {
-        +{field} name std::string
-        +{field} description std::string
+    +{field} name std::string
+    +{field} description std::string
 }
 
 note top of  spec_entry

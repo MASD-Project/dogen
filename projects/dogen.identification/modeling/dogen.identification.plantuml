@@ -6,113 +6,113 @@ identification within Dogen.
 end note
 
 namespace entities #F2F2F2 {
-        class name <<Nameable>> #F7E5FF {
-                +{field} qualified std::string
-        }
+    class name <<Nameable>> #F7E5FF {
+        +{field} qualified std::string
+    }
 
 note top of  name
 General name for modeling elements which do not need any specialisation.
 end note
 
-        class codec_provenance #F7E5FF {
-                +{field} model_type model_type
-                +{field} model_sha1_hash sha1_hash
-                +{field} codec_id codec_id
-                +{field} location codec_location
-        }
+    class codec_provenance #F7E5FF {
+        +{field} model_type model_type
+        +{field} model_sha1_hash sha1_hash
+        +{field} codec_id codec_id
+        +{field} location codec_location
+    }
 
 note top of  codec_provenance
 Source of a model element in the codec dimension.
 end note
 
-        enum model_type <<masd::enumeration>> #F2DAFD {
-                +{field} target
-                +{field} pdm_reference
-                +{field} non_pdm_reference
-                +{field} not_yet_determined
-        }
+    enum model_type <<masd::enumeration>> #F2DAFD {
+        +{field} target
+        +{field} pdm_reference
+        +{field} non_pdm_reference
+        +{field} not_yet_determined
+    }
 
 note top of  model_type
 Types of models with regards to the current generation taking place.
 end note
 
-        class sha1_hash <<masd::primitive>> #EDCEFB {
-        }
+    class sha1_hash <<masd::primitive>> #EDCEFB {
+    }
 
 note top of  sha1_hash
 Stores a SHA1 hash.
 end note
 
-        class codec_id <<masd::primitive>> #EDCEFB {
-        }
+    class codec_id <<masd::primitive>> #EDCEFB {
+    }
 
 note top of  codec_id
 ID of the elment as sourced from the codec model, if any.
 end note
 
-        class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
-        }
+    class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+    }
 
 note top of  logical_id
 ID of the elment in the logical dimension.
 end note
 
-        class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
-        }
+    class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+    }
 
 note top of  physical_meta_id
 ID of the meta-element in the physical dimension.
 end note
 
-        class codec_location #F7E5FF {
-                +{field} full_path boost::filesystem::path
-                +{field} line long
-        }
+    class codec_location #F7E5FF {
+        +{field} full_path boost::filesystem::path
+        +{field} line long
+    }
 
 note top of  codec_location
 Location of a modeling element in the codec dimension.
 end note
 
-        class logical_provenance #F7E5FF {
-                +{field} codec codec_provenance
-                +{field} logical_name logical_name
-                +{field} logical_meta_name logical_meta_name
-        }
+    class logical_provenance #F7E5FF {
+        +{field} codec codec_provenance
+        +{field} logical_name logical_name
+        +{field} logical_meta_name logical_meta_name
+    }
 
 note top of  logical_provenance
 Source of a model element in the logical dimension.
 end note
 
-        class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
-        }
+    class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+    }
 
 note top of  logical_meta_id
 ID for a logical meta-element.
 end note
 
-        class label #F7E5FF {
-                +{field} key std::string
-                +{field} value std::string
-        }
+    class label #F7E5FF {
+        +{field} key std::string
+        +{field} value std::string
+    }
 
 note top of  label
 A label is a key-value pair that can be used by the processing engine in a flexible way.
 end note
 
-        class tagged_value #F7E5FF {
-                +{field} tag std::string
-                +{field} value std::string
-        }
+    class tagged_value #F7E5FF {
+        +{field} tag std::string
+        +{field} value std::string
+    }
 
 note top of  tagged_value
 Represents a tagged value in a similar spirit to UMLs.
 end note
 
-        class logical_name <<Nameable, QualifiedRepresentations, dogen::hashable>> #F7E5FF {
-                +{field} id logical_id
-                +{field} location logical_location
-                +{field} is_container bool
-        }
+    class logical_name <<Nameable, QualifiedRepresentations, dogen::hashable>> #F7E5FF {
+        +{field} id logical_id
+        +{field} location logical_location
+        +{field} is_container bool
+    }
 
 note top of  logical_name
 Name of an element in logical space.
@@ -129,34 +129,34 @@ because we use them to infer all sorts of properties for an element (namespaces,
 naming files, etc).
 end note
 
-        class logical_location <<dogen::hashable>> #F7E5FF {
-                +{field} external_modules std::list<std::string>
-                +{field} model_modules std::list<std::string>
-                +{field} internal_modules std::list<std::string>
-                +{field} element std::string
-        }
+    class logical_location <<dogen::hashable>> #F7E5FF {
+        +{field} external_modules std::list<std::string>
+        +{field} model_modules std::list<std::string>
+        +{field} internal_modules std::list<std::string>
+        +{field} element std::string
+    }
 
 note top of  logical_location
 Identifies a hierarchy of containment within the logical space.
 end note
 
-        class qualified_representations <<dogen::hashable>> #F7E5FF {
-                +{field} dot std::string
-                +{field} colon std::string
-                +{field} identifiable std::string
-        }
+    class qualified_representations <<dogen::hashable>> #F7E5FF {
+        +{field} dot std::string
+        +{field} colon std::string
+        +{field} identifiable std::string
+    }
 
 note top of  qualified_representations
 All available qualified representations of a name.
 end note
 
-        class physical_meta_location #F7E5FF {
-                +{field} meta_model std::string
-                +{field} backend std::string
-                +{field} part std::string
-                +{field} facet std::string
-                +{field} archetype std::string
-        }
+    class physical_meta_location #F7E5FF {
+        +{field} meta_model std::string
+        +{field} backend std::string
+        +{field} part std::string
+        +{field} facet std::string
+        +{field} archetype std::string
+    }
 
 note top of  physical_meta_location
 Location of an entity or set of entities in the physical meta-model.
@@ -166,10 +166,10 @@ meta-model; in order to have a facet we must have a backend and in order to have
 formatter we must have a facet. We may not have any.
 end note
 
-        class physical_meta_name <<Nameable>> #F7E5FF {
-                +{field} id physical_meta_id
-                +{field} location physical_meta_location
-        }
+    class physical_meta_name <<Nameable>> #F7E5FF {
+        +{field} id physical_meta_id
+        +{field} location physical_meta_location
+    }
 
 note top of  physical_meta_name
 Name of an element in physical space.
@@ -182,79 +182,79 @@ space cannot have the same name and b) the same point or region in physical spac
 can only have one and only one name.
 end note
 
-        class logical_meta_name <<Nameable>> #F7E5FF {
-                +{field} id logical_meta_id
-        }
+    class logical_meta_name <<Nameable>> #F7E5FF {
+        +{field} id logical_meta_id
+    }
 
-        enum technical_space <<masd::enumeration, dogen::convertible>> #F2DAFD {
-                +{field} agnostic
-                +{field} cpp
-                +{field} csharp
-                +{field} cmake
-                +{field} xml
-                +{field} odb
-                +{field} sln
-                +{field} mustache
-        }
+    enum technical_space <<masd::enumeration, dogen::convertible>> #F2DAFD {
+        +{field} agnostic
+        +{field} cpp
+        +{field} csharp
+        +{field} cmake
+        +{field} xml
+        +{field} odb
+        +{field} sln
+        +{field} mustache
+    }
 
 note top of  technical_space
 Models need to declare upfront the technical space they will target.
 end note
 
-        class physical_name <<Nameable>> #F7E5FF {
-                +{field} id physical_id
-        }
+    class physical_name <<Nameable>> #F7E5FF {
+        +{field} id physical_id
+    }
 
 note top of  physical_name
 Name of a physical model element.
 end note
 
-        class Nameable <<masd::object_template>> #E3B6F6 {
-                +{field} simple std::string
-        }
+    class Nameable <<masd::object_template>> #E3B6F6 {
+        +{field} simple std::string
+    }
 
 note top of  Nameable
 Ability to have a name.
 end note
 
-        class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
-                +{field} logical_id logical_id
-                +{field} physical_meta_id physical_meta_id
-        }
+    class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
+        +{field} logical_id logical_id
+        +{field} physical_meta_id physical_meta_id
+    }
 
 note top of  logical_meta_physical_id
 ID in the logical-physical space.
 end note
 
-        class physical_id <<masd::primitive>> #EDCEFB {
-        }
+    class physical_id <<masd::primitive>> #EDCEFB {
+    }
 
 note top of  physical_id
 ID for a physical element.
 end note
 
-        class model_id <<masd::primitive>> #EDCEFB {
-        }
+    class model_id <<masd::primitive>> #EDCEFB {
+    }
 
 note top of  model_id
 ID for a model.
 end note
 
-        class stereotype <<masd::primitive>> #EDCEFB {
-        }
+    class stereotype <<masd::primitive>> #EDCEFB {
+    }
 
 note top of  stereotype
 Stereotype.
 end note
 
-        class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
-                +{field} current logical_name
-                +{field} children std::list<logical_name_tree>
-                +{field} are_children_opaque bool
-                +{field} is_circular_dependency bool
-                +{field} is_current_simple_type bool
-                +{field} is_floating_point bool
-        }
+    class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
+        +{field} current logical_name
+        +{field} children std::list<logical_name_tree>
+        +{field} are_children_opaque bool
+        +{field} is_circular_dependency bool
+        +{field} is_current_simple_type bool
+        +{field} is_floating_point bool
+    }
 
 note top of  logical_name_tree
 Adds support for name composition as a tree-like structure.
@@ -265,39 +265,39 @@ types and so on. It may also represent the simpler case of a non-generic type, i
 which case only the parent name is populated and there are no children.
 end note
 
-        class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
-                +{field} qualified qualified_representations
-        }
+    class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
+        +{field} qualified qualified_representations
+    }
 
 note top of  QualifiedRepresentations
 Name with multiple qualified representations.
 end note
 
-        class archetype_name_set #F7E5FF {
-                +{field} logical_meta_id logical_meta_id
-                +{field} meta_names std::list<physical_meta_name>
-                +{field} canonical_locations std::unordered_map<physical_meta_id, physical_meta_id>
-                +{field} archetype_for_label std::unordered_map<physical_meta_id, physical_meta_id>
-        }
+    class archetype_name_set #F7E5FF {
+        +{field} logical_meta_id logical_meta_id
+        +{field} meta_names std::list<physical_meta_name>
+        +{field} canonical_locations std::unordered_map<physical_meta_id, physical_meta_id>
+        +{field} archetype_for_label std::unordered_map<physical_meta_id, physical_meta_id>
+    }
 
-        class physical_meta_name_indices #F7E5FF {
-                +{field} all std::list<physical_meta_name>
-                +{field} facet_names_by_backend_name std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
-                +{field} archetype_names_by_logical_meta_name std::unordered_map<logical_meta_id, archetype_name_set>
-                +{field} archetype_names_by_backend_by_facet std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
-                +{field} technical_space_for_archetype std::unordered_map<physical_meta_id, technical_space>
-        }
+    class physical_meta_name_indices #F7E5FF {
+        +{field} all std::list<physical_meta_name>
+        +{field} facet_names_by_backend_name std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
+        +{field} archetype_names_by_logical_meta_name std::unordered_map<logical_meta_id, archetype_name_set>
+        +{field} archetype_names_by_backend_by_facet std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
+        +{field} technical_space_for_archetype std::unordered_map<physical_meta_id, technical_space>
+    }
 
 note top of  physical_meta_name_indices
 Containing physical meta-names, indexed as required by use cases.
 end note
 
-        enum technical_space_version <<masd::enumeration>> #F2DAFD {
-                +{field} cpp_98
-                +{field} cpp_11
-                +{field} cpp_14
-                +{field} cpp_17
-        }
+    enum technical_space_version <<masd::enumeration>> #F2DAFD {
+        +{field} cpp_98
+        +{field} cpp_11
+        +{field} cpp_14
+        +{field} cpp_17
+    }
 
 note top of  technical_space_version
 Version of the technical space to use.
@@ -311,85 +311,85 @@ of Dogen elements.
 end note
 
 namespace helpers #F2F2F2 {
-        class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class building_error <<masd::exception>> #E8C2F8 {
-        }
+    class building_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  building_error
 An error occurred whilst building.
 end note
 
-        class qualified_representations_builder <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} dot_printer pretty_printer
-                +{field} colon_printer pretty_printer
-        }
+    class qualified_representations_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} dot_printer pretty_printer
+        +{field} colon_printer pretty_printer
+    }
 
-        class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class logical_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} name entities::logical_name
-        }
+    class logical_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} name entities::logical_name
+    }
 
-        class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} location entities::logical_location
-        }
+    class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} location entities::logical_location
+    }
 
-        class flattening_error <<masd::exception>> #E8C2F8 {
-        }
+    class flattening_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  flattening_error
 An error occurred whilst flattening a name.
 end note
 
-        class printing_error <<masd::exception>> #E8C2F8 {
-        }
+    class printing_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  printing_error
 An error occurred whilst pretty printing.
 end note
 
-        class pretty_printer <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class pretty_printer <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        enum separators <<masd::enumeration>> #F2DAFD {
-                +{field} angle_brackets
-                +{field} double_colons
-                +{field} dots
-        }
+    enum separators <<masd::enumeration>> #F2DAFD {
+        +{field} angle_brackets
+        +{field} double_colons
+        +{field} dots
+    }
 
 note top of  separators
 Available separators to be used by the pretty printer.
 end note
 
-        class physical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class physical_meta_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_meta_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class physical_meta_id_builder <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_meta_id_builder <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class logical_name_tree_builder <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} names std::list<std::string>
-                +{field} root boost::shared_ptr<node>
-                +{field} current boost::shared_ptr<node>
-        }
+    class logical_name_tree_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} names std::list<std::string>
+        +{field} root boost::shared_ptr<node>
+        +{field} current boost::shared_ptr<node>
+    }
 
-        class legacy_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class legacy_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class node <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} parent boost::weak_ptr<node>
-                +{field} data entities::logical_name
-                +{field} children std::list<boost::shared_ptr<node>>
-        }
+    class node <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} parent boost::weak_ptr<node>
+        +{field} data entities::logical_name
+        +{field} children std::list<boost::shared_ptr<node>>
+    }
 
 note top of  node
 Node in a tree of logical names.
@@ -397,34 +397,34 @@ Node in a tree of logical names.
 Temporary data structure used to build trees of logical names.
 end note
 
-        class new_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class new_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class parsing_error <<masd::exception>> #E8C2F8 {
-        }
+    class parsing_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  parsing_error
 A fatal error has occurred while parsing.
 end note
 
-        class physical_meta_name_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_meta_name_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class validation_error <<masd::exception>> #E8C2F8 {
-        }
+    class validation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  validation_error
 An error occurred during validation.
 end note
 
-        class physical_id_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_id_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_name_index_builder <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_name_index_builder <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class logical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class logical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 

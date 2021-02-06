@@ -5,16 +5,16 @@ Houses classes common to all transformations.
 end note
 
 class tracer <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
-        +{field} backend boost::shared_ptr<backend>
+    +{field} backend boost::shared_ptr<backend>
 }
 
 class metrics <<dogen::untestable>> #ED8181 {
-        +{field} transform_id std::string
-        +{field} model_id std::string
-        +{field} guid std::string
-        +{field} start unsigned long
-        +{field} end unsigned long
-        +{field} children std::list<boost::shared_ptr<metrics>>
+    +{field} transform_id std::string
+    +{field} model_id std::string
+    +{field} guid std::string
+    +{field} start unsigned long
+    +{field} end unsigned long
+    +{field} children std::list<boost::shared_ptr<metrics>>
 }
 
 class metrics_builder <<dogen::handcrafted::typeable>> #FFFACD {
@@ -44,7 +44,7 @@ class file_backend <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FF
 
 backend <|-- file_backend
 class backend_factory_registrar <<dogen::handcrafted::typeable>> #FFFACD {
-        +{field} backend_factories std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
+    +{field} backend_factories std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
 }
 
 class registrar_error <<masd::exception>> #E8C2F8 {

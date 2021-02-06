@@ -33,91 +33,91 @@ etc.).
 end note
 
 namespace entities #F2F2F2 {
-        class attribute <<Documentable, Configurable, Nameable, Stereotypable>> #F7E5FF {
-                +{field} unparsed_type std::string
-                +{field} parsed_type identification::entities::logical_name_tree
-                +{field} is_immutable bool
-                +{field} is_fluent bool
-                +{field} orm_properties boost::optional<orm::attribute_properties>
-                +{field} member_variable_name std::string
-                +{field} getter_setter_name std::string
-        }
+    class attribute <<Documentable, Configurable, Nameable, Stereotypable>> #F7E5FF {
+        +{field} unparsed_type std::string
+        +{field} parsed_type identification::entities::logical_name_tree
+        +{field} is_immutable bool
+        +{field} is_fluent bool
+        +{field} orm_properties boost::optional<orm::attribute_properties>
+        +{field} member_variable_name std::string
+        +{field} getter_setter_name std::string
+    }
 
 note top of  attribute
 Represents an attribute in an object.
 end note
 
-        class Nameable <<masd::object_template>> #E3B6F6 {
-                +{field} name identification::entities::logical_name
-        }
+    class Nameable <<masd::object_template>> #E3B6F6 {
+        +{field} name identification::entities::logical_name
+    }
 
 note top of  Nameable
 Ability to have a name.
 end note
 
-        class Documentable <<masd::object_template>> #E3B6F6 {
-                +{field} documentation std::string
-        }
+    class Documentable <<masd::object_template>> #E3B6F6 {
+        +{field} documentation std::string
+    }
 
 note top of  Documentable
 Ability to provide documentation.
 end note
 
-        class Provenance <<masd::object_template>> #E3B6F6 {
-                +{field} provenance identification::entities::codec_provenance
-        }
+    class Provenance <<masd::object_template>> #E3B6F6 {
+        +{field} provenance identification::entities::codec_provenance
+    }
 
 note top of  Provenance
 Details of the origin of this model element.
 end note
 
-        class Containable <<masd::object_template>> #E3B6F6 {
-                +{field} contained_by identification::entities::logical_id
-                +{field} in_global_module bool
-        }
+    class Containable <<masd::object_template>> #E3B6F6 {
+        +{field} contained_by identification::entities::logical_id
+        +{field} in_global_module bool
+    }
 
 note top of  Containable
 The ability to be contained inside a module.
 end note
 
-        class Stereotypable <<masd::object_template>> #E3B6F6 {
-                +{field} stereotypes stereotypes
-        }
+    class Stereotypable <<masd::object_template>> #E3B6F6 {
+        +{field} stereotypes stereotypes
+    }
 
-        class MetaNameable <<masd::object_template>> #E3B6F6 {
-                +{field} meta_name identification::entities::logical_meta_name
-        }
+    class MetaNameable <<masd::object_template>> #E3B6F6 {
+        +{field} meta_name identification::entities::logical_meta_name
+    }
 
 note top of  MetaNameable
 Ability to have a meta-name.
 end note
 
-        class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
-                +{field} intrinsic_technical_space identification::entities::technical_space
-        }
+    class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
+        +{field} intrinsic_technical_space identification::entities::technical_space
+    }
 
-        class Configurable <<masd::object_template>> #E3B6F6 {
-                +{field} configuration boost::shared_ptr<variability::entities::configuration>
-        }
+    class Configurable <<masd::object_template>> #E3B6F6 {
+        +{field} configuration boost::shared_ptr<variability::entities::configuration>
+    }
 
 note top of  Configurable
 Ability to have meta-data associated.
 end note
 
-        class Labelable <<masd::object_template>> #E3B6F6 {
-                +{field} labels std::list<identification::entities::label>
-        }
+    class Labelable <<masd::object_template>> #E3B6F6 {
+        +{field} labels std::list<identification::entities::label>
+    }
 
 note top of  Labelable
 The ability to attach labels to an element.
 end note
 
-        class Generatable <<masd::object_template>> #E3B6F6 {
-                +{field} generability_status generability_status
-        }
+    class Generatable <<masd::object_template>> #E3B6F6 {
+        +{field} generability_status generability_status
+    }
 
-        class Element <<masd::object_template>> #E3B6F6 {
-        }
+    class Element <<masd::object_template>> #E3B6F6 {
+    }
 
 entities::Nameable <|-- entities::Element
 entities::Documentable <|-- entities::Element
@@ -137,22 +137,22 @@ when creating the element class. It is not required for any other
 purpose.
 end note
 
-        class Stateful <<masd::object_template>> #E3B6F6 {
-                +{field} all_attributes std::list<attribute>
-                +{field} local_attributes std::list<attribute>
-                +{field} inherited_attributes std::unordered_map<identification::entities::logical_name, std::list<attribute>>
-                +{field} is_immutable bool
-                +{field} is_fluent bool
-        }
+    class Stateful <<masd::object_template>> #E3B6F6 {
+        +{field} all_attributes std::list<attribute>
+        +{field} local_attributes std::list<attribute>
+        +{field} inherited_attributes std::unordered_map<identification::entities::logical_name, std::list<attribute>>
+        +{field} is_immutable bool
+        +{field} is_fluent bool
+    }
 
 note top of  Stateful
 Ability to have a state.
 end note
 
-        class element <<masd::visitable, Element>> #F7E5FF {
-                +{field} decoration std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
-                +{field} helper_properties std::list<helper_properties>
-        }
+    class element <<masd::visitable, Element>> #F7E5FF {
+        +{field} decoration std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
+        +{field} helper_properties std::list<helper_properties>
+    }
 
 note top of  element
 Represents a generic logical construct.
@@ -162,82 +162,82 @@ expressed in code generation. It covers both types (objects, enumerations, etc),
 meta-types (object templates) and non-types (modules and backend specific entities).
 end note
 
-        class model <<Nameable, MetaNameable, Provenance>> #F7E5FF {
-                +{field} references std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
-                +{field} leaves std::unordered_set<identification::entities::logical_name>
-                +{field} root_module boost::shared_ptr<structural::module>
-                +{field} input_technical_space identification::entities::technical_space
-                +{field} output_technical_spaces std::list<identification::entities::technical_space>
-                +{field} all_technical_spaces std::unordered_set<identification::entities::technical_space>
-                +{field} orm_properties boost::optional<orm::model_properties>
-                +{field} structural_elements structural::element_repository
-                +{field} decoration_elements decoration::element_repository
-                +{field} variability_elements variability::element_repository
-                +{field} mapping_elements mapping::element_repository
-                +{field} templating_elements templating::element_repository
-                +{field} serialization_elements serialization::element_repository
-                +{field} visual_studio_elements visual_studio::element_repository
-                +{field} orm_elements orm::element_repository
-                +{field} build_elements build::element_repository
-                +{field} physical_elements physical::element_repository
-                +{field} meta_names std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
-                +{field} streaming_properties std::unordered_map<identification::entities::logical_id, streaming_properties>
-                +{field} technical_space_version identification::entities::technical_space_version
-                +{field} aspect_properties std::unordered_map<identification::entities::logical_id, aspect_properties>
-                +{field} assistant_properties std::unordered_map<identification::entities::logical_id, assistant_properties>
-        }
+    class model <<Nameable, MetaNameable, Provenance>> #F7E5FF {
+        +{field} references std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
+        +{field} leaves std::unordered_set<identification::entities::logical_name>
+        +{field} root_module boost::shared_ptr<structural::module>
+        +{field} input_technical_space identification::entities::technical_space
+        +{field} output_technical_spaces std::list<identification::entities::technical_space>
+        +{field} all_technical_spaces std::unordered_set<identification::entities::technical_space>
+        +{field} orm_properties boost::optional<orm::model_properties>
+        +{field} structural_elements structural::element_repository
+        +{field} decoration_elements decoration::element_repository
+        +{field} variability_elements variability::element_repository
+        +{field} mapping_elements mapping::element_repository
+        +{field} templating_elements templating::element_repository
+        +{field} serialization_elements serialization::element_repository
+        +{field} visual_studio_elements visual_studio::element_repository
+        +{field} orm_elements orm::element_repository
+        +{field} build_elements build::element_repository
+        +{field} physical_elements physical::element_repository
+        +{field} meta_names std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
+        +{field} streaming_properties std::unordered_map<identification::entities::logical_id, streaming_properties>
+        +{field} technical_space_version identification::entities::technical_space_version
+        +{field} aspect_properties std::unordered_map<identification::entities::logical_id, aspect_properties>
+        +{field} assistant_properties std::unordered_map<identification::entities::logical_id, assistant_properties>
+    }
 
 note top of  model
 Intermediate representation of a masd model.
 end note
 
-        class elements_traversal <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-        }
+    class elements_traversal <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
 
-        class TraversalVisitor <<masd::object_template>> #E3B6F6 {
-        }
+    class TraversalVisitor <<masd::object_template>> #E3B6F6 {
+    }
 
-        class Visitable <<masd::object_template>> #E3B6F6 {
-                +{field} base_visitor boost::optional<identification::entities::logical_name>
-                +{field} derived_visitor boost::optional<identification::entities::logical_name>
-                +{field} is_visitation_root bool
-                +{field} is_visitation_leaf bool
-        }
+    class Visitable <<masd::object_template>> #E3B6F6 {
+        +{field} base_visitor boost::optional<identification::entities::logical_name>
+        +{field} derived_visitor boost::optional<identification::entities::logical_name>
+        +{field} is_visitation_root bool
+        +{field} is_visitation_leaf bool
+    }
 
 note top of  Visitable
 The ability to handle visitation.
 end note
 
-        class Associatable <<masd::object_template>> #E3B6F6 {
-                +{field} transparent_associations std::list<identification::entities::logical_name>
-                +{field} opaque_associations std::list<identification::entities::logical_name>
-                +{field} associative_container_keys std::list<identification::entities::logical_name>
-        }
+    class Associatable <<masd::object_template>> #E3B6F6 {
+        +{field} transparent_associations std::list<identification::entities::logical_name>
+        +{field} opaque_associations std::list<identification::entities::logical_name>
+        +{field} associative_container_keys std::list<identification::entities::logical_name>
+    }
 
 note top of  Associatable
 The element has the ability to associate itself with other elements.
 end note
 
-        class Generalizable <<masd::object_template>> #E3B6F6 {
-                +{field} is_parent bool
-                +{field} is_child bool
-                +{field} is_leaf bool
-                +{field} is_final bool
-                +{field} is_final_requested boost::optional<bool>
-                +{field} is_abstract bool
-                +{field} in_inheritance_relationship bool
-                +{field} root_parents std::list<identification::entities::logical_name>
-                +{field} parents std::list<identification::entities::logical_name>
-                +{field} leaves std::list<identification::entities::logical_name>
-                +{field} type_registrar boost::optional<identification::entities::logical_name>
-        }
+    class Generalizable <<masd::object_template>> #E3B6F6 {
+        +{field} is_parent bool
+        +{field} is_child bool
+        +{field} is_leaf bool
+        +{field} is_final bool
+        +{field} is_final_requested boost::optional<bool>
+        +{field} is_abstract bool
+        +{field} in_inheritance_relationship bool
+        +{field} root_parents std::list<identification::entities::logical_name>
+        +{field} parents std::list<identification::entities::logical_name>
+        +{field} leaves std::list<identification::entities::logical_name>
+        +{field} type_registrar boost::optional<identification::entities::logical_name>
+    }
 
 note top of  Generalizable
 The element has the ability to be part of a generalization relationship.
 end note
 
-        class Relatable <<masd::object_template>> #E3B6F6 {
-        }
+    class Relatable <<masd::object_template>> #E3B6F6 {
+    }
 
 entities::Containable <|-- entities::Relatable
 entities::Visitable <|-- entities::Relatable
@@ -247,92 +247,92 @@ note top of  Relatable
 Element has the ability to have relationships with other elements.
 end note
 
-        class Parameterisable <<masd::object_template>> #E3B6F6 {
-                +{field} type_parameters type_parameters
-        }
+    class Parameterisable <<masd::object_template>> #E3B6F6 {
+        +{field} type_parameters type_parameters
+    }
 
-        class type_parameters #F7E5FF {
-                +{field} variable_number_of_parameters bool
-                +{field} count unsigned int
-                +{field} always_in_heap bool
-        }
+    class type_parameters #F7E5FF {
+        +{field} variable_number_of_parameters bool
+        +{field} count unsigned int
+        +{field} always_in_heap bool
+    }
 
-        enum static_stereotypes <<masd::enumeration>> #F2DAFD {
-                +{field} fluent
-                +{field} immutable
-                +{field} visitable
-                +{field} structural_object
-                +{field} structural_object_template
-                +{field} structural_exception
-                +{field} structural_primitive
-                +{field} structural_enumeration
-                +{field} structural_module
-                +{field} structural_builtin
-                +{field} structural_entry_point
-                +{field} structural_assistant
-                +{field} orm_object
-                +{field} orm_value
-                +{field} decoration_modeline_group
-                +{field} decoration_modeline
-                +{field} decoration_generation_marker
-                +{field} decoration_licence
-                +{field} variability_profile
-                +{field} variability_profile_template
-                +{field} variability_feature_bundle
-                +{field} variability_feature_template_bundle
-                +{field} variability_initializer
-                +{field} mapping_fixed_mappable
-                +{field} mapping_extensible_mappable
-                +{field} templating_logic_less_template
-                +{field} serialization_type_registrar
-                +{field} visual_studio_solution
-                +{field} visual_studio_project
-                +{field} visual_studio_msbuild_targets
-                +{field} orm_common_odb_options
-                +{field} build_cmakelists
-                +{field} physical_backend
-                +{field} physical_facet
-                +{field} physical_archetype
-                +{field} physical_archetype_kind
-                +{field} physical_part
-                +{field} physical_helper
-        }
+    enum static_stereotypes <<masd::enumeration>> #F2DAFD {
+        +{field} fluent
+        +{field} immutable
+        +{field} visitable
+        +{field} structural_object
+        +{field} structural_object_template
+        +{field} structural_exception
+        +{field} structural_primitive
+        +{field} structural_enumeration
+        +{field} structural_module
+        +{field} structural_builtin
+        +{field} structural_entry_point
+        +{field} structural_assistant
+        +{field} orm_object
+        +{field} orm_value
+        +{field} decoration_modeline_group
+        +{field} decoration_modeline
+        +{field} decoration_generation_marker
+        +{field} decoration_licence
+        +{field} variability_profile
+        +{field} variability_profile_template
+        +{field} variability_feature_bundle
+        +{field} variability_feature_template_bundle
+        +{field} variability_initializer
+        +{field} mapping_fixed_mappable
+        +{field} mapping_extensible_mappable
+        +{field} templating_logic_less_template
+        +{field} serialization_type_registrar
+        +{field} visual_studio_solution
+        +{field} visual_studio_project
+        +{field} visual_studio_msbuild_targets
+        +{field} orm_common_odb_options
+        +{field} build_cmakelists
+        +{field} physical_backend
+        +{field} physical_facet
+        +{field} physical_archetype
+        +{field} physical_archetype_kind
+        +{field} physical_part
+        +{field} physical_helper
+    }
 
 note top of  static_stereotypes
 Lists all stereotypes defined in the masd UML profile.
 end note
 
-        class input_model_set #F7E5FF {
-                +{field} target model
-                +{field} references std::list<model>
-                +{field} fixed_mappings std::unordered_map<std::string, std::string>
-        }
+    class input_model_set #F7E5FF {
+        +{field} target model
+        +{field} references std::list<model>
+        +{field} fixed_mappings std::unordered_map<std::string, std::string>
+    }
 
 note top of  input_model_set
 Represents a set of related logical models used as an input to the logical model chains.
 end note
 
-        class Container <<masd::object_template>> #E3B6F6 {
-                +{field} contains std::list<identification::entities::logical_id>
-        }
+    class Container <<masd::object_template>> #E3B6F6 {
+        +{field} contains std::list<identification::entities::logical_id>
+    }
 
 note top of  Container
 Has the ability to contain other elements.
 end note
 
-        namespace decoration #F2F2F2 {
-                class licence <<logical::meta_element>> #F7E5FF {
-                        +{field} short_form std::string
-                        +{field} long_form std::string
-                }
+    namespace decoration #F2F2F2 {
+        class licence <<logical::meta_element>> #F7E5FF {
+            +{field} short_form std::string
+            +{field} long_form std::string
+        }
 
 note top of  licence
 Represents legal licence for software projects.
 end note
 
-                class modeline_group <<logical::meta_element, Container>> #F7E5FF {
-                        +{field} modelines std::list<boost::shared_ptr<modeline>>
-                }
+        class modeline_group <<logical::meta_element, Container>> #F7E5FF {
+            +{field} modelines std::list<boost::shared_ptr<modeline>>
+        }
 
 note top of  modeline_group
 Group of modelines, logically associated.
@@ -341,12 +341,12 @@ For example, one may choose to have a set of modelines for @e emacs , or for
 @e vi, etc.
 end note
 
-                class modeline <<logical::meta_element>> #F7E5FF {
-                        +{field} editor editor
-                        +{field} location modeline_location
-                        +{field} fields std::list<modeline_field>
-                        +{field} technical_space identification::entities::technical_space
-                }
+        class modeline <<logical::meta_element>> #F7E5FF {
+            +{field} editor editor
+            +{field} location modeline_location
+            +{field} fields std::list<modeline_field>
+            +{field} technical_space identification::entities::technical_space
+        }
 
 note top of  modeline
 Groups all the fields representing editor variables for emacs, vi, etc.
@@ -361,39 +361,39 @@ field name and its value is @e c++; the KVP separator is @e : and the field
 separator is @e ;.
 end note
 
-                enum editor <<masd::enumeration, dogen::convertible>> #F2DAFD {
-                        +{field} emacs
-                        +{field} vi
-                        +{field} vim
-                        +{field} ex
-                }
+        enum editor <<masd::enumeration, dogen::convertible>> #F2DAFD {
+            +{field} emacs
+            +{field} vi
+            +{field} vim
+            +{field} ex
+        }
 
 note top of  editor
 Supported editors for modelines.
 end note
 
-                class modeline_field #F7E5FF {
-                        +{field} name std::string
-                        +{field} value std::string
-                }
+        class modeline_field #F7E5FF {
+            +{field} name std::string
+            +{field} value std::string
+        }
 
-                enum modeline_location <<masd::enumeration, dogen::convertible>> #F2DAFD {
-                        +{field} top
-                        +{field} bottom
-                }
+        enum modeline_location <<masd::enumeration, dogen::convertible>> #F2DAFD {
+            +{field} top
+            +{field} bottom
+        }
 
 note top of  modeline_location
 Location in the file to place the modeline.
 end note
 
-                class generation_marker <<logical::meta_element>> #F7E5FF {
-                        +{field} add_date_time bool
-                        +{field} add_dogen_version bool
-                        +{field} add_model_to_text_transform_details bool
-                        +{field} add_warning bool
-                        +{field} add_origin_sha1_hash bool
-                        +{field} message std::string
-                }
+        class generation_marker <<logical::meta_element>> #F7E5FF {
+            +{field} add_date_time bool
+            +{field} add_dogen_version bool
+            +{field} add_model_to_text_transform_details bool
+            +{field} add_warning bool
+            +{field} add_origin_sha1_hash bool
+            +{field} message std::string
+        }
 
 note top of  generation_marker
 Properties of the "generation marker" to add to generated files.
@@ -401,55 +401,55 @@ Properties of the "generation marker" to add to generated files.
 These are also known as "location strings".
 end note
 
-                class element_properties #F7E5FF {
-                        +{field} preamble std::string
-                        +{field} postamble std::string
-                }
+        class element_properties #F7E5FF {
+            +{field} preamble std::string
+            +{field} postamble std::string
+        }
 
 note top of  element_properties
 Decoration for this element.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} modeline_groups std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
-                        +{field} modelines std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
-                        +{field} licences std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
-                        +{field} generation_markers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
-                }
-
+        class element_repository #F7E5FF {
+            +{field} modeline_groups std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
+            +{field} modelines std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
+            +{field} licences std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
+            +{field} generation_markers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
         }
+
+    }
 
 note top of  decoration
 Houses all of the meta-modeling elements and
 properties related to decorations.
 end note
 
-        class meta_element <<masd::variability::profile>> #DDECEC {
-                +{field} masd.generalization.parent
-        }
+    class meta_element <<masd::variability::profile>> #DDECEC {
+        +{field} masd.generalization.parent
+    }
 
-        namespace variability #F2F2F2 {
-                class abstract_feature <<Documentable, Configurable, Nameable>> #F7E5FF {
-                        +{field} original_key std::string
-                        +{field} key std::string
-                        +{field} identifiable_key std::string
-                        +{field} unparsed_type std::string
-                        +{field} mapped_type std::string
-                        +{field} parsed_type identification::entities::logical_name_tree
-                        +{field} default_value std::string
-                        +{field} value_type variability::entities::value_type
-                        +{field} binding_point boost::optional<variability::entities::binding_point>
-                        +{field} is_optional bool
-                        +{field} requires_optionality bool
-                }
+    namespace variability #F2F2F2 {
+        class abstract_feature <<Documentable, Configurable, Nameable>> #F7E5FF {
+            +{field} original_key std::string
+            +{field} key std::string
+            +{field} identifiable_key std::string
+            +{field} unparsed_type std::string
+            +{field} mapped_type std::string
+            +{field} parsed_type identification::entities::logical_name_tree
+            +{field} default_value std::string
+            +{field} value_type variability::entities::value_type
+            +{field} binding_point boost::optional<variability::entities::binding_point>
+            +{field} is_optional bool
+            +{field} requires_optionality bool
+        }
 
 note top of  abstract_feature
 Contains all of the common attributes between features and feature templates.
 end note
 
-                class feature_template #F7E5FF {
-                        +{field} default_value_overrides std::list<default_value_override>
-                }
+        class feature_template #F7E5FF {
+            +{field} default_value_overrides std::list<default_value_override>
+        }
 
 entities::variability::abstract_feature <|-- entities::variability::feature_template
 note top of  feature_template
@@ -458,30 +458,30 @@ Represents a feature template in variability space.
 Feature templates are expanded into features within the variability model.
 end note
 
-                class initializer <<logical::meta_element>> #F7E5FF {
-                        +{field} feature_template_bundles std::list<identification::entities::logical_name>
-                        +{field} feature_bundles std::list<identification::entities::logical_name>
-                }
+        class initializer <<logical::meta_element>> #F7E5FF {
+            +{field} feature_template_bundles std::list<identification::entities::logical_name>
+            +{field} feature_bundles std::list<identification::entities::logical_name>
+        }
 
 note top of  initializer
 Responsible for initialising features and feature templates.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} profile_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
-                        +{field} profiles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
-                        +{field} feature_template_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
-                        +{field} feature_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
-                        +{field} initializer boost::shared_ptr<initializer>
-                }
+        class element_repository #F7E5FF {
+            +{field} profile_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
+            +{field} profiles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
+            +{field} feature_template_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
+            +{field} feature_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
+            +{field} initializer boost::shared_ptr<initializer>
+        }
 
-                class abstract_bundle <<logical::meta_element, Associatable>> #F7E5FF {
-                        +{field} key_prefix std::string
-                        +{field} generate_registration bool
-                        +{field} generate_static_configuration bool
-                        +{field} requires_manual_default_constructor bool
-                        +{field} default_binding_point boost::optional<variability::entities::binding_point>
-                }
+        class abstract_bundle <<logical::meta_element, Associatable>> #F7E5FF {
+            +{field} key_prefix std::string
+            +{field} generate_registration bool
+            +{field} generate_static_configuration bool
+            +{field} requires_manual_default_constructor bool
+            +{field} default_binding_point boost::optional<variability::entities::binding_point>
+        }
 
 note top of  abstract_bundle
 A feature template bundle represents an aggregation of feature templates in a
@@ -498,9 +498,9 @@ Generated code comprises of two aspects:
  read out from the dynamic configuration - if requested.
 end note
 
-                class feature_bundle #F7E5FF {
-                        +{field} features std::list<feature>
-                }
+        class feature_bundle #F7E5FF {
+            +{field} features std::list<feature>
+        }
 
 entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
 note top of  feature_bundle
@@ -519,18 +519,18 @@ Generated code comprises of two aspects:
 Both of these aspects are optional, but at least one must be chosen.
 end note
 
-                class feature #F7E5FF {
-                }
+        class feature #F7E5FF {
+        }
 
 entities::variability::abstract_feature <|-- entities::variability::feature
 note top of  feature
 Represents a feature in variability space.
 end note
 
-                class feature_template_bundle #F7E5FF {
-                        +{field} feature_templates std::list<feature_template>
-                        +{field} instantiation_domain_name std::string
-                }
+        class feature_template_bundle #F7E5FF {
+            +{field} feature_templates std::list<feature_template>
+            +{field} instantiation_domain_name std::string
+        }
 
 entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
 note top of  feature_template_bundle
@@ -550,48 +550,48 @@ Generated code comprises of two aspects:
 Both of these aspects are optional, but at least one must be chosen.
 end note
 
-                class abstract_profile <<logical::meta_element>> #F7E5FF {
-                        +{field} stereotype std::string
-                        +{field} parents std::list<identification::entities::logical_name>
-                        +{field} key_prefix std::string
-                }
+        class abstract_profile <<logical::meta_element>> #F7E5FF {
+            +{field} stereotype std::string
+            +{field} parents std::list<identification::entities::logical_name>
+            +{field} key_prefix std::string
+        }
 
-                class profile_template #F7E5FF {
-                        +{field} entries std::list<profile_template_entry>
-                }
+        class profile_template #F7E5FF {
+            +{field} entries std::list<profile_template_entry>
+        }
 
 entities::variability::abstract_profile <|-- entities::variability::profile_template
-                class profile #F7E5FF {
-                        +{field} entries std::list<profile_entry>
-                        +{field} binding_point std::string
-                }
+        class profile #F7E5FF {
+            +{field} entries std::list<profile_entry>
+            +{field} binding_point std::string
+        }
 
 entities::variability::abstract_profile <|-- entities::variability::profile
 note top of  profile
 Represents a profile from the variability subsystem.
 end note
 
-                class abstract_profile_entry <<Documentable, Configurable, Nameable>> #F7E5FF {
-                        +{field} original_key std::string
-                        +{field} key std::string
-                        +{field} value std::list<std::string>
-                }
+        class abstract_profile_entry <<Documentable, Configurable, Nameable>> #F7E5FF {
+            +{field} original_key std::string
+            +{field} key std::string
+            +{field} value std::list<std::string>
+        }
 
-                class profile_entry #F7E5FF {
-                }
+        class profile_entry #F7E5FF {
+        }
 
 entities::variability::abstract_profile_entry <|-- entities::variability::profile_entry
-                class profile_template_entry #F7E5FF {
-                        +{field} instantiation_domain_name std::string
-                }
+        class profile_template_entry #F7E5FF {
+            +{field} instantiation_domain_name std::string
+        }
 
 entities::variability::abstract_profile_entry <|-- entities::variability::profile_template_entry
-                class default_value_override #F7E5FF {
-                        +{field} key_ends_with std::string
-                        +{field} default_value std::string
-                }
-
+        class default_value_override #F7E5FF {
+            +{field} key_ends_with std::string
+            +{field} default_value std::string
         }
+
+    }
 
 note top of  variability
 Houses all of the meta-modeling elements related to variability.
@@ -641,147 +641,147 @@ perhaps it will have the underisable side-effect of hiding all of this
 complexity.
 end note
 
-        namespace orm #F2F2F2 {
-                class model_properties <<Schemable, Caseable>> #F7E5FF {
-                        +{field} database_systems std::vector<database_system>
-                }
+    namespace orm #F2F2F2 {
+        class model_properties <<Schemable, Caseable>> #F7E5FF {
+            +{field} database_systems std::vector<database_system>
+        }
 
-                enum database_system <<masd::enumeration, dogen::hashable, dogen::convertible>> #F2DAFD {
-                        +{field} mysql
-                        +{field} postgresql
-                        +{field} oracle
-                        +{field} sql_server
-                        +{field} sqlite
-                }
+        enum database_system <<masd::enumeration, dogen::hashable, dogen::convertible>> #F2DAFD {
+            +{field} mysql
+            +{field} postgresql
+            +{field} oracle
+            +{field} sql_server
+            +{field} sqlite
+        }
 
-                enum letter_case <<masd::enumeration, dogen::convertible>> #F2DAFD {
-                        +{field} upper_case
-                        +{field} lower_case
-                }
+        enum letter_case <<masd::enumeration, dogen::convertible>> #F2DAFD {
+            +{field} upper_case
+            +{field} lower_case
+        }
 
-                class object_properties <<OrmElement>> #F7E5FF {
-                        +{field} table_name std::string
-                        +{field} is_value bool
-                        +{field} has_primary_key bool
-                }
+        class object_properties <<OrmElement>> #F7E5FF {
+            +{field} table_name std::string
+            +{field} is_value bool
+            +{field} has_primary_key bool
+        }
 
-                class primitive_properties <<OrmElement, Overridable>> #F7E5FF {
-                }
+        class primitive_properties <<OrmElement, Overridable>> #F7E5FF {
+        }
 
-                class module_properties <<Schemable, Caseable>> #F7E5FF {
-                }
+        class module_properties <<Schemable, Caseable>> #F7E5FF {
+        }
 
-                class attribute_properties <<Overridable, OdbPragmable>> #F7E5FF {
-                        +{field} column_name std::string
-                        +{field} is_primary_key bool
-                        +{field} is_nullable boost::optional<bool>
-                        +{field} is_composite bool
-                }
+        class attribute_properties <<Overridable, OdbPragmable>> #F7E5FF {
+            +{field} column_name std::string
+            +{field} is_primary_key bool
+            +{field} is_nullable boost::optional<bool>
+            +{field} is_composite bool
+        }
 
-                class Schemable <<masd::object_template>> #E3B6F6 {
-                        +{field} schema_name std::string
-                        +{field} capitalised_schema_name std::string
-                }
+        class Schemable <<masd::object_template>> #E3B6F6 {
+            +{field} schema_name std::string
+            +{field} capitalised_schema_name std::string
+        }
 
 note top of  Schemable
 Model element can belong to a relational database schema.
 end note
 
-                class Caseable <<masd::object_template>> #E3B6F6 {
-                        +{field} letter_case boost::optional<letter_case>
-                }
+        class Caseable <<masd::object_template>> #E3B6F6 {
+            +{field} letter_case boost::optional<letter_case>
+        }
 
 note top of  Caseable
 The model element supports configuration related to casing.
 end note
 
-                class Mappeable <<masd::object_template>> #E3B6F6 {
-                        +{field} generate_mapping bool
-                }
+        class Mappeable <<masd::object_template>> #E3B6F6 {
+            +{field} generate_mapping bool
+        }
 
-                class TypeMappable <<masd::object_template>> #E3B6F6 {
-                        +{field} type_mappings std::list<type_mapping>
-                }
+        class TypeMappable <<masd::object_template>> #E3B6F6 {
+            +{field} type_mappings std::list<type_mapping>
+        }
 
-                class OdbPragmable <<masd::object_template>> #E3B6F6 {
-                        +{field} odb_pragmas std::list<std::string>
-                }
+        class OdbPragmable <<masd::object_template>> #E3B6F6 {
+            +{field} odb_pragmas std::list<std::string>
+        }
 
-                class OrmElement <<masd::object_template>> #E3B6F6 {
-                        +{field} odb_options odb_options
-                }
+        class OrmElement <<masd::object_template>> #E3B6F6 {
+            +{field} odb_options odb_options
+        }
 
 entities::orm::Schemable <|-- entities::orm::OrmElement
 entities::orm::Caseable <|-- entities::orm::OrmElement
 entities::orm::Mappeable <|-- entities::orm::OrmElement
 entities::orm::TypeMappable <|-- entities::orm::OrmElement
 entities::orm::OdbPragmable <|-- entities::orm::OrmElement
-                class Overridable <<masd::object_template>> #E3B6F6 {
-                        +{field} type_overrides std::unordered_map<database_system, std::string>
-                }
-
-                class type_mapping #F7E5FF {
-                        +{field} source_type std::string
-                        +{field} destination_type std::string
-                        +{field} to_source_type std::string
-                        +{field} to_destination_type std::string
-                        +{field} database boost::optional<database_system>
-                }
-
-                class odb_options #F7E5FF {
-                        +{field} epilogue std::string
-                        +{field} include_regexes std::list<std::string>
-                        +{field} header_guard_prefix std::string
-                }
-
-                class common_odb_options <<logical::meta_element>> #F7E5FF {
-                        +{field} sql_name_case std::string
-                        +{field} databases std::list<std::string>
-                }
-
-                class element_repository #F7E5FF {
-                        +{field} common_odb_options std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
-                }
-
-                class odb_targets #F7E5FF {
-                        +{field} main_target_name std::string
-                        +{field} common_odb_options std::string
-                        +{field} targets std::list<odb_target>
-                }
-
-                class odb_target #F7E5FF {
-                        +{field} name std::string
-                        +{field} comment std::string
-                        +{field} output_directory std::string
-                        +{field} types_file std::string
-                        +{field} move_parameters std::list<std::pair<std::string, std::string>>
-                        +{field} object_odb_options std::string
-                }
-
+        class Overridable <<masd::object_template>> #E3B6F6 {
+            +{field} type_overrides std::unordered_map<database_system, std::string>
         }
+
+        class type_mapping #F7E5FF {
+            +{field} source_type std::string
+            +{field} destination_type std::string
+            +{field} to_source_type std::string
+            +{field} to_destination_type std::string
+            +{field} database boost::optional<database_system>
+        }
+
+        class odb_options #F7E5FF {
+            +{field} epilogue std::string
+            +{field} include_regexes std::list<std::string>
+            +{field} header_guard_prefix std::string
+        }
+
+        class common_odb_options <<logical::meta_element>> #F7E5FF {
+            +{field} sql_name_case std::string
+            +{field} databases std::list<std::string>
+        }
+
+        class element_repository #F7E5FF {
+            +{field} common_odb_options std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
+        }
+
+        class odb_targets #F7E5FF {
+            +{field} main_target_name std::string
+            +{field} common_odb_options std::string
+            +{field} targets std::list<odb_target>
+        }
+
+        class odb_target #F7E5FF {
+            +{field} name std::string
+            +{field} comment std::string
+            +{field} output_directory std::string
+            +{field} types_file std::string
+            +{field} move_parameters std::list<std::pair<std::string, std::string>>
+            +{field} object_odb_options std::string
+        }
+
+    }
 
 note top of  orm
 Houses all of the properties related to ORM
 support in Dogen.
 end note
 
-        namespace structural #F2F2F2 {
-                class object_template <<logical::meta_element, Stateful>> #F7E5FF {
-                        +{field} parents std::list<identification::entities::logical_name>
-                        +{field} is_child bool
-                }
+    namespace structural #F2F2F2 {
+        class object_template <<logical::meta_element, Stateful>> #F7E5FF {
+            +{field} parents std::list<identification::entities::logical_name>
+            +{field} is_child bool
+        }
 
 note top of  object_template
 Represents a structural template for masd objects.
 end note
 
-                class object <<logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties>> #F7E5FF {
-                        +{field} is_associative_container bool
-                        +{field} object_templates std::list<identification::entities::logical_name>
-                        +{field} provides_opaqueness bool
-                        +{field} can_be_primitive_underlier bool
-                        +{field} orm_properties boost::optional<dogen::logical::entities::orm::object_properties>
-                }
+        class object <<logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties>> #F7E5FF {
+            +{field} is_associative_container bool
+            +{field} object_templates std::list<identification::entities::logical_name>
+            +{field} provides_opaqueness bool
+            +{field} can_be_primitive_underlier bool
+            +{field} orm_properties boost::optional<dogen::logical::entities::orm::object_properties>
+        }
 
 note top of  object
 Representation of the class notion in the OOP paradigm.
@@ -792,46 +792,46 @@ is ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.
 end note
 
-                class builtin <<logical::meta_element>> #F7E5FF {
-                        +{field} is_default_enumeration_type bool
-                        +{field} is_floating_point bool
-                        +{field} can_be_enumeration_underlier bool
-                        +{field} can_be_primitive_underlier bool
-                }
+        class builtin <<logical::meta_element>> #F7E5FF {
+            +{field} is_default_enumeration_type bool
+            +{field} is_floating_point bool
+            +{field} can_be_enumeration_underlier bool
+            +{field} can_be_primitive_underlier bool
+        }
 
 note top of  builtin
 Represents a value type that is built-in at the hardware level.
 end note
 
-                class exception <<logical::meta_element>> #F7E5FF {
-                }
+        class exception <<logical::meta_element>> #F7E5FF {
+        }
 
 note top of  exception
 Represents an exception which can be thrown.
 end note
 
-                class visitor <<logical::meta_element>> #F7E5FF {
-                        +{field} visits std::list<identification::entities::logical_name>
-                        +{field} parent boost::optional<identification::entities::logical_name>
-                }
+        class visitor <<logical::meta_element>> #F7E5FF {
+            +{field} visits std::list<identification::entities::logical_name>
+            +{field} parent boost::optional<identification::entities::logical_name>
+        }
 
-                class primitive <<logical::meta_element, TechnicalSpaceProperties>> #F7E5FF {
-                        +{field} is_nullable bool
-                        +{field} value_attribute attribute
-                        +{field} use_type_aliasing bool
-                        +{field} is_immutable bool
-                        +{field} orm_properties boost::optional<dogen::logical::entities::orm::primitive_properties>
-                }
+        class primitive <<logical::meta_element, TechnicalSpaceProperties>> #F7E5FF {
+            +{field} is_nullable bool
+            +{field} value_attribute attribute
+            +{field} use_type_aliasing bool
+            +{field} is_immutable bool
+            +{field} orm_properties boost::optional<dogen::logical::entities::orm::primitive_properties>
+        }
 
 note top of  primitive
 Defines an element created by the user to wrap another element, most likely a built-in.
 end note
 
-                class module <<logical::meta_element, Container>> #F7E5FF {
-                        +{field} is_root bool
-                        +{field} is_global_module bool
-                        +{field} orm_properties boost::optional<dogen::logical::entities::orm::module_properties>
-                }
+        class module <<logical::meta_element, Container>> #F7E5FF {
+            +{field} is_root bool
+            +{field} is_global_module bool
+            +{field} orm_properties boost::optional<dogen::logical::entities::orm::module_properties>
+        }
 
 note top of  module
 Container for other logical elements.
@@ -839,22 +839,22 @@ Container for other logical elements.
 Aggregates a group of logically related elements into a unit.
 end note
 
-                class enumeration <<logical::meta_element>> #F7E5FF {
-                        +{field} underlying_element identification::entities::logical_name
-                        +{field} enumerators std::list<enumerator>
-                        +{field} use_implementation_defined_underlying_element bool
-                        +{field} use_implementation_defined_enumerator_values bool
-                        +{field} add_invalid_enumerator bool
-                }
+        class enumeration <<logical::meta_element>> #F7E5FF {
+            +{field} underlying_element identification::entities::logical_name
+            +{field} enumerators std::list<enumerator>
+            +{field} use_implementation_defined_underlying_element bool
+            +{field} use_implementation_defined_enumerator_values bool
+            +{field} add_invalid_enumerator bool
+        }
 
 note top of  enumeration
 Defines a bounded set of logically related values for a built-in type
 or a string.
 end note
 
-                class enumerator <<Documentable, Nameable, Configurable, Stereotypable>> #F7E5FF {
-                        +{field} value std::string
-                }
+        class enumerator <<Documentable, Nameable, Configurable, Stereotypable>> #F7E5FF {
+            +{field} value std::string
+        }
 
 note top of  enumerator
 One of a set of valid values that an enumeration can assume.
@@ -862,55 +862,55 @@ One of a set of valid values that an enumeration can assume.
 The enumerator defines an element in the domain of the enumeration.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} modules std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>
-                        +{field} object_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>
-                        +{field} builtins std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>
-                        +{field} enumerations std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>
-                        +{field} primitives std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>
-                        +{field} objects std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>
-                        +{field} exceptions std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>
-                        +{field} visitors std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>
-                        +{field} entry_points std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>
-                        +{field} assistants std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>
-                }
+        class element_repository #F7E5FF {
+            +{field} modules std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>
+            +{field} object_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>
+            +{field} builtins std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>
+            +{field} enumerations std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>
+            +{field} primitives std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>
+            +{field} objects std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>
+            +{field} exceptions std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>
+            +{field} visitors std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>
+            +{field} entry_points std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>
+            +{field} assistants std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>
+        }
 
-                class entry_point <<logical::meta_element>> #F7E5FF {
-                }
+        class entry_point <<logical::meta_element>> #F7E5FF {
+        }
 
 note top of  entry_point
 Represents an entry point to a binary.
 end note
 
-                class assistant <<logical::meta_element>> #F7E5FF {
-                }
+        class assistant <<logical::meta_element>> #F7E5FF {
+        }
 
 note top of  assistant
 General type to provide helpers.
 end note
 
-                class technical_space_properties #F7E5FF {
-                        +{field} requires_manual_default_constructor bool
-                        +{field} requires_manual_move_constructor bool
-                        +{field} requires_stream_manipulators bool
-                        +{field} requires_static_reference_equals bool
-                }
-
-                class TechnicalSpaceProperties <<masd::object_template>> #E3B6F6 {
-                        +{field} technical_space_properties technical_space_properties
-                }
-
+        class technical_space_properties #F7E5FF {
+            +{field} requires_manual_default_constructor bool
+            +{field} requires_manual_move_constructor bool
+            +{field} requires_stream_manipulators bool
+            +{field} requires_static_reference_equals bool
         }
+
+        class TechnicalSpaceProperties <<masd::object_template>> #E3B6F6 {
+            +{field} technical_space_properties technical_space_properties
+        }
+
+    }
 
 note top of  structural
 Houses all of the meta-modeling elements related
 to structural modeling.
 end note
 
-        namespace mapping #F2F2F2 {
-                class extensible_mappable <<logical::meta_element>> #F7E5FF {
-                        +{field} destinations std::list<destination>
-                }
+    namespace mapping #F2F2F2 {
+        class extensible_mappable <<logical::meta_element>> #F7E5FF {
+            +{field} destinations std::list<destination>
+        }
 
 note top of  extensible_mappable
 A mappable meta-model element for the general purpose of mapping.
@@ -920,19 +920,19 @@ mapped to concrete types to form a Platform Specific Model (PSM). Users can
 extend the mappings as required.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} extensible_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
-                        +{field} fixed_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
-                }
+        class element_repository #F7E5FF {
+            +{field} extensible_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
+            +{field} fixed_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
+        }
 
-                class destination #F7E5FF {
-                        +{field} name identification::entities::logical_name
-                        +{field} technical_space identification::entities::technical_space
-                }
+        class destination #F7E5FF {
+            +{field} name identification::entities::logical_name
+            +{field} technical_space identification::entities::technical_space
+        }
 
-                class fixed_mappable <<logical::meta_element>> #F7E5FF {
-                        +{field} destination std::string
-                }
+        class fixed_mappable <<logical::meta_element>> #F7E5FF {
+            +{field} destination std::string
+        }
 
 note top of  fixed_mappable
 A mappable meta-model element for a special purpose.
@@ -941,16 +941,16 @@ At present, the only fixed mappables used by Dogen are related to the mapping of
 variability types.
 end note
 
-        }
+    }
 
 note top of  mapping
 Meta-model elements related to mapping domains.
 end note
 
-        namespace templating #F2F2F2 {
-                class logic_less_template <<logical::meta_element>> #F7E5FF {
-                        +{field} content std::string
-                }
+    namespace templating #F2F2F2 {
+        class logic_less_template <<logical::meta_element>> #F7E5FF {
+            +{field} content std::string
+        }
 
 note top of  logic_less_template
 Represents a logic-less template.
@@ -958,21 +958,21 @@ Represents a logic-less template.
 At present the system only supports wale templates.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} logic_less_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
-                }
-
+        class element_repository #F7E5FF {
+            +{field} logic_less_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
         }
+
+    }
 
 note top of  templating
 Meta-model elements related to templating .
 end note
 
-        namespace serialization #F2F2F2 {
-                class type_registrar <<logical::meta_element>> #F7E5FF {
-                        +{field} leaves std::list<identification::entities::logical_name>
-                        +{field} registrar_dependencies std::list<identification::entities::logical_name>
-                }
+    namespace serialization #F2F2F2 {
+        class type_registrar <<logical::meta_element>> #F7E5FF {
+            +{field} leaves std::list<identification::entities::logical_name>
+            +{field} registrar_dependencies std::list<identification::entities::logical_name>
+        }
 
 note top of  type_registrar
 Responsible for registering types for serialisation purposes.
@@ -984,37 +984,37 @@ types to work. The type registrar is aware of all types with such requirements a
 generates the registration code as needed.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} type_registrars std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
-                }
-
+        class element_repository #F7E5FF {
+            +{field} type_registrars std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
         }
+
+    }
 
 note top of  serialization
 Houses all of the meta-modeling elements related
 to serialisation.
 end note
 
-        namespace visual_studio #F2F2F2 {
-                class project <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
-                        +{field} type_guid std::string
-                        +{field} item_groups std::list<item_group>
-                        +{field} project_name std::string
-                }
+    namespace visual_studio #F2F2F2 {
+        class project <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
+            +{field} type_guid std::string
+            +{field} item_groups std::list<item_group>
+            +{field} project_name std::string
+        }
 
 note top of  project
 Represents a Visual Studio project.
 end note
 
-                class element_repository #F7E5FF {
-                        +{field} solutions std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
-                        +{field} projects std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
-                        +{field} msbuild_targets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
-                }
+        class element_repository #F7E5FF {
+            +{field} solutions std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
+            +{field} projects std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
+            +{field} msbuild_targets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
+        }
 
-                class item_group #F7E5FF {
-                        +{field} items std::list<item>
-                }
+        class item_group #F7E5FF {
+            +{field} items std::list<item>
+        }
 
 note top of  item_group
 Represents an MSBuild ItemGroup.
@@ -1023,10 +1023,10 @@ Documented as follows: Contains a set of user-defined Item elements. Every item
 used in a MSBuild project must be specified as a child of an ItemGroup element.
 end note
 
-                class item #F7E5FF {
-                        +{field} name std::string
-                        +{field} include std::string
-                }
+        class item #F7E5FF {
+            +{field} name std::string
+            +{field} include std::string
+        }
 
 note top of  item
 Represents an MSBuild Item, used in Visual Studio projects.
@@ -1035,50 +1035,50 @@ Documentation:  Contains a user-defined item and its metadata. Every item that i
 used in a MSBuild project must be specified as a child of an ItemGroup element.
 end note
 
-                class solution <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
-                        +{field} project_persistence_blocks std::list<project_persistence_block>
-                }
-
-                class project_persistence_block <<UniquelyIdentifiable>> #F7E5FF {
-                        +{field} name std::string
-                        +{field} relative_path boost::filesystem::path
-                        +{field} type_guid std::string
-                }
-
-                class UniquelyIdentifiable <<masd::object_template>> #E3B6F6 {
-                        +{field} guid std::string
-                }
-
-                class msbuild_targets <<logical::meta_element>> #F7E5FF {
-                        +{field} odb_targets dogen::logical::entities::orm::odb_targets
-                }
-
+        class solution <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
+            +{field} project_persistence_blocks std::list<project_persistence_block>
         }
+
+        class project_persistence_block <<UniquelyIdentifiable>> #F7E5FF {
+            +{field} name std::string
+            +{field} relative_path boost::filesystem::path
+            +{field} type_guid std::string
+        }
+
+        class UniquelyIdentifiable <<masd::object_template>> #E3B6F6 {
+            +{field} guid std::string
+        }
+
+        class msbuild_targets <<logical::meta_element>> #F7E5FF {
+            +{field} odb_targets dogen::logical::entities::orm::odb_targets
+        }
+
+    }
 
 note top of  visual_studio
 Houses meta-model elements related to
 build systems.
 end note
 
-        namespace build #F2F2F2 {
-                class element_repository #F7E5FF {
-                        +{field} cmakelists std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
-                }
+    namespace build #F2F2F2 {
+        class element_repository #F7E5FF {
+            +{field} cmakelists std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
+        }
 
-                class cmakelists <<logical::meta_element>> #F7E5FF {
-                        +{field} include_directory_path std::string
-                        +{field} source_directory_name std::string
-                        +{field} header_file_extension std::string
-                        +{field} implementation_file_extension std::string
-                        +{field} odb_targets dogen::logical::entities::orm::odb_targets
-                        +{field} tests_directory_name std::string
-                }
+        class cmakelists <<logical::meta_element>> #F7E5FF {
+            +{field} include_directory_path std::string
+            +{field} source_directory_name std::string
+            +{field} header_file_extension std::string
+            +{field} implementation_file_extension std::string
+            +{field} odb_targets dogen::logical::entities::orm::odb_targets
+            +{field} tests_directory_name std::string
+        }
 
 note top of  cmakelists
 Represents build CMakeLists files.
 end note
 
-        }
+    }
 
 note top of  build
 Houses all of the meta-modeling elements related
@@ -1086,196 +1086,196 @@ to building, which don't have their own containing
 namespace.
 end note
 
-        namespace physical #F2F2F2 {
-                class element_repository #F7E5FF {
-                        +{field} backends std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
-                        +{field} facets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
-                        +{field} archetypes std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>
-                        +{field} parts std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>
-                        +{field} archetype_kinds std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
-                        +{field} helpers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>
-                }
+    namespace physical #F2F2F2 {
+        class element_repository #F7E5FF {
+            +{field} backends std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
+            +{field} facets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
+            +{field} archetypes std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>
+            +{field} parts std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>
+            +{field} archetype_kinds std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
+            +{field} helpers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>
+        }
 
-                class archetype <<logical::meta_element, PhysicalElement, HasTechnicalSpace>> #F7E5FF {
-                        +{field} facet_name std::string
-                        +{field} part_id std::string
-                        +{field} logical_meta_element_id identification::entities::logical_meta_id
-                        +{field} relations relations
-                        +{field} text_templating text_templating
-                        +{field} postfix std::string
-                }
+        class archetype <<logical::meta_element, PhysicalElement, HasTechnicalSpace>> #F7E5FF {
+            +{field} facet_name std::string
+            +{field} part_id std::string
+            +{field} logical_meta_element_id identification::entities::logical_meta_id
+            +{field} relations relations
+            +{field} text_templating text_templating
+            +{field} postfix std::string
+        }
 
 note top of  archetype
 Represents an archetype within a facet.
 end note
 
-                class backend <<logical::meta_element, PhysicalElement, Container, HasTechnicalSpace>> #F7E5FF {
-                        +{field} facets std::list<identification::entities::logical_name>
-                        +{field} parts std::list<identification::entities::logical_name>
-                        +{field} archetype_kinds std::list<identification::entities::logical_name>
-                        +{field} directory_name std::string
-                }
+        class backend <<logical::meta_element, PhysicalElement, Container, HasTechnicalSpace>> #F7E5FF {
+            +{field} facets std::list<identification::entities::logical_name>
+            +{field} parts std::list<identification::entities::logical_name>
+            +{field} archetype_kinds std::list<identification::entities::logical_name>
+            +{field} directory_name std::string
+        }
 
 note top of  backend
 Represents a physical backend, targetting a major technical space such as C++ or C#.
 end note
 
-                class facet <<logical::meta_element, PhysicalElement, Container>> #F7E5FF {
-                        +{field} archetypes std::list<identification::entities::logical_name>
-                        +{field} helpers std::list<identification::entities::logical_name>
-                        +{field} directory_name std::string
-                        +{field} postfix std::string
-                }
+        class facet <<logical::meta_element, PhysicalElement, Container>> #F7E5FF {
+            +{field} archetypes std::list<identification::entities::logical_name>
+            +{field} helpers std::list<identification::entities::logical_name>
+            +{field} directory_name std::string
+            +{field} postfix std::string
+        }
 
 note top of  facet
 Represents a facet within a backend, such as type definitions.
 end note
 
-                class part <<logical::meta_element, PhysicalElement>> #F7E5FF {
-                        +{field} external_modules_path_contribution std::string
-                        +{field} model_modules_path_contribution std::string
-                        +{field} facet_path_contribution std::string
-                        +{field} internal_modules_path_contribution std::string
-                        +{field} requires_relative_path bool
-                        +{field} archetypes std::list<identification::entities::logical_name>
-                        +{field} directory_name std::string
-                }
+        class part <<logical::meta_element, PhysicalElement>> #F7E5FF {
+            +{field} external_modules_path_contribution std::string
+            +{field} model_modules_path_contribution std::string
+            +{field} facet_path_contribution std::string
+            +{field} internal_modules_path_contribution std::string
+            +{field} requires_relative_path bool
+            +{field} archetypes std::list<identification::entities::logical_name>
+            +{field} directory_name std::string
+        }
 
 note top of  part
 Part whithin a backend.
 end note
 
-                class archetype_kind <<logical::meta_element, PhysicalElement>> #F7E5FF {
-                        +{field} file_extension std::string
-                }
+        class archetype_kind <<logical::meta_element, PhysicalElement>> #F7E5FF {
+            +{field} file_extension std::string
+        }
 
-                class PhysicalElement <<masd::object_template>> #E3B6F6 {
-                        +{field} id std::string
-                        +{field} major_technical_space identification::entities::technical_space
-                        +{field} meta_model_name std::string
-                        +{field} backend_name std::string
-                }
+        class PhysicalElement <<masd::object_template>> #E3B6F6 {
+            +{field} id std::string
+            +{field} major_technical_space identification::entities::technical_space
+            +{field} meta_model_name std::string
+            +{field} backend_name std::string
+        }
 
-                class variable_relation <<Urnable>> #F7E5FF {
-                        +{field} type std::string
-                }
+        class variable_relation <<Urnable>> #F7E5FF {
+            +{field} type std::string
+        }
 
-                class constant_relation <<Urnable, Labelable>> #F7E5FF {
-                        +{field} logical_model_element_id std::string
-                }
+        class constant_relation <<Urnable, Labelable>> #F7E5FF {
+            +{field} logical_model_element_id std::string
+        }
 
-                class Urnable <<masd::object_template>> #E3B6F6 {
-                        +{field} original_urn std::string
-                }
+        class Urnable <<masd::object_template>> #E3B6F6 {
+            +{field} original_urn std::string
+        }
 
-                class hard_coded_relation #F7E5FF {
-                        +{field} value std::string
-                }
+        class hard_coded_relation #F7E5FF {
+            +{field} value std::string
+        }
 
-                class relations #F7E5FF {
-                        +{field} status std::string
-                        +{field} constant std::list<constant_relation>
-                        +{field} variable std::list<variable_relation>
-                        +{field} hard_coded std::list<hard_coded_relation>
-                }
+        class relations #F7E5FF {
+            +{field} status std::string
+            +{field} constant std::list<constant_relation>
+            +{field} variable std::list<variable_relation>
+            +{field} hard_coded std::list<hard_coded_relation>
+        }
 
-                class text_templating <<Configurable>> #F7E5FF {
-                        +{field} stitch_template_content std::string
-                        +{field} wale_template boost::optional<identification::entities::logical_name>
-                        +{field} wale_template_content std::string
-                        +{field} rendered_stitch_template std::string
-                        +{field} relations relations
-                }
+        class text_templating <<Configurable>> #F7E5FF {
+            +{field} stitch_template_content std::string
+            +{field} wale_template boost::optional<identification::entities::logical_name>
+            +{field} wale_template_content std::string
+            +{field} rendered_stitch_template std::string
+            +{field} relations relations
+        }
 
 note top of  text_templating
 Contains all the properties related to the generation of archetypes themselves.
 end note
 
-                class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
-                        +{field} technical_space std::string
-                }
-
-                class helper <<logical::meta_element, PhysicalElement>> #F7E5FF {
-                        +{field} part_id std::string
-                        +{field} facet_name std::string
-                        +{field} family std::string
-                        +{field} owning_formatters std::list<std::string>
-                        +{field} owning_facets std::list<std::string>
-                        +{field} helper_name std::string
-                        +{field} text_templating text_templating
-                        +{field} relations relations
-                }
-
+        class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
+            +{field} technical_space std::string
         }
+
+        class helper <<logical::meta_element, PhysicalElement>> #F7E5FF {
+            +{field} part_id std::string
+            +{field} facet_name std::string
+            +{field} family std::string
+            +{field} owning_formatters std::list<std::string>
+            +{field} owning_facets std::list<std::string>
+            +{field} helper_name std::string
+            +{field} text_templating text_templating
+            +{field} relations relations
+        }
+
+    }
 
 note top of  physical
 Logical representation of elements in the physical dimension.
 end note
 
-        class output_model_set <<Nameable>> #F7E5FF {
-                +{field} models std::list<model>
-        }
+    class output_model_set <<Nameable>> #F7E5FF {
+        +{field} models std::list<model>
+    }
 
 note top of  output_model_set
 Represents a set of related logical models produced as ouput of the logical model chains.
 end note
 
-        enum generability_status <<masd::enumeration>> #F2DAFD {
-                +{field} non_generatable_source
-                +{field} generation_not_expected
-                +{field} non_generatable_state
-                +{field} generation_disabled
-                +{field} generation_ignored
-                +{field} generatable
-        }
+    enum generability_status <<masd::enumeration>> #F2DAFD {
+        +{field} non_generatable_source
+        +{field} generation_not_expected
+        +{field} non_generatable_state
+        +{field} generation_disabled
+        +{field} generation_ignored
+        +{field} generatable
+    }
 
 note top of  generability_status
 The status of this element with regards to generability.
 end note
 
-        class stereotypes #F7E5FF {
-                +{field} static_stereotypes std::list<static_stereotypes>
-                +{field} dynamic_stereotypes std::list<identification::entities::stereotype>
-        }
+    class stereotypes #F7E5FF {
+        +{field} static_stereotypes std::list<static_stereotypes>
+        +{field} dynamic_stereotypes std::list<identification::entities::stereotype>
+    }
 
 note top of  stereotypes
 Stereotype information associated with this element.
 end note
 
-        class streaming_properties #F7E5FF {
-                +{field} requires_quoting bool
-                +{field} string_conversion_method std::string
-                +{field} remove_unprintable_characters bool
-        }
+    class streaming_properties #F7E5FF {
+        +{field} requires_quoting bool
+        +{field} string_conversion_method std::string
+        +{field} remove_unprintable_characters bool
+    }
 
-        class helper_properties #F7E5FF {
-                +{field} current helper_descriptor
-                +{field} direct_descendants std::list<helper_descriptor>
-                +{field} in_inheritance_relationship bool
-        }
+    class helper_properties #F7E5FF {
+        +{field} current helper_descriptor
+        +{field} direct_descendants std::list<helper_descriptor>
+        +{field} in_inheritance_relationship bool
+    }
 
-        class helper_descriptor #F7E5FF {
-                +{field} family std::string
-                +{field} namespaces std::list<std::string>
-                +{field} name_identifiable std::string
-                +{field} name_qualified std::string
-                +{field} name_tree_qualified std::string
-                +{field} name_tree_identifiable std::string
-                +{field} streaming_properties boost::optional<streaming_properties>
-                +{field} is_simple_type bool
-                +{field} requires_hashing_helper bool
-                +{field} is_circular_dependency bool
-                +{field} is_pointer bool
-        }
+    class helper_descriptor #F7E5FF {
+        +{field} family std::string
+        +{field} namespaces std::list<std::string>
+        +{field} name_identifiable std::string
+        +{field} name_qualified std::string
+        +{field} name_tree_qualified std::string
+        +{field} name_tree_identifiable std::string
+        +{field} streaming_properties boost::optional<streaming_properties>
+        +{field} is_simple_type bool
+        +{field} requires_hashing_helper bool
+        +{field} is_circular_dependency bool
+        +{field} is_pointer bool
+    }
 
-        class aspect_properties #F7E5FF {
-                +{field} requires_static_reference_equals bool
-        }
+    class aspect_properties #F7E5FF {
+        +{field} requires_static_reference_equals bool
+    }
 
-        class assistant_properties #F7E5FF {
-                +{field} requires_assistance bool
-                +{field} method_postfix std::string
-        }
+    class assistant_properties #F7E5FF {
+        +{field} requires_assistance bool
+        +{field} method_postfix std::string
+    }
 
 }
 
@@ -1287,14 +1287,14 @@ class traits <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 namespace transforms #F2F2F2 {
-        class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} compatibility_mode bool
-                +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
-                +{field} physical_meta_model boost::shared_ptr<physical::entities::meta_model>
-                +{field} mapping_repository boost::shared_ptr<helpers::mapping_set_repository>
-                +{field} tracer boost::shared_ptr<tracing::tracer>
-                +{field} activity_timestamp std::string
-        }
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} compatibility_mode bool
+        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
+        +{field} physical_meta_model boost::shared_ptr<physical::entities::meta_model>
+        +{field} mapping_repository boost::shared_ptr<helpers::mapping_set_repository>
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} activity_timestamp std::string
+    }
 
 note top of  context
 Context for all logical transformations.
@@ -1306,144 +1306,144 @@ arguments were being supplied across the call graph, resulting in a
 lot of repetitive code. The context gathers together all of these.
 end note
 
-        class pre_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class pre_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class post_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class post_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class modules_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class modules_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class origin_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class origin_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class type_params_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class type_params_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class parsing_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class parsing_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class primitives_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class primitives_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generalization_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generalization_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class object_templates_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class object_templates_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class global_module_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class global_module_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class orm_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class orm_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class resolver_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class resolver_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class attributes_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class attributes_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class associations_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class associations_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class transformation_error <<masd::exception>> #E8C2F8 {
-        }
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  transformation_error
 An error occurred whilst applying a transformation.
 end note
 
-        class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class extensible_mapping_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class extensible_mapping_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_naming_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_naming_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class modelines_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class modelines_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class containment_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class containment_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class variability_features_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class variability_features_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class mapping_elements_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class mapping_elements_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class type_registrar_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class type_registrar_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class visual_studio_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class visual_studio_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class visual_studio_project_type_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class visual_studio_project_type_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class odb_options_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class odb_options_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class variability_profiles_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class variability_profiles_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class dynamic_stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class dynamic_stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class variability_profiles_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class variability_profiles_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class physical_entities_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class physical_entities_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class template_rendering_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class template_rendering_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class decoration_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decoration_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class all_technical_spaces_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class all_technical_spaces_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class labelling_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class labelling_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class streaming_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class streaming_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class technical_space_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class technical_space_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class helper_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class helper_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class aspect_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class aspect_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class assistant_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class assistant_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
@@ -1452,159 +1452,159 @@ Houses all of the transformations supported by logical.
 end note
 
 namespace helpers #F2F2F2 {
-        class decomposition_result #F7E5FF {
-                +{field} names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
-                +{field} meta_names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
-                +{field} name_trees std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
-        }
+    class decomposition_result #F7E5FF {
+        +{field} names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
+        +{field} meta_names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
+        +{field} name_trees std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
+    }
 
-        class decomposer <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decomposer <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class post_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class post_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class validation_error <<masd::exception>> #E8C2F8 {
-        }
+    class validation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  validation_error
 An error occurred during validation.
 end note
 
-        class pre_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class pre_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class indices #F7E5FF {
-                +{field} objects_always_in_heap std::unordered_set<identification::entities::logical_id>
-                +{field} elements_referable_by_attributes std::unordered_set<identification::entities::logical_id>
-                +{field} primitive_underliers std::unordered_set<identification::entities::logical_id>
-                +{field} enumeration_underliers std::unordered_set<identification::entities::logical_id>
-                +{field} abstract_elements std::unordered_set<identification::entities::logical_id>
-        }
+    class indices #F7E5FF {
+        +{field} objects_always_in_heap std::unordered_set<identification::entities::logical_id>
+        +{field} elements_referable_by_attributes std::unordered_set<identification::entities::logical_id>
+        +{field} primitive_underliers std::unordered_set<identification::entities::logical_id>
+        +{field} enumeration_underliers std::unordered_set<identification::entities::logical_id>
+        +{field} abstract_elements std::unordered_set<identification::entities::logical_id>
+    }
 
-        class indexing_error <<masd::exception>> #E8C2F8 {
-        }
+    class indexing_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  indexing_error
 A fatal error has occurred while indexing.
 end note
 
-        class indexer <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class indexer <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class resolver <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class resolver <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class resolution_error <<masd::exception>> #E8C2F8 {
-        }
+    class resolution_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  resolution_error
 An error occurred while trying to resolve a type.
 end note
 
-        class mapping_error <<masd::exception>> #E8C2F8 {
-        }
+    class mapping_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  mapping_error
 An error has occurred while mapping element names.
 end note
 
-        class mapper <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class mapper <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class mapping_context #F7E5FF {
-                +{field} translations std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
-                +{field} erasures std::unordered_set<identification::entities::logical_id>
-                +{field} codecs std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
-        }
+    class mapping_context #F7E5FF {
+        +{field} translations std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
+        +{field} erasures std::unordered_set<identification::entities::logical_id>
+        +{field} codecs std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
+    }
 
-        class mapping_set #F7E5FF {
-                +{field} name std::string
-                +{field} by_agnostic_id std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>
-                +{field} erasures_by_technical_space std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
-        }
+    class mapping_set #F7E5FF {
+        +{field} name std::string
+        +{field} by_agnostic_id std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>
+        +{field} erasures_by_technical_space std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
+    }
 
 note top of  mapping_set
 Consistent unit of mapping that can be used to translate a model from one technical
 space to another.
 end note
 
-        class mapping_set_repository #F7E5FF {
-                +{field} default_mapping_set mapping_set
-                +{field} by_name std::unordered_map<std::string, mapping_set>
-        }
+    class mapping_set_repository #F7E5FF {
+        +{field} default_mapping_set mapping_set
+        +{field} by_name std::unordered_map<std::string, mapping_set>
+    }
 
 note top of  mapping_set_repository
 Stores all available mapping sets.
 end note
 
-        class mappings_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class mappings_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class mapping #F7E5FF {
-                +{field} agnostic_id identification::entities::logical_id
-                +{field} by_technical_space std::unordered_map<identification::entities::technical_space, mapping_value>
-        }
+    class mapping #F7E5FF {
+        +{field} agnostic_id identification::entities::logical_id
+        +{field} by_technical_space std::unordered_map<identification::entities::technical_space, mapping_value>
+    }
 
 note top of  mapping
 Stores the mapping of a key (the element id) to its values, organised by technical
 space.
 end note
 
-        class mapping_value #F7E5FF {
-                +{field} mapping_action mapping_actions
-                +{field} default_name boost::optional<identification::entities::logical_name>
-        }
+    class mapping_value #F7E5FF {
+        +{field} mapping_action mapping_actions
+        +{field} default_name boost::optional<identification::entities::logical_name>
+    }
 
 note top of  mapping_value
 Value of a mapping.
 end note
 
-        enum mapping_actions <<masd::enumeration>> #F2DAFD {
-                +{field} translate
-                +{field} erase
-        }
+    enum mapping_actions <<masd::enumeration>> #F2DAFD {
+        +{field} translate
+        +{field} erase
+    }
 
-        class visual_studio_project_type_mapper <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class visual_studio_project_type_mapper <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class profile_adapter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class profile_adapter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class configuration_model_set_adapter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class configuration_model_set_adapter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class adaptation_exception <<masd::exception>> #E8C2F8 {
-        }
+    class adaptation_exception <<masd::exception>> #E8C2F8 {
+    }
 
-        class decoration_repository #F7E5FF {
-                +{field} modelines_by_modeline_group_by_technical_space std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
-                +{field} licences_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>
-                +{field} generation_markers_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
-        }
+    class decoration_repository #F7E5FF {
+        +{field} modelines_by_modeline_group_by_technical_space std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
+        +{field} licences_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>
+        +{field} generation_markers_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
+    }
 
-        class decoration_repository_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decoration_repository_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class decoration_configuration #F7E5FF {
-                +{field} enabled boost::optional<bool>
-                +{field} copyright_notices std::list<std::string>
-                +{field} licence_name identification::entities::logical_id
-                +{field} modeline_group_name identification::entities::logical_id
-                +{field} marker_name identification::entities::logical_id
-        }
+    class decoration_configuration #F7E5FF {
+        +{field} enabled boost::optional<bool>
+        +{field} copyright_notices std::list<std::string>
+        +{field} licence_name identification::entities::logical_id
+        +{field} modeline_group_name identification::entities::logical_id
+        +{field} marker_name identification::entities::logical_id
+    }
 
-        class decoration_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decoration_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class decoration_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decoration_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class stereotypes_helper <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class stereotypes_helper <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class building_error <<masd::exception>> #E8C2F8 {
-        }
+    class building_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  building_error
 An error has occurred in a factory.
@@ -1613,243 +1613,243 @@ end note
 }
 
 namespace features #F2F2F2 {
-        class type_parameters <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} variable_number_of_parameters masd::variability::boolean
-                +{field} count masd::variability::number
-                +{field} always_in_heap masd::variability::boolean
-        }
+    class type_parameters <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} variable_number_of_parameters masd::variability::boolean
+        +{field} count masd::variability::number
+        +{field} always_in_heap masd::variability::boolean
+    }
 
 note top of  type_parameters
 Parameters to configure generic types.
 end note
 
-        class initializer <<masd::variability::initializer>> #A9CDCD {
-        }
+    class initializer <<masd::variability::initializer>> #A9CDCD {
+    }
 
-        class enumeration <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} use_implementation_defined_underlying_element masd::variability::boolean
-                +{field} underlying_element masd::variability::text
-                +{field} use_implementation_defined_enumerator_values masd::variability::boolean
-                +{field} add_invalid_enumerator masd::variability::boolean
-        }
+    class enumeration <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} use_implementation_defined_underlying_element masd::variability::boolean
+        +{field} underlying_element masd::variability::text
+        +{field} use_implementation_defined_enumerator_values masd::variability::boolean
+        +{field} add_invalid_enumerator masd::variability::boolean
+    }
 
 note top of  enumeration
 Parameters related to enumerations.
 end note
 
-        class enumerator <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} value masd::variability::text
-        }
+    class enumerator <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} value masd::variability::text
+    }
 
 note top of  enumerator
 Parameters related to enumerators.
 end note
 
-        class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} is_final masd::variability::boolean
-                +{field} parent masd::variability::text
-        }
+    class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} is_final masd::variability::boolean
+        +{field} parent masd::variability::text
+    }
 
 note top of  generalization
 Features related to the generalization relationship.
 end note
 
-        class origin <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} masd.codec.is_proxy_model masd::variability::boolean
-        }
+    class origin <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} masd.codec.is_proxy_model masd::variability::boolean
+    }
 
 note top of  origin
 Features related to the origin of the model.
 end note
 
-        class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} output_technical_space masd::variability::text_collection
-        }
+    class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} output_technical_space masd::variability::text_collection
+    }
 
 note top of  output_technical_space
 Features related to the output technical space.
 end note
 
-        class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} underlying_element masd::variability::text
-                +{field} is_nullable masd::variability::boolean
-                +{field} use_type_aliasing masd::variability::boolean
-        }
+    class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} underlying_element masd::variability::text
+        +{field} is_nullable masd::variability::boolean
+        +{field} use_type_aliasing masd::variability::boolean
+    }
 
 note top of  primitive
 Features related to primitive elements.
 end note
 
-        class orm <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} database_system masd::variability::text_collection
-                +{field} table_name masd::variability::text
-                +{field} schema_name masd::variability::text
-                +{field} is_primary_key masd::variability::boolean
-                +{field} column_name masd::variability::text
-                +{field} is_nullable masd::variability::boolean
-                +{field} is_composite masd::variability::boolean
-                +{field} letter_case masd::variability::text
-                +{field} type_override masd::variability::text_collection
-                +{field} type_mapping masd::variability::text_collection
-                +{field} odb_pragma masd::variability::text_collection
-        }
+    class orm <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} database_system masd::variability::text_collection
+        +{field} table_name masd::variability::text
+        +{field} schema_name masd::variability::text
+        +{field} is_primary_key masd::variability::boolean
+        +{field} column_name masd::variability::text
+        +{field} is_nullable masd::variability::boolean
+        +{field} is_composite masd::variability::boolean
+        +{field} letter_case masd::variability::text
+        +{field} type_override masd::variability::text_collection
+        +{field} type_mapping masd::variability::text_collection
+        +{field} odb_pragma masd::variability::text_collection
+    }
 
 note top of  orm
 Features related to ORM support.
 end note
 
-        class decoration_modeline <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} editor masd::variability::text
-                +{field} location masd::variability::text
-                +{field} technical_space masd::variability::text
-        }
+    class decoration_modeline <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} editor masd::variability::text
+        +{field} location masd::variability::text
+        +{field} technical_space masd::variability::text
+    }
 
 note top of  decoration_modeline
 Modeline properties.
 end note
 
-        class variability_templates <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} binding_point masd::variability::text
-                +{field} stereotype masd::variability::text
-                +{field} value masd::variability::text_collection
-                +{field} is_optional masd::variability::boolean
-                +{field} default_value_override masd::variability::key_value_pair
-        }
+    class variability_templates <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} binding_point masd::variability::text
+        +{field} stereotype masd::variability::text
+        +{field} value masd::variability::text_collection
+        +{field} is_optional masd::variability::boolean
+        +{field} default_value_override masd::variability::key_value_pair
+    }
 
 note top of  variability_templates
 Features related to the processing of variability for feature and profile templates.
 end note
 
-        class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} target masd::variability::text
-                +{field} destination masd::variability::text
-        }
+    class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} target masd::variability::text
+        +{field} destination masd::variability::text
+    }
 
 note top of  mapping
 Meta-data related to element mapping.
 end note
 
-        class variability_bundle <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} generate_registration masd::variability::boolean
-                +{field} generate_static_configuration masd::variability::boolean
-                +{field} default_binding_point masd::variability::text
-                +{field} instantiation_domain_name masd::variability::text
-                +{field} key_prefix masd::variability::text
-        }
+    class variability_bundle <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} generate_registration masd::variability::boolean
+        +{field} generate_static_configuration masd::variability::boolean
+        +{field} default_binding_point masd::variability::text
+        +{field} instantiation_domain_name masd::variability::text
+        +{field} key_prefix masd::variability::text
+    }
 
 note top of  variability_bundle
 Features related to the processing of variability for feature bundles.
 end note
 
-        class variability_entry <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} binding_point masd::variability::text
-                +{field} value masd::variability::text_collection
-                +{field} instantiation_domain_name masd::variability::text
-        }
+    class variability_entry <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} binding_point masd::variability::text
+        +{field} value masd::variability::text_collection
+        +{field} instantiation_domain_name masd::variability::text
+    }
 
 note top of  variability_entry
 Features related to the processing of variability for profiles and profile templates.
 end note
 
-        class variability_profile <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} stereotype masd::variability::text
-                +{field} key_prefix masd::variability::text
-                +{field} binding_point masd::variability::text
-        }
+    class variability_profile <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} stereotype masd::variability::text
+        +{field} key_prefix masd::variability::text
+        +{field} binding_point masd::variability::text
+    }
 
 note top of  variability_profile
 Features related to the processing of variability for profile entries.
 end note
 
-        class physical <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} backend_name masd::variability::text
-                +{field} part_id masd::variability::text
-                +{field} logical_meta_element_id masd::variability::text
-                +{field} major_technical_space masd::variability::text
-                +{field} technical_space masd::variability::text
-                +{field} wale_template_reference masd::variability::text
-                +{field} directory_name masd::variability::text
-                +{field} postfix masd::variability::text
-        }
+    class physical <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} backend_name masd::variability::text
+        +{field} part_id masd::variability::text
+        +{field} logical_meta_element_id masd::variability::text
+        +{field} major_technical_space masd::variability::text
+        +{field} technical_space masd::variability::text
+        +{field} wale_template_reference masd::variability::text
+        +{field} directory_name masd::variability::text
+        +{field} postfix masd::variability::text
+    }
 
 note top of  physical
 Features required for physical elements.
 end note
 
-        class wale <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} text_template masd::variability::text
-                +{field} kvp masd::variability::key_value_pair
-        }
+    class wale <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} text_template masd::variability::text
+        +{field} kvp masd::variability::key_value_pair
+    }
 
 note top of  wale
 Wale related features.
 end note
 
-        class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} enabled masd::variability::boolean
-                +{field} copyright_notice masd::variability::text_collection
-                +{field} licence_name masd::variability::text
-                +{field} modeline_group_name masd::variability::text
-                +{field} marker_name masd::variability::text
-        }
+    class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} enabled masd::variability::boolean
+        +{field} copyright_notice masd::variability::text_collection
+        +{field} licence_name masd::variability::text
+        +{field} modeline_group_name masd::variability::text
+        +{field} marker_name masd::variability::text
+    }
 
-        class labelling <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} masd.label masd::variability::key_value_pair
-        }
+    class labelling <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} masd.label masd::variability::key_value_pair
+    }
 
 note top of  labelling
 Features related to labels.
 end note
 
-        class physical_relations <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} relation_status masd::variability::text
-                +{field} variable_relation masd::variability::comma_separated_collection
-                +{field} constant_relation masd::variability::comma_separated_collection
-        }
+    class physical_relations <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} relation_status masd::variability::text
+        +{field} variable_relation masd::variability::comma_separated_collection
+        +{field} constant_relation masd::variability::comma_separated_collection
+    }
 
 note top of  physical_relations
 Features related to relations at the physical level.
 end note
 
-        class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} string_conversion_method masd::variability::text
-                +{field} requires_quoting masd::variability::boolean
-                +{field} remove_unprintable_characters masd::variability::boolean
-        }
+    class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} string_conversion_method masd::variability::text
+        +{field} requires_quoting masd::variability::boolean
+        +{field} remove_unprintable_characters masd::variability::boolean
+    }
 
-        class technical_space_version <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} standard masd::variability::text
-        }
+    class technical_space_version <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} standard masd::variability::text
+    }
 
-        class technical_space_properties <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} cpp.aspect.requires_manual_default_constructor masd::variability::boolean
-                +{field} cpp.aspect.requires_manual_move_constructor masd::variability::boolean
-                +{field} cpp.aspect.requires_stream_manipulators masd::variability::boolean
-        }
+    class technical_space_properties <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} cpp.aspect.requires_manual_default_constructor masd::variability::boolean
+        +{field} cpp.aspect.requires_manual_move_constructor masd::variability::boolean
+        +{field} cpp.aspect.requires_stream_manipulators masd::variability::boolean
+    }
 
-        class helpers <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} helper.family masd::variability::text
-        }
+    class helpers <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} helper.family masd::variability::text
+    }
 
-        class physical_helpers <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} family masd::variability::text
-                +{field} owning_formatters masd::variability::text_collection
-                +{field} owning_facets masd::variability::text_collection
-                +{field} wale_template_reference masd::variability::text
-        }
+    class physical_helpers <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} family masd::variability::text
+        +{field} owning_formatters masd::variability::text_collection
+        +{field} owning_facets masd::variability::text_collection
+        +{field} wale_template_reference masd::variability::text
+    }
 
 note top of  physical_helpers
 Features related to the helpers in physical domain.
 end note
 
-        class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} requires_static_reference_equals masd::variability::boolean
-        }
+    class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} requires_static_reference_equals masd::variability::boolean
+    }
 
-        class assistant <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} requires_assistance masd::variability::boolean
-                +{field} method_postfix masd::variability::text
-        }
+    class assistant <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} requires_assistance masd::variability::boolean
+        +{field} method_postfix masd::variability::text
+    }
 
 }
 
@@ -1867,17 +1867,17 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 namespace formatters #F2F2F2 {
-        class decoration_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class decoration_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generation_marker_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generation_marker_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class modeline_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class modeline_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class formatting_error <<masd::exception>> #E8C2F8 {
-        }
+    class formatting_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  formatting_error
 An error has occurred while formatting.

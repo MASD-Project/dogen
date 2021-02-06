@@ -5,37 +5,37 @@ Contains all of the M2T transforms for all supported backends.
 end note
 
 namespace entities #F2F2F2 {
-        class model <<Provenance>> #F7E5FF {
-                +{field} logical logical::entities::model
-                +{field} physical physical::entities::model
-                +{field} logical_physical_regions std::list<logical_physical_region>
-        }
+    class model <<Provenance>> #F7E5FF {
+        +{field} logical logical::entities::model
+        +{field} physical physical::entities::model
+        +{field} logical_physical_regions std::list<logical_physical_region>
+    }
 
 note top of  model
 Represents the combined logical-physical space.
 end note
 
-        class Provenance <<masd::object_template>> #E3B6F6 {
-                +{field} provenance identification::entities::logical_provenance
-        }
+    class Provenance <<masd::object_template>> #E3B6F6 {
+        +{field} provenance identification::entities::logical_provenance
+    }
 
 note top of  Provenance
 Details of the origin of this model element.
 end note
 
-        class logical_physical_region #F7E5FF {
-                +{field} logical_element boost::shared_ptr<logical::entities::element>
-                +{field} physical_region physical::entities::region
-        }
+    class logical_physical_region #F7E5FF {
+        +{field} logical_element boost::shared_ptr<logical::entities::element>
+        +{field} physical_region physical::entities::region
+    }
 
 note top of  logical_physical_region
 Represents a region of logical-physical space with a single logical element and
 its associated physical elements.
 end note
 
-        class model_set <<Provenance>> #F7E5FF {
-                +{field} models std::list<model>
-        }
+    class model_set <<Provenance>> #F7E5FF {
+        +{field} models std::list<model>
+    }
 
 note top of  model_set
 Represents a set of related models.
@@ -44,1159 +44,1159 @@ end note
 }
 
 namespace transforms #F2F2F2 {
-        class model_to_text_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_to_text_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} physical_meta_model boost::shared_ptr<physical::entities::meta_model>
-                +{field} output_directory_path boost::filesystem::path
-                +{field} tracer boost::shared_ptr<tracing::tracer>
-                +{field} generation_timestamp std::string
-        }
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} physical_meta_model boost::shared_ptr<physical::entities::meta_model>
+        +{field} output_directory_path boost::filesystem::path
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} generation_timestamp std::string
+    }
 
-        class transformation_error <<masd::exception>> #E8C2F8 {
-        }
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  transformation_error
 An error occurred whilst applying a transformation.
 end note
 
-        class registrar_error <<masd::exception>> #E8C2F8 {
-        }
+    class registrar_error <<masd::exception>> #E8C2F8 {
+    }
 
-        class model_to_text_transform <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
-        }
+    class model_to_text_transform <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
+    }
 
-        namespace cpp <<masd::physical::backend>> #EBFAF1 {
-                class implementation <<masd::physical::part>> #43CD80 {
-                        +{field} external_modules_path_contribution
-                        +{field} model_modules_path_contribution
-                        +{field} facet_path_contribution
-                        +{field} requires_relative_path
-                        +{field} directory_name
-                }
+    namespace cpp <<masd::physical::backend>> #EBFAF1 {
+        class implementation <<masd::physical::part>> #43CD80 {
+            +{field} external_modules_path_contribution
+            +{field} model_modules_path_contribution
+            +{field} facet_path_contribution
+            +{field} requires_relative_path
+            +{field} directory_name
+        }
 
 note top of  implementation
 Contains the implementation files.
 end note
 
-                class public_headers <<masd::physical::part>> #43CD80 {
-                        +{field} external_modules_path_contribution
-                        +{field} model_modules_path_contribution
-                        +{field} facet_path_contribution
-                        +{field} requires_relative_path
-                        +{field} directory_name
-                }
+        class public_headers <<masd::physical::part>> #43CD80 {
+            +{field} external_modules_path_contribution
+            +{field} model_modules_path_contribution
+            +{field} facet_path_contribution
+            +{field} requires_relative_path
+            +{field} directory_name
+        }
 
 note top of  public_headers
 Contains the header files that are publicly visible.
 end note
 
-                class testing <<masd::physical::part>> #43CD80 {
-                        +{field} external_modules_path_contribution
-                        +{field} model_modules_path_contribution
-                        +{field} facet_path_contribution
-                        +{field} requires_relative_path
-                        +{field} directory_name
-                }
+        class testing <<masd::physical::part>> #43CD80 {
+            +{field} external_modules_path_contribution
+            +{field} model_modules_path_contribution
+            +{field} facet_path_contribution
+            +{field} requires_relative_path
+            +{field} directory_name
+        }
 
 note top of  testing
 Contains the generated test files.
 end note
 
-                class standard_header_file <<masd::physical::archetype_kind>> #68D799 {
-                        +{field} file_extension
-                }
+        class standard_header_file <<masd::physical::archetype_kind>> #68D799 {
+            +{field} file_extension
+        }
 
 note top of  standard_header_file
 Header file generated by Dogen.
 end note
 
-                namespace types <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace types <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class archetype_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_class_header_transform
 Generates header files for archetypes.
 end note
 
-                        class archetype_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_class_implementation_transform
 Generates implementation files for archetypes.
 end note
 
-                        class archetype_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_class_header_factory
 Generates header files for archetype factories.
 end note
 
-                        class archetype_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_class_implementation_factory
 Generates implementation files for archetype factories.
 end note
 
-                        class facet_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class facet_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  facet_class_header_transform
 Generates header files for facet transforms.
 end note
 
-                        class facet_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class facet_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  facet_class_implementation_transform
 Generates implementation files for facet transforms.
 end note
 
-                        class facet_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class facet_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  facet_class_header_factory
 Generates header files for facet factories.
 end note
 
-                        class facet_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class facet_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  facet_class_implementation_factory
 Generates implementation files for facet factory.
 end note
 
-                        class backend_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class backend_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  backend_class_header_transform
 Generates header files for archetypes.
 end note
 
-                        class backend_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class backend_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  backend_class_implementation_transform
 Generates implementation files for archetypes.
 end note
 
-                        class backend_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class backend_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  backend_class_header_factory
 Generates header files for backend factories.
 end note
 
-                        class part_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class part_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  part_class_header_transform
 Generates header files for parts.
 end note
 
-                        class part_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class part_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  part_class_header_factory
 Generates header files for part factories.
 end note
 
-                        class helper_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class helper_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  helper_class_header_transform
 Generates header files for helpers.
 end note
 
-                        class helper_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class helper_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  helper_class_header_factory
 Generates header files for helper factories.
 end note
 
-                        class archetype_kind_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_kind_class_header_factory <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_kind_class_header_factory
 Generates header files for archetype_kind factories.
 end note
 
-                        class backend_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class backend_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  backend_class_implementation_factory
 Generates implementation files for backend factories.
 end note
 
-                        class part_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class part_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  part_class_implementation_transform
 Generates implementation files for parts.
 end note
 
-                        class part_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class part_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  part_class_implementation_factory
 Generates implementation files for part factories.
 end note
 
-                        class helper_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class helper_class_implementation_transform <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  helper_class_implementation_transform
 Generates implementation files for helpers.
 end note
 
-                        class helper_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class helper_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  helper_class_implementation_factory
 Generates implementation files for helper factories.
 end note
 
-                        class archetype_kind_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class archetype_kind_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  archetype_kind_class_implementation_factory
 Generates implementation files for archetype_kind factories.
 end note
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for objects.
 end note
 
-                        class class_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_forward_declarations
 Generates forward declarations for classes.
 end note
 
-                        class namespace_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class namespace_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  namespace_header
 Generates header files for namespaces.
 end note
 
-                        class visitor_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class visitor_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  visitor_header
 Generates header files for visitors.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class primitive_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_forward_declarations
 Generates forward declarations for primitives.
 end note
 
-                        class feature_template_bundle_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class feature_template_bundle_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  feature_template_bundle_header
 Generates implementation files for feature template bundles
 end note
 
-                        class feature_bundle_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class feature_bundle_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  feature_bundle_header
 Generates header files for feature bundles.
 end note
 
-                        class variability_initializer_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class variability_initializer_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  variability_initializer_header
 Generates header files for feature bundles.
 end note
 
-                        class main <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class main <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  main
 Generates implementation file for entry point.
 end note
 
-                        class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates implementation files for objects.
 end note
 
-                        class exception_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class exception_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  exception_header
 Generates header files for exceptions.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                        class visitor_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class visitor_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  visitor_forward_declarations
 Generates forward declarations for visitors.
 end note
 
-                        class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_implementation
 Generates implementation files for primitives.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class feature_template_bundle_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class feature_template_bundle_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  feature_template_bundle_implementation
 Generates implementation files for feature templates.
 end note
 
-                        class feature_bundle_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class feature_bundle_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  feature_bundle_implementation
 Generates implementation files for feature bundles.
 end note
 
-                        class variability_initializer_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class variability_initializer_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  variability_initializer_implementation
 Generates header files for feature bundles.
 end note
 
-                }
+        }
 
 note top of  types
 M2T transforms for the types facet of the
 C++ technical space.
 end note
 
-                class base_archetype_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.technical_space
-                }
+        class base_archetype_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.technical_space
+        }
 
 note top of  base_archetype_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class tests_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.part_id
-                        +{field} masd.physical.wale_template_reference
-                        +{field} masd.physical.relation_status
-                }
+        class tests_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.part_id
+            +{field} masd.physical.wale_template_reference
+            +{field} masd.physical.relation_status
+        }
 
 transforms::cpp::base_archetype_configuration <|-- transforms::cpp::tests_configuration
 note top of  tests_configuration
 Contains the configuration common to most archetypes in tests.
 end note
 
-                class header_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.part_id
-                        +{field} masd.physical.wale_template_reference
-                }
+        class header_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.part_id
+            +{field} masd.physical.wale_template_reference
+        }
 
 transforms::cpp::base_archetype_configuration <|-- transforms::cpp::header_configuration
 note top of  header_configuration
 Contains the configuration common to all c++ header archetypes.
 end note
 
-                class header_facet_default_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.relation_status
-                }
+        class header_facet_default_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.relation_status
+        }
 
 transforms::cpp::header_configuration <|-- transforms::cpp::header_facet_default_configuration
-                class enumeration_header_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class enumeration_header_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::enumeration_header_configuration
 note top of  enumeration_header_configuration
 Contains the configuration common to all enumeration header archetypes.
 end note
 
-                class object_header_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class object_header_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::object_header_configuration
 note top of  object_header_configuration
 Contains the configuration common to all object header archetypes.
 end note
 
-                class primitive_header_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class primitive_header_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::primitive_header_configuration
 note top of  primitive_header_configuration
 Contains the configuration common to all built header archetypes.
 end note
 
-                class builtin_header_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class builtin_header_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::builtin_header_configuration
 note top of  builtin_header_configuration
 Contains the configuration common to all built header archetypes.
 end note
 
-                class implementation_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.part_id
-                        +{field} masd.physical.wale_template_reference
-                        +{field} masd.physical.relation_status
-                }
+        class implementation_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.part_id
+            +{field} masd.physical.wale_template_reference
+            +{field} masd.physical.relation_status
+        }
 
 transforms::cpp::base_archetype_configuration <|-- transforms::cpp::implementation_configuration
 note top of  implementation_configuration
 Contains the configuration common to all c++ implementation archetypes.
 end note
 
-                class object_implementation_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class object_implementation_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::implementation_configuration <|-- transforms::cpp::object_implementation_configuration
-                class primitive_implementation_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class primitive_implementation_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::implementation_configuration <|-- transforms::cpp::primitive_implementation_configuration
-                class enumeration_implementation_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class enumeration_implementation_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_implementation_configuration
-                namespace hash <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace hash <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class date_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class date_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class ptime_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class ptime_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class associative_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class optional_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class optional_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class sequence_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class variant_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class variant_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class time_duration_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class time_duration_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class ptree_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class ptree_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class pair_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class pair_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class path_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class path_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for objects.
 end note
 
-                        class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates implementation files for objects.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_implementation
 Generates implementation files for primitives.
 end note
 
-                }
+        }
 
 note top of  hash
 M2T transforms for the hash facet of the
 C++ technical space.
 end note
 
-                namespace build <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace build <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class include_cmakelists <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class include_cmakelists <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  include_cmakelists
 Generates cmakelists for tests.
 end note
 
-                        class source_cmakelists <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class source_cmakelists <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  source_cmakelists
 Generates cmakelists for tests.
 end note
 
-                }
+        }
 
 note top of  build
 M2T transforms related to build files.
 end note
 
-                namespace io <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace io <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class optional_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class optional_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class pair_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class pair_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class string_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class string_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class ptree_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class ptree_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class associative_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class sequence_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class variant_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class variant_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class inserter_implementation_helper <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+            class inserter_implementation_helper <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for objects.
 end note
 
-                        class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates implementation files for objects.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                        class enum_implementation <<masd::physical::archetype, dogen::enumeration_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_implementation <<masd::physical::archetype, dogen::enumeration_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_implementation
 Generates implementation files for enumerations.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_implementation
 Generates implementation files for primitives.
 end note
 
-                }
+        }
 
 note top of  io
 M2T transforms for the io facet of the
 C++ technical space.
 end note
 
-                namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class solution <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class solution <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  solution
 Generates visual studio solutions.
 end note
 
-                        class msbuild_targets <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class msbuild_targets <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  msbuild_targets
 Generates msbuild targets.
 end note
 
-                        class project <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class project <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  project
 Generates visual studio project.
 end note
 
-                }
+        }
 
 note top of  visual_studio
 M2T transforms related to Visual Studio
 support.
 end note
 
-                namespace serialization <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace serialization <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class path_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class path_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for objects.
 end note
 
-                        class class_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_forward_declarations
 Generates forward declarations for classes.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class primitive_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_forward_declarations <<masd::physical::archetype, dogen::header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_forward_declarations
 Generates forward declarations for primitives.
 end note
 
-                        class type_registrar_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class type_registrar_header <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  type_registrar_header
 Generates header files for type registrars.
 end note
 
-                        class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates implementation files for objects.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_implementation
 Generates header files for primitives.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for primitives.
 end note
 
-                        class type_registrar_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class type_registrar_implementation <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  type_registrar_implementation
 Generates header files for feature bundles.
 end note
 
-                }
+        }
 
 note top of  serialization
 M2T transforms for the boost serialisation
 facet of the C++ technical space.
 end note
 
-                namespace test_data <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace test_data <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class date_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class date_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class bool_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class bool_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class char_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class char_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class ptree_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class ptree_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class associative_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class associative_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class pair_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class pair_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class number_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class number_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class variant_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class variant_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class path_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class path_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class ptime_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class ptime_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class optional_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class optional_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class sequence_container_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class sequence_container_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class string_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class string_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class domain_type_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class domain_type_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class time_duration_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class time_duration_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for objects.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::object_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates implementation files for objects.
 end note
 
-                        class enum_implementation <<masd::physical::archetype, dogen::enumeration_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_implementation <<masd::physical::archetype, dogen::enumeration_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_implementation
 Generates implementation files for enumerations.
 end note
 
-                        class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_implementation <<masd::physical::archetype, dogen::primitive_implementation_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_implementation
 Generates implementation files for primitives.
 end note
 
-                }
+        }
 
 note top of  test_data
 M2T transforms for the test data facet
 of the C++ technical space.
 end note
 
-                namespace tests <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace tests <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class class_implementation <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_implementation <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_implementation
 Generates tests for objects.
 end note
 
-                        class main <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class main <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  main
 Generates entry point for tests.
 end note
 
-                        class enum_implementation <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_implementation <<masd::physical::archetype, dogen::tests_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_implementation
 Generates tests for enumeration.
 end note
 
-                        class cmakelists <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class cmakelists <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  cmakelists
 Generates cmakelists for tests.
 end note
 
-                }
+        }
 
 note top of  tests
 M2T transforms that generate tests for
 generated code, in the C++ technical space.
 end note
 
-                namespace odb <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace odb <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class_header <<masd::physical::archetype, dogen::object_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class_header
 Generates header files for archetypes.
 end note
 
-                        class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin_header <<masd::physical::archetype, dogen::builtin_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin_header
 Generates header files for builtins.
 end note
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                        class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_header <<masd::physical::archetype, dogen::primitive_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_header
 Generates header files for primitives.
 end note
 
-                        class object_odb_options <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class object_odb_options <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  object_odb_options
 Generates object options for odb.
 end note
 
-                        class primitive_odb_options <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive_odb_options <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive_odb_options
 Generates object options for odb.
 end note
 
-                        class common_odb_options <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class common_odb_options <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  common_odb_options
 Generates object options for odb.
 end note
 
-                }
+        }
 
 note top of  odb
 M2T transforms for the ODB facet of the
 C++ technical space.
 end note
 
-                namespace lexical_cast <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace lexical_cast <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum_header
 Generates header files for enumerations.
 end note
 
-                }
+        }
 
 note top of  lexical_cast
 M2T transforms related to conversions from
 and to string.
 end note
 
-                class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                }
+        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+        }
 
-                class project <<masd::physical::part>> #43CD80 {
-                        +{field} external_modules_path_contribution
-                        +{field} model_modules_path_contribution
-                        +{field} facet_path_contribution
-                        +{field} requires_relative_path
-                }
+        class project <<masd::physical::part>> #43CD80 {
+            +{field} external_modules_path_contribution
+            +{field} model_modules_path_contribution
+            +{field} facet_path_contribution
+            +{field} requires_relative_path
+        }
 
 note top of  project
 FIXME: to be removed.
 end note
 
-        }
+    }
 
 note top of  cpp
 Text transforms that implement the C++ backend.
@@ -1206,270 +1206,270 @@ model elements into a physical representation in the
 C++ technical space, or associated minor technical spaces.
 end note
 
-        class helper_transform <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
-        }
+    class helper_transform <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {
+    }
 
-        class helper_chain <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} physical_model physical::entities::meta_model
-        }
+    class helper_chain <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} physical_model physical::entities::meta_model
+    }
 
-        class helper_repository <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} helpers_by_family std::unordered_map<std::string, std::unordered_map<identification::entities::physical_meta_id, std::list<std::shared_ptr<helper_transform>>>>
-        }
+    class helper_repository <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} helpers_by_family std::unordered_map<std::string, std::unordered_map<identification::entities::physical_meta_id, std::list<std::shared_ptr<helper_transform>>>>
+    }
 
-        class helper_registrar <<dogen::handcrafted::typeable>> #FFFACD {
-                +{field} repository helper_repository
-        }
+    class helper_registrar <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} repository helper_repository
+    }
 
-        namespace csharp <<masd::physical::backend>> #EBFAF1 {
-                class archetype_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.part_id
-                        +{field} masd.physical.wale_template_reference
-                        +{field} masd.physical.relation_status
-                        +{field} masd.physical.technical_space
-                }
+    namespace csharp <<masd::physical::backend>> #EBFAF1 {
+        class archetype_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.part_id
+            +{field} masd.physical.wale_template_reference
+            +{field} masd.physical.relation_status
+            +{field} masd.physical.technical_space
+        }
 
 note top of  archetype_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class primitive_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class primitive_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::csharp::archetype_configuration <|-- transforms::csharp::primitive_configuration
 note top of  primitive_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class enumeration_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class enumeration_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::csharp::archetype_configuration <|-- transforms::csharp::enumeration_configuration
 note top of  enumeration_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class object_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class object_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::csharp::archetype_configuration <|-- transforms::csharp::object_configuration
 note top of  object_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class exception_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class exception_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::csharp::archetype_configuration <|-- transforms::csharp::exception_configuration
 note top of  exception_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class builtin_configuration <<masd::variability::profile>> #DDECEC {
-                        +{field} masd.physical.logical_meta_element_id
-                        +{field} masd.wale.kvp.archetype.simple_name
-                }
+        class builtin_configuration <<masd::variability::profile>> #DDECEC {
+            +{field} masd.physical.logical_meta_element_id
+            +{field} masd.wale.kvp.archetype.simple_name
+        }
 
 transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_configuration
 note top of  builtin_configuration
 Contains the configuration common to all archetypes.
 end note
 
-                class implementation <<masd::physical::part>> #43CD80 {
-                        +{field} external_modules_path_contribution
-                        +{field} model_modules_path_contribution
-                        +{field} facet_path_contribution
-                        +{field} requires_relative_path
-                }
+        class implementation <<masd::physical::part>> #43CD80 {
+            +{field} external_modules_path_contribution
+            +{field} model_modules_path_contribution
+            +{field} facet_path_contribution
+            +{field} requires_relative_path
+        }
 
 note top of  implementation
 Contains the implementation files.
 end note
 
-                namespace types <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace types <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class floating_point_number_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class floating_point_number_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class
 Generates implementation files for objects.
 end note
 
-                        class exception <<masd::physical::archetype, dogen::exception_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class exception <<masd::physical::archetype, dogen::exception_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  exception
 Generates implementation files for exceptions.
 end note
 
-                        class builtin <<masd::physical::archetype, dogen::builtin_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class builtin <<masd::physical::archetype, dogen::builtin_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  builtin
 Generates implementation files for builtins.
 end note
 
-                        class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum
 Generates implementation files for enums.
 end note
 
-                        class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive
 Generates implementation files for primitives.
 end note
 
-                }
+        }
 
 note top of  types
 M2T transforms for the types facet of
 the C# technical space.
 end note
 
-                namespace io <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace io <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class enumerable_helper <<masd::physical::helper>> #68D7BB {
-                                +{field} stitch_template_content
-                        }
+            class enumerable_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
 
-                        class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class
 Generates implementation files for objects.
 end note
 
-                        class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum
 Generates implementation files for enums.
 end note
 
-                        class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive
 Generates implementation files for primitives.
 end note
 
-                        class assistant <<masd::physical::archetype, dogen::archetype_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class assistant <<masd::physical::archetype, dogen::archetype_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  assistant
 Generates implementation files for assistants.
 end note
 
-                }
+        }
 
 note top of  io
 M2T transforms for the io facet of the
 C# technical space.
 end note
 
-                namespace test_data <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace test_data <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class class <<masd::physical::archetype, dogen::object_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  class
 Generates implementation files for objects.
 end note
 
-                        class assistant <<masd::physical::archetype, dogen::archetype_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class assistant <<masd::physical::archetype, dogen::archetype_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  assistant
 Generates implementation files for assistants.
 end note
 
-                        class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class enum <<masd::physical::archetype, dogen::enumeration_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  enum
 Generates implementation files for enums.
 end note
 
-                        class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class primitive <<masd::physical::archetype, dogen::primitive_configuration>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  primitive
 Generates implementation files for primitives.
 end note
 
-                }
+        }
 
 note top of  test_data
 M2T transforms for the test data facet of
 the C# technical space.
 end note
 
-                namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
-                        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                        }
+        namespace visual_studio <<masd::physical::facet>> #C6F0D8 {
+            class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+            }
 
-                        class project <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class project <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  project
 Generates visual studio project.
 end note
 
-                        class solution <<masd::physical::archetype>> #68D799 {
-                                +{field} stitch_template_content
-                        }
+            class solution <<masd::physical::archetype>> #68D799 {
+                +{field} stitch_template_content
+            }
 
 note top of  solution
 Generates visual studio solutions.
 end note
 
-                }
+        }
 
 note top of  visual_studio
 M2T transforms for the visual studio
 facet of the C# technical space.
 end note
 
-                class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-                }
-
+        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
         }
+
+    }
 
 note top of  csharp
 M2T transforms for the C# technical space.
@@ -1479,15 +1479,15 @@ representations of the these types according to the grammar
 of the C# technical space.
 end note
 
-        class initializer <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class text_transform_repository <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} model_to_text_transforms_by_meta_name std::unordered_map<identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<model_to_text_transform>>>
-        }
+    class text_transform_repository <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} model_to_text_transforms_by_meta_name std::unordered_map<identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<model_to_text_transform>>>
+    }
 
-        class text_transform_registrar <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class text_transform_registrar <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
@@ -1496,43 +1496,43 @@ Contains all of the text transforms available.
 end note
 
 namespace formatters #F2F2F2 {
-        class formatting_error <<masd::exception>> #E8C2F8 {
-        }
+    class formatting_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  formatting_error
 An error has occurred while formatting.
 end note
 
-        class namespace_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class namespace_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class scoped_namespace_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class scoped_namespace_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class boilerplate_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class boilerplate_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class scoped_boilerplate_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class scoped_boilerplate_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class dependencies_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class dependencies_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class header_guard_formatter <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class header_guard_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class boilerplate_properties #F7E5FF {
-                +{field} preamble std::string
-                +{field} postamble std::string
-                +{field} dependencies std::list<std::string>
-                +{field} header_guard std::string
-                +{field} technical_space identification::entities::technical_space
-                +{field} generate_preamble bool
-                +{field} generate_header_guards bool
-        }
+    class boilerplate_properties #F7E5FF {
+        +{field} preamble std::string
+        +{field} postamble std::string
+        +{field} dependencies std::list<std::string>
+        +{field} header_guard std::string
+        +{field} technical_space identification::entities::technical_space
+        +{field} generate_preamble bool
+        +{field} generate_header_guards bool
+    }
 
-        class assistant <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class assistant <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
@@ -1546,26 +1546,26 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 class cpp_artefact_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
-        +{field} content
+    +{field} content
 }
 
 class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 class csharp_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
-        +{field} content
+    +{field} content
 }
 
 class csharp_helper_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
-        +{field} content
+    +{field} content
 }
 
 class cpp_helper_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
-        +{field} content
+    +{field} content
 }
 
 class cpp_helper_transform_implementation_enabled <<masd::templating::logic_less_templates>> #FFC072 {
-        +{field} content
+    +{field} content
 }
 
 @enduml

@@ -12,42 +12,42 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 namespace helpers #F2F2F2 {
-        class template_instantiation_domains_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class template_instantiation_domains_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class building_error <<masd::exception>> #E8C2F8 {
-        }
+    class building_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  building_error
 An error occurred while the field factory was building.
 end note
 
-        class path_generator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class path_generator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class file_status_collector <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class file_status_collector <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class files_by_status #F7E5FF {
-                +{field} unexpected std::list<boost::filesystem::path>
-                +{field} ignored std::list<boost::filesystem::path>
-        }
+    class files_by_status #F7E5FF {
+        +{field} unexpected std::list<boost::filesystem::path>
+        +{field} ignored std::list<boost::filesystem::path>
+    }
 
-        class unified_differ <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class unified_differ <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_model_validator <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_model_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class validation_error <<masd::exception>> #E8C2F8 {
-        }
+    class validation_error <<masd::exception>> #E8C2F8 {
+    }
 
 note top of  validation_error
 An error occurred during validation.
 end note
 
-        class header_guard_factory <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class header_guard_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
@@ -56,11 +56,11 @@ Helpers for the physical model.
 end note
 
 namespace entities #F2F2F2 {
-        class meta_model <<ContainingMetaElement>> #F7E5FF {
-                +{field} template_instantiation_domains std::unordered_map<std::string, std::vector<std::string>>
-                +{field} backends std::list<backend>
-                +{field} indexed_names identification::entities::physical_meta_name_indices
-        }
+    class meta_model <<ContainingMetaElement>> #F7E5FF {
+        +{field} template_instantiation_domains std::unordered_map<std::string, std::vector<std::string>>
+        +{field} backends std::list<backend>
+        +{field} indexed_names identification::entities::physical_meta_name_indices
+    }
 
 note top of  meta_model
 Describes the geometry of physical space.
@@ -68,390 +68,390 @@ Describes the geometry of physical space.
 Provides details of the backends available in the current instance of Dogen.
 end note
 
-        class backend <<ContainingMetaElement, HasTechnicalSpace>> #F7E5FF {
-                +{field} parts std::unordered_map<identification::entities::physical_meta_id, part>
-                +{field} facets std::unordered_map<identification::entities::physical_meta_id, facet>
-                +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
-                +{field} archetype_kinds std::unordered_map<std::string, archetype_kind>
-        }
+    class backend <<ContainingMetaElement, HasTechnicalSpace>> #F7E5FF {
+        +{field} parts std::unordered_map<identification::entities::physical_meta_id, part>
+        +{field} facets std::unordered_map<identification::entities::physical_meta_id, facet>
+        +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
+        +{field} archetype_kinds std::unordered_map<std::string, archetype_kind>
+    }
 
 note top of  backend
 Represents a meta-region in physical space with archetypes for a primary technical
 space, and associated secondary technical spaces.
 end note
 
-        class part <<ContainingMetaElement>> #F7E5FF {
-                +{field} path_configuration path_configuration
-                +{field} facets std::unordered_map<identification::entities::physical_meta_id, facet>
-                +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
-                +{field} requires_relative_path bool
-        }
+    class part <<ContainingMetaElement>> #F7E5FF {
+        +{field} path_configuration path_configuration
+        +{field} facets std::unordered_map<identification::entities::physical_meta_id, facet>
+        +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
+        +{field} requires_relative_path bool
+    }
 
 note top of  part
 Represents a meta-region in physical space with archetypes for a given part of a
 component in a backend.
 end note
 
-        class path_configuration #F7E5FF {
-                +{field} external_modules path_contribution_type
-                +{field} model_modules path_contribution_type
-                +{field} facet path_contribution_type
-                +{field} internal_modules path_contribution_type
-        }
+    class path_configuration #F7E5FF {
+        +{field} external_modules path_contribution_type
+        +{field} model_modules path_contribution_type
+        +{field} facet path_contribution_type
+        +{field} internal_modules path_contribution_type
+    }
 
 note top of  path_configuration
 Describes how paths are handled within a part.
 end note
 
-        enum path_contribution_type <<masd::enumeration>> #F2DAFD {
-                +{field} none
-                +{field} as_directories
-                +{field} as_path_components
-        }
+    enum path_contribution_type <<masd::enumeration>> #F2DAFD {
+        +{field} none
+        +{field} as_directories
+        +{field} as_path_components
+    }
 
 note top of  path_contribution_type
 Different kinds of contributions that can be made to the final path computation.
 end note
 
-        class facet <<ContainingMetaElement, Postfixable>> #F7E5FF {
-                +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
-                +{field} helpers std::unordered_map<identification::entities::physical_meta_id, helper>
-                +{field} default_archetype_for_logical_meta_model_id std::unordered_map<std::string, archetype>
-        }
+    class facet <<ContainingMetaElement, Postfixable>> #F7E5FF {
+        +{field} archetypes std::unordered_map<identification::entities::physical_meta_id, archetype>
+        +{field} helpers std::unordered_map<identification::entities::physical_meta_id, helper>
+        +{field} default_archetype_for_logical_meta_model_id std::unordered_map<std::string, archetype>
+    }
 
 note top of  facet
 Represents a meta-region in physical space with archetypes for a given theme.
 end note
 
-        class archetype <<MetaElement, Postfixable, Associatable, HasTechnicalSpace>> #F7E5FF {
-                +{field} archetype_kind_id std::string
-                +{field} logical_meta_element_id identification::entities::logical_meta_id
-                +{field} part identification::entities::physical_meta_id
-                +{field} relations relations
-        }
+    class archetype <<MetaElement, Postfixable, Associatable, HasTechnicalSpace>> #F7E5FF {
+        +{field} archetype_kind_id std::string
+        +{field} logical_meta_element_id identification::entities::logical_meta_id
+        +{field} part identification::entities::physical_meta_id
+        +{field} relations relations
+    }
 
 note top of  archetype
 Represents a meta-artefact.
 end note
 
-        class archetype_kind <<Describable>> #F7E5FF {
-                +{field} id std::string
-                +{field} file_extension std::string
-        }
+    class archetype_kind <<Describable>> #F7E5FF {
+        +{field} id std::string
+        +{field} file_extension std::string
+    }
 
 note top of  archetype_kind
 Represents a type of archetypes.
 end note
 
-        class model <<Element>> #F7E5FF {
-                +{field} technical_space std::string
-                +{field} managed_directories std::list<boost::filesystem::path>
-                +{field} outputting_properties outputting_properties
-                +{field} orphan_artefacts std::list<boost::shared_ptr<physical::entities::artefact>>
-                +{field} meta_model_properties meta_model_properties
-                +{field} has_generatable_artefacts bool
-                +{field} regions_by_logical_id std::unordered_map<identification::entities::logical_id, region>
-        }
+    class model <<Element>> #F7E5FF {
+        +{field} technical_space std::string
+        +{field} managed_directories std::list<boost::filesystem::path>
+        +{field} outputting_properties outputting_properties
+        +{field} orphan_artefacts std::list<boost::shared_ptr<physical::entities::artefact>>
+        +{field} meta_model_properties meta_model_properties
+        +{field} has_generatable_artefacts bool
+        +{field} regions_by_logical_id std::unordered_map<identification::entities::logical_id, region>
+    }
 
 note top of  model
 Collection of entities representing objects in physical space.
 end note
 
-        class Describable <<masd::object_template>> #E3B6F6 {
-                +{field} description std::string
-        }
+    class Describable <<masd::object_template>> #E3B6F6 {
+        +{field} description std::string
+    }
 
-        class MetaNameable <<masd::object_template>> #E3B6F6 {
-                +{field} meta_name identification::entities::physical_meta_name
-        }
+    class MetaNameable <<masd::object_template>> #E3B6F6 {
+        +{field} meta_name identification::entities::physical_meta_name
+    }
 
 note top of  MetaNameable
 Ability to have a meta-name.
 end note
 
-        class Labelable <<masd::object_template>> #E3B6F6 {
-                +{field} labels std::list<identification::entities::label>
-        }
+    class Labelable <<masd::object_template>> #E3B6F6 {
+        +{field} labels std::list<identification::entities::label>
+    }
 
 note top of  Labelable
 The ability to attach labels to an element.
 end note
 
-        class MetaElement <<masd::object_template>> #E3B6F6 {
-        }
+    class MetaElement <<masd::object_template>> #E3B6F6 {
+    }
 
 entities::Describable <|-- entities::MetaElement
 entities::MetaNameable <|-- entities::MetaElement
 entities::Labelable <|-- entities::MetaElement
-        class ContainingMetaElement <<masd::object_template>> #E3B6F6 {
-                +{field} directory_name std::string
-        }
+    class ContainingMetaElement <<masd::object_template>> #E3B6F6 {
+        +{field} directory_name std::string
+    }
 
 entities::MetaElement <|-- entities::ContainingMetaElement
 note top of  ContainingMetaElement
 The meta-element can contain other meta-elements.
 end note
 
-        class Postfixable <<masd::object_template>> #E3B6F6 {
-                +{field} postfix std::string
-        }
+    class Postfixable <<masd::object_template>> #E3B6F6 {
+        +{field} postfix std::string
+    }
 
-        class artefact <<Element, HasTechnicalSpace>> #F7E5FF {
-                +{field} file_path boost::filesystem::path
-                +{field} content std::string
-                +{field} path_properties path_properties
-                +{field} dependencies std::vector<boost::filesystem::path>
-                +{field} unified_diff std::string
-                +{field} operation operation
-                +{field} enablement_properties enablement_properties
-                +{field} formatting_input std::string
-                +{field} relations relation_properties
-        }
+    class artefact <<Element, HasTechnicalSpace>> #F7E5FF {
+        +{field} file_path boost::filesystem::path
+        +{field} content std::string
+        +{field} path_properties path_properties
+        +{field} dependencies std::vector<boost::filesystem::path>
+        +{field} unified_diff std::string
+        +{field} operation operation
+        +{field} enablement_properties enablement_properties
+        +{field} formatting_input std::string
+        +{field} relations relation_properties
+    }
 
 note top of  artefact
 Represents an entity in physical space.
 end note
 
-        class Configurable <<masd::object_template>> #E3B6F6 {
-                +{field} configuration boost::shared_ptr<variability::entities::configuration>
-        }
+    class Configurable <<masd::object_template>> #E3B6F6 {
+        +{field} configuration boost::shared_ptr<variability::entities::configuration>
+    }
 
 note top of  Configurable
 Ability to have meta-data associated.
 end note
 
-        class Provenance <<masd::object_template>> #E3B6F6 {
-                +{field} provenance identification::entities::logical_provenance
-        }
+    class Provenance <<masd::object_template>> #E3B6F6 {
+        +{field} provenance identification::entities::logical_provenance
+    }
 
 note top of  Provenance
 Properties related to the origin of the modeling element.
 end note
 
-        class Nameable <<masd::object_template>> #E3B6F6 {
-                +{field} name identification::entities::physical_name
-        }
+    class Nameable <<masd::object_template>> #E3B6F6 {
+        +{field} name identification::entities::physical_name
+    }
 
 note top of  Nameable
 Ability to have a name.
 end note
 
-        class LogicalPhysicalSpaceIdentity <<masd::object_template>> #E3B6F6 {
-                +{field} id identification::entities::logical_meta_physical_id
-        }
+    class LogicalPhysicalSpaceIdentity <<masd::object_template>> #E3B6F6 {
+        +{field} id identification::entities::logical_meta_physical_id
+    }
 
-        class Element <<masd::object_template>> #E3B6F6 {
-        }
+    class Element <<masd::object_template>> #E3B6F6 {
+    }
 
 entities::MetaNameable <|-- entities::Element
 entities::Configurable <|-- entities::Element
 entities::Provenance <|-- entities::Element
 entities::Nameable <|-- entities::Element
 entities::LogicalPhysicalSpaceIdentity <|-- entities::Element
-        class outputting_properties #F7E5FF {
-                +{field} force_write bool
-                +{field} delete_extra_files bool
-                +{field} ignore_files_matching_regex std::vector<std::string>
-                +{field} delete_empty_directories bool
-        }
+    class outputting_properties #F7E5FF {
+        +{field} force_write bool
+        +{field} delete_extra_files bool
+        +{field} ignore_files_matching_regex std::vector<std::string>
+        +{field} delete_empty_directories bool
+    }
 
 note top of  outputting_properties
 Properties related to outputting.
 end note
 
-        class operation #F7E5FF {
-                +{field} type operation_type
-                +{field} reason operation_reason
-        }
+    class operation #F7E5FF {
+        +{field} type operation_type
+        +{field} reason operation_reason
+    }
 
 note top of  operation
 Operation to apply to an artefact.
 end note
 
-        enum operation_type <<masd::enumeration>> #F2DAFD {
-                +{field} create_only
-                +{field} write
-                +{field} ignore
-                +{field} remove
-        }
+    enum operation_type <<masd::enumeration>> #F2DAFD {
+        +{field} create_only
+        +{field} write
+        +{field} ignore
+        +{field} remove
+    }
 
 note top of  operation_type
 Operation to perform to a given artefact.
 end note
 
-        enum operation_reason <<masd::enumeration>> #F2DAFD {
-                +{field} newly_generated
-                +{field} changed_generated
-                +{field} unchanged_generated
-                +{field} already_exists
-                +{field} ignore_generated
-                +{field} force_write
-                +{field} unexpected
-                +{field} ignore_unexpected
-                +{field} ignore_regex
-        }
+    enum operation_reason <<masd::enumeration>> #F2DAFD {
+        +{field} newly_generated
+        +{field} changed_generated
+        +{field} unchanged_generated
+        +{field} already_exists
+        +{field} ignore_generated
+        +{field} force_write
+        +{field} unexpected
+        +{field} ignore_unexpected
+        +{field} ignore_regex
+    }
 
 note top of  operation_reason
 Reasons for performing an operation.
 end note
 
-        class Associatable <<masd::object_template>> #E3B6F6 {
-                +{field} depends std::list<std::string>
-                +{field} generates std::list<std::string>
-                +{field} generated_by std::string
-        }
+    class Associatable <<masd::object_template>> #E3B6F6 {
+        +{field} depends std::list<std::string>
+        +{field} generates std::list<std::string>
+        +{field} generated_by std::string
+    }
 
 note top of  Associatable
 The meta-element is associated with other meta-elements
 end note
 
-        class model_set <<Nameable>> #F7E5FF {
-                +{field} models std::list<model>
-        }
+    class model_set <<Nameable>> #F7E5FF {
+        +{field} models std::list<model>
+    }
 
 note top of  model_set
 Represents a set of related physical models.
 end note
 
-        enum relation_status <<masd::enumeration, dogen::convertible>> #F2DAFD {
-                +{field} not_relatable
-                +{field} relatable
-                +{field} facet_default
-        }
+    enum relation_status <<masd::enumeration, dogen::convertible>> #F2DAFD {
+        +{field} not_relatable
+        +{field} relatable
+        +{field} facet_default
+    }
 
 note top of  relation_status
 Status of a given archetype with regards to being related to other archetypes.
 end note
 
-        class constant_relation <<Urnable, Labelable>> #F7E5FF {
-                +{field} logical_model_element_id std::string
-        }
+    class constant_relation <<Urnable, Labelable>> #F7E5FF {
+        +{field} logical_model_element_id std::string
+    }
 
 note top of  constant_relation
 Represents a relation between archetypes, fixed to a logical model element.
 end note
 
-        class variable_relation <<Urnable>> #F7E5FF {
-                +{field} type variable_relation_type
-        }
+    class variable_relation <<Urnable>> #F7E5FF {
+        +{field} type variable_relation_type
+    }
 
-        class Urnable <<masd::object_template>> #E3B6F6 {
-                +{field} original_urn std::string
-                +{field} resolved_urn std::string
-        }
+    class Urnable <<masd::object_template>> #E3B6F6 {
+        +{field} original_urn std::string
+        +{field} resolved_urn std::string
+    }
 
-        enum variable_relation_type <<masd::enumeration>> #F2DAFD {
-                +{field} self
-                +{field} parent
-                +{field} child
-                +{field} transparent
-                +{field} opaque
-                +{field} associative_key
-                +{field} visitation
-        }
+    enum variable_relation_type <<masd::enumeration>> #F2DAFD {
+        +{field} self
+        +{field} parent
+        +{field} child
+        +{field} transparent
+        +{field} opaque
+        +{field} associative_key
+        +{field} visitation
+    }
 
 note top of  variable_relation_type
 Lists all of the valid variable relation types.
 end note
 
-        class relations #F7E5FF {
-                +{field} status relation_status
-                +{field} constant std::list<constant_relation>
-                +{field} variable std::list<variable_relation>
-                +{field} hard_coded std::list<hard_coded_relation>
-        }
+    class relations #F7E5FF {
+        +{field} status relation_status
+        +{field} constant std::list<constant_relation>
+        +{field} variable std::list<variable_relation>
+        +{field} hard_coded std::list<hard_coded_relation>
+    }
 
 note top of  relations
 Models relationships between archetypes.
 end note
 
-        class hard_coded_relation #F7E5FF {
-                +{field} value std::string
-        }
+    class hard_coded_relation #F7E5FF {
+        +{field} value std::string
+    }
 
 note top of  hard_coded_relation
 Relations against hard-coded values.
 end note
 
-        class region <<Configurable, Provenance>> #F7E5FF {
-                +{field} artefacts_by_archetype std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
-                +{field} archetype_for_role std::unordered_map<std::string, identification::entities::physical_meta_id>
-                +{field} is_generatable bool
-        }
+    class region <<Configurable, Provenance>> #F7E5FF {
+        +{field} artefacts_by_archetype std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
+        +{field} archetype_for_role std::unordered_map<std::string, identification::entities::physical_meta_id>
+        +{field} is_generatable bool
+    }
 
 note top of  region
 Represents a region of logical-physical space fixed at one logical point.
 end note
 
-        class enablement_properties #F7E5FF {
-                +{field} enabled bool
-                +{field} overwrite bool
-                +{field} facet_enabled boost::optional<bool>
-                +{field} archetype_enabled boost::optional<bool>
-                +{field} facet_overwrite boost::optional<bool>
-                +{field} archetype_overwrite boost::optional<bool>
-        }
+    class enablement_properties #F7E5FF {
+        +{field} enabled bool
+        +{field} overwrite bool
+        +{field} facet_enabled boost::optional<bool>
+        +{field} archetype_enabled boost::optional<bool>
+        +{field} facet_overwrite boost::optional<bool>
+        +{field} archetype_overwrite boost::optional<bool>
+    }
 
 note top of  enablement_properties
 Stores the properties related to the enablement.
 end note
 
-        class backend_properties <<MetaIdentifiable>> #F7E5FF {
-                +{field} enabled bool
-                +{field} file_path boost::filesystem::path
-                +{field} technical_space_version std::string
-                +{field} enable_backend_directories bool
-                +{field} directory_name std::string
-                +{field} computed_directory_name std::string
-        }
+    class backend_properties <<MetaIdentifiable>> #F7E5FF {
+        +{field} enabled bool
+        +{field} file_path boost::filesystem::path
+        +{field} technical_space_version std::string
+        +{field} enable_backend_directories bool
+        +{field} directory_name std::string
+        +{field} computed_directory_name std::string
+    }
 
 note top of  backend_properties
 Properties related to the backend.
 end note
 
-        class archetype_kind_properties <<MetaNameable>> #F7E5FF {
-                +{field} file_extension std::string
-        }
+    class archetype_kind_properties <<MetaNameable>> #F7E5FF {
+        +{field} file_extension std::string
+    }
 
-        class facet_properties <<MetaIdentifiable>> #F7E5FF {
-                +{field} enabled bool
-                +{field} overwrite bool
-                +{field} directory_name std::string
-                +{field} computed_directory_name std::string
-                +{field} postfix std::string
-                +{field} computed_postfix std::string
-        }
+    class facet_properties <<MetaIdentifiable>> #F7E5FF {
+        +{field} enabled bool
+        +{field} overwrite bool
+        +{field} directory_name std::string
+        +{field} computed_directory_name std::string
+        +{field} postfix std::string
+        +{field} computed_postfix std::string
+    }
 
 note top of  facet_properties
 Properties related to the facet.
 end note
 
-        class archetype_properties <<MetaIdentifiable>> #F7E5FF {
-                +{field} enabled bool
-                +{field} overwrite boost::optional<bool>
-                +{field} postfix std::string
-                +{field} computed_postfix std::string
-                +{field} backend_properties backend_properties
-                +{field} facet_properties facet_properties
-                +{field} part_properties part_properties
-        }
+    class archetype_properties <<MetaIdentifiable>> #F7E5FF {
+        +{field} enabled bool
+        +{field} overwrite boost::optional<bool>
+        +{field} postfix std::string
+        +{field} computed_postfix std::string
+        +{field} backend_properties backend_properties
+        +{field} facet_properties facet_properties
+        +{field} part_properties part_properties
+    }
 
 note top of  archetype_properties
 Properties related to the archetype.
 end note
 
-        class meta_model_properties #F7E5FF {
-                +{field} output_directory_path boost::filesystem::path
-                +{field} file_path boost::filesystem::path
-                +{field} backend_properties std::unordered_map<identification::entities::physical_meta_id, backend_properties>
-                +{field} facet_properties std::unordered_map<identification::entities::physical_meta_id, facet_properties>
-                +{field} archetype_properties std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
-                +{field} archetype_kind_properties std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>
-                +{field} part_properties std::unordered_map<identification::entities::physical_meta_id, part_properties>
-                +{field} enabled_backends std::unordered_set<identification::entities::physical_meta_id>
-                +{field} enabled_archetype_for_element std::unordered_set<identification::entities::logical_meta_physical_id>
-                +{field} project_path_properties project_path_properties
-        }
+    class meta_model_properties #F7E5FF {
+        +{field} output_directory_path boost::filesystem::path
+        +{field} file_path boost::filesystem::path
+        +{field} backend_properties std::unordered_map<identification::entities::physical_meta_id, backend_properties>
+        +{field} facet_properties std::unordered_map<identification::entities::physical_meta_id, facet_properties>
+        +{field} archetype_properties std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
+        +{field} archetype_kind_properties std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>
+        +{field} part_properties std::unordered_map<identification::entities::physical_meta_id, part_properties>
+        +{field} enabled_backends std::unordered_set<identification::entities::physical_meta_id>
+        +{field} enabled_archetype_for_element std::unordered_set<identification::entities::logical_meta_physical_id>
+        +{field} project_path_properties project_path_properties
+    }
 
 note top of  meta_model_properties
 Meta-model configuration supplied by this model.
@@ -461,97 +461,97 @@ of the existing physical meta-model. In addition, the properties also contain
 computed values on the back of physical transforms.
 end note
 
-        class part_properties <<MetaIdentifiable>> #F7E5FF {
-                +{field} file_path boost::filesystem::path
-                +{field} relative_path boost::filesystem::path
-                +{field} directory_name std::string
-                +{field} computed_directory_name std::string
-        }
+    class part_properties <<MetaIdentifiable>> #F7E5FF {
+        +{field} file_path boost::filesystem::path
+        +{field} relative_path boost::filesystem::path
+        +{field} directory_name std::string
+        +{field} computed_directory_name std::string
+    }
 
 note top of  part_properties
 Properties related to the part.
 end note
 
-        class path_properties #F7E5FF {
-                +{field} file_path boost::filesystem::path
-                +{field} header_guard std::string
-                +{field} inclusion_path boost::filesystem::path
-                +{field} inclusion_directives inclusion_directives
-                +{field} inclusion_dependencies std::list<std::string>
-                +{field} using_dependencies std::list<std::string>
-                +{field} relative_path boost::filesystem::path
-        }
+    class path_properties #F7E5FF {
+        +{field} file_path boost::filesystem::path
+        +{field} header_guard std::string
+        +{field} inclusion_path boost::filesystem::path
+        +{field} inclusion_directives inclusion_directives
+        +{field} inclusion_dependencies std::list<std::string>
+        +{field} using_dependencies std::list<std::string>
+        +{field} relative_path boost::filesystem::path
+    }
 
-        class project_path_properties #F7E5FF {
-                +{field} include_directory_name std::string
-                +{field} source_directory_name std::string
-                +{field} disable_facet_directories bool
-                +{field} header_file_extension std::string
-                +{field} implementation_file_extension std::string
-                +{field} tests_directory_name std::string
-                +{field} templates_directory_name std::string
-                +{field} templates_file_extension std::string
-                +{field} enable_unique_file_names bool
-                +{field} headers_output_directory std::string
-                +{field} enable_backend_directories bool
-                +{field} implementation_directory_full_path boost::filesystem::path
-                +{field} include_directory_full_path boost::filesystem::path
-                +{field} templates_directory_full_path boost::filesystem::path
-        }
+    class project_path_properties #F7E5FF {
+        +{field} include_directory_name std::string
+        +{field} source_directory_name std::string
+        +{field} disable_facet_directories bool
+        +{field} header_file_extension std::string
+        +{field} implementation_file_extension std::string
+        +{field} tests_directory_name std::string
+        +{field} templates_directory_name std::string
+        +{field} templates_file_extension std::string
+        +{field} enable_unique_file_names bool
+        +{field} headers_output_directory std::string
+        +{field} enable_backend_directories bool
+        +{field} implementation_directory_full_path boost::filesystem::path
+        +{field} include_directory_full_path boost::filesystem::path
+        +{field} templates_directory_full_path boost::filesystem::path
+    }
 
 note top of  project_path_properties
 Legacy type containing all proprties related to paths.
 end note
 
-        class MetaIdentifiable <<masd::object_template>> #E3B6F6 {
-                +{field} meta_id identification::entities::physical_meta_id
-        }
+    class MetaIdentifiable <<masd::object_template>> #E3B6F6 {
+        +{field} meta_id identification::entities::physical_meta_id
+    }
 
-        enum legacy_archetype_kind <<masd::enumeration>> #F2DAFD {
-                +{field} visual_studio_solution
-                +{field} visual_studio_project
-                +{field} odb_options
-                +{field} msbuild_targets
-                +{field} tests_cmakelists
-                +{field} source_cmakelists
-                +{field} include_cmakelists
-                +{field} cpp_header
-                +{field} cpp_implementation
-                +{field} tests_cpp_main
-                +{field} tests_cpp_implementation
-                +{field} templates
-                +{field} csharp_implementation
-        }
+    enum legacy_archetype_kind <<masd::enumeration>> #F2DAFD {
+        +{field} visual_studio_solution
+        +{field} visual_studio_project
+        +{field} odb_options
+        +{field} msbuild_targets
+        +{field} tests_cmakelists
+        +{field} source_cmakelists
+        +{field} include_cmakelists
+        +{field} cpp_header
+        +{field} cpp_implementation
+        +{field} tests_cpp_main
+        +{field} tests_cpp_implementation
+        +{field} templates
+        +{field} csharp_implementation
+    }
 
 note top of  legacy_archetype_kind
 Kinds of archetypes available across all technical spaces.
 end note
 
-        class relation_properties #F7E5FF {
-                +{field} status relation_status
-                +{field} relations std::list<std::string>
-        }
+    class relation_properties #F7E5FF {
+        +{field} status relation_status
+        +{field} relations std::list<std::string>
+    }
 
-        class inclusion_directives #F7E5FF {
-                +{field} primary std::string
-                +{field} secondary std::list<std::string>
-        }
+    class inclusion_directives #F7E5FF {
+        +{field} primary std::string
+        +{field} secondary std::list<std::string>
+    }
 
 note top of  inclusion_directives
 Represents the group of inclusion directives associated with a name and an archetype.
 end note
 
-        class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
-                +{field} technical_space identification::entities::technical_space
-        }
+    class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
+        +{field} technical_space identification::entities::technical_space
+    }
 
-        class helper <<MetaElement, Associatable, HasTechnicalSpace>> #F7E5FF {
-                +{field} relations relations
-                +{field} part identification::entities::physical_meta_id
-                +{field} family std::string
-                +{field} owning_formatters std::list<identification::entities::physical_meta_id>
-                +{field} owning_facets std::list<identification::entities::physical_meta_id>
-        }
+    class helper <<MetaElement, Associatable, HasTechnicalSpace>> #F7E5FF {
+        +{field} relations relations
+        +{field} part identification::entities::physical_meta_id
+        +{field} family std::string
+        +{field} owning_formatters std::list<identification::entities::physical_meta_id>
+        +{field} owning_facets std::list<identification::entities::physical_meta_id>
+    }
 
 }
 
@@ -560,81 +560,81 @@ Defines the MASD physical space.
 end note
 
 namespace features #F2F2F2 {
-        class facet_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
-                +{field} directory_name masd::variability::text
-                +{field} postfix masd::variability::text
-                +{field} overwrite masd::variability::boolean
-        }
+    class facet_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
+        +{field} directory_name masd::variability::text
+        +{field} postfix masd::variability::text
+        +{field} overwrite masd::variability::boolean
+    }
 
 note top of  facet_features
 Physical features common to all facets.
 end note
 
-        class archetype_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
-                +{field} postfix masd::variability::text
-                +{field} overwrite masd::variability::boolean
-        }
+    class archetype_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
+        +{field} postfix masd::variability::text
+        +{field} overwrite masd::variability::boolean
+    }
 
 note top of  archetype_features
 Features common to all archetypes.
 end note
 
-        class initializer <<masd::variability::initializer>> #A9CDCD {
-        }
+    class initializer <<masd::variability::initializer>> #A9CDCD {
+    }
 
-        class filesystem <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} force_write masd::variability::boolean
-                +{field} delete_extra_files masd::variability::boolean
-                +{field} ignore_files_matching_regex masd::variability::text_collection
-                +{field} delete_empty_directories masd::variability::boolean
-                +{field} enable_backend_directories masd::variability::boolean
-        }
+    class filesystem <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} force_write masd::variability::boolean
+        +{field} delete_extra_files masd::variability::boolean
+        +{field} ignore_files_matching_regex masd::variability::text_collection
+        +{field} delete_empty_directories masd::variability::boolean
+        +{field} enable_backend_directories masd::variability::boolean
+    }
 
 note top of  filesystem
 Features related to filesystem operations.
 end note
 
-        class enablement <<masd::variability::feature_template_bundle>> #CCE2E2 {
-                +{field} enabled masd::variability::boolean
-        }
+    class enablement <<masd::variability::feature_template_bundle>> #CCE2E2 {
+        +{field} enabled masd::variability::boolean
+    }
 
 note top of  enablement
 Enablement related properties.
 end note
 
-        class backend_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
-                +{field} directory_name masd::variability::text
-        }
+    class backend_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
+        +{field} directory_name masd::variability::text
+    }
 
 note top of  backend_features
 Physical features common to all backends.
 end note
 
-        class path_features <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} headers_output_directory masd::variability::text
-                +{field} source_directory_name masd::variability::text
-                +{field} include_directory_name masd::variability::text
-                +{field} tests_directory_name masd::variability::text
-                +{field} templates_directory_name masd::variability::text
-                +{field} header_file_extension masd::variability::text
-                +{field} implementation_file_extension masd::variability::text
-                +{field} templates_file_extension masd::variability::text
-                +{field} enable_unique_file_names masd::variability::boolean
-                +{field} disable_facet_directories masd::variability::boolean
-        }
+    class path_features <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} headers_output_directory masd::variability::text
+        +{field} source_directory_name masd::variability::text
+        +{field} include_directory_name masd::variability::text
+        +{field} tests_directory_name masd::variability::text
+        +{field} templates_directory_name masd::variability::text
+        +{field} header_file_extension masd::variability::text
+        +{field} implementation_file_extension masd::variability::text
+        +{field} templates_file_extension masd::variability::text
+        +{field} enable_unique_file_names masd::variability::boolean
+        +{field} disable_facet_directories masd::variability::boolean
+    }
 
 note top of  path_features
 Set of features related to path processing.
 end note
 
-        class directive_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
-                +{field} primary_inclusion_directive masd::variability::text
-                +{field} secondary_inclusion_directive masd::variability::text_collection
-        }
+    class directive_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
+        +{field} primary_inclusion_directive masd::variability::text
+        +{field} secondary_inclusion_directive masd::variability::text_collection
+    }
 
-        class inclusion_features <<masd::variability::feature_bundle>> #BAD7D7 {
-                +{field} inclusion_required masd::variability::boolean
-        }
+    class inclusion_features <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} inclusion_required masd::variability::boolean
+    }
 
 }
 
@@ -643,98 +643,98 @@ Features for the MASD physical model.
 end note
 
 namespace transforms #F2F2F2 {
-        class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} diffing_configuration boost::optional<diffing_configuration>
-                +{field} reporting_configuration boost::optional<reporting_configuration>
-                +{field} dry_run_mode_enabled bool
-                +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
-                +{field} meta_model boost::shared_ptr<entities::meta_model>
-                +{field} tracer boost::shared_ptr<tracing::tracer>
-                +{field} output_directory_path boost::filesystem::path
-        }
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} diffing_configuration boost::optional<diffing_configuration>
+        +{field} reporting_configuration boost::optional<reporting_configuration>
+        +{field} dry_run_mode_enabled bool
+        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
+        +{field} meta_model boost::shared_ptr<entities::meta_model>
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} output_directory_path boost::filesystem::path
+    }
 
-        class transform_exception <<masd::exception>> #E8C2F8 {
-        }
+    class transform_exception <<masd::exception>> #E8C2F8 {
+    }
 
-        class file_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class file_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class write_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class write_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class update_outputting_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class update_outputting_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class remove_files_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class remove_files_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generate_report_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generate_report_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_post_processing_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_post_processing_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generate_diffs_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generate_diffs_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class gather_external_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class gather_external_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generate_patch_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generate_patch_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class mock_content_filler_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class mock_content_filler_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class operation_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class operation_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class compute_name_indices_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class compute_name_indices_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class minimal_context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-                +{field} tracer boost::shared_ptr<tracing::tracer>
-        }
+    class minimal_context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+    }
 
 note top of  minimal_context
 Smallest possible context required for bootstrapping purposes.
 end note
 
-        class meta_model_assembly_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_model_assembly_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class compute_template_instantiation_domains <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class compute_template_instantiation_domains <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class model_population_chain <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class model_population_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class meta_model_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class meta_model_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class enablement_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class enablement_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class remove_regions_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class remove_regions_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class legacy_paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class legacy_paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-        class relations_transform <<dogen::handcrafted::typeable>> #FFFACD {
-        }
+    class relations_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
 }
 
