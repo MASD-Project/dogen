@@ -8,6 +8,7 @@
 - work on PMM.
 
 * Stories
+
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
@@ -362,6 +363,55 @@ Time spent creating the demo and presentation.
     :END:
 
 Updates to sprint and product backlog.
+
+*** Fix PlantUML indentation                                          :story:
+
+At present if we indent a diagram in emacs we get a different
+indentation compared to the generated one. We need to either get emacs
+to indent correctly, or copy the emacs indentation. The main problem
+at present is that we are indenting classes correctly in generated
+code:
+
+#+begin_src plantuml
+namespace entities #F2F2F2 {
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
+    }
+}
+#+end_src
+
+Whereas emacs does not:
+
+#+begin_src plantuml
+namespace entities #F2F2F2 {
+
+    class section #F7E5FF {
+    +{field} blocks std::list<block>
+}
+
+}
+#+end_src
+
+Note that the behaviour seems different in org-babel.
+
+*** Empty classes do not need brackets in Plant UML                   :story:
+
+At present we are still adding start and end brackets to empty classes:
+
+#+begin_src plantuml
+class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+#+end_src
+
+This takes space for no reason. We could just not print those brackets.
+
+*** Consider creating a product PlantUML diagram                      :story:
+
+Once we have support for product models, we should be able to create a
+composite Plant UML diagram of the entire product, with linkages for
+all types within the product. This means we should keep this use case
+in mind when we resolve the problems we currently have with
+associations intra-model.
 
 *** Partial information extraction from logical model                 :story:
 

@@ -6218,7 +6218,7 @@ We could add emacs/vi tags to make fully generated files read-only -
 as opposed to partially generated files such as services, which are
 expected to be modified by the user. Example:
 
-: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
+: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4; buffer-read-only: t -*-
 
 There must be a vi equivalent. There is =view= but its not clear how
 to set it into a modeline. The alternative is to write the files as
@@ -9611,7 +9611,8 @@ generation and emacs:
   kind of integration with projectile?
 - bookmarks: we could generate a org-mode file of bookmarks for all
   key directories in a product such as say "coding include types",
-  etc. This can also use traditional emacs bookmarking format.
+  etc. This can also use traditional emacs bookmarking format. It
+  should also include links to models.
 - run affected test suites: create a graph of includes per file such
   that when you change a file, you can ask to run affected test
   suites. This is computed based on the include graph. Won't work for
@@ -9879,6 +9880,12 @@ Links:
   text templating system to use with C++ programs. It was originally
   called Google Templates, due to its origin as the template system
   used for Google search result pages.
+- [[https://github.com/moneymanagerex/ctpp][ctpp GH]]: See also [[http://ctpp.havoc.ru/en/][homepage]]. Seems a bit unmaintained but may have
+  some good ideas. See [[http://ctpp.havoc.ru/en/whatis.html][What is CTPP?]]
+- [[https://github.com/blockspacer/CXXCTP][CXXCTP GH]]: "Add custom features to C++ language, like metaclasses,
+  Rust-like traits, reflection and many more. A fully open source,
+  powerful solution for modification and generation of C++ source
+  code. Reduce the amount of boilerplate code in your C++ projects."
 
 *** Org-mode schemas                                                  :story:
 
@@ -11003,6 +11010,9 @@ that do not result in full blown projects.
 A project with just exceptions does not need a make file, and fails to
 compile if a makefile is generated. We need a way to not generate a
 makefile if there are no implementation files generated.
+
+Actually we still need a CMakeFile. We need to figure out what the
+conventions are for header only projects.
 
 *** IO header could depend on types forward declaration               :story:
 
@@ -12255,6 +12265,8 @@ Links:
 - [[https://github.com/matt-42/silicon][silicon]]: yet another C++ HTTP framework.
 - [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
 - OpenApi code generator examples: [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-pistache][petstore/cpp-pistache]], [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-restbed][cpp-restbed]]
+- [[https://github.com/jbeder/yaml-cpp][yaml-cpp GH]]: "yaml-cpp is a YAML parser and emitter in C++ matching
+  the YAML 1.2 spec."
 
 *** Factory method instead of complete constructor                    :story:
 
@@ -16550,6 +16562,65 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Investigate integrating HTM with dogen
+
+HTM is numenta's
+
+Links:
+
+- [[https://github.com/htm-community/htm.core][htm.core GH]]: "This is a Community Fork of the nupic.core C++
+  repository, with Python bindings. This implements the theory as
+  described in Numenta's BAMI."
+
+*** Add support for digests
+
+#+begin_quote
+Experimental C++11 header-only message digest library. Derived from
+cppcrypto in an attempt to devise a more modern yet flexible and
+universal C++ API for cryptographic hash functions.
+#+end_quote
+
+Links:
+
+- [[https://github.com/kerukuro/digestpp][digestpp GH]]
+- [[https://numenta.com/resources/biological-and-machine-intelligence/][Biological and Machine Intelligence (BAMI)]]
+
+*** Consider adding support for scheduling                            :story:
+
+Links:
+
+- [[https://github.com/PerMalmberg/libcron][libcron GH]]: "A C++ scheduling library using cron formatting."
+
+*** Consider adding support for =cpp-equiv=                           :story:
+
+#+begin_quote
+Creating equivalence relations with indexes as elements, merging
+elements and testing for equivalence. Also supports adding and
+removing elements from existing equivalence relations, comparing
+fine-ness, creating all equivalence relations of a given size, and
+other auxilary functions/methods.
+#+end_quote
+
+Links:
+
+- [[https://github.com/Ahajha/cpp-equiv][cpp-equiv GH]]
+
+*** Consider adding support for trees                                 :story:
+
+We often require a tree datastructure. There must be c++ libraries
+implementing these that we can use.
+
+Links:
+
+- [[https://github.com/gvinciguerra/PGM-index][PGM-index GH]]: "The Piecewise Geometric Model index (PGM-index) is a
+  data structure that enables fast lookup, predecessor, range searches
+  and updates in arrays of billions of items using orders of magnitude
+  less space than traditional indexes while providing the same
+  worst-case query time guarantees."
+- [[https://github.com/Kronuz/cpp-btree][C++ B-tree GH]]: "Code in this repository is based on Google's B-tree
+  implementation. C++ B-tree is a template library that implements
+  ordered in-memory containers based on a B-tree data structure."
+
 *** Consider adding support for =libvineyard=                         :story:
 
 #+begin_quote
@@ -16566,7 +16637,7 @@ Links:
   offers the ability to share your data structures among multiple
   processes simultaneously through Plasma, an in-memory object store."
 
-*** org-block extras
+*** org-block extras                                                  :story:
 
 See if we can mine this org documentation for ideas that can be
 applied to Dogen:
@@ -18646,6 +18717,9 @@ Notes:
   objective is to make an interactive view of the API, not to replace
   Wt. We could also use mustache templates for simple cases. There is
   also static sites generation (see hugo, etc).
+- actually, we should definitely not use stitch for this. We want to
+  use a specialised library that is well maintained with lots of use
+  cases outside of dogen. Example: [[https://github.com/pantor/inja][inja]]
 - we should generate the swagger interactive interface as they do for
   the [[https://petstore.swagger.io/][petstore]].
 - we should also allow users to add documentation for the API,
@@ -18697,8 +18771,12 @@ Links:
   using C++11 and Asio (both Boost.Asio and standalone Asio can be
   used).
 - [[https://www.techempower.com/benchmarks/#section=data-r19&hw=ph&test=composite][Benchmarks Composite scores]]: benchmarks for several web frameworks.
-- https://github.com/matt-42/lithium: Lithium's goal is to ease the
-  development of C++ high performance HTTP APIs.
+- [[https://github.com/matt-42/lithium][lithium GH]]: Lithium's goal is to ease the development of C++ high
+  performance HTTP APIs.
+- [[https://github.com/yhirose/cpp-httplib][cpp-httplib GH]]: A C++11 single-file header-only cross platform
+  HTTP/HTTPS library.
+- [[https://github.com/blockspacer/CXTPL][CXTPL GH]]: "Template engine with full C++ power (transpiles template
+  into valid C++ code, supports Cling, etc.)."
 
 *** Consider generating consul service discovery code                 :story:
 
@@ -18728,7 +18806,12 @@ Notes:
   lots of unnecessary work. However, unpicking transforms won't be
   trivial.
 - think of code as a graph, where handcrafted files are leaves and
-  generated files are non-leafs.
+  generated files are non-leafs. In fact, it probably makes more sense
+  to generate a graph using dot which highlights all of the entities
+  which are not reached by non-generated entities. This is a bit
+  tricky because we may make use of an entity in regular C++ code, so
+  we will need something like LSP to produce a list of "types used" by
+  a given type.
 
 Links:
 
@@ -20420,6 +20503,9 @@ in dia mailinglist:
 - https://mail.gnome.org/archives/dia-list/2015-June/msg00013.html
 - https://mail.gnome.org/archives/dia-list/2015-June/msg00014.html
 
+Now that we moved over to PlantUML it makes more sense to add parsing
+support for Plant UML.
+
 See also:
 
 - [[http://blog.qt.io/blog/2017/01/23/qt-scxml-state-chart-support-qt-creator/][Qt SCXML and State Chart Support in Qt Creator]]
@@ -20429,7 +20515,6 @@ See also:
 - There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
 - See ragel as well: http://www.colm.net/open-source/ragel/
 - [[https://github.com/josteink/wsd-mode][Web Sequence Diagrams emacs mode]]: not exactly directly related.
--
 
 *** Add reflection support by using model and type enums               :epic:
 
