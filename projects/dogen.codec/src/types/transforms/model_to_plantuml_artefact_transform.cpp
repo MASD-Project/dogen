@@ -39,6 +39,7 @@ transform_id("codec.transforms.model_to_plantuml_artefact_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const unsigned int plantuml_indent_level(4);
 const std::string empty;
 const std::string default_element_colour("#F7E5FF");
 const std::string default_module_colour("#F2F2F2");
@@ -226,7 +227,7 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
         const auto lambda([](const unsigned int level) {
             if (level == 0)
                 return empty;
-            return std::string(level * 8, ' ');
+            return std::string(level * plantuml_indent_level, ' ');
         });
         const auto indent(lambda(level));
         const std::string inner_indent(lambda(level + 1));
