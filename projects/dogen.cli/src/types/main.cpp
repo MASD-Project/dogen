@@ -39,6 +39,7 @@
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.relational/types/tracing/log_backend.hpp"
 #endif
+
 namespace {
 
 using namespace dogen::utility::log;
