@@ -276,9 +276,14 @@ if(NOT EXISTS "${stage_doc_dir}")
     make_directory("${stage_doc_dir}")
 endif()
 
-set(stage_doxygen_dir ${stage_dir}/doxygen)
+set(stage_doxygen_dir ${stage_doc_dir}/doxygen)
 if(NOT EXISTS "${stage_doxygen_dir}")
     make_directory("${stage_doxygen_dir}")
+endif()
+
+set(stage_modeling_dir ${stage_doc_dir}/modeling)
+if(NOT EXISTS "${stage_modeling_dir}")
+    make_directory("${stage_modeling_dir}")
 endif()
 
 #
