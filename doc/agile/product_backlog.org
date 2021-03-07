@@ -78,6 +78,222 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Export models to HTML                                             :story:
+
+We should have a target that runs emacs and outputs an HTML
+representation of the models.
+
+Links:
+
+- [[https://github.com/DogLooksGood/org-html-themify][org-html-themify GH]]: "This package will generate inlined CSS style in
+  your exported HTML, according to your installed Emacs color theme."
+- [[https://github.com/fniessen/org-html-themes][org-html-themes]]: "Though you can easily override CSS stylesheets and
+  add your own HTML themes, we can say (or write) that Org mode
+  provides a basic HTML support."
+- [[https://www.reddit.com/r/emacs/comments/3pvbag/is_there_a_collection_of_css_styles_for_org/][reddit: Is there a collection of CSS styles for Org exports? What
+  are your favorites?]]
+- [[http://thomasf.github.io/solarized-css/][solarized-css]]
+- [[https://github.com/dakrone/dakrone.github.com/blob/master/org.css][org.css GH]]
+
+*** Ignorable headlines in org-mode                                   :story:
+
+It should be possible to add documents that do not get expressed as
+source code in models, but still come out in the documentation.
+
+Notes:
+
+- apparently org-mode supports headlines marked with =COMMENT=.
+
+Links:
+
+- [[https://www.reddit.com/r/emacs/comments/lxwo61/quick_tip_for_those_with_a_literate_emacs_config/][reddit: Quick tip for those with a literate emacs config]]
+
+*** Implement code merging support                                    :story:
+
+Once we have support for operations we now have in place all of the
+requirements for code merging support. We then just need to read the
+C++ source block in the operation, and associate the =custom_id= of
+the operation with the generated code. Note that the org mode file
+does not have the source code for the operation at all. Instead, we
+have a link (see the transclusion story below) to the GUID in the
+file. Users click on the link and edit the file directly. There is a
+transform in the physical layer that reads the block and replaces the
+GUID, e.g. given a file like so:
+
+#+begin_src c++
+void some_class::some_func() {
+// {{{ 507ab9d0-d1a5-4fa9-97a9-d78a48a08c3d
+<some content>
+// }}}
+}
+#+end_src
+
+We get all the text between:
+
+: // {{{ 507ab9d0-d1a5-4fa9-97a9-d78a48a08c3d
+
+and
+
+: // }}}
+
+And use it to replace the GUID prior to writing the file. Note also
+that the function signature is written by Dogen. A operation is a
+list of attributes. However, we also need to find a way to associate
+some additional properties that are not needed for regular attributes:
+
+- direction: =in=, =out=, =inout=. determine if its a reference, etc.
+- mutability: =query= if its const.
+- comments: used to construct the method's comment. Each attribute has
+  one.
+- default value.
+
+For the operation we also need:
+
+- return value: this can be directly added to the operation itself.
+- class scope: static or not.
+- visibility: protected, private, public.
+- inheritance type: leaf, abstract, final.
+- stereotype: No use for it yet.
+
+Notes:
+
+- in UML these are named parameters.
+
+Merged stories:
+
+*Add support for operations*
+
+#+begin_quote
+*Story*: As a dogen user, I want to specify operations via the
+frontend so that I dogen can generate the header file and I can
+manually add the implementation.
+#+end_quote
+
+This story is a requirement in order to implement merging support.
+
+We now have in place almost all building blocks needed to implement
+operations. Note that operations should be the only use case for
+code-merging. Anything more complicated than this should just be
+handcrafted. The basic idea is that we define operations just like we
+define attributes (see simplified parsing below). We then code
+generate the function signature for the operation on the header and
+implementation files. In the implementation c++ file we add markers
+like so:
+
+#+begin_src c++
+void some_class::some_func() {
+// {{{ 507ab9d0-d1a5-4fa9-97a9-d78a48a08c3d
+<some content>
+// }}}
+}
+#+end_src
+
+Users can freely edit =<some content>=. During the generation
+pipeline, the implementation file will have the UUID written out as a
+string, e.g.:
+
+: 507ab9d0-d1a5-4fa9-97a9-d78a48a08c3d
+
+Then, when we are generating files, as part of the artefact pipeline,
+we first read the file we are about to write and extract any blocks
+such as the above (block extraction transform). For each block we
+perform a search and replace on the generated file. Then we do the
+writing. The org-mode file has a link to the file. This means we have
+full LSP support for code writing.
+
+Notes:
+
+- we need to handle the initial case. We should create a map of
+  "required UUIDs".
+- we also need some meta-data that allows injecting include files for
+  the operation implementation.
+- org-mode supports "text search"; see the [[https://orgmode.org/manual/External-Links.html#FOOT27][external links]]
+  section. This means we can do a link like so:
+
+#+begin_src
+file:f1.cpp::507ab9d0-d1a5-4fa9-97a9-d78a48a08c3d
+#+end_src
+
+Links:
+
+- [[https://emacs.stackexchange.com/questions/63391/how-do-i-link-to-an-id-on-a-non-org-mode-file][SO: How do I link to an ID on a non org-mode file?]]
+- [[https://github.com/nobiot/org-transclusion/issues/59][Transclusion of non-org mode files #59]]
+
+*Existing support*
+
+When we did the expansion and indexing work for properties, we omitted
+operations altogether. This is fine for now, as we only have a
+half-baked support for them anyway, but will need to be revisited as
+we start to use it in anger. In particular:
+
+- we need sets of operations: local, inherited, all
+- we need an operations indexer
+
+Actually we removed the half-baked support.
+
+*Simplify argument parsing for operations*
+
+One of the main stumbling blocks for adding support for operations has
+been the complexity of parsing all the permutations allowed by
+C++. However, for the majority of use cases we have found so far
+(particularly for the definition of interfaces), we don't actually
+require access to the full expressiveness of c++:
+
+- we don't use raw pointers that much;
+- we always pass types by const reference or const (simple types);
+- in cases where we need full power, we can always hand-craft those
+  classes.
+
+If we were to only allow types in arguments to be those already
+available for attributes, we could start parsing operations really
+easily. Once we have those, a few use cases open up:
+
+- generation of skeleton for classes (header and c++);
+- full generation of interfaces;
+- we can start work on services/remoting (see other stories)
+- we can start to consider generating SWIG interfaces,
+
+In addition, Dia has a direction for each parameter (e.g. In, In &
+Out, etc) so this can also be leveraged.
+
+Notes:
+
+- we should disable parsing of operations if hand-crafted is on (or do
+  a shallow parse and just literally copy the string; we have another
+  story for this in the backlog).
+- we should make all operations simplified: e.g. not support the
+  complexities of C++ etc. We only support simple UML like
+  syntax. Additional information must be conveyed via mapping.
+
+*Basic support for operations*
+
+We could add support for operations without having full parsing
+support for all variations in c++. This could be achieved as follows:
+
+- do not support LAM to start off with. Mapping of types requires
+  parsing all expressions on operations and this will not work until
+  we support pointers, references and const.
+- treat parameters in operations as a string - e.g. no parsing into
+  name trees. Because we cannot parse, we also cannot resolve
+  dependencies (e.g. the includes etc will not be right). One
+  alternative is to have a hard-coded support for just =const= and
+  =&=, which are the only use cases we have at present. If the parser
+  could just ignore those we could still build name trees and have
+  dependency support.
+- for value objects, associate every operation with a protected
+  region. For handcrafted objects, they are used just for creating the
+  initial "class template" or the interface.
+- when code-generating the operation, merely write the variable name
+  and type without any transformation at all.
+- users must associate a GUID with the operation for the protected
+  region. This has to be done manually to preserve traceability
+  links.
+- since the protected region is bounded by function scope, we can
+  simply look for protected region begin and end markers, and copy the
+  region into the generated artefact.
+- the purpose of these operations is just to: a) add trivial behaviour
+  to value objects b) generate interfaces. It is kept really simple.
+
 *** "Inferred" models                                                 :story:
 
 [[https://www.reddit.com/r/cpp/comments/ksf2az/code_generation_using_attributes/][This reddit post]] inspired an idea. The gist of it is, one could
@@ -307,11 +523,56 @@ exporting into PlantUML.
   have support for diffing on conversion, which we may not yet
   have. Also the existing tests do not take into account the action.
 - add plantuml representations to reference models.
+- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
+  PlantUML]]
+- add comments on relations:
+
+: someclass o-- otherclass : a description of the relation
+
+  This means the org-mode model must contain the comment. We could
+  either use the comment on the association itself, or have a field in
+  properties:
+
+: :masd.codec.relation_comment: a description of the relation
+
+  This is then copied as is into the UML diagram. By separating the
+  two means we can still make "proper" comments at the attribute
+  level.
+- there should be meta-data to determine if a comment will show up in
+  the diagram as a note or not. It should apply to both classes and
+  methods.
+- we should allow users to set the location of the comment for classes
+  etc (bottom, top, left, right).
+- we should allow enabling comments on methods and attributes, with
+  direction (left or right).
 
 Notes:
 
 - we need to move features such as name trees and generalisation into
   the codec model.
+- actually perhaps we need to allow users to "tweak" the
+  relationships. We probably don't want every single relationship to
+  become a link in UML because then we can't see the wood for the
+  trees. A better approach may be to force users to declare the
+  relationships as meta-data, like we suggested above for comments,
+  and then transport those annotations to the UML diagram. This also
+  means we could add a full reference to the types, which solves the
+  issue of having to merge models. Finally, it means we can declare
+  any kind of relation, as per the plant uml syntax - in fact we
+  should probably expose the plant UML syntax directly, e.g. the user
+  is expected to declare a native plantuml relation:
+
+: :masd.codec.plantuml_relation: AS_IS_RELATION
+
+  We could perhaps default to the current class, but that's about
+  it. This would also allow for things like hidden links, etc. In
+  effect the only relation you get for free is inheritance. Actually
+  we should also have a "raw" way of inserting relations in a
+
+  namespace. These are placed at the end of the namespace.
+Links:
+
+- [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
 
 *** Deprecate managed directories                                     :story:
 
@@ -4926,6 +5187,8 @@ features, as explained here:
   dependencies.
 - [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
 - [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
+- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
+  helper files."
 
 We need to implement this using proper CMake idioms.
 
@@ -5205,71 +5468,6 @@ Notes:
   allowing concepts to be placed in packages. We just need to test
   this. It may be that we are not merging object templates.
 
-*** Simplify argument parsing for operations                          :story:
-
-One of the main stumbling blocks for adding support for operations has
-been the complexity of parsing all the permutations allowed by
-C++. However, for the majority of use cases we have found so far
-(particularly for the definition of interfaces), we don't actually
-require access to the full expressiveness of c++:
-
-- we don't use raw pointers that much;
-- we always pass types by const reference or const (simple types);
-- in cases where we need full power, we can always hand-craft those
-  classes.
-
-If we were to only allow types in arguments to be those already
-available for attributes, we could start parsing operations really
-easily. Once we have those, a few use cases open up:
-
-- generation of skeleton for classes (header and c++);
-- full generation of interfaces;
-- we can start work on services/remoting (see other stories)
-- we can start to consider generating SWIG interfaces,
-
-In addition, Dia has a direction for each parameter (e.g. In, In &
-Out, etc) so this can also be leveraged.
-
-Notes:
-
-- we should disable parsing of operations if hand-crafted is on (or do
-  a shallow parse and just literally copy the string; we have another
-  story for this in the backlog).
-- we should make all operations simplified: e.g. not support the
-  complexities of C++ etc. We only support simple UML like
-  syntax. Additional information must be conveyed via mapping.
-
-Merged Stories:
-
-*Basic support for operations*
-
-We could add support for operations without having full parsing
-support for all variations in c++. This could be achieved as follows:
-
-- do not support LAM to start off with. Mapping of types requires
-  parsing all expressions on operations and this will not work until
-  we support pointers, references and const.
-- treat parameters in operations as a string - e.g. no parsing into
-  name trees. Because we cannot parse, we also cannot resolve
-  dependencies (e.g. the includes etc will not be right). One
-  alternative is to have a hard-coded support for just =const= and
-  =&=, which are the only use cases we have at present. If the parser
-  could just ignore those we could still build name trees and have
-  dependency support.
-- for value objects, associate every operation with a protected
-  region. For handcrafted objects, they are used just for creating the
-  initial "class template" or the interface.
-- when code-generating the operation, merely write the variable name
-  and type without any transformation at all.
-- users must associate a GUID with the operation for the protected
-  region. This has to be done manually to preserve traceability
-  links.
-- since the protected region is bounded by function scope, we can
-  simply look for protected region begin and end markers, and copy the
-  region into the generated artefact.
-- the purpose of these operations is just to: a) add trivial behaviour
-  to value objects b) generate interfaces. It is kept really simple.
-
 *** Rename validators to checkers                                     :story:
 
 In the literature, model validators seems to be called
@@ -5544,26 +5742,6 @@ licences. For example we could say that a model M with a proprietary
 licence including a PDM P with GPL licence is an error. This could
 come up as any other error would. We could have a "compatible with"
 field in licences for this.
-
-*** Add support for operations                                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to specify operations via the
-frontend so that I dogen can generate the header file and I can
-manually add the implementation.
-#+end_quote
-
-This story is a requirement in order to implement merging support.
-
-When we did the expansion and indexing work for properties, we omitted
-operations altogether. This is fine for now, as we only have a
-half-baked support for them anyway, but will need to be revisited as
-we start to use it in anger. In particular:
-
-- we need sets of operations: local, inherited, all
-- we need an operations indexer
-
-Actually we removed the half-baked support.
 
 *** Add stereotype for IoC containers                                 :story:
 
@@ -9886,6 +10064,12 @@ Links:
   Rust-like traits, reflection and many more. A fully open source,
   powerful solution for modification and generation of C++ source
   code. Reduce the amount of boilerplate code in your C++ projects."
+- [[https://github.com/flexferrum/autoprogrammer][autoprogrammer GH]]: "Welcome to Autoprogrammer, the C++ code
+  generation tool! This tool helps you dramatically reduce the amount
+  of boilerplate code in your C++ projects. Based on clang frontend,
+  the 'autoprogrammer' parses your C++ source files and generates new
+  set C++ sources. For instance, it generates enum-to-string
+  converting functions for you. Instead of you."
 
 *** Org-mode schemas                                                  :story:
 
@@ -11380,6 +11564,12 @@ We should have a metamodel element for this. The keys could be simply:
 
 Then, we could expose the metamodel element from SWIG into python.
 
+Actually this is even more useful in the context of Plant UML. We just
+need to create a "table" of identifiers, either by meta-model element
+name or by stereotype. The meta-model element should work like
+profiles allowing inheritance. Or at least dogen could define a base
+"table" for elements which can be overriden by the user.
+
 *** Consider adding inheritance support to modelines                  :story:
 
 Though it is probably overkill, it would be nice to be able to
@@ -12042,6 +12232,16 @@ that use coroutines.
 
 - [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
 - [[https://github.com/lewissbaker/cppcoro/blob/master/include/cppcoro/generator.hpp][generator.hpp]]: sample generator for C++ 20.
+- [[https://github.com/MiSo1289/asiochan][asiochan GH]]: "This library provides golang-inspired channel types to
+  be used with ASIO awaitable coroutines. Channels allow bidirectional
+  message passing and synchronization between coroutines. Both
+  standalone and boost versions of ASIO are supported. See the
+  installing section on how to install and select the ASIO
+  distribution used."
+- [[https://github.com/bloomberg/quantum][quantum GH]]: "Quantum is a full-featured and powerful C++ framework
+  build on top of the Boost coroutine library. The framework allows
+  users to dispatch units of work (a.k.a. tasks) as coroutines and
+  execute them concurrently using the 'reactor' pattern."
 
 *** Add support for =std::forward_list=                               :story:
 
@@ -16287,6 +16487,8 @@ Links:
 
 - [[http://stackoverflow.com/questions/2152077/is-it-possible-to-get-cmake-to-build-both-a-static-and-shared-version-of-the-sam][Is it possible to get CMake to build both a static and shared
   version of the same library?]]
+- [[https://github.com/friendlyanon/cxx-static-shared-example][GH cxx-static-shared-example]]: "CMake Example: support building as
+  either shared or static".
 
 *** Migrate from Boost Test to Catch                                  :story:
 
@@ -17653,6 +17855,15 @@ Links:
   and a message broker written in C++ that stores, routes, and
   forwards messages using AMQP.
 - [[https://github.com/apache/qpid-cpp][qpid GH]]. [[https://github.com/apache/qpid-cpp/tree/master/examples/messaging][Examples]].
+- [[https://github.com/bloomberg/corokafka][corokafka GH]]: Coroutine-based Kafka messaging library! CoroKafka is
+  a scalable and simple to use C++ library built on top of cppkafka
+  and quantum, supporting any number of parallel producers and
+  consumers.
+- [[https://github.com/mfontanini/cppkafka][cppkafka GH]]: "cppkafka allows C++ applications to consume and
+  produce messages using the Apache Kafka protocol. The library is
+  built on top of librdkafka, and provides a high level API that uses
+  modern C++ features to make it easier to write code while keeping
+  the wrapper's performance overhead to a minimum.
 
 *** Consider supporting nano-id                                       :story:
 

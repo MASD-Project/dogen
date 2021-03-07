@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-01-05 Tue 22:47]
+#+CAPTION: Clock summary at [2021-03-07 Sun 16:35]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *6:33* |      |      | 100.0 |
+| *Total time*                                       | *9:01* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 6:33   |      |      | 100.0 |
-| Active                                             |        | 6:33 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:06 |  93.1 |
-| Create a demo and presentation for previous sprint |        |      | 0:27 |   6.9 |
+| Stories                                            | 9:01   |      |      | 100.0 |
+| Active                                             |        | 9:01 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:06 |  67.7 |
+| Create a demo and presentation for previous sprint |        |      | 0:27 |   5.0 |
+| Sprint and product backlog grooming                |        |      | 2:28 |  27.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -356,6 +357,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2021-03-05 Fri 10:40]--[2021-03-05 Fri 11:20] =>  0:40
+    CLOCK: [2021-02-14 Sun 10:02]--[2021-02-14 Sun 10:54] =>  0:52
     CLOCK: [2021-01-17 Sun 13:15]--[2021-01-17 Sun 13:25] =>  0:10
     CLOCK: [2021-01-15 Fri 15:02]--[2021-01-15 Fri 15:21] =>  0:19
     CLOCK: [2021-01-09 Sat 17:15]--[2021-01-09 Sat 17:22] =>  0:07
@@ -363,6 +366,25 @@ Time spent creating the demo and presentation.
     :END:
 
 Updates to sprint and product backlog.
+
+*** Fix PlantUML namespace comments                                   :story:
+
+At present the comments appear as a link to the namespace. We should
+try to do whatever it is we did for the model comment, which looks
+like a regular note at the top of the namespace.
+
+In addition, sub-namespaces seem to generate both a class with the
+comment as well as the namespace itself (see text model).
+
+*** Generate PNGs for Plant UML models                                :story:
+
+At present we are generating SVGs for the Plant UML models. This is
+not ideal because emacs does not process them very well. Also, we are
+checking in the SVG. We probably don't need to do that, nor do we need
+to check in the Plant UML source, but it does offer an easy way to
+check for regressions. At any rate, we should just have a CMake target
+that creates the PNGs in the build output directory, and open those in
+emacs with tabs and scroll bars.
 
 *** Fix PlantUML indentation                                          :story:
 
@@ -383,16 +405,59 @@ namespace entities #F2F2F2 {
 Whereas emacs does not:
 
 #+begin_src plantuml
+@startuml
+
 namespace entities #F2F2F2 {
-
     class section #F7E5FF {
-    +{field} blocks std::list<block>
+        +{field} blocks std::list<block>
+    }
 }
-
-}
+@enduml
 #+end_src
 
-Note that the behaviour seems different in org-babel.
+Note that the behaviour seems different in org-babel. Note also that
+notes have incorrect indentation (text model, inside a namespace):
+
+#+begin_src plantuml
+note top of  transformation_error
+An error occurred whilst applying a transformation.
+end note
+#+end_src
+
+Note also the extra space before exception name, as well as the
+missing indentation inside the note.
+
+Actually what is causing the problem with emacs indentation is the use
+of top-level notes:
+
+#+begin_src plantuml
+note as N1
+Contains all of the M2T transforms for all supported backends.
+end note
+#+end_src
+
+We need to investigate why this causes indentation problems. Seems
+like its valid syntax.
+
+*** Consider creating a "top-level" group in PlantUM                  :story:
+
+There are a number of classes that always show up at the top:
+
+- registrar
+- cmakelists
+- main
+- etc
+
+These could also be part of a top-level group.
+
+We could also have a group for logic-less templates if they are at the
+top-level.
+
+*** Consider adding operations for Plant UML                          :story:
+
+We don't need full operation support for it to be useful. We could
+have minimal support and use it to update the UML diagrams. It would
+then later on be extended for merging code generation.
 
 *** Empty classes do not need brackets in Plant UML                   :story:
 
