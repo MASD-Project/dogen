@@ -54,20 +54,24 @@ endif()
 
 set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/config.hpp.in")
 configure_file(${version_template} ${stage_inc_dir}/dogen/config.hpp)
-message(STATUS "Transformed config.hpp.")
+message(STATUS "Transformed ${version_template}.")
 
 set(doxy_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/dogen.in")
 configure_file(${doxy_template} ${stage_doxygen_dir}/dogen.doxy)
-message(STATUS "Transformed dogen.doxy.")
+message(STATUS "Transformed ${doxy_template}.")
+
+set(doxy_css "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/doxygen-awesome.css")
+file(COPY ${doxy_css} DESTINATION ${stage_doxygen_dir}/)
+message(STATUS "Transformed ${doxy_css}.")
 
 set(main_page_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/mainpage.dox.in")
 configure_file(${main_page_template} ${stage_doxygen_dir}/dox/mainpage.dox)
-message(STATUS "Transformed mainpage.dox.")
+message(STATUS "Transformed ${main_page_template}.")
 
 set(htaccess_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/htaccess")
 configure_file(${htaccess_template} ${stage_doxygen_dir}/.htaccess)
-message(STATUS "Transformed htaccess.")
+message(STATUS "Transformed ${htaccess_template}.")
 
 set(bintray_template "${CMAKE_CURRENT_SOURCE_DIR}/bintray/bintray.json.in")
 configure_file(${bintray_template} ${stage_pkg_dir}/bintray.json)
-message(STATUS "Transformed bintray.")
+message(STATUS "Transformed ${bintray_template}.")
