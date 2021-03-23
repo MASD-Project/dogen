@@ -18,7 +18,7 @@
 [![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.30) ](https://bintray.com/masd-project/main/dogen/1.0.30/link)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.30.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
-[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
+[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)](https://mcraveiro.github.io/dogen/doxygen/index.html)
 [![Language](https://img.shields.io/badge/Language-C++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-C++17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
 [![gcc-9](https://img.shields.io/badge/GCC-9-blue.svg)](https://www.gnu.org/software/gcc/gcc-9)
