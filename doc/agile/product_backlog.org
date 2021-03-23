@@ -1039,6 +1039,7 @@ for these yet.
 Links:
 
 - [[https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp][Writing a custom iterator in modern C++]]
+- [[https://www.reedbeta.com/blog/ranges-compatible-containers/][Making Your Own Container Compatible With C++20 Ranges]]
 
 *** Consider adding a codec meta-model                                :story:
 
@@ -16489,6 +16490,7 @@ Links:
   version of the same library?]]
 - [[https://github.com/friendlyanon/cxx-static-shared-example][GH cxx-static-shared-example]]: "CMake Example: support building as
   either shared or static".
+- [[https://alexreinking.com/blog/building-a-dual-shared-and-static-library-with-cmake.html][Building a Dual Shared and Static Library with CMake]]
 
 *** Migrate from Boost Test to Catch                                  :story:
 
@@ -16763,6 +16765,59 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for =enumerate()=
+
+#+begin_quote
+Python has a handy built-in function called enumerate(), which lets
+you iterate over an object (e.g. a list) and have access to both the
+index and the item in each iteration. You use it in a for loop, like
+this:
+
+for i, thing in enumerate(listOfThings):
+    print("The %dth thing is %s" % (i, thing))
+#+end_quote
+
+Link:
+
+- [[https://www.reedbeta.com/blog/python-like-enumerate-in-cpp17/][Python-Like enumerate() In C++17]]
+
+*** Consider adding support for =PartitionAlloc=
+
+#+begin_quote
+PartitionAlloc is a memory allocator optimized for security, low
+allocation latency (when called appropriately), and good space
+efficiency (when called appropriately). This document aims to help you
+understand how PartitionAlloc works so that you can use it
+effectively.
+#+end_quote
+
+Links:
+
+- [[https://chromium.googlesource.com/chromium/src/+/master/base/allocator/partition_allocator/PartitionAlloc.md][PartitionAlloc Design]]
+- [[http://struct.github.io/pdfium_partitionalloc.html][Porting PartitionAlloc To PDFium]]
+- [[http://struct.github.io/partition_alloc.html][PartitionAlloc - A shallow dive and some rand]]
+- [[https://github.com/struct/HardenedPartitionAlloc][GH HardenedPartitionAlloc]]: "This is a standalone library containing
+  PartitionAlloc, the allocator used in Chrome's Blink engine. It
+  needs a lot of work and testing before it should be used on
+  production code. This code is changing rapidly and should be
+  considered unstable and untested until this notice is removed."
+
+*** Mine GSL for ideas                                                :story:
+
+#+begin_quote
+GSL/4.1 is a code construction tool. It will generate code in all
+languages and for all purposes. If this sounds too good to be true,
+welcome to 1996, when we invented these techniques. Magic is simply
+technology that is twenty years ahead of its time. In addition to code
+construction, GSL has been used to generate database schema
+definitions, user interfaces, reports, system administration tools and
+much more.
+#+end_quote
+
+Links:
+
+- [[https://github.com/imatix/gsl][GSL GH]]
 
 *** Investigate integrating HTM with dogen
 
@@ -20486,6 +20541,7 @@ Links:
 - [[https://github.com/shaovoon/minicsv][minicsv]]: Minimalistic CSV Streams.
 - [[https://github.com/shaovoon/csv_stream][csv_stream]]: C++14 CSV Stream based on C API.
 - [[https://github.com/p-ranav/csv][CSV]]: CSV for Modern C++ (C++ 17).
+- [[https://github.com/p-ranav/csv2][csv2 GH]]: new version of csv project.
 - [[https://github.com/shaovoon/minicsv_benchmark][benchmark of CSV libaries]]
 - [[https://github.com/ashtum/lazycsv][lazycsv GH]]: lazycsv is a c++17, posix-compliant, single-header
   library for reading and parsing csv files.
