@@ -140,6 +140,10 @@ if [[ ! -z "${DOGEN_FULL_GENERATION}" ]]; then
     cmake_defines="${cmake_defines} -DWITH_FULL_GENERATION=ON"
 fi
 
+if [[ ! -z "${WITH_DOXYGEN}" ]]; then
+    cmake_defines="${cmake_defines} -DWITH_DOXYGEN=ON"
+fi
+
 #
 # Use minimal packaging in debug to preserve disk space.
 #
