@@ -9,13 +9,12 @@
  *
  * Dogen's source code is available in git:
  *
- * - <A HREF="https://github.com/DomainDrivenConsulting/dogen">GitHub</A>
- * - <A HREF="https://bitbucket.org/marco_craveiro/dogen">BitBucket</A>
+ * - <a href="https://github.com/DomainDrivenConsulting/dogen">GitHub</a>
+ * - <a href="https://bitbucket.org/MASD-Project/dogen/">BitBucket</a>
+ * - <a href="https://gitlab.com/DomainDrivenConsulting/dogen">GitLab</a>
  *
  * You can find details on the ongoing work in the <A HREF="https://github.com/DomainDrivenConsulting/dogen/tree/master/doc/agile">Agile folder</A>. Look for the latest sprint.
  *
- * For more details on Dogen itself, please have a look at <A HREF="https://github.com/DomainDrivenconsulting/dogen/blob/master/doc/manual/manual.org">the manual</A>.
- *
- * @e commit: ${CURRENT_GIT_COMMIT}
+ * For more details on Dogen itself, please have a look at <A HREF="https://github.com/DomainDrivenconsulting/dogen/blob/master/doc/manual">the manual</A>.
  *
  */
