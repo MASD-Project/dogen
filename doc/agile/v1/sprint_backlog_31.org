@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-03-23 Tue 20:50]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *9:38* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 9:38   |      |      | 100.0 |
-| Active                                             |        | 9:38 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:06 |  63.3 |
-| Create a demo and presentation for previous sprint |        |      | 0:27 |   4.7 |
-| Sprint and product backlog grooming                |        |      | 2:28 |  25.6 |
-| Generate doxygen docs and add to site              |        |      | 0:37 |   6.4 |
+#+CAPTION: Clock summary at [2021-04-03 Sat 09:29]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *11:20* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 11:20   |       |      | 100.0 |
+| Active                                             |         | 11:20 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 6:06 |  53.8 |
+| Create a demo and presentation for previous sprint |         |       | 0:27 |   4.0 |
+| Sprint and product backlog grooming                |         |       | 2:56 |  25.9 |
+| Generate doxygen docs and add to site              |         |       | 1:51 |  16.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -358,6 +358,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
+    CLOCK: [2021-04-03 Sat 09:01]--[2021-04-03 Sat 09:29] =>  0:28
     CLOCK: [2021-03-05 Fri 10:40]--[2021-03-05 Fri 11:20] =>  0:40
     CLOCK: [2021-02-14 Sun 10:02]--[2021-02-14 Sun 10:54] =>  0:52
     CLOCK: [2021-01-17 Sun 13:15]--[2021-01-17 Sun 13:25] =>  0:10
@@ -370,6 +372,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Generate doxygen docs and add to site                     :story:
     :LOGBOOK:
+    CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
     CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
     :END:
 
@@ -385,6 +388,8 @@ Notes:
 [![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
 #+end_src
 
+- add SVG of models to the docs.
+
 Links:
 
 - [[https://jothepro.github.io/doxygen-awesome-css/][doxygen-awesome-css]]: "Doxygen Awesome is a custom CSS theme for
@@ -395,6 +400,47 @@ Links:
 - [[https://github.com/jothepro/doxygen-awesome-css/issues/2][GH issue: Creating a link to the dark theme]]: opened a ticket about
   adding a link to the dark theme version.
 - [[https://github.com/adafruit/ci-arduino/tree/master/assets][Example doxygen badge]]
+- [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
+- [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
+
+*** Simplistic renaming based on GUIDs                                :story:
+
+One really simple way of renaming classes would be to have the UUID in
+the comments (ideally the boilerplate) of each file. We could then
+have a pre-generation step that reads in all the files and maps them
+to an ID. Then, if a file is handcrafted, we could use the contents
+instead of creating a blank file.
+
+Notes:
+
+- we could possibly also do some minor hackery such as search /
+  replace the old namespace with the new namespace, and the old class
+  name with the new class name though that would be much more
+  dangerous. On the plus side, git would likely detect the rename
+  which would mean we could then diff.
+- we could possibly also issue the git rename commands for the
+  affected files.
+- note that generated files would not be part of this simplistic
+  renaming.
+- most of the work could be carried out in the physical model.
+- one assumption here is that all handcrafted files are originally
+  generated with their GUIDs and users must not delete them.
+- this makes one wonder if we should not create a type of files that
+  are "partially generated". That is, we could allow users freedom
+  within some bounds but the "header" and "footer" of the file must
+  always be generated by Dogen. This would guarantee the correct
+  namespaces, header guards, etc. Perhaps we could make this an
+  option:
+
+  - fully generated
+  - header and footer generation
+  - skeleton generation as a one-off.
+
+*** Generation statistics                                             :story:
+
+It would be very useful to know percentages of generated code versus
+hand-crafted code. We already have a report which groups files, we can
+add to that report.
 
 *** Fix PlantUML namespace comments                                   :story:
 
@@ -405,7 +451,32 @@ like a regular note at the top of the namespace.
 In addition, sub-namespaces seem to generate both a class with the
 comment as well as the namespace itself (see text model).
 
-*** Generate PNGs for Plant UML models                                :story:
+*** Create a local resolver in codec to support PlantUML use case     :story:
+
+We can create most of the links in PlantUML via local resolution. We
+could create a local resolver, which only looks at types for the
+current model. It lives inside of codec. For those types, if it
+resolves, we can create the PlantUML link. In addition, we could also
+resolve operations in the same way (once they have been
+modeled).
+
+Ideally, we should implement this resolve in such a way that it can be
+used for merged models and stand alone models. We created a story on
+the new approach for the resolver; we need to have a look at that and
+see if it can be implemented as part of this work. For example, we
+could flatten all names prior to calling resolver; use a GUID against
+each type, read from custom ID in org mode.
+
+The resolver needs to be primed with all of the existing model names
+and namespaces, without depending on the qualified names data
+structure. It should have its own data structures. It could live in
+=identification=. The output of the resolver should be the GUID of the
+type the name points to, or nothing if it could not resolve.
+
+In the calling models, we need a transform that decomposes a type into
+the names it references. Then, for each name, we call the resolver.
+
+*** Generate PNGs for PlantUML models                                 :story:
 
 At present we are generating SVGs for the Plant UML models. This is
 not ideal because emacs does not process them very well. Also, we are
@@ -468,7 +539,9 @@ end note
 We need to investigate why this causes indentation problems. Seems
 like its valid syntax.
 
-*** Consider creating a "top-level" group in PlantUM                  :story:
+Note also that all comments are not indented correctly.
+
+*** Consider creating a "top-level" group in PlantUML                 :story:
 
 There are a number of classes that always show up at the top:
 
@@ -482,13 +555,13 @@ These could also be part of a top-level group.
 We could also have a group for logic-less templates if they are at the
 top-level.
 
-*** Consider adding operations for Plant UML                          :story:
+*** Consider adding operations for PlantUML                           :story:
 
 We don't need full operation support for it to be useful. We could
 have minimal support and use it to update the UML diagrams. It would
 then later on be extended for merging code generation.
 
-*** Empty classes do not need brackets in Plant UML                   :story:
+*** Empty classes do not need brackets in PlantUML                    :story:
 
 At present we are still adding start and end brackets to empty classes:
 
@@ -515,6 +588,23 @@ gives us the bare minimum to populate the relevant properties; we can
 then extract those and map them to the codec ID. We should also make
 the codec ID mandatory and use a map for the codec elements. The
 orchestration model is responsible for stitching the information.
+
+*** org-model and links to references                                 :story:
+
+At present we are adding links as part of the drawers in
+org-models. However, this is not ideal. We want to use regular
+org-mode constructs. There are several use cases for links:
+
+- we want org-mode links so that we can make use of tools such as
+  org-roam.
+- we need to use the links for dogen to resolve the model. Both of
+  these use cases happen whilst the code is in its normal shape in the
+  git repository.
+- when we generate doxygen documentation we need links that can work
+  when the site has been published. At this point the models have all
+  been copied to a different location by doxygen.
+
+We need to find out a way to make links work for all of these use cases.
 
 *** PlantUML and hyperlinks                                           :story:
 

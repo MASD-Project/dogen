@@ -568,8 +568,8 @@ Notes:
   it. This would also allow for things like hidden links, etc. In
   effect the only relation you get for free is inheritance. Actually
   we should also have a "raw" way of inserting relations in a
-
   namespace. These are placed at the end of the namespace.
+
 Links:
 
 - [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
@@ -10078,6 +10078,10 @@ Check to see if there is any concept of an org-mode schema, whereby
 certain outlines, etc are mandatory in order for the document to be
 compliant.
 
+Links:
+
+- [[https://github.com/tgbugs/laundry][laundry GH]]
+
 *** Dogen Modeling Studio                                              :epic:
 
 Assorted set of ideas of what an "integrated environment" for modeling
@@ -10190,7 +10194,7 @@ roundtrip support, but instead a "localised" roundtrip:
   merge support), this is not very useful. This is because we only
   expect
 
-*** LSP damemon for Dogen                                              :epic:
+*** LSP daemon for Dogen                                               :epic:
 
 We should be able to create a simple LSP daemon that helps with dogen
 models and stitch templates. For dogen models:
@@ -12450,6 +12454,13 @@ run-time support (e.g. reflection, etc). All meta-data can be
 generated at compile time from the meta-model. In addition, we can
 place objects in the stack as much as possible and pre-generate JSON
 and reuse it.
+
+It would also be interesting to generate a Wt based swagger-like UI to
+test the API (as well as org-mode). Ideally this would be generic and
+it would use any OpenAPI JSON and render it into a Wt website. The
+advantage over using the traditional swagger codegen is that it would
+not require javascript and so could be accessed by regular browsers
+like eww.
 
 Links:
 
@@ -16766,7 +16777,73 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
-*** Consider adding support for =enumerate()=
+*** Update Dogen to c++ 20                                            :story:
+
+Once its properly supported in clang and GCC, we should move to
+C++ 20.
+
+Links:
+
+- [[https://oleksandrkvl.github.io/2021/04/02/cpp-20-overview.html][All C++20 core language features with examples]]
+
+*** Consider adding support for =mnemonicode=                         :story:
+
+#+begin_quote
+These routines implement a method for encoding binary data into a
+sequence of words which can be spoken over the phone, for example, and
+converted back to data on the other side.
+#+end_quote
+
+Link:
+
+- [[https://github.com/singpolyma/mnemonicode][mnemonicode GH]]
+- [[http://web.archive.org/web/20101031205747/http://www.tothink.com/mnemonic/][Article: Mnemonic encoder]]
+- [[https://github.com/Debdut/uuid-readable][uuid-readable GH]]
+- [[https://www.reddit.com/r/PostgreSQL/comments/meo45i/how_to_shorten_a_uuid/][reddit: How to shorten a uuid?]]
+
+*** Consider adding support for immutable containers                  :story:
+
+#+begin_quote
+immer is a library of persistent and immutable data structures written
+in C++. These enable whole new kinds of architectures for interactive
+and concurrent programs of striking simplicity, correctness, and
+performance.
+#+end_quote
+
+Notes:
+
+- we should consider making all containers in dogen immutable. This
+  would mean that each transform would not mutate the containers in
+  place, but update their versions. With this and with some kind of
+  data flow framework we would be able to achieve some form of
+  parallelism.
+
+Links:
+
+- [[https://github.com/arximboldi/immer][immer GH]]
+- [[https://github.com/dougbinks/enkiTS][enkiTS GH]]: "A permissively licensed C and C++ Task Scheduler qfor
+  creating parallel programs. Requires C++11 support." Useful once we
+  have immutable containers.
+- [[https://github.com/oneapi-src/oneTBB][TBB GH]]: probably makes more sense to use TBB for the data flow.
+- [[https://github.com/arximboldi/lager][lager GH]]: dataflow based on immer.
+
+*** Consider adding support for QTL                                   :story:
+
+#+begin_quote
+QTL is a C ++ library for accessing SQL databases and currently
+supports MySQL, SQLite, PostgreSQL and ODBC. QTL is a lightweight
+library that consists of only header files and does not require
+separate compilation and installation. QTL is a thin encapsulation of
+the database's native client interface. It can provide a friendly way
+of using and has performance close to using the native
+interface. Using QTL requires a compiler that supports C++11.
+#+end_quote
+
+Link:
+
+- [[https://github.com/znone/qtl][QTL GH]]:
+
+*** Consider adding support for =enumerate()=                         :story:
 
 #+begin_quote
 Python has a handy built-in function called enumerate(), which lets
@@ -16782,7 +16859,7 @@ Link:
 
 - [[https://www.reedbeta.com/blog/python-like-enumerate-in-cpp17/][Python-Like enumerate() In C++17]]
 
-*** Consider adding support for =PartitionAlloc=
+*** Consider adding support for =PartitionAlloc=                      :story:
 
 #+begin_quote
 PartitionAlloc is a memory allocator optimized for security, low
@@ -16819,7 +16896,7 @@ Links:
 
 - [[https://github.com/imatix/gsl][GSL GH]]
 
-*** Investigate integrating HTM with dogen
+*** Investigate integrating HTM with dogen                            :story:
 
 HTM is numenta's
 
@@ -16829,7 +16906,7 @@ Links:
   repository, with Python bindings. This implements the theory as
   described in Numenta's BAMI."
 
-*** Add support for digests
+*** Add support for digests                                           :story:
 
 #+begin_quote
 Experimental C++11 header-only message digest library. Derived from
@@ -20782,6 +20859,10 @@ See also:
 - There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
 - See ragel as well: http://www.colm.net/open-source/ragel/
 - [[https://github.com/josteink/wsd-mode][Web Sequence Diagrams emacs mode]]: not exactly directly related.
+- [[https://github.com/Skoparov/csm][csm GH]]: "Compact State Machine: An event based header-only
+  lightweight state machine that extensively employs compile time to
+  avoid virtual calls and simplify the declaration of transition
+  tables/action rules."
 
 *** Add reflection support by using model and type enums               :epic:
 
