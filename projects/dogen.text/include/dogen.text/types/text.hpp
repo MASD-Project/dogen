@@ -26,7 +26,11 @@
 #endif
 
 /**
- * @brief Contains all of the M2T transforms for all supported backends.
+ * @brief Contains all of the M2T transforms for all supported backendsUML Representation of model:
+ *
+ * UML representation:
+ *
+ * \image html dogen.text/modeling/dogen.text.svg
  */
 namespace dogen::text {
 }

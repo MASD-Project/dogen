@@ -46,6 +46,10 @@ complete).
 In general, codecs use file extensions to determine the type of the
 codec.
 
+UML representation:
+
+\image html dogen.codec/modeling/dogen.codec.svg
+
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: O0

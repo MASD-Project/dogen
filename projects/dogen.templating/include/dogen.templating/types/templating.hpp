@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_DIA_HPP
-#define DOGEN_DIA_TYPES_DIA_HPP
+#ifndef DOGEN_TEMPLATING_TYPES_TEMPLATING_HPP
+#define DOGEN_TEMPLATING_TYPES_TEMPLATING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 /**
- * @brief Represents the domain of the Dia diagram editor.
+ * @brief Contains all the generic text templating infrastructure.
  *
  * UML representation:
  *
- * \image html dogen.dia/modeling/dogen.dia.svg
+ * \image html dogen.templating/modeling/dogen.templating.svg
  */
-namespace dogen::dia {
+namespace dogen::templating {
 }
 
 #endif

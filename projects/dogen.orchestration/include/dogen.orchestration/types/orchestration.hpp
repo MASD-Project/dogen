@@ -27,6 +27,10 @@
 
 /**
  * @brief Orchestration-based imlementation of the Dogen product API.
+ *
+ * UML representation:
+ *
+ * \image html dogen.orchestration/modeling/dogen.orchestration.svg
  */
 namespace dogen::orchestration {
 }

@@ -55,6 +55,10 @@
  * @li to ensure the consistency of the merged model via validation
  * rules (such as verifying that all types have a definitions,
  * etc.).
+ *
+ * UML representation:
+ *
+ * \image html dogen.logical/modeling/dogen.logical.svg
  */
 namespace dogen::logical {
 }

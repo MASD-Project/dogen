@@ -27,6 +27,10 @@
 
 /**
  * @brief Implements the command-line interface for Dogen.
+ *
+ * UML representation:
+ *
+ * \image html dogen.cli/modeling/dogen.cli.svg
  */
 namespace dogen::cli {
 }

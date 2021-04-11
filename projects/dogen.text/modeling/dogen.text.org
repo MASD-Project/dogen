@@ -18,7 +18,11 @@
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
-Contains all of the M2T transforms for all supported backends.
+Contains all of the M2T transforms for all supported backendsUML Representation of model:
+
+UML representation:
+
+\image html dogen.text/modeling/dogen.text.svg
 
 * entities                                                           :module:
   :PROPERTIES:

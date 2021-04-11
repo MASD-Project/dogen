@@ -23,6 +23,10 @@
 
 Orchestration-based imlementation of the Dogen product API.
 
+UML representation:
+
+\image html dogen.orchestration/modeling/dogen.orchestration.svg
+
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: O1

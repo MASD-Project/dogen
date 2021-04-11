@@ -18,6 +18,10 @@
 
 Implements the command-line interface for Dogen.
 
+UML representation:
+
+\image html dogen.cli/modeling/dogen.cli.svg
+
 * parser exception                                                  :element:
   :PROPERTIES:
   :custom_id: O1
@@ -177,4 +181,3 @@ Dumps all the specs about this version of dogen.
    :END:
 
 Which style to use when dumping the specs.
-

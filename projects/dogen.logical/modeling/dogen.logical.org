@@ -49,6 +49,10 @@ together into a bigger model - called the @e merged model.
 rules (such as verifying that all types have a definitions,
 etc.).
 
+UML representation:
+
+\image html dogen.logical/modeling/dogen.logical.svg
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: O0
@@ -4664,4 +4668,3 @@ Contains formatting classes for the logical model.
    :END:
 
 An error has occurred while formatting.
-

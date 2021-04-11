@@ -58,6 +58,10 @@
  * only of its user. This decoupling was achieved by creating the concept
  * of template instantiation domains, which are just sets. These are mapped
  * elsewhere from the geometry of physical space.
+ *
+ * UML representation:
+ *
+ * \image html dogen.variability/modeling/dogen.variability.svg
  */
 namespace dogen::variability {
 }

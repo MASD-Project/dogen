@@ -49,6 +49,10 @@ only of its user. This decoupling was achieved by creating the concept
 of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
 
+UML representation:
+
+\image html dogen.variability/modeling/dogen.variability.svg
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: O1
@@ -282,7 +286,7 @@ Represents a pair of key and value.
     :END:
 
 #+begin_src mustache
-The data structure was chosen to guarantee that the order is maintained from 
+The data structure was chosen to guarantee that the order is maintained from
 source.
 
 #+end_src
@@ -799,7 +803,7 @@ Context for transformations.
 Provides all of the domains to be used for template instantiation.
 
 Example of a domain is "masd.facet" which contains the list of all available facets.
-Templates (facet and profile) are then instantiated over this range, depending on 
+Templates (facet and profile) are then instantiated over this range, depending on
 user choices.
 
 *** tracer                                                        :attribute:

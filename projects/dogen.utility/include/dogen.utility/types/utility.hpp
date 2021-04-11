@@ -27,6 +27,10 @@
 
 /**
  * @brief Assorted utilities used by Dogen.
+ *
+ * UML representation:
+ *
+ * \image html dogen.utility/modeling/dogen.utility.svg
  */
 namespace dogen::utility {
 }

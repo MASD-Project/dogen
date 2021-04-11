@@ -27,6 +27,10 @@
 
 /**
  * @brief Houses classes common to all transformations.
+ *
+ * UML representation:
+ *
+ * \image html dogen.tracing/modeling/dogen.tracing.svg
  */
 namespace dogen::tracing {
 }

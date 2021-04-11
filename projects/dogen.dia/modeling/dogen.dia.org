@@ -17,6 +17,10 @@
 
 Represents the domain of the Dia diagram editor.
 
+UML representation:
+
+\image html dogen.dia/modeling/dogen.dia.svg
+
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O1

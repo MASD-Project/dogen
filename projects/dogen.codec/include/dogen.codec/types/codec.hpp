@@ -52,6 +52,10 @@
  *
  * In general, codecs use file extensions to determine the type of the
  * codec.
+ *
+ * UML representation:
+ *
+ * \image html dogen.codec/modeling/dogen.codec.svg
  */
 namespace dogen::codec {
 }

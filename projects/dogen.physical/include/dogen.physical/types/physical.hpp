@@ -28,6 +28,10 @@
 /**
  * @brief The pysical model defines the core entities that make up the
  * physical dimension of MASD conceptual space.
+ *
+ * UML representation:
+ *
+ * \image html dogen.physical/modeling/dogen.physical.svg
  */
 namespace dogen::physical {
 }

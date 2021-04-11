@@ -16,6 +16,10 @@
 
 Provides the top-level API for the dogen product.
 
+UML representation:
+
+\image html dogen/modeling/dogen.svg
+
 * configuration                                                     :element:
   :PROPERTIES:
   :custom_id: O0
@@ -490,4 +494,3 @@ Human readable text describing this entry.
   :END:
 
 An error ocurred when dumping dogen's specs.
-

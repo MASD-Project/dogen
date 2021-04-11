@@ -27,6 +27,10 @@
 
 /**
  * @brief Provides the top-level API for the dogen product.
+ *
+ * UML representation:
+ *
+ * \image html dogen/modeling/dogen.svg
  */
 namespace dogen {
 }

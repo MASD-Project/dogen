@@ -28,6 +28,10 @@
 /**
  * @brief Collection of types related to naming, labelling and general
  * identification within Dogen.
+ *
+ * UML representation:
+ *
+ * \image html dogen.identification/modeling/dogen.identification.svg
  */
 namespace dogen::identification {
 }

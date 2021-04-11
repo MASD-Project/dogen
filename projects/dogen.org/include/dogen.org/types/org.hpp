@@ -30,6 +30,10 @@
  *
  * The support is very basic and focuses only on the features of org mode
  * required by Dogen.
+ *
+ * UML representation:
+ *
+ * \image html dogen.org/modeling/dogen.org.svg
  */
 namespace dogen::org {
 }

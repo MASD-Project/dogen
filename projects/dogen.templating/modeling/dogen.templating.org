@@ -15,6 +15,13 @@
 :masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
+Contains all the generic text templating infrastructure.
+
+UML representation:
+
+\image html dogen.templating/modeling/dogen.templating.svg
+
 * wale                                                               :module:
   :PROPERTIES:
   :custom_id: O0

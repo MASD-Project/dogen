@@ -1,6 +1,7 @@
 #+title: dogen.identification
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
+#+html_head: <link rel="stylesheet" href="css/tufte.css" type="text/css" />
 :PROPERTIES:
 :masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.identification
@@ -15,6 +16,11 @@
 
 Collection of types related to naming, labelling and general
 identification within Dogen.
+
+UML representation:
+
+[[./dogen.identification.svg]]
+\image html dogen.identification/modeling/dogen.identification.svg
 
 * entities                                                           :module:
   :PROPERTIES:
