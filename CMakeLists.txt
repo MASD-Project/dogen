@@ -450,6 +450,8 @@ if (WITH_RELATIONAL_SUPPORT)
     else()
         message(STATUS "ODB Compiler NOT Found.")
     endif()
+else()
+    message(STATUS "Relational support is NOT enabled.")
 endif()
 
 #
