@@ -26,7 +26,8 @@
 #endif
 
 /**
- * @brief Houses classes common to all transformations.
+ * @brief Houses classes common to all transformations, in the transform tracing
+ * domain.
  *
  * UML representation:
  *

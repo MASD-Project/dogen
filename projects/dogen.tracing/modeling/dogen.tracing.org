@@ -15,7 +15,8 @@
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
-Houses classes common to all transformations.
+Houses classes common to all transformations, in the transform tracing
+domain.
 
 UML representation:
 
