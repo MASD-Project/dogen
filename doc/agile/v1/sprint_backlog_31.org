@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 30
+#+title: Sprint Backlog 31
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
@@ -358,6 +358,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
     CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
     CLOCK: [2021-04-03 Sat 09:01]--[2021-04-03 Sat 09:29] =>  0:28
     CLOCK: [2021-03-05 Fri 10:40]--[2021-03-05 Fri 11:20] =>  0:40
@@ -403,6 +404,179 @@ Links:
 - [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
 - [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
 
+*** Logical model still has a traits class                            :story:
+
+These should all have been removed, but its still there:
+
+: #include "dogen.logical/types/traits.hpp"
+
+*** Rename merger to model compiler                                   :story:
+
+What we call "merging" is really the job of the "model compiler". We
+should rename these transforms accordingly. The model compiler weaves
+the models together. We can just rename the merger to these
+terms. Literature:
+
+#+begin_quote
+A model compiler takes a set of executable UML models and weaves them
+together according to a /consistent set of rules/. This task involves
+executing the mapping functions between the various source and target
+models to produce a single all-encompassing metamodel [...] that
+includes all the structure, behavior and logic --- everything --- in
+the \marginpar{Weaving, model compilers} system. [...] Weaving the
+models together at once addresses the problem of architectural
+mismatch, a term coined by David Garlan to refer to components that do
+not fit together without the addition of tubes and tubes of glue code,
+the very problem MDA is intended to avoid! A model compiler imposes a
+single architectural structure on the system as a whole.
+#+end_quote
+
+*** Limitations of the current org-mode approach                      :story:
+
+At present we decided to implement org-mode support directly in Dogen,
+which has some advantages:
+
+- we can process org-mode documents without having Emacs - e.g. you
+  can create documents in other editors and still benefit from
+  Dogen support.
+
+However, there are also problems:
+
+- org-mode is very complex. We don't want to support only a partial
+  subset of the format; we want users to create regular org-mode
+  documents with all of the org-mode functionality and then have them
+  exported into code. This means our parser has to be very clever.
+- we want to be able to export the model to other formats such as HTML
+  / PDF etc. This means the document may contain all sorts of weird
+  and wonderful config for those formats which we do not care about.
+- we want users to add sections for documentation purposes such as
+  images, etc. These won't necessarily be used for Dogen.
+
+All of this makes us think we may have taken the wrong approach. We
+should instead support some well-defined intermediary format which can
+be understood by Dogen unequivocally, and which has a "trivial"
+parsing implementation, similar to Dia XML. Then:
+
+- we can then create an org-mode exporter in elisp which uses the
+  existing org-mode functionality to determine what should be
+  converted and what should be ignored.
+- with this we can be confident that the org-mode document is handled
+  correctly.
+
+There are downsides though:
+
+- third-party editors will no longer be supported - they will require
+  their own exporter code, and most do not support this.
+- there are more steps to the process, which is particularly annoying
+  when you have several models. You now need to ensure you have exported
+  them all, else you may get strange errors.
+- the format must support mapping to the original locations so that we
+  can still support LSP with proper errors, etc.
+
+*** Add minor mode in emacs that finds element location               :story:
+
+It would be nice to be able to run a command in emacs that opens the
+model element associated with the current file.
+
+*** Allow setting colours and visibility on PlantUML relations        :story:
+
+When we start to model all relations on diagrams, they will become
+quite confusing. However, we could probably make things easier by
+allowing users to decide what colour to add to a relation and also if
+they should be visible or not. These can be supplied as meta-data.
+
+From [[https://plantuml.com/class-diagram#8dfb3b05fc895d2b][PlantUML docs]]:
+
+#+begin_quote
+You can change the color or style of individual relation or arrows
+using the inline following notation:
+
+: #color;line.[bold|dashed|dotted];text:color
+#+end_quote
+
+#+begin_src plantuml :file my-diagram.png
+@startuml
+class foo
+foo --> bar : normal
+foo --> bar1 #line:red;line.bold;text:red  : red bold
+foo --> bar2 #green;line.dashed;text:green : green dashed
+foo --> bar3 #blue;line.dotted;text:blue   : blue dotted
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:my-diagram.png]]
+
+Notes:
+
+- we need to have an additional property to model the comments on the
+  link, supplied by meta-data.
+- we could also have different colours for each comment type:
+  - source comments.
+  - user comments for diagram only (not supported yet).
+
+*** Add support for "diagram-only" comments                           :story:
+
+We may want to add documentation for the purposes of the model that we
+do not want expressed in code. It would be nice to be able to mark
+some comments as "diagram-only".
+
+*** Parse org-mode syntax in comment                                  :story:
+
+At present we are expecting users to use doxygen mark up in the
+model. This is not ideal:
+
+- if we generate say C++ and C# the markup is invalid in one.
+- if we generate HTML/PDFs the markup looks weird.
+
+We should expect documents to have org markup only and then interpret
+it in the generation. We probably only need a few items:
+
+- lists
+- =code variables=
+- /italics/ and _underscores_
+
+*** Org roundtrip does not add blank line at the end of document      :story:
+
+Errors:
+
+#+begin_src
+FAILED: projects/dogen.orchestration/tests/CMakeFiles/run_dogen.orchestration.tests
+cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin/dogen.orchestration.tests --log_level=error
+Running 156 test cases...
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/modeling/dogen.org"
+@@ -494,3 +494,4 @@
+   :END:
+
+ An error ocurred when dumping dogen's specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(188): error: in "dogen_product_org_tests/dogen_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.cli/modeling/dogen.cli.org"
+@@ -181,3 +181,4 @@
+    :END:
+
+ Which style to use when dumping the specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(202): error: in "dogen_product_org_tests/dogen_cli_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.logical/modeling/dogen.logical.org"
+@@ -4668,3 +4668,4 @@
+    :END:
+
+ An error has occurred while formatting.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(244): error: in "dogen_product_org_tests/dogen_logical_org_conversion_has_no_diffs": check diff.empty() has failed
+
+3 failures are detected in the test module "dogen.orchestration.tests"
+ninja: build stopped: subcommand failed.
+Error running CMake.
+
+Compilation exited abnormally with code 1 at Sun Apr 11 20:15:01
+Elapsed: 00:00:13.738
+#+end_src
+
 *** Simplistic renaming based on GUIDs                                :story:
 
 One really simple way of renaming classes would be to have the UUID in
@@ -442,6 +616,10 @@ It would be very useful to know percentages of generated code versus
 hand-crafted code. We already have a report which groups files, we can
 add to that report.
 
+*** Remove commas from PlantUML enums                                 :story:
+
+We don't need to add commas to separate PlantUML enums.
+
 *** Fix PlantUML namespace comments                                   :story:
 
 At present the comments appear as a link to the namespace. We should
@@ -475,6 +653,15 @@ type the name points to, or nothing if it could not resolve.
 
 In the calling models, we need a transform that decomposes a type into
 the names it references. Then, for each name, we call the resolver.
+
+Notes:
+
+- we could also create two step resolution. We could resolve all local
+  names first, and mark them as resolved (for example by adding the
+  UUID of the resolved type to the name) and leaving unresolved types
+  unmarked. Then, the second merged model resolution would only
+  resolve types which are not yet resolved. This would probably speed
+  things up because we may end up with smaller containers.
 
 *** Generate PNGs for PlantUML models                                 :story:
 

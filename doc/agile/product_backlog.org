@@ -78,6 +78,28 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider modeling DTOs explicitly                                :story:
+
+There is a generalisation for POCO, POJO, etc called DTO:
+
+#+begin_quote
+In the field of programming a data transfer object (DTO) is an
+object that carries data between processes. The motivation for its use
+is that communication between processes is usually done resorting to
+remote interfaces (e.g., web services), where each call is an
+expensive operation. Because the majority of the cost of each call
+is related to the round-trip time between the client and the server,
+one way of reducing the number of calls is to use an object (the DTO)
+that aggregates the data that would have been transferred by the
+several calls, but that is served by one call only.
+#+end_quote
+
+We should really have this concept somewhere in Dogen.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Data_transfer_object][wikipedia: Data transfer object]]
+
 *** Export models to HTML                                             :story:
 
 We should have a target that runs emacs and outputs an HTML
@@ -10525,6 +10547,29 @@ Stories that have not yet been allocated a release, by broad themes.
 
 Ideas to improve the code base.
 
+*** Add support for temporal entities                                 :story:
+
+It would be nice to declare an entity "temporal" and then have
+automatic temporal database support.
+
+Links:
+
+- [[https://github.com/nearform/temporal_tables][temporal_tables GH (as a function)]]: "This is an attempt to rewrite
+  the postgresql temporal_tables extension in PL/pgSQL, without the
+  need for external c extension."
+- [[https://github.com/arkhipov/temporal_tables][temporal_tables GH (as an extension)]]: "A temporal table is a table
+  that records the period of time when a row is valid. There are two
+  types of periods: the application period (also known as valid-time
+  or business-time) and the system period (also known as
+  transaction-time)."
+- [[https://news.ycombinator.com/item?id=26748096][HN: Temporal Tables PostgreSQL Extension]]
+- [[https://github.com/xocolatl/periods][periods GH]]: "This extension recreates the behavior defined in
+  SQL:2016 (originally in SQL:2011) around periods and tables with
+  SYSTEM VERSIONING. The idea is to figure out all the rules that
+  PostgreSQL would like to adopt (there are some details missing in
+  the standard) and to allow earlier versions of PostgreSQL to
+  simulate the behavior once the feature is finally integrated."
+
 *** Create a test model with SHA1 hash in generation marker           :story:
 
 At present we cannot test this feature because we are using all models
@@ -14081,6 +14126,12 @@ Links:
 - [[https://github.com/nanopb/nanopb][nanopb GH]]: Nanopb is a small code-size Protocol Buffers
   implementation in ansi C.
 - [[https://github.com/StandardCyborg/protobag][protobag GH]]: Protobag: A bag of Serialized Protobuf Messages
+- [[https://github.com/eclipse-iceoryx/iceoryx][iceoryx GH]]: "iceoryx is an inter-process-communication (IPC)
+  middleware for various operating systems (currently we support
+  Linux, MacOS and QNX). It has its origins in the automotive
+  industry, where large amounts of data have to be transferred between
+  different processes when it comes to driver assistance or automated
+  driving systems." [[https://www.reddit.com/r/cpp/comments/ms2i0f/announcing_eclipse_iceoryx_100/][Reddit discussion]]. [[https://www.eclipse.org/community/eclipse_newsletter/2019/december/4.php][Basic overview]].
 
 *** Add support for flatbuffers                                       :story:
 
@@ -16971,6 +17022,18 @@ Links:
   offers the ability to share your data structures among multiple
   processes simultaneously through Plasma, an in-memory object store."
 
+*** Consider adding support for =flashlight=                          :story:
+
+#+begin_quote
+Flashlight is a fast, flexible machine learning library written
+entirely in C++ from the Facebook AI Research Speech team and the
+creators of Torch and Deep Speech.
+#+end_quote
+
+Links:
+
+- [[https://github.com/flashlight/flashlight][flashlight GH]]. [[https://www.reddit.com/r/cpp/comments/msb8kv/flashlight_a_c_standalone_library_for_machine/][Reddit discussion]].
+
 *** org-block extras                                                  :story:
 
 See if we can mine this org documentation for ideas that can be
@@ -19731,6 +19794,7 @@ Links:
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 - [[https://www.omg.org/spec/XMI/20131001/XMI.xsd][XMI XSD v2.5.1]]
 - [[http://www.omg.org/spec/xmi/2.5.1/][XMI specification v2.5.1]]
+- [[https://wiki.eclipse.org/images/f/f0/OMCW_chapter04_IntroductionToXMI.SINTEF.pdf][slides: Introduction to XML Metadata Interchange]]
 
 *Previous Understanding*
 
