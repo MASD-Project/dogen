@@ -410,7 +410,7 @@ These should all have been removed, but its still there:
 
 : #include "dogen.logical/types/traits.hpp"
 
-*** Rename merger to model compiler                                   :story:
+O*** Rename merger to model compiler or weaver                         :story:
 
 What we call "merging" is really the job of the "model compiler". We
 should rename these transforms accordingly. The model compiler weaves

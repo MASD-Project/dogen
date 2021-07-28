@@ -78,7 +78,20 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Consider modeling DTOs explicitly                                :story:
+*** Move build to GitHub
+
+Travis is no longer supported, nor is bintray. We should move our CI
+pipeline to GitHub.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
+
+*** Rename object to data type                                        :story:
+
+See DTO on wikipedia.
+
+*** Consider modeling DTOs explicitly                                 :story:
 
 There is a generalisation for POCO, POJO, etc called DTO:
 
@@ -2978,6 +2991,8 @@ Links:
   cross-platform build and CI testing (GCC, Visual Studio, iOS,
   Android, Clang analyzer, sanitizers etc.)
 - [[https://github.com/darlinghq/darling][darling GH]]: Wine but for OSX. Can be used to run DMGs (see readme).
+- [[https://github.com/mstorsjo/msvc-wine][msvc wine GH]]: "This is a reproducible Dockerfile for cross compiling
+  with MSVC on Linux, usable as base image for CI style setups."
 
 *** Merge visitor with object                                         :story:
 
@@ -3815,6 +3830,237 @@ and Object Oriented concepts to manage the software variability”, IEEE
 International Conference on Information Reuse and Integration (IRI),
 pp. 344-349.
 
+*** Consider creating a generic host at modeling time                  :epic:
+
+Instead of just introducing DI as a meta-pattern, we should look into
+the entities used in the dotnet core model for hosting and see if we
+can extract the entire hosting logic as a meta-pattern. The idea being
+that you could then annotate entities with the correct stereotypes and
+we would then code-generate plain c++ code which performs the same
+role as the library code in C#.
+
+Notes:
+
+- we could note down all constructors on all annotated classes, create
+  a graph and then generate a method that creates instances of each
+  class, in graph order, supplying parameters to constructors as
+  required. We could even detect smart pointers and determine when to
+  =new= and when to use move semantics.
+- there are a number of services provided out of the box in
+  dotnet. For example, kestrel the web service is one of them. We
+  could also provide some of these services (gRPC, etc) but as code
+  generation. Users would configure via variability in their models
+  what services are required and code generation would initialise
+  these services.
+- the host starts services in order, and stops them in reverse
+  order. This is so that if there are dependencies between services
+  these are respected.
+- =application_lifetime= is an out-of-the-box service provided by the
+  framework for other services to listen to start and shutdown
+  events.
+- =host_lifetime= is an out-of-the-box service that controls when the
+  host stops and starts. For example by listening to termination
+  events (=SIGTERM=, ctrl-c, etc). Its job is to tell the host to
+  start and stop.
+- =host_environment= is an out-of-the-box service to read different
+  configuration sources such as the environment, config files, etc.
+- application versus services: application is the user code. The
+  application uses services to implement its functionality. Some
+  services are provided out of the box, others can be implemented by
+  the user. Services are registered against a DI container, which it
+  itself a service.
+- service collection is the DI container for dotnet core. You can
+  register services with it. You can also request services. This is
+  only expected to be done at the top-level, with the remaining
+  services (inter-services dependencies) to be resolved implicitly as
+  part of the dependency graph. In C++ we have two approaches:
+
+  - the move semantics approach: the user requested =type_x= in the
+    constructor. We can just create one on the fly and supply it.
+  - the pointer/references approach: the user requested =type_x&= in
+    the constructor. In this case we need to create the type at the
+    scope of the =host_lifetime= (not necessarily in it, but with the
+    same scope or smaller) and then supply the reference. The object
+    will have to be a pointer, or else we need to create the object
+    even before the user asked for it.
+
+- in dotnet there are four lifetimes available to services in the
+  instance collection:
+
+  - instance: you add a specific instance of a service and that
+    instance will be returned on each call. You need to manually add
+    this one instance. In c++ this would require a pointer.
+  - transient: creates a new instance every time the user requests
+    this type.
+  - singleton: you register the type and the service collection will
+    then instantiate it, once. If the type requires other types, the
+    DI is responsible for instantiating those as well.
+  - scoped: the instance of the object exists within a scope. If the
+    scope does not yet exist, DI has to create the scope and place the
+    object in it. Anyone requesting objects on that scope will get the
+    same object. The classic example for scoped is in HTTP processing,
+    where the HTTP context is created for each individual request, and
+    within that context you want to reuse created objects.
+
+- ideally you want to make services such as databases, message queues,
+  etc also available as part of the DI mechanism. The code generator
+  is responsible for creating the glue code that reads the config from
+  the config file, instantiating the resource (say database
+  connection) and supplying it to the using application as
+  required. All of this is performed transparently by generated code
+  that can be trivially debugged and is part of the application
+  itself, not library code. This code should also use the conventions
+  of the platform it instantiates. For example, say you are using
+  ODB. The DI will generate code such as:
+
+#+begin_src c++
+    using odb::oracle::database;
+    std::unique_ptr<database>
+        db(new database("northwind", password, "XE", "localhost", 1521));
+#+end_src
+
+  However, the database name, password etc is all supplied as part of
+  the hosting context, and the hosting context will retrieve it by
+  using the configuration chosen at the modeling stage (e.g. JSON
+  file, INI file, etc). Similar example but for consul:
+
+#+begin_src c++
+using ppconsul::Consul;
+using namespace ppconsul::agent;
+
+// Create a consul client that uses default local endpoint `http://127.0.0.1:8500` and default data center
+Consul consul;
+// We need the 'agent' endpoint for a service registration
+Agent agent(consul);
+
+// Register a service with associated HTTP check:
+agent.registerService(
+    kw::name = "my-service",
+    kw::port = 9876,
+    kw::tags = {"tcp", "super_server"},
+    kw::check = HttpCheck{"http://localhost:80/", std::chrono::seconds(2)}
+);
+#+end_src
+
+  In this case we need to generate the code for registering the
+  service. The port, etc can be obtained from configuration (for
+  example from the environment variables which are populated on the
+  host environment).
+
+- We can have multiple configuration sources:
+
+  - level 0 or bootstrapping: config file with application. For
+    example, this can contain the consul settings.
+  - level 1: consul contains the rest of the configuration.
+
+  If we associate the configuration with the service, this will enable
+  us to generate the correct code for each service.
+- the hosting environment must support an "in-memory" host out of the
+  box for cases where you want to hook it into tests.
+
+
+Links:
+
+- [[https://andrewlock.net/introducing-ihostlifetime-and-untangling-the-generic-host-startup-interactions/][Introducing IHostLifetime and untangling the Generic Host startup
+  interactions]]
+- [[https://andrewlock.net/controlling-ihostedservice-execution-order-in-aspnetcore-3/][Controlling IHostedService execution order in ASP.NET Core 3.x]]
+- [[https://github.com/oliora/ppconsul][GH ppconsul]]: "A C++ client library for Consul. Consul is a
+  distributed tool for discovering and configuring services in your
+  infrastructure."
+- [[https://andrewlock.net/comparing-startup-between-the-asp-net-core-3-templates/][Comparing Startup.cs between the ASP.NET Core 3.0 templates]]
+
+#+begin_src plantuml :file hosted-service.png
+@startuml
+class host
+note top of host
+    An host is an object that encapsulates App resources such as:
+
+    - logging
+    - configuration
+    - hosted services.
+
+    When a host starts, it calls an async start method on all hosted services.
+
+    The main reason for including all of the app interdependent
+    resrouces in one object is life time management. It provides control over the
+    app start and shutdown.
+end note
+
+class host_builder
+note top of host_builder
+
+    The job of the host builder is to setup the host. This includes
+    reading configuration from all of the supported configuration
+    sources (for example XML file, INI file, possibly database,
+    etc). It also includes the processing of environment variables. C#
+    uses a convention that variables starting with DOTNET_ are
+    read. It also processes the command line args supplied to the
+    process.
+
+    The host builder is also a DI container.
+
+end note
+
+host_builder o-- host
+
+class hosting_environment
+host_builder o-- hosting_environment
+host o-- hosting_environment
+
+note top of hosting_environment
+
+    Contains all of the environmental information for a host.
+
+end note
+
+class host_lifetime {
+    void wait_for_start
+    void stop
+}
+class console_lifetime extends host_lifetime
+class systemd_lifetime extends host_lifetime
+
+host_lifetime o-- host : notifies the host of start/stop events
+
+note top of host_lifetime
+    Listens to certain events and uses those to manage the life time
+    of the hosted service. For example, can listen to SIGTERM or
+    ctrl-c and then relay to the service the termination. Inheritors
+    have different policies (listen to different things). In general,
+    their objective is to manage the life time of the host.
+end note
+
+interface application_lifetime
+host_lifetime o-- application_lifetime : propagates lifetime events
+
+note top of application_lifetime
+    Manages the life cycle of individual applications running within a
+    host. Responsibilities include the management of cancellation
+    tokens against which callbacks can be registered to know of when
+    the application is going to stop.
+end note
+
+interface hosted_service {
+    void start_async
+}
+
+note top of hosted_service
+  A worker service is a long running service in dotnet
+  terminology. hosted_service is the implementation of the service.
+end note
+
+host o-- hosted_service : manages one or more
+class user_hosted_service implements hosted_service
+
+user_hosted_service o-- application_lifetime : registers to receive lifetime events
+user_hosted_service o-- hosting_environment : accesses configuration via
+
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:hosted-service.png]]
+
 *** Consider generating dependency injection code                      :epic:
 
 If one could mark constructors as =injectable= in a diagram, we could
@@ -4244,6 +4490,7 @@ available:
 - [[https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.layout][The Pitchfork Layout (PFL)]]
 - [[https://www.boost.org/development/requirements.html#Organization][Boost: Organization]]
 - [[https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/][A Simple C++ Project Structure]]
+- [[https://github.com/golang-standards/project-layout][Standard Go Project Layout]]
 
 *Product Model*
 
@@ -5630,6 +5877,10 @@ error has occurred when importing any imported file. Even for Dia,
 this would make troubleshooting much easier. We need to add some
 information to the meta-model to keep track of the source of the
 types: file, line start, line end perhaps.
+
+Links:
+
+- [[https://www.gnu.org/prep/standards/standards.html#Libraries][GNU: 4.4 Formatting Error Messages]]
 
 *** Attributes versus properties                                      :story:
 
@@ -9832,6 +10083,8 @@ Links:
 - [[https://github.com/wlbr/cl-marshal][cl-marshal]]: Simple and fast marshalling of Lisp datastructures.
 - [[https://www.cliki.net/serialization][cliki]]: Libraries to translate data structures to/from a format which
   can be stored/retrieved
+- [[https://github.com/rxi/fe][fe GH]]: "A tiny, embeddable language implemented in ANSI C"
+
 
 *** User interface generation                                          :epic:
 
@@ -10738,9 +10991,17 @@ transformations we could do:
 
   Links:
 
-  [[https://github.com/apache/incubator-brpc][brpc GH]]: An industrial-grade RPC framework used throughout Baidu,
+- [[https://github.com/apache/incubator-brpc][brpc GH]]: An industrial-grade RPC framework used throughout Baidu,
   with 1,000,000+ instances(not counting clients) and thousands kinds
   of services. "brpc" means "better RPC".
+- [[https://github.com/rpclib/rpclib][rpclib GH]]: "rpclib is a RPC library for C++, providing both a client
+  and server implementation. It is built using modern C++14, and as
+  such, requires a recent compiler."
+- [[https://github.com/msgpack/msgpack-c][msgpack-c GH]]: "MessagePack is an efficient binary serialization
+  format, which lets you exchange data among multiple languages like
+  JSON, except that it's faster and smaller. Small integers are
+  encoded into a single byte and short strings require only one extra
+  byte in addition to the strings themselves." See also [[https://github.com/msgpack/msgpack-c/tree/cpp_master][cpp_master]].
 
 *** Add support for "ad-hoc" tracing                                  :story:
 
@@ -11477,7 +11738,6 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
-
 *** Consider using PMR strings                                        :story:
 
 We should create a report that provides a size distribution of files
@@ -11715,6 +11975,14 @@ Note that we've already have a dumpspecs activity. We need to make
 sure there is a clear distinction between the two so users don't get
 confused.
 
+*** Consider improving dry-run mode                                   :story:
+
+This article has some good suggestions for a dry-run implementation:
+
+- [[https://www.gresearch.co.uk/article/in-praise-of-dry-run/][In praise of --dry-run]]
+
+Check to see if we are using this approach on our implementation.
+
 *** Allow user supplied enumerator values                             :story:
 
 Now that we have value support in injection, it should be fairly
@@ -11782,7 +12050,6 @@ Now if you change =book= then this will not compile.
 Links:
 
 - [[https://github.com/Neargye/nameof][nameof GH]]
-
 
 *** Consider adding support for secure string                         :story:
 
@@ -12524,6 +12791,10 @@ Links:
 - OpenApi code generator examples: [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-pistache][petstore/cpp-pistache]], [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-restbed][cpp-restbed]]
 - [[https://github.com/jbeder/yaml-cpp][yaml-cpp GH]]: "yaml-cpp is a YAML parser and emitter in C++ matching
   the YAML 1.2 spec."
+- [[https://github.com/OpenAPITools/openapi-generator][GH openapi-generator]]: "OpenAPI Generator allows generation of API
+  client libraries (SDK generation), server stubs, documentation and
+  configuration automatically given an OpenAPI Spec (both 2.0 and 3.0
+  are supported)."
 
 *** Factory method instead of complete constructor                    :story:
 
@@ -13086,6 +13357,8 @@ Links:
 
 - [[http://gamesfromwithin.com/physical-structure-and-c-part-1-a-first-look][Physical Structure and C++ – Part 1: A First Look]]
 - [[http://gamesfromwithin.com/physical-structure-and-c-part-2-build-times][Physical Structure and C++ – Part 2: Build Times]]
+- [[https://gitlab.com/jas/pmccabe][pmccabe GL]]: "McCabe-style complexity and line counting for C and
+  C++"
 - [[https://github.com/metrixplusplus/metrixplusplus][GH metrixplusplus]]: Metrix++ is an extendable tool for code metrics
   collection and analysis.
 
@@ -13613,13 +13886,13 @@ exports.
 #pragma once
 
 #ifdef MODEL_DECL
-    #undef MODEL _DECL
+    #undef MODEL_DECL
 #endif
 
-#ifdef MODEL _EXPORTS
-    #define MODEL _DECL __declspec(dllexport)
+#ifdef MODEL_EXPORTS
+    #define MODEL_DECL __declspec(dllexport)
 #else
-    #define MODEL _DECL __declspec(dllimport)
+    #define MODEL_DECL __declspec(dllimport)
 #endif
 #+end_example
 
@@ -16828,6 +17101,65 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for provisioning                          :story:
+
+This is a general story to keep track of ideas in the provisioning
+space. We need to generate code for product provisioning, possibly
+across multiple frameworks:
+
+- chef
+- puppet
+- ansible
+- etc.
+
+We should also consider having direct systemd support, generating unit
+files for each product.
+
+Links:
+
+- [[https://github.com/spanezz/transilience][transilience GH]]: "Python provisioning library. Ansible-like
+  modules. Declarative actions. Generate actions with Python. No
+  templatized YAML. Mitogen-based connections."
+
+*** Consider adding support for dbcritic                              :story:
+
+Where a project has a database, it would be nice to automatically have
+a =dbcritic= target.
+
+#+begin_quote
+dbcritic finds problems in a database schema.
+#+end_quote
+
+Links:
+
+- [[https://github.com/channable/dbcritic][dbcritic GH]]
+- [[https://www.channable.com/tech/dbcritic-constructively-criticizing-your-postgres-schema][dbcritic: Constructively criticizing your Postgres schema (using
+  Idris)]]
+
+*** Consider adding support for CppSerDes                             :story:
+
+#+begin_quote
+CppSerdes is a serialization/deserialization library designed with
+embedded systems in mind
+#+end_quote
+
+Links:
+
+- [[https://github.com/DarrenLevine/cppserdes][cppserdes GH]]
+- [[https://www.reddit.com/r/cpp/comments/odbaev/cppserdes_a_minimalistic_memcpylike_library_for/][reddit discussion]]
+
+*** Consider adding support for Djinni                                :story:
+
+#+begin_quote
+Djinni is a tool for generating cross-language type declarations and
+interface bindings. It's designed to connect C++ with either Java or
+Objective-C.
+#+end_quote
+
+Links:
+
+- [[https://github.com/cross-language-cpp/djinni-generator][djinni-generator GH]]
+
 *** Update Dogen to c++ 20                                            :story:
 
 Once its properly supported in clang and GCC, we should move to
@@ -17116,7 +17448,9 @@ delightful search experiences.
 
 It would be nice if dogen could generate code to integrate with
 typesense - whatever that means precisely, upload documents into the
-search engine? Serialise to a format compatible?
+search engine? Serialise to a compatible format? At any rate, ideally
+one just wants to annotate types in a product as searchable and then
+the infrastructure needed is generated.
 
 Links:
 
@@ -17163,6 +17497,12 @@ parsers according to a Parsing Expression Grammar (PEG).
 Links:
 
 - [[https://github.com/taocpp/PEGTL][GH repo]]
+- [[https://github.com/foonathan/lexy][lexy GH]]: "lexy is a parser combinator library for C++17 and
+  onwards. It allows you to write a parser by specifying it in a
+  convenient C++ DSL, which gives you all the flexibility and control
+  of a handwritten parser without all the manual work."
+- [[https://www3.nd.edu/~dthain/compilerbook/][Introduction to Compilers and Language Design]]: generic book on the
+  subject.
 
 *** Consider integrating with =NN-512=                                :story:
 
@@ -17632,6 +17972,24 @@ Modern cryptography suite built in C++ with concept-based architecture.
 Links:
 
 - [[https://github.com/NilFoundation/crypto3][GitHub]]
+
+*** Consider adding support for =univalue=                            :story:
+
+#+begin_quote
+An easy-to-use and competitively fast JSON parsing library for C++17,
+forked from Bitcoin Cash Node's own UniValue library.
+
+Supports parsing and serializing, as well as modeling a JSON
+document. The central class is UniValue, a universal value class, with
+JSON encoding and decoding methods. UniValue is an abstract data type
+that may be a null, boolean, string, number, array container, or a
+key/value dictionary container, nested to an arbitrary depth. This
+class implements the JSON standard, RFC 8259.
+#+end_quote
+
+Links:
+
+- [[https://github.com/cculianu/univalue][univalue GH]]
 
 *** Consider adding support for libstud-json                          :story:
 
@@ -18368,13 +18726,15 @@ more efficient way of logging. One possibility is to use binary logs.
 
 Links:
 
-- [[https://github.com/Morgan-Stanley/binlog][binlog]]: A high performance C++ log library, producing structured
+- [[https://github.com/Morgan-Stanley/binlog][GH binlog]]: A high performance C++ log library, producing structured
   binary logs http://binlog.org
 - [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
 - [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
   to use with default logging sinks or you can add your own.
 - [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
   system for C++ that exposes a simple printf-like API.
+- [[https://www.reddit.com/r/cpp/comments/n67jhg/fmtlog_fastest_c_logging_library_using_fmtlib/][reddit: fmtlog: fastest C++ logging library using fmtlib syntax]]: not
+  binary logging but faster logging nonetheless.
 
 *** Consider using command line indicators                            :story:
 
@@ -18435,6 +18795,12 @@ Notes:
 
 Links:
 
+- [[https://lsif.dev/][LSIF]]: "The Language Server Index Format (LSIF, pronounced “else if”)
+  is a standard format for language servers or other programming tools
+  to emit their knowledge about a code workspace. This persisted
+  information can later be used to answer LSP requests for the same
+  workspace without running a language server."
+- [[https://github.com/sourcegraph/sourcegraph][sourcegraph GH]]
 - [[https://www.youtube.com/watch?v=Cfu6f0uyzc8][SourceTrail demo]]
 - [[https://github.com/weirdNox/org-noter][org-noter github]]
 - [[https://www.youtube.com/watch?v=Un0ZRXTzufo][org-noter demo]]
@@ -19166,6 +19532,7 @@ Links:
 - [[https://docs.microsoft.com/en-gb/rest/api/appservice/webapps/list][Web Apps - List]]
 - [[https://github.com/cpp-netlib/cpp-netlib][cpp-netlib GitHub]]
 - [[https://github.com/boostorg/beast][Boost.Beast GitHub]]
+- [[https://github.com/CrowCpp/crow][crow GH]]
 - [[https://github.com/microsoft/cpprestsdk][C++ Rest SDK]]
 - [[https://github.com/omartijn/cpprouter][cpprouter GH]]: A modern, header-only request router for C++. Can be
   used with Beast.
@@ -20185,6 +20552,12 @@ Links:
 - [[https://github.com/Guardsquare/mocxx][GH mocxx]], article: [[https://tech.guardsquare.com/posts/mocxx-the-mocking-tool/][The C++ Mocking Tool]], [[https://www.reddit.com/r/cpp/comments/k0atyi/mocxx_a_versatile_c_function_mocking_framework/][reddit]].
 - [[https://github.com/Smertig/rcmp][GH rcmp]]
 - [[http://blog.zhangliaoyuan.com/blog/2015/05/15/thy-ways-to-break-the-dependency-during-unit-testing-in-c_c++-programming/][The Ways to Break the Dependency During Unit Testing in C/C++ Programming]]
+- [[https://github.com/ThrowTheSwitch/CMock][GH CMock]]: "CMock is a mock and stub generator and runtime for unit
+  testing C. It's been designed to work smoothly with Unity Test,
+  another of the embedded-software testing tools developed by
+  ThrowTheSwitch.org. CMock automagically parses your C headers and
+  creates useful and usable mock interfaces for unit testing."
+- [[https://interrupt.memfault.com/blog/unit-test-mocking][Embedded C/C++ Unit Testing with Mocks]]
 
 *** Investigate ribosome for ideas                                    :story:
 
@@ -20521,6 +20894,8 @@ Notes:
 
 - [[https://github.com/GNOME/libpeas][libpeas GitHub]]: gnome extensibility library. We should mine it for
   ideas.
+- [[https://begriffs.com/posts/2021-07-04-shared-libraries.html?hn=2][Dynamic linking best practices]]
+- [[https://akkadia.org/drepper/dsohowto.pdf][How to write shared libraries]]
 
 *** Improving test data generation via "reflection"                   :story:
 
@@ -21225,6 +21600,8 @@ Links:
 
 - [[http://jailer.sourceforge.net/exporting-data.htm][jailer tutorial]]
 - [[http://jailer.sourceforge.net/][jailer]]
+- [[https://github.com/Wisser/Jailer][Jailer GH]]: "Jailer is a tool for database subsetting and relational
+  data browsing."
 - [[https://martinfowler.com/articles/evodb.html][Evolutionary Database Design]]: Fowler article talking about how
   jailer is used with Agile.
 - [[https://github.com/TonicAI/condenser][condenser]]: Condenser is a config-driven database subsetting
