@@ -78,7 +78,137 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Move build to GitHub
+*** Rename profiles to configurations                                 :story:
+
+This is more in keeping with its role.
+
+*** Rename =instantiation_domain_name=                                :story:
+
+This can be shortened to just =instantiation_domain=.
+
+: masd.variability.instantiation_domain_name
+
+*** Rename feature bundles to feature sets                            :story:
+
+Bundles is not a name found in the literature.
+
+*** Add "composite" physical elements                                 :story:
+
+At present we allow users to reference facets without naming parts,
+e.g.:
+
+: masd.cpp.types
+
+In practice this is shorthand for:
+
+: masd.cpp.include.types
+: masd.cpp.src.types
+
+One way to address this is to create the notion of "composite"
+physical elements, at present only needed for facets. The idea is that
+=masd.cpp.types= gets expanded into all parts that contains that
+facet. An alternative is to allow a notation with wildcards, like
+RabbitMQ:
+
+#+begin_quote
+Topic Exchange
+
+Topic exchanges route messages to queues based on wildcard matches
+between the routing key and the routing pattern, which is specified by
+the queue binding. Messages are routed to one or many queues based on
+a matching between a message routing key and this pattern.
+
+The routing key must be a list of words, delimited by a period
+(.). Examples are agreements.us and agreements.eu.stockholm which in
+this case identifies agreements that are set up for a company with
+offices in lots of different locations. The routing patterns may
+contain an asterisk (“*”) to match a word in a specific position of
+the routing key (e.g., a routing pattern of "agreements.*.*.b.*" only
+match routing keys where the first word is "agreements" and the fourth
+word is "b"). A pound symbol (“#”) indicates a match of zero or more
+words (e.g., a routing pattern of "agreements.eu.berlin.#" matches any
+routing keys beginning with "agreements.eu.berlin").
+#+end_quote
+
+This notation would allow for more generalised matching, though its
+not clear we need this level of flexibility.
+
+Links:
+
+- [[https://www.cloudamqp.com/blog/part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html][Part 4: RabbitMQ Exchanges, routing keys and bindings]]
+
+*** Flat directory mode                                               :story:
+
+In the past it was possible to generate code without creating
+directories for facets. This was called flat directory mode. It is a
+useful feature because it allows users to generate code for its
+classes without having to have a dogen-like directory
+structure. However, it seems we've removed this feature at some
+point. We still have a test for it in the C++ reference model, but it
+does not do anything. We need to reactivate this feature, perhaps
+renaming the configuration name. We should also look for stories on
+this as we must have something on this in the backlog.
+
+Actually maybe there is some confusion on this as we have
+=disable_facet_folders=.
+
+*** org-roam integration                                              :story:
+
+Assorted notes on org-roam:
+
+- org-roam v2 now forces all entries to have an ID. We can use these
+  as element identifiers. These are just GUIDs associated with
+  org-mode headlines. We care about both the "model" level ID as well
+  as the element level IDs.
+- we need to introduce a model element called "reference" (we must
+  already have some analysis on this). The reference will contain the
+  org-roam ID for the model we are referencing. This will ensure we
+  see the backlinks when we open models and facilitate navigation.
+- org-roam must have a path on which to search files. We need to make
+  sure we can see across products. For example, if we have product A
+  referencing product B, both directories with all org-files must be
+  in the path.
+- by writing the ID into the file as a comment, we can now handle
+  moves. This is done as follows: first, get a list of all files in a
+  component and their IDs. Then, as a step on the physical model, for
+  all files where overwrite is disabled, load up the previous content
+  and set the current content to be the previous content. With this
+  the file will move to its new location. Alternatively, if this
+  increases generation time too much we can only load files based on
+  the file name. But first try the easy approach.
+- we can make a really simple "format" for references, just a
+  meta-model element annotation as an org-tag (e.g. =reference=) and
+  the contents of the reference must be an org-link
+  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
+  this. The org-link is actually an org-roam link. This means we need
+  to have the directories where the models are stored in some path
+  lookup in Dogen. We need to find all org-mode documents, open them
+  and get their IDs.
+- we need to allow adding elements which do not contribute to
+  code. This is so we can add random notes in models. They can be seen
+  as UML notes. We could simply add a "note" metatype to the logical
+  model.
+- with this approach, if the agile stores have links to the org-models
+  we should also see them in org-roam. However, over time we'll
+  probably end up with too many links. But it would be nice to open a
+  model and see a list of stories done against it. We may need a way
+  to enable / disable this.
+- when we add build2 support, we need to be able to package the models
+  with the header files.
+
+Links:
+
+- [[https://www.orgroam.com/manual.html][org-roam manual]]
+
+*** Rename external and model modules                                 :story:
+
+These are really product modules and component modules.
+
+*** Rename backend to technical space                                 :story:
+
+This is needed to make it compliant with the domain architecture.
+
+*** Move build to GitHub                                              :story:
 
 Travis is no longer supported, nor is bintray. We should move our CI
 pipeline to GitHub.
@@ -3328,9 +3458,9 @@ them.
 
 *** Consider adding cartridge M2T transforms                          :story:
 
-At present we are creating CMake scripts to call ODB. This kind of
-makes sense because we see ODB as an external code generator. However,
-we then have several issues:
+In effect, T2T transforms. At present we are creating CMake scripts to
+call ODB. This kind of makes sense because we see ODB as an external
+code generator. However, we then have several issues:
 
 - ODB files are not known to dogen. We could create some expectations
   of what these files are and where they will be located, but if the
@@ -3387,6 +3517,8 @@ Links:
 
 - [[https://www.boost.org/doc/libs/1_72_0/doc/html/process.html][Boost.Process]]: we could use this library to start external
   processes.
+- [[https://github.com/rajatjain1997/subprocess][subprocess GH]]: "The aim of this library is to allow you to write
+  shell commands in C++ almost as if you were writing them in shell."
 - https://github.com/build2/build2
 
 Merged stories:
@@ -7363,6 +7495,10 @@ Links:
 - [[https://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa][Converting hex color to RGB and vice-versa]]
 - [[https://stackoverflow.com/questions/43001349/convert-numpy-array-of-rgb-values-to-hex-using-format-operator][Convert numpy array of RGB values to hex using format operator %]]
 - [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Colors.html][emacs: Colors for Faces]]: list RGB colours in emacs.
+- [[https://jiffyclub.github.io/palettable/][Palettable GH]]: Color palettes for Python
+- [[https://www.colour-science.org/][colour GH]]: "Colour is an open-source Python package providing a
+  comprehensive number of algorithms and datasets for colour science."
+- [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn colour palettes]]
 
 *** Improve error messages for mistakes in meta-data enums            :story:
 
@@ -10346,6 +10482,8 @@ Links:
   the 'autoprogrammer' parses your C++ source files and generates new
   set C++ sources. For instance, it generates enum-to-string
   converting functions for you. Instead of you."
+- [[https://github.com/TheLongRunSmoke/utility-boilerplate-qt][utility-boilerplate-qt GH]]: "Template for creating simple
+  cross-platform application with GUI based on Qt."
 
 *** Org-mode schemas                                                  :story:
 
@@ -11720,23 +11858,129 @@ source code:
 - get all test names. This can be used to generate the org-mode test
   file with org-babel.
 
-** Injection
-
-Changes to injection.
-
-** Logical Model
-
-Changes to the core.
-
-** Extraction
-
-Changes to facets, formatters, etc.
-
 ** Feature Heap
 
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Add support for citation files                                    :story:
+
+#+begin_quote
+What is a CITATION.cff file?
+
+CITATION.cff files are plain text files with human- and
+machine-readable citation information for software (and
+datasets). Code developers can include them in their repositories to
+let others know how to correctly cite their software.
+
+This is an example of a simple CITATION.cff file:
+
+: cff-version: 1.2.0
+: message: "If you use this software, please cite it as below."
+: authors:
+:   - family-names: Druskat
+:     given-names: Stephan
+:     orcid: https://orcid.org/0000-0003-4925-7248
+: title: "My Research Software"
+: version: 2.0.4
+: doi: 10.5281/zenodo.1234
+: date-released: 2021-08-11
+#+end_quote
+
+We could easily create a metamodel element with the data required to
+generate this file. However, we should also generate the bibtex entry
+from the same format and use configuration to decide what to
+create. For this we need a new facet (=citation=?) with multiple
+archetypes (=cff=, =bibtex=, etc.)
+
+Links:
+
+- [[https://citation-file-format.github.io/][GH]]
+- [[https://news.ycombinator.com/item?id=28246899][HN]]
+
+*** Consider adding support for Dr. Mock                              :story:
+
+#+begin_quote
+DrMock is a C++17 testing and mocking framework for Windows, Linux and macOS.
+
+Features
+
+- Unit test framework
+- On-the-fly mock object source code generation at compile time
+- State machine-like mock objects
+- Qt5 integration
+#+end_quote
+
+Links:
+
+- [[https://github.com/DrCpp/DrMock][GH]]
+
+*** Add docker support                                                :story:
+
+When we create a product, we should be able to enable docker and get
+the docker files generated, etc.
+
+Links:
+
+- [[https://thewagner.net/blog/2021/02/25/building-container-images-with-nix/][Building container images with Nix]]
+- [[https://news.ycombinator.com/item?id=28240748][HN: Building Container Images with Nix]]
+- [[https://sandervanderburg.blogspot.com/2020/07/on-using-nix-and-docker-as-deployment.html][On using Nix and Docker as deployment automation solutions:
+  similarities and differences]]
+
+*** Consider adding support for =Hypodermic=                          :story:
+
+#+begin_quote
+Hypodermic is a non-intrusive header only IoC container for C++. It
+provides dependency injection to your existing design by managing the
+creation of your components and their dependencies in the right order,
+sparing you the trouble of writing and maintaining boiler plate code.
+#+end_quote
+
+Links:
+
+- [[https://github.com/ybainier/Hypodermic][Hypodermic GH]]
+
+*** Consider adding support for =strong_type=                         :story:
+
+#+begin_quote
+Very much inspired by @foonathan's type_safe library, but aim is
+slightly different. Limit scope for type safety only. No runtime
+checks. Also strive for a higher level abstraction of the needed
+functionality. The idea is to suffer no runtime penalty, but to
+capture misuse at compile time (for example accidentally subtracting
+from a handle, or swapping two parameters in a function call) while
+still being easy to use for inexperienced programmers.
+#+end_quote
+
+Links:
+
+- [[https://github.com/rollbear/strong_type][strong_type GH]]
+- [[https://github.com/foonathan/type_safe][type_safe GH]]
+
+*** Add support for C++ modules                                       :story:
+
+We need to wait until clang and gcc support this.
+
+Links:
+
+- [[https://devblogs.microsoft.com/cppblog/moving-a-project-to-cpp-named-modules/][Moving a project to C++ named Modules]]
+
+*** Consider adding support for open telemetry                        :story:
+
+#+begin_quote
+An observability framework for cloud-native software.
+
+OpenTelemetry is a collection of tools, APIs, and SDKs. You can use it
+to instrument, generate, collect, and export telemetry data (metrics,
+logs, and traces) for analysis in order to understand your software's
+performance and behavior.
+#+end_quote
+
+Links:
+
+- [[https://opentelemetry.io/][main site]]
+- [[https://github.com/open-telemetry/opentelemetry-cpp][OpenTelemetry C++ GH]]
 
 *** Consider using PMR strings                                        :story:
 
@@ -12783,6 +13027,7 @@ Links:
 - [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI. See also [[https://swagger.io/specification/][this page]].
 - [[https://github.com/eidheim/Simple-Web-Server][Simple-Web-Server]]: alternative to beast.
 - [[https://github.com/Stiffstream/restinio][RESTinio]]: another HTTP/websockets framework based on asio.
+- [[https://github.com/seemk/WebUDP][WebUDP GH]]: "WebRTC datachannel library and server"
 - [[https://github.com/swagger-api/swagger-codegen][Swagger codegen]]: tool for code generation of swagger APIs. See also
   [[https://swagger.io/tools/swagger-codegen/][this link]].
 - [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
@@ -13413,12 +13658,31 @@ Links:
 
 - https://github.com/real-logic/simple-binary-encoding
 
-*** Consider adding support for magic enum library                    :story:
+*** Consider adding support for strong enum libraries                 :story:
+
+There are a number of different libraries that provide support for
+strong enums in C++. This story keeps track of the ones we bumped
+into. These are useful for two reasons:
+
+- add support to Dogen for these libraries as platforms.
+- look at the features of the libraries and see if we can replace them
+  with code-generated code.
+
+We could write a short paper surveying the libraries.
+
+Links:
+
+- [[https://github.com/Domiran/enum_values][enum_values GH]]: "Yet another post-build step and class to bring
+  reflection to C++ enumerations!"
+
+Merged stories:
+
+*Consider adding support for magic enum library*
 
 Yet another enum library: https://github.com/Neargye/magic_enum. C++
 17 only.
 
-*** Consider adding support for the =enum.hpp= library                :story:
+*Consider adding support for the =enum.hpp= library*
 
 See the github repo.
 
@@ -13426,7 +13690,7 @@ Links:
 
 - https://github.com/BlackMATov/enum.hpp
 
-*** Consider adding support for Meta Enum library                     :story:
+*Consider adding support for Meta Enum library*
 
 Meta Enum provides a number of features for enumerations. We could
 simply declare enums using their library. A second useful thing is to
@@ -13437,7 +13701,7 @@ Links:
 
 - https://github.com/therocode/meta_enum
 
-*** Consider adding support for Better Enums library                  :story:
+*Consider adding support for Better Enums library*
 
 Interesting library that wraps enumerations.
 
@@ -13445,7 +13709,7 @@ Links:
 
 - https://github.com/aantron/better-enums
 
-*** Consider adding support for FWK enum library                      :story:
+*Consider adding support for FWK enum library*
 
 Yet another enum library.
 
@@ -14715,6 +14979,12 @@ Links:
 - [[https://pocoproject.org/docs/package-Foundation.Cache.html][POCO: Cache namespace]]
 - [[https://pocoproject.org/slides/140-Cache.pdf][POCO: Cache namespace docs]]
 - [[https://github.com/cachelot/cachelot][cachelot]]: LRU cache
+- [[https://github.com/facebook/CacheLib][CacheLib GH]]: "Pluggable caching engine to build and scale high
+  performance cache services. See www.cachelib.org for documentation
+  and more information."
+- [[https://engineering.fb.com/2021/09/02/open-source/cachelib/][CacheLib, Facebook’s open source caching engine for web-scale
+  services]]
+- [[https://www.reddit.com/r/cpp/comments/pgn6wi/cachelib_facebooks_open_source_caching_engine_for/][Reddit discussion on CacheLib]]
 
 *** Generate Redis get/set code                                       :story:
 
@@ -16381,6 +16651,9 @@ Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
 
+*** Consider adding support for
+
+
 *** Consider cross-platform building                                  :story:
 
 At present we use windows and appveyor for windows builds. This is a
@@ -16400,6 +16673,7 @@ Links:
 - [[https://askubuntu.com/questions/1117461/how-do-i-create-a-dmg-file-on-linux-ubuntu-for-macos][SO How do I create a DMG file on linux Ubuntu for MacOS]]
 - [[https://stackoverflow.com/questions/286419/how-to-build-a-dmg-mac-os-x-file-on-a-non-mac-platform][SO How to build a dmg Mac OS X file (on a non-Mac platform)?]]
 - [[http://www.elstensoftware.com/blog/2013/04/17/scripting-dmg-build-osx-linux/][Scripting DMG builds on OS X from Linux]]
+- [[https://www.reddit.com/r/cpp/comments/p00vrk/github_actions_to_setup_gccclangmingww64/][reddit: GitHub actions to setup GCC/Clang/MinGW-w64]]
 
 *** Log file per transform                                            :story:
 
@@ -16918,6 +17192,7 @@ Links:
 - http://clangformat.com/
 - [[https://github.com/johnmcfarlane/unformat][Unformat]]: Python3 utility to generate a .clang-format file from
   example code-base.
+- [[https://www.reddit.com/r/cpp/comments/pnli5r/cc_precommit_hooks_for_static_analyzers_and/][C/C++ pre-commit hooks for static analyzers and linters]]
 
 *** Consider adding an emblem for clang's analysis checks             :story:
 
@@ -17101,6 +17376,174 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Add support for search at product level                           :story:
+
+It would be nice if we could annotate certain types as searchable and
+all code to index and search them would be automatically generated,
+with choices of backends.
+
+Another interesting use, which may not be Dogen related, is to index
+all documents in a product and have an emacs mode to interface with
+the search engine.
+
+Links:
+
+-
+- [[https://github.com/synhershko/clucene][clucene GH]]: "It is a high-performance, full-featured text search
+  engine written in C++."
+- [[https://github.com/typesense/typesense][typesense GH]]: "Typesense is a fast, typo-tolerant search engine for
+  building delightful search experiences."
+- [[https://github.com/casouri/xeft][xeft GH]]: "A dynamic module that exposes a very basic indexing
+  feature to Emacs Lisp, that lets you index and search a text files
+  very fast."
+
+Merged stories:
+
+*Consider adding support for typesense*
+
+#+begin_quote
+Typesense is a fast, typo-tolerant search engine for building
+delightful search experiences.
+#+end_quote
+
+It would be nice if dogen could generate code to integrate with
+typesense - whatever that means precisely, upload documents into the
+search engine? Serialise to a compatible format? At any rate, ideally
+one just wants to annotate types in a product as searchable and then
+the infrastructure needed is generated.
+
+Links:
+
+- [[https://github.com/typesense/typesense][GH typesense]]
+- [[https://developer.mozilla.org/en-US/docs/Web/OpenSearch][OpenSearch]]
+- [[https://github.com/phaistos-networks/Trinity][GH Trinity]]: "Trinity is a modern C++ information-retrieval library
+  for building queries, indexing documents and other content, running
+  queries and scoring documents matching them."
+
+*** Consider adding support for =pg_timetable=                        :story:
+
+#+begin_quote
+pg_timetable is an advanced standalone job scheduler for PostgreSQL,
+offering many advantages over traditional schedulers such as cron and
+others. It is completely database driven and provides a couple of
+advanced concepts. It allows you to schedule PostgreSQL commands,
+system programs and built-in operations [...]
+#+end_quote
+
+Links:
+
+- [[https://github.com/cybertec-postgresql/pg_timetable][GH]]
+- [[https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-cron-like-scheduler-released/][pg_timetable: Advanced PostgreSQL cron-like scheduler released!]]
+- [[https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-job-scheduling/][pg_timetable: advanced postgresql scheduling]]
+
+*** Context provider                                                  :story:
+
+This story is not really directly connected with Dogen, but as we have
+no better place, we'll keep it in the backlog for now. It would be
+really nice to have a "companion" tool which would be following the
+user and supplying context. By this we mean that as the user is moving
+around the code base, the context providing tool would be:
+
+- drawing a class diagram with classes at a "close" distance from
+  where we are. That is, given a function, it would scan the types
+  immediately surrounding the function, and then the class and so on,
+  and add these to a class diagram. The class diagram should also
+  contain the documentation for the classes involved (UML notes?) as
+  well as methods.
+- drawing an interaction diagram for the function (who is calling it
+  and who does it call).
+- listing all references of near types (who is using them, and who are
+  they using).
+
+Ideally this is being computed on the fly and for each computation
+SVGs are produced (at least for the diagrams). The SVGs cannot be
+clicked on, but we could have a text based buffer with additional
+information (a-la org-ref). In effect, we are probably fusing org-ref
+with UML here.
+
+Notes:
+
+- All the information should be obtained by querying an LSP server, so
+  that the same approach would work for any language that supports
+  LSP.
+- the protocol to communicate with the server should be very similar
+  to LSP. Ideally emacs would send commands (the same commands it
+  sends to LSP server, e.g. position etc) and the server would reply
+  with artefacts such as SVGs etc.
+- actually instead of generating SVGs, it may make more sense to
+  generate text representations of files. These could be in a file
+  format that emacs can understand so that we could have links for
+  every element in an image. It would make navigation, searching etc
+  much easier.
+
+*** Add support for internationalisation                              :story:
+
+Links:
+
+- [[https://github.com/zauguin/i18n-cpp][i18n-cpp GH]]: I18N for C++20 based on libintl/gettext
+
+*** Consider using a simpler graph library                            :story:
+
+Our use cases for graphs are very simple. It seems Boost.Graph may be
+overkill and it does not seem to be well maintained. This story keeps
+track of newer graph libraries in C++.
+
+Links:
+
+- [[https://gitlab.com/MartenBE/varia][varia GH]]: "Algorithms and more in modern C++. These algorithms are
+  all being unit tested."
+- [[https://github.com/nspo/graphs-cpp][graphs-cpp GH]]: "Code for weighted and unweighted graph and digraph
+  problems"
+- [[http://lemon.cs.elte.hu/pub/doc/latest-svn/index.html][LEMON]]: "LEMON stands for Library of Efficient Models and
+  Optimization in Networks. It is a C++ template library aimed at
+  combinatorial optimization tasks which often involve in working with
+  graphs."
+- [[https://github.com/haasdo95/graphlite][graphlite GH]]: Graphlite is a lightweight generic graph library that
+  supports: a) node properties b) edge properties c)
+  directed/undirected graphs d) multi-edges & self-loops e)
+  user-specified data structures; for the adjacency list and neighbor
+  containers
+
+*** Consider adding support for Vega                                  :story:
+
+#+begin_quote
+Vega is a visualization grammar, a declarative format for creating,
+saving, and sharing interactive visualization designs. With Vega you
+can describe data visualizations in a JSON format, and generate
+interactive views using either HTML5 Canvas or SVG.
+#+end_quote
+
+Links:
+
+- [[https://vega.github.io/vega/][Vega home]]
+- [[https://github.com/vega/vega][vega GH]]
+
+*** Mine "repo visualisation" for ideas                               :story:
+
+#+begin_quote
+How can we “fingerprint” a codebase to see its structure at a glance?
+Let’s explore ways to automatically visualize a GitHub repo, and how
+that could be useful.
+#+end_quote
+
+Notes:
+
+- it would be nice if we could map this to an emacs mode that linked
+  back to the product.
+- ideally you'd want an SVG representation with embedded
+  links. Actually we did a test, created SVG with embedded links and
+  these are not visible from within Emacs.
+- we should also diff this against source trail, and org-roam UI.
+
+Links:
+
+- [[https://octo.github.com/projects/repo-visualization][Visualizing a codebase]]
+- [[https://github.com/org-roam/org-roam-ui][org-roam-ui GH]]
+- [[https://www.reddit.com/r/emacs/comments/ozwvcs/svgmode_clickable_links_in_documents/][reddit: svg-mode: Clickable links in documents]]
+- [[https://github.com/sabof/svg-thing][svg-thing GH]]
+- [[https://github.com/jave/inkmacs][inkmacs GH]]
+- [[https://www.emacswiki.org/emacs/EmacsSvg][EmacsSvg]]
+
 *** Consider adding support for provisioning                          :story:
 
 This is a general story to keep track of ideas in the provisioning
@@ -17183,6 +17626,7 @@ Link:
 - [[http://web.archive.org/web/20101031205747/http://www.tothink.com/mnemonic/][Article: Mnemonic encoder]]
 - [[https://github.com/Debdut/uuid-readable][uuid-readable GH]]
 - [[https://www.reddit.com/r/PostgreSQL/comments/meo45i/how_to_shorten_a_uuid/][reddit: How to shorten a uuid?]]
+- [[https://datatracker.ietf.org/doc/html/draft-peabody-dispatch-new-uuid-format][RFC: New UUID Formats]]. [[https://news.ycombinator.com/item?id=28088213][HN discussion]].
 
 *** Consider adding support for immutable containers                  :story:
 
@@ -17281,13 +17725,14 @@ Links:
 
 *** Investigate integrating HTM with dogen                            :story:
 
-HTM is numenta's
+#+begin_quote
+This is a Community Fork of the nupic.core C++ repository, with Python
+bindings. This implements the theory as described in Numenta's BAMI.
+#+end_quote
 
 Links:
 
-- [[https://github.com/htm-community/htm.core][htm.core GH]]: "This is a Community Fork of the nupic.core C++
-  repository, with Python bindings. This implements the theory as
-  described in Numenta's BAMI."
+- [[https://github.com/htm-community/htm.core][htm.core GH]]
 
 *** Add support for digests                                           :story:
 
@@ -17438,27 +17883,6 @@ suitable for storing multiple terabytes of data in a single database.
 Links:
 
 - [[https://github.com/facebook/rocksdb][GH rocksdb]]
-
-*** Consider adding support for typesense                             :story:
-
-#+begin_quote
-Typesense is a fast, typo-tolerant search engine for building
-delightful search experiences.
-#+end_quote
-
-It would be nice if dogen could generate code to integrate with
-typesense - whatever that means precisely, upload documents into the
-search engine? Serialise to a compatible format? At any rate, ideally
-one just wants to annotate types in a product as searchable and then
-the infrastructure needed is generated.
-
-Links:
-
-- [[https://github.com/typesense/typesense][GH typesense]]
-- [[https://developer.mozilla.org/en-US/docs/Web/OpenSearch][OpenSearch]]
-- [[https://github.com/phaistos-networks/Trinity][GH Trinity]]: "Trinity is a modern C++ information-retrieval library
-  for building queries, indexing documents and other content, running
-  queries and scoring documents matching them."
 
 *** Consider adding support for snowflake                             :story:
 
@@ -17802,6 +18226,7 @@ Links:
   external to it - the notes themselves live in an Org-mode file.
 - [[https://github.com/samhedin/rustdoc-to-org][rustdoc-to-org:]] A Pandoc filter that converts rust documentation to
   .org-files, and a minor mode to go with!
+- [[https://alphapapa.github.io/org-almanac/#Parsing][org-mode parsers]]
 
 *** Investigate telosys                                               :story:
 
