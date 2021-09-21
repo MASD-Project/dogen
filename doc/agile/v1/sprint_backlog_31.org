@@ -404,6 +404,94 @@ Links:
 - [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
 - [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
 
+*** STARTED Move build to GitHub                                      :story:
+    :LOGBOOK:
+    CLOCK: [2021-09-19 Sun 15:33]--[2021-09-19 Sun 15:55] =>  0:22
+    :END:
+
+Travis is no longer supported, nor is bintray. We should move our CI
+pipeline to GitHub.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
+
+*** STARTED Fix broken tests                                          :story:
+    :LOGBOOK:
+    CLOCK: [2021-09-19 Sun 22:15]--[2021-09-19 Sun 22:54] =>  0:39
+    :END:
+
+At present a number of tests are failing. These are mainly due to org-mode
+rountripping and spacing.
+
+#+begin_example
+Differences found. Outputting head of first 5 diffs.
+diff -u include/dogen.identification/types/identification.hpp include/dogen.identification/types/identification.hpp
+Reason: Changed generated file.
+---  include/dogen.identification/types/identification.hpp
++++  include/dogen.identification/types/identification.hpp
+@@ -26,12 +26,7 @@
+ #endif
+
+ /**
+- * @brief Collection of types related to naming, labelling and general
+- * identification within Dogen.
+- *
+- * UML representation:
+- *
+- * \image html dogen.identification/modeling/dogen.identification.svg
++ * @brief \image html dogen.identification/modeling/dogen.identification.svg
+  */
+ namespace dogen::identification {
+ }
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(178): error: in "dogen_product_org_tests/dogen_identification_org_produces_expected_model": check mg::check_for_differences(od, m) has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/modeling/dogen.org"
+@@ -494,3 +494,4 @@
+   :END:
+
+ An error ocurred when dumping dogen's specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(188): error: in "dogen_product_org_tests/dogen_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.cli/modeling/dogen.cli.org"
+@@ -181,3 +181,4 @@
+    :END:
+
+ Which style to use when dumping the specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(202): error: in "dogen_product_org_tests/dogen_cli_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.logical/modeling/dogen.logical.org"
+@@ -4668,3 +4668,4 @@
+    :END:
+
+ An error has occurred while formatting.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(244): error: in "dogen_product_org_tests/dogen_logical_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.identification/modeling/dogen.identification.org"
+@@ -12,6 +12,7 @@
+ :masd.codec.reference: dogen.profiles
+ :masd.variability.profile: dogen.profiles.base.default_profile
+ :END:
++
+ \image html dogen.identification/modeling/dogen.identification.svg
+
+ * entities                                                           :module:
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(286): error: in "dogen_product_org_tests/dogen_identification_org_conversion_has_no_diffs": check diff.empty() has failed
+#+end_example
+
+*** Upload release to github                                          :story:
+
+At present we are manually uploading binaries on a release to
+github. It would be nice to integrate this with CI.
+
+Links:
+
+- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
+- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
+
 *** Logical model still has a traits class                            :story:
 
 These should all have been removed, but its still there:

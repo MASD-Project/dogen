@@ -208,15 +208,6 @@ These are really product modules and component modules.
 
 This is needed to make it compliant with the domain architecture.
 
-*** Move build to GitHub                                              :story:
-
-Travis is no longer supported, nor is bintray. We should move our CI
-pipeline to GitHub.
-
-Links:
-
-- [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
-
 *** Rename object to data type                                        :story:
 
 See DTO on wikipedia.
@@ -9815,16 +9806,6 @@ Hope that helps, I also created an issue
 https://github.com/report-ci/scripts/issues/16
 #+end_quote
 
-*** Upload release to github                                          :story:
-
-At present we are manually uploading binaries on a release to
-github. It would be nice to integrate this with CI.
-
-Links:
-
-- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
-- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
-
 *** Consider adding support for kcov                                  :story:
 
 In the past we used kcov and were very happy with it. However,
@@ -17375,6 +17356,46 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for email libraries                       :story:
+
+A common use case is the need to send emails from an application. This story
+keeps track of c++ libraries that provide support for sending and receiving
+emails.
+
+Links:
+
+- [[https://github.com/karastojko/mailio][mailio GH]]: "mailio is a cross platform C++ library for MIME format and SMTP,
+  POP3 and IMAP protocols. It is based on the standard C++ 17 and Boost library"
+- [[https://github.com/MailCore/mailcore2][mailcore2 GH]]: "MailCore 2 provides a simple and asynchronous Objective-C API
+  to work with the e-mail protocols IMAP, POP and SMTP. The API has been
+  redesigned from the ground up."
+- [[https://github.com/kisli/vmime][vmime GH]]: "VMime is a powerful C++ class library for working with RFC-822 and
+  MIME messages and Internet messaging services like IMAP, POP or SMTP."
+
+*** Consider adding support for =idle=                                :story:
+
+#+begin_quote
+Idle is an asynchronous, hot-reloadable, and highly reactive dynamic component
+framework similar to OSGI that is:
+
+- Modular: Your program logic is encapsulated into services that provide
+  interfaces for usage
+- Dynamic: Services can come and go whenever they want, Idle will keep your
+  application stable
+- Progressive: Your code is recompiled automatically asynchronously into your
+  application Therefore Idle can improve your workflow significantly through
+decreased code iteration time and cleaner code-bases based on the SOLID
+principles, especially interface segregation. Idle is a C++ engine that is
+capable of hot-reloading large multi-module codebases on the fly through a
+scheduled dependency graph. What a game engine is to graphics, that is Idle for
+C++, without targeting a specific domain. Idle can be used for almost any C++
+application type e.g. servers, GUIs, or graphic engine.s
+#+end_quote
+
+Links:
+
+- [[https://github.com/Naios/idle][idle GH]]
 
 *** Add support for search at product level                           :story:
 
