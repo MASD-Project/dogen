@@ -468,7 +468,7 @@ to_document(const codec::entities::model& m) {
 entities::artefact model_to_org_artefact_transform::
 apply(const transforms::context& ctx, const boost::filesystem::path& p,
     const entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "org artefact to model",
+    tracing::scoped_transform_tracer stp(lg, "model to org artefact",
         transform_id, m.name().qualified(), *ctx.tracer(), m);
 
     /*
