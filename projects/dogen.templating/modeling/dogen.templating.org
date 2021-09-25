@@ -26,6 +26,7 @@ UML representation:
   :PROPERTIES:
   :custom_id: O0
   :END:
+
 ** text template                                                    :element:
    :PROPERTIES:
    :custom_id: O2
@@ -41,23 +42,26 @@ Represents a wale text template.
 
 #+begin_src mustache
 Textual content of the wale template.
-
 #+end_src
+
 ** key extractor                                                    :element:
    :PROPERTIES:
    :custom_id: O3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** instantiator                                                     :element:
    :PROPERTIES:
    :custom_id: O4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** formatter                                                        :element:
    :PROPERTIES:
    :custom_id: O5
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** formatting error                                                 :element:
    :PROPERTIES:
    :custom_id: O9
@@ -78,23 +82,28 @@ An error occurred whilst extracting a key.
   :PROPERTIES:
   :custom_id: O13
   :END:
+
 ** parser                                                           :element:
    :PROPERTIES:
    :custom_id: O14
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** block                                                            :element:
    :PROPERTIES:
    :custom_id: O15
    :END:
+
 *** type                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: block_types
     :END:
+
 *** content                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** text template                                                    :element:
    :PROPERTIES:
    :custom_id: O16
@@ -122,6 +131,7 @@ Body of the text template.
    :custom_id: O19
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: O21
@@ -142,52 +152,67 @@ An error occurred whilst formatting.
    :PROPERTIES:
    :custom_id: O25
    :END:
+
 *** stream variable name                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** inclusion dependencies                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
+
 *** containing namespaces                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
+
 *** wale template                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** wale kvps                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<std::string, std::string>
     :END:
+
 ** line                                                             :element:
    :PROPERTIES:
    :custom_id: O27
    :END:
+
 *** blocks                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
+
 ** block types                                                      :element:
    :PROPERTIES:
    :custom_id: O28
    :masd.codec.stereotypes: masd::enumeration
    :END:
+
 *** text block                                                    :attribute:
+
 *** standard control block                                        :attribute:
+
 *** expression block                                              :attribute:
+
 *** variable block                                                :attribute:
+
 ** instantiator                                                     :element:
    :PROPERTIES:
    :custom_id: O30
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** text template body                                               :element:
    :PROPERTIES:
    :custom_id: O32
    :END:
+
 *** tagged values                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<identification::entities::tagged_value>
@@ -199,11 +224,13 @@ Set of tagged values read from the template.
     :PROPERTIES:
     :masd.codec.type: std::list<line>
     :END:
+
 ** instantiation error                                              :element:
    :PROPERTIES:
    :custom_id: O37
    :masd.codec.stereotypes: masd::exception
    :END:
+
 ** features                                                         :element:
    :PROPERTIES:
    :custom_id: O48
@@ -287,11 +314,13 @@ Key value pairs that were supplied for instantiation.
   :PROPERTIES:
   :custom_id: O40
   :END:
+
 ** kvp validator                                                    :element:
    :PROPERTIES:
    :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** validation error                                                 :element:
    :PROPERTIES:
    :custom_id: O42
@@ -305,6 +334,7 @@ An error occurred with the supplied KVPs.
    :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** resolution error                                                 :element:
    :PROPERTIES:
    :custom_id: O45
@@ -318,11 +348,13 @@ An error occurred when trying to resolve a key.
   :custom_id: O47
   :masd.codec.stereotypes: masd::variability::initializer
   :END:
+
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O49
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O50

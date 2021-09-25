@@ -439,6 +439,7 @@ Location for a meta-name in physical space.
    :custom_id: O26
    :masd.codec.stereotypes: Nameable
    :END:
+
 *** id                                                            :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_meta_id
@@ -644,6 +645,7 @@ Contains the name according to different representations.
    :PROPERTIES:
    :custom_id: O95
    :END:
+
 *** logical meta id                                               :attribute:
     :PROPERTIES:
     :masd.codec.type: logical_meta_id
@@ -724,9 +726,13 @@ Resolves a given physical meta-model element ID into its technical space.
 Version of the technical space to use.
 
 *** cpp 98                                                        :attribute:
+
 *** cpp 11                                                        :attribute:
+
 *** cpp 14                                                        :attribute:
+
 *** cpp 17                                                        :attribute:
+
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: O36
@@ -740,6 +746,7 @@ Assorted helpers used to construct domain entities.
    :custom_id: O37
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** building error                                                   :element:
    :PROPERTIES:
    :custom_id: O38
@@ -753,42 +760,51 @@ An error occurred whilst building.
    :custom_id: O39
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 *** dot printer                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: pretty_printer
     :END:
+
 *** colon printer                                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: pretty_printer
     :END:
+
 ** logical name factory                                             :element:
    :PROPERTIES:
    :custom_id: O40
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** logical name builder                                             :element:
    :PROPERTIES:
    :custom_id: O41
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: entities::logical_name
     :END:
+
 ** logical name flattener                                           :element:
    :PROPERTIES:
    :custom_id: O44
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** logical location builder                                         :element:
    :PROPERTIES:
    :custom_id: O45
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 *** location                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: entities::logical_location
     :END:
+
 ** flattening error                                                 :element:
    :PROPERTIES:
    :custom_id: O47
@@ -810,6 +826,7 @@ An error occurred whilst pretty printing.
    :custom_id: O49
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** separators                                                       :element:
    :PROPERTIES:
    :custom_id: O50
@@ -835,38 +852,46 @@ Separate name elements with a '.'.
    :custom_id: O54
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** physical meta name builder                                       :element:
    :PROPERTIES:
    :custom_id: O55
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** physical meta id builder                                         :element:
    :PROPERTIES:
    :custom_id: O56
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** logical name tree builder                                        :element:
    :PROPERTIES:
    :custom_id: O77
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 *** names                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<std::string>
     :END:
+
 *** root                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<node>
     :END:
+
 *** current                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<node>
     :END:
+
 ** legacy logical name tree parser                                  :element:
    :PROPERTIES:
    :custom_id: O78
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** node                                                             :element:
    :PROPERTIES:
    :custom_id: O79
@@ -903,6 +928,7 @@ Child nodes in a tree.
    :custom_id: O80
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: O82
@@ -916,6 +942,7 @@ A fatal error has occurred while parsing.
    :custom_id: O88
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** validation error                                                 :element:
    :PROPERTIES:
    :custom_id: O90
@@ -929,21 +956,25 @@ An error occurred during validation.
    :custom_id: O93
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** meta name index builder                                          :element:
    :PROPERTIES:
    :custom_id: O99
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** logical meta name factory                                        :element:
    :PROPERTIES:
    :custom_id: O100
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O61
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
+
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O62

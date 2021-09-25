@@ -25,37 +25,43 @@ space; keep it technical space agnostic.
   :masd.mapping.destination: std::string
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
+
 * number                                                            :element:
   :PROPERTIES:
   :custom_id: 7e43ffd3-1a71-4da9-b9f6-5bc36a6a6e80
   :masd.mapping.destination: int
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* text_collection                                                   :element:
+
+* text collection                                                   :element:
   :PROPERTIES:
   :custom_id: ab04f66e-3be2-403d-b70f-c09ad7e1ab46
   :masd.mapping.destination: std::list<std::string>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* key_value_pair                                                    :element:
+
+* key value pair                                                    :element:
   :PROPERTIES:
   :custom_id: c4f6881a-3152-46c0-8a20-ce2321cb7688
   :masd.mapping.destination: std::list<std::pair<std::string, std::string>>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
+
 * boolean                                                           :element:
   :PROPERTIES:
   :custom_id: 468ae952-a7c1-4917-9b8d-9be629b8780f
   :masd.mapping.destination: bool
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* comma_separated                                                   :element:
+
+* comma separated                                                   :element:
   :PROPERTIES:
   :custom_id: 0dde8e7e-d419-4c70-8d07-3a04707dda89
   :masd.mapping.destination: std::list<std::string>
   :masd.codec.stereotypes: masd::mapping::fixed_mappable
   :END:
-* comma_separated_collection                                        :element:
+
+* comma separated collection                                        :element:
   :PROPERTIES:
   :custom_id: f97b1a7e-f683-4145-be6e-3cdc2f5fc751
   :masd.mapping.destination: std::list<std::list<std::string>>

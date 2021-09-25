@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 31
+q#+title: Sprint Backlog 31
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
@@ -416,10 +416,16 @@ Links:
 
 - [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
 
-*** STARTED Fix broken tests                                          :story:
+*** STARTED Fix broken org-mode tests                                 :story:
     :LOGBOOK:
+    CLOCK: [2021-09-25 Sat 14:52]
+    CLOCK: [2021-09-25 Sat 00:00]--[2021-09-25 Sat 00:53] =>  0:53
+    CLOCK: [2021-09-24 Fri 00:00]--[2021-09-24 Fri 00:26] =>  0:26
     CLOCK: [2021-09-19 Sun 22:15]--[2021-09-19 Sun 22:54] =>  0:39
     :END:
+
+
+(setq org-agenda-files '("/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/v1/sprint_backlog_31.org"))
 
 At present a number of tests are failing. These are mainly due to org-mode
 rountripping and spacing.
@@ -481,6 +487,12 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 ../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(286): error: in "dogen_product_org_tests/dogen_identification_org_conversion_has_no_diffs": check diff.empty() has failed
 #+end_example
+
+*** Change file format of tracing dumps according to codec            :story:
+
+At present we always dump the transform inputs and outputs as =.json=. However,
+if the content is in org-mode format, it would make more sense to have a =.org=
+extension. The transform doing the dump should override the extension.
 
 *** Upload release to github                                          :story:
 

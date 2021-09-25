@@ -21,6 +21,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * sbyte                                                             :element:
   :PROPERTIES:
   :custom_id: 0b9ba3b4-b113-44e8-8f65-3eca758caacd
@@ -33,6 +34,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * int                                                               :element:
   :PROPERTIES:
   :custom_id: e5148ab4-4541-4086-9e0d-21c4488fde39
@@ -46,6 +48,7 @@ CLR-provided built-in types.
   :masd.codec.can_be_enumeration_underlier: true
   :masd.codec.is_default_enumeration_type: true
   :END:
+
 * uint                                                              :element:
   :PROPERTIES:
   :custom_id: 80a8b969-f979-4d2b-8635-902b172704a1
@@ -57,6 +60,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * short                                                             :element:
   :PROPERTIES:
   :custom_id: 172e2a12-e3b7-4cfc-8d9b-4930b0e38475
@@ -68,6 +72,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * ushort                                                            :element:
   :PROPERTIES:
   :custom_id: 2677ad69-9bb0-4132-a1c6-8f6dff99b92f
@@ -79,6 +84,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * long                                                              :element:
   :PROPERTIES:
   :custom_id: a7b4f6dc-e5ef-46b5-8291-64afbcf7b528
@@ -90,6 +96,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * ulong                                                             :element:
   :PROPERTIES:
   :custom_id: 226373e4-abd7-4aea-9a4f-3f134e1fb044
@@ -101,6 +108,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * float                                                             :element:
   :PROPERTIES:
   :custom_id: 2f586bbc-a3a1-4eba-8349-85993a78f1ba
@@ -114,6 +122,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.is_floating_point: true
   :END:
+
 * double                                                            :element:
   :PROPERTIES:
   :custom_id: 65e57c72-4365-4968-a1a8-ed6a81627922
@@ -127,6 +136,7 @@ CLR-provided built-in types.
   :masd.codec.in_global_module: true
   :masd.codec.is_floating_point: true
   :END:
+
 * char                                                              :element:
   :PROPERTIES:
   :custom_id: 8333f958-bc09-45bd-8fdf-2954890c8030
@@ -138,6 +148,7 @@ CLR-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
+
 * bool                                                              :element:
   :PROPERTIES:
   :custom_id: 8346bbad-0f84-4443-8fec-763ed83d24c7
@@ -149,6 +160,7 @@ CLR-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
+
 * object                                                            :element:
   :PROPERTIES:
   :custom_id: e78bc3f5-2314-41ca-bd1a-40f2dd5f6e9a
@@ -157,6 +169,7 @@ CLR-provided built-in types.
   :masd.csharp.assistant.method_postfix: Object
   :masd.codec.in_global_module: true
   :END:
+
 * string                                                            :element:
   :PROPERTIES:
   :custom_id: 9149f4ca-047c-44f1-bc36-e68a61f50f35
@@ -166,6 +179,7 @@ CLR-provided built-in types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.in_global_module: true
   :END:
+
 * decimal                                                           :element:
   :PROPERTIES:
   :custom_id: 4af768f5-cc2b-4e3a-9b08-780f65e373f5

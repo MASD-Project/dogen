@@ -350,7 +350,7 @@ to_block(const std::string& content, const block_type bt,
     r.type(bt);
 
     std::ostringstream os;
-    os << content << std::endl;
+    os << content;
     r.contents(os.str());
 
     if (!parameter.empty()) {

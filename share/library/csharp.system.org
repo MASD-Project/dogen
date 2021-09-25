@@ -20,6 +20,7 @@ System types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * Int32                                                             :element:
   :PROPERTIES:
   :custom_id: 3fb4f124-9211-4ed7-9c56-50a7ce92e094
@@ -31,6 +32,7 @@ System types.
   :masd.codec.can_be_primitive_underlier: true
   :masd.codec.can_be_enumeration_underlier: true
   :END:
+
 * Int64                                                             :element:
   :PROPERTIES:
   :custom_id: 4ef72ebe-7361-4b61-bd50-3420e9343f28

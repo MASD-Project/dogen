@@ -36,22 +36,27 @@ Represents entities from Emacs' org-mode.
    :PROPERTIES:
    :custom_id: O1
    :END:
+
 *** blocks                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<block>
     :END:
+
 ** document                                                         :element:
    :PROPERTIES:
    :custom_id: O2
    :END:
+
 *** affiliated keywords                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<affiliated_keyword>
     :END:
+
 *** drawers                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<drawer>
     :END:
+
 *** section                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: section
@@ -111,14 +116,17 @@ Number of the line in the file which contained this headline.
     :PROPERTIES:
     :masd.codec.type: std::list<affiliated_keyword>
     :END:
+
 *** drawers                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<drawer>
     :END:
+
 *** section                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: section
     :END:
+
 *** headlines                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<headline>
@@ -167,16 +175,19 @@ Headline's TODO keyword.
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
+
 ** todo keyword                                                     :element:
    :PROPERTIES:
    :custom_id: O6
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
+
 ** drawer                                                           :element:
    :PROPERTIES:
    :custom_id: O7
    :END:
+
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -188,109 +199,136 @@ Original name used by the property.
     :PROPERTIES:
     :masd.codec.type: drawer_type
     :END:
+
 *** contents                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<drawer_content>
     :END:
+
 ** drawer content                                                   :element:
    :PROPERTIES:
    :custom_id: O8
    :END:
+
 *** key                                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** value                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** affiliated keyword                                               :element:
    :PROPERTIES:
    :custom_id: O9
    :END:
+
 *** key                                                           :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** value                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** drawer type                                                      :element:
    :PROPERTIES:
    :custom_id: O11
    :masd.codec.stereotypes: masd::enumeration
    :END:
+
 *** regular                                                       :attribute:
+
 *** property drawer                                               :attribute:
+
 ** priority cookie                                                  :element:
    :PROPERTIES:
    :custom_id: O12
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
+
 ** block                                                            :element:
    :PROPERTIES:
    :custom_id: O13
    :END:
+
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** parameters                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<parameter>
     :END:
+
 *** contents                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** type                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: block_type
     :END:
+
 ** block type                                                       :element:
    :PROPERTIES:
    :custom_id: O14
    :masd.codec.stereotypes: masd::enumeration
    :END:
+
 *** text block                                                    :attribute:
+
 *** greater block                                                 :attribute:
+
 ** parameter                                                        :element:
    :PROPERTIES:
    :custom_id: O30
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
+
 * registrar                                                         :element:
   :PROPERTIES:
   :custom_id: O24
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
+
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O25
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O26
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
+
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: O27
   :END:
+
 ** string to document transform                                     :element:
    :PROPERTIES:
    :custom_id: O28
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** document to string transform                                     :element:
    :PROPERTIES:
    :custom_id: O29
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** transformation error                                             :element:
    :PROPERTIES:
    :custom_id: O51
@@ -303,11 +341,13 @@ An error occurred whilst transforming.
   :PROPERTIES:
   :custom_id: O31
   :END:
+
 ** parser                                                           :element:
    :PROPERTIES:
    :custom_id: O32
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: O33
@@ -321,23 +361,28 @@ An error ocurred whilst parsing an org-mode document.
    :custom_id: O37
    :masd.codec.stereotypes: dogen::untestable
    :END:
+
 *** data                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: entities::headline
     :END:
+
 *** children                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::list<boost::shared_ptr<node>>
     :END:
+
 ** builder                                                          :element:
    :PROPERTIES:
    :custom_id: O38
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 *** root                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::shared_ptr<node>
     :END:
+
 ** building error                                                   :element:
    :PROPERTIES:
    :custom_id: O39

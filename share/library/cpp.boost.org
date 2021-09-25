@@ -8,7 +8,8 @@
 :END:
 
 Boost Library types.
-* shared_ptr                                                        :element:
+
+* shared ptr                                                        :element:
   :PROPERTIES:
   :custom_id: d7ea9a93-4fee-456a-b0e1-ad2563406e47
   :masd.mapping.target: masd.lam.core.pointer
@@ -20,7 +21,8 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/shared_ptr.hpp>
   :END:
-* weak_ptr                                                          :element:
+
+* weak ptr                                                          :element:
   :PROPERTIES:
   :custom_id: c43cd093-561a-4554-82a1-e5aa8751dad0
   :masd.helper.family: SmartPointer
@@ -31,7 +33,8 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/weak_ptr.hpp>
   :END:
-* scoped_ptr                                                        :element:
+
+* scoped ptr                                                        :element:
   :PROPERTIES:
   :custom_id: e13b4476-5ef1-4eb6-981d-cd9023e33e5e
   :masd.helper.family: SmartPointer
@@ -42,6 +45,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/scoped_ptr.hpp>
   :END:
+
 * optional                                                          :element:
   :PROPERTIES:
   :custom_id: 43f6e516-0bff-4f81-b43a-07be0aa7a67d
@@ -54,6 +58,7 @@ Boost Library types.
   :masd.cpp.serialization.class_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
   :masd.cpp.serialization.primitive_header.primary_inclusion_directive: <boost/serialization/optional.hpp>
   :END:
+
 * variant                                                           :element:
   :PROPERTIES:
   :custom_id: dff97ad8-bd93-49c0-9d5a-0efd68c719e5
@@ -69,40 +74,48 @@ Boost Library types.
   :masd.cpp.hash.class_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
   :masd.cpp.hash.primitive_header.primary_inclusion_directive: <boost/variant/apply_visitor.hpp>
   :END:
+
 * asio                                                               :module:
   :PROPERTIES:
   :custom_id: 15c48c05-a72e-45ef-9094-782f1f46d2cc
   :END:
-** io_service                                                       :element:
+
+** io service                                                       :element:
    :PROPERTIES:
    :custom_id: 07d984e4-8205-4fed-8688-755434501a2f
    :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/io_service.hpp>
    :END:
+
 ** ip                                                                :module:
    :PROPERTIES:
    :custom_id: ca012cda-b5fe-4904-81d4-7cb8c917e97b
    :END:
+
 *** tcp                                                              :module:
     :PROPERTIES:
     :custom_id: 7c9102e6-7cba-4b2f-878a-38951d0d0c90
     :END:
+
 **** socket                                                         :element:
      :PROPERTIES:
      :custom_id: 7c7ef44a-e9e3-4287-9cac-cef943b17ba9
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
+
 **** acceptor                                                       :element:
      :PROPERTIES:
      :custom_id: a5ced8b6-7a1c-44b3-93cd-8488721f3339
      :masd.cpp.types.class_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :masd.cpp.types.primitive_header.primary_inclusion_directive: <boost/asio/ip/tcp.hpp>
      :END:
+
 * filesystem                                                         :module:
   :PROPERTIES:
   :custom_id: 7eb2029f-0448-45f3-ba35-218033b17028
   :END:
+
 ** path                                                             :element:
    :PROPERTIES:
    :custom_id: 7ee6042b-81d3-49d4-9ce8-bc0151f3b007
@@ -114,10 +127,12 @@ Boost Library types.
    :masd.cpp.test_data.class_header.primary_inclusion_directive: <sstream>
    :masd.cpp.test_data.primitive_header.primary_inclusion_directive: <sstream>
    :END:
+
 * gregorian                                                          :module:
   :PROPERTIES:
   :custom_id: 48c56991-152d-4c77-8c7e-4476c68dc6d3
   :END:
+
 ** date                                                             :element:
    :PROPERTIES:
    :custom_id: 5e503ef3-18c6-4dee-903a-61f94430322b
@@ -134,10 +149,12 @@ Boost Library types.
    :masd.cpp.serialization.primitive_header.secondary_inclusion_directive: <boost/date_time/gregorian/gregorian.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-* posix_time                                                         :module:
+
+* posix time                                                         :module:
   :PROPERTIES:
   :custom_id: 960f0bf4-62c1-4bb7-b476-e8f2b5e4e35d
   :END:
+
 ** ptime                                                            :element:
    :PROPERTIES:
    :custom_id: 1455d85e-7bd5-4ef8-8e8d-12ccadd36d1d
@@ -154,7 +171,8 @@ Boost Library types.
    :masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-** time_duration                                                    :element:
+
+** time duration                                                    :element:
    :PROPERTIES:
    :custom_id: d1b4dc62-422c-4c81-a293-9f197527957e
    :masd.mapping.target: masd.lam.chrono.time
@@ -169,10 +187,12 @@ Boost Library types.
    :masd.cpp.io.primitive_header.primary_inclusion_directive: <boost/date_time/posix_time/posix_time.hpp>
    :masd.codec.can_be_primitive_underlier: true
    :END:
-* property_tree                                                      :module:
+
+* property tree                                                      :module:
   :PROPERTIES:
   :custom_id: b2762067-f1e4-4f60-84f0-cf1dce73c39d
   :END:
+
 ** ptree                                                            :element:
    :PROPERTIES:
    :custom_id: c30a9aa0-5e0f-443e-a1d3-77692769b4fa

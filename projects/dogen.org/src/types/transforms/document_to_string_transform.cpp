@@ -96,6 +96,14 @@ render_section(std::ostream& os, const entities::section& sec) {
 
 void document_to_string_transform::render_headline(std::ostream& os,
     const entities::headline& h) {
+    /*
+     * Always insert a line between the new headline and the previous content.
+     */
+    os << std::endl;
+
+    /*
+     * Build headline.
+     */
     const std::string stars(h.level(), '*');
     os << stars << " " << h.title();
 
@@ -112,10 +120,15 @@ void document_to_string_transform::render_headline(std::ostream& os,
     }
     os << std::endl;
 
+    /*
+     * Render headline contents.
+     */
     render_drawers(os, h.level(), h.drawers());
-
     render_section(os, h.section());
 
+    /*
+     * Render all sub-headlines.
+     */
     for (const auto& child : h.headlines())
         render_headline(os, child);
 }

@@ -8,6 +8,7 @@
 :END:
 
 Basic collection types.
+
 * IEnumerable                                                       :element:
   :PROPERTIES:
   :custom_id: 8f63b6f7-fa43-4354-9449-0ad5c55077b2
@@ -15,6 +16,7 @@ Basic collection types.
   :masd.csharp.assistant.requires_assistance: true
   :masd.csharp.assistant.method_postfix: IEnumerable
   :END:
+
 * ICollection                                                       :element:
   :PROPERTIES:
   :custom_id: 41adf1cb-d4ec-472f-b00a-65d582a06bda
@@ -23,6 +25,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: ICollection
   :masd.codec.parent: IEnumerable
   :END:
+
 * IList                                                             :element:
   :PROPERTIES:
   :custom_id: 87d2b50b-bf93-4fe1-a20a-362aabd52bc6
@@ -31,6 +34,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: IList
   :masd.codec.parent: ICollection
   :END:
+
 * ArrayList                                                         :element:
   :PROPERTIES:
   :custom_id: ef464894-e7b2-4343-bfaa-8e77f245c4a3
@@ -39,6 +43,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: ArrayList
   :masd.codec.parent: IList
   :END:
+
 * IDictionary                                                       :element:
   :PROPERTIES:
   :custom_id: 45ca5b4b-6b09-4df2-a575-c23f825e4d25
@@ -47,6 +52,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: IDictionary
   :masd.codec.parent: ICollection
   :END:
+
 * Hashtable                                                         :element:
   :PROPERTIES:
   :custom_id: bc8c359b-595b-48f3-8933-9deaa014ad28
@@ -55,10 +61,12 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: Hashtable
   :masd.codec.parent: IDictionary
   :END:
+
 * Specialized                                                        :module:
   :PROPERTIES:
   :custom_id: 3c98a1cc-7aa1-4bfe-b50f-45925856af73
   :END:
+
 ** HybridDictionary                                                 :element:
    :PROPERTIES:
    :custom_id: 67a80d90-c3fc-41cf-834f-1553214f3337
@@ -67,6 +75,7 @@ Basic collection types.
    :masd.csharp.assistant.method_postfix: HybridDictionary
    :masd.codec.parent: IDictionary
    :END:
+
 ** NameValueCollection                                              :element:
    :PROPERTIES:
    :custom_id: c4ad53e7-c5fc-4fc3-8305-acab89a251fe
@@ -75,6 +84,7 @@ Basic collection types.
    :masd.csharp.assistant.method_postfix: NameValueCollection
    :masd.codec.parent: ICollection
    :END:
+
 * BitArray                                                          :element:
   :PROPERTIES:
   :custom_id: 3da9364c-0854-4ef7-a6b2-37e56fc750f2
@@ -83,6 +93,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: BitArray
   :masd.codec.parent: ICollection
   :END:
+
 * Queue                                                             :element:
   :PROPERTIES:
   :custom_id: 07cca3e7-3b0c-43ba-a63a-41a97e95d3e0
@@ -91,6 +102,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: Queue
   :masd.codec.parent: ICollection
   :END:
+
 * Stack                                                             :element:
   :PROPERTIES:
   :custom_id: b8f5f25b-4a31-47ce-854d-97c55ab28d0d
@@ -99,6 +111,7 @@ Basic collection types.
   :masd.csharp.assistant.method_postfix: Stack
   :masd.codec.parent: ICollection
   :END:
+
 * SortedList                                                        :element:
   :PROPERTIES:
   :custom_id: e3ce8684-9f15-4079-9e60-7c03a85e6325

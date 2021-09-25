@@ -26,11 +26,13 @@ UML representation:
   :custom_id: O1
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O2
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: O3
@@ -135,6 +137,7 @@ Connection details for this object.
     :PROPERTIES:
     :masd.codec.type: boost::optional<child_node>
     :END:
+
 *** attributes                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: std::vector<attribute>
@@ -237,14 +240,17 @@ Represents a font in a diagram.
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** style                                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** name                                                          :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** composite                                                        :element:
    :PROPERTIES:
    :custom_id: O13
@@ -390,6 +396,7 @@ Text representation of a rectangle with a pair of X/Y coordinates.
   :PROPERTIES:
   :custom_id: O40
   :END:
+
 ** transformation error                                             :element:
    :PROPERTIES:
    :custom_id: O41

@@ -19,6 +19,7 @@
 :masd.orm.letter_case: upper_case
 :masd.orm.schema_name: dogen
 :END:
+
 * tracing                                                            :module:
   :PROPERTIES:
   :custom_id: O1
@@ -38,12 +39,14 @@ UML representation:
    :custom_id: O2
    :masd.codec.stereotypes: masd::orm::object, Timestamped
    :END:
+
 *** run event key                                                 :attribute:
     :PROPERTIES:
     :masd.orm.is_primary_key: true
     :masd.orm.is_composite: true
     :masd.codec.type: run_event_key
     :END:
+
 *** version                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
@@ -56,24 +59,29 @@ Which version of dogen where we running.
     :masd.orm.type_override: postgresql,JSONB
     :masd.codec.type: json
     :END:
+
 *** activity                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** logging impact                                                :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** tracing impact                                                :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** run id                                                           :element:
    :PROPERTIES:
    :custom_id: O3
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::orm::value, masd::primitive
    :END:
+
 ** json                                                             :element:
    :PROPERTIES:
    :custom_id: O5
@@ -83,162 +91,200 @@ Which version of dogen where we running.
    :masd.orm.type_mapping: sqlite,JSON_TEXT,TEXT,json((?))
    :masd.codec.stereotypes: masd::orm::value, masd::primitive
    :END:
+
 ** transform id                                                     :element:
    :PROPERTIES:
    :custom_id: O6
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::orm::value, masd::primitive
    :END:
+
 ** Timestamped                                                      :element:
    :PROPERTIES:
    :custom_id: O7
    :masd.codec.stereotypes: masd::object_template
    :END:
+
 *** timestamp                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: boost::posix_time::ptime
     :END:
+
 ** transform event                                                  :element:
    :PROPERTIES:
    :custom_id: O8
    :masd.codec.stereotypes: masd::orm::object, Timestamped
    :END:
+
 *** transform event key                                           :attribute:
     :PROPERTIES:
     :masd.orm.is_primary_key: true
     :masd.orm.is_composite: true
     :masd.codec.type: transform_event_key
     :END:
+
 *** run id                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: run_id
     :END:
+
 *** transform type                                                :attribute:
     :PROPERTIES:
     :masd.codec.type: transform_type
     :END:
+
 *** transform id                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: transform_id
     :END:
+
 *** payload                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: json
     :END:
+
 *** model id                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** parent transform                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: transform_instance_id
     :END:
+
 ** JsonContent                                                      :element:
    :PROPERTIES:
    :custom_id: O9
    :masd.codec.stereotypes: masd::object_template
    :END:
+
 *** json content                                                  :attribute:
     :PROPERTIES:
     :masd.codec.type: json
     :END:
+
 ** log event                                                        :element:
    :PROPERTIES:
    :custom_id: O11
    :masd.codec.stereotypes: masd::orm::object, Timestamped
    :END:
+
 *** run id                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: run_id
     :END:
+
 *** component                                                     :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** severity                                                      :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 *** message                                                       :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
+
 ** transform type                                                   :element:
    :PROPERTIES:
    :custom_id: O13
    :masd.codec.stereotypes: masd::enumeration
    :END:
+
 *** chain                                                         :attribute:
+
 *** leaf                                                          :attribute:
+
 ** relational backend                                               :element:
    :PROPERTIES:
    :custom_id: O16
    :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
    :END:
+
 ** relational backend factory                                       :element:
    :PROPERTIES:
    :custom_id: O17
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 ** transform instance id                                            :element:
    :PROPERTIES:
    :custom_id: O24
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::orm::value, masd::primitive
    :END:
+
 ** event type                                                       :element:
    :PROPERTIES:
    :custom_id: O25
    :masd.codec.stereotypes: masd::enumeration
    :END:
+
 *** start                                                         :attribute:
+
 *** end                                                           :attribute:
+
 ** run event key                                                    :element:
    :PROPERTIES:
    :custom_id: O27
    :masd.codec.stereotypes: masd::orm::value
    :END:
+
 *** run id                                                        :attribute:
     :PROPERTIES:
     :masd.codec.type: run_id
     :END:
+
 *** event type                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: event_type
     :END:
+
 ** transform event key                                              :element:
    :PROPERTIES:
    :custom_id: O29
    :masd.codec.stereotypes: masd::orm::value
    :END:
+
 *** transform instance id                                         :attribute:
     :PROPERTIES:
     :masd.codec.type: transform_instance_id
     :END:
+
 *** event type                                                    :attribute:
     :PROPERTIES:
     :masd.codec.type: event_type
     :END:
+
 ** log backend                                                      :element:
    :PROPERTIES:
    :custom_id: O32
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
 * initializer                                                       :element:
   :PROPERTIES:
   :custom_id: O15
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
+
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O33
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
+
 * common                                                            :element:
   :PROPERTIES:
   :custom_id: O34
   :masd.codec.stereotypes: masd::orm::common_odb_options
   :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O35

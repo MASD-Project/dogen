@@ -44,18 +44,22 @@ Configuration for the decoration elements.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** licence name                                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: masd.gpl_v3
     :END:
+
 *** modeline group name                                           :attribute:
     :PROPERTIES:
     :masd.codec.value: masd.emacs
     :END:
+
 *** copyright notice                                              :attribute:
     :PROPERTIES:
     :masd.variability.value: Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
     :END:
+
 ** extraction                                                       :element:
    :PROPERTIES:
    :custom_id: O37
@@ -69,10 +73,12 @@ Configuration for extraction.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** delete empty directories                                      :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** csharp                                                           :element:
    :PROPERTIES:
    :custom_id: O39
@@ -86,6 +92,7 @@ Configures the main options for the C# backend.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** ignores                                                          :element:
    :PROPERTIES:
    :custom_id: O44
@@ -103,24 +110,29 @@ facet for manual tests.
     :PROPERTIES:
     :masd.codec.value: .*/test/.*
     :END:
+
 *** ignore files matching regex                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: .*/tests/.*
     :END:
+
 *** ignore files matching regex                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: .*/modeling/.*
     :END:
+
 ** base                                                             :element:
    :PROPERTIES:
    :custom_id: O38
    :masd.codec.parent: base::decoration, base::extraction, base::csharp, base::ignores
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** masd.cpp.standard                                             :attribute:
     :PROPERTIES:
     :masd.codec.value: c++-17
     :END:
+
 ** base profile                                                     :element:
    :PROPERTIES:
    :custom_id: O5
@@ -135,26 +147,32 @@ Configures the main options for the C++ backend.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** hash.enabled                                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** serialization.enabled                                         :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** lexical cast.enabled                                          :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** tests.enabled                                                 :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** test data.enabled                                             :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** default profile                                                  :element:
    :PROPERTIES:
    :custom_id: O7
@@ -180,6 +198,7 @@ Disables all facets in the C++ backend.
     :masd.variability.instantiation_domain_name: masd.facet
     :masd.codec.value: false
     :END:
+
 ** relational profile                                               :element:
    :PROPERTIES:
    :custom_id: O29
@@ -187,28 +206,34 @@ Disables all facets in the C++ backend.
    :masd.codec.parent: base::base_profile
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** odb.enabled                                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** build.enabled                                                 :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** test all facets                                                  :element:
    :PROPERTIES:
    :custom_id: O31
    :masd.codec.parent: base::base
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** masd.decoration.marker name                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: dogen.profiles.test_marker
     :END:
+
 *** masd.cpp.tests.main.enabled                                   :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 * composable                                                         :module:
   :PROPERTIES:
   :custom_id: O2
@@ -234,6 +259,7 @@ Model element is defined as a type.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** masd.variability.profile                                      :attribute:
     :PROPERTIES:
     :masd.codec.value: dogen.profiles.base.disable_all_facets
@@ -257,6 +283,7 @@ The element has the ability to dump itself to a stream.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** hashable                                                         :element:
    :PROPERTIES:
    :custom_id: O13
@@ -272,6 +299,7 @@ The element has the ability to generate hashes.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** serializable                                                     :element:
    :PROPERTIES:
    :custom_id: O14
@@ -280,10 +308,12 @@ The element has the ability to generate hashes.
    :masd.variability.key_prefix: masd.cpp.serialization
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** enabled                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** handcrafted                                                      :element:
    :PROPERTIES:
    :custom_id: O16
@@ -297,6 +327,7 @@ Base profile for model elements that are manually generated.
     :PROPERTIES:
     :masd.codec.value: dogen.profiles.base.disable_all_facets
     :END:
+
 ** handcrafted pretty printable                                     :element:
    :PROPERTIES:
    :custom_id: O17
@@ -306,14 +337,17 @@ Base profile for model elements that are manually generated.
    :masd.codec.parent: composable::handcrafted
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** enabled                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** overwrite                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** handcrafted typeable                                             :element:
    :PROPERTIES:
    :custom_id: O15
@@ -330,14 +364,17 @@ Configuration for model elements that are generated manually by the user.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** overwrite                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** class forward declarations.enabled                            :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** header only                                                      :element:
    :PROPERTIES:
    :custom_id: O18
@@ -354,6 +391,7 @@ This element has only a types header file.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** inheritable                                                      :element:
    :PROPERTIES:
    :custom_id: O19
@@ -361,10 +399,12 @@ This element has only a types header file.
    :masd.variability.stereotype: dogen::inheritable
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** masd.generalization.is final                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** implementation only                                              :element:
    :PROPERTIES:
    :custom_id: O23
@@ -381,14 +421,17 @@ This element has only a types implementation file.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** class forward declarations.enabled                            :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 *** class implementation.enabled                                  :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** handcrafted serializable                                         :element:
    :PROPERTIES:
    :custom_id: O26
@@ -398,14 +441,17 @@ This element has only a types implementation file.
    :masd.codec.parent: composable::handcrafted
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** enabled                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** overwrite                                                     :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** convertible                                                      :element:
    :PROPERTIES:
    :custom_id: O28
@@ -414,10 +460,12 @@ This element has only a types implementation file.
    :masd.variability.key_prefix: masd.cpp.lexical_cast
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** enabled                                                       :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 ** untestable                                                       :element:
    :PROPERTIES:
    :custom_id: O34
@@ -433,6 +481,7 @@ Model element will not be tested via generated tests.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** untypable                                                        :element:
    :PROPERTIES:
    :custom_id: O35
@@ -448,6 +497,7 @@ The element does not have a types facet.
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** handcrafted cmake                                                :element:
    :PROPERTIES:
    :custom_id: O36
@@ -456,14 +506,17 @@ The element does not have a types facet.
    :masd.variability.key_prefix: masd.cpp
    :masd.codec.stereotypes: masd::variability::profile
    :END:
+
 *** build.enabled                                                 :attribute:
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 *** build.overwrite                                               :attribute:
     :PROPERTIES:
     :masd.codec.value: false
     :END:
+
 ** forward declarable                                               :element:
    :PROPERTIES:
    :custom_id: O43
@@ -479,25 +532,29 @@ Element has forward declarations.
     :PROPERTIES:
     :masd.codec.value: true
     :END:
+
 * test marker                                                       :element:
   :PROPERTIES:
   :custom_id: O32
   :masd.codec.stereotypes: masd::decoration::generation_marker
   :END:
+
 ** add date time                                                  :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:
+
 ** add warning                                                    :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:
+
 ** add dogen version                                              :attribute:
    :PROPERTIES:
    :masd.codec.value: true
    :END:
+
 ** message                                                        :attribute:
 
 These files are code-generated via overrides to test dogen. Do not commit them.
-
 

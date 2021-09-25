@@ -25,10 +25,12 @@ UML representation:
   :custom_id: O0
   :masd.codec.stereotypes: masd::fluent
   :END:
+
 ** model processing                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: model_processing_configuration
    :END:
+
 ** tracing                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::optional<tracing_configuration>
@@ -40,10 +42,12 @@ Configuration for tracing.
    :PROPERTIES:
    :masd.codec.type: boost::optional<diffing_configuration>
    :END:
+
 ** reporting                                                      :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::optional<reporting_configuration>
    :END:
+
 ** byproduct directory                                            :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
@@ -67,7 +71,9 @@ Configuration related to database connectivity, if any.
 Available levels for tracing transformation.
 
 ** detail                                                         :attribute:
+
 ** summary                                                        :attribute:
+
 * tracing configuration                                             :element:
   :PROPERTIES:
   :custom_id: O2
@@ -123,6 +129,7 @@ size limitations.
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
+
 ** backend                                                        :attribute:
    :PROPERTIES:
    :masd.codec.type: tracing_backend
@@ -184,15 +191,18 @@ Configuration for diff generation.
    :PROPERTIES:
    :masd.codec.type: diffing_destination
    :END:
+
 ** output directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
+
 * configuration validator                                           :element:
   :PROPERTIES:
   :custom_id: O9
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
+
 * model processing configuration                                    :element:
   :PROPERTIES:
   :custom_id: O12
@@ -257,21 +267,25 @@ The values supplied for the configuration are not valid.
   :custom_id: O15
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
+
 * converter                                                         :element:
   :PROPERTIES:
   :custom_id: O17
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
+
 * generation exception                                              :element:
   :PROPERTIES:
   :custom_id: O20
   :masd.codec.stereotypes: masd::exception
   :END:
+
 * conversion exception                                              :element:
   :PROPERTIES:
   :custom_id: O21
   :masd.codec.stereotypes: masd::exception
   :END:
+
 * diffing destination                                               :element:
   :PROPERTIES:
   :custom_id: O24
@@ -299,10 +313,12 @@ Configuration related to operational reports.
    :PROPERTIES:
    :masd.codec.type: reporting_style
    :END:
+
 ** output directory                                               :attribute:
    :PROPERTIES:
    :masd.codec.type: boost::filesystem::path
    :END:
+
 * reporting style                                                   :element:
   :PROPERTIES:
   :custom_id: O33
@@ -324,6 +340,7 @@ Emacs Org mode.
   :custom_id: O35
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
+
 * database configuration                                            :element:
   :PROPERTIES:
   :custom_id: O37
@@ -363,6 +380,7 @@ User to use in thedatabase connection.
    :PROPERTIES:
    :masd.codec.type: std::string
    :END:
+
 ** engine                                                         :attribute:
    :PROPERTIES:
    :masd.codec.type: database_engine
@@ -414,11 +432,13 @@ Connect to a SQLite database.
   :custom_id: O43
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
+
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: O44
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
+
 * specs                                                             :element:
   :PROPERTIES:
   :custom_id: O45
@@ -487,6 +507,7 @@ Human readable text describing this entry.
   :custom_id: O50
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
+
 * dumping exception                                                 :element:
   :PROPERTIES:
   :custom_id: O52
