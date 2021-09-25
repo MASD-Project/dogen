@@ -45,8 +45,8 @@ namespace dogen::codec::transforms {
 
 void documentation_trimming_transform::trim(std::string& s) {
     /*
-     * Do not use "trim" as it also removes spaces in the middle
-     * of the string.
+     * Do not use "boost::trim" as it also removes spaces in the middle of the
+     * string.
      */
     boost::algorithm::trim_left(s);
     boost::algorithm::trim_right(s);
