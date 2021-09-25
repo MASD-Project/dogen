@@ -45,7 +45,7 @@ namespace dogen::org::transforms {
 
 void document_to_string_transform::render_drawers(std::ostream& os,
     const unsigned int level, const std::list<entities::drawer>& ds) {
-    const std::string spaces([&]() {
+    const std::string lambda([&]() {
         if (level == 0)
             return empty;
         return std::string(level + 1, ' ');
@@ -55,10 +55,10 @@ void document_to_string_transform::render_drawers(std::ostream& os,
         if (d.contents().empty())
             return;
 
-        os << spaces << ":PROPERTIES:" << std::endl;
+        os << lambda << ":PROPERTIES:" << std::endl;
         for (const auto& dc : d.contents())
-            os << spaces << ":" << dc.key() << ": " << dc.value() << std::endl;
-        os << spaces << ":END:" << std::endl;
+            os << lambda << ":" << dc.key() << ": " << dc.value() << std::endl;
+        os << lambda << ":END:" << std::endl;
     }
 }
 
@@ -110,10 +110,10 @@ void document_to_string_transform::render_headline(std::ostream& os,
             tag_space_count : 1, ' ');
         os << tag_spaces << tag;
     }
-
     os << std::endl;
 
     render_drawers(os, h.level(), h.drawers());
+
     render_section(os, h.section());
 
     for (const auto& child : h.headlines())
