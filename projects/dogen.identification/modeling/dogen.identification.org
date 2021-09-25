@@ -12,6 +12,12 @@
 :masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
+
+Collection of types related to naming, labelling and general
+identification within Dogen.
+
+UML representation:
+
 \image html dogen.identification/modeling/dogen.identification.svg
 
 * entities                                                           :module:
