@@ -50,7 +50,7 @@ apply(const transforms::context& ctx, const entities::artefact& input,
     auto input_model(artefact_to_model_chain::apply(ctx, input));
 
     /*
-     * Trim all the unnecessary whitespace.
+     * Trim all the unnecessary white space.
      */
     documentation_trimming_transform::apply(ctx, input_model);
 
