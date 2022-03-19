@@ -46,8 +46,7 @@ void generator::generate(const configuration& cfg,
         /*
          * Bootstrap the top-level context.
          */
-        using namespace transforms;
-        using cbc = context_bootstrapping_chain;
+        using cbc = transforms::context_bootstrapping_chain;
         const auto& od(output_directory);
         const auto& a(generation_activity);
         const auto& rds(reference_directories);
@@ -56,13 +55,12 @@ void generator::generate(const configuration& cfg,
         /*
          * Bind the tracer to the current scope.
          */
-        const auto& t(*ctx.codec_context().tracer());
-        tracing::scoped_tracer st(t);
+        tracing::scoped_tracer st(*ctx.codec_context().tracer());
 
         /*
          * Apply the code generation chain.
          */
-        code_generation_chain::apply(ctx, target);
+        transforms::code_generation_chain::apply(ctx, target);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";

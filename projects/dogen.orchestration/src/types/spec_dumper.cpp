@@ -89,8 +89,8 @@ process_binding_point(const variability::entities::binding_point bp) const {
     return r;
 }
 
-std::string spec_dumper::process_value(
-    const boost::shared_ptr<variability::entities::value> v) const {
+std::string spec_dumper::
+process_value(const boost::shared_ptr<variability::entities::value> v) const {
     visitor vis;
     std::string r;
     if (v) {

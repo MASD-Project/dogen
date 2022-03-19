@@ -44,16 +44,13 @@ void converter::convert(const configuration& cfg,
         /*
          * Bootstrap the codec context.
          */
-        using namespace transforms;
-        using cbc = context_bootstrapping_chain;
-        const auto& a(conversion_activity);
-        const auto ctx(cbc::bootstrap_codec_context(cfg, a));
+        using cbc = transforms::context_bootstrapping_chain;
+        const auto ctx(cbc::bootstrap_codec_context(cfg, conversion_activity));
 
         /*
          * Bind the tracer to the current scope.
          */
-        const auto& t(*ctx.tracer());
-        tracing::scoped_tracer st(t);
+        tracing::scoped_tracer st(*ctx.tracer());
 
         /*
          * Apply the code generation chain.
