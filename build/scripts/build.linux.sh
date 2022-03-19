@@ -133,7 +133,6 @@ cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 cmake_defines="${cmake_defines} -DWITH_BENCHMARKS=ON"
-cmake_defines="${cmake_defines} -DWITH_RELATIONAL_SUPPORT=OFF"
 cmake_defines="${cmake_defines} -DBUILD_SHARED_LIBS=OFF"
 
 if [[ ! -z "${CMAKE_TOOLCHAIN_FILE}" ]]; then

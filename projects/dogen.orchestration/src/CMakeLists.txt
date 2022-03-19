@@ -35,18 +35,6 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-if (WITH_RELATIONAL_SUPPORT)
-    list(APPEND relational_lib
-        -Wl,--whole-archive dogen.relational.lib  -Wl,--no-whole-archive)
-    list(APPEND relational_lib Boost::date_time)
-    list(APPEND relational_lib odb::libodb)
-    list(APPEND relational_lib odb::libodb-boost)
-    list(APPEND relational_lib odb::libodb-pgsql)
-    list(APPEND relational_lib odb::libodb-sqlite)
-    list(APPEND relational_lib OpenSSL::SSL)
-    list(APPEND relational_lib OpenSSL::Crypto)
-endif()
-
 target_link_libraries(${lib_target_name}
     dogen.variability.lib
     dogen.physical.lib

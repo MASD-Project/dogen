@@ -34,10 +34,6 @@ set_target_properties(${lib_target_name}
   PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 set(relational_lib "")
-if (WITH_RELATIONAL_SUPPORT)
-    set(relational_lib "dogen.relational.lib")
-endif()
-
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.tracing.lib

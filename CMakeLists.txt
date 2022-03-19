@@ -120,7 +120,6 @@ option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
 option(WITH_BOOST_TEST_REPORTING "Create boost test reports." off)
-option(WITH_RELATIONAL_SUPPORT "Add support for relational data." off)
 option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
 option(WITH_PROFILING "Generate profiling information for code coverage.." off)
 
@@ -413,45 +412,6 @@ if (CPPCHECK_FOUND)
     message(STATUS "Found cppcheck (${CPPCHECK_EXECUTABLE}).")
 else()
     message(STATUS "Could not find cppcheck.")
-endif()
-
-#
-# ODB
-#
-if (WITH_RELATIONAL_SUPPORT)
-    set(DOGEN_HAVE_RELATIONAL_MODEL "1")
-    find_package(odb COMPONENTS libodb boost pgsql sqlite REQUIRED)
-    if (odb_FOUND)
-        message(STATUS "Found ODB Libraries...")
-        set(ODB_LIBODB_FOUND ${odb_FOUND})
-    else()
-        message(FATAL_ERROR "ODB Libraries NOT Found.")
-    endif()
-
-    find_program(ODB_EXECUTABLE NAMES odb)
-
-    # sqlite
-    find_package(sqlite3 REQUIRED)
-    if (sqlite3_FOUND)
-        include_directories(SYSTEM ${sqlite3_INCLUDE_DIR})
-        set(LIBS ${LIBS} ${sqlite3_LIBRARY_DIR})
-    endif()
-
-    #
-    # OpenSSL
-    #
-    find_package(OpenSSL REQUIRED)
-
-    if (ODB_EXECUTABLE)
-        message(STATUS "Found ODB Compiler... (${ODB_EXECUTABLE})")
-        add_custom_target(odb_all)
-        add_custom_target(oa)
-        add_dependencies(oa odb_all)
-    else()
-        message(STATUS "ODB Compiler NOT Found.")
-    endif()
-else()
-    message(STATUS "Relational support is NOT enabled.")
 endif()
 
 #

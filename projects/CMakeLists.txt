@@ -285,12 +285,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.text/include
     )
 
-if (WITH_RELATIONAL_SUPPORT)
-    include_directories(
-        ${CMAKE_SOURCE_DIR}/projects/dogen.relational/include
-        )
-endif()
-
 # Model reference directories
 set(DOGEN_REFERENCE_OPTIONS "")
 list(APPEND DOGEN_REFERENCE_OPTIONS
@@ -350,7 +344,3 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.text)
-
-if (WITH_RELATIONAL_SUPPORT)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.relational)
-endif()
