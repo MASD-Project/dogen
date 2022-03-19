@@ -160,15 +160,6 @@ BOOST_AUTO_TEST_CASE(dogen_variability_org_produces_expected_model) {
     BOOST_CHECK(mg::check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_relational_org_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_relational_org_produces_expected_model");
-    const auto t(dogen_product::input_dogen_relational_org());
-    const auto od(dogen_product::project_directory());
-    const auto rds(dogen_product::reference_directories());
-    const auto m(mg::apply_physical_model_production(t, rds, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
-}
-
 BOOST_AUTO_TEST_CASE(dogen_identification_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_identification_org_produces_expected_model");
     const auto t(dogen_product::input_dogen_identification_org());
@@ -268,13 +259,6 @@ BOOST_AUTO_TEST_CASE(dogen_utility_org_conversion_has_no_diffs) {
 BOOST_AUTO_TEST_CASE(dogen_variability_org_conversion_has_no_diffs) {
     SETUP_TEST_LOG("dogen_variability_org_conversion_has_no_diffs");
     const auto t(dogen_product::input_dogen_variability_org());
-    const auto diff(mg::apply_artefact_to_artefact_chain(t));
-    BOOST_CHECK(diff.empty());
-}
-
-BOOST_AUTO_TEST_CASE(dogen_relational_org_conversion_has_no_diffs) {
-    SETUP_TEST_LOG("dogen_relational_org_conversion_has_no_diffs");
-    const auto t(dogen_product::input_dogen_relational_org());
     const auto diff(mg::apply_artefact_to_artefact_chain(t));
     BOOST_CHECK(diff.empty());
 }

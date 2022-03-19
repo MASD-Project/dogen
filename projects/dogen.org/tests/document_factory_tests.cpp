@@ -1347,12 +1347,6 @@ BOOST_AUTO_TEST_CASE(dogen_variability_org_does_not_throw) {
     BOOST_CHECK(!document.headlines().empty());
 }
 
-BOOST_AUTO_TEST_CASE(dogen_relational_org_does_not_throw) {
-    SETUP_TEST_LOG_SOURCE("dogen_relational_org_does_not_throw");
-    const auto document(make(dogen_product::input_dogen_relational_org()));
-    BOOST_CHECK(!document.headlines().empty());
-}
-
 BOOST_AUTO_TEST_CASE(dogen_identification_org_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("dogen_identification_org_does_not_throw");
     const auto document(make(dogen_product::input_dogen_identification_org()));
