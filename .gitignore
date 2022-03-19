@@ -47,3 +47,4 @@ doc/agile/reports
 org-roam.db
 
 .cache
+.clangd
