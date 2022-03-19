@@ -21,9 +21,6 @@
 #include "dogen/config.hpp"
 #include "dogen.text/types/initializer.hpp"
 #include "dogen.tracing/types/initializer.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include "dogen.relational/types/initializer.hpp"
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.orchestration/types/initializer.hpp"
 
 namespace dogen::orchestration {
@@ -31,9 +28,6 @@ namespace dogen::orchestration {
 void initializer::initialize() {
     dogen::text::initializer::initialize();
     dogen::tracing::initializer::initialize();
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-    dogen::relational::initializer::initialize();
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
 }
 
 }

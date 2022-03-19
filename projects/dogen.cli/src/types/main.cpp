@@ -36,9 +36,6 @@
 #include "dogen.cli/types/parser_exception.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
 #include "dogen/config.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include "dogen.relational/types/tracing/log_backend.hpp"
-#endif
 
 namespace {
 
@@ -115,14 +112,6 @@ int execute_cli_workflow(const int argc, const char* argv[],
      */
     const auto& cfg(*ocfg);
     slm.initialise(cfg.logging());
-
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-    if (cfg.api().database() && cfg.logging()) {
-        const auto sl(to_severity_level(cfg.logging()->severity()));
-        using dogen::relational::tracing::create_relational_log_backend;
-        create_relational_log_backend(cfg.api(), sl);
-    }
-#endif
 
     /*
      * Log the configuration and command line arguments.
