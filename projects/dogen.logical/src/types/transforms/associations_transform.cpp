@@ -124,7 +124,7 @@ template<typename Associatable>
 void process(Associatable& a) {
     std::unordered_set<logical_name> transparent_associations;
     remove_duplicates(a.transparent_associations());
-    for (const auto n : a.transparent_associations())
+    for (const auto& n : a.transparent_associations())
         transparent_associations.insert(n);
 
     /*
