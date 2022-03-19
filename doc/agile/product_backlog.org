@@ -78,6 +78,30 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Weaving as model merging                                          :story:
+
+We probably should use the MDE term weaving for model merging:
+
+#+begin_quote
+A model compiler takes a set of /executable UML models/ and /weaves/ them
+together according to a /consistent set of rules/. This task involves executing
+the mapping functions between the various source and target models to produce a
+/single all-encompassing metamodel/ [...] that the includes all the
+\marginpar{Model \\ compilers} structure, behavior and logic --- everything ---
+in the system. [...] /Weaving the models together/ at once addresses the problem
+of /architectural mismatch/, a term coined by David Garlan to refer to
+components that do not fit together without the addition of tubes and tubes of
+glue code, the /very problem MDA is intended to avoid!/ A model compiler imposes
+a single architectural structure on the system as a whole.
+#+end_quote
+
+@article{mellor2004agile,
+  title={Agile mda},
+  author={Mellor, Stephen J},
+  journal={MDA Journal, www. bptrends. com June},
+  year={2004}
+}
+
 *** Rename profiles to configurations                                 :story:
 
 This is more in keeping with its role.
@@ -4614,6 +4638,9 @@ available:
 - [[https://www.boost.org/development/requirements.html#Organization][Boost: Organization]]
 - [[https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/][A Simple C++ Project Structure]]
 - [[https://github.com/golang-standards/project-layout][Standard Go Project Layout]]
+- [[https://github.com/CodelyTV/csharp-basic-skeleton][csharp-basic-skeleton]]: "This is a repository intended to serve as a starting
+  point if you want to bootstrap a project in C# and dotnet." See also skeletons
+  for other languages, e.g. [[https://github.com/CodelyTV/java-basic-skeleton][Java]].
 
 *Product Model*
 
@@ -10139,24 +10166,6 @@ Links:
 - [[https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new][dotnet new]]
 - [[https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates][Custom templates for dotnet new]]
 
-*** Tighter vcpkg integration                                         :story:
-
-If the user requests, we should also generate a vcpkg project that is
-a clone of vcpkg but builds all of the base dependencies and pushes
-them to a known location (e.g. GCS). Then, the build steps should
-first download from that known location and put it on the path. It
-should be trivial to update the vcpkg clone, e.g.: user adds new vcpkg
-dependency to the model; dogen updates the data file, user commits the
-update, new vcpkg build is triggered and generates new vcpkg zip, with
-a stamp. User updates model to point to the new stamp and pushes. Next
-build will use new vcpkg libraries. Ideally vcpkg builds for all
-supported platforms (this is requested in the product model).
-
-Links:
-
-- [[https://devblogs.microsoft.com/cppblog/vcpkg-accelerate-your-team-development-environment-with-binary-caching-and-manifests/][vcpkg: Accelerate your team development environment with binary
-  caching and manifests]]
-
 *** Tighter integration of Dogen and Emacs                            :story:
 
 There are a couple of areas where we could take advantage of code
@@ -10404,8 +10413,8 @@ needs are also very basic.
 Originally we implemented wale as a quick hack, but we stated:
 
 #+begin_quote
-A second point is the use of [[https://github.com/DomainDrivenConsulting/bustache][bustache]] vs rolling our own trivial
-mustache-like implementation:
+A second point is the use of [[https://github.com/jamboree/bustache][bustache]] vs rolling our own trivial mustache-like
+implementation:
 
 - if we use bustache we can, in the future, start to make use of
   complex mustache templates. We don't have a use case for this now,
@@ -10445,7 +10454,11 @@ Links:
 - [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
 - [[https://github.com/melpon/ginger][ginger]]
 - [[https://github.com/qicosmos/render][render]]
-- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library.
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library. [[https://github.com/paradoxxxzero/jinja2-mode][Emacs mode]]. "Inja is a template engine for
+  modern C++, loosely inspired by jinja for python. It has an easy and yet
+  powerful template syntax with all variables, loops, conditions, includes,
+  callbacks, and comments you need, nested and combined as you like. Inja uses
+  the wonderful json library by nlohmann for data input."
 - [[https://github.com/jrziviani/amps][amps]]
 - [[https://github.com/OlafvdSpek/ctemplate][ctemplate]]: This library provides an easy to use and lightning fast
   text templating system to use with C++ programs. It was originally
@@ -11816,6 +11829,53 @@ Links:
 
 ** Unclassified
 
+*** Consider adding support for KDab reactive programming             :story:
+
+#+begin_quote
+Reactive programming & data binding in C++
+
+From plain C++ you get:
+
+- Signals + Slots.
+- Properties templated on the contained type.
+- Property bindings allowing reactive code to be written without having to do
+  all the low-level, error prone plumbing by hand.
+- Lazy evaluation of property bindings.
+- No more broken bindings.
+- Totally stand-alone "header-only" library. No heavy Qt dependency.
+#+end_quote
+
+Links:
+
+- [[https://github.com/KDAB/KDBindings][KDBindings GH]]
+- [[https://www.kdab.com/signals-slots-properties-bindings/][Introducing KDBindings]]
+
+*** Stuttering in naming                                              :story:
+
+Apparently, when one repeats the same name its called stuttering. From [[https://github.com/facebook/folly][Folly]]:
+
+#+begin_quote
+At the top level Folly uses the classic "stuttering" scheme folly/folly used by
+Boost and others. The first directory serves as an installation root of the
+library (with possible versioning a la folly-1.0/), and the second is to
+distinguish the library when including files, e.g. #include <folly/FBString.h>.
+
+The directory structure is flat (mimicking the namespace structure), i.e. we
+don't have an elaborate directory hierarchy (it is possible this will change in
+future versions). The subdirectory experimental contains files that are used
+inside folly and possibly at Facebook but not considered stable enough for
+client use. Your code should not use files in folly/experimental lest it may
+break when you update Folly.
+#+end_quote
+
+We need to add this term into our vocabulary, for example for configuration
+options.
+
+
+Links:
+
+- [[https://michaelwhatcott.com/go-code-that-stutters/][Go code that stutters]]
+
 *** Handling empty primitives                                         :story:
 
 In certain cases we may want to represent the notion of an empty /
@@ -11844,6 +11904,20 @@ source code:
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Consider adding support for zip serialisation                     :story:
+
+#+begin_quote
+A modern C++20 binary serialization library, with just one header file.
+
+This library is a successor to zpp::serializer. The library tries to be simpler
+for use, but has more or less similar API to its predecessor.
+#+end_quote
+
+Links:
+
+- [[https://github.com/eyalz800/zpp_bits][zpp_bits GH]] (C++ 20)
+- [[https://github.com/eyalz800/serializer][zpp serializer]] (C++ 17)
 
 *** Add support for citation files                                    :story:
 
@@ -13221,7 +13295,8 @@ Links:
   issues when used as user-input data.
 - [[https://github.com/dariusk/corpora][corpora]]: A collection of small corpuses of interesting data for the
   creation of bots and similar stuff.
-- [[https://github.com/joke2k/faker][faker]]: Faker is a Python package that generates fake data for you.
+- [[https://github.com/joke2k/faker][faker]]: Faker is a Python package that generates fake data for you. See also
+  PHP [[https://github.com/fzaninotto/Faker][Faker]], Kotlin [[https://jworks.io/datafaker-1-1-0-released/][datafaker]].
 - [[https://github.com/schoentoon/cxxfaker][cxxfaker]]: basic C++ faker.
 - [[https://github.com/vrok/randodo][randodo]]: random strings generator
 - [[https://github.com/emirozer/fake2db][fake2db]]: Generate fake but valid data filled databases for test
@@ -13245,6 +13320,9 @@ Links:
   to help teach machines how real people speak. In addition to the
   Common Voice dataset, we’re also building an open source speech
   recognition engine called Deep Speech.
+- [[https://gitlab.com/dalibo/postgresql_anonymizer][PostgreSQL Anonymizer]]: postgresql_anonymizer is an extension to mask or
+  replace personally identifiable information (PII) or commercially sensitive
+  data from a PostgreSQL database.
 
 Fantasy:
 
@@ -13380,7 +13458,6 @@ need to have similar characteristics to real models such as:
 - Shirt Size. S, M, L
 - Short Hex Color. #14b, #a32, #926
 - Slogan. Randomly generated marketing slogans
-- SQL Expression. Specify a SQL expression to use as the inserted value.
 - SSN. 678-59-9455, 312-20-4597, 684-62-5799
 - State. State/Province names, US and worldwide
 - State (abbrev). Two character state/province abbreviations, US and worldwide
@@ -17357,6 +17434,29 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for typed factories                       :story:
+
+A common pattern in code is the need to create a factory where we associate an
+enum or a string with a specific implementation of an interface. For example:
+
+: IMyFactory
+: TriangleFactory -> Enum Shapes.Triangle
+: SquareFactory -> Enum Shapes.Square
+
+And then we create an instance of the factory that does little more than
+dispatching the enum to the appropriate instance. In Windsor Castle this pattern
+is known as Typed Factory Facility. In Dogen we can do this all at compile time,
+making the entire exercise more useful because:
+
+- you can see exactly what the mappings are; there is no black magic.
+- you can debug it since its normal code.
+
+We can reuse all of the castle analysis and simply make these meta-parameters.
+
+Links:
+
+- [[https://github.com/castleproject/Windsor/blob/master/docs/typed-factory-facility-interface-based.md][Typed Factory Facility - interface-based factories]]
+
 *** Consider adding support for email libraries                       :story:
 
 A common use case is the need to send emails from an application. This story
@@ -18248,6 +18348,7 @@ Links:
 - [[https://github.com/samhedin/rustdoc-to-org][rustdoc-to-org:]] A Pandoc filter that converts rust documentation to
   .org-files, and a minor mode to go with!
 - [[https://alphapapa.github.io/org-almanac/#Parsing][org-mode parsers]]
+- [[https://github.com/milisims/tree-sitter-org][tree-sitter-org]]
 
 *** Investigate telosys                                               :story:
 
@@ -18798,6 +18899,7 @@ Links:
 - [[https://github.com/InfiniteRasa/Authentication-Server][Authentication-Server]]
 - [[https://stackoverflow.com/questions/11580944/client-to-server-authentication-in-c-using-sockets][Client to Server Authentication in C++ using sockets]]
 - [[https://www.omg.org/news/meetings/workshops/presentations/docsec_present/1997/1-1.pdf][Introduction to CORBA Security]]
+- [[https://fusionauth.io/learn/expert-advice/oauth/modern-guide-to-oauth/][The Modern Guide to OAuth]]
 
 *** Consider adding OpenHMI support                                   :story:
 
@@ -18974,6 +19076,28 @@ but once that is done its worth investigating if transforms can be
 implemented as a graph in a data flow library. Performance may benefit
 a little - there are a few things we can do in parallel such as
 injection - but its not the key objective here.
+
+[[https://github.com/taskflow/taskflow][Taskflow]] in particular looks very promising:
+
+#+begin_src c++
+tf::Executor executor;
+tf::Taskflow taskflow;
+
+auto [A, B, C, D] = taskflow.emplace(  // create four tasks
+        [] () { std::cout << "TaskA\n"; },
+        [] () { std::cout << "TaskB\n"; },
+        [] () { std::cout << "TaskC\n"; },
+        [] () { std::cout << "TaskD\n"; }
+        );
+
+A.precede(B, C);  // A runs before B and C
+D.succeed(B, C);  // D runs after  B and C
+
+executor.run(taskflow).wait();
+#+end_src
+
+We could easily declare dependencies between transforms this way. This is
+specially useful for chains.
 
 Links:
 
@@ -21187,6 +21311,9 @@ We should have a separate tool to do this work.
 Links:
 
 - [[http://blog.quicktype.io/debut/][quicktype's big debut]]
+- https://quicktype.io/
+- [[https://github.com/quicktype/quicktype][quicktype GH]]
+- [[https://github.com/Artawower/quicktype.el][quicktype.el]]
 
 *** Investigate GDB visualisers for generated models                  :epic:
 
@@ -21502,7 +21629,7 @@ Links:
   support.
 - [[https://github.com/shaovoon/minicsv][minicsv]]: Minimalistic CSV Streams.
 - [[https://github.com/shaovoon/csv_stream][csv_stream]]: C++14 CSV Stream based on C API.
-- [[https://github.com/p-ranav/csv][CSV]]: CSV for Modern C++ (C++ 17).
+- [[https://github.com/p-ranav/csv][CSV]]: CSV for Modern C++ (C++ 17). Deprecated.
 - [[https://github.com/p-ranav/csv2][csv2 GH]]: new version of csv project.
 - [[https://github.com/shaovoon/minicsv_benchmark][benchmark of CSV libaries]]
 - [[https://github.com/ashtum/lazycsv][lazycsv GH]]: lazycsv is a c++17, posix-compliant, single-header
@@ -21510,6 +21637,8 @@ Links:
 - [[https://github.com/JamesBoer/Tbl][Tbl GH]]: Tbl is a lightweight CSV (comma separated value) and
   tab-delimited table reader.
 - [[https://github.com/antonmks/nvParse][nvParse GH]]: Parsing CSV files with GPU
+- [[https://bravenewmethod.com/2016/09/17/quick-and-robust-c-csv-reader-with-boost/][Quick and robust C++ CSV reader with boost]]
+- [[https://stackoverflow.com/questions/1120140/how-can-i-read-and-parse-csv-files-in-c][How can I read and parse CSV files in C++?]]
 
 *** Consider generation of validators                                  :epic:
 

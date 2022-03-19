@@ -12,18 +12,20 @@ q#+title: Sprint Backlog 31
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2021-04-03 Sat 09:29]
+#+CAPTION: Clock summary at [2022-03-19 Sat 17:19]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *11:20* |       |      | 100.0 |
+| *Total time*                                       | *17:22* |       |      |   0.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 11:20   |       |      | 100.0 |
-| Active                                             |         | 11:20 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 6:06 |  53.8 |
-| Create a demo and presentation for previous sprint |         |       | 0:27 |   4.0 |
-| Sprint and product backlog grooming                |         |       | 2:56 |  25.9 |
-| Generate doxygen docs and add to site              |         |       | 1:51 |  16.3 |
+| Stories                                            | 17:22   |       |      |   0.0 |
+| Active                                             |         | 17:22 |      |   0.0 |
+| Edit release notes for previous sprint             |         |       | 6:06 |   0.0 |
+| Create a demo and presentation for previous sprint |         |       | 0:27 |   0.0 |
+| Fix broken org-mode tests                          |         |       | 3:09 |   0.0 |
+| Sprint and product backlog grooming                |         |       | 3:36 |   0.0 |
+| Generate doxygen docs and add to site              |         |       | 1:51 |   0.0 |
+| Move build to GitHub                               |         |       | 2:13 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -356,69 +358,9 @@ Time spent creating the demo and presentation.
 ***** PlantUML support
 ***** Reference models directory
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Fix broken org-mode tests                               :story:
     :LOGBOOK:
-    CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
-    CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
-    CLOCK: [2021-04-03 Sat 09:01]--[2021-04-03 Sat 09:29] =>  0:28
-    CLOCK: [2021-03-05 Fri 10:40]--[2021-03-05 Fri 11:20] =>  0:40
-    CLOCK: [2021-02-14 Sun 10:02]--[2021-02-14 Sun 10:54] =>  0:52
-    CLOCK: [2021-01-17 Sun 13:15]--[2021-01-17 Sun 13:25] =>  0:10
-    CLOCK: [2021-01-15 Fri 15:02]--[2021-01-15 Fri 15:21] =>  0:19
-    CLOCK: [2021-01-09 Sat 17:15]--[2021-01-09 Sat 17:22] =>  0:07
-    CLOCK: [2021-01-08 Fri 10:30]--[2021-01-08 Fri 10:50] =>  0:20
-    :END:
-
-Updates to sprint and product backlog.
-
-*** STARTED Generate doxygen docs and add to site                     :story:
-    :LOGBOOK:
-    CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
-    CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
-    :END:
-
-Now we have a site, we could add the doxygen docs to it.
-
-Notes:
-
-- consider adding links in the source code to the PlantUML diagrams so
-  that they come out in doxygen.
-- add badge for documentation. Example:
-
-#+begin_src markdown
-[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
-#+end_src
-
-- add SVG of models to the docs.
-
-Links:
-
-- [[https://jothepro.github.io/doxygen-awesome-css/][doxygen-awesome-css]]: "Doxygen Awesome is a custom CSS theme for
-  doxygen html-documentation with lots of customization parameters.W
-- [[https://mcraveiro.github.io/dogen/doxygen/index.html][Dogen documentation]]
-- [[https://www.reddit.com/r/cpp/comments/ma2r2r/dxoygen_awesome_css_make_your_doxygen_docs/][reddit: dxoygen (/sic./) awesome css : make your doxygen docs
-  looking more modern]]
-- [[https://github.com/jothepro/doxygen-awesome-css/issues/2][GH issue: Creating a link to the dark theme]]: opened a ticket about
-  adding a link to the dark theme version.
-- [[https://github.com/adafruit/ci-arduino/tree/master/assets][Example doxygen badge]]
-- [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
-- [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
-
-*** STARTED Move build to GitHub                                      :story:
-    :LOGBOOK:
-    CLOCK: [2021-09-19 Sun 15:33]--[2021-09-19 Sun 15:55] =>  0:22
-    :END:
-
-Travis is no longer supported, nor is bintray. We should move our CI
-pipeline to GitHub.
-
-Links:
-
-- [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
-
-*** STARTED Fix broken org-mode tests                                 :story:
-    :LOGBOOK:
-    CLOCK: [2021-09-25 Sat 14:52]
+    CLOCK: [2021-09-25 Sat 14:52]--[2021-09-25 Sat 16:03] =>  1:11
     CLOCK: [2021-09-25 Sat 00:00]--[2021-09-25 Sat 00:53] =>  0:53
     CLOCK: [2021-09-24 Fri 00:00]--[2021-09-24 Fri 00:26] =>  0:26
     CLOCK: [2021-09-19 Sun 22:15]--[2021-09-19 Sun 22:54] =>  0:39
@@ -488,11 +430,114 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 ../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(286): error: in "dogen_product_org_tests/dogen_identification_org_conversion_has_no_diffs": check diff.empty() has failed
 #+end_example
 
-*** Change file format of tracing dumps according to codec            :story:
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
+    CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
+    CLOCK: [2021-04-03 Sat 09:01]--[2021-04-03 Sat 09:29] =>  0:28
+    CLOCK: [2021-03-05 Fri 10:40]--[2021-03-05 Fri 11:20] =>  0:40
+    CLOCK: [2021-02-14 Sun 10:02]--[2021-02-14 Sun 10:54] =>  0:52
+    CLOCK: [2021-01-17 Sun 13:15]--[2021-01-17 Sun 13:25] =>  0:10
+    CLOCK: [2021-01-15 Fri 15:02]--[2021-01-15 Fri 15:21] =>  0:19
+    CLOCK: [2021-01-09 Sat 17:15]--[2021-01-09 Sat 17:22] =>  0:07
+    CLOCK: [2021-01-08 Fri 10:30]--[2021-01-08 Fri 10:50] =>  0:20
+    :END:
 
-At present we always dump the transform inputs and outputs as =.json=. However,
-if the content is in org-mode format, it would make more sense to have a =.org=
-extension. The transform doing the dump should override the extension.
+Updates to sprint and product backlog.
+
+*** STARTED Generate doxygen docs and add to site                     :story:
+    :LOGBOOK:
+    CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
+    CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
+    :END:
+
+Now we have a site, we could add the doxygen docs to it.
+
+Notes:
+
+- consider adding links in the source code to the PlantUML diagrams so
+  that they come out in doxygen.
+- add badge for documentation. Example:
+
+#+begin_src markdown
+[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
+#+end_src
+
+- add SVG of models to the docs.
+
+Links:
+
+- [[https://jothepro.github.io/doxygen-awesome-css/][doxygen-awesome-css]]: "Doxygen Awesome is a custom CSS theme for
+  doxygen html-documentation with lots of customization parameters.W
+- [[https://mcraveiro.github.io/dogen/doxygen/index.html][Dogen documentation]]
+- [[https://www.reddit.com/r/cpp/comments/ma2r2r/dxoygen_awesome_css_make_your_doxygen_docs/][reddit: dxoygen (/sic./) awesome css : make your doxygen docs
+  looking more modern]]
+- [[https://github.com/jothepro/doxygen-awesome-css/issues/2][GH issue: Creating a link to the dark theme]]: opened a ticket about
+  adding a link to the dark theme version.
+- [[https://github.com/adafruit/ci-arduino/tree/master/assets][Example doxygen badge]]
+- [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
+- [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
+
+*** STARTED Move build to GitHub                                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-19 Sat 17:01]--[2022-03-19 Sat 17:19] =>  0:18
+    CLOCK: [2021-09-26 Sun 10:11]--[2021-09-26 Sun 11:11] =>  1:00
+    CLOCK: [2021-09-25 Sat 16:04]--[2021-09-25 Sat 16:37] =>  0:33
+    CLOCK: [2021-09-19 Sun 15:33]--[2021-09-19 Sun 15:55] =>  0:22
+    :END:
+
+Travis is no longer supported, nor is bintray. We should move our CI
+pipeline to GitHub.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
+- [[https://github.com/otland/forgottenserver/blob/master/.github/workflows/build-vcpkg.yml][build-vcpkg]]: example vcpkg.
+
+*** Reduce friction in the development process                        :story:
+
+We need to simplify our third party packages story:
+
+- remove relational support: Since we do not make use of ODB at present we
+  probably could remove support altogether.
+- remove boost-di: we only use this in a very limited manner, but because of it
+  we need to carry our own vcpkg patches.
+- deprecate MASD fork of vcpkg.
+
+*** Update vcpkg to latest                                            :story:
+
+We need to get latest vcpkg locally and update all dependencies.
+
+Links:
+
+- [[https://github.com/MASD-Project/vcpkg][vcpkg]]
+
+*** Tighter vcpkg integration                                         :story:
+
+If the user requests, we should also generate a vcpkg project that is
+a clone of vcpkg but builds all of the base dependencies and pushes
+them to a known location (e.g. GCS). Then, the build steps should
+first download from that known location and put it on the path. It
+should be trivial to update the vcpkg clone, e.g.: user adds new vcpkg
+dependency to the model; dogen updates the data file, user commits the
+update, new vcpkg build is triggered and generates new vcpkg zip, with
+a stamp. User updates model to point to the new stamp and pushes. Next
+build will use new vcpkg libraries. Ideally vcpkg builds for all
+supported platforms (this is requested in the product model).
+
+Links:
+
+- [[https://devblogs.microsoft.com/cppblog/vcpkg-accelerate-your-team-development-environment-with-binary-caching-and-manifests/][vcpkg: Accelerate your team development environment with binary
+  caching and manifests]]
+
+*** Look at warnings in lgtm                                          :story:
+
+We seem to have a number of code quality warnings, check them and fix the
+important ones.
+
+Links:
+
+- [[https://lgtm.com/projects/g/MASD-Project/dogen/alerts/?mode=list][lgtm warnings]]
 
 *** Upload release to github                                          :story:
 
@@ -503,6 +548,59 @@ Links:
 
 - [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
 - [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
+
+*** org-to-org transform removes custom id's from attributes          :story:
+
+Diff of =share/library/masd.org= after transform:
+
+:
+:  *** mode                                                          :attribute:
+:      :PROPERTIES:
+: -    :custom_id: 4e770d9b-44b4-4a6d-8504-49629f4d29c1
+:      :masd.codec.value: c++
+:      :END:
+
+We should always preserve all attributes.
+
+*** org-to-org transform creates mustache templates incorrectly       :story:
+
+At present we determine the language for the block by looking at the name of the
+property. If its called =content= we use =mustache=. However, if a user creates
+a field called =content= this should not kick in. We should have a configuration
+option at the model level that enables this "intelligent" behaviour, and enable
+it only for the =dogen.text= model.
+
+: *** content                                                       :attribute:
+:    :PROPERTIES:
+:    :masd.codec.type: std::string
+:    :END:
+:
+: #+begin_src mustache
+: Contents of the artefact.
+: #+end_src
+
+*** Consider integrating org-spec with org-model                      :story:
+
+#+begin_quote
+An Org-mode template for technical specification documents and HTML publishing
+#+end_quote
+
+It would be nice to generate models that can produce org-spec HTML output.
+
+Links:
+
+- [[https://github.com/thi-ng/org-spec][org-spec GH]]
+
+*** Enable relational model locally                                   :story:
+
+At present we are not building locally the relational model. We need to ensure
+we are not breaking this code.
+
+*** Change file format of tracing dumps according to codec            :story:
+
+At present we always dump the transform inputs and outputs as =.json=. However,
+if the content is in org-mode format, it would make more sense to have a =.org=
+extension. The transform doing the dump should override the extension.
 
 *** Logical model still has a traits class                            :story:
 
