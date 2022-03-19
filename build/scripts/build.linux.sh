@@ -69,6 +69,14 @@ elif [ "${compiler}" = "gcc9" ]; then
     echo "* Compiler: ${compiler}"
     export CC=gcc-9
     export CXX=g++-9
+elif [ "${compiler}" = "gcc11" ]; then
+    echo "* Compiler: ${compiler}"
+    export CC=gcc-11
+    export CXX=g++-11
+elif [ "${compiler}" = "clang14" ]; then
+    echo "* Compiler: ${compiler}"
+    export CC=clang-14
+    export CXX=clang-14
 elif [ "${compiler}" = "clang11" ]; then
     echo "* Compiler: ${compiler}"
     export CC=clang-11
@@ -125,7 +133,7 @@ cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 cmake_defines="${cmake_defines} -DWITH_BENCHMARKS=ON"
-cmake_defines="${cmake_defines} -DWITH_RELATIONAL_SUPPORT=ON"
+cmake_defines="${cmake_defines} -DWITH_RELATIONAL_SUPPORT=OFF"
 cmake_defines="${cmake_defines} -DBUILD_SHARED_LIBS=OFF"
 
 if [[ ! -z "${CMAKE_TOOLCHAIN_FILE}" ]]; then
