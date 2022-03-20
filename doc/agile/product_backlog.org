@@ -14461,16 +14461,6 @@ can be done once we create a facet for manual tests. However, we would
 have to declare each test in the model and hard-code both the unit
 test framework as well as the benchmark framework.
 
-*** Remove existing benchmark infrastructure                          :story:
-
-We have not used it since it was implemented a long time ago. In
-addition, it is not very practical because it requires us to manually
-generate the benchmark numbers and we never remember to do it. We
-should just remove it and create a new benchmark framework based on
-existing libraries and integrated with nightlies. Ideally it should
-also output results to relational so that we can plot the evolution
-over time.
-
 *** Consider using a benchmarking framework                           :story:
 
 It seems there is a C++ benchmarks framework which could be used for

@@ -485,8 +485,9 @@ Links:
 - [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
 - [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
 
-*** STARTED Move build to GitHub                                      :story:
+*** COMPLETED Move build to GitHub                                    :story:
     :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 19:01]--[2022-03-20 Sun 20:55] =>  1:54
     CLOCK: [2022-03-19 Sat 17:01]--[2022-03-19 Sat 17:19] =>  0:18
     CLOCK: [2021-09-26 Sun 10:11]--[2021-09-26 Sun 11:11] =>  1:00
     CLOCK: [2021-09-25 Sat 16:04]--[2021-09-25 Sat 16:37] =>  0:33
@@ -500,6 +501,20 @@ Links:
 
 - [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
 - [[https://github.com/otland/forgottenserver/blob/master/.github/workflows/build-vcpkg.yml][build-vcpkg]]: example vcpkg.
+
+*** COMPLETED Update vcpkg to latest                                  :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 13:00]--[2022-03-20 Sun 16:00] =>  3:00
+    :END:
+
+We need to get latest vcpkg locally and update all dependencies.
+
+Links:
+
+- [[https://github.com/MASD-Project/vcpkg][vcpkg]]
+- [[https://lindevs.com/install-vcpkg-on-ubuntu/][Install vcpkg on Ubuntu 20.04]]
+- [[https://nicedoc.io/microsoft/vcpkg#vcpkg-as-a-submodule][Vcpkg as a Submodule]]
+- [[https://github.com/clangd/clangd/blob/master/.github/workflows/autobuild.yaml][clangd github action]]
 
 *** COMPLETED Remove third-party dependencies outside vcpkg           :story:
     :LOGBOOK:
@@ -517,18 +532,62 @@ We need to simplify our third party packages story:
   we need to carry our own vcpkg patches.
 - deprecate MASD fork of vcpkg.
 
-*** STARTED Update vcpkg to latest                                    :story:
+*** STARTED Add testing step to github actions                        :story:
     :LOGBOOK:
-    CLOCK: [2022-03-20 Sun 13:00]--[2022-03-20 Sun 16:00] =>  3:00
+    CLOCK: [2022-03-20 Sun 20:56]--[2022-03-20 Sun 21:15] =>  0:19
     :END:
 
-We need to get latest vcpkg locally and update all dependencies.
+At present we are not running the tests in github actions.
+
+*** Add packaging step to github actions                              :story:
+
+We should really create packages for all builds. We need to also check that when
+we tag we create packages.
+
+*** Update nightly builds to use new vcpkg setup                      :story:
+
+At present we are still relying on the old vcpkg setup, with downloads from
+dropbox etc. We need to move to the new world of presets.
+
+Notes:
+
+- update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
+
+*** Remove deprecated travis and appveyor config files                :story:
+
+As part of the move to github we should drop all of the legacy files. This also
+includes the old build scripts from the shell.
+
+*** Reference implementation build is borked                          :story:
+
+We need to upgrade the ODB version of the reference implementation. Annoyingly
+this will mean hitting the usual issues with vcpkg. We should probably consider
+deprecating ODB from the reference implementation as well, or at least disabling
+the building of the generated ODB code.
+
+*** Add github actions build for C#                                   :story:
+
+We need to build on .Net 6.
+
+*** Remove existing benchmark infrastructure                          :story:
+
+We have not used it since it was implemented a long time ago. In
+addition, it is not very practical because it requires us to manually
+generate the benchmark numbers and we never remember to do it. We
+should just remove it and create a new benchmark framework based on
+existing libraries and integrated with nightlies. Ideally it should
+also output results to relational so that we can plot the evolution
+over time.
+
+*** Upload release to github                                          :story:
+
+At present we are manually uploading binaries on a release to
+github. It would be nice to integrate this with CI.
 
 Links:
 
-- [[https://github.com/MASD-Project/vcpkg][vcpkg]]
-- [[https://lindevs.com/install-vcpkg-on-ubuntu/][Install vcpkg on Ubuntu 20.04]]
-- [[https://nicedoc.io/microsoft/vcpkg#vcpkg-as-a-submodule][Vcpkg as a Submodule]]
+- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
+- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
 
 *** Consider standardising all templates as mustache templates        :story:
     :LOGBOOK:
@@ -646,25 +705,6 @@ Links:
 
 - [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
 
-*** Process org-mode image links                                      :story:
-
-At present we have hard-coded doxygen notation for image links:
-
-: \image html dogen.orchestration/modeling/dogen.orchestration.svg
-
-Instead, we should use org-mode notation for these links:
-
-: #+CAPTION: This is the caption for the next figure link (or table)
-: #+NAME:   fig:SED-HR4049
-: [[./img/a.jpg]]
-
-These then need to be read out by the org-mode parser and converted internally
-into doxygen links.
-
-Links:
-
-- [[https://orgmode.org/manual/Images.html][org-mode manual: images]]
-
 *** Replace Dia IDs with UUIDs                                        :story:
 
 We still have lots of IDs in models from Dia:
@@ -710,16 +750,6 @@ Links:
 
 - [[https://lgtm.com/projects/g/MASD-Project/dogen/alerts/?mode=list][lgtm warnings]]
 
-*** Upload release to github                                          :story:
-
-At present we are manually uploading binaries on a release to
-github. It would be nice to integrate this with CI.
-
-Links:
-
-- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
-- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
-
 *** org-to-org transform removes custom id's from attributes          :story:
 
 Diff of =share/library/masd.org= after transform:
@@ -732,6 +762,25 @@ Diff of =share/library/masd.org= after transform:
 :      :END:
 
 We should always preserve all attributes.
+
+*** Process org-mode image links                                      :story:
+
+At present we have hard-coded doxygen notation for image links:
+
+: \image html dogen.orchestration/modeling/dogen.orchestration.svg
+
+Instead, we should use org-mode notation for these links:
+
+: #+CAPTION: This is the caption for the next figure link (or table)
+: #+NAME:   fig:SED-HR4049
+: [[./img/a.jpg]]
+
+These then need to be read out by the org-mode parser and converted internally
+into doxygen links.
+
+Links:
+
+- [[https://orgmode.org/manual/Images.html][org-mode manual: images]]
 
 *** org-to-org transform creates mustache templates incorrectly       :story:
 
