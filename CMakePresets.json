@@ -1,0 +1,319 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "use-ninja",
+            "hidden": true,
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "default-build-dir",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/output/${presetName}"
+        },
+        {
+            "name": "dogen-common-options",
+            "hidden": true,
+            "environment": {
+                "FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../../frozen/master/projects",
+                "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
+                "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
+            },
+            "cacheVariables" : {
+                "WITH_LATEX": "OFF",
+                "WITH_FULL_GENERATION": "ON"
+            }
+        },
+        {
+            "name": "debug-build",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "inherits": [
+                "dogen-common-options"
+            ]
+        },
+        {
+            "name": "release-with-debug-build",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            },
+            "inherits": [
+                "dogen-common-options"
+            ]
+        },
+        {
+            "name": "release-build",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "dogen-common-options"
+            ]
+        },
+        {
+            "name": "use-clang",
+            "hidden": true,
+            "inherits": [
+                "default-build-dir",
+                "use-ninja"
+            ],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_CXX_FLAGS": "-stdlib=libc++",
+                "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libc++",
+                "CMAKE_SHARED_LINKER_FLAGS": "-stdlib=libc++"
+            }
+        },
+        {
+            "name": "use-gcc",
+            "hidden": true,
+            "inherits": [
+                "default-build-dir",
+                "use-ninja"
+            ],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "use-msvc-cl",
+            "hidden": true,
+            "inherits": [
+                "default-build-dir",
+                "use-ninja"
+            ],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "use-msvc-clang-cl",
+            "hidden": true,
+            "inherits": [
+                "default-build-dir",
+                "use-ninja"
+            ],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-cl",
+                "CMAKE_CXX_COMPILER": "clang-cl"
+            }
+        },
+        {
+            "name": "linux-clang-debug",
+            "displayName": "Linux clang debug",
+            "inherits": [
+                "use-clang",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "linux-clang-release",
+            "displayName": "Linux clang release",
+            "inherits": [
+                "use-clang",
+                "release-build"
+            ]
+        },
+        {
+            "name": "linux-gcc-debug",
+            "displayName": "Linux gcc debug",
+            "inherits": [
+                "use-gcc",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "linux-gcc-release",
+            "displayName": "Linux gcc release",
+            "inherits": [
+                "use-gcc",
+                "release-build"
+            ]
+        },
+        {
+            "name": "windows-arch-x64",
+            "hidden": true,
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            }
+        },
+        {
+            "name": "windows-default",
+            "displayName": "Windows x64 Debug",
+            "hidden": true,
+            "inherits": [
+                "use-msvc-cl",
+                "windows-arch-x64"
+            ],
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Windows"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "windows-debug",
+            "displayName": "Windows x64 Debug",
+            "inherits": [
+                "windows-default",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "windows-release",
+            "displayName": "Windows x64 Release",
+            "inherits": [
+                "windows-default",
+                "release-build"
+            ]
+        },
+        {
+            "name": "ci-options",
+            "hidden": true,
+            "cacheVariables": {
+                "BUILD_TESTING": "ON",
+                "BUILD_DEMO_VIEWER": "OFF"
+            }
+        },
+        {
+            "name": "windows-ci",
+            "description": "used by the ci pipeline",
+            "inherits": [
+                "windows-release",
+                "ci-options"
+            ],
+            "cacheVariables": {
+                "INSTALL_DEPENDENCIES": "ON",
+                "ADDITIONAL_LIBARIES_PATHS": "${sourceDir}/build/${presetName}/vcpkg_installed/x64-windows/bin"
+            },
+            "environment": {
+                "PROJ_LIB": "${sourceDir}/build/${presetName}/vcpkg_installed/x64-windows/share/proj4"
+            }
+        },
+        {
+            "name": "linux-ci",
+            "description": "used by the ci pipeline",
+            "inherits": [
+                "release-with-debug-build",
+                "use-gcc",
+                "ci-options"
+            ],
+            "cacheVariables": {
+                "CMAKE_CXX_FLAGS": "--coverage"
+            },
+            "environment": {
+                "PROJ_LIB": "${sourceDir}/build/${presetName}/vcpkg_installed/x64-linux/share/proj4"
+            }
+        },
+        {
+            "name": "macos-ci",
+            "description": "used by the ci pipeline",
+            "inherits": [
+                "use-ninja",
+                "release-with-debug-build",
+                "default-build-dir",
+                "ci-options"
+            ],
+            "cacheVariables": {
+                "CMAKE_CXX_FLAGS": "-fprofile-arcs -ftest-coverage"
+            },
+            "environment": {
+                "PROJ_LIB": "${sourceDir}/build/${presetName}/vcpkg_installed/x64-osx/share/proj4"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "windows-debug",
+            "configurePreset": "windows-debug"
+        },
+        {
+            "name": "windows-release",
+            "configurePreset": "windows-release"
+        },
+        {
+            "name": "linux-clang-debug",
+            "configurePreset": "linux-clang-debug"
+        },
+        {
+            "name": "linux-clang-release",
+            "configurePreset": "linux-clang-release"
+        },
+        {
+            "name": "linux-gcc-debug",
+            "configurePreset": "linux-gcc-debug"
+        },
+        {
+            "name": "linux-gcc-release",
+            "configurePreset": "linux-gcc-release"
+        },
+        {
+            "name": "windows-ci",
+            "configurePreset": "windows-ci"
+        },
+        {
+            "name": "linux-ci",
+            "configurePreset": "linux-ci"
+        },
+        {
+            "name": "macos-ci",
+            "configurePreset": "macos-ci"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "test-default",
+            "hidden": true,
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": false
+            }
+        },
+        {
+            "name": "windows-ci",
+            "configurePreset": "windows-ci",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "linux-ci",
+            "configurePreset": "linux-ci",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "macos-ci",
+            "configurePreset": "macos-ci",
+            "inherits": [
+                "test-default"
+            ]
+        }
+    ]
+}
