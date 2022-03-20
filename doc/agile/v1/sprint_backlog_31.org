@@ -1,4 +1,4 @@
-q#+title: Sprint Backlog 31
+#+title: Sprint Backlog 31
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
@@ -12,22 +12,30 @@ q#+title: Sprint Backlog 31
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-03-19 Sat 17:19]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *17:22* |       |      |   0.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 17:22   |       |      |   0.0 |
-| Active                                             |         | 17:22 |      |   0.0 |
-| Edit release notes for previous sprint             |         |       | 6:06 |   0.0 |
-| Create a demo and presentation for previous sprint |         |       | 0:27 |   0.0 |
-| Fix broken org-mode tests                          |         |       | 3:09 |   0.0 |
-| Sprint and product backlog grooming                |         |       | 3:36 |   0.0 |
-| Generate doxygen docs and add to site              |         |       | 1:51 |   0.0 |
-| Move build to GitHub                               |         |       | 2:13 |   0.0 |
+#+CAPTION: Clock summary at [2022-03-20 Sun 10:06]
+| <75>                                                       |         |       |      |       |
+| Headline                                                   | Time    |       |      |     % |
+|------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                               | *19:25* |       |      |   0.0 |
+|------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                    | 19:25   |       |      |   0.0 |
+| Active                                                     |         | 19:25 |      |   0.0 |
+| Edit release notes for previous sprint                     |         |       | 6:06 |   0.0 |
+| Create a demo and presentation for previous sprint         |         |       | 0:27 |   0.0 |
+| Fix broken org-mode tests                                  |         |       | 3:09 |   0.0 |
+| Sprint and product backlog grooming                        |         |       | 4:38 |   0.0 |
+| Generate doxygen docs and add to site                      |         |       | 1:51 |   0.0 |
+| Move build to GitHub                                       |         |       | 2:13 |   0.0 |
+| Remove third-party dependencies outside vcpkg              |         |       | 0:40 |   0.0 |
+| Consider standardising all templates as mustache templates |         |       | 0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
+
+Agenda:
+
+#+begin_src emacs-lisp
+(org-agenda-file-to-front)
+#+end_src
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2021-01-05 Tue 22:06]
@@ -366,9 +374,6 @@ Time spent creating the demo and presentation.
     CLOCK: [2021-09-19 Sun 22:15]--[2021-09-19 Sun 22:54] =>  0:39
     :END:
 
-
-(setq org-agenda-files '("/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/v1/sprint_backlog_31.org"))
-
 At present a number of tests are failing. These are mainly due to org-mode
 rountripping and spacing.
 
@@ -432,6 +437,7 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 07:31]--[2022-03-20 Sun 08:33] =>  1:02
     CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
     CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
     CLOCK: [2021-04-03 Sat 09:01]--[2021-04-03 Sat 09:29] =>  0:28
@@ -494,7 +500,11 @@ Links:
 - [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
 - [[https://github.com/otland/forgottenserver/blob/master/.github/workflows/build-vcpkg.yml][build-vcpkg]]: example vcpkg.
 
-*** Reduce friction in the development process                        :story:
+*** STARTED Remove third-party dependencies outside vcpkg             :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 09:40]--[2022-03-20 Sun 10:06] =>  0:26
+    CLOCK: [2022-03-19 Sat 17:21]--[2022-03-19 Sat 17:35] =>  0:14
+    :END:
 
 We need to simplify our third party packages story:
 
@@ -503,6 +513,159 @@ We need to simplify our third party packages story:
 - remove boost-di: we only use this in a very limited manner, but because of it
   we need to carry our own vcpkg patches.
 - deprecate MASD fork of vcpkg.
+
+*** Consider standardising all templates as mustache templates        :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 09:18]--[2022-03-20 Sun 09:39] =>  0:21
+    :END:
+
+At present we have a somewhat complex story with regards to templating:
+
+1. we use a mustache-like approach called wale, built in-house. It is used for
+   some header files such as the M2T transforms.
+2. we use a t4-like approach called stitch, also in-house. It is used for the
+   implementation of the M2T transforms.
+
+What would be really nice is if we could use the same approach for both, and if
+that approach was not part of Dogen. The purpose of this story is to explore the
+possibility of replacing both with a standard implementation of mustache,
+ideally available on vcpkg. We already have a story for replacing wale with
+mustache in the backlog, so see that for the choice of implementation. This
+story concerns itself mainly with the second item in the above list; that is,
+can we replace stitch with mustache.
+
+In order to answer this question we first must try to figure out what the
+differences between T4 and mustache are. T4 is a "generator generator". That is,
+the text template generates C# code that generates the ultimate target of the
+template. This means it is possible to embed any logic within the T4 template as
+required, to do complex processing. It also means the processing is "fast"
+because we generate C# code rather than try to introspect at run time. Stitch
+uses the same approach. However, after many years of using both T4 and Stitch,
+the general conclusion has been that the templates should be kept as simple as
+possible. The main reason is that "debugging" through the templates is
+non-trivial, even though it is simple C++ code (in the case of stitch).
+
+Mustache on the other hand puts forward an approach of logic-less templates.
+That is, the templates are evaluated dynamically by the templating engine, and
+the engine only allows for a very limited number of constructs. In some
+implementations, the so called "template hash", that is the input to the
+template, is a JSON object. All the template can do is refer to entries in the
+JSON object and replace tokens with the values of those entries.
+
+Until recently we deemed mustache to be too simple for our needs because Dogen
+templates were very complex. However, several things have changed:
+
+- we do not want the templates to have any indentation at all; this should be
+  left to clang-format as a subsequent T2T transform. This removes a lot of
+  functionality we had in Stitch.
+- we do not want the logical model objects to be processed any further in the
+  template. As explained above this leads to a lot of complications. We want the
+  object to be in its final form.
+- we want all relationships etc to be encoded in the logical model object prior
+  to M2T transformation.
+
+In other words, we have slowly been converging towards logic-less templates,
+though we are not yet there. The main stumbling blocks are:
+
+- epilogue and prologue are at present handled by assistants:
+
+#+begin_src
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= o.name().simple() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+
+#+end_src
+
+   Ideally we should just have a way to ask for the values of these fields.
+- we need to investigate all templates and see if a JSON representation of a
+  logical model element is sufficient to capture all required information.
+  However the best way to do this is to have an incremental approach: provide a
+  mustache based M2T and then incrementally move each M2T at a time.
+
+If we do move to mustache, there are lots of advantages:
+
+- remove all of templating code.
+- we could allow users to supply their own mustache templates in a model. We can
+  even allow for the dynamic creation of PMM elements and then the association
+  of those elements with templates. End users cannot of course extend the LMM,
+  but even just extending the LMM gives them a lot of power.
+- we could create a stand alone tool that allows users to play with templates.
+  All they need is a dump of the JSON representation of the objects in their
+  model (this could be an option in Dogen). Then the tool can take the template
+  and the JSON and render it to =std::out=. This makes template development much
+  easier. If we integrate it with Emacs, we could even have a view where we
+  do: 1) JSON 2) template 3) output. Users can then change 1) and 2) and see the
+  results in 3). We don't even have to extend emacs for this, we could just use
+  the compilation command.
+
+Notes:
+
+- if we could create JSON schemas for the LMM, we could then allow users to
+  create their own JSON representations. Not sure how useful this would be.
+- we need JSON support in Dogen for this.
+- we need to measure how much slower Dogen would be with this approach.
+  Presumably mustache is a lot slower that Stitch.
+- from this perspective, the PMM is fixed but the PM then becomes a dynamic
+  entity. We can supply a PM model with Dogen but that is just Dogen's
+  interpretation of the physical space; users could supply their own PM's as
+  required. The PMs need to bind to the PMM: either the user supplies its own
+  TS, part etc or it must bind (via meta-data) to existing parts, TS etc.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
+
+*** Process org-mode image links                                      :story:
+
+At present we have hard-coded doxygen notation for image links:
+
+: \image html dogen.orchestration/modeling/dogen.orchestration.svg
+
+Instead, we should use org-mode notation for these links:
+
+: #+CAPTION: This is the caption for the next figure link (or table)
+: #+NAME:   fig:SED-HR4049
+: [[./img/a.jpg]]
+
+These then need to be read out by the org-mode parser and converted internally
+into doxygen links.
+
+Links:
+
+- [[https://orgmode.org/manual/Images.html][org-mode manual: images]]
+
+*** Replace Dia IDs with UUIDs                                        :story:
+
+We still have lots of IDs in models from Dia:
+
+:  :PROPERTIES:
+:  :custom_id: O65
+:  :END:
+
+We need to update these to use UUIDs.
+
+*** Capitalise titles in models correctly                             :story:
+
+We still have models with lower case titles:
+
+: * initializer                                                       :element:
+
+Capitalise these correctly.
 
 *** Update vcpkg to latest                                            :story:
 
