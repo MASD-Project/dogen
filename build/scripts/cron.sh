@@ -4,7 +4,7 @@
 # Very trivial script to use CTest to run two nightly builds (clang
 # and gcc). Ensure you have exported CMAKE_TOOLCHAIN_FILE before running
 # this script.
-export PATH=/home/marco/local/cmake-3.15.3-Linux-x86_64/bin:$PATH
+export PATH=/home/marco/local/cmake-3.22.2-Linux-x86_64/bin:$PATH
 export MASD_DIR=/work/DomainDrivenConsulting/masd
 export CMAKE_TOOLCHAIN_FILE=${MASD_DIR}/vcpkg/masd/scripts/buildsystems/vcpkg.cmake
 
@@ -45,7 +45,6 @@ fi
 cd ${git_dir}
 # update manually as ctest won't do it for us.
 git pull origin master
-
 
 #
 # C++ Ref Impl
