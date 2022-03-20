@@ -1,0 +1,13 @@
+name: Ubuntu
+
+jobs:
+  build:
+    steps:
+      - uses: lukka/get-cmake@latest
+      - name: Restore artifacts, or setup vcpkg (do not install any package)
+        uses: lukka/run-vcpkg@v10
+      - name: Run CMake consuming CMakePreset.json and vcpkg.json by mean of vcpkg.
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: 'linux-gcc-release'
+          buildPreset: 'linux-gcc-release'
