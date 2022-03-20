@@ -36,9 +36,6 @@ std::ostream& operator<<(std::ostream& s, const tracing_backend& v) {
     case tracing_backend::file:
         attr = "\"file\"";
         break;
-    case tracing_backend::relational_database:
-        attr = "\"relational_database\"";
-        break;
     default:
         throw std::invalid_argument("Invalid value for tracing_backend");
     }

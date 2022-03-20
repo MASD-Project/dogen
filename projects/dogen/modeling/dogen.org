@@ -346,26 +346,6 @@ Available backends to manage tracing information.
 
 Write tracing information to files.
 
-** relational database                                            :attribute:
-
-Write tracing information to a relational database.
-
-* database engine                                                   :element:
-  :PROPERTIES:
-  :custom_id: O41
-  :masd.codec.stereotypes: masd::enumeration
-  :END:
-
-Supported relational databases engines.
-
-** postgres                                                       :attribute:
-
-Connect to a PostgreSQL database.
-
-** sqlite                                                         :attribute:
-
-Connect to a SQLite database.
-
 * main                                                              :element:
   :PROPERTIES:
   :custom_id: O43

@@ -28,7 +28,6 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen/types/database_engine.hpp"
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/severity_level.hpp"
 #include "dogen.utility/types/log/logging_configuration.hpp"
@@ -507,8 +506,6 @@ read_tracing_configuration(const variables_map& vm,
         const auto s(vm[tracing_backend_arg].as<std::string>());
         if (s == tracing_backend_file)
             r.backend(tracing_backend::file);
-        else if (s == tracing_backend_database)
-            r.backend(tracing_backend::relational_database);
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_backend + s));
     }
