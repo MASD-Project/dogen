@@ -14,6 +14,7 @@
         "boost-graph",
         "boost-uuid",
         "boost-spirit",
+        "boost-iostreams",
         "dtl"
     ]
 }
