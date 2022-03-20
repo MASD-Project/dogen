@@ -1,5 +1,22 @@
 name: Ubuntu
 
+on:
+  push:
+    branches:
+      - master
+      - v*
+
+    paths:
+      - cmake/**
+      - src/**
+      - CMakeLists.txt
+
+  pull_request:
+    paths:
+      - cmake/**
+      - src/**
+      - CMakeLists.txt
+
 jobs:
   build:
     steps:
