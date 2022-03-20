@@ -14,6 +14,7 @@ jobs:
     runs-on: ${{matrix.os}}-latest
     strategy:
       max-parallel: 10
+      fail-fast: false
       matrix:
         name: [linux-gcc, linux-clang, macos-clang]
         buildtype: [debug, release]
@@ -54,7 +55,7 @@ jobs:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
     runs-on: ${{matrix.os}}-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       max-parallel: 8
       matrix:
         name: [windows-msvc]
