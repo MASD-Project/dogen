@@ -14,7 +14,7 @@ on:
   pull_request:
     paths:
       - cmake/**
-      - src/**
+      - projects/**
       - CMakeLists.txt
 
 jobs:
