@@ -10,7 +10,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/MASD-Project/dogen/total.svg)](https://github.com/MASD-Project/dogen/releases)
 [![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/g/DomainDrivenConsulting/dogen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DomainDrivenConsulting/dogen/context:cpp)
 [![Build Dashboard](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
-[![GitHub Workflows](https://github.com/MASD-Project/dogen/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/ubuntu.yml)
+[![Build vcpkg](https://github.com/MASD-Project/dogen/actions/workflows/build-vcpkg.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/build-vcpkg.yml)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.30.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)](https://mcraveiro.github.io/dogen/doxygen/index.html)
