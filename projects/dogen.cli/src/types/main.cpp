@@ -24,6 +24,7 @@
 #include <ostream>
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
+#include "dogen/config.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/log/severity_level.hpp"
@@ -38,7 +39,6 @@
 #include "dogen.cli/types/parser_exception.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
 #include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen/config.hpp"
 
 namespace {
 
@@ -54,8 +54,8 @@ const std::string force_terminate("Application was forced to terminate.");
  */
 void report_exception(const bool can_log, const std::exception& e) {
     /*
-     * Dump to the console first. Here we just want to make our output
-     * as humanly readable as possible.
+     * Dump to the console first. Here we just want to make our output as
+     * humanly readable as possible.
      */
     std::cerr << err_prefix << e.what() << std::endl;
     std::cerr << activity_failure << std::endl;
@@ -64,12 +64,11 @@ void report_exception(const bool can_log, const std::exception& e) {
         return;
 
     /*
-     * Now we can try to dump useful, but less user-friendly
-     * information by interrogating the exception. Note that we must
-     * catch by std::exception and cast the boost exception; if we
-     * were to catch boost exception, we would not have access to the
-     * what() method and thus could not provide the exception message
-     * to the console.
+     * Now we can try to dump useful, but less user-friendly information by
+     * interrogating the exception. Note that we must catch by std::exception
+     * and cast the boost exception; if we were to catch boost exception, we
+     * would not have access to the what() method and thus could not provide the
+     * exception message to the console.
      */
     const auto be(dynamic_cast<const boost::exception* const>(&e));
     if (!be)
@@ -87,30 +86,25 @@ int execute_cli_workflow(const int argc, const char* argv[],
     dogen::utility::log::scoped_lifecycle_manager& slm) {
 
     /*
-     * Perform DI initialisation and obtain the parser.
+     * Create the configuration from command line options.
      */
     using namespace dogen::cli;
     program_options_parser p;
-
-    /*
-     * Create the configuration from command line options.
-     */
     const auto args(std::vector<std::string>(argv + 1, argv + argc));
     const auto ocfg(p.parse(args, std::cout, std::cerr));
 
     /*
-     * If we have no configuration, then there is nothing to do. This
-     * can only happen if the user requested some valid options such
-     * as help or version; any errors at the command line level are
-     * treated as exceptions, and all other cases must result in a
-     * configuration object.
+     * If we have no configuration, then there is nothing to do. This can only
+     * happen if the user requested some valid options such as help or version;
+     * any errors at the command line level are treated as exceptions, and all
+     * other cases must result in a configuration object.
      */
     if (!ocfg)
         return EXIT_SUCCESS;
 
     /*
-     * Since we have a configuration, we can now attempt to
-     * initialise the logging subsystem.
+     * Since we have a configuration, we can now attempt to initialise the
+     * logging subsystem.
      */
     const auto& cfg(*ocfg);
     slm.initialise(cfg.logging());
@@ -122,17 +116,18 @@ int execute_cli_workflow(const int argc, const char* argv[],
     BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
 
     /*
-     * Now perform legacy initialisation. It uses logging so it must
-     * be done after logging initialisation.
+     * Now perform DI initialisation. It uses logging so it must be done after
+     * logging initialisation.
      */
     initializer::initialize();
 
     /*
      * Execute the application.
      */
-    dogen::orchestration::converter c;
-    dogen::orchestration::generator g;
-    dogen::orchestration::spec_dumper sd;
+    using namespace dogen::orchestration;
+    converter c;
+    generator g;
+    spec_dumper sd;
     const application app(c, g, sd);
     app.run(cfg);
     return EXIT_SUCCESS;
