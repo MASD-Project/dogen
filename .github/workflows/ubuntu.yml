@@ -4,17 +4,9 @@ on:
   push:
     branches:
       - master
-
-    paths:
-      - cmake/**
-      - projects/**
-      - CMakeLists.txt
-
   pull_request:
-    paths:
-      - cmake/**
-      - projects/**
-      - CMakeLists.txt
+    branches:
+      - master
 
 jobs:
   unix:
