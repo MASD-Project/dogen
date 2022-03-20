@@ -191,7 +191,7 @@
             ]
         },
         {
-            "name": "macos-clang",
+            "name": "macos-ci",
             "description": "used by the ci pipeline",
             "inherits": [
                 "use-ninja",
@@ -206,7 +206,7 @@
     "buildPresets": [
         {
             "name": "windows-msvc-debug",
-            "configurePreset": "windows-debug"
+            "configurePreset": "windows-msvc-debug"
         },
         {
             "name": "windows-msvc-release",
@@ -247,14 +247,14 @@
         },
         {
             "name": "windows-ci",
-            "configurePreset": "windows-ci",
+            "configurePreset": "windows-msvc-release",
             "inherits": [
                 "test-default"
             ]
         },
         {
             "name": "linux-ci",
-            "configurePreset": "linux-ci",
+            "configurePreset": "linux-clang-release",
             "inherits": [
                 "test-default"
             ]
