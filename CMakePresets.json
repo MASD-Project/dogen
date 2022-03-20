@@ -23,6 +23,7 @@
             "name": "dogen-common-options",
             "hidden": true,
             "environment": {
+                "DOGEN_PROJECTS_DIRECTORY": "${sourceDir}/projects",
                 "FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../../frozen/master/projects",
                 "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
                 "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
