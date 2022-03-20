@@ -333,6 +333,8 @@ A number of videos are now available discussing Dogen, gathered under
 - [MASD - Dogen
   Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
   end of sprint demos.
+- [MASD - Dogen Coding: Move to GitHub CI](https://www.youtube.com/playlist?list=PLwfrwe216gF2qlIWKsBrL7UEsrEg8dXC0):
+  Series of videos on moving Dogen from Travis CI to GitHub CI.
 - [MASD - Dogen Coding: Org
   Codec](https://www.youtube.com/playlist?list=PLwfrwe216gF0wdVhy4fO1_QXJ-njWLSy4):
   Series of videos describing the addition of org-mode support to
