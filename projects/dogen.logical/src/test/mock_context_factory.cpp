@@ -25,7 +25,6 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen/types/tracing_configuration.hpp"
-#include "dogen/types/database_configuration.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"
 
 namespace {

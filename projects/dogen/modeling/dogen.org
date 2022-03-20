@@ -55,13 +55,6 @@ Configuration for tracing.
 
 Directory in which to place all files not directly related to generated code.
 
-** database                                                       :attribute:
-   :PROPERTIES:
-   :masd.codec.type: boost::optional<database_configuration>
-   :END:
-
-Configuration related to database connectivity, if any.
-
 * tracing level                                                     :element:
   :PROPERTIES:
   :custom_id: O1
@@ -340,60 +333,6 @@ Emacs Org mode.
   :custom_id: O35
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
-
-* database configuration                                            :element:
-  :PROPERTIES:
-  :custom_id: O37
-  :END:
-
-Contains the config
-
-** host                                                           :attribute:
-   :PROPERTIES:
-   :masd.codec.type: std::string
-   :END:
-
-Database host to connect to.
-
-** port                                                           :attribute:
-   :PROPERTIES:
-   :masd.codec.type: unsigned int
-   :END:
-
-Database port to connect to.
-
-** name                                                           :attribute:
-   :PROPERTIES:
-   :masd.codec.type: std::string
-   :END:
-
-Name of the database to connect to.
-
-** user                                                           :attribute:
-   :PROPERTIES:
-   :masd.codec.type: std::string
-   :END:
-
-User to use in thedatabase connection.
-
-** password                                                       :attribute:
-   :PROPERTIES:
-   :masd.codec.type: std::string
-   :END:
-
-** engine                                                         :attribute:
-   :PROPERTIES:
-   :masd.codec.type: database_engine
-   :END:
-
-Which relational database engine to connect to.
-
-** generate schema                                                :attribute:
-   :PROPERTIES:
-   :masd.codec.type: bool
-   :END:
-
-If true, deletes all tables and recreates them. Otherwise, assumes their presence.
 
 * tracing backend                                                   :element:
   :PROPERTIES:

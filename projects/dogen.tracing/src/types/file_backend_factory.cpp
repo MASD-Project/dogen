@@ -22,7 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
-#include "dogen/io/database_configuration_io.hpp"
 #include "dogen.tracing/types/file_backend.hpp"
 #include "dogen.tracing/types/file_backend_factory.hpp"
 

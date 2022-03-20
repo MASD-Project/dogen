@@ -626,60 +626,6 @@ read_reporting_configuration(const variables_map& vm,
     return r;
 }
 
-boost::optional<dogen::database_configuration>
-read_database_configuration(const variables_map& vm) {
-    using dogen::database_configuration;
-    bool found(false);
-
-    database_configuration r;
-    if (vm.count(database_hostname_arg)) {
-        found = true;
-        r.host(vm[database_hostname_arg].as<std::string>());
-    }
-
-    if (vm.count(database_port_arg) != 0) {
-        found = true;
-        r.port(vm[database_port_arg].as<unsigned int>());
-    }
-
-    if (vm.count(database_name_arg) != 0) {
-        found = true;
-        r.name(vm[database_name_arg].as<std::string>());
-    }
-
-    if (vm.count(database_user_arg) != 0) {
-        found = true;
-        r.user(vm[database_user_arg].as<std::string>());
-    }
-
-    if (vm.count(database_password_arg) != 0) {
-        found = true;
-        r.password(vm[database_password_arg].as<std::string>());
-    }
-
-    if (vm.count(database_engine_arg) != 0) {
-        found = true;
-         const auto s(vm[database_engine_arg].as<std::string>());
-         using dogen::database_engine;
-         if (s == database_engine_postgres)
-             r.engine(database_engine::postgres);
-         else if (s == database_engine_sqlite)
-             r.engine(database_engine::sqlite);
-         else
-             BOOST_THROW_EXCEPTION(parser_exception(invalid_engine + s));
-    }
-
-    if (vm.count(database_schema_gen_arg) != 0) {
-        found = true;
-        r.generate_schema(true);
-    }
-
-    if (!found)
-        return boost::optional<database_configuration>();
-    return r;
-}
-
-
 /**
  * @brief Constructs an identifier sufficiently unique for this
  * run. It can be used for log file names, directories, etc.
@@ -908,7 +854,6 @@ handle_command(const std::string& command_name, const bool has_help,
     a.reporting(read_reporting_configuration(vm, bd));
     a.diffing(read_diffing_configuration(vm, bd));
     a.model_processing(read_model_processing_configuration(vm));
-    a.database(read_database_configuration(vm));
 
     return r;
 }

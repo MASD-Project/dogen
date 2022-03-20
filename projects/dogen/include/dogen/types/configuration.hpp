@@ -30,7 +30,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/diffing_configuration.hpp"
 #include "dogen/types/tracing_configuration.hpp"
-#include "dogen/types/database_configuration.hpp"
 #include "dogen/types/reporting_configuration.hpp"
 #include "dogen/types/model_processing_configuration.hpp"
 
@@ -51,8 +50,7 @@ public:
         const boost::optional<dogen::tracing_configuration>& tracing,
         const boost::optional<dogen::diffing_configuration>& diffing,
         const boost::optional<dogen::reporting_configuration>& reporting,
-        const boost::filesystem::path& byproduct_directory,
-        const boost::optional<dogen::database_configuration>& database);
+        const boost::filesystem::path& byproduct_directory);
 
 public:
     const dogen::model_processing_configuration& model_processing() const;
@@ -90,16 +88,6 @@ public:
     configuration& byproduct_directory(const boost::filesystem::path&& v);
     /**@}*/
 
-    /**
-     * @brief Configuration related to database connectivity, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::database_configuration>& database() const;
-    boost::optional<dogen::database_configuration>& database();
-    configuration& database(const boost::optional<dogen::database_configuration>& v);
-    configuration& database(const boost::optional<dogen::database_configuration>&& v);
-    /**@}*/
-
 public:
     bool operator==(const configuration& rhs) const;
     bool operator!=(const configuration& rhs) const {
@@ -116,7 +104,6 @@ private:
     boost::optional<dogen::diffing_configuration> diffing_;
     boost::optional<dogen::reporting_configuration> reporting_;
     boost::filesystem::path byproduct_directory_;
-    boost::optional<dogen::database_configuration> database_;
 };
 
 }

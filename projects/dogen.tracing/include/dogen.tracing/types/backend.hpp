@@ -33,7 +33,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/types/tracing_backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
-#include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 

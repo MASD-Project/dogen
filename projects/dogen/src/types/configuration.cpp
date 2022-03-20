@@ -27,22 +27,19 @@ configuration::configuration(configuration&& rhs)
       tracing_(std::move(rhs.tracing_)),
       diffing_(std::move(rhs.diffing_)),
       reporting_(std::move(rhs.reporting_)),
-      byproduct_directory_(std::move(rhs.byproduct_directory_)),
-      database_(std::move(rhs.database_)) { }
+      byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 configuration::configuration(
     const dogen::model_processing_configuration& model_processing,
     const boost::optional<dogen::tracing_configuration>& tracing,
     const boost::optional<dogen::diffing_configuration>& diffing,
     const boost::optional<dogen::reporting_configuration>& reporting,
-    const boost::filesystem::path& byproduct_directory,
-    const boost::optional<dogen::database_configuration>& database)
+    const boost::filesystem::path& byproduct_directory)
     : model_processing_(model_processing),
       tracing_(tracing),
       diffing_(diffing),
       reporting_(reporting),
-      byproduct_directory_(byproduct_directory),
-      database_(database) { }
+      byproduct_directory_(byproduct_directory) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
@@ -51,7 +48,6 @@ void configuration::swap(configuration& other) noexcept {
     swap(diffing_, other.diffing_);
     swap(reporting_, other.reporting_);
     swap(byproduct_directory_, other.byproduct_directory_);
-    swap(database_, other.database_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
@@ -59,8 +55,7 @@ bool configuration::operator==(const configuration& rhs) const {
         tracing_ == rhs.tracing_ &&
         diffing_ == rhs.diffing_ &&
         reporting_ == rhs.reporting_ &&
-        byproduct_directory_ == rhs.byproduct_directory_ &&
-        database_ == rhs.database_;
+        byproduct_directory_ == rhs.byproduct_directory_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -156,24 +151,6 @@ configuration& configuration::byproduct_directory(const boost::filesystem::path&
 
 configuration& configuration::byproduct_directory(const boost::filesystem::path&& v) {
     byproduct_directory_ = std::move(v);
-    return *this;
-}
-
-const boost::optional<dogen::database_configuration>& configuration::database() const {
-    return database_;
-}
-
-boost::optional<dogen::database_configuration>& configuration::database() {
-    return database_;
-}
-
-configuration& configuration::database(const boost::optional<dogen::database_configuration>& v) {
-    database_ = v;
-    return *this;
-}
-
-configuration& configuration::database(const boost::optional<dogen::database_configuration>&& v) {
-    database_ = std::move(v);
     return *this;
 }
 

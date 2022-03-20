@@ -24,7 +24,6 @@
 #include "dogen/config.hpp"
 #include "dogen/io/tracing_backend_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
-#include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"

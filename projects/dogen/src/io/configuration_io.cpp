@@ -22,7 +22,6 @@
 #include "dogen/io/configuration_io.hpp"
 #include "dogen/io/diffing_configuration_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
-#include "dogen/io/database_configuration_io.hpp"
 #include "dogen/io/reporting_configuration_io.hpp"
 #include "dogen/io/model_processing_configuration_io.hpp"
 
@@ -71,21 +70,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::re
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::database_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen {
 
 std::ostream& operator<<(std::ostream& s, const configuration& v) {
@@ -95,8 +79,7 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
       << "\"tracing\": " << v.tracing() << ", "
       << "\"diffing\": " << v.diffing() << ", "
       << "\"reporting\": " << v.reporting() << ", "
-      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\"" << ", "
-      << "\"database\": " << v.database()
+      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
       << " }";
     return(s);
 }
