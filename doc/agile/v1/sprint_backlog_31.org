@@ -12,22 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-03-20 Sun 16:00]
+#+CAPTION: Clock summary at [2022-03-20 Sun 22:16]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *23:04* |       |      |   0.0 |
+| *Total time*                                               | *25:53* |       |      |   0.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 23:04   |       |      |   0.0 |
-| Active                                                     |         | 23:04 |      |   0.0 |
+| Stories                                                    | 25:53   |       |      |   0.0 |
+| Active                                                     |         | 25:53 |      |   0.0 |
 | Edit release notes for previous sprint                     |         |       | 6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       | 0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       | 3:09 |   0.0 |
 | Sprint and product backlog grooming                        |         |       | 4:38 |   0.0 |
 | Generate doxygen docs and add to site                      |         |       | 1:51 |   0.0 |
-| Move build to GitHub                                       |         |       | 2:13 |   0.0 |
-| Remove third-party dependencies outside vcpkg              |         |       | 1:19 |   0.0 |
+| Move build to GitHub                                       |         |       | 4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       | 3:00 |   0.0 |
+| Remove third-party dependencies outside vcpkg              |         |       | 1:19 |   0.0 |
+| Fix clang build in github                                  |         |       | 0:36 |   0.0 |
+| Add testing step to github actions                         |         |       | 0:19 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       | 0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -531,6 +533,20 @@ We need to simplify our third party packages story:
 - remove boost-di: we only use this in a very limited manner, but because of it
   we need to carry our own vcpkg patches.
 - deprecate MASD fork of vcpkg.
+
+*** Fix clang build in github                                         :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 21:40]--[2022-03-20 Sun 22:16] =>  0:36
+    :END:
+
+At present we cannot build using clang. The main issue seems to be that dogen
+code is using libc++ whereas the vcpkg dependencies are using the GCC standard
+library. For now we can default to GCC's library and create a new story to use
+clangs.
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/9783][#9783: Add example for using libc++ on Linux]]
 
 *** STARTED Add testing step to github actions                        :story:
     :LOGBOOK:
