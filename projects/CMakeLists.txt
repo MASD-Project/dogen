@@ -146,7 +146,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     set(warning_flags "${warning_flags} -Wwrite-strings")
 
     # enable RTTI
-    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
     if(APPLE)
         set(other_flags "${other_flags} -fvisibility=default")
     else()
