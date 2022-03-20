@@ -27,14 +27,12 @@
 #include "dogen.utility/types/io/vector_io.hpp"
 #include "dogen.cli/io/configuration_io.hpp"
 #include "dogen.cli/types/configuration.hpp"
-#include "dogen.cli/types/injector_factory.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
 #include "dogen.cli/types/program_options_parser.hpp"
 #include "dogen.cli/types/program_options_parser.hpp"
 #include "dogen.cli/types/parser_exception.hpp"
 
 using namespace dogen::utility::log;
-using dogen::cli::injector_factory;
 using dogen::cli::command_line_parser;
 using dogen::cli::conversion_configuration;
 using dogen::cli::generation_configuration;
@@ -81,9 +79,7 @@ void check_exception(std::vector<std::string> args, std::string expected) {
     std::ostringstream info, err;
     logger lg(logger_factory(test_suite));
 
-    auto inj(injector_factory::make_injector());
-    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
-
+    program_options_parser p;
     BOOST_LOG_SEV(lg, debug) << "Arguments: " << args;
 
     using dogen::cli::parser_exception;
@@ -101,7 +97,7 @@ void check_exception(std::vector<std::string> args, std::string expected) {
             return true;
         });
 
-    BOOST_CHECK_EXCEPTION(p->parse(args, info, err), parser_exception, lambda);
+    BOOST_CHECK_EXCEPTION(p.parse(args, info, err), parser_exception, lambda);
 
     const auto info_str(info.str());
     BOOST_LOG_SEV(lg, debug) << "Info stream: '" << info_str << "'";
@@ -119,9 +115,8 @@ check_valid_arguments(std::vector<std::string> args) {
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "Arguments: " << args;
 
-    auto inj(injector_factory::make_injector());
-    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
-    const auto r(p->parse(args, info, err));
+    program_options_parser p;
+    const auto r(p.parse(args, info, err));
     BOOST_LOG_SEV(lg, debug) << "Options: " << r;
     BOOST_CHECK(r);
 
@@ -141,9 +136,8 @@ void check_help(const std::vector<std::string>& args) {
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "Arguments: " << args;
 
-    auto inj(injector_factory::make_injector());
-    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
-    const auto r(p->parse(args, info, err));
+    program_options_parser p;
+    const auto r(p.parse(args, info, err));
     BOOST_LOG_SEV(lg, debug) << "Options: " << r;
     BOOST_CHECK(!r);
 
@@ -163,9 +157,8 @@ void check_version(std::vector<std::string> args) {
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "Arguments: " << args;
 
-    auto inj(injector_factory::make_injector());
-    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
-    const auto r(p->parse(args, info, err));
+    program_options_parser p;
+    const auto r(p.parse(args, info, err));
     BOOST_LOG_SEV(lg, debug) << "Options: " << r;
     BOOST_CHECK(!r);
 

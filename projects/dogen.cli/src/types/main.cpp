@@ -29,12 +29,15 @@
 #include "dogen.utility/types/log/severity_level.hpp"
 #include "dogen.utility/types/log/logging_configuration.hpp"
 #include "dogen.utility/types/log/scoped_lifecycle_manager.hpp"
+#include "dogen.orchestration/types/converter.hpp"
+#include "dogen.orchestration/types/generator.hpp"
+#include "dogen.orchestration/types/spec_dumper.hpp"
 #include "dogen.cli/io/configuration_io.hpp"
 #include "dogen.cli/types/initializer.hpp"
 #include "dogen.cli/types/application.hpp"
-#include "dogen.cli/types/injector_factory.hpp"
 #include "dogen.cli/types/parser_exception.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
+#include "dogen.cli/types/program_options_parser.hpp"
 #include "dogen/config.hpp"
 
 namespace {
@@ -87,14 +90,13 @@ int execute_cli_workflow(const int argc, const char* argv[],
      * Perform DI initialisation and obtain the parser.
      */
     using namespace dogen::cli;
-    auto inj(injector_factory::make_injector());
-    const auto p(inj.create<std::unique_ptr<command_line_parser>>());
+    program_options_parser p;
 
     /*
      * Create the configuration from command line options.
      */
     const auto args(std::vector<std::string>(argv + 1, argv + argc));
-    const auto ocfg(p->parse(args, std::cout, std::cerr));
+    const auto ocfg(p.parse(args, std::cout, std::cerr));
 
     /*
      * If we have no configuration, then there is nothing to do. This
@@ -121,16 +123,18 @@ int execute_cli_workflow(const int argc, const char* argv[],
 
     /*
      * Now perform legacy initialisation. It uses logging so it must
-     * be done after logging initialisation. FIXME: To be removed once
-     * we move all to DI.
+     * be done after logging initialisation.
      */
     initializer::initialize();
 
     /*
      * Execute the application.
      */
-    const auto app(inj.create<std::unique_ptr<application>>());
-    app->run(cfg);
+    dogen::orchestration::converter c;
+    dogen::orchestration::generator g;
+    dogen::orchestration::spec_dumper sd;
+    const application app(c, g, sd);
+    app.run(cfg);
     return EXIT_SUCCESS;
 }
 

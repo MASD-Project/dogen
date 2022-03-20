@@ -49,12 +49,6 @@ A fatal error has occurred during option parsing.
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
-* injector factory                                                  :element:
-  :PROPERTIES:
-  :custom_id: O8
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
-
 * application exception                                             :element:
   :PROPERTIES:
   :custom_id: O9

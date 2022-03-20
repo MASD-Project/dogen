@@ -168,12 +168,6 @@ An error occurred in the factory whilst making.
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
-* injector factory                                                  :element:
-  :PROPERTIES:
-  :custom_id: O5
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
-
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: O12
