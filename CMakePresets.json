@@ -73,9 +73,9 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_CXX_FLAGS": "-stdlib=libc++",
-                "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libc++",
-                "CMAKE_SHARED_LINKER_FLAGS": "-stdlib=libc++"
+                "CMAKE_CXX_FLAGS": "-stdlib=libstdc++",
+                "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libstdc++",
+                "CMAKE_SHARED_LINKER_FLAGS": "-stdlib=libstdc++"
             }
         },
         {
@@ -191,17 +191,27 @@
             ]
         },
         {
-            "name": "macos-ci",
-            "description": "used by the ci pipeline",
+            "name": "macos-clang-debug",
+            "description": "Mac OSX Debug",
             "inherits": [
                 "use-ninja",
-                "release-with-debug-build",
+                "debug-build",
                 "default-build-dir"
             ],
             "cacheVariables": {
                 "CMAKE_CXX_FLAGS": "-fprofile-arcs -ftest-coverage"
             }
+        },
+        {
+            "name": "macos-clang-release",
+            "description": "Mac OSX Release",
+            "inherits": [
+                "use-ninja",
+                "release-with-debug-build",
+                "default-build-dir"
+            ]
         }
+
     ],
     "buildPresets": [
         {
@@ -229,8 +239,12 @@
             "configurePreset": "linux-gcc-release"
         },
         {
-            "name": "macos-ci",
-            "configurePreset": "macos-ci"
+            "name": "macos-clang-debug",
+            "configurePreset": "macos-clang-debug"
+        },
+        {
+            "name": "macos-clang-release",
+            "configurePreset": "macos-clang-release"
         }
     ],
     "testPresets": [
@@ -260,8 +274,8 @@
             ]
         },
         {
-            "name": "macos-ci",
-            "configurePreset": "macos-ci",
+            "name": "macos-clang-release",
+            "configurePreset": "macos-clang-release",
             "inherits": [
                 "test-default"
             ]
