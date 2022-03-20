@@ -246,15 +246,15 @@
             }
         },
         {
-            "name": "windows-ci",
+            "name": "windows-msvc-release",
             "configurePreset": "windows-msvc-release",
             "inherits": [
                 "test-default"
             ]
         },
         {
-            "name": "linux-ci",
-            "configurePreset": "linux-clang-release",
+            "name": "linux-gcc-release",
+            "configurePreset": "linux-gcc-release",
             "inherits": [
                 "test-default"
             ]
