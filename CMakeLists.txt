@@ -126,7 +126,6 @@ option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
-option(WITH_BOOST_TEST_REPORTING "Create boost test reports." off)
 option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
 option(WITH_PROFILING "Generate profiling information for code coverage.." off)
 

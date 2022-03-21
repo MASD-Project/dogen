@@ -20,10 +20,6 @@
 
 # parameters for boost tests
 set(boost_test_parameters "--log_level=error")
-if (WITH_BOOST_TEST_REPORTING)
-    set(boost_test_parameters ${boost_test_parameters} "--log_format=XML"
-        "--report_format=XML")
-endif()
 
 # tests to ignore
 set(boost_tests_ignore "")
@@ -68,18 +64,11 @@ macro(add_boost_tests test_module)
                  if (${test_name} IN_LIST boost_tests_ignore)
                      message(STATUS "Ignoring test: ${test_name}")
                  else()
-                     set(sink_setup "")
-                     if (WITH_BOOST_TEST_REPORTING)
-                         set(sink_setup
-                             "--log_sink=log_${test_suite}_${test_name}.xml"
-                             "--report_sink=report_${test_suite}_${test_name}.xml")
-                     endif()
-
                      set(tests_cmd ${stage_bin_dir}/${test_module})
                      add_test(${test_module}/${test_suite}/${test_name}
                          ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
                          ${tests_cmd} --run_test=${test_suite}/${test_name}
-                         ${boost_test_parameters} ${sink_setup})
+                         ${boost_test_parameters})
                  endif()
              endforeach()
          endif()
