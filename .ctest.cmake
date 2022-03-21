@@ -140,10 +140,6 @@ set(retry_count 10)
 # Defines for CMake.
 #
 set(cmake_defines "")
-if(DEFINED boost_test_reporting)
-    set(cmake_defines ${cmake_defines} "-DWITH_BOOST_TEST_REPORTING=On")
-endif()
-
 if(DEFINED minimal_packaging)
     set(cmake_defines ${cmake_defines} "-DWITH_MINIMAL_PACKAGING=On")
 endif()
