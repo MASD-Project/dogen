@@ -37,7 +37,7 @@ jobs:
           submodules: true
 
       - name: Set up Clang
-        if: ${{matrix.family != 'macos'}}
+        if: ${{matrix.family != 'macos' && matrix.compiler == 'clang'}}
         uses: egor-tensin/setup-clang@v1
         with:
           version: latest
