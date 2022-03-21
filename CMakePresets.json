@@ -218,42 +218,42 @@
         {
             "name": "windows-msvc-debug",
             "configurePreset": "windows-msvc-debug",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "windows-msvc-release",
             "configurePreset": "windows-msvc-release",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "linux-clang-debug",
             "configurePreset": "linux-clang-debug",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "linux-clang-release",
             "configurePreset": "linux-clang-release",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "linux-gcc-debug",
             "configurePreset": "linux-gcc-debug",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "linux-gcc-release",
             "configurePreset": "linux-gcc-release",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "macos-clang-debug",
             "configurePreset": "macos-clang-debug",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         },
         {
             "name": "macos-clang-release",
             "configurePreset": "macos-clang-release",
-            "targets": [ "package" ]
+            "targets": [ "rat", "package" ]
         }
     ],
     "testPresets": [
