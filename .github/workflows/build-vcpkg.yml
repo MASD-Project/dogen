@@ -104,7 +104,7 @@ jobs:
 
       - name: Setup test data
         run: |
-          ./build/scripts/github.setup.${{matrix.family}}.sh
+          ./build/scripts/github.setup.${{matrix.family}}.ps1
 
       - name: Run CTest workflow
         run: |
