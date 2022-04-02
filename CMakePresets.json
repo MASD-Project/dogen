@@ -198,6 +198,38 @@
             ]
         },
         {
+            "name": "windows-msvc-clang-cl",
+            "displayName": "Windows x64 Debug",
+            "hidden": true,
+            "inherits": [
+                "use-msvc-clang-cl",
+                "windows-arch-x64"
+            ],
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Windows"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "windows-msvc-clang-cl-debug",
+            "displayName": "Windows x64 Debug",
+            "inherits": [
+                "windows-msvc-clang-cl",
+                "debug-build"
+            ]
+        },
+        {
+            "name": "windows-msvc-clang-cl-release",
+            "displayName": "Windows x64 Release",
+            "inherits": [
+                "windows-msvc-clang-cl",
+                "release-build"
+            ]
+        },
+        {
             "name": "macos-clang-debug",
             "description": "Mac OSX Debug",
             "inherits": [

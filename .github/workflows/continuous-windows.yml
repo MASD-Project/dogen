@@ -14,15 +14,18 @@ jobs:
     runs-on: ${{matrix.os}}-latest
     strategy:
       fail-fast: false
-      max-parallel: 8
       matrix:
-        name: [windows-msvc]
+        name: [windows-msvc, windows-msvc-clang-cl]
         buildtype: [debug, release]
         include:
           - name: windows-msvc
             os: windows
             family: windows
             compiler: msvc
+          - name: windows-msvc-clang-cl
+            os: windows
+            family: windows
+            compiler: clang-cl
 
     steps:
       - uses: actions/checkout@v2
