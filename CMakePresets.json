@@ -217,43 +217,35 @@
     "buildPresets": [
         {
             "name": "windows-msvc-debug",
-            "configurePreset": "windows-msvc-debug",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "windows-msvc-debug"
         },
         {
             "name": "windows-msvc-release",
-            "configurePreset": "windows-msvc-release",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "windows-msvc-release"
         },
         {
             "name": "linux-clang-debug",
-            "configurePreset": "linux-clang-debug",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "linux-clang-debug"
         },
         {
             "name": "linux-clang-release",
-            "configurePreset": "linux-clang-release",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "linux-clang-release"
         },
         {
             "name": "linux-gcc-debug",
-            "configurePreset": "linux-gcc-debug",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "linux-gcc-debug"
         },
         {
             "name": "linux-gcc-release",
-            "configurePreset": "linux-gcc-release",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "linux-gcc-release"
         },
         {
             "name": "macos-clang-debug",
-            "configurePreset": "macos-clang-debug",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "macos-clang-debug"
         },
         {
             "name": "macos-clang-release",
-            "configurePreset": "macos-clang-release",
-            "targets": [ "rat", "package" ]
+            "configurePreset": "macos-clang-release"
         }
     ],
     "testPresets": [
@@ -276,6 +268,13 @@
             ]
         },
         {
+            "name": "windows-msvc-debug",
+            "configurePreset": "windows-msvc-debug",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
             "name": "linux-gcc-release",
             "configurePreset": "linux-gcc-release",
             "inherits": [
@@ -283,8 +282,36 @@
             ]
         },
         {
+            "name": "linux-gcc-debug",
+            "configurePreset": "linux-gcc-debug",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "linux-clang-release",
+            "configurePreset": "linux-clang-release",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "linux-clang-debug",
+            "configurePreset": "linux-clang-debug",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
             "name": "macos-clang-release",
             "configurePreset": "macos-clang-release",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "macos-clang-debug",
+            "configurePreset": "macos-clang-debug",
             "inherits": [
                 "test-default"
             ]
