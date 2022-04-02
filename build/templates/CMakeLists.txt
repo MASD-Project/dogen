@@ -17,41 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-if (WITH_JSON_VALIDATION)
-    set(files "")
-
-    #
-    # bintray
-    #
-    set(folder "bintray")
-    file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json.in")
-
-    add_custom_target(validate_json_${folder})
-    add_dependencies(validate_all_json validate_json_${folder})
-
-    add_custom_target(indent_json_${folder})
-    add_dependencies(indent_all_json indent_json_${folder})
-
-    foreach(file ${files})
-        add_custom_target(validate_json_${folder}_${file}
-            COMMENT "Validating JSON for ${folder}/${file}."
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . ${folder}/${file} > /dev/null)
-        add_dependencies(validate_json_${folder}
-            validate_json_${folder}_${file})
-
-        add_custom_target(indent_json_${folder}_${file}
-            COMMENT "Indenting JSON for ${folder}/${file}."
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            COMMAND ${JQ_COMMAND} . ${folder}/${file} > ${folder}/${file}_tmp
-            COMMAND mv ${folder}/${file}_tmp ${folder}/${file})
-        add_dependencies(indent_json_${folder}
-            indent_json_${folder}_${file})
-    endforeach()
-endif()
-
 set(version_template "${CMAKE_CURRENT_SOURCE_DIR}/cpp/config.hpp.in")
 configure_file(${version_template} ${stage_inc_dir}/dogen/config.hpp)
 message(STATUS "Transformed ${version_template}.")
@@ -71,7 +36,3 @@ message(STATUS "Transformed ${main_page_template}.")
 set(htaccess_template "${CMAKE_CURRENT_SOURCE_DIR}/doxygen/htaccess")
 configure_file(${htaccess_template} ${stage_doxygen_dir}/.htaccess)
 message(STATUS "Transformed ${htaccess_template}.")
-
-set(bintray_template "${CMAKE_CURRENT_SOURCE_DIR}/bintray/bintray.json.in")
-configure_file(${bintray_template} ${stage_pkg_dir}/bintray.json)
-message(STATUS "Transformed ${bintray_template}.")
