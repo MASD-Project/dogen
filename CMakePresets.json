@@ -79,7 +79,6 @@
                 "use-ninja"
             ],
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_CXX_FLAGS": "-stdlib=libstdc++",
                 "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libstdc++",
@@ -94,7 +93,6 @@
                 "use-ninja"
             ],
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
                 "CMAKE_CXX_COMPILER": "g++"
             }
         },
@@ -106,7 +104,6 @@
                 "use-ninja"
             ],
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
                 "CMAKE_CXX_COMPILER": "cl"
             }
         },
@@ -118,7 +115,6 @@
                 "use-ninja"
             ],
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang-cl",
                 "CMAKE_CXX_COMPILER": "clang-cl"
             }
         },
