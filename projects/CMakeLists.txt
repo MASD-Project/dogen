@@ -190,6 +190,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         # workaround for C1128: number of sections exceeded object
         # file format limit.
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
+
+        # Force synchronous writes to PDBs in order to support parallel builds.
+        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /FS")
     endif()
 
     # It seems Wall and /W4 are not practical for now as it includes
