@@ -20,14 +20,18 @@
             "binaryDir": "${sourceDir}/build/output/${presetName}"
         },
         {
-            "name": "dogen-common-options",
+            "name": "dogen-test-environment",
             "hidden": true,
             "environment": {
                 "DOGEN_PROJECTS_DIRECTORY": "${sourceDir}/projects",
                 "FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../../frozen/master/projects",
                 "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
                 "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
-            },
+            }
+        },
+        {
+            "name": "dogen-common-options",
+            "hidden": true,
             "cacheVariables" : {
                 "WITH_LATEX": "OFF",
                 "WITH_FULL_GENERATION": "ON",
@@ -41,6 +45,7 @@
                 "CMAKE_BUILD_TYPE": "Debug"
             },
             "inherits": [
+                "dogen-test-environment",
                 "dogen-common-options"
             ]
         },
@@ -51,6 +56,7 @@
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo"
             },
             "inherits": [
+                "dogen-test-environment",
                 "dogen-common-options"
             ]
         },
@@ -61,6 +67,7 @@
                 "CMAKE_BUILD_TYPE": "Release"
             },
             "inherits": [
+                "dogen-test-environment",
                 "dogen-common-options"
             ]
         },
