@@ -154,20 +154,17 @@ endif()
 #
 # Step: build.
 #
-ctest_build(RETURN_VALUE build_result)
-if(build_result)
-    message(FATAL_ERROR "Failed to build")
-endif ()
+ctest_build()
 
 #
 # Step: test.
 #
-# Note: because we are doing nothing with the return value, the build
-# will be green even when tests fail. This is OK because we rely on
-# CDash to see the testing status. Travis/AppVeyor just tells us
-# weather the build and packaging steps have worked or failed.
+# Note: because we are doing nothing with the return value, the build will be
+# green even when tests fail. This is OK because we rely on CDash to see the
+# testing status. Travis/AppVeyor just tells us weather the build and packaging
+# steps have worked or failed.
 #
-ctest_test(RETURN_VALUE retval)
+ctest_test()
 
 #
 # Step: code coverage
