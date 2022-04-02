@@ -51,11 +51,10 @@ jobs:
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
-      - name: Build with CMake
-        uses: lukka/run-cmake@v10
-        with:
-          configurePreset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          buildPreset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+      - name: Run CTest workflow
+        run: |
+          export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
 
   windows:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
@@ -85,8 +84,7 @@ jobs:
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
-      - name: Build with CMake
-        uses: lukka/run-cmake@v10
-        with:
-          configurePreset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          buildPreset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+      - name: Run CTest workflow
+        run: |
+          export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
