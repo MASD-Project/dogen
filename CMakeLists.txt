@@ -98,16 +98,13 @@ endif()
 #
 # Setup CCache
 #
-find_program(CCACHE_PROGRAM ccache)
+find_program(CCACHE_PROGRAM sccache)
 if (CCACHE_PROGRAM)
-    message(STATUS "Found CCache (${CCACHE_PROGRAM})...")
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
-
-    execute_process(COMMAND ${CCACHE_PROGRAM} --max-size=10G
-        ${CCACHE_PROGRAM} --show-stats
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+    message(STATUS "Found SCCache (${CCACHE_PROGRAM})...")
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}" CACHE STRING "")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}" CACHE STRING "")
 else()
-    message(STATUS "CCache NOT found.")
+    message(STATUS "SCCache NOT found.")
 endif()
 
 project(DOGEN LANGUAGES CXX VERSION 1.0.31)
