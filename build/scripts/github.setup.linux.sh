@@ -26,6 +26,7 @@ echo "Extract dir: ${cpp_ref_impl_extract_dir}"
 
 wget --no-check-certificate ${cpp_ref_impl_input_location} -O ${cpp_ref_impl_output_location}
 unzip -q ${cpp_ref_impl_output_location} -d ${cpp_ref_impl_extract_dir}
+ls ${cpp_ref_impl_extract_dir}
 
 frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zip"
 frozen_output_location="${RUNNER_TEMP}/frozen.zip"
@@ -36,6 +37,7 @@ echo "Extract dir: ${frozen_extract_dir}"
 
 wget --no-check-certificate ${frozen_input_location} -O ${frozen_output_location}
 unzip -q ${frozen_output_location} -d ${frozen_extract_dir}
+ls ${frozen_extract_dir}
 
 csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl/archive/master.zip"
 csharp_ref_impl_output_location="${RUNNER_TEMP}/csharp_ref_impl.zip"
@@ -46,3 +48,4 @@ echo "Extract dir: ${csharp_ref_impl_extract_dir}"
 
 wget --no-check-certificate ${csharp_ref_impl_input_location} -O ${csharp_ref_impl_output_location}
 unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
+ls ${csharp_ref_impl_extract_dir}
