@@ -181,6 +181,9 @@
         {
             "name": "windows-msvc-debug",
             "displayName": "Windows x64 Debug",
+            "environment": {
+                "CTEST_MAX_PARALLELISM": "1"
+            },
             "inherits": [
                 "windows-msvc",
                 "debug-build"
