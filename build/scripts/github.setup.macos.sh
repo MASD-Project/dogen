@@ -19,18 +19,30 @@
 #
 cpp_ref_impl_input_location="https://github.com/MASD-Project/cpp_ref_impl/archive/master.zip"
 cpp_ref_impl_output_location="${RUNNER_TEMP}/cpp_ref_impl.zip"
+echo "Download file: ${cpp_ref_impl_output_location}"
+
 cpp_ref_impl_extract_dir="${GITHUB_WORKSPACE}/../.."
+echo "Extract dir: ${cpp_ref_impl_extract_dir}"
+
 curl -L -o ${cpp_ref_impl_output_location} ${cpp_ref_impl_input_location}
 unzip -q ${cpp_ref_impl_output_location} -d ${cpp_ref_impl_extract_dir}
 
 frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zip"
 frozen_output_location="${RUNNER_TEMP}/frozen.zip"
+echo "Download file: ${frozen_output_location}"
+
 frozen_extract_dir="${GITHUB_WORKSPACE}/../.."
+echo "Extract dir: ${frozen_extract_dir}"
+
 curl -L -o ${frozen_output_location} ${frozen_input_location}
 unzip -q ${frozen_output_location} -d ${frozen_extract_dir}
 
 csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl/archive/master.zip"
 csharp_ref_impl_output_location="${RUNNER_TEMP}/csharp_ref_impl.zip"
+echo "Download file: ${csharp_ref_impl_output_location}"
+
 csharp_ref_impl_extract_dir="${GITHUB_WORKSPACE}/../.."
+echo "Extract dir: ${csharp_ref_impl_extract_dir}"
+
 curl -L -o ${csharp_ref_impl_output_location} ${csharp_ref_impl_input_location}
 unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
