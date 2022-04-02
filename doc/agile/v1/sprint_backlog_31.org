@@ -542,7 +542,7 @@ We need to simplify our third party packages story:
 As part of the move to github we should drop all of the legacy files. This also
 includes the old build scripts from the shell.
 
-*** STARTED Create clang build using libc++                           :story:
+*** COMPLETED Create clang build using libc++                         :story:
     :LOGBOOK:
     CLOCK: [2022-03-20 Sun 21:40]--[2022-03-20 Sun 22:16] =>  0:36
     :END:
@@ -552,11 +552,7 @@ code is using libc++ whereas the vcpkg dependencies are using the GCC standard
 library. For now we can default to GCC's library and create a new story to use
 clangs.
 
-Links:
-
-- [[https://github.com/microsoft/vcpkg/issues/9783][#9783: Add example for using libc++ on Linux]]
-
-*** STARTED Rewrite CTest script to use github actions                :story:
+*** COMPLETED Rewrite CTest script to use github actions              :story:
     :LOGBOOK:
     CLOCK: [2022-04-02 Sat 15:30]--[2022-04-02 Sat 18:11] =>  2:41
     CLOCK: [2022-04-02 Sat 14:40]--[2022-04-02 Sat 15:29] =>  0:49
@@ -588,10 +584,27 @@ Notes:
 - at present it seems the only advantage of the lukka cmake scripts is the
   setting up of the VCPKG caching.
 
-*** Add packaging step to github actions                              :story:
+*** STARTED Add packaging step to github actions                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-02 Sat 18:25]--[2022-04-02 Sat 18:43] =>  0:18
+    CLOCK: [2022-04-02 Sat 18:13]--[2022-04-02 Sat 18:16] =>  0:03
+    :END:
 
 We should really create packages for all builds. We need to also check that when
 we tag we create packages.
+
+Notes:
+
+- we are packaging but we can't see the resulting files. Perhaps they only
+  appear at the end of the workflow?
+
+** Use MSVC in Windows build                                          :story:
+   :LOGBOOK:
+   CLOCK: [2022-04-02 Sat 18:44]
+   :END:
+
+At present the Windows build seems to be using a mix of Ming and MSVC (but
+failing to find MSVC). We need to make sure both vcpkg and the build use MSVC.
 
 *** Update nightly builds to use new vcpkg setup                      :story:
 
@@ -601,6 +614,17 @@ dropbox etc. We need to move to the new world of presets.
 Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
+
+*** Create clang build using libc++                                   :story:
+
+At present we cannot build using clang and libc++. The main issue seems to be
+that dogen code is using libc++ whereas the vcpkg dependencies are using the GCC
+standard library. For now we defaulted to GCC's library but the right fix is to
+use libc++.
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/9783][#9783: Add example for using libc++ on Linux]]
 
 *** Reference implementation build is borked                          :story:
 
@@ -623,10 +647,10 @@ existing libraries and integrated with nightlies. Ideally it should
 also output results to relational so that we can plot the evolution
 over time.
 
-*** Upload release to github                                          :story:
+*** Upload release to github on tags                                  :story:
 
-At present we are manually uploading binaries on a release to
-github. It would be nice to integrate this with CI.
+At present we are manually uploading binaries on a release to github. It would
+be nice to integrate this with CI.
 
 Links:
 
@@ -743,7 +767,10 @@ Notes:
   entity. We can supply a PM model with Dogen but that is just Dogen's
   interpretation of the physical space; users could supply their own PM's as
   required. The PMs need to bind to the PMM: either the user supplies its own
-  TS, part etc or it must bind (via meta-data) to existing parts, TS etc.
+  TS, part etc or it must bind (via meta-data) to existing parts, TS etc. We
+  also need to support two styles of declaring PM entities: inline (e.g. nested)
+  or outline (e.g. we want to bind a given facet, part etc to an already
+  existing TS, etc).
 - we could hash both the mustache template and the JSON object used as input,
   and save those two hashes in the generated file. If the hashes match, don't
   bother regenerating.
