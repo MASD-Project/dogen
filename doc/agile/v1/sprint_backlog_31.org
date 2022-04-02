@@ -534,6 +534,14 @@ We need to simplify our third party packages story:
   we need to carry our own vcpkg patches.
 - deprecate MASD fork of vcpkg.
 
+*** COMPLETED Remove deprecated travis and appveyor config files      :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-02 Sat 18:11]--[2022-04-02 Sat 18:13] =>  0:02
+    :END:
+
+As part of the move to github we should drop all of the legacy files. This also
+includes the old build scripts from the shell.
+
 *** STARTED Create clang build using libc++                           :story:
     :LOGBOOK:
     CLOCK: [2022-03-20 Sun 21:40]--[2022-03-20 Sun 22:16] =>  0:36
@@ -550,6 +558,7 @@ Links:
 
 *** STARTED Rewrite CTest script to use github actions                :story:
     :LOGBOOK:
+    CLOCK: [2022-04-02 Sat 15:30]--[2022-04-02 Sat 18:11] =>  2:41
     CLOCK: [2022-04-02 Sat 14:40]--[2022-04-02 Sat 15:29] =>  0:49
     CLOCK: [2022-04-02 Sat 11:20]--[2022-04-02 Sat 12:42] =>  1:22
     CLOCK: [2022-04-02 Sat 11:00]--[2022-04-02 Sat 11:19] =>  0:19
@@ -592,11 +601,6 @@ dropbox etc. We need to move to the new world of presets.
 Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
-
-*** Remove deprecated travis and appveyor config files                :story:
-
-As part of the move to github we should drop all of the legacy files. This also
-includes the old build scripts from the shell.
 
 *** Reference implementation build is borked                          :story:
 
