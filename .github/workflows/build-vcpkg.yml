@@ -129,5 +129,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: Install package
+          name: Package ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/
