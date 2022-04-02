@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-02 Sat 15:30]
+#+CAPTION: Clock summary at [2022-04-03 Sun 00:50]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *36:08* |       |       |   0.0 |
+| *Total time*                                               | *41:16* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 36:08   |       |       |   0.0 |
-| Active                                                     |         | 36:08 |       |   0.0 |
+| Stories                                                    | 41:16   |       |       |   0.0 |
+| Active                                                     |         | 38:51 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
@@ -28,8 +28,12 @@
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
+| Remove deprecated travis and appveyor config files         |         |       |  0:02 |   0.0 |
 | Create clang build using libc++                            |         |       |  0:36 |   0.0 |
-| Rewrite CTest script to use github actions                 |         |       | 10:34 |   0.0 |
+| Rewrite CTest script to use github actions                 |         |       | 13:15 |   0.0 |
+| Add packaging step to github actions                       |         |       |  0:21 |   0.0 |
+| Use MSVC in Windows build                                  |         |  2:04 |       |   0.0 |
+| Can't see build info in github builds                      |         |  0:21 |       |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -598,14 +602,39 @@ Notes:
 - we are packaging but we can't see the resulting files. Perhaps they only
   appear at the end of the workflow?
 
-** Use MSVC in Windows build                                          :story:
+** STARTED Use MSVC in Windows build                                  :story:
    :LOGBOOK:
-   CLOCK: [2022-04-02 Sat 18:44]
+   CLOCK: [2022-04-03 Sun 00:20]--[2022-04-03 Sun 00:50] =>  0:30
+   CLOCK: [2022-04-02 Sat 23:25]--[2022-04-02 Sat 23:40] =>  0:15
+   CLOCK: [2022-04-02 Sat 22:23]--[2022-04-02 Sat 22:54] =>  0:31
+   CLOCK: [2022-04-02 Sat 21:45]--[2022-04-02 Sat 21:57] =>  0:12
+   CLOCK: [2022-04-02 Sat 18:44]--[2022-04-02 Sat 19:20] =>  0:36
    :END:
 
 At present the Windows build seems to be using a mix of Ming and MSVC (but
 failing to find MSVC). We need to make sure both vcpkg and the build use MSVC.
 
+Notes:
+
+- debug build has a config type of release.
+- ccache is not creating the cache correctly on windows.
+
+** Windows package is broken                                          :story:
+
+When we install the windows package under wine, it fails with:
+
+
+#+begin_quote
+E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
+#+end_quote
+
+** Remove database options from help                                  :story:
+** Can't see build info in github builds                              :story:
 *** Update nightly builds to use new vcpkg setup                      :story:
 
 At present we are still relying on the old vcpkg setup, with downloads from
