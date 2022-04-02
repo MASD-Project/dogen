@@ -262,6 +262,14 @@
             "configurePreset": "windows-msvc-release"
         },
         {
+            "name": "windows-msvc-clang-cl-debug",
+            "configurePreset": "windows-msvc-debug"
+        },
+        {
+            "name": "windows-msvc-clang-cl-release",
+            "configurePreset": "windows-msvc-release"
+        },
+        {
             "name": "linux-clang-debug",
             "configurePreset": "linux-clang-debug"
         },
@@ -308,6 +316,20 @@
         {
             "name": "windows-msvc-debug",
             "configurePreset": "windows-msvc-debug",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "windows-msvc-clang-cl-release",
+            "configurePreset": "windows-msvc-clang-cl-release",
+            "inherits": [
+                "test-default"
+            ]
+        },
+        {
+            "name": "windows-msvc-clang-cl-debug",
+            "configurePreset": "windows-msvc-clang-cl-debug",
             "inherits": [
                 "test-default"
             ]
