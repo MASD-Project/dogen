@@ -32,12 +32,11 @@
 
 namespace dogen::utility::log {
 
-typedef boost::log::sources::severity_channel_logger<
-    severity_level,
-    std::string
-    > logger;
+using logger = boost::log::sources::severity_channel_logger<
+    severity_level, std::string
+    >;
 
-logger logger_factory(std::string component_name);
+auto logger_factory(std::string component_name) -> logger;
 
 }
 
