@@ -1,0 +1,64 @@
+name: MacOS
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+    runs-on: ${{matrix.os}}-latest
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix:
+        name: [macos-clang]
+        buildtype: [debug, release]
+        include:
+          - name: macos-clang
+            family: macos
+            os: macos
+            compiler: clang
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          variant: sccache
+          key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          max-size: 1000M
+
+      - name: Get latest CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@v10
+        with:
+          appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
+
+      - name: Setup test data
+        run: |
+          ./build/scripts/github.setup.${{matrix.family}}.sh
+
+      - name: Run CTest workflow
+        run: |
+          export DOGEN_BUILD_PROVIDER="github"
+          export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
+          export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+          export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
+          ls ../../
+          export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/
