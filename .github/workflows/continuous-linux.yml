@@ -1,4 +1,4 @@
-name: MacOS
+name: Continuous Linux
 
 on:
   push:
@@ -16,17 +16,28 @@ jobs:
       max-parallel: 10
       fail-fast: false
       matrix:
-        name: [macos-clang]
+        name: [linux-gcc, linux-clang]
         buildtype: [debug, release]
         include:
-          - name: macos-clang
-            family: macos
-            os: macos
+          - name: linux-gcc
+            family: linux
+            os: ubuntu
+            compiler: gcc
+          - name: linux-clang
+            family: linux
+            os: ubuntu
             compiler: clang
+
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
+
+      - name: Setup Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
 
       - name: Setup ccache
         uses: hendrikmuhs/ccache-action@v1.2

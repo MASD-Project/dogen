@@ -1,4 +1,4 @@
-name: Windows
+name: Continuous MacOS
 
 on:
   push:
@@ -9,27 +9,24 @@ on:
       - master
 
 jobs:
-  windows:
+  build:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
     runs-on: ${{matrix.os}}-latest
     strategy:
+      max-parallel: 10
       fail-fast: false
-      max-parallel: 8
       matrix:
-        name: [windows-msvc]
+        name: [macos-clang]
         buildtype: [debug, release]
         include:
-          - name: windows-msvc
-            os: windows
-            family: windows
-            compiler: msvc
-
+          - name: macos-clang
+            family: macos
+            os: macos
+            compiler: clang
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
-
-      - uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup ccache
         uses: hendrikmuhs/ccache-action@v1.2
@@ -48,16 +45,17 @@ jobs:
 
       - name: Setup test data
         run: |
-          ./build/scripts/github.setup.${{matrix.family}}.ps1
+          ./build/scripts/github.setup.${{matrix.family}}.sh
 
       - name: Run CTest workflow
         run: |
-          $env:DOGEN_BUILD_PROVIDER="github"
-          $env:DOGEN_BUILD_COMMIT="$env:GITHUB_SHA"
-          $env:DOGEN_BUILD_NUMBER="$env:GITHUB_RUN_NUMBER"
-          $env:DOGEN_BUILD_TIMESTAMP=Get-Date -format "yyyy/MM/dd HH:mm:ss"
-          $preset="${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}"
-          ctest -VV --preset $preset --script "CTest.cmake,ctest_model=Continuous,ctest_preset=$preset"
+          export DOGEN_BUILD_PROVIDER="github"
+          export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
+          export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+          export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
+          ls ../../
+          export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+          ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
