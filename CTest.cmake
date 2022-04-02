@@ -154,7 +154,7 @@ endif()
 #
 # Step: build.
 #
-#ctest_build(RETURN_VALUE build_result)
+ctest_build(RETURN_VALUE build_result)
 if(build_result)
     message(FATAL_ERROR "Failed to build")
 endif ()
@@ -167,7 +167,7 @@ endif ()
 # CDash to see the testing status. Travis/AppVeyor just tells us
 # weather the build and packaging steps have worked or failed.
 #
-#ctest_test(RETURN_VALUE retval)
+ctest_test(RETURN_VALUE retval)
 
 #
 # Step: code coverage
@@ -186,4 +186,4 @@ endif()
 #
 # Step: submit build results
 #
-#ctest_submit(RETRY_COUNT ${retry_count} RETRY_DELAY ${retry_delay})
+ctest_submit(RETRY_COUNT ${retry_count} RETRY_DELAY ${retry_delay})
