@@ -48,7 +48,7 @@ jobs:
         with:
           variant: sccache
           key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          max-size: 100M
+          max-size: 1000M
 
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
@@ -66,6 +66,12 @@ jobs:
         run: |
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: Install package
+          path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/*
 
   windows:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
@@ -92,7 +98,7 @@ jobs:
         with:
           variant: sccache
           key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          max-size: 100M
+          max-size: 1000M
 
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
@@ -109,4 +115,10 @@ jobs:
       - name: Run CTest workflow
         run: |
           set preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          ctest -VV --preset %preset% --script "CTest.cmake,ctest_model=Continuous,ctest_preset=%preset%"
+          ctest -VV --preset $preset --script "CTest.cmake,ctest_model=Continuous,ctest_preset=$preset"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: Install package
+          path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/*
