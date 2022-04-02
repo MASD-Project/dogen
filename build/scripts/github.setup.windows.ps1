@@ -16,16 +16,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-$ref_models_dir="${GITHUB_WORKSPACE}\..\.."
-$downloads_dir="${RUNNER_TEMP}\"
+$ref_models_dir="$Env:GITHUB_WORKSPACE\..\.."
+Write-Host "Reference models: $ref_models_dir"
+
+$downloads_dir="$Env:RUNNER_TEMP\"
+Write-Host "Downloads dir: $downloads_dir"
 
 $cpp_ref_impl_input_location="https://github.com/MASD-Project/cpp_ref_impl/archive/master.zip"
 $cpp_ref_impl_downloads_location="${downloads_dir}\cpp_ref_impl.zip"
 $cpp_ref_impl_installs_dir="$ref_models_dir"
 
-Invoke-WebRequest -OutFile $cpp_ref_impl_downloads_location $cpp_ref_impl_input_location
 Write-Host "URL: $cpp_ref_impl_input_location"
 Write-Host "Download location: $cpp_ref_impl_downloads_location"
+Invoke-WebRequest -OutFile $cpp_ref_impl_downloads_location $cpp_ref_impl_input_location
 Set-Location -Path $cpp_ref_impl_installs_dir | Out-Null
 7z x $cpp_ref_impl_downloads_location > $null
 
@@ -33,9 +36,9 @@ $frozen_input_location="https://github.com/MASD-Project/frozen/archive/master.zi
 $frozen_downloads_location="${downloads_dir}\frozen.zip"
 $frozen_installs_dir="$ref_models_dir"
 
-Invoke-WebRequest -OutFile $frozen_downloads_location $frozen_input_location
 Write-Host "URL: $frozen_input_location"
 Write-Host "Download location: $frozen_downloads_location"
+Invoke-WebRequest -OutFile $frozen_downloads_location $frozen_input_location
 Set-Location -Path $frozen_installs_dir | Out-Null
 7z x $frozen_downloads_location > $null
 
@@ -43,8 +46,8 @@ $csharp_ref_impl_input_location="https://github.com/MASD-Project/csharp_ref_impl
 $csharp_ref_impl_downloads_location="${downloads_dir}\csharp_ref_impl.zip"
 $csharp_ref_impl_installs_dir="$ref_models_dir"
 
-Invoke-WebRequest -OutFile $csharp_ref_impl_downloads_location $csharp_ref_impl_input_location
 Write-Host "URL: $csharp_ref_impl_input_location"
 Write-Host "Download location: $csharp_ref_impl_downloads_location"
+Invoke-WebRequest -OutFile $csharp_ref_impl_downloads_location $csharp_ref_impl_input_location
 Set-Location -Path $csharp_ref_impl_installs_dir | Out-Null
 7z x $csharp_ref_impl_downloads_location > $null
