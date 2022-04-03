@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-03 Sun 13:22]
+#+CAPTION: Clock summary at [2022-04-03 Sun 13:27]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *43:00* |       |       |   0.0 |
+| *Total time*                                               | *43:04* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 43:00   |       |       |   0.0 |
-| Active                                                     |         | 43:00 |       |   0.0 |
+| Stories                                                    | 43:04   |       |       |   0.0 |
+| Active                                                     |         | 43:04 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
@@ -33,7 +33,7 @@
 | Remove database options from help                          |         |       |  0:07 |   0.0 |
 | Generate doxygen docs and add to site                      |         |       |  1:51 |   0.0 |
 | Add packaging step to github actions                       |         |       |  0:21 |   0.0 |
-| Setup MSVC Windows build for debug and release             |         |       |  3:20 |   0.0 |
+| Setup MSVC Windows build for debug and release             |         |       |  3:24 |   0.0 |
 | Can't see build info in github builds                      |         |       |  0:09 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -616,6 +616,7 @@ Notes:
 
 *** COMPLETED Setup MSVC Windows build for debug and release          :story:
    :LOGBOOK:
+   CLOCK: [2022-04-03 Sun 13:23]--[2022-04-03 Sun 13:27] =>  0:04
    CLOCK: [2022-04-03 Sun 12:48]--[2022-04-03 Sun 12:58] =>  0:10
    CLOCK: [2022-04-03 Sun 10:40]--[2022-04-03 Sun 11:30] =>  0:50
    CLOCK: [2022-04-03 Sun 01:24]--[2022-04-03 Sun 01:34] =>  0:10
