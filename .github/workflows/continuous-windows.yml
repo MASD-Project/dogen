@@ -22,6 +22,7 @@ jobs:
             os: windows
             family: windows
             compiler: msvc
+            experimental: false
           - name: windows-msvc-clang-cl
             os: windows
             family: windows
@@ -61,7 +62,7 @@ jobs:
           $env:DOGEN_BUILD_TIMESTAMP=Get-Date -format "yyyy/MM/dd HH:mm:ss"
           $preset="${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}"
           $model = "Continuous"
-          if (${{matrix.experimental}} -eq 1)
+          if (${{matrix.experimental}} -eq true)
           {
               $model = "Experimental"
           }
