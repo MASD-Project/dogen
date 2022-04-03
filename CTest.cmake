@@ -102,6 +102,7 @@ if(NOT "$ENV{CTEST_MAX_PARALLELISM}" STREQUAL "")
 endif()
 
 # We assume Ninja, but this also works for make.
+message(STATUS "Number of parallel jobs: ${nproc}")
 set(CTEST_BUILD_FLAGS "-l${nproc}")
 
 # Set limits for test output
