@@ -65,6 +65,8 @@ jobs:
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           if [[ "${{matrix.buildtype}}" == "debug" ]]; then
               export code_coverage="1"
+          else
+              echo "Code coverage not enabled. Build type: ${{matrix.buildtype}}"
           fi
           export cmake_args="model=Continuous,preset=${preset},configuration=${{matrix.buildtype}}"
           ctest -VV --preset ${preset} --script "CTest.cmake,${cmake_args}"
