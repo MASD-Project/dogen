@@ -160,7 +160,7 @@ if(git_result)
 endif()
 
 # Setup the preset for configuration.
-set(cmake_args "--preset ${preset} ${cmake_defines}")
+set(cmake_args ${cmake_defines} "--preset ${preset}")
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
 if(configure_result)
     message(FATAL_ERROR "Failed to configure")
