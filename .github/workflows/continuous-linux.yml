@@ -33,6 +33,7 @@ jobs:
 
       - name: Setup Clang
         uses: egor-tensin/setup-clang@v1
+        if: ${{matrix.compiler}} == clang
         with:
           version: latest
           platform: x64
