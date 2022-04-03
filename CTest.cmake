@@ -47,27 +47,37 @@ endif()
 #
 # Ensure all mandatory parameters have been set.
 #
-if(NOT DEFINED ctest_model)
-    message(FATAL_ERROR "CTest model parameter not defined (ctest_model).")
+if(NOT DEFINED model)
+    message(FATAL_ERROR "CTest model parameter not defined.")
 endif()
 
-if(NOT DEFINED ctest_preset)
-    message(FATAL_ERROR "Preset parameter not defined (ctest_preset).")
+if(NOT DEFINED preset)
+    message(FATAL_ERROR "CTest preset parameter not defined.")
+endif()
+
+if(NOT DEFINED configuration)
+    message(FATAL_ERROR "CTest configuration parameter not defined.")
 endif()
 
 #
 # Setup CTest variables
 #
 if (DEFINED ENV{DOGEN_BUILD_PROVIDER})
-    set(ctest_site $ENV{DOGEN_BUILD_PROVIDER})
+    set(CTEST_SITE $ENV{DOGEN_BUILD_PROVIDER})
 else()
     site_name(APP_SITE)
-    set(ctest_site "${APP_SITE}")
+    set(CTEST_SITE "${APP_SITE}")
 endif()
 
-set(CTEST_SITE "${ctest_site}")
-set(CTEST_BUILD_NAME "${ctest_preset}")
+set(CTEST_BUILD_NAME "${preset}")
 set(CTEST_BUILD_TARGET "package")
+
+string(TOLOWER "${configuration}" configuration_lower)
+if(configuration_lower STREQUAL "Debug")
+    set(CTEST_CONFIGURATION_TYPE "Debug")
+else()
+    set(CTEST_CONFIGURATION_TYPE "Release")
+endif()
 
 # Set the generator. This will override the presets, but we have no option as
 # CTest refuses to configure unless there is a generator.
@@ -79,8 +89,7 @@ message(STATUS "Source directory: ${CTEST_SOURCE_DIRECTORY}")
 
 # Note that we have hard-coded the paths to match the presets. This is not very
 # nice but since it should not change often, it suffices.
-set(CTEST_BINARY_DIRECTORY
-    "${CTEST_SOURCE_DIRECTORY}/build/output/${ctest_preset}")
+set(CTEST_BINARY_DIRECTORY "${CTEST_SOURCE_DIRECTORY}/build/output/${preset}")
 message(STATUS "Binary directory: ${CTEST_BINARY_DIRECTORY}")
 
 # Determine the number of jobs to run in parallel.
@@ -128,7 +137,7 @@ set(WITH_MEMCHECK false)
 #
 # Step: start the build
 #
-ctest_start(${ctest_model})
+ctest_start(${model})
 
 #
 # Step: Version control.
@@ -145,7 +154,7 @@ if(git_result)
 endif()
 
 # Setup the preset for configuration.
-set(cmake_args "--preset ${ctest_preset}")
+set(cmake_args "--preset ${preset}")
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
 if(configure_result)
     message(FATAL_ERROR "Failed to configure")

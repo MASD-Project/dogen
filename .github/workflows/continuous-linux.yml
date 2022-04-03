@@ -13,7 +13,6 @@ jobs:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
     runs-on: ${{matrix.os}}-latest
     strategy:
-      max-parallel: 10
       fail-fast: false
       matrix:
         name: [linux-gcc, linux-clang]
@@ -27,7 +26,6 @@ jobs:
             family: linux
             os: ubuntu
             compiler: clang
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -64,9 +62,12 @@ jobs:
           export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
           export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
-          ls ../../
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          ctest -VV --preset ${preset} --script "CTest.cmake,ctest_model=Continuous,ctest_preset=${preset}"
+          if [[ "${{matrix.buildtype}}" == "debug" ]];
+              export code_coverage="1"
+          fi
+          export cmake_args="model=Continuous,preset=${preset},configuration=${{matrix.buildtype}}"
+          ctest -VV --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1

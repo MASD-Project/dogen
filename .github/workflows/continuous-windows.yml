@@ -59,7 +59,8 @@ jobs:
           $env:DOGEN_BUILD_NUMBER="$env:GITHUB_RUN_NUMBER"
           $env:DOGEN_BUILD_TIMESTAMP=Get-Date -format "yyyy/MM/dd HH:mm:ss"
           $preset="${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}"
-          ctest -VV --preset $preset --script "CTest.cmake,ctest_model=Continuous,ctest_preset=$preset"
+          $cmake_args="model=Continuous,preset=$preset,configuration=${{matrix.buildtype}}"
+          ctest -VV --preset $preset --script "CTest.cmake,$cmake_args"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
