@@ -62,7 +62,7 @@ jobs:
           $env:DOGEN_BUILD_TIMESTAMP=Get-Date -format "yyyy/MM/dd HH:mm:ss"
           $preset="${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}"
           $model = "Continuous"
-          if (${{matrix.experimental}} -eq true)
+          if (${{matrix.experimental}})
           {
               $model = "Experimental"
           }

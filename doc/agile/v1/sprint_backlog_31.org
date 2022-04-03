@@ -645,6 +645,7 @@ Links:
 
 *** STARTED Can't see build info in github builds                     :story:
     :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 14:30]--[2022-04-03 Sun 14:42] =>  0:12
     CLOCK: [2022-04-03 Sun 13:12]--[2022-04-03 Sun 13:21] =>  0:09
     :END:
 
