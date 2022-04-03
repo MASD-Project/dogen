@@ -655,6 +655,7 @@ that is no longer working.
 
 *** STARTED Update build instructions in readme                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 22:22]--[2022-04-03 Sun 22:35] =>  0:13
     CLOCK: [2022-04-03 Sun 14:43]--[2022-04-03 Sun 15:04] =>  0:21
     :END:
 

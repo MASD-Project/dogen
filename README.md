@@ -105,7 +105,7 @@ These warnings can probably best summarised as follows: "if it breaks, you get
 to keep the pieces; and it will break, often". But if you find such things fun,
 proceed with caution.
 
-# Packages
+# Binary Packages
 
 Binary packages are available for each release on and
 [GitHub](https://github.com/MASD-Project/dogen/releases) (links at the end of
@@ -130,7 +130,7 @@ Where ```${VERSION}``` is your Dogen version such as ```1.0.30```.
 
 ----
 
-# Building
+# Building From Source
 
 In order to build Dogen you will need a C++ toolchain. On Linux and OSX, you'll
 need a recent compiler with C++ 17 support, such as [GCC
@@ -165,7 +165,7 @@ cd dogen
 cmake --preset linux-clang-release
 ```
 
-On Linux and OSX, you can build using GNU Make as follows:
+You can build Dogen on all platforms as follows:
 
 ```
 cmake --build --preset linux-clang-release
@@ -214,8 +214,12 @@ for Dogen):
 
 ```
 
-Executing the ```run_all_tests``` target will now also include the reference
-implementations. Make sure your changes do not break these models.
+Running all tests will now also include the tests for reference implementations.
+You can run all tests as follows:
+
+```
+cmake --build --preset linux-clang-release --target rat
+```
 
 ## Generation
 
@@ -224,17 +228,16 @@ using the target ```generate_all_org``` or its abbreviation ```gao```. This is
 useful, for example, to update the models to the latest version of Dogen, or
 just to see how Dogen works. By default Dogen uses the current built version,
 but you can also use another. For this you may need to tell CMake of its
-location by setting ```CMAKE_PROGRAM_PATH```:
+location by setting ```CMAKE_PROGRAM_PATH```. After regeneration, you can then
+use ```git diff``` to inspect the differences produced by regeneration, if any.
+The build directory contains all of the logs, under the directory ```log```.
 
-```
-CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..
-```
+# Documentation
 
-After regeneration, you can then use ```git diff``` to inspect the differences
-produced by regeneration, if any. The build directory contains all of the logs,
-under the directory ```log```.
+Whilst we do not have a huge amount of documentation, there is plenty of
+assorted material talking about Dogen.
 
-# Videos
+## Videos
 
 A number of videos are now available discussing Dogen, gathered under "themed"
 playlists:
@@ -267,7 +270,7 @@ playlists:
   been read to get a better understanding of the field. We try to read one of
   these a week, but we don't always succeed.
 
-# Posts
+## Posts
 
 Over time, a number of assorted blog posts have been published on Dogen, mainly
 covering its development process:
@@ -304,6 +307,20 @@ covering its development process:
 
 The [release notes](https://github.com/MASD-Project/dogen/releases) are also
 worth perusing as contain quite a lot of material about Dogen's internals.
+
+## Papers
+
+We are strong believers in open academia so all of our papers are open.
+
+- [Notes on Model Driven
+  Engineering](https://zenodo.org/record/5812017#.YkmlftDMKXI): Background on
+  MDE.
+- [Survey of Special Purpose Code
+  Generators](https://zenodo.org/record/5790875#.YkoSutDMKXI): Short survey of
+  Open Source tools dedicated to special purpose code generation.
+- [Experience Report of Industrial Adoption of Model Driven Development in the
+  Financial Sector](https://zenodo.org/record/5767247#.YkoS6NDMKXI): Our prior
+  experiences of using MDE on an industrial setting.
 
 # Reporting Problems
 
