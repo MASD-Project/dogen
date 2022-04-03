@@ -63,7 +63,7 @@ jobs:
           export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          if [[ "${{matrix.buildtype}}" == "debug" ]];
+          if [[ "${{matrix.buildtype}}" == "debug" ]]; then
               export code_coverage="1"
           fi
           export cmake_args="model=Continuous,preset=${preset},configuration=${{matrix.buildtype}}"
