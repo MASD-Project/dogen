@@ -86,7 +86,6 @@ const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_default_directory("tracing");
 const std::string tracing_backend_arg("tracing-backend");
 const std::string tracing_backend_file("file");
-const std::string tracing_backend_database("relational");
 const std::string tracing_run_id_arg("tracing-run-id");
 const std::string tracing_filter_regex_arg("tracing-filter-regex");
 
@@ -100,16 +99,6 @@ const std::string diffing_destination_arg("diffing-destination");
 const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
-
-const std::string database_hostname_arg("database-host");
-const std::string database_port_arg("database-port");
-const std::string database_name_arg("database-name");
-const std::string database_user_arg("database-user");
-const std::string database_password_arg("database-password");
-const std::string database_engine_arg("database-engine");
-const std::string database_engine_postgres("postgres");
-const std::string database_engine_sqlite("sqlite");
-const std::string database_schema_gen_arg("database-generate-schema");
 
 const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
@@ -128,7 +117,6 @@ const std::string generate_output_dir_arg("output-directory");
 const std::string convert_source_arg("source");
 const std::string convert_destination_arg("destination");
 
-const std::string invalid_engine("Database engine is not valid: ");
 const std::string invalid_backend("Tracing backend is not valid: ");
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
@@ -197,7 +185,7 @@ options_description make_top_level_visible_options_description() {
             " metrics. Valid values: plain, org-mode, graphviz. "
             "Defaults to org-mode.")
         ("tracing-backend", value<std::string>(),
-            "Backend to use for tracing. Valid values: file, relational.")
+            "Backend to use for tracing. Valid values: file.")
         ("tracing-run-id", value<std::string>(),
             "Run ID to use to identify the tracing session.")
         ("tracing-filter-regex", value<std::vector<std::string>>(),
@@ -233,27 +221,6 @@ options_description make_top_level_visible_options_description() {
             "Override the NOW value used for the activity timestamp. "
             "Format: %Y-%m-%dT%H:%M:%S");
     r.add(ehod);
-
-    options_description db("Database");
-    db.add_options()
-        ("database-host", value<std::string>(),
-            "Name of the machine hosting the database.")
-        ("database-port", value<unsigned int>(),
-            "Port to connect to access the database.")
-        ("database-name", value<std::string>(),
-            "Name of the database.")
-        ("database-user", value<std::string>(),
-            "User to connect as in the database.")
-        ("database-password", value<std::string>(),
-            "Password for the user.")
-        ("database-engine", value<std::string>(),
-            "Database engine. Valid values: postgresql, sqlite.")
-        ("database-generate-schema",
-            "If true, deletes all tables and regenerates them. Otherwise, "
-            "assumes their presence.");
-
-    r.add(db);
-
     return r;
 }
 

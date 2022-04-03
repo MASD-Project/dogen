@@ -33,8 +33,6 @@
 #include "dogen.cli/types/parser_exception.hpp"
 
 using namespace dogen::utility::log;
-using dogen::cli::command_line_parser;
-using dogen::cli::conversion_configuration;
 using dogen::cli::generation_configuration;
 using dogen::cli::program_options_parser;
 
@@ -257,7 +255,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_output_dir_results_in_expected_options) {
 
 BOOST_AUTO_TEST_CASE(supplying_an_invalid_command_or_argument_throws) {
     SETUP_TEST_LOG("supplying_an_invalid_command_or_argument_throws");
-    typedef std::vector<std::string> vector;
+    using vector = std::vector<std::string>;
     check_exception(vector { invalid_arg }, missing_command_msg);
     check_exception(vector { generate_command_arg, invalid_arg },
         invalid_argument_msg);

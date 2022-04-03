@@ -458,39 +458,6 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 Updates to sprint and product backlog.
 
-*** STARTED Generate doxygen docs and add to site                     :story:
-    :LOGBOOK:
-    CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
-    CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
-    :END:
-
-Now we have a site, we could add the doxygen docs to it.
-
-Notes:
-
-- consider adding links in the source code to the PlantUML diagrams so
-  that they come out in doxygen.
-- add badge for documentation. Example:
-
-#+begin_src markdown
-[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
-#+end_src
-
-- add SVG of models to the docs.
-
-Links:
-
-- [[https://jothepro.github.io/doxygen-awesome-css/][doxygen-awesome-css]]: "Doxygen Awesome is a custom CSS theme for
-  doxygen html-documentation with lots of customization parameters.W
-- [[https://mcraveiro.github.io/dogen/doxygen/index.html][Dogen documentation]]
-- [[https://www.reddit.com/r/cpp/comments/ma2r2r/dxoygen_awesome_css_make_your_doxygen_docs/][reddit: dxoygen (/sic./) awesome css : make your doxygen docs
-  looking more modern]]
-- [[https://github.com/jothepro/doxygen-awesome-css/issues/2][GH issue: Creating a link to the dark theme]]: opened a ticket about
-  adding a link to the dark theme version.
-- [[https://github.com/adafruit/ci-arduino/tree/master/assets][Example doxygen badge]]
-- [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
-- [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
-
 *** COMPLETED Move build to GitHub                                    :story:
     :LOGBOOK:
     CLOCK: [2022-03-20 Sun 19:01]--[2022-03-20 Sun 20:55] =>  1:54
@@ -588,6 +555,13 @@ Notes:
 - at present it seems the only advantage of the lukka cmake scripts is the
   setting up of the VCPKG caching.
 
+*** COMPLETED Remove database options from help                       :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 01:39]--[2022-04-03 Sun 01:46] =>  0:07
+    :END:
+
+We removed the relational model, but the options are still in the help.
+
 *** STARTED Add packaging step to github actions                      :story:
     :LOGBOOK:
     CLOCK: [2022-04-02 Sat 18:25]--[2022-04-02 Sat 18:43] =>  0:18
@@ -602,8 +576,42 @@ Notes:
 - we are packaging but we can't see the resulting files. Perhaps they only
   appear at the end of the workflow?
 
-** STARTED Use MSVC in Windows build                                  :story:
+*** STARTED Generate doxygen docs and add to site                     :story:
+    :LOGBOOK:
+    CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
+    CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
+    :END:
+
+Now we have a site, we could add the doxygen docs to it.
+
+Notes:
+
+- consider adding links in the source code to the PlantUML diagrams so
+  that they come out in doxygen.
+- add badge for documentation. Example:
+
+#+begin_src markdown
+[![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)]
+#+end_src
+
+- add SVG of models to the docs.
+
+Links:
+
+- [[https://jothepro.github.io/doxygen-awesome-css/][doxygen-awesome-css]]: "Doxygen Awesome is a custom CSS theme for
+  doxygen html-documentation with lots of customization parameters.W
+- [[https://mcraveiro.github.io/dogen/doxygen/index.html][Dogen documentation]]
+- [[https://www.reddit.com/r/cpp/comments/ma2r2r/dxoygen_awesome_css_make_your_doxygen_docs/][reddit: dxoygen (/sic./) awesome css : make your doxygen docs
+  looking more modern]]
+- [[https://github.com/jothepro/doxygen-awesome-css/issues/2][GH issue: Creating a link to the dark theme]]: opened a ticket about
+  adding a link to the dark theme version.
+- [[https://github.com/adafruit/ci-arduino/tree/master/assets][Example doxygen badge]]
+- [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
+- [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
+
+*** STARTED Use MSVC in Windows build                                 :story:
    :LOGBOOK:
+   CLOCK: [2022-04-03 Sun 01:24]--[2022-04-03 Sun 01:34] =>  0:10
    CLOCK: [2022-04-03 Sun 00:51]--[2022-04-03 Sun 00:57] =>  0:06
    CLOCK: [2022-04-03 Sun 00:20]--[2022-04-03 Sun 00:50] =>  0:30
    CLOCK: [2022-04-02 Sat 23:25]--[2022-04-02 Sat 23:40] =>  0:15
@@ -620,7 +628,7 @@ Notes:
 - debug build has a config type of release.
 - ccache is not creating the cache correctly on windows.
 
-** Windows package is broken                                          :story:
+*** Windows package is broken                                         :story:
 
 When we install the windows package under wine, it fails with:
 
@@ -634,8 +642,7 @@ E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is nee
 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
 #+end_quote
 
-** Remove database options from help                                  :story:
-** Can't see build info in github builds                              :story:
+*** Can't see build info in github builds                             :story:
 *** Update nightly builds to use new vcpkg setup                      :story:
 
 At present we are still relying on the old vcpkg setup, with downloads from
