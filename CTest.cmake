@@ -95,6 +95,7 @@ message(STATUS "Binary directory: ${CTEST_BINARY_DIRECTORY}")
 # Determine the number of jobs to run in parallel.
 include(ProcessorCount)
 ProcessorCount(nproc)
+message(STATUS "Available processors: ${nproc}")
 if(NOT "$ENV{CTEST_MAX_PARALLELISM}" STREQUAL "")
     if(nproc GREATER "$ENV{CTEST_MAX_PARALLELISM}")
         set(nproc "$ENV{CTEST_MAX_PARALLELISM}")
@@ -129,7 +130,11 @@ if(DEFINED code_coverage)
             set(CTEST_COVERAGE_EXTRA_FLAGS "--preserve-paths")
             set(WITH_COVERAGE true)
         endif()
+    else()
+        message(STATUS "Coverage not enabled.")
     endif()
+else()
+    message(STATUS "Coverage not enabled.")
 endif()
 
 # only run these for Nightly.
@@ -155,7 +160,7 @@ if(git_result)
 endif()
 
 # Setup the preset for configuration.
-set(cmake_args "--preset ${preset}")
+set(cmake_args "--preset ${preset} ${cmake_defines}")
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
 if(configure_result)
     message(FATAL_ERROR "Failed to configure")
