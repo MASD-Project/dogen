@@ -379,7 +379,6 @@ void version(std::ostream& s) {
       << std::endl << "There is NO WARRANTY, to the extent permitted by law."
       << std::endl;
 
-
     if (!build_info.empty()) {
         s << build_info << std::endl;
         s << "IMPORTANT: build details are NOT for security purposes."
