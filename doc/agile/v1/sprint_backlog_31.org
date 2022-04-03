@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-03 Sun 00:57]
+#+CAPTION: Clock summary at [2022-04-03 Sun 13:22]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *41:22* |       |       |   0.0 |
+| *Total time*                                               | *43:00* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 41:22   |       |       |   0.0 |
-| Active                                                     |         | 38:51 |       |   0.0 |
+| Stories                                                    | 43:00   |       |       |   0.0 |
+| Active                                                     |         | 43:00 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  4:38 |   0.0 |
-| Generate doxygen docs and add to site                      |         |       |  1:51 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  4:50 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
 | Remove deprecated travis and appveyor config files         |         |       |  0:02 |   0.0 |
 | Create clang build using libc++                            |         |       |  0:36 |   0.0 |
 | Rewrite CTest script to use github actions                 |         |       | 13:15 |   0.0 |
+| Remove database options from help                          |         |       |  0:07 |   0.0 |
+| Generate doxygen docs and add to site                      |         |       |  1:51 |   0.0 |
 | Add packaging step to github actions                       |         |       |  0:21 |   0.0 |
-| Use MSVC in Windows build                                  |         |  2:10 |       |   0.0 |
-| Can't see build info in github builds                      |         |  0:21 |       |   0.0 |
+| Setup MSVC Windows build for debug and release             |         |       |  3:20 |   0.0 |
+| Can't see build info in github builds                      |         |       |  0:09 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -444,6 +445,7 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 12:59]--[2022-04-03 Sun 13:11] =>  0:12
     CLOCK: [2022-03-20 Sun 07:31]--[2022-03-20 Sun 08:33] =>  1:02
     CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
     CLOCK: [2021-04-03 Sat 11:55]--[2021-04-03 Sat 12:12] =>  0:17
@@ -562,25 +564,14 @@ Notes:
 
 We removed the relational model, but the options are still in the help.
 
-*** STARTED Add packaging step to github actions                      :story:
-    :LOGBOOK:
-    CLOCK: [2022-04-02 Sat 18:25]--[2022-04-02 Sat 18:43] =>  0:18
-    CLOCK: [2022-04-02 Sat 18:13]--[2022-04-02 Sat 18:16] =>  0:03
-    :END:
-
-We should really create packages for all builds. We need to also check that when
-we tag we create packages.
-
-Notes:
-
-- we are packaging but we can't see the resulting files. Perhaps they only
-  appear at the end of the workflow?
-
-*** STARTED Generate doxygen docs and add to site                     :story:
+*** COMPLETED Generate doxygen docs and add to site                   :story:
     :LOGBOOK:
     CLOCK: [2021-03-27 Sat 12:00]--[2021-03-27 Sat 13:14] =>  1:14
     CLOCK: [2021-03-23 Tue 20:10]--[2021-03-23 Tue 20:47] =>  0:37
     :END:
+
+*Rationale*: we've got the basics working, with badge and manual uploading of
+docs to the site. Create a new story for integrating this with CI.
 
 Now we have a site, we could add the doxygen docs to it.
 
@@ -609,8 +600,24 @@ Links:
 - [[https://www.doxygen.nl/manual/config.html#cfg_image_path][doxygen: IMAGE_PATH]]
 - [[https://www.doxygen.nl/manual/commands.html#cmdimage][doxygen: /image]]
 
-*** STARTED Use MSVC in Windows build                                 :story:
+*** COMPLETED Add packaging step to github actions                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-02 Sat 18:25]--[2022-04-02 Sat 18:43] =>  0:18
+    CLOCK: [2022-04-02 Sat 18:13]--[2022-04-02 Sat 18:16] =>  0:03
+    :END:
+
+We should really create packages for all builds. We need to also check that when
+we tag we create packages.
+
+Notes:
+
+- we are packaging but we can't see the resulting files. Perhaps they only
+  appear at the end of the workflow?
+
+*** COMPLETED Setup MSVC Windows build for debug and release          :story:
    :LOGBOOK:
+   CLOCK: [2022-04-03 Sun 12:48]--[2022-04-03 Sun 12:58] =>  0:10
+   CLOCK: [2022-04-03 Sun 10:40]--[2022-04-03 Sun 11:30] =>  0:50
    CLOCK: [2022-04-03 Sun 01:24]--[2022-04-03 Sun 01:34] =>  0:10
    CLOCK: [2022-04-03 Sun 00:51]--[2022-04-03 Sun 00:57] =>  0:06
    CLOCK: [2022-04-03 Sun 00:20]--[2022-04-03 Sun 00:50] =>  0:30
@@ -620,18 +627,55 @@ Links:
    CLOCK: [2022-04-02 Sat 18:44]--[2022-04-02 Sat 19:20] =>  0:36
    :END:
 
-At present the Windows build seems to be using a mix of Ming and MSVC (but
-failing to find MSVC). We need to make sure both vcpkg and the build use MSVC.
-
 Notes:
 
-- debug build has a config type of release.
-- ccache is not creating the cache correctly on windows.
+- At present the Windows build seems to be using a mix of Ming and MSVC (but
+  failing to find MSVC). We need to make sure both vcpkg and the build use MSVC.
+- debug build has a config type of release. Use the release type consistently in
+  case its causing other problems. Done.
+- ccache is not creating the cache correctly on windows. Seems to work for MSVC
+  now but not clang-cl. However, we never had a green build so that may be
+  related. Wait until we have one to re-access.
+
+Links:
+
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/20222]["fatal error C1041" errors when using Ninja/MSVC and setting COMPILE_PDB_NAME]]
+
+*** STARTED Can't see build info in github builds                     :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 13:12]--[2022-04-03 Sun 13:21] =>  0:09
+    :END:
+
+In the past, =--version= showed the commit details etc from CI builds. It seems
+that is no longer working.
+
+*** Integrate Doxygen with CI                                         :story:
+
+At present we are manually generating the docs and uploading them into our site.
+We should instead:
+
+- create a site specific to Dogen which is served from the dogen project;
+- add a workflow that generates the doxygen docs and does nothing else. We need
+  one for the tags and one for the commits.
+
+*** Clang-cl build is broken                                          :story:
+
+At present we are getting strange linking errors:
+
+#+begin_quote
+cmd.exe /C "cd . && D:\a\_temp\1259921409\cmake-3.23.0-windows-x86_64\bin\cmake.exe -E vs_link_exe --intdir=projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x64\mt.exe --manifests  -- C:\PROGRA~1\LLVM\bin\lld-link.exe /nologo projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\comment_formatter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\file_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\generators_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\indenter_filter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\main.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\path_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\resolver_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\sha1_hasher_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\splitter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\test_data_set_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\utility_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\xml_tests.cpp.obj  /out:stage\bin\dogen.utility.tests.exe /implib:stage\bin\dogen.utility.tests.lib /pdb:stage\bin\dogen.utility.tests.pdb /version:0.0 /machine:x64 /IGNORE:4217 /INCREMENTAL:NO /subsystem:console  stage\bin\dogen.utility.lib  vcpkg_installed\x64-windows\lib\libxml2.lib  vcpkg_installed\x64-windows\lib\boost_system-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_serialization-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_date_time-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_log-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_thread-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_filesystem-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_program_options-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_unit_test_framework-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_regex-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_chrono-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_atomic-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_log_setup-vc140-mt.lib  vcpkg_installed\x64-windows\lib\zlib.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D D:\a\dogen\dogen\build\output\windows-msvc-clang-cl-debug\projects\dogen.utility\tests && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file D:/a/dogen/dogen/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary /.../windows-msvc-clang-cl-debug/stage/bin/dogen.utility.tests.exe -installedDir /.../windows-msvc-clang-cl-debug/vcpkg_installed/x64-windows/bin -OutVariable out""
+LINK: command "C:\PROGRA~1\LLVM\bin\lld-link.exe /nologo projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\comment_formatter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\file_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\generators_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\indenter_filter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\main.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\path_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\resolver_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\sha1_hasher_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\splitter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\test_data_set_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\utility_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\xml_tests.cpp.obj /out:stage\bin\dogen.utility.tests.exe /implib:stage\bin\dogen.utility.tests.lib /pdb:stage\bin\dogen.utility.tests.pdb /version:0.0 /machine:x64 /IGNORE:4217 /INCREMENTAL:NO /subsystem:console stage\bin\dogen.utility.lib vcpkg_installed\x64-windows\lib\libxml2.lib vcpkg_installed\x64-windows\lib\boost_system-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_serialization-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_date_time-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_log-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_thread-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_filesystem-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_program_options-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_unit_test_framework-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_regex-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_chrono-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_atomic-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_log_setup-vc140-mt.lib vcpkg_installed\x64-windows\lib\zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:stage\bin\dogen.utility.tests.exe.manifest" failed (exit code 1) with the following output:
+lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+>>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `public: static void __cdecl boost::archive::save_access::save_primitive<class boost::archive::xml_oarchive, int>(class archive::save_access::xml_oarchive &, int const &)'::`1'::dtor$3)
+>>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `protected: void __cdecl boost::archive::xml_iarchive_impl<class boost::archive::xml_iarchive>::load_override<class boost::serialization::nvp<int> const>(class archive::serialization::nvp<int> const &)'::`1'::dtor$3)
+#+end_quote
+
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
 
 *** Windows package is broken                                         :story:
 
 When we install the windows package under wine, it fails with:
-
 
 #+begin_quote
 E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
@@ -642,7 +686,9 @@ E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is nee
 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
 #+end_quote
 
-*** Can't see build info in github builds                             :story:
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
+
 *** Update nightly builds to use new vcpkg setup                      :story:
 
 At present we are still relying on the old vcpkg setup, with downloads from
@@ -834,7 +880,7 @@ We still have models with lower case titles:
 
 Capitalise these correctly.
 
-*** Tighter vcpkg integration                                         :story:
+*** Improve vcpkg integration for generated code                      :story:
 
 If the user requests, we should also generate a vcpkg project that is
 a clone of vcpkg but builds all of the base dependencies and pushes
@@ -921,11 +967,6 @@ It would be nice to generate models that can produce org-spec HTML output.
 Links:
 
 - [[https://github.com/thi-ng/org-spec][org-spec GH]]
-
-*** Enable relational model locally                                   :story:
-
-At present we are not building locally the relational model. We need to ensure
-we are not breaking this code.
 
 *** Change file format of tracing dumps according to codec            :story:
 
@@ -1064,6 +1105,7 @@ it in the generation. We probably only need a few items:
 - lists
 - =code variables=
 - /italics/ and _underscores_
+- links.
 
 *** Org roundtrip does not add blank line at the end of document      :story:
 
@@ -1437,3 +1479,9 @@ Links:
 - [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.12][Sprint 12]]: introduction of reporting.
 
 ** Deprecated
+*** CANCELLED Enable relational model locally                         :story:
+
+*Rationale*: we removed the relational model.
+
+At present we are not building locally the relational model. We need to ensure
+we are not breaking this code.
