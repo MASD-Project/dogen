@@ -660,6 +660,13 @@ that is no longer working.
 
 We should only support VCPKG builds now. Update docs.
 
+*** STARTED Add code coverage on continuous builds                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-03 Sun 20:50]--[2022-04-03 Sun 21:22] =>  0:32
+    :END:
+
+At present code coverage is not kicking in.
+
 *** Integrate Doxygen with CI                                         :story:
 
 At present we are manually generating the docs and uploading them into our site.

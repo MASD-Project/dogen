@@ -73,7 +73,7 @@ set(CTEST_BUILD_NAME "${preset}")
 set(CTEST_BUILD_TARGET "package")
 
 string(TOLOWER "${configuration}" configuration_lower)
-if(configuration_lower STREQUAL "Debug")
+if(configuration_lower STREQUAL "debug")
     set(CTEST_CONFIGURATION_TYPE "Debug")
 else()
     set(CTEST_CONFIGURATION_TYPE "Release")
