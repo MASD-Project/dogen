@@ -157,6 +157,33 @@ set(WITH_MEMCHECK false)
 ctest_start(${model})
 
 #
+# Nightly
+#
+if(${build_group} MATCHES Nightly)
+    # setup valgrind
+    find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
+    if(NOT CTEST_MEMORYCHECK_COMMAND)
+        message("valgrind not found, disabling it.")
+        set(WITH_MEMCHECK false)
+    else()
+        message("Found valgrind (${CTEST_MEMORYCHECK_COMMAND})...")
+        set(WITH_MEMCHECK true)
+
+        set(valgrind_options "--trace-children=yes")
+        set(valgrind_options "${valgrind_options} --quiet")
+        set(valgrind_options "${valgrind_options} --tool=memcheck")
+        set(valgrind_options "${valgrind_options} --leak-check=full")
+        set(valgrind_options "${valgrind_options} --show-reachable=yes")
+        set(valgrind_options "${valgrind_options} --num-callers=50")
+        set(valgrind_options "${valgrind_options} --demangle=yes")
+        set(valgrind_options "${valgrind_options} --gen-suppressions=all")
+        set(CTEST_MEMORYCHECK_COMMAND_OPTIONS ${valgrind_options})
+        set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE
+            "${CTEST_SOURCE_DIRECTORY}/build/valgrind/custom.supp")
+    endif()
+endif()
+
+#
 # Step: Version control.
 #
 find_package(Git)
