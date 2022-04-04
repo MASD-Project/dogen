@@ -86,14 +86,14 @@ mind the following:
   or backward compatibility; there isn't even an effort not to break these - in
   fact, quite the opposite, if its not in agreement with the conceptual model it
   must be changed. We do try to highlight these in the [release
-  notes](https://github.com/MASD-Project/dogen/releases).
+  notes](https://github.com/MASD-Project/dogen/releases) best we can.
 - we do have an [extensive suite of
   tests](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen) (both
   generated and handcrafted), but these focus _only_ on Dogen's use cases. If
   you try any permutations outside these, it is likely you will find problems.
   The errors you will get will not be the most obvious.
 - there is little to no documentation on Dogen. This will not change until we
-  publish the PhD thesis, presently awaiting the _viva_.. Resources are limited
+  publish the PhD thesis, presently awaiting the _viva_. Resources are limited
   and they are all directed to development at present.
 - for this tool to be useful in any way in its present state, you must have a
   good working knowledge of
@@ -221,6 +221,12 @@ You can run all tests as follows:
 cmake --build --preset linux-clang-release --target rat
 ```
 
+You can also use CTest to run the tests, _e.g._:
+
+```
+ctest --preset linux-clang-release
+```
+
 ## Generation
 
 If you'd like to run Dogen to regenerate all of its models, you can do so by
@@ -231,6 +237,11 @@ but you can also use another. For this you may need to tell CMake of its
 location by setting ```CMAKE_PROGRAM_PATH```. After regeneration, you can then
 use ```git diff``` to inspect the differences produced by regeneration, if any.
 The build directory contains all of the logs, under the directory ```log```.
+Example:
+
+```
+cmake --build --preset linux-clang-release --target gao
+```
 
 # Documentation
 
