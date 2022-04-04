@@ -671,6 +671,29 @@ We should only support VCPKG builds now. Update docs.
 
 At present code coverage is not kicking in.
 
+*** STARTED Update nightly builds to use new vcpkg setup              :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-04 Mon 18:48]--[2022-04-04 Mon 18:51] =>  0:03
+    CLOCK: [2022-04-04 Mon 18:35]--[2022-04-04 Mon 18:47] =>  0:12
+    :END:
+
+At present we are still relying on the old vcpkg setup, with downloads from
+dropbox etc. We need to move to the new world of presets.
+
+Notes:
+
+- update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
+
+*** Update the test package scripts for the GitHub CI                 :story:
+
+We can probably install debian packages in GitHub CI. Try to see if we can run
+the old package test scripts in GitHub.
+
+*** Build =linux-clang-debug= fails in CTest step                     :story:
+
+Its not obvious why this build is failing. =llvm-cov= is probably returning
+non-zero.
+
 *** Integrate Doxygen with CI                                         :story:
 
 At present we are manually generating the docs and uploading them into our site.
@@ -710,15 +733,6 @@ E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is nee
 
 This will probably be fixed when we move over to the new way of specifying
 dependencies in CMake. Do that first and revisit this problem.
-
-*** Update nightly builds to use new vcpkg setup                      :story:
-
-At present we are still relying on the old vcpkg setup, with downloads from
-dropbox etc. We need to move to the new world of presets.
-
-Notes:
-
-- update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
 
 *** Create clang build using libc++                                   :story:
 
