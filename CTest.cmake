@@ -122,9 +122,14 @@ if(DEFINED code_coverage)
     if (code_coverage EQUAL 1)
         if (CMAKE_COMPILER_IS_GNUCXX)
             find_program(CTEST_COVERAGE_COMMAND NAMES gcov)
+            message(STATUS "Looking for gcov.");
         elseif(CMAKE_COMPILER_IS_CLANGXX)
+            message(STATUS "Looking for llvm-cov.");
             find_program(CTEST_COVERAGE_COMMAND NAMES llvm-cov)
+        else()
+            message(STATUS "Compiler does not support code coverage.");
         endif()
+
         if(NOT CTEST_COVERAGE_COMMAND)
             message(STATUS "gcov not found, disabling coverage.")
             set(WITH_COVERAGE false)
