@@ -46,6 +46,7 @@ cd ${git_dir}
 # update manually as ctest won't do it for us.
 git pull origin master
 
+
 #
 # C++ Ref Impl
 #
@@ -92,10 +93,11 @@ build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gao > $
 git add -A > ${logs_dir}/git_add.log
 git commit -m "Generated code." > ${logs_dir}/git_add.log
 
-compiler=${clang_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+export code_coverage=1
+preset=${linux-gcc-debug}
+ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
 
 STAGE_DIR=build/output/${compiler}/${configuration}/stage
 
-compiler=${gcc_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1,code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+preset=${linux-clang-debug}
+ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
