@@ -137,8 +137,8 @@ if(DEFINED code_coverage)
         else()
             message(STATUS "Found gcov (${CTEST_COVERAGE_COMMAND})...")
             set(cmake_defines ${cmake_defines} "-DWITH_PROFILING=On")
-            set(CTEST_COVERAGE_EXTRA_FLAGS ${CTEST_COVERAGE_EXTRA_FLAGS}
-                "--preserve-paths")
+            set(CTEST_COVERAGE_EXTRA_FLAGS
+                "${CTEST_COVERAGE_EXTRA_FLAGS} --preserve-paths")
             set(WITH_COVERAGE true)
         endif()
     else()
