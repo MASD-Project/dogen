@@ -34,7 +34,7 @@
             "hidden": true,
             "cacheVariables" : {
                 "WITH_LATEX": "OFF",
-                "WITH_FULL_GENERATION": "ON",
+                "WITH_FULL_GENERATION": "OFF",
                 "WITH_MINIMAL_PACKAGING": "ON"
             }
         },
