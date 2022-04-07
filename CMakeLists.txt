@@ -20,7 +20,7 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 #
-# VCPKG
+# vcpkg
 #
 set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
@@ -40,16 +40,14 @@ if (DEFINED ENV{DOGEN_PROJECTS_DIRECTORY})
         "DOGEN_PROJECTS_DIRECTORY=$ENV{DOGEN_PROJECTS_DIRECTORY}")
 else()
     #
-    # If the user did not set the projects directory for dogen, we
-    # default it to the well-known projects directory. In truth, the
-    # handling of the projects directory is a bit messy: it must be
-    # set externally for cases such as running tests for coverage
-    # because we do not go via CMake. At the same time, we do not want
-    # users to have to deal with setting the variable if all they want
-    # to do is build dogen from git - they may not even want to run
-    # the system tests, so it seems a bit excessive to ask them to
-    # figure out how to set it. Due to, this we have this defaulting
-    # here.
+    # If the user did not set the projects directory for dogen, we default it to
+    # the well-known projects directory. In truth, the handling of the projects
+    # directory is a bit messy: it must be set externally for cases such as
+    # running tests for coverage because we do not go via CMake. At the same
+    # time, we do not want users to have to deal with setting the variable if
+    # all they want to do is build dogen from git - they may not even want to
+    # run the system tests, so it seems a bit excessive to ask them to figure
+    # out how to set it. Due to, this we have this defaulting here.
     #
     set(ENV{DOGEN_PROJECTS_DIRECTORY} "${CMAKE_SOURCE_DIR}/projects")
     message(STATUS
@@ -63,8 +61,8 @@ endif()
 #
 # Frozen projects directory.
 #
-# Frozen contains a stale copy of Dogen, snapshotted before we removed
-# the JSON and Dia models.
+# Frozen contains a stale copy of Dogen, snapshotted before we removed the JSON
+# and Dia models.
 #
 if (DEFINED ENV{FROZEN_PROJECTS_DIRECTORY})
     message(STATUS
@@ -120,7 +118,8 @@ else()
     message(STATUS "SCCache NOT found.")
 endif()
 
-project(DOGEN LANGUAGES CXX VERSION 1.0.31)
+project(DOGEN VERSION 1.0.31 LANGUAGES CXX
+    DESCRIPTION "Code generator for Model Assisted Software Development.")
 
 #
 # add our own modules
@@ -134,7 +133,6 @@ option(WITH_PLANTUML "Build UML representation." on)
 option(WITH_DOXYGEN "Build the project documentation." off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
-option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
 option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
 option(WITH_PROFILING "Generate profiling information for code coverage.." off)
@@ -232,19 +230,6 @@ if (WITH_LATEX)
     message(STATUS "Building latex documents...")
 else()
     message(STATUS "NOT building latex documents...")
-endif()
-
-#
-# setup jq, for JSON validation.
-#
-find_program(JQ_COMMAND NAMES jq)
-if (JQ_COMMAND)
-    message(STATUS "Found jq (${JQ_COMMAND})...")
-    add_custom_target(validate_all_json)
-    add_custom_target(indent_all_json)
-else()
-    message(STATUS "jq not found, disabling JSON validation.")
-    set(WITH_JSON_VALIDATION "off")
 endif()
 
 #
@@ -375,7 +360,7 @@ message(STATUS "Product version: ${DOGEN_VERSION}")
 # doxygen
 #
 if (WITH_DOXYGEN)
-    find_package(Doxygen)
+    find_package(Doxygen REQUIRED dot)
 
     if(DOXYGEN_FOUND)
         message(STATUS "Doxygen enabled - generating API documentation")
@@ -398,8 +383,7 @@ if (WITH_DOXYGEN)
         install(
             DIRECTORY ${stage_doxygen_dir}/html/
             DESTINATION share/doc/
-            COMPONENT documentation
-            )
+            COMPONENT documentation)
     else()
         message(STATUS "Could not find Doxygen.")
     endif()
@@ -561,14 +545,6 @@ if (DOGEN_CLI_EXECUTABLE)
     #
     set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
     set(DOGEN_GENERATION_OPTIONS --output-directory ${projects_dir}/)
-endif()
-
-if (WITH_JSON_VALIDATION)
-    add_custom_target(iaj)
-    add_custom_target(vaj)
-
-    add_dependencies(iaj indent_all_json)
-    add_dependencies(vaj indent_all_json)
 endif()
 
 #
