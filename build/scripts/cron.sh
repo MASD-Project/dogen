@@ -94,10 +94,10 @@ git add -A > ${logs_dir}/git_add.log
 git commit -m "Generated code." > ${logs_dir}/git_add.log
 
 export code_coverage=1
-preset=${linux-gcc-debug}
+preset="linux-gcc-debug"
 ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
 
 STAGE_DIR=build/output/${compiler}/${configuration}/stage
 
-preset=${linux-clang-debug}
+preset="linux-clang-debug"
 ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
