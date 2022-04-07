@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-04 Mon 18:34]
+#+CAPTION: Clock summary at [2022-04-07 Thu 16:00]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *45:04* |       |       |   0.0 |
+| *Total time*                                               | *46:30* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 45:04   |       |       |   0.0 |
-| Active                                                     |         | 45:04 |       |   0.0 |
+| Stories                                                    | 46:30   |       |       |   0.0 |
+| Active                                                     |         | 46:30 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  4:50 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  4:58 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -37,6 +37,9 @@
 | Can't see build info in github builds                      |         |       |  0:35 |   0.0 |
 | Update build instructions in readme                        |         |       |  0:34 |   0.0 |
 | Add code coverage on continuous builds                     |         |       |  0:53 |   0.0 |
+| Remove existing benchmark infrastructure                   |         |       |  0:24 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
+| Assorted improvements to CMake files                       |         |       |  0:39 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -447,6 +450,7 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-07 Thu 15:36]--[2022-04-07 Thu 15:44] =>  0:08
     CLOCK: [2022-04-03 Sun 12:59]--[2022-04-03 Sun 13:11] =>  0:12
     CLOCK: [2022-03-20 Sun 07:31]--[2022-03-20 Sun 08:33] =>  1:02
     CLOCK: [2021-04-16 Fri 08:30]--[2021-04-16 Fri 08:53] =>  0:23
@@ -671,6 +675,25 @@ We should only support VCPKG builds now. Update docs.
 
 At present code coverage is not kicking in.
 
+*** COMPLETED Remove existing benchmark infrastructure                :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-07 Thu 15:44]--[2022-04-07 Thu 16:00] =>  0:16
+    CLOCK: [2022-04-07 Thu 15:27]--[2022-04-07 Thu 15:35] =>  0:08
+    :END:
+
+We have not used it since it was implemented a long time ago. In
+addition, it is not very practical because it requires us to manually
+generate the benchmark numbers and we never remember to do it. We
+should just remove it and create a new benchmark framework based on
+existing libraries and integrated with nightlies. Ideally it should
+also output results to relational so that we can plot the evolution
+over time.
+
+Notes:
+
+- removed from dogen CMake files.
+- need to remove from text template, and regenerate c++ ref impl. Done.
+
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
     CLOCK: [2022-04-04 Mon 18:48]--[2022-04-04 Mon 18:51] =>  0:03
@@ -684,22 +707,154 @@ Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
 
+*** STARTED Assorted improvements to CMake files                       :epic:
+    :LOGBOOK:
+    CLOCK: [2022-04-07 Thu 15:13]--[2022-04-07 Thu 15:26] =>  0:13
+    CLOCK: [2022-04-07 Thu 14:34]--[2022-04-07 Thu 15:00] =>  0:26
+    :END:
+
+#+begin_src cmake
+find_package(Boost REQUIRED [COMPONENTS <libs>...])
+target_link_libraries(main PRIVATE Boost::boost Boost::<lib1> Boost::<lib2> ...)
+
+find_path(DTL_INCLUDE_DIRS "dtl/Diff.hpp")
+target_include_directories(main PRIVATE ${DTL_INCLUDE_DIRS})
+
+find_package(LibXml2 CONFIG REQUIRED)
+target_link_libraries(main PRIVATE LibXml2::LibXml2)
+
+target_compile_features(myTarget PUBLIC cxx_std_11)
+set_target_properties(myTarget PROPERTIES CXX_EXTENSIONS OFF)
+
+set(CMAKE_CXX_STANDARD 11 CACHE STRING "The C++ standard to use")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
+LINK_WHAT_YOU_USE
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy" "-checks=*")
+<LANG>_CLANG_TIDY: CMake 3.6+
+<LANG>_CPPCHECK
+<LANG>_CPPLINT
+<LANG>_INCLUDE_WHAT_YOU_USE
+
+install(TARGETS MyLib
+        EXPORT MyLibTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+        )
+
+# Packaging support
+set(CPACK_PACKAGE_VENDOR "Vendor name")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Some summary")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENCE")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+#+end_src
+
+*Previous understanding*
+
+It seems we are not using proper CMake idioms to pick up compiler features, as
+explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
+- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
+- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
+- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
+  helper files."
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to repeat the
+  same flags; this could be avoided by passing in a variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is
+  the modern method for setting general compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested aliasing for
+  =dogen::test_models=. Ensure all linking is done against qualified names.
+- use target include directories for each target and only add the required
+  include directories to each target. Mark them with the appropriate visibility,
+  including using =interface=. We should then remove all duplication of
+  libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature detection. We need
+  to create a list of all C++-14 features we're using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type support to
+  our builds, but as a result, the binaries moved from =stage/bin= to =bin=.
+  There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage to use.
+  We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake directories. This will
+  also fix the problems we have with BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
 *** Update the test package scripts for the GitHub CI                 :story:
 
 We can probably install debian packages in GitHub CI. Try to see if we can run
 the old package test scripts in GitHub.
+
+*** Update C++ reference implementation to use GitHub CI              :story:
+
+We need to move over from travis and appveyor.
 
 *** Build =linux-clang-debug= fails in CTest step                     :story:
 
 Its not obvious why this build is failing. =llvm-cov= is probably returning
 non-zero.
 
+*** Create a site for Dogen                                           :story:
+
+- add papers as content.
+- add blog posts as content.
+- site is generated from org files in Dogen as a vcpkg build.
+- add sprint and product backlog as content.
+
+Links:
+
+- [[https://github.com/larstvei/org-bootstrap-document][GH: org-bootstrap-document]]: "This is a simple scheme for Org mode to generate
+  nice and readable HTML sites. "
+
 *** Integrate Doxygen with CI                                         :story:
 
 At present we are manually generating the docs and uploading them into our site.
 We should instead:
 
-- create a site specific to Dogen which is served from the dogen project;
+- create a site specific to Dogen which is served from the dogen project - see
+  site story.
 - add a workflow that generates the doxygen docs and does nothing else. We need
   one for the tags and one for the commits.
 
@@ -755,16 +910,6 @@ the building of the generated ODB code.
 *** Add github actions build for C#                                   :story:
 
 We need to build on .Net 6.
-
-*** Remove existing benchmark infrastructure                          :story:
-
-We have not used it since it was implemented a long time ago. In
-addition, it is not very practical because it requires us to manually
-generate the benchmark numbers and we never remember to do it. We
-should just remove it and create a new benchmark framework based on
-existing libraries and integrated with nightlies. Ideally it should
-also output results to relational so that we can plot the evolution
-over time.
 
 *** Upload release to github on tags                                  :story:
 
@@ -1521,3 +1666,17 @@ Links:
 
 At present we are not building locally the relational model. We need to ensure
 we are not breaking this code.
+
+*** CANCELLED Benchmarks do not work for utility tests                :story:
+
+*Rationale*: removed benchmark support.
+
+When we run the benchmarks for utility we get an error:
+
+: Running 95 test cases...
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
+
+Seems like the tests do not clean up after themselves. We need to add
+some clean up logic and re-enable the tests. We probably should just
+remove all of the benchmarks infrastructure, given we never use it and
+it has probably bit-rotted by now.

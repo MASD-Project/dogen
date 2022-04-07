@@ -5591,69 +5591,6 @@ property to be set. AS it happens, it normally tends to be the schema
 name, because it makes sense to set it when defining a relational
 model. This is why we never bumped into this problem before.
 
-*** Assorted improvements to CMake files                               :epic:
-
-It seems we are not using proper CMake idioms to pick up compiler
-features, as explained here:
-
-- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
-- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
-- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
-- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
-- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
-- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
-  platform C++ CMake project using modern CMake syntax and transitive
-  dependencies.
-- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
-- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
-- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
-  helper files."
-
-We need to implement this using proper CMake idioms.
-
-Notes:
-
-- Add version and language to project.
-- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to
-  repeat the same flags; this could be avoided by passing in a
-  variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is the modern method for setting general
-  compile flags in CMake?]]
-- define qualified aliases for all libraries, including nested
-  aliasing for =dogen::test_models=. Ensure all linking is done
-  against qualified names.
-- use target include directories for each target and only add the
-  required include directories to each target. Mark them with the
-  appropriate visibility, including using =interface=. We should then
-  remove all duplication of libraries in the specs.
-- try replacing calls to =-std=c++-14= with compiler feature
-  detection. We need to create a list of all C++-14 features we're
-  using.
-- remove all of the debug/release compilation options and start using
-  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type
-  support to our builds, but as a result, the binaries moved from
-  =stage/bin= to =bin=. There is no obvious explanation for this.
-- remove =STATIC= on all libraries and let users specify which linkage
-  to use. We already have a story to capture this work.
-- remove the stage folder and use the traditional CMake
-  directories. This will also fix the problems we have with
-  BUILD_TYPE.
-- consider buying the CMake book: https://crascit.com/professional-cmake/.
-
-Merged stories:
-
-*Usage of external module path in cmakelists*                       :story:
-
-It seems like we are not populating the target names
-properly. Originally the target name for test model all built-ins was:
-
-: dogen_all_builtins
-
-When we moved the test models into =test_models= the target name did
-not change. It should have changed to:
-
-: dogen_test_models_all_builtins
-
 *** Support for cmake components and groups                           :story:
 
 #+begin_quote
@@ -11200,18 +11137,6 @@ point":
 - floating
 - fixed
 - exact
-
-*** Benchmarks do not work for utility tests                          :story:
-
-When we run the benchmarks for utility we get an error:
-
-: Running 95 test cases...
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
-
-Seems like the tests do not clean up after themselves. We need to add
-some clean up logic and re-enable the tests. We probably should just
-remove all of the benchmarks infrastructure, given we never use it and
-it has probably bit-rotted by now.
 
 *** Clean up comment formatter                                        :story:
 
