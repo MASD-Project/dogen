@@ -35,7 +35,6 @@ set_target_properties(${tests_target_name}
 target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
     dogen.utility.lib
-    ${LIBXML2_LIBRARIES}
     Boost::unit_test_framework
     ${CMAKE_THREAD_LIBS_INIT}
     ${CMAKE_REQUIRED_LIBRARIES})

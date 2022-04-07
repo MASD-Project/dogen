@@ -59,10 +59,8 @@ add_executable(${exe_target_name} ${exe_files})
 set_target_properties(${exe_target_name} PROPERTIES
     OUTPUT_NAME ${exe_binary_name})
 
-target_link_libraries(${exe_target_name}
+target_link_libraries(${exe_target_name} PRIVATE
     ${lib_target_name}
-    ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 

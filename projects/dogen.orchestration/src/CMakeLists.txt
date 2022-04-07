@@ -46,7 +46,6 @@ target_link_libraries(${lib_target_name} PRIVATE
     dogen.variability.lib
     Boost::serialization
     Boost::boost
-    ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

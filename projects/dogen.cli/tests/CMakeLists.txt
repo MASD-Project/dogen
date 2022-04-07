@@ -36,7 +36,6 @@ target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
     dogen.cli.lib
     dogen.utility.lib
-    ${LIBXML2_LIBRARIES}
     Boost::unit_test_framework
     ${PQXX_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}

@@ -157,25 +157,9 @@ find_package(Boost 1.78 REQUIRED COMPONENTS
     serialization
     unit_test_framework)
 
-# iconv - required by libxml
-find_package(Iconv REQUIRED)
-if (ICONV_FOUND)
-    include_directories(SYSTEM ${ICONV_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${ICONV_LIBRARIES})
-endif()
-
-# libxml
-find_package(LibXml2 REQUIRED)
-if (LIBXML2_FOUND)
-    include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
-endif()
-
+# Other packages
+find_package(LibXml2 CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
-if (ZLIB_FOUND)
-    message(STATUS "Found ZLib...")
-endif()
-
 find_package(DTL REQUIRED)
 
 # packaging type
@@ -424,7 +408,7 @@ endif()
 # Dogen
 #
 
-# FIXME: this looks strange!
+# We need to use the code generator to generate the code generator.
 find_package(Dogen REQUIRED)
 
 #
@@ -490,17 +474,6 @@ if (DOGEN_CLI_EXECUTABLE)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-backend file)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS}
     #    --tracing-filter-regex .*text.transforms.model_to_text_chain.*)
-
-    set(DOGEN_DATABASE_OPTIONS "")
-    # uncomment to enable database tracing.
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-host localhost)
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-port 5433)
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-name musseque)
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-user build)
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-password build)
-    # uncomment out if schema regeneration is required.
-    # WARNING: all data will be deleted.
-    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-generate-schema)
 
     set(DOGEN_DIFFING_OPTIONS "")
     # uncomment to enable diffing

@@ -36,7 +36,7 @@ set_target_properties(${lib_target_name}
 target_include_directories(${lib_target_name} PRIVATE ${DTL_INCLUDE_DIRS})
 target_link_libraries(${lib_target_name} PRIVATE
     ZLIB::ZLIB
-    ${LIBXML2_LIBRARIES}
+    LibXml2::LibXml2
     Boost::boost
     Boost::date_time
     Boost::exception

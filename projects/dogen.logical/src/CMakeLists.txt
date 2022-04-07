@@ -40,7 +40,6 @@ target_link_libraries(${lib_target_name} PRIVATE
     dogen.tracing.lib
     dogen.utility.lib
     dogen.variability.lib
-    ${LIBXML2_LIBRARIES}
     Boost::boost)
 
 install(TARGETS ${lib_target_name}
