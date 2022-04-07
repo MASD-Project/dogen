@@ -709,17 +709,12 @@ Notes:
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
+    CLOCK: [2022-04-07 Thu 16:01]--[2022-04-07 Thu 17:06] =>  1:05
     CLOCK: [2022-04-07 Thu 15:13]--[2022-04-07 Thu 15:26] =>  0:13
     CLOCK: [2022-04-07 Thu 14:34]--[2022-04-07 Thu 15:00] =>  0:26
     :END:
 
 #+begin_src cmake
-find_package(Boost REQUIRED [COMPONENTS <libs>...])
-target_link_libraries(main PRIVATE Boost::boost Boost::<lib1> Boost::<lib2> ...)
-
-find_path(DTL_INCLUDE_DIRS "dtl/Diff.hpp")
-target_include_directories(main PRIVATE ${DTL_INCLUDE_DIRS})
-
 find_package(LibXml2 CONFIG REQUIRED)
 target_link_libraries(main PRIVATE LibXml2::LibXml2)
 
