@@ -93,23 +93,3 @@ if (DOGEN_CLI_EXECUTABLE)
     endforeach()
 
 endif()
-
-#
-# Benchmark targets
-#
-if(WITH_BENCHMARKS)
-    set(folder "benchmarks/expected")
-    file(GLOB_RECURSE files RELATIVE
-        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.csv")
-
-    foreach(file ${files})
-        get_filename_component(label ${file} NAME)
-        add_custom_target(benchmark_stats_${label}
-            COMMENT "Producing benchmark stats for ${label}"
-            COMMAND gawk -f ${CMAKE_SOURCE_DIR}/build/scripts/benchmark.diff.linux.awk ${label} ${CMAKE_CURRENT_SOURCE_DIR}/${folder}/${file} ${stage_test_data_dir}/benchmarks/actual/${file}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(benchmark_stats benchmark_stats_${label})
-    endforeach()
-
-endif()

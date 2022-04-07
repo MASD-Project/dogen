@@ -41,18 +41,6 @@ if (DOGEN_CLI_EXECUTABLE)
         ${DOGEN_COMMON_OPTIONS})
     add_dependencies(convert_all_org convert_${target_ext}_org)
 
-    if (WITH_BENCHMARKS)
-        add_custom_target(benchmark_generate_${target_ext}
-            COMMENT "Benchmarking generating ${target_ext} model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_CLI_EXECUTABLE} --target ${target_path}
-            ${DOGEN_COMMON_OPTIONS} ${DOGEN_GENERATION_OPTIONS})
-        add_dependencies(benchmark_${frontend}
-            benchmark_generate_${target_ext})
-    endif()
-
     set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}")
     set(source ${output_dir}/${target}.org)
     set(destination ${output_dir}/${target}.plantuml)

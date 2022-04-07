@@ -133,7 +133,6 @@ option(WITH_PLANTUML "Build UML representation." on)
 option(WITH_DOXYGEN "Build the project documentation." off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
-option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
 option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
 option(WITH_PROFILING "Generate profiling information for code coverage.." off)
 
@@ -545,32 +544,6 @@ if (DOGEN_CLI_EXECUTABLE)
     #
     set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
     set(DOGEN_GENERATION_OPTIONS --output-directory ${projects_dir}/)
-endif()
-
-#
-# Benchmarks
-#
-if(NOT UNIX)
-    set(WITH_BENCHMARKS "off")
-endif()
-
-if(WITH_BENCHMARKS)
-    set(benchmark_repeats "20")
-    set(benchmark_command
-        "${CMAKE_SOURCE_DIR}/build/scripts/benchmark.linux.sh")
-    set(benchmark_directory "${stage_test_data_dir}/benchmarks/actual")
-    set(benchmark_prefix "")
-    if(NOT EXISTS "${benchmark_directory}")
-        make_directory("${benchmark_directory}")
-    endif()
-
-    add_custom_target(benchmark_stats)
-    add_custom_target(benchmark_all)
-    add_custom_target(ba)
-    add_dependencies(ba benchmark_all)
-
-    add_custom_target(benchmark_org)
-    add_dependencies(benchmark_all benchmark_org)
 endif()
 
 #

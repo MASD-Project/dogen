@@ -53,19 +53,6 @@ add_custom_target(run_${tests_target_name}
 
 add_dependencies(run_all_tests run_${tests_target_name})
 
-if(WITH_BENCHMARKS)
-    set(benchmark_file
-        ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)
-    add_custom_target(benchmark_${tests_target_name}
-        COMMENT "Benchmarking testing ${tests_target_name}" VERBATIM
-        COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}
-        ${command}
-        WORKING_DIRECTORY ${stage_bin_dir}
-        DEPENDS ${tests_target_name})
-
-    add_dependencies(benchmark_all benchmark_${tests_target_name})
-endif()
-
 add_boost_tests(${tests_binary_name} ${files})
 
 install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
