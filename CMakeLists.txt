@@ -174,14 +174,9 @@ endif()
 find_package(ZLIB REQUIRED)
 if (ZLIB_FOUND)
     message(STATUS "Found ZLib...")
-    include_directories(SYSTEM ${ZLIB_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${ZLIB_LIBRARY_DIR})
 endif()
 
 find_package(DTL REQUIRED)
-if (DTL_FOUND)
-    message(STATUS "Found DTL...")
-endif()
 
 # packaging type
 if (WITH_MINIMAL_PACKAGING)

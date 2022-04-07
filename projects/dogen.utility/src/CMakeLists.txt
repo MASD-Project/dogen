@@ -33,6 +33,7 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+target_include_directories(${lib_target_name} PRIVATE ${DTL_INCLUDE_DIRS})
 target_link_libraries(${lib_target_name} PRIVATE
     ZLIB::ZLIB
     ${LIBXML2_LIBRARIES}
