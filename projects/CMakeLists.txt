@@ -218,38 +218,23 @@ include_directories(
 
 # Model reference directories
 set(DOGEN_REFERENCE_OPTIONS "")
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.cli/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.physical/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.org/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.text/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.logical/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.variability/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.relational/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.identification/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS
-    --reference-directory ${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling/org)
+set(reference_prefix --reference-directory ${CMAKE_CURRENT_SOURCE_DIR})
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.cli/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.physical/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.dia/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.org/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.tracing/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.codec/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.text/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.logical/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.templating/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.orchestration/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.utility/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.variability/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.relational/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.identification/modeling)
+list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.modeling/org)
 
 get_directory_property(dirs INCLUDE_DIRECTORIES)
 set(global_includes "")
