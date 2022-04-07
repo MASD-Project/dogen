@@ -33,11 +33,11 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-target_link_libraries(${lib_target_name}
+target_link_libraries(${lib_target_name} PRIVATE
+    dogen.logical.lib
     dogen.utility.lib
     dogen.variability.lib
-    dogen.logical.lib
-    ${Boost_LIBRARIES})
+    Boost::boost)
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib

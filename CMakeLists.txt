@@ -133,8 +133,8 @@ option(WITH_PLANTUML "Build UML representation." on)
 option(WITH_DOXYGEN "Build the project documentation." off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
-option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
-option(WITH_PROFILING "Generate profiling information for code coverage.." off)
+option(WITH_FULL_GENERATION "Generate all facets for all models." off)
+option(WITH_PROFILING "Generate profiling information for code coverage." off)
 
 #
 # check for dependencies
@@ -143,31 +143,19 @@ option(WITH_PROFILING "Generate profiling information for code coverage.." off)
 # threads
 find_package(Threads REQUIRED)
 
-# boost. Force static linking for all libraries
-set(Boost_USE_STATIC_LIBS ON)
+# boost.
 set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME ON)
-set(BOOST_ALL_DYN_LINK OFF)
 
 # Note: it is possible to build with older versions of boost, but
 # these require patches.
-find_package(Boost 1.61 REQUIRED COMPONENTS
-    system
-    serialization
+find_package(Boost 1.78 REQUIRED COMPONENTS
     date_time
-    log
-    thread
+    exception
     filesystem
+    log
     program_options
-    unit_test_framework
-    regex
-    chrono
-    atomic
-    )
-
-if (Boost_FOUND)
-    include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
-endif()
+    serialization
+    unit_test_framework)
 
 # iconv - required by libxml
 find_package(Iconv REQUIRED)

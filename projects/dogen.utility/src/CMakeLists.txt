@@ -33,10 +33,13 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-target_link_libraries(${lib_target_name}
+target_link_libraries(${lib_target_name} PRIVATE
     ZLIB::ZLIB
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
+    Boost::boost
+    Boost::date_time
+    Boost::exception
+    Boost::log
     ${CMAKE_THREAD_LIBS_INIT})
 
 install(TARGETS ${lib_target_name}

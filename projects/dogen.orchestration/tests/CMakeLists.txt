@@ -32,10 +32,11 @@ add_executable(${tests_target_name} ${files})
 set_target_properties(${tests_target_name}
     PROPERTIES OUTPUT_NAME ${tests_binary_name})
 
-target_link_libraries(${tests_target_name}
+target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
+    dogen.utility.lib
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
+    Boost::unit_test_framework
     ${CMAKE_THREAD_LIBS_INIT}
     ${CMAKE_REQUIRED_LIBRARIES})
 

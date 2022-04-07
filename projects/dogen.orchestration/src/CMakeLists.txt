@@ -35,19 +35,18 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-target_link_libraries(${lib_target_name}
-    dogen.variability.lib
-    dogen.physical.lib
+target_link_libraries(${lib_target_name} PRIVATE
     dogen.codec.lib
-    dogen.logical.lib
-    dogen.text.lib
-    ${relational_lib}
     dogen.lib
+    dogen.logical.lib
+    dogen.physical.lib
+    dogen.text.lib
     dogen.tracing.lib
     dogen.utility.lib
+    dogen.variability.lib
     Boost::serialization
+    Boost::boost
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

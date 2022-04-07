@@ -34,14 +34,12 @@ set_target_properties(${lib_target_name}
   PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 set(relational_lib "")
-target_link_libraries(${lib_target_name}
+target_link_libraries(${lib_target_name} PRIVATE
+    dogen.identification.lib
     dogen.lib
     dogen.tracing.lib
-    dogen.physical.lib
     dogen.utility.lib
-    dogen.identification.lib
-    # ${relational_lib}
-    ${Boost_LIBRARIES})
+    Boost::boost)
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
