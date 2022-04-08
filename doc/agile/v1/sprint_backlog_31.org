@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-08 Fri 12:37]
+#+CAPTION: Clock summary at [2022-04-08 Fri 21:52]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *51:28* |       |       |   0.0 |
+| *Total time*                                               | *52:59* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 51:28   |       |       |   0.0 |
-| Active                                                     |         | 51:28 |       |   0.0 |
+| Stories                                                    | 52:59   |       |       |   0.0 |
+| Active                                                     |         | 52:59 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
@@ -39,7 +39,9 @@
 | Add code coverage on continuous builds                     |         |       |  0:53 |   0.0 |
 | Remove existing benchmark infrastructure                   |         |       |  0:24 |   0.0 |
 | Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
-| Assorted improvements to CMake files                       |         |       |  5:37 |   0.0 |
+| Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
+| Windows package is broken                                  |         |       |  0:17 |   0.0 |
+| Update the test package scripts for the GitHub CI          |         |       |  0:25 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -483,6 +485,26 @@ Links:
 - [[https://www.reddit.com/r/cpp/comments/of2sf1/github_action_to_set_vcpkg_up_and_cache_it/][reddit: GitHub action to set vcpkg up and cache it]]
 - [[https://github.com/otland/forgottenserver/blob/master/.github/workflows/build-vcpkg.yml][build-vcpkg]]: example vcpkg.
 
+Merged stories:
+
+*Consider moving CI to GitHub Actions*
+
+At present we are using Travis and AppVeyor for our CI. However, it
+would be nice to have a single place with all of the CI (and even more
+ideally, packaging as well). GitHub seems to offer some kind of CI
+support via GitHub actions. However, we need to first move to building
+on [[*Build dogen from docker][docker]].
+
+Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
+
+Links:
+
+- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
+  caching]]
+- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
+- [[https://github.com/lballabio/QuantLib/tree/master/.github/workflows][quantlib GH]]: support for all operative systems (OSX, Win, Linux) as
+  well as a number of interesting actions.
+
 *** COMPLETED Update vcpkg to latest                                  :story:
     :LOGBOOK:
     CLOCK: [2022-03-20 Sun 13:00]--[2022-03-20 Sun 16:00] =>  3:00
@@ -694,6 +716,13 @@ Notes:
 - removed from dogen CMake files.
 - need to remove from text template, and regenerate c++ ref impl. Done.
 
+*** COMPLETED Build =linux-clang-debug= fails in CTest step           :story:
+
+Its not obvious why this build is failing. =llvm-cov= is probably returning
+non-zero.
+
+This was resolved by capturing the coverage exit status.
+
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
     CLOCK: [2022-04-04 Mon 18:48]--[2022-04-04 Mon 18:51] =>  0:03
@@ -709,6 +738,8 @@ Notes:
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 21:17]--[2022-04-08 Fri 21:26] =>  0:09
+    CLOCK: [2022-04-08 Fri 20:35]--[2022-04-08 Fri 20:45] =>  0:10
     CLOCK: [2022-04-08 Fri 17:00]--[2022-04-08 Fri 17:30] =>  0:30
     CLOCK: [2022-04-08 Fri 10:40]--[2022-04-08 Fri 12:37] =>  1:57
     CLOCK: [2022-04-08 Fri 09:24]--[2022-04-08 Fri 10:05] =>  0:41
@@ -824,19 +855,13 @@ Links:
 - [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
   #1653]]
 
-*** Update the test package scripts for the GitHub CI                 :story:
+*** STARTED Update the test package scripts for the GitHub CI         :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 21:27]--[2022-04-08 Fri 21:52] =>  0:25
+    :END:
 
 We can probably install debian packages in GitHub CI. Try to see if we can run
 the old package test scripts in GitHub.
-
-*** Update C++ reference implementation to use GitHub CI              :story:
-
-We need to move over from travis and appveyor.
-
-*** Build =linux-clang-debug= fails in CTest step                     :story:
-
-Its not obvious why this build is failing. =llvm-cov= is probably returning
-non-zero.
 
 *** Create a site for Dogen                                           :story:
 
@@ -859,6 +884,26 @@ We should instead:
   site story.
 - add a workflow that generates the doxygen docs and does nothing else. We need
   one for the tags and one for the commits.
+
+Links:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/doxygen.yml][QuantLib doxygen]]
+
+*** Add target to check headers compile in isolation                  :story:
+
+As per quantlib build, we should check headers compile in isolation.
+
+Links:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/headers.yml][quantlib header check workflow]]
+
+*** Add target to check test timings                                  :story:
+
+As per quantlib build, we should check for how long tests take to run.
+
+Link:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/test-times.yml][test-times quantlib workflow]]
 
 *** Clang-cl build is broken                                          :story:
 
@@ -1588,24 +1633,6 @@ to copy across all applicable documentation.
 Links:
 
 - [[https://github.com/org-rs/org-rs/blob/master/rust/element/src/headline.rs][org-rs headline example]]
-
-*** Consider moving CI to GitHub Actions                              :story:
-
-At present we are using Travis and AppVeyor for our CI. However, it
-would be nice to have a single place with all of the CI (and even more
-ideally, packaging as well). GitHub seems to offer some kind of CI
-support via GitHub actions. However, we need to first move to building
-on [[*Build dogen from docker][docker]].
-
-Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
-
-Links:
-
-- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
-  caching]]
-- [[https://packages.debian.org/sid/libdtl-dev][libdtl-dev]]: dependency available on debian now.
-- [[https://github.com/lballabio/QuantLib/tree/master/.github/workflows][quantlib GH]]: support for all operative systems (OSX, Win, Linux) as
-  well as a number of interesting actions.
 
 *** Consider adding support for "literate testing"                    :story:
 

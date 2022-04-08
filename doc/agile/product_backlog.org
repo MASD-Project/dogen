@@ -14375,29 +14375,6 @@ Links:
 
 Implement the visitor formatters for C#.
 
-*** Generate benchmarking code                                        :story:
-
-We should automatically add the benchmarking code in the generated
-CMakeLists. This could be behind a feature switch in meta-data.
-
-Alternatively, we should consider adding wrapper code around unit
-tests which generates benchmarking code via existing libraries. This
-can be done once we create a facet for manual tests. However, we would
-have to declare each test in the model and hard-code both the unit
-test framework as well as the benchmark framework.
-
-*** Consider using a benchmarking framework                           :story:
-
-It seems there is a C++ benchmarks framework which could be used for
-dogen's benchmarks:
-
-- [[https://github.com/nickbruun/hayai][hayai]]
-- [[https://bruun.co/2012/02/07/easy-cpp-benchmarking][Easy C++ benchmarking]]
-- [[https://github.com/martinus/nanobench][nanobench GH]]: ankerl::nanobench is a platform independent
-  microbenchmarking library for C++11/14/17/20.
-- [[https://github.com/p-ranav/criterion][criterion GH]]: Criterion is a micro-benchmarking library for modern
-  C++.
-
 *** Generate AssemblyInfo in C#                                       :story:
 
 We need to inject a type for this in assets. For now we can leave it
