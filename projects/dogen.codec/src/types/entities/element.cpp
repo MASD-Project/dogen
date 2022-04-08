@@ -57,7 +57,8 @@ element::element(
     const bool is_default_enumeration_type,
     const bool is_associative_container,
     const bool is_floating_point,
-    const dogen::identification::entities::codec_id& containing_element_id)
+    const dogen::identification::entities::codec_id& containing_element_id,
+    const std::list<std::string>& plantuml)
     : tagged_values_(tagged_values),
       stereotypes_(stereotypes),
       name_(name),
@@ -74,7 +75,8 @@ element::element(
       is_default_enumeration_type_(is_default_enumeration_type),
       is_associative_container_(is_associative_container),
       is_floating_point_(is_floating_point),
-      containing_element_id_(containing_element_id) { }
+      containing_element_id_(containing_element_id),
+      plantuml_(plantuml) { }
 
 void element::swap(element& other) noexcept {
     using std::swap;
@@ -95,6 +97,7 @@ void element::swap(element& other) noexcept {
     swap(is_associative_container_, other.is_associative_container_);
     swap(is_floating_point_, other.is_floating_point_);
     swap(containing_element_id_, other.containing_element_id_);
+    swap(plantuml_, other.plantuml_);
 }
 
 bool element::operator==(const element& rhs) const {
@@ -114,7 +117,8 @@ bool element::operator==(const element& rhs) const {
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
         is_floating_point_ == rhs.is_floating_point_ &&
-        containing_element_id_ == rhs.containing_element_id_;
+        containing_element_id_ == rhs.containing_element_id_ &&
+        plantuml_ == rhs.plantuml_;
 }
 
 element& element::operator=(element other) {
@@ -345,6 +349,22 @@ void element::containing_element_id(const dogen::identification::entities::codec
 
 void element::containing_element_id(const dogen::identification::entities::codec_id&& v) {
     containing_element_id_ = std::move(v);
+}
+
+const std::list<std::string>& element::plantuml() const {
+    return plantuml_;
+}
+
+std::list<std::string>& element::plantuml() {
+    return plantuml_;
+}
+
+void element::plantuml(const std::list<std::string>& v) {
+    plantuml_ = v;
+}
+
+void element::plantuml(const std::list<std::string>&& v) {
+    plantuml_ = std::move(v);
 }
 
 }

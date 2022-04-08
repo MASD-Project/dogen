@@ -339,6 +339,14 @@ main stereotypes.
 
 ID of the containing element, if any.
 
+*** plantuml                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+Set of PlantUML statements, which will be printed right after the element
+definition.
+
 ** attribute                                                        :element:
    :PROPERTIES:
    :custom_id: 3EEE4BC7-2227-E4C4-155B-3FC0572BB1C2
