@@ -103,6 +103,7 @@ const std::string empty_id("Element has an empty ID: ");
 }
 
 namespace dogen::codec::transforms {
+using std::string;
 
 model_to_plantuml_artefact_transform::properties
 model_to_plantuml_artefact_transform::extract_properties(
@@ -125,84 +126,84 @@ stereotype_to_colour(const std::string& stereotypes, const bool is_module) {
     std::string r;
 
     if (boost::contains(stereotypes, masd_assistant))
-        return std::string("#D89EF1");
+        return { "#D89EF1" };
     else if (boost::contains(stereotypes, masd_build_cmakelists))
-        return std::string("#99CB99");
+        return { "#99CB99" };
     else if (boost::contains(stereotypes, masd_decoration_generation_marker))
-        return std::string("#E8D0C5");
+        return { "#E8D0C5" };
     else if (boost::contains(stereotypes, masd_decoration_licence))
-        return std::string("#F9F0EB");
+        return { "#F9F0EB" };
     else if (boost::contains(stereotypes, masd_decoration_licence_text))
-        return std::string("#F9F0EB");
+        return { "#F9F0EB" };
     else if (boost::contains(stereotypes, masd_decoration_modeline))
-        return std::string("#D6B19F");
+        return { "#D6B19F" };
     else if (boost::contains(stereotypes, masd_decoration_modeline_group))
-        return std::string("#CECECE");
+        return { "#CECECE" };
     else if (boost::contains(stereotypes, masd_entry_point))
-        return std::string("#DDA9F3");
+        return { "#DDA9F3" };
     else if (boost::contains(stereotypes, masd_enumeration))
-        return std::string("#F2DAFD");
+        return { "#F2DAFD" };
     else if (boost::contains(stereotypes, masd_exception))
-        return std::string("#E8C2F8");
+        return { "#E8C2F8" };
     else if (boost::contains(stereotypes, masd_mapping_extensible_mappable))
-        return std::string("#FFFF72");
+        return { "#FFFF72" };
     else if (boost::contains(stereotypes, masd_mapping_fixed_mappable))
-        return std::string("#FFFFAC");
+        return { "#FFFFAC" };
     else if (boost::contains(stereotypes, masd_object_template))
-        return std::string("#E3B6F6");
+        return { "#E3B6F6" };
     else if (boost::contains(stereotypes, masd_object))
-        return std::string("#F7E5FF");
+        return { "#F7E5FF" };
     else if (boost::contains(stereotypes, masd_orm_common_odb_options))
-        return std::string("#80FFBF");
+        return { "#80FFBF" };
     else if (boost::contains(stereotypes, masd_orm_object))
-        return std::string("#CCFFE6");
+        return { "#CCFFE6" };
     else if (boost::contains(stereotypes, masd_orm_value))
-        return std::string("#B3FFD9");
+        return { "#B3FFD9" };
     else if (boost::contains(stereotypes, masd_physical_helper))
-        return std::string("#68D7BB");
+        return { "#68D7BB" };
     else if (boost::contains(stereotypes, masd_physical_archetype))
-        return std::string("#68D799");
+        return { "#68D799" };
     else if (boost::contains(stereotypes, masd_physical_archetype_kind))
-        return std::string("#A0E6BF");
+        return { "#A0E6BF" };
     else if (boost::contains(stereotypes, masd_physical_backend))
-        return std::string("#EBFAF1");
+        return { "#EBFAF1" };
     else if (boost::contains(stereotypes, masd_physical_facet))
-        return std::string("#C6F0D8");
+        return { "#C6F0D8" };
     else if (boost::contains(stereotypes, masd_physical_part))
-        return std::string("#43CD80");
+        return { "#43CD80" };
     else if (boost::contains(stereotypes, masd_primitive))
-        return std::string("#EDCEFB");
+        return { "#EDCEFB" };
     else if (boost::contains(stereotypes, masd_serialization_type_registrar))
-        return std::string("#00FF00");
+        return { "#00FF00" };
     else if (boost::contains(stereotypes, masd_templating_logic_less_templates))
-        return std::string("#FFC072");
+        return { "#FFC072" };
     else if (boost::contains(stereotypes, masd_variability_feature_bundle))
-        return std::string("#BAD7D7");
+        return { "#BAD7D7" };
     else if (boost::contains(stereotypes,
             masd_variability_feature_template_bundle))
-        return std::string("#CCE2E2");
+        return { "#CCE2E2" };
     else if (boost::contains(stereotypes, masd_variability_initializer))
-        return std::string("#A9CDCD");
+        return { "#A9CDCD" };
     else if (boost::contains(stereotypes, masd_variability_profile))
-        return std::string("#DDECEC");
+        return { "#DDECEC" };
     else if (boost::contains(stereotypes, masd_variability_profile_template))
-        return std::string("#EEF6F6");
+        return { "#EEF6F6" };
     else if (boost::contains(stereotypes, masd_visual_studio_msbuild_targets))
-        return std::string("#B3DDB3");
+        return { "#B3DDB3" };
     else if (boost::contains(stereotypes, masd_visual_studio_project))
-        return std::string("#CCEECC");
+        return { "#CCEECC" };
     else if (boost::contains(stereotypes, masd_visual_studio_solution))
-        return std::string("#E5FFE5");
+        return { "#E5FFE5" };
     else if (boost::contains(stereotypes, dogen_handcrafted_typeable))
-        return std::string("#FFFACD");
+        return { "#FFFACD" };
     else if (boost::contains(stereotypes,
             dogen_handcrafted_typeable_header_only))
-        return std::string("#FFFADD");
+        return { "#FFFADD" };
     else if (boost::contains(stereotypes,
             dogen_handcrafted_typeable_implementation_only))
-        return std::string("#FFFADE");
+        return { "#FFFADE" };
     else if (boost::contains(stereotypes, dogen_untestable))
-        return std::string("#ED8181");
+        return { "#ED8181" };
 
     /*
      * If we did not match any stereotype, use the default colours for
@@ -338,5 +339,4 @@ apply(const transforms::context& ctx, const boost::filesystem::path& p,
     return r;
 }
 
-
-}
+} // namespace dogen::codec::transforms
