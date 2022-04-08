@@ -22,7 +22,7 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 #
 # vcpkg
 #
-cmake_policy(SET CMP0077 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 set(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
 set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
