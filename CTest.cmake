@@ -228,8 +228,8 @@ if(WITH_COVERAGE)
     ctest_coverage(RETURN_VALUE cov_result
         CAPTURE_CMAKE_ERROR cov_capture_result
         QUIET)
-    message(STATUS "Result: ${cov_result}");
-    message(STATUS "Cov capture result: ${cov_capture_result}");
+    message(STATUS "Result: ${cov_result}")
+    message(STATUS "Cov capture result: ${cov_capture_result}")
 endif()
 
 #
