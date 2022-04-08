@@ -22,35 +22,35 @@ UML representation:
 
 * exception                                                          :module:
   :PROPERTIES:
-  :custom_id: O0
+  :custom_id: E57380DA-C1FB-CA14-E8E3-D8FE2F1585AA
   :END:
 
 ** invalid enum value                                               :element:
    :PROPERTIES:
-   :custom_id: O2
+   :custom_id: F6A978C0-FE5A-7E14-6883-8D12041A46B8
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** utility exception                                                :element:
    :PROPERTIES:
-   :custom_id: O3
+   :custom_id: 298B2C62-0737-0044-C693-2ACA8E51EEEB
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 * filesystem                                                         :module:
   :PROPERTIES:
-  :custom_id: O4
+  :custom_id: B29CB727-F8F4-C994-9C13-3E9C368A2751
   :END:
 
 ** file                                                             :element:
    :PROPERTIES:
-   :custom_id: O5
+   :custom_id: 9A3D8753-4159-E474-3723-96C5C81D35A7
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** file not found                                                   :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: 1F6495E1-911A-DC14-672B-1DEB5F4F52B8
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -58,7 +58,7 @@ File was not found.
 
 ** io error                                                         :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: 2657217F-3EC5-0EA4-F053-42D6058B6984
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -66,154 +66,154 @@ An error occurred whilst performing an IO operation.
 
 ** path                                                             :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: 60457A74-EB1A-B254-9E63-90781B89C4FD
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * hash                                                               :module:
   :PROPERTIES:
-  :custom_id: O9
+  :custom_id: ADBD47C4-6217-6A74-CBCB-551887F50D0F
   :END:
 
 ** combine                                                          :element:
    :PROPERTIES:
-   :custom_id: O10
+   :custom_id: 79ECC9CF-2077-2544-A9EB-BD1990B27119
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** list hash                                                        :element:
    :PROPERTIES:
-   :custom_id: O11
+   :custom_id: 17592E91-6867-F354-5433-71C6C6A2F40F
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** sha1 hasher                                                      :element:
    :PROPERTIES:
-   :custom_id: O90
+   :custom_id: 17F825CB-C0B7-4874-AA4B-922B864F4D90
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * io                                                                 :module:
   :PROPERTIES:
-  :custom_id: O12
+  :custom_id: A6143CAD-062A-9984-081B-1DFBD4C27608
   :END:
 
 ** array io                                                         :element:
    :PROPERTIES:
-   :custom_id: O13
+   :custom_id: 22BF0BAF-A2E8-34C4-93BB-681FC963C56E
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** forward list io                                                  :element:
    :PROPERTIES:
-   :custom_id: O14
+   :custom_id: E2FDAA0B-7FDD-D7C4-4B23-F4F742146ACD
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** jsonify io                                                       :element:
    :PROPERTIES:
-   :custom_id: O15
+   :custom_id: 90642B6E-1091-6ED4-B5B3-0BF6A1F7CEF9
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** list io                                                          :element:
    :PROPERTIES:
-   :custom_id: O16
+   :custom_id: 8D128EA6-CC89-8EE4-1173-607AD2189A8E
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** map io                                                           :element:
    :PROPERTIES:
-   :custom_id: O17
+   :custom_id: 73B187A0-E957-3854-5423-0907EF08B92E
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** memory io                                                        :element:
    :PROPERTIES:
-   :custom_id: O18
+   :custom_id: 9B7C8AEB-AD76-75D4-B863-B28676195F5E
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** optional io                                                      :element:
    :PROPERTIES:
-   :custom_id: O19
+   :custom_id: 02FB2AFD-76E4-47B4-189B-03740A4A9947
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** pair io                                                          :element:
    :PROPERTIES:
-   :custom_id: O20
+   :custom_id: 60B68F7F-9BD9-26B4-963B-AB0917358F44
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** set io                                                           :element:
    :PROPERTIES:
-   :custom_id: O21
+   :custom_id: 6C27BCC8-2230-F294-DFB3-8B6E92385BAC
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** shared ptr io                                                    :element:
    :PROPERTIES:
-   :custom_id: O22
+   :custom_id: 568DC511-F8BC-6994-EDB3-9E385BD83F41
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** typeindex io                                                     :element:
    :PROPERTIES:
-   :custom_id: O23
+   :custom_id: 4CCAD036-812F-4CD4-2C93-0FD055016924
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** unordered map io                                                 :element:
    :PROPERTIES:
-   :custom_id: O24
+   :custom_id: 46EB5B30-FFA5-41C4-F503-641862B9FD0D
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** unordered set io                                                 :element:
    :PROPERTIES:
-   :custom_id: O25
+   :custom_id: B96CB2B9-5E43-0854-FFC3-C8DAEF7BDD73
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** vector io                                                        :element:
    :PROPERTIES:
-   :custom_id: O26
+   :custom_id: BA60C2F3-B6FD-E364-ED63-877F611D40C8
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 * log                                                                :module:
   :PROPERTIES:
-  :custom_id: O27
+  :custom_id: 039F535F-F00F-E164-6B3B-9C27E58CC1CD
   :END:
 
 ** logger                                                           :element:
    :PROPERTIES:
-   :custom_id: O28
+   :custom_id: E4F0766C-4AB2-5424-61F3-4E7B76BBD63B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** lifecycle manager                                                :element:
    :PROPERTIES:
-   :custom_id: O29
+   :custom_id: 8CC02578-AA3E-7044-F9B3-B16EF7DAD340
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** scoped lifecycle manager                                         :element:
    :PROPERTIES:
-   :custom_id: O30
+   :custom_id: 2485C326-CE74-9844-D0BB-1F49A5D2265B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** severity level                                                   :element:
    :PROPERTIES:
-   :custom_id: O31
+   :custom_id: 36DC8E47-DF27-B604-4213-A3DFD0371F16
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** logging configuration                                            :element:
    :PROPERTIES:
-   :custom_id: O64
+   :custom_id: C4876A0A-1DBC-EF54-353B-E6AD7DE2D6AC
    :masd.codec.stereotypes: masd::fluent
    :END:
 
@@ -251,7 +251,7 @@ Directory in which to place the output.
 
 ** invalid logging configuration                                    :element:
    :PROPERTIES:
-   :custom_id: O67
+   :custom_id: 5594037B-7825-1024-A5A3-DBB1DD8B7E10
    :masd.cpp.types.class_forward_declarations.enabled: false
    :masd.codec.stereotypes: masd::exception
    :END:
@@ -260,189 +260,189 @@ The values supplied for the logging configuration are not valid.
 
 ** logging configuration validator                                  :element:
    :PROPERTIES:
-   :custom_id: O68
+   :custom_id: 5A345A54-1D16-D574-72A3-4B1AB259390B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * serialization                                                      :module:
   :PROPERTIES:
-  :custom_id: O32
+  :custom_id: D69A1F31-730E-8364-B613-F8BAF834F8C9
   :END:
 
 ** archive types                                                    :element:
    :PROPERTIES:
-   :custom_id: O33
+   :custom_id: EEF066B6-A8B5-B3B4-9403-E4CBF39B64D4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** xml helper                                                       :element:
    :PROPERTIES:
-   :custom_id: O34
+   :custom_id: B13F7075-F1F8-7DA4-B97B-A20419523BFF
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** path                                                             :element:
    :PROPERTIES:
-   :custom_id: O35
+   :custom_id: DB87251D-5CD4-CED4-B0AB-F98776AD8547
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 * string                                                             :module:
   :PROPERTIES:
-  :custom_id: O36
+  :custom_id: FCA0B67F-EB93-E544-F16B-261CB5E3DAB4
   :END:
 
 ** splitter                                                         :element:
    :PROPERTIES:
-   :custom_id: O37
+   :custom_id: D6120A68-CCA4-8DD4-BB6B-5499BA3A7071
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** differ                                                           :element:
    :PROPERTIES:
-   :custom_id: O89
+   :custom_id: B02B4E59-49A9-1BF4-A46B-B4C48F654C74
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * test                                                               :module:
   :PROPERTIES:
-  :custom_id: O38
+  :custom_id: D7CD4A9D-C496-73F4-962B-6ECC99295474
   :END:
 
 ** asserter                                                         :element:
    :PROPERTIES:
-   :custom_id: O39
+   :custom_id: 9F83399B-80E6-4164-BF73-FC217620AC7D
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** bytewise file asserter                                           :element:
    :PROPERTIES:
-   :custom_id: O40
+   :custom_id: 42A6D69A-F15C-0614-4EE3-793AE17288CD
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** file asserter                                                    :element:
    :PROPERTIES:
-   :custom_id: O41
+   :custom_id: A34AD6C5-97F7-9574-AB83-A231248C9F85
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** logging                                                          :element:
    :PROPERTIES:
-   :custom_id: O42
+   :custom_id: 81E1FBB3-0CE3-E9D4-BE83-19BF2705594C
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** xml serialization helper                                         :element:
    :PROPERTIES:
-   :custom_id: O43
+   :custom_id: C811CD9F-A0C7-4704-C51B-5E55307BFFD9
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** exception checkers                                               :element:
    :PROPERTIES:
-   :custom_id: O44
+   :custom_id: 2FD942E2-CEDA-B8F4-75C3-CEB64EA2DFCD
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** fixture                                                          :element:
    :PROPERTIES:
-   :custom_id: O45
+   :custom_id: F1EB48A9-64B0-C554-1B33-6B048FEDDE4E
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** macros                                                           :element:
    :PROPERTIES:
-   :custom_id: O46
+   :custom_id: B63A9BCE-01FB-8794-8CA3-1DB0881C615A
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 * test data                                                          :module:
   :PROPERTIES:
-  :custom_id: O47
+  :custom_id: 9EAB63F3-58E6-3844-3A53-192193A76E14
   :END:
 
 ** filesystem tests                                                 :element:
    :PROPERTIES:
-   :custom_id: O48
+   :custom_id: 7F8A295B-747E-58A4-0C5B-462E90D96542
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** generate container                                               :element:
    :PROPERTIES:
-   :custom_id: O49
+   :custom_id: 6910D1F2-278F-2104-25DB-757C90B9CA01
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** generator                                                        :element:
    :PROPERTIES:
-   :custom_id: O50
+   :custom_id: 76CEBB53-FD31-5F74-11B3-80042AA17910
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** northwind                                                        :element:
    :PROPERTIES:
-   :custom_id: O51
+   :custom_id: B0E14D07-23B0-2E04-BFDB-577AB60397E9
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** resolver                                                         :element:
    :PROPERTIES:
-   :custom_id: O52
+   :custom_id: 260F7CCC-9965-9DC4-CC7B-9A06C5BAFA2F
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** sequence                                                         :element:
    :PROPERTIES:
-   :custom_id: O53
+   :custom_id: 9CE8F828-B08A-EEB4-17CB-0E7B4411C4CD
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** tds test good                                                    :element:
    :PROPERTIES:
-   :custom_id: O54
+   :custom_id: 91C04450-1791-3414-EAAB-D48DF1F130C6
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** test data                                                        :element:
    :PROPERTIES:
-   :custom_id: O55
+   :custom_id: D968BB46-154D-C814-A8D3-42232BBAF4D9
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** validating resolver                                              :element:
    :PROPERTIES:
-   :custom_id: O56
+   :custom_id: B4D361FB-F3F5-6274-9963-D42E9BF98007
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** xml reader                                                       :element:
    :PROPERTIES:
-   :custom_id: O57
+   :custom_id: 35316072-32FF-9C74-3053-D15DC1351855
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** dogen product                                                    :element:
    :PROPERTIES:
-   :custom_id: O73
+   :custom_id: 74452FA6-0A46-2024-0983-A8FA332CB819
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** cpp ref impl product                                             :element:
    :PROPERTIES:
-   :custom_id: O74
+   :custom_id: E82B626F-C1CE-F794-98DB-716F369A144D
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** csharp ref impl product                                          :element:
    :PROPERTIES:
-   :custom_id: O75
+   :custom_id: 451F63DE-9FC0-5554-E0BB-9BBDCC5C8A5B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** test data exception                                              :element:
    :PROPERTIES:
-   :custom_id: O76
+   :custom_id: 367ED4AA-DB50-4974-E7F3-670658FF1BD1
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -450,53 +450,53 @@ An error occurred whilst obtaining the test data.
 
 ** frozen product                                                   :element:
    :PROPERTIES:
-   :custom_id: O103
+   :custom_id: E10B8C28-B4AF-3B94-D3A3-6FB73E5C4F39
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * xml                                                                :module:
   :PROPERTIES:
-  :custom_id: O58
+  :custom_id: F7AFC72F-A202-D734-2E1B-2B0E24702884
   :END:
 
 ** exception                                                        :element:
    :PROPERTIES:
-   :custom_id: O59
+   :custom_id: D6449709-8A0B-1DA4-7E0B-BCFCC88930A8
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** node types                                                       :element:
    :PROPERTIES:
-   :custom_id: O60
+   :custom_id: E69DC3B8-A399-D924-C7D3-247AF2A6D9C6
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** node types io                                                    :element:
    :PROPERTIES:
-   :custom_id: O61
+   :custom_id: 3FF45B72-872A-AF14-2D13-0CC441AE9241
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** text reader                                                      :element:
    :PROPERTIES:
-   :custom_id: O62
+   :custom_id: 8CE1997A-D840-62C4-B4AB-6770AB7CE3F9
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** text reader io                                                   :element:
    :PROPERTIES:
-   :custom_id: O63
+   :custom_id: 532D79D6-CD60-8264-7FCB-876F84504471
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * environment                                                        :module:
   :PROPERTIES:
-  :custom_id: O77
+  :custom_id: 1B6CCAEA-2154-EF04-0693-6A7D11993DCC
   :END:
 
 ** environment exception                                            :element:
    :PROPERTIES:
-   :custom_id: O78
+   :custom_id: 566C40B1-0ADC-F0D4-BBE3-F0CC0427FAD9
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -504,13 +504,13 @@ There was an error reading an environment variable.
 
 ** variable reader                                                  :element:
    :PROPERTIES:
-   :custom_id: O79
+   :custom_id: 21E38C3A-197E-7A24-D2AB-3FEE1EDBD63B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * formatters                                                         :module:
   :PROPERTIES:
-  :custom_id: O82
+  :custom_id: 38BF9D5A-D501-B424-CE8B-6C1127B626DB
   :masd.codec.dia.comment: true
   :END:
 
@@ -520,7 +520,7 @@ model.
 
 ** formatting error                                                 :element:
    :PROPERTIES:
-   :custom_id: O83
+   :custom_id: 20A8E053-6BF6-0064-9463-CB919CAD691E
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -528,7 +528,7 @@ An error has occurred while formatting.
 
 ** quote type                                                       :element:
    :PROPERTIES:
-   :custom_id: O84
+   :custom_id: 1B7475CF-8C0D-55C4-4893-12B637564138
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -540,7 +540,7 @@ Types of quotes that can be used in streaming.
 
 ** spacing type                                                     :element:
    :PROPERTIES:
-   :custom_id: O85
+   :custom_id: C01A6E47-921C-7E24-4543-F12912750A98
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -554,19 +554,19 @@ Types of quotes that can be used in streaming.
 
 ** utility formatter                                                :element:
    :PROPERTIES:
-   :custom_id: O86
+   :custom_id: 89ADE049-3394-83B4-838B-634689B7D389
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** indent filter                                                    :element:
    :PROPERTIES:
-   :custom_id: O93
+   :custom_id: 4775FD41-BEBC-A9F4-DCFB-2473255A5F01
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 
 ** comment style                                                    :element:
    :PROPERTIES:
-   :custom_id: O96
+   :custom_id: 7F64DA63-85E5-5B64-D49B-FA3E88F12C30
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -598,19 +598,19 @@ Comments using XML syntax.
 
 ** comment formatter                                                :element:
    :PROPERTIES:
-   :custom_id: O97
+   :custom_id: 36DC3635-FE0D-1994-3863-24611F2CD17A
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** sequence formatter                                               :element:
    :PROPERTIES:
-   :custom_id: O99
+   :custom_id: 77B16479-7620-4D74-7073-5C37E780B812
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** infix configuration                                              :element:
    :PROPERTIES:
-   :custom_id: O100
+   :custom_id: 080E12E1-5798-4534-C3AB-9CDECF771E2B
    :masd.codec.stereotypes: masd::fluent
    :END:
 
@@ -647,12 +647,12 @@ Only applicable to the last element of a sequence.
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O91
+  :custom_id: EC0FAF02-A84B-5374-1753-1B84D3029B12
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O92
+  :custom_id: FCE58F5D-2416-1014-75E3-A209CECF5149
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

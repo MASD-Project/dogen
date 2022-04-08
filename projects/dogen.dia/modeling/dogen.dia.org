@@ -23,19 +23,19 @@ UML representation:
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O1
+  :custom_id: BB4D16D7-E68B-A8F4-0383-F90CB4A2F2B3
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O2
+  :custom_id: 6598373F-B4F7-79E4-EB13-6BF2CA527BCF
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
 * entities                                                           :module:
   :PROPERTIES:
-  :custom_id: O3
+  :custom_id: F253FBAB-D244-3144-F93B-C096D64F531E
   :masd.codec.dia.comment: true
   :END:
 
@@ -44,7 +44,7 @@ domain of the Dia diagram editor.
 
 ** diagram                                                          :element:
    :PROPERTIES:
-   :custom_id: O4
+   :custom_id: 8C817E5D-F486-A854-085B-08AB757F8849
    :END:
 
 Represents a diagram in Dia.
@@ -65,7 +65,7 @@ Visual layers on the diagram.
 
 ** layer                                                            :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: F8DF7B4F-D160-8904-FF73-07960FA3523E
    :END:
 
 Represents a layer in a Dia diagram.
@@ -100,7 +100,7 @@ Dia objects contained in layer.
 
 ** object                                                           :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: 2BE640CB-3014-D914-40D3-A5E593D8FA29
    :END:
 
 Represents a Dia object.
@@ -147,7 +147,7 @@ All attributes associated with the object.
 
 ** connection                                                       :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: 45AF71D9-E202-DE94-C613-4EE99D23C628
    :END:
 
 Connection between entities in a Dia diagram.
@@ -178,7 +178,7 @@ we renamed it.
 
 ** diagram data                                                     :element:
    :PROPERTIES:
-   :custom_id: O9
+   :custom_id: FFEE0D74-483A-FC24-E813-04FD91FD5B22
    :END:
 
 Represents a all the data associated with a diagram.
@@ -192,7 +192,7 @@ All attributes associated with the diagram data.
 
 ** child node                                                       :element:
    :PROPERTIES:
-   :custom_id: O10
+   :custom_id: 192D67AC-AF30-1B14-027B-72322A7380D3
    :END:
 
 Represents a child_node in a diagram.
@@ -210,7 +210,7 @@ Parent for this object.
 
 ** attribute                                                        :element:
    :PROPERTIES:
-   :custom_id: O11
+   :custom_id: FADBDD81-AFF9-0074-4DE3-C278D4942D5E
    :END:
 
 Attribute in a Dia diagram.
@@ -231,7 +231,7 @@ Values for the attribute.
 
 ** font                                                             :element:
    :PROPERTIES:
-   :custom_id: O12
+   :custom_id: 6A39DB77-CC35-0204-B7DB-4E6BAB1B02C7
    :END:
 
 Represents a font in a diagram.
@@ -253,7 +253,7 @@ Represents a font in a diagram.
 
 ** composite                                                        :element:
    :PROPERTIES:
-   :custom_id: O13
+   :custom_id: D5A001ED-4FAE-0404-336B-A8B1299C717F
    :masd.codec.stereotypes: dogen::untestable
    :END:
 
@@ -282,7 +282,7 @@ Some composites contain an inner composite field.
 
 ** color                                                            :element:
    :PROPERTIES:
-   :custom_id: O14
+   :custom_id: 4497384E-6670-D2E4-642B-3C9C32AC7943
    :END:
 
 Represents a color in a diagram.
@@ -296,7 +296,7 @@ Text representation of an RGB value in hex.
 
 ** real                                                             :element:
    :PROPERTIES:
-   :custom_id: O15
+   :custom_id: 9528B0CB-A7E5-5D54-42B3-50ADBC3430E3
    :END:
 
 Represents a real value.
@@ -310,7 +310,7 @@ Text representation of a real value.
 
 ** integer                                                          :element:
    :PROPERTIES:
-   :custom_id: O16
+   :custom_id: 71BED2CD-7862-2964-6203-5F8976FC5931
    :END:
 
 Represents an integer value.
@@ -324,7 +324,7 @@ Text representation of an integer value.
 
 ** boolean                                                          :element:
    :PROPERTIES:
-   :custom_id: O17
+   :custom_id: AA5D8D99-2ED2-7034-A2D3-A14E7667F145
    :END:
 
 Represents a boolean value.
@@ -338,7 +338,7 @@ Text representation of a boolean value.
 
 ** point                                                            :element:
    :PROPERTIES:
-   :custom_id: O18
+   :custom_id: 4E7D3178-5CF9-D2E4-0D2B-552814BC7C01
    :END:
 
 Represents a point in a diagram.
@@ -352,7 +352,7 @@ Text representation of a point with X/Y coordinates.
 
 ** enumeration                                                      :element:
    :PROPERTIES:
-   :custom_id: O19
+   :custom_id: B1451B01-A877-03E4-7793-5AEE0C569E58
    :END:
 
 Represents a enumeration in a diagram.
@@ -366,7 +366,7 @@ Text representation of a enumeration.
 
 ** string                                                           :element:
    :PROPERTIES:
-   :custom_id: O20
+   :custom_id: F376DA4C-7B04-76C4-A33B-B7B290FC1067
    :END:
 
 Represents a string value.
@@ -380,7 +380,7 @@ Represents a string value.
 
 ** rectangle                                                        :element:
    :PROPERTIES:
-   :custom_id: O21
+   :custom_id: 7F079D16-7083-EDD4-E21B-B3DFC83FBD39
    :END:
 
 Represents a rectangle in a diagram.
@@ -394,12 +394,12 @@ Text representation of a rectangle with a pair of X/Y coordinates.
 
 * transforms                                                         :module:
   :PROPERTIES:
-  :custom_id: O40
+  :custom_id: 536B50A6-39A7-E4B4-F283-D794F3B2446A
   :END:
 
 ** transformation error                                             :element:
    :PROPERTIES:
-   :custom_id: O41
+   :custom_id: 89B46C2F-7FA7-9224-6B7B-DD91D9F4495E
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -407,6 +407,6 @@ An error occurred whilst applying a transformation.
 
 ** string to diagram transform                                      :element:
    :PROPERTIES:
-   :custom_id: O42
+   :custom_id: AEBEE08F-5CF3-4C14-E333-FB32841EB608
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:

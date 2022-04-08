@@ -26,7 +26,7 @@ UML representation:
 
 * entities                                                           :module:
   :PROPERTIES:
-  :custom_id: O0
+  :custom_id: 20E948A4-80F2-5874-8B23-4FA51E0611E8
   :masd.codec.dia.comment: true
   :END:
 
@@ -34,7 +34,7 @@ Represents entities from Emacs' org-mode.
 
 ** section                                                          :element:
    :PROPERTIES:
-   :custom_id: O1
+   :custom_id: 3B68E17F-9CC3-C644-908B-EE5B890386E2
    :END:
 
 *** blocks                                                        :attribute:
@@ -44,7 +44,7 @@ Represents entities from Emacs' org-mode.
 
 ** document                                                         :element:
    :PROPERTIES:
-   :custom_id: O2
+   :custom_id: FF5E7EC4-54D0-8D54-9AD3-D51AD1FC5DD7
    :END:
 
 *** affiliated keywords                                           :attribute:
@@ -73,7 +73,7 @@ Top-level headlines in document.
 
 ** headline                                                         :element:
    :PROPERTIES:
-   :custom_id: 2ae8829f-db42-4ab8-a2c3-627ae2b0431d
+   :custom_id: 69AFEF06-7AD4-7EA4-5F1B-C67F09E2A4F2
    :END:
 
 Represents a headline in org mode.
@@ -171,21 +171,21 @@ Headline's TODO keyword.
 
 ** tag                                                              :element:
    :PROPERTIES:
-   :custom_id: O5
+   :custom_id: D9C49E71-D6A2-24E4-D2C3-7AB76EE9AB08
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 
 ** todo keyword                                                     :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: B2D0F01B-DFE6-F594-E70B-3440077564B3
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 
 ** drawer                                                           :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: 96FF2304-3ADD-7C44-1F03-C84C2C9F5BAD
    :END:
 
 *** name                                                          :attribute:
@@ -207,7 +207,7 @@ Original name used by the property.
 
 ** drawer content                                                   :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: 9B50B5D9-71B9-71E4-B58B-EDAA46E7E479
    :END:
 
 *** key                                                           :attribute:
@@ -222,7 +222,7 @@ Original name used by the property.
 
 ** affiliated keyword                                               :element:
    :PROPERTIES:
-   :custom_id: O9
+   :custom_id: 6C3D51B0-4C79-E254-03E3-586355386C55
    :END:
 
 *** key                                                           :attribute:
@@ -237,7 +237,7 @@ Original name used by the property.
 
 ** drawer type                                                      :element:
    :PROPERTIES:
-   :custom_id: O11
+   :custom_id: C70A41FC-3384-A254-9F3B-32259431BC7D
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -247,14 +247,14 @@ Original name used by the property.
 
 ** priority cookie                                                  :element:
    :PROPERTIES:
-   :custom_id: O12
+   :custom_id: 8052B6A5-ACA3-E364-5113-02016F0377B1
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 
 ** block                                                            :element:
    :PROPERTIES:
-   :custom_id: O13
+   :custom_id: 746719EA-CA81-E704-D6AB-FD338BBF526E
    :END:
 
 *** name                                                          :attribute:
@@ -279,7 +279,7 @@ Original name used by the property.
 
 ** block type                                                       :element:
    :PROPERTIES:
-   :custom_id: O14
+   :custom_id: 225EABE1-DC08-C254-5CBB-F00D79E5A9BF
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -289,49 +289,49 @@ Original name used by the property.
 
 ** parameter                                                        :element:
    :PROPERTIES:
-   :custom_id: O30
+   :custom_id: 475541D7-DB42-6E24-14D3-521B64E0E702
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
 
 * registrar                                                         :element:
   :PROPERTIES:
-  :custom_id: O24
+  :custom_id: A562E2EF-4661-B124-B5F3-0F91C2C9735E
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O25
+  :custom_id: E6202653-E0AE-7044-2A5B-502A4EDBF40A
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O26
+  :custom_id: 180139E8-6BDF-5B34-78BB-A1923B493721
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
 * transforms                                                         :module:
   :PROPERTIES:
-  :custom_id: O27
+  :custom_id: D54D258E-9769-EFD4-35A3-2FF92FA595DC
   :END:
 
 ** string to document transform                                     :element:
    :PROPERTIES:
-   :custom_id: O28
+   :custom_id: 15F33F7E-F4BE-A854-7953-DE8257D2389E
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** document to string transform                                     :element:
    :PROPERTIES:
-   :custom_id: O29
+   :custom_id: E7020AFA-2C14-E694-CC4B-B31E3919C9CE
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** transformation error                                             :element:
    :PROPERTIES:
-   :custom_id: O51
+   :custom_id: DDBC08ED-48DD-B834-1EC3-E1DDF8906222
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -339,18 +339,18 @@ An error occurred whilst transforming.
 
 * helpers                                                            :module:
   :PROPERTIES:
-  :custom_id: O31
+  :custom_id: B20B40F1-7F38-1B64-35DB-2F028D406586
   :END:
 
 ** parser                                                           :element:
    :PROPERTIES:
-   :custom_id: O32
+   :custom_id: 0120EF5E-81AD-5B14-FBB3-4B1C5ED10F47
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** parsing error                                                    :element:
    :PROPERTIES:
-   :custom_id: O33
+   :custom_id: FC6DD25D-66F1-05A4-B5A3-07266AB7971D
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -358,7 +358,7 @@ An error ocurred whilst parsing an org-mode document.
 
 ** node                                                             :element:
    :PROPERTIES:
-   :custom_id: O37
+   :custom_id: 3B6B48CA-C8E9-C3C4-03D3-BCFF94AA1716
    :masd.codec.stereotypes: dogen::untestable
    :END:
 
@@ -374,7 +374,7 @@ An error ocurred whilst parsing an org-mode document.
 
 ** builder                                                          :element:
    :PROPERTIES:
-   :custom_id: O38
+   :custom_id: 9A14EF64-B4EA-1674-7903-62412683B9C2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -385,7 +385,7 @@ An error ocurred whilst parsing an org-mode document.
 
 ** building error                                                   :element:
    :PROPERTIES:
-   :custom_id: O39
+   :custom_id: BC644074-F05B-E224-79B3-7590F8756340
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -393,6 +393,6 @@ An error occurred whilst building.
 
 ** document factory                                                 :element:
    :PROPERTIES:
-   :custom_id: O47
+   :custom_id: 751D8EBF-3C49-7E14-A9DB-CA1BBC9D11E8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:

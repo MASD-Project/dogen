@@ -22,7 +22,7 @@ UML representation:
 
 * entities                                                           :module:
   :PROPERTIES:
-  :custom_id: O0
+  :custom_id: 26AD9BBB-D426-39F4-B083-B895205B8B51
   :masd.codec.dia.comment: true
   :END:
 
@@ -31,7 +31,7 @@ of Dogen elements.
 
 ** name                                                             :element:
    :PROPERTIES:
-   :custom_id: O2
+   :custom_id: 21747B01-B289-0DA4-FE23-353F8678AD47
    :masd.codec.stereotypes: Nameable
    :END:
 
@@ -46,7 +46,7 @@ Qualified name for an element.
 
 ** codec provenance                                                 :element:
    :PROPERTIES:
-   :custom_id: 30866ffa-2b2a-4324-9a4a-ba84c8601856
+   :custom_id: A3214C79-E31C-F684-6613-821B231B7AE5
    :END:
 
 Source of a model element in the codec dimension.
@@ -81,7 +81,7 @@ Where the element was located in the original source.
 
 ** model type                                                       :element:
    :PROPERTIES:
-   :custom_id: O4
+   :custom_id: 133F75E6-C6C5-D654-9A2B-067B30B84940
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -105,7 +105,7 @@ The origin of the element is not yet known.
 
 ** sha1 hash                                                        :element:
    :PROPERTIES:
-   :custom_id: O5
+   :custom_id: 093FBEF7-0420-D614-252B-A4191650A2FB
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
@@ -114,7 +114,7 @@ Stores a SHA1 hash.
 
 ** codec id                                                         :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: 9CA88D8E-6411-CD34-E503-7CF19F65B200
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
@@ -123,7 +123,7 @@ ID of the elment as sourced from the codec model, if any.
 
 ** logical id                                                       :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: D75CC0A7-54C6-1814-8C0B-D0555875171A
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive, dogen::hashable
    :END:
@@ -132,7 +132,7 @@ ID of the elment in the logical dimension.
 
 ** physical meta id                                                 :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: BA99A61F-A969-7E04-67EB-A7897DFE1318
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive, dogen::hashable
    :END:
@@ -141,7 +141,7 @@ ID of the meta-element in the physical dimension.
 
 ** codec location                                                   :element:
    :PROPERTIES:
-   :custom_id: 9423280e-9b15-45f0-a3b3-612d9a329f36
+   :custom_id: D93CBE19-294B-FC24-D80B-C8BEEA125B18
    :END:
 
 Location of a modeling element in the codec dimension.
@@ -162,7 +162,7 @@ Line number where the element was defined.
 
 ** logical provenance                                               :element:
    :PROPERTIES:
-   :custom_id: O10
+   :custom_id: 9206D558-C3ED-F1F4-5323-2518AD09001A
    :END:
 
 Source of a model element in the logical dimension.
@@ -190,7 +190,7 @@ Provenance of the current element in the logical dimension as a meta-element.
 
 ** logical meta id                                                  :element:
    :PROPERTIES:
-   :custom_id: O15
+   :custom_id: EA63CD46-3903-7C64-47D3-438EF12B34D4
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive, dogen::hashable
    :END:
@@ -199,7 +199,7 @@ ID for a logical meta-element.
 
 ** label                                                            :element:
    :PROPERTIES:
-   :custom_id: O16
+   :custom_id: BA8F36F2-F254-4AF4-B4F3-15FCDBA9D43B
    :END:
 
 A label is a key-value pair that can be used by the processing engine in a flexible way.
@@ -220,7 +220,7 @@ Value associated with this label.
 
 ** tagged value                                                     :element:
    :PROPERTIES:
-   :custom_id: O17
+   :custom_id: FFE9383A-9F22-E714-07FB-D8113AC0A892
    :END:
 
 Represents a tagged value in a similar spirit to UMLs.
@@ -241,7 +241,7 @@ Value associated with this tag.
 
 ** logical name                                                     :element:
    :PROPERTIES:
-   :custom_id: O18
+   :custom_id: FC872101-C9F0-83E4-1BF3-73A985DCF106
    :masd.codec.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
    :END:
 
@@ -281,7 +281,7 @@ If true, the name indicates an element that can contain other elements.
 
 ** logical location                                                 :element:
    :PROPERTIES:
-   :custom_id: O19
+   :custom_id: 7340D4F6-D84A-D354-32F3-5F5957B55EDB
    :masd.codec.stereotypes: dogen::hashable
    :END:
 
@@ -329,7 +329,7 @@ that are not modules, such as attributes, inner classes, etc.
 
 ** qualified representations                                        :element:
    :PROPERTIES:
-   :custom_id: O20
+   :custom_id: 053FF8AE-4698-E9F4-D0D3-E93E8131FE33
    :masd.codec.stereotypes: dogen::hashable
    :END:
 
@@ -359,7 +359,7 @@ supported technical spaces, using the entire name structure.
 
 ** physical meta location                                           :element:
    :PROPERTIES:
-   :custom_id: O21
+   :custom_id: 1E7B1F65-BB60-0C04-8243-D7C94D632B54
    :END:
 
 Location of an entity or set of entities in the physical meta-model.
@@ -407,7 +407,7 @@ Name of the archetype for this element, if applicable.
 
 ** physical meta name                                               :element:
    :PROPERTIES:
-   :custom_id: O22
+   :custom_id: FB623C32-E416-A8D4-9D7B-00752CE11BE0
    :masd.codec.stereotypes: Nameable
    :END:
 
@@ -436,7 +436,7 @@ Location for a meta-name in physical space.
 
 ** logical meta name                                                :element:
    :PROPERTIES:
-   :custom_id: O26
+   :custom_id: 463F53C0-DEA8-4DB4-A7D3-0FCF4C89F9B4
    :masd.codec.stereotypes: Nameable
    :END:
 
@@ -449,7 +449,7 @@ Identifier for this logical meta-element.
 
 ** technical space                                                  :element:
    :PROPERTIES:
-   :custom_id: O27
+   :custom_id: 42C61E0C-FDBD-E444-488B-15FC5961F5FB
    :masd.cpp.hash.enabled: true
    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
    :END:
@@ -490,7 +490,7 @@ Mustache templates.
 
 ** physical name                                                    :element:
    :PROPERTIES:
-   :custom_id: O28
+   :custom_id: 6F594E39-E4BA-2E94-078B-7177E469361B
    :masd.codec.stereotypes: Nameable
    :END:
 
@@ -505,7 +505,7 @@ ID for a physical element.
 
 ** Nameable                                                         :element:
    :PROPERTIES:
-   :custom_id: O29
+   :custom_id: B4A03449-DC6D-1704-18BB-C0DEC1874FD5
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -520,7 +520,7 @@ Simple name for a modeling element.
 
 ** logical meta physical id                                         :element:
    :PROPERTIES:
-   :custom_id: O30
+   :custom_id: 46D6B0B6-91F1-5614-46DB-BE4CA1B6B51C
    :masd.codec.stereotypes: dogen::hashable
    :END:
 
@@ -542,7 +542,7 @@ ID of the element in the physical dimension.
 
 ** physical id                                                      :element:
    :PROPERTIES:
-   :custom_id: O32
+   :custom_id: C1FB3BF9-0B18-7C84-DCA3-D85AC4141936
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
@@ -551,7 +551,7 @@ ID for a physical element.
 
 ** model id                                                         :element:
    :PROPERTIES:
-   :custom_id: O69
+   :custom_id: 14567330-9D10-FDF4-FFB3-AB31039D3C9D
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
@@ -560,7 +560,7 @@ ID for a model.
 
 ** stereotype                                                       :element:
    :PROPERTIES:
-   :custom_id: O70
+   :custom_id: BDA057E0-76D2-3054-3F83-AC71C4C87C87
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
@@ -569,7 +569,7 @@ Stereotype.
 
 ** logical name tree                                                :element:
    :PROPERTIES:
-   :custom_id: O72
+   :custom_id: 359B0BBF-F6A6-0764-E393-6B06E1E56833
    :masd.codec.stereotypes: QualifiedRepresentations
    :END:
 
@@ -628,7 +628,7 @@ If true, "current" stores a floating point type.
 
 ** QualifiedRepresentations                                         :element:
    :PROPERTIES:
-   :custom_id: O73
+   :custom_id: CC848548-ED99-3E94-4CEB-6BF9ABB199B7
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -643,7 +643,7 @@ Contains the name according to different representations.
 
 ** archetype name set                                               :element:
    :PROPERTIES:
-   :custom_id: O95
+   :custom_id: 6EA14C10-A650-3104-54C3-2FB4A125359B
    :END:
 
 *** logical meta id                                               :attribute:
@@ -677,7 +677,7 @@ Maps a label to archetype ID within the present logical manifold.
 
 ** physical meta name indices                                       :element:
    :PROPERTIES:
-   :custom_id: O97
+   :custom_id: D609D50D-A5FD-38D4-3A53-74B537D93C89
    :END:
 
 Containing physical meta-names, indexed as required by use cases.
@@ -719,7 +719,7 @@ Resolves a given physical meta-model element ID into its technical space.
 
 ** technical space version                                          :element:
    :PROPERTIES:
-   :custom_id: O102
+   :custom_id: 36432529-6E98-43A4-D71B-F8C13908940F
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -735,7 +735,7 @@ Version of the technical space to use.
 
 * helpers                                                            :module:
   :PROPERTIES:
-  :custom_id: O36
+  :custom_id: 06C5284F-121D-B7E4-75CB-A85F85D87106
   :masd.codec.dia.comment: true
   :END:
 
@@ -743,13 +743,13 @@ Assorted helpers used to construct domain entities.
 
 ** identifiable factory                                             :element:
    :PROPERTIES:
-   :custom_id: O37
+   :custom_id: E267BF67-488A-E2A4-42F3-4481A0F0C612
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** building error                                                   :element:
    :PROPERTIES:
-   :custom_id: O38
+   :custom_id: 680D454A-BB02-E2D4-373B-AFFCAE270782
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -757,7 +757,7 @@ An error occurred whilst building.
 
 ** qualified representations builder                                :element:
    :PROPERTIES:
-   :custom_id: O39
+   :custom_id: 926945D7-C581-0124-9FEB-14EA659E3388
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -773,13 +773,13 @@ An error occurred whilst building.
 
 ** logical name factory                                             :element:
    :PROPERTIES:
-   :custom_id: O40
+   :custom_id: C501186E-E596-A414-1A7B-AA44E21372FD
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** logical name builder                                             :element:
    :PROPERTIES:
-   :custom_id: O41
+   :custom_id: CB116D36-38B0-5F24-7FE3-4FFAED56A464
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -790,13 +790,13 @@ An error occurred whilst building.
 
 ** logical name flattener                                           :element:
    :PROPERTIES:
-   :custom_id: O44
+   :custom_id: 988CD7CD-B3EE-0824-2EE3-A501D8C14006
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** logical location builder                                         :element:
    :PROPERTIES:
-   :custom_id: O45
+   :custom_id: 2434744A-630B-7314-0FA3-67533A9FABF0
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -807,7 +807,7 @@ An error occurred whilst building.
 
 ** flattening error                                                 :element:
    :PROPERTIES:
-   :custom_id: O47
+   :custom_id: F44642E3-6AE0-8204-8A8B-38E1A6DBCB38
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -815,7 +815,7 @@ An error occurred whilst flattening a name.
 
 ** printing error                                                   :element:
    :PROPERTIES:
-   :custom_id: O48
+   :custom_id: C01E4007-DBDF-5654-E94B-178C9748D9A5
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -823,13 +823,13 @@ An error occurred whilst pretty printing.
 
 ** pretty printer                                                   :element:
    :PROPERTIES:
-   :custom_id: O49
+   :custom_id: 126B5AC4-C73A-F884-52B3-B9CF2BF676AB
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** separators                                                       :element:
    :PROPERTIES:
-   :custom_id: O50
+   :custom_id: D74379F1-C3FD-33B4-3413-DECC11D1060C
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -849,25 +849,25 @@ Separate name elements with a '.'.
 
 ** physical meta name factory                                       :element:
    :PROPERTIES:
-   :custom_id: O54
+   :custom_id: 768E0DDB-F69F-4154-FF23-B5948B59B195
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** physical meta name builder                                       :element:
    :PROPERTIES:
-   :custom_id: O55
+   :custom_id: A51532B5-3BAD-2644-5763-A7FC3F8854D2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** physical meta id builder                                         :element:
    :PROPERTIES:
-   :custom_id: O56
+   :custom_id: E6CA91E2-6683-A1C4-86FB-64C1727DD622
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** logical name tree builder                                        :element:
    :PROPERTIES:
-   :custom_id: O77
+   :custom_id: 84F51A2C-A5C3-0214-48DB-851CBAF3D602
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -888,13 +888,13 @@ Separate name elements with a '.'.
 
 ** legacy logical name tree parser                                  :element:
    :PROPERTIES:
-   :custom_id: O78
+   :custom_id: EF1DE00B-55A0-F3E4-AC8B-8037C62849F6
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** node                                                             :element:
    :PROPERTIES:
-   :custom_id: O79
+   :custom_id: 004A12D7-ECF8-DF84-A97B-FBAA8FF78B4C
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -925,13 +925,13 @@ Child nodes in a tree.
 
 ** new logical name tree parser                                     :element:
    :PROPERTIES:
-   :custom_id: O80
+   :custom_id: CD4EB800-9A94-8B84-C54B-39178F4EDEC4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** parsing error                                                    :element:
    :PROPERTIES:
-   :custom_id: O82
+   :custom_id: 46FB8537-1FED-2E84-4C23-AD8A6CD1E43E
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -939,13 +939,13 @@ A fatal error has occurred while parsing.
 
 ** physical meta name validator                                     :element:
    :PROPERTIES:
-   :custom_id: O88
+   :custom_id: 9B64AE0B-90AB-8EB4-8C93-AF3641257187
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** validation error                                                 :element:
    :PROPERTIES:
-   :custom_id: O90
+   :custom_id: 301D148C-F826-EEA4-D493-7E65EFECC60E
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -953,30 +953,30 @@ An error occurred during validation.
 
 ** physical id factory                                              :element:
    :PROPERTIES:
-   :custom_id: O93
+   :custom_id: 332C7F11-B63F-37A4-544B-14A01C1155BD
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** meta name index builder                                          :element:
    :PROPERTIES:
-   :custom_id: O99
+   :custom_id: 9F07E20B-A9D7-2594-15EB-2954B9346EEA
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** logical meta name factory                                        :element:
    :PROPERTIES:
-   :custom_id: O100
+   :custom_id: 772AED49-FF06-27B4-21DB-88B57E31E9A0
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O61
+  :custom_id: 7FA9ABF6-B1D0-0854-A79B-8FB5DDBD8739
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O62
+  :custom_id: 171B88FB-C015-49A4-3B6B-76F925692C1B
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:

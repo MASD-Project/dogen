@@ -24,7 +24,7 @@ UML representation:
 
 * tracer                                                            :element:
   :PROPERTIES:
-  :custom_id: O1
+  :custom_id: 6708FCAD-49CF-2494-2813-0F6A491C25FD
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
@@ -36,7 +36,7 @@ UML representation:
 
 * metrics                                                           :element:
   :PROPERTIES:
-  :custom_id: O2
+  :custom_id: 79BFE2F1-7FE8-C584-89CB-05273A45B186
   :masd.codec.stereotypes: dogen::untestable
   :END:
 
@@ -72,19 +72,19 @@ UML representation:
 
 * metrics builder                                                   :element:
   :PROPERTIES:
-  :custom_id: O3
+  :custom_id: 77775204-0C44-B9E4-182B-58B79B9B803C
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * metrics printer                                                   :element:
   :PROPERTIES:
-  :custom_id: O4
+  :custom_id: 5F842B02-701B-70E4-459B-DF33859880EF
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * tracing error                                                     :element:
   :PROPERTIES:
-  :custom_id: O7
+  :custom_id: 97DA5113-8638-A914-481B-0EE00A6D222A
   :masd.codec.stereotypes: masd::exception
   :END:
 
@@ -92,33 +92,33 @@ An error occurred when trying to generate tracing data.
 
 * scoped tracer                                                     :element:
   :PROPERTIES:
-  :custom_id: O8
+  :custom_id: 0E787F64-AA39-4684-4D6B-A4AC4EC7544B
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * references printer                                                :element:
   :PROPERTIES:
-  :custom_id: O10
+  :custom_id: CFEA8E5C-0C79-D344-348B-2FEDEFC3A3C8
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * backend                                                           :element:
   :PROPERTIES:
-  :custom_id: O14
+  :custom_id: 89A84827-36C1-DD14-B243-B15AFC3859DB
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
 
 * file backend                                                      :element:
   :PROPERTIES:
-  :custom_id: O11
+  :custom_id: B8DC6D9E-45DD-C284-B30B-9AE42CE14E3A
   :masd.codec.parent: backend
   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
   :END:
 
 * backend factory registrar                                         :element:
   :PROPERTIES:
-  :custom_id: O20
+  :custom_id: 324AFE62-2977-25B4-3033-BCE7FBE54768
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
@@ -129,38 +129,38 @@ An error occurred when trying to generate tracing data.
 
 * registrar error                                                   :element:
   :PROPERTIES:
-  :custom_id: O23
+  :custom_id: 8C7747EE-1801-1E94-A83B-AAB3FCF20838
   :masd.codec.stereotypes: masd::exception
   :END:
 
 * backend factory                                                   :element:
   :PROPERTIES:
-  :custom_id: O25
+  :custom_id: 8B24C2D5-AFE0-0AA4-AE03-9B555705327B
   :masd.cpp.types.class_forward_declarations.enabled: true
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 
 * file backend factory                                              :element:
   :PROPERTIES:
-  :custom_id: O27
+  :custom_id: C7487D0F-5358-55F4-E9B3-49F799859838
   :masd.codec.parent: backend_factory
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * initializer                                                       :element:
   :PROPERTIES:
-  :custom_id: O29
+  :custom_id: 2D856996-3FD9-5234-C373-38AA437B43D7
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O31
+  :custom_id: 9F806021-B91B-E174-CF0B-E9C3E52FF7C3
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O32
+  :custom_id: 7BA7DCC9-DC1B-FFB4-6F9B-D0F3A173196B
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:

@@ -22,7 +22,7 @@ level.
 
 * one property                                                      :element:
   :PROPERTIES:
-  :custom_id: O0
+  :custom_id: D5DDC9A9-6957-9E44-BECB-8F67046E7F9A
   :END:
 
 Hello World class.
@@ -33,4 +33,3 @@ Hello World class.
    :END:
 
 This is a sample property.
-

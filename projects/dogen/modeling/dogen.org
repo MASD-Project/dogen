@@ -22,7 +22,7 @@ UML representation:
 
 * configuration                                                     :element:
   :PROPERTIES:
-  :custom_id: O0
+  :custom_id: C8DE753A-81CB-2B74-F85B-E9852476B146
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -57,7 +57,7 @@ Directory in which to place all files not directly related to generated code.
 
 * tracing level                                                     :element:
   :PROPERTIES:
-  :custom_id: O1
+  :custom_id: BFE938FC-38DC-EA34-FC7B-9903E39733E7
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -69,7 +69,7 @@ Available levels for tracing transformation.
 
 * tracing configuration                                             :element:
   :PROPERTIES:
-  :custom_id: O2
+  :custom_id: 5B643C89-3815-55C4-EF4B-699D85ACEF6F
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -146,7 +146,7 @@ If supplied, ignore all traces except those which match the supplied regexes.
 
 * tracing format                                                    :element:
   :PROPERTIES:
-  :custom_id: O3
+  :custom_id: 39686EAC-979C-8AA4-9BCB-59BA3588A5B6
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -166,7 +166,7 @@ Dot notation for GraphViz
 
 * configuration builder                                             :element:
   :PROPERTIES:
-  :custom_id: O7
+  :custom_id: 74559E32-8FC7-B834-B3FB-14BC373A665F
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
@@ -174,7 +174,7 @@ masd::builder
 
 * diffing configuration                                             :element:
   :PROPERTIES:
-  :custom_id: O8
+  :custom_id: 580F0728-29B8-0F34-AF93-BF5DEBE18A9E
   :masd.codec.stereotypes: masd::fluent
   :END:
 
@@ -192,13 +192,13 @@ Configuration for diff generation.
 
 * configuration validator                                           :element:
   :PROPERTIES:
-  :custom_id: O9
+  :custom_id: A51D12CF-4E5D-FFA4-9003-B305DBD09863
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * model processing configuration                                    :element:
   :PROPERTIES:
-  :custom_id: O12
+  :custom_id: 61BDDC34-8635-18F4-5EEB-03397D9877F2
   :END:
 
 Configuration related to the behaviour of Dogen whilst processing models.
@@ -248,7 +248,7 @@ Timepoint at which the activity started.
 
 * invalid configuration exception                                   :element:
   :PROPERTIES:
-  :custom_id: O14
+  :custom_id: E940F035-D016-BC84-3583-23C88EAB48A9
   :masd.cpp.types.class_forward_declarations.enabled: false
   :masd.codec.stereotypes: masd::exception
   :END:
@@ -257,31 +257,31 @@ The values supplied for the configuration are not valid.
 
 * generator                                                         :element:
   :PROPERTIES:
-  :custom_id: O15
+  :custom_id: 48425DA1-E429-6784-DFD3-594A00817E74
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 
 * converter                                                         :element:
   :PROPERTIES:
-  :custom_id: O17
+  :custom_id: F490E436-6657-4294-701B-643425DD0C70
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 
 * generation exception                                              :element:
   :PROPERTIES:
-  :custom_id: O20
+  :custom_id: 38C861E2-5C89-2CD4-31DB-2A50F7714831
   :masd.codec.stereotypes: masd::exception
   :END:
 
 * conversion exception                                              :element:
   :PROPERTIES:
-  :custom_id: O21
+  :custom_id: BDD84550-BA65-BBA4-334B-6C003E010FED
   :masd.codec.stereotypes: masd::exception
   :END:
 
 * diffing destination                                               :element:
   :PROPERTIES:
-  :custom_id: O24
+  :custom_id: 122EAF89-EE1D-6324-EEAB-4EEDA9366977
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -297,7 +297,7 @@ Outputs the diff to the console.
 
 * reporting configuration                                           :element:
   :PROPERTIES:
-  :custom_id: O32
+  :custom_id: 9291B01D-2948-1E54-872B-2A5E4A087D2B
   :END:
 
 Configuration related to operational reports.
@@ -314,7 +314,7 @@ Configuration related to operational reports.
 
 * reporting style                                                   :element:
   :PROPERTIES:
-  :custom_id: O33
+  :custom_id: 69EFF757-9FCF-CC34-64F3-555DFB80EA08
   :masd.codec.stereotypes: masd::enumeration, dogen::convertible
   :END:
 
@@ -330,13 +330,13 @@ Emacs Org mode.
 
 * mock configuration factory                                        :element:
   :PROPERTIES:
-  :custom_id: O35
+  :custom_id: 19305C0C-2EC3-2664-CC53-47FFB43ADC87
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 
 * tracing backend                                                   :element:
   :PROPERTIES:
-  :custom_id: O39
+  :custom_id: 6B7E7B75-82E6-BEF4-AE53-C7CDE84CFBD6
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
@@ -348,19 +348,19 @@ Write tracing information to files.
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O43
+  :custom_id: EFADDCC4-4C93-5CF4-80DB-C5A5BBFECE7D
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O44
+  :custom_id: A8C2F12E-2F56-A314-9BAB-2E6797C70978
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
 * specs                                                             :element:
   :PROPERTIES:
-  :custom_id: O45
+  :custom_id: BB8E7FB7-4671-AF24-EF9B-024DDF9F3656
   :END:
 
 Describes details of the available functionality within this version of Dogen.
@@ -374,7 +374,7 @@ All categories of specifications.
 
 * spec category                                                     :element:
   :PROPERTIES:
-  :custom_id: O46
+  :custom_id: 16897C9D-3EA9-64F4-59E3-3D12AB874B55
   :END:
 
 Describes a category of dogen specifications.
@@ -402,7 +402,7 @@ Purpose of the group.
 
 * spec entry                                                        :element:
   :PROPERTIES:
-  :custom_id: O47
+  :custom_id: 4D70E127-E6D6-5CD4-ACCB-B9FBC681BBE0
   :END:
 
 Unit of functionality within Dogen.
@@ -423,13 +423,13 @@ Human readable text describing this entry.
 
 * spec dumper                                                       :element:
   :PROPERTIES:
-  :custom_id: O50
+  :custom_id: D814E09A-2FA1-8824-88D3-3925756621CF
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 
 * dumping exception                                                 :element:
   :PROPERTIES:
-  :custom_id: O52
+  :custom_id: 741544C3-02CE-BD04-E9CB-04565810F7D0
   :masd.codec.stereotypes: masd::exception
   :END:
 

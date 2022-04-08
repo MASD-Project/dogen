@@ -25,35 +25,35 @@ as possible, so we can evaluate how they work together.
 
 * palette test one one                                              :element:
   :PROPERTIES:
-  :custom_id: O1
+  :custom_id: A567ECB7-69FC-08A4-75F3-0FDAEF7D0A7D
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
 * palette test one two                                              :element:
   :PROPERTIES:
-  :custom_id: O2
+  :custom_id: F8881ABA-94BA-C4D4-263B-D44EF7092B5D
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
   :END:
 * palette test one three                                            :element:
   :PROPERTIES:
-  :custom_id: O3
+  :custom_id: 8F1C4BDC-1734-6984-6A63-01819ACAD3CE
   :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
   :END:
 * package                                                            :module:
   :PROPERTIES:
-  :custom_id: O5
+  :custom_id: B502BD79-5033-F7B4-1843-0EA2BA388B9C
   :END:
 ** palette test one one                                             :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: A707AEAD-2D61-7CB4-07E3-3CED7FDF685C
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 ** palette test one two                                             :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: CD369C4E-0B59-A5F4-A74B-269A58EBE1F7
    :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
    :END:
 ** palette test one three                                           :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: F970CC8A-09E1-7864-9D9B-8300D1148795
    :masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
    :END:

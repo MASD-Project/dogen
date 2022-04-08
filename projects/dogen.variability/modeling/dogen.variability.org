@@ -55,7 +55,7 @@ UML representation:
 
 * entities                                                           :module:
   :PROPERTIES:
-  :custom_id: O1
+  :custom_id: 46DA526D-03E4-27B4-C52B-AD758B9C20B2
   :masd.codec.dia.comment: true
   :END:
 
@@ -64,7 +64,7 @@ with Masd.
 
 ** element                                                          :element:
    :PROPERTIES:
-   :custom_id: O19
+   :custom_id: 21D62613-339A-7804-550B-5BAC15A30B16
    :masd.codec.stereotypes: Element
    :END:
 
@@ -72,7 +72,7 @@ Represents an element modeling some aspect of variability.
 
 ** feature                                                          :element:
    :PROPERTIES:
-   :custom_id: O3
+   :custom_id: 98C4E3BC-8DB4-0DD4-0E13-6A1C40276BA5
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: FeatureElement
    :END:
@@ -88,7 +88,7 @@ Feature name can be matched partially.
 
 ** binding point                                                    :element:
    :PROPERTIES:
-   :custom_id: O4
+   :custom_id: 0E29D529-1570-C334-B82B-5372A519D1D5
    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
    :END:
 
@@ -116,7 +116,7 @@ Feature can only be configured in an operation of a modeling element.
 
 ** feature model                                                    :element:
    :PROPERTIES:
-   :custom_id: O5
+   :custom_id: 743C0E3E-207F-C274-2243-BBE9D11FCE91
    :END:
 
 Container of all available features, organised for querying.
@@ -142,7 +142,7 @@ Features that can be partially matcheable, by qualified name.
 
 ** feature template                                                 :element:
    :PROPERTIES:
-   :custom_id: O6
+   :custom_id: D67AD973-FF5B-E9C4-DE63-3A42926A473B
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: FeatureElement, Templateable
    :END:
@@ -158,7 +158,7 @@ Overrides for the default value, if any.
 
 ** value type                                                       :element:
    :PROPERTIES:
-   :custom_id: O7
+   :custom_id: 0B23C061-58CB-6084-D623-CCC88F26AD87
    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
    :END:
 
@@ -194,7 +194,7 @@ Represents a collection of CSV input that is split into a collection of text val
 
 ** profile template                                                 :element:
    :PROPERTIES:
-   :custom_id: O8
+   :custom_id: EE9F58C3-5A6A-C674-55A3-64563E006AB6
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: Profilable
    :END:
@@ -208,7 +208,7 @@ Holds a set of templates for configuration points.
 
 ** configuration point template                                     :element:
    :PROPERTIES:
-   :custom_id: O9
+   :custom_id: 6E8202C1-A7C7-8AE4-C13B-3C68F3A13CB0
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: Templateable
    :END:
@@ -220,7 +220,7 @@ Holds a set of templates for configuration points.
 
 ** value                                                            :element:
    :PROPERTIES:
-   :custom_id: O10
+   :custom_id: 3CAB493D-4916-38F4-4043-CE96EF8DBF62
    :masd.codec.stereotypes: masd::visitable
    :END:
 
@@ -230,7 +230,7 @@ Represents a value for a configuration point, a default value for a feature, etc
 
 ** number                                                           :element:
    :PROPERTIES:
-   :custom_id: O11
+   :custom_id: 8025E3ED-4F07-1134-8C53-F347292E7BC0
    :masd.codec.parent: entities::value
    :END:
 
@@ -243,7 +243,7 @@ Represents a numeric integral value.
 
 ** text                                                             :element:
    :PROPERTIES:
-   :custom_id: O12
+   :custom_id: 8A9A3038-BBDF-E274-49F3-02AE071F0EF3
    :masd.codec.parent: entities::value
    :END:
 
@@ -256,7 +256,7 @@ Represents a text value.
 
 ** text collection                                                  :element:
    :PROPERTIES:
-   :custom_id: O13
+   :custom_id: 78E8B05B-FE4C-8504-8C4B-A4B749296335
    :masd.codec.parent: entities::value
    :END:
 
@@ -269,7 +269,7 @@ Represents a collection of text values.
 
 ** boolean                                                          :element:
    :PROPERTIES:
-   :custom_id: O14
+   :custom_id: 5B208894-EA10-9C94-17E3-E5ACAFCCBB95
    :masd.codec.parent: entities::value
    :END:
 
@@ -282,7 +282,7 @@ Represents a boolean value.
 
 ** key value pair                                                   :element:
    :PROPERTIES:
-   :custom_id: O15
+   :custom_id: 69CF9E10-ED7D-7C04-A573-7D31AB8A6B57
    :masd.codec.parent: entities::value
    :END:
 
@@ -300,7 +300,7 @@ source.
 
 ** configuration                                                    :element:
    :PROPERTIES:
-   :custom_id: O16
+   :custom_id: B8F335CC-BCAB-8E64-AFFB-A7DF6FC87841
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: ConfigurationStore
    :END:
@@ -338,7 +338,7 @@ If true, this configuration was sourced from an element in the target model.
 
 ** configuration point                                              :element:
    :PROPERTIES:
-   :custom_id: O17
+   :custom_id: 15BD6F5F-AA32-7984-618B-46C1F24068E1
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: Valuable
    :END:
@@ -347,7 +347,7 @@ Maps a feature name to an instance value
 
 ** Nameable                                                         :element:
    :PROPERTIES:
-   :custom_id: O18
+   :custom_id: D578283E-7BC6-2C84-1243-C38690AE17E4
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -362,7 +362,7 @@ Name of this variability element.
 
 ** Describable                                                      :element:
    :PROPERTIES:
-   :custom_id: O21
+   :custom_id: DB744B9A-5E7B-A434-47D3-E7B21F4CBEC0
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -375,14 +375,14 @@ Human readable description of the feature, used for documentation.
 
 ** Element                                                          :element:
    :PROPERTIES:
-   :custom_id: O23
+   :custom_id: 56E4D404-723D-89D4-6DF3-D61DD353C4FF
    :masd.codec.parent: entities::Nameable, entities::Describable
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 ** Defaultable                                                      :element:
    :PROPERTIES:
-   :custom_id: O38
+   :custom_id: 640207D8-A13E-1B54-FEC3-F51C410F0F31
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -395,7 +395,7 @@ Default value for element, if any.
 
 ** Typeable                                                         :element:
    :PROPERTIES:
-   :custom_id: O64
+   :custom_id: 093F396A-9390-9A84-FE93-224FDE6B864C
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -408,7 +408,7 @@ Type of the value for the feature that will result of the template instantiation
 
 ** BindActionable                                                   :element:
    :PROPERTIES:
-   :custom_id: O66
+   :custom_id: 286975CF-F0F9-D844-A283-B8B615C443E7
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -424,7 +424,7 @@ Type of the value for the feature that will result of the template instantiation
 
 ** Bindable                                                         :element:
    :PROPERTIES:
-   :custom_id: O114
+   :custom_id: 5B676AE4-E4FC-0844-AED3-3219FCDE2745
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -437,14 +437,14 @@ How the feature binds against other model elements.
 
 ** FeatureElement                                                   :element:
    :PROPERTIES:
-   :custom_id: O39
+   :custom_id: 9E314B1E-A28B-4C54-5C5B-91A3E0D15ABF
    :masd.codec.parent: entities::Element, entities::Defaultable, entities::Typeable, entities::BindActionable, entities::Bindable
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 ** Templateable                                                     :element:
    :PROPERTIES:
-   :custom_id: O72
+   :custom_id: 6C395A42-5514-80A4-37E3-4B3AF8963DA1
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -459,7 +459,7 @@ Name of the domain to use for template instantiation.
 
 ** Valuable                                                         :element:
    :PROPERTIES:
-   :custom_id: O73
+   :custom_id: D4AA2894-26CC-37C4-8C53-05015C480B20
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -472,7 +472,7 @@ Value that has been assigned to this element.
 
 ** ConfigurationStore                                               :element:
    :PROPERTIES:
-   :custom_id: O74
+   :custom_id: BD110F7B-6AA2-5434-D213-FD2C28849899
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -485,7 +485,7 @@ All configuration points associated with this element.
 
 ** profile                                                          :element:
    :PROPERTIES:
-   :custom_id: O75
+   :custom_id: 7FDD4EA7-0B56-67C4-C9E3-336A061F26D3
    :masd.codec.parent: entities::element
    :masd.codec.stereotypes: ConfigurationStore, Profilable
    :END:
@@ -506,7 +506,7 @@ Which base layer does this profile rely on, if any.
 
 ** binding action                                                   :element:
    :PROPERTIES:
-   :custom_id: O82
+   :custom_id: F92A2AD8-C320-E2B4-E1DB-6447166F8F50
    :masd.codec.stereotypes: masd::enumeration
    :END:
 
@@ -522,7 +522,7 @@ Copy across the value of the feature from the related element
 
 ** profile repository                                               :element:
    :PROPERTIES:
-   :custom_id: O84
+   :custom_id: AA3571BF-6EFA-4224-2F83-DE5504D8AFB9
    :END:
 
 *** by name                                                       :attribute:
@@ -537,7 +537,7 @@ Copy across the value of the feature from the related element
 
 ** configuration model set                                          :element:
    :PROPERTIES:
-   :custom_id: O86
+   :custom_id: 50DD40AE-E71A-68A4-2ABB-63CCB43F6680
    :END:
 
 *** models                                                        :attribute:
@@ -547,7 +547,7 @@ Copy across the value of the feature from the related element
 
 ** configuration model                                              :element:
    :PROPERTIES:
-   :custom_id: O89
+   :custom_id: BDFC09FF-6BBA-9054-5C1B-C2DD8CDA7684
    :END:
 
 *** global                                                        :attribute:
@@ -562,7 +562,7 @@ Copy across the value of the feature from the related element
 
 ** profile template repository                                      :element:
    :PROPERTIES:
-   :custom_id: O90
+   :custom_id: 42DEF709-1808-95E4-23AB-BFCE04B81533
    :END:
 
 *** templates                                                     :attribute:
@@ -572,7 +572,7 @@ Copy across the value of the feature from the related element
 
 ** potential binding                                                :element:
    :PROPERTIES:
-   :custom_id: O92
+   :custom_id: B9F10AF8-1BE8-AD54-C5EB-60302076C56B
    :END:
 
 Contains information about a potential binding.
@@ -594,7 +594,7 @@ If true, the potential binding was realised into an actual binding.
 
 ** feature template repository                                      :element:
    :PROPERTIES:
-   :custom_id: O93
+   :custom_id: 54042E8C-0440-B8A4-2513-30A0396ACA87
    :END:
 
 Stores a set of feature templates.
@@ -606,7 +606,7 @@ Stores a set of feature templates.
 
 ** feature repository                                               :element:
    :PROPERTIES:
-   :custom_id: O108
+   :custom_id: C54A388F-6C17-81F4-3193-609260F6DBA3
    :END:
 
 Stores a set of features.
@@ -618,7 +618,7 @@ Stores a set of features.
 
 ** default value override                                           :element:
    :PROPERTIES:
-   :custom_id: O112
+   :custom_id: A0D8486F-F7CB-D6E4-6363-C9681132B2D9
    :END:
 
 Stores an override for a default value.
@@ -635,7 +635,7 @@ Stores an override for a default value.
 
 ** Generalizable                                                    :element:
    :PROPERTIES:
-   :custom_id: O79
+   :custom_id: 3C5462D4-4B08-84F4-3F8B-5F9548995C9A
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -646,7 +646,7 @@ Stores an override for a default value.
 
 ** Stereotypable                                                    :element:
    :PROPERTIES:
-   :custom_id: O80
+   :custom_id: 9DBEA7BD-3367-D704-6AFB-165BBFFED347
    :masd.codec.stereotypes: masd::object_template
    :END:
 
@@ -657,14 +657,14 @@ Stores an override for a default value.
 
 ** Profilable                                                       :element:
    :PROPERTIES:
-   :custom_id: O119
+   :custom_id: 77F9ADBB-3A81-36C4-9AFB-750789BDD996
    :masd.codec.parent: entities::Bindable, entities::Generalizable, entities::Stereotypable
    :masd.codec.stereotypes: masd::object_template
    :END:
 
 ** comma separated                                                  :element:
    :PROPERTIES:
-   :custom_id: O133
+   :custom_id: 610BA87F-C95B-B924-A4CB-860A75AD68EA
    :masd.codec.parent: entities::value
    :END:
 
@@ -677,7 +677,7 @@ Represents a CSV input that is split into a collection of text values.
 
 ** comma separated collection                                       :element:
    :PROPERTIES:
-   :custom_id: O136
+   :custom_id: CC5A4F4E-2E12-D794-8023-32B73204A00D
    :masd.codec.parent: entities::value
    :END:
 
@@ -690,60 +690,60 @@ Represents a collection of CSV input that is split into a collection of text val
 
 * helpers                                                            :module:
   :PROPERTIES:
-  :custom_id: O42
+  :custom_id: 1B0E6892-A935-B654-52E3-57E71A5E1630
   :END:
 
 ** feature selector                                                 :element:
    :PROPERTIES:
-   :custom_id: O43
+   :custom_id: BD9085BB-3008-11A4-EB73-46A1DFDA69E8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** configuration factory                                            :element:
    :PROPERTIES:
-   :custom_id: O49
+   :custom_id: 7C89E2B3-1F05-0AD4-E853-1377BA5EEC1A
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** configuration point merger                                       :element:
    :PROPERTIES:
-   :custom_id: O51
+   :custom_id: 7FC67C4F-8D76-A894-1C2B-292499529F7A
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** value factory                                                    :element:
    :PROPERTIES:
-   :custom_id: O58
+   :custom_id: C2D81F67-0E43-DEE4-E44B-6002BC467F9F
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** building exception                                               :element:
    :PROPERTIES:
-   :custom_id: O59
+   :custom_id: C2E2AA07-0C9A-3204-D673-9C76680BBDA1
    :masd.codec.stereotypes: masd::exception
    :END:
 
 ** selection exception                                              :element:
    :PROPERTIES:
-   :custom_id: O60
+   :custom_id: D086B333-E713-7E04-5C63-9E5B92A26BA5
    :masd.codec.stereotypes: masd::exception
    :END:
 
 ** configuration selector                                           :element:
    :PROPERTIES:
-   :custom_id: O69
+   :custom_id: 751775A4-A85A-8E24-B573-A182CA91E930
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** template instantiator                                            :element:
    :PROPERTIES:
-   :custom_id: O70
+   :custom_id: E3CCC864-D9F8-A1B4-D14B-A3CD8BA11C2B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** instantiation exception                                          :element:
    :PROPERTIES:
-   :custom_id: O71
+   :custom_id: 162D16C8-118E-3634-048B-8ED549553F08
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -751,7 +751,7 @@ An error occurred whilst instantiating templates.
 
 ** registrar                                                        :element:
    :PROPERTIES:
-   :custom_id: O95
+   :custom_id: 42332941-4CCD-BC04-411B-AD06E8689237
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -767,13 +767,13 @@ An error occurred whilst instantiating templates.
 
 ** enum mapper                                                      :element:
    :PROPERTIES:
-   :custom_id: O96
+   :custom_id: DBF439D7-D8E5-CDA4-7B53-D07792E47805
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** enum mapping exception                                           :element:
    :PROPERTIES:
-   :custom_id: O97
+   :custom_id: 5A7DF6CC-03C0-45B4-65A3-5830E6675AD1
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -781,13 +781,13 @@ An error occurred whilst mapping enums to or from strings.
 
 ** relational adapter                                               :element:
    :PROPERTIES:
-   :custom_id: O102
+   :custom_id: DB873E81-C1B0-6654-A693-C6538AA0F944
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** adaption exception                                               :element:
    :PROPERTIES:
-   :custom_id: O103
+   :custom_id: D1F004F7-8DC7-BB94-EC2B-EAF8714375F1
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -795,13 +795,13 @@ An error occurred whilst adapting a model.
 
 ** configuration points factory                                     :element:
    :PROPERTIES:
-   :custom_id: O123
+   :custom_id: B78DD7BF-16AB-1874-8C1B-9175AB0D7181
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** merging exception                                                :element:
    :PROPERTIES:
-   :custom_id: O131
+   :custom_id: 4C368A20-7E57-6DE4-E8EB-1CFBF5FC29FC
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -809,48 +809,48 @@ An error occurred whilst merging.
 
 * transforms                                                         :module:
   :PROPERTIES:
-  :custom_id: O2
+  :custom_id: 762C373E-0404-6CD4-9EB3-F8F129E03515
   :END:
 
 ** feature model production chain                                   :element:
    :PROPERTIES:
-   :custom_id: O44
+   :custom_id: D77706D9-6243-AB04-84C3-309C8C95BED6
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** feature template instantiation transform                         :element:
    :PROPERTIES:
-   :custom_id: O45
+   :custom_id: 77DA8E48-6791-65E4-638B-35836B7E23E9
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** feature model transform                                          :element:
    :PROPERTIES:
-   :custom_id: O46
+   :custom_id: EA1976BE-C455-B884-E6B3-B6FE42123B0B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** profile repository production chain                              :element:
    :PROPERTIES:
-   :custom_id: O47
+   :custom_id: 09FE83D7-6198-0ED4-678B-7A76D28F1D4B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** profile template instantiation transform                         :element:
    :PROPERTIES:
-   :custom_id: O48
+   :custom_id: 77446D4A-B0CF-3C04-A783-F251F7C11638
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** profile binding transform                                        :element:
    :PROPERTIES:
-   :custom_id: O50
+   :custom_id: A1CE11C9-50B7-5784-55B3-417F766227B0
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** context                                                          :element:
    :PROPERTIES:
-   :custom_id: O54
+   :custom_id: 25F714AD-132D-82F4-6293-E6D429A3B399
    :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
    :END:
 
@@ -879,13 +879,13 @@ user choices.
 
 ** profile merging transform                                        :element:
    :PROPERTIES:
-   :custom_id: O55
+   :custom_id: F6C1A4A4-0F25-70A4-0EC3-A52D41C1ED43
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** transformation error                                             :element:
    :PROPERTIES:
-   :custom_id: O61
+   :custom_id: 0CC8222B-C812-A834-9A9B-070091CA66FD
    :masd.codec.stereotypes: masd::exception
    :END:
 
@@ -893,13 +893,13 @@ An error occurred whilst applying a transformation.
 
 ** global configuration binding transform                           :element:
    :PROPERTIES:
-   :custom_id: O91
+   :custom_id: C9C67C21-F57D-C904-AE1B-1DA435D9BAEA
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** profile repository inputs                                        :element:
    :PROPERTIES:
-   :custom_id: O110
+   :custom_id: 34808F95-8260-2D04-8D9B-FE5BB6A45140
    :END:
 
 *** profiles                                                      :attribute:
@@ -914,7 +914,7 @@ An error occurred whilst applying a transformation.
 
 * features                                                           :module:
   :PROPERTIES:
-  :custom_id: O98
+  :custom_id: FB4C3D05-B57A-8D34-65B3-7D34546BD038
   :masd.codec.dia.comment: true
   :END:
 
@@ -922,7 +922,7 @@ Features used by the variability model.
 
 ** profile                                                          :element:
    :PROPERTIES:
-   :custom_id: O99
+   :custom_id: 16AC75EE-8D88-FD64-C223-53A2E61C50BC
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
@@ -940,24 +940,24 @@ Profile associated with this configuration.
 
 ** initializer                                                      :element:
    :PROPERTIES:
-   :custom_id: O101
+   :custom_id: 7534EF59-A0A1-0714-C053-E187A13C7B7A
    :masd.codec.stereotypes: masd::variability::initializer
    :END:
 
 * registrar                                                         :element:
   :PROPERTIES:
-  :custom_id: O105
+  :custom_id: 69097D84-89DF-E204-7063-C7C62781AFE2
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
 
 * main                                                              :element:
   :PROPERTIES:
-  :custom_id: O106
+  :custom_id: EDA88542-67F3-5B04-5673-5D9243627E78
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
-  :custom_id: O107
+  :custom_id: 840A2839-3F6C-1844-48D3-C4577EBB7417
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
