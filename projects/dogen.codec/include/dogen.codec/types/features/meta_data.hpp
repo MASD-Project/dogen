@@ -51,6 +51,7 @@ public:
         variability::entities::feature is_associative_container;
         variability::entities::feature is_floating_point;
         variability::entities::feature preserve_original;
+        variability::entities::feature plantuml;
     };
 
     static feature_group
@@ -69,6 +70,7 @@ public:
         boost::optional<bool> is_associative_container;
         boost::optional<bool> is_floating_point;
         boost::optional<bool> preserve_original;
+        std::list<std::string> plantuml;
     };
 
     static static_configuration make_static_configuration(

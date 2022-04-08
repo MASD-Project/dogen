@@ -170,6 +170,20 @@ make_masd_codec_preserve_original() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_codec_plantuml() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("plantuml");
+    r.name().qualified("masd.codec.plantuml");
+    r.description(R"(One or more PlantUML commands, which will be written after the definition of the
+element.)");
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
 }
 
 meta_data::feature_group
@@ -188,6 +202,7 @@ meta_data::make_feature_group(const dogen::variability::entities::feature_model&
     r.is_associative_container = s.get_by_name("masd.codec.is_associative_container");
     r.is_floating_point = s.get_by_name("masd.codec.is_floating_point");
     r.preserve_original = s.get_by_name("masd.codec.preserve_original");
+    r.plantuml = s.get_by_name("masd.codec.plantuml");
 
     return r;
 }
@@ -220,6 +235,8 @@ meta_data::static_configuration meta_data::make_static_configuration(
         r.is_floating_point = s.get_boolean_content(fg.is_floating_point);
     if (s.has_configuration_point(fg.preserve_original))
         r.preserve_original = s.get_boolean_content(fg.preserve_original);
+    if (s.has_configuration_point(fg.plantuml))
+        r.plantuml = s.get_text_collection_content(fg.plantuml);
     return r;
 }
 
@@ -238,6 +255,7 @@ meta_data::make_features() {
     r.push_back(make_masd_codec_is_associative_container());
     r.push_back(make_masd_codec_is_floating_point());
     r.push_back(make_masd_codec_preserve_original());
+    r.push_back(make_masd_codec_plantuml());
     return r;
 }
 

@@ -875,6 +875,15 @@ Parent associated with this element.
     :masd.codec.type: masd::variability::boolean
     :END:
 
+*** plantuml                                                      :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text_collection
+    :END:
+
+One or more PlantUML commands, which will be written after the definition of the
+element.
+
 * registrar                                                         :element:
   :PROPERTIES:
   :custom_id: 56C078C7-DB8D-41A4-C173-659125D04F1B
