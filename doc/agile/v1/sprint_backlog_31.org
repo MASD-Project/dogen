@@ -709,6 +709,7 @@ Notes:
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 17:00]--[2022-04-08 Fri 17:30] =>  0:30
     CLOCK: [2022-04-08 Fri 10:40]--[2022-04-08 Fri 12:37] =>  1:57
     CLOCK: [2022-04-08 Fri 09:24]--[2022-04-08 Fri 10:05] =>  0:41
     CLOCK: [2022-04-07 Thu 18:15]--[2022-04-07 Thu 19:30] =>  1:15
@@ -738,15 +739,6 @@ install(TARGETS MyLib
         RUNTIME DESTINATION bin
         INCLUDES DESTINATION include
         )
-
-# Packaging support
-set(CPACK_PACKAGE_VENDOR "Vendor name")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Some summary")
-set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENCE")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 #+end_src
 
 *Previous understanding*
@@ -806,6 +798,32 @@ not change. It should have changed to:
 
 : dogen_test_models_all_builtins
 
+*** STARTED Windows package is broken                                 :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 17:31]--[2022-04-08 Fri 17:48] =>  0:17
+    :END:
+
+When we install the windows package under wine, it fails with:
+
+#+begin_quote
+E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
+#+end_quote
+
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
+
+Actually, this did not help.
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
+  #1653]]
+
 *** Update the test package scripts for the GitHub CI                 :story:
 
 We can probably install debian packages in GitHub CI. Try to see if we can run
@@ -852,22 +870,6 @@ LINK: command "C:\PROGRA~1\LLVM\bin\lld-link.exe /nologo projects\dogen.utility\
 lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
 >>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `public: static void __cdecl boost::archive::save_access::save_primitive<class boost::archive::xml_oarchive, int>(class archive::save_access::xml_oarchive &, int const &)'::`1'::dtor$3)
 >>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `protected: void __cdecl boost::archive::xml_iarchive_impl<class boost::archive::xml_iarchive>::load_override<class boost::serialization::nvp<int> const>(class archive::serialization::nvp<int> const &)'::`1'::dtor$3)
-#+end_quote
-
-This will probably be fixed when we move over to the new way of specifying
-dependencies in CMake. Do that first and revisit this problem.
-
-*** Windows package is broken                                         :story:
-
-When we install the windows package under wine, it fails with:
-
-#+begin_quote
-E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
 #+end_quote
 
 This will probably be fixed when we move over to the new way of specifying
