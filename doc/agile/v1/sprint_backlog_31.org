@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-07 Thu 16:00]
+#+CAPTION: Clock summary at [2022-04-08 Fri 12:37]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *46:30* |       |       |   0.0 |
+| *Total time*                                               | *51:28* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 46:30   |       |       |   0.0 |
-| Active                                                     |         | 46:30 |       |   0.0 |
+| Stories                                                    | 51:28   |       |       |   0.0 |
+| Active                                                     |         | 51:28 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
@@ -39,7 +39,7 @@
 | Add code coverage on continuous builds                     |         |       |  0:53 |   0.0 |
 | Remove existing benchmark infrastructure                   |         |       |  0:24 |   0.0 |
 | Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
-| Assorted improvements to CMake files                       |         |       |  0:39 |   0.0 |
+| Assorted improvements to CMake files                       |         |       |  5:37 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -709,24 +709,15 @@ Notes:
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 10:40]--[2022-04-08 Fri 12:37] =>  1:57
+    CLOCK: [2022-04-08 Fri 09:24]--[2022-04-08 Fri 10:05] =>  0:41
+    CLOCK: [2022-04-07 Thu 18:15]--[2022-04-07 Thu 19:30] =>  1:15
     CLOCK: [2022-04-07 Thu 16:01]--[2022-04-07 Thu 17:06] =>  1:05
     CLOCK: [2022-04-07 Thu 15:13]--[2022-04-07 Thu 15:26] =>  0:13
     CLOCK: [2022-04-07 Thu 14:34]--[2022-04-07 Thu 15:00] =>  0:26
     :END:
 
 #+begin_src cmake
-find_package(LibXml2 CONFIG REQUIRED)
-target_link_libraries(main PRIVATE LibXml2::LibXml2)
-
-target_compile_features(myTarget PUBLIC cxx_std_11)
-set_target_properties(myTarget PROPERTIES CXX_EXTENSIONS OFF)
-
-set(CMAKE_CXX_STANDARD 11 CACHE STRING "The C++ standard to use")
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)
 if(result)
@@ -766,9 +757,7 @@ explained here:
 - [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
 - [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
 - [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
-- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
-- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
+- [[https://datascience.dsscale.org/wp-content/uploads/2016/06/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
 - [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
   platform C++ CMake project using modern CMake syntax and transitive
   dependencies.
