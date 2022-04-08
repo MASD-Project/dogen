@@ -137,14 +137,9 @@ context_bootstrapping_chain::bootstrap_codec_context(
         "bootstrapping", *t);
 
     /*
-     * Create the physical meta-model.
-     */
-    const auto pmm(create_physical_meta_model(t));
-
-    /*
      * Create the codec context.
      */
-    const auto r(context_factory::make_codec_context(activity, t, pmm));
+    const auto r(context_factory::make_codec_context(activity, t));
     stp.end_chain(r);
     return r;
 }

@@ -60,8 +60,7 @@ context_factory::make_variability_context(const configuration& cfg,
 }
 
 codec::transforms::context context_factory::make_codec_context(
-    const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
-    boost::shared_ptr<physical::entities::meta_model> /*pmm*/) {
+    const std::string& activity, boost::shared_ptr<tracing::tracer> tracer) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
 
     /*

@@ -60,8 +60,7 @@ public:
      * chain.
      */
     static codec::transforms::context make_codec_context(
-        const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
-        boost::shared_ptr<physical::entities::meta_model> pmm);
+        const std::string& activity, boost::shared_ptr<tracing::tracer> tracer);
 
     /**
      * @brief Creates the top-level context required by all transform
