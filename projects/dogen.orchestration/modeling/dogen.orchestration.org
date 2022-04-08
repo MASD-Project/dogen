@@ -194,7 +194,7 @@ Helpers for the orchestration model.
    :masd.codec.stereotypes: masd::exception
    :END:
 
-An error ocurred whilst projecting elements from one space into another.
+An error occurred whilst projecting elements from one space into another.
 
 ** dependencies builder                                             :element:
    :PROPERTIES:

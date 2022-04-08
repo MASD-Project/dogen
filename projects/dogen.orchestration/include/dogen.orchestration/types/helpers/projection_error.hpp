@@ -31,7 +31,7 @@
 namespace dogen::orchestration::helpers {
 
 /**
- * @brief An error ocurred whilst projecting elements from one space into another.
+ * @brief An error occurred whilst projecting elements from one space into another.
  */
 class projection_error : public virtual std::exception, public virtual boost::exception {
 public:
