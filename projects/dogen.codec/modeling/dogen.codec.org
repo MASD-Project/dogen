@@ -233,6 +233,14 @@ Raw set of variability overrides.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
+** context bootstrapping chain                                      :element:
+   :PROPERTIES:
+   :custom_id: 21EF7BC6-140A-D0A4-F56B-F90456F1ED01
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Trivial transform that bootstraps the codec context.
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: AF505F72-F592-27F4-A2DB-21759E2D64C3
