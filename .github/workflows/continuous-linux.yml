@@ -73,7 +73,7 @@ jobs:
           ctest -VV --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
       - name: Test package
-        run: ./build/scripts/test_package.linux.sh
+        run: ./build/scripts/test_package.linux.sh ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
