@@ -40,8 +40,7 @@ target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
     dogen.utility.lib
     Boost::unit_test_framework
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${CMAKE_REQUIRED_LIBRARIES})
+    ${CMAKE_THREAD_LIBS_INIT})
 
 set(command $<TARGET_FILE:${tests_binary_name}> ${boost_test_parameters})
 

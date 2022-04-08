@@ -82,7 +82,6 @@ target_link_libraries(${exe_target_name} PRIVATE
     Boost::boost
     Boost::date_time
     Boost::program_options
-    ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
 install(TARGETS ${exe_target_name} RUNTIME DESTINATION bin
