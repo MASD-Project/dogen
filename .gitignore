@@ -48,6 +48,3 @@ org-roam.db
 
 .cache
 .clangd
-
-# vcpkg
-vcpkg_installed
