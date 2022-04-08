@@ -35,13 +35,6 @@ jobs:
 
       - uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@v1.2
-        with:
-          variant: sccache
-          key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          max-size: 1000M
-
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
 
