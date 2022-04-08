@@ -60,8 +60,7 @@ target_link_libraries(${lib_target_name} PRIVATE
     dogen.templating.lib
     dogen.variability.lib
     Boost::serialization
-    Boost::boost
-    ${CMAKE_REQUIRED_LIBRARIES})
+    Boost::boost)
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib

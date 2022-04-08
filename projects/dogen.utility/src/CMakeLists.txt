@@ -44,8 +44,7 @@ target_link_libraries(${lib_target_name} PRIVATE
     Boost::date_time
     Boost::exception
     Boost::log
-    Boost::serialization
-    ${CMAKE_THREAD_LIBS_INIT})
+    Boost::serialization)
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
