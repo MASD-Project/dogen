@@ -39,10 +39,10 @@ target_link_libraries(${lib_target_name} PRIVATE
     dogen.lib
     dogen.orchestration.lib
     dogen.utility.lib
-    $<$<BOOL:${USE_MSVC_LIBS}>:bcrypt>
     Boost::boost
     Boost::date_time
-    Boost::program_options)
+    Boost::program_options
+    $<$<BOOL:${USE_MSVC_LIBS}>:bcrypt>)
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
@@ -61,6 +61,9 @@ set_target_properties(${exe_target_name} PROPERTIES
 
 target_link_libraries(${exe_target_name} PRIVATE
     ${lib_target_name}
+    Boost::boost
+    Boost::date_time
+    Boost::program_options
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 

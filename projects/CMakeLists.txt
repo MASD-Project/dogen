@@ -84,15 +84,15 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_COMPILER_IS_CLANGXX "TRUE")
 endif()
 
-if (UNIX)
-    check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
-    if (HAVE_CLOCK_GETTIME)
-        message(STATUS "Requires clock_gettime.")
-        set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
-    else()
-        message(STATUS "Does NOT require clock_gettime.")
-    endif()
-endif()
+# if (UNIX)
+#     check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
+#     if (HAVE_CLOCK_GETTIME)
+#         message(STATUS "Requires clock_gettime.")
+#         set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES} rt)
+#     else()
+#         message(STATUS "Does NOT require clock_gettime.")
+#     endif()
+# endif()
 
 #
 # Use C++ 17 on all compilers.
@@ -162,36 +162,36 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${other_flags}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${profiling_flags}")
 
-    if (WIN32)
-        # ignore fuzzy link errors
-        set(CMAKE_EXE_LINKER_FLAGS
-            "${CMAKE_EXE_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
-        set(CMAKE_SHARED_LINKER_FLAGS
-            "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
-    elseif(UNIX AND NOT APPLE)
-        # use the Gold linker.
-        set(CMAKE_EXE_LINKER_FLAGS
-            "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold")
-        set(CMAKE_SHARED_LINKER_FLAGS
-            "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-fuse-ld=gold")
-    endif()
+    # if (WIN32)
+    #     # ignore fuzzy link errors
+    #     set(CMAKE_EXE_LINKER_FLAGS
+    #         "${CMAKE_EXE_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
+    #     set(CMAKE_SHARED_LINKER_FLAGS
+    #         "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
+    # elseif(UNIX AND NOT APPLE)
+    #     # use the Gold linker.
+    #     set(CMAKE_EXE_LINKER_FLAGS
+    #         "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold")
+    #     set(CMAKE_SHARED_LINKER_FLAGS
+    #         "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-fuse-ld=gold")
+    # endif()
 
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
-    if (CMAKE_COMPILER_IS_CLANGXX)
-        # Ingore the annoying "locally defined symbol imported"
-        # warning we get from boost thread on clang-cl.
-        set(CMAKE_EXE_LINKER_FLAGS
-            "${CMAKE_EXE_LINKER_FLAGS} /IGNORE:4217")
+# elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
+#     if (CMAKE_COMPILER_IS_CLANGXX)
+#         # Ingore the annoying "locally defined symbol imported"
+#         # warning we get from boost thread on clang-cl.
+#         set(CMAKE_EXE_LINKER_FLAGS
+#             "${CMAKE_EXE_LINKER_FLAGS} /IGNORE:4217")
 
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-unknown-pragmas")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-assume")
-        set(CMAKE_CXX_FLAGS
-            "${CMAKE_CXX_FLAGS} -Xclang -Wno-deprecated-declarations")
-        set(CMAKE_CXX_FLAGS
-            "${CMAKE_CXX_FLAGS} -Xclang -Wno-delete-non-virtual-dtor")
-        set(CMAKE_CXX_FLAGS
-            "${CMAKE_CXX_FLAGS} -Xclang -Wno-potentially-evaluated-expression")
-    endif()
+#         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-unknown-pragmas")
+#         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-assume")
+#         set(CMAKE_CXX_FLAGS
+#             "${CMAKE_CXX_FLAGS} -Xclang -Wno-deprecated-declarations")
+#         set(CMAKE_CXX_FLAGS
+#             "${CMAKE_CXX_FLAGS} -Xclang -Wno-delete-non-virtual-dtor")
+#         set(CMAKE_CXX_FLAGS
+#             "${CMAKE_CXX_FLAGS} -Xclang -Wno-potentially-evaluated-expression")
+#     endif()
 endif()
 
 # user includes
@@ -235,12 +235,6 @@ list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.variability/modeli
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.relational/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.identification/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.modeling/org)
-
-get_directory_property(dirs INCLUDE_DIRECTORIES)
-set(global_includes "")
-foreach(dir IN LISTS dirs)
-    set(ODB_EXECUTABLE_GLOBAL_ARGS ${ODB_EXECUTABLE_GLOBAL_ARGS} -I ${dir})
-endforeach()
 
 #
 # add all other projects
