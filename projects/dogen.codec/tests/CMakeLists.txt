@@ -32,6 +32,10 @@ add_executable(${tests_target_name} ${files})
 set_target_properties(${tests_target_name}
     PROPERTIES OUTPUT_NAME ${tests_binary_name})
 
+target_include_directories(${lib_target_name}
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/${name}/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include)
+
 target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
     dogen.utility.lib

@@ -31,7 +31,15 @@ add_library(${lib_target_name} ${lib_files})
 set_target_properties(${lib_target_name} PROPERTIES
     OUTPUT_NAME ${lib_binary_name})
 
+target_include_directories(${lib_target_name}
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/${name}/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include)
+
 target_link_libraries(${lib_target_name} PRIVATE
+    dogen.lib
+    dogen.tracing.lib
     dogen.utility.lib
     Boost::boost)
 

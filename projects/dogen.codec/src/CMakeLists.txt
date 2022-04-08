@@ -33,10 +33,22 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+target_include_directories(${lib_target_name}
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/${name}/include
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.identification/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.org/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include)
+
 target_link_libraries(${lib_target_name} PRIVATE
     dogen.dia.lib
     dogen.identification.lib
+    dogen.lib
     dogen.org.lib
+    dogen.tracing.lib
     dogen.utility.lib
     dogen.variability.lib
     Boost::boost)

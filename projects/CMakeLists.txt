@@ -194,28 +194,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
 #     endif()
 endif()
 
-# user includes
-include_directories(
-    # generated header files
-    ${stage_inc_dir}/
-
-    # real code
-    ${CMAKE_SOURCE_DIR}/projects/dogen/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.identification/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.physical/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.cli/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.org/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.codec/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.logical/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.orchestration/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.text/include
-    )
-
 # Model reference directories
 set(DOGEN_REFERENCE_OPTIONS "")
 set(reference_prefix --reference-directory ${CMAKE_CURRENT_SOURCE_DIR})

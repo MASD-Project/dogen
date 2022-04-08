@@ -33,6 +33,12 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+target_include_directories(${lib_target_name}
+    PUBLIC ${CMAKE_SOURCE_DIR}/projects/${name}/include
+    PRIVATE ${stage_inc_dir}/ # generated header files
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include)
+
 target_link_libraries(${lib_target_name} PRIVATE
     dogen.lib
     dogen.utility.lib
