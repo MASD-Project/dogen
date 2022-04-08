@@ -73,8 +73,7 @@ std::ostream& operator<<(std::ostream& stream, const test_serialization& v) {
 
 }
 
-namespace boost {
-namespace serialization {
+namespace boost::serialization {
 
 template<class Archive>
 inline void
@@ -82,7 +81,7 @@ serialize(Archive & archive,  test_serialization& v, const unsigned int) {
     archive & make_nvp("i", v.i_);
 }
 
-} }
+}
 
 BOOST_AUTO_TEST_SUITE(asserter_tests)
 
