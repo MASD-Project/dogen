@@ -99,9 +99,9 @@
         {
             "name": "use-msvc-cl",
             "hidden": true,
-            "generator": "Visual Studio 17 2022",
             "inherits": [
-                "default-build-dir"
+                "default-build-dir",
+                "use-ninja"
             ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl"
@@ -110,10 +110,9 @@
         {
             "name": "use-msvc-clang-cl",
             "hidden": true,
-             "generator": "Visual Studio 17 2022",
-            "toolset": "ClangCL",
             "inherits": [
-                "default-build-dir"
+                "default-build-dir",
+                "use-ninja"
             ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang-cl"
