@@ -32,7 +32,6 @@
 #include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.codec/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
@@ -75,14 +74,6 @@ private:
         const variability::transforms::context& ctx);
 
 public:
-    /**
-     * @brief Execute a partial bootstrapping, producing an codec
-     * context.
-     */
-    static codec::transforms::context
-    bootstrap_codec_context(const configuration& cfg,
-        const std::string& activity);
-
     /**
      * @brief Execute the full bootstrap process, producing a
      * top-level context.

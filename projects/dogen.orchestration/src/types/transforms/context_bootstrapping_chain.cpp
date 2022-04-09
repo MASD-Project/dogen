@@ -28,7 +28,6 @@
 #include "dogen.physical/types/transforms/minimal_context.hpp"
 #include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
-#include "dogen.codec/io/transforms/context_io.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.codec/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
@@ -123,24 +122,6 @@ create_variability_feature_model(const variability::transforms::context& ctx) {
      */
     using variability::transforms::feature_model_production_chain;
     const auto r(feature_model_production_chain::apply(ctx, ftrp, frp));
-    return r;
-}
-
-codec::transforms::context
-context_bootstrapping_chain::bootstrap_codec_context(
-    const configuration& cfg, const std::string& activity) {
-    /*
-     * Obtain the tracer.
-     */
-    const auto t(create_and_setup_tracer(cfg, activity));
-    tracing::scoped_chain_tracer stp(lg, "full bootstrapping", transform_id,
-        "bootstrapping", *t);
-
-    /*
-     * Create the codec context.
-     */
-    const auto r(context_factory::make_codec_context(activity, t));
-    stp.end_chain(r);
     return r;
 }
 
