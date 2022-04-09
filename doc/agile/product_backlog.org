@@ -143,6 +143,7 @@ Notes:
   effect the only relation you get for free is inheritance. Actually
   we should also have a "raw" way of inserting relations in a
   namespace. These are placed at the end of the namespace.
+- logical model namespaces are not documented correctly.
 
 Links:
 

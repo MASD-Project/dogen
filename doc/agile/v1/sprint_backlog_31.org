@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-09 Sat 02:28]
+#+CAPTION: Clock summary at [2022-04-09 Sat 10:25]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *56:02* |       |       |   0.0 |
+| *Total time*                                               | *57:15* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 56:02   |       |       |   0.0 |
-| Active                                                     |         | 56:02 |       |   0.0 |
+| Stories                                                    | 57:15   |       |       |   0.0 |
+| Active                                                     |         | 57:15 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  5:40 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  6:21 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -41,10 +41,10 @@
 | Move codec related tests into codecs                       |         |       |  1:02 |   0.0 |
 | Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
-| Windows package is broken                                  |         |       |  0:17 |   0.0 |
+| Windows package is broken                                  |         |       |  0:31 |   0.0 |
 | Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
 | Add full and relative path processing to PM                |         |       |  0:12 |   0.0 |
-| Add "verbatim" PlantUML extension                          |         |       |  1:42 |   0.0 |
+| Add "verbatim" PlantUML extension                          |         |       |  2:00 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -455,6 +455,9 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-09 Sat 09:52]--[2022-04-09 Sat 10:05] =>  0:13
+    CLOCK: [2022-04-09 Sat 09:34]--[2022-04-09 Sat 09:40] =>  0:06
+    CLOCK: [2022-04-09 Sat 09:11]--[2022-04-09 Sat 09:33] =>  0:22
     CLOCK: [2022-04-08 Fri 23:18]--[2022-04-08 Fri 23:29] =>  0:11
     CLOCK: [2022-04-08 Fri 22:41]--[2022-04-08 Fri 23:02] =>  0:21
     CLOCK: [2022-04-08 Fri 21:52]--[2022-04-08 Fri 22:02] =>  0:10
@@ -672,6 +675,7 @@ Notes:
 - ccache is not creating the cache correctly on windows. Seems to work for MSVC
   now but not clang-cl. However, we never had a green build so that may be
   related. Wait until we have one to re-access.
+- debug build was breaking due to use of ccache. Removed this for MSVC builds.
 
 Links:
 
@@ -842,29 +846,34 @@ not change. It should have changed to:
 
 *** STARTED Windows package is broken                                 :story:
     :LOGBOOK:
+    CLOCK: [2022-04-09 Sat 10:10]--[2022-04-09 Sat 10:24] =>  0:14
     CLOCK: [2022-04-08 Fri 17:31]--[2022-04-08 Fri 17:48] =>  0:17
     :END:
 
 When we install the windows package under wine, it fails with:
 
-#+begin_quote
-E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
-#+end_quote
+: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
 
 This will probably be fixed when we move over to the new way of specifying
 dependencies in CMake. Do that first and revisit this problem.
 
-Actually, this did not help.
+Actually, this did not help. We then used the new VCPKG macro (see links) which
+now includes all of boost. We are failing on:
+
+: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
+: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
 
 Links:
 
 - [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
   #1653]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
+- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
 
 *** STARTED Capitalise titles in models correctly                     :story:
     :LOGBOOK:
@@ -1071,6 +1080,8 @@ Notes:
 
 *** STARTED Add "verbatim" PlantUML extension                         :story:
     :LOGBOOK:
+    CLOCK: [2022-04-09 Sat 09:41]--[2022-04-09 Sat 09:50] =>  0:09
+    CLOCK: [2022-04-09 Sat 09:01]--[2022-04-09 Sat 09:10] =>  0:09
     CLOCK: [2022-04-09 Sat 02:19]--[2022-04-09 Sat 02:28] =>  0:09
     CLOCK: [2022-04-09 Sat 01:51]--[2022-04-09 Sat 02:19] =>  0:28
     CLOCK: [2022-04-08 Fri 23:42]--[2022-04-09 Sat 00:47] =>  1:05
@@ -1103,6 +1114,59 @@ Notes:
 - move codec to codec tests from orchestration to codec component.
 - codec needs to have a way to bootstrap its context without requiring
   orchestration.
+
+*** Clang-cl windows build is broken                                  :story:
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+Links:
+
+- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+
+*** Consider modeling relations at a higher level of abstration       :story:
+
+At present we model relations in logical model as two object templates:
+
+- =Generalisable= for inheritance (implements and extends).
+- =Associatable= for composition.
+
+In reality, we should have created the UML relationships as a top-level
+construct:
+
+- association: composition, aggregation
+- dependency
+- generalisation
+- realisation
+
+Relationships should have an associated comment or description.
+
+Notes:
+
+- relationships should already exist in the codec model. These exist for "local"
+  relationships only (that is, elements in the same model). They can be used for
+  generalisation. This does mean generalisation could be "remote" though as we
+  some times inherit from other diagrams. We need a way to distinguish between
+  local and remote relations, which could be by "resolving" the GUID into an
+  element.
+- relationships can be user-annotated, and used for UML diagram generation.
+- generalisation and realisation remove the need for the parent meta-data.
+- relationships can be derived from attributes. This is what the "resolver"
+  does. It is in fact not a resolver but a transform that converts properties in
+  the element into relationships.
+- relationships should use the GUID as well as the qualified name.
+- relationships should really be modeled as org-mode headings. However, one
+  downside of this approach is that we will create a lot of noise when
+  generating documentation. However, given we will only use them for local
+  relationships (generalisation, UML purposes), maybe the noise is not that bad.
+- transparent and opaque associations as well associative container keys need to
+  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
+  If none is appropriate we should create them.
+
+Links:
+
+- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
 
 *** Make =parent= feature a CSV collection                            :story:
 
@@ -1201,29 +1265,6 @@ As per quantlib build, we should check headers compile in isolation.
 Links:
 
 - [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/headers.yml][quantlib header check workflow]]
-
-*** Add target to check test timings                                  :story:
-
-As per quantlib build, we should check for how long tests take to run.
-
-Link:
-
-- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/test-times.yml][test-times quantlib workflow]]
-
-*** Clang-cl build is broken                                          :story:
-
-At present we are getting strange linking errors:
-
-#+begin_quote
-cmd.exe /C "cd . && D:\a\_temp\1259921409\cmake-3.23.0-windows-x86_64\bin\cmake.exe -E vs_link_exe --intdir=projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100220~1.0\x64\mt.exe --manifests  -- C:\PROGRA~1\LLVM\bin\lld-link.exe /nologo projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\comment_formatter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\file_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\generators_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\indenter_filter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\main.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\path_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\resolver_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\sha1_hasher_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\splitter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\test_data_set_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\utility_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\xml_tests.cpp.obj  /out:stage\bin\dogen.utility.tests.exe /implib:stage\bin\dogen.utility.tests.lib /pdb:stage\bin\dogen.utility.tests.pdb /version:0.0 /machine:x64 /IGNORE:4217 /INCREMENTAL:NO /subsystem:console  stage\bin\dogen.utility.lib  vcpkg_installed\x64-windows\lib\libxml2.lib  vcpkg_installed\x64-windows\lib\boost_system-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_serialization-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_date_time-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_log-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_thread-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_filesystem-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_program_options-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_unit_test_framework-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_regex-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_chrono-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_atomic-vc140-mt.lib  vcpkg_installed\x64-windows\lib\boost_log_setup-vc140-mt.lib  vcpkg_installed\x64-windows\lib\zlib.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D D:\a\dogen\dogen\build\output\windows-msvc-clang-cl-debug\projects\dogen.utility\tests && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file D:/a/dogen/dogen/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary /.../windows-msvc-clang-cl-debug/stage/bin/dogen.utility.tests.exe -installedDir /.../windows-msvc-clang-cl-debug/vcpkg_installed/x64-windows/bin -OutVariable out""
-LINK: command "C:\PROGRA~1\LLVM\bin\lld-link.exe /nologo projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\comment_formatter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\file_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\generators_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\indenter_filter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\main.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\path_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\resolver_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\sha1_hasher_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\splitter_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\test_data_set_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\utility_tests.cpp.obj projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\xml_tests.cpp.obj /out:stage\bin\dogen.utility.tests.exe /implib:stage\bin\dogen.utility.tests.lib /pdb:stage\bin\dogen.utility.tests.pdb /version:0.0 /machine:x64 /IGNORE:4217 /INCREMENTAL:NO /subsystem:console stage\bin\dogen.utility.lib vcpkg_installed\x64-windows\lib\libxml2.lib vcpkg_installed\x64-windows\lib\boost_system-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_serialization-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_date_time-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_log-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_thread-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_filesystem-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_program_options-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_unit_test_framework-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_regex-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_chrono-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_atomic-vc140-mt.lib vcpkg_installed\x64-windows\lib\boost_log_setup-vc140-mt.lib vcpkg_installed\x64-windows\lib\zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:stage\bin\dogen.utility.tests.exe.manifest" failed (exit code 1) with the following output:
-lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
->>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `public: static void __cdecl boost::archive::save_access::save_primitive<class boost::archive::xml_oarchive, int>(class archive::save_access::xml_oarchive &, int const &)'::`1'::dtor$3)
->>> referenced by projects\dogen.utility\tests\CMakeFiles\dogen.utility.tests.dir\asserter_tests.cpp.obj:(int `protected: void __cdecl boost::archive::xml_iarchive_impl<class boost::archive::xml_iarchive>::load_override<class boost::serialization::nvp<int> const>(class archive::serialization::nvp<int> const &)'::`1'::dtor$3)
-#+end_quote
-
-This will probably be fixed when we move over to the new way of specifying
-dependencies in CMake. Do that first and revisit this problem.
 
 *** Create clang build using libc++                                   :story:
 
