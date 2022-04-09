@@ -126,7 +126,7 @@ create_variability_feature_model(const variability::transforms::context& ctx) {
 }
 
 context context_bootstrapping_chain::
-bootstrap_full_context(const configuration& cfg, const std::string& activity,
+bootstrap(const configuration& cfg, const std::string& activity,
     const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_directory) {
     /*

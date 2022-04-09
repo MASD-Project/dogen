@@ -134,7 +134,7 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     const auto& od(output_dir);
     const auto& a(run_activity);
     const auto& rds(reference_directories);
-    const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
+    const auto ctx(cbc::bootstrap(cfg, a, rds, od));
 
     /*
      * Bind the tracer to the current scope.

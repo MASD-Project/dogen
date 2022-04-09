@@ -50,7 +50,7 @@ void generator::generate(const configuration& cfg,
         const auto& od(output_directory);
         const auto& a(generation_activity);
         const auto& rds(reference_directories);
-        const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
+        const auto ctx(cbc::bootstrap(cfg, a, rds, od));
 
         /*
          * Bind the tracer to the current scope.

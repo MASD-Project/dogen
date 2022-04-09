@@ -244,7 +244,7 @@ specs spec_dumper::dump(const configuration& cfg) const {
         const auto& a(dumping_activity);
         const auto& od(empty_output_directory);
         const std::vector<boost::filesystem::path> rds; // reference directories
-        const auto ctx(cbc::bootstrap_full_context(cfg, a, rds, od));
+        const auto ctx(cbc::bootstrap(cfg, a, rds, od));
 
         /*
          * Bind the tracer to the current scope.
