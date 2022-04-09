@@ -45,6 +45,7 @@ const std::string default_element_colour("#F7E5FF");
 const std::string default_module_colour("#F2F2F2");
 const std::string parent_tag("masd.codec.parent");
 const std::string stereotypes_tag("masd.codec.stereotypes");
+const std::string plantuml_tag("masd.codec.plantuml");
 const std::string type_tag("masd.codec.type");
 const std::string masd_assistant("masd::assistant");
 const std::string masd_build_cmakelists("masd::build::cmakelists");
@@ -116,6 +117,8 @@ model_to_plantuml_artefact_transform::extract_properties(
             r.stereotypes = tv.value();
         else if (tv.tag() == type_tag)
             r.type = tv.value();
+        else if (tv.tag() == plantuml_tag)
+            r.plantuml.push_back(tv.value());
     }
 
     return r;
@@ -274,6 +277,12 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
             walk_parent_to_child(os, level + 1, inner_id, map);
 
             os << indent << "}" << std::endl << std::endl;
+
+            if (!props.plantuml.empty()) {
+                for (const auto& entry : props.plantuml)
+                    os << indent << entry << std::endl;
+                os  << std::endl;
+            }
 
             if (!props.parents.empty()) {
                 using utility::string::splitter;

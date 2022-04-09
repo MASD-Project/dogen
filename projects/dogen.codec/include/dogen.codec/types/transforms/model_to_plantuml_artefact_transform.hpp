@@ -46,6 +46,7 @@ private:
         std::string parents;
         std::string stereotypes;
         std::string type;
+        std::list<std::string> plantuml;
     };
 
 private:
