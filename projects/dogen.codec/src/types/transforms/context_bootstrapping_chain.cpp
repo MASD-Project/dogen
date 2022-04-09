@@ -54,8 +54,7 @@ context_bootstrapping_chain::create_and_setup_tracer(
     return r;
 }
 
-codec::transforms::context
-context_bootstrapping_chain::bootstrap_codec_context(
+codec::transforms::context context_bootstrapping_chain::bootstrap(
     const configuration& cfg, const std::string& activity) {
 
     /*

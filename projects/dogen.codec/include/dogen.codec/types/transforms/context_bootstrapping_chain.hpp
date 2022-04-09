@@ -49,8 +49,7 @@ public:
      * context.
      */
     static codec::transforms::context
-    bootstrap_codec_context(const configuration& cfg,
-        const std::string& activity);
+    bootstrap(const configuration& cfg, const std::string& activity);
 };
 
 }
