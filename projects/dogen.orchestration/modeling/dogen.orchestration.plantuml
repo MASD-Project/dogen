@@ -2,6 +2,10 @@
 set namespaceSeparator ::
 note as N1
 Orchestration-based imlementation of the Dogen product API.
+
+UML representation:
+
+\image html dogen.orchestration/modeling/dogen.orchestration.svg
 end note
 
 namespace transforms #F2F2F2 {
@@ -72,9 +76,6 @@ class generator <<dogen::handcrafted::typeable>> #FFFACD {
 class converter <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-class injector_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
-
 namespace helpers #F2F2F2 {
     class codec_to_logical_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -86,7 +87,7 @@ namespace helpers #F2F2F2 {
     }
 
 note top of  projection_error
-An error ocurred whilst projecting elements from one space into another.
+An error occurred whilst projecting elements from one space into another.
 end note
 
     class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {

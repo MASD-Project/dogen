@@ -3,6 +3,10 @@ set namespaceSeparator ::
 note as N1
 The pysical model defines the core entities that make up the
 physical dimension of MASD conceptual space.
+
+UML representation:
+
+\image html dogen.physical/modeling/dogen.physical.svg
 end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
@@ -457,7 +461,7 @@ note top of  meta_model_properties
 Meta-model configuration supplied by this model.
 
 The meta-model properties represent a set of variability overrides supplied on top
-of the existing physical meta-model. In addition, the properties also contain 
+of the existing physical meta-model. In addition, the properties also contain
 computed values on the back of physical transforms.
 end note
 

@@ -2,6 +2,10 @@
 set namespaceSeparator ::
 note as N1
 Represents the domain of the Dia diagram editor.
+
+UML representation:
+
+\image html dogen.dia/modeling/dogen.dia.svg
 end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {

@@ -2,6 +2,10 @@
 set namespaceSeparator ::
 note as N1
 Implements the command-line interface for Dogen.
+
+UML representation:
+
+\image html dogen.cli/modeling/dogen.cli.svg
 end note
 
 class parser_exception <<masd::exception>> #E8C2F8 {
@@ -21,9 +25,6 @@ class program_options_parser <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 command_line_parser <|-- program_options_parser
-class injector_factory <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
-
 class application_exception <<masd::exception>> #E8C2F8 {
 }
 

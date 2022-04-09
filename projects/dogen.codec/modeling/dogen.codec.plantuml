@@ -27,6 +27,10 @@ complete).
 
 In general, codecs use file extensions to determine the type of the
 codec.
+
+UML representation:
+
+\image html dogen.codec/modeling/dogen.codec.svg
 end note
 
 namespace transforms #F2F2F2 {
@@ -110,6 +114,13 @@ namespace transforms #F2F2F2 {
     class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+note top of  context_bootstrapping_chain
+Trivial transform that bootstraps the codec context.
+end note
+
 }
 
 namespace entities #F2F2F2 {
@@ -135,6 +146,7 @@ end note
         +{field} is_associative_container bool
         +{field} is_floating_point bool
         +{field} containing_element_id identification::entities::codec_id
+        +{field} plantuml std::list<std::string>
     }
 
 note top of  element
@@ -368,6 +380,7 @@ end note
         +{field} is_associative_container masd::variability::boolean
         +{field} is_floating_point masd::variability::boolean
         +{field} preserve_original masd::variability::boolean
+        +{field} plantuml masd::variability::text_collection
     }
 
 note top of  meta_data

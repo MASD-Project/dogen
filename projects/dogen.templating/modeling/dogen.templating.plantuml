@@ -1,5 +1,13 @@
 @startuml
 set namespaceSeparator ::
+note as N1
+Contains all the generic text templating infrastructure.
+
+UML representation:
+
+\image html dogen.templating/modeling/dogen.templating.svg
+end note
+
 namespace wale #F2F2F2 {
     class text_template <<ConfigurableViaKvps>> #F7E5FF {
         +{field} content std::string

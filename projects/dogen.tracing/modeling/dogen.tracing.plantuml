@@ -1,7 +1,12 @@
 @startuml
 set namespaceSeparator ::
 note as N1
-Houses classes common to all transformations.
+Houses classes common to all transformations, in the transform tracing
+domain.
+
+UML representation:
+
+\image html dogen.tracing/modeling/dogen.tracing.svg
 end note
 
 class tracer <<dogen::handcrafted::typeable, dogen::pretty_printable>> #FFFACD {

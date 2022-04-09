@@ -5,6 +5,10 @@ Provides support for encoding and decoding Emacs's org-mode documents.
 
 The support is very basic and focuses only on the features of org mode
 required by Dogen.
+
+UML representation:
+
+\image html dogen.org/modeling/dogen.org.svg
 end note
 
 namespace entities #F2F2F2 {

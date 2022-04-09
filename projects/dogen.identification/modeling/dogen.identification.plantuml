@@ -3,6 +3,10 @@ set namespaceSeparator ::
 note as N1
 Collection of types related to naming, labelling and general
 identification within Dogen.
+
+UML representation:
+
+\image html dogen.identification/modeling/dogen.identification.svg
 end note
 
 namespace entities #F2F2F2 {

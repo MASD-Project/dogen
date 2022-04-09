@@ -2,6 +2,10 @@
 set namespaceSeparator ::
 note as N1
 Provides the top-level API for the dogen product.
+
+UML representation:
+
+\image html dogen/modeling/dogen.svg
 end note
 
 class configuration <<masd::fluent>> #F7E5FF {
@@ -10,7 +14,6 @@ class configuration <<masd::fluent>> #F7E5FF {
     +{field} diffing boost::optional<diffing_configuration>
     +{field} reporting boost::optional<reporting_configuration>
     +{field} byproduct_directory boost::filesystem::path
-    +{field} database boost::optional<database_configuration>
 }
 
 enum tracing_level <<masd::enumeration>> #F2DAFD {
@@ -127,36 +130,12 @@ end note
 class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
-class database_configuration #F7E5FF {
-    +{field} host std::string
-    +{field} port unsigned int
-    +{field} name std::string
-    +{field} user std::string
-    +{field} password std::string
-    +{field} engine database_engine
-    +{field} generate_schema bool
-}
-
-note top of  database_configuration
-Contains the config
-end note
-
 enum tracing_backend <<masd::enumeration>> #F2DAFD {
     +{field} file
-    +{field} relational_database
 }
 
 note top of  tracing_backend
 Available backends to manage tracing information.
-end note
-
-enum database_engine <<masd::enumeration>> #F2DAFD {
-    +{field} postgres
-    +{field} sqlite
-}
-
-note top of  database_engine
-Supported relational databases engines.
 end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
