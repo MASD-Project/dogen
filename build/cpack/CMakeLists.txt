@@ -105,41 +105,7 @@ if(NOT EXISTS "${stage_lib_dir}")
     file(MAKE_DIRECTORY "${stage_lib_dir}")
 endif()
 
-set(bitness 32)
-if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(bitness 64)
-endif()
-
-set(cpp_runtime_libs "")
-if (MINGW)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} e:/mingw/bin/LIBGCC_S_DW2-1.DLL)
-    set (cpp_runtime_libs
-        ${cpp_runtime_libs} e:/mingw/bin/LIBSTDC++-6.DLL)
-elseif (APPLE)
-    if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
-        set (cpp_runtime_libs
-            ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
-    else()
-        message(FATAL "could not find C++ runtime")
-    endif()
-elseif (UNIX)
-    # rely on package management for runtime.
-endif()
-
-foreach(library ${cpp_runtime_libs})
-    execute_process(
-        COMMAND cp -L ${library} ${stage_lib_dir}
-        RESULT_VARIABLE ret_var
-        OUTPUT_VARIABLE output_var)
-
-    set(library_name "")
-    get_filename_component(library_name ${library} NAME)
-    install(FILES ${stage_lib_dir}/${library_name}
-        DESTINATION bin COMPONENT applications)
-endforeach()
+include (InstallRequiredSystemLibraries)
 
 #
 # platform specific
