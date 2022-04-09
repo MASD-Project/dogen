@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/model_to_model_chain.hpp"
-#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
+#include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/converter.hpp"
 
 namespace {
@@ -44,8 +44,8 @@ void converter::convert(const configuration& cfg,
         /*
          * Bootstrap the codec context.
          */
-        using cbc = transforms::context_bootstrapping_chain;
-        const auto ctx(cbc::bootstrap_codec_context(cfg, conversion_activity));
+        using cbc = codec::transforms::context_bootstrapping_chain;
+        const auto ctx(cbc::bootstrap(cfg, conversion_activity));
 
         /*
          * Bind the tracer to the current scope.
