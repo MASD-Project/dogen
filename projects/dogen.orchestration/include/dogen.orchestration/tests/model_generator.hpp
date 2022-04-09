@@ -66,12 +66,6 @@ public:
         const bool enable_reporting_locally = false,
         const bool enable_diffing_locally = false);
 
-    static std::string apply_artefact_to_artefact_chain(
-        const boost::filesystem::path& src,
-        const bool enable_tracing_locally = false,
-        const bool enable_reporting_locally = false,
-        const bool enable_diffing_locally = false);
-
 public:
 
     /**
