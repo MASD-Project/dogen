@@ -476,7 +476,7 @@ C++ technical space.
             +{field} masd.physical.relation_status
         }
 
-transforms::cpp::base_archetype_configuration <|-- transforms::cpp::tests_configuration
+        transforms::cpp::base_archetype_configuration <|-- transforms::cpp::tests_configuration
         note top of  tests_configuration
             Contains the configuration common to most archetypes in tests.
         end note
@@ -486,7 +486,7 @@ transforms::cpp::base_archetype_configuration <|-- transforms::cpp::tests_config
             +{field} masd.physical.wale_template_reference
         }
 
-transforms::cpp::base_archetype_configuration <|-- transforms::cpp::header_configuration
+        transforms::cpp::base_archetype_configuration <|-- transforms::cpp::header_configuration
         note top of  header_configuration
             Contains the configuration common to all c++ header archetypes.
         end note
@@ -495,13 +495,13 @@ transforms::cpp::base_archetype_configuration <|-- transforms::cpp::header_confi
             +{field} masd.physical.relation_status
         }
 
-transforms::cpp::header_configuration <|-- transforms::cpp::header_facet_default_configuration
+        transforms::cpp::header_configuration <|-- transforms::cpp::header_facet_default_configuration
         class enumeration_header_configuration <<masd::variability::profile>> #DDECEC {
             +{field} masd.physical.logical_meta_element_id
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::enumeration_header_configuration
+        transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::enumeration_header_configuration
         note top of  enumeration_header_configuration
             Contains the configuration common to all enumeration header archetypes.
         end note
@@ -511,7 +511,7 @@ transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::enumer
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::object_header_configuration
+        transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::object_header_configuration
         note top of  object_header_configuration
             Contains the configuration common to all object header archetypes.
         end note
@@ -521,7 +521,7 @@ transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::object
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::primitive_header_configuration
+        transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::primitive_header_configuration
         note top of  primitive_header_configuration
             Contains the configuration common to all built header archetypes.
         end note
@@ -531,7 +531,7 @@ transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::primit
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::builtin_header_configuration
+        transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::builtin_header_configuration
         note top of  builtin_header_configuration
             Contains the configuration common to all built header archetypes.
         end note
@@ -542,7 +542,7 @@ transforms::cpp::header_facet_default_configuration <|-- transforms::cpp::builti
             +{field} masd.physical.relation_status
         }
 
-transforms::cpp::base_archetype_configuration <|-- transforms::cpp::implementation_configuration
+        transforms::cpp::base_archetype_configuration <|-- transforms::cpp::implementation_configuration
         note top of  implementation_configuration
             Contains the configuration common to all c++ implementation archetypes.
         end note
@@ -552,19 +552,19 @@ transforms::cpp::base_archetype_configuration <|-- transforms::cpp::implementati
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::implementation_configuration <|-- transforms::cpp::object_implementation_configuration
+        transforms::cpp::implementation_configuration <|-- transforms::cpp::object_implementation_configuration
         class primitive_implementation_configuration <<masd::variability::profile>> #DDECEC {
             +{field} masd.physical.logical_meta_element_id
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::implementation_configuration <|-- transforms::cpp::primitive_implementation_configuration
+        transforms::cpp::implementation_configuration <|-- transforms::cpp::primitive_implementation_configuration
         class enumeration_implementation_configuration <<masd::variability::profile>> #DDECEC {
             +{field} masd.physical.logical_meta_element_id
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_implementation_configuration
+        transforms::cpp::implementation_configuration <|-- transforms::cpp::enumeration_implementation_configuration
         namespace hash <<masd::physical::facet>> #C6F0D8 {
             class initializer <<dogen::handcrafted::typeable>> #FFFACD {
             }
@@ -1242,7 +1242,7 @@ C++ technical space, or associated minor technical spaces.
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::csharp::archetype_configuration <|-- transforms::csharp::primitive_configuration
+        transforms::csharp::archetype_configuration <|-- transforms::csharp::primitive_configuration
         note top of  primitive_configuration
             Contains the configuration common to all archetypes.
         end note
@@ -1252,7 +1252,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::primitive_c
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::csharp::archetype_configuration <|-- transforms::csharp::enumeration_configuration
+        transforms::csharp::archetype_configuration <|-- transforms::csharp::enumeration_configuration
         note top of  enumeration_configuration
             Contains the configuration common to all archetypes.
         end note
@@ -1262,7 +1262,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::enumeration
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::csharp::archetype_configuration <|-- transforms::csharp::object_configuration
+        transforms::csharp::archetype_configuration <|-- transforms::csharp::object_configuration
         note top of  object_configuration
             Contains the configuration common to all archetypes.
         end note
@@ -1272,7 +1272,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::object_conf
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::csharp::archetype_configuration <|-- transforms::csharp::exception_configuration
+        transforms::csharp::archetype_configuration <|-- transforms::csharp::exception_configuration
         note top of  exception_configuration
             Contains the configuration common to all archetypes.
         end note
@@ -1282,7 +1282,7 @@ transforms::csharp::archetype_configuration <|-- transforms::csharp::exception_c
             +{field} masd.wale.kvp.archetype.simple_name
         }
 
-transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_configuration
+        transforms::csharp::archetype_configuration <|-- transforms::csharp::builtin_configuration
         note top of  builtin_configuration
             Contains the configuration common to all archetypes.
         end note

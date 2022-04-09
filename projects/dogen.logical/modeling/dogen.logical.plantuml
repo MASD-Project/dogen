@@ -123,16 +123,16 @@ namespace entities #F2F2F2 {
     class Element <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Nameable <|-- entities::Element
-entities::Documentable <|-- entities::Element
-entities::Provenance <|-- entities::Element
-entities::Containable <|-- entities::Element
-entities::Stereotypable <|-- entities::Element
-entities::MetaNameable <|-- entities::Element
-entities::TechnicalSpaceRelationship <|-- entities::Element
-entities::Configurable <|-- entities::Element
-entities::Labelable <|-- entities::Element
-entities::Generatable <|-- entities::Element
+    entities::Nameable <|-- entities::Element
+    entities::Documentable <|-- entities::Element
+    entities::Provenance <|-- entities::Element
+    entities::Containable <|-- entities::Element
+    entities::Stereotypable <|-- entities::Element
+    entities::MetaNameable <|-- entities::Element
+    entities::TechnicalSpaceRelationship <|-- entities::Element
+    entities::Configurable <|-- entities::Element
+    entities::Labelable <|-- entities::Element
+    entities::Generatable <|-- entities::Element
     note top of  Element
         A unit of coding that can be code generated.
 
@@ -243,10 +243,10 @@ meta-types (object templates) and non-types (modules and backend specific entiti
     class Relatable <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Containable <|-- entities::Relatable
-entities::Visitable <|-- entities::Relatable
-entities::Associatable <|-- entities::Relatable
-entities::Generalizable <|-- entities::Relatable
+    entities::Containable <|-- entities::Relatable
+    entities::Visitable <|-- entities::Relatable
+    entities::Associatable <|-- entities::Relatable
+    entities::Generalizable <|-- entities::Relatable
     note top of  Relatable
         Element has the ability to have relationships with other elements.
     end note
@@ -455,7 +455,7 @@ properties related to decorations.
             +{field} default_value_overrides std::list<default_value_override>
         }
 
-entities::variability::abstract_feature <|-- entities::variability::feature_template
+        entities::variability::abstract_feature <|-- entities::variability::feature_template
         note top of  feature_template
             Represents a feature template in variability space.
 
@@ -506,7 +506,7 @@ Generated code comprises of two aspects:
             +{field} features std::list<feature>
         }
 
-entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
+        entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
         note top of  feature_bundle
             A feature bundle represents an aggregation of features in a model.
 
@@ -526,7 +526,7 @@ Both of these aspects are optional, but at least one must be chosen.
         class feature #F7E5FF {
         }
 
-entities::variability::abstract_feature <|-- entities::variability::feature
+        entities::variability::abstract_feature <|-- entities::variability::feature
         note top of  feature
             Represents a feature in variability space.
         end note
@@ -536,7 +536,7 @@ entities::variability::abstract_feature <|-- entities::variability::feature
             +{field} instantiation_domain_name std::string
         }
 
-entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
+        entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
         note top of  feature_template_bundle
             A feature template bundle represents an aggregation of feature templates in a
 model.
@@ -564,13 +564,13 @@ Both of these aspects are optional, but at least one must be chosen.
             +{field} entries std::list<profile_template_entry>
         }
 
-entities::variability::abstract_profile <|-- entities::variability::profile_template
+        entities::variability::abstract_profile <|-- entities::variability::profile_template
         class profile #F7E5FF {
             +{field} entries std::list<profile_entry>
             +{field} binding_point std::string
         }
 
-entities::variability::abstract_profile <|-- entities::variability::profile
+        entities::variability::abstract_profile <|-- entities::variability::profile
         note top of  profile
             Represents a profile from the variability subsystem.
         end note
@@ -584,12 +584,12 @@ entities::variability::abstract_profile <|-- entities::variability::profile
         class profile_entry #F7E5FF {
         }
 
-entities::variability::abstract_profile_entry <|-- entities::variability::profile_entry
+        entities::variability::abstract_profile_entry <|-- entities::variability::profile_entry
         class profile_template_entry #F7E5FF {
             +{field} instantiation_domain_name std::string
         }
 
-entities::variability::abstract_profile_entry <|-- entities::variability::profile_template_entry
+        entities::variability::abstract_profile_entry <|-- entities::variability::profile_template_entry
         class default_value_override #F7E5FF {
             +{field} key_ends_with std::string
             +{field} default_value std::string
@@ -715,11 +715,11 @@ complexity.
             +{field} odb_options odb_options
         }
 
-entities::orm::Schemable <|-- entities::orm::OrmElement
-entities::orm::Caseable <|-- entities::orm::OrmElement
-entities::orm::Mappeable <|-- entities::orm::OrmElement
-entities::orm::TypeMappable <|-- entities::orm::OrmElement
-entities::orm::OdbPragmable <|-- entities::orm::OrmElement
+        entities::orm::Schemable <|-- entities::orm::OrmElement
+        entities::orm::Caseable <|-- entities::orm::OrmElement
+        entities::orm::Mappeable <|-- entities::orm::OrmElement
+        entities::orm::TypeMappable <|-- entities::orm::OrmElement
+        entities::orm::OdbPragmable <|-- entities::orm::OrmElement
         class Overridable <<masd::object_template>> #E3B6F6 {
             +{field} type_overrides std::unordered_map<database_system, std::string>
         }

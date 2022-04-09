@@ -51,7 +51,7 @@ namespace entities #F2F2F2 {
         +{field} is_partially_matchable bool
     }
 
-entities::element <|-- entities::feature
+    entities::element <|-- entities::feature
     note top of  feature
         Unit of configuration within Dogen. Defines the domain of values.
     end note
@@ -82,7 +82,7 @@ entities::element <|-- entities::feature
         +{field} default_value_overrides std::list<default_value_override>
     }
 
-entities::element <|-- entities::feature_template
+    entities::element <|-- entities::feature_template
     note top of  feature_template
         Defines a template that can be used to instantiate features.
     end note
@@ -105,7 +105,7 @@ entities::element <|-- entities::feature_template
         +{field} templates std::list<configuration_point_template>
     }
 
-entities::element <|-- entities::profile_template
+    entities::element <|-- entities::profile_template
     note top of  profile_template
         Holds a set of templates for configuration points.
     end note
@@ -114,7 +114,7 @@ entities::element <|-- entities::profile_template
         +{field} untyped_value std::list<std::string>
     }
 
-entities::element <|-- entities::configuration_point_template
+    entities::element <|-- entities::configuration_point_template
     class value <<masd::visitable>> #F7E5FF {
     }
 
@@ -128,7 +128,7 @@ Represents a value for a configuration point, a default value for a feature, etc
         +{field} content int
     }
 
-entities::value <|-- entities::number
+    entities::value <|-- entities::number
     note top of  number
         Represents a numeric integral value.
     end note
@@ -137,7 +137,7 @@ entities::value <|-- entities::number
         +{field} content std::string
     }
 
-entities::value <|-- entities::text
+    entities::value <|-- entities::text
     note top of  text
         Represents a text value.
     end note
@@ -146,7 +146,7 @@ entities::value <|-- entities::text
         +{field} content std::list<std::string>
     }
 
-entities::value <|-- entities::text_collection
+    entities::value <|-- entities::text_collection
     note top of  text_collection
         Represents a collection of text values.
     end note
@@ -155,7 +155,7 @@ entities::value <|-- entities::text_collection
         +{field} content bool
     }
 
-entities::value <|-- entities::boolean
+    entities::value <|-- entities::boolean
     note top of  boolean
         Represents a boolean value.
     end note
@@ -164,7 +164,7 @@ entities::value <|-- entities::boolean
         +{field} content std::list<std::pair<std::string, std::string>>
     }
 
-entities::value <|-- entities::key_value_pair
+    entities::value <|-- entities::key_value_pair
     note top of  key_value_pair
         Represents a pair of key and value.
     end note
@@ -176,11 +176,11 @@ entities::value <|-- entities::key_value_pair
         +{field} from_target bool
     }
 
-entities::element <|-- entities::configuration
+    entities::element <|-- entities::configuration
     class configuration_point <<Valuable>> #F7E5FF {
     }
 
-entities::element <|-- entities::configuration_point
+    entities::element <|-- entities::configuration_point
     note top of  configuration_point
         Maps a feature name to an instance value
     end note
@@ -200,8 +200,8 @@ entities::element <|-- entities::configuration_point
     class Element <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Nameable <|-- entities::Element
-entities::Describable <|-- entities::Element
+    entities::Nameable <|-- entities::Element
+    entities::Describable <|-- entities::Element
     class Defaultable <<masd::object_template>> #E3B6F6 {
         +{field} default_value boost::shared_ptr<value>
     }
@@ -222,11 +222,11 @@ entities::Describable <|-- entities::Element
     class FeatureElement <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Element <|-- entities::FeatureElement
-entities::Defaultable <|-- entities::FeatureElement
-entities::Typeable <|-- entities::FeatureElement
-entities::BindActionable <|-- entities::FeatureElement
-entities::Bindable <|-- entities::FeatureElement
+    entities::Element <|-- entities::FeatureElement
+    entities::Defaultable <|-- entities::FeatureElement
+    entities::Typeable <|-- entities::FeatureElement
+    entities::BindActionable <|-- entities::FeatureElement
+    entities::Bindable <|-- entities::FeatureElement
     class Templateable <<masd::object_template>> #E3B6F6 {
         +{field} instantiation_domain_name std::string
     }
@@ -244,7 +244,7 @@ entities::Bindable <|-- entities::FeatureElement
         +{field} base_layer_profile std::string
     }
 
-entities::element <|-- entities::profile
+    entities::element <|-- entities::profile
     enum binding_action <<masd::enumeration>> #F2DAFD {
         +{field} ignore
         +{field} copy
@@ -317,14 +317,14 @@ entities::element <|-- entities::profile
     class Profilable <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Bindable <|-- entities::Profilable
-entities::Generalizable <|-- entities::Profilable
-entities::Stereotypable <|-- entities::Profilable
+    entities::Bindable <|-- entities::Profilable
+    entities::Generalizable <|-- entities::Profilable
+    entities::Stereotypable <|-- entities::Profilable
     class comma_separated #F7E5FF {
         +{field} content std::list<std::string>
     }
 
-entities::value <|-- entities::comma_separated
+    entities::value <|-- entities::comma_separated
     note top of  comma_separated
         Represents a CSV input that is split into a collection of text values.
     end note
@@ -333,7 +333,7 @@ entities::value <|-- entities::comma_separated
         +{field} content std::list<std::list<std::string>>
     }
 
-entities::value <|-- entities::comma_separated_collection
+    entities::value <|-- entities::comma_separated_collection
     note top of  comma_separated_collection
         Represents a collection of CSV input that is split into a collection of text values.
     end note

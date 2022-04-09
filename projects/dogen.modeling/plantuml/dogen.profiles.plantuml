@@ -57,10 +57,10 @@ facet for manual tests.
         +{field} masd.cpp.standard
     }
 
-base::decoration <|-- base::base
-base::extraction <|-- base::base
-base::csharp <|-- base::base
-base::ignores <|-- base::base
+    base::decoration <|-- base::base
+    base::extraction <|-- base::base
+    base::csharp <|-- base::base
+    base::ignores <|-- base::base
     class base_profile <<masd::variability::profile>> #DDECEC {
         +{field} odb.enabled
         +{field} hash.enabled
@@ -70,7 +70,7 @@ base::ignores <|-- base::base
         +{field} test_data.enabled
     }
 
-base::base <|-- base::base_profile
+    base::base <|-- base::base_profile
     note top of  base_profile
         Configures the main options for the C++ backend.
     end note
@@ -78,7 +78,7 @@ base::base <|-- base::base_profile
     class default_profile <<masd::variability::profile>> #DDECEC {
     }
 
-base::base_profile <|-- base::default_profile
+    base::base_profile <|-- base::default_profile
     note top of  default_profile
         Variability profile for a typical dogen model.
     end note
@@ -87,7 +87,7 @@ base::base_profile <|-- base::default_profile
         +{field} enabled
     }
 
-base::base <|-- base::disable_all_facets
+    base::base <|-- base::disable_all_facets
     note top of  disable_all_facets
         Disables all facets in the C++ backend.
     end note
@@ -97,13 +97,13 @@ base::base <|-- base::disable_all_facets
         +{field} build.enabled
     }
 
-base::base_profile <|-- base::relational_profile
+    base::base_profile <|-- base::relational_profile
     class test_all_facets <<masd::variability::profile>> #DDECEC {
         +{field} masd.decoration.marker_name
         +{field} masd.cpp.tests.main.enabled
     }
 
-base::base <|-- base::test_all_facets
+    base::base <|-- base::test_all_facets
 }
 
 note top of  base
@@ -155,14 +155,14 @@ namespace composable #F2F2F2 {
         +{field} overwrite
     }
 
-composable::handcrafted <|-- composable::handcrafted_pretty_printable
+    composable::handcrafted <|-- composable::handcrafted_pretty_printable
     class handcrafted_typeable <<masd::variability::profile>> #DDECEC {
         +{field} enabled
         +{field} overwrite
         +{field} class_forward_declarations.enabled
     }
 
-composable::handcrafted <|-- composable::handcrafted_typeable
+    composable::handcrafted <|-- composable::handcrafted_typeable
     note top of  handcrafted_typeable
         Configuration for model elements that are generated manually by the user.
     end note
@@ -171,7 +171,7 @@ composable::handcrafted <|-- composable::handcrafted_typeable
         +{field} class_implementation.enabled
     }
 
-composable::handcrafted_typeable <|-- composable::header_only
+    composable::handcrafted_typeable <|-- composable::header_only
     note top of  header_only
         This element has only a types header file.
     end note
@@ -186,7 +186,7 @@ composable::handcrafted_typeable <|-- composable::header_only
         +{field} class_implementation.enabled
     }
 
-composable::handcrafted_typeable <|-- composable::implementation_only
+    composable::handcrafted_typeable <|-- composable::implementation_only
     note top of  implementation_only
         This element has only a types implementation file.
     end note
@@ -196,7 +196,7 @@ composable::handcrafted_typeable <|-- composable::implementation_only
         +{field} overwrite
     }
 
-composable::handcrafted <|-- composable::handcrafted_serializable
+    composable::handcrafted <|-- composable::handcrafted_serializable
     class convertible <<masd::variability::profile>> #DDECEC {
         +{field} enabled
     }

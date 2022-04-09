@@ -223,13 +223,13 @@ namespace entities #F2F2F2 {
     class Element <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Taggable <|-- entities::Element
-entities::Stereotypable <|-- entities::Element
-entities::Nameable <|-- entities::Element
-entities::Configurable <|-- entities::Element
-entities::DeterminableOrigin <|-- entities::Element
-entities::TaggableOverridable <|-- entities::Element
-entities::Commentable <|-- entities::Element
+    entities::Taggable <|-- entities::Element
+    entities::Stereotypable <|-- entities::Element
+    entities::Nameable <|-- entities::Element
+    entities::Configurable <|-- entities::Element
+    entities::DeterminableOrigin <|-- entities::Element
+    entities::TaggableOverridable <|-- entities::Element
+    entities::Commentable <|-- entities::Element
     note top of  Element
         Consolidates a number of related object templates.
     end note

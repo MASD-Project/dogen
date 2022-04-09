@@ -184,14 +184,14 @@ component in a backend.
     class MetaElement <<masd::object_template>> #E3B6F6 {
     }
 
-entities::Describable <|-- entities::MetaElement
-entities::MetaNameable <|-- entities::MetaElement
-entities::Labelable <|-- entities::MetaElement
+    entities::Describable <|-- entities::MetaElement
+    entities::MetaNameable <|-- entities::MetaElement
+    entities::Labelable <|-- entities::MetaElement
     class ContainingMetaElement <<masd::object_template>> #E3B6F6 {
         +{field} directory_name std::string
     }
 
-entities::MetaElement <|-- entities::ContainingMetaElement
+    entities::MetaElement <|-- entities::ContainingMetaElement
     note top of  ContainingMetaElement
         The meta-element can contain other meta-elements.
     end note
@@ -247,11 +247,11 @@ entities::MetaElement <|-- entities::ContainingMetaElement
     class Element <<masd::object_template>> #E3B6F6 {
     }
 
-entities::MetaNameable <|-- entities::Element
-entities::Configurable <|-- entities::Element
-entities::Provenance <|-- entities::Element
-entities::Nameable <|-- entities::Element
-entities::LogicalPhysicalSpaceIdentity <|-- entities::Element
+    entities::MetaNameable <|-- entities::Element
+    entities::Configurable <|-- entities::Element
+    entities::Provenance <|-- entities::Element
+    entities::Nameable <|-- entities::Element
+    entities::LogicalPhysicalSpaceIdentity <|-- entities::Element
     class outputting_properties #F7E5FF {
         +{field} force_write bool
         +{field} delete_extra_files bool

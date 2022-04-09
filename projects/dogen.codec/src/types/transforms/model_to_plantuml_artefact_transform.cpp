@@ -288,7 +288,7 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                 using utility::string::splitter;
                 const auto parents(splitter::split_csv(props.parents));
                 for (const auto& parent : parents) {
-                    os << parent << " <|-- "
+                    os << indent << parent << " <|-- "
                        << e.name().qualified()
                        << std::endl;
                 }
