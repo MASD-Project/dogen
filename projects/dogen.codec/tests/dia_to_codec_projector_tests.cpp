@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+ * Copyright (C) 2012-2022 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@ namespace  {
 const std::string test_module("masd.codec.tests");
 const std::string test_suite("dia_to_codec_projector_tests");
 const std::string model_name("test");
+
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 
