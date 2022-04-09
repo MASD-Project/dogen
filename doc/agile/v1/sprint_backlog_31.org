@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-08 Fri 21:52]
+#+CAPTION: Clock summary at [2022-04-09 Sat 02:28]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *52:59* |       |       |   0.0 |
+| *Total time*                                               | *56:02* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 52:59   |       |       |   0.0 |
-| Active                                                     |         | 52:59 |       |   0.0 |
+| Stories                                                    | 56:02   |       |       |   0.0 |
+| Active                                                     |         | 56:02 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  4:58 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  5:40 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -36,12 +36,15 @@
 | Setup MSVC Windows build for debug and release             |         |       |  3:31 |   0.0 |
 | Can't see build info in github builds                      |         |       |  0:35 |   0.0 |
 | Update build instructions in readme                        |         |       |  0:34 |   0.0 |
-| Add code coverage on continuous builds                     |         |       |  0:53 |   0.0 |
-| Remove existing benchmark infrastructure                   |         |       |  0:24 |   0.0 |
+| Replace Dia IDs with UUIDs                                 |         |       |  0:22 |   0.0 |
+| Update the test package scripts for the GitHub CI          |         |       |  0:39 |   0.0 |
+| Move codec related tests into codecs                       |         |       |  1:02 |   0.0 |
 | Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
 | Windows package is broken                                  |         |       |  0:17 |   0.0 |
-| Update the test package scripts for the GitHub CI          |         |       |  0:25 |   0.0 |
+| Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
+| Add full and relative path processing to PM                |         |       |  0:12 |   0.0 |
+| Add "verbatim" PlantUML extension                          |         |       |  1:42 |   0.0 |
 | Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -1068,7 +1071,8 @@ Notes:
 
 *** STARTED Add "verbatim" PlantUML extension                         :story:
     :LOGBOOK:
-    CLOCK: [2022-04-09 Sat 01:51]
+    CLOCK: [2022-04-09 Sat 02:19]--[2022-04-09 Sat 02:28] =>  0:09
+    CLOCK: [2022-04-09 Sat 01:51]--[2022-04-09 Sat 02:19] =>  0:28
     CLOCK: [2022-04-08 Fri 23:42]--[2022-04-09 Sat 00:47] =>  1:05
     :END:
 

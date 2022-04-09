@@ -131,6 +131,9 @@ namespace entities #F2F2F2 {
         +{field} processed_variability_overrides std::unordered_set<std::string>
     }
 
+    model o-- element : composed of
+    Element <|.. model
+
     note top of  model
         Represents an external model.
     end note
@@ -163,6 +166,8 @@ namespace entities #F2F2F2 {
         +{field} references std::list<model>
         +{field} reference_graph_data reference_graph_data
     }
+
+    model_set o-- model : composed of
 
     class Taggable <<masd::object_template>> #E3B6F6 {
         +{field} tagged_values std::list<identification::entities::tagged_value>
@@ -216,6 +221,8 @@ namespace entities #F2F2F2 {
         +{field} comment comment
     }
 
+    Commentable o-- comment
+
     note top of  Commentable
         Has the ability to have an associated comment.
     end note
@@ -262,6 +269,9 @@ namespace entities #F2F2F2 {
         +{field} connection boost::optional<std::pair<std::string,std::string>>
         +{field} attributes std::list<attribute>
     }
+
+    object o-- attribute : has
+    Commentable <|.. object
 
     note top of  object
         Represents an "raw" codec object which may or may not contain a modeling element of interest.

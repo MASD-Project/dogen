@@ -256,6 +256,8 @@ Not all codecs will make use of all entities.
    :PROPERTIES:
    :custom_id: 294DC761-8784-3D74-824B-48E7BCC2CFB2
    :masd.codec.stereotypes: Element
+   :masd.codec.plantuml: model o-- element : composed of
+   :masd.codec.plantuml: Element <|.. model
    :END:
 
 Represents an external model.
@@ -376,6 +378,7 @@ Default value for this attribute, if any.
 ** model set                                                        :element:
    :PROPERTIES:
    :custom_id: 031418CC-A332-B9C4-7C5B-92A78A10DF1C
+   :masd.codec.plantuml: model_set o-- model : composed of
    :END:
 
 *** target                                                        :attribute:
@@ -485,6 +488,7 @@ Meta-data sourced externally that can be used to override meta-data in model.
    :PROPERTIES:
    :custom_id: CEC37E59-A723-5EE4-16B3-E5A3D218DCCD
    :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Commentable o-- comment
    :END:
 
 Has the ability to have an associated comment.
@@ -564,6 +568,8 @@ JavaDoc for Java, etc.
    :PROPERTIES:
    :custom_id: 8E2A0AE2-9028-0E94-C653-88AD5E2DD15E
    :masd.codec.stereotypes: Commentable
+   :masd.codec.plantuml: object o-- attribute : has
+   :masd.codec.plantuml: Commentable <|.. object
    :END:
 
 Represents an "raw" codec object which may or may not contain a modeling element of interest.
