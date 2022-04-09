@@ -26,9 +26,9 @@ namespace transforms #F2F2F2 {
     class factory_exception <<masd::exception>> #E8C2F8 {
     }
 
-note top of  factory_exception
-An error occurred in the factory whilst making.
-end note
+    note top of  factory_exception
+        An error occurred in the factory whilst making.
+    end note
 
     class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -66,7 +66,7 @@ end note
 }
 
 note top of  transforms
-Top-level transforms for Dogen. These are
+    Top-level transforms for Dogen. These are
 the entry points to all transformations.
 end note
 
@@ -86,9 +86,9 @@ namespace helpers #F2F2F2 {
     class projection_error <<masd::exception>> #E8C2F8 {
     }
 
-note top of  projection_error
-An error occurred whilst projecting elements from one space into another.
-end note
+    note top of  projection_error
+        An error occurred whilst projecting elements from one space into another.
+    end note
 
     class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -99,7 +99,7 @@ end note
 }
 
 note top of  helpers
-Helpers for the orchestration model.
+    Helpers for the orchestration model.
 end note
 
 namespace features #F2F2F2 {
@@ -108,9 +108,9 @@ namespace features #F2F2F2 {
         +{field} model_modules masd::variability::text
     }
 
-note top of  model_location
-Feature group for model location related features.
-end note
+    note top of  model_location
+        Feature group for model location related features.
+    end note
 
     class initializer <<masd::variability::initializer>> #A9CDCD {
     }
@@ -118,7 +118,7 @@ end note
 }
 
 note top of  features
-Features for the orchestration model.
+    Features for the orchestration model.
 end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {

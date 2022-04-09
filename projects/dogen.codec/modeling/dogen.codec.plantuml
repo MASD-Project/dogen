@@ -117,9 +117,9 @@ namespace transforms #F2F2F2 {
     class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-note top of  context_bootstrapping_chain
-Trivial transform that bootstraps the codec context.
-end note
+    note top of  context_bootstrapping_chain
+        Trivial transform that bootstraps the codec context.
+    end note
 
 }
 
@@ -131,9 +131,9 @@ namespace entities #F2F2F2 {
         +{field} processed_variability_overrides std::unordered_set<std::string>
     }
 
-note top of  model
-Represents an external model.
-end note
+    note top of  model
+        Represents an external model.
+    end note
 
     class element <<Element>> #F7E5FF {
         +{field} parents std::list<std::string>
@@ -149,9 +149,9 @@ end note
         +{field} plantuml std::list<std::string>
     }
 
-note top of  element
-Represents an element from an external model.
-end note
+    note top of  element
+        Represents an element from an external model.
+    end note
 
     class attribute <<Element>> #F7E5FF {
         +{field} type std::string
@@ -168,57 +168,57 @@ end note
         +{field} tagged_values std::list<identification::entities::tagged_value>
     }
 
-note top of  Taggable
-Ability to contain tagged values.
-end note
+    note top of  Taggable
+        Ability to contain tagged values.
+    end note
 
     class Stereotypable <<masd::object_template>> #E3B6F6 {
         +{field} stereotypes std::list<identification::entities::stereotype>
     }
 
-note top of  Stereotypable
-Ability to have stereotypes.
-end note
+    note top of  Stereotypable
+        Ability to have stereotypes.
+    end note
 
     class Nameable <<masd::object_template>> #E3B6F6 {
         +{field} name identification::entities::name
     }
 
-note top of  Nameable
-Ability to have a name.
-end note
+    note top of  Nameable
+        Ability to have a name.
+    end note
 
     class Configurable <<masd::object_template>> #E3B6F6 {
         +{field} configuration boost::shared_ptr<variability::entities::configuration>
     }
 
-note top of  Configurable
-Ability to have meta-data associated.
-end note
+    note top of  Configurable
+        Ability to have meta-data associated.
+    end note
 
     class DeterminableOrigin <<masd::object_template>> #E3B6F6 {
         +{field} provenance identification::entities::codec_provenance
     }
 
-note top of  DeterminableOrigin
-Properties related to the origin of the modeling element.
-end note
+    note top of  DeterminableOrigin
+        Properties related to the origin of the modeling element.
+    end note
 
     class TaggableOverridable <<masd::object_template>> #E3B6F6 {
         +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
     }
 
-note top of  TaggableOverridable
-Ability to contain tagged values.
-end note
+    note top of  TaggableOverridable
+        Ability to contain tagged values.
+    end note
 
     class Commentable <<masd::object_template>> #E3B6F6 {
         +{field} comment comment
     }
 
-note top of  Commentable
-Has the ability to have an associated comment.
-end note
+    note top of  Commentable
+        Has the ability to have an associated comment.
+    end note
 
     class Element <<masd::object_template>> #E3B6F6 {
     }
@@ -230,18 +230,18 @@ entities::Configurable <|-- entities::Element
 entities::DeterminableOrigin <|-- entities::Element
 entities::TaggableOverridable <|-- entities::Element
 entities::Commentable <|-- entities::Element
-note top of  Element
-Consolidates a number of related object templates.
-end note
+    note top of  Element
+        Consolidates a number of related object templates.
+    end note
 
     class reference_graph_data #F7E5FF {
         +{field} root std::string
         +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
     }
 
-note top of  reference_graph_data
-Contains all the data required to build the graph of references.
-end note
+    note top of  reference_graph_data
+        Contains all the data required to build the graph of references.
+    end note
 
     class comment <<Taggable>> #F7E5FF {
         +{field} applies_to_container bool
@@ -249,9 +249,9 @@ end note
         +{field} documentation std::string
     }
 
-note top of  comment
-Represents a comment block as read out from the codec representation.
-end note
+    note top of  comment
+        Represents a comment block as read out from the codec representation.
+    end note
 
     class object <<Commentable>> #F7E5FF {
         +{field} id std::string
@@ -263,9 +263,9 @@ end note
         +{field} attributes std::list<attribute>
     }
 
-note top of  object
-Represents an "raw" codec object which may or may not contain a modeling element of interest.
-end note
+    note top of  object
+        Represents an "raw" codec object which may or may not contain a modeling element of interest.
+    end note
 
     class artefact #F7E5FF {
         +{field} path boost::filesystem::path
@@ -276,7 +276,7 @@ end note
 }
 
 note top of  entities
-Object model that is codec-agnostic but aims to provide
+    Object model that is codec-agnostic but aims to provide
 a representation of the core entities needed by all codecs.
 
 Not all codecs will make use of all entities.
@@ -298,9 +298,9 @@ namespace helpers #F2F2F2 {
     class graphing_error <<masd::exception>> #E8C2F8 {
     }
 
-note top of  graphing_error
-An error has occurred while building the dia object graph.
-end note
+    note top of  graphing_error
+        An error has occurred while building the dia object graph.
+    end note
 
     class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -311,9 +311,9 @@ end note
     class projection_error <<masd::exception>> #E8C2F8 {
     }
 
-note top of  projection_error
-An error occurred whilst projecting elements from one space to another.
-end note
+    note top of  projection_error
+        An error occurred whilst projecting elements from one space to another.
+    end note
 
     class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -321,9 +321,9 @@ end note
     class adaptation_error <<masd::exception>> #E8C2F8 {
     }
 
-note top of  adaptation_error
-A fatal error has occurred while adapting an object into an element.
-end note
+    note top of  adaptation_error
+        A fatal error has occurred while adapting an object into an element.
+    end note
 
     class reference_resolution_exception <<masd::exception>> #E8C2F8 {
     }
@@ -334,9 +334,9 @@ end note
     class reference_validation_error <<masd::exception>> #E8C2F8 {
     }
 
-note top of  reference_validation_error
-A cycle was detected in the references graph.
-end note
+    note top of  reference_validation_error
+        A cycle was detected in the references graph.
+    end note
 
 }
 
@@ -345,17 +345,17 @@ namespace features #F2F2F2 {
         +{field} input_technical_space masd::variability::text
     }
 
-note top of  input_technical_space
-Feature bundle for the input technical space.
-end note
+    note top of  input_technical_space
+        Feature bundle for the input technical space.
+    end note
 
     class reference <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} reference masd::variability::text_collection
     }
 
-note top of  reference
-Features related to model referencing.
-end note
+    note top of  reference
+        Features related to model referencing.
+    end note
 
     class initializer <<masd::variability::initializer>> #A9CDCD {
     }
@@ -364,9 +364,9 @@ end note
         +{field} dia.comment masd::variability::boolean
     }
 
-note top of  uml
-Features related to all UML injectors.
-end note
+    note top of  uml
+        Features related to all UML injectors.
+    end note
 
     class meta_data <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} stereotypes masd::variability::comma_separated
@@ -383,14 +383,14 @@ end note
         +{field} plantuml masd::variability::text_collection
     }
 
-note top of  meta_data
-Assorted meta-data.
-end note
+    note top of  meta_data
+        Assorted meta-data.
+    end note
 
 }
 
 note top of  features
-Defines all of the features and feature groups used by
+    Defines all of the features and feature groups used by
 the codec model.
 end note
 

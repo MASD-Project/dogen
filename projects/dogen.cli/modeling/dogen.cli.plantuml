@@ -12,7 +12,7 @@ class parser_exception <<masd::exception>> #E8C2F8 {
 }
 
 note top of  parser_exception
-A fatal error has occurred during option parsing.
+    A fatal error has occurred during option parsing.
 end note
 
 class application <<dogen::handcrafted::typeable>> #FFFACD {
@@ -29,7 +29,7 @@ class application_exception <<masd::exception>> #E8C2F8 {
 }
 
 note top of  application_exception
-A fatal error has occurred whilst executing the application.
+    A fatal error has occurred whilst executing the application.
 end note
 
 class configuration #F7E5FF {
@@ -39,7 +39,7 @@ class configuration #F7E5FF {
 }
 
 note top of  configuration
-All of the configuration required by the command line application.
+    All of the configuration required by the command line application.
 end note
 
 class generation_configuration <<masd::fluent>> #F7E5FF {
@@ -49,7 +49,7 @@ class generation_configuration <<masd::fluent>> #F7E5FF {
 }
 
 note top of  generation_configuration
-Configuration related to code generation.
+    Configuration related to code generation.
 end note
 
 class conversion_configuration <<masd::fluent>> #F7E5FF {
@@ -58,7 +58,7 @@ class conversion_configuration <<masd::fluent>> #F7E5FF {
 }
 
 note top of  conversion_configuration
-Configuration for the model conversion.
+    Configuration for the model conversion.
 end note
 
 class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -73,7 +73,7 @@ class cli_configuration <<masd::fluent>> #F7E5FF {
 }
 
 note top of  cli_configuration
-Configuration specific to the CLI application.
+    Configuration specific to the CLI application.
 end note
 
 class main <<masd::entry_point>> #DDA9F3 {
@@ -87,7 +87,7 @@ class dumpspecs_configuration <<masd::fluent>> #F7E5FF {
 }
 
 note top of  dumpspecs_configuration
-Dumps all the specs about this version of dogen.
+    Dumps all the specs about this version of dogen.
 end note
 
 @enduml

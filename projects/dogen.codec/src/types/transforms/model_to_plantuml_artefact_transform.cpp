@@ -286,11 +286,10 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
             }
 
             if (!e.comment().documentation().empty()) {
-                os << "note top of  " << e.name().simple() << std::endl
-                   << e.comment().documentation() << std::endl
-                   << "end note" << std::endl << std::endl;
+                os << indent << "note top of  " << e.name().simple() << std::endl
+                   << inner_indent << e.comment().documentation() << std::endl
+                   << indent << "end note" << std::endl << std::endl;
             }
-
         }
     }
 

@@ -32,7 +32,7 @@ class tracing_error <<masd::exception>> #E8C2F8 {
 }
 
 note top of  tracing_error
-An error occurred when trying to generate tracing data.
+    An error occurred when trying to generate tracing data.
 end note
 
 class scoped_tracer <<dogen::handcrafted::typeable>> #FFFACD {
