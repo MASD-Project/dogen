@@ -45,8 +45,7 @@ private:
 
 public:
     /**
-     * @brief Execute a partial bootstrapping, producing an codec
-     * context.
+     * @brief Produce a codec context.
      */
     static codec::transforms::context
     bootstrap(const configuration& cfg, const std::string& activity);

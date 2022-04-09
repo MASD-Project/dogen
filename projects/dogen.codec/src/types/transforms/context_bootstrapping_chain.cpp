@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/io/configuration_io.hpp"
+#include "dogen.codec/io/transforms/context_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -58,8 +59,7 @@ codec::transforms::context context_bootstrapping_chain::bootstrap(
     const configuration& cfg, const std::string& activity) {
 
     /*
-     * Obtain the tracer. Note that we do it regardless of whether tracing is
-     * enabled or not - its the tracer job to handle that.
+     * Obtain the tracer.
      */
     codec::transforms::context r;
     const auto t(create_and_setup_tracer(cfg, activity));
