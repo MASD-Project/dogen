@@ -34,10 +34,14 @@ set_target_properties(${tests_target_name}
 
 target_include_directories(${lib_target_name}
     PRIVATE ${CMAKE_SOURCE_DIR}/projects/${name}/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen/include
+    PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
     PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include)
 
 target_link_libraries(${tests_target_name} PRIVATE
     ${lib_target_name}
+    dogen.lib
+    dogen.tracing.lib
     dogen.utility.lib
     Boost::unit_test_framework
     ${CMAKE_THREAD_LIBS_INIT})

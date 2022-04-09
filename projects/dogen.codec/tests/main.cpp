@@ -20,7 +20,27 @@
  */
 #define BOOST_TEST_MODULE masd.codec.tests
 #include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
+#include "dogen.utility/types/test/fixture.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
+
+namespace  {
+
+const std::string test_suite("initializer");
+const std::string test_module("dogen.codec.tests");
+
+struct initializer {
+    initializer() {
+        SETUP_TEST_LOG_SOURCE("initializer");
+        BOOST_LOG_SEV(lg, debug) << "Started initialisation.";
+
+        dogen::utility::test_data::dogen_product::initialize();
+    }
+};
+
+}
 
 using namespace dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
+BOOST_GLOBAL_FIXTURE(initializer);
