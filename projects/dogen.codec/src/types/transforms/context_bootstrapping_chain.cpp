@@ -18,12 +18,65 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/io/configuration_io.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/filesystem/path.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "codec.transforms.context_bootstrapping_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+const std::string input_id("configuration");
+
+}
 
 namespace dogen::codec::transforms {
 
-bool context_bootstrapping_chain::operator==(const context_bootstrapping_chain& /*rhs*/) const {
-    return true;
+boost::shared_ptr<tracing::tracer>
+context_bootstrapping_chain::create_and_setup_tracer(
+    const configuration& cfg, const std::string& activity) {
+    /*
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle
+     * that. Also, we start tracing here so that all transforms can
+     * make use of it.
+     */
+    using namespace transforms;
+    const auto r(boost::make_shared<tracing::tracer>(cfg, activity));
+    r->start_run(input_id, cfg);
+    return r;
+}
+
+codec::transforms::context
+context_bootstrapping_chain::bootstrap_codec_context(
+    const configuration& cfg, const std::string& activity) {
+
+    /*
+     * Obtain the tracer. Note that we do it regardless of whether tracing is
+     * enabled or not - its the tracer job to handle that.
+     */
+    codec::transforms::context r;
+    const auto t(create_and_setup_tracer(cfg, activity));
+    tracing::scoped_chain_tracer stp(lg, "full bootstrapping", transform_id,
+        "bootstrapping", *t);
+    r.tracer(t);
+
+    /*
+     * Obtain the share directory.
+     */
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    r.data_directories(lib_dirs);
+
+    stp.end_chain(r);
+    return r;
 }
 
 }

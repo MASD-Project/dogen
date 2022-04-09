@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen/types/configuration.hpp"
+#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 
 namespace dogen::codec::transforms {
 
@@ -33,19 +36,21 @@ namespace dogen::codec::transforms {
  * @brief Trivial transform that bootstraps the codec context.
  */
 class context_bootstrapping_chain final {
-public:
-    context_bootstrapping_chain() = default;
-    context_bootstrapping_chain(const context_bootstrapping_chain&) = default;
-    context_bootstrapping_chain(context_bootstrapping_chain&&) = default;
-    ~context_bootstrapping_chain() = default;
-    context_bootstrapping_chain& operator=(const context_bootstrapping_chain&) = default;
+private:
+    /**
+     * @brief Creates and sets up the tracer.
+     */
+    static boost::shared_ptr<tracing::tracer> create_and_setup_tracer(
+        const configuration& cfg, const std::string& activity);
 
 public:
-    bool operator==(const context_bootstrapping_chain& rhs) const;
-    bool operator!=(const context_bootstrapping_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Execute a partial bootstrapping, producing an codec
+     * context.
+     */
+    static codec::transforms::context
+    bootstrap_codec_context(const configuration& cfg,
+        const std::string& activity);
 };
 
 }
