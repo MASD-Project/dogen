@@ -452,6 +452,9 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 23:18]--[2022-04-08 Fri 23:29] =>  0:11
+    CLOCK: [2022-04-08 Fri 22:41]--[2022-04-08 Fri 23:02] =>  0:21
+    CLOCK: [2022-04-08 Fri 21:52]--[2022-04-08 Fri 22:02] =>  0:10
     CLOCK: [2022-04-07 Thu 15:36]--[2022-04-07 Thu 15:44] =>  0:08
     CLOCK: [2022-04-03 Sun 12:59]--[2022-04-03 Sun 13:11] =>  0:12
     CLOCK: [2022-03-20 Sun 07:31]--[2022-03-20 Sun 08:33] =>  1:02
@@ -689,39 +692,44 @@ that is no longer working.
 
 We should only support VCPKG builds now. Update docs.
 
-*** COMPLETED Add code coverage on continuous builds                  :story:
-    :LOGBOOK:
-    CLOCK: [2022-04-03 Sun 22:00]--[2022-04-03 Sun 22:21] =>  0:21
-    CLOCK: [2022-04-03 Sun 20:50]--[2022-04-03 Sun 21:22] =>  0:32
-    :END:
-
-At present code coverage is not kicking in.
-
-*** COMPLETED Remove existing benchmark infrastructure                :story:
-    :LOGBOOK:
-    CLOCK: [2022-04-07 Thu 15:44]--[2022-04-07 Thu 16:00] =>  0:16
-    CLOCK: [2022-04-07 Thu 15:27]--[2022-04-07 Thu 15:35] =>  0:08
-    :END:
-
-We have not used it since it was implemented a long time ago. In
-addition, it is not very practical because it requires us to manually
-generate the benchmark numbers and we never remember to do it. We
-should just remove it and create a new benchmark framework based on
-existing libraries and integrated with nightlies. Ideally it should
-also output results to relational so that we can plot the evolution
-over time.
-
-Notes:
-
-- removed from dogen CMake files.
-- need to remove from text template, and regenerate c++ ref impl. Done.
-
 *** COMPLETED Build =linux-clang-debug= fails in CTest step           :story:
 
 Its not obvious why this build is failing. =llvm-cov= is probably returning
 non-zero.
 
 This was resolved by capturing the coverage exit status.
+
+*** COMPLETED Replace Dia IDs with UUIDs                              :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 22:18]--[2022-04-08 Fri 22:40] =>  0:22
+    :END:
+
+We still have lots of IDs in models from Dia:
+
+:  :PROPERTIES:
+:  :custom_id: O65
+:  :END:
+
+We need to update these to use UUIDs.
+
+*** COMPLETED Update the test package scripts for the GitHub CI       :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 22:03]--[2022-04-08 Fri 22:17] =>  0:14
+    CLOCK: [2022-04-08 Fri 21:27]--[2022-04-08 Fri 21:52] =>  0:25
+    :END:
+
+We can probably install debian packages in GitHub CI. Try to see if we can run
+the old package test scripts in GitHub.
+
+*** COMPLETED Move codec related tests into codecs                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-09 Sat 00:48]--[2022-04-09 Sat 01:50] =>  1:02
+    :END:
+
+At present we have tests that just convert from one codec to another but are
+located in orchestration. These tests should live in the codec component.
+
+Also, add tests for PlantUML.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
@@ -855,13 +863,275 @@ Links:
 - [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
   #1653]]
 
-*** STARTED Update the test package scripts for the GitHub CI         :story:
+*** STARTED Capitalise titles in models correctly                     :story:
     :LOGBOOK:
-    CLOCK: [2022-04-08 Fri 21:27]--[2022-04-08 Fri 21:52] =>  0:25
+    CLOCK: [2022-04-08 Fri 23:11]--[2022-04-08 Fri 23:17] =>  0:06
     :END:
 
-We can probably install debian packages in GitHub CI. Try to see if we can run
-the old package test scripts in GitHub.
+We still have models with lower case titles:
+
+: * initializer                                                       :element:
+
+Capitalise these correctly.
+
+When we tried to do this to the dogen model, generation failed with the
+following error:
+
+: Error: Object has attribute with undefined type: spec_category
+
+We are probably not normalising to lower case.
+
+Merged stories:
+
+*Capitalise model headers correctly*
+
+At present most models still use the "all lower case" notation, copied from Dia.
+We need to capitalise headers correctly so that when we generate documentation
+they come out correctly.
+
+*** STARTED Add full and relative path processing to PM               :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 23:29]--[2022-04-08 Fri 23:41] =>  0:12
+    :END:
+
+We need to be able to generate full paths in the PM. This will require access to
+the file extensions. For this we will need new decoration elements. This must be
+done as part of the logical model to physical model conversion. While we're at
+it, we should also generate the relative paths. Once we have relative paths we
+should compute the header guards from them. These could be generalised to
+"unique identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we cannot locate
+  the extensions. Also we did not create all of the required archetype kinds in
+  the text models. The populating should be done via profiles.
+- we must first figure out the number of enabled backends. The meta-model
+  properties will always contain all backends, but not all of them are enabled.
+- we need to populate the part directories. For this we need to know what parts
+  are available for each backend (PMM), and then ensure the part properties have
+  been created. We also need a directory for the part in variability. It is not
+  clear we have support for this in the template instantiation domains - we
+  probably only have backend, facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space and its
+  instances in the file-system.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We may need
+to treat certain labels more specially than others - its not clear. We need a
+container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*Implement locator in physical model*
+
+Use PMM entities to generate artefact paths, within =m2t=.
+
+*Create a archetypes locator*
+
+We need to move all functionality which is not kernel specific into yarn for the
+locator. This will exist in the helpers namespace. We then need to implement the
+C++ locator as a composite of yarn locator.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit ad-hoc. We could
+potentially create a pattern. Say for C++, we have the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine the
+  placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or "natural"
+  location inside of facet.
+- archetype location: used to determine the facet and archetype postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location (a given
+artefact has a fixed placement). So a naive approach to this seems to imply one
+could create a data driven locator, that works for all languages if supplied
+suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project sub-directories". There is a
+  mapping between the artefact location and a project sub-directory.
+- there is a mapping between the artefact location and the facet and artefact
+  postfixes.
+- extensions are a slight complication: a) we want to allow users to override
+  header/implementation extensions, but to do it so for the entire project
+  (except maybe for ODB files). However, what yarn's locator needs is a mapping
+  of artefact location to extension. It would be a tad cumbersome to have to
+  specify extensions one artefact location at a time. So someone has to read a
+  kernel level configuration parameter with the artefact extensions and expand
+  it to the required mappings. Whilst dealing with this we also have the issue
+  of elements which have extension in their names such as visual studio projects
+  and solutions. The correct solution is to implement these using element
+  extensions, and to remove the extension from the element name.
+- each kernel can supply its configuration to yarn's locator via the kernel
+  interface. This is fairly static so it can be supplied early on during
+  initialisation.
+- there is still something not quite right. We are performing a mapping between
+  some logical space (the modeling space) and the physical space (paths in the
+  filesystem). Some modeling elements such as the various CMakeLists.txt do not
+  have enough information at the logical level to tell us about their location;
+  at present the formatter itself gives us this hint ("include cmakelists" or
+  "source cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the archetype
+  location and the physical space. Although, if this is the only case of a
+  modeling element not mapping uniquely, perhaps we should do exactly this.
+- However, we still have inclusion paths to worry about. As we done with the
+  source/include directories, we need to somehow create a concept of inclusion
+  path which is not language specific; "relative path" and "requires relative
+  path" perhaps? These could be a function of archetype location.
+
+Merged stories:
+
+*Generate file paths as a transform*
+
+We need to understand how file paths are being generated at present; they should
+be a transform inside generation.
+
+*Create the notion of project destinations*
+
+At present we have conflated the notion of a facet, which is a logical concept,
+with the notion of the folders in which files are placed - a physical concept.
+We started thinking about addressing this problem by adding the "intra-backend
+segment properties", but as the name indicates, we were not thinking about this
+the right way. In truth, what we really need is to map facets (better: archetype
+locations) to "destinations".
+
+For example, we could define a few project destinations:
+
+: masd.generation.destination.name="types_headers"
+: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
+: masd.generation.destination.name=top_level (global?)
+: masd.generation.destination.folder=""
+: masd.generation.destination.name="types_src"
+: masd.generation.destination.folder="src/types"
+: masd.generation.destination.name="tests"
+: masd.generation.destination.folder="tests"
+
+And so on. Then we can associate each formatter with a destination:
+
+: masd.generation.cpp.types.class_header.destination=types_headers
+
+Notes:
+
+- these should be in archetypes models.
+- with this we can now map any formatter to any folder, particularly if this is
+  done at the element level. That is, you can easily define a global mapping for
+  all formatters, and then override it locally. This solves the long standing
+  problem of creating say types in tests and so forth. With this approach you
+  can create anything anywhere.
+- we need to have some tests that ensure we don't end up with multiple files
+  with the same name at the same destination. This is a particular problem for
+  CMake. One alternative is to allow the merging of CMake files, but we don't
+  yet have a use case for this. The solution would be to have a "merged file
+  flag" and then disable all other facets.
+- this will work very nicely with profiles: we can create a few out of the box
+  profiles for users such as flat project, common facets and so on. Users can
+  simply apply the stereotype to their models. These are akin to "destination
+  themes". However, we will also need some kind of "variable replacement" so we
+  can support cases like =include/masd.cpp_ref_impl.northwind/types=. In fact,
+  we also have the same problem when it comes to modules. A proper path is
+  something like:
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
+
+  This is *extremely* flexible. The user can now create a folder structure that
+  depends on package names etc or choose to flatten it and can do so for one or
+  all facets. This means for example that we could use nested folders for
+  =include=, not use model modules for =src= and then flatten it all for
+  =tests=.
+- actually it is a bit of a mistake to think of these destinations as purely
+  physical. In reality, we may also need them to contribute to namespaces. For
+  example, in java the folders and namespaces must match. We could solve this by
+  having a "module contribution" in the destination. These would then be used to
+  construct the namespace for a given facet. Look for java story on backlog for
+  this.
+- this also addresses the issue of having multiple serialisation formats and
+  choosing one, but having sensible folder names. For example, we could have
+  boost serialisation mapped to a destination called =serialisation=. Or we
+  could map it to say RapidJSON serialisation. Or we could support two methods
+  of serialisation for the same project. The user chooses where to place them.
+
+*** STARTED Add "verbatim" PlantUML extension                         :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-08 Fri 23:42]--[2022-04-09 Sat 00:47] =>  1:05
+    :END:
+
+One very simple way to improve diagrams is to allow users to associate a
+fragment of PlantUML code with a class, for example:
+
+: masd.codec.plantuml: myclass <>-- other_class : test
+
+This fragments are added after the class, verbatim. Its up to the users to
+annotate diagrams as they see fit, we merely copy and paste these annotations.
+
+In the future, we may spot patterns of usage that can be derived from meta-data,
+but for now we just need the diagrams to be usable like they were in Dia.
+
+Notes:
+
+- notes are not indented at present.
+- we are not leaving a space after inheritance.
+- empty classes still have brackets.
+- no top-level namespace for model. We didn't have this in Dia either.
+
+ Tasks:
+
+- add new feature in codec model.
+- add properties in model and element to store the data.
+- when converting into PlantUML, output the new properties after dumping the
+  class.
+- move codec to codec tests from orchestration to codec component.
+- codec needs to have a way to bootstrap its context without requiring
+  orchestration.
+
+*** Make =parent= feature a CSV collection                            :story:
+
+At present we declare multiple parents like so:
+
+:    :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
+
+This is a remnant of the Dia stereotypes field, which was one long CSV string.
+However, in the Dia world it makes more sense for us to have:
+
+:    :masd.codec.parent: entities::Taggable
+:    :masd.codec.parent: entities::Stereotypable
+:    :masd.codec.parent: entities::Nameable
+:    :masd.codec.parent: entities::Configurable
+: ...
+
+This would make the org-mode document more readable. For this to work, we
+probably just need to:
+
+- make the field a CSV collection to allow for the transition without breaking
+  anything.
+- add processing in codec to handle the collection.
+
+*** Consider making features dynamic elements                         :story:
+
+At present we generate code to bake in features to the Dogen binary. However, in
+a world where the PM is a dynamic entity, read out from core dogen models, it
+seems the same should happen with features. As with profiles, we just need to
+make sure these models are read out first before we start processing regular
+model elements.
+
+*** Rename backend to technical space                                 :story:
+
+This is needed to make it compliant with the domain architecture.
 
 *** Create a site for Dogen                                           :story:
 
@@ -869,11 +1139,41 @@ the old package test scripts in GitHub.
 - add blog posts as content.
 - site is generated from org files in Dogen as a vcpkg build.
 - add sprint and product backlog as content.
+- add models.
+- add release notes
 
 Links:
 
 - [[https://github.com/larstvei/org-bootstrap-document][GH: org-bootstrap-document]]: "This is a simple scheme for Org mode to generate
   nice and readable HTML sites. "
+
+*** Create a DOI for dogen                                            :story:
+
+As quantlib has done, we need to create a DOI for dogen.
+
+#+begin_src md
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1440997.svg)](https://doi.org/10.5281/zenodo.1440997)
+#+end_src
+
+CITATION.cff:
+
+#+begin_quote
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+
+title: "QuantLib: a free/open-source library for quantitative finance"
+authors:
+  - name: "The QuantLib contributors"
+url: "https://www.quantlib.org/"
+type: software
+doi: 10.5281/zenodo.1440997
+license: BSD-3-Clause
+repository-code: "https://github.com/lballabio/QuantLib"
+#+end_quote
+
+Links:
+
+- [[https://zenodo.org/record/5869144#.YlCksdDMKXJ][QuantLib: a free/open-source library for quantitative finance]]
 
 *** Integrate Doxygen with CI                                         :story:
 
@@ -1073,24 +1373,6 @@ Notes:
 Links:
 
 - [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
-
-*** Replace Dia IDs with UUIDs                                        :story:
-
-We still have lots of IDs in models from Dia:
-
-:  :PROPERTIES:
-:  :custom_id: O65
-:  :END:
-
-We need to update these to use UUIDs.
-
-*** Capitalise titles in models correctly                             :story:
-
-We still have models with lower case titles:
-
-: * initializer                                                       :element:
-
-Capitalise these correctly.
 
 *** Improve vcpkg integration for generated code                      :story:
 

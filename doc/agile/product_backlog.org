@@ -78,6 +78,76 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Missing PlantUML features                                         :story:
+
+This story keeps track of features that we need to implement when
+exporting into PlantUML.
+
+- generalisation via meta-data does not work. This would be very
+  complicated: we need to resolve =masd.generalization.parent= into
+  the value and then look for all classes with the stereotype of the
+  concept (e.g. =meta_element= for logical model).
+- we need to unpack all properties and resolve those into types for
+  the current model in order to model associations. Also, we need a
+  simple resolver to find the types in the right namespaces. The
+  logic would be very similar to the existing resolver. One possible
+  solution is to move name trees into the codec model and perform
+  these transforms earlier in the pipeline.
+- add tests to check that PlantUML output has not changed. We need to
+  have support for diffing on conversion, which we may not yet
+  have. Also the existing tests do not take into account the action.
+- add plantuml representations to reference models.
+- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
+  PlantUML]]
+- add comments on relations:
+
+: someclass o-- otherclass : a description of the relation
+
+  This means the org-mode model must contain the comment. We could
+  either use the comment on the association itself, or have a field in
+  properties:
+
+: :masd.codec.relation_comment: a description of the relation
+
+  This is then copied as is into the UML diagram. By separating the
+  two means we can still make "proper" comments at the attribute
+  level.
+- there should be meta-data to determine if a comment will show up in
+  the diagram as a note or not. It should apply to both classes and
+  methods.
+- we should allow users to set the location of the comment for classes
+  etc (bottom, top, left, right).
+- we should allow enabling comments on methods and attributes, with
+  direction (left or right).
+
+Notes:
+
+- we need to move features such as name trees and generalisation into
+  the codec model.
+- actually perhaps we need to allow users to "tweak" the
+  relationships. We probably don't want every single relationship to
+  become a link in UML because then we can't see the wood for the
+  trees. A better approach may be to force users to declare the
+  relationships as meta-data, like we suggested above for comments,
+  and then transport those annotations to the UML diagram. This also
+  means we could add a full reference to the types, which solves the
+  issue of having to merge models. Finally, it means we can declare
+  any kind of relation, as per the plant uml syntax - in fact we
+  should probably expose the plant UML syntax directly, e.g. the user
+  is expected to declare a native plantuml relation:
+
+: :masd.codec.plantuml_relation: AS_IS_RELATION
+
+  We could perhaps default to the current class, but that's about
+  it. This would also allow for things like hidden links, etc. In
+  effect the only relation you get for free is inheritance. Actually
+  we should also have a "raw" way of inserting relations in a
+  namespace. These are placed at the end of the namespace.
+
+Links:
+
+- [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
+
 *** Weaving as model merging                                          :story:
 
 We probably should use the MDE term weaving for model merging:
@@ -118,8 +188,7 @@ Bundles is not a name found in the literature.
 
 *** Add "composite" physical elements                                 :story:
 
-At present we allow users to reference facets without naming parts,
-e.g.:
+At present we allow users to reference facets without naming parts, e.g.:
 
 : masd.cpp.types
 
@@ -227,10 +296,6 @@ Links:
 *** Rename external and model modules                                 :story:
 
 These are really product modules and component modules.
-
-*** Rename backend to technical space                                 :story:
-
-This is needed to make it compliant with the domain architecture.
 
 *** Rename object to data type                                        :story:
 
@@ -476,18 +541,17 @@ support for all variations in c++. This could be achieved as follows:
 
 *** "Inferred" models                                                 :story:
 
-[[https://www.reddit.com/r/cpp/comments/ksf2az/code_generation_using_attributes/][This reddit post]] inspired an idea. The gist of it is, one could
-annotate an object with some attributes, e.g.:
+[[https://www.reddit.com/r/cpp/comments/ksf2az/code_generation_using_attributes/][This reddit post]] inspired an idea. The gist of it is, one could annotate an
+object with some attributes, e.g.:
 
 : [[Register]]
 : class Service
 
-Via something like LSP one should be able to retrieve both the class,
-the attributes and the properties. With this, it would be "trivial" to
-create a Dogen model on the fly and generate it. The attributes could
-contain stereotypes to configure the object, such as binding it into a
-profile, etc. This would make integration of generated and
-non-generated code much easier.
+Via something like LSP one should be able to retrieve both the class, the
+attributes and the properties. With this, it would be "trivial" to create a
+Dogen model on the fly and generate it. The attributes could contain stereotypes
+to configure the object, such as binding it into a profile, etc. This would make
+integration of generated and non-generated code much easier.
 
 *** Add custom IDs to attributes in org model                         :story:
 
@@ -683,76 +747,6 @@ in case the old behaviour was more sensible.
 Names:
 
 - =default-to-target-directory=?
-
-*** Missing PlantUML features                                         :story:
-
-This story keeps track of features that we need to implement when
-exporting into PlantUML.
-
-- generalisation via meta-data does not work. This would be very
-  complicated: we need to resolve =masd.generalization.parent= into
-  the value and then look for all classes with the stereotype of the
-  concept (e.g. =meta_element= for logical model).
-- we need to unpack all properties and resolve those into types for
-  the current model in order to model associations. Also, we need a
-  simple resolver to find the types in the right namespaces. The
-  logic would be very similar to the existing resolver. One possible
-  solution is to move name trees into the codec model and perform
-  these transforms earlier in the pipeline.
-- add tests to check that PlantUML output has not changed. We need to
-  have support for diffing on conversion, which we may not yet
-  have. Also the existing tests do not take into account the action.
-- add plantuml representations to reference models.
-- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
-  PlantUML]]
-- add comments on relations:
-
-: someclass o-- otherclass : a description of the relation
-
-  This means the org-mode model must contain the comment. We could
-  either use the comment on the association itself, or have a field in
-  properties:
-
-: :masd.codec.relation_comment: a description of the relation
-
-  This is then copied as is into the UML diagram. By separating the
-  two means we can still make "proper" comments at the attribute
-  level.
-- there should be meta-data to determine if a comment will show up in
-  the diagram as a note or not. It should apply to both classes and
-  methods.
-- we should allow users to set the location of the comment for classes
-  etc (bottom, top, left, right).
-- we should allow enabling comments on methods and attributes, with
-  direction (left or right).
-
-Notes:
-
-- we need to move features such as name trees and generalisation into
-  the codec model.
-- actually perhaps we need to allow users to "tweak" the
-  relationships. We probably don't want every single relationship to
-  become a link in UML because then we can't see the wood for the
-  trees. A better approach may be to force users to declare the
-  relationships as meta-data, like we suggested above for comments,
-  and then transport those annotations to the UML diagram. This also
-  means we could add a full reference to the types, which solves the
-  issue of having to merge models. Finally, it means we can declare
-  any kind of relation, as per the plant uml syntax - in fact we
-  should probably expose the plant UML syntax directly, e.g. the user
-  is expected to declare a native plantuml relation:
-
-: :masd.codec.plantuml_relation: AS_IS_RELATION
-
-  We could perhaps default to the current class, but that's about
-  it. This would also allow for things like hidden links, etc. In
-  effect the only relation you get for free is inheritance. Actually
-  we should also have a "raw" way of inserting relations in a
-  namespace. These are placed at the end of the namespace.
-
-Links:
-
-- [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
 
 *** Deprecate managed directories                                     :story:
 
@@ -1519,17 +1513,6 @@ Actually we could do a quick change now and address this:
 Actually that would not work as we are projecting "the other way
 around". This work will have to wait.
 
-*** Replace meta-model naming with stereotypes                        :story:
-
-At present we are using meta-names for binding formatters to logical
-meta-model elements. This is not a very good way of doing things. We
-should bind them directly at the stereotype level. This would allow us
-to decomission a lot of code:
-
-1. =meta_naming_transform=, =meta_name_factory=.
-2. =stereotypes_helper=
-3. =static_stereotypes= enumeration
-
 *** Consider making technical spaces a core concept                   :story:
 
 At present we are trying to instantiate a stitch template. It requires
@@ -1747,198 +1730,6 @@ combination of different things:
 
 We need to finish the analysis on this and make sure we have the right
 model and PDMs to house these types.
-
-*** Add full and relative path processing to PM                       :story:
-
-We need to be able to generate full paths in the PM. This will require
-access to the file extensions. For this we will need new decoration
-elements. This must be done as part of the logical model to physical
-model conversion. While we're at it, we should also generate the
-relative paths. Once we have relative paths we should compute the
-header guards from them. These could be generalised to "unique
-identifiers" or some such general name perhaps. That should be a
-separate transform.
-
-Notes:
-
-- we are not yet populating the archetype kind in archetypes so we
-  cannot locate the extensions. Also we did not create all of the
-  required archetype kinds in the text models. The populating should
-  be done via profiles.
-- we must first figure out the number of enabled backends. The
-  meta-model properties will always contain all backends, but not all
-  of them are enabled.
-- we need to populate the part directories. For this we need to know
-  what parts are available for each backend (PMM), and then ensure the
-  part properties have been created. We also need a directory for the
-  part in variability. It is not clear we have support for this in the
-  template instantiation domains - we probably only have backend,
-  facet, archetype.
-- guiding principle: there should be a direct mapping between the two
-  hierarchical spaces: the definition meta-model of the physical space
-  and its instances in the file-system.
-
-Merged stories:
-
-*Map archetypes to labels*
-
-We need to add support in the PMM for mapping archetypes to labels. We
-may need to treat certain labels more specially than others - its not
-clear. We need a container with:
-
-- logical model element ID
-- archetype ID
-- labels
-
-*Implement locator in physical model*
-
-Use PMM entities to generate artefact paths, within =m2t=.
-
-*Create a archetypes locator*
-
-We need to move all functionality which is not kernel specific into
-yarn for the locator. This will exist in the helpers namespace. We
-then need to implement the C++ locator as a composite of yarn
-locator.
-
-*Other Notes*
-
-At present we have multiple calls in locator, which are a bit
-ad-hoc. We could potentially create a pattern. Say for C++, we have
-the following parameters:
-
-- relative or full path
-- include or implementation: this is simultaneously used to determine
-  the placement (below) and the extension.
-- meta-model element:
-- "placement": top-level project directory, source directory or
-  "natural" location inside of facet.
-- archetype location: used to determine the facet and archetype
-  postfixes.
-
-E.g.:
-
-: make_full_path_for_enumeration_implementation
-
-Interestingly, the "placement" is a function of the archetype location
-(a given artefact has a fixed placement). So a naive approach to this
-seems to imply one could create a data driven locator, that works for
-all languages if supplied suitable configuration data. To generalise:
-
-- project directory is common to all languages.
-- source or include directories become "project
-  sub-directories". There is a mapping between the artefact location
-  and a project sub-directory.
-- there is a mapping between the artefact location and the facet and
-  artefact postfixes.
-- extensions are a slight complication: a) we want to allow users to
-  override header/implementation extensions, but to do it so for the
-  entire project (except maybe for ODB files). However, what yarn's
-  locator needs is a mapping of artefact location to  extension. It
-  would be a tad cumbersome to have to specify extensions one artefact
-  location at a time. So someone has to read a kernel level
-  configuration parameter with the artefact extensions and expand it
-  to the required mappings. Whilst dealing with this we also have the
-  issue of elements which have extension in their names such as visual
-  studio projects and solutions. The correct solution is to implement
-  these using element extensions, and to remove the extension from the
-  element name.
-- each kernel can supply its configuration to yarn's locator via the
-  kernel interface. This is fairly static so it can be supplied early
-  on during initialisation.
-- there is still something not quite right. We are performing a
-  mapping between some logical space (the modeling space) and the
-  physical space (paths in the filesystem). Some modeling elements
-  such as the various CMakeLists.txt do not have enough information at
-  the logical level to tell us about their location; at present the
-  formatter itself gives us this hint ("include cmakelists" or "source
-  cmakelists"?). It would be annoying to have to split these into
-  multiple archetypes just so we can have a function between the
-  archetype location and the physical space. Although, if this is the
-  only case of a modeling element not mapping uniquely, perhaps we
-  should do exactly this.
-- However, we still have inclusion paths to worry about. As we done
-  with the source/include directories, we need to somehow create a
-  concept of inclusion path which is not language specific; "relative
-  path" and "requires relative path" perhaps? These could be a
-  function of archetype location.
-
-Merged stories:
-
-*Generate file paths as a transform*
-
-We need to understand how file paths are being generated at present;
-they should be a transform inside generation.
-
-*Create the notion of project destinations*
-
-At present we have conflated the notion of a facet, which is a logical
-concept, with the notion of the folders in which files are placed - a
-physical concept. We started thinking about addressing this problem by
-adding the "intra-backend segment properties", but as the name
-indicates, we were not thinking about this the right way. In truth,
-what we really need is to map facets (better: archetype locations) to
-"destinations".
-
-For example, we could define a few project destinations:
-
-: masd.generation.destination.name="types_headers"
-: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
-: masd.generation.destination.name=top_level (global?)
-: masd.generation.destination.folder=""
-: masd.generation.destination.name="types_src"
-: masd.generation.destination.folder="src/types"
-: masd.generation.destination.name="tests"
-: masd.generation.destination.folder="tests"
-
-And so on. Then we can associate each formatter with a destination:
-
-: masd.generation.cpp.types.class_header.destination=types_headers
-
-Notes:
-
-- these should be in archetypes models.
-- with this we can now map any formatter to any folder, particularly
-  if this is done at the element level. That is, you can easily define
-  a global mapping for all formatters, and then override it
-  locally. This solves the long standing problem of creating say types
-  in tests and so forth. With this approach you can create anything
-  anywhere.
-- we need to have some tests that ensure we don't end up with multiple
-  files with the same name at the same destination. This is a
-  particular problem for CMake. One alternative is to allow the
-  merging of CMake files, but we don't yet have a use case for
-  this. The solution would be to have a "merged file flag" and then
-  disable all other facets.
-- this will work very nicely with profiles: we can create a few out of
-  the box profiles for users such as flat project, common facets and
-  so on. Users can simply apply the stereotype to their models. These
-  are akin to "destination themes". However, we will also need some
-  kind of "variable replacement" so we can support cases like
-  =include/masd.cpp_ref_impl.northwind/types=. In fact, we also have
-  the same problem when it comes to modules. A proper path is
-  something like:
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
-
-  This is *extremely* flexible. The user can now create a folder
-  structure that depends on package names etc or choose to flatten it
-  and can do so for one or all facets. This means for example that we
-  could use nested folders for =include=, not use model modules for
-  =src= and then flatten it all for =tests=.
-- actually it is a bit of a mistake to think of these destinations as
-  purely physical. In reality, we may also need them to contribute to
-  namespaces. For example, in java the folders and namespaces must
-  match. We could solve this by having a "module contribution" in the
-  destination. These would then be used to construct the namespace for
-  a given facet. Look for java story on backlog for this.
-- this also addresses the issue of having multiple serialisation
-  formats and choosing one, but having sensible folder names. For
-  example, we could have boost serialisation mapped to a destination
-  called =serialisation=. Or we could map it to say RapidJSON
-  serialisation. Or we could support two methods of serialisation for
-  the same project. The user chooses where to place them.
 
 *** Create a factory transform for parts and archetype kinds          :story:
 
