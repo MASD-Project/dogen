@@ -22,6 +22,7 @@
 #include <iostream>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/operation_reason_io.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
@@ -155,9 +156,9 @@ apply_artefact_to_artefact_chain(const boost::filesystem::path& src,
     /*
      * Bootstrap the top-level context.
      */
-    using namespace dogen::orchestration::transforms;
+    using namespace dogen::codec::transforms;
     using cbc = context_bootstrapping_chain;
-    const auto ctx(cbc::bootstrap_codec_context(cfg, conversion_activity));
+    const auto ctx(cbc::bootstrap(cfg, conversion_activity));
 
     using codec::transforms::file_to_artefact_transform;
     const auto src_a(file_to_artefact_transform::apply(ctx, src));
