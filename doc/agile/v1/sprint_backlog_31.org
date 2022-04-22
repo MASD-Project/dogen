@@ -5,47 +5,48 @@
 
 * Sprint Goals
 
-- work on PMM.
+- Restore support for CI/CD.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-09 Sat 10:25]
-| <75>                                                       |         |       |       |       |
-| Headline                                                   | Time    |       |       |     % |
-|------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *57:15* |       |       |   0.0 |
-|------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 57:15   |       |       |   0.0 |
-| Active                                                     |         | 57:15 |       |   0.0 |
-| Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
-| Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
-| Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  6:21 |   0.0 |
-| Move build to GitHub                                       |         |       |  4:07 |   0.0 |
-| Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
-| Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
-| Remove deprecated travis and appveyor config files         |         |       |  0:02 |   0.0 |
-| Create clang build using libc++                            |         |       |  0:36 |   0.0 |
-| Rewrite CTest script to use github actions                 |         |       | 13:15 |   0.0 |
-| Remove database options from help                          |         |       |  0:07 |   0.0 |
-| Generate doxygen docs and add to site                      |         |       |  1:51 |   0.0 |
-| Add packaging step to github actions                       |         |       |  0:21 |   0.0 |
-| Setup MSVC Windows build for debug and release             |         |       |  3:31 |   0.0 |
-| Can't see build info in github builds                      |         |       |  0:35 |   0.0 |
-| Update build instructions in readme                        |         |       |  0:34 |   0.0 |
-| Replace Dia IDs with UUIDs                                 |         |       |  0:22 |   0.0 |
-| Update the test package scripts for the GitHub CI          |         |       |  0:39 |   0.0 |
-| Move codec related tests into codecs                       |         |       |  1:02 |   0.0 |
-| Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
-| Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
-| Windows package is broken                                  |         |       |  0:31 |   0.0 |
-| Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
-| Add full and relative path processing to PM                |         |       |  0:12 |   0.0 |
-| Add "verbatim" PlantUML extension                          |         |       |  2:00 |   0.0 |
-| Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
+#+CAPTION: Clock summary at [2022-04-21 Thu 17:15]
+| <75>                                                       |            |          |       |       |
+| Headline                                                   | Time       |          |       |     % |
+|------------------------------------------------------------+------------+----------+-------+-------|
+| *Total time*                                               | *2d 10:27* |          |       |   0.0 |
+|------------------------------------------------------------+------------+----------+-------+-------|
+| Stories                                                    | 2d 10:27   |          |       |   0.0 |
+| Active                                                     |            | 2d 10:27 |       |   0.0 |
+| Edit release notes for previous sprint                     |            |          |  6:06 |   0.0 |
+| Create a demo and presentation for previous sprint         |            |          |  0:27 |   0.0 |
+| Fix broken org-mode tests                                  |            |          |  3:09 |   0.0 |
+| Sprint and product backlog grooming                        |            |          |  7:16 |   0.0 |
+| Move build to GitHub                                       |            |          |  4:07 |   0.0 |
+| Update vcpkg to latest                                     |            |          |  3:00 |   0.0 |
+| Remove third-party dependencies outside vcpkg              |            |          |  1:19 |   0.0 |
+| Remove deprecated travis and appveyor config files         |            |          |  0:02 |   0.0 |
+| Create clang build using libc++                            |            |          |  0:36 |   0.0 |
+| Rewrite CTest script to use github actions                 |            |          | 13:15 |   0.0 |
+| Remove database options from help                          |            |          |  0:07 |   0.0 |
+| Generate doxygen docs and add to site                      |            |          |  1:51 |   0.0 |
+| Add packaging step to github actions                       |            |          |  0:21 |   0.0 |
+| Setup MSVC Windows build for debug and release             |            |          |  3:31 |   0.0 |
+| Can't see build info in github builds                      |            |          |  0:35 |   0.0 |
+| Update build instructions in readme                        |            |          |  0:34 |   0.0 |
+| Replace Dia IDs with UUIDs                                 |            |          |  0:22 |   0.0 |
+| Update the test package scripts for the GitHub CI          |            |          |  0:39 |   0.0 |
+| Move codec related tests into codecs                       |            |          |  1:02 |   0.0 |
+| Setup the laptop for development                           |            |          |  0:17 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |            |          |  0:15 |   0.0 |
+| Assorted improvements to CMake files                       |            |          |  6:26 |   0.0 |
+| Windows package is broken                                  |            |          |  0:31 |   0.0 |
+| Capitalise titles in models correctly                      |            |          |  0:06 |   0.0 |
+| Add full and relative path processing to PM                |            |          |  0:12 |   0.0 |
+| Add "verbatim" PlantUML extension                          |            |          |  2:00 |   0.0 |
+| Consider standardising all templates as mustache templates |            |          |  0:21 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -455,6 +456,8 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-04-21 Thu 16:40]--[2022-04-21 Thu 17:15] =>  0:35
+    CLOCK: [2022-04-21 Thu 08:50]--[2022-04-21 Thu 09:10] =>  0:20
     CLOCK: [2022-04-09 Sat 09:52]--[2022-04-09 Sat 10:05] =>  0:13
     CLOCK: [2022-04-09 Sat 09:34]--[2022-04-09 Sat 09:40] =>  0:06
     CLOCK: [2022-04-09 Sat 09:11]--[2022-04-09 Sat 09:33] =>  0:22
@@ -737,6 +740,13 @@ At present we have tests that just convert from one codec to another but are
 located in orchestration. These tests should live in the codec component.
 
 Also, add tests for PlantUML.
+
+*** STARTED Setup the laptop for development                          :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-21 Thu 08:32]--[2022-04-21 Thu 08:49] =>  0:17
+    :END:
+
+We need to move to the new vcpkg setup, with latest clang and gcc.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
@@ -1115,6 +1125,254 @@ Notes:
 - codec needs to have a way to bootstrap its context without requiring
   orchestration.
 
+*** STARTED Consider standardising all templates as mustache templates :story:
+    :LOGBOOK:
+    CLOCK: [2022-03-20 Sun 09:18]--[2022-03-20 Sun 09:39] =>  0:21
+    :END:
+
+At present we have a somewhat complex story with regards to templating:
+
+1. we use a mustache-like approach called wale, built in-house. It is used for
+   some header files such as the M2T transforms.
+2. we use a t4-like approach called stitch, also in-house. It is used for the
+   implementation of the M2T transforms.
+
+What would be really nice is if we could use the same approach for both, and if
+that approach was not part of Dogen. The purpose of this story is to explore the
+possibility of replacing both with a standard implementation of mustache,
+ideally available on vcpkg. We already have a story for replacing wale with
+mustache in the backlog, so see that for the choice of implementation. This
+story concerns itself mainly with the second item in the above list; that is,
+can we replace stitch with mustache.
+
+In order to answer this question we first must try to figure out what the
+differences between T4 and mustache are. T4 is a "generator generator". That is,
+the text template generates C# code that generates the ultimate target of the
+template. This means it is possible to embed any logic within the T4 template as
+required, to do complex processing. It also means the processing is "fast"
+because we generate C# code rather than try to introspect at run time. Stitch
+uses the same approach. However, after many years of using both T4 and Stitch,
+the general conclusion has been that the templates should be kept as simple as
+possible. The main reason is that "debugging" through the templates is
+non-trivial, even though it is simple C++ code (in the case of stitch).
+
+Mustache on the other hand puts forward an approach of logic-less templates.
+That is, the templates are evaluated dynamically by the templating engine, and
+the engine only allows for a very limited number of constructs. In some
+implementations, the so called "template hash", that is the input to the
+template, is a JSON object. All the template can do is refer to entries in the
+JSON object and replace tokens with the values of those entries.
+
+Until recently we deemed mustache to be too simple for our needs because Dogen
+templates were very complex. However, several things have changed:
+
+- we do not want the templates to have any indentation at all; this should be
+  left to clang-format as a subsequent T2T transform. This removes a lot of
+  functionality we had in Stitch.
+- we do not want the logical model objects to be processed any further in the
+  template. As explained above this leads to a lot of complications. We want the
+  object to be in its final form.
+- we want all relationships etc to be encoded in the logical model object prior
+  to M2T transformation.
+
+In other words, we have slowly been converging towards logic-less templates,
+though we are not yet there. The main stumbling blocks are:
+
+- epilogue and prologue are at present handled by assistants:
+
+#+begin_src
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= o.name().simple() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+
+#+end_src
+
+   Ideally we should just have a way to ask for the values of these fields.
+- we need to investigate all templates and see if a JSON representation of a
+  logical model element is sufficient to capture all required information.
+  However the best way to do this is to have an incremental approach: provide a
+  mustache based M2T and then incrementally move each M2T at a time.
+
+If we do move to mustache, there are lots of advantages:
+
+- remove all of templating code.
+- we could allow users to supply their own mustache templates in a model. We can
+  even allow for the dynamic creation of PMM elements and then the association
+  of those elements with templates. End users cannot of course extend the LMM,
+  but even just extending the LMM gives them a lot of power.
+- we could create a stand alone tool that allows users to play with templates.
+  All they need is a dump of the JSON representation of the objects in their
+  model (this could be an option in Dogen). Then the tool can take the template
+  and the JSON and render it to =std::out=. This makes template development much
+  easier. If we integrate it with Emacs, we could even have a view where we
+  do: 1) JSON 2) template 3) output. Users can then change 1) and 2) and see the
+  results in 3). We don't even have to extend emacs for this, we could just use
+  the compilation command.
+
+Notes:
+
+- if we could create JSON schemas for the LMM, we could then allow users to
+  create their own JSON representations. Not sure how useful this would be.
+- we need JSON support in Dogen for this.
+- we need to measure how much slower Dogen would be with this approach.
+  Presumably mustache is a lot slower that Stitch.
+- from this perspective, the PMM is fixed but the PM then becomes a dynamic
+  entity. We can supply a PM model with Dogen but that is just Dogen's
+  interpretation of the physical space; users could supply their own PM's as
+  required. The PMs need to bind to the PMM: either the user supplies its own
+  TS, part etc or it must bind (via meta-data) to existing parts, TS etc. We
+  also need to support two styles of declaring PM entities: inline (e.g. nested)
+  or outline (e.g. we want to bind a given facet, part etc to an already
+  existing TS, etc).
+- we could hash both the mustache template and the JSON object used as input,
+  and save those two hashes in the generated file. If the hashes match, don't
+  bother regenerating.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
+
+Merged stories:
+
+*Implement wale in terms of existing template libraries*
+
+Originally we implemented wale as a quick hack, but we stated:
+
+#+begin_quote
+A second point is the use of [[https://github.com/jamboree/bustache][bustache]] vs rolling our own trivial mustache-like
+implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+#+end_quote
+
+We should really move to one of these mustache implementations. Inja
+seems to be the most sensible one, even though it depends on a JSON
+library. We will need JSON internally anyway, so it may be the time to
+add a dependency. We should also have a way to associate an arbitrary
+JSON document with a formatter so that users can create their own
+templates with their own parameters and the model is merely used for
+pass-through.
+
+We should also start to create a standard set of variables that dogen
+exports into inja such as object name, namespaces, etc. These are
+"system variables" and do not require any action from the user. In
+fact, if we use the JSON based approach, we could define a JSON schema
+for meta-model elements which is MASD specific. These are used by the
+templates.
+
+Note that stitch only makes sense when we are creating a code
+generator (at least given the use cases we have so far) whereas inja
+makes sense even for regular models and can be applied to items in any
+technical space.
+
+Links:
+
+- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
+- [[https://github.com/no1msd/mstch][mstch]]
+- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
+- [[https://github.com/melpon/ginger][ginger]]
+- [[https://github.com/qicosmos/render][render]]
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library. [[https://github.com/paradoxxxzero/jinja2-mode][Emacs mode]]. "Inja is a template engine for
+  modern C++, loosely inspired by jinja for python. It has an easy and yet
+  powerful template syntax with all variables, loops, conditions, includes,
+  callbacks, and comments you need, nested and combined as you like. Inja uses
+  the wonderful json library by nlohmann for data input."
+- [[https://github.com/jrziviani/amps][amps]]
+- [[https://github.com/OlafvdSpek/ctemplate][ctemplate]]: This library provides an easy to use and lightning fast
+  text templating system to use with C++ programs. It was originally
+  called Google Templates, due to its origin as the template system
+  used for Google search result pages.
+- [[https://github.com/moneymanagerex/ctpp][ctpp GH]]: See also [[http://ctpp.havoc.ru/en/][homepage]]. Seems a bit unmaintained but may have
+  some good ideas. See [[http://ctpp.havoc.ru/en/whatis.html][What is CTPP?]]
+- [[https://github.com/blockspacer/CXXCTP][CXXCTP GH]]: "Add custom features to C++ language, like metaclasses,
+  Rust-like traits, reflection and many more. A fully open source,
+  powerful solution for modification and generation of C++ source
+  code. Reduce the amount of boilerplate code in your C++ projects."
+- [[https://github.com/flexferrum/autoprogrammer][autoprogrammer GH]]: "Welcome to Autoprogrammer, the C++ code
+  generation tool! This tool helps you dramatically reduce the amount
+  of boilerplate code in your C++ projects. Based on clang frontend,
+  the 'autoprogrammer' parses your C++ source files and generates new
+  set C++ sources. For instance, it generates enum-to-string
+  converting functions for you. Instead of you."
+- [[https://github.com/TheLongRunSmoke/utility-boilerplate-qt][utility-boilerplate-qt GH]]: "Template for creating simple
+  cross-platform application with GUI based on Qt."
+
+*Consider renaming =wale= to =mustache=*
+
+We need to rename all of the wale templates to mustache.
+
+*Consider renaming =wale= to =tangle=*
+
+Wale and stitch are remnant from the sewing days. Whilst stitch is
+still vaguely appropriate, we can't even remember what wale stands
+for. We should use a more domain-specific term such as weave or
+tangle. In fact, we probably should rename =stitch= to =weave= given
+it weaves text with code, and find a better name for wale. Its not
+"tangling" (given tangling, as we understand it from org-mode, is just
+another name for weaving). We need to look into logic-less templates
+terminology.
+
+Actually this is a mistake. Wale is just a poor-person's mustache and
+will be replaced by a proper implementation of mustache as soon as we
+can. We should instead start calling it mustache and explain this is
+just a temporary fix.
+
+*Consider renaming logic-less templates*
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means.
+
+In addition, the templates should be specific to their types; we need
+to know if its a mustache template or a stitch template because the
+processing will be very different. The templates should be named after
+their type in the logical model. Rename these to wale templates.
+
+Actually its not yet clear if the existing logic could not be extended
+to other template types. We should wait until we implement it front to
+back and then make a decision.
+
+The most obvious thing is just to call the templates after their
+actual name: mustache.
+
+*** Add models directory to each component                            :story:
+
+Instead of a product level models directory, we should have separate component
+level directories. We can't do the PMM implementation just yet but we can use
+regexes to get the directory in the correct shape and then use it to target the
+changes in the PMM. The directory should be called =modeling= to reflect the
+fact that it will contain more than models.
+
+Notes:
+
+- when we do this we will break the dogen product unit tests.
+- we need to add the targets to each component (generation, conversion).
+
 *** Clang-cl windows build is broken                                  :story:
 
 We are failing to link:
@@ -1297,128 +1555,6 @@ Links:
 
 - [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
 - [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
-
-*** Consider standardising all templates as mustache templates        :story:
-    :LOGBOOK:
-    CLOCK: [2022-03-20 Sun 09:18]--[2022-03-20 Sun 09:39] =>  0:21
-    :END:
-
-At present we have a somewhat complex story with regards to templating:
-
-1. we use a mustache-like approach called wale, built in-house. It is used for
-   some header files such as the M2T transforms.
-2. we use a t4-like approach called stitch, also in-house. It is used for the
-   implementation of the M2T transforms.
-
-What would be really nice is if we could use the same approach for both, and if
-that approach was not part of Dogen. The purpose of this story is to explore the
-possibility of replacing both with a standard implementation of mustache,
-ideally available on vcpkg. We already have a story for replacing wale with
-mustache in the backlog, so see that for the choice of implementation. This
-story concerns itself mainly with the second item in the above list; that is,
-can we replace stitch with mustache.
-
-In order to answer this question we first must try to figure out what the
-differences between T4 and mustache are. T4 is a "generator generator". That is,
-the text template generates C# code that generates the ultimate target of the
-template. This means it is possible to embed any logic within the T4 template as
-required, to do complex processing. It also means the processing is "fast"
-because we generate C# code rather than try to introspect at run time. Stitch
-uses the same approach. However, after many years of using both T4 and Stitch,
-the general conclusion has been that the templates should be kept as simple as
-possible. The main reason is that "debugging" through the templates is
-non-trivial, even though it is simple C++ code (in the case of stitch).
-
-Mustache on the other hand puts forward an approach of logic-less templates.
-That is, the templates are evaluated dynamically by the templating engine, and
-the engine only allows for a very limited number of constructs. In some
-implementations, the so called "template hash", that is the input to the
-template, is a JSON object. All the template can do is refer to entries in the
-JSON object and replace tokens with the values of those entries.
-
-Until recently we deemed mustache to be too simple for our needs because Dogen
-templates were very complex. However, several things have changed:
-
-- we do not want the templates to have any indentation at all; this should be
-  left to clang-format as a subsequent T2T transform. This removes a lot of
-  functionality we had in Stitch.
-- we do not want the logical model objects to be processed any further in the
-  template. As explained above this leads to a lot of complications. We want the
-  object to be in its final form.
-- we want all relationships etc to be encoded in the logical model object prior
-  to M2T transformation.
-
-In other words, we have slowly been converging towards logic-less templates,
-though we are not yet there. The main stumbling blocks are:
-
-- epilogue and prologue are at present handled by assistants:
-
-#+begin_src
-    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
-    const auto& o(ast.as<logical::entities::structural::object>(e));
-
-    {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(ast.make_namespaces(o.name()));
-            auto snf(ast.make_scoped_namespace_formatter(ns));
-#>
-
-class <#= o.name().simple() #>;
-
-<#+
-        } // snf
-#>
-
-<#+
-    } // sbf
-
-#+end_src
-
-   Ideally we should just have a way to ask for the values of these fields.
-- we need to investigate all templates and see if a JSON representation of a
-  logical model element is sufficient to capture all required information.
-  However the best way to do this is to have an incremental approach: provide a
-  mustache based M2T and then incrementally move each M2T at a time.
-
-If we do move to mustache, there are lots of advantages:
-
-- remove all of templating code.
-- we could allow users to supply their own mustache templates in a model. We can
-  even allow for the dynamic creation of PMM elements and then the association
-  of those elements with templates. End users cannot of course extend the LMM,
-  but even just extending the LMM gives them a lot of power.
-- we could create a stand alone tool that allows users to play with templates.
-  All they need is a dump of the JSON representation of the objects in their
-  model (this could be an option in Dogen). Then the tool can take the template
-  and the JSON and render it to =std::out=. This makes template development much
-  easier. If we integrate it with Emacs, we could even have a view where we
-  do: 1) JSON 2) template 3) output. Users can then change 1) and 2) and see the
-  results in 3). We don't even have to extend emacs for this, we could just use
-  the compilation command.
-
-Notes:
-
-- if we could create JSON schemas for the LMM, we could then allow users to
-  create their own JSON representations. Not sure how useful this would be.
-- we need JSON support in Dogen for this.
-- we need to measure how much slower Dogen would be with this approach.
-  Presumably mustache is a lot slower that Stitch.
-- from this perspective, the PMM is fixed but the PM then becomes a dynamic
-  entity. We can supply a PM model with Dogen but that is just Dogen's
-  interpretation of the physical space; users could supply their own PM's as
-  required. The PMs need to bind to the PMM: either the user supplies its own
-  TS, part etc or it must bind (via meta-data) to existing parts, TS etc. We
-  also need to support two styles of declaring PM entities: inline (e.g. nested)
-  or outline (e.g. we want to bind a given facet, part etc to an already
-  existing TS, etc).
-- we could hash both the mustache template and the JSON object used as input,
-  and save those two hashes in the generated file. If the hashes match, don't
-  bother regenerating.
-
-Links:
-
-- [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
 
 *** Improve vcpkg integration for generated code                      :story:
 
@@ -2020,4 +2156,32 @@ When we run the benchmarks for utility we get an error:
 Seems like the tests do not clean up after themselves. We need to add
 some clean up logic and re-enable the tests. We probably should just
 remove all of the benchmarks infrastructure, given we never use it and
-it has probably bit-rotted by now.
+it has probably bit-rotted by now.*
+*** CANCELLED Consider handling "dia comments" in a general manner    :story:
+
+*Rationale*: The core codec is now org-mode and it does not suffer from this
+problem. We should just leave it as is.
+
+At present we allow comments with:
+
+: #DOGEN masd.codec.dia.comment=true
+
+to be processed as part of the containing object. We should try to
+generalise this notion so that any codec could make use of this
+feature.
+
+*** CANCELLED Move wale templates to TS namespaces                    :story:
+
+*Rationale*: this story is superseded by the new understanding of templates,
+where all templates will eventually become mustache templates.
+
+At present the wale templates are in the top-level namespace of the
+text model, but they should really be in each technical space.
+
+Merged stories:
+
+*Move mustache templates into the =transforms= namespaces*
+
+We left the templates at the top level as it was in the TS-specific
+models but they should really be within =transforms= namespace. We
+need to check to see how name resolution for templates is working.
