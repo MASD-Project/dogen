@@ -23,11 +23,11 @@ jobs:
             family: windows
             compiler: msvc
             experimental: false
-          - name: windows-msvc-clang-cl
-            os: windows
-            family: windows
-            compiler: msvc-clang-cl
-            experimental: true
+          # - name: windows-msvc-clang-cl
+          #   os: windows
+          #   family: windows
+          #   compiler: msvc-clang-cl
+          #   experimental: true
     steps:
       - uses: actions/checkout@v2
         with:

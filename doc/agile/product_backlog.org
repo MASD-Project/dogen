@@ -208,8 +208,63 @@ The backend transform should:
 
 Check backlog for a story on this.
 
+*** Consider modeling relations at a higher level of abstration        :epic:
+    :PROPERTIES:
+    :CUSTOM_ID: E19AC760-A5C5-CC84-61DB-E6D7B9562ECF
+    :END:
 
+Note: this story captures the high-level analysis for implementing relations
+across dogen. We then need to create specific stories for its implementation.
 
+At present we model relations in logical model as two object templates:
+
+- =Generalisable= for inheritance (implements and extends).
+- =Associatable= for composition.
+
+In reality, we should have created the UML relationships as a top-level
+construct:
+
+- association: composition, aggregation
+- dependency
+- generalisation
+- realisation
+
+Relationships should have an associated comment or description.
+
+Notes:
+
+- relationships should already exist in the codec model. These exist for "local"
+  relationships only (that is, elements in the same model). They can be used for
+  generalisation. This does mean generalisation could be "remote" though as we
+  some times inherit from other diagrams. We need a way to distinguish between
+  local and remote relations, which could be by "resolving" the GUID into an
+  element.
+- relationships can be user-annotated, and used for UML diagram generation.
+- generalisation and realisation remove the need for the parent meta-data.
+- relationships can be derived from attributes. This is what the "resolver"
+  does. It is in fact not a resolver but a transform that converts properties in
+  the element into relationships.
+- relationships should use the GUID as well as the qualified name.
+- relationships should really be modeled as org-mode headings. However, one
+  downside of this approach is that we will create a lot of noise when
+  generating documentation. However, given we will only use them for local
+  relationships (generalisation, UML purposes), maybe the noise is not that bad.
+- transparent and opaque associations as well associative container keys need to
+  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
+  If none is appropriate we should create them.
+- object templates are incorrectly modeled as stereotypes. These are
+  realisations.
+- profiles are also incorrectly modeled as stereotypes. These are also
+  relations. However, the problem will be that once we remove them from
+  stereotypes we cannot see them in UML. We need to have a section in the
+  documentation which shows these properties for an element.
+- The name of the relation is its description, e.g. "throws". We can have
+  duplicate relation names.
+
+Links:
+
+- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
+- [[file:v1/sprint_backlog_31.org::#1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB][codec implementation]]
 
 *** Missing PlantUML features                                         :story:
 
@@ -16993,6 +17048,17 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider making hexagonal architecture a pattern                  :story:
+
+We were already following the ideas of hexagonal architecture, even though we
+did not know it was an established pattern. We need to read up on it to try to
+figure out if there are elements of this architecture which can be encoded into
+the LPS.
+
+Links:
+
+- [[https://alistair.cockburn.us/hexagonal-architecture/][Hexagonal architecture]]
 
 *** Consider adding support for typed factories                       :story:
 

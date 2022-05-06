@@ -12,41 +12,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-04-21 Thu 17:15]
-| <75>                                                       |            |          |       |       |
-| Headline                                                   | Time       |          |       |     % |
-|------------------------------------------------------------+------------+----------+-------+-------|
-| *Total time*                                               | *2d 10:27* |          |       |   0.0 |
-|------------------------------------------------------------+------------+----------+-------+-------|
-| Stories                                                    | 2d 10:27   |          |       |   0.0 |
-| Active                                                     |            | 2d 10:27 |       |   0.0 |
-| Edit release notes for previous sprint                     |            |          |  6:06 |   0.0 |
-| Create a demo and presentation for previous sprint         |            |          |  0:27 |   0.0 |
-| Fix broken org-mode tests                                  |            |          |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |            |          |  7:16 |   0.0 |
-| Move build to GitHub                                       |            |          |  4:07 |   0.0 |
-| Update vcpkg to latest                                     |            |          |  3:00 |   0.0 |
-| Remove third-party dependencies outside vcpkg              |            |          |  1:19 |   0.0 |
-| Remove deprecated travis and appveyor config files         |            |          |  0:02 |   0.0 |
-| Create clang build using libc++                            |            |          |  0:36 |   0.0 |
-| Rewrite CTest script to use github actions                 |            |          | 13:15 |   0.0 |
-| Remove database options from help                          |            |          |  0:07 |   0.0 |
-| Generate doxygen docs and add to site                      |            |          |  1:51 |   0.0 |
-| Add packaging step to github actions                       |            |          |  0:21 |   0.0 |
-| Setup MSVC Windows build for debug and release             |            |          |  3:31 |   0.0 |
-| Can't see build info in github builds                      |            |          |  0:35 |   0.0 |
-| Update build instructions in readme                        |            |          |  0:34 |   0.0 |
-| Replace Dia IDs with UUIDs                                 |            |          |  0:22 |   0.0 |
-| Update the test package scripts for the GitHub CI          |            |          |  0:39 |   0.0 |
-| Move codec related tests into codecs                       |            |          |  1:02 |   0.0 |
-| Setup the laptop for development                           |            |          |  0:17 |   0.0 |
-| Update nightly builds to use new vcpkg setup               |            |          |  0:15 |   0.0 |
-| Assorted improvements to CMake files                       |            |          |  6:26 |   0.0 |
-| Windows package is broken                                  |            |          |  0:31 |   0.0 |
-| Capitalise titles in models correctly                      |            |          |  0:06 |   0.0 |
-| Add full and relative path processing to PM                |            |          |  0:12 |   0.0 |
-| Add "verbatim" PlantUML extension                          |            |          |  2:00 |   0.0 |
-| Consider standardising all templates as mustache templates |            |          |  0:21 |   0.0 |
+#+CAPTION: Clock summary at [2022-05-06 Fri 20:39]
+| <75>                                                       |         |       |       |       |
+| Headline                                                   | Time    |       |       |     % |
+|------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                               | *60:50* |       |       |   0.0 |
+|------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                    | 60:50   |       |       |   0.0 |
+| Active                                                     |         | 60:50 |       |   0.0 |
+| Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
+| Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
+| Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  8:02 |   0.0 |
+| Move build to GitHub                                       |         |       |  4:07 |   0.0 |
+| Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
+| Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
+| Remove deprecated travis and appveyor config files         |         |       |  0:02 |   0.0 |
+| Create clang build using libc++                            |         |       |  0:36 |   0.0 |
+| Rewrite CTest script to use github actions                 |         |       | 13:15 |   0.0 |
+| Remove database options from help                          |         |       |  0:07 |   0.0 |
+| Generate doxygen docs and add to site                      |         |       |  1:51 |   0.0 |
+| Add packaging step to github actions                       |         |       |  0:21 |   0.0 |
+| Setup MSVC Windows build for debug and release             |         |       |  3:31 |   0.0 |
+| Can't see build info in github builds                      |         |       |  0:35 |   0.0 |
+| Update build instructions in readme                        |         |       |  0:34 |   0.0 |
+| Replace Dia IDs with UUIDs                                 |         |       |  0:22 |   0.0 |
+| Update the test package scripts for the GitHub CI          |         |       |  0:39 |   0.0 |
+| Move codec related tests into codecs                       |         |       |  1:02 |   0.0 |
+| Setup the laptop for development                           |         |       |  0:17 |   0.0 |
+| Add "verbatim" PlantUML extension                          |         |       |  2:07 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |         |       |  0:15 |   0.0 |
+| Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
+| Windows package is broken                                  |         |       |  0:31 |   0.0 |
+| Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
+| Add full and relative path processing to PM                |         |       |  0:12 |   0.0 |
+| Add support for relations in codec model                   |         |       |  0:54 |   0.0 |
+| Consider standardising all templates as mustache templates |         |       |  0:21 |   0.0 |
+| Clang-cl windows build is broken                           |         |       |  0:36 |   0.0 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -458,6 +460,8 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
     :LOGBOOK:
     CLOCK: [2022-04-21 Thu 16:40]--[2022-04-21 Thu 17:15] =>  0:35
     CLOCK: [2022-04-21 Thu 08:50]--[2022-04-21 Thu 09:10] =>  0:20
+    CLOCK: [2022-04-09 Sat 11:45]--[2022-04-09 Sat 11:59] =>  0:14
+    CLOCK: [2022-04-09 Sat 10:33]--[2022-04-09 Sat 11:05] =>  0:32
     CLOCK: [2022-04-09 Sat 09:52]--[2022-04-09 Sat 10:05] =>  0:13
     CLOCK: [2022-04-09 Sat 09:34]--[2022-04-09 Sat 09:40] =>  0:06
     CLOCK: [2022-04-09 Sat 09:11]--[2022-04-09 Sat 09:33] =>  0:22
@@ -747,6 +751,54 @@ Also, add tests for PlantUML.
     :END:
 
 We need to move to the new vcpkg setup, with latest clang and gcc.
+
+*** COMPLETED Add "verbatim" PlantUML extension                       :story:
+    :LOGBOOK:
+    CLOCK: [2022-04-09 Sat 10:26]--[2022-04-09 Sat 10:33] =>  0:07
+    CLOCK: [2022-04-09 Sat 09:41]--[2022-04-09 Sat 09:50] =>  0:09
+    CLOCK: [2022-04-09 Sat 09:01]--[2022-04-09 Sat 09:10] =>  0:09
+    CLOCK: [2022-04-09 Sat 02:19]--[2022-04-09 Sat 02:28] =>  0:09
+    CLOCK: [2022-04-09 Sat 01:51]--[2022-04-09 Sat 02:19] =>  0:28
+    CLOCK: [2022-04-08 Fri 23:42]--[2022-04-09 Sat 00:47] =>  1:05
+    :END:
+
+One very simple way to improve diagrams is to allow users to associate a
+fragment of PlantUML code with a class, for example:
+
+: masd.codec.plantuml: myclass <>-- other_class : test
+
+This fragments are added after the class, verbatim. Its up to the users to
+annotate diagrams as they see fit, we merely copy and paste these annotations.
+
+In the future, we may spot patterns of usage that can be derived from meta-data,
+but for now we just need the diagrams to be usable like they were in Dia.
+
+Notes:
+
+- notes are not indented at present.
+- we are not leaving a space after inheritance.
+- empty classes still have brackets.
+- no top-level namespace for model. We didn't have this in Dia either.
+
+ Tasks:
+
+- add new feature in codec model.
+- add properties in model and element to store the data.
+- when converting into PlantUML, output the new properties after dumping the
+  class.
+- move codec to codec tests from orchestration to codec component.
+- codec needs to have a way to bootstrap its context without requiring
+  orchestration.
+
+Conclusions:
+
+- we've implemented this functionality and it does indeed do much of the work as
+  expected. We can probably leave it as-is, but for its main use case its not
+  ideal. This is because we already have most of the required information in the
+  form of model data, its just not organised in a good way. Instead what we need
+  to do is to model relationships correctly at codec level and use these to
+  express the PlantUML relationships. We also need to allow users to manually
+  add more relationships. This will be captured in a separate story.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
@@ -1088,13 +1140,12 @@ Notes:
   could map it to say RapidJSON serialisation. Or we could support two methods
   of serialisation for the same project. The user chooses where to place them.
 
-*** STARTED Add "verbatim" PlantUML extension                         :story:
+*** STARTED Add support for relations in codec model                  :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB
+    :END:
     :LOGBOOK:
-    CLOCK: [2022-04-09 Sat 09:41]--[2022-04-09 Sat 09:50] =>  0:09
-    CLOCK: [2022-04-09 Sat 09:01]--[2022-04-09 Sat 09:10] =>  0:09
-    CLOCK: [2022-04-09 Sat 02:19]--[2022-04-09 Sat 02:28] =>  0:09
-    CLOCK: [2022-04-09 Sat 01:51]--[2022-04-09 Sat 02:19] =>  0:28
-    CLOCK: [2022-04-08 Fri 23:42]--[2022-04-09 Sat 00:47] =>  1:05
+    CLOCK: [2022-04-09 Sat 11:59]--[2022-04-09 Sat 12:53] =>  0:54
     :END:
 
 One very simple way to improve diagrams is to allow users to associate a
@@ -1360,6 +1411,31 @@ back and then make a decision.
 The most obvious thing is just to call the templates after their
 actual name: mustache.
 
+*** STARTED Clang-cl windows build is broken                          :story:
+    :LOGBOOK:
+    CLOCK: [2022-05-06 Fri 20:02]--[2022-05-06 Fri 20:38] =>  0:36
+    :END:
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+Notes:
+
+- at present we are picking up the LLVM clang-cl, not the visual studio one. It
+  means we are using LLD to link. Its not entirely obvious how to change it to
+  use VS without losing ninja.
+- GitHub does not support allow failures in the build matrix. See this
+  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
+  job]]
+- for now, commented out clang-cl build.
+
+Links:
+
+- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
+  paths?]]
+
 *** Add models directory to each component                            :story:
 
 Instead of a product level models directory, we should have separate component
@@ -1372,16 +1448,6 @@ Notes:
 
 - when we do this we will break the dogen product unit tests.
 - we need to add the targets to each component (generation, conversion).
-
-*** Clang-cl windows build is broken                                  :story:
-
-We are failing to link:
-
-: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
-
-Links:
-
-- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
 
 *** Consider modeling relations at a higher level of abstration       :story:
 
@@ -1399,6 +1465,9 @@ construct:
 - realisation
 
 Relationships should have an associated comment or description.
+
+This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
+as the codec model is concerned.
 
 Notes:
 
@@ -1421,6 +1490,19 @@ Notes:
 - transparent and opaque associations as well associative container keys need to
   be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
   If none is appropriate we should create them.
+- add a new type of relationship to codec model. We probably also need an enum
+  to capture the type of relationship. This can be supplied in org-mode as
+  meta-data. Relationships belong to elements.
+- for now, do a hack in the logical model that takes relations of certain types
+  (say realisation) and adds them to stereotypes in the logical model. However,
+  we must be able to ignore other types (say attributes annotated by the user).
+- best mapping for org-mode is:
+  - title is the type we point to.
+  - description is the name of the relationship.
+  - attribute =relationship= to denote codec type.
+  - meta-data to denote relationship type.
+  - add GUID if you want the relationship to show up in PlantUML.
+- make object templates interfaces. Modeling a concept is a realisation.
 
 Links:
 
@@ -1448,6 +1530,16 @@ probably just need to:
   anything.
 - add processing in codec to handle the collection.
 
+*** Clang-cl windows build is broken                                  :story:
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+Links:
+
+- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+
 *** Consider making features dynamic elements                         :story:
 
 At present we generate code to bake in features to the Dogen binary. However, in
@@ -1462,17 +1554,41 @@ This is needed to make it compliant with the domain architecture.
 
 *** Create a site for Dogen                                           :story:
 
+Notes:
+
 - add papers as content.
 - add blog posts as content.
 - site is generated from org files in Dogen as a vcpkg build.
 - add sprint and product backlog as content.
 - add models.
 - add release notes
+- remove svg model representation; generate these dynamically with the site on
+  each commit. For the code, we should create the SVG's in the output directory.
+- split stable releases of dogen from main. Remove reference from Dogyxgen docs
+  to SVG.
+- we should create a set of cmake targets that convert the org-mode documents
+  into HTML, package them and commit them into github's branch.
 
 Links:
 
 - [[https://github.com/larstvei/org-bootstrap-document][GH: org-bootstrap-document]]: "This is a simple scheme for Org mode to generate
   nice and readable HTML sites. "
+
+Merged stories:
+
+*Integrate Doxygen with CI*
+
+At present we are manually generating the docs and uploading them into our site.
+We should instead:
+
+- create a site specific to Dogen which is served from the dogen project - see
+  site story.
+- add a workflow that generates the doxygen docs and does nothing else. We need
+  one for the tags and one for the commits.
+
+Links:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/doxygen.yml][QuantLib doxygen]]
 
 *** Create a DOI for dogen                                            :story:
 
