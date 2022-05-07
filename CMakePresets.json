@@ -228,7 +228,7 @@
         },
         {
             "name": "macos-clang-debug",
-            "description": "Mac OSX Debug",
+            "displayName": "Mac OSX Debug",
             "inherits": [
                 "use-ninja",
                 "debug-build",
@@ -240,14 +240,13 @@
         },
         {
             "name": "macos-clang-release",
-            "description": "Mac OSX Release",
+            "displayName": "Mac OSX Release",
             "inherits": [
                 "use-ninja",
                 "release-with-debug-build",
                 "default-build-dir"
             ]
         }
-
     ],
     "buildPresets": [
         {
