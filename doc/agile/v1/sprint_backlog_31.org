@@ -817,6 +817,24 @@ After the vcpkg update we ended up with some inconsistencies in the readme. Fix
 those.
 
 
+*** STARTED Gitter notifications for builds are not showing up        :story:
+    :LOGBOOK:
+    CLOCK: [2022-05-07 Sat 11:32]--[2022-05-07 Sat 11:46] =>  0:14
+    :END:
+
+We used to see travis and appveyor build notifications. We stopped seeing them
+after moving to github actions. This is useful because we can see them from
+Emacs in IRC.
+
+Notes:
+
+- it seems the settings have an option for this in webhooks. Redo the hook to
+  see if it helps.
+
+Links:
+
+- [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
+
 *** STARTED Setup the laptop for development                          :story:
     :LOGBOOK:
     CLOCK: [2022-04-21 Thu 08:32]--[2022-04-21 Thu 08:49] =>  0:17
@@ -826,6 +844,7 @@ We need to move to the new vcpkg setup, with latest clang and gcc.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
+    CLOCK: [2022-05-07 Sat 11:47]--[2022-05-07 Sat 11:49] =>  0:02
     CLOCK: [2022-04-04 Mon 18:48]--[2022-04-04 Mon 18:51] =>  0:03
     CLOCK: [2022-04-04 Mon 18:35]--[2022-04-04 Mon 18:47] =>  0:12
     :END:
@@ -836,6 +855,7 @@ dropbox etc. We need to move to the new world of presets.
 Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
+- we are using the old CTest script.
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
