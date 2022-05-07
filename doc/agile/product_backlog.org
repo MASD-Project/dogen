@@ -78,6 +78,31 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Clang-cl windows build is broken                                  :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 8CF1E48A-E643-E534-F05B-639E459C8C1B
+    :END:
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+Notes:
+
+- at present we are picking up the LLVM clang-cl, not the visual studio one. It
+  means we are using LLD to link. Its not entirely obvious how to change it to
+  use VS without losing ninja.
+- GitHub does not support allow failures in the build matrix. See this
+  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
+  job]]. Added our use case to that discussion.
+- for now, commented out clang-cl build.
+
+Links:
+
+- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
+  paths?]]
+
 *** Towards a dynamic PMM
 
 Now that we are starting to see all text templates as mustache templates, the
