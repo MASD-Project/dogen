@@ -458,6 +458,7 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-05-07 Sat 10:51]--[2022-05-07 Sat 11:00] =>  0:09
     CLOCK: [2022-04-21 Thu 16:40]--[2022-04-21 Thu 17:15] =>  0:35
     CLOCK: [2022-04-21 Thu 08:50]--[2022-04-21 Thu 09:10] =>  0:20
     CLOCK: [2022-04-09 Sat 11:45]--[2022-04-09 Sat 11:59] =>  0:14
@@ -745,19 +746,6 @@ located in orchestration. These tests should live in the codec component.
 
 Also, add tests for PlantUML.
 
-*** COMPLETED Comment out clang-cl windows build                      :story:
-    :LOGBOOK:
-    CLOCK: [2022-05-07 Sat 10:30]--[2022-05-07 Sat 10:50] =>  0:20
-    CLOCK: [2022-05-06 Fri 20:02]--[2022-05-06 Fri 20:38] =>  0:36
-    :END:
-
-We are failing to link:
-
-: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
-
-For now, comment out clang-cl build. Created [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#8CF1E48A-E643-E534-F05B-639E459C8C1B][story in backlog]] to deal with this
-properly.
-
 *** COMPLETED Add "verbatim" PlantUML extension                       :story:
     :LOGBOOK:
     CLOCK: [2022-04-09 Sat 10:26]--[2022-04-09 Sat 10:33] =>  0:07
@@ -805,6 +793,29 @@ Conclusions:
   to do is to model relationships correctly at codec level and use these to
   express the PlantUML relationships. We also need to allow users to manually
   add more relationships. This will be captured in a separate story.
+
+*** COMPLETED Comment out clang-cl windows build                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-05-07 Sat 10:30]--[2022-05-07 Sat 10:50] =>  0:20
+    CLOCK: [2022-05-06 Fri 20:02]--[2022-05-06 Fri 20:38] =>  0:36
+    :END:
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+For now, comment out clang-cl build. Created [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#8CF1E48A-E643-E534-F05B-639E459C8C1B][story in backlog]] to deal with this
+properly.
+
+*** STARTED Updates to the readme                                     :story:
+    :LOGBOOK:
+    CLOCK: [2022-05-07 Sat 11:17]--[2022-05-07 Sat 11:31] =>  0:14
+    CLOCK: [2022-05-07 Sat 11:00]--[2022-05-07 Sat 11:16] =>  0:16
+    :END:
+
+After the vcpkg update we ended up with some inconsistencies in the readme. Fix
+those.
+
 
 *** STARTED Setup the laptop for development                          :story:
     :LOGBOOK:

@@ -120,7 +120,7 @@ currently under development (see badges above).
 **Notes**
 
 - The OSX installer provides you with a DMG. Once you open it in Finder, it
-mounts under ```/Volumes/```, e.g.:
+mounts under ```/Volumes/```, _e.g_.:
 
 ```
 /Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
@@ -155,12 +155,46 @@ Dogen has the following additional dependencies, across all operative systems:
 Though Dogen should build fine with package manager supplied libraries - or even
 with hand-built dependencies - the recommended way to setup a development
 environment on all supported platforms is by using
-[vcpkg](https://github.com/Microsoft/vcpkg). We use the "sub-module setup",
-whereby vcpkg is a submodule of Dogen. All of the dependencies are declared on
+[vcpkg](https://github.com/Microsoft/vcpkg), which is what we will describe in
+this document. Dogen uses the "sub-module setup", whereby vcpkg is a submodule
+of Dogen. All of the dependencies are declared on
 [vcpkg.json](https://github.com/MASD-Project/dogen/blob/master/vcpkg.json).
+
+Before we proceed, please note that Dogen makes use of [CMake
+Presets](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html). You
+can have a look at our presets file
+[```CMakePresets.json```](https://github.com/MASD-Project/dogen/blob/master/CMakePresets.json)
+for a list of available presets; alternatively, just use CMake:
+
+```
+$ cmake --list-presets
+Available configure presets:
+
+  "linux-clang-debug"             - Linux clang debug
+  "linux-clang-release"           - Linux clang release
+  "linux-gcc-debug"               - Linux gcc debug
+  "linux-gcc-release"             - Linux gcc release
+  "windows-msvc-debug"            - Windows x64 Debug
+  "windows-msvc-release"          - Windows x64 Release
+  "windows-msvc-clang-cl-debug"   - Windows x64 Debug
+  "windows-msvc-clang-cl-release" - Windows x64 Release
+  "macos-clang-debug"             - Mac OSX Debug
+  "macos-clang-release"           - Mac OSX Release
+```
+
+For the remainder of this document we shall assume ```linux-clang-release```,
+which is our preferred preset. If its not yours, remember to update the preset
+name to match your desired build.
+
+To checkout Dogen clone as follows:
 
 ```
 git clone https://github.com/MASD-Project/dogen.git --recurse-submodules
+```
+
+This takes into account the vcpkg submodule setup. For the configure step:
+
+```
 cd dogen
 cmake --preset linux-clang-release
 ```
@@ -200,8 +234,8 @@ different structure then you will need to create your own preset configuration
 for CMake.
 
 If all has gone according to plan, you should then see that Dogen correctly
-recognises the additional models (where ```DIR``` is the top-level directory
-for Dogen):
+recognises the additional models (where ```DIR``` is the top-level directory for
+Dogen):
 
 ```
 ...
@@ -243,19 +277,21 @@ Example:
 cmake --build --preset linux-clang-release --target gao
 ```
 
+Replacing ```linux-clang-release``` with your platform and compiler.
+
 # Documentation
 
 Whilst we do not have a huge amount of documentation, there is plenty of
-assorted material talking about Dogen.
+assorted material discussing Dogen.
 
 ## Videos
 
-A number of videos are now available discussing Dogen, gathered under "themed"
+A number of videos are available discussing Dogen, gathered under "themed"
 playlists:
 
 - [MASD - Dogen
   Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
-  end of sprint demos.
+  end of sprint demos. Suitable for end users.
 - [MASD - Dogen Coding: Move to GitHub
   CI](https://www.youtube.com/playlist?list=PLwfrwe216gF2qlIWKsBrL7UEsrEg8dXC0):
   Series of videos on moving Dogen from Travis CI to GitHub CI.
