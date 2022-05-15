@@ -137,7 +137,7 @@
         {
             "name": "linux-clang-debug-nightly",
             "displayName": "Linux Clang Debug nightly",
-            "hidden": true,
+            "hidden": false,
             "inherits": [
                 "use-clang",
                 "debug-build",
@@ -165,7 +165,7 @@
         {
             "name": "linux-gcc-debug-nightly",
             "displayName": "Linux GCC Debug nightly",
-            "hidden": true,
+            "hidden": false,
             "inherits": [
                 "use-gcc",
                 "debug-build",
@@ -175,7 +175,7 @@
         {
             "name": "linux-gcc-release-nightly",
             "displayName": "Linux GCC Release nightly",
-            "hidden": true,
+            "hidden": false,
             "inherits": [
                 "use-gcc",
                 "release-build",
