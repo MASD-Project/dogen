@@ -199,6 +199,10 @@ endif()
 
 # Setup the preset for configuration.
 set(cmake_args ${cmake_defines} "--preset ${preset}")
+if(${build_group} MATCHES Nightly)
+    set(cmake_args ${cmake_defines} "-DWITH_FULL_GENERATION=ON")
+endif()
+
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
 if(configure_result)
     message(FATAL_ERROR "Failed to configure")
