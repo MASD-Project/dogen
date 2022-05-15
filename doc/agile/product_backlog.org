@@ -102,6 +102,7 @@ Links:
 - [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
 - [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
   paths?]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
 *** Towards a dynamic PMM
 
@@ -11502,6 +11503,18 @@ Links:
 
 ** Unclassified
 
+*** Consider adding support for Click House                           :story:
+
+#+begin_quote
+ClickHouse® is an open-source column-oriented database management system that
+allows generating analytical data reports in real-time.
+#+end_quote
+
+Links:
+
+- [[https://github.com/ClickHouse/ClickHouse][ClickHouse GH]]
+- [[https://github.com/ClickHouse/clickhouse-cpp][clickhouse-cpp]]: C++ client for ClickHouse.
+
 *** Consider adding support for KDab reactive programming             :story:
 
 #+begin_quote
@@ -14721,6 +14734,8 @@ overridable at the element level).
 Other KVP stores:
 
 - [[https://github.com/microsoft/FASTER/tree/master/cc][FASTER GH]]: see also the [[https://microsoft.github.io/FASTER/docs/fasterkv-cpp/][home page]].
+- [[https://github.com/mzimbres/aedis][aedis GH]]: "Aedis is a Redis client library built on top of Asio that provides
+  simple and efficient communication with a Redis server."
 
 *** Add support for libnop                                            :story:
 
@@ -16949,6 +16964,7 @@ See also:
 - [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
 - [[https://www.kdab.com/clang-tidy-part-1-modernize-source-code-using-c11c14/?utm_source%3DMaster%2520List%252006-16&utm_campaign%3Dd11fea20e3-EMAIL_CAMPAIGN_2017_03_23&utm_medium%3Demail&utm_term%3D0_bdde4cdc11-d11fea20e3-101553725&goal%3D0_bdde4cdc11-d11fea20e3-101553725][Clang-Tidy, part 1: Modernize your source code using C++11/C++14]]
 - [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-tidy][hpx clang tidy file]]
+- [[https://github.com/lballabio/QuantLib/pull/1369][Split .clang-tidy into one for fixes and one for checks #1369]]
 
 *** Add support for the =scan-build= static analyser                  :story:
 
@@ -21709,6 +21725,14 @@ notes:
   environment variable into the cmake
 - note that the objective is not to make something like odb. the sql
   is generated specifically for dogen types, not general purpose.
+
+Links:
+
+- [[https://github.com/yandex/ozo][OZO GH]]: "OZO is a C++17 library for asyncronous communication with PostgreSQL
+  DBMS. The library leverages the power of template metaprogramming, providing
+  convenient mapping from C++ types to SQL along with rich query building
+  possibilities."
+-
 
 *** Consider adding support for =sandbox-api=                         :story:
 

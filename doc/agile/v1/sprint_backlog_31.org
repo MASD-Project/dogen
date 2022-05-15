@@ -844,6 +844,9 @@ We need to move to the new vcpkg setup, with latest clang and gcc.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
+    CLOCK: [2022-05-15 Sun 12:18]--[2022-05-15 Sun 12:50] =>  0:32
+    CLOCK: [2022-05-07 Sat 16:30]--[2022-05-07 Sat 16:40] =>  0:10
+    CLOCK: [2022-05-07 Sat 16:00]--[2022-05-07 Sat 16:10] =>  0:10
     CLOCK: [2022-05-07 Sat 11:47]--[2022-05-07 Sat 11:49] =>  0:02
     CLOCK: [2022-04-04 Mon 18:48]--[2022-04-04 Mon 18:51] =>  0:03
     CLOCK: [2022-04-04 Mon 18:35]--[2022-04-04 Mon 18:47] =>  0:12
