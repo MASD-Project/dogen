@@ -127,7 +127,7 @@
         },
         {
             "name": "linux-clang-debug",
-            "displayName": "Linux clang debug",
+            "displayName": "Linux Clang Debug",
             "inherits": [
                 "use-clang",
                 "debug-build",
@@ -136,7 +136,7 @@
         },
         {
             "name": "linux-clang-debug-nightly",
-            "displayName": "Linux clang debug nightly",
+            "displayName": "Linux Clang Debug nightly",
             "hidden": true,
             "inherits": [
                 "use-clang",
@@ -146,7 +146,7 @@
         },
         {
             "name": "linux-clang-release",
-            "displayName": "Linux clang release",
+            "displayName": "Linux Clang Release",
             "inherits": [
                 "use-clang",
                 "release-build",
@@ -155,7 +155,7 @@
         },
         {
             "name": "linux-gcc-debug",
-            "displayName": "Linux gcc debug",
+            "displayName": "Linux GCC debug",
             "inherits": [
                 "use-gcc",
                 "debug-build",
@@ -164,7 +164,7 @@
         },
         {
             "name": "linux-gcc-debug-nightly",
-            "displayName": "Linux gcc debug nightly",
+            "displayName": "Linux GCC Debug nightly",
             "hidden": true,
             "inherits": [
                 "use-gcc",
@@ -173,8 +173,18 @@
             ]
         },
         {
+            "name": "linux-gcc-release-nightly",
+            "displayName": "Linux GCC Release nightly",
+            "hidden": true,
+            "inherits": [
+                "use-gcc",
+                "release-build",
+                "dogen-nightly-test-environment"
+            ]
+        },
+        {
             "name": "linux-gcc-release",
-            "displayName": "Linux gcc release",
+            "displayName": "Linux GCC Release",
             "inherits": [
                 "use-gcc",
                 "release-build",
