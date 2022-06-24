@@ -289,6 +289,10 @@ assorted material discussing Dogen.
 A number of videos are available discussing Dogen, gathered under "themed"
 playlists:
 
+- [MASD: An introduction to Model Assisted Software
+  Development](https://youtube.com/playlist?list=PLwfrwe216gF3Qamk0YOSo5Csx1R_LplG0):
+  Series of lectures on Model Assisted Software Development (MASD), the
+  methodology put forward in my PhD and implemented by Dogen.
 - [MASD - Dogen
   Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
   end of sprint demos. Suitable for end users.
