@@ -1,0 +1,248 @@
+#+title: An Introduction to Model Driven Engineering
+#+author: Marco Craveiro
+
+* Historical Context I
+
+The software industry has had to deal with two big problems, both related to
+reducing the role of humans in the software development process:
+
+- How to lower the cost of development and maintenance of systems via
+  automation:
+  - All of the software engineering that can be reduced to a machine
+    understandable representation should be automated.
+  - Humans should be used only where they add value.
+- How to extract the domain essence of legacy systems such that they can be
+  moved across from legacy platforms into newer platforms.
+
+* Historical Context II
+
+Whilst pursuing these, the industry bumped into two core concepts:
+
+- /Platform Independent Models/: (PIMs) The portion of the domain knowledge in a
+  system which is not directly related to a specific implementation.
+- /Platform Specific Models/: (PSMs) The portion of the system which is specific
+  to a platform.
+
+The holy grail was then to extract a PSM from an existing system, and then use
+it to generate PSMs. This required a theoretical foundation on which to build
+this work.
+
+* Models and Modeling I
+
+One of the first stumbling blocks is a suitable definition of a Model:
+
+- It is a very general term which raises deep philosophical questions.
+- We need to set some boundaries in terms of what we are trying to achieve.
+
+Brambilla cite:brambilla2012model:
+
+#+begin_quote
+We are not interested here by a theoretical definition of a model, but by an
+engineering one, /i.e./ a definition that will help users to implement and
+maintain systems.
+#+end_quote
+
+* Models and Modeling II
+
+Brambilla cite:brambilla2012model states:
+
+#+begin_quote
+We can informally define a model as a simplified or partial representation of
+reality, defined in order to accomplish a task or to reach an agreement on a
+topic. Therefore, by definition, a model will never describe reality on its
+entirety.
+#+end_quote
+
+In cite:kurtev2002technological, Bezivin states:
+
+#+begin_quote
+[...] [A] graph-based structure representing some aspects of a given system and
+conforming to the definition of another graph called the meta-model. [...] A
+model is said to *represent* a system.
+#+end_quote
+
+Voelter /et al./ cite:volter2013model state:
+
+#+begin_quote
+A model is an abstract representation of a system’s structure, function or
+behavior.
+#+end_quote
+
+* Models and Modeling III
+
+- "The model always exists, the only option designers have is about its form: it
+  may be mental (existing only in the designers head) or explicit."
+  cite:brambilla2012model
+- There are many kinds of models: sketches, blueprints, diagrams, the programs
+  themselves (modeling the world).
+- We are interested in a special class of models: those which are described
+  according to a formal language and thus have precise semantics.
+
+* Models and Modeling IV
+
+Formal models are written using a DSL (Domain Specific Language). The DSL is
+designed specifically for modeling. UML is an example of such a DSL. UML has a
+graphical representation, but also an /abstract syntax/.
+
+[[images/northwind_diagram.png]]
+
+* Models and Modeling V
+
+- Modeling is thus the process of creating models for a system.
+- These are not just /pretty pictures/ but formal, fundamental knowledge about
+  the system, just like code, but at a higher level of abstraction.
+- These models contain enough knowledge to create some aspects of the system -
+  /i.e./ using code generation, we can transform a formal model into code.
+
+* Model Driven Engineering I
+
+We can now start to sketch a broad definition of Model Driven Engineering:
+
+- "Development paradigm that uses models as the primary artifact of the
+  development process. Usually [...] the implementation is (semi-)automatically
+  generated from the models." cite:brambilla2012model
+- "Goes beyond the pure development activities and encompasses other model-based
+  tasks of a complete software engineering process (/e.g./ the model-based
+  evolution of the system or the model-driven reverse engineering of a legacy
+  system." cite:brambilla2012model
+
+* Model Driven Engineering II
+
+Wirth stated cite:Wirth:1978:ADS:540029
+
+#+begin_quote
+Algorithms + Data Structures = Programs
+#+end_quote
+
+MDE states cite:brambilla2012model:
+
+#+begin_quote
+Models + Transformations = Software
+#+end_quote
+
+* Model Driven Engineering III
+
+And then MDE goes even further:
+
+#+begin_quote
+/Everything/ is a model.
+#+end_quote
+
+- Thus transformations themselves are models;
+- The formal language we use to describe models themselves is a model.
+
+* Meta-Models I
+
+- A meta-model is simply a kind of model used to define a language to define
+  other models.
+- Meta-models are very common in programming; we are just not used to thinking
+  about them explicitly.
+- All programming languages define meta-models: constructs such class, function
+  and so forth are meta-constructs. Users then define their own classes, which
+  are instances of this meta-class. Those classes are in turn instantiated into
+  objects.
+
+* Meta-Models II
+
+Other examples of meta-models:
+
+- UML is a meta-model with constructs such as class, association, attributes and
+  so forth. User models are instances of the UML meta-model.
+- XML documents can have an associated XML schema.
+- The RDBMS model has a meta-model composed of tables, columns and so forth.
+- NeuroML defines a meta-model to which all instance models must conform to in
+  order to be valid NeuroML documents.
+
+* Meta-Models III
+
+But why bother defining a meta-model explicitly?
+
+- The key point is the second term on our equation: transformations.
+- Once we have two explicit meta-models we can create a language that describes
+  transformations between those two and automate the process.
+- For example, we could create a transformation between an XML document and a
+  database schema, generating the tables automatically.
+
+* Meta-Meta-Models I
+
+But is it turtles all the way up?
+
+- If meta-models are formal models, they must also conform to a
+    DSL of some kind.
+- Models that are used to define meta-models are called meta-meta-models. An
+  example is MOF, the meta-meta-model used to define UML.
+- Meta-meta-models are useful in practice because we can use them to help define
+  transformations.
+- However, there is no point in going up the abstraction ladder:
+  meta-meta-models can be used to define themselves, thus closing the process.
+
+* Meta-Meta-Models II
+
+[[images/uml-m0-m3-wikipedia.png]]
+
+* Technical Spaces I
+
+To create a bridge between different technologies, the notion of a Technical
+Space was introduced cite:kurtev2002technological.
+
+#+begin_quote
+A technical space is a working context with a set of associated concepts, body
+of knowledge, tools, required skills, and possibilities. It is also a model
+management framework usually based on some algebraic structures like trees,
+graphs, hypergraphs, categories, /etc./ Although technical spaces may be
+difficult to define formally, they can be easily recognized (e.g. XML, MDA). In
+the three-level conjecture, each technical space can be seen as based on a
+metametamodel (explicit or implicit) and a collection of metamodels.
+#+end_quote
+
+* Technical Spaces II
+
+- Technical Spaces are effectively a package of meta-meta-model, a set of
+  meta-models and the associated models one can create from them.
+- For example, Java and other languages are Technical Spaces, and so is XML.
+- Technical Spaces provide context to terminology: when you say "model", it only
+  has meaning in the context of a precise Technical Space such as UML or NeuroML
+  /etc./
+
+* Technical Spaces III
+
+- Technical Spaces are also a way to structure the Solution Space. Different
+  Technical Spaces have different "abilities", so it is very useful to convert
+  models from one Technical Space to another.
+- MDE tools such as Eclipse's EMF provide a Technical Space with a complete
+  stack of solutions for MDE, including the definition of DSLs, modeling,
+  run-time reflection and so forth.
+
+* MDE, in practice I
+
+But these books and papers are from the 1990s and 2000s! Where is MDE now?
+
+- Whilst the theory and tooling of MDE is becoming clearer in academic terms,
+  its still not widely adopted in practice.
+- As Steven Mellor has been saying since 1985: "Modeling and
+  model-driven engineering will be common place in three years time."
+- MDE is becoming yet another Computer Science elusive holy grail like AI.
+
+* MDE in practice II
+
+Why is it so elusive?
+
+- The theoretical models are not complete; there is still no proper mathematical
+  theory behind it.
+- Institutions and companies such as OMG, Rational, /etc./ oversold
+  the technology to the point of hype and now it has been somewhat
+  discredited, as with AI.
+
+* MDE in practice III
+
+Why is it so elusive?
+
+- The theory is very complex and hard to see how it is applied until one starts
+  using it. Many people view it as a ``purist approach'' that works in theory
+  but is not feasible in practice.
+- There is pressure to lower development costs by requiring less specialised
+  knowledge so that Software Engineering work can be outsourced and off-shored;
+  MDE requires very specialised knowledge to get up and running.
+- The tooling is not yet mature; it is complex and does not work for all use
+  cases; it is common for one to start adopting a technology only to find it
+  deficient half-way through adoption.
