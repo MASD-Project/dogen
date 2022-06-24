@@ -17090,6 +17090,30 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for asio-grpc                             :story:
+
+#+begin_quote
+An Executor, Networking TS and std::execution interface to grpc::CompletionQueue
+for writing asynchronous gRPC clients and servers using C++20 coroutines,
+Boost.Coroutines, Asio's stackless coroutines, callbacks, sender/receiver and
+more.
+#+end_quote
+
+Links:
+
+- [[https://github.com/Tradias/asio-grpc][asio-grpc GH]]:
+
+*** Consider adding support for osmanip                               :story:
+
+#+begin_quote
+Library with useful output stream tools like: color and style manipulators,
+progress bars and terminal graphics
+#+end_quote
+
+Links:
+
+- [[https://github.com/JustWhit3/osmanip][osmanip GH]]
+
 *** Consider making hexagonal architecture a pattern                  :story:
 
 We were already following the ideas of hexagonal architecture, even though we
