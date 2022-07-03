@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-05-15 Sun 12:51]
+#+CAPTION: Clock summary at [2022-07-03 Sun 18:18]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *62:57* |       |       |   0.0 |
+| *Total time*                                               | *74:19* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 62:57   |       |       |   0.0 |
-| Active                                                     |         | 62:57 |       |   0.0 |
+| Stories                                                    | 74:19   |       |       |   0.0 |
+| Active                                                     |         | 74:19 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  8:11 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  8:37 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -42,9 +42,10 @@
 | Add "verbatim" PlantUML extension                          |         |       |  2:07 |   0.0 |
 | Comment out clang-cl windows build                         |         |       |  0:56 |   0.0 |
 | Updates to the readme                                      |         |       |  0:30 |   0.0 |
+| Create a series of lectures on MDE and MASD                |         |       |  9:36 |   0.0 |
 | Gitter notifications for builds are not showing up         |         |       |  0:14 |   0.0 |
 | Setup the laptop for development                           |         |       |  0:17 |   0.0 |
-| Update nightly builds to use new vcpkg setup               |         |       |  1:09 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |         |       |  2:29 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
 | Windows package is broken                                  |         |       |  0:31 |   0.0 |
 | Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
@@ -460,6 +461,7 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-07-03 Sun 17:50]--[2022-07-03 Sun 18:16] =>  0:26
     CLOCK: [2022-05-07 Sat 10:51]--[2022-05-07 Sat 11:00] =>  0:09
     CLOCK: [2022-04-21 Thu 16:40]--[2022-04-21 Thu 17:15] =>  0:35
     CLOCK: [2022-04-21 Thu 08:50]--[2022-04-21 Thu 09:10] =>  0:20
@@ -809,7 +811,7 @@ We are failing to link:
 For now, comment out clang-cl build. Created [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#8CF1E48A-E643-E534-F05B-639E459C8C1B][story in backlog]] to deal with this
 properly.
 
-*** STARTED Updates to the readme                                     :story:
+*** COMPLETED Updates to the readme                                   :story:
     :LOGBOOK:
     CLOCK: [2022-05-07 Sat 11:17]--[2022-05-07 Sat 11:31] =>  0:14
     CLOCK: [2022-05-07 Sat 11:00]--[2022-05-07 Sat 11:16] =>  0:16
@@ -817,6 +819,28 @@ properly.
 
 After the vcpkg update we ended up with some inconsistencies in the readme. Fix
 those.
+
+*** COMPLETED Create a series of lectures on MDE and MASD             :story:
+    :LOGBOOK:
+    CLOCK: [2022-05-20 Fri 13:45]--[2022-05-20 Fri 14:58] =>  1:13
+    CLOCK: [2022-05-20 Fri 09:50]--[2022-05-20 Fri 12:10] =>  2:20
+    CLOCK: [2022-05-25 Wed 19:21]--[2022-05-25 Wed 20:13] =>  0:52
+    CLOCK: [2022-05-30 Mon 18:41]--[2022-05-30 Mon 19:32] =>  0:51
+    CLOCK: [2022-06-10 Fri 22:34]--[2022-06-10 Fri 23:13] =>  0:39
+    CLOCK: [2022-06-11 Sat 18:15]--[2022-06-11 Sat 18:52] =>  0:37
+    CLOCK: [2022-06-17 Fri 10:09]--[2022-06-17 Fri 10:46] =>  0:37
+    CLOCK: [2022-06-19 Sun 18:43]--[2022-06-19 Sun 19:23] =>  0:40
+    CLOCK: [2022-06-24 Fri 10:52]--[2022-06-24 Fri 11:55] =>  1:03
+    CLOCK: [2022-06-24 Fri 14:55]--[2022-06-24 Fri 15:39] =>  0:44
+    :END:
+
+In preparation for the viva, we need to review all of our research material.
+Record a series of lectures on MASD as preparation.
+
+Links:
+
+- [[https://youtube.com/playlist?list=PLwfrwe216gF3Qamk0YOSo5Csx1R_LplG0][MASD: An introduction to Model Assisted Software Development]]: youtube
+  playlist.
 
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
@@ -843,14 +867,6 @@ Links:
     :END:
 
 We need to move to the new vcpkg setup, with latest clang and gcc.
-
-*** STARTED Create a series of lectures on MDE and MASD               :story:
-    :LOGBOOK:
-    CLOCK: [2022-05-20 Fri 13:45]--[2022-05-20 Fri 14:58] =>  1:13
-    CLOCK: [2022-05-20 Fri 09:50]--[2022-05-20 Fri 12:10] =>  2:20
-    :END:
-
-In preparation for the viva, we need to review all of our research material.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
@@ -1468,6 +1484,10 @@ back and then make a decision.
 
 The most obvious thing is just to call the templates after their
 actual name: mustache.
+
+*** Investigate why codec object is =Commentable=                     :story:
+
+Most other types are =Element=.
 
 *** Add models directory to each component                            :story:
 

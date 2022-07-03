@@ -104,7 +104,7 @@ Links:
   paths?]]
 - [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
-*** Towards a dynamic PMM
+*** Towards a dynamic PMM                                              :epic:
 
 Now that we are starting to see all text templates as mustache templates, the
 next logical step is to make the PMM itself dynamic. That is to say, just like
@@ -17089,6 +17089,22 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for
+
+#+begin_quote
+crunchy_bytes is a C++ 17 library that serializes structured data.
+
+You bring the data definitions, and crunchy_bytes will generate C++ classes that
+can serialize and deserialize themselves into a compact binary representation
+that can be easily be transferred between processes.
+
+crunchy_bytes is ideal for IPC, or long term data storage
+#+end_quote
+
+Links:
+
+- [[https://github.com/crabmandable/crunchy-bytes][crunchy-bytes GH]]
 
 *** Consider adding support for asio-grpc                             :story:
 
