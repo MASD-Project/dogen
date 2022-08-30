@@ -26,22 +26,23 @@
 
 # Overview
 
-**Dogen** is the reference implementation of the MASD Project code generator.
+**Dogen** is the reference implementation of the /MASD Project/ code generator.
 MASD - Model Assisted Software Development - is a new methodology for the
 development of software systems based on [MDE (Model Driven
-Engineering)](https://en.wikipedia.org/wiki/Model-driven_engineering). The
-theoretical framework for MASD is under development as part of my PhD thesis,
-and is not yet ready for public review. However, the development of Dogen
-remains as it always was, an open source project available to all.
+Engineering)](https://en.wikipedia.org/wiki/Model-driven_engineering). MASD was
+developed in the context of a PhD programme; if you are that way inclined, you
+may find the thesis of interest: [Model Assisted Software Development - a
+MDE-Based Software Development
+Methodology](https://uhra.herts.ac.uk/handle/2299/25708).
 
 In lay terms, Dogen's objective is to automate the development process as much
-as possible: the user creates models in one of the supported codecs and
+as possible: the user creates /models/ in one of the supported codecs and
 respecting a set of predefined restrictions; Dogen then uses this input to
-generate a source code representation of the model. At present the main frontend
-is [Org Mode](https://orgmode.org/), though there is also support for
-[Dia](https://en.wikipedia.org/wiki/Dia_(software)) and
-[JSON](http://json.org/). Depending on use cases and user demand, other
-frontends may follow.
+generate a source code representation of the model. Though we support several
+codecs, the preferred one is an extension to [Org Mode](https://orgmode.org/)
+which we call /org-model/. In the future we plan to deprecate other codecs and
+rely on an [XMI](https://en.wikipedia.org/wiki/XML_Metadata_Interchange)-based
+input format.
 
 The generated code contains most of the functionality required from a typical
 C++ domain object such as serialisation, hashing, streaming and so on. Whilst we
@@ -50,34 +51,37 @@ end goal is to enable users to extend Dogen, adapting it to the vagaries of
 their specific needs. Note that Dogen has experimental C# support, but it is not
 in feature parity with C++ support.
 
-Dogen provides a reference implementation for each supported language, available
-as a separate git repo:
+Dogen provides a /reference product/ for each supported language, available as a
+separate git repo:
 
-- [C++ Reference Implementation](https://github.com/MASD-Project/cpp_ref_impl).
+- [C++ Reference Product](https://github.com/MASD-Project/cpp_ref_impl).
   Models available
   [here](https://github.com/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.models).
-- [C# Reference
-  Implementation](https://github.com/MASD-Project/csharp_ref_impl). Models
-  available
+- [C# Reference Product](https://github.com/MASD-Project/csharp_ref_impl).
+  Models available
   [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/CSharpRefImpl.Models).
 
 These are designed to give you a feel for how the generated code will look like,
-and they attempt to exercise all of Dogen's functionality.
+and they attempt to exercise all of Dogen's functionality. Note that these
+reference products still use older codecs rather than org-model.
 
 # Status
 
-Whilst we welcome users and contributors, we think its important to set clear
-expectations for the project. At the outset we must stress that Dogen is an
-_academic project_ at present, with academic goals. That is, our objectives are
-not (yet) to produce a fully polished tool, ready for end users to work on
-industrial scale projects. If for whatever reason you decide to use it, bear in
-mind the following:
+Our previous major milestone for Dogen was to complete the [PhD
+thesis](https://uhra.herts.ac.uk/handle/2299/25708), which we did so
+successfully. The current major milestone is to sync up the source code with the
+latest version of the theoretical framework, as laid out in the thesis. In other
+words, our focus is /not/ on producing a fully polished tool, ready for end
+users to deploy on industrial scale projects. If, for whatever reason you still
+want to go ahead and use it, bear in mind the following:
 
-- our immediate goal is to work out the MASD conceptual model. We will continue
-  to refactor the code internally until it is consistent with the conceptual
-  model. It will take a long while to get there. This means that adding new
-  features is not a priority for Dogen development (though of course we are
-  gathering a long list of ideas in our [product
+- our immediate goal is to refactor the conceptual model in the source code to
+  reflect the MASD conceptual model presented in Chapter 6 of the thesis
+  (/Domain Architecture/). We will continue to refactor the code internally
+  until it is consistent with the conceptual model. It may take a long while to
+  get there. This means that adding new features is not a priority for Dogen
+  development (though of course we are gathering a long list of ideas in our
+  [product
   backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org)).
 - in our quest for the conceptual model, we have broken and _we shall continue_
   to break the API many times. This will manifest itself in having to update
@@ -92,9 +96,9 @@ mind the following:
   generated and handcrafted), but these focus _only_ on Dogen's use cases. If
   you try any permutations outside these, it is likely you will find problems.
   The errors you will get will not be the most obvious.
-- there is little to no documentation on Dogen. This will not change until we
-  publish the PhD thesis, presently awaiting the _viva_. Resources are limited
-  and they are all directed to development at present.
+- there is little to no documentation on Dogen. We are presently working on
+  porting across the documentation generated for the thesis but the process is
+  slow and laborious.
 - for this tool to be useful in any way in its present state, you must have a
   good working knowledge of
   [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering). You can make
@@ -119,14 +123,16 @@ currently under development (see badges above).
 ---
 **Notes**
 
+- Other than Linux, we do not test the packages manually. If you find any issues
+  with a binary package, please raise an issue.
 - The OSX installer provides you with a DMG. Once you open it in Finder, it
-mounts under ```/Volumes/```, _e.g_.:
+  mounts under ```/Volumes/```, _e.g_.:
 
 ```
 /Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
 ```
 
-Where ```${VERSION}``` is your Dogen version such as ```1.0.30```.
+  Where ```${VERSION}``` is your Dogen version such as ```1.0.30```.
 
 ----
 
@@ -281,8 +287,9 @@ Replacing ```linux-clang-release``` with your platform and compiler.
 
 # Documentation
 
-Whilst we do not have a huge amount of documentation, there is plenty of
-assorted material discussing Dogen.
+Whilst we do not have a huge amount of documentation aimed at end users, there
+is plenty of assorted material discussing Dogen. Most of the material is more
+suitable for researchers.
 
 ## Videos
 
@@ -292,7 +299,8 @@ playlists:
 - [MASD: An introduction to Model Assisted Software
   Development](https://youtube.com/playlist?list=PLwfrwe216gF3Qamk0YOSo5Csx1R_LplG0):
   Series of lectures on Model Assisted Software Development (MASD), the
-  methodology put forward in my PhD and implemented by Dogen.
+  methodology put forward in my PhD and implemented by Dogen. This series of
+  lectures was made in preparation for the /viva/.
 - [MASD - Dogen
   Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
   end of sprint demos. Suitable for end users.
@@ -372,6 +380,8 @@ We are strong believers in open academia so all of our papers are open.
 - [Experience Report of Industrial Adoption of Model Driven Development in the
   Financial Sector](https://zenodo.org/record/5767247#.YkoS6NDMKXI): Our prior
   experiences of using MDE on an industrial setting.
+- [Model Assisted Software Development - a MDE-Based Software Development
+  Methodology](https://uhra.herts.ac.uk/handle/2299/25708): PhD thesis.
 
 # Reporting Problems
 
