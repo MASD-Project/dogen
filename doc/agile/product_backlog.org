@@ -17090,7 +17090,20 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
-*** Consider adding support for
+*** Investigate =lombok= for ideas                                    :story:
+
+#+begin_quote
+Project Lombok is a java library that automatically plugs into your editor and
+build tools, spicing up your java. Never write another getter or equals method
+again, with one annotation your class has a fully featured builder, Automate
+your logging variables, and much more.
+#+end_quote
+
+Links:
+
+- https://projectlombok.org/features/all
+
+*** Consider adding support for                                       :story:
 
 #+begin_quote
 crunchy_bytes is a C++ 17 library that serializes structured data.

@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-07-03 Sun 18:18]
+#+CAPTION: Clock summary at [2022-08-30 Tue 15:57]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *74:19* |       |       |   0.0 |
+| *Total time*                                               | *78:05* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 74:19   |       |       |   0.0 |
-| Active                                                     |         | 74:19 |       |   0.0 |
+| Stories                                                    | 78:05   |       |       |   0.0 |
+| Active                                                     |         | 78:05 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
@@ -43,8 +43,9 @@
 | Comment out clang-cl windows build                         |         |       |  0:56 |   0.0 |
 | Updates to the readme                                      |         |       |  0:30 |   0.0 |
 | Create a series of lectures on MDE and MASD                |         |       |  9:36 |   0.0 |
+| Setup the laptop for development                           |         |       |  3:07 |   0.0 |
+| Update README with thesis info                             |         |       |  0:56 |   0.0 |
 | Gitter notifications for builds are not showing up         |         |       |  0:14 |   0.0 |
-| Setup the laptop for development                           |         |       |  0:17 |   0.0 |
 | Update nightly builds to use new vcpkg setup               |         |       |  2:29 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
 | Windows package is broken                                  |         |       |  0:31 |   0.0 |
@@ -843,6 +844,23 @@ Links:
   playlist.
 
 
+*** COMPLETED Setup the laptop for development                        :story:
+    :LOGBOOK:
+    CLOCK: [2022-07-06 Tue 08:00]--[2022-07-06 Wed 10:50] =>  2:50
+    CLOCK: [2022-04-21 Thu 08:32]--[2022-04-21 Thu 08:49] =>  0:17
+    :END:
+
+We need to move to the new vcpkg setup, with latest clang and gcc.
+
+*** COMPLETED Update README with thesis info                          :story:
+    :LOGBOOK:
+    CLOCK: [2022-08-30 Tue 15:38]--[2022-08-30 Tue 15:57] =>  0:19
+    CLOCK: [2022-08-30 Tue 15:01]--[2022-08-30 Tue 15:38] =>  0:37
+    :END:
+
+Now that we have finished the thesis, we need to update references to it in
+README.
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-05-07 Sat 11:32]--[2022-05-07 Sat 11:46] =>  0:14
@@ -860,13 +878,6 @@ Notes:
 Links:
 
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
-
-*** STARTED Setup the laptop for development                          :story:
-    :LOGBOOK:
-    CLOCK: [2022-04-21 Thu 08:32]--[2022-04-21 Thu 08:49] =>  0:17
-    :END:
-
-We need to move to the new vcpkg setup, with latest clang and gcc.
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
@@ -886,6 +897,7 @@ Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
 - we are using the old CTest script.
+- bypass presets altogether, set everything up manually.
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
