@@ -7,46 +7,49 @@
     },
     "configurePresets": [
         {
-            "name": "use-ninja",
+            "name": "ninja",
             "hidden": true,
             "generator": "Ninja",
-            "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-            }
+            "description": "Setup the Ninja generator."
         },
         {
-            "name": "default-build-dir",
+            "name": "build-dir",
             "hidden": true,
-            "binaryDir": "${sourceDir}/build/output/${presetName}"
+            "binaryDir": "${sourceDir}/build/output/${presetName}",
+            "description": "Setup the build directory."
         },
         {
-            "name": "dogen-test-environment",
+            "name": "environment",
             "hidden": true,
             "environment": {
                 "DOGEN_PROJECTS_DIRECTORY": "${sourceDir}/projects",
                 "FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../../frozen/master/projects",
                 "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
                 "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
-            }
+            },
+            "description": "Setup all environment variables."
         },
         {
-            "name": "dogen-nightly-test-environment",
-            "hidden": true,
-            "environment": {
-                "DOGEN_PROJECTS_DIRECTORY": "${sourceDir}/../dogen_pristine/projects",
-                "FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../frozen/projects",
-                "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../cpp_ref_impl/projects",
-                "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../csharp_ref_impl/Src"
-            }
-        },
-        {
-            "name": "dogen-common-options",
+            "name": "cmake",
             "hidden": true,
             "cacheVariables" : {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
                 "WITH_LATEX": "OFF",
                 "WITH_FULL_GENERATION": "OFF",
                 "WITH_MINIMAL_PACKAGING": "ON"
-            }
+            },
+            "description": "Setup common CMake configuration."
+        },
+        {
+            "name": "base-configuration",
+            "hidden": true,
+            "inherits": [
+                "ninja",
+                "build-dir",
+                "environment",
+                "cmake"
+            ],
+            "description": "Base class for common configuration options."
         },
         {
             "name": "debug-build",
@@ -54,9 +57,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             },
-            "inherits": [
-                "dogen-common-options"
-            ]
+            "description": "Setup CMake debug build."
         },
         {
             "name": "release-with-debug-build",
@@ -64,9 +65,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo"
             },
-            "inherits": [
-                "dogen-common-options"
-            ]
+            "description": "Setup CMake release with debug symbols build."
         },
         {
             "name": "release-build",
@@ -74,122 +73,82 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             },
-            "inherits": [
-                "dogen-common-options"
-            ]
+            "description": "Setup CMake release build."
         },
         {
-            "name": "use-clang",
+            "name": "clang",
             "hidden": true,
-            "inherits": [
-                "default-build-dir",
-                "use-ninja"
-            ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_CXX_FLAGS": "-stdlib=libstdc++",
                 "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libstdc++",
                 "CMAKE_SHARED_LINKER_FLAGS": "-stdlib=libstdc++"
-            }
+            },
+            "description": "Setup the Clang C++ compiler."
         },
         {
-            "name": "use-gcc",
+            "name": "gcc",
             "hidden": true,
-            "inherits": [
-                "default-build-dir",
-                "use-ninja"
-            ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "g++"
-            }
+            },
+            "description": "Setup the GCC C++ compiler."
         },
         {
-            "name": "use-msvc-cl",
+            "name": "msvc-cl",
             "hidden": true,
-            "inherits": [
-                "default-build-dir",
-                "use-ninja"
-            ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl"
-            }
+            },
+            "description": "Setup the MSVC C++ compiler."
         },
         {
-            "name": "use-msvc-clang-cl",
+            "name": "msvc-clang-cl",
             "hidden": true,
-            "inherits": [
-                "default-build-dir",
-                "use-ninja"
-            ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang-cl"
-            }
+            },
+            "description": "Setup the Clang MSVC C++ compiler."
         },
         {
             "name": "linux-clang-debug",
             "displayName": "Linux Clang Debug",
             "inherits": [
-                "use-clang",
-                "debug-build",
-                "dogen-test-environment"
-            ]
-        },
-        {
-            "name": "linux-clang-debug-nightly",
-            "displayName": "Linux Clang Debug nightly",
-            "hidden": false,
-            "inherits": [
-                "use-clang",
-                "debug-build",
-                "dogen-nightly-test-environment"
-            ]
+                "base-configuration",
+                "clang",
+                "debug-build"
+            ],
+            "description": "Dogen debug build for Linux Clang."
         },
         {
             "name": "linux-clang-release",
             "displayName": "Linux Clang Release",
             "inherits": [
-                "use-clang",
-                "release-build",
-                "dogen-test-environment"
-            ]
+                "base-configuration",
+                "clang",
+                "release-build"
+            ],
+            "description": "Dogen release build for Linux Clang."
         },
         {
             "name": "linux-gcc-debug",
             "displayName": "Linux GCC debug",
             "inherits": [
-                "use-gcc",
-                "debug-build",
-                "dogen-test-environment"
-            ]
-        },
-        {
-            "name": "linux-gcc-debug-nightly",
-            "displayName": "Linux GCC Debug nightly",
-            "hidden": false,
-            "inherits": [
-                "use-gcc",
-                "debug-build",
-                "dogen-nightly-test-environment"
-            ]
-        },
-        {
-            "name": "linux-gcc-release-nightly",
-            "displayName": "Linux GCC Release nightly",
-            "hidden": false,
-            "inherits": [
-                "use-gcc",
-                "release-build",
-                "dogen-nightly-test-environment"
-            ]
+                "base-configuration",
+                "gcc",
+                "debug-build"
+            ],
+            "description": "Dogen debug build for Linux GCC."
         },
         {
             "name": "linux-gcc-release",
             "displayName": "Linux GCC Release",
             "inherits": [
-                "use-gcc",
-                "release-build",
-                "dogen-test-environment"
-            ]
+                "base-configuration",
+                "gcc",
+                "release-build"
+            ],
+            "description": "Dogen release build for Linux GCC."
         },
         {
             "name": "windows-arch-x64",
@@ -201,14 +160,52 @@
             "toolset": {
                 "value": "host=x64",
                 "strategy": "external"
-            }
+            },
+            "description": "Base configuration for Windows 64-bit"
         },
         {
             "name": "windows-msvc",
             "displayName": "Windows x64",
             "hidden": true,
             "inherits": [
-                "use-msvc-cl",
+                "windows-arch-x64",
+                "msvc-cl"
+            ],
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Windows"
+                    ]
+                }
+            },
+            "description": "Setup the MSVC C++ compiler for Windows."
+        },
+        {
+            "name": "windows-msvc-debug",
+            "displayName": "Windows x64 Debug",
+            "inherits": [
+                "base-configuration",
+                "windows-msvc",
+                "debug-build"
+            ],
+            "description": "Dogen debug build for Windows MSVC."
+        },
+        {
+            "name": "windows-msvc-release",
+            "displayName": "Windows x64 Release",
+            "inherits": [
+                "base-configuration",
+                "windows-msvc",
+                "release-build"
+            ],
+            "description": "Dogen release build for Windows MSVC."
+        },
+        {
+            "name": "windows-msvc-clang-cl",
+            "displayName": "Windows x64 Debug",
+            "hidden": true,
+            "inherits": [
+                "msvc-clang-cl",
                 "windows-arch-x64"
             ],
             "vendor": {
@@ -217,83 +214,49 @@
                         "Windows"
                     ]
                 }
-            }
-        },
-        {
-            "name": "windows-msvc-debug",
-            "displayName": "Windows x64 Debug",
-            "inherits": [
-                "windows-msvc",
-                "debug-build",
-                "dogen-test-environment"
-            ]
-        },
-        {
-            "name": "windows-msvc-release",
-            "displayName": "Windows x64 Release",
-            "inherits": [
-                "windows-msvc",
-                "release-build",
-                "dogen-test-environment"
-            ]
-        },
-        {
-            "name": "windows-msvc-clang-cl",
-            "displayName": "Windows x64 Debug",
-            "hidden": true,
-            "inherits": [
-                "use-msvc-clang-cl",
-                "windows-arch-x64",
-                "dogen-test-environment"
-            ],
-            "vendor": {
-                "microsoft.com/VisualStudioSettings/CMake/1.0": {
-                    "hostOS": [
-                        "Windows"
-                    ]
-                }
-            }
+            },
+            "description": "Setup the Clang MSVC C++ compiler for Windows."
         },
         {
             "name": "windows-msvc-clang-cl-debug",
             "displayName": "Windows x64 Debug",
             "inherits": [
+                "base-configuration",
                 "windows-msvc-clang-cl",
-                "debug-build",
-                "dogen-test-environment"
-            ]
+                "debug-build"
+            ],
+            "description": "Dogen debug build for Windows Clang MSVC."
         },
         {
             "name": "windows-msvc-clang-cl-release",
             "displayName": "Windows x64 Release",
             "inherits": [
+                "base-configuration",
                 "windows-msvc-clang-cl",
-                "release-build",
-                "dogen-test-environment"
-            ]
+                "release-build"
+            ],
+            "description": "Dogen release build for Windows Clang MSVC."
         },
         {
             "name": "macos-clang-debug",
             "displayName": "Mac OSX Debug",
             "inherits": [
-                "use-ninja",
-                "debug-build",
-                "default-build-dir",
-                "dogen-test-environment"
+                "base-configuration",
+                "debug-build"
             ],
             "cacheVariables": {
                 "CMAKE_CXX_FLAGS": "-fprofile-arcs -ftest-coverage"
-            }
+            },
+            "description": "Dogen debug build for MacOSX Clang."
         },
         {
             "name": "macos-clang-release",
             "displayName": "Mac OSX Release",
             "inherits": [
-                "use-ninja",
-                "release-with-debug-build",
-                "default-build-dir",
-                "dogen-test-environment"
-            ]
+                "base-configuration",
+                "release-with-debug-build"
+            ],
+            "description": "Dogen release build for MacOSX Clang."
         }
     ],
     "buildPresets": [
@@ -318,20 +281,12 @@
             "configurePreset": "linux-clang-debug"
         },
         {
-            "name": "linux-clang-debug-nightly",
-            "configurePreset": "linux-clang-debug-nightly"
-        },
-        {
             "name": "linux-clang-release",
             "configurePreset": "linux-clang-release"
         },
         {
             "name": "linux-gcc-debug",
             "configurePreset": "linux-gcc-debug"
-        },
-        {
-            "name": "linux-gcc-debug-nightly",
-            "configurePreset": "linux-gcc-debug-nightly"
         },
         {
             "name": "linux-gcc-release",
