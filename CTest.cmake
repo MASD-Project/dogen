@@ -47,16 +47,96 @@ endif()
 #
 # Ensure all mandatory parameters have been set.
 #
-if(NOT DEFINED model)
-    message(FATAL_ERROR "CTest model parameter not defined.")
+if(NOT DEFINED build_name)
+    message(FATAL_ERROR "Parameter build_name not defined.")
+endif()
+set(preset ${build_name})
+
+if(NOT DEFINED build_group)
+    message(FATAL_ERROR "Parameter build_group not defined.")
 endif()
 
-if(NOT DEFINED preset)
-    message(FATAL_ERROR "CTest preset parameter not defined.")
+if(NOT DEFINED with_presets)
+    message(FATAL_ERROR "Parameter with_presets not defined.")
 endif()
 
+#
+# Parse the build name to extract input parameters, and validate them.
+#
+string(TOLOWER "${build_name}" build_name_lower)
+message(STATUS "CDash build name: ${build_name}")
+
+string(REPLACE "-" ";" build_name_list ${build_name_lower})
+list(LENGTH build_name_list bn_length)
+if (NOT bn_length EQUAL 3)
+    message(FATAL_ERROR "Invalid build name: ${build_name}")
+endif()
+
+# Setup the operative system.
+list(GET build_name_list 0 operative_system)
+if(NOT DEFINED operative_system)
+    message(FATAL_ERROR "Operative system not supplied.")
+endif()
+
+ if(${operative_system} STREQUAL "linux")
+     message(STATUS "OS: Linux")
+ elseif(${operative_system} STREQUAL "windows")
+     message(STATUS "OS: Windows")
+ elseif(${operative_system} STREQUAL "macos")
+     message(STATUS "OS: Mac OS")
+ else()
+    message(FATAL_ERROR "Unsupported operative system: ${operative_system}")
+endif()
+
+# Setup the compiler.
+list(GET build_name_list 1 compiler)
+if(NOT DEFINED compiler)
+    message(FATAL_ERROR "Compiler not supplied.")
+endif()
+
+if(${compiler} STREQUAL "gcc")
+    message(STATUS "Compiler: GCC")
+    if (NOT with_presets)
+        set(ENV{CC} "gcc")
+        set(ENV{CXX} "g++")
+        message(STATUS "Setting up environment for compiler.")
+    endif()
+elseif(${compiler} STREQUAL "clang")
+    message(STATUS "Compiler: Clang")
+    if (NOT with_presets)
+        set(ENV{CC} "clang")
+        set(ENV{CXX} "clang++")
+        message(STATUS "Setting up environment for compiler.")
+    endif()
+else()
+    message(FATAL_ERROR "Unsupported compiler: ${compiler}")
+endif()
+
+# Setup the configuration
+list(GET build_name_list 2 configuration)
 if(NOT DEFINED configuration)
-    message(FATAL_ERROR "CTest configuration parameter not defined.")
+     message(FATAL_ERROR "Configuration not supplied.")
+ endif()
+
+if(configuration STREQUAL "debug")
+    message(STATUS "CMake configuration: Debug")
+    set(CTEST_CONFIGURATION_TYPE "Debug")
+elseif(configuration STREQUAL "release")
+    message(STATUS "CMake configuration: Release")
+    set(CTEST_CONFIGURATION_TYPE "Release")
+else()
+    message(FATAL_ERROR "Configuration not supported: ${configuration}")
+endif()
+
+# Setup the build group.
+if(build_group STREQUAL "Nightly")
+    message(STATUS "CDash build_group: Nightly")
+elseif(build_group STREQUAL "Continuous")
+    message(STATUS "CDash build_group: Continuous")
+elseif(build_group STREQUAL "Experimental")
+    message(STATUS "CDash build_group: Experimental")
+else()
+    message(FATAL_ERROR "Build group not supported: ${build_group}")
 endif()
 
 #
@@ -71,13 +151,6 @@ endif()
 
 set(CTEST_BUILD_NAME "${preset}")
 set(CTEST_BUILD_TARGET "package")
-
-string(TOLOWER "${configuration}" configuration_lower)
-if(configuration_lower STREQUAL "debug")
-    set(CTEST_CONFIGURATION_TYPE "Debug")
-else()
-    set(CTEST_CONFIGURATION_TYPE "Release")
-endif()
 
 # Set the generator. This will override the presets, but we have no option as
 # CTest refuses to configure unless there is a generator.
@@ -119,11 +192,11 @@ set(retry_count 10)
 
 set(WITH_COVERAGE false)
 if(DEFINED code_coverage)
-    if (code_coverage EQUAL 1)
-        if(preset MATCHES "gcc")
+    if(code_coverage EQUAL 1)
+        if(compiler EQUALS "gcc")
             find_program(CTEST_COVERAGE_COMMAND NAMES gcov)
             message(STATUS "Looking for gcov.")
-        elseif(preset MATCHES "clang")
+        elseif(compiler EQUALS "clang")
             message(STATUS "Looking for llvm-cov.")
             find_program(CTEST_COVERAGE_COMMAND NAMES llvm-cov)
             set(CTEST_COVERAGE_EXTRA_FLAGS "gcov")
@@ -154,7 +227,7 @@ set(WITH_MEMCHECK false)
 #
 # Step: start the build
 #
-ctest_start(${model})
+ctest_start(${build_group})
 
 #
 # Nightly
@@ -197,8 +270,12 @@ if(git_result)
     message(FATAL_ERROR "Failed to update source code from git.")
 endif()
 
-# Setup the preset for configuration.
-set(cmake_args ${cmake_defines} "--preset ${preset}")
+# Setup the preset for configuration, if requested.
+if(with_presets)
+    set(cmake_args ${cmake_defines} "--preset ${preset}")
+endif()
+
+# For nightlies, we want to force full generation.
 if(${build_group} MATCHES Nightly)
     set(cmake_args ${cmake_defines} "-DWITH_FULL_GENERATION=ON")
 endif()
