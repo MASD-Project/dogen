@@ -33,10 +33,7 @@
             "name": "cmake",
             "hidden": true,
             "cacheVariables" : {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "WITH_LATEX": "OFF",
-                "WITH_FULL_GENERATION": "OFF",
-                "WITH_MINIMAL_PACKAGING": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             },
             "description": "Setup common CMake configuration."
         },
