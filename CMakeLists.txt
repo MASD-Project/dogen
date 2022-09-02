@@ -131,12 +131,12 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 #
 # options
 #
-option(WITH_PLANTUML "Build UML representation." on)
-option(WITH_DOXYGEN "Build the project documentation." off)
-option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
-option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
-option(WITH_FULL_GENERATION "Generate all facets for all models." off)
-option(WITH_PROFILING "Generate profiling information for code coverage." off)
+option(WITH_PLANTUML "Build UML representation." ON)
+option(WITH_DOXYGEN "Build the project documentation." OFF)
+option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." OFF)
+option(WITH_MINIMAL_PACKAGING "Package just the main application" ON)
+option(WITH_FULL_GENERATION "Generate all facets for all models." OFF)
+option(WITH_PROFILING "Generate profiling information for code coverage." OFF)
 
 #
 # check for dependencies
