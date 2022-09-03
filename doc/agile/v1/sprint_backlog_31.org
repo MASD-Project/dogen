@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-08-30 Tue 15:57]
+#+CAPTION: Clock summary at [2022-09-03 Sat 14:33]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *78:05* |       |       |   0.0 |
+| *Total time*                                               | *84:03* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 78:05   |       |       |   0.0 |
-| Active                                                     |         | 78:05 |       |   0.0 |
+| Stories                                                    | 84:03   |       |       |   0.0 |
+| Active                                                     |         | 84:03 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  8:37 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  8:54 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -46,7 +46,8 @@
 | Setup the laptop for development                           |         |       |  3:07 |   0.0 |
 | Update README with thesis info                             |         |       |  0:56 |   0.0 |
 | Gitter notifications for builds are not showing up         |         |       |  0:14 |   0.0 |
-| Update nightly builds to use new vcpkg setup               |         |       |  2:29 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |         |       |  6:59 |   0.0 |
+| Tests should take full generation into account             |         |       |  1:11 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
 | Windows package is broken                                  |         |       |  0:31 |   0.0 |
 | Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
@@ -462,6 +463,9 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-08-30 Tue 16:53]--[2022-08-30 Tue 16:54] =>  0:01
+    CLOCK: [2022-08-30 Tue 16:21]--[2022-08-30 Tue 16:27] =>  0:06
+    CLOCK: [2022-08-30 Tue 16:10]--[2022-08-30 Tue 16:20] =>  0:10
     CLOCK: [2022-07-03 Sun 17:50]--[2022-07-03 Sun 18:16] =>  0:26
     CLOCK: [2022-05-07 Sat 10:51]--[2022-05-07 Sat 11:00] =>  0:09
     CLOCK: [2022-04-21 Thu 16:40]--[2022-04-21 Thu 17:15] =>  0:35
@@ -881,6 +885,11 @@ Links:
 
 *** STARTED Update nightly builds to use new vcpkg setup              :story:
     :LOGBOOK:
+    CLOCK: [2022-09-02 Fri 11:40]--[2022-09-02 Fri 12:25] =>  0:45
+    CLOCK: [2022-09-01 Thu 17:47]--[2022-09-01 Thu 19:01] =>  1:14
+    CLOCK: [2022-09-01 Thu 16:01]--[2022-09-01 Thu 17:10] =>  1:09
+    CLOCK: [2022-09-01 Thu 14:04]--[2022-09-01 Thu 15:01] =>  0:57
+    CLOCK: [2022-08-30 Tue 16:55]--[2022-08-30 Tue 17:20] =>  0:25
     CLOCK: [2022-05-15 Sun 12:50]--[2022-05-15 Sun 14:10] =>  1:20
     CLOCK: [2022-05-15 Sun 12:18]--[2022-05-15 Sun 12:50] =>  0:32
     CLOCK: [2022-05-07 Sat 16:30]--[2022-05-07 Sat 16:40] =>  0:10
@@ -897,7 +906,44 @@ Notes:
 
 - update the compiler versions (e.g. =clang9-Linux-x86_64-Debug=, etc).
 - we are using the old CTest script.
-- bypass presets altogether, set everything up manually.
+- bypass presets altogether, set everything up manually. Actually this is not
+  quite that simple because we are using the same script for continuous builds.
+  Simpler way:
+  - supply a "build id". Detect all parameters from build ID.
+  - supply a flag "use presets". If true, use the build id as the preset.
+    Otherwise, rely on the environment.
+- actually there are several approaches we can take for this:
+  - supply all parameters on a preset name but call it "build name" since that
+    is the CDash nomenclature. Also supply a flag to determine if one is to use
+    presets or not. This should solve the impedance mismatch between nightlies,
+    continuous and local dev.
+  - alternatively, use the build name as-is and split/parse it inside CMake
+    script. This means less parameters to supply, e.g.:
+
+    : export cmake_args="model=Continuous,preset=${preset},configuration=${{matrix.buildtype}}"
+
+    We could just supply one parameter.
+  - use symlinks in nightly to simulate directory layout. However, not clear how
+    we would solve the "dogen pristine" problem.
+- we can't use presets at all because they have:
+
+  : WITH_FULL_GENERATION="OFF"
+
+  We need to set this to on.
+
+*** STARTED Tests should take full generation into account            :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-03 Sat 14:12]--[2022-09-03 Sat 14:33] =>  0:21
+    CLOCK: [2022-09-02 Fri 12:26]--[2022-09-02 Fri 13:16] =>  0:50
+    :END:
+
+At present tests for Dogen are respecting the requested features in each model,
+i.e. we only generate the requested facets. However, for nightlies we have an
+override to generate all possible facets. This means that tests would fail if we
+tried to compare generated code against what is in the Dogen repo. This results
+in special cases for the nightly build. However, if somehow we could get the
+tests to respect the override, then we would not need a pristine directory for
+comparisons, making nightlies a less special case.
 
 *** STARTED Assorted improvements to CMake files                       :epic:
     :LOGBOOK:
@@ -1040,6 +1086,8 @@ following error:
 : Error: Object has attribute with undefined type: spec_category
 
 We are probably not normalising to lower case.
+
+In addition
 
 Merged stories:
 

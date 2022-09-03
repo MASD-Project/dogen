@@ -71,7 +71,7 @@ Release goals:
 - finish the dogen API and implement all functionality in terms of
   metamodel elements - e.g. no special cases such as profiles,
   licences etc.
-- we also expected to define the logical-physical conceptual model.
+- we also expected to define the LPS (Logical-Physical Space).
 
 ** Core work
 
