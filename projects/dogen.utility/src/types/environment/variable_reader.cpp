@@ -71,9 +71,9 @@ read_environment_variable(const std::string& n) {
     return r;
 #else
     const char* v = std::getenv(n.c_str());
-    if (v == NULL) {
+    if (v == nullptr) {
         BOOST_LOG_SEV(lg, debug) << "Environment variable is not defined.";
-        return std::string();
+        return {};
     }
 
     const std::string r(v);
