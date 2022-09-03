@@ -42,14 +42,17 @@ namespace dogen {
 
 mock_configuration_factory::mock_configuration_factory(
     const bool enable_tracing, const bool enable_reporting,
-    const bool enable_diffing)
+    const bool enable_diffing, const std::string& variability_override)
     : enable_tracing_(enable_tracing),
       enable_reporting_(enable_reporting),
-      enable_diffing_(enable_diffing) {
+      enable_diffing_(enable_diffing),
+      variability_override_(variability_override) {
 
     BOOST_LOG_SEV(lg, debug) << "Enable tracing: " << enable_tracing_
                              << " Enable reporting: " << enable_reporting_
-                             << " Enable diffing: " << enable_diffing_;
+                             << " Enable diffing: " << enable_diffing_
+                             << " Variability override: "
+                             << variability_override_;
 }
 
 configuration mock_configuration_factory::
@@ -94,6 +97,11 @@ make(const boost::filesystem::path& target, const std::string& activity) const {
         rcfg.style(reporting_style::org_mode);
         rcfg.output_directory(r.byproduct_directory());
         r.reporting(rcfg);
+    }
+
+    if (!variability_override_.empty()) {
+        const std::vector<std::string> overrides({ variability_override_ });
+        r.model_processing().variability_overrides(overrides);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating mock configuration. Result: "

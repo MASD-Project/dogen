@@ -37,7 +37,8 @@ namespace dogen {
 class mock_configuration_factory final {
 public:
     mock_configuration_factory(const bool enable_tracing,
-        const bool enable_reporting, const bool enable_diffing);
+        const bool enable_reporting, const bool enable_diffing,
+        const std::string& variability_override = std::string());
 
 public:
     configuration make(const boost::filesystem::path& target,
@@ -47,6 +48,7 @@ private:
     const bool enable_tracing_;
     const bool enable_reporting_;
     const bool enable_diffing_;
+    const std::string variability_override_;
 };
 
 }
