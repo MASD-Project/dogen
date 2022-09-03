@@ -1,63 +1,63 @@
 #!/bin/bash
 
 #
-# Very trivial script to use CTest to run two nightly builds (clang
-# and gcc). Ensure you have exported CMAKE_TOOLCHAIN_FILE before running
-# this script.
-export PATH=/home/marco/local/cmake-3.22.2-Linux-x86_64/bin:$PATH
-export MASD_DIR=/work/DomainDrivenConsulting/masd
-export CMAKE_TOOLCHAIN_FILE=${MASD_DIR}/vcpkg/masd/scripts/buildsystems/vcpkg.cmake
-
+# Very trivial script to use CTest to run two nightly builds (clang and gcc).
+#
 workspace="${HOME}/nightly"
 configuration=Debug
-generator=Ninja
 number_of_jobs=6
 build_group=Nightly
-logs_dir=../logs
-clang_compiler=clang9
-gcc_compiler=gcc9
+logs_dir=${workspace}/logs
+clang_compiler=clang
+gcc_compiler=gcc
 verbosity=-VV
+
+#
+# Logs
+#
+if [ ! -d "${logs_dir}" ]; then
+    echo "Creating the logs directory."
+    mkdir ${logs_dir}
+fi
 
 #
 # C# Ref Impl
 #
+echo "C# Ref Impl"
 product="csharp_ref_impl"
 git_url="https://github.com/MASD-Project/${product}.git"
-git_dir="${workspace}/${product}"
-export CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${git_dir}/Src/
+git_dir="${workspace}/${product}/master"
 if [ ! -d "${git_dir}" ]; then
-    git clone ${git_url} ${git_dir}
+    git clone --depth=1 ${git_url} ${git_dir}
 fi
 cd ${git_dir}
-# update manually as ctest won't do it for us.
 git pull origin master
 
 #
 # Frozen
 #
+echo "Frozen"
 product="frozen"
 git_url="https://github.com/MASD-Project/${product}.git"
-git_dir="${workspace}/${product}"
-export FROZEN_PROJECTS_DIRECTORY=${git_dir}/projects
+git_dir="${workspace}/${product}/master"
 if [ ! -d "${git_dir}" ]; then
-    git clone ${git_url} ${git_dir}
+    git clone --depth=1 ${git_url} ${git_dir}
 fi
 cd ${git_dir}
-# update manually as ctest won't do it for us.
 git pull origin master
-
 
 #
 # C++ Ref Impl
 #
+echo "C++ Ref Impl"
 product="cpp_ref_impl"
 git_url="https://github.com/MASD-Project/${product}.git"
-git_dir="${workspace}/${product}"
-export CPP_REF_IMPL_PROJECTS_DIRECTORY=${git_dir}/projects
+git_dir="${workspace}/${product}/master"
 if [ ! -d "${git_dir}" ]; then
-    git clone ${git_url} ${git_dir}
+    git clone --depth=1 ${git_url} ${git_dir}
 fi
 cd ${git_dir}
+
 # update manually as ctest won't do it for us.
 git pull origin master
 
@@ -72,32 +72,34 @@ ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},ge
 #
 product="dogen"
 git_url="https://github.com/MASD-Project/${product}.git"
-git_dir="${workspace}/${product}"
-if [ -d "${git_dir}" ]; then
-    rm -rf ${git_dir}
+
+cd ${workspace}
+git_dir="${workspace}/${product}/master"
+if [ -d "${workspace}/${product}" ]; then
+    rm -rf ${workspace}/${product}
 fi
+mkdir ${workspace}/${product}
+git clone --depth=1 --recurse-submodules ${git_url}
 
-pristine_dir="${workspace}/${product}_pristine"
-if [ -d "${pristine_dir}" ]; then
-    rm -rf ${pristine_dir}
-fi
-
-git clone --depth=3 ${git_url} ${git_dir}
-cp -r ${git_dir} ${pristine_dir}
-export DOGEN_PROJECTS_DIRECTORY="${pristine_dir}/projects"
-
+# Build just the code generator first, do a full generation and commit that
+# locally. This commit is only for the purposes of the nightly.
+echo "Dogen (for generation)"
 cd ${git_dir}
-build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} dogen.cli > ${logs_dir}/dogen.cli.log
-export DOGEN_FULL_GENERATION="1"
-build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gao > ${logs_dir}/gao.log
+preset="linux-gcc-release"
+cmake --preset ${preset} > ${logs_dir}/dogen.cli.log
+cmake --build --preset ${preset} --target dogen.cli >> ${logs_dir}/dogen.cli.log
+
+cmake --preset ${preset} > ${logs_dir}/gao.log
+cmake --build --preset ${preset} --target gao >> ${logs_dir}/gao.log
 git add -A > ${logs_dir}/git_add.log
-git commit -m "Generated code." > ${logs_dir}/git_add.log
+git commit -m "Generated code." >> ${logs_dir}/git_add.log
 
-export code_coverage=1
+echo "Dogen GCC"
 preset="linux-gcc-debug"
-ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
+compiler=${gcc_compiler}
+ctest ${verbosity} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-STAGE_DIR=build/output/${compiler}/${configuration}/stage
-
+echo "Dogen clang"
 preset="linux-clang-debug"
-ctest ${verbosity} --script "CTest.cmake,configuration=${configuration},model=${build_group},preset=${preset}" > ${logs_dir}/ctest_${product}_${preset}.log 2>&1
+compiler=${clang_compiler}
+ctest ${verbosity} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
