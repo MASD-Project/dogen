@@ -19,7 +19,9 @@
  *
  */
 #include <sstream>
+#include <locale>
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
@@ -31,6 +33,7 @@
 #include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
 #include "dogen.utility/types/string/differ.hpp"
+#include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.orchestration/tests/model_generator.hpp"
 
 namespace  {
@@ -86,6 +89,40 @@ model_generator::gather_artefacts(const dogen::physical::entities::model& m) {
     return r;
 }
 
+configuration model_generator::
+make_configuration(const boost::filesystem::path& target,
+    const bool enable_tracing_locally, const bool enable_reporting_locally,
+    const bool enable_diffing_locally) {
+    const bool et(enable_tracing_globally || enable_tracing_locally);
+    const bool er(enable_reporting_globally || enable_reporting_locally);
+    const bool ed(enable_diffing_globally || enable_diffing_locally);
+
+    /*
+     * If the environment variable forcing full generation is on, setup the
+     * overrides and expected profile for it.
+     */
+    using vr = dogen::utility::environment::variable_reader;
+    const std::string var("WITH_FULL_GENERATION");
+    using boost::algorithm::to_lower_copy;
+    const std::string wfg = to_lower_copy(vr::read_environment_variable(var));
+
+    using dogen::mock_configuration_factory;
+    const bool with_full_generation(wfg == "on");
+    if (with_full_generation) {
+        const std::string full_generation_option =
+            "--variability-override masd.variability.profile,"
+            "dogen.profiles.base.test_all_facets";
+
+        mock_configuration_factory f(et, er, ed, full_generation_option);
+        const auto r(f.make(target, run_activity));
+        return r;
+    }
+
+    mock_configuration_factory f(et, er, ed);
+    const auto r(f.make(target, run_activity));
+    return r;
+}
+
 dogen::physical::entities::model model_generator::
 apply_physical_model_production(const boost::filesystem::path& target,
     const std::vector<boost::filesystem::path>& reference_directories,
@@ -96,12 +133,8 @@ apply_physical_model_production(const boost::filesystem::path& target,
     /*
      * Create the configuration.
      */
-    const bool et(enable_tracing_globally || enable_tracing_locally);
-    const bool er(enable_reporting_globally || enable_reporting_locally);
-    const bool ed(enable_diffing_globally || enable_diffing_locally);
-    using dogen::mock_configuration_factory;
-    mock_configuration_factory f(et, er, ed);
-    const auto cfg(f.make(target, run_activity));
+    const auto cfg(make_configuration(target, enable_tracing_locally,
+            enable_reporting_locally, enable_diffing_locally));
 
     /*
      * Bootstrap the top-level context.

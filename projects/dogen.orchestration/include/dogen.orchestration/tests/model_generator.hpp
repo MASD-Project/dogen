@@ -29,6 +29,7 @@
 #include <string>
 #include <ostream>
 #include <boost/shared_ptr.hpp>
+#include "dogen/types/configuration.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 
@@ -49,6 +50,15 @@ private:
 
     static std::list<boost::shared_ptr<physical::entities::artefact>>
     gather_artefacts(const dogen::physical::entities::model& m);
+
+    /**
+     * @brief Creates the configuration.
+     */
+    static configuration make_configuration(
+        const boost::filesystem::path& target,
+        const bool enable_tracing_locally,
+        const bool enable_reporting_locally,
+        const bool enable_diffing_locally);
 
 public:
     static dogen::physical::entities::model
