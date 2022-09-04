@@ -18,6 +18,9 @@ verbosity=-VV
 if [ ! -d "${logs_dir}" ]; then
     echo "Creating the logs directory."
     mkdir ${logs_dir}
+else
+    echo "Deleting old logs."
+    rm -f ${logs_dir}/*.log
 fi
 
 #
@@ -61,11 +64,11 @@ cd ${git_dir}
 # update manually as ctest won't do it for us.
 git pull origin master
 
-compiler=${clang_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+# compiler=${clang_compiler}
+# ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-compiler=${gcc_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+# compiler=${gcc_compiler}
+# ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
@@ -75,24 +78,26 @@ git_url="https://github.com/MASD-Project/${product}.git"
 
 cd ${workspace}
 git_dir="${workspace}/${product}/master"
-if [ -d "${workspace}/${product}" ]; then
-    rm -rf ${workspace}/${product}
-fi
+# if [ -d "${workspace}/${product}" ]; then
+#     rm -rf ${workspace}/${product}
+# fi
 mkdir ${workspace}/${product}
-git clone --depth=1 --recurse-submodules ${git_url}
+cd ${workspace}/${product}
+git clone --depth=1 --recurse-submodules ${git_url} master
 
 # Build just the code generator first, do a full generation and commit that
 # locally. This commit is only for the purposes of the nightly.
 echo "Dogen (for generation)"
 cd ${git_dir}
 preset="linux-gcc-release"
-cmake --preset ${preset} > ${logs_dir}/dogen.cli.log
+cmake -DWITH_FULL_GENERATION=ON --preset ${preset} > ${logs_dir}/dogen.cli.log
 cmake --build --preset ${preset} --target dogen.cli >> ${logs_dir}/dogen.cli.log
 
-cmake --preset ${preset} > ${logs_dir}/gao.log
+cmake -DWITH_FULL_GENERATION=ON --preset ${preset} > ${logs_dir}/dogen.cli.log
 cmake --build --preset ${preset} --target gao >> ${logs_dir}/gao.log
 git add -A > ${logs_dir}/git_add.log
 git commit -m "Generated code." >> ${logs_dir}/git_add.log
+export WITH_FULL_GENERATION=ON
 
 echo "Dogen GCC"
 preset="linux-gcc-debug"
