@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-03 Sat 14:33]
+#+CAPTION: Clock summary at [2022-09-04 Sun 15:54]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *84:03* |       |       |   0.0 |
+| *Total time*                                               | *85:02* |       |       |   0.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 84:03   |       |       |   0.0 |
-| Active                                                     |         | 84:03 |       |   0.0 |
+| Stories                                                    | 85:02   |       |       |   0.0 |
+| Active                                                     |         | 85:02 |       |   0.0 |
 | Edit release notes for previous sprint                     |         |       |  6:06 |   0.0 |
 | Create a demo and presentation for previous sprint         |         |       |  0:27 |   0.0 |
 | Fix broken org-mode tests                                  |         |       |  3:09 |   0.0 |
-| Sprint and product backlog grooming                        |         |       |  8:54 |   0.0 |
+| Sprint and product backlog grooming                        |         |       |  9:00 |   0.0 |
 | Move build to GitHub                                       |         |       |  4:07 |   0.0 |
 | Update vcpkg to latest                                     |         |       |  3:00 |   0.0 |
 | Remove third-party dependencies outside vcpkg              |         |       |  1:19 |   0.0 |
@@ -45,9 +45,9 @@
 | Create a series of lectures on MDE and MASD                |         |       |  9:36 |   0.0 |
 | Setup the laptop for development                           |         |       |  3:07 |   0.0 |
 | Update README with thesis info                             |         |       |  0:56 |   0.0 |
-| Gitter notifications for builds are not showing up         |         |       |  0:14 |   0.0 |
-| Update nightly builds to use new vcpkg setup               |         |       |  6:59 |   0.0 |
 | Tests should take full generation into account             |         |       |  1:11 |   0.0 |
+| Gitter notifications for builds are not showing up         |         |       |  0:14 |   0.0 |
+| Update nightly builds to use new vcpkg setup               |         |       |  7:52 |   0.0 |
 | Assorted improvements to CMake files                       |         |       |  6:26 |   0.0 |
 | Windows package is broken                                  |         |       |  0:31 |   0.0 |
 | Capitalise titles in models correctly                      |         |       |  0:06 |   0.0 |
@@ -461,8 +461,9 @@ Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integ
 ../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(286): error: in "dogen_product_org_tests/dogen_identification_org_conversion_has_no_diffs": check diff.empty() has failed
 #+end_example
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
     :LOGBOOK:
+    CLOCK: [2022-09-04 Sun 15:48]--[2022-09-04 Sun 15:54] =>  0:06
     CLOCK: [2022-08-30 Tue 16:53]--[2022-08-30 Tue 16:54] =>  0:01
     CLOCK: [2022-08-30 Tue 16:21]--[2022-08-30 Tue 16:27] =>  0:06
     CLOCK: [2022-08-30 Tue 16:10]--[2022-08-30 Tue 16:20] =>  0:10
@@ -865,7 +866,21 @@ We need to move to the new vcpkg setup, with latest clang and gcc.
 Now that we have finished the thesis, we need to update references to it in
 README.
 
-*** STARTED Gitter notifications for builds are not showing up        :story:
+*** COMPLETED Tests should take full generation into account          :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-03 Sat 14:12]--[2022-09-03 Sat 14:33] =>  0:21
+    CLOCK: [2022-09-02 Fri 12:26]--[2022-09-02 Fri 13:16] =>  0:50
+    :END:
+
+At present tests for Dogen are respecting the requested features in each model,
+i.e. we only generate the requested facets. However, for nightlies we have an
+override to generate all possible facets. This means that tests would fail if we
+tried to compare generated code against what is in the Dogen repo. This results
+in special cases for the nightly build. However, if somehow we could get the
+tests to respect the override, then we would not need a pristine directory for
+comparisons, making nightlies a less special case.
+
+*** POSTPONED Gitter notifications for builds are not showing up      :story:
     :LOGBOOK:
     CLOCK: [2022-05-07 Sat 11:32]--[2022-05-07 Sat 11:46] =>  0:14
     :END:
@@ -883,8 +898,10 @@ Links:
 
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
 
-*** STARTED Update nightly builds to use new vcpkg setup              :story:
+*** POSTPONED Update nightly builds to use new vcpkg setup            :story:
     :LOGBOOK:
+    CLOCK: [2022-09-04 Sun 15:25]--[2022-09-04 Sun 15:29] =>  0:04
+    CLOCK: [2022-09-04 Sun 12:50]--[2022-09-04 Sun 13:39] =>  0:49
     CLOCK: [2022-09-02 Fri 11:40]--[2022-09-02 Fri 12:25] =>  0:45
     CLOCK: [2022-09-01 Thu 17:47]--[2022-09-01 Thu 19:01] =>  1:14
     CLOCK: [2022-09-01 Thu 16:01]--[2022-09-01 Thu 17:10] =>  1:09
@@ -931,21 +948,7 @@ Notes:
 
   We need to set this to on.
 
-*** STARTED Tests should take full generation into account            :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-03 Sat 14:12]--[2022-09-03 Sat 14:33] =>  0:21
-    CLOCK: [2022-09-02 Fri 12:26]--[2022-09-02 Fri 13:16] =>  0:50
-    :END:
-
-At present tests for Dogen are respecting the requested features in each model,
-i.e. we only generate the requested facets. However, for nightlies we have an
-override to generate all possible facets. This means that tests would fail if we
-tried to compare generated code against what is in the Dogen repo. This results
-in special cases for the nightly build. However, if somehow we could get the
-tests to respect the override, then we would not need a pristine directory for
-comparisons, making nightlies a less special case.
-
-*** STARTED Assorted improvements to CMake files                       :epic:
+*** CANCELLED Assorted improvements to CMake files                     :epic:
     :LOGBOOK:
     CLOCK: [2022-04-08 Fri 21:17]--[2022-04-08 Fri 21:26] =>  0:09
     CLOCK: [2022-04-08 Fri 20:35]--[2022-04-08 Fri 20:45] =>  0:10
@@ -1038,7 +1041,7 @@ not change. It should have changed to:
 
 : dogen_test_models_all_builtins
 
-*** STARTED Windows package is broken                                 :story:
+*** CANCELLED Windows package is broken                               :story:
     :LOGBOOK:
     CLOCK: [2022-04-09 Sat 10:10]--[2022-04-09 Sat 10:24] =>  0:14
     CLOCK: [2022-04-08 Fri 17:31]--[2022-04-08 Fri 17:48] =>  0:17
@@ -1069,7 +1072,7 @@ Links:
 - [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
 - [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
 
-*** STARTED Capitalise titles in models correctly                     :story:
+*** CANCELLED Capitalise titles in models correctly                   :story:
     :LOGBOOK:
     CLOCK: [2022-04-08 Fri 23:11]--[2022-04-08 Fri 23:17] =>  0:06
     :END:
@@ -1097,7 +1100,7 @@ At present most models still use the "all lower case" notation, copied from Dia.
 We need to capitalise headers correctly so that when we generate documentation
 they come out correctly.
 
-*** STARTED Add full and relative path processing to PM               :story:
+*** CANCELLED Add full and relative path processing to PM             :story:
     :LOGBOOK:
     CLOCK: [2022-04-08 Fri 23:29]--[2022-04-08 Fri 23:41] =>  0:12
     :END:
@@ -1274,7 +1277,7 @@ Notes:
   could map it to say RapidJSON serialisation. Or we could support two methods
   of serialisation for the same project. The user chooses where to place them.
 
-*** STARTED Add support for relations in codec model                  :story:
+*** CANCELLED Add support for relations in codec model                :story:
     :PROPERTIES:
     :CUSTOM_ID: 1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB
     :END:
@@ -1310,7 +1313,7 @@ Notes:
 - codec needs to have a way to bootstrap its context without requiring
   orchestration.
 
-*** STARTED Consider standardising all templates as mustache templates :story:
+*** CANCELLED Consider standardising all templates as mustache templates :story:
     :LOGBOOK:
     CLOCK: [2022-03-20 Sun 09:18]--[2022-03-20 Sun 09:39] =>  0:21
     :END:
@@ -1544,874 +1547,3 @@ back and then make a decision.
 
 The most obvious thing is just to call the templates after their
 actual name: mustache.
-
-*** Investigate why codec object is =Commentable=                     :story:
-
-Most other types are =Element=.
-
-*** Add models directory to each component                            :story:
-
-Instead of a product level models directory, we should have separate component
-level directories. We can't do the PMM implementation just yet but we can use
-regexes to get the directory in the correct shape and then use it to target the
-changes in the PMM. The directory should be called =modeling= to reflect the
-fact that it will contain more than models.
-
-Notes:
-
-- when we do this we will break the dogen product unit tests.
-- we need to add the targets to each component (generation, conversion).
-
-*** Consider modeling relations at a higher level of abstration       :story:
-
-At present we model relations in logical model as two object templates:
-
-- =Generalisable= for inheritance (implements and extends).
-- =Associatable= for composition.
-
-In reality, we should have created the UML relationships as a top-level
-construct:
-
-- association: composition, aggregation
-- dependency
-- generalisation
-- realisation
-
-Relationships should have an associated comment or description.
-
-This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
-as the codec model is concerned.
-
-Notes:
-
-- relationships should already exist in the codec model. These exist for "local"
-  relationships only (that is, elements in the same model). They can be used for
-  generalisation. This does mean generalisation could be "remote" though as we
-  some times inherit from other diagrams. We need a way to distinguish between
-  local and remote relations, which could be by "resolving" the GUID into an
-  element.
-- relationships can be user-annotated, and used for UML diagram generation.
-- generalisation and realisation remove the need for the parent meta-data.
-- relationships can be derived from attributes. This is what the "resolver"
-  does. It is in fact not a resolver but a transform that converts properties in
-  the element into relationships.
-- relationships should use the GUID as well as the qualified name.
-- relationships should really be modeled as org-mode headings. However, one
-  downside of this approach is that we will create a lot of noise when
-  generating documentation. However, given we will only use them for local
-  relationships (generalisation, UML purposes), maybe the noise is not that bad.
-- transparent and opaque associations as well associative container keys need to
-  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
-  If none is appropriate we should create them.
-- add a new type of relationship to codec model. We probably also need an enum
-  to capture the type of relationship. This can be supplied in org-mode as
-  meta-data. Relationships belong to elements.
-- for now, do a hack in the logical model that takes relations of certain types
-  (say realisation) and adds them to stereotypes in the logical model. However,
-  we must be able to ignore other types (say attributes annotated by the user).
-- best mapping for org-mode is:
-  - title is the type we point to.
-  - description is the name of the relationship.
-  - attribute =relationship= to denote codec type.
-  - meta-data to denote relationship type.
-  - add GUID if you want the relationship to show up in PlantUML.
-- make object templates interfaces. Modeling a concept is a realisation.
-
-Links:
-
-- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
-
-*** Make =parent= feature a CSV collection                            :story:
-
-At present we declare multiple parents like so:
-
-:    :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
-
-This is a remnant of the Dia stereotypes field, which was one long CSV string.
-However, in the Dia world it makes more sense for us to have:
-
-:    :masd.codec.parent: entities::Taggable
-:    :masd.codec.parent: entities::Stereotypable
-:    :masd.codec.parent: entities::Nameable
-:    :masd.codec.parent: entities::Configurable
-: ...
-
-This would make the org-mode document more readable. For this to work, we
-probably just need to:
-
-- make the field a CSV collection to allow for the transition without breaking
-  anything.
-- add processing in codec to handle the collection.
-
-*** Clang-cl windows build is broken                                  :story:
-
-We are failing to link:
-
-: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
-
-Links:
-
-- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
-
-*** Consider making features dynamic elements                         :story:
-
-At present we generate code to bake in features to the Dogen binary. However, in
-a world where the PM is a dynamic entity, read out from core dogen models, it
-seems the same should happen with features. As with profiles, we just need to
-make sure these models are read out first before we start processing regular
-model elements.
-
-*** Rename backend to technical space                                 :story:
-
-This is needed to make it compliant with the domain architecture.
-
-*** Create a site for Dogen                                           :story:
-
-Notes:
-
-- add papers as content.
-- add blog posts as content.
-- site is generated from org files in Dogen as a vcpkg build.
-- add sprint and product backlog as content.
-- add models.
-- add release notes
-- remove svg model representation; generate these dynamically with the site on
-  each commit. For the code, we should create the SVG's in the output directory.
-- split stable releases of dogen from main. Remove reference from Dogyxgen docs
-  to SVG.
-- we should create a set of cmake targets that convert the org-mode documents
-  into HTML, package them and commit them into github's branch.
-
-Links:
-
-- [[https://github.com/larstvei/org-bootstrap-document][GH: org-bootstrap-document]]: "This is a simple scheme for Org mode to generate
-  nice and readable HTML sites. "
-
-Merged stories:
-
-*Integrate Doxygen with CI*
-
-At present we are manually generating the docs and uploading them into our site.
-We should instead:
-
-- create a site specific to Dogen which is served from the dogen project - see
-  site story.
-- add a workflow that generates the doxygen docs and does nothing else. We need
-  one for the tags and one for the commits.
-
-Links:
-
-- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/doxygen.yml][QuantLib doxygen]]
-- [[https://github.com/jcs090218/setup-emacs][setup-emacs GH]]: github action to setup emacs.
-
-*** Create a DOI for dogen                                            :story:
-
-As quantlib has done, we need to create a DOI for dogen.
-
-#+begin_src md
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1440997.svg)](https://doi.org/10.5281/zenodo.1440997)
-#+end_src
-
-CITATION.cff:
-
-#+begin_quote
-cff-version: 1.2.0
-message: If you use this software, please cite it using these metadata.
-
-title: "QuantLib: a free/open-source library for quantitative finance"
-authors:
-  - name: "The QuantLib contributors"
-url: "https://www.quantlib.org/"
-type: software
-doi: 10.5281/zenodo.1440997
-license: BSD-3-Clause
-repository-code: "https://github.com/lballabio/QuantLib"
-#+end_quote
-
-Links:
-
-- [[https://zenodo.org/record/5869144#.YlCksdDMKXJ][QuantLib: a free/open-source library for quantitative finance]]
-
-*** Integrate Doxygen with CI                                         :story:
-
-At present we are manually generating the docs and uploading them into our site.
-We should instead:
-
-- create a site specific to Dogen which is served from the dogen project - see
-  site story.
-- add a workflow that generates the doxygen docs and does nothing else. We need
-  one for the tags and one for the commits.
-
-Links:
-
-- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/doxygen.yml][QuantLib doxygen]]
-
-*** Add target to check headers compile in isolation                  :story:
-
-As per quantlib build, we should check headers compile in isolation.
-
-Links:
-
-- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/headers.yml][quantlib header check workflow]]
-
-*** Create clang build using libc++                                   :story:
-
-At present we cannot build using clang and libc++. The main issue seems to be
-that dogen code is using libc++ whereas the vcpkg dependencies are using the GCC
-standard library. For now we defaulted to GCC's library but the right fix is to
-use libc++.
-
-Links:
-
-- [[https://github.com/microsoft/vcpkg/issues/9783][#9783: Add example for using libc++ on Linux]]
-
-*** Reference implementation build is borked                          :story:
-
-We need to upgrade the ODB version of the reference implementation. Annoyingly
-this will mean hitting the usual issues with vcpkg. We should probably consider
-deprecating ODB from the reference implementation as well, or at least disabling
-the building of the generated ODB code.
-
-*** Add github actions build for C#                                   :story:
-
-We need to build on .Net 6.
-
-*** Upload release to github on tags                                  :story:
-
-At present we are manually uploading binaries on a release to github. It would
-be nice to integrate this with CI.
-
-Links:
-
-- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
-- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
-
-*** Improve vcpkg integration for generated code                      :story:
-
-If the user requests, we should also generate a vcpkg project that is
-a clone of vcpkg but builds all of the base dependencies and pushes
-them to a known location (e.g. GCS). Then, the build steps should
-first download from that known location and put it on the path. It
-should be trivial to update the vcpkg clone, e.g.: user adds new vcpkg
-dependency to the model; dogen updates the data file, user commits the
-update, new vcpkg build is triggered and generates new vcpkg zip, with
-a stamp. User updates model to point to the new stamp and pushes. Next
-build will use new vcpkg libraries. Ideally vcpkg builds for all
-supported platforms (this is requested in the product model).
-
-Links:
-
-- [[https://devblogs.microsoft.com/cppblog/vcpkg-accelerate-your-team-development-environment-with-binary-caching-and-manifests/][vcpkg: Accelerate your team development environment with binary
-  caching and manifests]]
-
-*** Look at warnings in lgtm                                          :story:
-
-We seem to have a number of code quality warnings, check them and fix the
-important ones.
-
-Links:
-
-- [[https://lgtm.com/projects/g/MASD-Project/dogen/alerts/?mode=list][lgtm warnings]]
-
-*** org-to-org transform removes custom id's from attributes          :story:
-
-Diff of =share/library/masd.org= after transform:
-
-:
-:  *** mode                                                          :attribute:
-:      :PROPERTIES:
-: -    :custom_id: 4e770d9b-44b4-4a6d-8504-49629f4d29c1
-:      :masd.codec.value: c++
-:      :END:
-
-We should always preserve all attributes.
-
-*** Process org-mode image links                                      :story:
-
-At present we have hard-coded doxygen notation for image links:
-
-: \image html dogen.orchestration/modeling/dogen.orchestration.svg
-
-Instead, we should use org-mode notation for these links:
-
-: #+CAPTION: This is the caption for the next figure link (or table)
-: #+NAME:   fig:SED-HR4049
-: [[./img/a.jpg]]
-
-These then need to be read out by the org-mode parser and converted internally
-into doxygen links.
-
-Links:
-
-- [[https://orgmode.org/manual/Images.html][org-mode manual: images]]
-
-*** org-to-org transform creates mustache templates incorrectly       :story:
-
-At present we determine the language for the block by looking at the name of the
-property. If its called =content= we use =mustache=. However, if a user creates
-a field called =content= this should not kick in. We should have a configuration
-option at the model level that enables this "intelligent" behaviour, and enable
-it only for the =dogen.text= model.
-
-: *** content                                                       :attribute:
-:    :PROPERTIES:
-:    :masd.codec.type: std::string
-:    :END:
-:
-: #+begin_src mustache
-: Contents of the artefact.
-: #+end_src
-
-*** Consider integrating org-spec with org-model                      :story:
-
-#+begin_quote
-An Org-mode template for technical specification documents and HTML publishing
-#+end_quote
-
-It would be nice to generate models that can produce org-spec HTML output.
-
-Links:
-
-- [[https://github.com/thi-ng/org-spec][org-spec GH]]
-
-*** Change file format of tracing dumps according to codec            :story:
-
-At present we always dump the transform inputs and outputs as =.json=. However,
-if the content is in org-mode format, it would make more sense to have a =.org=
-extension. The transform doing the dump should override the extension.
-
-*** Logical model still has a traits class                            :story:
-
-These should all have been removed, but its still there:
-
-: #include "dogen.logical/types/traits.hpp"
-
-O*** Rename merger to model compiler or weaver                         :story:
-
-What we call "merging" is really the job of the "model compiler". We
-should rename these transforms accordingly. The model compiler weaves
-the models together. We can just rename the merger to these
-terms. Literature:
-
-#+begin_quote
-A model compiler takes a set of executable UML models and weaves them
-together according to a /consistent set of rules/. This task involves
-executing the mapping functions between the various source and target
-models to produce a single all-encompassing metamodel [...] that
-includes all the structure, behavior and logic --- everything --- in
-the \marginpar{Weaving, model compilers} system. [...] Weaving the
-models together at once addresses the problem of architectural
-mismatch, a term coined by David Garlan to refer to components that do
-not fit together without the addition of tubes and tubes of glue code,
-the very problem MDA is intended to avoid! A model compiler imposes a
-single architectural structure on the system as a whole.
-#+end_quote
-
-*** Limitations of the current org-mode approach                      :story:
-
-At present we decided to implement org-mode support directly in Dogen,
-which has some advantages:
-
-- we can process org-mode documents without having Emacs - e.g. you
-  can create documents in other editors and still benefit from
-  Dogen support.
-
-However, there are also problems:
-
-- org-mode is very complex. We don't want to support only a partial
-  subset of the format; we want users to create regular org-mode
-  documents with all of the org-mode functionality and then have them
-  exported into code. This means our parser has to be very clever.
-- we want to be able to export the model to other formats such as HTML
-  / PDF etc. This means the document may contain all sorts of weird
-  and wonderful config for those formats which we do not care about.
-- we want users to add sections for documentation purposes such as
-  images, etc. These won't necessarily be used for Dogen.
-
-All of this makes us think we may have taken the wrong approach. We
-should instead support some well-defined intermediary format which can
-be understood by Dogen unequivocally, and which has a "trivial"
-parsing implementation, similar to Dia XML. Then:
-
-- we can then create an org-mode exporter in elisp which uses the
-  existing org-mode functionality to determine what should be
-  converted and what should be ignored.
-- with this we can be confident that the org-mode document is handled
-  correctly.
-
-There are downsides though:
-
-- third-party editors will no longer be supported - they will require
-  their own exporter code, and most do not support this.
-- there are more steps to the process, which is particularly annoying
-  when you have several models. You now need to ensure you have exported
-  them all, else you may get strange errors.
-- the format must support mapping to the original locations so that we
-  can still support LSP with proper errors, etc.
-
-*** Add minor mode in emacs that finds element location               :story:
-
-It would be nice to be able to run a command in emacs that opens the
-model element associated with the current file.
-
-*** Allow setting colours and visibility on PlantUML relations        :story:
-
-When we start to model all relations on diagrams, they will become
-quite confusing. However, we could probably make things easier by
-allowing users to decide what colour to add to a relation and also if
-they should be visible or not. These can be supplied as meta-data.
-
-From [[https://plantuml.com/class-diagram#8dfb3b05fc895d2b][PlantUML docs]]:
-
-#+begin_quote
-You can change the color or style of individual relation or arrows
-using the inline following notation:
-
-: #color;line.[bold|dashed|dotted];text:color
-#+end_quote
-
-#+begin_src plantuml :file my-diagram.png
-@startuml
-class foo
-foo --> bar : normal
-foo --> bar1 #line:red;line.bold;text:red  : red bold
-foo --> bar2 #green;line.dashed;text:green : green dashed
-foo --> bar3 #blue;line.dotted;text:blue   : blue dotted
-@enduml
-#+end_src
-
-#+RESULTS:
-[[file:my-diagram.png]]
-
-Notes:
-
-- we need to have an additional property to model the comments on the
-  link, supplied by meta-data.
-- we could also have different colours for each comment type:
-  - source comments.
-  - user comments for diagram only (not supported yet).
-
-*** Add support for "diagram-only" comments                           :story:
-
-We may want to add documentation for the purposes of the model that we
-do not want expressed in code. It would be nice to be able to mark
-some comments as "diagram-only".
-
-*** Parse org-mode syntax in comment                                  :story:
-
-At present we are expecting users to use doxygen mark up in the
-model. This is not ideal:
-
-- if we generate say C++ and C# the markup is invalid in one.
-- if we generate HTML/PDFs the markup looks weird.
-
-We should expect documents to have org markup only and then interpret
-it in the generation. We probably only need a few items:
-
-- lists
-- =code variables=
-- /italics/ and _underscores_
-- links.
-
-*** Org roundtrip does not add blank line at the end of document      :story:
-
-Errors:
-
-#+begin_src
-FAILED: projects/dogen.orchestration/tests/CMakeFiles/run_dogen.orchestration.tests
-cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin/dogen.orchestration.tests --log_level=error
-Running 156 test cases...
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/modeling/dogen.org"
-@@ -494,3 +494,4 @@
-   :END:
-
- An error ocurred when dumping dogen's specs.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(188): error: in "dogen_product_org_tests/dogen_org_conversion_has_no_diffs": check diff.empty() has failed
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.cli/modeling/dogen.cli.org"
-@@ -181,3 +181,4 @@
-    :END:
-
- Which style to use when dumping the specs.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(202): error: in "dogen_product_org_tests/dogen_cli_org_conversion_has_no_diffs": check diff.empty() has failed
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.logical/modeling/dogen.logical.org"
-@@ -4668,3 +4668,4 @@
-    :END:
-
- An error has occurred while formatting.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(244): error: in "dogen_product_org_tests/dogen_logical_org_conversion_has_no_diffs": check diff.empty() has failed
-
-3 failures are detected in the test module "dogen.orchestration.tests"
-ninja: build stopped: subcommand failed.
-Error running CMake.
-
-Compilation exited abnormally with code 1 at Sun Apr 11 20:15:01
-Elapsed: 00:00:13.738
-#+end_src
-
-*** Simplistic renaming based on GUIDs                                :story:
-
-One really simple way of renaming classes would be to have the UUID in
-the comments (ideally the boilerplate) of each file. We could then
-have a pre-generation step that reads in all the files and maps them
-to an ID. Then, if a file is handcrafted, we could use the contents
-instead of creating a blank file.
-
-Notes:
-
-- we could possibly also do some minor hackery such as search /
-  replace the old namespace with the new namespace, and the old class
-  name with the new class name though that would be much more
-  dangerous. On the plus side, git would likely detect the rename
-  which would mean we could then diff.
-- we could possibly also issue the git rename commands for the
-  affected files.
-- note that generated files would not be part of this simplistic
-  renaming.
-- most of the work could be carried out in the physical model.
-- one assumption here is that all handcrafted files are originally
-  generated with their GUIDs and users must not delete them.
-- this makes one wonder if we should not create a type of files that
-  are "partially generated". That is, we could allow users freedom
-  within some bounds but the "header" and "footer" of the file must
-  always be generated by Dogen. This would guarantee the correct
-  namespaces, header guards, etc. Perhaps we could make this an
-  option:
-
-  - fully generated
-  - header and footer generation
-  - skeleton generation as a one-off.
-
-*** Generation statistics                                             :story:
-
-It would be very useful to know percentages of generated code versus
-hand-crafted code. We already have a report which groups files, we can
-add to that report.
-
-*** Remove commas from PlantUML enums                                 :story:
-
-We don't need to add commas to separate PlantUML enums.
-
-*** Fix PlantUML namespace comments                                   :story:
-
-At present the comments appear as a link to the namespace. We should
-try to do whatever it is we did for the model comment, which looks
-like a regular note at the top of the namespace.
-
-In addition, sub-namespaces seem to generate both a class with the
-comment as well as the namespace itself (see text model).
-
-*** Create a local resolver in codec to support PlantUML use case     :story:
-
-We can create most of the links in PlantUML via local resolution. We
-could create a local resolver, which only looks at types for the
-current model. It lives inside of codec. For those types, if it
-resolves, we can create the PlantUML link. In addition, we could also
-resolve operations in the same way (once they have been
-modeled).
-
-Ideally, we should implement this resolve in such a way that it can be
-used for merged models and stand alone models. We created a story on
-the new approach for the resolver; we need to have a look at that and
-see if it can be implemented as part of this work. For example, we
-could flatten all names prior to calling resolver; use a GUID against
-each type, read from custom ID in org mode.
-
-The resolver needs to be primed with all of the existing model names
-and namespaces, without depending on the qualified names data
-structure. It should have its own data structures. It could live in
-=identification=. The output of the resolver should be the GUID of the
-type the name points to, or nothing if it could not resolve.
-
-In the calling models, we need a transform that decomposes a type into
-the names it references. Then, for each name, we call the resolver.
-
-Notes:
-
-- we could also create two step resolution. We could resolve all local
-  names first, and mark them as resolved (for example by adding the
-  UUID of the resolved type to the name) and leaving unresolved types
-  unmarked. Then, the second merged model resolution would only
-  resolve types which are not yet resolved. This would probably speed
-  things up because we may end up with smaller containers.
-
-*** Generate PNGs for PlantUML models                                 :story:
-
-At present we are generating SVGs for the Plant UML models. This is
-not ideal because emacs does not process them very well. Also, we are
-checking in the SVG. We probably don't need to do that, nor do we need
-to check in the Plant UML source, but it does offer an easy way to
-check for regressions. At any rate, we should just have a CMake target
-that creates the PNGs in the build output directory, and open those in
-emacs with tabs and scroll bars.
-
-*** Fix PlantUML indentation                                          :story:
-
-At present if we indent a diagram in emacs we get a different
-indentation compared to the generated one. We need to either get emacs
-to indent correctly, or copy the emacs indentation. The main problem
-at present is that we are indenting classes correctly in generated
-code:
-
-#+begin_src plantuml
-namespace entities #F2F2F2 {
-    class section #F7E5FF {
-        +{field} blocks std::list<block>
-    }
-}
-#+end_src
-
-Whereas emacs does not:
-
-#+begin_src plantuml
-@startuml
-
-namespace entities #F2F2F2 {
-    class section #F7E5FF {
-        +{field} blocks std::list<block>
-    }
-}
-@enduml
-#+end_src
-
-Note that the behaviour seems different in org-babel. Note also that
-notes have incorrect indentation (text model, inside a namespace):
-
-#+begin_src plantuml
-note top of  transformation_error
-An error occurred whilst applying a transformation.
-end note
-#+end_src
-
-Note also the extra space before exception name, as well as the
-missing indentation inside the note.
-
-Actually what is causing the problem with emacs indentation is the use
-of top-level notes:
-
-#+begin_src plantuml
-note as N1
-Contains all of the M2T transforms for all supported backends.
-end note
-#+end_src
-
-We need to investigate why this causes indentation problems. Seems
-like its valid syntax.
-
-Note also that all comments are not indented correctly.
-
-*** Consider creating a "top-level" group in PlantUML                 :story:
-
-There are a number of classes that always show up at the top:
-
-- registrar
-- cmakelists
-- main
-- etc
-
-These could also be part of a top-level group.
-
-We could also have a group for logic-less templates if they are at the
-top-level.
-
-*** Consider adding operations for PlantUML                           :story:
-
-We don't need full operation support for it to be useful. We could
-have minimal support and use it to update the UML diagrams. It would
-then later on be extended for merging code generation.
-
-*** Empty classes do not need brackets in PlantUML                    :story:
-
-At present we are still adding start and end brackets to empty classes:
-
-#+begin_src plantuml
-class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
-#+end_src
-
-This takes space for no reason. We could just not print those brackets.
-
-*** Consider creating a product PlantUML diagram                      :story:
-
-Once we have support for product models, we should be able to create a
-composite Plant UML diagram of the entire product, with linkages for
-all types within the product. This means we should keep this use case
-in mind when we resolve the problems we currently have with
-associations intra-model.
-
-*** Partial information extraction from logical model                 :story:
-
-Since we just need generalisation and association information, we
-could probably create a specialised chain in the logical model that
-gives us the bare minimum to populate the relevant properties; we can
-then extract those and map them to the codec ID. We should also make
-the codec ID mandatory and use a map for the codec elements. The
-orchestration model is responsible for stitching the information.
-
-*** org-model and links to references                                 :story:
-
-At present we are adding links as part of the drawers in
-org-models. However, this is not ideal. We want to use regular
-org-mode constructs. There are several use cases for links:
-
-- we want org-mode links so that we can make use of tools such as
-  org-roam.
-- we need to use the links for dogen to resolve the model. Both of
-  these use cases happen whilst the code is in its normal shape in the
-  git repository.
-- when we generate doxygen documentation we need links that can work
-  when the site has been published. At this point the models have all
-  been copied to a different location by doxygen.
-
-We need to find out a way to make links work for all of these use cases.
-
-*** PlantUML and hyperlinks                                           :story:
-
-Apparently it is possible to embed HTTP links in SVG diagrams. This
-means it may also be possible to supply these as inputs in the
-PlantUML model. If so, it would be nice to be able to find the model
-definition of an element by clicking on the element. Its not clear if
-this would work in the SVG support we have in Emacs.
-
-Links:
-
-- [[https://alligator.io/svg/hyperlinks-svg/][Hyperlinks/Anchors Inside SVG Graphics]]
-
-*** Type that references itself results in a recursive include        :story:
-
-In org-mode headline we seem to be including the headline itself:
-
-: #include "dogen.org/types/entities/headline.hpp"
-
-In the associations transform, we could do a quick check: if a type
-references itself, the remove the association.
-
-*** Use a Dogen drawer instead of properties                          :story:
-
-Its possible users will want to add their own drawers to Dogen
-documents. For example, maybe you want to clock against model items or
-use org-brain. We need to preserve all of these entries when
-roundtripping. The easiest way to achieve that is to try to separate
-the Dogen information from the non-Dogen one. If we had our own
-drawers it would be much easier, we could simply state that you are
-not allowed to add any non-Dogen stuff there and copy across the Dogen
-drawer into the original document.
-
-We could keep the element ID as a =CUSTOM_ID= in the =PROPERTIES=
-drawer though as that is a org concept.
-
-*** Org Roundtripping is lossy at present                             :story:
-
-One way to roundtrip documents without losing information is to
-preserve the original org document, run the Dogen transforms (for
-example to obtain the generalisation and association information),
-transform that back into an org-model and then copy over the dogen
-elements into the original org document by performing lookups based on
-element ID. This way we ensure we do not lose any information of the
-original model. The way we are roundtripping at present, if you add
-any non-Dogen headlines, these would be dropped on the round trip.
-
-In fact, its like we need a "merge algorithm" to merge the source
-document with the roundtripped document.
-
-*** Copy org documentation from rust implementations                  :story:
-
-The rust module for org-mode seems very well documented. We should try
-to copy across all applicable documentation.
-
-Links:
-
-- [[https://github.com/org-rs/org-rs/blob/master/rust/element/src/headline.rs][org-rs headline example]]
-
-*** Consider adding support for "literate testing"                    :story:
-
-It would be nice if we could create an org-mode file specifying a
-test, then add the code as an orb-babel clock and then tangle the file
-into a c++ file. Ideally the tangling should be done by Dogen (as well
-as by org-mode).
-
-Actually, we don't need a separate org-mode file, this is just the
-class definition for the test fixture.
-
-Links:
-
-- [[https://github.com/jkitchin/org-ref/blob/master/test/all-org-test.org][all-org-test.org]]: literate test from org-ref.
-
-*** Documentation as the aggregate model view                         :story:
-
-It would be really nice if we could "merge" different types of
-documentation, all written using org-mode:
-
-- user manual
-- developer manual, which is the aggregation of the product model and
-  all the component models.
-
-These should create two separate PDFs. We should also be able to
-create a dynamic site for the product by just pointing to the git
-repository of the project.
-
-*** Reporting with diffs                                              :story:
-
-At present its possible to create a diff with dry run and diffing
-enabled or to do a report showing all operations - which produces an
-org-mode report. However, what would be nice, especially when testing
-is to merge the two: create a report that also includes the diffs.
-
-Links:
-
-- [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.12][Sprint 12]]: introduction of reporting.
-
-** Deprecated
-*** CANCELLED Enable relational model locally                         :story:
-
-*Rationale*: we removed the relational model.
-
-At present we are not building locally the relational model. We need to ensure
-we are not breaking this code.
-
-*** CANCELLED Benchmarks do not work for utility tests                :story:
-
-*Rationale*: removed benchmark support.
-
-When we run the benchmarks for utility we get an error:
-
-: Running 95 test cases...
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
-
-Seems like the tests do not clean up after themselves. We need to add
-some clean up logic and re-enable the tests. We probably should just
-remove all of the benchmarks infrastructure, given we never use it and
-it has probably bit-rotted by now.*
-*** CANCELLED Consider handling "dia comments" in a general manner    :story:
-
-*Rationale*: The core codec is now org-mode and it does not suffer from this
-problem. We should just leave it as is.
-
-At present we allow comments with:
-
-: #DOGEN masd.codec.dia.comment=true
-
-to be processed as part of the containing object. We should try to
-generalise this notion so that any codec could make use of this
-feature.
-
-*** CANCELLED Move wale templates to TS namespaces                    :story:
-
-*Rationale*: this story is superseded by the new understanding of templates,
-where all templates will eventually become mustache templates.
-
-At present the wale templates are in the top-level namespace of the
-text model, but they should really be in each technical space.
-
-Merged stories:
-
-*Move mustache templates into the =transforms= namespaces*
-
-We left the templates at the top level as it was in the TS-specific
-models but they should really be within =transforms= namespace. We
-need to check to see how name resolution for templates is working.
