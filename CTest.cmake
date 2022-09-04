@@ -56,10 +56,6 @@ if(NOT DEFINED build_group)
     message(FATAL_ERROR "Parameter build_group not defined.")
 endif()
 
-if(NOT DEFINED with_presets)
-    message(FATAL_ERROR "Parameter with_presets not defined.")
-endif()
-
 #
 # Parse the build name to extract input parameters, and validate them.
 #
@@ -96,18 +92,8 @@ endif()
 
 if(${compiler} STREQUAL "gcc")
     message(STATUS "Compiler: GCC")
-    if (NOT with_presets)
-        set(ENV{CC} "gcc")
-        set(ENV{CXX} "g++")
-        message(STATUS "Setting up environment for compiler.")
-    endif()
 elseif(${compiler} STREQUAL "clang")
     message(STATUS "Compiler: Clang")
-    if (NOT with_presets)
-        set(ENV{CC} "clang")
-        set(ENV{CXX} "clang++")
-        message(STATUS "Setting up environment for compiler.")
-    endif()
 elseif(${compiler} STREQUAL "msvc")
     message(STATUS "Compiler: MSVC")
 elseif(${compiler} STREQUAL "msvc-clang-cl")
@@ -275,13 +261,14 @@ if(git_result)
 endif()
 
 # Setup the preset for configuration, if requested.
-if(with_presets)
-    set(cmake_args ${cmake_defines} "--preset ${preset}")
-endif()
+set(cmake_args ${cmake_defines} "--preset ${preset}")
 
 # For nightlies, we want to force full generation.
 if(${build_group} MATCHES Nightly)
+    message(STATUS "Full generation is ON.")
     set(cmake_args ${cmake_defines} "-DWITH_FULL_GENERATION=ON")
+else()
+    message(STATUS "Full generation is OFF.")
 endif()
 
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
