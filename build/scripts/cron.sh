@@ -64,11 +64,11 @@ cd ${git_dir}
 # update manually as ctest won't do it for us.
 git pull origin master
 
-# compiler=${clang_compiler}
-# ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+compiler=${clang_compiler}
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-# compiler=${gcc_compiler}
-# ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+compiler=${gcc_compiler}
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
@@ -78,9 +78,9 @@ git_url="https://github.com/MASD-Project/${product}.git"
 
 cd ${workspace}
 git_dir="${workspace}/${product}/master"
-# if [ -d "${workspace}/${product}" ]; then
-#     rm -rf ${workspace}/${product}
-# fi
+if [ -d "${workspace}/${product}" ]; then
+    rm -rf ${workspace}/${product}
+fi
 mkdir ${workspace}/${product}
 cd ${workspace}/${product}
 git clone --depth=1 --recurse-submodules ${git_url} master
