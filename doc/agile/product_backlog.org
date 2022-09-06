@@ -50,18 +50,16 @@ To be done on the last Sunday of the sprint.
 
 To be done on the Monday morning of the new sprint.
 
-1. Open new sprint, updating CMake version, README, appveyor version
-   and decoration formatter tests. Build all and run tests (some will
-   fail). This should all be in one commit. *DO NOT PUSH*.
+1. Open new sprint, updating CMake version, README, and decoration formatter
+   tests. Build all and run tests (some will fail). This should all be in one
+   commit. *DO NOT PUSH*.
 2. Regenerate the LAM models for C# and C++ with the new version, and
    commit the changed files. Push the commit. (Ensure there are no
    pending builds still running or tests will fail due to version
    change).
 3. Create a demo. Publish it on youtube.
 4. Write up release notes, publish them in github.
-5. Download the binaries from bin tray and manually upload them to github.
-6. Update bintray with the correct release notes.
-7. When tag build is finished, announce on gitter, twitter and linked
+5. When tag build is finished, announce on gitter, twitter and linked
    in.
 
 * V2 Release

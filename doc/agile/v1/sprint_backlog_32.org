@@ -1,0 +1,751 @@
+#+title: Sprint Backlog 32
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) spike(p) }
+
+* Sprint Goals
+
+- Finish restore support for CI/CD.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2022-09-06 Tue 12:13]
+| <75>                                |        |      |      |       |
+| Headline                            | Time   |      |      |     % |
+|-------------------------------------+--------+------+------+-------|
+| *Total time*                        | *0:26* |      |      |   0.0 |
+|-------------------------------------+--------+------+------+-------|
+| Stories                             | 0:26   |      |      |   0.0 |
+| Active                              |        | 0:26 |      |   0.0 |
+| Sprint and product backlog grooming |        |      | 0:26 |   0.0 |
+#+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+Agenda:
+
+#+begin_src emacs-lisp
+(org-agenda-file-to-front)
+#+end_src
+
+*** Edit release notes for previous sprint                           :story:
+
+Add github release notes for previous sprint.
+
+Release announcements:
+
+- [[https://twitter.com/MarcoCraveiro/status/1346587523187937281][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1030-est%C3%A1dio-joaquim-morais-activity-6752353683461304320-zKp7/][linkedin]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+#+begin_src markdown
+![Estadio](https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/108163652_3035579726477117_9033283849917525599_n.jpg?_nc_cat=106&ccb=2&_nc_sid=8bfeb9&_nc_ohc=q2MqbCT1YhgAX_zmBps&_nc_ht=scontent.flhr4-1.fna&oh=48ca18f3dd13f0a746ea29458f643993&oe=6018A9EA)
+_Municipal stadium in Moçamedes, Namibe. (C) 2020 [Administração Municipal De Moçâmedes](https://www.facebook.com/permalink.php?id=1473211179380654&story_fbid=3035581253143631)._
+
+# Introduction
+
+# User visible changes
+
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail.
+
+[![Sprint 1.0.30 Demo](https://img.youtube.com/vi/ei8B1Pine34/0.jpg)](https://youtu.be/ei8B1Pine34)
+_Video 1: Sprint 30 Demo._
+
+## Test
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the sprint log. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org).
+
+## Milestones and Ephemerides
+
+This sprint saw the 13,000th commit to Dogen.
+
+![13k commit](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/git_commit_13_000th.png)
+_Figure 7_: Commit number 13,000th was made to the Dogen GitHub repository.
+
+## Significant Internal Stories
+
+This sprint had two key goals, both of which were achieved: org-mode and
+PlantUML support. These were described in the user facing stories above. In this
+section we shall provide more details about how this work was organised, as well
+as other stories which were not user facing.
+
+### Smaller stories
+
+### Video series of Dogen coding
+
+This sprint we recorded some videos on the implementation of the org-mode codec, and the subsequent use of these models. The individual videos are listed on Table 2, with a short description. They are also available as a playlist, as per link below.
+
+[![Org-mode codec](https://img.youtube.com/vi/xfJNJ_9uAGU/0.jpg)](https://www.youtube.com/playlist?list=PLwfrwe216gF0wdVhy4fO1_QXJ-njWLSy4)
+_Video 2: Playlist "MASD - Dogen Coding: Formatables Refactor"._
+
+|Video | Description |
+|---------|-----------------|
+| [Part 1](https://youtu.be/xfJNJ_9uAGU) | In this part we provide context about the current task and start off by doing some preliminary work setting up the required infrastructure.|
+| [Part 2](https://youtu.be/HueypBCfwIM) | In this video we review the work done to process org mode documents, and start coding the codec transform. However, we bump into a number of problems.|
+| [Part 3](https://youtu.be/QE7P9s-8Xg0) | In this video we review the work done to get the org codec to generate files, and analyse the problems we're having at present, likely related to errors processing profiles.|
+| [Part 4](https://youtu.be/I-PkSHkpwhI) | In this video we review the work done offline to implement the basic support for reading org-mode documents and start the work to write org mode documents using our org model.|
+| [Part 6](https://youtu.be/ZfpqC9PuEog) | In this part we review the round-trip work made to support org mode, and refactor the tags used in org models. We also add support for org custom IDs.|
+| [Part 7](https://youtu.be/6XDt7lV0k_k) | Addendum video where we demonstrate the use of the new org mode models in a more expansive manner.|
+| [Part 8](https://youtu.be/6wqsbT-jG6Y) | In this second addendum we work on the org-to-org transform, solving a number of issues with whitespacing.|
+| [Part 9](https://youtu.be/GvsI7IGk5sY) | In this video we try to explore moving away from properties to represent meta-data and using tables instead, but we run into a number of difficulties and end up spending most time fixing bugs related to element provenance.|
+
+## Resourcing
+
+![Sprint 30 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_pie_chart.jpg)
+_Figure 8_: Cost of stories for sprint 30.
+
+## Roadmap
+
+The road map has been working like clockwork for the last few sprints, with us ticking stories off as if it was a mere list - clearly no longer the Oracle of Delphi it once was - and this sprint was no exception. Were we to be able to continue with the same release cadence, the next sprint would no doubt also tick off the next story on our list. Alas, we have ran out of coding time, so Sprint 31 will instead be very long running sprint, with very low utilisation rate. In addition, we won't bother creating sprints when the work is completely dedicated to writing; instead, regular service will resume once the writing comes to an end.
+
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_resource_allocation_graph.png)
+
+# Binaries
+
+You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.30) or [GitHub](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30), as per Table 3. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.30.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.30.tar.gz) format.
+
+| Operative System | Format | BinTray | GitHub |
+|----------|-------|-----|--------|
+|Linux Debian/Ubuntu | Deb | [dogen_1.0.30_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.30/dogen_1.0.30_amd64-applications.deb) | [dogen_1.0.30_amd64-applications.deb](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/dogen_1.0.30_amd64-applications.deb) |
+|Windows | MSI | [DOGEN-1.0.30-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.30-Windows-AMD64.msi) | [DOGEN-1.0.30-Windows-AMD64.msi](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/DOGEN-1.0.30-Windows-AMD64.msi) |
+
+_Table 3: Binary packages for Dogen._
+
+**Note 1:** The Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
+
+**Note 2:** Due to issues with Travis CI, we did not manage to get OSX to build, so and we could not produce a final build for this sprint. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
+
+# Next Sprint
+
+The goals for the next sprint are:
+
+- to implement path and dependencies via PMM.
+
+That's all for this release. Happy Modeling!
+#+end_src markdown
+
+*** Create a demo and presentation for previous sprint                :story:
+
+Time spent creating the demo and presentation.
+
+**** Presentation
+
+***** Dogen v1.0.30, "Estádio Joaquim Morais"
+
+    Marco Craveiro
+    Domain Driven Development
+    Released on 5th January 2021
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-06 Tue 12:07]
+    CLOCK: [2022-09-06 Tue 11:40]--[2022-09-06 Tue 12:06] =>  0:26
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Gitter notifications for builds are not showing up                :story:
+
+We used to see travis and appveyor build notifications. We stopped seeing them
+after moving to github actions. This is useful because we can see them from
+Emacs in IRC.
+
+Notes:
+
+- it seems the settings have an option for this in webhooks. Redo the hook to
+  see if it helps.
+
+Links:
+
+- [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
+
+*** Update boost to latest in vcpg                                    :story:
+
+Boost 1.80 is now available.
+
+*** Fix errors in nightly builds                                      :story:
+*** Update github actions to build from tags                          :story:
+
+At present it seems we only build from master. We need to build from tags for
+releases.
+
+*** Assorted improvements to CMake files                               :epic:
+
+#+begin_src cmake
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
+LINK_WHAT_YOU_USE
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy" "-checks=*")
+<LANG>_CLANG_TIDY: CMake 3.6+
+<LANG>_CPPCHECK
+<LANG>_CPPLINT
+<LANG>_INCLUDE_WHAT_YOU_USE
+
+install(TARGETS MyLib
+        EXPORT MyLibTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+        )
+#+end_src
+
+*Previous understanding*
+
+It seems we are not using proper CMake idioms to pick up compiler features, as
+explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.dsscale.org/wp-content/uploads/2016/06/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
+- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
+- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
+  helper files."
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to repeat the
+  same flags; this could be avoided by passing in a variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is
+  the modern method for setting general compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested aliasing for
+  =dogen::test_models=. Ensure all linking is done against qualified names.
+- use target include directories for each target and only add the required
+  include directories to each target. Mark them with the appropriate visibility,
+  including using =interface=. We should then remove all duplication of
+  libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature detection. We need
+  to create a list of all C++-14 features we're using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type support to
+  our builds, but as a result, the binaries moved from =stage/bin= to =bin=.
+  There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage to use.
+  We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake directories. This will
+  also fix the problems we have with BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
+*** Windows package is broken                                         :story:
+
+When we install the windows package under wine, it fails with:
+
+: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
+
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
+
+Actually, this did not help. We then used the new VCPKG macro (see links) which
+now includes all of boost. We are failing on:
+
+: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
+: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
+  #1653]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
+- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
+
+*** Capitalise titles in models correctly                             :story:
+
+We still have models with lower case titles:
+
+: * initializer                                                       :element:
+
+Capitalise these correctly.
+
+When we tried to do this to the dogen model, generation failed with the
+following error:
+
+: Error: Object has attribute with undefined type: spec_category
+
+We are probably not normalising to lower case.
+
+In addition
+
+Merged stories:
+
+*Capitalise model headers correctly*
+
+At present most models still use the "all lower case" notation, copied from Dia.
+We need to capitalise headers correctly so that when we generate documentation
+they come out correctly.
+
+*** Add full and relative path processing to PM                       :story:
+
+We need to be able to generate full paths in the PM. This will require access to
+the file extensions. For this we will need new decoration elements. This must be
+done as part of the logical model to physical model conversion. While we're at
+it, we should also generate the relative paths. Once we have relative paths we
+should compute the header guards from them. These could be generalised to
+"unique identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we cannot locate
+  the extensions. Also we did not create all of the required archetype kinds in
+  the text models. The populating should be done via profiles.
+- we must first figure out the number of enabled backends. The meta-model
+  properties will always contain all backends, but not all of them are enabled.
+- we need to populate the part directories. For this we need to know what parts
+  are available for each backend (PMM), and then ensure the part properties have
+  been created. We also need a directory for the part in variability. It is not
+  clear we have support for this in the template instantiation domains - we
+  probably only have backend, facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space and its
+  instances in the file-system.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We may need
+to treat certain labels more specially than others - its not clear. We need a
+container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*Implement locator in physical model*
+
+Use PMM entities to generate artefact paths, within =m2t=.
+
+*Create a archetypes locator*
+
+We need to move all functionality which is not kernel specific into yarn for the
+locator. This will exist in the helpers namespace. We then need to implement the
+C++ locator as a composite of yarn locator.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit ad-hoc. We could
+potentially create a pattern. Say for C++, we have the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine the
+  placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or "natural"
+  location inside of facet.
+- archetype location: used to determine the facet and archetype postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location (a given
+artefact has a fixed placement). So a naive approach to this seems to imply one
+could create a data driven locator, that works for all languages if supplied
+suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project sub-directories". There is a
+  mapping between the artefact location and a project sub-directory.
+- there is a mapping between the artefact location and the facet and artefact
+  postfixes.
+- extensions are a slight complication: a) we want to allow users to override
+  header/implementation extensions, but to do it so for the entire project
+  (except maybe for ODB files). However, what yarn's locator needs is a mapping
+  of artefact location to extension. It would be a tad cumbersome to have to
+  specify extensions one artefact location at a time. So someone has to read a
+  kernel level configuration parameter with the artefact extensions and expand
+  it to the required mappings. Whilst dealing with this we also have the issue
+  of elements which have extension in their names such as visual studio projects
+  and solutions. The correct solution is to implement these using element
+  extensions, and to remove the extension from the element name.
+- each kernel can supply its configuration to yarn's locator via the kernel
+  interface. This is fairly static so it can be supplied early on during
+  initialisation.
+- there is still something not quite right. We are performing a mapping between
+  some logical space (the modeling space) and the physical space (paths in the
+  filesystem). Some modeling elements such as the various CMakeLists.txt do not
+  have enough information at the logical level to tell us about their location;
+  at present the formatter itself gives us this hint ("include cmakelists" or
+  "source cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the archetype
+  location and the physical space. Although, if this is the only case of a
+  modeling element not mapping uniquely, perhaps we should do exactly this.
+- However, we still have inclusion paths to worry about. As we done with the
+  source/include directories, we need to somehow create a concept of inclusion
+  path which is not language specific; "relative path" and "requires relative
+  path" perhaps? These could be a function of archetype location.
+
+Merged stories:
+
+*Generate file paths as a transform*
+
+We need to understand how file paths are being generated at present; they should
+be a transform inside generation.
+
+*Create the notion of project destinations*
+
+At present we have conflated the notion of a facet, which is a logical concept,
+with the notion of the folders in which files are placed - a physical concept.
+We started thinking about addressing this problem by adding the "intra-backend
+segment properties", but as the name indicates, we were not thinking about this
+the right way. In truth, what we really need is to map facets (better: archetype
+locations) to "destinations".
+
+For example, we could define a few project destinations:
+
+: masd.generation.destination.name="types_headers"
+: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
+: masd.generation.destination.name=top_level (global?)
+: masd.generation.destination.folder=""
+: masd.generation.destination.name="types_src"
+: masd.generation.destination.folder="src/types"
+: masd.generation.destination.name="tests"
+: masd.generation.destination.folder="tests"
+
+And so on. Then we can associate each formatter with a destination:
+
+: masd.generation.cpp.types.class_header.destination=types_headers
+
+Notes:
+
+- these should be in archetypes models.
+- with this we can now map any formatter to any folder, particularly if this is
+  done at the element level. That is, you can easily define a global mapping for
+  all formatters, and then override it locally. This solves the long standing
+  problem of creating say types in tests and so forth. With this approach you
+  can create anything anywhere.
+- we need to have some tests that ensure we don't end up with multiple files
+  with the same name at the same destination. This is a particular problem for
+  CMake. One alternative is to allow the merging of CMake files, but we don't
+  yet have a use case for this. The solution would be to have a "merged file
+  flag" and then disable all other facets.
+- this will work very nicely with profiles: we can create a few out of the box
+  profiles for users such as flat project, common facets and so on. Users can
+  simply apply the stereotype to their models. These are akin to "destination
+  themes". However, we will also need some kind of "variable replacement" so we
+  can support cases like =include/masd.cpp_ref_impl.northwind/types=. In fact,
+  we also have the same problem when it comes to modules. A proper path is
+  something like:
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
+
+  This is *extremely* flexible. The user can now create a folder structure that
+  depends on package names etc or choose to flatten it and can do so for one or
+  all facets. This means for example that we could use nested folders for
+  =include=, not use model modules for =src= and then flatten it all for
+  =tests=.
+- actually it is a bit of a mistake to think of these destinations as purely
+  physical. In reality, we may also need them to contribute to namespaces. For
+  example, in java the folders and namespaces must match. We could solve this by
+  having a "module contribution" in the destination. These would then be used to
+  construct the namespace for a given facet. Look for java story on backlog for
+  this.
+- this also addresses the issue of having multiple serialisation formats and
+  choosing one, but having sensible folder names. For example, we could have
+  boost serialisation mapped to a destination called =serialisation=. Or we
+  could map it to say RapidJSON serialisation. Or we could support two methods
+  of serialisation for the same project. The user chooses where to place them.
+
+*** Add support for relations in codec model                          :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB
+    :END:
+
+One very simple way to improve diagrams is to allow users to associate a
+fragment of PlantUML code with a class, for example:
+
+: masd.codec.plantuml: myclass <>-- other_class : test
+
+This fragments are added after the class, verbatim. Its up to the users to
+annotate diagrams as they see fit, we merely copy and paste these annotations.
+
+In the future, we may spot patterns of usage that can be derived from meta-data,
+but for now we just need the diagrams to be usable like they were in Dia.
+
+Notes:
+
+- notes are not indented at present.
+- we are not leaving a space after inheritance.
+- empty classes still have brackets.
+- no top-level namespace for model. We didn't have this in Dia either.
+
+ Tasks:
+
+- add new feature in codec model.
+- add properties in model and element to store the data.
+- when converting into PlantUML, output the new properties after dumping the
+  class.
+- move codec to codec tests from orchestration to codec component.
+- codec needs to have a way to bootstrap its context without requiring
+  orchestration.
+
+*** Consider standardising all templates as mustache templates        :story:
+
+At present we have a somewhat complex story with regards to templating:
+
+1. we use a mustache-like approach called wale, built in-house. It is used for
+   some header files such as the M2T transforms.
+2. we use a t4-like approach called stitch, also in-house. It is used for the
+   implementation of the M2T transforms.
+
+What would be really nice is if we could use the same approach for both, and if
+that approach was not part of Dogen. The purpose of this story is to explore the
+possibility of replacing both with a standard implementation of mustache,
+ideally available on vcpkg. We already have a story for replacing wale with
+mustache in the backlog, so see that for the choice of implementation. This
+story concerns itself mainly with the second item in the above list; that is,
+can we replace stitch with mustache.
+
+In order to answer this question we first must try to figure out what the
+differences between T4 and mustache are. T4 is a "generator generator". That is,
+the text template generates C# code that generates the ultimate target of the
+template. This means it is possible to embed any logic within the T4 template as
+required, to do complex processing. It also means the processing is "fast"
+because we generate C# code rather than try to introspect at run time. Stitch
+uses the same approach. However, after many years of using both T4 and Stitch,
+the general conclusion has been that the templates should be kept as simple as
+possible. The main reason is that "debugging" through the templates is
+non-trivial, even though it is simple C++ code (in the case of stitch).
+
+Mustache on the other hand puts forward an approach of logic-less templates.
+That is, the templates are evaluated dynamically by the templating engine, and
+the engine only allows for a very limited number of constructs. In some
+implementations, the so called "template hash", that is the input to the
+template, is a JSON object. All the template can do is refer to entries in the
+JSON object and replace tokens with the values of those entries.
+
+Until recently we deemed mustache to be too simple for our needs because Dogen
+templates were very complex. However, several things have changed:
+
+- we do not want the templates to have any indentation at all; this should be
+  left to clang-format as a subsequent T2T transform. This removes a lot of
+  functionality we had in Stitch.
+- we do not want the logical model objects to be processed any further in the
+  template. As explained above this leads to a lot of complications. We want the
+  object to be in its final form.
+- we want all relationships etc to be encoded in the logical model object prior
+  to M2T transformation.
+
+In other words, we have slowly been converging towards logic-less templates,
+though we are not yet there. The main stumbling blocks are:
+
+- epilogue and prologue are at present handled by assistants:
+
+#+begin_src
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= o.name().simple() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+
+#+end_src
+
+   Ideally we should just have a way to ask for the values of these fields.
+- we need to investigate all templates and see if a JSON representation of a
+  logical model element is sufficient to capture all required information.
+  However the best way to do this is to have an incremental approach: provide a
+  mustache based M2T and then incrementally move each M2T at a time.
+
+If we do move to mustache, there are lots of advantages:
+
+- remove all of templating code.
+- we could allow users to supply their own mustache templates in a model. We can
+  even allow for the dynamic creation of PMM elements and then the association
+  of those elements with templates. End users cannot of course extend the LMM,
+  but even just extending the LMM gives them a lot of power.
+- we could create a stand alone tool that allows users to play with templates.
+  All they need is a dump of the JSON representation of the objects in their
+  model (this could be an option in Dogen). Then the tool can take the template
+  and the JSON and render it to =std::out=. This makes template development much
+  easier. If we integrate it with Emacs, we could even have a view where we
+  do: 1) JSON 2) template 3) output. Users can then change 1) and 2) and see the
+  results in 3). We don't even have to extend emacs for this, we could just use
+  the compilation command.
+
+Notes:
+
+- if we could create JSON schemas for the LMM, we could then allow users to
+  create their own JSON representations. Not sure how useful this would be.
+- we need JSON support in Dogen for this.
+- we need to measure how much slower Dogen would be with this approach.
+  Presumably mustache is a lot slower that Stitch.
+- from this perspective, the PMM is fixed but the PM then becomes a dynamic
+  entity. We can supply a PM model with Dogen but that is just Dogen's
+  interpretation of the physical space; users could supply their own PM's as
+  required. The PMs need to bind to the PMM: either the user supplies its own
+  TS, part etc or it must bind (via meta-data) to existing parts, TS etc. We
+  also need to support two styles of declaring PM entities: inline (e.g. nested)
+  or outline (e.g. we want to bind a given facet, part etc to an already
+  existing TS, etc).
+- we could hash both the mustache template and the JSON object used as input,
+  and save those two hashes in the generated file. If the hashes match, don't
+  bother regenerating.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
+
+Merged stories:
+
+*Implement wale in terms of existing template libraries*
+
+Originally we implemented wale as a quick hack, but we stated:
+
+#+begin_quote
+A second point is the use of [[https://github.com/jamboree/bustache][bustache]] vs rolling our own trivial mustache-like
+implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+#+end_quote
+
+We should really move to one of these mustache implementations. Inja
+seems to be the most sensible one, even though it depends on a JSON
+library. We will need JSON internally anyway, so it may be the time to
+add a dependency. We should also have a way to associate an arbitrary
+JSON document with a formatter so that users can create their own
+templates with their own parameters and the model is merely used for
+pass-through.
+
+We should also start to create a standard set of variables that dogen
+exports into inja such as object name, namespaces, etc. These are
+"system variables" and do not require any action from the user. In
+fact, if we use the JSON based approach, we could define a JSON schema
+for meta-model elements which is MASD specific. These are used by the
+templates.
+
+Note that stitch only makes sense when we are creating a code
+generator (at least given the use cases we have so far) whereas inja
+makes sense even for regular models and can be applied to items in any
+technical space.
+
+Links:
+
+- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
+- [[https://github.com/no1msd/mstch][mstch]]
+- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
+- [[https://github.com/melpon/ginger][ginger]]
+- [[https://github.com/qicosmos/render][render]]
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library. [[https://github.com/paradoxxxzero/jinja2-mode][Emacs mode]]. "Inja is a template engine for
+  modern C++, loosely inspired by jinja for python. It has an easy and yet
+  powerful template syntax with all variables, loops, conditions, includes,
+  callbacks, and comments you need, nested and combined as you like. Inja uses
+  the wonderful json library by nlohmann for data input."
+- [[https://github.com/jrziviani/amps][amps]]
+- [[https://github.com/OlafvdSpek/ctemplate][ctemplate]]: This library provides an easy to use and lightning fast
+  text templating system to use with C++ programs. It was originally
+  called Google Templates, due to its origin as the template system
+  used for Google search result pages.
+- [[https://github.com/moneymanagerex/ctpp][ctpp GH]]: See also [[http://ctpp.havoc.ru/en/][homepage]]. Seems a bit unmaintained but may have
+  some good ideas. See [[http://ctpp.havoc.ru/en/whatis.html][What is CTPP?]]
+- [[https://github.com/blockspacer/CXXCTP][CXXCTP GH]]: "Add custom features to C++ language, like metaclasses,
+  Rust-like traits, reflection and many more. A fully open source,
+  powerful solution for modification and generation of C++ source
+  code. Reduce the amount of boilerplate code in your C++ projects."
+- [[https://github.com/flexferrum/autoprogrammer][autoprogrammer GH]]: "Welcome to Autoprogrammer, the C++ code
+  generation tool! This tool helps you dramatically reduce the amount
+  of boilerplate code in your C++ projects. Based on clang frontend,
+  the 'autoprogrammer' parses your C++ source files and generates new
+  set C++ sources. For instance, it generates enum-to-string
+  converting functions for you. Instead of you."
+- [[https://github.com/TheLongRunSmoke/utility-boilerplate-qt][utility-boilerplate-qt GH]]: "Template for creating simple
+  cross-platform application with GUI based on Qt."
+
+*Consider renaming =wale= to =mustache=*
+
+We need to rename all of the wale templates to mustache.
+
+*Consider renaming =wale= to =tangle=*
+
+Wale and stitch are remnant from the sewing days. Whilst stitch is
+still vaguely appropriate, we can't even remember what wale stands
+for. We should use a more domain-specific term such as weave or
+tangle. In fact, we probably should rename =stitch= to =weave= given
+it weaves text with code, and find a better name for wale. Its not
+"tangling" (given tangling, as we understand it from org-mode, is just
+another name for weaving). We need to look into logic-less templates
+terminology.
+
+Actually this is a mistake. Wale is just a poor-person's mustache and
+will be replaced by a proper implementation of mustache as soon as we
+can. We should instead start calling it mustache and explain this is
+just a temporary fix.
+
+*Consider renaming logic-less templates*
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means.
+
+In addition, the templates should be specific to their types; we need
+to know if its a mustache template or a stitch template because the
+processing will be very different. The templates should be named after
+their type in the logical model. Rename these to wale templates.
+
+Actually its not yet clear if the existing logic could not be extended
+to other template types. We should wait until we implement it front to
+back and then make a decision.
+
+The most obvious thing is just to call the templates after their
+actual name: mustache.
+
+** Deprecated

@@ -120,7 +120,7 @@ else()
     message(STATUS "SCCache NOT found.")
 endif()
 
-project(DOGEN VERSION 1.0.31 LANGUAGES CXX
+project(DOGEN VERSION 1.0.32 LANGUAGES CXX
     DESCRIPTION "Code generator for Model Assisted Software Development.")
 
 #
