@@ -12,16 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-06 Tue 12:13]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:26* |      |      |   0.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:26   |      |      |   0.0 |
-| Active                              |        | 0:26 |      |   0.0 |
-| Sprint and product backlog grooming |        |      | 0:26 |   0.0 |
-#+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+CAPTION: Clock summary at [2022-09-12 Mon 22:42]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *6:58* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 6:58   |      |      | 100.0 |
+| Active                                 |        | 6:58 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 6:15 |  89.7 |
+| Sprint and product backlog grooming    |        |      | 0:43 |  10.3 |
 #+end:
 
 Agenda:
@@ -30,7 +30,16 @@ Agenda:
 (org-agenda-file-to-front)
 #+end_src
 
-*** Edit release notes for previous sprint                           :story:
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-12 Mon 22:00]--[2022-09-12 Mon 22:41] =>  0:41
+    CLOCK: [2022-09-11 Sun 22:25]--[2022-09-11 Sun 23:35] =>  1:10
+    CLOCK: [2022-09-11 Sun 11:58]--[2022-09-11 Sun 12:33] =>  0:35
+    CLOCK: [2022-09-10 Sat 22:44]--[2022-09-10 Sat 23:40] =>  0:56
+    CLOCK: [2022-09-10 Sat 20:21]--[2022-09-10 Sat 20:35] =>  0:14
+    CLOCK: [2022-09-10 Sat 19:02]--[2022-09-10 Sat 20:20] =>  1:18
+    CLOCK: [2022-09-10 Sat 15:49]--[2022-09-10 Sat 17:10] =>  1:21
+    :END:
 
 Add github release notes for previous sprint.
 
@@ -41,91 +50,172 @@ Release announcements:
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 #+begin_src markdown
-![Estadio](https://scontent.flhr4-1.fna.fbcdn.net/v/t1.0-9/108163652_3035579726477117_9033283849917525599_n.jpg?_nc_cat=106&ccb=2&_nc_sid=8bfeb9&_nc_ohc=q2MqbCT1YhgAX_zmBps&_nc_ht=scontent.flhr4-1.fna&oh=48ca18f3dd13f0a746ea29458f643993&oe=6018A9EA)
-_Municipal stadium in Moçamedes, Namibe. (C) 2020 [Administração Municipal De Moçâmedes](https://www.facebook.com/permalink.php?id=1473211179380654&story_fbid=3035581253143631)._
+**_DRAFT RELEASE NOTES - Please come back soon._**
+
+![Graduation](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/phd_graduation.jpg)
+_Graduation day for the PhD programme of Computer Science at the University of Hertfordshire, UK. (C) 2022 Shahinara Craveiro._
 
 # Introduction
 
+After an hiatus of almost ten months, we've finally managed to get another Dogen release out. When looked at purely from a software engineering perspective, this wasn't exactly the most compelling of releases since almost all our stories are infrastructural. More specifically, the majority of resourcing was shifted towards getting Continuous Integration (CI) to work again, in the wake of the carnage left by Travis CI's decommission. However, the _true_ focus of the last few months lays outside the bounds of software engineering; our time was spent mainly on completing the PhD thesis, getting it past a myriad of red-tape processes and, perhaps most significantly of all, on passing the final exam called _the viva_. And so we did. Given it has taken some eight years to complete the PhD programme, you'll forgive us for the break with the tradition in naming releases after Angolan places or events; regular service will resume on the next release, for this as well as in the engineering front ```<knocks on wood, nervously>```. So grab a cupper, sit back, relax, and get ready for the release notes that mark the end of academic life in the Dogen project.
+
 # User visible changes
 
-This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail.
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. However, as we've only had a couple of those - and even then, as these are fairly minor - the demo spends some time reflecting on the PhD programme overall.
 
-[![Sprint 1.0.30 Demo](https://img.youtube.com/vi/ei8B1Pine34/0.jpg)](https://youtu.be/ei8B1Pine34)
-_Video 1: Sprint 30 Demo._
+[![Sprint 1.0.31 Demo](https://img.youtube.com/vi/ei8B1Pine34/0.jpg)](https://youtu.be/ei8B1Pine34)
+_Video 1_: Sprint 31 Demo.
 
-## Test
+## Deprecate support for dumping tracing to a relational database
 
-# Development Matters
+It wasn't _that_ long ago Dogen was extended to dump tracing information into relational databases such as [PostgreSQL](https://www.postgresql.org/) and their ilk. In fact, [v1.0.20](https://github.com/MASD-Project/dogen/releases/tag/v1.0.20)'s release notes announced this new feature with great fanfare, and we genuinely had high hopes for its future. You are of course forgiven if you fail to recall what the fuss was all about, so it is perhaps worthwhile doing a quick recap. Tracing - or _probing_ as it was known then - was introduced in the long forgotten days of [Dogen v1.0.05](https://github.com/MASD-Project/dogen/releases/tag/v1.0.05), the idea being that it would be useful to inspect model state as the transform graph went through its motions. Together with log files, this treasure trove of information enabled us to understand where things went wrong quickly, more often than not without necessitating a debugger. And it was indeed incredibly useful to begin with, but we soon got bored of manually inspecting trace files. You see, the trouble with these crazy critters is that they are rather plump blobs of JSON, thus making it difficult to understand "before" and "after" diffs for the state of a given model transform - even when allowing for [json-diff](https://github.com/andreyvit/json-diff) and the like. To address the problem we doubled-down on our usage of [JQ](https://stedolan.github.io/jq/), but the more we did so, the clearer it became that JQ queries competed in the readability space with computer science classics like regular expressions and perl. A few choice data points should give a flavour of our troubles:
 
-In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the sprint log. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_30.org).
+```bash
+# JQ query to obtain file paths:
+$ jq .models[0].physical.regions_by_logical_id[0][1].data.artefacts_by_archetype[][1].data.data.file_path
+# JQ query to sort models by elements:
+$ jq '.elements|=sort_by(.name.qualified)'
+# JQ query for element names in generated model:
+$ jq ."elements"[]."data"."__parent_0__"."name"."qualified"."dot"
+```
 
-## Milestones and Ephemerides
+It is of course deeply unfair to blame JQ for all our problems, since "meaningful" names such as ```__parent_0__``` fall squarely within Dogen's sphere of influence. Moreover, as a tool JQ is extremely useful for what it is _meant_ to do, as well as being incredibly fast at it. Nonetheless, we begun to accumulate more and more of these query fragments, glued them up with complex UNIX shell pipelines that dumped information from trace files into text files, and then dumped diffs of said information to other text files which where then... - well, you get the drift. These scripts were extremely brittle and mostly "one-off" solutions, but at least the direction of travel was obvious: what was needed was a way to build up a number of queries targeting the "before" and "after" state of any given transform, such that we could ask a series of canned questions like "has object X gone missing in transform T0?" or "did we update field Y incorrectly in transform T1?",  and so on. One can easily conceive that a large library of these queries would accumulate over time, allowing us to see at a glance what changed between transforms and, in so doing, make routine investigations several orders of magnitude faster. Thus far, thus logical. We then investigated PostgreSQL's JSON support and, at first blush, found it to be [very comprehensive](https://www.postgresql.org/docs/current/functions-json.html). Furthermore, given that Dogen always had basic support for [ODB](https://www.codesynthesis.com/products/odb/), it was "easy enough" to teach it to dump trace information into a relational database - which we did in the [aforementioned release](https://github.com/MASD-Project/dogen/releases/tag/v1.0.20).
 
-This sprint saw the 13,000th commit to Dogen.
+Alas, after the initial enthusiasm, we soon realised that expressing our desired questions as database queries was _far_ more difficult than anticipated. Part of it is related to the complex graph that we have on our JSON documents, which could be helped by creating a more relational-database-friendly model; and part of it is the inexperience with PostgreSQL's JSON query extensions. Sadly, we do not have sufficient time address either question properly, given the required engineering effort. To make matters worse, even though it was not being used in anger, the maintenance of this code was become increasingly expensive due to two factors:
 
-![13k commit](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/git_commit_13_000th.png)
-_Figure 7_: Commit number 13,000th was made to the Dogen GitHub repository.
+- its reliance on a beta version of ODB ([v2.5](https://www.codesynthesis.com/pipermail/odb-users/2021-October/004696.html)), for which there are no DEBs readily available; instead, one is expected to build it from source using [Build2](https://build2.org/), an extremely interesting but rather _suis generis_ build tool; and
+- its reliance on either manual install of the ODB C++ libraries or a patched version of [vcpkg](https://vcpkg.io/en/getting-started.html) with support for v2.5. As vcpkg undergoes constant change, this means that every time we update it, we then need to spend ages porting our code to the new world.
 
-## Significant Internal Stories
+Now, one of the rules we've had for the longest time in Dogen is that, if something is not adding value (or worse, _subtracting_ value) then it should be deprecated and removed until such time it can be proven to add value. As with any spare time project, time is extremely scarce, so we barely have enough of it to be confused with the real issues at hand - let alone speculative features that may provide a pay-off one day. So it was that, with great sadness, we removed all support for the relational backend on this release. Not all is lost though. We use [MongoDB](https://www.mongodb.com/) a fair bit at work, and got the hang of its query language. A much simpler alternative is to dump the JSON documents into MongoDB - a shell script would do, at least initially - and then write Mongo queries to process the data. This is an approach we shall explore next time we get stuck investigating an issue using trace dumps.
 
-This sprint had two key goals, both of which were achieved: org-mode and
-PlantUML support. These were described in the user facing stories above. In this
-section we shall provide more details about how this work was organised, as well
-as other stories which were not user facing.
+## Add "verbatim" PlantUML extension
 
-### Smaller stories
+Since we moved away from [Dia](https://wiki.gnome.org/Apps/Dia), the quality of our diagrams degraded considerably. This is to be expected; when we originally added PlantUML support in the [previous release](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30), it was as much a feasibility study as it was the implementation of a new feature. So the understanding was that we'd spend a number of sprints adding improvements to this new codec, until it got to the point where the diagrams where of comparable quality to the Dia ones. However, this sprint it dawned on us just how much machinery would be required to properly model relations in the rich way we had in Dia. Worse: it is not necessarily possible to merely record relations between entities in the input codec and then map those to a UML diagram, the reason being that, in Dia, we cleverly choose which relations are of significance and ignore those we deemed to be less interesting when conveying meaning on a diagram. To make matters more concrete, imagine a [vocabulary type](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p2125r0.pdf) such as ```entities::name``` in model ```dogen::identification```. It is used throughout the whole of Dogen, and any entity with a representation in the LPS (Logical-Physical Space) will use it. A blind approach of modeling each and every relation to a core type such as this would result in a mess of inter-crossing lines, removing any meaning from the resulting diagram.
 
-### Video series of Dogen coding
+After a great deal of pondering, we decided that the PlantUML output needs two kinds of data sources: _automated_, where the relationship is obvious and uncontroversial, such as say the attributes that make up a class; and _manual_, where the relationship requires hand-holding by a human. This is useful for example in the above case, where one would like to suppress the relationships with a basic vocabulary type. This feature was implemented by means of adding a  PlantUML  _verbatim_  attribute to models. It is called "verbatim" because we merely add **exactly** what you put in there into the final PlantUML output. By convention, these statements are placed straight after the entity they were added to. It is perhaps easier to understand this feature by means of an example. Say in the ```dogen.codec``` model one wishes to add a relationship between ```model``` and ```element```. One could go about it as follows:
 
-This sprint we recorded some videos on the implementation of the org-mode codec, and the subsequent use of these models. The individual videos are listed on Table 2, with a short description. They are also available as a playlist, as per link below.
+![Dogen.Codec model](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/add_plantuml_relationships_via_verbatim.png)
+_Figure 1_: Use of the verbatim PlantUML property in the ```dogen.codec``` model.
 
-[![Org-mode codec](https://img.youtube.com/vi/xfJNJ_9uAGU/0.jpg)](https://www.youtube.com/playlist?list=PLwfrwe216gF0wdVhy4fO1_QXJ-njWLSy4)
-_Video 2: Playlist "MASD - Dogen Coding: Formatables Refactor"._
+As you can see, the property ```masd.codec.plantuml``` is extremely simple: it merely allows one to enter valid PlantUML statements, which are subsequently transported into the generated source code without modification, _e.g._:
+
+![PlantUML generated source](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/plantuml_source_with_verbatim_attribute.png)
+_Figure 2_: PlantUML source code for ```dogen.codec``` model.
+
+For good measure, we can observe the final (graphical) output produced by PlantUML, with the two relations. Its worth highlighting a couple of things here. The first is that we added a relationship with the object template ```Element```. Now, it is not entirely clear this is the correct way in UML to model relationships with object templates - the last expert I consulted was not entirely pleased with this approach - but no matter. The salient point is not whether this specific representation is correct or incorrect, but that one can choose to use this or any other representation quite easily, as desired. Secondly and similarly, the aggregation between ```model_set```, ```model``` and ```element``` is something that one would like to highlight in this model, and it is possible to do so trivially by means of this feature. Each of these classes is composed of a number of attributes which are not  particularly interesting from a relationship perspective, and adding relations for all of those would greatly increase the amount of noise in the diagram.
+
+![PlantUML output](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/graphical_representation_of_plantuml_model.png)
+_Figure 3_: Graphical output produced by PlantUML from Dogen-generated sources.
+
+This feature is a great example of how often one needs to think of a problem from many different perspectives before arriving at a solution; and that, even though the problem may appear extremely complex at the start, sometimes all it takes is to view it from a completely different angle. All and all, the feature was implemented in just over two hours; we had originally envisioned lots of invasive changes at the lowers levels of Dogen just to propagate this information, and likely an entire sprint dedicated to it. To be fair, the jury is not out yet on whether this is really the correct approach. Firstly, because we now need to go through each and every model and compare the relations we had in Dia to those we see in PlantUML, and implement them if required. Secondly, we have no way of knowing if the PlantUML input is correct or not, short of writing a parser for their syntax - which we won't consider. This means the user will only find out about syntax errors after running PlantUML - and given it will be within generated code, it is entirely likely the error messages will be less than obvious as to what is causing the problem. Finally and somewhat related:  the _verbatim_ nature of this attribute entails bypassing the Dogen type system entirely, by design. This means that  if this information is useful for purposes other than PlantUML generation - say for example for regular source code generation - we would have no access to it.
+
+A possibly better way of modeling this property is to add a non-verbatim attribute such as "significant relationship" or "user important relationship" or some such. Whatever its name, said attribute would model the notion of there being an important relationship between some types within the Dogen type system, and it could then be used by the PlantUML codec to output it in its syntax. However, before we get too carried away, its important to remember that we always take the simplest possible approach first and wait until use cases arrive, so all of this analysis has been farmed off to the backlog for some future use.
+
+## Video series on MDE and MASD
+
+In general, we tend to place our YouTube videos under the Development Matters section of the release notes because these tend to be about coding within the narrow confines of Dogen. As with so many items within this release, an exception was made for one of the series because it is likely to be of interest to Dogen developers and users alike. The series in question is called "MASD: An introduction to Model Assisted Software Development", and it is composed of 10 parts as of this writing. Its main objective was to prepare us for the _viva_, so the long arc of the series builds up to why one would want to create a new methodology and ends with an explanation of what that methodology might be. However, as we were unsure as to whether we could use material directly from [the thesis](https://uhra.herts.ac.uk/handle/2299/25708), and given our shortness of time to create new material specifically for the series, we opted for a high-level description of the methodology which is somewhat unsatisfactory due to a lack of visuals. We are therefore considering an additional 11th part which reviews a couple of key chapters from the thesis, namely Chapters 5 and 6.
+
+At any rate, the individual videos are listed on Table 1, with a short description. They are also available as a playlist, as per link below.
+
+![MASD: An introduction to Model Assisted Software Development](https://img.youtube.com/vi/yRFjSegsC_s/0.jpg)
+_Video 2_: Playlist "MASD: An introduction to Model Assisted Software Development".
 
 |Video | Description |
 |---------|-----------------|
-| [Part 1](https://youtu.be/xfJNJ_9uAGU) | In this part we provide context about the current task and start off by doing some preliminary work setting up the required infrastructure.|
-| [Part 2](https://youtu.be/HueypBCfwIM) | In this video we review the work done to process org mode documents, and start coding the codec transform. However, we bump into a number of problems.|
-| [Part 3](https://youtu.be/QE7P9s-8Xg0) | In this video we review the work done to get the org codec to generate files, and analyse the problems we're having at present, likely related to errors processing profiles.|
-| [Part 4](https://youtu.be/I-PkSHkpwhI) | In this video we review the work done offline to implement the basic support for reading org-mode documents and start the work to write org mode documents using our org model.|
-| [Part 6](https://youtu.be/ZfpqC9PuEog) | In this part we review the round-trip work made to support org mode, and refactor the tags used in org models. We also add support for org custom IDs.|
-| [Part 7](https://youtu.be/6XDt7lV0k_k) | Addendum video where we demonstrate the use of the new org mode models in a more expansive manner.|
-| [Part 8](https://youtu.be/6wqsbT-jG6Y) | In this second addendum we work on the org-to-org transform, solving a number of issues with whitespacing.|
-| [Part 9](https://youtu.be/GvsI7IGk5sY) | In this video we try to explore moving away from properties to represent meta-data and using tables instead, but we run into a number of difficulties and end up spending most time fixing bugs related to element provenance.|
+| [Part 1](https://www.youtube.com/watch?v=yRFjSegsC_s) | This lecture is the start of an overview of Model Driven Engineering (MDE), the approach that underlies MASD.|
+| [Part 2](https://www.youtube.com/watch?v=Q-5Ic_gOd0Y)|In this lecture we conclude our overview of MDE by discussing Platforms and Technical Spaces, and we start to look at the field in more detail, critiquing its foundations.|
+| [Part 3](https://www.youtube.com/watch?v=P20uEmc0wtc)|In this lecture we discuss the two fundamental concepts of MDE: Models and Transformations.|
+| [Part 4](https://www.youtube.com/watch?v=_x5Wnab8Ipk)|In this lecture we take a large detour to think about the philosophical implications of modeling. In the detour we discuss Russell, Whitehead, Wittgenstein and Meyers amongst others.|
+| [Part 5](https://www.youtube.com/watch?v=w1ZH4v8UiJU)|In this lecture we finish our excursion into the philosophy of modeling and discuss two core topics: Technical Spaces (TS) and Platforms.|
+|[Part 6](https://www.youtube.com/watch?v=TcCNNpH4EfM)|In this video we take a detour and talk about research, and how our programme in particular was carried out - including all the bumps and bruises we faced along the way.|
+|[Part 7](https://www.youtube.com/watch?v=r33MbmOv2ag)|In this lecture we discuss Variability and Variability Management in the context of Model Driven Engineering (MDE).|
+|[Part 8](https://www.youtube.com/watch?v=AAvopzFQm9Q)|In this lecture we start a presentation of the material of the thesis itself, covering state of the art in code generation, and the requirements for a new approach.|
+|[Part 9](https://www.youtube.com/watch?v=EFPMWq5SNGQ)|In this lecture we outline the MASD methodology: its philosophy, processes, actors and modeling language. We also discuss the domain architecture in more detail.|
+|[Part 10](https://www.youtube.com/watch?v=EFPMWq5SNGQ)|In this final lecture we discuss Dogen, introducing its architecture.|
+
+_Table 1_: Video series for "MASD: An introduction to Model Assisted Software Development".
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the sprint log. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_31.org).
+
+## Milestones and Éphémérides
+
+This sprint marks the end of the PhD programme that started in 2014.
+
+![PhD Thesis](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/phd_thesis_in_uh_archive.png)
+_Figure 3_: PhD thesis within the University of Hertfordshire archives.
+
+## Significant Internal Stories
+
+From an engineering perspective, this sprint had one goal which was to restore our CI environment. Other smaller stories were also carried out.
+
+### Move CI to GitHub actions
+
+A great number of stories this sprint (listed below) were connected with returning to a sane world of continuous integration, which we had lost with the demise of the open source support for [Travis CI](https://www.travis-ci.org). First and foremost, I'd like to give a huge shout out to Travis CI for all the years of supporting open source projects, even when perhaps it did not make huge financial sense. Prior to this decision, we had relied on Travis CI quite a lot, and in general it just worked. To my knowledge, they were the first ones to introduce the simple YAML markup for their IaC language, and it still supports features that we could not map to in our new approach (_e.g._  the infamous issue [#399](https://github.com/actions/toolkit/issues/399)). So it was not without sadness that we lost Travis CI support and found ourselves needing to move on to a new, hopefully stable, home. As we have support for [GitHub](https://github.com/MASD-Project/dogen), [BitBucket](https://bitbucket.org/MASD-Project/dogen/src/master/) and [GitLab](https://gitlab.com/DomainDrivenConsulting/dogen) as Git clones, we considered these three providers. In the end, we settled on GitHub actions, mainly because of the wealth of example projects using C++. All things considered, the move was remarkably easy, though not without its challenges. At present we seem to have all Dogen builds across Linux, Windows and OSX working reliably - though, as always, much work still remains such as porting all of our reference products.
+
+![GitHub Actions](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/github_actions_for_dogen.png)
+_Figure 4_: GitHub actions for the Dogen project.
+
+Some of the work on this epic was captured on a video series called "MASD - Dogen Coding: Move to GitHub CI". It is available as a playlist.
+
+[![Move to GitHub CI](https://img.youtube.com/vi/l13FwDpvcA8/0.jpg)](https://youtu.be/ei8B1Pine34)
+_Video 3_: Playlist for  "MASD - Dogen Coding: Move to GitHub CI".
+
+The next table shows the individual parts of the video series.
+
+|Video | Description |
+|---------|-----------------|
+| [Part 1](https://www.youtube.com/watch?v=l13FwDpvcA8)|In this part we start by getting all unit tests to pass.|
+| [Part 2](https://www.youtube.com/watch?v=v7ebzs6XIf4)|In this video we update our vcpkg fork with the required libraries, including ODB. However, we bump into problems getting Dogen to build with the new version of ODB.|
+| [Part 3](https://www.youtube.com/watch?v=JOQPzueENB0)|In this video we decide to remove the relational model altogether as a way to simplify the building of Dogen. It is a bittersweet decision as it took us a long time to code the relational model, but in truth it never lived up to its original promise.|
+| [Part 4](https://www.youtube.com/watch?v=zu-YeZ6akcM)|In this short video we remove all uses of Boost DI. Originally, we saw Boost DI as a solution for our dependency injection needs, which are mainly rooted in the registration of M2T (Model to Text) transforms.|
+| [Part 5](https://www.youtube.com/watch?v=OdDDQlV72BA)|In this video we update vcpkg to use latest and greatest and start to make use of the new standard machinery for CMake and vcpkg integration such as CMake presets. However, ninja misbehaves at the end.|
+| [Part 6](https://www.youtube.com/watch?v=aY_OLBtkEHY)|In this part we get the core of the workflow to work, and iron out a lot of the kinks across all platforms.|
+| [Part 7](https://www.youtube.com/watch?v=gtV9frKFZTw)|In this video we review the work done so far, and continue adding support for nightly builds using the new CMake infrastructure.|
+| [Part 8](https://www.youtube.com/watch?v=Pf-nD5UpLT8)|This video concludes the series. In it, we sort out the few remaining problems with nightly builds, by making them behave more like the regular CI builds.|
+
+_Table 2_: Video series for "MASD - Dogen Coding: Move to GitHub CI".
+
+**Related Stories**: "Move build to GitHub", "Can't see build info in github builds", "Update the test package scripts for the GitHub CI", "Remove deprecated travis and appveyor config files", "Create clang build using libc++", "Add packaging step to github actions", "Setup MSVC Windows build for debug and release", "Update build instructions in readme", "Update the test package scripts for the GitHub CI", "Comment out clang-cl windows build", "Setup the laptop for development", "Windows package is broken".
+
+### Improvements on vcpkg setup
+
+As part of the move to GitHub actions, we decided to greatly simplify our builds. In the past we had relied on a hack: we built all our third party dependencies and placed them, as a zip, on DropBox. This worked, but it meant that updating these dependencies was a major pain. In particular, we often forgot how exactly those builds had been done and where we had sourced all of the libraries. As part of the research on GitHub actions, it became apparent that all the cool kids had moved on to using [vcpkg](https://vcpkg.io/en/getting-started.html) within the CI itself, with a set of supporting actions that made this use case much easier than before. This is highly advantageous because it means that updating the third party dependencies means merely having to update a git submodule. We took this opportunity and simplified all of our dependencies, which meant that sadly we had to remove our support for ODB since v2.5 is not available on vcpkg (see above). Nonetheless, the new setup is an improvement of several orders of magnitude, especially because in the past we had to have our own OSX and Windows Physicals/VM's to build the dependencies whereas now we rely only on vcpkg.
+
+**Related Stories**:  "Update vcpkg to latest", "Remove third-party dependencies outside vcpkg",  "Update nightly builds to use new vcpkg setup".
 
 ## Resourcing
 
-![Sprint 30 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_pie_chart.jpg)
-_Figure 8_: Cost of stories for sprint 30.
+
+![Sprint 31 stories](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/sprint_31_pie_chart.jpg)
+_Figure 5_: Cost of stories for sprint 31.
 
 ## Roadmap
 
-The road map has been working like clockwork for the last few sprints, with us ticking stories off as if it was a mere list - clearly no longer the Oracle of Delphi it once was - and this sprint was no exception. Were we to be able to continue with the same release cadence, the next sprint would no doubt also tick off the next story on our list. Alas, we have ran out of coding time, so Sprint 31 will instead be very long running sprint, with very low utilisation rate. In addition, we won't bother creating sprints when the work is completely dedicated to writing; instead, regular service will resume once the writing comes to an end.
+![Project plan](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/sprint_31_project_plan.png)
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_project_plan.png)
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_30_resource_allocation_graph.png)
+![Resource allocation](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/sprint_31_resource_allocation_graph.png)
 
 # Binaries
 
 You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.30) or [GitHub](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30), as per Table 3. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.30.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.30.tar.gz) format.
 
-| Operative System | Format | BinTray | GitHub |
-|----------|-------|-----|--------|
-|Linux Debian/Ubuntu | Deb | [dogen_1.0.30_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.30/dogen_1.0.30_amd64-applications.deb) | [dogen_1.0.30_amd64-applications.deb](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/dogen_1.0.30_amd64-applications.deb) |
-|Windows | MSI | [DOGEN-1.0.30-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.30-Windows-AMD64.msi) | [DOGEN-1.0.30-Windows-AMD64.msi](https://github.com/MASD-Project/dogen/releases/download/v1.0.30/DOGEN-1.0.30-Windows-AMD64.msi) |
+| Operative System | Debug | Release |
+|--------------------------|------------|-----------|
+| Linux Debian/Ubuntu (Deb) | [linux-clang-debug](https://github.com/MASD-Project/dogen/suites/8228081571/artifacts/359021758) | [linux-clang-release](https://github.com/MASD-Project/dogen/suites/8228081571/artifacts/359021759) |
+| Linux Debian/Ubuntu (Deb) | [linux-gcc-debug](https://github.com/MASD-Project/dogen/suites/8228081571/artifacts/359021760) | [linux-gcc-release](https://github.com/MASD-Project/dogen/suites/8228081571/artifacts/359021761) |
+| Windows (MSI) | [windows-msvc-debug](https://github.com/MASD-Project/dogen/suites/8228081572/artifacts/359031416) | [windows-msvc-release](https://github.com/MASD-Project/dogen/suites/8228081572/artifacts/359031417) |
+| Mac OSX (DMG) | [macos-clang-debug](https://github.com/MASD-Project/dogen/suites/8228081569/artifacts/359027762) | [macos-clang-release](https://github.com/MASD-Project/dogen/suites/8228081569/artifacts/359027763) |
 
-_Table 3: Binary packages for Dogen._
+_Table 3_: Binary packages for Dogen.
 
 **Note 1:** The Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
 
 **Note 2:** Due to issues with Travis CI, we did not manage to get OSX to build, so and we could not produce a final build for this sprint. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
 
 # Next Sprint
-
-The goals for the next sprint are:
-
-- to implement path and dependencies via PMM.
 
 That's all for this release. Happy Modeling!
 #+end_src markdown
@@ -144,7 +234,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
-    CLOCK: [2022-09-06 Tue 12:07]
+    CLOCK: [2022-09-06 Tue 12:07]--[2022-09-06 Tue 12:24] =>  0:17
     CLOCK: [2022-09-06 Tue 11:40]--[2022-09-06 Tue 12:06] =>  0:26
     :END:
 
