@@ -32,6 +32,8 @@ Agenda:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2022-09-13 Tue 17:47]--[2022-09-13 Tue 18:20] =>  0:33
+    CLOCK: [2022-09-13 Tue 08:18]--[2022-09-13 Tue 09:02] =>  0:44
     CLOCK: [2022-09-12 Mon 22:00]--[2022-09-12 Mon 22:41] =>  0:41
     CLOCK: [2022-09-11 Sun 22:25]--[2022-09-11 Sun 23:35] =>  1:10
     CLOCK: [2022-09-11 Sun 11:58]--[2022-09-11 Sun 12:33] =>  0:35
@@ -157,7 +159,61 @@ A great number of stories this sprint (listed below) were connected with returni
 ![GitHub Actions](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/github_actions_for_dogen.png)
 _Figure 4_: GitHub actions for the Dogen project.
 
-Some of the work on this epic was captured on a video series called "MASD - Dogen Coding: Move to GitHub CI". It is available as a playlist.
+**Related Stories**: "Move build to GitHub", "Can't see build info in github builds", "Update the test package scripts for the GitHub CI", "Remove deprecated travis and appveyor config files", "Create clang build using libc++", "Add packaging step to github actions", "Setup MSVC Windows build for debug and release", "Update build instructions in readme", "Update the test package scripts for the GitHub CI", "Comment out clang-cl windows build", "Setup the laptop for development", "Windows package is broken", "Rewrite CTest script to use github actions".
+
+### Improvements to vcpkg setup
+
+As part of the move to GitHub actions, we decided to greatly simplify our builds. In the past we had relied on a hack: we built all our third party dependencies and placed them, as a zip, on DropBox. This worked, but it meant that updating these dependencies was a major pain. In particular, we often forgot how exactly those builds had been done and where we had sourced all of the libraries. As part of the research on GitHub actions, it became apparent that all the cool kids had moved on to using [vcpkg](https://vcpkg.io/en/getting-started.html) within the CI itself, with a set of supporting actions that made this use case much easier than before. This is highly advantageous because it means that updating the third party dependencies means merely having to update a git submodule. We took this opportunity and simplified all of our dependencies, which meant that sadly we had to remove our support for ODB since v2.5 is not available on vcpkg (see above). Nonetheless, the new setup is an improvement of several orders of magnitude, especially because in the past we had to have our own OSX and Windows Physicals/VM's to build the dependencies whereas now we rely only on vcpkg.
+
+**Related Stories**:  "Update vcpkg to latest", "Remove third-party dependencies outside vcpkg",  "Update nightly builds to use new vcpkg setup".
+
+### Improvements to CTest and CMake scripts
+
+Closely related to the work on vcpkg and GitHub actions was a number of fundamental changes to our CMake and CTest setup. First and foremost, we like to point out the move to use CMake Presets. This is a great little feature in CMake that enables one to pack all of the CMake configuration into a preset file, removing the need for the old ```build.*``` scripts that had littered our build directory. It also means that building from Emacs - as well as other editors and IDEs which support presets, of course - is now really easy. In the past we had to supply a number o environment variables and other swuch incantations to the build script in order to setup the required environment. With presets all of that is encapsulated into a self comntained ```CMakePresets.json``` file, making the build much simpler:
+
+
+```
+cmake --preset linux-clang-release
+cmake --build --preset linux-clang-release
+```
+
+You can also list the available presets very easily:
+
+```
+$ cmake --list-presets
+Available configure presets:
+
+  "linux-clang-debug"             - Linux clang debug
+  "linux-clang-release"           - Linux clang release
+  "linux-gcc-debug"               - Linux gcc debug
+  "linux-gcc-release"             - Linux gcc release
+  "windows-msvc-debug"            - Windows x64 Debug
+  "windows-msvc-release"          - Windows x64 Release
+  "windows-msvc-clang-cl-debug"   - Windows x64 Debug
+  "windows-msvc-clang-cl-release" - Windows x64 Release
+  "macos-clang-debug"             - Mac OSX Debug
+  "macos-clang-release"           - Mac OSX Release
+```
+
+This ensures a high degree of regularity of Dogen builds if you wish to stick to the defaults, which is the case for almost all our use cases. The exception had been nightlies, but as we explain elsewhere, with this release we also managed to make those builds conform to the same overall approach.
+
+The release also saw a general clean up of the CTest script, now called ```CTest.cmake```, which supports both continuous as well as nighly builds with minimal complexity. Sadly, the integration of presets with CTest is not exactly perfect, so it took us a fair amount of time to work out how to best get these two to talk to each other.
+
+**Related Stories**: "Rewrite CTest script to use github actions", "Assorted improvements to CMake files"
+
+### Smaller stories
+
+In addition to the big ticket items, a number of smaller stories was also worked om.
+
+- **Fix broken org-mode tests**: due to the _ad-hoc_ nature of our org-mode parser, we keep finding weird and wonderful problems with code generation, mainly related to the introduction of spurious whitelines. This sprint we fixed yet another group of these issues. Going forward, the right solution is to remove org-mode support from within Dogen, since we can't find a third party library that is rock solid, and add instead an XMI-based codec. We can then extend Emacs to generate this XMI output. There are downsides to this approach - for example, the loss of support to non-Emacs based editors such as VI and VS Code.
+- **Generate doxygen docs and add to site**: Every so often we update manually the Doxygen docs available [on our site](https://mcraveiro.github.io/dogen/doxygen/index.html). This time we also added a badge linking back to the documentation. Once the main bulk of work is finished with GitHub actions, we need to consider adding an action to regenerate documentation.
+- **Update build instructions in README***: This sprint saw a raft of updates to our [REAMDE file](https://github.com/MASD-Project/dogen/blob/master/README.md), mostly connected with the end of the tesis as well as all the build changes related to GitHub actions.
+- **Replace Dia IDs with UUIDs**: Now that we have removed Dia models from within Dogen, it seemed appropriate to get rid of some of its vestiges such as Object IDs based on Dia object names. This is yet another small step towards making the org-mode models closer to their native representation. We also begun work on supporting proper capitalisation of org-mode headings ("Capitalise titles in models correctly"), but sadly this proved to be much more complex than expected and has since been returned to the product backlog for further analysis.
+- **Tests should take full generation into account**: Since time immemorial, our nightly builds have been, welll, _different_, from regular CI builds. This is because we make use of a feature called "full generation". Full generation forces the instantiation of model elements across all facets of physical space regardless of the requested configuration within the user model. This is done so that we exercise generated code to the fullest, and also has the great benefit of valgrinding the generated tests, hopefully pointing out any leaks we may have missed. One major down side of this approach was the need to somehow "fake" the contents of the Dogen directory, to esnure the generated tests did not break. We did this via the "pristine" hack: we kept two checkouts of Dogen, and pointed the tests of the main build towards this printine directory, so that the code geneation tests did not fail. It was ugly but just about worked. That is, until we introduced CMake Presets. Then, it caused all sorts of very annoying issues. In this sprint, after the longest time of trying to extend the hack, we finally saw the obvious: the easiest way to address this issue is to extend the tests to also use full generation. This was very easy to implement and made the nightlies regular with respect to the continuous builds.
+
+### Video series of Dogen coding
+
+This sprint we recorded a series of videos titled "MASD - Dogen Coding: Move to GitHub CI". It is somewhat more generic than the name implies, because it includes a lot of the side-tasks needed to make GitHub actions work such as removing third party dependencies, fixing CTest scripts, _etc._ The video series is available as a playlist, in the link below.
 
 [![Move to GitHub CI](https://img.youtube.com/vi/l13FwDpvcA8/0.jpg)](https://youtu.be/ei8B1Pine34)
 _Video 3_: Playlist for  "MASD - Dogen Coding: Move to GitHub CI".
@@ -177,16 +233,11 @@ The next table shows the individual parts of the video series.
 
 _Table 2_: Video series for "MASD - Dogen Coding: Move to GitHub CI".
 
-**Related Stories**: "Move build to GitHub", "Can't see build info in github builds", "Update the test package scripts for the GitHub CI", "Remove deprecated travis and appveyor config files", "Create clang build using libc++", "Add packaging step to github actions", "Setup MSVC Windows build for debug and release", "Update build instructions in readme", "Update the test package scripts for the GitHub CI", "Comment out clang-cl windows build", "Setup the laptop for development", "Windows package is broken".
-
-### Improvements on vcpkg setup
-
-As part of the move to GitHub actions, we decided to greatly simplify our builds. In the past we had relied on a hack: we built all our third party dependencies and placed them, as a zip, on DropBox. This worked, but it meant that updating these dependencies was a major pain. In particular, we often forgot how exactly those builds had been done and where we had sourced all of the libraries. As part of the research on GitHub actions, it became apparent that all the cool kids had moved on to using [vcpkg](https://vcpkg.io/en/getting-started.html) within the CI itself, with a set of supporting actions that made this use case much easier than before. This is highly advantageous because it means that updating the third party dependencies means merely having to update a git submodule. We took this opportunity and simplified all of our dependencies, which meant that sadly we had to remove our support for ODB since v2.5 is not available on vcpkg (see above). Nonetheless, the new setup is an improvement of several orders of magnitude, especially because in the past we had to have our own OSX and Windows Physicals/VM's to build the dependencies whereas now we rely only on vcpkg.
-
-**Related Stories**:  "Update vcpkg to latest", "Remove third-party dependencies outside vcpkg",  "Update nightly builds to use new vcpkg setup".
-
 ## Resourcing
 
+At over ten months duration, this sprint was characterised mainly by its irregularity, rendering metrics such as utilisation rate rather meaningless. It would of course be an unfair comment if we stopped at that - given how much was achieved on the PhD front -  but alas these are not resourcing concerns, given its sole focus on engineering effort. Looking at the sprint as a whole, it must be classified was very productive, weighing in at just over 85 hours and haing largely achieved our sprint goals. It is of course very disappointing to spend this much effort just to get back to where we were in terms of CI/CD in the Travis CI golden days, but it is what it is, and if anything our new setup is certainly a step up in terms of functionality when compared to the Travis/AppVeyor approach.
+
+The most expensive story, by far, was the rewrite of the CTest scripts, at almost 16% of total effort, and it was closely followed by our series of lectures on MDE and MASD (11%). We also spent an uncharacteristic large amount of time refining our sprint and product backlogs: 10% versus the 7% of sprint 30 and the 3.5% of sprint 29. Of course, in the context of ten months with very little coding, it does make sense that we spent a lot of time having ideas about coding. All told, just under 60% of the sprint's total resourcing was directly related to its missing
 
 ![Sprint 31 stories](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/sprint_31_pie_chart.jpg)
 _Figure 5_: Cost of stories for sprint 31.
