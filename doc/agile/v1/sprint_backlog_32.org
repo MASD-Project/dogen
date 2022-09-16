@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-12 Mon 22:42]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *6:58* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 6:58   |      |      | 100.0 |
-| Active                                 |        | 6:58 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 6:15 |  89.7 |
-| Sprint and product backlog grooming    |        |      | 0:43 |  10.3 |
+#+CAPTION: Clock summary at [2022-09-16 Fri 11:07]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *10:46* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 10:46   |       |      | 100.0 |
+| Active                                             |         | 10:46 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 9:44 |  90.4 |
+| Create a demo and presentation for previous sprint |         |       | 0:10 |   1.5 |
+| Sprint and product backlog grooming                |         |       | 0:52 |   8.0 |
 #+end:
 
 Agenda:
@@ -30,8 +31,10 @@ Agenda:
 (org-agenda-file-to-front)
 #+end_src
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
     :LOGBOOK:
+    CLOCK: [2022-09-16 Fri 09:35]--[2022-09-16 Fri 11:06] =>  1:31
+    CLOCK: [2022-09-14 Wed 18:00]--[2022-09-14 Wed 18:41] =>  0:41
     CLOCK: [2022-09-13 Tue 17:47]--[2022-09-13 Tue 18:20] =>  0:33
     CLOCK: [2022-09-13 Tue 08:18]--[2022-09-13 Tue 09:02] =>  0:44
     CLOCK: [2022-09-12 Mon 22:00]--[2022-09-12 Mon 22:41] =>  0:41
@@ -47,13 +50,11 @@ Add github release notes for previous sprint.
 
 Release announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1346587523187937281][twitter]]
-- [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1030-est%C3%A1dio-joaquim-morais-activity-6752353683461304320-zKp7/][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1570851700893941760][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-phd-%F0%9F%87%A6%F0%9F%87%B4%F0%9F%87%B5%F0%9F%87%B9-31558919_release-dogen-v1031-exeunt-academia-activity-6976618358418886656-FRBE][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 #+begin_src markdown
-**_DRAFT RELEASE NOTES - Please come back soon._**
-
 ![Graduation](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/phd_graduation.jpg)
 _Graduation day for the PhD programme of Computer Science at the University of Hertfordshire, UK. (C) 2022 Shahinara Craveiro._
 
@@ -159,13 +160,13 @@ A great number of stories this sprint (listed below) were connected with returni
 ![GitHub Actions](https://github.com/MASD-Project/dogen/releases/download/v1.0.31/github_actions_for_dogen.png)
 _Figure 4_: GitHub actions for the Dogen project.
 
-**Related Stories**: "Move build to GitHub", "Can't see build info in github builds", "Update the test package scripts for the GitHub CI", "Remove deprecated travis and appveyor config files", "Create clang build using libc++", "Add packaging step to github actions", "Setup MSVC Windows build for debug and release", "Update build instructions in readme", "Update the test package scripts for the GitHub CI", "Comment out clang-cl windows build", "Setup the laptop for development", "Windows package is broken", "Rewrite CTest script to use github actions".
+,**Related Stories**: "Move build to GitHub", "Can't see build info in github builds", "Update the test package scripts for the GitHub CI", "Remove deprecated travis and appveyor config files", "Create clang build using libc++", "Add packaging step to github actions", "Setup MSVC Windows build for debug and release", "Update build instructions in readme", "Update the test package scripts for the GitHub CI", "Comment out clang-cl windows build", "Setup the laptop for development", "Windows package is broken", "Rewrite CTest script to use github actions".
 
 ### Improvements to vcpkg setup
 
 As part of the move to GitHub actions, we decided to greatly simplify our builds. In the past we had relied on a hack: we built all our third party dependencies and placed them, as a zip, on DropBox. This worked, but it meant that updating these dependencies was a major pain. In particular, we often forgot how exactly those builds had been done and where we had sourced all of the libraries. As part of the research on GitHub actions, it became apparent that all the cool kids had moved on to using [vcpkg](https://vcpkg.io/en/getting-started.html) within the CI itself, with a set of supporting actions that made this use case much easier than before. This is highly advantageous because it means that updating the third party dependencies means merely having to update a git submodule. We took this opportunity and simplified all of our dependencies, which meant that sadly we had to remove our support for ODB since v2.5 is not available on vcpkg (see above). Nonetheless, the new setup is an improvement of several orders of magnitude, especially because in the past we had to have our own OSX and Windows Physicals/VM's to build the dependencies whereas now we rely only on vcpkg.
 
-**Related Stories**:  "Update vcpkg to latest", "Remove third-party dependencies outside vcpkg",  "Update nightly builds to use new vcpkg setup".
+,**Related Stories**:  "Update vcpkg to latest", "Remove third-party dependencies outside vcpkg",  "Update nightly builds to use new vcpkg setup".
 
 ### Improvements to CTest and CMake scripts
 
@@ -199,7 +200,7 @@ This ensures a high degree of regularity of Dogen builds if you wish to stick to
 
 The release also saw a general clean up of the CTest script, now called ```CTest.cmake```, which supports both continuous as well as nighly builds with minimal complexity. Sadly, the integration of presets with CTest is not exactly perfect, so it took us a fair amount of time to work out how to best get these two to talk to each other.
 
-**Related Stories**: "Rewrite CTest script to use github actions", "Assorted improvements to CMake files"
+,**Related Stories**: "Rewrite CTest script to use github actions", "Assorted improvements to CMake files"
 
 ### Smaller stories
 
@@ -262,34 +263,59 @@ You can download binaries from either [Bintray](https://bintray.com/masd-project
 
 _Table 3_: Binary packages for Dogen.
 
-**Note 1:** The Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
+,**Note 1:** The Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
 
-**Note 2:** Due to issues with Travis CI, we did not manage to get OSX to build, so and we could not produce a final build for this sprint. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
+,**Note 2:** Due to issues with Travis CI, we did not manage to get OSX to build, so and we could not produce a final build for this sprint. The situation with Travis CI is rather uncertain at present so we may remove support for OSX builds altogether next sprint.
 
 # Next Sprint
 
 That's all for this release. Happy Modeling!
-#+end_src markdown
+#+end_src
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-16 Fri 19:15]--[2022-09-16 Fri 20:13] =>  0:58
+    CLOCK: [2022-09-16 Fri 13:55]--[2022-09-16 Fri 14:53] =>  0:58
+    CLOCK: [2022-09-14 Wed 18:42]--[2022-09-14 Wed 18:52] =>  0:10
+    :END:
 
 Time spent creating the demo and presentation.
 
 **** Presentation
 
-***** Dogen v1.0.30, "Estádio Joaquim Morais"
+***** Dogen v1.0.31, "Exeunt Academia"
 
     Marco Craveiro
     Domain Driven Development
-    Released on 5th January 2021
+    Released on 4th September 2022
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-14 Wed 18:53]--[2022-09-14 Wed 19:02] =>  0:09
     CLOCK: [2022-09-06 Tue 12:07]--[2022-09-06 Tue 12:24] =>  0:17
     CLOCK: [2022-09-06 Tue 11:40]--[2022-09-06 Tue 12:06] =>  0:26
     :END:
 
 Updates to sprint and product backlog.
+
+** Consider renaming plantuml property                                :story:
+
+In the previous sprint we introduced =masd.codec.plantuml=. this name is
+questionable, given that the codec name is =plantum=. Consider renaming it.
+Suggestions:
+
+: masd.codec.plantuml.verbatim
+
+*** Nightly builds are failing due to missing variable                :story:
+
+At present we are getting the following error:
+
+: /home/marco/nightly/dogen/master/projects/dogen.utility/src/types/environment/variable_reader.cpp(96): Throw in function static std::string dogen::utility::environment::variable_reader::strict_read_environment_variable(const std::string&)
+: Dynamic exception type: boost::wrapexcept<dogen::utility::environment::environment_exception>
+: std::exception::what: Environment variable is empty or not defined: DOGEN_PROJECTS_DIRECTORY
+: unknown location(0): fatal error: in "Test setup": std::runtime_error: Error during test
+: /home/marco/nightly/dogen/master/projects/dogen.codec/tests/main.cpp(35): last checkpoint: initializer
+: Running 1 test case...
 
 *** Gitter notifications for builds are not showing up                :story:
 

@@ -128,6 +128,16 @@ Notes:
 - when we do this we will break the dogen product unit tests.
 - we need to add the targets to each component (generation, conversion).
 
+*** Codec classification                                              :story:
+
+It seems we have three types of codecs:
+
+- input only, Dia
+- output only: PlantUML
+- roundtrip: org-mode, JSON.
+
+We should make this explicit in the listing of codecs.
+
 *** Consider modeling relations at a higher level of abstration       :story:
 
 At present we model relations in logical model as two object templates:
