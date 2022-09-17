@@ -33,7 +33,8 @@
             "name": "cmake",
             "hidden": true,
             "cacheVariables" : {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "Boost_NO_WARN_NEW_VERSIONS": 1
             },
             "description": "Setup common CMake configuration."
         },
