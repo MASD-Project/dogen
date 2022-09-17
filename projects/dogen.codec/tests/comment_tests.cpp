@@ -36,7 +36,7 @@ namespace  {
 
 const std::string empty;
 const std::string test_module("masd.codec.dia.tests");
-const std::string test_suite("dia_to_codec_projector_tests");
+const std::string test_suite("comment_tests");
 
 const std::string line_1("line 1");
 const std::string line_2("line 2");
@@ -71,7 +71,7 @@ const std::string no_sep_msg("Expected separator");
 using dogen::codec::helpers::dia_to_codec_projector;
 using dogen::codec::helpers::projection_error;
 
-BOOST_AUTO_TEST_SUITE(dia_to_codec_projector_tests)
+BOOST_AUTO_TEST_SUITE(comment_tests)
 
 BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_tagged_values) {
     SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_tagged_values");
