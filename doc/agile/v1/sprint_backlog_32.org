@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-17 Sat 21:27]
+#+CAPTION: Clock summary at [2022-09-17 Sat 21:48]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *13:30* |       |      | 100.0 |
+| *Total time*                                              | *13:49* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 13:30   |       |      | 100.0 |
-| Active                                                    |         | 13:30 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  72.1 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |  15.6 |
-| Update boost to latest in vcpg                            |         |       | 0:20 |   2.5 |
-| Sprint and product backlog grooming                       |         |       | 0:55 |   6.8 |
-| Nightly builds are failing due to missing environment var |         |       | 0:16 |   2.0 |
+| Stories                                                   | 13:49   |       |      | 100.0 |
+| Active                                                    |         | 13:49 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 9:44 |  70.4 |
+| Create a demo and presentation for previous sprint        |         |       | 2:06 |  15.2 |
+| Update boost to latest in vcpg                            |         |       | 0:20 |   2.4 |
+| Sprint and product backlog grooming                       |         |       | 0:55 |   6.6 |
+| Nightly builds are failing due to missing environment var |         |       | 0:16 |   1.9 |
 | Remove deprecated uses of boost bind                      |         |       | 0:09 |   1.1 |
+| Gitter notifications for builds are not showing up        |         |       | 0:19 |   2.3 |
 #+end:
 
 Agenda:
@@ -377,15 +378,10 @@ Links:
 - [[https://stackoverflow.com/questions/63084695/note-when-building-cgal-code-the-practice-of-declaring-the-bind-placeholders][SO: Note when building CGAL code: The practice of declaring the Bind
   placeholders (_1, _2, ...) in the global namespace is deprecated]]
 
-*** Consider renaming plantuml property                               :story:
-
-In the previous sprint we introduced =masd.codec.plantuml=. this name is
-questionable, given that the codec name is =plantum=. Consider renaming it.
-Suggestions:
-
-: masd.codec.plantuml.verbatim
-
-*** Gitter notifications for builds are not showing up                :story:
+*** STARTED Gitter notifications for builds are not showing up        :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
+    :END:
 
 We used to see travis and appveyor build notifications. We stopped seeing them
 after moving to github actions. This is useful because we can see them from
@@ -399,6 +395,15 @@ Notes:
 Links:
 
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
+- [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
+
+*** Consider renaming plantuml property                               :story:
+
+In the previous sprint we introduced =masd.codec.plantuml=. this name is
+questionable, given that the codec name is =plantum=. Consider renaming it.
+Suggestions:
+
+: masd.codec.plantuml.verbatim
 
 *** Update github actions to build from tags                          :story:
 
