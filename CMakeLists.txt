@@ -34,6 +34,9 @@ message(STATUS "CMake Version: ${CMAKE_VERSION}")
 # ctest support
 enable_testing()
 
+# Suppress warning: "The practice of declaring the Bind placeholders
+add_definitions(-DBOOST_BIND_GLOBAL_PLACEHOLDERS)
+
 #
 # Check environment
 #

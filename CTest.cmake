@@ -199,7 +199,7 @@ if(DEFINED code_coverage)
             set(WITH_COVERAGE false)
         else()
             message(STATUS "Found gcov (${CTEST_COVERAGE_COMMAND})...")
-            set(cmake_defines ${cmake_defines} "-DWITH_PROFILING=On")
+            set(cmake_args ${cmake_args} "-DWITH_PROFILING=On")
             set(CTEST_COVERAGE_EXTRA_FLAGS
                 "${CTEST_COVERAGE_EXTRA_FLAGS} --preserve-paths")
             set(WITH_COVERAGE true)
@@ -260,17 +260,18 @@ if(git_result)
     message(FATAL_ERROR "Failed to update source code from git.")
 endif()
 
-# Setup the preset for configuration, if requested.
-set(cmake_args ${cmake_defines} "--preset ${preset}")
+# Setup the preset for configuration.
+set(cmake_args ${cmake_args} "--preset ${preset}")
 
 # For nightlies, we want to force full generation.
 if(${build_group} MATCHES Nightly)
     message(STATUS "Full generation is ON.")
-    set(cmake_args ${cmake_defines} "-DWITH_FULL_GENERATION=ON")
+    set(cmake_args ${cmake_args} "-DWITH_FULL_GENERATION=ON")
 else()
     message(STATUS "Full generation is OFF.")
 endif()
 
+message(STATUS "CMake args: ${cmake_args}")
 ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
 if(configure_result)
     message(FATAL_ERROR "Failed to configure")
