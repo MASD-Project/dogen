@@ -290,7 +290,7 @@ ctest_build(PARALLEL_LEVEL ${nproc})
 # testing status. Travis/AppVeyor just tells us weather the build and packaging
 # steps have worked or failed.
 #
-ctest_test(QUIET)
+ctest_test(PARALLEL_LEVEL ${nproc} QUIET)
 
 #
 # Step: code coverage
@@ -309,7 +309,7 @@ endif()
 # Step: memcheck.
 #
 if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
-    ctest_memcheck(PARALLEL_LEVEL ${number_of_jobs})
+    ctest_memcheck(PARALLEL_LEVEL ${nproc})
 endif()
 
 #
