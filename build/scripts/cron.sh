@@ -102,9 +102,9 @@ export WITH_FULL_GENERATION=ON
 echo "Dogen GCC"
 preset="linux-gcc-debug"
 compiler=${gcc_compiler}
-ctest ${verbosity} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --preset ${preset} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 echo "Dogen clang"
 preset="linux-clang-debug"
 compiler=${clang_compiler}
-ctest ${verbosity} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --preset ${preset} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
