@@ -389,6 +389,7 @@ Links:
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
     CLOCK: [2022-09-18 Sun 07:20]--[2022-09-18 Sun 07:29] =>  0:09
     CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
     :END:
@@ -406,6 +407,7 @@ Links:
 
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
 - [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
+- [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
 
 *** STARTED Windows package is broken                                 :story:
     :LOGBOOK:

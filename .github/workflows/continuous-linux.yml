@@ -83,9 +83,9 @@ jobs:
           name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/dogen_1.0.32_amd64-applications.deb
 
-      - name: Gitter
-        uses: juztcode/gitter-github-action@v1
-        with:
-          room-id: ${{secrets.GITTER_ROOM_ID}}
-          token: ${{secrets.GITTER_TOKEN}}
-          text: ${{github.actio}} - ${{job.status}}
+      # - name: Gitter
+      #   uses: juztcode/gitter-github-action@v1
+      #   with:
+      #     room-id: ${{secrets.GITTER_ROOM_ID}}
+      #     token: ${{secrets.GITTER_TOKEN}}
+      #     text: ${{github.actio}} - ${{job.status}}
