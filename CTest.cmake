@@ -280,7 +280,7 @@ endif()
 #
 # Step: build.
 #
-ctest_build()
+ctest_build(PARALLEL_LEVEL ${nproc})
 
 #
 # Step: test.
