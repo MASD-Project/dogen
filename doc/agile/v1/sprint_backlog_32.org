@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-18 Sun 07:47]
+#+CAPTION: Clock summary at [2022-09-18 Sun 18:45]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *14:13* |       |      | 100.0 |
+| *Total time*                                              | *14:42* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 14:13   |       |      | 100.0 |
-| Active                                                    |         | 14:13 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  68.5 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |  14.8 |
+| Stories                                                   | 14:42   |       |      | 100.0 |
+| Active                                                    |         | 14:42 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 9:44 |  66.2 |
+| Create a demo and presentation for previous sprint        |         |       | 2:06 |  14.3 |
 | Update boost to latest in vcpg                            |         |       | 0:20 |   2.3 |
-| Sprint and product backlog grooming                       |         |       | 0:57 |   6.7 |
-| Nightly builds are failing due to missing environment var |         |       | 0:21 |   2.5 |
-| Remove deprecated uses of boost bind                      |         |       | 0:09 |   1.1 |
-| Gitter notifications for builds are not showing up        |         |       | 0:28 |   3.3 |
+| Sprint and product backlog grooming                       |         |       | 0:57 |   6.5 |
+| Nightly builds are failing due to missing environment var |         |       | 0:40 |   4.5 |
+| Remove deprecated uses of boost bind                      |         |       | 0:09 |   1.0 |
+| Gitter notifications for builds are not showing up        |         |       | 0:38 |   4.3 |
 | Windows package is broken                                 |         |       | 0:08 |   0.9 |
 #+end:
 
@@ -314,6 +314,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Nightly builds are failing due to missing environment var :story:
     :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 18:21]--[2022-09-18 Sun 18:40] =>  0:19
     CLOCK: [2022-09-18 Sun 07:29]--[2022-09-18 Sun 07:34] =>  0:05
     CLOCK: [2022-09-17 Sat 20:55]--[2022-09-17 Sat 21:11] =>  0:16
     :END:
