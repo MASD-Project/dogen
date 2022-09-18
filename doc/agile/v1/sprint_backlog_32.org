@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-17 Sat 21:48]
+#+CAPTION: Clock summary at [2022-09-18 Sun 07:47]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *13:49* |       |      | 100.0 |
+| *Total time*                                              | *14:13* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 13:49   |       |      | 100.0 |
-| Active                                                    |         | 13:49 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  70.4 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |  15.2 |
-| Update boost to latest in vcpg                            |         |       | 0:20 |   2.4 |
-| Sprint and product backlog grooming                       |         |       | 0:55 |   6.6 |
-| Nightly builds are failing due to missing environment var |         |       | 0:16 |   1.9 |
+| Stories                                                   | 14:13   |       |      | 100.0 |
+| Active                                                    |         | 14:13 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 9:44 |  68.5 |
+| Create a demo and presentation for previous sprint        |         |       | 2:06 |  14.8 |
+| Update boost to latest in vcpg                            |         |       | 0:20 |   2.3 |
+| Sprint and product backlog grooming                       |         |       | 0:57 |   6.7 |
+| Nightly builds are failing due to missing environment var |         |       | 0:21 |   2.5 |
 | Remove deprecated uses of boost bind                      |         |       | 0:09 |   1.1 |
-| Gitter notifications for builds are not showing up        |         |       | 0:19 |   2.3 |
+| Gitter notifications for builds are not showing up        |         |       | 0:28 |   3.3 |
+| Windows package is broken                                 |         |       | 0:08 |   0.9 |
 #+end:
 
 Agenda:
@@ -302,6 +303,7 @@ Boost 1.80 is now available.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 07:37]--[2022-09-18 Sun 07:39] =>  0:02
     CLOCK: [2022-09-17 Sat 21:24]--[2022-09-17 Sat 21:27] =>  0:03
     CLOCK: [2022-09-14 Wed 18:53]--[2022-09-14 Wed 19:02] =>  0:09
     CLOCK: [2022-09-06 Tue 12:07]--[2022-09-06 Tue 12:24] =>  0:17
@@ -312,6 +314,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Nightly builds are failing due to missing environment var :story:
     :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 07:29]--[2022-09-18 Sun 07:34] =>  0:05
     CLOCK: [2022-09-17 Sat 20:55]--[2022-09-17 Sat 21:11] =>  0:16
     :END:
 
@@ -335,6 +338,12 @@ Notes:
 
 - this is due to a bug on the CTest script which is resetting the CMake
   arguments for nightlies.
+- it appears we are not using parallel builds during nightly, we are taking over
+  8h for a single build.
+
+Links:
+
+- [[https://cmake.org/cmake/help/latest/command/ctest_build.html][ctest_build]]
 
 Merged stories:
 
@@ -380,6 +389,7 @@ Links:
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 07:20]--[2022-09-18 Sun 07:29] =>  0:09
     CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
     :END:
 
@@ -396,6 +406,44 @@ Links:
 
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
 - [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
+
+*** STARTED Windows package is broken                                 :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 07:39]--[2022-09-18 Sun 07:47] =>  0:08
+    :END:
+
+When we install the windows package under wine, it fails with:
+
+: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
+
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
+
+Actually, this did not help. We then used the new VCPKG macro (see links) which
+now includes all of boost. We are failing on:
+
+: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
+: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
+  #1653]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
+- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
+  install this DLL.
+
+*** Consider creating a small paper summarising MASD                  :story:
+
+At present we have the thesis, that explains the entire methodology and its
+rationale in great detail. This is not suitable for new users. We should have a
+small paper, 3 or 4 pages long, that summarises the argument.
 
 *** Consider renaming plantuml property                               :story:
 
@@ -491,33 +539,6 @@ When we moved the test models into =test_models= the target name did
 not change. It should have changed to:
 
 : dogen_test_models_all_builtins
-
-*** Windows package is broken                                         :story:
-
-When we install the windows package under wine, it fails with:
-
-: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
-
-This will probably be fixed when we move over to the new way of specifying
-dependencies in CMake. Do that first and revisit this problem.
-
-Actually, this did not help. We then used the new VCPKG macro (see links) which
-now includes all of boost. We are failing on:
-
-: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
-: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-
-Links:
-
-- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
-  #1653]]
-- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
-- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
 
 *** Capitalise titles in models correctly                             :story:
 
