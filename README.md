@@ -25,7 +25,7 @@
 
 # Overview
 
-**Dogen** is the reference implementation of the /MASD Project/ code generator.
+**Dogen** is the reference implementation of the _MASD Project_ code generator.
 MASD - Model Assisted Software Development - is a new methodology for the
 development of software systems based on [MDE (Model Driven
 Engineering)](https://en.wikipedia.org/wiki/Model-driven_engineering). MASD was
@@ -35,11 +35,11 @@ MDE-Based Software Development
 Methodology](https://uhra.herts.ac.uk/handle/2299/25708).
 
 In lay terms, Dogen's objective is to automate the development process as much
-as possible: the user creates /models/ in one of the supported codecs and
+as possible: the user creates _models_ in one of the supported codecs and
 respecting a set of predefined restrictions; Dogen then uses this input to
 generate a source code representation of the model. Though we support several
 codecs, the preferred one is an extension to [Org Mode](https://orgmode.org/)
-which we call /org-model/. In the future we plan to deprecate other codecs and
+which we call _org-model_. In the future we plan to deprecate other codecs and
 rely on an [XMI](https://en.wikipedia.org/wiki/XML_Metadata_Interchange)-based
 input format.
 
@@ -50,7 +50,7 @@ end goal is to enable users to extend Dogen, adapting it to the vagaries of
 their specific needs. Note that Dogen has experimental C# support, but it is not
 in feature parity with C++ support.
 
-Dogen provides a /reference product/ for each supported language, available as a
+Dogen provides a _reference product_ for each supported language, available as a
 separate git repo:
 
 - [C++ Reference Product](https://github.com/MASD-Project/cpp_ref_impl).
@@ -76,7 +76,7 @@ want to go ahead and use it, bear in mind the following:
 
 - our immediate goal is to refactor the conceptual model in the source code to
   reflect the MASD conceptual model presented in Chapter 6 of the thesis
-  (/Domain Architecture/). We will continue to refactor the code internally
+  (_Domain Architecture_). We will continue to refactor the code internally
   until it is consistent with the conceptual model. It may take a long while to
   get there. This means that adding new features is not a priority for Dogen
   development (though of course we are gathering a long list of ideas in our
