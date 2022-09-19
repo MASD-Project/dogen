@@ -39,9 +39,9 @@ std::vector<std::string> split_lines(const std::string& s) {
 }
 
 bool compose_diff(const std::vector<std::string>& a,
-    const std::vector<std::string>& b, std::ostream& s) {
+    const std::vector<std::string>& e, std::ostream& s) {
 
-    dtl::Diff<std::string> diff(a, b);
+    dtl::Diff<std::string> diff(a, e);
     diff.onHuge();
     diff.compose();
     diff.composeUnifiedHunks();
@@ -54,9 +54,9 @@ bool compose_diff(const std::vector<std::string>& a,
 
 namespace dogen::utility::string {
 
-std::string differ::diff(const std::string& a, const std::string& b) {
+std::string differ::diff(const std::string& a, const std::string& e) {
     std::ostringstream s;
-    diff(a, b, s);
+    diff(a, e, s);
 
     const auto r(s.str());
     if (r.empty())
@@ -67,13 +67,13 @@ std::string differ::diff(const std::string& a, const std::string& b) {
     return r;
 }
 
-bool differ::diff(const std::string& a, const std::string& b, std::ostream& s) {
+bool differ::diff(const std::string& a, const std::string& e, std::ostream& s) {
     BOOST_LOG_SEV(lg, trace) << "Content of a: " << std::endl << a;
-    BOOST_LOG_SEV(lg, trace) << "Content of b: " << std::endl << b;
+    BOOST_LOG_SEV(lg, trace) << "Content of e: " << std::endl << e;
 
     const auto a_lines(split_lines(a));
-    const auto b_lines(split_lines(b));
-    return compose_diff(a_lines, b_lines, s);
+    const auto e_lines(split_lines(e));
+    return compose_diff(a_lines, e_lines, s);
 }
 
 }

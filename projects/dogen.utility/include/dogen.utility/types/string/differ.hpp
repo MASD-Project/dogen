@@ -38,7 +38,7 @@ public:
     /**
      * @brief Returns diff as a string.
      */
-    static std::string diff(const std::string& a, const std::string& b);
+    static std::string diff(const std::string& a, const std::string& e);
 
     /**
      * @brief Dumps diff into a stream.
@@ -46,7 +46,7 @@ public:
      * @return True if there are any differences, false otherwise.
      */
     static bool
-    diff(const std::string& a, const std::string& b, std::ostream& s);
+    diff(const std::string& a, const std::string& e, std::ostream& s);
 };
 
 }

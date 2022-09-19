@@ -83,7 +83,7 @@ process_artefact(const boost::filesystem::path& managed_dir,
     using physical::entities::operation_reason;
     const auto reason(a.operation().reason());
     using dogen::utility::filesystem::read_file_content;
-    const std::string c(reason == operation_reason::newly_generated ?
+    const std::string actual(reason == operation_reason::newly_generated ?
         empty : read_file_content(fp));
 
     /*
@@ -107,8 +107,9 @@ process_artefact(const boost::filesystem::path& managed_dir,
         }());
 
     using helpers::unified_differ;
-    const auto ud(unified_differ::diff(c, a.content(), managed_dir, fp, info));
-    a.unified_diff(ud);
+    const auto expected(a.content());
+    const auto d(unified_differ::diff(actual, expected, managed_dir, fp, info));
+    a.unified_diff(d);
     return true;
 }
 

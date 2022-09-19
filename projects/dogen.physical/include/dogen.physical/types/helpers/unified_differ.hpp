@@ -32,9 +32,10 @@ namespace dogen::physical::helpers {
 
 class unified_differ final {
 public:
-    static std::string diff(const std::string& a, const std::string& b,
-        const boost::filesystem::path& base,
-        const boost::filesystem::path& a_path,
+    static std::string diff(const std::string& actual,
+        const std::string& expected,
+        const boost::filesystem::path& base_path,
+        const boost::filesystem::path& actual_path,
         const std::string& info);
 };
 

@@ -33,11 +33,11 @@ const std::string empty;
 /**
  * @brief Creates the unified diff header.
  */
-void compose_header(const boost::filesystem::path& base,
-    const boost::filesystem::path& a_path, const std::string&  info,
+void compose_header(const boost::filesystem::path& base_path,
+    const boost::filesystem::path& actual_path, const std::string& info,
     std::ostream& s) {
 
-    auto rp(a_path.lexically_relative(base));
+    auto rp(actual_path.lexically_relative(base_path));
     const auto gs(rp.generic().generic_string());
     s << "diff -u " << gs << " " << gs << std::endl
       << info << std::endl
@@ -49,16 +49,17 @@ void compose_header(const boost::filesystem::path& base,
 
 namespace dogen::physical::helpers {
 
-std::string unified_differ::diff(const std::string& a, const std::string& b,
-    const boost::filesystem::path& base,
-    const boost::filesystem::path& a_path,
+std::string unified_differ::diff(const std::string& actual,
+    const std::string& expected,
+    const boost::filesystem::path& base_path,
+    const boost::filesystem::path& actual_path,
     const std::string& info) {
 
-    BOOST_LOG_SEV(lg, debug) << "Diffing: " << a_path.generic();
+    BOOST_LOG_SEV(lg, debug) << "Diffing: " << actual_path.generic();
 
     std::ostringstream s;
-    compose_header(base, a_path, info, s);
-    const auto has_diffs(utility::string::differ::diff(a, b, s));
+    compose_header(base_path, actual_path, info, s);
+    const auto has_diffs(utility::string::differ::diff(actual, expected, s));
     if (has_diffs) {
         const auto r(s.str());
         BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
