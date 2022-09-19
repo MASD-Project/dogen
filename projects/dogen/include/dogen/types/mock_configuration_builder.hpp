@@ -25,27 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/types/configuration.hpp"
 
 namespace dogen {
 
 /**
  * @brief Creates configurations for testing purposes.
  */
+/**
+ * @brief Creates a configuration suitable for use in tests.
+ */
 class mock_configuration_builder final {
-public:
-    mock_configuration_builder() = default;
-    mock_configuration_builder(const mock_configuration_builder&) = default;
-    mock_configuration_builder(mock_configuration_builder&&) = default;
-    ~mock_configuration_builder() = default;
-    mock_configuration_builder& operator=(const mock_configuration_builder&) = default;
+private:
+    std::string read_variability_override() const;
 
 public:
-    bool operator==(const mock_configuration_builder& rhs) const;
-    bool operator!=(const mock_configuration_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    mock_configuration_builder&
+    target(const boost::filesystem::path& target);
 
+    mock_configuration_builder&
+    activity(const std::string& activity);
+
+    mock_configuration_builder&
+    enable_tracing(const bool enable_tracing);
+
+    mock_configuration_builder&
+    enable_reporting(const bool enable_reporting);
+
+    mock_configuration_builder&
+    enable_diffing(const bool enable_diffing);
+
+    mock_configuration_builder&
+    read_environment(const bool read_environment);
+
+public:
+    configuration build() const;
+
+private:
+    boost::filesystem::path target_;
+    std::string activity_;
+    bool enable_tracing_locally_{};
+    bool enable_reporting_locally_{};
+    bool enable_diffing_locally_{};
+    bool read_environment_locally_{};
 };
 
 }
