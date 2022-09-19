@@ -104,6 +104,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
         # disable mismatched tags as there are STL inconsistencies that
         # make it a bit useless.
         set(warning_flags "${warning_flags} -Wno-mismatched-tags")
+
+        # force DWARF version to 4 in order to keep Valgrind happy.
+        set(warning_flags "${warning_flags} -gdwarf-4")
         if(CCACHE_PROGRAM)
             # CCache and Clang don't seem to play nice when it comes
             # to unused arguments.
