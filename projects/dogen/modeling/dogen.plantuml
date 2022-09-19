@@ -127,6 +127,13 @@ note top of  reporting_style
     Available formats for operational reports.
 end note
 
+class mock_configuration_builder <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+note top of  mock_configuration_builder
+    Creates configurations for testing purposes.
+end note
+
 class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
