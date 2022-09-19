@@ -186,6 +186,35 @@ apply_physical_model_production(const boost::filesystem::path& target,
         enable_diffing_locally);
 }
 
+dogen::physical::entities::model model_generator::
+apply_physical_model_production(const configuration& cfg,
+    const boost::filesystem::path& target,
+    const std::vector<boost::filesystem::path>& reference_directories,
+    const boost::filesystem::path& output_dir) {
+
+    /*
+     * Bootstrap the top-level context.
+     */
+    using namespace dogen::orchestration::transforms;
+    using cbc = context_bootstrapping_chain;
+    const auto& od(output_dir);
+    const auto& a(run_activity);
+    const auto& rds(reference_directories);
+    const auto ctx(cbc::bootstrap(cfg, a, rds, od));
+
+    /*
+     * Bind the tracer to the current scope.
+     */
+    const auto& t(*ctx.codec_context().tracer());
+    dogen::tracing::scoped_tracer st(t);
+
+    /*
+     * Produce the physical model.
+     */
+    const auto r(physical_model_production_chain::apply(ctx, target));
+    return r;
+}
+
 bool model_generator::check_for_differences(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {

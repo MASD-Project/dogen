@@ -76,8 +76,13 @@ public:
         const bool enable_reporting_locally = false,
         const bool enable_diffing_locally = false);
 
-public:
+    static dogen::physical::entities::model
+    apply_physical_model_production(const configuration& cfg,
+        const boost::filesystem::path& target,
+        const std::vector<boost::filesystem::path>& reference_directories,
+        const boost::filesystem::path& output_dir);
 
+public:
     /**
      * @brief Checks to see if the model contains any artefacts which are
      * different from the files in the filesystem.
