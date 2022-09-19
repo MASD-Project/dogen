@@ -35,7 +35,6 @@ constexpr std::string_view run_identifier_prefix("tests.");
 const std::string byproduct_directory("dogen.byproducts/");
 const std::string tracing_directory("tracing");
 
-
 }
 
 namespace dogen {

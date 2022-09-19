@@ -24,6 +24,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/test/logging.hpp"
+#include "dogen.utility/types/string/differ.hpp"
+#include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
@@ -33,8 +35,6 @@
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
-#include "dogen.utility/types/string/differ.hpp"
-#include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.orchestration/tests/model_generator.hpp"
 
 namespace  {
