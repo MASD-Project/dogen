@@ -67,31 +67,30 @@ activity(const std::string& activity) {
 }
 
 mock_configuration_builder& mock_configuration_builder::
-enable_tracing(const bool enable_tracing) {
-    BOOST_LOG_SEV(lg, debug) << "Setting enable tracing: " << enable_tracing;
-    enable_tracing_locally_ = enable_tracing;
+enable_tracing() {
+    BOOST_LOG_SEV(lg, debug) << "Enabling tracing.";
+    enable_tracing_locally_ = true;
     return *this;
 }
 
 mock_configuration_builder& mock_configuration_builder::
-enable_reporting(const bool enable_reporting) {
-    BOOST_LOG_SEV(lg, debug) << "Setting enable reporting: " << enable_reporting;
-    enable_reporting_locally_ = enable_reporting;
+enable_reporting() {
+    BOOST_LOG_SEV(lg, debug) << "Enable reporting.";
+    enable_reporting_locally_ = true;
     return *this;
 }
 
 mock_configuration_builder& mock_configuration_builder::
-enable_diffing(const bool enable_diffing) {
-    BOOST_LOG_SEV(lg, debug) << "Setting enable diffing: " << enable_diffing;
-    enable_diffing_locally_ = enable_diffing;
+enable_diffing() {
+    BOOST_LOG_SEV(lg, debug) << "Enable diffing.";
+    enable_diffing_locally_ = true;
     return *this;
 }
 
 mock_configuration_builder& mock_configuration_builder::
-read_environment(const bool read_environment) {
-    BOOST_LOG_SEV(lg, debug) << "Setting read environment: "
-                             << read_environment;
-    read_environment_locally_ = read_environment;
+read_environment() {
+    BOOST_LOG_SEV(lg, debug) << "Reading environment.";
+    read_environment_locally_ = true;
     return *this;
 }
 

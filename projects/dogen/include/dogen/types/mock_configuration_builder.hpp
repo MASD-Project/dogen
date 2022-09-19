@@ -49,16 +49,16 @@ public:
     activity(const std::string& activity);
 
     mock_configuration_builder&
-    enable_tracing(const bool enable_tracing);
+    enable_tracing();
 
     mock_configuration_builder&
-    enable_reporting(const bool enable_reporting);
+    enable_reporting();
 
     mock_configuration_builder&
-    enable_diffing(const bool enable_diffing);
+    enable_diffing();
 
     mock_configuration_builder&
-    read_environment(const bool read_environment);
+    read_environment();
 
 public:
     configuration build() const;
