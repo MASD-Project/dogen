@@ -22,6 +22,7 @@
 #include <locale>
 #include <iostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
@@ -38,8 +39,8 @@
 
 namespace  {
 
-const std::string test_module("dogen.orchestration.tests");
-const std::string test_suite("physical_model_production_chain_tests");
+using namespace dogen::utility::log;
+auto lg(logger_factory("orchestration.model_generator"));
 
 const std::string conversion_activity("model_to_model");
 const std::string run_activity("physical_production");
@@ -97,25 +98,39 @@ make_configuration(const boost::filesystem::path& target,
     const bool er(enable_reporting_globally || enable_reporting_locally);
     const bool ed(enable_diffing_globally || enable_diffing_locally);
 
+    BOOST_LOG_SEV(lg, debug) << "Enable tracing: " << et
+                             << " Enable reporting: " << er
+                             << " Enable diffing: " << ed;
+
     /*
      * If the environment variable forcing full generation is on, setup the
      * overrides and expected profile for it.
      */
     using vr = dogen::utility::environment::variable_reader;
     const std::string var("WITH_FULL_GENERATION");
-    using boost::algorithm::to_lower_copy;
-    const std::string wfg = to_lower_copy(vr::read_environment_variable(var));
+    const auto original(vr::read_environment_variable(var));
+    BOOST_LOG_SEV(lg, debug) << "Original environment variable."
+                             << "Name: " << var
+                             << " Value: " << original;
 
+    using boost::algorithm::to_lower_copy;
+    const std::string wfg = to_lower_copy(original);
     using dogen::mock_configuration_factory;
     const bool with_full_generation(wfg == "on");
     if (with_full_generation) {
+        BOOST_LOG_SEV(lg, debug) << "Full generation is ON.";
+
         const std::string full_generation_option =
             "--variability-override masd.variability.profile,"
             "dogen.profiles.base.test_all_facets";
+        BOOST_LOG_SEV(lg, debug) << "Full generation option: "
+                                 << full_generation_option;
 
         mock_configuration_factory f(et, er, ed, full_generation_option);
         const auto r(f.make(target, run_activity));
         return r;
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "Full generation is NOT enabled.";
     }
 
     mock_configuration_factory f(et, er, ed);
