@@ -5,31 +5,33 @@
 
 * Sprint Goals
 
-- Finish restore support for CI/CD.
+- Finish restoring support for CI/CD.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-19 Mon 09:19]
+#+CAPTION: Clock summary at [2022-09-19 Mon 18:40]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *16:22* |       |      | 100.0 |
+| *Total time*                                              | *18:33* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 16:22   |       |      | 100.0 |
-| Active                                                    |         | 16:22 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  59.5 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |  12.8 |
-| Update boost to latest in vcpg                            |         |       | 0:20 |   2.0 |
-| Improve diffing output in tests                           |         |       | 0:19 |   1.9 |
-| Sprint and product backlog grooming                       |         |       | 1:01 |   6.2 |
-| Nightly builds are failing due to missing environment var |         |       | 1:07 |   6.8 |
-| Remove deprecated uses of boost bind                      |         |       | 0:09 |   0.9 |
-| Gitter notifications for builds are not showing up        |         |       | 0:38 |   3.9 |
-| Windows package is broken                                 |         |       | 0:08 |   0.8 |
-| Full generation support in tests is incorrect             |         |       | 0:50 |   5.1 |
+| Stories                                                   | 18:33   |       |      | 100.0 |
+| Active                                                    |         | 18:33 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 9:44 |  52.5 |
+| Create a demo and presentation for previous sprint        |         |       | 2:06 |  11.3 |
+| Update boost to latest in vcpg                            |         |       | 0:20 |   1.8 |
+| Improve diffing output in tests                           |         |       | 0:19 |   1.7 |
+| Sprint and product backlog grooming                       |         |       | 1:09 |   6.2 |
+| Nightly builds are failing due to missing environment var |         |       | 1:07 |   6.0 |
+| Remove deprecated uses of boost bind                      |         |       | 0:09 |   0.8 |
+| Gitter notifications for builds are not showing up        |         |       | 0:38 |   3.4 |
+| Windows package is broken                                 |         |       | 0:08 |   0.7 |
+| Full generation support in tests is incorrect             |         |       | 1:00 |   5.4 |
+| Create a mock configuration builder                       |         |       | 1:49 |   9.8 |
+| Add PlantUML relationships to diagrams                    |         |       | 0:04 |   0.4 |
 #+end:
 
 Agenda:
@@ -354,6 +356,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-19 Mon 11:42]--[2022-09-19 Mon 11:50] =>  0:08
     CLOCK: [2022-09-19 Mon 08:29]--[2022-09-19 Mon 08:29] =>  0:00
     CLOCK: [2022-09-19 Mon 08:24]--[2022-09-19 Mon 08:28] =>  0:04
     CLOCK: [2022-09-18 Sun 07:37]--[2022-09-18 Sun 07:39] =>  0:02
@@ -365,7 +368,7 @@ generation overrides the decoration settings.
 
 Updates to sprint and product backlog.
 
-*** STARTED Nightly builds are failing due to missing environment var :story:
+*** COMPLETED Nightly builds are failing due to missing environment var :story:
     :LOGBOOK:
     CLOCK: [2022-09-19 Mon 07:35]--[2022-09-19 Mon 08:02] =>  0:27
     CLOCK: [2022-09-18 Sun 18:21]--[2022-09-18 Sun 18:40] =>  0:19
@@ -404,8 +407,6 @@ Notes:
 
   : unhandled dwarf2 abbrev form code 0x25
 
--
-
 Links:
 
 - [[https://cmake.org/cmake/help/latest/command/ctest_build.html][ctest_build]]
@@ -428,7 +429,7 @@ At present we are getting the following error:
 
 *Fix errors in nightly builds*
 
-*** STARTED Remove deprecated uses of boost bind                      :story:
+*** COMPLETED Remove deprecated uses of boost bind                    :story:
    :LOGBOOK:
    CLOCK: [2022-09-17 Sat 21:14]--[2022-09-17 Sat 21:23] =>  0:09
    :END:
@@ -511,6 +512,7 @@ Links:
 
 *** STARTED Full generation support in tests is incorrect             :story:
     :LOGBOOK:
+    CLOCK: [2022-09-19 Mon 11:18]--[2022-09-19 Mon 11:28] =>  0:10
     CLOCK: [2022-09-19 Mon 08:29]--[2022-09-19 Mon 09:19] =>  0:50
     :END:
 
@@ -552,11 +554,90 @@ Links:
 
 - [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.19][v1.0.19]]: "Add support for variability overrides in Dogen"
 
-*** Consider creating a small paper summarising MASD                  :story:
+*** STARTED Create a mock configuration builder                       :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-19 Mon 18:19]--[2022-09-19 Mon 18:40] =>  0:21
+    CLOCK: [2022-09-19 Mon 16:31]--[2022-09-19 Mon 17:50] =>  1:19
+    CLOCK: [2022-09-19 Mon 11:28]--[2022-09-19 Mon 11:37] =>  0:09
+    :END:
 
-At present we have the thesis, that explains the entire methodology and its
-rationale in great detail. This is not suitable for new users. We should have a
-small paper, 3 or 4 pages long, that summarises the argument.
+At present we are using a factory for creating mock configurations. This was
+fine because we only had one or two variations, so it was easy enough to
+construct the configuration in one call. However, with variability overrides we
+now have several different scenarios. It would be easier to have a builder, with
+sensible defaults, that returns a full configuration which is then supplied to
+the model generator.
+
+Notes:
+
+- consider adding all variables to the result of the builder, to make the code a
+  bit less repetitive.
+
+*** STARTED Add PlantUML relationships to diagrams                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-19 Mon 11:38]--[2022-09-19 Mon 11:42] =>  0:04
+    :END:
+
+We need to go through each and every model and add the relations we add in Dia
+to make diagrams more readable. Models done:
+
+- dogen
+
+*** CI error: Failed to delete output directory                       :story:
+
+We are experiencing a strange CI error:
+
+#+begin_example
+D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
+D:\a\dogen\dogen\projects\dogen.orchestration\tests\main.cpp(39): last checkpoint: initializer
+Running 1 test case...
+
+ *** No errors detected
+Test setup error:
+#+end_example
+
+We also have this related error:
+
+#+begin_example
+Running 1 test case...
+/home/runner/work/dogen/dogen/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(169): fatal error: in "code_generation_chain_tests/empty_folders_are_deleted_when_delete_empty_folders_flag_is_on": critical check are_generated_files_healthy(od, t, 60 ) has failed
+
+ *** 1 failure is detected in the test module "dogen.orchestration.tests"
+#+end_example
+
+*** PlantUML Verbatim considered harmful                              :story:
+
+Last sprint we added the PlantUML verbatim property, /i.e./:
+
+:   :masd.codec.plantuml: model o-- element : composed of
+:   :masd.codec.plantuml: Element <|.. model
+
+This was meant to allow us to add the missing relations in the PlantUML
+diagrams. However, there are issues with this approach:
+
+- we may enter invalid PlantUML syntax, and will only find out at diagram
+  generation time. The error will probably be very hard to figure out as well.
+- we need to know the exact element name. Given the "spaces for underscores"
+  approach, this is not very nice (/e.g./ we replace "a model type" with
+  "a_model_type").
+- if you rename a type, this will fail.
+
+Seems like a better approach is to name the relations and add them as codec
+attributes:
+
+:   :masd.codec.annotation.abstraction: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
+:   :masd.codec.annotation.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
+:   :masd.codec.annotation.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
+
+These relations then give rise to a mapping to the element name during
+resolution. This copes with renames.
+
+Links:
+
+- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
 
 *** Consider renaming plantuml property                               :story:
 
@@ -565,118 +646,6 @@ questionable, given that the codec name is =plantum=. Consider renaming it.
 Suggestions:
 
 : masd.codec.plantuml.verbatim
-
-*** Update github actions to build from tags                          :story:
-
-At present it seems we only build from master. We need to build from tags for
-releases.
-
-*** Assorted improvements to CMake files                               :epic:
-
-#+begin_src cmake
-include(CheckIPOSupported)
-check_ipo_supported(RESULT result)
-if(result)
-  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif()
-
-LINK_WHAT_YOU_USE
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy" "-checks=*")
-<LANG>_CLANG_TIDY: CMake 3.6+
-<LANG>_CPPCHECK
-<LANG>_CPPLINT
-<LANG>_INCLUDE_WHAT_YOU_USE
-
-install(TARGETS MyLib
-        EXPORT MyLibTargets
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
-        INCLUDES DESTINATION include
-        )
-#+end_src
-
-*Previous understanding*
-
-It seems we are not using proper CMake idioms to pick up compiler features, as
-explained here:
-
-- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
-- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
-- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-- [[https://datascience.dsscale.org/wp-content/uploads/2016/06/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
-- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
-  platform C++ CMake project using modern CMake syntax and transitive
-  dependencies.
-- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
-- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
-- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
-  helper files."
-
-We need to implement this using proper CMake idioms.
-
-Notes:
-
-- Add version and language to project.
-- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to repeat the
-  same flags; this could be avoided by passing in a variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is
-  the modern method for setting general compile flags in CMake?]]
-- define qualified aliases for all libraries, including nested aliasing for
-  =dogen::test_models=. Ensure all linking is done against qualified names.
-- use target include directories for each target and only add the required
-  include directories to each target. Mark them with the appropriate visibility,
-  including using =interface=. We should then remove all duplication of
-  libraries in the specs.
-- try replacing calls to =-std=c++-14= with compiler feature detection. We need
-  to create a list of all C++-14 features we're using.
-- remove all of the debug/release compilation options and start using
-  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type support to
-  our builds, but as a result, the binaries moved from =stage/bin= to =bin=.
-  There is no obvious explanation for this.
-- remove =STATIC= on all libraries and let users specify which linkage to use.
-  We already have a story to capture this work.
-- remove the stage folder and use the traditional CMake directories. This will
-  also fix the problems we have with BUILD_TYPE.
-- consider buying the CMake book: https://crascit.com/professional-cmake/.
-
-Merged stories:
-
-*Usage of external module path in cmakelists*                       :story:
-
-It seems like we are not populating the target names
-properly. Originally the target name for test model all built-ins was:
-
-: dogen_all_builtins
-
-When we moved the test models into =test_models= the target name did
-not change. It should have changed to:
-
-: dogen_test_models_all_builtins
-
-*** Capitalise titles in models correctly                             :story:
-
-We still have models with lower case titles:
-
-: * initializer                                                       :element:
-
-Capitalise these correctly.
-
-When we tried to do this to the dogen model, generation failed with the
-following error:
-
-: Error: Object has attribute with undefined type: spec_category
-
-We are probably not normalising to lower case.
-
-In addition
-
-Merged stories:
-
-*Capitalise model headers correctly*
-
-At present most models still use the "all lower case" notation, copied from Dia.
-We need to capitalise headers correctly so that when we generate documentation
-they come out correctly.
 
 *** Add full and relative path processing to PM                       :story:
 
@@ -851,6 +820,124 @@ Notes:
   boost serialisation mapped to a destination called =serialisation=. Or we
   could map it to say RapidJSON serialisation. Or we could support two methods
   of serialisation for the same project. The user chooses where to place them.
+
+*** Update github actions to build from tags                          :story:
+
+At present it seems we only build from master. We need to build from tags for
+releases.
+
+*** Assorted improvements to CMake files                               :epic:
+
+#+begin_src cmake
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
+LINK_WHAT_YOU_USE
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy" "-checks=*")
+<LANG>_CLANG_TIDY: CMake 3.6+
+<LANG>_CPPCHECK
+<LANG>_CPPLINT
+<LANG>_INCLUDE_WHAT_YOU_USE
+
+install(TARGETS MyLib
+        EXPORT MyLibTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+        )
+#+end_src
+
+*Previous understanding*
+
+It seems we are not using proper CMake idioms to pick up compiler features, as
+explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.dsscale.org/wp-content/uploads/2016/06/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
+- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
+- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
+  helper files."
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to repeat the
+  same flags; this could be avoided by passing in a variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is
+  the modern method for setting general compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested aliasing for
+  =dogen::test_models=. Ensure all linking is done against qualified names.
+- use target include directories for each target and only add the required
+  include directories to each target. Mark them with the appropriate visibility,
+  including using =interface=. We should then remove all duplication of
+  libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature detection. We need
+  to create a list of all C++-14 features we're using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type support to
+  our builds, but as a result, the binaries moved from =stage/bin= to =bin=.
+  There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage to use.
+  We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake directories. This will
+  also fix the problems we have with BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
+*** Capitalise titles in models correctly                             :story:
+
+We still have models with lower case titles:
+
+: * initializer                                                       :element:
+
+Capitalise these correctly.
+
+When we tried to do this to the dogen model, generation failed with the
+following error:
+
+: Error: Object has attribute with undefined type: spec_category
+
+We are probably not normalising to lower case.
+
+In addition
+
+Merged stories:
+
+*Capitalise model headers correctly*
+
+At present most models still use the "all lower case" notation, copied from Dia.
+We need to capitalise headers correctly so that when we generate documentation
+they come out correctly.
+
+*** Consider creating a small paper summarising MASD                  :story:
+
+At present we have the thesis, that explains the entire methodology and its
+rationale in great detail. This is not suitable for new users. We should have a
+small paper, 3 or 4 pages long, that summarises the argument.
 
 *** Add support for relations in codec model                          :story:
     :PROPERTIES:
