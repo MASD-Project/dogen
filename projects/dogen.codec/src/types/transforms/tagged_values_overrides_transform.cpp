@@ -110,7 +110,7 @@ apply(const transforms::context& ctx, entities::model& m) {
         BOOST_LOG_SEV(lg, trace) << "Override model name: '"
                                  << model_name << "'";
         if (!model_name.empty() && m.name().simple() != model_name) {
-            BOOST_LOG_SEV(lg, trace) << "Override does not apply to model."
+            BOOST_LOG_SEV(lg, debug) << "Override does not apply to model."
                                      << " Model: " << m.name().simple()
                                      << " Variability override model: "
                                      <<  model_name;
@@ -121,7 +121,7 @@ apply(const transforms::context& ctx, entities::model& m) {
         if (tokens_size > 3) {
             element_name = tokens.front();
             tokens.pop_front();
-            BOOST_LOG_SEV(lg, trace) << "Override element name: '"
+            BOOST_LOG_SEV(lg, debug) << "Override element name: '"
                                      << element_name << "'";
         }
 
@@ -129,7 +129,7 @@ apply(const transforms::context& ctx, entities::model& m) {
         if (tokens_size == 5) {
             attribute_name = tokens.front();
             tokens.pop_front();
-            BOOST_LOG_SEV(lg, trace) << "Override attribute name: '"
+            BOOST_LOG_SEV(lg, debug) << "Override attribute name: '"
                                      << attribute_name << "'";
         }
 
