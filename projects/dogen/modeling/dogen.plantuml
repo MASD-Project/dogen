@@ -51,13 +51,6 @@ note top of  tracing_format
     Available formats for tracing transformations.
 end note
 
-class configuration_builder <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-note top of  configuration_builder
-    masd::builder
-end note
-
 class diffing_configuration <<masd::fluent>> #F7E5FF {
     +{field} destination diffing_destination
     +{field} output_directory boost::filesystem::path
