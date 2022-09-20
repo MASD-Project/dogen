@@ -215,6 +215,31 @@ apply_physical_model_production(const configuration& cfg,
     return r;
 }
 
+bool model_generator::
+has_differences(const physical::entities::artefact& a) {
+    /*
+     * We can safely ignore all files the user provided regexes
+     * for.
+     */
+    using namespace dogen::physical::entities;
+    if (a.operation().type() == operation_type::ignore &&
+        a.operation().reason() == operation_reason::ignore_regex)
+        return false;
+
+    /*
+     * If we are not writing or deleting the artefact, then its not a
+     * difference.
+     */
+    if (a.operation().type() != operation_type::write &&
+        a.operation().type() != operation_type::remove)
+        return false;
+
+    /*
+     * All other cases are differences.
+     */
+    return true;
+}
+
 bool model_generator::check_for_differences(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
@@ -223,17 +248,7 @@ bool model_generator::check_for_differences(
     const auto& artefacts(gather_artefacts(m));
     for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
-        using namespace dogen::physical::entities;
-        /*
-         * We can safely ignore all files the user provided regexes
-         * for.
-         */
-        if (a.operation().type() == operation_type::ignore &&
-            a.operation().reason() == operation_reason::ignore_regex)
-            continue;
-
-        if (a.operation().type() != operation_type::write &&
-            a.operation().type() != operation_type::remove)
+        if (!has_differences(a))
             continue;
 
         const bool is_first_diff(diffs_found == 0);
@@ -249,6 +264,7 @@ bool model_generator::check_for_differences(
         const auto& p(a.file_path());
         const auto rel(p.lexically_relative(output_dir));
         const auto gs(rel.generic_string());
+        using namespace dogen::physical::entities;
         if (a.operation().type() == operation_type::remove)
             std::cout << "Unexpected file (remove): " << gs << std::endl;
         else if (a.operation().type() == operation_type::write) {
@@ -259,8 +275,11 @@ bool model_generator::check_for_differences(
                 a.unified_diff().empty()) {
                 std::cout << "Unexpected force write (no diffs): "
                           << gs << std::endl;
-            } else
+            } else {
+                std::cout << "Unexpected write: " << gs << std::endl
+                          << "Reason: " << rsn << std::endl;
                 print_lines(a.unified_diff(), 20, std::cout);
+            }
         } else if (a.operation().type() == operation_type::ignore) {
             if (a.operation().reason() == operation_reason::ignore_unexpected)
                 std::cout << "Unexpected file (ignore): " << gs << std::endl;

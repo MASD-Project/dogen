@@ -60,6 +60,11 @@ private:
         const bool enable_reporting_locally,
         const bool enable_diffing_locally);
 
+    /**
+     * @brief Returns true if the artefact is different from the expectation.
+     */
+    static bool has_differences(const physical::entities::artefact& a);
+
 public:
     static dogen::physical::entities::model
     apply_physical_model_production(const boost::filesystem::path& target,
