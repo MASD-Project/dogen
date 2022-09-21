@@ -37,6 +37,7 @@ using dogen::mock_configuration_builder;
 mock_configuration_builder setup_builder() {
     mock_configuration_builder r;
     r.read_environment();
+    r.use_fixed_activity_timestamp();
     return r;
 }
 
