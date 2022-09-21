@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/io/configuration_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/differ.hpp"
@@ -38,12 +39,13 @@ auto lg(logger_factory("dogen.mock_configuration_builder"));
  * for no good reason.
  */
 const bool enable_tracing_globally(false);
-const bool enable_reporting_globally(false);
-const bool enable_diffing_globally(false);
+const bool enable_reporting_globally(true);
+const bool enable_diffing_globally(true);
 const bool read_environment_globally(false);
 
 constexpr std::string_view dot(".");
 constexpr std::string_view run_identifier_prefix("tests.");
+const std::string invalid_activity_timestamp("Invalid activity timestamp: ");
 
 const std::string byproduct_directory("dogen.byproducts/");
 const std::string tracing_directory("tracing");
@@ -91,6 +93,13 @@ mock_configuration_builder& mock_configuration_builder::
 read_environment() {
     BOOST_LOG_SEV(lg, debug) << "Reading environment.";
     read_environment_locally_ = true;
+    return *this;
+}
+
+mock_configuration_builder& mock_configuration_builder::
+use_fixed_activity_timestamp() {
+    BOOST_LOG_SEV(lg, debug) << "Using a fixed activity timestamp.";
+    use_fixed_activity_timestamp_ = true;
     return *this;
 }
 
@@ -173,6 +182,14 @@ configuration mock_configuration_builder::build() const {
         rcfg.style(reporting_style::org_mode);
         rcfg.output_directory(r.byproduct_directory());
         r.reporting(rcfg);
+    }
+
+    if (use_fixed_activity_timestamp_) {
+        using boost::gregorian::date;
+        using boost::posix_time::ptime;
+        using boost::posix_time::time_duration;
+        ptime pt(date(2022, 10, 20), time_duration(10, 20, 30));
+        r.model_processing().activity_timestamp(pt);
     }
 
     const bool re(read_environment_globally || read_environment_locally_);

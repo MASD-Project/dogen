@@ -45,20 +45,12 @@ public:
     mock_configuration_builder&
     target(const boost::filesystem::path& target);
 
-    mock_configuration_builder&
-    activity(const std::string& activity);
-
-    mock_configuration_builder&
-    enable_tracing();
-
-    mock_configuration_builder&
-    enable_reporting();
-
-    mock_configuration_builder&
-    enable_diffing();
-
-    mock_configuration_builder&
-    read_environment();
+    mock_configuration_builder& activity(const std::string& activity);
+    mock_configuration_builder& enable_tracing();
+    mock_configuration_builder& enable_reporting();
+    mock_configuration_builder& enable_diffing();
+    mock_configuration_builder& read_environment();
+    mock_configuration_builder& use_fixed_activity_timestamp();
 
 public:
     configuration build() const;
@@ -70,6 +62,7 @@ private:
     bool enable_reporting_locally_{};
     bool enable_diffing_locally_{};
     bool read_environment_locally_{};
+    bool use_fixed_activity_timestamp_{};
 };
 
 }
