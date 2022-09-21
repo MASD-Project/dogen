@@ -22,6 +22,7 @@
 [![clang-14](https://img.shields.io/badge/CLANG-14-blue.svg)](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html)
 [![msvc2017](https://img.shields.io/badge/MSVC-2017-blue.svg)](https://visualstudio.microsoft.com/vs/whatsnew/)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
+[![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/MASD-Project/dogen)](https://www.tickgit.com/browse?repo=github.com/MASD-Project/dogen)
 
 # Overview
 
