@@ -462,6 +462,10 @@ if (DOGEN_CLI_EXECUTABLE)
         set(profile "dogen.profiles.base.test_all_facets")
         set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
             --variability-override masd.variability.profile,${profile})
+
+        # need to fix the activity timestamp to the value used in tests.
+        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
+            --activity-timestamp "2022-10-20 10:20:30")
     endif()
 
     # uncomment to enable logging.
