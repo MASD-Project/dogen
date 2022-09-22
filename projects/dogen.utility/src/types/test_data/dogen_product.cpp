@@ -152,7 +152,6 @@ path dogen_product::output_directory() {
     return output_directory_;
 }
 
-
 const std::vector<boost::filesystem::path>&
 dogen_product::reference_directories() {
     return reference_directories_;
