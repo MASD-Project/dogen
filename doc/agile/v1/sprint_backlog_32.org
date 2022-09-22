@@ -12,25 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-21 Wed 23:53]
+#+CAPTION: Clock summary at [2022-09-22 Thu 20:00]
 | <75>                                                      |         |       |      |       |
 | Headline                                                  | Time    |       |      |     % |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *20:43* |       |      | 100.0 |
+| *Total time*                                              | *21:47* |       |      | 100.0 |
 |-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 20:43   |       |      | 100.0 |
-| Active                                                    |         | 20:43 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  47.0 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |  10.1 |
-| Update boost to latest in vcpg                            |         |       | 0:20 |   1.6 |
+| Stories                                                   | 21:47   |       |      | 100.0 |
+| Active                                                    |         | 21:47 |      | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 9:44 |  44.7 |
+| Create a demo and presentation for previous sprint        |         |       | 2:06 |   9.6 |
+| Update boost to latest in vcpg                            |         |       | 0:20 |   1.5 |
 | Improve diffing output in tests                           |         |       | 0:19 |   1.5 |
-| Sprint and product backlog grooming                       |         |       | 1:15 |   6.0 |
-| Nightly builds are failing due to missing environment var |         |       | 1:07 |   5.4 |
+| Sprint and product backlog grooming                       |         |       | 1:24 |   6.4 |
+| Nightly builds are failing due to missing environment var |         |       | 1:07 |   5.1 |
 | Remove deprecated uses of boost bind                      |         |       | 0:09 |   0.7 |
-| Gitter notifications for builds are not showing up        |         |       | 0:38 |   3.1 |
-| Windows package is broken                                 |         |       | 0:20 |   1.6 |
-| Full generation support in tests is incorrect             |         |       | 2:43 |  13.1 |
-| Create a mock configuration builder                       |         |       | 1:58 |   9.5 |
+| Full generation support in tests is incorrect             |         |       | 2:52 |  13.2 |
+| Gitter notifications for builds are not showing up        |         |       | 0:38 |   2.9 |
+| Windows package is broken                                 |         |       | 0:20 |   1.5 |
+| Tests failing with filesystem errors                      |         |       | 0:46 |   3.5 |
+| Create a mock configuration builder                       |         |       | 1:58 |   9.0 |
 | Add PlantUML relationships to diagrams                    |         |       | 0:04 |   0.3 |
 #+end:
 
@@ -356,6 +357,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-22 Thu 08:47]--[2022-09-22 Thu 08:56] =>  0:09
     CLOCK: [2022-09-20 Tue 08:15]--[2022-09-20 Tue 08:21] =>  0:06
     CLOCK: [2022-09-19 Mon 11:42]--[2022-09-19 Mon 11:50] =>  0:08
     CLOCK: [2022-09-19 Mon 08:29]--[2022-09-19 Mon 08:29] =>  0:00
@@ -457,67 +459,9 @@ Links:
 - [[https://stackoverflow.com/questions/63084695/note-when-building-cgal-code-the-practice-of-declaring-the-bind-placeholders][SO: Note when building CGAL code: The practice of declaring the Bind
   placeholders (_1, _2, ...) in the global namespace is deprecated]]
 
-*** STARTED Gitter notifications for builds are not showing up        :story:
+*** COMPLETED Full generation support in tests is incorrect           :story:
     :LOGBOOK:
-    CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
-    CLOCK: [2022-09-18 Sun 07:20]--[2022-09-18 Sun 07:29] =>  0:09
-    CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
-    :END:
-
-We used to see travis and appveyor build notifications. We stopped seeing them
-after moving to github actions. This is useful because we can see them from
-Emacs in IRC.
-
-Notes:
-
-- it seems the settings have an option for this in webhooks. Redo the hook to
-  see if it helps.
-
-Links:
-
-- [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
-- [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
-- [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
-
-*** STARTED Windows package is broken                                 :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-20 Tue 08:21]--[2022-09-20 Tue 08:33] =>  0:12
-    CLOCK: [2022-09-18 Sun 07:39]--[2022-09-18 Sun 07:47] =>  0:08
-    :END:
-
-When we install the windows package under wine, it fails with:
-
-: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
-
-This will probably be fixed when we move over to the new way of specifying
-dependencies in CMake. Do that first and revisit this problem.
-
-Actually, this did not help. We then used the new VCPKG macro (see links) which
-now includes all of boost. We are failing on:
-
-: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
-: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
-
-Notes:
-
-- Check if we are on latest MSVC.
-
-Links:
-
-- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
-  #1653]]
-- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
-- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
-- [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
-  install this DLL.
-
-*** STARTED Full generation support in tests is incorrect             :story:
-    :LOGBOOK:
+    CLOCK: [2022-09-22 Thu 07:30]--[2022-09-22 Thu 07:39] =>  0:09
     CLOCK: [2022-09-21 Wed 23:20]--[2022-09-21 Wed 23:53] =>  0:33
     CLOCK: [2022-09-21 Wed 08:24]--[2022-09-21 Wed 08:48] =>  0:24
     CLOCK: [2022-09-21 Wed 07:40]--[2022-09-21 Wed 07:47] =>  0:07
@@ -611,6 +555,102 @@ Links:
 
 - [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.19][v1.0.19]]: "Add support for variability overrides in Dogen"
 
+*** STARTED Gitter notifications for builds are not showing up        :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
+    CLOCK: [2022-09-18 Sun 07:20]--[2022-09-18 Sun 07:29] =>  0:09
+    CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
+    :END:
+
+We used to see travis and appveyor build notifications. We stopped seeing them
+after moving to github actions. This is useful because we can see them from
+Emacs in IRC.
+
+Notes:
+
+- it seems the settings have an option for this in webhooks. Redo the hook to
+  see if it helps.
+
+Links:
+
+- [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
+- [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
+- [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
+
+*** STARTED Windows package is broken                                 :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-20 Tue 08:21]--[2022-09-20 Tue 08:33] =>  0:12
+    CLOCK: [2022-09-18 Sun 07:39]--[2022-09-18 Sun 07:47] =>  0:08
+    :END:
+
+When we install the windows package under wine, it fails with:
+
+: E0fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_filesystem-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_program_options-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library libxml2.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:import_dll Library boost_thread-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+: 00fc:err:module:LdrInitializeThunk Importing dlls for L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe" failed, status c0000135
+
+This will probably be fixed when we move over to the new way of specifying
+dependencies in CMake. Do that first and revisit this problem.
+
+Actually, this did not help. We then used the new VCPKG macro (see links) which
+now includes all of boost. We are failing on:
+
+: 00fc:err:module:import_dll Library MSVCP140_CODECVT_IDS.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\boost_log-vc143-mt-x64-1_78.dll") not found
+: 00fc:err:module:import_dll Library boost_log-vc143-mt-x64-1_78.dll (which is needed by L"C:\\Program Files\\DOGEN\\bin\\dogen.cli.exe") not found
+
+Notes:
+
+- Check if we are on latest MSVC.
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/1653][CMake: provide option to deploy DLLs on install() like VCPKG_APPLOCAL_DEPS
+  #1653]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/22623][InstallRequiredSystemLibraries MSVCP140.dll is missing]]
+- [[https://stackoverflow.com/questions/4134725/installrequiredsystemlibraries-purpose][InstallRequiredSystemLibraries purpose]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
+  install this DLL.
+
+*** STARTED Tests failing with filesystem errors                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-22 Thu 19:40]--[2022-09-22 Thu 20:00] =>  0:20
+    CLOCK: [2022-09-22 Thu 08:20]--[2022-09-22 Thu 08:46] =>  0:26
+    :END:
+
+The next batch of test failures is related to filesystem errors:
+
+#+begin_example
+Running 1 test case...
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(222): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(first_empty_folders) has failed
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(223): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(second_empty_folders) has failed
+#+end_example
+
+#+begin_example
+/home/marco/nightly/dogen/master/projects/dogen.utility/src/types/test_data/dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: boost::wrapexcept<dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": std::runtime_error: Error during test
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/main.cpp(39): last checkpoint: initializer
+Running 1 test case...
+#+end_example
+
+#+begin_example
+D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
+D:\a\dogen\dogen\projects\dogen.codec\tests\main.cpp(35): last checkpoint: initializer
+Running 1 test case...
+#+end_example
+
+The problem is a race condition on how we are using the filesystem. The product
+initialisers are recreating the top-level product directories, and this causes a
+race condition between the tests generating code and the initialiser. We need to
+have a way to setup / clean each test so that they do not affect each other.
+
 *** STARTED Create a mock configuration builder                       :story:
     :LOGBOOK:
     CLOCK: [2022-09-20 Tue 19:06]--[2022-09-20 Tue 19:15] =>  0:09
@@ -641,6 +681,34 @@ to make diagrams more readable. Models done:
 
 - dogen
 
+*** Ignore vcpkg path length warning                                  :story:
+
+#+begin_example
+Building boost-system[core]:x64-windows...
+CMake Warning at scripts/cmake/vcpkg_buildpath_length_warning.cmake:4 (message):
+  boost-system's buildsystem uses very long paths and may fail on your
+  system.
+
+  We recommend moving vcpkg to a short path such as 'C:\src\vcpkg' or using
+  the subst command.
+Call Stack (most recent call first):
+  ports/boost-system/portfile.cmake:3 (vcpkg_buildpath_length_warning)
+  scripts/ports.cmake:147 (include)
+#+end_example
+
+Clues about path length:
+
+#+begin_example
+-- Downloading https://github.com/boostorg/system/archive/boost-1.80.0.tar.gz -> boostorg-system-boost-1.80.0.tar.gz...
+-- Extracting source D:/a/dogen/dogen/vcpkg/downloads/boostorg-system-boost-1.80.0.tar.gz
+#+end_example
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/11119][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
+  Windows 10 #11119]]
+- [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
+
 *** Cannot access binaries from release notes                         :story:
 
 At present the URLs for the binaries are 404ing. We need to upload binaries
@@ -654,7 +722,7 @@ Release notes have been updated:
 
 - https://github.com/MASD-Project/dogen/releases/tag/v1.0.31
 
-*** Enable CodeQL
+*** Enable CodeQL                                                     :story:
 
 GitHub seems to have new security tooling.
 
