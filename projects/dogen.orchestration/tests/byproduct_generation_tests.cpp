@@ -58,9 +58,8 @@ using dogen::utility::test_data::dogen_product;
  * additional postfix here so we should not affect anyone else.
  */
 void remove_byproducts_directory(const configuration& cfg) {
-    using namespace boost::filesystem;
-    if (exists(cfg.byproduct_directory()))
-        remove_all(cfg.byproduct_directory());
+    using dogen::utility::filesystem::recreate_directory;
+    recreate_directory(cfg.byproduct_directory());
 }
 
 /**
@@ -282,6 +281,9 @@ bool are_tracing_files_healthy(const configuration& cfg,
 
 }
 
+/*
+ * Test the generation of files within the byproducts directory.
+ */
 BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 
 /*
