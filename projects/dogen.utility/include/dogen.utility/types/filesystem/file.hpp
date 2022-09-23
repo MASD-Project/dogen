@@ -108,6 +108,14 @@ void remove_empty_directories(const boost::filesystem::path& dir);
 void remove_empty_directories(const std::list<boost::filesystem::path>& dirs);
 /**@}*/
 
+/**
+ * @brief If the directory exists, deletes it and recreates it. Otherwise,
+ * creates it.
+ *
+ * @throws If the path points to a file.
+ */
+void recreate_directory(const boost::filesystem::path& dir);
+
 }
 
 #endif

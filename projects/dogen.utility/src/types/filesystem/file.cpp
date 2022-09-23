@@ -35,6 +35,9 @@ auto lg(logger_factory("utility.filesystem.file"));
 const std::string invalid_directory("Not a directory: ");
 const std::string file_not_found_msg("File not found: ");
 const std::string directory_not_found("Could not find directory: ");
+const std::string failed_delete("Failed to delete output directory.");
+const std::string failed_create("Failed to create output directory.");
+
 const std::string dot(".");
 
 }
@@ -87,7 +90,6 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& dir)
         BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
         BOOST_THROW_EXCEPTION(file_not_found(invalid_directory + gs));
     }
-
 
     recursive_directory_iterator i(dir);
     const recursive_directory_iterator end;
@@ -214,6 +216,36 @@ void remove_empty_directories(const boost::filesystem::path& dir) {
 void remove_empty_directories(const std::list<boost::filesystem::path>& dirs) {
     for (const auto& dir : dirs)
         remove_empty_directories(dir);
+}
+
+void recreate_directory(const boost::filesystem::path& dir) {
+    if (boost::filesystem::exists(dir)) {
+        BOOST_LOG_SEV(lg, debug) << "Path already exists: "
+                                 << dir.generic_string();
+
+        if (!is_directory(dir)) {
+            const auto gs(dir.generic_string());
+            BOOST_LOG_SEV(lg, error) << invalid_directory << gs;
+            BOOST_THROW_EXCEPTION(io_error(invalid_directory + gs));
+        }
+
+        boost::system::error_code ec;
+        boost::filesystem::remove_all(dir, ec);
+        if (ec) {
+            BOOST_LOG_SEV(lg, error) << failed_delete;
+            BOOST_THROW_EXCEPTION(io_error(failed_delete));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Deleted output data directory.";
+    }
+
+    boost::system::error_code ec;
+    boost::filesystem::create_directories(dir, ec);
+    if (ec) {
+        BOOST_LOG_SEV(lg, error) << failed_create;
+        BOOST_THROW_EXCEPTION(io_error(failed_create));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Created output data directory: "
+                             << dir.generic_string();
 }
 
 }
