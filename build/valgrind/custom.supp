@@ -273,9 +273,7 @@
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation11thread_dataC1Ev
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation16init_thread_dataEv
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation15get_thread_dataEv
-   fun:open_record
-   fun:_ZN5boost3log12v2s_mt_posix4core11open_recordERKNS1_13attribute_setE
-   ...
+  ...
 }
 
 {
