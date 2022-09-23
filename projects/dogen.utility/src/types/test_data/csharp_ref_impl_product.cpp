@@ -21,7 +21,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.utility/types/test_data/test_data_exception.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
@@ -101,8 +100,6 @@ void csharp_ref_impl_product::initialize() {
                              << json_models_directory_.generic_string();
 
     output_directory_ = boost::filesystem::absolute(output_dir);
-    using utility::filesystem::recreate_directory;
-    recreate_directory(output_directory_);
 }
 
 void csharp_ref_impl_product::ensure_initialized() {

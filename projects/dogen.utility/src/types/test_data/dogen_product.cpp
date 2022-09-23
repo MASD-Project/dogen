@@ -21,7 +21,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.utility/types/test_data/test_data_exception.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
@@ -112,8 +111,6 @@ void dogen_product::initialize() {
         push_back(project_directory_ / "dogen.modeling" / "org");
 
     output_directory_ = boost::filesystem::absolute(output_dir);
-    using utility::filesystem::recreate_directory;
-    recreate_directory(output_directory_);
 }
 
 void dogen_product::ensure_initialized() {
