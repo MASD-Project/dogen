@@ -21,6 +21,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.utility/types/test_data/test_data_exception.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
@@ -36,9 +37,6 @@ const std::string csharp_ref_impl_project_directory_env(
 const std::string project_dir_not_found(
     "Could not find project directory: ");
 const std::string not_initialized("Test data set is not initialized");
-const std::string failed_delete("Failed to delete output directory.");
-const std::string failed_create("Failed to create output directory.");
-
 const std::string output_dir("masd.csharp_ref_impl.code_generation_test_output");
 
 const std::string models_dia_dir("CSharpRefImpl.Models/dia");
@@ -103,27 +101,8 @@ void csharp_ref_impl_product::initialize() {
                              << json_models_directory_.generic_string();
 
     output_directory_ = boost::filesystem::absolute(output_dir);
-    if (boost::filesystem::exists(output_directory_)) {
-        BOOST_LOG_SEV(lg, debug) << "Output directory already exists: "
-                                 << output_directory_.generic_string();
-
-        boost::system::error_code ec;
-        boost::filesystem::remove_all(output_directory_, ec);
-        if (ec) {
-            BOOST_LOG_SEV(lg, error) << failed_delete;
-            BOOST_THROW_EXCEPTION(test_data_exception(failed_delete));
-        }
-        BOOST_LOG_SEV(lg, debug) << "Deleted output data directory.";
-    }
-
-    boost::system::error_code ec;
-    boost::filesystem::create_directories(output_directory_, ec);
-    if (ec) {
-        BOOST_LOG_SEV(lg, error) << failed_create;
-        BOOST_THROW_EXCEPTION(test_data_exception(failed_create));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Created output data directory: "
-                             << output_directory_.generic_string();
+    using utility::filesystem::recreate_directory;
+    recreate_directory(output_directory_);
 }
 
 void csharp_ref_impl_product::ensure_initialized() {
