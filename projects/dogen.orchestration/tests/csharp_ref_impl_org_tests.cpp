@@ -35,7 +35,7 @@ const std::string test_suite("csharp_ref_impl_org_tests");
 
 }
 
-using mg = dogen::orchestration::tests::model_producer;
+using dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::csharp_ref_impl_product;
 
 BOOST_AUTO_TEST_SUITE(csharp_ref_impl_org_tests)
@@ -46,24 +46,27 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_org_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_csharpmodel_org_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_csharpmodel_org());
     const auto od(csharp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_org_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_directorysettings_org_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_directory_settings_org());
     const auto od(csharp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_org_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_lammodel_org_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_lammodel_org());
     const auto od(csharp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS

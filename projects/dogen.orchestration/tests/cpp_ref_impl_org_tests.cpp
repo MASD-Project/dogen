@@ -37,7 +37,7 @@ const std::string test_suite("cpp_ref_impl_org_tests");
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
 
-using mg = dogen::orchestration::tests::model_producer;
+using dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::cpp_ref_impl_product;
 
 BOOST_AUTO_TEST_SUITE(cpp_ref_impl_org_tests)
@@ -46,168 +46,180 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_boost_model_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_boost_model_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_boost_model_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_98_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_98_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_cpp_98_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_model_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_model_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_cpp_model_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_directory_settings_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_directory_settings_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_disable_cmakelists_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_disable_cmakelists_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_disable_cmakelists_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_disable_facet_folders_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_disable_facet_folders_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_disable_facet_folders_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_hash_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_hash_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_hash_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_io_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_io_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_io_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_serialization_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_serialization_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_serialization_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_types_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_types_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_types_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_flat_directory_mode_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_flat_directory_mode_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_flat_directory_mode_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_lam_model_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_lam_model_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_lam_model_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_northwind_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_northwind_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_northwind_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_split_project_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_split_project_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_split_project_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_std_model_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_std_model_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_std_model_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_two_layers_with_objects_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_two_layers_with_objects_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_two_layers_with_objects_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto m(mg::apply_physical_model_production(t, od));
-    BOOST_CHECK(mg::check_for_differences(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_delete_extra_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_delete_extra_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_delete_extra_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto et(false/*enable_tracing_locally*/);
-    const auto er(true/*enable_reporting_locally*/);
-    const auto m(mg::apply_physical_model_production(t, od, et, er));
-    BOOST_CHECK(mg::check_for_delete_extra(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_force_write_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_two_layers_with_objects_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_force_write_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto et(false/*enable_tracing_locally*/);
-    const auto er(true/*enable_reporting_locally*/);
-    const auto m(mg::apply_physical_model_production(t, od, et, er));
-    BOOST_CHECK(mg::check_for_force_write(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_force_write(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_ignore_extra_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_ignore_extra_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_ignore_extra_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto et(false/*enable_tracing_locally*/);
-    const auto er(true/*enable_reporting_locally*/);
-    const auto m(mg::apply_physical_model_production(t, od, et, er));
-    BOOST_CHECK(mg::check_for_ignore_extra(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_org_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_out_of_sync_org_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_out_of_sync_org());
     const auto od(cpp_ref_impl_product::project_directory());
-    const auto et(false/*enable_tracing_locally*/);
-    const auto er(true/*enable_reporting_locally*/);
-    const auto m(mg::apply_physical_model_production(t, od, et, er));
-    BOOST_CHECK(mg::check_out_of_sync(od, m));
+    model_producer mp(true/*read_environment_variables*/);
+    const auto m(mp.apply_physical_model_production(t, od));
+    BOOST_CHECK(mp.check_out_of_sync(od, m));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
