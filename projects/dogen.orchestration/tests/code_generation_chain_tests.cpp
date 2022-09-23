@@ -34,6 +34,8 @@
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
+using dogen::utility::test_data::dogen_product;
+
 namespace  {
 
 const std::string test_module("dogen.orchestration.tests");
@@ -139,15 +141,25 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
     code_generation_chain::apply(ctx, target);
 }
 
+boost::filesystem::path output_directory_for_test(const std::string& test) {
+    const std::string top_dir(test_suite);
+    const auto r = boost::filesystem::absolute(top_dir) / test;
+    return r;
 }
 
+}
+
+/*
+ * The purpose of these tests is to exercise code generation fully, including
+ * the writing to the filesystem. No other tests are actually going all the way
+ * to writing files.
+ */
 BOOST_AUTO_TEST_SUITE(code_generation_chain_tests)
 
 BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_code) {
     SETUP_TEST_LOG("dogen_variability_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_variability_org());
-    const auto od(dogen_product::output_directory());
+    const auto od(output_directory_for_test("dogen_variability_dia"));
     const auto rds(dogen_product::reference_directories());
     execute_code_generation_transform(t, rds, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
@@ -161,9 +173,8 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
      * names must be small due to windows limitations so that is why
      * the test names do not match the model names.
      */
-    using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_org());
-    const auto od(dogen_product::output_directory());
+    const auto od(output_directory_for_test("delete_empty_folders"));
     const auto rds(dogen_product::reference_directories());
     execute_code_generation_transform(t, rds, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 60/*minimum_number*/));
@@ -200,7 +211,7 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_fla
     using dogen::utility::test_data::cpp_ref_impl_product;
     const auto t(cpp_ref_impl_product::
         input_cpp_ref_impl_do_not_delete_empty_dirs_json());
-    const auto od(cpp_ref_impl_product::output_directory());
+    const auto od(output_directory_for_test("skip_empty_folders"));
     const std::vector<boost::filesystem::path> rds;
     execute_code_generation_transform(t, rds, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 15/*minimum_number*/));
