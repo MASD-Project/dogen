@@ -24,7 +24,7 @@
 #include <boost/test/unit_test_monitor.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test_data/frozen_product.hpp"
-#include "dogen.orchestration/tests/model_generator.hpp"
+#include "dogen.orchestration/tests/model_producer.hpp"
 
 namespace  {
 
@@ -35,7 +35,7 @@ const std::string test_suite("frozen_product_dia_tests");
 
 #ifdef ENABLE_FROZEN_TESTS
 
-using mg = dogen::orchestration::tests::model_generator;
+using mg = dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::frozen_product;
 
 BOOST_AUTO_TEST_SUITE(frozen_product_dia_tests)

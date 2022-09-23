@@ -35,12 +35,12 @@
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
-#include "dogen.orchestration/tests/model_generator.hpp"
+#include "dogen.orchestration/tests/model_producer.hpp"
 
 namespace  {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("orchestration.model_generator"));
+auto lg(logger_factory("orchestration.model_producer"));
 
 const std::string conversion_activity("model_to_model");
 const std::string run_activity("physical_production");
@@ -63,7 +63,7 @@ const bool enable_diffing_globally(true);
 
 namespace dogen::orchestration::tests {
 
-void model_generator::print_lines(const std::string& content,
+void model_producer::print_lines(const std::string& content,
     const unsigned int total, std::ostream& os) {
 
     unsigned int i(0);
@@ -76,7 +76,7 @@ void model_generator::print_lines(const std::string& content,
 }
 
 std::list<boost::shared_ptr<dogen::physical::entities::artefact>>
-model_generator::gather_artefacts(const dogen::physical::entities::model& m) {
+model_producer::gather_artefacts(const dogen::physical::entities::model& m) {
     std::list<boost::shared_ptr<dogen::physical::entities::artefact>> r;
     for (const auto& pr_pair : m.regions_by_logical_id()) {
         const auto& as(pr_pair.second);
@@ -90,7 +90,7 @@ model_generator::gather_artefacts(const dogen::physical::entities::model& m) {
     return r;
 }
 
-configuration model_generator::
+configuration model_producer::
 make_configuration(const boost::filesystem::path& target,
     const bool enable_tracing_locally, const bool enable_reporting_locally,
     const bool enable_diffing_locally) {
@@ -138,7 +138,7 @@ make_configuration(const boost::filesystem::path& target,
     return r;
 }
 
-dogen::physical::entities::model model_generator::
+dogen::physical::entities::model model_producer::
 apply_physical_model_production(const boost::filesystem::path& target,
     const std::vector<boost::filesystem::path>& reference_directories,
     const boost::filesystem::path& output_dir,
@@ -174,7 +174,7 @@ apply_physical_model_production(const boost::filesystem::path& target,
     return r;
 }
 
-dogen::physical::entities::model model_generator::
+dogen::physical::entities::model model_producer::
 apply_physical_model_production(const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir,
     const bool enable_tracing_locally, const bool enable_reporting_locally,
@@ -186,7 +186,7 @@ apply_physical_model_production(const boost::filesystem::path& target,
         enable_diffing_locally);
 }
 
-dogen::physical::entities::model model_generator::
+dogen::physical::entities::model model_producer::
 apply_physical_model_production(const configuration& cfg,
     const boost::filesystem::path& target,
     const std::vector<boost::filesystem::path>& reference_directories,
@@ -215,7 +215,7 @@ apply_physical_model_production(const configuration& cfg,
     return r;
 }
 
-bool model_generator::
+bool model_producer::
 has_differences(const physical::entities::artefact& a) {
     /*
      * We can safely ignore all files the user provided regexes
@@ -240,7 +240,7 @@ has_differences(const physical::entities::artefact& a) {
     return true;
 }
 
-bool model_generator::check_for_differences(
+bool model_producer::check_for_differences(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
 
@@ -296,7 +296,7 @@ bool model_generator::check_for_differences(
     return diffs_found == 0;
 }
 
-bool model_generator::
+bool model_producer::
 check_for_delete_extra(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
@@ -352,7 +352,7 @@ check_for_delete_extra(const boost::filesystem::path& output_dir,
     return diffs_found == 0;
 }
 
-bool model_generator::check_for_ignore_extra(
+bool model_producer::check_for_ignore_extra(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
@@ -408,7 +408,7 @@ bool model_generator::check_for_ignore_extra(
     return diffs_found == 0;
 }
 
-bool model_generator::check_for_force_write(
+bool model_producer::check_for_force_write(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
@@ -455,7 +455,7 @@ bool model_generator::check_for_force_write(
     return diffs_found == 0;
 }
 
-bool model_generator::check_out_of_sync(
+bool model_producer::check_out_of_sync(
     const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);

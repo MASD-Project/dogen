@@ -26,7 +26,7 @@
 #include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
-#include "dogen.orchestration/tests/model_generator.hpp"
+#include "dogen.orchestration/tests/model_producer.hpp"
 
 namespace  {
 
@@ -37,7 +37,7 @@ const std::string test_suite("cpp_ref_impl_json_tests");
 
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
 
-using mg = dogen::orchestration::tests::model_generator;
+using mg = dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::cpp_ref_impl_product;
 
 BOOST_AUTO_TEST_SUITE(cpp_ref_impl_json_tests)

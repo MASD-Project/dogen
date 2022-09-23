@@ -26,7 +26,7 @@
 #include "dogen.utility/types/test_data/frozen_product.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
-#include "dogen.orchestration/tests/model_generator.hpp"
+#include "dogen.orchestration/tests/model_producer.hpp"
 
 namespace  {
 
@@ -35,7 +35,7 @@ const std::string test_suite("frozen_product_json_tests");
 
 }
 
-using mg = dogen::orchestration::tests::model_generator;
+using mg = dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::frozen_product;
 
 BOOST_AUTO_TEST_SUITE(frozen_product_json_tests)

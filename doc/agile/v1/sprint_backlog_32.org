@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-22 Thu 20:00]
-| <75>                                                      |         |       |      |       |
-| Headline                                                  | Time    |       |      |     % |
-|-----------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                              | *21:47* |       |      | 100.0 |
-|-----------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                   | 21:47   |       |      | 100.0 |
-| Active                                                    |         | 21:47 |      | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 9:44 |  44.7 |
-| Create a demo and presentation for previous sprint        |         |       | 2:06 |   9.6 |
-| Update boost to latest in vcpg                            |         |       | 0:20 |   1.5 |
-| Improve diffing output in tests                           |         |       | 0:19 |   1.5 |
-| Sprint and product backlog grooming                       |         |       | 1:24 |   6.4 |
-| Nightly builds are failing due to missing environment var |         |       | 1:07 |   5.1 |
-| Remove deprecated uses of boost bind                      |         |       | 0:09 |   0.7 |
-| Full generation support in tests is incorrect             |         |       | 2:52 |  13.2 |
-| Gitter notifications for builds are not showing up        |         |       | 0:38 |   2.9 |
-| Windows package is broken                                 |         |       | 0:20 |   1.5 |
-| Tests failing with filesystem errors                      |         |       | 0:46 |   3.5 |
-| Create a mock configuration builder                       |         |       | 1:58 |   9.0 |
-| Add PlantUML relationships to diagrams                    |         |       | 0:04 |   0.3 |
+#+CAPTION: Clock summary at [2022-09-23 Fri 10:13]
+| <75>                                                      |         |       |       |       |
+| Headline                                                  | Time    |       |       |     % |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                              | *23:37* |       |       | 100.0 |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                   | 23:37   |       |       | 100.0 |
+| Active                                                    |         | 23:37 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  43.3 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   8.9 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   1.4 |
+| Improve diffing output in tests                           |         |       |  0:19 |   1.3 |
+| Sprint and product backlog grooming                       |         |       |  1:24 |   5.9 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   4.7 |
+| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.6 |
+| Full generation support in tests is incorrect             |         |       |  3:03 |  12.9 |
+| Tests failing with filesystem errors                      |         |       |  1:56 |   8.2 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.7 |
+| Windows package is broken                                 |         |       |  0:20 |   1.4 |
+| Create a mock configuration builder                       |         |       |  1:58 |   8.3 |
+| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.3 |
 #+end:
 
 Agenda:
@@ -43,6 +43,8 @@ Agenda:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 08:53]--[2022-09-23 Fri 09:02] =>  0:09
+    CLOCK: [2022-09-23 Fri 07:58]--[2022-09-23 Fri 08:18] =>  0:20
     CLOCK: [2022-09-16 Fri 09:35]--[2022-09-16 Fri 11:06] =>  1:31
     CLOCK: [2022-09-14 Wed 18:00]--[2022-09-14 Wed 18:41] =>  0:41
     CLOCK: [2022-09-13 Tue 17:47]--[2022-09-13 Tue 18:20] =>  0:33
@@ -461,6 +463,7 @@ Links:
 
 *** COMPLETED Full generation support in tests is incorrect           :story:
     :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 07:50]--[2022-09-23 Fri 08:01] =>  0:11
     CLOCK: [2022-09-22 Thu 07:30]--[2022-09-22 Thu 07:39] =>  0:09
     CLOCK: [2022-09-21 Wed 23:20]--[2022-09-21 Wed 23:53] =>  0:33
     CLOCK: [2022-09-21 Wed 08:24]--[2022-09-21 Wed 08:48] =>  0:24
@@ -555,6 +558,54 @@ Links:
 
 - [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.19][v1.0.19]]: "Add support for variability overrides in Dogen"
 
+*** COMPLETED Tests failing with filesystem errors                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 09:03]--[2022-09-23 Fri 10:13] =>  1:10
+    CLOCK: [2022-09-22 Thu 19:40]--[2022-09-22 Thu 20:00] =>  0:20
+    CLOCK: [2022-09-22 Thu 08:20]--[2022-09-22 Thu 08:46] =>  0:26
+    :END:
+
+The next batch of test failures is related to filesystem errors:
+
+#+begin_example
+Running 1 test case...
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(222): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(first_empty_folders) has failed
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(223): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(second_empty_folders) has failed
+#+end_example
+
+#+begin_example
+/home/marco/nightly/dogen/master/projects/dogen.utility/src/types/test_data/dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: boost::wrapexcept<dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": std::runtime_error: Error during test
+/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/main.cpp(39): last checkpoint: initializer
+Running 1 test case...
+#+end_example
+
+#+begin_example
+D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
+D:\a\dogen\dogen\projects\dogen.codec\tests\main.cpp(35): last checkpoint: initializer
+Running 1 test case...
+#+end_example
+
+The problem is a race condition on how we are using the filesystem. The product
+initialisers are recreating the top-level product directories, and this causes a
+race condition between the tests generating code and the initialiser. We need to
+have a way to setup / clean each test so that they do not affect each other.
+
+We only seem to have three tests that actually write to the filesystem. So to
+fix this:
+
+- remove the recreation of directories from the product classes. Add it to
+  utilities.
+- add a unique prefix to each test's output directory and recreate that
+  directory.
+- add comments on the tests where we do not write to the filesystem to make it
+  more obvious.
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -614,43 +665,6 @@ Links:
 - [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
   install this DLL.
 
-*** STARTED Tests failing with filesystem errors                      :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-22 Thu 19:40]--[2022-09-22 Thu 20:00] =>  0:20
-    CLOCK: [2022-09-22 Thu 08:20]--[2022-09-22 Thu 08:46] =>  0:26
-    :END:
-
-The next batch of test failures is related to filesystem errors:
-
-#+begin_example
-Running 1 test case...
-/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(222): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(first_empty_folders) has failed
-/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(223): error: in "code_generation_chain_tests/empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off": check exists(second_empty_folders) has failed
-#+end_example
-
-#+begin_example
-/home/marco/nightly/dogen/master/projects/dogen.utility/src/types/test_data/dogen_product.cpp(125): Throw in function initialize
-Dynamic exception type: boost::wrapexcept<dogen::utility::test_data::test_data_exception>
-std::exception::what: Failed to delete output directory.
-unknown location(0): fatal error: in "Test setup": std::runtime_error: Error during test
-/home/marco/nightly/dogen/master/projects/dogen.orchestration/tests/main.cpp(39): last checkpoint: initializer
-Running 1 test case...
-#+end_example
-
-#+begin_example
-D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
-Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
-std::exception::what: Failed to delete output directory.
-unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
-D:\a\dogen\dogen\projects\dogen.codec\tests\main.cpp(35): last checkpoint: initializer
-Running 1 test case...
-#+end_example
-
-The problem is a race condition on how we are using the filesystem. The product
-initialisers are recreating the top-level product directories, and this causes a
-race condition between the tests generating code and the initialiser. We need to
-have a way to setup / clean each test so that they do not affect each other.
-
 *** STARTED Create a mock configuration builder                       :story:
     :LOGBOOK:
     CLOCK: [2022-09-20 Tue 19:06]--[2022-09-20 Tue 19:15] =>  0:09
@@ -680,6 +694,12 @@ We need to go through each and every model and add the relations we add in Dia
 to make diagrams more readable. Models done:
 
 - dogen
+
+*** Consider adding PlantUML verbatim inside element                  :story:
+
+One simple way of adding operations is to extend verbatim to support inside
+class. This can easily be achieved via =.before=, =.inside= and =.after= fields.
+The =.inside= can be replaced by operations later.
 
 *** Ignore vcpkg path length warning                                  :story:
 

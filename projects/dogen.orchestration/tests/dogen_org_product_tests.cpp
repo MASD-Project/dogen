@@ -25,7 +25,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen/types/mock_configuration_builder.hpp"
-#include "dogen.orchestration/tests/model_generator.hpp"
+#include "dogen.orchestration/tests/model_producer.hpp"
 
 namespace  {
 
@@ -43,7 +43,7 @@ mock_configuration_builder setup_builder() {
 
 }
 
-using mg = dogen::orchestration::tests::model_generator;
+using mg = dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::dogen_product;
 
 BOOST_AUTO_TEST_SUITE(dogen_product_org_tests)

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TESTS_MODEL_GENERATOR_HPP
-#define DOGEN_ORCHESTRATION_TESTS_MODEL_GENERATOR_HPP
+#ifndef DOGEN_ORCHESTRATION_TESTS_MODEL_PRODUCER_HPP
+#define DOGEN_ORCHESTRATION_TESTS_MODEL_PRODUCER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,10 +36,10 @@
 namespace dogen::orchestration::tests {
 
 /**
- * @brief Generates a model and performs a canned set of associated
- * checks.
+ * @brief Produces a model and performs a canned set of associated checks. Note
+ * that the producer creates a model but does not write to the filesystem.
  */
-class model_generator {
+class model_producer {
 private:
     /**
      * @brief Prints a limited number of lines from content. Used to
