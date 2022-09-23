@@ -8,11 +8,11 @@
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs%20-welcome-brightgreen.svg)](https://github.com/MASD-Project/dogen/blob/master/CONTRIBUTING.md)
 [![Github All Releases](https://img.shields.io/github/downloads/MASD-Project/dogen/total.svg)](https://github.com/MASD-Project/dogen/releases)
-[![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/g/DomainDrivenConsulting/dogen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DomainDrivenConsulting/dogen/context:cpp)
-[![CDash](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
 [![Continuous Linux](https://github.com/MASD-Project/dogen/actions/workflows/continuous-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-linux.yml)
 [![Continuous Windows](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml)
 [![Continuous MacOS](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml)
+[![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/g/DomainDrivenConsulting/dogen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DomainDrivenConsulting/dogen/context:cpp)
+[![CDash](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.31.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)](https://mcraveiro.github.io/dogen/doxygen/index.html)
@@ -21,8 +21,8 @@
 [![gcc-11](https://img.shields.io/badge/GCC-11-blue.svg)](https://www.gnu.org/software/gcc/gcc-11)
 [![clang-14](https://img.shields.io/badge/CLANG-14-blue.svg)](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html)
 [![msvc2017](https://img.shields.io/badge/MSVC-2017-blue.svg)](https://visualstudio.microsoft.com/vs/whatsnew/)
-[![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 [![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/MASD-Project/dogen)](https://www.tickgit.com/browse?repo=github.com/MASD-Project/dogen)
+[![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 
 # Overview
 
