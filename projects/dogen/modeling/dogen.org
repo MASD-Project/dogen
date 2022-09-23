@@ -320,19 +320,13 @@ Plain text format.
 
 Emacs Org mode.
 
-* mock configuration builder                                        :element:
-  :PROPERTIES:
-  :custom_id: C4C8D353-43B2-B5B4-DA3B-8D4B0C95B6B9
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-Creates configurations for testing purposes.
-
 * mock configuration factory                                        :element:
   :PROPERTIES:
   :custom_id: 19305C0C-2EC3-2664-CC53-47FFB43ADC87
   :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
+
+Creates configurations for testing purposes.
 
 * tracing backend                                                   :element:
   :PROPERTIES:
