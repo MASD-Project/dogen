@@ -54,7 +54,7 @@ void code_generation_chain::apply(const context& ctx,
     const auto m(physical_model_production_chain::apply(ctx, target));
 
     /*
-     * Runn all of the physical transforms against the physical models.
+     * Runn all of the file generation transforms against the physical models.
      */
     using physical::transforms::file_generation_chain;
     file_generation_chain::apply(ctx.physical_context(), m);
