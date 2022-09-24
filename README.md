@@ -71,7 +71,7 @@ Our previous major milestone for Dogen was to complete the [PhD
 thesis](https://uhra.herts.ac.uk/handle/2299/25708), which we did so
 successfully. The current major milestone is to sync up the source code with the
 latest version of the theoretical framework, as laid out in the thesis. In other
-words, our focus is /not/ on producing a fully polished tool, ready for end
+words, our focus is _not_ on producing a fully polished tool, ready for end
 users to deploy on industrial scale projects. If, for whatever reason you still
 want to go ahead and use it, bear in mind the following:
 
@@ -296,6 +296,11 @@ suitable for researchers.
 A number of videos are available discussing Dogen, gathered under "themed"
 playlists:
 
+- [MASD - Dogen Coding: PMM
+  Refactor](https://www.youtube.com/playlist?list=PLwfrwe216gF0_1KPp_ir7ZCYLwnhdmBGJ):
+  Series of coding videos on refactoring the Physical MetaModel. However, it
+  beings where the previous series left off (MASD - Dogen Coding: Move to GitHub
+  CI), _e.g._ on getting our CI and nightlies to work again.
 - [MASD: An introduction to Model Assisted Software
   Development](https://youtube.com/playlist?list=PLwfrwe216gF3Qamk0YOSo5Csx1R_LplG0):
   Series of lectures on Model Assisted Software Development (MASD), the
