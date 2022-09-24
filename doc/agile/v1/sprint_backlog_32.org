@@ -13,27 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-23 Fri 10:13]
+#+CAPTION: Clock summary at [2022-09-24 Sat 08:50]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *23:37* |       |       | 100.0 |
+| *Total time*                                              | *27:47* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 23:37   |       |       | 100.0 |
-| Active                                                    |         | 23:37 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  43.3 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   8.9 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   1.4 |
-| Improve diffing output in tests                           |         |       |  0:19 |   1.3 |
-| Sprint and product backlog grooming                       |         |       |  1:24 |   5.9 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   4.7 |
-| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.6 |
-| Full generation support in tests is incorrect             |         |       |  3:03 |  12.9 |
-| Tests failing with filesystem errors                      |         |       |  1:56 |   8.2 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.7 |
-| Windows package is broken                                 |         |       |  0:20 |   1.4 |
-| Create a mock configuration builder                       |         |       |  1:58 |   8.3 |
-| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.3 |
+| Stories                                                   | 27:47   |       |       | 100.0 |
+| Active                                                    |         | 27:47 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  36.8 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.6 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   1.2 |
+| Improve diffing output in tests                           |         |       |  0:19 |   1.1 |
+| Sprint and product backlog grooming                       |         |       |  1:44 |   6.2 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   4.0 |
+| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
+| Full generation support in tests is incorrect             |         |       |  3:03 |  11.0 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   7.8 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   3.2 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.3 |
+| Windows package is broken                                 |         |       |  0:20 |   1.2 |
+| Create a mock configuration builder                       |         |       |  1:58 |   7.1 |
+| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
+| Add continuous builds to C++ reference product            |         |       |  1:57 |   7.0 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.7 |
 #+end:
 
 Agenda:
@@ -360,6 +363,8 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 14:54]--[2022-09-23 Fri 14:59] =>  0:05
+    CLOCK: [2022-09-23 Fri 14:42]--[2022-09-23 Fri 14:53] =>  0:11
     CLOCK: [2022-09-23 Fri 10:29]--[2022-09-23 Fri 10:33] =>  0:04
     CLOCK: [2022-09-22 Thu 08:47]--[2022-09-22 Thu 08:56] =>  0:09
     CLOCK: [2022-09-20 Tue 08:15]--[2022-09-20 Tue 08:21] =>  0:06
@@ -562,6 +567,7 @@ Links:
 
 *** COMPLETED Tests failing with filesystem errors                    :story:
     :LOGBOOK:
+    CLOCK: [2022-09-24 Sat 08:35]--[2022-09-24 Sat 08:49] =>  0:14
     CLOCK: [2022-09-23 Fri 09:03]--[2022-09-23 Fri 10:13] =>  1:10
     CLOCK: [2022-09-22 Thu 19:40]--[2022-09-22 Thu 20:00] =>  0:20
     CLOCK: [2022-09-22 Thu 08:20]--[2022-09-22 Thu 08:46] =>  0:26
@@ -704,6 +710,54 @@ We need to go through each and every model and add the relations we add in Dia
 to make diagrams more readable. Models done:
 
 - dogen
+
+*** STARTED Add continuous builds to C++ reference product            :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 16:54]--[2022-09-23 Fri 18:51] =>  1:57
+    :END:
+
+Since we list travis we lost support for CI.
+
+*** STARTED Remove ODB support from Dogen                             :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 15:49]--[2022-09-23 Fri 16:34] =>  0:45
+    :END:
+
+Last sprint we removed the relational model from Dogen. This sprint we need to g
+one step further and remove ODB support. Now, we may not need to remove it
+entirely: the headers Dogen generates are simple C++ headers that do not require
+ODB libraries to compile, /e.g./:
+
+#+begin_src c++
+#ifdef ODB_COMPILER
+
+#pragma db object(categories) schema("NORTHWIND")
+
+#pragma db member(categories::category_id_) id
+#pragma db member(categories::description_) null
+#pragma db member(categories::picture_) null
+
+#endif
+#+end_src
+
+We could conceivably continue to generate these, but we must not add the
+associated ODB files (generated by ODB) because then we pull in the ODB C++
+libraries and these are not supported by vcpkg. If we leave the pragmas we at
+least know we are not making ODB support any worse. This is still useful as we
+may return to it in the future. It also ensure some variation in the logical
+model (in particular in the cartridges domain).
+
+*** Add nightly builds to C++ reference product                       :story:
+
+Since we list travis we lost support for nightlies.
+
+*** Add continuous builds to C# reference product                     :story:
+
+Since we list travis we lost support for CI.
+
+*** Add nightly builds to C# reference product                        :story:
+
+Since we list travis we lost support for nightlies.
 
 *** Consider adding PlantUML verbatim inside element                  :story:
 
