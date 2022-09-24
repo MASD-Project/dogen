@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 
 #
 # vcpkg
@@ -153,7 +153,7 @@ set(Boost_USE_MULTITHREADED ON)
 
 # Note: it is possible to build with older versions of boost, but
 # these require patches.
-find_package(Boost 1.78 REQUIRED COMPONENTS
+find_package(Boost 1.80 REQUIRED COMPONENTS
     date_time
     exception
     filesystem
