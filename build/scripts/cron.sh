@@ -57,18 +57,22 @@ product="cpp_ref_impl"
 git_url="https://github.com/MASD-Project/${product}.git"
 git_dir="${workspace}/${product}/master"
 if [ ! -d "${git_dir}" ]; then
-    git clone --depth=1 ${git_url} ${git_dir}
+    git clone --recurse-submodules --depth=1 ${git_url} ${git_dir}
 fi
 cd ${git_dir}
 
 # update manually as ctest won't do it for us.
 git pull origin master
 
-compiler=${clang_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
-
+echo "Dogen GCC"
+preset="linux-gcc-debug"
 compiler=${gcc_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --timeout 12000 --preset ${preset} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+
+echo "Dogen clang"
+preset="linux-clang-debug"
+compiler=${clang_compiler}
+ctest ${verbosity} --timeout 12000 --preset ${preset} --script "CTest.cmake,build_group=${build_group},build_name=${preset},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
