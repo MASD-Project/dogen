@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_98_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_98_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_cpp_98_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_model_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_cpp_model_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_cpp_model_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_directory_settings_dia_produces_expected_model
     SETUP_TEST_LOG("cpp_ref_impl_directory_settings_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_disable_cmakelists_dia_produces_expected_model
     SETUP_TEST_LOG("cpp_ref_impl_disable_cmakelists_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_disable_cmakelists_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_disable_facet_folders_dia_produces_expected_mo
     SETUP_TEST_LOG("cpp_ref_impl_disable_facet_folders_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_disable_facet_folders_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_hash_dia_produces_expected_model)
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_hash_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_hash_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_io_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_io_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_io_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_serialization_dia_produces_expect
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_serialization_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_serialization_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_enable_facet_types_dia_produces_expected_model
     SETUP_TEST_LOG("cpp_ref_impl_enable_facet_types_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_types_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_flat_directory_mode_dia_produces_expected_mode
     SETUP_TEST_LOG("cpp_ref_impl_flat_directory_mode_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_flat_directory_mode_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_lam_model_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_lam_model_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_lam_model_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_northwind_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_northwind_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_northwind_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_split_project_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_split_project_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_split_project_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_std_model_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_std_model_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_std_model_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_two_layers_with_objects_dia_produces_expected_
     SETUP_TEST_LOG("cpp_ref_impl_two_layers_with_objects_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_two_layers_with_objects_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-     model_producer mp(true/*read_environment_variables*/);
+     model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -190,7 +190,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_delete_extra_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_delete_extra_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_delete_extra_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -199,7 +199,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_force_write_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_two_layers_with_objects_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_force_write_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_force_write(od, m));
 }
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_ignore_extra_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_ignore_extra_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_ignore_extra_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -217,7 +217,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_out_of_sync_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_out_of_sync_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_out_of_sync(od, m));
 }

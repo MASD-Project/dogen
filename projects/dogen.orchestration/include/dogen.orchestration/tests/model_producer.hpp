@@ -41,6 +41,7 @@ namespace dogen::orchestration::tests {
  */
 class model_producer {
 public:
+    model_producer() = default;
     model_producer(const bool read_environment_variables)
         : read_environment_variables_(read_environment_variables) {}
 

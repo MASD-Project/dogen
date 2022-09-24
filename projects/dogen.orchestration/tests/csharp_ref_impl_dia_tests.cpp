@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_dia_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_csharpmodel_dia_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_csharpmodel_dia());
     const auto od(csharp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_dia_produces_expected_model
     SETUP_TEST_LOG("csharprefimpl_directorysettings_dia_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_directory_settings_dia());
     const auto od(csharp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_dia_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_lammodel_dia_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_lammodel_dia());
     const auto od(csharp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }

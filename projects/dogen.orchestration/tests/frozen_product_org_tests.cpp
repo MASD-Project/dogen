@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(dogen_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(dogen_physical_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_physical_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_physical_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(dogen_cli_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_cli_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_cli_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(dogen_dia_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_dia_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(dogen_org_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_org_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_org_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(dogen_tracing_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_tracing_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_tracing_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(dogen_codec_org_produces_expected_model) {
     SETUP_TEST_LOG("frozen_product_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_codec_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(dogen_codec_dia_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_codec_dia_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_codec_dia_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(dogen_text_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_text_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_text_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(dogen_logical_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_logical_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_logical_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(dogen_templating_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_templating_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_templating_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(dogen_orchestration_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_orchestration_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_orchestration_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(dogen_utility_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_utility_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_utility_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(dogen_variability_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_variability_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_variability_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(dogen_relational_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_relational_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_relational_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(dogen_identification_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_identification_org_produces_expected_model");
     const auto t(frozen_product::input_frozen_identification_org());
     const auto od(frozen_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
