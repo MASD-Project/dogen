@@ -26,35 +26,30 @@
 #endif
 
 /**
- * @brief The logcal model defines the core entities that live in the logical
- * dimension of MASD's conceptual model.
+ * @brief The logcal model defines the core entities that live in the logical dimension of
+ * MASD's conceptual model.
  *
  * @section logical_0 Overview
  *
- * The logical model strives to provide a technical-space agnostic
- * element representation, designed for code generation. Codec models
- * are obtained via frontends and transformed into "bare" logical models,
- * at which point they can enter its pipeline. Within it, they are
- * processed until they form a cohesive whole. They are then in a suitable
- * state for code generation.
+ * The logical model strives to provide a technical-space agnostic element
+ * representation, designed for code generation. Codec models are obtained via
+ * frontends and transformed into "bare" logical models, at which point they can
+ * enter its pipeline. Within it, they are processed until they form a cohesive
+ * whole. They are then in a suitable state for code generation.
  *
  * @section asset_1 Mission
  *
  * The objectives of the logical model are:
  *
- * @li to represent all high-level entities that exist across a number
- * of technical spaces used in software engineering. These entities
- * are not necessarily limited to programming entities, though, of course,
- * these form the core set of elements we're interested in. Additional
- * entities such as build sytems and high-level patterns such as GoF
- * and others are also captured.
- *
- * @li to provide the tooling required to combine multiple models
- * together into a bigger model - called the @e merged model.
- *
- * @li to ensure the consistency of the merged model via validation
- * rules (such as verifying that all types have a definitions,
- * etc.).
+ * - to represent all high-level entities that exist across a number of technical
+ *   spaces used in software engineering. These entities are not necessarily
+ *   limited to programming entities, though, of course, these form the core set of
+ *   elements we're interested in. Additional entities such as build sytems and
+ *   high-level patterns such as GoF and others are also captured.
+ * - to provide the tooling required to combine multiple models together into a
+ *   bigger model - called the merged model.
+ * - to ensure the consistency of the merged model via validation rules (such as
+ *   verifying that all types have a definitions, etc.).
  *
  * UML representation:
  *
