@@ -33,6 +33,27 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
+    - name: Setup Clang
+      uses: egor-tensin/setup-clang@v1
+      with:
+        version: latest
+        platform: x64
+
+    - name: Setup ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        variant: sccache
+        key: linux-clang-debug-codeql
+        max-size: 1000M
+
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Run vcpkg
+      uses: lukka/run-vcpkg@v10
+      with:
+        appendedCacheKey: linux-clang-debug-codeql
+
     - name: Setup test data
       run: |
         ./build/scripts/github.setup.linux.sh
