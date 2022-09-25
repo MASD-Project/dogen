@@ -40,6 +40,9 @@ namespace dogen::codec::features {
 class meta_data final {
 public:
     struct feature_group {
+        variability::entities::feature association;
+        variability::entities::feature aggregation;
+        variability::entities::feature composition;
         variability::entities::feature stereotypes;
         variability::entities::feature type;
         variability::entities::feature value;
@@ -59,6 +62,9 @@ public:
 
 public:
     struct static_configuration {
+        std::list<std::list<std::string> > association;
+        std::list<std::list<std::string> > aggregation;
+        std::list<std::list<std::string> > composition;
         std::list<std::string> stereotypes;
         std::string type;
         std::string value;

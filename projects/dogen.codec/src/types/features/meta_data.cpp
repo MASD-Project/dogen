@@ -28,6 +28,45 @@ namespace dogen::codec::features {
 namespace {
 
 dogen::variability::entities::feature
+make_masd_codec_association() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("association");
+    r.name().qualified("masd.codec.association");
+    r.description(R"(Element associated with this element.)");
+    const auto vt(value_type::comma_separated_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_aggregation() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("aggregation");
+    r.name().qualified("masd.codec.aggregation");
+    r.description(R"(Element which forms an aggregation relationship  with this element.)");
+    const auto vt(value_type::comma_separated_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_composition() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("composition");
+    r.name().qualified("masd.codec.composition");
+    r.description(R"(Element which forms a composition relationship  with this element.)");
+    const auto vt(value_type::comma_separated_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
 make_masd_codec_stereotypes() {
     using namespace dogen::variability::entities;
     feature r;
@@ -191,6 +230,9 @@ meta_data::make_feature_group(const dogen::variability::entities::feature_model&
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
+    r.association = s.get_by_name("masd.codec.association");
+    r.aggregation = s.get_by_name("masd.codec.aggregation");
+    r.composition = s.get_by_name("masd.codec.composition");
     r.stereotypes = s.get_by_name("masd.codec.stereotypes");
     r.type = s.get_by_name("masd.codec.type");
     r.value = s.get_by_name("masd.codec.value");
@@ -213,6 +255,12 @@ meta_data::static_configuration meta_data::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.association))
+        r.association = s.get_comma_separated_collection_content(fg.association);
+    if (s.has_configuration_point(fg.aggregation))
+        r.aggregation = s.get_comma_separated_collection_content(fg.aggregation);
+    if (s.has_configuration_point(fg.composition))
+        r.composition = s.get_comma_separated_collection_content(fg.composition);
     if (s.has_configuration_point(fg.stereotypes))
         r.stereotypes = s.get_comma_separated_content(fg.stereotypes);
     if (s.has_configuration_point(fg.type))
@@ -244,6 +292,9 @@ std::list<dogen::variability::entities::feature>
 meta_data::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
+    r.push_back(make_masd_codec_association());
+    r.push_back(make_masd_codec_aggregation());
+    r.push_back(make_masd_codec_composition());
     r.push_back(make_masd_codec_stereotypes());
     r.push_back(make_masd_codec_type());
     r.push_back(make_masd_codec_value());

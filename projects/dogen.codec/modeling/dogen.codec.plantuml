@@ -379,6 +379,9 @@ namespace features #F2F2F2 {
     end note
 
     class meta_data <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} association masd::variability::comma_separated_collection
+        +{field} aggregation masd::variability::comma_separated_collection
+        +{field} composition masd::variability::comma_separated_collection
         +{field} stereotypes masd::variability::comma_separated
         +{field} type masd::variability::text
         +{field} value masd::variability::text

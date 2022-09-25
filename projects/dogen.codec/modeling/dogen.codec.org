@@ -823,6 +823,30 @@ If the containing package is the model itself, it is linked to the model's modul
 
 Assorted meta-data.
 
+*** association                                                   :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::comma_separated_collection
+    :END:
+
+Element associated with this element.
+
+*** aggregation                                                   :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::comma_separated_collection
+    :END:
+
+Element which forms an aggregation relationship  with this element.
+
+*** composition                                                   :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::comma_separated_collection
+    :END:
+
+Element which forms a composition relationship  with this element.
+
 *** stereotypes                                                   :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
