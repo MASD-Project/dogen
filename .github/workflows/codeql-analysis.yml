@@ -33,6 +33,10 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
+    - name: Setup test data
+      run: |
+        ./build/scripts/github.setup.linux.sh
+
     - name: Build
       run: |
         cmake --preset linux-clang-debug
