@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_boost_model_dia_produces_expected_model) {
     SETUP_TEST_LOG("cpp_ref_impl_boost_model_dia_produces_expected_model");
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_boost_model_dia());
     const auto od(cpp_ref_impl_product::project_directory());
-    model_producer mp(true/*read_environment_variables*/);
+    model_producer mp;
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }

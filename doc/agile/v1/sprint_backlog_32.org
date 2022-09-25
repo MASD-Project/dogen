@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-24 Sat 08:50]
+#+CAPTION: Clock summary at [2022-09-25 Sun 09:12]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *27:47* |       |       | 100.0 |
+| *Total time*                                              | *28:02* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 27:47   |       |       | 100.0 |
-| Active                                                    |         | 27:47 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  36.8 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.6 |
+| Stories                                                   | 28:02   |       |       | 100.0 |
+| Active                                                    |         | 28:02 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  36.4 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.5 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   1.2 |
 | Improve diffing output in tests                           |         |       |  0:19 |   1.1 |
 | Sprint and product backlog grooming                       |         |       |  1:44 |   6.2 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   4.0 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
-| Full generation support in tests is incorrect             |         |       |  3:03 |  11.0 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   7.8 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |  11.8 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   7.7 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   3.2 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.3 |
 | Windows package is broken                                 |         |       |  0:20 |   1.2 |
-| Create a mock configuration builder                       |         |       |  1:58 |   7.1 |
+| Create a mock configuration builder                       |         |       |  1:58 |   7.0 |
 | Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
 | Add continuous builds to C++ reference product            |         |       |  1:57 |   7.0 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   2.7 |
@@ -470,6 +470,7 @@ Links:
 
 *** COMPLETED Full generation support in tests is incorrect           :story:
     :LOGBOOK:
+    CLOCK: [2022-09-25 Sun 08:57]--[2022-09-25 Sun 09:12] =>  0:15
     CLOCK: [2022-09-23 Fri 07:50]--[2022-09-23 Fri 08:01] =>  0:11
     CLOCK: [2022-09-22 Thu 07:30]--[2022-09-22 Thu 07:39] =>  0:09
     CLOCK: [2022-09-21 Wed 23:20]--[2022-09-21 Wed 23:53] =>  0:33
