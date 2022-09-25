@@ -59,8 +59,8 @@ To be done on the Monday morning of the new sprint.
    change).
 3. Create a demo. Publish it on youtube.
 4. Write up release notes, publish them in github.
-5. When tag build is finished, announce on gitter, twitter and linked
-   in.
+5. When tag build is finished, unpack and copy binaries into release, announce
+   on gitter, twitter and linked in.
 
 * V2 Release
 

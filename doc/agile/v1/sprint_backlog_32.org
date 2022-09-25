@@ -13,31 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-25 Sun 15:13]
+#+CAPTION: Clock summary at [2022-09-25 Sun 17:41]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *29:56* |       |       | 100.0 |
+| *Total time*                                              | *30:10* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 29:56   |       |       | 100.0 |
-| Active                                                    |         | 29:56 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  34.1 |
+| Stories                                                   | 30:10   |       |       | 100.0 |
+| Active                                                    |         | 30:10 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  33.9 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.0 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   1.1 |
-| Improve diffing output in tests                           |         |       |  0:19 |   1.1 |
-| Sprint and product backlog grooming                       |         |       |  1:44 |   5.8 |
+| Improve diffing output in tests                           |         |       |  0:19 |   1.0 |
+| Sprint and product backlog grooming                       |         |       |  1:48 |   6.0 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |  11.0 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |  10.9 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   7.2 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   3.0 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   7.4 |
-| Add continuous builds to C# reference product             |         |       |  1:38 |   5.5 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   7.3 |
+| Add continuous builds to C# reference product             |         |       |  1:38 |   5.4 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.5 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.1 |
 | Windows package is broken                                 |         |       |  0:20 |   1.1 |
-| Create a mock configuration builder                       |         |       |  1:58 |   6.6 |
+| Create a mock configuration builder                       |         |       |  1:58 |   6.5 |
 | Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   2.5 |
+| Enable CodeQL                                             |         |       |  0:10 |   0.6 |
 #+end:
 
 Agenda:
@@ -364,6 +365,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-25 Sun 17:31]--[2022-09-25 Sun 17:35] =>  0:04
     CLOCK: [2022-09-23 Fri 14:54]--[2022-09-23 Fri 14:59] =>  0:05
     CLOCK: [2022-09-23 Fri 14:42]--[2022-09-23 Fri 14:53] =>  0:11
     CLOCK: [2022-09-23 Fri 10:29]--[2022-09-23 Fri 10:33] =>  0:04
@@ -671,6 +673,88 @@ Running 1 test case...
  *** 1 failure is detected in the test module "dogen.orchestration.tests"
 #+end_example
 
+*** CANCELLED Remove ODB support from Dogen                           :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-23 Fri 15:49]--[2022-09-23 Fri 16:34] =>  0:45
+    :END:
+
+*Rationale*: Actually it seems we are not compiling this code as it stands so
+for now its OK to leave it as is.
+
+Last sprint we removed the relational model from Dogen. This sprint we need to g
+one step further and remove ODB support. Now, we may not need to remove it
+entirely: the headers Dogen generates are simple C++ headers that do not require
+ODB libraries to compile, /e.g./:
+
+#+begin_src c++
+#ifdef ODB_COMPILER
+
+#pragma db object(categories) schema("NORTHWIND")
+
+#pragma db member(categories::category_id_) id
+#pragma db member(categories::description_) null
+#pragma db member(categories::picture_) null
+
+#endif
+#+end_src
+
+We could conceivably continue to generate these, but we must not add the
+associated ODB files (generated by ODB) because then we pull in the ODB C++
+libraries and these are not supported by vcpkg. If we leave the pragmas we at
+least know we are not making ODB support any worse. This is still useful as we
+may return to it in the future. It also ensure some variation in the logical
+model (in particular in the cartridges domain).
+
+
+
+*** COMPLETED Cannot access binaries from release notes               :story:
+
+At present the URLs for the binaries are 404ing. We need to upload binaries
+manually to the release.
+
+- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/DOGEN-1.0.31-Darwin-x86_64.dmg][DOGEN-1.0.31-Darwin-x86_64.dmg]]
+- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/DOGEN-1.0.31-Windows-AMD64.msi][DOGEN-1.0.31-Windows-AMD64.msi]]
+- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/dogen_1.0.31_amd64-applications.deb][dogen_1.0.31_amd64-applications.deb]]
+
+Release notes have been updated:
+
+- https://github.com/MASD-Project/dogen/releases/tag/v1.0.31
+
+*** COMPLETED Add support for relations in codec model                :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB
+    :END:
+
+*Rationale*: this story and associated tasks have all been implemented.
+
+One very simple way to improve diagrams is to allow users to associate a
+fragment of PlantUML code with a class, for example:
+
+: masd.codec.plantuml: myclass <>-- other_class : test
+
+This fragments are added after the class, verbatim. Its up to the users to
+annotate diagrams as they see fit, we merely copy and paste these annotations.
+
+In the future, we may spot patterns of usage that can be derived from meta-data,
+but for now we just need the diagrams to be usable like they were in Dia.
+
+Notes:
+
+- notes are not indented at present.
+- we are not leaving a space after inheritance.
+- empty classes still have brackets.
+- no top-level namespace for model. We didn't have this in Dia either.
+
+ Tasks:
+
+- add new feature in codec model.
+- add properties in model and element to store the data.
+- when converting into PlantUML, output the new properties after dumping the
+  class.
+- move codec to codec tests from orchestration to codec component.
+- codec needs to have a way to bootstrap its context without requiring
+  orchestration.
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -760,34 +844,48 @@ to make diagrams more readable. Models done:
 
 - dogen
 
-*** STARTED Remove ODB support from Dogen                             :story:
+*** STARTED Enable CodeQL                                             :story:
     :LOGBOOK:
-    CLOCK: [2022-09-23 Fri 15:49]--[2022-09-23 Fri 16:34] =>  0:45
+    CLOCK: [2022-09-25 Sun 17:36]--[2022-09-25 Sun 17:41] =>  0:05
+    CLOCK: [2022-09-25 Sun 17:25]--[2022-09-25 Sun 17:30] =>  0:05
     :END:
 
-Last sprint we removed the relational model from Dogen. This sprint we need to g
-one step further and remove ODB support. Now, we may not need to remove it
-entirely: the headers Dogen generates are simple C++ headers that do not require
-ODB libraries to compile, /e.g./:
+GitHub seems to have new security tooling.
 
-#+begin_src c++
-#ifdef ODB_COMPILER
+Links:
 
-#pragma db object(categories) schema("NORTHWIND")
+- [[https://github.com/MASD-Project/dogen/security/code-scanning][code-scanning]]
 
-#pragma db member(categories::category_id_) id
-#pragma db member(categories::description_) null
-#pragma db member(categories::picture_) null
+*** PlantUML Verbatim considered harmful                              :story:
 
-#endif
-#+end_src
+Last sprint we added the PlantUML verbatim property, /i.e./:
 
-We could conceivably continue to generate these, but we must not add the
-associated ODB files (generated by ODB) because then we pull in the ODB C++
-libraries and these are not supported by vcpkg. If we leave the pragmas we at
-least know we are not making ODB support any worse. This is still useful as we
-may return to it in the future. It also ensure some variation in the logical
-model (in particular in the cartridges domain).
+:   :masd.codec.plantuml: model o-- element : composed of
+:   :masd.codec.plantuml: Element <|.. model
+
+This was meant to allow us to add the missing relations in the PlantUML
+diagrams. However, there are issues with this approach:
+
+- we may enter invalid PlantUML syntax, and will only find out at diagram
+  generation time. The error will probably be very hard to figure out as well.
+- we need to know the exact element name. Given the "spaces for underscores"
+  approach, this is not very nice (/e.g./ we replace "a model type" with
+  "a_model_type").
+- if you rename a type, this will fail.
+
+Seems like a better approach is to name the relations and add them as codec
+attributes:
+
+:   :masd.codec.annotation.abstraction: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
+:   :masd.codec.annotation.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
+:   :masd.codec.annotation.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
+
+These relations then give rise to a mapping to the element name during
+resolution. This copes with renames.
+
+Links:
+
+- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
 
 *** Consider adding PlantUML verbatim inside element                  :story:
 
@@ -823,63 +921,11 @@ Links:
   Windows 10 #11119]]
 - [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
 
-*** Cannot access binaries from release notes                         :story:
-
-At present the URLs for the binaries are 404ing. We need to upload binaries
-manually to the release.
-
-- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/DOGEN-1.0.31-Darwin-x86_64.dmg][DOGEN-1.0.31-Darwin-x86_64.dmg]]
-- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/DOGEN-1.0.31-Windows-AMD64.msi][DOGEN-1.0.31-Windows-AMD64.msi]]
-- [[https://github.com/MASD-Project/dogen/releases/download/v1.0.31/dogen_1.0.31_amd64-applications.deb][dogen_1.0.31_amd64-applications.deb]]
-
-Release notes have been updated:
-
-- https://github.com/MASD-Project/dogen/releases/tag/v1.0.31
-
-*** Enable CodeQL                                                     :story:
-
-GitHub seems to have new security tooling.
-
-Links:
-
-- [[https://github.com/MASD-Project/dogen/security/code-scanning][code-scanning]]
-
 *** Add operations to PlantUML diagrams                               :story:
 
 At present its not possible to add operations to PlantUML diagrams. This means
 the diagrams are not as useful as the Dia representation. We could add basic
 support for operations and then dump these in PlantUML.
-
-*** PlantUML Verbatim considered harmful                              :story:
-
-Last sprint we added the PlantUML verbatim property, /i.e./:
-
-:   :masd.codec.plantuml: model o-- element : composed of
-:   :masd.codec.plantuml: Element <|.. model
-
-This was meant to allow us to add the missing relations in the PlantUML
-diagrams. However, there are issues with this approach:
-
-- we may enter invalid PlantUML syntax, and will only find out at diagram
-  generation time. The error will probably be very hard to figure out as well.
-- we need to know the exact element name. Given the "spaces for underscores"
-  approach, this is not very nice (/e.g./ we replace "a model type" with
-  "a_model_type").
-- if you rename a type, this will fail.
-
-Seems like a better approach is to name the relations and add them as codec
-attributes:
-
-:   :masd.codec.annotation.abstraction: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
-:   :masd.codec.annotation.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
-:   :masd.codec.annotation.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
-
-These relations then give rise to a mapping to the element name during
-resolution. This copes with renames.
-
-Links:
-
-- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
 
 *** Consider renaming plantuml property                               :story:
 
@@ -1181,38 +1227,14 @@ At present we have the thesis, that explains the entire methodology and its
 rationale in great detail. This is not suitable for new users. We should have a
 small paper, 3 or 4 pages long, that summarises the argument.
 
-*** Add support for relations in codec model                          :story:
-    :PROPERTIES:
-    :CUSTOM_ID: 1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB
-    :END:
+*** Improvements to PlantUML output                                   :story:
 
-One very simple way to improve diagrams is to allow users to associate a
-fragment of PlantUML code with a class, for example:
-
-: masd.codec.plantuml: myclass <>-- other_class : test
-
-This fragments are added after the class, verbatim. Its up to the users to
-annotate diagrams as they see fit, we merely copy and paste these annotations.
-
-In the future, we may spot patterns of usage that can be derived from meta-data,
-but for now we just need the diagrams to be usable like they were in Dia.
-
-Notes:
+This story collects paper-cuts in the PlantUML output.
 
 - notes are not indented at present.
 - we are not leaving a space after inheritance.
 - empty classes still have brackets.
 - no top-level namespace for model. We didn't have this in Dia either.
-
- Tasks:
-
-- add new feature in codec model.
-- add properties in model and element to store the data.
-- when converting into PlantUML, output the new properties after dumping the
-  class.
-- move codec to codec tests from orchestration to codec component.
-- codec needs to have a way to bootstrap its context without requiring
-  orchestration.
 
 *** Consider standardising all templates as mustache templates        :story:
 
