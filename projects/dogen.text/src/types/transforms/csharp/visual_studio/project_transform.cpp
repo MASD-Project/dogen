@@ -60,46 +60,11 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 
     text::formatters::assistant ast(lps, e, a, false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
-    const auto& proj(ast.as<project>(e));
-
-ast.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
-ast.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
+ast.stream() << "<Project Sdk=\"Microsoft.NET.Sdk\">" << std::endl;
 ast.stream() << "  <PropertyGroup>" << std::endl;
-ast.stream() << "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" << std::endl;
-ast.stream() << "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" << std::endl;
-ast.stream() << "    <ProjectGuid>{" << proj.guid() << "}</ProjectGuid>" << std::endl;
 ast.stream() << "    <OutputType>Library</OutputType>" << std::endl;
-ast.stream() << "    <RootNamespace>" << proj.project_name() << "</RootNamespace>" << std::endl;
-ast.stream() << "    <AssemblyName>" << proj.project_name() << "</AssemblyName>" << std::endl;
+ast.stream() << "    <TargetFramework>net6.0</TargetFramework>" << std::endl;
 ast.stream() << "  </PropertyGroup>" << std::endl;
-ast.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" << std::endl;
-ast.stream() << "    <DebugSymbols>true</DebugSymbols>" << std::endl;
-ast.stream() << "    <DebugType>full</DebugType>" << std::endl;
-ast.stream() << "    <Optimize>false</Optimize>" << std::endl;
-ast.stream() << "    <OutputPath>bin\\Debug</OutputPath>" << std::endl;
-ast.stream() << "    <DefineConstants>DEBUG;</DefineConstants>" << std::endl;
-ast.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
-ast.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
-ast.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
-ast.stream() << "  </PropertyGroup>" << std::endl;
-ast.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">" << std::endl;
-ast.stream() << "    <DebugType>full</DebugType>" << std::endl;
-ast.stream() << "    <Optimize>true</Optimize>" << std::endl;
-ast.stream() << "    <OutputPath>bin\\Release</OutputPath>" << std::endl;
-ast.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
-ast.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
-ast.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
-ast.stream() << "  </PropertyGroup>" << std::endl;
-ast.stream() << "  <ItemGroup>" << std::endl;
-ast.stream() << "    <Reference Include=\"System\" />" << std::endl;
-ast.stream() << "  </ItemGroup>" << std::endl;
-        for (const auto& ig : proj.item_groups()) {
-ast.stream() << "  <ItemGroup>" << std::endl;
-            for (const auto& i : ig.items())
-ast.stream() << "    <" << i.name() << " Include=\"" << i.include() << "\" />" << std::endl;
-ast.stream() << "  </ItemGroup>" << std::endl;
-        }
-ast.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />" << std::endl;
 ast.stream() << "</Project>" << std::endl;
     ast.update_artefact();
     stp.end_transform(a);
