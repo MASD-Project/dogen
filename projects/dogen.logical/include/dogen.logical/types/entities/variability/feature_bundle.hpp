@@ -74,6 +74,7 @@ public:
         const std::list<dogen::identification::entities::logical_name>& transparent_associations,
         const std::list<dogen::identification::entities::logical_name>& opaque_associations,
         const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
+        const dogen::logical::entities::manual_associations& manual_associations,
         const std::string& key_prefix,
         const bool generate_registration,
         const bool generate_static_configuration,

@@ -211,6 +211,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         +{field} transparent_associations std::list<identification::entities::logical_name>
         +{field} opaque_associations std::list<identification::entities::logical_name>
         +{field} associative_container_keys std::list<identification::entities::logical_name>
+        +{field} manual_associations manual_associations
     }
 
     note top of  Associatable

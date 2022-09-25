@@ -24,6 +24,7 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.logical/io/entities/manual_associations_io.hpp"
 #include "dogen.logical/io/entities/variability/abstract_bundle_io.hpp"
 
 namespace dogen::logical::entities::variability {

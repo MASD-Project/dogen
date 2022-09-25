@@ -26,6 +26,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.logical/io/entities/manual_associations_io.hpp"
 #include "dogen.logical/io/entities/orm/object_properties_io.hpp"
 #include "dogen.logical/io/entities/structural/technical_space_properties_io.hpp"
 
@@ -152,6 +153,7 @@ object::object(object&& rhs)
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
+      manual_associations_(std::move(rhs.manual_associations_)),
       is_parent_(std::move(rhs.is_parent_)),
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
@@ -197,6 +199,7 @@ object::object(
     const std::list<dogen::identification::entities::logical_name>& transparent_associations,
     const std::list<dogen::identification::entities::logical_name>& opaque_associations,
     const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
+    const dogen::logical::entities::manual_associations& manual_associations,
     const bool is_parent,
     const bool is_child,
     const bool is_leaf,
@@ -241,6 +244,7 @@ object::object(
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       associative_container_keys_(associative_container_keys),
+      manual_associations_(manual_associations),
       is_parent_(is_parent),
       is_child_(is_child),
       is_leaf_(is_leaf),
@@ -300,6 +304,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
+      << "\"manual_associations\": " << manual_associations_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
@@ -337,6 +342,7 @@ void object::swap(object& other) noexcept {
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(associative_container_keys_, other.associative_container_keys_);
+    swap(manual_associations_, other.manual_associations_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
@@ -377,6 +383,7 @@ bool object::operator==(const object& rhs) const {
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
+        manual_associations_ == rhs.manual_associations_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
@@ -561,6 +568,22 @@ void object::associative_container_keys(const std::list<dogen::identification::e
 
 void object::associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v) {
     associative_container_keys_ = std::move(v);
+}
+
+const dogen::logical::entities::manual_associations& object::manual_associations() const {
+    return manual_associations_;
+}
+
+dogen::logical::entities::manual_associations& object::manual_associations() {
+    return manual_associations_;
+}
+
+void object::manual_associations(const dogen::logical::entities::manual_associations& v) {
+    manual_associations_ = v;
+}
+
+void object::manual_associations(const dogen::logical::entities::manual_associations&& v) {
+    manual_associations_ = std::move(v);
 }
 
 bool object::is_parent() const {

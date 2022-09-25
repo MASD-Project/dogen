@@ -33,6 +33,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.logical/types/entities/manual_associations.hpp"
 
 namespace dogen::logical::entities::variability {
 
@@ -80,6 +81,7 @@ public:
         const std::list<dogen::identification::entities::logical_name>& transparent_associations,
         const std::list<dogen::identification::entities::logical_name>& opaque_associations,
         const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
+        const dogen::logical::entities::manual_associations& manual_associations,
         const std::string& key_prefix,
         const bool generate_registration,
         const bool generate_static_configuration,
@@ -121,6 +123,16 @@ public:
     std::list<dogen::identification::entities::logical_name>& associative_container_keys();
     void associative_container_keys(const std::list<dogen::identification::entities::logical_name>& v);
     void associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Stores all associations added manually to the model.
+     */
+    /**@{*/
+    const dogen::logical::entities::manual_associations& manual_associations() const;
+    dogen::logical::entities::manual_associations& manual_associations();
+    void manual_associations(const dogen::logical::entities::manual_associations& v);
+    void manual_associations(const dogen::logical::entities::manual_associations&& v);
     /**@}*/
 
     /**
@@ -185,6 +197,7 @@ private:
     std::list<dogen::identification::entities::logical_name> transparent_associations_;
     std::list<dogen::identification::entities::logical_name> opaque_associations_;
     std::list<dogen::identification::entities::logical_name> associative_container_keys_;
+    dogen::logical::entities::manual_associations manual_associations_;
     std::string key_prefix_;
     bool generate_registration_;
     bool generate_static_configuration_;

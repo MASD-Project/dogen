@@ -595,6 +595,13 @@ This is used to break cycles where required.
 
 Elements that are keys in an associative container.
 
+*** manual associations                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: manual_associations
+    :END:
+
+Stores all associations added manually to the model.
+
 ** Generalizable                                                    :element:
    :PROPERTIES:
    :custom_id: CD6B5804-0CBC-1A14-56DB-27E8CB8F4808
