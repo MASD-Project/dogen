@@ -138,87 +138,6 @@ It seems we have three types of codecs:
 
 We should make this explicit in the listing of
 
-*** Consider modeling relations at a higher level of abstration       :story:
-
-At present we model relations in logical model as two object templates:
-
-- =Generalisable= for inheritance (implements and extends).
-- =Associatable= for composition.
-
-In reality, we should have created the UML relationships as a top-level
-construct:
-
-- association: composition, aggregation
-- dependency
-- generalisation
-- realisation
-
-Relationships should have an associated comment or description.
-
-This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
-as the codec model is concerned.
-
-Notes:
-
-- relationships should already exist in the codec model. These exist for "local"
-  relationships only (that is, elements in the same model). They can be used for
-  generalisation. This does mean generalisation could be "remote" though as we
-  some times inherit from other diagrams. We need a way to distinguish between
-  local and remote relations, which could be by "resolving" the GUID into an
-  element.
-- relationships can be user-annotated, and used for UML diagram generation.
-- generalisation and realisation remove the need for the parent meta-data.
-- relationships can be derived from attributes. This is what the "resolver"
-  does. It is in fact not a resolver but a transform that converts properties in
-  the element into relationships.
-- relationships should use the GUID as well as the qualified name.
-- relationships should really be modeled as org-mode headings. However, one
-  downside of this approach is that we will create a lot of noise when
-  generating documentation. However, given we will only use them for local
-  relationships (generalisation, UML purposes), maybe the noise is not that bad.
-- transparent and opaque associations as well associative container keys need to
-  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
-  If none is appropriate we should create them.
-- add a new type of relationship to codec model. We probably also need an enum
-  to capture the type of relationship. This can be supplied in org-mode as
-  meta-data. Relationships belong to elements.
-- for now, do a hack in the logical model that takes relations of certain types
-  (say realisation) and adds them to stereotypes in the logical model. However,
-  we must be able to ignore other types (say attributes annotated by the user).
-- best mapping for org-mode is:
-  - title is the type we point to.
-  - description is the name of the relationship.
-  - attribute =relationship= to denote codec type.
-  - meta-data to denote relationship type.
-  - add GUID if you want the relationship to show up in PlantUML.
-- make object templates interfaces. Modeling a concept is a realisation.
-
-Links:
-
-- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
-
-*** Make =parent= feature a CSV collection                            :story:
-
-At present we declare multiple parents like so:
-
-:    :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
-
-This is a remnant of the Dia stereotypes field, which was one long CSV string.
-However, in the Dia world it makes more sense for us to have:
-
-:    :masd.codec.parent: entities::Taggable
-:    :masd.codec.parent: entities::Stereotypable
-:    :masd.codec.parent: entities::Nameable
-:    :masd.codec.parent: entities::Configurable
-: ...
-
-This would make the org-mode document more readable. For this to work, we
-probably just need to:
-
-- make the field a CSV collection to allow for the transition without breaking
-  anything.
-- add processing in codec to handle the collection.
-
 *** Clang-cl windows build is broken                                  :story:
 
 We are failing to link:
@@ -1097,135 +1016,6 @@ The backend transform should:
 - use the facet and archetype transforms to process all elements.
 
 Check backlog for a story on this.
-
-*** Consider modeling relations at a higher level of abstration        :epic:
-    :PROPERTIES:
-    :CUSTOM_ID: E19AC760-A5C5-CC84-61DB-E6D7B9562ECF
-    :END:
-
-Note: this story captures the high-level analysis for implementing relations
-across dogen. We then need to create specific stories for its implementation.
-
-At present we model relations in logical model as two object templates:
-
-- =Generalisable= for inheritance (implements and extends).
-- =Associatable= for composition.
-
-In reality, we should have created the UML relationships as a top-level
-construct:
-
-- association: composition, aggregation
-- dependency
-- generalisation
-- realisation
-
-Relationships should have an associated comment or description.
-
-Notes:
-
-- relationships should already exist in the codec model. These exist for "local"
-  relationships only (that is, elements in the same model). They can be used for
-  generalisation. This does mean generalisation could be "remote" though as we
-  some times inherit from other diagrams. We need a way to distinguish between
-  local and remote relations, which could be by "resolving" the GUID into an
-  element.
-- relationships can be user-annotated, and used for UML diagram generation.
-- generalisation and realisation remove the need for the parent meta-data.
-- relationships can be derived from attributes. This is what the "resolver"
-  does. It is in fact not a resolver but a transform that converts properties in
-  the element into relationships.
-- relationships should use the GUID as well as the qualified name.
-- relationships should really be modeled as org-mode headings. However, one
-  downside of this approach is that we will create a lot of noise when
-  generating documentation. However, given we will only use them for local
-  relationships (generalisation, UML purposes), maybe the noise is not that bad.
-- transparent and opaque associations as well associative container keys need to
-  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
-  If none is appropriate we should create them.
-- object templates are incorrectly modeled as stereotypes. These are
-  realisations.
-- profiles are also incorrectly modeled as stereotypes. These are also
-  relations. However, the problem will be that once we remove them from
-  stereotypes we cannot see them in UML. We need to have a section in the
-  documentation which shows these properties for an element.
-- The name of the relation is its description, e.g. "throws". We can have
-  duplicate relation names.
-
-Links:
-
-- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
-- [[file:v1/sprint_backlog_31.org::#1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB][codec implementation]]
-
-*** Missing PlantUML features                                         :story:
-
-This story keeps track of features that we need to implement when
-exporting into PlantUML.
-
-- generalisation via meta-data does not work. This would be very
-  complicated: we need to resolve =masd.generalization.parent= into
-  the value and then look for all classes with the stereotype of the
-  concept (e.g. =meta_element= for logical model).
-- we need to unpack all properties and resolve those into types for
-  the current model in order to model associations. Also, we need a
-  simple resolver to find the types in the right namespaces. The
-  logic would be very similar to the existing resolver. One possible
-  solution is to move name trees into the codec model and perform
-  these transforms earlier in the pipeline.
-- add tests to check that PlantUML output has not changed. We need to
-  have support for diffing on conversion, which we may not yet
-  have. Also the existing tests do not take into account the action.
-- add plantuml representations to reference models.
-- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
-  PlantUML]]
-- add comments on relations:
-
-: someclass o-- otherclass : a description of the relation
-
-  This means the org-mode model must contain the comment. We could
-  either use the comment on the association itself, or have a field in
-  properties:
-
-: :masd.codec.relation_comment: a description of the relation
-
-  This is then copied as is into the UML diagram. By separating the
-  two means we can still make "proper" comments at the attribute
-  level.
-- there should be meta-data to determine if a comment will show up in
-  the diagram as a note or not. It should apply to both classes and
-  methods.
-- we should allow users to set the location of the comment for classes
-  etc (bottom, top, left, right).
-- we should allow enabling comments on methods and attributes, with
-  direction (left or right).
-
-Notes:
-
-- we need to move features such as name trees and generalisation into
-  the codec model.
-- actually perhaps we need to allow users to "tweak" the
-  relationships. We probably don't want every single relationship to
-  become a link in UML because then we can't see the wood for the
-  trees. A better approach may be to force users to declare the
-  relationships as meta-data, like we suggested above for comments,
-  and then transport those annotations to the UML diagram. This also
-  means we could add a full reference to the types, which solves the
-  issue of having to merge models. Finally, it means we can declare
-  any kind of relation, as per the plant uml syntax - in fact we
-  should probably expose the plant UML syntax directly, e.g. the user
-  is expected to declare a native plantuml relation:
-
-: :masd.codec.plantuml_relation: AS_IS_RELATION
-
-  We could perhaps default to the current class, but that's about
-  it. This would also allow for things like hidden links, etc. In
-  effect the only relation you get for free is inheritance. Actually
-  we should also have a "raw" way of inserting relations in a
-  namespace. These are placed at the end of the namespace.
-- logical model namespaces are not documented correctly.
-
-Links:
-
-- [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
 
 *** Weaving as model merging                                          :story:
 
@@ -2586,13 +2376,6 @@ the dumpers.
 This is a dependency in order to move to PDMs because we will not have
 helpers. Therefore there will be no way to handle the complex
 relationships between types and IO.
-
-*** Analysis of MDE papers to read                                    :story:
-
-Links:
-
-- [[https://ulir.ul.ie/bitstream/handle/10344/2126/2007_Botterweck.pdf;jsessionid=AC6FF39BA414E6065602C7851860C43D?sequence=2][Model-Driven Derivation of Product Architectures]]
-- [[https://madoc.bib.uni-mannheim.de/993/1/abwl_02_05.pdf][A Taxonomy of Metamodel Hierarchies]]
 
 *** Order of headers is hard-coded                                    :story:
 
@@ -6980,16 +6763,6 @@ for a few simple cases:
 
 We just need to use the wale template to create the first "draft" and
 then set overwrite to false.
-
-*** Make use of association relationships                             :story:
-
-When we start having to create elements such as visitor etc., it would
-be nice to rely on the association between visitor and visitable to
-figure out what the visitor is visiting. This and other simple cases
-can be inferred simply by looking at the end points of the
-association. However, we should still allow supplying this
-meta-parameter as meta-data because it may not be practical to have
-the association. And we need a way to express this in JSON as well.
 
 *** Consider allowing UML inheritance of object templates             :story:
 
@@ -11579,13 +11352,6 @@ set the trace/log level when logging is disabled.
 
 Its slightly confusing given that we also have =tracing=.
 
-*** Consider replacing the associations against object templates      :story:
-
-Object templates are really a higher level concept when compared to
-objects, etc. We should not be using associations to denote the notion
-of an object instantiating an object template. Perhaps the "implements
-an interface" relationship is more appropriate. Check the UML books.
-
 *** Use DI in injection model                                         :story:
 
 We need to use the boost.di injector in the injector model to register
@@ -15631,25 +15397,6 @@ filenames, but this bit-rotted and was eventually removed. It may make
 sense to add it again, but it is really a shorthand for setting facet
 and formatter prefix to empty string. We should at least have a model
 that tests that this works.
-
-*** Create a map between UML/MOF terminology and yarn                  :epic:
-
-It would be helpful to know what a yarn type means in terms of
-UML/MOF, and perhaps even explain why we have chosen certain names
-instead of the UML ones. We should also cover the modeling of
-relationships and the relation between yarn concepts and UML/MOF
-classes. This will form a chapter in the manual.
-
-The UML specification is available [[http://www.omg.org/spec/UML/2.5/][here]] and MOF specification is
-available [[http://www.omg.org/spec/MOF/2.5][here]].
-
-We need a way to uniquely identify a property. This could be done by
-appending the containing type's qualified name to the property name.
-
-See also [[http://www.uml-diagrams.org/][The Unified Modeling Language]] for a more accessible
-treatment.
-
-See [[http://www-01.ibm.com/support/knowledgecenter/SS5JSH_9.1.2/com.ibm.xtools.transform.uml2.cpp.doc/topics/rucppprofile.html][Stereotypes of the UML-to-C++ transformation profile]] for ideas.
 
 *** Investigate boost log config files                                :story:
 
@@ -21325,7 +21072,7 @@ code. We would require a mapping layer of eCore types into LAM.
 
 - [[http://eclipsesource.com/blogs/tutorials/emf-tutorial/][What every Eclipse developer should know about EMF]]
 
-*** Reducing the overhead of other facets in types                    :story:
+*** Reducing the overhead of other facets in types                     :epic:
 
 Note: This story is a bit far-fetched at the moment, but it is a place
 to collect ideas on this space.
