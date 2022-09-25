@@ -13,30 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-25 Sun 09:12]
+#+CAPTION: Clock summary at [2022-09-25 Sun 15:13]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *28:02* |       |       | 100.0 |
+| *Total time*                                              | *29:56* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 28:02   |       |       | 100.0 |
-| Active                                                    |         | 28:02 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  36.4 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.5 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   1.2 |
+| Stories                                                   | 29:56   |       |       | 100.0 |
+| Active                                                    |         | 29:56 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  34.1 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   7.0 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   1.1 |
 | Improve diffing output in tests                           |         |       |  0:19 |   1.1 |
-| Sprint and product backlog grooming                       |         |       |  1:44 |   6.2 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   4.0 |
+| Sprint and product backlog grooming                       |         |       |  1:44 |   5.8 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |  11.8 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   7.7 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   3.2 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.3 |
-| Windows package is broken                                 |         |       |  0:20 |   1.2 |
-| Create a mock configuration builder                       |         |       |  1:58 |   7.0 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |  11.0 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   7.2 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   3.0 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   7.4 |
+| Add continuous builds to C# reference product             |         |       |  1:38 |   5.5 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.1 |
+| Windows package is broken                                 |         |       |  0:20 |   1.1 |
+| Create a mock configuration builder                       |         |       |  1:58 |   6.6 |
 | Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
-| Add continuous builds to C++ reference product            |         |       |  1:57 |   7.0 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   2.7 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.5 |
 #+end:
 
 Agenda:
@@ -623,6 +624,53 @@ fix this:
 We don't really need a builder and a factory. Also remove the various flags we
 left scattered to handle diffing, reporting etc.
 
+*** COMPLETED Add nightly builds to C++ reference product             :story:
+
+Since we list travis we lost support for nightlies.
+
+*** COMPLETED Add continuous builds to C++ reference product          :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-25 Sun 12:15]--[2022-09-25 Sun 12:31] =>  0:16
+    CLOCK: [2022-09-23 Fri 16:54]--[2022-09-23 Fri 18:51] =>  1:57
+    :END:
+
+Since we list travis we lost support for CI.
+
+*** COMPLETED Add continuous builds to C# reference product           :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-25 Sun 13:45]--[2022-09-25 Sun 15:11] =>  1:26
+    CLOCK: [2022-09-25 Sun 13:30]--[2022-09-25 Sun 13:42] =>  0:12
+    :END:
+
+Since we list travis we lost support for CI.
+
+*** COMPLETED CI error: Failed to delete output directory             :story:
+
+*Rationale*: the changes to test structure resolved this issue.
+
+We are experiencing a strange CI error:
+
+#+begin_example
+D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
+Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
+std::exception::what: Failed to delete output directory.
+unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
+D:\a\dogen\dogen\projects\dogen.orchestration\tests\main.cpp(39): last checkpoint: initializer
+Running 1 test case...
+
+ *** No errors detected
+Test setup error:
+#+end_example
+
+We also have this related error:
+
+#+begin_example
+Running 1 test case...
+/home/runner/work/dogen/dogen/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(169): fatal error: in "code_generation_chain_tests/empty_folders_are_deleted_when_delete_empty_folders_flag_is_on": critical check are_generated_files_healthy(od, t, 60 ) has failed
+
+ *** 1 failure is detected in the test module "dogen.orchestration.tests"
+#+end_example
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -712,13 +760,6 @@ to make diagrams more readable. Models done:
 
 - dogen
 
-*** STARTED Add continuous builds to C++ reference product            :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-23 Fri 16:54]--[2022-09-23 Fri 18:51] =>  1:57
-    :END:
-
-Since we list travis we lost support for CI.
-
 *** STARTED Remove ODB support from Dogen                             :story:
     :LOGBOOK:
     CLOCK: [2022-09-23 Fri 15:49]--[2022-09-23 Fri 16:34] =>  0:45
@@ -747,18 +788,6 @@ libraries and these are not supported by vcpkg. If we leave the pragmas we at
 least know we are not making ODB support any worse. This is still useful as we
 may return to it in the future. It also ensure some variation in the logical
 model (in particular in the cartridges domain).
-
-*** Add nightly builds to C++ reference product                       :story:
-
-Since we list travis we lost support for nightlies.
-
-*** Add continuous builds to C# reference product                     :story:
-
-Since we list travis we lost support for CI.
-
-*** Add nightly builds to C# reference product                        :story:
-
-Since we list travis we lost support for nightlies.
 
 *** Consider adding PlantUML verbatim inside element                  :story:
 
@@ -820,31 +849,6 @@ Links:
 At present its not possible to add operations to PlantUML diagrams. This means
 the diagrams are not as useful as the Dia representation. We could add basic
 support for operations and then dump these in PlantUML.
-
-*** CI error: Failed to delete output directory                       :story:
-
-We are experiencing a strange CI error:
-
-#+begin_example
-D:\a\dogen\dogen\projects\dogen.utility\src\types\test_data\dogen_product.cpp(125): Throw in function initialize
-Dynamic exception type: struct boost::wrapexcept<class dogen::utility::test_data::test_data_exception>
-std::exception::what: Failed to delete output directory.
-unknown location(0): fatal error: in "Test setup": class std::runtime_error: Error during test
-D:\a\dogen\dogen\projects\dogen.orchestration\tests\main.cpp(39): last checkpoint: initializer
-Running 1 test case...
-
- *** No errors detected
-Test setup error:
-#+end_example
-
-We also have this related error:
-
-#+begin_example
-Running 1 test case...
-/home/runner/work/dogen/dogen/projects/dogen.orchestration/tests/code_generation_chain_tests.cpp(169): fatal error: in "code_generation_chain_tests/empty_folders_are_deleted_when_delete_empty_folders_flag_is_on": critical check are_generated_files_healthy(od, t, 60 ) has failed
-
- *** 1 failure is detected in the test module "dogen.orchestration.tests"
-#+end_example
 
 *** PlantUML Verbatim considered harmful                              :story:
 
@@ -1443,3 +1447,8 @@ The most obvious thing is just to call the templates after their
 actual name: mustache.
 
 ** Deprecated
+*** CANCELLED Add nightly builds to C# reference product              :story:
+
+Since we list travis we lost support for nightlies.
+
+Actually we never did have nightlies for C++.

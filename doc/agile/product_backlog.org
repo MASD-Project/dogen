@@ -136,7 +136,7 @@ It seems we have three types of codecs:
 - output only: PlantUML
 - roundtrip: org-mode, JSON.
 
-We should make this explicit in the listing of codecs.
+We should make this explicit in the listing of
 
 *** Consider modeling relations at a higher level of abstration       :story:
 
