@@ -6,37 +6,37 @@
 * Sprint Goals
 
 - Finish restoring support for CI/CD.
--
+- Get PlantUML diagrams into a usable state.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-25 Sun 20:00]
+#+CAPTION: Clock summary at [2022-09-26 Mon 19:53]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *31:30* |       |       | 100.0 |
+| *Total time*                                              | *32:02* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 31:30   |       |       | 100.0 |
-| Active                                                    |         | 31:30 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  32.4 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   6.7 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   1.1 |
+| Stories                                                   | 32:02   |       |       | 100.0 |
+| Active                                                    |         | 32:02 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  31.9 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   6.6 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   1.0 |
 | Improve diffing output in tests                           |         |       |  0:19 |   1.0 |
-| Sprint and product backlog grooming                       |         |       |  2:09 |   6.8 |
+| Sprint and product backlog grooming                       |         |       |  2:29 |   7.8 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.5 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |  10.5 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   6.9 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.9 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   7.0 |
-| Add continuous builds to C# reference product             |         |       |  1:38 |   5.2 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   2.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |  10.3 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   6.8 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.8 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.9 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   5.7 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.3 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.0 |
-| Windows package is broken                                 |         |       |  0:20 |   1.1 |
-| Create a mock configuration builder                       |         |       |  1:58 |   6.2 |
+| Windows package is broken                                 |         |       |  0:20 |   1.0 |
+| Create a mock configuration builder                       |         |       |  1:58 |   6.1 |
 | Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
 | Enable CodeQL                                             |         |       |  0:21 |   1.1 |
 | Model significant relations at a higher level             |         |       |  0:48 |   2.5 |
@@ -366,6 +366,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-26 Mon 08:25]--[2022-09-26 Mon 08:45] =>  0:20
     CLOCK: [2022-09-25 Sun 19:38]--[2022-09-25 Sun 19:59] =>  0:21
     CLOCK: [2022-09-25 Sun 17:31]--[2022-09-25 Sun 17:35] =>  0:04
     CLOCK: [2022-09-23 Fri 14:54]--[2022-09-23 Fri 14:59] =>  0:05
@@ -642,11 +643,18 @@ Since we list travis we lost support for CI.
 
 *** COMPLETED Add continuous builds to C# reference product           :story:
     :LOGBOOK:
+    CLOCK: [2022-09-26 Mon 07:40]--[2022-09-26 Mon 07:52] =>  0:12
     CLOCK: [2022-09-25 Sun 13:45]--[2022-09-25 Sun 15:11] =>  1:26
     CLOCK: [2022-09-25 Sun 13:30]--[2022-09-25 Sun 13:42] =>  0:12
     :END:
 
 Since we list travis we lost support for CI.
+
+Merged stories:
+
+*Add github actions build for C#*
+
+We need to build on .Net 6.
 
 *** COMPLETED CI error: Failed to delete output directory             :story:
 
@@ -707,7 +715,14 @@ least know we are not making ODB support any worse. This is still useful as we
 may return to it in the future. It also ensure some variation in the logical
 model (in particular in the cartridges domain).
 
+Merged stories:
 
+*Reference implementation build is borked*
+
+We need to upgrade the ODB version of the reference implementation. Annoyingly
+this will mean hitting the usual issues with vcpkg. We should probably consider
+deprecating ODB from the reference implementation as well, or at least disabling
+the building of the generated ODB code.
 
 *** COMPLETED Cannot access binaries from release notes               :story:
 
@@ -756,6 +771,22 @@ Notes:
 - move codec to codec tests from orchestration to codec component.
 - codec needs to have a way to bootstrap its context without requiring
   orchestration.
+
+*** COMPLETED Add models directory to each component                  :story:
+
+*Rationale*: this has been done in Dogen.
+
+Instead of a product level models directory, we should have separate component
+level directories. We can't do the PMM implementation just yet but we can use
+regexes to get the directory in the correct shape and then use it to target the
+changes in the PMM. The directory should be called =modeling= to reflect the
+fact that it will contain more than models.
+
+Notes:
+
+- when we do this we will break the dogen product unit tests.
+- we need to add the targets to each component (generation, conversion).
+
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
@@ -901,6 +932,198 @@ Links:
 
 - [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
 - [[https://www.omg.org/spec/MOF/2.5.1/PDF][MOF 2.5 specification]]
+
+*** Upload release to github on tags                                  :story:
+
+At present we are manually uploading binaries on a release to github. It would
+be nice to integrate this with CI.
+
+This has been added to workflow, check at the end of the sprint if it works.
+
+Links:
+
+- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
+- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
+
+
+*** org-roam integration                                               :epic:
+
+Assorted notes on org-roam:
+
+- org-roam v2 now forces all entries to have an ID. We can use these
+  as element identifiers. These are just GUIDs associated with
+  org-mode headlines. We care about both the "model" level ID as well
+  as the element level IDs.
+- we need to introduce a model element called "reference" (we must
+  already have some analysis on this). The reference will contain the
+  org-roam ID for the model we are referencing. This will ensure we
+  see the backlinks when we open models and facilitate navigation.
+- org-roam must have a path on which to search files. We need to make
+  sure we can see across products. For example, if we have product A
+  referencing product B, both directories with all org-files must be
+  in the path.
+- by writing the ID into the file as a comment, we can now handle
+  moves. This is done as follows: first, get a list of all files in a
+  component and their IDs. Then, as a step on the physical model, for
+  all files where overwrite is disabled, load up the previous content
+  and set the current content to be the previous content. With this
+  the file will move to its new location. Alternatively, if this
+  increases generation time too much we can only load files based on
+  the file name. But first try the easy approach.
+- we can make a really simple "format" for references, just a
+  meta-model element annotation as an org-tag (e.g. =reference=) and
+  the contents of the reference must be an org-link
+  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
+  this. The org-link is actually an org-roam link. This means we need
+  to have the directories where the models are stored in some path
+  lookup in Dogen. We need to find all org-mode documents, open them
+  and get their IDs.
+- we need to allow adding elements which do not contribute to
+  code. This is so we can add random notes in models. They can be seen
+  as UML notes. We could simply add a "note" metatype to the logical
+  model.
+- with this approach, if the agile stores have links to the org-models
+  we should also see them in org-roam. However, over time we'll
+  probably end up with too many links. But it would be nice to open a
+  model and see a list of stories done against it. We may need a way
+  to enable / disable this.
+- when we add build2 support, we need to be able to package the models
+  with the header files.
+
+Links:
+
+- [[https://www.orgroam.com/manual.html][org-roam manual]]
+
+*** Add model name as title in PlantUML diagram                       :story:
+
+At present its not possible to know the name of the model by looking at the SVG.
+We should have a comment with the title. It could be added to the existing model
+level comment with documentation.
+
+*** Fix PlantUML indentation                                          :story:
+
+At present if we indent a diagram in emacs we get a different
+indentation compared to the generated one. We need to either get emacs
+to indent correctly, or copy the emacs indentation. The main problem
+at present is that we are indenting classes correctly in generated
+code:
+
+#+begin_src plantuml
+namespace entities #F2F2F2 {
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
+    }
+}
+#+end_src
+
+Whereas emacs does not:
+
+#+begin_src plantuml
+@startuml
+
+namespace entities #F2F2F2 {
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
+    }
+}
+@enduml
+#+end_src
+
+Note that the behaviour seems different in org-babel. Note also that
+notes have incorrect indentation (text model, inside a namespace):
+
+#+begin_src plantuml
+note top of  transformation_error
+An error occurred whilst applying a transformation.
+end note
+#+end_src
+
+Note also the extra space before exception name, as well as the
+missing indentation inside the note.
+
+Actually what is causing the problem with emacs indentation is the use
+of top-level notes:
+
+#+begin_src plantuml
+note as N1
+Contains all of the M2T transforms for all supported backends.
+end note
+#+end_src
+
+We need to investigate why this causes indentation problems. Seems
+like its valid syntax.
+
+Note also that all comments are not indented correctly.
+
+*** Create a local resolver in codec to support PlantUML use case     :story:
+
+We can create most of the links in PlantUML via local resolution. We
+could create a local resolver, which only looks at types for the
+current model. It lives inside of codec. For those types, if it
+resolves, we can create the PlantUML link. In addition, we could also
+resolve operations in the same way (once they have been
+modeled).
+
+Ideally, we should implement this resolve in such a way that it can be
+used for merged models and stand alone models. We created a story on
+the new approach for the resolver; we need to have a look at that and
+see if it can be implemented as part of this work. For example, we
+could flatten all names prior to calling resolver; use a GUID against
+each type, read from custom ID in org mode.
+
+The resolver needs to be primed with all of the existing model names
+and namespaces, without depending on the qualified names data
+structure. It should have its own data structures. It could live in
+=identification=. The output of the resolver should be the GUID of the
+type the name points to, or nothing if it could not resolve.
+
+In the calling models, we need a transform that decomposes a type into
+the names it references. Then, for each name, we call the resolver.
+
+Notes:
+
+- we could also create two step resolution. We could resolve all local
+  names first, and mark them as resolved (for example by adding the
+  UUID of the resolved type to the name) and leaving unresolved types
+  unmarked. Then, the second merged model resolution would only
+  resolve types which are not yet resolved. This would probably speed
+  things up because we may end up with smaller containers.
+
+*** Fix PlantUML namespace comments                                   :story:
+
+At present the comments appear as a link to the namespace. We should
+try to do whatever it is we did for the model comment, which looks
+like a regular note at the top of the namespace.
+
+In addition, sub-namespaces seem to generate both a class with the
+comment as well as the namespace itself (see text model).
+
+*** Consider creating a "top-level" group in PlantUML                 :story:
+
+There are a number of classes that always show up at the top:
+
+- registrar
+- cmakelists
+- main
+- etc
+
+These could also be part of a top-level group.
+
+We could also have a group for logic-less templates if they are at the
+top-level.
+
+*** Empty classes do not need brackets in PlantUML                    :story:
+
+At present we are still adding start and end brackets to empty classes:
+
+#+begin_src plantuml
+class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+#+end_src
+
+This takes space for no reason. We could just not print those brackets.
+
+
 
 *** Consider modeling relations at a higher level of abstration       :story:
     :PROPERTIES:
@@ -1101,6 +1324,14 @@ Links:
 At present its not possible to add operations to PlantUML diagrams. This means
 the diagrams are not as useful as the Dia representation. We could add basic
 support for operations and then dump these in PlantUML.
+
+Merged stories:
+
+*Consider adding operations for PlantUML*
+
+We don't need full operation support for it to be useful. We could
+have minimal support and use it to update the UML diagrams. It would
+then later on be extended for merging code generation.
 
 *** Consider renaming plantuml property                               :story:
 

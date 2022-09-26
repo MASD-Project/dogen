@@ -115,19 +115,6 @@ For now as a quick hack we reintroduced global includes.
 
 Most other types are =Element=.
 
-*** Add models directory to each component                            :story:
-
-Instead of a product level models directory, we should have separate component
-level directories. We can't do the PMM implementation just yet but we can use
-regexes to get the directory in the correct shape and then use it to target the
-changes in the PMM. The directory should be called =modeling= to reflect the
-fact that it will contain more than models.
-
-Notes:
-
-- when we do this we will break the dogen product unit tests.
-- we need to add the targets to each component (generation, conversion).
-
 *** Codec classification                                              :story:
 
 It seems we have three types of codecs:
@@ -139,14 +126,30 @@ It seems we have three types of codecs:
 We should make this explicit in the listing of
 
 *** Clang-cl windows build is broken                                  :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 8CF1E48A-E643-E534-F05B-639E459C8C1B
+    :END:
 
 We are failing to link:
 
 : lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
 
+Notes:
+
+- at present we are picking up the LLVM clang-cl, not the visual studio one. It
+  means we are using LLD to link. Its not entirely obvious how to change it to
+  use VS without losing ninja.
+- GitHub does not support allow failures in the build matrix. See this
+  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
+  job]]. Added our use case to that discussion.
+- for now, commented out clang-cl build.
+
 Links:
 
 - [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
+  paths?]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
 *** Consider making features dynamic elements                         :story:
 
@@ -161,6 +164,12 @@ model elements.
 This is needed to make it compliant with the domain architecture.
 
 *** Create a site for Dogen                                           :story:
+
+We already have some kind of a site, but it only has the doxygen docs:
+
+- https://mcraveiro.github.io/dogen/doxygen/index.html
+
+Also, its showing up under =mcraveiro= rather than MASD.
 
 Notes:
 
@@ -256,30 +265,13 @@ that dogen code is using libc++ whereas the vcpkg dependencies are using the GCC
 standard library. For now we defaulted to GCC's library but the right fix is to
 use libc++.
 
+Notes:
+
+- it seems we are using libc++ but only on OSX, not Linux.
+
 Links:
 
 - [[https://github.com/microsoft/vcpkg/issues/9783][#9783: Add example for using libc++ on Linux]]
-
-*** Reference implementation build is borked                          :story:
-
-We need to upgrade the ODB version of the reference implementation. Annoyingly
-this will mean hitting the usual issues with vcpkg. We should probably consider
-deprecating ODB from the reference implementation as well, or at least disabling
-the building of the generated ODB code.
-
-*** Add github actions build for C#                                   :story:
-
-We need to build on .Net 6.
-
-*** Upload release to github on tags                                  :story:
-
-At present we are manually uploading binaries on a release to github. It would
-be nice to integrate this with CI.
-
-Links:
-
-- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
-- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
 
 *** Improve vcpkg integration for generated code                      :story:
 
@@ -356,18 +348,6 @@ it only for the =dogen.text= model.
 : #+begin_src mustache
 : Contents of the artefact.
 : #+end_src
-
-*** Consider integrating org-spec with org-model                      :story:
-
-#+begin_quote
-An Org-mode template for technical specification documents and HTML publishing
-#+end_quote
-
-It would be nice to generate models that can produce org-spec HTML output.
-
-Links:
-
-- [[https://github.com/thi-ng/org-spec][org-spec GH]]
 
 *** Change file format of tracing dumps according to codec            :story:
 
@@ -592,49 +572,6 @@ add to that report.
 
 We don't need to add commas to separate PlantUML enums.
 
-*** Fix PlantUML namespace comments                                   :story:
-
-At present the comments appear as a link to the namespace. We should
-try to do whatever it is we did for the model comment, which looks
-like a regular note at the top of the namespace.
-
-In addition, sub-namespaces seem to generate both a class with the
-comment as well as the namespace itself (see text model).
-
-*** Create a local resolver in codec to support PlantUML use case     :story:
-
-We can create most of the links in PlantUML via local resolution. We
-could create a local resolver, which only looks at types for the
-current model. It lives inside of codec. For those types, if it
-resolves, we can create the PlantUML link. In addition, we could also
-resolve operations in the same way (once they have been
-modeled).
-
-Ideally, we should implement this resolve in such a way that it can be
-used for merged models and stand alone models. We created a story on
-the new approach for the resolver; we need to have a look at that and
-see if it can be implemented as part of this work. For example, we
-could flatten all names prior to calling resolver; use a GUID against
-each type, read from custom ID in org mode.
-
-The resolver needs to be primed with all of the existing model names
-and namespaces, without depending on the qualified names data
-structure. It should have its own data structures. It could live in
-=identification=. The output of the resolver should be the GUID of the
-type the name points to, or nothing if it could not resolve.
-
-In the calling models, we need a transform that decomposes a type into
-the names it references. Then, for each name, we call the resolver.
-
-Notes:
-
-- we could also create two step resolution. We could resolve all local
-  names first, and mark them as resolved (for example by adding the
-  UUID of the resolved type to the name) and leaving unresolved types
-  unmarked. Then, the second merged model resolution would only
-  resolve types which are not yet resolved. This would probably speed
-  things up because we may end up with smaller containers.
-
 *** Generate PNGs for PlantUML models                                 :story:
 
 At present we are generating SVGs for the Plant UML models. This is
@@ -644,92 +581,6 @@ to check in the Plant UML source, but it does offer an easy way to
 check for regressions. At any rate, we should just have a CMake target
 that creates the PNGs in the build output directory, and open those in
 emacs with tabs and scroll bars.
-
-*** Fix PlantUML indentation                                          :story:
-
-At present if we indent a diagram in emacs we get a different
-indentation compared to the generated one. We need to either get emacs
-to indent correctly, or copy the emacs indentation. The main problem
-at present is that we are indenting classes correctly in generated
-code:
-
-#+begin_src plantuml
-namespace entities #F2F2F2 {
-    class section #F7E5FF {
-        +{field} blocks std::list<block>
-    }
-}
-#+end_src
-
-Whereas emacs does not:
-
-#+begin_src plantuml
-@startuml
-
-namespace entities #F2F2F2 {
-    class section #F7E5FF {
-        +{field} blocks std::list<block>
-    }
-}
-@enduml
-#+end_src
-
-Note that the behaviour seems different in org-babel. Note also that
-notes have incorrect indentation (text model, inside a namespace):
-
-#+begin_src plantuml
-note top of  transformation_error
-An error occurred whilst applying a transformation.
-end note
-#+end_src
-
-Note also the extra space before exception name, as well as the
-missing indentation inside the note.
-
-Actually what is causing the problem with emacs indentation is the use
-of top-level notes:
-
-#+begin_src plantuml
-note as N1
-Contains all of the M2T transforms for all supported backends.
-end note
-#+end_src
-
-We need to investigate why this causes indentation problems. Seems
-like its valid syntax.
-
-Note also that all comments are not indented correctly.
-
-*** Consider creating a "top-level" group in PlantUML                 :story:
-
-There are a number of classes that always show up at the top:
-
-- registrar
-- cmakelists
-- main
-- etc
-
-These could also be part of a top-level group.
-
-We could also have a group for logic-less templates if they are at the
-top-level.
-
-*** Consider adding operations for PlantUML                           :story:
-
-We don't need full operation support for it to be useful. We could
-have minimal support and use it to update the UML diagrams. It would
-then later on be extended for merging code generation.
-
-*** Empty classes do not need brackets in PlantUML                    :story:
-
-At present we are still adding start and end brackets to empty classes:
-
-#+begin_src plantuml
-class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
-}
-#+end_src
-
-This takes space for no reason. We could just not print those brackets.
 
 *** Consider creating a product PlantUML diagram                      :story:
 
@@ -860,32 +711,6 @@ is to merge the two: create a report that also includes the diffs.
 Links:
 
 - [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.12][Sprint 12]]: introduction of reporting.
-
-*** Clang-cl windows build is broken                                  :story:
-    :PROPERTIES:
-    :CUSTOM_ID: 8CF1E48A-E643-E534-F05B-639E459C8C1B
-    :END:
-
-We are failing to link:
-
-: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
-
-Notes:
-
-- at present we are picking up the LLVM clang-cl, not the visual studio one. It
-  means we are using LLD to link. Its not entirely obvious how to change it to
-  use VS without losing ninja.
-- GitHub does not support allow failures in the build matrix. See this
-  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
-  job]]. Added our use case to that discussion.
-- for now, commented out clang-cl build.
-
-Links:
-
-- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
-- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
-  paths?]]
-- [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
 *** Towards a dynamic PMM                                              :epic:
 
@@ -1113,54 +938,6 @@ this as we must have something on this in the backlog.
 
 Actually maybe there is some confusion on this as we have
 =disable_facet_folders=.
-
-*** org-roam integration                                              :story:
-
-Assorted notes on org-roam:
-
-- org-roam v2 now forces all entries to have an ID. We can use these
-  as element identifiers. These are just GUIDs associated with
-  org-mode headlines. We care about both the "model" level ID as well
-  as the element level IDs.
-- we need to introduce a model element called "reference" (we must
-  already have some analysis on this). The reference will contain the
-  org-roam ID for the model we are referencing. This will ensure we
-  see the backlinks when we open models and facilitate navigation.
-- org-roam must have a path on which to search files. We need to make
-  sure we can see across products. For example, if we have product A
-  referencing product B, both directories with all org-files must be
-  in the path.
-- by writing the ID into the file as a comment, we can now handle
-  moves. This is done as follows: first, get a list of all files in a
-  component and their IDs. Then, as a step on the physical model, for
-  all files where overwrite is disabled, load up the previous content
-  and set the current content to be the previous content. With this
-  the file will move to its new location. Alternatively, if this
-  increases generation time too much we can only load files based on
-  the file name. But first try the easy approach.
-- we can make a really simple "format" for references, just a
-  meta-model element annotation as an org-tag (e.g. =reference=) and
-  the contents of the reference must be an org-link
-  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
-  this. The org-link is actually an org-roam link. This means we need
-  to have the directories where the models are stored in some path
-  lookup in Dogen. We need to find all org-mode documents, open them
-  and get their IDs.
-- we need to allow adding elements which do not contribute to
-  code. This is so we can add random notes in models. They can be seen
-  as UML notes. We could simply add a "note" metatype to the logical
-  model.
-- with this approach, if the agile stores have links to the org-models
-  we should also see them in org-roam. However, over time we'll
-  probably end up with too many links. But it would be nice to open a
-  model and see a list of stories done against it. We may need a way
-  to enable / disable this.
-- when we add build2 support, we need to be able to package the models
-  with the header files.
-
-Links:
-
-- [[https://www.orgroam.com/manual.html][org-roam manual]]
 
 *** Rename external and model modules                                 :story:
 
@@ -1457,12 +1234,6 @@ Notes
   the codec transform into two across orchestration to implement this: load
   codec model, in orchestration load artefacts for references, then load codec
   model, etc.
-
-*** Add model name as title in PlantUML diagram                       :story:
-
-At present its not possible to know the name of the model by looking at the SVG.
-We should have a comment with the title. It could be added to the existing model
-level comment with documentation.
 
 *** Create a "manual tests" stereotype with profiles                  :story:
 
@@ -1846,14 +1617,15 @@ create:
 - org file with all the tests. If there is an environment variable to
   set the log level, we could then control it from org-babel.
 
-*** Model projections                                                 :story:
+*** Model projections into physical space                             :story:
 
 When we have a model element for models themselves, we could add
 support for model projections.
 
 Notes:
 
-- model to PlantUML diagram.
+- model to PlantUML diagram transform can be created, as well as PlantUML to svg
+  as a cartridge.
 - is the project file not a model projection?
 - look for a similar story on this.
 
@@ -1984,27 +1756,6 @@ create org files that cross reference artefacts:
 
 This only makes sense when we move all models into the component
 directory, under =modeling=.
-
-*** Consider adding support for C++ container generation              :story:
-
-At present we are creating a lot of maps etc. These have common access
-patterns:
-
-- "strict" find: find or throw.
-- "strict" insert: if duplicate, throw.
-
-We should catalogue all of these, there are probably more. A better
-approach would be to have a type much like primitive which wraps the
-container with the right accessors. It would also make domain
-terminology much saner. We should probably expose the typical C++
-infrastructure such as iterators, ranges, etc. This may also be useful
-for containers such as list and vector though we don't have use cases
-for these yet.
-
-Links:
-
-- [[https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp][Writing a custom iterator in modern C++]]
-- [[https://www.reedbeta.com/blog/ranges-compatible-containers/][Making Your Own Container Compatible With C++20 Ranges]]
 
 *** Consider adding a codec meta-model                                :story:
 
@@ -17700,6 +17451,39 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for C++ container generation              :story:
+
+At present we are creating a lot of maps etc. These have common access
+patterns:
+
+- "strict" find: find or throw.
+- "strict" insert: if duplicate, throw.
+
+We should catalogue all of these, there are probably more. A better
+approach would be to have a type much like primitive which wraps the
+container with the right accessors. It would also make domain
+terminology much saner. We should probably expose the typical C++
+infrastructure such as iterators, ranges, etc. This may also be useful
+for containers such as list and vector though we don't have use cases
+for these yet.
+
+Links:
+
+- [[https://www.internalpointers.com/post/writing-custom-iterators-modern-cpp][Writing a custom iterator in modern C++]]
+- [[https://www.reedbeta.com/blog/ranges-compatible-containers/][Making Your Own Container Compatible With C++20 Ranges]]
+
+*** Consider integrating org-spec with org-model                      :story:
+
+#+begin_quote
+An Org-mode template for technical specification documents and HTML publishing
+#+end_quote
+
+It would be nice to generate models that can produce org-spec HTML output.
+
+Links:
+
+- [[https://github.com/thi-ng/org-spec][org-spec GH]]
 
 *** Investigate =lombok= for ideas                                    :story:
 
