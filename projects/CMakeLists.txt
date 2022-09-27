@@ -130,12 +130,11 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     set(warning_flags "${warning_flags} -Wwrite-strings")
 
     # enable RTTI
-    if(APPLE)
-        set(other_flags "${other_flags} -fvisibility=default")
-    else()
-        set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
-        set(other_flags "${other_flags} -fvisibility=hidden")
-    endif()
+    set(other_flags "${other_flags} -frtti")
+
+    # handle visibility settings.
+    set(other_flags "${other_flags} -fvisibility-inlines-hidden")
+    set(other_flags "${other_flags} -fvisibility=hidden")
 
     set(profiling_flags "")
     if(WITH_PROFILING)

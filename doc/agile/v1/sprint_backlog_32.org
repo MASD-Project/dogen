@@ -366,6 +366,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-27 Tue 07:39]--[2022-09-27 Tue 07:48] =>  0:09
     CLOCK: [2022-09-26 Mon 08:25]--[2022-09-26 Mon 08:45] =>  0:20
     CLOCK: [2022-09-25 Sun 19:38]--[2022-09-25 Sun 19:59] =>  0:21
     CLOCK: [2022-09-25 Sun 17:31]--[2022-09-25 Sun 17:35] =>  0:04
@@ -932,6 +933,59 @@ Links:
 
 - [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
 - [[https://www.omg.org/spec/MOF/2.5.1/PDF][MOF 2.5 specification]]
+
+*** STARTED Warning on OSX build                                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-27 Tue 07:48]--[2022-09-27 Tue 07:55] =>  0:07
+    :END:
+
+We seem to have a single warning on OSX:
+
+#+begin_example
+ld: warning: direct access in function
+
+'boost::archive::basic_text_oprimitive<
+    std::__1::basic_ostream<char,
+                            std::__1::char_traits<char>
+                            >
+>
+::~basic_text_oprimitive()'
+
+from file
+
+'vcpkg_installed/x64-osx/debug/lib/libboost_serialization.a(basic_text_oprimitive.o)'
+
+to global weak symbol
+
+'std::__1::basic_ostream<
+    char, std::__1::char_traits<char>
+>&
+std::__1::endl<char, std::__1::char_traits<char> >(
+    std::__1::basic_ostream<char, std::__1::char_traits<char> >&
+)'
+
+from file 'projects/dogen.utility/tests/CMakeFiles/dogen.utility.tests.dir/indenter_filter_tests.cpp.o'
+
+means the weak symbol cannot be overridden at runtime. This was likely caused by
+different translation units being compiled with different visibility settings.
+#+end_example
+
+The flags that control this behaviour are:
+
+: cxxflags=-fvisibility=hidden
+: cxxflags=-fvisibility-inlines-hidden
+
+Compare our settings with Boost.
+
+Notes:
+
+- try removing special handling for boost.
+
+Links:
+
+- [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get "ld: warning: direct access in _main to global weak symbol" in
+  this simple code? [duplicate]​]]
+- [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings/11879361#11879361][xcode with boost : linker(Id) Warning about visibility settings]]
 
 *** Upload release to github on tags                                  :story:
 
