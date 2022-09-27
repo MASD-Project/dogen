@@ -76,6 +76,174 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Model significant relations at a higher level                     :story:
+
+In sprint 31 we added the PlantUML verbatim property, /i.e./:
+
+:   :masd.codec.plantuml: model o-- element : composed of
+:   :masd.codec.plantuml: Element <|.. model
+
+This was meant to allow us to add the missing relations in the PlantUML
+diagrams. However, there are issues with this approach:
+
+- we may enter invalid PlantUML syntax, and will only find out at diagram
+  generation time. The error will probably be very hard to figure out as well.
+- we need to know the exact element name. Given the "spaces for underscores"
+  approach, this is not very nice (/e.g./ we replace "a model type" with
+  "a_model_type").
+- if you rename a type, this will fail.
+
+Seems like a better approach is to name the relations and add them as codec
+attributes:
+
+:   :masd.codec.composition: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
+:   :masd.codec.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
+:   :masd.codec.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
+
+These relations then give rise to a mapping to the element name during
+resolution. This copes with renames.
+
+Notes:
+
+- actually, this story is related to the modeling of relationships in general.
+  We need to look through the backlog to find out what analysis had been done on
+  this and see how much of it is needed in order to implement this
+  functionality.
+- we need to split out two different activities. The current activity is just to
+  get the PlantUML diagrams into a usable state. If we get side-tracked into
+  solving relations in general, this will take too long. Also, by manually
+  updating diagrams with Verbatim we will get a much better handle on the use
+  cases, and we can then replace those over time. For now, unwind any changes we
+  did for this and put this story in the backlog.
+
+Links:
+
+- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
+- [[https://www.omg.org/spec/MOF/2.5.1/PDF][MOF 2.5 specification]]
+
+Merged stories:
+
+*Consider modeling relations at a higher level of abstration*
+    :PROPERTIES:
+    :CUSTOM_ID: E19AC760-A5C5-CC84-61DB-E6D7B9562ECF
+    :END:
+
+Note: this story captures the high-level analysis for implementing relations
+across dogen. We then need to create specific stories for its implementation.
+
+At present we model relations in logical model as two object templates:
+
+- =Generalisable= for inheritance (implements and extends).
+- =Associatable= for composition.
+
+In reality, we should have created the UML relationships as a top-level
+construct:
+
+- association: composition, aggregation
+- dependency
+- generalisation
+- realisation
+
+Relationships should have an associated comment or description.
+
+This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
+as the codec model is concerned.
+
+Notes:
+
+- relationships should already exist in the codec model. These exist for "local"
+  relationships only (that is, elements in the same model). They can be used for
+  generalisation. This does mean generalisation could be "remote" though as we
+  some times inherit from other diagrams. We need a way to distinguish between
+  local and remote relations, which could be by "resolving" the GUID into an
+  element.
+- relationships can be user-annotated, and used for UML diagram generation.
+- generalisation and realisation remove the need for the parent meta-data.
+- relationships can be derived from attributes. This is what the "resolver"
+  does. It is in fact not a resolver but a transform that converts properties in
+  the element into relationships.
+- relationships should use the GUID as well as the qualified name.
+- relationships should really be modeled as org-mode headings. However, one
+  downside of this approach is that we will create a lot of noise when
+  generating documentation. However, given we will only use them for local
+  relationships (generalisation, UML purposes), maybe the noise is not that bad.
+- transparent and opaque associations as well associative container keys need to
+  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
+  If none is appropriate we should create them.
+- add a new type of relationship to codec model. We probably also need an enum
+  to capture the type of relationship. This can be supplied in org-mode as
+  meta-data. Relationships belong to elements.
+- object templates are incorrectly modeled as stereotypes. These are
+  realisations.
+- profiles are also incorrectly modeled as stereotypes. These are also
+  relations. However, the problem will be that once we remove them from
+  stereotypes we cannot see them in UML. We need to have a section in the
+  documentation which shows these properties for an element.
+- The name of the relation is its description, e.g. "throws". We can have
+  duplicate relation names.
+- for now, do a hack in the logical model that takes relations of certain types
+  (say realisation) and adds them to stereotypes in the logical model. However,
+  we must be able to ignore other types (say attributes annotated by the user).
+- best mapping for org-mode is:
+  - title is the type we point to.
+  - description is the name of the relationship.
+  - attribute =relationship= to denote codec type.
+  - meta-data to denote relationship type.
+  - add GUID if you want the relationship to show up in PlantUML.
+- make object templates interfaces. Modeling a concept is a realisation.
+
+Links:
+
+- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
+
+*** org-roam integration                                               :epic:
+
+Assorted notes on org-roam:
+
+- org-roam v2 now forces all entries to have an ID. We can use these
+  as element identifiers. These are just GUIDs associated with
+  org-mode headlines. We care about both the "model" level ID as well
+  as the element level IDs.
+- we need to introduce a model element called "reference" (we must
+  already have some analysis on this). The reference will contain the
+  org-roam ID for the model we are referencing. This will ensure we
+  see the backlinks when we open models and facilitate navigation.
+- org-roam must have a path on which to search files. We need to make
+  sure we can see across products. For example, if we have product A
+  referencing product B, both directories with all org-files must be
+  in the path.
+- by writing the ID into the file as a comment, we can now handle
+  moves. This is done as follows: first, get a list of all files in a
+  component and their IDs. Then, as a step on the physical model, for
+  all files where overwrite is disabled, load up the previous content
+  and set the current content to be the previous content. With this
+  the file will move to its new location. Alternatively, if this
+  increases generation time too much we can only load files based on
+  the file name. But first try the easy approach.
+- we can make a really simple "format" for references, just a
+  meta-model element annotation as an org-tag (e.g. =reference=) and
+  the contents of the reference must be an org-link
+  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
+  this. The org-link is actually an org-roam link. This means we need
+  to have the directories where the models are stored in some path
+  lookup in Dogen. We need to find all org-mode documents, open them
+  and get their IDs.
+- we need to allow adding elements which do not contribute to
+  code. This is so we can add random notes in models. They can be seen
+  as UML notes. We could simply add a "note" metatype to the logical
+  model.
+- with this approach, if the agile stores have links to the org-models
+  we should also see them in org-roam. However, over time we'll
+  probably end up with too many links. But it would be nice to open a
+  model and see a list of stories done against it. We may need a way
+  to enable / disable this.
+- when we add build2 support, we need to be able to package the models
+  with the header files.
+
+Links:
+
+- [[https://www.orgroam.com/manual.html][org-roam manual]]
+
 *** Generated tests fail to compile due to include issues             :story:
 
 We updated CMake files to the new structure, e.g.:

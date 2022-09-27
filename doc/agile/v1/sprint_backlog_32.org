@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-27 Tue 08:27]
+#+CAPTION: Clock summary at [2022-09-27 Tue 08:50]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
@@ -34,13 +34,13 @@
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   6.8 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   5.6 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   2.3 |
+| Model significant relations at a higher level             |         |       |  1:05 |   3.3 |
+| Create a mock configuration builder                       |         |       |  1:58 |   6.0 |
+| Enable CodeQL                                             |         |       |  0:21 |   1.1 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.9 |
 | Windows package is broken                                 |         |       |  0:20 |   1.0 |
-| Create a mock configuration builder                       |         |       |  1:58 |   6.0 |
-| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
-| Enable CodeQL                                             |         |       |  0:21 |   1.1 |
-| Model significant relations at a higher level             |         |       |  1:05 |   3.3 |
 | Warning on OSX build                                      |         |       |  0:07 |   0.4 |
+| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
 #+end:
 
 Agenda:
@@ -367,6 +367,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-27 Tue 08:28]
     CLOCK: [2022-09-27 Tue 07:39]--[2022-09-27 Tue 07:48] =>  0:09
     CLOCK: [2022-09-26 Mon 08:25]--[2022-09-26 Mon 08:45] =>  0:20
     CLOCK: [2022-09-25 Sun 19:38]--[2022-09-25 Sun 19:59] =>  0:21
@@ -790,6 +791,168 @@ Notes:
 - we need to add the targets to each component (generation, conversion).
 
 
+*** CANCELLED Model significant relations at a higher level           :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-27 Tue 08:10]--[2022-09-27 Tue 08:27] =>  0:17
+    CLOCK: [2022-09-25 Sun 18:02]--[2022-09-25 Sun 18:50] =>  0:48
+    :END:
+
+Last sprint we added the PlantUML verbatim property, /i.e./:
+
+:   :masd.codec.plantuml: model o-- element : composed of
+:   :masd.codec.plantuml: Element <|.. model
+
+This was meant to allow us to add the missing relations in the PlantUML
+diagrams. However, there are issues with this approach:
+
+- we may enter invalid PlantUML syntax, and will only find out at diagram
+  generation time. The error will probably be very hard to figure out as well.
+- we need to know the exact element name. Given the "spaces for underscores"
+  approach, this is not very nice (/e.g./ we replace "a model type" with
+  "a_model_type").
+- if you rename a type, this will fail.
+
+Seems like a better approach is to name the relations and add them as codec
+attributes:
+
+:   :masd.codec.composition: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
+:   :masd.codec.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
+:   :masd.codec.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
+
+These relations then give rise to a mapping to the element name during
+resolution. This copes with renames.
+
+Notes:
+
+- actually, this story is related to the modeling of relationships in general.
+  We need to look through the backlog to find out what analysis had been done on
+  this and see how much of it is needed in order to implement this
+  functionality.
+- we need to split out two different activities. The current activity is just to
+  get the PlantUML diagrams into a usable state. If we get side-tracked into
+  solving relations in general, this will take too long. Also, by manually
+  updating diagrams with Verbatim we will get a much better handle on the use
+  cases, and we can then replace those over time. For now, unwind any changes we
+  did for this and put this story in the backlog.
+
+Links:
+
+- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
+- [[https://www.omg.org/spec/MOF/2.5.1/PDF][MOF 2.5 specification]]
+
+Merged stories:
+
+*Consider modeling relations at a higher level of abstration*
+    :PROPERTIES:
+    :CUSTOM_ID: E19AC760-A5C5-CC84-61DB-E6D7B9562ECF
+    :END:
+
+Note: this story captures the high-level analysis for implementing relations
+across dogen. We then need to create specific stories for its implementation.
+
+At present we model relations in logical model as two object templates:
+
+- =Generalisable= for inheritance (implements and extends).
+- =Associatable= for composition.
+
+In reality, we should have created the UML relationships as a top-level
+construct:
+
+- association: composition, aggregation
+- dependency
+- generalisation
+- realisation
+
+Relationships should have an associated comment or description.
+
+This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
+as the codec model is concerned.
+
+Notes:
+
+- relationships should already exist in the codec model. These exist for "local"
+  relationships only (that is, elements in the same model). They can be used for
+  generalisation. This does mean generalisation could be "remote" though as we
+  some times inherit from other diagrams. We need a way to distinguish between
+  local and remote relations, which could be by "resolving" the GUID into an
+  element.
+- relationships can be user-annotated, and used for UML diagram generation.
+- generalisation and realisation remove the need for the parent meta-data.
+- relationships can be derived from attributes. This is what the "resolver"
+  does. It is in fact not a resolver but a transform that converts properties in
+  the element into relationships.
+- relationships should use the GUID as well as the qualified name.
+- relationships should really be modeled as org-mode headings. However, one
+  downside of this approach is that we will create a lot of noise when
+  generating documentation. However, given we will only use them for local
+  relationships (generalisation, UML purposes), maybe the noise is not that bad.
+- transparent and opaque associations as well associative container keys need to
+  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
+  If none is appropriate we should create them.
+- add a new type of relationship to codec model. We probably also need an enum
+  to capture the type of relationship. This can be supplied in org-mode as
+  meta-data. Relationships belong to elements.
+- object templates are incorrectly modeled as stereotypes. These are
+  realisations.
+- profiles are also incorrectly modeled as stereotypes. These are also
+  relations. However, the problem will be that once we remove them from
+  stereotypes we cannot see them in UML. We need to have a section in the
+  documentation which shows these properties for an element.
+- The name of the relation is its description, e.g. "throws". We can have
+  duplicate relation names.
+- for now, do a hack in the logical model that takes relations of certain types
+  (say realisation) and adds them to stereotypes in the logical model. However,
+  we must be able to ignore other types (say attributes annotated by the user).
+- best mapping for org-mode is:
+  - title is the type we point to.
+  - description is the name of the relationship.
+  - attribute =relationship= to denote codec type.
+  - meta-data to denote relationship type.
+  - add GUID if you want the relationship to show up in PlantUML.
+- make object templates interfaces. Modeling a concept is a realisation.
+
+Links:
+
+- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
+
+*** CANCELLED Create a mock configuration builder                     :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-20 Tue 19:06]--[2022-09-20 Tue 19:15] =>  0:09
+    CLOCK: [2022-09-19 Mon 18:19]--[2022-09-19 Mon 18:40] =>  0:21
+    CLOCK: [2022-09-19 Mon 16:31]--[2022-09-19 Mon 17:50] =>  1:19
+    CLOCK: [2022-09-19 Mon 11:28]--[2022-09-19 Mon 11:37] =>  0:09
+    :END:
+
+*Rationale*: a better approach was implemented by adding state to the model
+producer.
+
+At present we are using a factory for creating mock configurations. This was
+fine because we only had one or two variations, so it was easy enough to
+construct the configuration in one call. However, with variability overrides we
+now have several different scenarios. It would be easier to have a builder, with
+sensible defaults, that returns a full configuration which is then supplied to
+the model generator.
+
+Notes:
+
+- consider adding all variables to the result of the builder, to make the code a
+  bit less repetitive.
+
+*** COMPLETED Enable CodeQL                                           :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-25 Sun 17:53]--[2022-09-25 Sun 17:57] =>  0:04
+    CLOCK: [2022-09-25 Sun 17:45]--[2022-09-25 Sun 17:52] =>  0:07
+    CLOCK: [2022-09-25 Sun 17:36]--[2022-09-25 Sun 17:41] =>  0:05
+    CLOCK: [2022-09-25 Sun 17:25]--[2022-09-25 Sun 17:30] =>  0:05
+    :END:
+
+GitHub seems to have new security tooling. Enabled but not quite sure what it
+does.
+
+Links:
+
+- [[https://github.com/MASD-Project/dogen/security/code-scanning][code-scanning]]
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -849,99 +1012,6 @@ Links:
 - [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
   install this DLL.
 
-*** STARTED Create a mock configuration builder                       :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-20 Tue 19:06]--[2022-09-20 Tue 19:15] =>  0:09
-    CLOCK: [2022-09-19 Mon 18:19]--[2022-09-19 Mon 18:40] =>  0:21
-    CLOCK: [2022-09-19 Mon 16:31]--[2022-09-19 Mon 17:50] =>  1:19
-    CLOCK: [2022-09-19 Mon 11:28]--[2022-09-19 Mon 11:37] =>  0:09
-    :END:
-
-At present we are using a factory for creating mock configurations. This was
-fine because we only had one or two variations, so it was easy enough to
-construct the configuration in one call. However, with variability overrides we
-now have several different scenarios. It would be easier to have a builder, with
-sensible defaults, that returns a full configuration which is then supplied to
-the model generator.
-
-Notes:
-
-- consider adding all variables to the result of the builder, to make the code a
-  bit less repetitive.
-
-*** STARTED Add PlantUML relationships to diagrams                    :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-19 Mon 11:38]--[2022-09-19 Mon 11:42] =>  0:04
-    :END:
-
-We need to go through each and every model and add the relations we add in Dia
-to make diagrams more readable. Models done:
-
-- dogen
-
-*** STARTED Enable CodeQL                                             :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-25 Sun 17:53]--[2022-09-25 Sun 17:57] =>  0:04
-    CLOCK: [2022-09-25 Sun 17:45]--[2022-09-25 Sun 17:52] =>  0:07
-    CLOCK: [2022-09-25 Sun 17:36]--[2022-09-25 Sun 17:41] =>  0:05
-    CLOCK: [2022-09-25 Sun 17:25]--[2022-09-25 Sun 17:30] =>  0:05
-    :END:
-
-GitHub seems to have new security tooling.
-
-Links:
-
-- [[https://github.com/MASD-Project/dogen/security/code-scanning][code-scanning]]
-
-*** STARTED Model significant relations at a higher level              :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-27 Tue 08:10]--[2022-09-27 Tue 08:27] =>  0:17
-    CLOCK: [2022-09-25 Sun 18:02]--[2022-09-25 Sun 18:50] =>  0:48
-    :END:
-
-Last sprint we added the PlantUML verbatim property, /i.e./:
-
-:   :masd.codec.plantuml: model o-- element : composed of
-:   :masd.codec.plantuml: Element <|.. model
-
-This was meant to allow us to add the missing relations in the PlantUML
-diagrams. However, there are issues with this approach:
-
-- we may enter invalid PlantUML syntax, and will only find out at diagram
-  generation time. The error will probably be very hard to figure out as well.
-- we need to know the exact element name. Given the "spaces for underscores"
-  approach, this is not very nice (/e.g./ we replace "a model type" with
-  "a_model_type").
-- if you rename a type, this will fail.
-
-Seems like a better approach is to name the relations and add them as codec
-attributes:
-
-:   :masd.codec.composition: 294DC761-8784-3D74-824B-48E7BCC2CFB2, description
-:   :masd.codec.aggregation: 294DC761-8784-3D74-824B-48E7BCC2CFB2, another description
-:   :masd.codec.association: 294DC761-8784-3D74-824B-48E7BCC2CFB2, yet another description
-
-These relations then give rise to a mapping to the element name during
-resolution. This copes with renames.
-
-Notes:
-
-- actually, this story is related to the modeling of relationships in general.
-  We need to look through the backlog to find out what analysis had been done on
-  this and see how much of it is needed in order to implement this
-  functionality.
-- we need to split out two different activities. The current activity is just to
-  get the PlantUML diagrams into a usable state. If we get side-tracked into
-  solving relations in general, this will take too long. Also, by manually
-  updating diagrams with Verbatim we will get a much better handle on the use
-  cases, and we can then replace those over time. For now, unwind any changes we
-  did for this and put this story in the backlog.
-
-Links:
-
-- [[https://www.ibm.com/docs/en/rational-soft-arch/9.5?topic=diagrams-relationships-in-class][UML: Relationships in class diagrams]]
-- [[https://www.omg.org/spec/MOF/2.5.1/PDF][MOF 2.5 specification]]
-
 *** STARTED Warning on OSX build                                      :story:
     :LOGBOOK:
     CLOCK: [2022-09-27 Tue 07:48]--[2022-09-27 Tue 07:55] =>  0:07
@@ -995,6 +1065,16 @@ Links:
   this simple code? [duplicate]​]]
 - [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings/11879361#11879361][xcode with boost : linker(Id) Warning about visibility settings]]
 
+*** STARTED Add PlantUML relationships to diagrams                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-19 Mon 11:38]--[2022-09-19 Mon 11:42] =>  0:04
+    :END:
+
+We need to go through each and every model and add the relations we add in Dia
+to make diagrams more readable. Models done:
+
+- dogen
+
 *** Upload release to github on tags                                  :story:
 
 At present we are manually uploading binaries on a release to github. It would
@@ -1007,54 +1087,6 @@ Links:
 - [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
 - [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
 
-
-*** org-roam integration                                               :epic:
-
-Assorted notes on org-roam:
-
-- org-roam v2 now forces all entries to have an ID. We can use these
-  as element identifiers. These are just GUIDs associated with
-  org-mode headlines. We care about both the "model" level ID as well
-  as the element level IDs.
-- we need to introduce a model element called "reference" (we must
-  already have some analysis on this). The reference will contain the
-  org-roam ID for the model we are referencing. This will ensure we
-  see the backlinks when we open models and facilitate navigation.
-- org-roam must have a path on which to search files. We need to make
-  sure we can see across products. For example, if we have product A
-  referencing product B, both directories with all org-files must be
-  in the path.
-- by writing the ID into the file as a comment, we can now handle
-  moves. This is done as follows: first, get a list of all files in a
-  component and their IDs. Then, as a step on the physical model, for
-  all files where overwrite is disabled, load up the previous content
-  and set the current content to be the previous content. With this
-  the file will move to its new location. Alternatively, if this
-  increases generation time too much we can only load files based on
-  the file name. But first try the easy approach.
-- we can make a really simple "format" for references, just a
-  meta-model element annotation as an org-tag (e.g. =reference=) and
-  the contents of the reference must be an org-link
-  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
-  this. The org-link is actually an org-roam link. This means we need
-  to have the directories where the models are stored in some path
-  lookup in Dogen. We need to find all org-mode documents, open them
-  and get their IDs.
-- we need to allow adding elements which do not contribute to
-  code. This is so we can add random notes in models. They can be seen
-  as UML notes. We could simply add a "note" metatype to the logical
-  model.
-- with this approach, if the agile stores have links to the org-models
-  we should also see them in org-roam. However, over time we'll
-  probably end up with too many links. But it would be nice to open a
-  model and see a list of stories done against it. We may need a way
-  to enable / disable this.
-- when we add build2 support, we need to be able to package the models
-  with the header files.
-
-Links:
-
-- [[https://www.orgroam.com/manual.html][org-roam manual]]
 
 *** Add model name as title in PlantUML diagram                       :story:
 
@@ -1160,6 +1192,26 @@ like a regular note at the top of the namespace.
 In addition, sub-namespaces seem to generate both a class with the
 comment as well as the namespace itself (see text model).
 
+*** Add operations to PlantUML diagrams                               :story:
+
+At present its not possible to add operations to PlantUML diagrams. This means
+the diagrams are not as useful as the Dia representation. We could add basic
+support for operations and then dump these in PlantUML.
+
+Merged stories:
+
+*Consider adding operations for PlantUML*
+
+We don't need full operation support for it to be useful. We could
+have minimal support and use it to update the UML diagrams. It would
+then later on be extended for merging code generation.
+
+*** Consider adding PlantUML verbatim inside element                  :story:
+
+One simple way of adding operations is to extend verbatim to support inside
+class. This can easily be achieved via =.before=, =.inside= and =.after= fields.
+The =.inside= can be replaced by operations later.
+
 *** Consider creating a "top-level" group in PlantUML                 :story:
 
 There are a number of classes that always show up at the top:
@@ -1186,125 +1238,6 @@ class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
 This takes space for no reason. We could just not print those brackets.
 
 
-
-*** Consider modeling relations at a higher level of abstration       :story:
-    :PROPERTIES:
-    :CUSTOM_ID: E19AC760-A5C5-CC84-61DB-E6D7B9562ECF
-    :END:
-
-At present we model relations in logical model as two object templates:
-
-- =Generalisable= for inheritance (implements and extends).
-- =Associatable= for composition.
-
-In reality, we should have created the UML relationships as a top-level
-construct:
-
-- association: composition, aggregation
-- dependency
-- generalisation
-- realisation
-
-Relationships should have an associated comment or description.
-
-This story implements the functionality described in [[file:/work/DomainDrivenConsulting/masd/dogen/integration/doc/agile/product_backlog.org::#E19AC760-A5C5-CC84-61DB-E6D7B9562ECF][this story]] but only as far
-as the codec model is concerned.
-
-Notes:
-
-- relationships should already exist in the codec model. These exist for "local"
-  relationships only (that is, elements in the same model). They can be used for
-  generalisation. This does mean generalisation could be "remote" though as we
-  some times inherit from other diagrams. We need a way to distinguish between
-  local and remote relations, which could be by "resolving" the GUID into an
-  element.
-- relationships can be user-annotated, and used for UML diagram generation.
-- generalisation and realisation remove the need for the parent meta-data.
-- relationships can be derived from attributes. This is what the "resolver"
-  does. It is in fact not a resolver but a transform that converts properties in
-  the element into relationships.
-- relationships should use the GUID as well as the qualified name.
-- relationships should really be modeled as org-mode headings. However, one
-  downside of this approach is that we will create a lot of noise when
-  generating documentation. However, given we will only use them for local
-  relationships (generalisation, UML purposes), maybe the noise is not that bad.
-- transparent and opaque associations as well associative container keys need to
-  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
-  If none is appropriate we should create them.
-- add a new type of relationship to codec model. We probably also need an enum
-  to capture the type of relationship. This can be supplied in org-mode as
-  meta-data. Relationships belong to elements.
-- for now, do a hack in the logical model that takes relations of certain types
-  (say realisation) and adds them to stereotypes in the logical model. However,
-  we must be able to ignore other types (say attributes annotated by the user).
-- best mapping for org-mode is:
-  - title is the type we point to.
-  - description is the name of the relationship.
-  - attribute =relationship= to denote codec type.
-  - meta-data to denote relationship type.
-  - add GUID if you want the relationship to show up in PlantUML.
-- make object templates interfaces. Modeling a concept is a realisation.
-
-Links:
-
-- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
-
-Merged stories:
-
-*Consider modeling relations at a higher level of abstration*
-
-Note: this story captures the high-level analysis for implementing relations
-across dogen. We then need to create specific stories for its implementation.
-
-At present we model relations in logical model as two object templates:
-
-- =Generalisable= for inheritance (implements and extends).
-- =Associatable= for composition.
-
-In reality, we should have created the UML relationships as a top-level
-construct:
-
-- association: composition, aggregation
-- dependency
-- generalisation
-- realisation
-
-Relationships should have an associated comment or description.
-
-Notes:
-
-- relationships should already exist in the codec model. These exist for "local"
-  relationships only (that is, elements in the same model). They can be used for
-  generalisation. This does mean generalisation could be "remote" though as we
-  some times inherit from other diagrams. We need a way to distinguish between
-  local and remote relations, which could be by "resolving" the GUID into an
-  element.
-- relationships can be user-annotated, and used for UML diagram generation.
-- generalisation and realisation remove the need for the parent meta-data.
-- relationships can be derived from attributes. This is what the "resolver"
-  does. It is in fact not a resolver but a transform that converts properties in
-  the element into relationships.
-- relationships should use the GUID as well as the qualified name.
-- relationships should really be modeled as org-mode headings. However, one
-  downside of this approach is that we will create a lot of noise when
-  generating documentation. However, given we will only use them for local
-  relationships (generalisation, UML purposes), maybe the noise is not that bad.
-- transparent and opaque associations as well associative container keys need to
-  be mapped to the appropriate UML stereotypes. Leaves and root parents as well.
-  If none is appropriate we should create them.
-- object templates are incorrectly modeled as stereotypes. These are
-  realisations.
-- profiles are also incorrectly modeled as stereotypes. These are also
-  relations. However, the problem will be that once we remove them from
-  stereotypes we cannot see them in UML. We need to have a section in the
-  documentation which shows these properties for an element.
-- The name of the relation is its description, e.g. "throws". We can have
-  duplicate relation names.
-
-Links:
-
-- [[https://www.guru99.com/uml-relationships-with-example.html#:~:text=Relationships%20in%20UML%20are%20used,Dependency%20%2C%20Generalization%20%2C%20and%20Realization][UML Relationships Types: Association, Dependency, Generalization]].
-- [[file:v1/sprint_backlog_31.org::#1ECCD69A-EE17-BAE4-7FE3-DA5F2E6E01FB][codec implementation]]
 
 *** Make use of association relationships                             :story:
 
@@ -1347,12 +1280,6 @@ probably just need to:
 
 
 
-*** Consider adding PlantUML verbatim inside element                  :story:
-
-One simple way of adding operations is to extend verbatim to support inside
-class. This can easily be achieved via =.before=, =.inside= and =.after= fields.
-The =.inside= can be replaced by operations later.
-
 *** Ignore vcpkg path length warning                                  :story:
 
 #+begin_example
@@ -1380,20 +1307,6 @@ Links:
 - [[https://github.com/microsoft/vcpkg/issues/11119][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
   Windows 10 #11119]]
 - [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
-
-*** Add operations to PlantUML diagrams                               :story:
-
-At present its not possible to add operations to PlantUML diagrams. This means
-the diagrams are not as useful as the Dia representation. We could add basic
-support for operations and then dump these in PlantUML.
-
-Merged stories:
-
-*Consider adding operations for PlantUML*
-
-We don't need full operation support for it to be useful. We could
-have minimal support and use it to update the UML diagrams. It would
-then later on be extended for merging code generation.
 
 *** Consider renaming plantuml property                               :story:
 
