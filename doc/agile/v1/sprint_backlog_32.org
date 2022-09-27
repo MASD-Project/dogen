@@ -1055,6 +1055,15 @@ The flags that control this behaviour are:
 
 Compare our settings with Boost.
 
+By removing the current settings for OSX we get over 50 warnings:
+
+: ld: warning: direct access in function 'boost::test_tools::tt_detail::print_log_value<char [48]>::operator()(std::__1::basic_ostream<char, std::__1::char_traits<char> >&, char const (&) [48])' from file 'projects/dogen.identification/tests/CMakeFiles/dogen.identification.tests.dir/legacy_logical_name_tree_parser_tests.cpp.o' to global weak symbol 'boost::test_tools::tt_detail::static_const<boost::test_tools::tt_detail::impl::boost_test_print_type_impl>::value' from file 'vcpkg_installed/x64-osx/debug/lib/libboost_unit_test_framework.a(framework.o)' means the weak symbol cannot be overridden at runtime. This was likely caused by different translation units being compiled with different visibility settings.
+
+In addition it also causes failures in tests:
+
+: dogen.utility.tests/resolver_tests/resolver_returns_test_data_directory_for_empty_path
+: dogen.utility.tests/resolver_tests/validating_resolver_returns_test_data_directory_for_empty_paths
+
 Notes:
 
 - try removing special handling for boost.
