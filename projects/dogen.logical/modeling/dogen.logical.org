@@ -595,13 +595,6 @@ This is used to break cycles where required.
 
 Elements that are keys in an associative container.
 
-*** manual associations                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: manual_associations
-    :END:
-
-Stores all associations added manually to the model.
-
 ** Generalizable                                                    :element:
    :PROPERTIES:
    :custom_id: CD6B5804-0CBC-1A14-56DB-27E8CB8F4808
@@ -695,35 +688,6 @@ Elements that are at the bottom of the inheritance tree.
    :END:
 
 Element has the ability to have relationships with other elements.
-
-** manual associations                                              :element:
-   :PROPERTIES:
-   :custom_id: 2D88CCC8-DEC6-9E74-0503-39772C6A628E
-   :END:
-
-Stores the set of associations between this element and other elements of this
-model. These have been added manually to the model.
-
-*** aggregation                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Represents a part-to-whole relationship between elements.
-
-*** composition                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Represents a part-to-whole relationship between elements.
-
-*** association                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Binary relationship between two elements.
 
 ** Parameterisable                                                  :element:
    :PROPERTIES:

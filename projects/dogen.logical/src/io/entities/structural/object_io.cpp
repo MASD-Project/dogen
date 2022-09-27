@@ -25,7 +25,6 @@
 #include "dogen.logical/io/entities/type_parameters_io.hpp"
 #include "dogen.logical/io/entities/structural/object_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.logical/io/entities/manual_associations_io.hpp"
 #include "dogen.logical/io/entities/orm/object_properties_io.hpp"
 #include "dogen.logical/io/entities/structural/technical_space_properties_io.hpp"
 

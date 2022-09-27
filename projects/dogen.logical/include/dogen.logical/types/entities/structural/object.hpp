@@ -34,7 +34,6 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/type_parameters.hpp"
 #include "dogen.identification/types/entities/logical_name.hpp"
-#include "dogen.logical/types/entities/manual_associations.hpp"
 #include "dogen.logical/types/entities/orm/object_properties.hpp"
 #include "dogen.identification/hash/entities/logical_name_hash.hpp"
 #include "dogen.logical/types/entities/structural/technical_space_properties.hpp"
@@ -88,7 +87,6 @@ public:
         const std::list<dogen::identification::entities::logical_name>& transparent_associations,
         const std::list<dogen::identification::entities::logical_name>& opaque_associations,
         const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
-        const dogen::logical::entities::manual_associations& manual_associations,
         const bool is_parent,
         const bool is_child,
         const bool is_leaf,
@@ -235,16 +233,6 @@ public:
     std::list<dogen::identification::entities::logical_name>& associative_container_keys();
     void associative_container_keys(const std::list<dogen::identification::entities::logical_name>& v);
     void associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Stores all associations added manually to the model.
-     */
-    /**@{*/
-    const dogen::logical::entities::manual_associations& manual_associations() const;
-    dogen::logical::entities::manual_associations& manual_associations();
-    void manual_associations(const dogen::logical::entities::manual_associations& v);
-    void manual_associations(const dogen::logical::entities::manual_associations&& v);
     /**@}*/
 
     /**
@@ -417,7 +405,6 @@ private:
     std::list<dogen::identification::entities::logical_name> transparent_associations_;
     std::list<dogen::identification::entities::logical_name> opaque_associations_;
     std::list<dogen::identification::entities::logical_name> associative_container_keys_;
-    dogen::logical::entities::manual_associations manual_associations_;
     bool is_parent_;
     bool is_child_;
     bool is_leaf_;

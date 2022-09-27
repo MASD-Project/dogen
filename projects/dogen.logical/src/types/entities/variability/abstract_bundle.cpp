@@ -24,7 +24,6 @@
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.logical/io/entities/manual_associations_io.hpp"
 #include "dogen.logical/types/entities/variability/abstract_bundle.hpp"
 
 namespace std {
@@ -77,7 +76,6 @@ abstract_bundle::abstract_bundle(abstract_bundle&& rhs)
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
-      manual_associations_(std::move(rhs.manual_associations_)),
       key_prefix_(std::move(rhs.key_prefix_)),
       generate_registration_(std::move(rhs.generate_registration_)),
       generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
@@ -101,7 +99,6 @@ abstract_bundle::abstract_bundle(
     const std::list<dogen::identification::entities::logical_name>& transparent_associations,
     const std::list<dogen::identification::entities::logical_name>& opaque_associations,
     const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
-    const dogen::logical::entities::manual_associations& manual_associations,
     const std::string& key_prefix,
     const bool generate_registration,
     const bool generate_static_configuration,
@@ -124,7 +121,6 @@ abstract_bundle::abstract_bundle(
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       associative_container_keys_(associative_container_keys),
-      manual_associations_(manual_associations),
       key_prefix_(key_prefix),
       generate_registration_(generate_registration),
       generate_static_configuration_(generate_static_configuration),
@@ -146,7 +142,6 @@ void abstract_bundle::to_stream(std::ostream& s) const {
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"manual_associations\": " << manual_associations_ << ", "
       << "\"key_prefix\": " << "\"" << tidy_up_string(key_prefix_) << "\"" << ", "
       << "\"generate_registration\": " << generate_registration_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
@@ -162,7 +157,6 @@ void abstract_bundle::swap(abstract_bundle& other) noexcept {
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(associative_container_keys_, other.associative_container_keys_);
-    swap(manual_associations_, other.manual_associations_);
     swap(key_prefix_, other.key_prefix_);
     swap(generate_registration_, other.generate_registration_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
@@ -175,7 +169,6 @@ bool abstract_bundle::compare(const abstract_bundle& rhs) const {
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
-        manual_associations_ == rhs.manual_associations_ &&
         key_prefix_ == rhs.key_prefix_ &&
         generate_registration_ == rhs.generate_registration_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
@@ -229,22 +222,6 @@ void abstract_bundle::associative_container_keys(const std::list<dogen::identifi
 
 void abstract_bundle::associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v) {
     associative_container_keys_ = std::move(v);
-}
-
-const dogen::logical::entities::manual_associations& abstract_bundle::manual_associations() const {
-    return manual_associations_;
-}
-
-dogen::logical::entities::manual_associations& abstract_bundle::manual_associations() {
-    return manual_associations_;
-}
-
-void abstract_bundle::manual_associations(const dogen::logical::entities::manual_associations& v) {
-    manual_associations_ = v;
-}
-
-void abstract_bundle::manual_associations(const dogen::logical::entities::manual_associations&& v) {
-    manual_associations_ = std::move(v);
 }
 
 const std::string& abstract_bundle::key_prefix() const {

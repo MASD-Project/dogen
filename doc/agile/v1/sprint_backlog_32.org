@@ -13,33 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-26 Mon 19:53]
+#+CAPTION: Clock summary at [2022-09-27 Tue 08:27]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *32:02* |       |       | 100.0 |
+| *Total time*                                              | *32:35* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 32:02   |       |       | 100.0 |
-| Active                                                    |         | 32:02 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  31.9 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   6.6 |
+| Stories                                                   | 32:35   |       |       | 100.0 |
+| Active                                                    |         | 32:35 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  31.4 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   6.4 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   1.0 |
 | Improve diffing output in tests                           |         |       |  0:19 |   1.0 |
-| Sprint and product backlog grooming                       |         |       |  2:29 |   7.8 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.5 |
+| Sprint and product backlog grooming                       |         |       |  2:38 |   8.1 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.4 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.5 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |  10.3 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   6.8 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |  10.1 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   6.6 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   2.8 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.9 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   5.7 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.8 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   5.6 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   2.3 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   2.0 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.9 |
 | Windows package is broken                                 |         |       |  0:20 |   1.0 |
-| Create a mock configuration builder                       |         |       |  1:58 |   6.1 |
+| Create a mock configuration builder                       |         |       |  1:58 |   6.0 |
 | Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
 | Enable CodeQL                                             |         |       |  0:21 |   1.1 |
-| Model significant relations at a higher level             |         |       |  0:48 |   2.5 |
+| Model significant relations at a higher level             |         |       |  1:05 |   3.3 |
+| Warning on OSX build                                      |         |       |  0:07 |   0.4 |
 #+end:
 
 Agenda:
@@ -894,6 +895,7 @@ Links:
 
 *** STARTED Model significant relations at a higher level              :story:
     :LOGBOOK:
+    CLOCK: [2022-09-27 Tue 08:10]--[2022-09-27 Tue 08:27] =>  0:17
     CLOCK: [2022-09-25 Sun 18:02]--[2022-09-25 Sun 18:50] =>  0:48
     :END:
 
@@ -928,6 +930,12 @@ Notes:
   We need to look through the backlog to find out what analysis had been done on
   this and see how much of it is needed in order to implement this
   functionality.
+- we need to split out two different activities. The current activity is just to
+  get the PlantUML diagrams into a usable state. If we get side-tracked into
+  solving relations in general, this will take too long. Also, by manually
+  updating diagrams with Verbatim we will get a much better handle on the use
+  cases, and we can then replace those over time. For now, unwind any changes we
+  did for this and put this story in the backlog.
 
 Links:
 
