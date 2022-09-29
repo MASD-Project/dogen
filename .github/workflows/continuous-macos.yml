@@ -44,12 +44,6 @@ jobs:
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
-      - name: Patch boost
-        run: |
-          pwd
-          find . -iname '*basic_text_oarchive.hpp*'
-          cp patches/basic_text_oarchive.hpp build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/vcpkg_installed/x64-osx/include/boost/archive/basic_text_oarchive.hpp
-
       - name: Setup test data
         run: |
           ./build/scripts/github.setup.${{matrix.family}}.sh
