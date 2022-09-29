@@ -280,7 +280,7 @@ endif()
 #
 # Apply patches
 #
-file(copy ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
+file(COPY ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
     ${CTEST_SOURCE_DIRECTORY}/build/output/${preset}/vcpkg_installed/x64-osx/include/boost/archive)
 
 #
