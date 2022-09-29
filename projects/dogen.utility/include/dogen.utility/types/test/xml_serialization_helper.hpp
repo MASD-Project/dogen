@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
+#include <boost/throw_exception.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
-#include <boost/throw_exception.hpp>
-#include "dogen.utility/types/log/logger.hpp"
 #include <boost/filesystem/operations.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file_not_found.hpp"
 
 template<typename Archive> void register_types(Archive& ar);

@@ -28,8 +28,8 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/test/xml_serialization_helper.hpp"
 #include "dogen.utility/types/test/file_asserter.hpp"
+#include "dogen.utility/types/test/xml_serialization_helper.hpp"
 
 namespace dogen::utility::test {
 
