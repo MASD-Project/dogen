@@ -58,6 +58,10 @@ jobs:
           export cmake_args="build_group=Continuous,build_name=${preset},with_presets=ON"
           ctest -VV --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
+      - name: List files
+        run: |
+          find . -iname '*basic_text_oarchive.hpp*'
+
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
