@@ -286,7 +286,7 @@ if(APPLE)
         DESTINATION ${CTEST_SOURCE_DIRECTORY}/build/output/${preset}/vcpkg_installed/x64-osx/include/boost/archive)
 
     file(COPY ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
-        DESTINATION ${CTEST_SOURCE_DIRECTORY}/vcpkg/packages/boost-serialization_x64-osx/include/boost/archive/basic_text_oarchive.hpp)
+        DESTINATION ${CTEST_SOURCE_DIRECTORY}/vcpkg/packages/boost-serialization_x64-osx/include/boost/archive)
 else()
     message(STATUS "NOT Applying patches.")
 endif()
