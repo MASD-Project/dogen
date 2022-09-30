@@ -22,44 +22,10 @@ UML representation:
 
 \image html dogen.cli/modeling/dogen.cli.svg
 
-* parser exception                                                  :element:
-  :PROPERTIES:
-  :custom_id: 6FFAB9E1-9461-F344-0493-733857F9819B
-  :masd.codec.stereotypes: masd::exception
-  :END:
-
-A fatal error has occurred during option parsing.
-
-* application                                                       :element:
-  :PROPERTIES:
-  :custom_id: 5D7E53A1-E95B-C614-A843-3BBC40A4BACB
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* command line parser                                               :element:
-  :PROPERTIES:
-  :custom_id: 56434D90-1E6B-0424-8F93-1EA467140A13
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
-
-* program options parser                                            :element:
-  :PROPERTIES:
-  :custom_id: 77211C2E-5AB3-5654-D09B-FBF875C70E90
-  :masd.codec.parent: command_line_parser
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* application exception                                             :element:
-  :PROPERTIES:
-  :custom_id: 88AAE6B4-ED44-9134-A0AB-70AB3FBDEE8A
-  :masd.codec.stereotypes: masd::exception
-  :END:
-
-A fatal error has occurred whilst executing the application.
-
 * configuration                                                     :element:
   :PROPERTIES:
   :custom_id: 0EF85FF4-F40D-6194-45DB-23334BFE2405
+  :masd.codec.plantuml: configuration o-- cli_configuration
   :END:
 
 All of the configuration required by the command line application.
@@ -80,6 +46,29 @@ Configuration related to logging, if any.
    :PROPERTIES:
    :masd.codec.type: cli_configuration
    :END:
+
+* cli configuration                                                 :element:
+  :PROPERTIES:
+  :custom_id: 884FAABA-DBBC-0794-952B-C13C3B4EA80C
+  :masd.codec.stereotypes: masd::fluent
+  :masd.codec.plantuml: cli_configuration o-- generation_configuration
+  :masd.codec.plantuml: cli_configuration o-- conversion_configuration
+  :masd.codec.plantuml: cli_configuration o-- dumpspecs_configuration
+  :END:
+
+Configuration specific to the CLI application.
+
+** activity                                                       :attribute:
+   :PROPERTIES:
+   :masd.codec.type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
+   :END:
+
+** byproduct directory                                            :attribute:
+   :PROPERTIES:
+   :masd.codec.type: boost::filesystem::path
+   :END:
+
+Directory in which to place all files not directly related to generated code.
 
 * generation configuration                                          :element:
   :PROPERTIES:
@@ -128,52 +117,6 @@ Configuration for the model conversion.
 
 Name of the file to output the conversion to.
 
-* configuration validator                                           :element:
-  :PROPERTIES:
-  :custom_id: CB5F9D83-9119-CD94-DFA3-40476A2DBE1D
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* initializer                                                       :element:
-  :PROPERTIES:
-  :custom_id: 8F7A2C14-D242-9944-5BDB-DD12D96D3B3C
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* cli configuration                                                 :element:
-  :PROPERTIES:
-  :custom_id: 884FAABA-DBBC-0794-952B-C13C3B4EA80C
-  :masd.codec.stereotypes: masd::fluent
-  :END:
-
-Configuration specific to the CLI application.
-
-** activity                                                       :attribute:
-   :PROPERTIES:
-   :masd.codec.type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
-   :END:
-
-** byproduct directory                                            :attribute:
-   :PROPERTIES:
-   :masd.codec.type: boost::filesystem::path
-   :END:
-
-Directory in which to place all files not directly related to generated code.
-
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: 52D666A6-EE70-8794-0F8B-3137462986D8
-  :masd.cpp.types.enabled: true
-  :masd.cpp.types.overwrite: false
-  :masd.codec.stereotypes: masd::entry_point
-  :END:
-
-* CMakeLists                                                        :element:
-  :PROPERTIES:
-  :custom_id: 7C8F5C5C-C471-E704-0123-351164B832D2
-  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
-
 * dumpspecs configuration                                           :element:
   :PROPERTIES:
   :custom_id: 718209A1-96BB-CC44-56CB-FC321CBB1918
@@ -188,3 +131,79 @@ Dumps all the specs about this version of dogen.
    :END:
 
 Which style to use when dumping the specs.
+
+* configuration validator                                           :element:
+  :PROPERTIES:
+  :custom_id: CB5F9D83-9119-CD94-DFA3-40476A2DBE1D
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: configuration_validator o-- configuration: validates
+  :END:
+
+* command line parser                                               :element:
+  :PROPERTIES:
+  :custom_id: 56434D90-1E6B-0424-8F93-1EA467140A13
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :masd.codec.plantuml: command_line_parser o-- parser_exception: throws
+  :masd.codec.plantuml: command_line_parser o-- configuration: creates
+  :END:
+
+Interface for a command-line parser of the dogen options.
+
+* parser exception                                                  :element:
+  :PROPERTIES:
+  :custom_id: 6FFAB9E1-9461-F344-0493-733857F9819B
+  :masd.codec.stereotypes: masd::exception
+  :END:
+
+A fatal error has occurred during option parsing.
+
+* application                                                       :element:
+  :PROPERTIES:
+  :custom_id: 5D7E53A1-E95B-C614-A843-3BBC40A4BACB
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: application o-- application_exception: throws
+  :masd.codec.plantuml: application o-- configuration: configured by
+  :END:
+
+Entry point for the dogen command line application.
+
+* application exception                                             :element:
+  :PROPERTIES:
+  :custom_id: 88AAE6B4-ED44-9134-A0AB-70AB3FBDEE8A
+  :masd.codec.stereotypes: masd::exception
+  :END:
+
+A fatal error has occurred whilst executing the application.
+
+* program options parser                                            :element:
+  :PROPERTIES:
+  :custom_id: 77211C2E-5AB3-5654-D09B-FBF875C70E90
+  :masd.codec.parent: command_line_parser
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
+
+Command-line parser implementation using boost program options.
+
+* initializer                                                       :element:
+  :PROPERTIES:
+  :custom_id: 8F7A2C14-D242-9944-5BDB-DD12D96D3B3C
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
+
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: 52D666A6-EE70-8794-0F8B-3137462986D8
+  :masd.cpp.types.enabled: true
+  :masd.cpp.types.overwrite: false
+  :masd.codec.stereotypes: masd::entry_point
+  :masd.codec.plantuml: main o-- command_line_parser
+  :masd.codec.plantuml: main o-- initializer
+  :masd.codec.plantuml: main o-- application: executes
+  :masd.codec.plantuml: main o-- configuration
+  :END:
+
+* CMakeLists                                                        :element:
+  :PROPERTIES:
+  :custom_id: 7C8F5C5C-C471-E704-0123-351164B832D2
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:
