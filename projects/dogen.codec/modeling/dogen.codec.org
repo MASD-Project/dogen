@@ -27,10 +27,12 @@ An external model is defined as:
   org-mode.
 - a Dogen format designed for interoperability (JSON).
 
-External models are converted into an intermediate format called the @e codec
+External models are converted into an intermediate format called the codec
 model, because it is the original entry point into the dogen processing
 pipeline. It also reflects the notion that we are injecting external technical
-spaces into the MASD technical technical space.
+spaces into the MASD technical technical space. The object model is
+codec-agnostic but aims to provide a representation of the core entities needed
+by all codecs. Not all codecs will make use of all entities.
 
 A codec must be created for each external model that is to be injected,
 providing a transformation between the native formats and the codec model. The
@@ -46,197 +48,6 @@ UML representation:
 
 \image html dogen.codec/modeling/dogen.codec.svg
 
-* transforms                                                         :module:
-  :PROPERTIES:
-  :custom_id: 0621AF27-D33E-38D4-A383-327A3766FC53
-  :END:
-
-** model production chain                                           :element:
-   :PROPERTIES:
-   :custom_id: 74E40A47-9C3A-F9C4-2843-D6A4BD2E5A8A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model to model chain                                             :element:
-   :PROPERTIES:
-   :custom_id: 1D7B118A-1A52-1B74-4D83-D6841DFB15FE
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** artefact to artefact chain                                       :element:
-   :PROPERTIES:
-   :custom_id: CDC52090-8D57-2524-664B-AF438F3A1352
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** file to file chain                                               :element:
-   :PROPERTIES:
-   :custom_id: 584094BE-A93D-3E74-4BD3-73486C506411
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** context                                                          :element:
-   :PROPERTIES:
-   :custom_id: 0B6609DB-D783-7CC4-CB2B-64BCBF72721E
-   :masd.cpp.types.class_forward_declarations.enabled: true
-   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
-   :END:
-
-*** data directories                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::vector<boost::filesystem::path>
-    :END:
-
-*** feature model                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
-    :END:
-
-*** tracer                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<tracing::tracer>
-    :END:
-
-*** compatibility mode                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** variability overrides                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::vector<std::string>
-    :END:
-
-Raw set of variability overrides.
-
-** transformation error                                             :element:
-   :PROPERTIES:
-   :custom_id: 01989AC1-5A39-3E14-19E3-566E733F5A20
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-** model set production chain                                       :element:
-   :PROPERTIES:
-   :custom_id: 58896FF6-9111-4C84-7E43-1F1A437695D5
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** input technical space transform                                  :element:
-   :PROPERTIES:
-   :custom_id: 2392E29A-230C-4E64-8FD3-A63A9C216FD1
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** references transform                                             :element:
-   :PROPERTIES:
-   :custom_id: 5B1BD10B-1C91-D6D4-AFB3-8E05FB08DBFA
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** configuration transform                                          :element:
-   :PROPERTIES:
-   :custom_id: C53C8DFF-425C-4C94-721B-9E0115F6F758
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** reference graph data transform                                   :element:
-   :PROPERTIES:
-   :custom_id: 6D106A88-7AF1-3094-B2DB-3204D847B4F5
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** tagged values overrides transform                                :element:
-   :PROPERTIES:
-   :custom_id: CD7782CD-FA59-73A4-F803-A73EBCB4DFC0
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** provenance transform                                             :element:
-   :PROPERTIES:
-   :custom_id: 88A823B3-F817-86B4-0EB3-E1F5CD021770
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** file to artefact transform                                       :element:
-   :PROPERTIES:
-   :custom_id: 9FEDFFBD-6D95-2104-FB73-9CD2C1EC8275
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** json artefact to model transform                                 :element:
-   :PROPERTIES:
-   :custom_id: 7B51B78D-9F73-F564-4E83-6439CEBBAFA6
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model to json artefact transform                                 :element:
-   :PROPERTIES:
-   :custom_id: 07CCDF84-F2F3-3B24-7763-05AC088C7E9C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** dia artefact to model transform                                  :element:
-   :PROPERTIES:
-   :custom_id: A0452FBC-C303-3BE4-FA6B-FB25AE415C40
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** org artefact to model transform                                  :element:
-   :PROPERTIES:
-   :custom_id: 20CB3B80-C69B-3824-1863-EB054B788E3C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model to org artefact transform                                  :element:
-   :PROPERTIES:
-   :custom_id: FCAEF032-0087-A7E4-50AB-ACCFF00D4673
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** artefact to file transform                                       :element:
-   :PROPERTIES:
-   :custom_id: 886E600A-643F-8F14-781B-A1F96230CD2F
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** artefact to model chain                                          :element:
-   :PROPERTIES:
-   :custom_id: 7F18AA6C-08F0-AFE4-0B0B-86D3A5618A6E
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model to artefact chain                                          :element:
-   :PROPERTIES:
-   :custom_id: 41B43B03-08A0-C534-EBC3-797E822658A4
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** meta data transform                                              :element:
-   :PROPERTIES:
-   :custom_id: BA891520-6E3A-4514-851B-D22D6640CFA7
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model to plantuml artefact transform                             :element:
-   :PROPERTIES:
-   :custom_id: 72460F72-ECF9-5BC4-0043-8D58AFF56BF2
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** documentation trimming transform                                 :element:
-   :PROPERTIES:
-   :custom_id: 9E39B164-6050-78B4-06B3-F09A06CB0621
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** context bootstrapping chain                                      :element:
-   :PROPERTIES:
-   :custom_id: 21EF7BC6-140A-D0A4-F56B-F90456F1ED01
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-Trivial transform that bootstraps the codec context.
-
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: AF505F72-F592-27F4-A2DB-21759E2D64C3
@@ -248,44 +59,161 @@ a representation of the core entities needed by all codecs.
 
 Not all codecs will make use of all entities.
 
-** model                                                            :element:
+** Taggable                                                         :element:
    :PROPERTIES:
-   :custom_id: 294DC761-8784-3D74-824B-48E7BCC2CFB2
-   :masd.codec.stereotypes: Element
-   :masd.codec.plantuml: model o-- element : composed of
-   :masd.codec.plantuml: Element <|.. model
+   :custom_id: 8BBB51CE-C129-C3D4-BA7B-7F6CB7C07D64
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Taggable <|.. comment
    :END:
 
-Represents an external model.
+Ability to contain tagged values.
 
-*** elements                                                      :attribute:
+*** tagged values                                                 :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::list<element>
+    :masd.codec.type: std::list<identification::entities::tagged_value>
     :END:
 
-*** input technical space                                         :attribute:
+** TaggableOverridable                                              :element:
+   :PROPERTIES:
+   :custom_id: 3164E96B-8D0C-E454-8FEB-086DA4E5BD95
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to contain tagged values.
+
+*** tagged values overrides                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::tagged_value>
+    :END:
+
+Meta-data sourced externally that can be used to override meta-data in model.
+
+** Nameable                                                         :element:
+   :PROPERTIES:
+   :custom_id: 41EF4B79-956B-7674-529B-1B766C684264
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have a name.
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::name
+    :END:
+
+Name of the codec element.
+
+** Commentable                                                      :element:
+   :PROPERTIES:
+   :custom_id: CEC37E59-A723-5EE4-16B3-E5A3D218DCCD
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Commentable o-- comment
+   :masd.codec.plantuml: Commentable <|.. object
+   :END:
+
+Has the ability to have an associated comment.
+
+*** comment                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: comment
+    :END:
+
+Properties associated with the codec comment.
+
+** comment                                                          :element:
+   :PROPERTIES:
+   :custom_id: A53721EE-28EC-F884-9F33-9FE29F4AA788
+   :masd.codec.stereotypes: Taggable
+   :END:
+
+Represents a comment block as read out from the codec representation.
+
+*** applies to container                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+Content of the field as it belonged to the containing object.
+
+*** original content                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: std::string
     :END:
 
-Technical space to which the model belongs, within the codec space.
+Content, as read from the codec representation.
 
-*** references                                                    :attribute:
+*** documentation                                                 :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
+    :masd.codec.type: std::string
     :END:
 
-*** processed variability overrides                               :attribute:
+Code comments.
+
+These are expected to follow the grammar of the comment processing
+tools of the technical space in question, e.g. Doxygen for C++,
+JavaDoc for Java, etc.
+
+** Stereotypable                                                    :element:
+   :PROPERTIES:
+   :custom_id: BF8CDBEF-9BEF-FBE4-C3AB-936F9D4FA05A
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have stereotypes.
+
+*** stereotypes                                                   :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::unordered_set<std::string>
+    :masd.codec.type: std::list<identification::entities::stereotype>
     :END:
 
-All the variability overrides that were processed by this model.
+** Configurable                                                     :element:
+   :PROPERTIES:
+   :custom_id: FE4C25B9-6795-7EB4-3BF3-06257A0AA166
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have meta-data associated.
+
+*** configuration                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
+    :END:
+
+Configuration for this element.
+
+** DeterminableOrigin                                               :element:
+   :PROPERTIES:
+   :custom_id: 85AA9D4A-7DE9-4384-8CD3-81555E9F5E44
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Properties related to the origin of the modeling element.
+
+*** provenance                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::codec_provenance
+    :END:
+
+Provenance details of this codec element.
+
+** Element                                                          :element:
+   :PROPERTIES:
+   :custom_id: 713E52E7-1713-5864-B78B-846FCC3F26FB
+   :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Element <|.. element
+   :masd.codec.plantuml: Element <|.. attribute
+   :masd.codec.plantuml: Element <|.. object
+   :masd.codec.plantuml: Element <|.. model
+   :END:
+
+Consolidates a number of related object templates.
 
 ** element                                                          :element:
    :PROPERTIES:
    :custom_id: 1E9B0297-1E1B-07C4-22CB-1366BFF0743B
    :masd.codec.stereotypes: Element
+   :masd.codec.plantuml: element o-- attribute: composed of
    :END:
 
 Represents an element from an external model.
@@ -371,201 +299,11 @@ definition.
 
 Default value for this attribute, if any.
 
-** model set                                                        :element:
-   :PROPERTIES:
-   :custom_id: 031418CC-A332-B9C4-7C5B-92A78A10DF1C
-   :masd.codec.plantuml: model_set o-- model : composed of
-   :END:
-
-*** target                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: model
-    :END:
-
-*** references                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<model>
-    :END:
-
-*** reference graph data                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: reference_graph_data
-    :END:
-
-Stores the data required to build a graph of references for a model set.
-
-** Taggable                                                         :element:
-   :PROPERTIES:
-   :custom_id: 8BBB51CE-C129-C3D4-BA7B-7F6CB7C07D64
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to contain tagged values.
-
-*** tagged values                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::tagged_value>
-    :END:
-
-** Stereotypable                                                    :element:
-   :PROPERTIES:
-   :custom_id: BF8CDBEF-9BEF-FBE4-C3AB-936F9D4FA05A
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have stereotypes.
-
-*** stereotypes                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::stereotype>
-    :END:
-
-** Nameable                                                         :element:
-   :PROPERTIES:
-   :custom_id: 41EF4B79-956B-7674-529B-1B766C684264
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a name.
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::name
-    :END:
-
-Name of the codec element.
-
-** Configurable                                                     :element:
-   :PROPERTIES:
-   :custom_id: FE4C25B9-6795-7EB4-3BF3-06257A0AA166
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have meta-data associated.
-
-*** configuration                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
-    :END:
-
-Configuration for this element.
-
-** DeterminableOrigin                                               :element:
-   :PROPERTIES:
-   :custom_id: 85AA9D4A-7DE9-4384-8CD3-81555E9F5E44
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Properties related to the origin of the modeling element.
-
-*** provenance                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::codec_provenance
-    :END:
-
-Provenance details of this codec element.
-
-** TaggableOverridable                                              :element:
-   :PROPERTIES:
-   :custom_id: 3164E96B-8D0C-E454-8FEB-086DA4E5BD95
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to contain tagged values.
-
-*** tagged values overrides                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::tagged_value>
-    :END:
-
-Meta-data sourced externally that can be used to override meta-data in model.
-
-** Commentable                                                      :element:
-   :PROPERTIES:
-   :custom_id: CEC37E59-A723-5EE4-16B3-E5A3D218DCCD
-   :masd.codec.stereotypes: masd::object_template
-   :masd.codec.plantuml: Commentable o-- comment
-   :END:
-
-Has the ability to have an associated comment.
-
-*** comment                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: comment
-    :END:
-
-Properties associated with the codec comment.
-
-** Element                                                          :element:
-   :PROPERTIES:
-   :custom_id: 713E52E7-1713-5864-B78B-846FCC3F26FB
-   :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Consolidates a number of related object templates.
-
-** reference graph data                                             :element:
-   :PROPERTIES:
-   :custom_id: B43E18A4-2B98-D004-E1CB-AAF4F9A70887
-   :END:
-
-Contains all the data required to build the graph of references.
-
-*** root                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Has the name of the target model, which is the entry point to the references
-graph.
-
-*** edges per model                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<std::string, std::list<std::string>>
-    :END:
-
-Contains the list of referenced models for a particular model name.
-
-** comment                                                          :element:
-   :PROPERTIES:
-   :custom_id: A53721EE-28EC-F884-9F33-9FE29F4AA788
-   :masd.codec.stereotypes: Taggable
-   :END:
-
-Represents a comment block as read out from the codec representation.
-
-*** applies to container                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-Content of the field as it belonged to the containing object.
-
-*** original content                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Content, as read from the codec representation.
-
-*** documentation                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Code comments.
-
-These are expected to follow the grammar of the comment processing
-tools of the technical space in question, e.g. Doxygen for C++,
-JavaDoc for Java, etc.
-
 ** object                                                           :element:
    :PROPERTIES:
    :custom_id: 8E2A0AE2-9028-0E94-C653-88AD5E2DD15E
    :masd.codec.stereotypes: Commentable
-   :masd.codec.plantuml: object o-- attribute : has
-   :masd.codec.plantuml: Commentable <|.. object
+   :masd.codec.plantuml: object o-- attribute: composed of
    :END:
 
 Represents an "raw" codec object which may or may not contain a modeling element of interest.
@@ -619,6 +357,85 @@ Connections this object may have with other objects, if any.
 
 All attributes associated with this object.
 
+** model                                                            :element:
+   :PROPERTIES:
+   :custom_id: 294DC761-8784-3D74-824B-48E7BCC2CFB2
+   :masd.codec.stereotypes: Element
+   :masd.codec.plantuml: model o-- element: composed of
+   :END:
+
+Represents an external model.
+
+*** elements                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<element>
+    :END:
+
+*** input technical space                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Technical space to which the model belongs, within the codec space.
+
+*** references                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+*** processed variability overrides                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_set<std::string>
+    :END:
+
+All the variability overrides that were processed by this model.
+
+** model set                                                        :element:
+   :PROPERTIES:
+   :custom_id: 031418CC-A332-B9C4-7C5B-92A78A10DF1C
+   :masd.codec.plantuml: model_set o-- model: aggregates different kinds of
+   :masd.codec.plantuml: model_set o-- reference_graph_data
+   :END:
+
+*** target                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: model
+    :END:
+
+*** references                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<model>
+    :END:
+
+*** reference graph data                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: reference_graph_data
+    :END:
+
+Stores the data required to build a graph of references for a model set.
+
+** reference graph data                                             :element:
+   :PROPERTIES:
+   :custom_id: B43E18A4-2B98-D004-E1CB-AAF4F9A70887
+   :END:
+
+Contains all the data required to build the graph of references.
+
+*** root                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Has the name of the target model, which is the entry point to the references
+graph.
+
+*** edges per model                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<std::string, std::list<std::string>>
+    :END:
+
+Contains the list of referenced models for a particular model name.
+
 ** artefact                                                         :element:
    :PROPERTIES:
    :custom_id: AAF1B946-A517-09C4-B343-C7ABB353FBB7
@@ -647,9 +464,302 @@ Name of the codec to process this artefact.
 Contents of the artefact.
 #+end_src
 
+* transforms                                                         :module:
+  :PROPERTIES:
+  :custom_id: 0621AF27-D33E-38D4-A383-327A3766FC53
+  :END:
+
+** transformation error                                             :element:
+   :PROPERTIES:
+   :custom_id: 01989AC1-5A39-3E14-19E3-566E733F5A20
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+** context                                                          :element:
+   :PROPERTIES:
+   :custom_id: 0B6609DB-D783-7CC4-CB2B-64BCBF72721E
+   :masd.cpp.types.class_forward_declarations.enabled: true
+   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+   :END:
+
+*** data directories                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::vector<boost::filesystem::path>
+    :END:
+
+*** feature model                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
+    :END:
+
+*** tracer                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<tracing::tracer>
+    :END:
+
+*** compatibility mode                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** variability overrides                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::vector<std::string>
+    :END:
+
+Raw set of variability overrides.
+
+** context bootstrapping chain                                      :element:
+   :PROPERTIES:
+   :custom_id: 21EF7BC6-140A-D0A4-F56B-F90456F1ED01
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: context_bootstrapping_chain o-- context
+   :END:
+
+Trivial transform that bootstraps the codec context.
+
+** model set production chain                                       :element:
+   :PROPERTIES:
+   :custom_id: 58896FF6-9111-4C84-7E43-1F1A437695D5
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_set_production_chain o-- entities::model_set: produces
+   :masd.codec.plantuml: model_set_production_chain o-- model_production_chain: produces models using
+   :masd.codec.plantuml: model_set_production_chain o-- model_set_production_chain: recursive
+   :masd.codec.plantuml: model_set_production_chain o-u- reference_graph_data_transform: resolves references
+   :END:
+
+Produces a codec model set.
+
+This chain loads every model and obtains their model set, and so forth,
+recursively. However, for the top-most model - which we know is the target
+model - it assembles the moodel sets in the correct order. That is, a direct
+reference of a reference becomes a transitive reference for the target.
+
+It must also determine if a model has already been loaded, and, if so, ignore
+it.
+
+** reference graph data transform                                   :element:
+   :PROPERTIES:
+   :custom_id: 6D106A88-7AF1-3094-B2DB-3204D847B4F5
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** model production chain                                           :element:
+   :PROPERTIES:
+   :custom_id: 74E40A47-9C3A-F9C4-2843-D6A4BD2E5A8A
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_production_chain o-- entities::model: produces
+   :masd.codec.plantuml: model_production_chain o-u-- references_transform
+   :masd.codec.plantuml: model_production_chain o-u- configuration_transform
+   :masd.codec.plantuml: model_production_chain o-u- input_technical_space_transform
+   :masd.codec.plantuml: model_production_chain o-u- provenance_transform
+   :masd.codec.plantuml: model_production_chain o-- meta_data_transform
+   :masd.codec.plantuml: model_production_chain o-- tagged_values_overrides_transform
+   :masd.codec.plantuml: model_production_chain o-- file_to_artefact_transform
+   :masd.codec.plantuml: model_production_chain o-- artefact_to_model_chain
+   :END:
+
+Given the location of a supported external model, it obtains it and transforms
+it into an codec model.
+
+** references transform                                             :element:
+   :PROPERTIES:
+   :custom_id: 5B1BD10B-1C91-D6D4-AFB3-8E05FB08DBFA
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Reads the model references from the annotation.
+
+** configuration transform                                          :element:
+   :PROPERTIES:
+   :custom_id: C53C8DFF-425C-4C94-721B-9E0115F6F758
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Transforms the tagged values as read from the external model into a
+configuration. No profile binding is made at this point, just a type
+transformation into variability types.
+
+Requires tagged values to have been populated by the decoding codec.
+
+** input technical space transform                                  :element:
+   :PROPERTIES:
+   :custom_id: 2392E29A-230C-4E64-8FD3-A63A9C216FD1
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Reads the input technical space from the model.
+
+Annotations transform must have been applied.
+
+** provenance transform                                             :element:
+   :PROPERTIES:
+   :custom_id: 88A823B3-F817-86B4-0EB3-E1F5CD021770
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Computes the SHA1 hash for a model content and updates the model with this
+value.
+
+** meta data transform                                              :element:
+   :PROPERTIES:
+   :custom_id: BA891520-6E3A-4514-851B-D22D6640CFA7
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Reads assorted meta-data.
+
+** tagged values overrides transform                                :element:
+   :PROPERTIES:
+   :custom_id: CD7782CD-FA59-73A4-F803-A73EBCB4DFC0
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Uses the variability overrides to generate the tagged values overrides for the
+appropriate modeling elements.
+
+** file to artefact transform                                       :element:
+   :PROPERTIES:
+   :custom_id: 9FEDFFBD-6D95-2104-FB73-9CD2C1EC8275
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Reads a file at a given path and creates an artefact from it. The file extension
+is used to populate the artefact type.
+
+** artefact to model chain                                          :element:
+   :PROPERTIES:
+   :custom_id: 7F18AA6C-08F0-AFE4-0B0B-86D3A5618A6E
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: artefact_to_model_chain o-- org_artefact_to_model_transform
+   :masd.codec.plantuml: artefact_to_model_chain o-- json_artefact_to_model_transform
+   :masd.codec.plantuml: artefact_to_model_chain o-- dia_artefact_to_model_transform
+   :END:
+
+Applies the codec transform for the supplied artefact, if one exists.
+
+Transforms the external model in whatever supported external representation it
+may be in - Dia, JSON, etc - into the internal representation of a codec model.
+
+** org artefact to model transform                                  :element:
+   :PROPERTIES:
+   :custom_id: 20CB3B80-C69B-3824-1863-EB054B788E3C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Processes the artefact as if encoded as an org-mode document, and converts it
+into an instance of the codec model.
+
+** json artefact to model transform                                 :element:
+   :PROPERTIES:
+   :custom_id: 7B51B78D-9F73-F564-4E83-6439CEBBAFA6
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Processes the artefact as if encoded using JSON, converting it into an instance
+of the codec model.
+
+** dia artefact to model transform                                  :element:
+   :PROPERTIES:
+   :custom_id: A0452FBC-C303-3BE4-FA6B-FB25AE415C40
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Unidirectional transformation model that transforms a Dia diagram into an codec
+model.
+
+** model to model chain                                             :element:
+   :PROPERTIES:
+   :custom_id: 1D7B118A-1A52-1B74-4D83-D6841DFB15FE
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_to_model_chain o-- file_to_file_chain
+   :END:
+
+Applies the codec transform for the supplied artefact, if one exists.
+
+Transforms the external model in whatever supported external representation it
+may be in - Dia, JSON, etc - into the internal representation of a codec model.
+
+** file to file chain                                               :element:
+   :PROPERTIES:
+   :custom_id: 584094BE-A93D-3E74-4BD3-73486C506411
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: file_to_file_chain o-u- file_to_artefact_transform
+   :masd.codec.plantuml: file_to_file_chain o-- artefact_to_artefact_chain
+   :masd.codec.plantuml: file_to_file_chain o-u- artefact_to_file_transform
+   :END:
+
+Converts an external model of a given type into another external model of
+another type in the filesystem.
+
+** artefact to artefact chain                                       :element:
+   :PROPERTIES:
+   :custom_id: CDC52090-8D57-2524-664B-AF438F3A1352
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: artefact_to_artefact_chain o-- artefact_to_model_chain
+   :masd.codec.plantuml: artefact_to_artefact_chain o-u- documentation_trimming_transform
+   :masd.codec.plantuml: artefact_to_artefact_chain o-- model_to_artefact_chain
+   :END:
+
+Converts an external model of a given type into another external model of
+another type and writes it to the filesystem.
+
+** artefact to file transform                                       :element:
+   :PROPERTIES:
+   :custom_id: 886E600A-643F-8F14-781B-A1F96230CD2F
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Writes the artefact to the filesystem.
+
+** documentation trimming transform                                 :element:
+   :PROPERTIES:
+   :custom_id: 9E39B164-6050-78B4-06B3-F09A06CB0621
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Removes any leading and trailing whitespace from all the documentation.
+
+** model to artefact chain                                          :element:
+   :PROPERTIES:
+   :custom_id: 41B43B03-08A0-C534-EBC3-797E822658A4
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_to_artefact_chain o-- model_to_json_artefact_transform
+   :masd.codec.plantuml: model_to_artefact_chain o-- model_to_org_artefact_transform
+   :masd.codec.plantuml: model_to_artefact_chain o-- model_to_plantuml_artefact_transform
+   :END:
+
+Transforms the supplied codec model into an artefact encoded using JSON.
+
+** model to json artefact transform                                 :element:
+   :PROPERTIES:
+   :custom_id: 07CCDF84-F2F3-3B24-7763-05AC088C7E9C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Transforms the supplied codec model into an artefact encoded using JSON.
+
+** model to org artefact transform                                  :element:
+   :PROPERTIES:
+   :custom_id: FCAEF032-0087-A7E4-50AB-ACCFF00D4673
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Processes the artefact as if encoded as a org-mode document, converting it into
+an instance of the codec model.
+
+** model to plantuml artefact transform                             :element:
+   :PROPERTIES:
+   :custom_id: 72460F72-ECF9-5BC4-0043-8D58AFF56BF2
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+Transforms a codec model into an artefact in PlantUML syntax.
+
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: 64564E47-BFA6-2944-459B-AE64FD0E8239
+  :masd.codec.plantuml: transforms -d- helpers
   :END:
 
 ** building error                                                   :element:
@@ -742,6 +852,7 @@ A cycle was detected in the references graph.
   :PROPERTIES:
   :custom_id: 2F4D10AA-1B1B-CB24-A6A3-544E2F84C530
   :masd.codec.dia.comment: true
+  :masd.codec.plantuml: entities -d- features
   :END:
 
 Defines all of the features and feature groups used by

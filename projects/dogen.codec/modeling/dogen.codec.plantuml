@@ -9,10 +9,12 @@ An external model is defined as:
   org-mode.
 - a Dogen format designed for interoperability (JSON).
 
-External models are converted into an intermediate format called the @e codec
+External models are converted into an intermediate format called the codec
 model, because it is the original entry point into the dogen processing
 pipeline. It also reflects the notion that we are injecting external technical
-spaces into the MASD technical technical space.
+spaces into the MASD technical technical space. The object model is
+codec-agnostic but aims to provide a representation of the core entities needed
+by all codecs. Not all codecs will make use of all entities.
 
 A codec must be created for each external model that is to be injected,
 providing a transformation between the native formats and the codec model. The
@@ -29,156 +31,23 @@ UML representation:
 \image html dogen.codec/modeling/dogen.codec.svg
 end note
 
-namespace transforms #F2F2F2 {
-    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class artefact_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-        +{field} data_directories std::vector<boost::filesystem::path>
-        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
-        +{field} tracer boost::shared_ptr<tracing::tracer>
-        +{field} compatibility_mode bool
-        +{field} variability_overrides std::vector<std::string>
-    }
-
-    class transformation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    class model_set_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class artefact_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    note top of  context_bootstrapping_chain
-        Trivial transform that bootstraps the codec context.
-    end note
-
-}
-
 namespace entities #F2F2F2 {
-    class model <<Element>> #F7E5FF {
-        +{field} elements std::list<element>
-        +{field} input_technical_space std::string
-        +{field} references std::list<std::string>
-        +{field} processed_variability_overrides std::unordered_set<std::string>
-    }
-
-    model o-- element : composed of
-    Element <|.. model
-
-    note top of  model
-        Represents an external model.
-    end note
-
-    class element <<Element>> #F7E5FF {
-        +{field} parents std::list<std::string>
-        +{field} attributes std::list<attribute>
-        +{field} fallback_element_type std::string
-        +{field} can_be_primitive_underlier bool
-        +{field} in_global_module bool
-        +{field} can_be_enumeration_underlier bool
-        +{field} is_default_enumeration_type bool
-        +{field} is_associative_container bool
-        +{field} is_floating_point bool
-        +{field} containing_element_id identification::entities::codec_id
-        +{field} plantuml std::list<std::string>
-    }
-
-    note top of  element
-        Represents an element from an external model.
-    end note
-
-    class attribute <<Element>> #F7E5FF {
-        +{field} type std::string
-        +{field} value std::string
-    }
-
-    class model_set #F7E5FF {
-        +{field} target model
-        +{field} references std::list<model>
-        +{field} reference_graph_data reference_graph_data
-    }
-
-    model_set o-- model : composed of
-
     class Taggable <<masd::object_template>> #E3B6F6 {
         +{field} tagged_values std::list<identification::entities::tagged_value>
     }
+
+    Taggable <|.. comment
 
     note top of  Taggable
         Ability to contain tagged values.
     end note
 
-    class Stereotypable <<masd::object_template>> #E3B6F6 {
-        +{field} stereotypes std::list<identification::entities::stereotype>
+    class TaggableOverridable <<masd::object_template>> #E3B6F6 {
+        +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
     }
 
-    note top of  Stereotypable
-        Ability to have stereotypes.
+    note top of  TaggableOverridable
+        Ability to contain tagged values.
     end note
 
     class Nameable <<masd::object_template>> #E3B6F6 {
@@ -187,6 +56,35 @@ namespace entities #F2F2F2 {
 
     note top of  Nameable
         Ability to have a name.
+    end note
+
+    class Commentable <<masd::object_template>> #E3B6F6 {
+        +{field} comment comment
+    }
+
+    Commentable o-- comment
+    Commentable <|.. object
+
+    note top of  Commentable
+        Has the ability to have an associated comment.
+    end note
+
+    class comment <<Taggable>> #F7E5FF {
+        +{field} applies_to_container bool
+        +{field} original_content std::string
+        +{field} documentation std::string
+    }
+
+    note top of  comment
+        Represents a comment block as read out from the codec representation.
+    end note
+
+    class Stereotypable <<masd::object_template>> #E3B6F6 {
+        +{field} stereotypes std::list<identification::entities::stereotype>
+    }
+
+    note top of  Stereotypable
+        Ability to have stereotypes.
     end note
 
     class Configurable <<masd::object_template>> #E3B6F6 {
@@ -205,26 +103,13 @@ namespace entities #F2F2F2 {
         Properties related to the origin of the modeling element.
     end note
 
-    class TaggableOverridable <<masd::object_template>> #E3B6F6 {
-        +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
-    }
-
-    note top of  TaggableOverridable
-        Ability to contain tagged values.
-    end note
-
-    class Commentable <<masd::object_template>> #E3B6F6 {
-        +{field} comment comment
-    }
-
-    Commentable o-- comment
-
-    note top of  Commentable
-        Has the ability to have an associated comment.
-    end note
-
     class Element <<masd::object_template>> #E3B6F6 {
     }
+
+    Element <|.. element
+    Element <|.. attribute
+    Element <|.. object
+    Element <|.. model
 
     entities::Taggable <|-- entities::Element
     entities::Stereotypable <|-- entities::Element
@@ -237,24 +122,30 @@ namespace entities #F2F2F2 {
         Consolidates a number of related object templates.
     end note
 
-    class reference_graph_data #F7E5FF {
-        +{field} root std::string
-        +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
+    class element <<Element>> #F7E5FF {
+        +{field} parents std::list<std::string>
+        +{field} attributes std::list<attribute>
+        +{field} fallback_element_type std::string
+        +{field} can_be_primitive_underlier bool
+        +{field} in_global_module bool
+        +{field} can_be_enumeration_underlier bool
+        +{field} is_default_enumeration_type bool
+        +{field} is_associative_container bool
+        +{field} is_floating_point bool
+        +{field} containing_element_id identification::entities::codec_id
+        +{field} plantuml std::list<std::string>
     }
 
-    note top of  reference_graph_data
-        Contains all the data required to build the graph of references.
+    element o-- attribute: composed of
+
+    note top of  element
+        Represents an element from an external model.
     end note
 
-    class comment <<Taggable>> #F7E5FF {
-        +{field} applies_to_container bool
-        +{field} original_content std::string
-        +{field} documentation std::string
+    class attribute <<Element>> #F7E5FF {
+        +{field} type std::string
+        +{field} value std::string
     }
-
-    note top of  comment
-        Represents a comment block as read out from the codec representation.
-    end note
 
     class object <<Commentable>> #F7E5FF {
         +{field} id std::string
@@ -266,11 +157,41 @@ namespace entities #F2F2F2 {
         +{field} attributes std::list<attribute>
     }
 
-    object o-- attribute : has
-    Commentable <|.. object
+    object o-- attribute: composed of
 
     note top of  object
         Represents an "raw" codec object which may or may not contain a modeling element of interest.
+    end note
+
+    class model <<Element>> #F7E5FF {
+        +{field} elements std::list<element>
+        +{field} input_technical_space std::string
+        +{field} references std::list<std::string>
+        +{field} processed_variability_overrides std::unordered_set<std::string>
+    }
+
+    model o-- element: composed of
+
+    note top of  model
+        Represents an external model.
+    end note
+
+    class model_set #F7E5FF {
+        +{field} target model
+        +{field} references std::list<model>
+        +{field} reference_graph_data reference_graph_data
+    }
+
+    model_set o-- model: aggregates different kinds of
+    model_set o-- reference_graph_data
+
+    class reference_graph_data #F7E5FF {
+        +{field} root std::string
+        +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
+    }
+
+    note top of  reference_graph_data
+        Contains all the data required to build the graph of references.
     end note
 
     class artefact #F7E5FF {
@@ -287,6 +208,249 @@ a representation of the core entities needed by all codecs.
 
 Not all codecs will make use of all entities.
 end note
+
+namespace transforms #F2F2F2 {
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
+
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} data_directories std::vector<boost::filesystem::path>
+        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} compatibility_mode bool
+        +{field} variability_overrides std::vector<std::string>
+    }
+
+    class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    context_bootstrapping_chain o-- context
+
+    note top of  context_bootstrapping_chain
+        Trivial transform that bootstraps the codec context.
+    end note
+
+    class model_set_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_set_production_chain o-- entities::model_set: produces
+    model_set_production_chain o-- model_production_chain: produces models using
+    model_set_production_chain o-- model_set_production_chain: recursive
+    model_set_production_chain o-u- reference_graph_data_transform: resolves references
+
+    note top of  model_set_production_chain
+        Produces a codec model set.
+
+This chain loads every model and obtains their model set, and so forth,
+recursively. However, for the top-most model - which we know is the target
+model - it assembles the moodel sets in the correct order. That is, a direct
+reference of a reference becomes a transitive reference for the target.
+
+It must also determine if a model has already been loaded, and, if so, ignore
+it.
+    end note
+
+    class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_production_chain o-- entities::model: produces
+    model_production_chain o-u-- references_transform
+    model_production_chain o-u- configuration_transform
+    model_production_chain o-u- input_technical_space_transform
+    model_production_chain o-u- provenance_transform
+    model_production_chain o-- meta_data_transform
+    model_production_chain o-- tagged_values_overrides_transform
+    model_production_chain o-- file_to_artefact_transform
+    model_production_chain o-- artefact_to_model_chain
+
+    note top of  model_production_chain
+        Given the location of a supported external model, it obtains it and transforms
+it into an codec model.
+    end note
+
+    class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  references_transform
+        Reads the model references from the annotation.
+    end note
+
+    class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  configuration_transform
+        Transforms the tagged values as read from the external model into a
+configuration. No profile binding is made at this point, just a type
+transformation into variability types.
+
+Requires tagged values to have been populated by the decoding codec.
+    end note
+
+    class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  input_technical_space_transform
+        Reads the input technical space from the model.
+
+Annotations transform must have been applied.
+    end note
+
+    class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  provenance_transform
+        Computes the SHA1 hash for a model content and updates the model with this
+value.
+    end note
+
+    class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  meta_data_transform
+        Reads assorted meta-data.
+    end note
+
+    class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  tagged_values_overrides_transform
+        Uses the variability overrides to generate the tagged values overrides for the
+appropriate modeling elements.
+    end note
+
+    class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  file_to_artefact_transform
+        Reads a file at a given path and creates an artefact from it. The file extension
+is used to populate the artefact type.
+    end note
+
+    class artefact_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    artefact_to_model_chain o-- org_artefact_to_model_transform
+    artefact_to_model_chain o-- json_artefact_to_model_transform
+    artefact_to_model_chain o-- dia_artefact_to_model_transform
+
+    note top of  artefact_to_model_chain
+        Applies the codec transform for the supplied artefact, if one exists.
+
+Transforms the external model in whatever supported external representation it
+may be in - Dia, JSON, etc - into the internal representation of a codec model.
+    end note
+
+    class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  org_artefact_to_model_transform
+        Processes the artefact as if encoded as an org-mode document, and converts it
+into an instance of the codec model.
+    end note
+
+    class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  json_artefact_to_model_transform
+        Processes the artefact as if encoded using JSON, converting it into an instance
+of the codec model.
+    end note
+
+    class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  dia_artefact_to_model_transform
+        Unidirectional transformation model that transforms a Dia diagram into an codec
+model.
+    end note
+
+    class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_to_model_chain o-- file_to_file_chain
+
+    note top of  model_to_model_chain
+        Applies the codec transform for the supplied artefact, if one exists.
+
+Transforms the external model in whatever supported external representation it
+may be in - Dia, JSON, etc - into the internal representation of a codec model.
+    end note
+
+    class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    file_to_file_chain o-u- file_to_artefact_transform
+    file_to_file_chain o-- artefact_to_artefact_chain
+    file_to_file_chain o-u- artefact_to_file_transform
+
+    note top of  file_to_file_chain
+        Converts an external model of a given type into another external model of
+another type in the filesystem.
+    end note
+
+    class artefact_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    artefact_to_artefact_chain o-- artefact_to_model_chain
+    artefact_to_artefact_chain o-u- documentation_trimming_transform
+    artefact_to_artefact_chain o-- model_to_artefact_chain
+
+    note top of  artefact_to_artefact_chain
+        Converts an external model of a given type into another external model of
+another type and writes it to the filesystem.
+    end note
+
+    class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  artefact_to_file_transform
+        Writes the artefact to the filesystem.
+    end note
+
+    class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  documentation_trimming_transform
+        Removes any leading and trailing whitespace from all the documentation.
+    end note
+
+    class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_to_artefact_chain o-- model_to_json_artefact_transform
+    model_to_artefact_chain o-- model_to_org_artefact_transform
+    model_to_artefact_chain o-- model_to_plantuml_artefact_transform
+
+    note top of  model_to_artefact_chain
+        Transforms the supplied codec model into an artefact encoded using JSON.
+    end note
+
+    class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  model_to_json_artefact_transform
+        Transforms the supplied codec model into an artefact encoded using JSON.
+    end note
+
+    class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  model_to_org_artefact_transform
+        Processes the artefact as if encoded as a org-mode document, converting it into
+an instance of the codec model.
+    end note
+
+    class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    note top of  model_to_plantuml_artefact_transform
+        Transforms a codec model into an artefact in PlantUML syntax.
+    end note
+
+}
 
 namespace helpers #F2F2F2 {
     class building_error <<masd::exception>> #E8C2F8 {
@@ -346,6 +510,8 @@ namespace helpers #F2F2F2 {
 
 }
 
+transforms -d- helpers
+
 namespace features #F2F2F2 {
     class input_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} input_technical_space masd::variability::text
@@ -397,6 +563,8 @@ namespace features #F2F2F2 {
     end note
 
 }
+
+entities -d- features
 
 note top of  features
     Defines all of the features and feature groups used by
