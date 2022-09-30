@@ -35,7 +35,7 @@
 namespace dogen::cli {
 
 /**
- * Entry point for the dogen command line application.
+ * @brief Entry point for the dogen command line application.
  */
 class application final {
 public:

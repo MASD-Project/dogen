@@ -34,7 +34,7 @@
 namespace dogen::cli {
 
 /**
- * Interface for a command-line parser of the dogen options.
+ * @brief Interface for a command-line parser of the dogen options.
  */
 class command_line_parser {
 public:
@@ -46,7 +46,7 @@ public:
 
 public:
     /**
-     * Transforms the supplied command line arguments into a dogen
+     * @brief Transforms the supplied command line arguments into a dogen
      * configuration, if valid.
      *
      * @param arguments Command line arguments supplied by the user.
