@@ -113,7 +113,7 @@ class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 class main <<masd::entry_point>> #DDA9F3 {
 }
 
-main o-- command_line_parser
+main o-- command_line_parser: reads configuration using
 main o-- initializer
 main o-- application: executes
 main o-- configuration

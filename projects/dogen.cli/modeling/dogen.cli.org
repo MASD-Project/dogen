@@ -196,7 +196,7 @@ Command-line parser implementation using boost program options.
   :masd.cpp.types.enabled: true
   :masd.cpp.types.overwrite: false
   :masd.codec.stereotypes: masd::entry_point
-  :masd.codec.plantuml: main o-- command_line_parser
+  :masd.codec.plantuml: main o-- command_line_parser: reads configuration using
   :masd.codec.plantuml: main o-- initializer
   :masd.codec.plantuml: main o-- application: executes
   :masd.codec.plantuml: main o-- configuration
