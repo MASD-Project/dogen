@@ -34,10 +34,12 @@
  *   org-mode.
  * - a Dogen format designed for interoperability (JSON).
  *
- * External models are converted into an intermediate format called the @e codec
+ * External models are converted into an intermediate format called the codec
  * model, because it is the original entry point into the dogen processing
  * pipeline. It also reflects the notion that we are injecting external technical
- * spaces into the MASD technical technical space.
+ * spaces into the MASD technical technical space. The object model is
+ * codec-agnostic but aims to provide a representation of the core entities needed
+ * by all codecs. Not all codecs will make use of all entities.
  *
  * A codec must be created for each external model that is to be injected,
  * providing a transformation between the native formats and the codec model. The

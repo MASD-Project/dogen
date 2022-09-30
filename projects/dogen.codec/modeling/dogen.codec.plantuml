@@ -62,7 +62,7 @@ namespace entities #F2F2F2 {
         +{field} comment comment
     }
 
-    Commentable o-- comment
+    Commentable o-u- comment
     Commentable <|.. object
 
     note top of  Commentable
@@ -236,7 +236,9 @@ namespace transforms #F2F2F2 {
     model_set_production_chain o-- entities::model_set: produces
     model_set_production_chain o-- model_production_chain: produces models using
     model_set_production_chain o-- model_set_production_chain: recursive
-    model_set_production_chain o-u- reference_graph_data_transform: resolves references
+    model_set_production_chain o-u- reference_graph_data_transform: obtains references
+    model_set_production_chain o-u- helpers::references_validator: validates references
+    model_set_production_chain o-u- helpers::references_resolver: resolves references
 
     note top of  model_set_production_chain
         Produces a codec model set.
@@ -252,6 +254,8 @@ it.
 
     class reference_graph_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    reference_graph_data_transform o-- entities::reference_graph_data
 
     class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -362,6 +366,9 @@ of the codec model.
     class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    dia_artefact_to_model_transform o-- helpers::grapher
+    dia_artefact_to_model_transform o-- helpers::visitor
+
     note top of  dia_artefact_to_model_transform
         Unidirectional transformation model that transforms a Dia diagram into an codec
 model.
@@ -453,17 +460,59 @@ an instance of the codec model.
 }
 
 namespace helpers #F2F2F2 {
-    class building_error <<masd::exception>> #E8C2F8 {
+    class references_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    references_validator o-- reference_validation_error
+
+    note top of  references_validator
+        Checks that there are no cycles in the references graph.
+    end note
+
+    class reference_validation_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of  reference_validation_error
+        A cycle was detected in the references graph.
+    end note
+
+    class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    references_resolver o-- reference_resolution_exception
+
+    note top of  references_resolver
+        Trivial struct that records all the data we need for our little DFS excursion.
+    end note
+
+    class reference_resolution_exception <<masd::exception>> #E8C2F8 {
     }
 
     class builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    building o-- building_error
+
+    note top of  builder
+        Builds a codec model from objects.
+    end note
+
+    class building_error <<masd::exception>> #E8C2F8 {
+    }
+
     class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
     }
 
+    visitor o-- builder
+
     class grapher <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    grapher o-- graphing_error
+
+    note top of  grapher
+        Graph of dependencies between objects.
+    end note
 
     class graphing_error <<masd::exception>> #E8C2F8 {
     }
@@ -472,11 +521,14 @@ namespace helpers #F2F2F2 {
         An error has occurred while building the dia object graph.
     end note
 
-    class references_resolver <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class dia_to_codec_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    dia_to_codec_projector o-- projection_error
+
+    note top of  dia_to_codec_projector
+        Projects dia objects into the codec space.
+    end note
 
     class projection_error <<masd::exception>> #E8C2F8 {
     }
@@ -488,6 +540,12 @@ namespace helpers #F2F2F2 {
     class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    object_to_element_adapter o-- adaptation_error
+
+    note top of  object_to_element_adapter
+        Adapts objects into elements.
+    end note
+
     class adaptation_error <<masd::exception>> #E8C2F8 {
     }
 
@@ -495,22 +553,7 @@ namespace helpers #F2F2F2 {
         A fatal error has occurred while adapting an object into an element.
     end note
 
-    class reference_resolution_exception <<masd::exception>> #E8C2F8 {
-    }
-
-    class references_validator <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class reference_validation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of  reference_validation_error
-        A cycle was detected in the references graph.
-    end note
-
 }
-
-transforms -d- helpers
 
 namespace features #F2F2F2 {
     class input_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -564,11 +607,8 @@ namespace features #F2F2F2 {
 
 }
 
-entities -d- features
-
 note top of  features
-    Defines all of the features and feature groups used by
-the codec model.
+    Defines all of the features and feature groups used by the codec model.
 end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {

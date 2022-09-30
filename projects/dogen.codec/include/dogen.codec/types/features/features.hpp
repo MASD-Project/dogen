@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Defines all of the features and feature groups used by
- * the codec model.
+ * @brief Defines all of the features and feature groups used by the codec model.
  */
 namespace dogen::codec::features {
 }
