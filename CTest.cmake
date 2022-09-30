@@ -280,8 +280,16 @@ endif()
 #
 # Apply patches
 #
-file(COPY ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
-    DESTINATION ${CTEST_SOURCE_DIRECTORY}/build/output/${preset}/vcpkg_installed/x64-osx/include/boost/archive)
+if(APPLE)
+    message(STATUS "Applying patches.")
+    file(COPY ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
+        DESTINATION ${CTEST_SOURCE_DIRECTORY}/build/output/${preset}/vcpkg_installed/x64-osx/include/boost/archive)
+
+    file(COPY ${CTEST_SOURCE_DIRECTORY}/patches/basic_text_oarchive.hpp
+        DESTINATION ${CTEST_SOURCE_DIRECTORY}/vcpkg/packages/boost-serialization_x64-osx/include/boost/archive/basic_text_oarchive.hpp)
+else()
+    message(STATUS "NOT Applying patches.")
+endif()
 
 #
 # Step: build.
