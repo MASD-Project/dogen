@@ -24,6 +24,10 @@ UML representation:
   :PROPERTIES:
   :custom_id: C8DE753A-81CB-2B74-F85B-E9852476B146
   :masd.codec.stereotypes: masd::fluent
+  :masd.codec.plantuml: configuration o-- diffing_configuration
+  :masd.codec.plantuml: configuration o-- tracing_configuration
+  :masd.codec.plantuml: configuration o-- model_processing_configuration
+  :masd.codec.plantuml: configuration o-- reporting_configuration
   :END:
 
 ** model processing                                               :attribute:
@@ -55,22 +59,48 @@ Configuration for tracing.
 
 Directory in which to place all files not directly related to generated code.
 
-* tracing level                                                     :element:
+* diffing configuration                                             :element:
   :PROPERTIES:
-  :custom_id: BFE938FC-38DC-EA34-FC7B-9903E39733E7
+  :custom_id: 580F0728-29B8-0F34-AF93-BF5DEBE18A9E
+  :masd.codec.stereotypes: masd::fluent
+  :masd.codec.plantuml: diffing_configuration o-- diffing_destination
+  :END:
+
+Configuration for diff generation.
+
+** destination                                                    :attribute:
+   :PROPERTIES:
+   :masd.codec.type: diffing_destination
+   :END:
+
+** output directory                                               :attribute:
+   :PROPERTIES:
+   :masd.codec.type: boost::filesystem::path
+   :END:
+
+* diffing destination                                               :element:
+  :PROPERTIES:
+  :custom_id: 122EAF89-EE1D-6324-EEAB-4EEDA9366977
   :masd.codec.stereotypes: masd::enumeration
   :END:
 
-Available levels for tracing transformation.
+Where to place the diffing results.
 
-** detail                                                         :attribute:
+** file                                                           :attribute:
 
-** summary                                                        :attribute:
+Generates a patch file.
+
+** console                                                        :attribute:
+
+Outputs the diff to the console.
 
 * tracing configuration                                             :element:
   :PROPERTIES:
   :custom_id: 5B643C89-3815-55C4-EF4B-699D85ACEF6F
   :masd.codec.stereotypes: masd::fluent
+  :masd.codec.plantuml: tracing_configuration o-- tracing_level
+  :masd.codec.plantuml: tracing_configuration o-- tracing_format
+  :masd.codec.plantuml: tracing_configuration o-- tracing_backend
   :END:
 
 Configuration related to transform tracing.
@@ -144,6 +174,18 @@ Identifier to use for the present run.
 
 If supplied, ignore all traces except those which match the supplied regexes.
 
+* tracing level                                                     :element:
+  :PROPERTIES:
+  :custom_id: BFE938FC-38DC-EA34-FC7B-9903E39733E7
+  :masd.codec.stereotypes: masd::enumeration
+  :END:
+
+Available levels for tracing transformation.
+
+** detail                                                         :attribute:
+
+** summary                                                        :attribute:
+
 * tracing format                                                    :element:
   :PROPERTIES:
   :custom_id: 39686EAC-979C-8AA4-9BCB-59BA3588A5B6
@@ -164,17 +206,29 @@ Emacs Org mode.
 
 Dot notation for GraphViz
 
-* diffing configuration                                             :element:
+* tracing backend                                                   :element:
   :PROPERTIES:
-  :custom_id: 580F0728-29B8-0F34-AF93-BF5DEBE18A9E
-  :masd.codec.stereotypes: masd::fluent
+  :custom_id: 6B7E7B75-82E6-BEF4-AE53-C7CDE84CFBD6
+  :masd.codec.stereotypes: masd::enumeration
   :END:
 
-Configuration for diff generation.
+Available backends to manage tracing information.
 
-** destination                                                    :attribute:
+** file                                                           :attribute:
+
+Write tracing information to files.
+
+* reporting configuration                                           :element:
+  :PROPERTIES:
+  :custom_id: 9291B01D-2948-1E54-872B-2A5E4A087D2B
+  :masd.codec.plantuml: reporting_configuration o-- reporting_style
+  :END:
+
+Configuration related to operational reports.
+
+** style                                                          :attribute:
    :PROPERTIES:
-   :masd.codec.type: diffing_destination
+   :masd.codec.type: reporting_style
    :END:
 
 ** output directory                                               :attribute:
@@ -182,11 +236,21 @@ Configuration for diff generation.
    :masd.codec.type: boost::filesystem::path
    :END:
 
-* configuration validator                                           :element:
+* reporting style                                                   :element:
   :PROPERTIES:
-  :custom_id: A51D12CF-4E5D-FFA4-9003-B305DBD09863
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :custom_id: 69EFF757-9FCF-CC34-64F3-555DFB80EA08
+  :masd.codec.stereotypes: masd::enumeration, dogen::convertible
   :END:
+
+Available formats for operational reports.
+
+** plain                                                          :attribute:
+
+Plain text format.
+
+** org mode                                                       :attribute:
+
+Emacs Org mode.
 
 * model processing configuration                                    :element:
   :PROPERTIES:
@@ -238,6 +302,16 @@ not as part of a profile).
 
 Timepoint at which the activity started.
 
+* configuration validator                                           :element:
+  :PROPERTIES:
+  :custom_id: A51D12CF-4E5D-FFA4-9003-B305DBD09863
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: configuration_validator o-- configuration: validates
+  :masd.codec.plantuml: configuration_validator o-- invalid_configuration_exception: throws
+  :END:
+
+Validates the Dogen configuration at the API level.
+
 * invalid configuration exception                                   :element:
   :PROPERTIES:
   :custom_id: E940F035-D016-BC84-3583-23C88EAB48A9
@@ -247,17 +321,24 @@ Timepoint at which the activity started.
 
 The values supplied for the configuration are not valid.
 
+* mock configuration factory                                        :element:
+  :PROPERTIES:
+  :custom_id: 19305C0C-2EC3-2664-CC53-47FFB43ADC87
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: mock_configuration_factory o-- configuration: creates
+  :END:
+
+Creates configurations for testing purposes.
+
 * generator                                                         :element:
   :PROPERTIES:
   :custom_id: 48425DA1-E429-6784-DFD3-594A00817E74
   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :masd.codec.plantuml: generator o-- configuration: configured by
+  :masd.codec.plantuml: generator o-- generation_exception: throws
   :END:
 
-* converter                                                         :element:
-  :PROPERTIES:
-  :custom_id: F490E436-6657-4294-701B-643425DD0C70
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
+Generates code for a given target model.
 
 * generation exception                                              :element:
   :PROPERTIES:
@@ -265,96 +346,53 @@ The values supplied for the configuration are not valid.
   :masd.codec.stereotypes: masd::exception
   :END:
 
+Generation failures:
+
+- Unsupported model format (target, references).
+- Target could not be found, opened.
+- Error parsing model. Which type caused it.
+- Error outputting model.
+- Error outputting tracing.
+- Could not write to output directory.
+- Output directory is a file.
+
+* converter                                                         :element:
+  :PROPERTIES:
+  :custom_id: F490E436-6657-4294-701B-643425DD0C70
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :masd.codec.plantuml: converter o-- configuration: configured by
+  :masd.codec.plantuml: converter o-- conversion_exception: throws
+  :END:
+
+Converts a supported model type into another.
+
 * conversion exception                                              :element:
   :PROPERTIES:
   :custom_id: BDD84550-BA65-BBA4-334B-6C003E010FED
   :masd.codec.stereotypes: masd::exception
   :END:
 
-* diffing destination                                               :element:
+Conversion failures:
+
+- Target could not be found, opened.
+- Unsupported model type.
+- Could not write to output directory.
+
+* spec dumper                                                       :element:
   :PROPERTIES:
-  :custom_id: 122EAF89-EE1D-6324-EEAB-4EEDA9366977
-  :masd.codec.stereotypes: masd::enumeration
+  :custom_id: D814E09A-2FA1-8824-88D3-3925756621CF
+  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+  :masd.codec.plantuml: spec_dumper o-- configuration: configured by
+  :masd.codec.plantuml: spec_dumper o-- dumping_exception: throws
+  :masd.codec.plantuml: spec_dumper o-- specs: creates
   :END:
 
-Where to place the diffing results.
-
-** file                                                           :attribute:
-
-Generates a patch file.
-
-** console                                                        :attribute:
-
-Outputs the diff to the console.
-
-* reporting configuration                                           :element:
-  :PROPERTIES:
-  :custom_id: 9291B01D-2948-1E54-872B-2A5E4A087D2B
-  :END:
-
-Configuration related to operational reports.
-
-** style                                                          :attribute:
-   :PROPERTIES:
-   :masd.codec.type: reporting_style
-   :END:
-
-** output directory                                               :attribute:
-   :PROPERTIES:
-   :masd.codec.type: boost::filesystem::path
-   :END:
-
-* reporting style                                                   :element:
-  :PROPERTIES:
-  :custom_id: 69EFF757-9FCF-CC34-64F3-555DFB80EA08
-  :masd.codec.stereotypes: masd::enumeration, dogen::convertible
-  :END:
-
-Available formats for operational reports.
-
-** plain                                                          :attribute:
-
-Plain text format.
-
-** org mode                                                       :attribute:
-
-Emacs Org mode.
-
-* mock configuration factory                                        :element:
-  :PROPERTIES:
-  :custom_id: 19305C0C-2EC3-2664-CC53-47FFB43ADC87
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-Creates configurations for testing purposes.
-
-* tracing backend                                                   :element:
-  :PROPERTIES:
-  :custom_id: 6B7E7B75-82E6-BEF4-AE53-C7CDE84CFBD6
-  :masd.codec.stereotypes: masd::enumeration
-  :END:
-
-Available backends to manage tracing information.
-
-** file                                                           :attribute:
-
-Write tracing information to files.
-
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: EFADDCC4-4C93-5CF4-80DB-C5A5BBFECE7D
-  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
-  :END:
-
-* CMakeLists                                                        :element:
-  :PROPERTIES:
-  :custom_id: A8C2F12E-2F56-A314-9BAB-2E6797C70978
-  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
+Dumps internal information from Dogen.
 
 * specs                                                             :element:
   :PROPERTIES:
   :custom_id: BB8E7FB7-4671-AF24-EF9B-024DDF9F3656
+  :masd.codec.plantuml: specs o-- spec_category
   :END:
 
 Describes details of the available functionality within this version of Dogen.
@@ -369,6 +407,7 @@ All categories of specifications.
 * spec category                                                     :element:
   :PROPERTIES:
   :custom_id: 16897C9D-3EA9-64F4-59E3-3D12AB874B55
+  :masd.codec.plantuml: spec_category o-- spec_entry
   :END:
 
 Describes a category of dogen specifications.
@@ -415,12 +454,6 @@ Name for this spec entry.
 
 Human readable text describing this entry.
 
-* spec dumper                                                       :element:
-  :PROPERTIES:
-  :custom_id: D814E09A-2FA1-8824-88D3-3925756621CF
-  :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-  :END:
-
 * dumping exception                                                 :element:
   :PROPERTIES:
   :custom_id: 741544C3-02CE-BD04-E9CB-04565810F7D0
@@ -428,3 +461,15 @@ Human readable text describing this entry.
   :END:
 
 An error ocurred when dumping dogen's specs.
+
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: EFADDCC4-4C93-5CF4-80DB-C5A5BBFECE7D
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :END:
+
+* CMakeLists                                                        :element:
+  :PROPERTIES:
+  :custom_id: A8C2F12E-2F56-A314-9BAB-2E6797C70978
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:

@@ -16,13 +16,29 @@ class configuration <<masd::fluent>> #F7E5FF {
     +{field} byproduct_directory boost::filesystem::path
 }
 
-enum tracing_level <<masd::enumeration>> #F2DAFD {
-    +{field} detail
-    +{field} summary
+configuration o-- diffing_configuration
+configuration o-- tracing_configuration
+configuration o-- model_processing_configuration
+configuration o-- reporting_configuration
+
+class diffing_configuration <<masd::fluent>> #F7E5FF {
+    +{field} destination diffing_destination
+    +{field} output_directory boost::filesystem::path
 }
 
-note top of  tracing_level
-    Available levels for tracing transformation.
+diffing_configuration o-- diffing_destination
+
+note top of  diffing_configuration
+    Configuration for diff generation.
+end note
+
+enum diffing_destination <<masd::enumeration>> #F2DAFD {
+    +{field} file
+    +{field} console
+}
+
+note top of  diffing_destination
+    Where to place the diffing results.
 end note
 
 class tracing_configuration <<masd::fluent>> #F7E5FF {
@@ -37,8 +53,21 @@ class tracing_configuration <<masd::fluent>> #F7E5FF {
     +{field} filter_regexes std::vector<std::string>
 }
 
+tracing_configuration o-- tracing_level
+tracing_configuration o-- tracing_format
+tracing_configuration o-- tracing_backend
+
 note top of  tracing_configuration
     Configuration related to transform tracing.
+end note
+
+enum tracing_level <<masd::enumeration>> #F2DAFD {
+    +{field} detail
+    +{field} summary
+}
+
+note top of  tracing_level
+    Available levels for tracing transformation.
 end note
 
 enum tracing_format <<masd::enumeration>> #F2DAFD {
@@ -51,61 +80,20 @@ note top of  tracing_format
     Available formats for tracing transformations.
 end note
 
-class diffing_configuration <<masd::fluent>> #F7E5FF {
-    +{field} destination diffing_destination
-    +{field} output_directory boost::filesystem::path
-}
-
-note top of  diffing_configuration
-    Configuration for diff generation.
-end note
-
-class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class model_processing_configuration #F7E5FF {
-    +{field} compatibility_mode_enabled bool
-    +{field} dry_run_mode_enabled bool
-    +{field} variability_overrides std::vector<std::string>
-    +{field} activity_timestamp boost::posix_time::ptime
-}
-
-note top of  model_processing_configuration
-    Configuration related to the behaviour of Dogen whilst processing models.
-end note
-
-class invalid_configuration_exception <<masd::exception>> #E8C2F8 {
-}
-
-note top of  invalid_configuration_exception
-    The values supplied for the configuration are not valid.
-end note
-
-class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
-
-class converter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
-
-class generation_exception <<masd::exception>> #E8C2F8 {
-}
-
-class conversion_exception <<masd::exception>> #E8C2F8 {
-}
-
-enum diffing_destination <<masd::enumeration>> #F2DAFD {
+enum tracing_backend <<masd::enumeration>> #F2DAFD {
     +{field} file
-    +{field} console
 }
 
-note top of  diffing_destination
-    Where to place the diffing results.
+note top of  tracing_backend
+    Available backends to manage tracing information.
 end note
 
 class reporting_configuration #F7E5FF {
     +{field} style reporting_style
     +{field} output_directory boost::filesystem::path
 }
+
+reporting_configuration o-- reporting_style
 
 note top of  reporting_configuration
     Configuration related to operational reports.
@@ -120,30 +108,105 @@ note top of  reporting_style
     Available formats for operational reports.
 end note
 
+class model_processing_configuration #F7E5FF {
+    +{field} compatibility_mode_enabled bool
+    +{field} dry_run_mode_enabled bool
+    +{field} variability_overrides std::vector<std::string>
+    +{field} activity_timestamp boost::posix_time::ptime
+}
+
+note top of  model_processing_configuration
+    Configuration related to the behaviour of Dogen whilst processing models.
+end note
+
+class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+configuration_validator o-- configuration: validates
+configuration_validator o-- invalid_configuration_exception: throws
+
+note top of  configuration_validator
+    Validates the Dogen configuration at the API level.
+end note
+
+class invalid_configuration_exception <<masd::exception>> #E8C2F8 {
+}
+
+note top of  invalid_configuration_exception
+    The values supplied for the configuration are not valid.
+end note
+
 class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 }
+
+mock_configuration_factory o-- configuration: creates
 
 note top of  mock_configuration_factory
     Creates configurations for testing purposes.
 end note
 
-enum tracing_backend <<masd::enumeration>> #F2DAFD {
-    +{field} file
+class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 }
 
-note top of  tracing_backend
-    Available backends to manage tracing information.
+generator o-- configuration: configured by
+generator o-- generation_exception: throws
+
+note top of  generator
+    Generates code for a given target model.
 end note
 
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+class generation_exception <<masd::exception>> #E8C2F8 {
 }
 
-class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+note top of  generation_exception
+    Generation failures:
+
+- Unsupported model format (target, references).
+- Target could not be found, opened.
+- Error parsing model. Which type caused it.
+- Error outputting model.
+- Error outputting tracing.
+- Could not write to output directory.
+- Output directory is a file.
+end note
+
+class converter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 }
+
+converter o-- configuration: configured by
+converter o-- conversion_exception: throws
+
+note top of  converter
+    Converts a supported model type into another.
+end note
+
+class conversion_exception <<masd::exception>> #E8C2F8 {
+}
+
+note top of  conversion_exception
+    Conversion failures:
+
+- Target could not be found, opened.
+- Unsupported model type.
+- Could not write to output directory.
+end note
+
+class spec_dumper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+}
+
+spec_dumper o-- configuration: configured by
+spec_dumper o-- dumping_exception: throws
+spec_dumper o-- specs: creates
+
+note top of  spec_dumper
+    Dumps internal information from Dogen.
+end note
 
 class specs #F7E5FF {
     +{field} categories std::list<spec_category>
 }
+
+specs o-- spec_category
 
 note top of  specs
     Describes details of the available functionality within this version of Dogen.
@@ -154,6 +217,8 @@ class spec_category #F7E5FF {
     +{field} entries std::list<spec_entry>
     +{field} description std::string
 }
+
+spec_category o-- spec_entry
 
 note top of  spec_category
     Describes a category of dogen specifications.
@@ -168,14 +233,17 @@ note top of  spec_entry
     Unit of functionality within Dogen.
 end note
 
-class spec_dumper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-}
-
 class dumping_exception <<masd::exception>> #E8C2F8 {
 }
 
 note top of  dumping_exception
     An error ocurred when dumping dogen's specs.
 end note
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
 
 @enduml

@@ -30,6 +30,17 @@
 
 namespace dogen {
 
+/**
+ * @brief Generation failures:
+ *
+ * - Unsupported model format (target, references).
+ * - Target could not be found, opened.
+ * - Error parsing model. Which type caused it.
+ * - Error outputting model.
+ * - Error outputting tracing.
+ * - Could not write to output directory.
+ * - Output directory is a file.
+ */
 class generation_exception : public virtual std::exception, public virtual boost::exception {
 public:
     generation_exception() = default;

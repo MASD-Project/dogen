@@ -30,6 +30,13 @@
 
 namespace dogen {
 
+/**
+ * @brief Conversion failures:
+ *
+ * - Target could not be found, opened.
+ * - Unsupported model type.
+ * - Could not write to output directory.
+ */
 class conversion_exception : public virtual std::exception, public virtual boost::exception {
 public:
     conversion_exception() = default;
