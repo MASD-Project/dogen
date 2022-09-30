@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-30 Fri 12:10]
+#+CAPTION: Clock summary at [2022-09-30 Fri 21:14]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *37:02* |       |       | 100.0 |
+| *Total time*                                              | *40:21* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 37:02   |       |       | 100.0 |
-| Active                                                    |         | 37:02 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  27.6 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   5.7 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   0.9 |
-| Improve diffing output in tests                           |         |       |  0:19 |   0.9 |
-| Sprint and product backlog grooming                       |         |       |  2:55 |   7.9 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.0 |
+| Stories                                                   | 40:21   |       |       | 100.0 |
+| Active                                                    |         | 40:21 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  25.3 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   5.2 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   0.8 |
+| Improve diffing output in tests                           |         |       |  0:19 |   0.8 |
+| Sprint and product backlog grooming                       |         |       |  2:55 |   7.2 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.8 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.4 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   8.9 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   5.9 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.4 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.0 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   5.0 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   2.0 |
-| Model significant relations at a higher level             |         |       |  1:05 |   2.9 |
-| Create a mock configuration builder                       |         |       |  1:58 |   5.3 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   8.2 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   5.4 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.2 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   5.5 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   4.5 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   1.9 |
+| Model significant relations at a higher level             |         |       |  1:05 |   2.7 |
+| Create a mock configuration builder                       |         |       |  1:58 |   4.9 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.9 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.7 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.6 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.5 |
-| Windows package is broken                                 |         |       |  0:20 |   0.9 |
-| Warning on OSX build                                      |         |       |  2:23 |   6.4 |
-| Add PlantUML relationships to diagrams                    |         |       |  1:46 |   4.8 |
+| Windows package is broken                                 |         |       |  0:20 |   0.8 |
+| Warning on OSX build                                      |         |       |  2:23 |   5.9 |
+| Add PlantUML relationships to diagrams                    |         |       |  5:05 |  12.6 |
 #+end:
 
 Agenda:
@@ -1199,6 +1199,10 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-09-30 Fri 20:48]--[2022-09-30 Fri 21:14] =>  0:26
+    CLOCK: [2022-09-30 Fri 19:42]--[2022-09-30 Fri 20:15] =>  0:33
+    CLOCK: [2022-09-30 Fri 19:07]--[2022-09-30 Fri 19:20] =>  0:13
+    CLOCK: [2022-09-30 Fri 13:57]--[2022-09-30 Fri 16:04] =>  2:07
     CLOCK: [2022-09-30 Fri 11:41]--[2022-09-30 Fri 12:10] =>  0:29
     CLOCK: [2022-09-30 Fri 11:16]--[2022-09-30 Fri 11:24] =>  0:08
     CLOCK: [2022-09-30 Fri 11:02]--[2022-09-30 Fri 11:09] =>  0:07
@@ -1207,10 +1211,10 @@ Links:
     :END:
 
 We need to go through each and every model and add the relations we add in Dia
-to make diagrams more readable. Models done:
+to make diagrams more readable. Models:
 
-- dogen
-- dogen.cli
+- dogen: done
+- dogen.cli: done
 
 *** Ignorable headlines in org-mode                                   :story:
 
