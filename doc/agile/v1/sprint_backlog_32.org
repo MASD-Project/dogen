@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-29 Thu 22:49]
+#+CAPTION: Clock summary at [2022-09-30 Fri 08:27]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *58:04* |       |       | 100.0 |
+| *Total time*                                              | *34:51* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 58:04   |       |       | 100.0 |
-| Active                                                    |         | 58:04 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  17.6 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.6 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   0.6 |
-| Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       | 26:11 |  45.1 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.9 |
-| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.7 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   3.7 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.5 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.8 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   3.2 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   1.3 |
-| Model significant relations at a higher level             |         |       |  1:05 |   1.9 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.4 |
-| Enable CodeQL                                             |         |       |  0:21 |   0.6 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.1 |
-| Windows package is broken                                 |         |       |  0:20 |   0.6 |
-| Warning on OSX build                                      |         |       |  1:51 |   3.2 |
-| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.1 |
-| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
+| Stories                                                   | 34:51   |       |       | 100.0 |
+| Active                                                    |         | 34:51 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  29.3 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   6.0 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   1.0 |
+| Improve diffing output in tests                           |         |       |  0:19 |   0.9 |
+| Sprint and product backlog grooming                       |         |       |  2:50 |   8.1 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.2 |
+| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   9.5 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   6.2 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.6 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.4 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   5.3 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.2 |
+| Model significant relations at a higher level             |         |       |  1:05 |   3.1 |
+| Create a mock configuration builder                       |         |       |  1:58 |   5.6 |
+| Enable CodeQL                                             |         |       |  0:21 |   1.0 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.8 |
+| Windows package is broken                                 |         |       |  0:20 |   1.0 |
+| Warning on OSX build                                      |         |       |  1:59 |   5.7 |
+| Add PlantUML relationships to diagrams                    |         |       |  0:04 |   0.2 |
+| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.6 |
 #+end:
 
 Agenda:
@@ -368,7 +368,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
-    CLOCK: [2022-09-27 Tue 08:28]--[2022-09-28 Wed 08:01] => 23:33
+    CLOCK: [2022-09-27 Tue 08:28]--[2022-09-27 Tue 08:40] =>  0:12
     CLOCK: [2022-09-27 Tue 07:39]--[2022-09-27 Tue 07:48] =>  0:09
     CLOCK: [2022-09-26 Mon 08:25]--[2022-09-26 Mon 08:45] =>  0:20
     CLOCK: [2022-09-25 Sun 19:38]--[2022-09-25 Sun 19:59] =>  0:21
@@ -452,9 +452,9 @@ At present we are getting the following error:
 *Fix errors in nightly builds*
 
 *** COMPLETED Remove deprecated uses of boost bind                    :story:
-   :LOGBOOK:
-   CLOCK: [2022-09-17 Sat 21:14]--[2022-09-17 Sat 21:23] =>  0:09
-   :END:
+    :LOGBOOK:
+    CLOCK: [2022-09-17 Sat 21:14]--[2022-09-17 Sat 21:23] =>  0:09
+    :END:
 
 #+begin_example
 [56/2312] Building CXX object projects/dogen/generated_tests/CMakeFiles/dogen.generated_tests.dir/spec_category_tests.cpp.o
@@ -1015,6 +1015,7 @@ Links:
 
 *** STARTED Warning on OSX build                                      :story:
     :LOGBOOK:
+    CLOCK: [2022-09-30 Fri 08:19]--[2022-09-30 Fri 08:27] =>  0:08
     CLOCK: [2022-09-29 Thu 22:40]--[2022-09-29 Thu 22:47] =>  0:07
     CLOCK: [2022-09-29 Thu 19:35]--[2022-09-29 Thu 19:44] =>  0:09
     CLOCK: [2022-09-29 Thu 17:40]--[2022-09-29 Thu 17:50] =>  0:10
