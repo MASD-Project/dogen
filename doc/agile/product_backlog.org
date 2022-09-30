@@ -1154,19 +1154,6 @@ Links:
 - [[http://thomasf.github.io/solarized-css/][solarized-css]]
 - [[https://github.com/dakrone/dakrone.github.com/blob/master/org.css][org.css GH]]
 
-*** Ignorable headlines in org-mode                                   :story:
-
-It should be possible to add documents that do not get expressed as
-source code in models, but still come out in the documentation.
-
-Notes:
-
-- apparently org-mode supports headlines marked with =COMMENT=.
-
-Links:
-
-- [[https://www.reddit.com/r/emacs/comments/lxwo61/quick_tip_for_those_with_a_literate_emacs_config/][reddit: Quick tip for those with a literate emacs config]]
-
 *** Implement code merging support                                    :story:
 
 Once we have support for operations we now have in place all of the

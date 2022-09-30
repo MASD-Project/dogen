@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-09-30 Fri 09:58]
+#+CAPTION: Clock summary at [2022-09-30 Fri 12:10]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *35:49* |       |       | 100.0 |
+| *Total time*                                              | *37:02* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 35:49   |       |       | 100.0 |
-| Active                                                    |         | 35:49 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  28.5 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   5.9 |
+| Stories                                                   | 37:02   |       |       | 100.0 |
+| Active                                                    |         | 37:02 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  27.6 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   5.7 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.9 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.9 |
-| Sprint and product backlog grooming                       |         |       |  2:50 |   7.9 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.1 |
+| Sprint and product backlog grooming                       |         |       |  2:55 |   7.9 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   3.0 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.4 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   9.2 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   6.0 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.5 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.2 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   5.1 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   2.1 |
-| Model significant relations at a higher level             |         |       |  1:05 |   3.0 |
-| Create a mock configuration builder                       |         |       |  1:58 |   5.5 |
-| Enable CodeQL                                             |         |       |  0:21 |   1.0 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.8 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   8.9 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   5.9 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.4 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   6.0 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   5.0 |
+| Remove ODB support from Dogen                             |         |       |  0:45 |   2.0 |
+| Model significant relations at a higher level             |         |       |  1:05 |   2.9 |
+| Create a mock configuration builder                       |         |       |  1:58 |   5.3 |
+| Enable CodeQL                                             |         |       |  0:21 |   0.9 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.7 |
+| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.5 |
 | Windows package is broken                                 |         |       |  0:20 |   0.9 |
-| Warning on OSX build                                      |         |       |  1:59 |   5.5 |
-| Add PlantUML relationships to diagrams                    |         |       |  1:02 |   2.9 |
-| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.6 |
+| Warning on OSX build                                      |         |       |  2:23 |   6.4 |
+| Add PlantUML relationships to diagrams                    |         |       |  1:46 |   4.8 |
 #+end:
 
 Agenda:
@@ -368,6 +368,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-09-30 Fri 11:10]--[2022-09-30 Fri 11:15] =>  0:05
     CLOCK: [2022-09-27 Tue 08:28]--[2022-09-27 Tue 08:40] =>  0:12
     CLOCK: [2022-09-27 Tue 07:39]--[2022-09-27 Tue 07:48] =>  0:09
     CLOCK: [2022-09-26 Mon 08:25]--[2022-09-26 Mon 08:45] =>  0:20
@@ -976,6 +977,40 @@ Links:
 - [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
 - [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
 
+*** STARTED Ignore vcpkg path length warning                          :story:
+    :LOGBOOK:
+    CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
+    :END:
+
+#+begin_example
+Building boost-system[core]:x64-windows...
+CMake Warning at scripts/cmake/vcpkg_buildpath_length_warning.cmake:4 (message):
+  boost-system's buildsystem uses very long paths and may fail on your
+  system.
+
+  We recommend moving vcpkg to a short path such as 'C:\src\vcpkg' or using
+  the subst command.
+Call Stack (most recent call first):
+  ports/boost-system/portfile.cmake:3 (vcpkg_buildpath_length_warning)
+  scripts/ports.cmake:147 (include)
+#+end_example
+
+Clues about path length:
+
+#+begin_example
+-- Downloading https://github.com/boostorg/system/archive/boost-1.80.0.tar.gz -> boostorg-system-boost-1.80.0.tar.gz...
+-- Extracting source D:/a/dogen/dogen/vcpkg/downloads/boostorg-system-boost-1.80.0.tar.gz
+#+end_example
+
+Links:
+
+- [[https://github.com/microsoft/vcpkg/issues/11119][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
+  Windows 10 #11119]]
+- [[https://github.com/microsoft/vcpkg/discussions/19141][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
+  Windows 10 #19141]]
+- [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
+- [[https://github.com/actions/runner-images/issues/1052][MAX_PATH lengths on Windows environment #1052]]
+
 *** STARTED Windows package is broken                                 :story:
     :LOGBOOK:
     CLOCK: [2022-09-20 Tue 08:21]--[2022-09-20 Tue 08:33] =>  0:12
@@ -1015,6 +1050,8 @@ Links:
 
 *** STARTED Warning on OSX build                                      :story:
     :LOGBOOK:
+    CLOCK: [2022-09-30 Fri 10:43]--[2022-09-30 Fri 11:00] =>  0:17
+    CLOCK: [2022-09-30 Fri 10:30]--[2022-09-30 Fri 10:37] =>  0:07
     CLOCK: [2022-09-30 Fri 08:19]--[2022-09-30 Fri 08:27] =>  0:08
     CLOCK: [2022-09-29 Thu 22:40]--[2022-09-29 Thu 22:47] =>  0:07
     CLOCK: [2022-09-29 Thu 19:35]--[2022-09-29 Thu 19:44] =>  0:09
@@ -1149,6 +1186,9 @@ Actually a really easy way to test this is to hack a script that overwrites this
 file in OSX with the fixes and see what happens to the warnings. We can even
 leave it in for now until the PR is merged.
 
+We were patching the wrong file it seems, the problem is not with =oarchive=,
+its with =oprimitive=.
+
 Links:
 
 - [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get "ld: warning: direct access in _main to global weak symbol" in
@@ -1159,6 +1199,9 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-09-30 Fri 11:41]--[2022-09-30 Fri 12:10] =>  0:29
+    CLOCK: [2022-09-30 Fri 11:16]--[2022-09-30 Fri 11:24] =>  0:08
+    CLOCK: [2022-09-30 Fri 11:02]--[2022-09-30 Fri 11:09] =>  0:07
     CLOCK: [2022-09-30 Fri 09:00]--[2022-09-30 Fri 09:58] =>  0:58
     CLOCK: [2022-09-19 Mon 11:38]--[2022-09-19 Mon 11:42] =>  0:04
     :END:
@@ -1167,40 +1210,28 @@ We need to go through each and every model and add the relations we add in Dia
 to make diagrams more readable. Models done:
 
 - dogen
+- dogen.cli
 
-*** STARTED Ignore vcpkg path length warning                          :story:
-    :LOGBOOK:
-    CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
-    :END:
+*** Ignorable headlines in org-mode                                   :story:
 
-#+begin_example
-Building boost-system[core]:x64-windows...
-CMake Warning at scripts/cmake/vcpkg_buildpath_length_warning.cmake:4 (message):
-  boost-system's buildsystem uses very long paths and may fail on your
-  system.
+It should be possible to add documents that do not get expressed as source code
+in models, but still come out in the documentation. At present it seems any
+headline which does not have a MASD attribute is ignored.
 
-  We recommend moving vcpkg to a short path such as 'C:\src\vcpkg' or using
-  the subst command.
-Call Stack (most recent call first):
-  ports/boost-system/portfile.cmake:3 (vcpkg_buildpath_length_warning)
-  scripts/ports.cmake:147 (include)
-#+end_example
+There are two use cases:
 
-Clues about path length:
+- adding content that is intended only for documentation purposes. For this we
+  can make use of the MASD attributes (or its absence).
+- ignoring a MASD element temporarily. For this we can remove manually the
+  attribute?
 
-#+begin_example
--- Downloading https://github.com/boostorg/system/archive/boost-1.80.0.tar.gz -> boostorg-system-boost-1.80.0.tar.gz...
--- Extracting source D:/a/dogen/dogen/vcpkg/downloads/boostorg-system-boost-1.80.0.tar.gz
-#+end_example
+Notes:
+
+- apparently org-mode supports headlines marked with =COMMENT=.
 
 Links:
 
-- [[https://github.com/microsoft/vcpkg/issues/11119][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
-  Windows 10 #11119]]
-- [[https://github.com/microsoft/vcpkg/discussions/19141][[vcpkg_buildpath_length_warning] Please add advice to enable long paths on
-  Windows 10 #19141]]
-- [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
-- [[https://github.com/actions/runner-images/issues/1052][MAX_PATH lengths on Windows environment #1052]]
+- [[https://www.reddit.com/r/emacs/comments/lxwo61/quick_tip_for_those_with_a_literate_emacs_config/][reddit: Quick tip for those with a literate emacs config]]
 
 *** Add support for notes and comments in models                      :story:
 
