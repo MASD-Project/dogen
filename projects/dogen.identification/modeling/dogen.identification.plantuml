@@ -354,8 +354,20 @@ note top of  entities
 end note
 
 namespace helpers #F2F2F2 {
-    class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    logical_name_factory o-- logical_name_builder: builds names using
+    logical_name_factory o-- entities::logical_name: builds
+
+    class logical_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} name entities::logical_name
+    }
+
+    logical_name_builder o-- entities::logical_name: builds
+    logical_name_builder o-- building_error: throws
+    logical_name_builder o-- logical_location_builder: builds locations using
+    logical_name_builder o-- qualified_representations_builder
 
     class building_error <<masd::exception>> #E8C2F8 {
     }
@@ -364,31 +376,22 @@ namespace helpers #F2F2F2 {
         An error occurred whilst building.
     end note
 
+    class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} location entities::logical_location
+    }
+
     class qualified_representations_builder <<dogen::handcrafted::typeable>> #FFFACD {
         +{field} dot_printer pretty_printer
         +{field} colon_printer pretty_printer
     }
 
-    class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    qualified_representations_builder o-- pretty_printer: creates representations using
+
+    class pretty_printer <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class logical_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
-        +{field} name entities::logical_name
-    }
-
-    class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
-        +{field} location entities::logical_location
-    }
-
-    class flattening_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of  flattening_error
-        An error occurred whilst flattening a name.
-    end note
+    pretty_printer o-- printing_error: throws
+    pretty_printer o-- separators: separates elements according to
 
     class printing_error <<masd::exception>> #E8C2F8 {
     }
@@ -396,9 +399,6 @@ namespace helpers #F2F2F2 {
     note top of  printing_error
         An error occurred whilst pretty printing.
     end note
-
-    class pretty_printer <<dogen::handcrafted::typeable>> #FFFACD {
-    }
 
     enum separators <<masd::enumeration>> #F2DAFD {
         +{field} angle_brackets
@@ -410,13 +410,44 @@ namespace helpers #F2F2F2 {
         Available separators to be used by the pretty printer.
     end note
 
-    class physical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    logical_name_flattener o-- flattening_error: throws
+
+    class flattening_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of  flattening_error
+        An error occurred whilst flattening a name.
+    end note
 
     class physical_meta_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    physical_meta_name_builder o-- physical_meta_id_builder
+    physical_meta_name_builder o-- physical_meta_name_factory
+    physical_meta_name_builder o-u- physical_meta_name_validator
+
     class physical_meta_id_builder <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class physical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class physical_meta_name_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    physical_meta_name_validator o-u- validation_error: throws
+
+    class validation_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of  validation_error
+        An error occurred during validation.
+    end note
+
+    class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class logical_name_tree_builder <<dogen::handcrafted::typeable>> #FFFACD {
@@ -425,8 +456,20 @@ namespace helpers #F2F2F2 {
         +{field} current boost::shared_ptr<node>
     }
 
+    logical_name_tree_builder o-- legacy_logical_name_tree_parser: converts strings into names
+    logical_name_tree_builder o-- new_logical_name_tree_parser
+
     class legacy_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    legacy_logical_name_tree_parser o-- node
+    legacy_logical_name_tree_parser o-- parsing_error: throws
+
+    class new_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    new_logical_name_tree_parser o-- node
+    new_logical_name_tree_parser o-- parsing_error: throws
 
     class node <<dogen::handcrafted::typeable>> #FFFACD {
         +{field} parent boost::weak_ptr<node>
@@ -440,9 +483,6 @@ namespace helpers #F2F2F2 {
 Temporary data structure used to build trees of logical names.
     end note
 
-    class new_logical_name_tree_parser <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class parsing_error <<masd::exception>> #E8C2F8 {
     }
 
@@ -450,21 +490,13 @@ Temporary data structure used to build trees of logical names.
         A fatal error has occurred while parsing.
     end note
 
-    class physical_meta_name_validator <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class validation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of  validation_error
-        An error occurred during validation.
-    end note
-
     class physical_id_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class meta_name_index_builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    meta_name_index_builder o-- entities::physical_meta_name_indices
 
     class logical_meta_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }

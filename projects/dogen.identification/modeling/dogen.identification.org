@@ -768,11 +768,28 @@ Version of the technical space to use.
 
 Assorted helpers used to construct domain entities.
 
-** identifiable factory                                             :element:
+** logical name factory                                             :element:
    :PROPERTIES:
-   :custom_id: E267BF67-488A-E2A4-42F3-4481A0F0C612
+   :custom_id: C501186E-E596-A414-1A7B-AA44E21372FD
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_name_factory o-- logical_name_builder: builds names using
+   :masd.codec.plantuml: logical_name_factory o-- entities::logical_name: builds
    :END:
+
+** logical name builder                                             :element:
+   :PROPERTIES:
+   :custom_id: CB116D36-38B0-5F24-7FE3-4FFAED56A464
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_name_builder o-- entities::logical_name: builds
+   :masd.codec.plantuml: logical_name_builder o-- building_error: throws
+   :masd.codec.plantuml: logical_name_builder o-- logical_location_builder: builds locations using
+   :masd.codec.plantuml: logical_name_builder o-- qualified_representations_builder
+   :END:
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: entities::logical_name
+    :END:
 
 ** building error                                                   :element:
    :PROPERTIES:
@@ -781,45 +798,6 @@ Assorted helpers used to construct domain entities.
    :END:
 
 An error occurred whilst building.
-
-** qualified representations builder                                :element:
-   :PROPERTIES:
-   :custom_id: 926945D7-C581-0124-9FEB-14EA659E3388
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-*** dot printer                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: pretty_printer
-    :END:
-
-*** colon printer                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: pretty_printer
-    :END:
-
-** logical name factory                                             :element:
-   :PROPERTIES:
-   :custom_id: C501186E-E596-A414-1A7B-AA44E21372FD
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** logical name builder                                             :element:
-   :PROPERTIES:
-   :custom_id: CB116D36-38B0-5F24-7FE3-4FFAED56A464
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: entities::logical_name
-    :END:
-
-** logical name flattener                                           :element:
-   :PROPERTIES:
-   :custom_id: 988CD7CD-B3EE-0824-2EE3-A501D8C14006
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 ** logical location builder                                         :element:
    :PROPERTIES:
@@ -832,13 +810,30 @@ An error occurred whilst building.
     :masd.codec.type: entities::logical_location
     :END:
 
-** flattening error                                                 :element:
+** qualified representations builder                                :element:
    :PROPERTIES:
-   :custom_id: F44642E3-6AE0-8204-8A8B-38E1A6DBCB38
-   :masd.codec.stereotypes: masd::exception
+   :custom_id: 926945D7-C581-0124-9FEB-14EA659E3388
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: qualified_representations_builder o-- pretty_printer: creates representations using
    :END:
 
-An error occurred whilst flattening a name.
+*** dot printer                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: pretty_printer
+    :END:
+
+*** colon printer                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: pretty_printer
+    :END:
+
+** pretty printer                                                   :element:
+   :PROPERTIES:
+   :custom_id: 126B5AC4-C73A-F884-52B3-B9CF2BF676AB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: pretty_printer o-- printing_error: throws
+   :masd.codec.plantuml: pretty_printer o-- separators: separates elements according to
+   :END:
 
 ** printing error                                                   :element:
    :PROPERTIES:
@@ -847,12 +842,6 @@ An error occurred whilst flattening a name.
    :END:
 
 An error occurred whilst pretty printing.
-
-** pretty printer                                                   :element:
-   :PROPERTIES:
-   :custom_id: 126B5AC4-C73A-F884-52B3-B9CF2BF676AB
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 ** separators                                                       :element:
    :PROPERTIES:
@@ -874,16 +863,28 @@ Separate name elements with a '::'.
 
 Separate name elements with a '.'.
 
-** physical meta name factory                                       :element:
+** logical name flattener                                           :element:
    :PROPERTIES:
-   :custom_id: 768E0DDB-F69F-4154-FF23-B5948B59B195
+   :custom_id: 988CD7CD-B3EE-0824-2EE3-A501D8C14006
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_name_flattener o-- flattening_error: throws
    :END:
+
+** flattening error                                                 :element:
+   :PROPERTIES:
+   :custom_id: F44642E3-6AE0-8204-8A8B-38E1A6DBCB38
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred whilst flattening a name.
 
 ** physical meta name builder                                       :element:
    :PROPERTIES:
    :custom_id: A51532B5-3BAD-2644-5763-A7FC3F8854D2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: physical_meta_name_builder o-- physical_meta_id_builder
+   :masd.codec.plantuml: physical_meta_name_builder o-- physical_meta_name_factory
+   :masd.codec.plantuml: physical_meta_name_builder o-u- physical_meta_name_validator
    :END:
 
 ** physical meta id builder                                         :element:
@@ -892,10 +893,39 @@ Separate name elements with a '.'.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
+** physical meta name factory                                       :element:
+   :PROPERTIES:
+   :custom_id: 768E0DDB-F69F-4154-FF23-B5948B59B195
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** physical meta name validator                                     :element:
+   :PROPERTIES:
+   :custom_id: 9B64AE0B-90AB-8EB4-8C93-AF3641257187
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: physical_meta_name_validator o-u- validation_error: throws
+   :END:
+
+** validation error                                                 :element:
+   :PROPERTIES:
+   :custom_id: 301D148C-F826-EEA4-D493-7E65EFECC60E
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred during validation.
+
+** identifiable factory                                             :element:
+   :PROPERTIES:
+   :custom_id: E267BF67-488A-E2A4-42F3-4481A0F0C612
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
 ** logical name tree builder                                        :element:
    :PROPERTIES:
    :custom_id: 84F51A2C-A5C3-0214-48DB-851CBAF3D602
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_name_tree_builder o-- legacy_logical_name_tree_parser: converts strings into names
+   :masd.codec.plantuml: logical_name_tree_builder o-- new_logical_name_tree_parser
    :END:
 
 *** names                                                         :attribute:
@@ -917,6 +947,16 @@ Separate name elements with a '.'.
    :PROPERTIES:
    :custom_id: EF1DE00B-55A0-F3E4-AC8B-8037C62849F6
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: legacy_logical_name_tree_parser o-- node
+   :masd.codec.plantuml: legacy_logical_name_tree_parser o-- parsing_error: throws
+   :END:
+
+** new logical name tree parser                                     :element:
+   :PROPERTIES:
+   :custom_id: CD4EB800-9A94-8B84-C54B-39178F4EDEC4
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: new_logical_name_tree_parser o-- node
+   :masd.codec.plantuml: new_logical_name_tree_parser o-- parsing_error: throws
    :END:
 
 ** node                                                             :element:
@@ -950,12 +990,6 @@ Current node.
 
 Child nodes in a tree.
 
-** new logical name tree parser                                     :element:
-   :PROPERTIES:
-   :custom_id: CD4EB800-9A94-8B84-C54B-39178F4EDEC4
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** parsing error                                                    :element:
    :PROPERTIES:
    :custom_id: 46FB8537-1FED-2E84-4C23-AD8A6CD1E43E
@@ -963,20 +997,6 @@ Child nodes in a tree.
    :END:
 
 A fatal error has occurred while parsing.
-
-** physical meta name validator                                     :element:
-   :PROPERTIES:
-   :custom_id: 9B64AE0B-90AB-8EB4-8C93-AF3641257187
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** validation error                                                 :element:
-   :PROPERTIES:
-   :custom_id: 301D148C-F826-EEA4-D493-7E65EFECC60E
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred during validation.
 
 ** physical id factory                                              :element:
    :PROPERTIES:
@@ -988,6 +1008,7 @@ An error occurred during validation.
    :PROPERTIES:
    :custom_id: 9F07E20B-A9D7-2594-15EB-2954B9346EEA
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: meta_name_index_builder o-- entities::physical_meta_name_indices
    :END:
 
 ** logical meta name factory                                        :element:
