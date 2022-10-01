@@ -13,35 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-01 Sat 15:07]
+#+CAPTION: Clock summary at [2022-10-01 Sat 18:53]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *41:55* |       |       | 100.0 |
+| *Total time*                                              | *42:44* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 41:55   |       |       | 100.0 |
-| Active                                                    |         | 41:55 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  24.4 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   5.0 |
+| Stories                                                   | 42:44   |       |       | 100.0 |
+| Active                                                    |         | 42:44 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  23.9 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.9 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.8 |
-| Improve diffing output in tests                           |         |       |  0:19 |   0.8 |
-| Sprint and product backlog grooming                       |         |       |  2:55 |   7.0 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.7 |
+| Improve diffing output in tests                           |         |       |  0:19 |   0.7 |
+| Sprint and product backlog grooming                       |         |       |  3:01 |   7.1 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.6 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.4 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   7.9 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   5.2 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   7.7 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   5.1 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   2.1 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   5.3 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   4.4 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   5.2 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   4.3 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.8 |
-| Model significant relations at a higher level             |         |       |  1:05 |   2.6 |
-| Create a mock configuration builder                       |         |       |  1:58 |   4.7 |
+| Model significant relations at a higher level             |         |       |  1:05 |   2.5 |
+| Create a mock configuration builder                       |         |       |  1:58 |   4.6 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.8 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.5 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.5 |
 | Windows package is broken                                 |         |       |  0:20 |   0.8 |
-| Warning on OSX build                                      |         |       |  2:23 |   5.7 |
-| Add PlantUML relationships to diagrams                    |         |       |  6:39 |  15.9 |
+| Warning on OSX build                                      |         |       |  2:23 |   5.6 |
+| Add PlantUML relationships to diagrams                    |         |       |  7:03 |  16.5 |
+| Change namespaces note implementation in PlantUML         |         |       |  0:19 |   0.7 |
 #+end:
 
 Agenda:
@@ -368,6 +369,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-10-01 Sat 16:48]--[2022-10-01 Sat 16:54] =>  0:06
     CLOCK: [2022-09-30 Fri 11:10]--[2022-09-30 Fri 11:15] =>  0:05
     CLOCK: [2022-09-27 Tue 08:28]--[2022-09-27 Tue 08:40] =>  0:12
     CLOCK: [2022-09-27 Tue 07:39]--[2022-09-27 Tue 07:48] =>  0:09
@@ -1199,6 +1201,9 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-10-01 Sat 16:39]--[2022-10-01 Sat 16:48] =>  0:09
+    CLOCK: [2022-10-01 Sat 15:36]--[2022-10-01 Sat 15:45] =>  0:09
+    CLOCK: [2022-10-01 Sat 15:19]--[2022-10-01 Sat 15:25] =>  0:17
     CLOCK: [2022-10-01 Sat 14:50]--[2022-10-01 Sat 15:07] =>  0:17
     CLOCK: [2022-10-01 Sat 13:20]--[2022-10-01 Sat 13:30] =>  0:10
     CLOCK: [2022-10-01 Sat 11:44]--[2022-10-01 Sat 12:09] =>  0:25
@@ -1222,6 +1227,37 @@ to make diagrams more readable. Models:
 - dogen.cli: done
 - dogen.codec: done
 - dogen.identification
+
+*** STARTED Change namespaces note implementation in PlantUML         :story:
+    :LOGBOOK:
+    CLOCK: [2022-10-01 Sat 17:11]--[2022-10-01 Sat 17:30] =>  0:19
+    :END:
+
+At present we are adding notes to namespaces like so:
+
+#+begin_src plantuml
+    note top of  variability
+        Houses all of the meta-modeling elements related to variability.
+    end note
+#+end_src
+
+The problem with this approach is that the notes end up floating above the
+namespace with an arrow, making it hard to read. A better approach is a floating
+note:
+
+#+begin_src plantuml
+    note A1
+        Houses all of the meta-modeling elements related to variability.
+    end note
+#+end_src
+
+The note is declared inside the namespace. We probably need to ensure the note
+has a unique name. We probably need to use a GUID for the note. Actually maybe
+we can use the ID of the namespace in the note.
+
+Links:
+
+- [[https://stackoverflow.com/questions/59934882/plantuml-and-notes-on-packages][PlantUML and notes on packages]]
 
 *** Ignorable headlines in org-mode                                   :story:
 

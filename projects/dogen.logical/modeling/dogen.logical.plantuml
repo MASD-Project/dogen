@@ -4,7 +4,7 @@ note as N1
 The logcal model defines the core entities that live in the logical dimension of
 MASD's conceptual model.
 
-@section logical_0 Overview
+Overview
 
 The logical model strives to provide a technical-space agnostic element
 representation, designed for code generation. Codec models are obtained via
@@ -12,7 +12,7 @@ frontends and transformed into "bare" logical models, at which point they can
 enter its pipeline. Within it, they are processed until they form a cohesive
 whole. They are then in a suitable state for code generation.
 
-@section asset_1 Mission
+Mission
 
 The objectives of the logical model are:
 
@@ -32,180 +32,17 @@ UML representation:
 end note
 
 namespace entities #F2F2F2 {
-    class attribute <<Documentable, Configurable, Nameable, Stereotypable>> #F7E5FF {
-        +{field} unparsed_type std::string
-        +{field} parsed_type identification::entities::logical_name_tree
-        +{field} is_immutable bool
-        +{field} is_fluent bool
-        +{field} orm_properties boost::optional<orm::attribute_properties>
-        +{field} member_variable_name std::string
-        +{field} getter_setter_name std::string
+    class Parameterisable <<masd::object_template>> #E3B6F6 {
+        +{field} type_parameters type_parameters
     }
 
-    note top of  attribute
-        Represents an attribute in an object.
-    end note
+    Parameterisable o-- type_parameters
 
-    class Nameable <<masd::object_template>> #E3B6F6 {
-        +{field} name identification::entities::logical_name
+    class type_parameters #F7E5FF {
+        +{field} variable_number_of_parameters bool
+        +{field} count unsigned int
+        +{field} always_in_heap bool
     }
-
-    note top of  Nameable
-        Ability to have a name.
-    end note
-
-    class Documentable <<masd::object_template>> #E3B6F6 {
-        +{field} documentation std::string
-    }
-
-    note top of  Documentable
-        Ability to provide documentation.
-    end note
-
-    class Provenance <<masd::object_template>> #E3B6F6 {
-        +{field} provenance identification::entities::codec_provenance
-    }
-
-    note top of  Provenance
-        Details of the origin of this model element.
-    end note
-
-    class Containable <<masd::object_template>> #E3B6F6 {
-        +{field} contained_by identification::entities::logical_id
-        +{field} in_global_module bool
-    }
-
-    note top of  Containable
-        The ability to be contained inside a module.
-    end note
-
-    class Stereotypable <<masd::object_template>> #E3B6F6 {
-        +{field} stereotypes stereotypes
-    }
-
-    class MetaNameable <<masd::object_template>> #E3B6F6 {
-        +{field} meta_name identification::entities::logical_meta_name
-    }
-
-    note top of  MetaNameable
-        Ability to have a meta-name.
-    end note
-
-    class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
-        +{field} intrinsic_technical_space identification::entities::technical_space
-    }
-
-    class Configurable <<masd::object_template>> #E3B6F6 {
-        +{field} configuration boost::shared_ptr<variability::entities::configuration>
-    }
-
-    note top of  Configurable
-        Ability to have meta-data associated.
-    end note
-
-    class Labelable <<masd::object_template>> #E3B6F6 {
-        +{field} labels std::list<identification::entities::label>
-    }
-
-    note top of  Labelable
-        The ability to attach labels to an element.
-    end note
-
-    class Generatable <<masd::object_template>> #E3B6F6 {
-        +{field} generability_status generability_status
-    }
-
-    class Element <<masd::object_template>> #E3B6F6 {
-    }
-
-    entities::Nameable <|-- entities::Element
-    entities::Documentable <|-- entities::Element
-    entities::Provenance <|-- entities::Element
-    entities::Containable <|-- entities::Element
-    entities::Stereotypable <|-- entities::Element
-    entities::MetaNameable <|-- entities::Element
-    entities::TechnicalSpaceRelationship <|-- entities::Element
-    entities::Configurable <|-- entities::Element
-    entities::Labelable <|-- entities::Element
-    entities::Generatable <|-- entities::Element
-    note top of  Element
-        A unit of coding that can be code generated.
-
-We define the Element object template purely to make our life easier
-when creating the element class. It is not required for any other
-purpose.
-    end note
-
-    class Stateful <<masd::object_template>> #E3B6F6 {
-        +{field} all_attributes std::list<attribute>
-        +{field} local_attributes std::list<attribute>
-        +{field} inherited_attributes std::unordered_map<identification::entities::logical_name, std::list<attribute>>
-        +{field} is_immutable bool
-        +{field} is_fluent bool
-    }
-
-    note top of  Stateful
-        Ability to have a state.
-    end note
-
-    class element <<masd::visitable, Element>> #F7E5FF {
-        +{field} decoration std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
-        +{field} helper_properties std::list<helper_properties>
-    }
-
-    note top of  element
-        Represents a generic logical construct.
-
-An element is anything of interest in a problem domain which needs to be
-expressed in code generation. It covers both types (objects, enumerations, etc),
-meta-types (object templates) and non-types (modules and backend specific entities).
-    end note
-
-    class model <<Nameable, MetaNameable, Provenance>> #F7E5FF {
-        +{field} references std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
-        +{field} leaves std::unordered_set<identification::entities::logical_name>
-        +{field} root_module boost::shared_ptr<structural::module>
-        +{field} input_technical_space identification::entities::technical_space
-        +{field} output_technical_spaces std::list<identification::entities::technical_space>
-        +{field} all_technical_spaces std::unordered_set<identification::entities::technical_space>
-        +{field} orm_properties boost::optional<orm::model_properties>
-        +{field} structural_elements structural::element_repository
-        +{field} decoration_elements decoration::element_repository
-        +{field} variability_elements variability::element_repository
-        +{field} mapping_elements mapping::element_repository
-        +{field} templating_elements templating::element_repository
-        +{field} serialization_elements serialization::element_repository
-        +{field} visual_studio_elements visual_studio::element_repository
-        +{field} orm_elements orm::element_repository
-        +{field} build_elements build::element_repository
-        +{field} physical_elements physical::element_repository
-        +{field} meta_names std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
-        +{field} streaming_properties std::unordered_map<identification::entities::logical_id, streaming_properties>
-        +{field} technical_space_version identification::entities::technical_space_version
-        +{field} aspect_properties std::unordered_map<identification::entities::logical_id, aspect_properties>
-        +{field} assistant_properties std::unordered_map<identification::entities::logical_id, assistant_properties>
-    }
-
-    note top of  model
-        Intermediate representation of a masd model.
-    end note
-
-    class elements_traversal <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-    }
-
-    class TraversalVisitor <<masd::object_template>> #E3B6F6 {
-    }
-
-    class Visitable <<masd::object_template>> #E3B6F6 {
-        +{field} base_visitor boost::optional<identification::entities::logical_name>
-        +{field} derived_visitor boost::optional<identification::entities::logical_name>
-        +{field} is_visitation_root bool
-        +{field} is_visitation_leaf bool
-    }
-
-    note top of  Visitable
-        The ability to handle visitation.
-    end note
 
     class Associatable <<masd::object_template>> #E3B6F6 {
         +{field} transparent_associations std::list<identification::entities::logical_name>
@@ -235,6 +72,17 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         The element has the ability to be part of a generalization relationship.
     end note
 
+    class Visitable <<masd::object_template>> #E3B6F6 {
+        +{field} base_visitor boost::optional<identification::entities::logical_name>
+        +{field} derived_visitor boost::optional<identification::entities::logical_name>
+        +{field} is_visitation_root bool
+        +{field} is_visitation_leaf bool
+    }
+
+    note top of  Visitable
+        The ability to handle visitation.
+    end note
+
     class Relatable <<masd::object_template>> #E3B6F6 {
     }
 
@@ -246,15 +94,43 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         Element has the ability to have relationships with other elements.
     end note
 
-    class Parameterisable <<masd::object_template>> #E3B6F6 {
-        +{field} type_parameters type_parameters
+    class Containable <<masd::object_template>> #E3B6F6 {
+        +{field} contained_by identification::entities::logical_id
+        +{field} in_global_module bool
     }
 
-    class type_parameters #F7E5FF {
-        +{field} variable_number_of_parameters bool
-        +{field} count unsigned int
-        +{field} always_in_heap bool
+    note top of  Containable
+        The ability to be contained inside a module.
+    end note
+
+    class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
+        +{field} intrinsic_technical_space identification::entities::technical_space
     }
+
+    class Provenance <<masd::object_template>> #E3B6F6 {
+        +{field} provenance identification::entities::codec_provenance
+    }
+
+    note top of  Provenance
+        Details of the origin of this model element.
+    end note
+
+    class Stereotypable <<masd::object_template>> #E3B6F6 {
+        +{field} stereotypes stereotypes
+    }
+
+    Stereotypable o-- stereotypes
+
+    class stereotypes #F7E5FF {
+        +{field} static_stereotypes std::list<static_stereotypes>
+        +{field} dynamic_stereotypes std::list<identification::entities::stereotype>
+    }
+
+    stereotypes o-- static_stereotypes
+
+    note top of  stereotypes
+        Stereotype information associated with this element.
+    end note
 
     enum static_stereotypes <<masd::enumeration>> #F2DAFD {
         +{field} fluent
@@ -301,15 +177,208 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         Lists all stereotypes defined in the masd UML profile.
     end note
 
+    class Documentable <<masd::object_template>> #E3B6F6 {
+        +{field} documentation std::string
+    }
+
+    note top of  Documentable
+        Ability to provide documentation.
+    end note
+
+    class Configurable <<masd::object_template>> #E3B6F6 {
+        +{field} configuration boost::shared_ptr<variability::entities::configuration>
+    }
+
+    note top of  Configurable
+        Ability to have meta-data associated.
+    end note
+
+    class MetaNameable <<masd::object_template>> #E3B6F6 {
+        +{field} meta_name identification::entities::logical_meta_name
+    }
+
+    note top of  MetaNameable
+        Ability to have a meta-name.
+    end note
+
+    class Nameable <<masd::object_template>> #E3B6F6 {
+        +{field} name identification::entities::logical_name
+    }
+
+    note top of  Nameable
+        Ability to have a name.
+    end note
+
+    class Generatable <<masd::object_template>> #E3B6F6 {
+        +{field} generability_status generability_status
+    }
+
+    Generatable o-- generability_status
+
+    enum generability_status <<masd::enumeration>> #F2DAFD {
+        +{field} non_generatable_source
+        +{field} generation_not_expected
+        +{field} non_generatable_state
+        +{field} generation_disabled
+        +{field} generation_ignored
+        +{field} generatable
+    }
+
+    note top of  generability_status
+        The status of this element with regards to generability.
+    end note
+
+    class Labelable <<masd::object_template>> #E3B6F6 {
+        +{field} labels std::list<identification::entities::label>
+    }
+
+    note top of  Labelable
+        The ability to attach labels to an element.
+    end note
+
+    class Stateful <<masd::object_template>> #E3B6F6 {
+        +{field} all_attributes std::list<attribute>
+        +{field} local_attributes std::list<attribute>
+        +{field} inherited_attributes std::unordered_map<identification::entities::logical_name, std::list<attribute>>
+        +{field} is_immutable bool
+        +{field} is_fluent bool
+    }
+
+    Stateful o-- attribute: stores state in
+
+    note top of  Stateful
+        Ability to have a state.
+    end note
+
+    class attribute <<Documentable, Configurable, Nameable, Stereotypable>> #F7E5FF {
+        +{field} unparsed_type std::string
+        +{field} parsed_type identification::entities::logical_name_tree
+        +{field} is_immutable bool
+        +{field} is_fluent bool
+        +{field} orm_properties boost::optional<orm::attribute_properties>
+        +{field} member_variable_name std::string
+        +{field} getter_setter_name std::string
+    }
+
+    note top of  attribute
+        Represents an attribute in an object.
+    end note
+
+    class Element <<masd::object_template>> #E3B6F6 {
+    }
+
+    Element <|-- element
+
+    entities::Nameable <|-- entities::Element
+    entities::Documentable <|-- entities::Element
+    entities::Provenance <|-- entities::Element
+    entities::Containable <|-- entities::Element
+    entities::Stereotypable <|-- entities::Element
+    entities::MetaNameable <|-- entities::Element
+    entities::TechnicalSpaceRelationship <|-- entities::Element
+    entities::Configurable <|-- entities::Element
+    entities::Labelable <|-- entities::Element
+    entities::Generatable <|-- entities::Element
+    note top of  Element
+        A unit of coding that can be code generated.
+
+We define the Element object template purely to make our life easier when
+creating the element class. It is not required for any other purpose.
+    end note
+
+    class element <<masd::visitable, Element>> #F7E5FF {
+        +{field} decoration std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
+        +{field} helper_properties std::list<helper_properties>
+    }
+
+    element o-- helper_properties
+
+    note top of  element
+        Represents a generic logical construct.
+
+An element is anything of interest in a problem domain which needs to be
+expressed in code generation. It covers both types (objects, enumerations, etc),
+meta-types (object templates) and non-types (modules and backend specific entities).
+    end note
+
+    class model <<Nameable, MetaNameable, Provenance>> #F7E5FF {
+        +{field} references std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
+        +{field} leaves std::unordered_set<identification::entities::logical_name>
+        +{field} root_module boost::shared_ptr<structural::module>
+        +{field} input_technical_space identification::entities::technical_space
+        +{field} output_technical_spaces std::list<identification::entities::technical_space>
+        +{field} all_technical_spaces std::unordered_set<identification::entities::technical_space>
+        +{field} orm_properties boost::optional<orm::model_properties>
+        +{field} structural_elements structural::element_repository
+        +{field} decoration_elements decoration::element_repository
+        +{field} variability_elements variability::element_repository
+        +{field} mapping_elements mapping::element_repository
+        +{field} templating_elements templating::element_repository
+        +{field} serialization_elements serialization::element_repository
+        +{field} visual_studio_elements visual_studio::element_repository
+        +{field} orm_elements orm::element_repository
+        +{field} build_elements build::element_repository
+        +{field} physical_elements physical::element_repository
+        +{field} meta_names std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
+        +{field} streaming_properties std::unordered_map<identification::entities::logical_id, streaming_properties>
+        +{field} technical_space_version identification::entities::technical_space_version
+        +{field} aspect_properties std::unordered_map<identification::entities::logical_id, aspect_properties>
+        +{field} assistant_properties std::unordered_map<identification::entities::logical_id, assistant_properties>
+    }
+
+    model o-- element
+    model o-- assistant_properties
+    model o-- aspect_properties
+    model o-- streaming_properties
+
+    note top of  model
+        Intermediate representation of a masd model.
+    end note
+
+    class assistant_properties #F7E5FF {
+        +{field} requires_assistance bool
+        +{field} method_postfix std::string
+    }
+
+    class aspect_properties #F7E5FF {
+        +{field} requires_static_reference_equals bool
+    }
+
+    class streaming_properties #F7E5FF {
+        +{field} requires_quoting bool
+        +{field} string_conversion_method std::string
+        +{field} remove_unprintable_characters bool
+    }
+
+    class output_model_set <<Nameable>> #F7E5FF {
+        +{field} models std::list<model>
+    }
+
+    output_model_set o-- model: composed of
+
+    note top of  output_model_set
+        Represents a set of related logical models produced as ouput of the logical
+model chains.
+    end note
+
     class input_model_set #F7E5FF {
         +{field} target model
         +{field} references std::list<model>
         +{field} fixed_mappings std::unordered_map<std::string, std::string>
     }
 
+    input_model_set o-- model: composed of
+
     note top of  input_model_set
-        Represents a set of related logical models used as an input to the logical model chains.
+        Represents a set of related logical models used as an input to the logical model
+chains.
     end note
+
+    class elements_traversal <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class TraversalVisitor <<masd::object_template>> #E3B6F6 {
+    }
 
     class Container <<masd::object_template>> #E3B6F6 {
         +{field} contains std::list<identification::entities::logical_id>
@@ -1211,47 +1280,13 @@ namespace.
         Logical representation of elements in the physical dimension.
     end note
 
-    class output_model_set <<Nameable>> #F7E5FF {
-        +{field} models std::list<model>
-    }
-
-    note top of  output_model_set
-        Represents a set of related logical models produced as ouput of the logical model chains.
-    end note
-
-    enum generability_status <<masd::enumeration>> #F2DAFD {
-        +{field} non_generatable_source
-        +{field} generation_not_expected
-        +{field} non_generatable_state
-        +{field} generation_disabled
-        +{field} generation_ignored
-        +{field} generatable
-    }
-
-    note top of  generability_status
-        The status of this element with regards to generability.
-    end note
-
-    class stereotypes #F7E5FF {
-        +{field} static_stereotypes std::list<static_stereotypes>
-        +{field} dynamic_stereotypes std::list<identification::entities::stereotype>
-    }
-
-    note top of  stereotypes
-        Stereotype information associated with this element.
-    end note
-
-    class streaming_properties #F7E5FF {
-        +{field} requires_quoting bool
-        +{field} string_conversion_method std::string
-        +{field} remove_unprintable_characters bool
-    }
-
     class helper_properties #F7E5FF {
         +{field} current helper_descriptor
         +{field} direct_descendants std::list<helper_descriptor>
         +{field} in_inheritance_relationship bool
     }
+
+    helper_properties o-- helper_descriptor
 
     class helper_descriptor #F7E5FF {
         +{field} family std::string
@@ -1265,15 +1300,6 @@ namespace.
         +{field} requires_hashing_helper bool
         +{field} is_circular_dependency bool
         +{field} is_pointer bool
-    }
-
-    class aspect_properties #F7E5FF {
-        +{field} requires_static_reference_equals bool
-    }
-
-    class assistant_properties #F7E5FF {
-        +{field} requires_assistance bool
-        +{field} method_postfix std::string
     }
 
 }

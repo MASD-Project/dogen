@@ -22,7 +22,7 @@
 The logcal model defines the core entities that live in the logical dimension of
 MASD's conceptual model.
 
-@section logical_0 Overview
+Overview
 
 The logical model strives to provide a technical-space agnostic element
 representation, designed for code generation. Codec models are obtained via
@@ -30,7 +30,7 @@ frontends and transformed into "bare" logical models, at which point they can
 enter its pipeline. Within it, they are processed until they form a cohesive
 whole. They are then in a suitable state for code generation.
 
-@section asset_1 Mission
+Mission
 
 The objectives of the logical model are:
 
@@ -55,6 +55,553 @@ UML representation:
   :END:
 
 Entities that define the logical model.
+
+** Parameterisable                                                  :element:
+   :PROPERTIES:
+   :custom_id: 5CEF51C1-A7DE-EFC4-A923-39BD2A687FE9
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Parameterisable o-- type_parameters
+   :END:
+
+*** type parameters                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: type_parameters
+    :END:
+
+** type parameters                                                  :element:
+   :PROPERTIES:
+   :custom_id: C31D2585-6731-A8C4-438B-98EC0378AE03
+   :END:
+
+*** variable number of parameters                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** count                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: unsigned int
+    :END:
+
+*** always in heap                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+** Associatable                                                     :element:
+   :PROPERTIES:
+   :custom_id: 2AE7E131-8ADA-77E4-E303-DD0829E14A88
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The element has the ability to associate itself with other elements.
+
+*** transparent associations                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Elements that are involved in aggregation or composition relationships.
+
+*** opaque associations                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Elements that are involved in aggregation or composition relationships via
+indirection.
+
+This is used to break cycles where required.
+
+*** associative container keys                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Elements that are keys in an associative container.
+
+** Generalizable                                                    :element:
+   :PROPERTIES:
+   :custom_id: CD6B5804-0CBC-1A14-56DB-27E8CB8F4808
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The element has the ability to be part of a generalization relationship.
+
+*** is parent                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+True if this element is the parent of one or more elements, false otherwise.
+
+*** is child                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the element has at least one parent.
+
+*** is leaf                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+True if the type has a parent but no children.
+
+*** is final                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the element cannot be inherited from.
+
+*** is final requested                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<bool>
+    :END:
+
+If present and true/false, user has requested is_final to be true/false.
+
+If not present, user did not make any statements with regards to finality.
+
+*** is abstract                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the type is an abstract type.
+
+*** in inheritance relationship                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+True if the object is related to at least one other object as a parent or a child.
+
+*** root parents                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Top-most parents at the root of the inheritance hierarchy, if any.
+
+*** parents                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Direct parent of this element, if any.
+
+*** leaves                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::logical_name>
+    :END:
+
+Elements that are at the bottom of the inheritance tree.
+
+*** type registrar                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<identification::entities::logical_name>
+    :END:
+
+** Visitable                                                        :element:
+   :PROPERTIES:
+   :custom_id: C07FD6BB-10DD-33C4-3D03-B5931BB227CE
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The ability to handle visitation.
+
+*** base visitor                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<identification::entities::logical_name>
+    :END:
+
+Base class of the visitor that visits the current element, if any.
+
+*** derived visitor                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<identification::entities::logical_name>
+    :END:
+
+Derived class of the visitor that visits the current element, if any.
+
+*** is visitation root                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** is visitation leaf                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+** Relatable                                                        :element:
+   :PROPERTIES:
+   :custom_id: EB02CA2F-34EA-15B4-A023-6CDCD276979A
+   :masd.codec.parent: entities::Containable, entities::Visitable, entities::Associatable, entities::Generalizable
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Element has the ability to have relationships with other elements.
+
+** Containable                                                      :element:
+   :PROPERTIES:
+   :custom_id: 94418DCE-0B68-6F54-5E6B-406609EB3418
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The ability to be contained inside a module.
+
+*** contained by                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_id
+    :END:
+
+ID of the element in which we are contained, if any.
+
+*** in global module                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the element is located in the global module.
+
+** TechnicalSpaceRelationship                                       :element:
+   :PROPERTIES:
+   :custom_id: BA239DB7-6263-49D4-D2DB-55C6AEB8933E
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+*** intrinsic technical space                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::technical_space
+    :END:
+
+Describes the intrinsic nature of the modeling element with regards to technical
+spaces.
+
+If the element can be mapped to a technical space then its intrinsic nature is
+agnostic. Otherwise, the element belongs to a concrete technical space.
+
+** Provenance                                                       :element:
+   :PROPERTIES:
+   :custom_id: 4750770A-D660-7394-4D13-6843880FFA6F
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Details of the origin of this model element.
+
+*** provenance                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::codec_provenance
+    :END:
+
+Details of the provenance of this model element.
+
+** Stereotypable                                                    :element:
+   :PROPERTIES:
+   :custom_id: EA9E4E85-C60E-3934-2CF3-E6FD0155850F
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Stereotypable o-- stereotypes
+   :END:
+
+*** stereotypes                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: stereotypes
+    :END:
+
+All stereotypes associated with this element.
+
+** stereotypes                                                      :element:
+   :PROPERTIES:
+   :custom_id: 5CAA14F0-5A76-76A4-D5A3-0A2CE25D11A0
+   :masd.codec.plantuml: stereotypes o-- static_stereotypes
+   :END:
+
+Stereotype information associated with this element.
+
+*** static stereotypes                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<static_stereotypes>
+    :END:
+
+Stereotypes that are part of the dogen UML profile, and so are well-known to the
+model.
+
+*** dynamic stereotypes                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::stereotype>
+    :END:
+
+Stereotypes that are not part of the masd UML profile. These are user defined.
+
+** static stereotypes                                               :element:
+   :PROPERTIES:
+   :custom_id: 5EB21FF9-F912-A704-F043-70B2125E6164
+   :masd.codec.stereotypes: masd::enumeration
+   :END:
+
+Lists all stereotypes defined in the masd UML profile.
+
+*** fluent                                                        :attribute:
+
+*** immutable                                                     :attribute:
+
+*** visitable                                                     :attribute:
+
+*** structural object                                             :attribute:
+
+*** structural object template                                    :attribute:
+
+*** structural exception                                          :attribute:
+
+*** structural primitive                                          :attribute:
+
+*** structural enumeration                                        :attribute:
+
+*** structural module                                             :attribute:
+
+*** structural builtin                                            :attribute:
+
+*** structural entry point                                        :attribute:
+
+*** structural assistant                                          :attribute:
+
+*** orm object                                                    :attribute:
+
+*** orm value                                                     :attribute:
+
+*** decoration modeline group                                     :attribute:
+
+*** decoration modeline                                           :attribute:
+
+*** decoration generation marker                                  :attribute:
+
+*** decoration licence                                            :attribute:
+
+*** variability profile                                           :attribute:
+
+*** variability profile template                                  :attribute:
+
+*** variability feature bundle                                    :attribute:
+
+*** variability feature template bundle                           :attribute:
+
+*** variability initializer                                       :attribute:
+
+*** mapping fixed mappable                                        :attribute:
+
+*** mapping extensible mappable                                   :attribute:
+
+*** templating logic less template                                :attribute:
+
+*** serialization type registrar                                  :attribute:
+
+*** visual studio solution                                        :attribute:
+
+*** visual studio project                                         :attribute:
+
+*** visual studio msbuild targets                                 :attribute:
+
+*** orm common odb options                                        :attribute:
+
+*** build cmakelists                                              :attribute:
+
+*** physical backend                                              :attribute:
+
+*** physical facet                                                :attribute:
+
+*** physical archetype                                            :attribute:
+
+*** physical archetype kind                                       :attribute:
+
+*** physical part                                                 :attribute:
+
+*** physical helper                                               :attribute:
+
+** Documentable                                                     :element:
+   :PROPERTIES:
+   :custom_id: 85CC8ECB-E225-8AD4-90EB-45F0B72D176A
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to provide documentation.
+
+*** documentation                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Code comments.
+
+These are expected to follow the grammar of the comment processing tools
+of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
+etc.
+
+** Configurable                                                     :element:
+   :PROPERTIES:
+   :custom_id: E41A5990-6CA4-D134-2C93-86EF7957C258
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have meta-data associated.
+
+*** configuration                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
+    :END:
+
+Configuration for this element.
+
+** MetaNameable                                                     :element:
+   :PROPERTIES:
+   :custom_id: D422CBBA-69C2-8294-A453-096336337AF0
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have a meta-name.
+
+*** meta name                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_meta_name
+    :END:
+
+Name of the element in the meta-model that this instance conforms to.
+
+** Nameable                                                         :element:
+   :PROPERTIES:
+   :custom_id: F708E2D2-E4DB-1954-22CB-CF879D9444BE
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Ability to have a name.
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_name
+    :END:
+
+Fully qualified name.
+
+** Generatable                                                      :element:
+   :PROPERTIES:
+   :custom_id: 559CD1AE-B7FC-5104-88F3-4A2CBD0944FE
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Generatable o-- generability_status
+   :END:
+
+*** generability status                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: generability_status
+    :END:
+
+The status of this element with regards to generability.
+
+** generability status                                              :element:
+   :PROPERTIES:
+   :custom_id: 91BF00F9-9715-F314-50E3-9B6AFFB47CFA
+   :masd.codec.stereotypes: masd::enumeration
+   :END:
+
+The status of this element with regards to generability.
+
+*** non generatable source                                        :attribute:
+
+The element was sourced from a non-target model.
+
+*** generation not expected                                       :attribute:
+
+The element is of a type that is expected to have support for generation.
+
+*** non generatable state                                         :attribute:
+
+The element is normally generatable, but is in a state that precludes generation.
+
+*** generation disabled                                           :attribute:
+
+The user requested generation to be disabled.
+
+*** generation ignored                                            :attribute:
+
+User requested that any changes to this element are to be ignored.
+
+*** generatable                                                   :attribute:
+
+The element is generatable.
+
+** Labelable                                                        :element:
+   :PROPERTIES:
+   :custom_id: 5FFF82DE-828A-A2D4-E81B-7949E844308A
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The ability to attach labels to an element.
+
+*** labels                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::label>
+    :END:
+
+All labels associated with this element.
+
+** Stateful                                                         :element:
+   :PROPERTIES:
+   :custom_id: D3BB6222-DA90-7F44-ADCB-EE9D1C89B845
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Stateful o-- attribute: stores state in
+   :END:
+
+Ability to have a state.
+
+*** all attributes                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<attribute>
+    :END:
+
+All attributes associated with this type.
+
+This is a union of the following sets:
+
+@li the set of all attributes obtained via inheritance relationships;
+@li the set of all attributes obtained via instantiating object templates,
+    including their inheritance tree;
+@li the set of all attributes directly associated with the type (local).
+
+The first and third sets are cached in this object. The second isn't as we do
+not have a need for it.
+
+*** local attributes                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<attribute>
+    :END:
+
+The set of all attributes directly associated with the type.
+
+*** inherited attributes                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::logical_name, std::list<attribute>>
+    :END:
+
+The set of all attributes obtained via inheritance, by parent name.
+
+Note that we are using name as a key by design (instead of id); it is required for
+formatting.
+
+*** is immutable                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, do not generate setters for the element's attributes.
+
+*** is fluent                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, generate fluent setters.
 
 ** attribute                                                        :element:
    :PROPERTIES:
@@ -116,238 +663,24 @@ across all languages. This will have to be revisited in the future.
 
 Name to use for getter and setter.
 
-** Nameable                                                         :element:
-   :PROPERTIES:
-   :custom_id: F708E2D2-E4DB-1954-22CB-CF879D9444BE
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a name.
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_name
-    :END:
-
-Fully qualified name.
-
-** Documentable                                                     :element:
-   :PROPERTIES:
-   :custom_id: 85CC8ECB-E225-8AD4-90EB-45F0B72D176A
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to provide documentation.
-
-*** documentation                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Code comments.
-
-These are expected to follow the grammar of the comment processing tools
-of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
-etc.
-
-** Provenance                                                       :element:
-   :PROPERTIES:
-   :custom_id: 4750770A-D660-7394-4D13-6843880FFA6F
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Details of the origin of this model element.
-
-*** provenance                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::codec_provenance
-    :END:
-
-Details of the provenance of this model element.
-
-** Containable                                                      :element:
-   :PROPERTIES:
-   :custom_id: 94418DCE-0B68-6F54-5E6B-406609EB3418
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-The ability to be contained inside a module.
-
-*** contained by                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_id
-    :END:
-
-ID of the element in which we are contained, if any.
-
-*** in global module                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the element is located in the global module.
-
-** Stereotypable                                                    :element:
-   :PROPERTIES:
-   :custom_id: EA9E4E85-C60E-3934-2CF3-E6FD0155850F
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** stereotypes                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: stereotypes
-    :END:
-
-All stereotypes associated with this element.
-
-** MetaNameable                                                     :element:
-   :PROPERTIES:
-   :custom_id: D422CBBA-69C2-8294-A453-096336337AF0
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a meta-name.
-
-*** meta name                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_meta_name
-    :END:
-
-Name of the element in the meta-model that this instance conforms to.
-
-** TechnicalSpaceRelationship                                       :element:
-   :PROPERTIES:
-   :custom_id: BA239DB7-6263-49D4-D2DB-55C6AEB8933E
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** intrinsic technical space                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::technical_space
-    :END:
-
-Describes the intrinsic nature of the modeling element with regards to technical
-spaces.
-
-If the element can be mapped to a technical space then its intrinsic nature is
-agnostic. Otherwise, the element belongs to a concrete technical space.
-
-** Configurable                                                     :element:
-   :PROPERTIES:
-   :custom_id: E41A5990-6CA4-D134-2C93-86EF7957C258
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have meta-data associated.
-
-*** configuration                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
-    :END:
-
-Configuration for this element.
-
-** Labelable                                                        :element:
-   :PROPERTIES:
-   :custom_id: 5FFF82DE-828A-A2D4-E81B-7949E844308A
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-The ability to attach labels to an element.
-
-*** labels                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::label>
-    :END:
-
-All labels associated with this element.
-
-** Generatable                                                      :element:
-   :PROPERTIES:
-   :custom_id: 559CD1AE-B7FC-5104-88F3-4A2CBD0944FE
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** generability status                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: generability_status
-    :END:
-
-The status of this element with regards to generability.
-
 ** Element                                                          :element:
    :PROPERTIES:
    :custom_id: FB7855FA-79DF-A9C4-51FB-C6977AD36BC6
    :masd.codec.parent: entities::Nameable, entities::Documentable, entities::Provenance, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable, entities::Generatable
    :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Element <|-- element
    :END:
 
 A unit of coding that can be code generated.
 
-We define the Element object template purely to make our life easier
-when creating the element class. It is not required for any other
-purpose.
-
-** Stateful                                                         :element:
-   :PROPERTIES:
-   :custom_id: D3BB6222-DA90-7F44-ADCB-EE9D1C89B845
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a state.
-
-*** all attributes                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<attribute>
-    :END:
-
-All attributes associated with this type.
-
-This is a union of the following sets:
-
-@li the set of all attributes obtained via inheritance relationships;
-@li the set of all attributes obtained via instantiating object templates,
-    including their inheritance tree;
-@li the set of all attributes directly associated with the type (local).
-
-The first and third sets are cached in this object. The second isn't as we do
-not have a need for it.
-
-*** local attributes                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<attribute>
-    :END:
-
-The set of all attributes directly associated with the type.
-
-*** inherited attributes                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::logical_name, std::list<attribute>>
-    :END:
-
-The set of all attributes obtained via inheritance, by parent name.
-
-Note that we are using name as a key by design (instead of id); it is required for
-formatting.
-
-*** is immutable                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, do not generate setters for the element's attributes.
-
-*** is fluent                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, generate fluent setters.
+We define the Element object template purely to make our life easier when
+creating the element class. It is not required for any other purpose.
 
 ** element                                                          :element:
    :PROPERTIES:
    :custom_id: 11FA3A73-F424-9174-2583-D51BFFCC94A3
    :masd.codec.stereotypes: masd::visitable, Element
+   :masd.codec.plantuml: element o-- helper_properties
    :END:
 
 Represents a generic logical construct.
@@ -372,6 +705,10 @@ If set, decoration to be added to each generated file.
    :PROPERTIES:
    :custom_id: 3FA5A710-81C4-9874-3553-701B8E6D77AA
    :masd.codec.stereotypes: Nameable, MetaNameable, Provenance
+   :masd.codec.plantuml: model o-- element
+   :masd.codec.plantuml: model o-- assistant_properties
+   :masd.codec.plantuml: model o-- aspect_properties
+   :masd.codec.plantuml: model o-- streaming_properties
    :END:
 
 Intermediate representation of a masd model.
@@ -519,297 +856,80 @@ Version of the technical space we are targeting.
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, assistant_properties>
     :END:
 
-** elements traversal                                               :element:
+** assistant properties                                             :element:
    :PROPERTIES:
-   :custom_id: 04747766-0B17-5034-3D23-88B43D603F91
-   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+   :custom_id: 38B5C749-A7FE-C4B4-84AB-C379F15AD7D4
    :END:
 
-** TraversalVisitor                                                 :element:
+*** requires assistance                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the type needs help of an assistant.
+
+*** method postfix                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Postfix to use to call the appropriate assistant method, if required.
+
+** aspect properties                                                :element:
    :PROPERTIES:
-   :custom_id: A2973ACD-EDD9-6B94-5F23-1F2CEC731434
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: 37EEEB28-ECF9-77C4-8C03-A839BE8FD062
    :END:
 
-** Visitable                                                        :element:
+*** requires static reference equals                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+** streaming properties                                             :element:
    :PROPERTIES:
-   :custom_id: C07FD6BB-10DD-33C4-3D03-B5931BB227CE
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: DDACB531-582A-B374-2BDB-70E8810430CC
    :END:
 
-The ability to handle visitation.
-
-*** base visitor                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<identification::entities::logical_name>
-    :END:
-
-Base class of the visitor that visits the current element, if any.
-
-*** derived visitor                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<identification::entities::logical_name>
-    :END:
-
-Derived class of the visitor that visits the current element, if any.
-
-*** is visitation root                                            :attribute:
+*** requires quoting                                              :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
-*** is visitation leaf                                            :attribute:
+*** string conversion method                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** remove unprintable characters                                 :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
-** Associatable                                                     :element:
+** output model set                                                 :element:
    :PROPERTIES:
-   :custom_id: 2AE7E131-8ADA-77E4-E303-DD0829E14A88
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: 9C3D1AF3-4670-7D04-C3AB-BF9EBC76C030
+   :masd.codec.stereotypes: Nameable
+   :masd.codec.plantuml: output_model_set o-- model: composed of
    :END:
 
-The element has the ability to associate itself with other elements.
+Represents a set of related logical models produced as ouput of the logical
+model chains.
 
-*** transparent associations                                      :attribute:
+*** models                                                        :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
+    :masd.codec.type: std::list<model>
     :END:
 
-Elements that are involved in aggregation or composition relationships.
-
-*** opaque associations                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Elements that are involved in aggregation or composition relationships via
-indirection.
-
-This is used to break cycles where required.
-
-*** associative container keys                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Elements that are keys in an associative container.
-
-** Generalizable                                                    :element:
-   :PROPERTIES:
-   :custom_id: CD6B5804-0CBC-1A14-56DB-27E8CB8F4808
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-The element has the ability to be part of a generalization relationship.
-
-*** is parent                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-True if this element is the parent of one or more elements, false otherwise.
-
-*** is child                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the element has at least one parent.
-
-*** is leaf                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-True if the type has a parent but no children.
-
-*** is final                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the element cannot be inherited from.
-
-*** is final requested                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<bool>
-    :END:
-
-If present and true/false, user has requested is_final to be true/false.
-
-If not present, user did not make any statements with regards to finality.
-
-*** is abstract                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the type is an abstract type.
-
-*** in inheritance relationship                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-True if the object is related to at least one other object as a parent or a child.
-
-*** root parents                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Top-most parents at the root of the inheritance hierarchy, if any.
-
-*** parents                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Direct parent of this element, if any.
-
-*** leaves                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::logical_name>
-    :END:
-
-Elements that are at the bottom of the inheritance tree.
-
-*** type registrar                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<identification::entities::logical_name>
-    :END:
-
-** Relatable                                                        :element:
-   :PROPERTIES:
-   :custom_id: EB02CA2F-34EA-15B4-A023-6CDCD276979A
-   :masd.codec.parent: entities::Containable, entities::Visitable, entities::Associatable, entities::Generalizable
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Element has the ability to have relationships with other elements.
-
-** Parameterisable                                                  :element:
-   :PROPERTIES:
-   :custom_id: 5CEF51C1-A7DE-EFC4-A923-39BD2A687FE9
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** type parameters                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: type_parameters
-    :END:
-
-** type parameters                                                  :element:
-   :PROPERTIES:
-   :custom_id: C31D2585-6731-A8C4-438B-98EC0378AE03
-   :END:
-
-*** variable number of parameters                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** count                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: unsigned int
-    :END:
-
-*** always in heap                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-** static stereotypes                                               :element:
-   :PROPERTIES:
-   :custom_id: 5EB21FF9-F912-A704-F043-70B2125E6164
-   :masd.codec.stereotypes: masd::enumeration
-   :END:
-
-Lists all stereotypes defined in the masd UML profile.
-
-*** fluent                                                        :attribute:
-
-*** immutable                                                     :attribute:
-
-*** visitable                                                     :attribute:
-
-*** structural object                                             :attribute:
-
-*** structural object template                                    :attribute:
-
-*** structural exception                                          :attribute:
-
-*** structural primitive                                          :attribute:
-
-*** structural enumeration                                        :attribute:
-
-*** structural module                                             :attribute:
-
-*** structural builtin                                            :attribute:
-
-*** structural entry point                                        :attribute:
-
-*** structural assistant                                          :attribute:
-
-*** orm object                                                    :attribute:
-
-*** orm value                                                     :attribute:
-
-*** decoration modeline group                                     :attribute:
-
-*** decoration modeline                                           :attribute:
-
-*** decoration generation marker                                  :attribute:
-
-*** decoration licence                                            :attribute:
-
-*** variability profile                                           :attribute:
-
-*** variability profile template                                  :attribute:
-
-*** variability feature bundle                                    :attribute:
-
-*** variability feature template bundle                           :attribute:
-
-*** variability initializer                                       :attribute:
-
-*** mapping fixed mappable                                        :attribute:
-
-*** mapping extensible mappable                                   :attribute:
-
-*** templating logic less template                                :attribute:
-
-*** serialization type registrar                                  :attribute:
-
-*** visual studio solution                                        :attribute:
-
-*** visual studio project                                         :attribute:
-
-*** visual studio msbuild targets                                 :attribute:
-
-*** orm common odb options                                        :attribute:
-
-*** build cmakelists                                              :attribute:
-
-*** physical backend                                              :attribute:
-
-*** physical facet                                                :attribute:
-
-*** physical archetype                                            :attribute:
-
-*** physical archetype kind                                       :attribute:
-
-*** physical part                                                 :attribute:
-
-*** physical helper                                               :attribute:
+All models in this model set.
 
 ** input model set                                                  :element:
    :PROPERTIES:
    :custom_id: FF74E452-91BE-2534-9BAB-2CE4F4F4130E
+   :masd.codec.plantuml: input_model_set o-- model: composed of
    :END:
 
-Represents a set of related logical models used as an input to the logical model chains.
+Represents a set of related logical models used as an input to the logical model
+chains.
 
 *** target                                                        :attribute:
     :PROPERTIES:
@@ -827,6 +947,18 @@ Represents a set of related logical models used as an input to the logical model
     :END:
 
 Maps a fixed mappable name, using the scope notation, to its destination.
+
+** elements traversal                                               :element:
+   :PROPERTIES:
+   :custom_id: 04747766-0B17-5034-3D23-88B43D603F91
+   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+   :END:
+
+** TraversalVisitor                                                 :element:
+   :PROPERTIES:
+   :custom_id: A2973ACD-EDD9-6B94-5F23-1F2CEC731434
+   :masd.codec.stereotypes: masd::object_template
+   :END:
 
 ** Container                                                        :element:
    :PROPERTIES:
@@ -3153,98 +3285,10 @@ Technical space to which this physical element belongs to.
 
 Relation information for this helper.
 
-** output model set                                                 :element:
-   :PROPERTIES:
-   :custom_id: 9C3D1AF3-4670-7D04-C3AB-BF9EBC76C030
-   :masd.codec.stereotypes: Nameable
-   :END:
-
-Represents a set of related logical models produced as ouput of the logical model chains.
-
-*** models                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<model>
-    :END:
-
-All models in this model set.
-
-** generability status                                              :element:
-   :PROPERTIES:
-   :custom_id: 91BF00F9-9715-F314-50E3-9B6AFFB47CFA
-   :masd.codec.stereotypes: masd::enumeration
-   :END:
-
-The status of this element with regards to generability.
-
-*** non generatable source                                        :attribute:
-
-The element was sourced from a non-target model.
-
-*** generation not expected                                       :attribute:
-
-The element is of a type that is expected to have support for generation.
-
-*** non generatable state                                         :attribute:
-
-The element is normally generatable, but is in a state that precludes generation.
-
-*** generation disabled                                           :attribute:
-
-The user requested generation to be disabled.
-
-*** generation ignored                                            :attribute:
-
-User requested that any changes to this element are to be ignored.
-
-*** generatable                                                   :attribute:
-
-The element is generatable.
-
-** stereotypes                                                      :element:
-   :PROPERTIES:
-   :custom_id: 5CAA14F0-5A76-76A4-D5A3-0A2CE25D11A0
-   :END:
-
-Stereotype information associated with this element.
-
-*** static stereotypes                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<static_stereotypes>
-    :END:
-
-Stereotypes that are part of the dogen UML profile, and so are well-known to the
-model.
-
-*** dynamic stereotypes                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::stereotype>
-    :END:
-
-Stereotypes that are not part of the masd UML profile. These are user defined.
-
-** streaming properties                                             :element:
-   :PROPERTIES:
-   :custom_id: DDACB531-582A-B374-2BDB-70E8810430CC
-   :END:
-
-*** requires quoting                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** string conversion method                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** remove unprintable characters                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
 ** helper properties                                                :element:
    :PROPERTIES:
    :custom_id: C501CB9E-BC09-6A94-DF43-4C622140C276
+   :masd.codec.plantuml: helper_properties o-- helper_descriptor
    :END:
 
 *** current                                                       :attribute:
@@ -3321,35 +3365,6 @@ Stereotypes that are not part of the masd UML profile. These are user defined.
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
-
-** aspect properties                                                :element:
-   :PROPERTIES:
-   :custom_id: 37EEEB28-ECF9-77C4-8C03-A839BE8FD062
-   :END:
-
-*** requires static reference equals                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-** assistant properties                                             :element:
-   :PROPERTIES:
-   :custom_id: 38B5C749-A7FE-C4B4-84AB-C379F15AD7D4
-   :END:
-
-*** requires assistance                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the type needs help of an assistant.
-
-*** method postfix                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Postfix to use to call the appropriate assistant method, if required.
 
 * traits                                                            :element:
   :PROPERTIES:

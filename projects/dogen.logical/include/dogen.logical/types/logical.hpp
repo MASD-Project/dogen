@@ -29,7 +29,7 @@
  * @brief The logcal model defines the core entities that live in the logical dimension of
  * MASD's conceptual model.
  *
- * @section logical_0 Overview
+ * Overview
  *
  * The logical model strives to provide a technical-space agnostic element
  * representation, designed for code generation. Codec models are obtained via
@@ -37,7 +37,7 @@
  * enter its pipeline. Within it, they are processed until they form a cohesive
  * whole. They are then in a suitable state for code generation.
  *
- * @section asset_1 Mission
+ * Mission
  *
  * The objectives of the logical model are:
  *

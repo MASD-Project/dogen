@@ -34,7 +34,8 @@
 namespace dogen::logical::entities {
 
 /**
- * @brief Represents a set of related logical models used as an input to the logical model chains.
+ * @brief Represents a set of related logical models used as an input to the logical model
+ * chains.
  */
 class input_model_set final {
 public:
