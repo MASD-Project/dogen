@@ -26,8 +26,8 @@
 #endif
 
 /**
- * @brief Contains all the entities required by Dogen from the
- * domain of the Dia diagram editor.
+ * @brief Contains all the entities required by Dogen from the domain of the Dia diagram
+ * editor.
  */
 namespace dogen::dia::entities {
 }

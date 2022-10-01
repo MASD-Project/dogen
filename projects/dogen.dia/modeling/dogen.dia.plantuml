@@ -8,17 +8,14 @@ UML representation:
 \image html dogen.dia/modeling/dogen.dia.svg
 end note
 
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
-}
-
-class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
-}
-
 namespace entities #F2F2F2 {
     class diagram #F7E5FF {
         +{field} diagram_data diagram_data
         +{field} layers std::vector<layer>
     }
+
+    diagram o-- layer: composed of
+    diagram o-- diagram_data: meta-data
 
     note top of  diagram
         Represents a diagram in Dia.
@@ -31,8 +28,20 @@ namespace entities #F2F2F2 {
         +{field} objects std::vector<object>
     }
 
+    layer o-- object: composed of
+
     note top of  layer
         Represents a layer in a Dia diagram.
+    end note
+
+    class diagram_data #F7E5FF {
+        +{field} attributes std::vector<attribute>
+    }
+
+    diagram_data o-- attribute
+
+    note top of  diagram_data
+        Represents a all the data associated with a diagram.
     end note
 
     class object #F7E5FF {
@@ -43,6 +52,10 @@ namespace entities #F2F2F2 {
         +{field} child_node boost::optional<child_node>
         +{field} attributes std::vector<attribute>
     }
+
+    object o-u- connection
+    object o-u- child_node
+    object o-- attribute
 
     note top of  object
         Represents a Dia object.
@@ -56,14 +69,6 @@ namespace entities #F2F2F2 {
 
     note top of  connection
         Connection between entities in a Dia diagram.
-    end note
-
-    class diagram_data #F7E5FF {
-        +{field} attributes std::vector<attribute>
-    }
-
-    note top of  diagram_data
-        Represents a all the data associated with a diagram.
     end note
 
     class child_node #F7E5FF {
@@ -83,8 +88,32 @@ pointing to O0.
         +{field} values std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
     }
 
+    attribute o-u- font
+    attribute o-- composite
+    attribute o-u- color
+    attribute o-u- real
+    attribute o-u- integer
+    attribute o-u- boolean
+    attribute o-- point
+    attribute o-- enumeration
+    attribute o-- string
+    attribute o-- rectangle
+
     note top of  attribute
         Attribute in a Dia diagram.
+    end note
+
+    class composite <<dogen::untestable>> #ED8181 {
+        +{field} type std::string
+        +{field} value std::vector<boost::shared_ptr<attribute>>
+        +{field} inner_composite boost::shared_ptr<composite>
+    }
+
+    composite o-- attribute
+    composite o-- composite: recursive
+
+    note top of  composite
+        Attribute value which is made up of other attributes.
     end note
 
     class font #F7E5FF {
@@ -95,16 +124,6 @@ pointing to O0.
 
     note top of  font
         Represents a font in a diagram.
-    end note
-
-    class composite <<dogen::untestable>> #ED8181 {
-        +{field} type std::string
-        +{field} value std::vector<boost::shared_ptr<attribute>>
-        +{field} inner_composite boost::shared_ptr<composite>
-    }
-
-    note top of  composite
-        Attribute value which is made up of other attributes.
     end note
 
     class color #F7E5FF {
@@ -174,11 +193,17 @@ pointing to O0.
 }
 
 note top of  entities
-    Contains all the entities required by Dogen from the
-domain of the Dia diagram editor.
+    Contains all the entities required by Dogen from the domain of the Dia diagram
+editor.
 end note
 
 namespace transforms #F2F2F2 {
+    class string_to_diagram_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    string_to_diagram_transform o-d- entities::diagram
+    string_to_diagram_transform o-u- transformation_error
+
     class transformation_error <<masd::exception>> #E8C2F8 {
     }
 
@@ -186,9 +211,12 @@ namespace transforms #F2F2F2 {
         An error occurred whilst applying a transformation.
     end note
 
-    class string_to_diagram_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
+}
 
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
 
 @enduml

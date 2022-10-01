@@ -21,30 +21,20 @@ UML representation:
 
 \image html dogen.dia/modeling/dogen.dia.svg
 
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: BB4D16D7-E68B-A8F4-0383-F90CB4A2F2B3
-  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
-  :END:
-
-* CMakeLists                                                        :element:
-  :PROPERTIES:
-  :custom_id: 6598373F-B4F7-79E4-EB13-6BF2CA527BCF
-  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
-
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: F253FBAB-D244-3144-F93B-C096D64F531E
   :masd.codec.dia.comment: true
   :END:
 
-Contains all the entities required by Dogen from the
-domain of the Dia diagram editor.
+Contains all the entities required by Dogen from the domain of the Dia diagram
+editor.
 
 ** diagram                                                          :element:
    :PROPERTIES:
    :custom_id: 8C817E5D-F486-A854-085B-08AB757F8849
+   :masd.codec.plantuml: diagram o-- layer: composed of
+   :masd.codec.plantuml: diagram o-- diagram_data: meta-data
    :END:
 
 Represents a diagram in Dia.
@@ -66,6 +56,7 @@ Visual layers on the diagram.
 ** layer                                                            :element:
    :PROPERTIES:
    :custom_id: F8DF7B4F-D160-8904-FF73-07960FA3523E
+   :masd.codec.plantuml: layer o-- object: composed of
    :END:
 
 Represents a layer in a Dia diagram.
@@ -98,9 +89,27 @@ Whether the layer is active or not.
 
 Dia objects contained in layer.
 
+** diagram data                                                     :element:
+   :PROPERTIES:
+   :custom_id: FFEE0D74-483A-FC24-E813-04FD91FD5B22
+   :masd.codec.plantuml: diagram_data o-- attribute
+   :END:
+
+Represents a all the data associated with a diagram.
+
+*** attributes                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::vector<attribute>
+    :END:
+
+All attributes associated with the diagram data.
+
 ** object                                                           :element:
    :PROPERTIES:
    :custom_id: 2BE640CB-3014-D914-40D3-A5E593D8FA29
+   :masd.codec.plantuml: object o-u- connection
+   :masd.codec.plantuml: object o-u- child_node
+   :masd.codec.plantuml: object o-- attribute
    :END:
 
 Represents a Dia object.
@@ -176,20 +185,6 @@ Number of the connection slot we're connected to.
 This is known in Dia as a connection but to avoid confusion between the class and the slot concepts,
 we renamed it.
 
-** diagram data                                                     :element:
-   :PROPERTIES:
-   :custom_id: FFEE0D74-483A-FC24-E813-04FD91FD5B22
-   :END:
-
-Represents a all the data associated with a diagram.
-
-*** attributes                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::vector<attribute>
-    :END:
-
-All attributes associated with the diagram data.
-
 ** child node                                                       :element:
    :PROPERTIES:
    :custom_id: 192D67AC-AF30-1B14-027B-72322A7380D3
@@ -211,6 +206,16 @@ Parent for this object.
 ** attribute                                                        :element:
    :PROPERTIES:
    :custom_id: FADBDD81-AFF9-0074-4DE3-C278D4942D5E
+   :masd.codec.plantuml: attribute o-u- font
+   :masd.codec.plantuml: attribute o-- composite
+   :masd.codec.plantuml: attribute o-u- color
+   :masd.codec.plantuml: attribute o-u- real
+   :masd.codec.plantuml: attribute o-u- integer
+   :masd.codec.plantuml: attribute o-u- boolean
+   :masd.codec.plantuml: attribute o-- point
+   :masd.codec.plantuml: attribute o-- enumeration
+   :masd.codec.plantuml: attribute o-- string
+   :masd.codec.plantuml: attribute o-- rectangle
    :END:
 
 Attribute in a Dia diagram.
@@ -229,32 +234,12 @@ Name of the attribute.
 
 Values for the attribute.
 
-** font                                                             :element:
-   :PROPERTIES:
-   :custom_id: 6A39DB77-CC35-0204-B7DB-4E6BAB1B02C7
-   :END:
-
-Represents a font in a diagram.
-
-*** family                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** style                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
 ** composite                                                        :element:
    :PROPERTIES:
    :custom_id: D5A001ED-4FAE-0404-336B-A8B1299C717F
    :masd.codec.stereotypes: dogen::untestable
+   :masd.codec.plantuml: composite o-- attribute
+   :masd.codec.plantuml: composite o-- composite: recursive
    :END:
 
 Attribute value which is made up of other attributes.
@@ -279,6 +264,28 @@ Underlying Dia attributes.
     :END:
 
 Some composites contain an inner composite field.
+
+** font                                                             :element:
+   :PROPERTIES:
+   :custom_id: 6A39DB77-CC35-0204-B7DB-4E6BAB1B02C7
+   :END:
+
+Represents a font in a diagram.
+
+*** family                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** style                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
 
 ** color                                                            :element:
    :PROPERTIES:
@@ -397,6 +404,14 @@ Text representation of a rectangle with a pair of X/Y coordinates.
   :custom_id: 536B50A6-39A7-E4B4-F283-D794F3B2446A
   :END:
 
+** string to diagram transform                                      :element:
+   :PROPERTIES:
+   :custom_id: AEBEE08F-5CF3-4C14-E333-FB32841EB608
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: string_to_diagram_transform o-d- entities::diagram
+   :masd.codec.plantuml: string_to_diagram_transform o-u- transformation_error
+   :END:
+
 ** transformation error                                             :element:
    :PROPERTIES:
    :custom_id: 89B46C2F-7FA7-9224-6B7B-DD91D9F4495E
@@ -405,8 +420,14 @@ Text representation of a rectangle with a pair of X/Y coordinates.
 
 An error occurred whilst applying a transformation.
 
-** string to diagram transform                                      :element:
-   :PROPERTIES:
-   :custom_id: AEBEE08F-5CF3-4C14-E333-FB32841EB608
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: BB4D16D7-E68B-A8F4-0383-F90CB4A2F2B3
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :END:
+
+* CMakeLists                                                        :element:
+  :PROPERTIES:
+  :custom_id: 6598373F-B4F7-79E4-EB13-6BF2CA527BCF
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:
