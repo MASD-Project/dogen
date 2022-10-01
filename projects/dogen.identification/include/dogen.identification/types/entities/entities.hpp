@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Stores all of the entities related to identification
- * of Dogen elements.
+ * @brief Stores all of the entities related to identification of Dogen elements.
  */
 namespace dogen::identification::entities {
 }

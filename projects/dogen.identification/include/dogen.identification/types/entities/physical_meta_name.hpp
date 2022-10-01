@@ -35,12 +35,12 @@ namespace dogen::identification::entities {
 /**
  * @brief Name of an element in physical space.
  *
- * A name represents a point or a region in physical space. It can only be used by one
- * physical element. Names can be uniquely identified by their qualified ID.
+ * A name represents a point or a region in physical space. It can only be used by
+ * one physical element. Names can be uniquely identified by their qualified ID.
  *
  * Name has the following properties: a) two different points or regionsin physical
- * space cannot have the same name and b) the same point or region in physical space
- * can only have one and only one name.
+ * space cannot have the same name and b) the same point or region in physical
+ * space can only have one and only one name.
  */
 class physical_meta_name final {
 public:

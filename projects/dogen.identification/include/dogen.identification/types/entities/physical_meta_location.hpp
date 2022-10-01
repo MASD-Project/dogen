@@ -34,8 +34,8 @@ namespace dogen::identification::entities {
  * @brief Location of an entity or set of entities in the physical meta-model.
  *
  * These must be populated in order, e.g. in order to have a backend we must have a
- * meta-model; in order to have a facet we must have a backend and in order to have a
- * formatter we must have a facet. We may not have any.
+ * meta-model; in order to have a facet we must have a backend and in order to have
+ * a formatter we must have a facet. We may not have any.
  */
 class physical_meta_location final {
 public:

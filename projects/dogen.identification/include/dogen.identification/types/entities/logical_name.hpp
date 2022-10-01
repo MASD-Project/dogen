@@ -36,8 +36,9 @@ namespace dogen::identification::entities {
 /**
  * @brief Name of an element in logical space.
  *
- * A name represents a point or a region in logical space, and this point or region can
- * only be used by one element. Names can be uniquely identified by their qualified ID.
+ * A name represents a point or a region in logical space, and this point or region
+ * can only be used by one element. Names can be uniquely identified by their
+ * qualified ID.
  *
  * Name has the following properties: a) two different points or regions in logical
  * space cannot have the same name and b) the same point in logical space can only

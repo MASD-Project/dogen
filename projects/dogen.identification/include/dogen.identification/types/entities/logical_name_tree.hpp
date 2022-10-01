@@ -37,9 +37,9 @@ namespace dogen::identification::entities {
  * @brief Adds support for name composition as a tree-like structure.
  *
  * A logical name tree has the responsibility of representing an instantiation of a
- * generic type with all of its type parameters, which themselves can also be generic
- * types and so on. It may also represent the simpler case of a non-generic type, in
- * which case only the parent name is populated and there are no children.
+ * generic type with all of its type parameters, which themselves can also be
+ * generic types and so on. It may also represent the simpler case of a non-generic
+ * type, in which case only the parent name is populated and there are no children.
  */
 class logical_name_tree final {
 public:

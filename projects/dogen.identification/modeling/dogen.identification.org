@@ -26,27 +26,16 @@ UML representation:
   :masd.codec.dia.comment: true
   :END:
 
-Stores all of the entities related to identification
-of Dogen elements.
-
-** name                                                             :element:
-   :PROPERTIES:
-   :custom_id: 21747B01-B289-0DA4-FE23-353F8678AD47
-   :masd.codec.stereotypes: Nameable
-   :END:
-
-General name for modeling elements which do not need any specialisation.
-
-*** qualified                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Qualified name for an element.
+Stores all of the entities related to identification of Dogen elements.
 
 ** codec provenance                                                 :element:
    :PROPERTIES:
    :custom_id: A3214C79-E31C-F684-6613-821B231B7AE5
+   :masd.codec.plantuml: codec_provenance o-u- codec_id
+   :masd.codec.plantuml: codec_provenance o-u- sha1_hash
+   :masd.codec.plantuml: codec_provenance o-u- codec_location
+   :masd.codec.plantuml: codec_provenance o-- model_id
+   :masd.codec.plantuml: codec_provenance o-- model_type
    :END:
 
 Source of a model element in the codec dimension.
@@ -79,6 +68,54 @@ Identifier for the modeling element in the codec dimension.
 
 Where the element was located in the original source.
 
+** codec id                                                         :element:
+   :PROPERTIES:
+   :custom_id: 9CA88D8E-6411-CD34-E503-7CF19F65B200
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
+   :END:
+
+ID of the elment as sourced from the codec model, if any.
+
+** sha1 hash                                                        :element:
+   :PROPERTIES:
+   :custom_id: 093FBEF7-0420-D614-252B-A4191650A2FB
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
+   :END:
+
+Stores a SHA1 hash.
+
+** codec location                                                   :element:
+   :PROPERTIES:
+   :custom_id: D93CBE19-294B-FC24-D80B-C8BEEA125B18
+   :END:
+
+Location of a modeling element in the codec dimension.
+
+*** full path                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the file that was read, if any.
+
+*** line                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: long
+    :END:
+
+Line number where the element was defined.
+
+** model id                                                         :element:
+   :PROPERTIES:
+   :custom_id: 14567330-9D10-FDF4-FFB3-AB31039D3C9D
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
+   :END:
+
+ID for a model.
+
 ** model type                                                       :element:
    :PROPERTIES:
    :custom_id: 133F75E6-C6C5-D654-9A2B-067B30B84940
@@ -103,66 +140,12 @@ The element was part of a reference model which is regular dogen model.
 
 The origin of the element is not yet known.
 
-** sha1 hash                                                        :element:
-   :PROPERTIES:
-   :custom_id: 093FBEF7-0420-D614-252B-A4191650A2FB
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
-
-Stores a SHA1 hash.
-
-** codec id                                                         :element:
-   :PROPERTIES:
-   :custom_id: 9CA88D8E-6411-CD34-E503-7CF19F65B200
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
-
-ID of the elment as sourced from the codec model, if any.
-
-** logical id                                                       :element:
-   :PROPERTIES:
-   :custom_id: D75CC0A7-54C6-1814-8C0B-D0555875171A
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive, dogen::hashable
-   :END:
-
-ID of the elment in the logical dimension.
-
-** physical meta id                                                 :element:
-   :PROPERTIES:
-   :custom_id: BA99A61F-A969-7E04-67EB-A7897DFE1318
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive, dogen::hashable
-   :END:
-
-ID of the meta-element in the physical dimension.
-
-** codec location                                                   :element:
-   :PROPERTIES:
-   :custom_id: D93CBE19-294B-FC24-D80B-C8BEEA125B18
-   :END:
-
-Location of a modeling element in the codec dimension.
-
-*** full path                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Full path to the file that was read, if any.
-
-*** line                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: long
-    :END:
-
-Line number where the element was defined.
-
 ** logical provenance                                               :element:
    :PROPERTIES:
    :custom_id: 9206D558-C3ED-F1F4-5323-2518AD09001A
+   :masd.codec.plantuml: logical_provenance o-u- codec_provenance
+   :masd.codec.plantuml: logical_provenance o-- logical_name
+   :masd.codec.plantuml: logical_provenance o-- logical_meta_name
    :END:
 
 Source of a model element in the logical dimension.
@@ -188,67 +171,43 @@ Provenance of the current element in the logical dimension.
 
 Provenance of the current element in the logical dimension as a meta-element.
 
-** logical meta id                                                  :element:
+** name                                                             :element:
    :PROPERTIES:
-   :custom_id: EA63CD46-3903-7C64-47D3-438EF12B34D4
+   :custom_id: 21747B01-B289-0DA4-FE23-353F8678AD47
+   :masd.codec.stereotypes: Nameable
+   :END:
+
+General name for modeling elements which do not need any specialisation.
+
+*** qualified                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Qualified name for an element.
+
+** logical id                                                       :element:
+   :PROPERTIES:
+   :custom_id: D75CC0A7-54C6-1814-8C0B-D0555875171A
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive, dogen::hashable
    :END:
 
-ID for a logical meta-element.
-
-** label                                                            :element:
-   :PROPERTIES:
-   :custom_id: BA8F36F2-F254-4AF4-B4F3-15FCDBA9D43B
-   :END:
-
-A label is a key-value pair that can be used by the processing engine in a flexible way.
-
-*** key                                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Key of the label.
-
-*** value                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Value associated with this label.
-
-** tagged value                                                     :element:
-   :PROPERTIES:
-   :custom_id: FFE9383A-9F22-E714-07FB-D8113AC0A892
-   :END:
-
-Represents a tagged value in a similar spirit to UMLs.
-
-*** tag                                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Tag name.
-
-*** value                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Value associated with this tag.
+ID of the elment in the logical dimension.
 
 ** logical name                                                     :element:
    :PROPERTIES:
    :custom_id: FC872101-C9F0-83E4-1BF3-73A985DCF106
    :masd.codec.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
+   :masd.codec.plantuml: logical_name o-- logical_id
+   :masd.codec.plantuml: logical_name o-- logical_location
    :END:
 
 Name of an element in logical space.
 
-A name represents a point or a region in logical space, and this point or region can
-only be used by one element. Names can be uniquely identified by their qualified ID.
+A name represents a point or a region in logical space, and this point or region
+can only be used by one element. Names can be uniquely identified by their
+qualified ID.
 
 Name has the following properties: a) two different points or regions in logical
 space cannot have the same name and b) the same point in logical space can only
@@ -327,46 +286,149 @@ Name of the owning element, if any.
 For coding elements which are located within other logical elements
 that are not modules, such as attributes, inner classes, etc.
 
-** qualified representations                                        :element:
+** logical name tree                                                :element:
    :PROPERTIES:
-   :custom_id: 053FF8AE-4698-E9F4-D0D3-E93E8131FE33
-   :masd.codec.stereotypes: dogen::hashable
+   :custom_id: 359B0BBF-F6A6-0764-E393-6B06E1E56833
+   :masd.codec.stereotypes: QualifiedRepresentations
+   :masd.codec.plantuml: logical_name_tree o-- logical_name
    :END:
 
-All available qualified representations of a name.
+Adds support for name composition as a tree-like structure.
 
-*** dot                                                           :attribute:
+A logical name tree has the responsibility of representing an instantiation of a
+generic type with all of its type parameters, which themselves can also be
+generic types and so on. It may also represent the simpler case of a non-generic
+type, in which case only the parent name is populated and there are no children.
+
+*** current                                                       :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::string
+    :masd.codec.type: logical_name
     :END:
 
-Qualified identifier using "." as the separator.
+Name for the current level of the tree.
 
-*** colon                                                         :attribute:
+*** children                                                      :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::string
+    :masd.codec.type: std::list<logical_name_tree>
     :END:
 
-Qualified identifier using "::" as the separator.
+Names of the child elements.
 
-*** identifiable                                                  :attribute:
+*** are children opaque                                           :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::string
+    :masd.codec.type: bool
     :END:
 
-Representation of the identifier that can usable as an identifier on all of the
-supported technical spaces, using the entire name structure.
+If true, the association with its children can be opaque.
+
+Children are considered opaque when the parent does not require knowledge
+about the childs' internal structure. This is the case, for example, with C and
+C++ pointers, references and so on.
+
+*** is circular dependency                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, the presence of the current name causes a circular dependency.
+
+*** is current simple type                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+Returns true if @e current is a simple type such as a built-in or an enumeration.
+
+*** is floating point                                             :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+If true, "current" stores a floating point type.
+
+** physical meta id                                                 :element:
+   :PROPERTIES:
+   :custom_id: BA99A61F-A969-7E04-67EB-A7897DFE1318
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive, dogen::hashable
+   :END:
+
+ID of the meta-element in the physical dimension.
+
+** logical meta id                                                  :element:
+   :PROPERTIES:
+   :custom_id: EA63CD46-3903-7C64-47D3-438EF12B34D4
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive, dogen::hashable
+   :END:
+
+ID for a logical meta-element.
+
+** logical meta physical id                                         :element:
+   :PROPERTIES:
+   :custom_id: 46D6B0B6-91F1-5614-46DB-BE4CA1B6B51C
+   :masd.codec.stereotypes: dogen::hashable
+   :masd.codec.plantuml: logical_meta_physical_id o-- logical_id
+   :masd.codec.plantuml: logical_meta_physical_id o-- physical_meta_id
+   :END:
+
+ID in the logical-physical space.
+
+*** logical id                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: logical_id
+    :END:
+
+ID of the element in the logical dimension.
+
+*** physical meta id                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: physical_meta_id
+    :END:
+
+ID of the element in the physical dimension.
+
+** physical meta name                                               :element:
+   :PROPERTIES:
+   :custom_id: FB623C32-E416-A8D4-9D7B-00752CE11BE0
+   :masd.codec.stereotypes: Nameable
+   :masd.codec.plantuml: physical_meta_name o-- physical_meta_id
+   :END:
+
+Name of an element in physical space.
+
+A name represents a point or a region in physical space. It can only be used by
+one physical element. Names can be uniquely identified by their qualified ID.
+
+Name has the following properties: a) two different points or regionsin physical
+space cannot have the same name and b) the same point or region in physical
+space can only have one and only one name.
+
+*** id                                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: physical_meta_id
+    :END:
+
+Identifier for this physical meta-element.
+
+*** location                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: physical_meta_location
+    :END:
+
+Location for a meta-name in physical space.
 
 ** physical meta location                                           :element:
    :PROPERTIES:
    :custom_id: 1E7B1F65-BB60-0C04-8243-D7C94D632B54
+   :masd.codec.plantuml: physical_meta_location o-- physical_meta_name
    :END:
 
 Location of an entity or set of entities in the physical meta-model.
 
 These must be populated in order, e.g. in order to have a backend we must have a
-meta-model; in order to have a facet we must have a backend and in order to have a
-formatter we must have a facet. We may not have any.
+meta-model; in order to have a facet we must have a backend and in order to have
+a formatter we must have a facet. We may not have any.
 
 *** meta model                                                    :attribute:
     :PROPERTIES:
@@ -405,34 +467,173 @@ Name of the facet where this element is located, if any.
 
 Name of the archetype for this element, if applicable.
 
-** physical meta name                                               :element:
+** archetype name set                                               :element:
    :PROPERTIES:
-   :custom_id: FB623C32-E416-A8D4-9D7B-00752CE11BE0
-   :masd.codec.stereotypes: Nameable
+   :custom_id: 6EA14C10-A650-3104-54C3-2FB4A125359B
+   :masd.codec.plantuml: archetype_name_set o-- physical_meta_name
+   :masd.codec.plantuml: archetype_name_set o-- physical_meta_id
+   :masd.codec.plantuml: archetype_name_set o-- logical_meta_id
    :END:
 
-Name of an element in physical space.
+*** logical meta id                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: logical_meta_id
+    :END:
 
-A name represents a point or a region in physical space. It can only be used by one
-physical element. Names can be uniquely identified by their qualified ID.
+Identifier of the meta-element in the logical dimension.
 
-Name has the following properties: a) two different points or regionsin physical
-space cannot have the same name and b) the same point or region in physical space
-can only have one and only one name.
+*** meta names                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<physical_meta_name>
+    :END:
+
+All meta-names that belong to this group.
+
+*** canonical locations                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
+    :END:
+
+Maps a concrete archetype location to its canonical form, if the canonical
+form is supported. Otherwise no such mapping will exist.
+
+*** archetype for label                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
+    :END:
+
+Maps a label to archetype ID within the present logical manifold.
+
+** physical meta name indices                                       :element:
+   :PROPERTIES:
+   :custom_id: D609D50D-A5FD-38D4-3A53-74B537D93C89
+   :masd.codec.plantuml: physical_meta_name_indices o-- archetype_name_set
+   :END:
+
+Containing physical meta-names, indexed as required by use cases.
+
+*** all                                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<physical_meta_name>
+    :END:
+
+All meta-names.
+
+*** facet names by backend name                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
+    :END:
+
+Qualified names of facets by qualified names of backends.
+
+*** archetype names by logical meta name                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<logical_meta_id, archetype_name_set>
+    :END:
+
+Physical meta-names by logical meta-names.
+
+*** archetype names by backend by facet                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
+    :END:
+
+Archetype names by qualified backend and facet names
+
+*** technical space for archetype                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<physical_meta_id, technical_space>
+    :END:
+
+Resolves a given physical meta-model element ID into its technical space.
+
+** physical name                                                    :element:
+   :PROPERTIES:
+   :custom_id: 6F594E39-E4BA-2E94-078B-7177E469361B
+   :masd.codec.stereotypes: Nameable
+   :masd.codec.plantuml: physical_name o-- physical_id
+   :END:
+
+Name of a physical model element.
 
 *** id                                                            :attribute:
     :PROPERTIES:
-    :masd.codec.type: physical_meta_id
+    :masd.codec.type: physical_id
     :END:
 
-Identifier for this physical meta-element.
+ID for a physical element.
 
-*** location                                                      :attribute:
+** label                                                            :element:
+   :PROPERTIES:
+   :custom_id: BA8F36F2-F254-4AF4-B4F3-15FCDBA9D43B
+   :END:
+
+A label is a key-value pair that can be used by the processing engine in a flexible way.
+
+*** key                                                           :attribute:
     :PROPERTIES:
-    :masd.codec.type: physical_meta_location
+    :masd.codec.type: std::string
     :END:
 
-Location for a meta-name in physical space.
+Key of the label.
+
+*** value                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Value associated with this label.
+
+** tagged value                                                     :element:
+   :PROPERTIES:
+   :custom_id: FFE9383A-9F22-E714-07FB-D8113AC0A892
+   :END:
+
+Represents a tagged value in a similar spirit to UMLs.
+
+*** tag                                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Tag name.
+
+*** value                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Value associated with this tag.
+
+** qualified representations                                        :element:
+   :PROPERTIES:
+   :custom_id: 053FF8AE-4698-E9F4-D0D3-E93E8131FE33
+   :masd.codec.stereotypes: dogen::hashable
+   :END:
+
+All available qualified representations of a name.
+
+*** dot                                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Qualified identifier using "." as the separator.
+
+*** colon                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Qualified identifier using "::" as the separator.
+
+*** identifiable                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Representation of the identifier that can usable as an identifier on all of the
+supported technical spaces, using the entire name structure.
 
 ** logical meta name                                                :element:
    :PROPERTIES:
@@ -488,25 +689,14 @@ Visual studio solution.
 
 Mustache templates.
 
-** physical name                                                    :element:
-   :PROPERTIES:
-   :custom_id: 6F594E39-E4BA-2E94-078B-7177E469361B
-   :masd.codec.stereotypes: Nameable
-   :END:
-
-Name of a physical model element.
-
-*** id                                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: physical_id
-    :END:
-
-ID for a physical element.
-
 ** Nameable                                                         :element:
    :PROPERTIES:
    :custom_id: B4A03449-DC6D-1704-18BB-C0DEC1874FD5
    :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Nameable <|-- name
+   :masd.codec.plantuml: Nameable <|-- logical_meta_name
+   :masd.codec.plantuml: Nameable <|-- physical_meta_name
+   :masd.codec.plantuml: Nameable <|-- logical_name
    :END:
 
 Ability to have a name.
@@ -518,118 +708,13 @@ Ability to have a name.
 
 Simple name for a modeling element.
 
-** logical meta physical id                                         :element:
-   :PROPERTIES:
-   :custom_id: 46D6B0B6-91F1-5614-46DB-BE4CA1B6B51C
-   :masd.codec.stereotypes: dogen::hashable
-   :END:
-
-ID in the logical-physical space.
-
-*** logical id                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: logical_id
-    :END:
-
-ID of the element in the logical dimension.
-
-*** physical meta id                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: physical_meta_id
-    :END:
-
-ID of the element in the physical dimension.
-
-** physical id                                                      :element:
-   :PROPERTIES:
-   :custom_id: C1FB3BF9-0B18-7C84-DCA3-D85AC4141936
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
-
-ID for a physical element.
-
-** model id                                                         :element:
-   :PROPERTIES:
-   :custom_id: 14567330-9D10-FDF4-FFB3-AB31039D3C9D
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
-
-ID for a model.
-
-** stereotype                                                       :element:
-   :PROPERTIES:
-   :custom_id: BDA057E0-76D2-3054-3F83-AC71C4C87C87
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
-
-Stereotype.
-
-** logical name tree                                                :element:
-   :PROPERTIES:
-   :custom_id: 359B0BBF-F6A6-0764-E393-6B06E1E56833
-   :masd.codec.stereotypes: QualifiedRepresentations
-   :END:
-
-Adds support for name composition as a tree-like structure.
-
-A logical name tree has the responsibility of representing an instantiation of a
-generic type with all of its type parameters, which themselves can also be generic
-types and so on. It may also represent the simpler case of a non-generic type, in
-which case only the parent name is populated and there are no children.
-
-*** current                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: logical_name
-    :END:
-
-Name for the current level of the tree.
-
-*** children                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<logical_name_tree>
-    :END:
-
-Names of the child elements.
-
-*** are children opaque                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the association with its children can be opaque.
-
-Children are considered opaque when the parent does not require knowledge
-about the childs' internal structure. This is the case, for example, with C and
-C++ pointers, references and so on.
-
-*** is circular dependency                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, the presence of the current name causes a circular dependency.
-
-*** is current simple type                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-Returns true if @e current is a simple type such as a built-in or an enumeration.
-
-*** is floating point                                             :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-If true, "current" stores a floating point type.
-
 ** QualifiedRepresentations                                         :element:
    :PROPERTIES:
    :custom_id: CC848548-ED99-3E94-4CEB-6BF9ABB199B7
    :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: QualifiedRepresentations o-u- qualified_representations
+   :masd.codec.plantuml: QualifiedRepresentations <|-- logical_name
+   :masd.codec.plantuml: QualifiedRepresentations <|-- logical_name_tree
    :END:
 
 Name with multiple qualified representations.
@@ -641,81 +726,23 @@ Name with multiple qualified representations.
 
 Contains the name according to different representations.
 
-** archetype name set                                               :element:
+** physical id                                                      :element:
    :PROPERTIES:
-   :custom_id: 6EA14C10-A650-3104-54C3-2FB4A125359B
+   :custom_id: C1FB3BF9-0B18-7C84-DCA3-D85AC4141936
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
    :END:
 
-*** logical meta id                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: logical_meta_id
-    :END:
+ID for a physical element.
 
-Identifier of the meta-element in the logical dimension.
-
-*** meta names                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<physical_meta_name>
-    :END:
-
-All meta-names that belong to this group.
-
-*** canonical locations                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
-    :END:
-
-Maps a concrete archetype location to its canonical form, if the canonical
-form is supported. Otherwise no such mapping will exist.
-
-*** archetype for label                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
-    :END:
-
-Maps a label to archetype ID within the present logical manifold.
-
-** physical meta name indices                                       :element:
+** stereotype                                                       :element:
    :PROPERTIES:
-   :custom_id: D609D50D-A5FD-38D4-3A53-74B537D93C89
+   :custom_id: BDA057E0-76D2-3054-3F83-AC71C4C87C87
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
    :END:
 
-Containing physical meta-names, indexed as required by use cases.
-
-*** all                                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<physical_meta_name>
-    :END:
-
-All meta-names.
-
-*** facet names by backend name                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
-    :END:
-
-Qualified names of facets by qualified names of backends.
-
-*** archetype names by logical meta name                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<logical_meta_id, archetype_name_set>
-    :END:
-
-Physical meta-names by logical meta-names.
-
-*** archetype names by backend by facet                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
-    :END:
-
-Archetype names by qualified backend and facet names
-
-*** technical space for archetype                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<physical_meta_id, technical_space>
-    :END:
-
-Resolves a given physical meta-model element ID into its technical space.
+Stereotype.
 
 ** technical space version                                          :element:
    :PROPERTIES:

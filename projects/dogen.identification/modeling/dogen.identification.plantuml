@@ -10,14 +10,6 @@ UML representation:
 end note
 
 namespace entities #F2F2F2 {
-    class name <<Nameable>> #F7E5FF {
-        +{field} qualified std::string
-    }
-
-    note top of  name
-        General name for modeling elements which do not need any specialisation.
-    end note
-
     class codec_provenance #F7E5FF {
         +{field} model_type model_type
         +{field} model_sha1_hash sha1_hash
@@ -25,8 +17,44 @@ namespace entities #F2F2F2 {
         +{field} location codec_location
     }
 
+    codec_provenance o-u- codec_id
+    codec_provenance o-u- sha1_hash
+    codec_provenance o-u- codec_location
+    codec_provenance o-- model_id
+    codec_provenance o-- model_type
+
     note top of  codec_provenance
         Source of a model element in the codec dimension.
+    end note
+
+    class codec_id <<masd::primitive>> #EDCEFB {
+    }
+
+    note top of  codec_id
+        ID of the elment as sourced from the codec model, if any.
+    end note
+
+    class sha1_hash <<masd::primitive>> #EDCEFB {
+    }
+
+    note top of  sha1_hash
+        Stores a SHA1 hash.
+    end note
+
+    class codec_location #F7E5FF {
+        +{field} full_path boost::filesystem::path
+        +{field} line long
+    }
+
+    note top of  codec_location
+        Location of a modeling element in the codec dimension.
+    end note
+
+    class model_id <<masd::primitive>> #EDCEFB {
+    }
+
+    note top of  model_id
+        ID for a model.
     end note
 
     enum model_type <<masd::enumeration>> #F2DAFD {
@@ -40,18 +68,26 @@ namespace entities #F2F2F2 {
         Types of models with regards to the current generation taking place.
     end note
 
-    class sha1_hash <<masd::primitive>> #EDCEFB {
+    class logical_provenance #F7E5FF {
+        +{field} codec codec_provenance
+        +{field} logical_name logical_name
+        +{field} logical_meta_name logical_meta_name
     }
 
-    note top of  sha1_hash
-        Stores a SHA1 hash.
+    logical_provenance o-u- codec_provenance
+    logical_provenance o-- logical_name
+    logical_provenance o-- logical_meta_name
+
+    note top of  logical_provenance
+        Source of a model element in the logical dimension.
     end note
 
-    class codec_id <<masd::primitive>> #EDCEFB {
+    class name <<Nameable>> #F7E5FF {
+        +{field} qualified std::string
     }
 
-    note top of  codec_id
-        ID of the elment as sourced from the codec model, if any.
+    note top of  name
+        General name for modeling elements which do not need any specialisation.
     end note
 
     class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
@@ -61,68 +97,21 @@ namespace entities #F2F2F2 {
         ID of the elment in the logical dimension.
     end note
 
-    class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
-    }
-
-    note top of  physical_meta_id
-        ID of the meta-element in the physical dimension.
-    end note
-
-    class codec_location #F7E5FF {
-        +{field} full_path boost::filesystem::path
-        +{field} line long
-    }
-
-    note top of  codec_location
-        Location of a modeling element in the codec dimension.
-    end note
-
-    class logical_provenance #F7E5FF {
-        +{field} codec codec_provenance
-        +{field} logical_name logical_name
-        +{field} logical_meta_name logical_meta_name
-    }
-
-    note top of  logical_provenance
-        Source of a model element in the logical dimension.
-    end note
-
-    class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
-    }
-
-    note top of  logical_meta_id
-        ID for a logical meta-element.
-    end note
-
-    class label #F7E5FF {
-        +{field} key std::string
-        +{field} value std::string
-    }
-
-    note top of  label
-        A label is a key-value pair that can be used by the processing engine in a flexible way.
-    end note
-
-    class tagged_value #F7E5FF {
-        +{field} tag std::string
-        +{field} value std::string
-    }
-
-    note top of  tagged_value
-        Represents a tagged value in a similar spirit to UMLs.
-    end note
-
     class logical_name <<Nameable, QualifiedRepresentations, dogen::hashable>> #F7E5FF {
         +{field} id logical_id
         +{field} location logical_location
         +{field} is_container bool
     }
 
+    logical_name o-- logical_id
+    logical_name o-- logical_location
+
     note top of  logical_name
         Name of an element in logical space.
 
-A name represents a point or a region in logical space, and this point or region can
-only be used by one element. Names can be uniquely identified by their qualified ID.
+A name represents a point or a region in logical space, and this point or region
+can only be used by one element. Names can be uniquely identified by their
+qualified ID.
 
 Name has the following properties: a) two different points or regions in logical
 space cannot have the same name and b) the same point in logical space can only
@@ -144,14 +133,68 @@ naming files, etc).
         Identifies a hierarchy of containment within the logical space.
     end note
 
-    class qualified_representations <<dogen::hashable>> #F7E5FF {
-        +{field} dot std::string
-        +{field} colon std::string
-        +{field} identifiable std::string
+    class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
+        +{field} current logical_name
+        +{field} children std::list<logical_name_tree>
+        +{field} are_children_opaque bool
+        +{field} is_circular_dependency bool
+        +{field} is_current_simple_type bool
+        +{field} is_floating_point bool
     }
 
-    note top of  qualified_representations
-        All available qualified representations of a name.
+    logical_name_tree o-- logical_name
+
+    note top of  logical_name_tree
+        Adds support for name composition as a tree-like structure.
+
+A logical name tree has the responsibility of representing an instantiation of a
+generic type with all of its type parameters, which themselves can also be
+generic types and so on. It may also represent the simpler case of a non-generic
+type, in which case only the parent name is populated and there are no children.
+    end note
+
+    class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+    }
+
+    note top of  physical_meta_id
+        ID of the meta-element in the physical dimension.
+    end note
+
+    class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
+    }
+
+    note top of  logical_meta_id
+        ID for a logical meta-element.
+    end note
+
+    class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
+        +{field} logical_id logical_id
+        +{field} physical_meta_id physical_meta_id
+    }
+
+    logical_meta_physical_id o-- logical_id
+    logical_meta_physical_id o-- physical_meta_id
+
+    note top of  logical_meta_physical_id
+        ID in the logical-physical space.
+    end note
+
+    class physical_meta_name <<Nameable>> #F7E5FF {
+        +{field} id physical_meta_id
+        +{field} location physical_meta_location
+    }
+
+    physical_meta_name o-- physical_meta_id
+
+    note top of  physical_meta_name
+        Name of an element in physical space.
+
+A name represents a point or a region in physical space. It can only be used by
+one physical element. Names can be uniquely identified by their qualified ID.
+
+Name has the following properties: a) two different points or regionsin physical
+space cannot have the same name and b) the same point or region in physical
+space can only have one and only one name.
     end note
 
     class physical_meta_location #F7E5FF {
@@ -162,28 +205,77 @@ naming files, etc).
         +{field} archetype std::string
     }
 
+    physical_meta_location o-- physical_meta_name
+
     note top of  physical_meta_location
         Location of an entity or set of entities in the physical meta-model.
 
 These must be populated in order, e.g. in order to have a backend we must have a
-meta-model; in order to have a facet we must have a backend and in order to have a
-formatter we must have a facet. We may not have any.
+meta-model; in order to have a facet we must have a backend and in order to have
+a formatter we must have a facet. We may not have any.
     end note
 
-    class physical_meta_name <<Nameable>> #F7E5FF {
-        +{field} id physical_meta_id
-        +{field} location physical_meta_location
+    class archetype_name_set #F7E5FF {
+        +{field} logical_meta_id logical_meta_id
+        +{field} meta_names std::list<physical_meta_name>
+        +{field} canonical_locations std::unordered_map<physical_meta_id, physical_meta_id>
+        +{field} archetype_for_label std::unordered_map<physical_meta_id, physical_meta_id>
     }
 
-    note top of  physical_meta_name
-        Name of an element in physical space.
+    archetype_name_set o-- physical_meta_name
+    archetype_name_set o-- physical_meta_id
+    archetype_name_set o-- logical_meta_id
 
-A name represents a point or a region in physical space. It can only be used by one
-physical element. Names can be uniquely identified by their qualified ID.
+    class physical_meta_name_indices #F7E5FF {
+        +{field} all std::list<physical_meta_name>
+        +{field} facet_names_by_backend_name std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
+        +{field} archetype_names_by_logical_meta_name std::unordered_map<logical_meta_id, archetype_name_set>
+        +{field} archetype_names_by_backend_by_facet std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
+        +{field} technical_space_for_archetype std::unordered_map<physical_meta_id, technical_space>
+    }
 
-Name has the following properties: a) two different points or regionsin physical
-space cannot have the same name and b) the same point or region in physical space
-can only have one and only one name.
+    physical_meta_name_indices o-- archetype_name_set
+
+    note top of  physical_meta_name_indices
+        Containing physical meta-names, indexed as required by use cases.
+    end note
+
+    class physical_name <<Nameable>> #F7E5FF {
+        +{field} id physical_id
+    }
+
+    physical_name o-- physical_id
+
+    note top of  physical_name
+        Name of a physical model element.
+    end note
+
+    class label #F7E5FF {
+        +{field} key std::string
+        +{field} value std::string
+    }
+
+    note top of  label
+        A label is a key-value pair that can be used by the processing engine in a flexible way.
+    end note
+
+    class tagged_value #F7E5FF {
+        +{field} tag std::string
+        +{field} value std::string
+    }
+
+    note top of  tagged_value
+        Represents a tagged value in a similar spirit to UMLs.
+    end note
+
+    class qualified_representations <<dogen::hashable>> #F7E5FF {
+        +{field} dot std::string
+        +{field} colon std::string
+        +{field} identifiable std::string
+    }
+
+    note top of  qualified_representations
+        All available qualified representations of a name.
     end note
 
     class logical_meta_name <<Nameable>> #F7E5FF {
@@ -205,29 +297,29 @@ can only have one and only one name.
         Models need to declare upfront the technical space they will target.
     end note
 
-    class physical_name <<Nameable>> #F7E5FF {
-        +{field} id physical_id
-    }
-
-    note top of  physical_name
-        Name of a physical model element.
-    end note
-
     class Nameable <<masd::object_template>> #E3B6F6 {
         +{field} simple std::string
     }
+
+    Nameable <|-- name
+    Nameable <|-- logical_meta_name
+    Nameable <|-- physical_meta_name
+    Nameable <|-- logical_name
 
     note top of  Nameable
         Ability to have a name.
     end note
 
-    class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
-        +{field} logical_id logical_id
-        +{field} physical_meta_id physical_meta_id
+    class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
+        +{field} qualified qualified_representations
     }
 
-    note top of  logical_meta_physical_id
-        ID in the logical-physical space.
+    QualifiedRepresentations o-u- qualified_representations
+    QualifiedRepresentations <|-- logical_name
+    QualifiedRepresentations <|-- logical_name_tree
+
+    note top of  QualifiedRepresentations
+        Name with multiple qualified representations.
     end note
 
     class physical_id <<masd::primitive>> #EDCEFB {
@@ -237,63 +329,11 @@ can only have one and only one name.
         ID for a physical element.
     end note
 
-    class model_id <<masd::primitive>> #EDCEFB {
-    }
-
-    note top of  model_id
-        ID for a model.
-    end note
-
     class stereotype <<masd::primitive>> #EDCEFB {
     }
 
     note top of  stereotype
         Stereotype.
-    end note
-
-    class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
-        +{field} current logical_name
-        +{field} children std::list<logical_name_tree>
-        +{field} are_children_opaque bool
-        +{field} is_circular_dependency bool
-        +{field} is_current_simple_type bool
-        +{field} is_floating_point bool
-    }
-
-    note top of  logical_name_tree
-        Adds support for name composition as a tree-like structure.
-
-A logical name tree has the responsibility of representing an instantiation of a
-generic type with all of its type parameters, which themselves can also be generic
-types and so on. It may also represent the simpler case of a non-generic type, in
-which case only the parent name is populated and there are no children.
-    end note
-
-    class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
-        +{field} qualified qualified_representations
-    }
-
-    note top of  QualifiedRepresentations
-        Name with multiple qualified representations.
-    end note
-
-    class archetype_name_set #F7E5FF {
-        +{field} logical_meta_id logical_meta_id
-        +{field} meta_names std::list<physical_meta_name>
-        +{field} canonical_locations std::unordered_map<physical_meta_id, physical_meta_id>
-        +{field} archetype_for_label std::unordered_map<physical_meta_id, physical_meta_id>
-    }
-
-    class physical_meta_name_indices #F7E5FF {
-        +{field} all std::list<physical_meta_name>
-        +{field} facet_names_by_backend_name std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
-        +{field} archetype_names_by_logical_meta_name std::unordered_map<logical_meta_id, archetype_name_set>
-        +{field} archetype_names_by_backend_by_facet std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
-        +{field} technical_space_for_archetype std::unordered_map<physical_meta_id, technical_space>
-    }
-
-    note top of  physical_meta_name_indices
-        Containing physical meta-names, indexed as required by use cases.
     end note
 
     enum technical_space_version <<masd::enumeration>> #F2DAFD {
@@ -310,8 +350,7 @@ which case only the parent name is populated and there are no children.
 }
 
 note top of  entities
-    Stores all of the entities related to identification
-of Dogen elements.
+    Stores all of the entities related to identification of Dogen elements.
 end note
 
 namespace helpers #F2F2F2 {
