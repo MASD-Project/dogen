@@ -13,36 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-02 Sun 08:38]
+#+CAPTION: Clock summary at [2022-10-03 Mon 19:51]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *43:00* |       |       | 100.0 |
+| *Total time*                                              | *43:27* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 43:00   |       |       | 100.0 |
-| Active                                                    |         | 43:00 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  23.8 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.9 |
+| Stories                                                   | 43:27   |       |       | 100.0 |
+| Active                                                    |         | 43:27 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  23.5 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.8 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.8 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  3:01 |   7.0 |
+| Sprint and product backlog grooming                       |         |       |  3:28 |   8.0 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.6 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   7.7 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   7.6 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   5.0 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   2.1 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   5.2 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   4.3 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   5.1 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   4.2 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.7 |
 | Model significant relations at a higher level             |         |       |  1:05 |   2.5 |
-| Create a mock configuration builder                       |         |       |  1:58 |   4.6 |
+| Create a mock configuration builder                       |         |       |  1:58 |   4.5 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.8 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.5 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.5 |
 | Windows package is broken                                 |         |       |  0:20 |   0.8 |
 | Warning on OSX build                                      |         |       |  2:23 |   5.5 |
-| Add PlantUML relationships to diagrams                    |         |       |  7:03 |  16.4 |
-| Change namespaces note implementation in PlantUML         |         |       |  0:35 |   1.4 |
+| Add PlantUML relationships to diagrams                    |         |       |  7:03 |  16.2 |
+| Change namespaces note implementation in PlantUML         |         |       |  0:35 |   1.3 |
 #+end:
 
 Agenda:
@@ -369,6 +369,8 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-10-03 Mon 19:41]--[2022-10-03 Mon 19:51] =>  0:10
+    CLOCK: [2022-10-03 Mon 18:30]--[2022-10-03 Mon 18:47] =>  0:17
     CLOCK: [2022-10-01 Sat 16:48]--[2022-10-01 Sat 16:54] =>  0:06
     CLOCK: [2022-09-30 Fri 11:10]--[2022-09-30 Fri 11:15] =>  0:05
     CLOCK: [2022-09-27 Tue 08:28]--[2022-09-27 Tue 08:40] =>  0:12
@@ -1270,6 +1272,49 @@ We should also use GUIDs here.
 Links:
 
 - [[https://stackoverflow.com/questions/59934882/plantuml-and-notes-on-packages][PlantUML and notes on packages]]
+
+*** Core generation rules                                             :story:
+
+These are some ideas that need further work. We seem to have figured out a
+couple of core principles related to generation:
+
+- all artefacts must be modeled. We should not ignore anything. If it requires
+  ignoring, we must ignore it at the model level - e.g. we should not use things
+  such as ignore regexes. Corollary: dogen models must be modeled.
+- do not have more than one representation of the same data. For example, take
+  protected regions; we can't have these on the output files and on the model
+  itself. This is because if we do we now have a synchronisation problem. The
+  use case is to edit the protected region from the file itself. The only
+  problem with this approach is that one cannot take the model and regenerate
+  everything. For this we could have a rule - the region in the model always
+  reflects the last run. That is, the region in the model is read-only and will
+  be updated with generation.
+- it would be extremely useful to have a list of files in the model which is
+  updated after each generation. This would allow us to jump quickly from model
+  elements to files. It would also allow us to use org-roam.
+- models should refer to documentation for detailed explanation, via org-roam.
+- there should only be one generation pass. At present we rely on a multi-pass
+  approach for generation. For example, we may generate some code using Dogen,
+  then use ODB to generate more code and so on. The right approach is to have a
+  cartridge for ODB and a way to model the expected artefacts coming out of ODB
+  (or perhaps detect them post-facto?). This means the build system only has to
+  call Dogen. Note that cartridges can call cartridges and so on. We need a way
+  to model this chain of calls as a model element. A cartridge such as protobuf
+  may generate many files. We need a way to capture this.
+- a model element may be associated with a directory which then has a model:
+  product models make use of this feature to contain component models. This
+  should also allow for adding new component models: dogen creates the directory
+  structure and the empty component model.
+ - models have an associated "type" which determines the valid set of logical
+   entities that can be instantiated within the model, and by implication the
+   set of projections onto physical space.
+- it should be possible to generate a model either at the product level or at
+  the component level.
+- when working at a higher level than the product, org-roam is used to weave
+  knowledge across the product set. But should there be a higher-level model
+  above product? This would allow for the creation of the correct filesystem
+  structure for products, as well as cater for documentation specific to this
+  higher level entity.
 
 *** Ignorable headlines in org-mode                                   :story:
 
