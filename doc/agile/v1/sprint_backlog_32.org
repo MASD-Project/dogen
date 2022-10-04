@@ -369,6 +369,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-10-04 Tue 08:21]--[2022-10-04 Tue 08:29] =>  0:08
     CLOCK: [2022-10-03 Mon 19:41]--[2022-10-03 Mon 19:51] =>  0:10
     CLOCK: [2022-10-03 Mon 18:30]--[2022-10-03 Mon 18:47] =>  0:17
     CLOCK: [2022-10-01 Sat 16:48]--[2022-10-01 Sat 16:54] =>  0:06
@@ -1232,6 +1233,9 @@ to make diagrams more readable. Models:
 
 *** STARTED Change namespaces note implementation in PlantUML         :story:
     :LOGBOOK:
+    CLOCK: [2022-10-04 Tue 19:19]--[2022-10-04 Tue 20:00] =>  0:41
+    CLOCK: [2022-10-04 Tue 08:30]--[2022-10-04 Tue 08:50] =>  0:20
+    CLOCK: [2022-10-04 Tue 08:08]--[2022-10-04 Tue 08:20] =>  0:21
     CLOCK: [2022-10-02 Sun 08:27]--[2022-10-02 Sun 08:38] =>  0:11
     CLOCK: [2022-10-02 Sun 08:21]--[2022-10-02 Sun 08:26] =>  0:05
     CLOCK: [2022-10-01 Sat 17:11]--[2022-10-01 Sat 17:30] =>  0:19
@@ -1272,6 +1276,15 @@ We should also use GUIDs here.
 Links:
 
 - [[https://stackoverflow.com/questions/59934882/plantuml-and-notes-on-packages][PlantUML and notes on packages]]
+
+*** Codec ID validation                                               :story:
+
+We are now relying on the codec ID for a lot of things. We need to make sure:
+
+- it has been supplied for all elements;
+- it is unique across a model.
+
+In the future we should also check its unique across all loaded models.
 
 *** Core generation rules                                             :story:
 
@@ -1315,6 +1328,13 @@ couple of core principles related to generation:
   above product? This would allow for the creation of the correct filesystem
   structure for products, as well as cater for documentation specific to this
   higher level entity.
+
+*** Consider using templates for codec conversion                     :story:
+
+At present we are generating org-mode and PlantUML output by hand. It seems
+likely using templates would be an improvement. However, we should probably do
+this after we move away from stitch and into mustache. This will also make life
+easier because stitch may pull in unnecessary dependencies.
 
 *** Ignorable headlines in org-mode                                   :story:
 
