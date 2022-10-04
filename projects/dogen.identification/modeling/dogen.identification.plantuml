@@ -10,6 +10,10 @@ UML representation:
 end note
 
 namespace entities #F2F2F2 {
+    note as entities_1
+Stores all of the entities related to identification of Dogen elements.
+    end note
+
     class codec_provenance #F7E5FF {
         +{field} model_type model_type
         +{field} model_sha1_hash sha1_hash
@@ -24,21 +28,21 @@ namespace entities #F2F2F2 {
     codec_provenance o-- model_type
 
     note top of  codec_provenance
-        Source of a model element in the codec dimension.
+Source of a model element in the codec dimension.
     end note
 
     class codec_id <<masd::primitive>> #EDCEFB {
     }
 
     note top of  codec_id
-        ID of the elment as sourced from the codec model, if any.
+ID of the elment as sourced from the codec model, if any.
     end note
 
     class sha1_hash <<masd::primitive>> #EDCEFB {
     }
 
     note top of  sha1_hash
-        Stores a SHA1 hash.
+Stores a SHA1 hash.
     end note
 
     class codec_location #F7E5FF {
@@ -47,14 +51,14 @@ namespace entities #F2F2F2 {
     }
 
     note top of  codec_location
-        Location of a modeling element in the codec dimension.
+Location of a modeling element in the codec dimension.
     end note
 
     class model_id <<masd::primitive>> #EDCEFB {
     }
 
     note top of  model_id
-        ID for a model.
+ID for a model.
     end note
 
     enum model_type <<masd::enumeration>> #F2DAFD {
@@ -65,7 +69,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  model_type
-        Types of models with regards to the current generation taking place.
+Types of models with regards to the current generation taking place.
     end note
 
     class logical_provenance #F7E5FF {
@@ -79,7 +83,7 @@ namespace entities #F2F2F2 {
     logical_provenance o-- logical_meta_name
 
     note top of  logical_provenance
-        Source of a model element in the logical dimension.
+Source of a model element in the logical dimension.
     end note
 
     class name <<Nameable>> #F7E5FF {
@@ -87,14 +91,14 @@ namespace entities #F2F2F2 {
     }
 
     note top of  name
-        General name for modeling elements which do not need any specialisation.
+General name for modeling elements which do not need any specialisation.
     end note
 
     class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
     }
 
     note top of  logical_id
-        ID of the elment in the logical dimension.
+ID of the elment in the logical dimension.
     end note
 
     class logical_name <<Nameable, QualifiedRepresentations, dogen::hashable>> #F7E5FF {
@@ -107,7 +111,7 @@ namespace entities #F2F2F2 {
     logical_name o-- logical_location
 
     note top of  logical_name
-        Name of an element in logical space.
+Name of an element in logical space.
 
 A name represents a point or a region in logical space, and this point or region
 can only be used by one element. Names can be uniquely identified by their
@@ -130,7 +134,7 @@ naming files, etc).
     }
 
     note top of  logical_location
-        Identifies a hierarchy of containment within the logical space.
+Identifies a hierarchy of containment within the logical space.
     end note
 
     class logical_name_tree <<QualifiedRepresentations>> #F7E5FF {
@@ -145,7 +149,7 @@ naming files, etc).
     logical_name_tree o-- logical_name
 
     note top of  logical_name_tree
-        Adds support for name composition as a tree-like structure.
+Adds support for name composition as a tree-like structure.
 
 A logical name tree has the responsibility of representing an instantiation of a
 generic type with all of its type parameters, which themselves can also be
@@ -157,14 +161,14 @@ type, in which case only the parent name is populated and there are no children.
     }
 
     note top of  physical_meta_id
-        ID of the meta-element in the physical dimension.
+ID of the meta-element in the physical dimension.
     end note
 
     class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
     }
 
     note top of  logical_meta_id
-        ID for a logical meta-element.
+ID for a logical meta-element.
     end note
 
     class logical_meta_physical_id <<dogen::hashable>> #F7E5FF {
@@ -176,7 +180,7 @@ type, in which case only the parent name is populated and there are no children.
     logical_meta_physical_id o-- physical_meta_id
 
     note top of  logical_meta_physical_id
-        ID in the logical-physical space.
+ID in the logical-physical space.
     end note
 
     class physical_meta_name <<Nameable>> #F7E5FF {
@@ -187,7 +191,7 @@ type, in which case only the parent name is populated and there are no children.
     physical_meta_name o-- physical_meta_id
 
     note top of  physical_meta_name
-        Name of an element in physical space.
+Name of an element in physical space.
 
 A name represents a point or a region in physical space. It can only be used by
 one physical element. Names can be uniquely identified by their qualified ID.
@@ -208,7 +212,7 @@ space can only have one and only one name.
     physical_meta_location o-- physical_meta_name
 
     note top of  physical_meta_location
-        Location of an entity or set of entities in the physical meta-model.
+Location of an entity or set of entities in the physical meta-model.
 
 These must be populated in order, e.g. in order to have a backend we must have a
 meta-model; in order to have a facet we must have a backend and in order to have
@@ -237,7 +241,7 @@ a formatter we must have a facet. We may not have any.
     physical_meta_name_indices o-- archetype_name_set
 
     note top of  physical_meta_name_indices
-        Containing physical meta-names, indexed as required by use cases.
+Containing physical meta-names, indexed as required by use cases.
     end note
 
     class physical_name <<Nameable>> #F7E5FF {
@@ -247,7 +251,7 @@ a formatter we must have a facet. We may not have any.
     physical_name o-- physical_id
 
     note top of  physical_name
-        Name of a physical model element.
+Name of a physical model element.
     end note
 
     class label #F7E5FF {
@@ -256,7 +260,7 @@ a formatter we must have a facet. We may not have any.
     }
 
     note top of  label
-        A label is a key-value pair that can be used by the processing engine in a flexible way.
+A label is a key-value pair that can be used by the processing engine in a flexible way.
     end note
 
     class tagged_value #F7E5FF {
@@ -265,7 +269,7 @@ a formatter we must have a facet. We may not have any.
     }
 
     note top of  tagged_value
-        Represents a tagged value in a similar spirit to UMLs.
+Represents a tagged value in a similar spirit to UMLs.
     end note
 
     class qualified_representations <<dogen::hashable>> #F7E5FF {
@@ -275,7 +279,7 @@ a formatter we must have a facet. We may not have any.
     }
 
     note top of  qualified_representations
-        All available qualified representations of a name.
+All available qualified representations of a name.
     end note
 
     class logical_meta_name <<Nameable>> #F7E5FF {
@@ -294,7 +298,7 @@ a formatter we must have a facet. We may not have any.
     }
 
     note top of  technical_space
-        Models need to declare upfront the technical space they will target.
+Models need to declare upfront the technical space they will target.
     end note
 
     class Nameable <<masd::object_template>> #E3B6F6 {
@@ -307,7 +311,7 @@ a formatter we must have a facet. We may not have any.
     Nameable <|-- logical_name
 
     note top of  Nameable
-        Ability to have a name.
+Ability to have a name.
     end note
 
     class QualifiedRepresentations <<masd::object_template>> #E3B6F6 {
@@ -319,21 +323,21 @@ a formatter we must have a facet. We may not have any.
     QualifiedRepresentations <|-- logical_name_tree
 
     note top of  QualifiedRepresentations
-        Name with multiple qualified representations.
+Name with multiple qualified representations.
     end note
 
     class physical_id <<masd::primitive>> #EDCEFB {
     }
 
     note top of  physical_id
-        ID for a physical element.
+ID for a physical element.
     end note
 
     class stereotype <<masd::primitive>> #EDCEFB {
     }
 
     note top of  stereotype
-        Stereotype.
+Stereotype.
     end note
 
     enum technical_space_version <<masd::enumeration>> #F2DAFD {
@@ -344,16 +348,16 @@ a formatter we must have a facet. We may not have any.
     }
 
     note top of  technical_space_version
-        Version of the technical space to use.
+Version of the technical space to use.
     end note
 
 }
 
-note top of  entities
-    Stores all of the entities related to identification of Dogen elements.
-end note
-
 namespace helpers #F2F2F2 {
+    note as helpers_1
+Assorted helpers used to construct domain entities.
+    end note
+
     class logical_name_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -373,7 +377,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  building_error
-        An error occurred whilst building.
+An error occurred whilst building.
     end note
 
     class logical_location_builder <<dogen::handcrafted::typeable>> #FFFACD {
@@ -397,7 +401,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  printing_error
-        An error occurred whilst pretty printing.
+An error occurred whilst pretty printing.
     end note
 
     enum separators <<masd::enumeration>> #F2DAFD {
@@ -407,7 +411,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  separators
-        Available separators to be used by the pretty printer.
+Available separators to be used by the pretty printer.
     end note
 
     class logical_name_flattener <<dogen::handcrafted::typeable>> #FFFACD {
@@ -419,7 +423,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  flattening_error
-        An error occurred whilst flattening a name.
+An error occurred whilst flattening a name.
     end note
 
     class physical_meta_name_builder <<dogen::handcrafted::typeable>> #FFFACD {
@@ -444,7 +448,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  validation_error
-        An error occurred during validation.
+An error occurred during validation.
     end note
 
     class identifiable_factory <<dogen::handcrafted::typeable>> #FFFACD {
@@ -478,7 +482,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  node
-        Node in a tree of logical names.
+Node in a tree of logical names.
 
 Temporary data structure used to build trees of logical names.
     end note
@@ -487,7 +491,7 @@ Temporary data structure used to build trees of logical names.
     }
 
     note top of  parsing_error
-        A fatal error has occurred while parsing.
+A fatal error has occurred while parsing.
     end note
 
     class physical_id_factory <<dogen::handcrafted::typeable>> #FFFACD {
@@ -502,10 +506,6 @@ Temporary data structure used to build trees of logical names.
     }
 
 }
-
-note top of  helpers
-    Assorted helpers used to construct domain entities.
-end note
 
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }

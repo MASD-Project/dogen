@@ -12,6 +12,10 @@ UML representation:
 end note
 
 namespace entities #F2F2F2 {
+    note as entities_1
+Represents entities from Emacs' org-mode.
+    end note
+
     class section #F7E5FF {
         +{field} blocks std::list<block>
     }
@@ -37,7 +41,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  headline
-        Represents a headline in org mode.
+Represents a headline in org mode.
 
 Headlines and Sections
 
@@ -114,10 +118,6 @@ colons.
 
 }
 
-note top of  entities
-    Represents entities from Emacs' org-mode.
-end note
-
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
 }
 
@@ -138,7 +138,7 @@ namespace transforms #F2F2F2 {
     }
 
     note top of  transformation_error
-        An error occurred whilst transforming.
+An error occurred whilst transforming.
     end note
 
 }
@@ -151,7 +151,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  parsing_error
-        An error ocurred whilst parsing an org-mode document.
+An error ocurred whilst parsing an org-mode document.
     end note
 
     class node <<dogen::untestable>> #ED8181 {
@@ -167,7 +167,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  building_error
-        An error occurred whilst building.
+An error occurred whilst building.
     end note
 
     class document_factory <<dogen::handcrafted::typeable>> #FFFACD {

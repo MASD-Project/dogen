@@ -12,6 +12,12 @@ space; keep it technical space agnostic.
 end note
 
 namespace base #F2F2F2 {
+    note as base_1
+The base layer profiles are designed to be applied first.
+Their objective is to set the initial state from which
+other layers can then configure features.
+    end note
+
     class decoration <<masd::variability::profile>> #DDECEC {
         +{field} enabled
         +{field} licence_name
@@ -20,7 +26,7 @@ namespace base #F2F2F2 {
     }
 
     note top of  decoration
-        Configuration for the decoration elements.
+Configuration for the decoration elements.
     end note
 
     class extraction <<masd::variability::profile>> #DDECEC {
@@ -29,7 +35,7 @@ namespace base #F2F2F2 {
     }
 
     note top of  extraction
-        Configuration for extraction.
+Configuration for extraction.
     end note
 
     class csharp <<masd::variability::profile>> #DDECEC {
@@ -37,7 +43,7 @@ namespace base #F2F2F2 {
     }
 
     note top of  csharp
-        Configures the main options for the C# backend.
+Configures the main options for the C# backend.
     end note
 
     class ignores <<masd::variability::profile>> #DDECEC {
@@ -47,7 +53,7 @@ namespace base #F2F2F2 {
     }
 
     note top of  ignores
-        Regexes to ignore.
+Regexes to ignore.
 
 FIXME: we should remove all ignores related to tests and add a proper
 facet for manual tests.
@@ -72,7 +78,7 @@ facet for manual tests.
 
     base::base <|-- base::base_profile
     note top of  base_profile
-        Configures the main options for the C++ backend.
+Configures the main options for the C++ backend.
     end note
 
     class default_profile <<masd::variability::profile>> #DDECEC {
@@ -80,7 +86,7 @@ facet for manual tests.
 
     base::base_profile <|-- base::default_profile
     note top of  default_profile
-        Variability profile for a typical dogen model.
+Variability profile for a typical dogen model.
     end note
 
     class disable_all_facets <<masd::variability::profile_template>> #DDECEC {
@@ -89,7 +95,7 @@ facet for manual tests.
 
     base::base <|-- base::disable_all_facets
     note top of  disable_all_facets
-        Disables all facets in the C++ backend.
+Disables all facets in the C++ backend.
     end note
 
     class relational_profile <<masd::variability::profile>> #DDECEC {
@@ -106,20 +112,21 @@ facet for manual tests.
     base::base <|-- base::test_all_facets
 }
 
-note top of  base
-    The base layer profiles are designed to be applied first.
-Their objective is to set the initial state from which
-other layers can then configure features.
-end note
-
 namespace composable #F2F2F2 {
+    note as composable_1
+The composable layer is made up of profiles that
+are meant to be applied on top of the base layer.
+These can be used to compose the final configuration
+for the element.
+    end note
+
     class typeable <<masd::variability::profile>> #DDECEC {
         +{field} masd.cpp.types.enabled
         +{field} masd.variability.profile
     }
 
     note top of  typeable
-        Model element is defined as a type.
+Model element is defined as a type.
     end note
 
     class pretty_printable <<masd::variability::profile>> #DDECEC {
@@ -127,7 +134,7 @@ namespace composable #F2F2F2 {
     }
 
     note top of  pretty_printable
-        The element has the ability to dump itself to a stream.
+The element has the ability to dump itself to a stream.
     end note
 
     class hashable <<masd::variability::profile>> #DDECEC {
@@ -135,7 +142,7 @@ namespace composable #F2F2F2 {
     }
 
     note top of  hashable
-        The element has the ability to generate hashes.
+The element has the ability to generate hashes.
     end note
 
     class serializable <<masd::variability::profile>> #DDECEC {
@@ -147,7 +154,7 @@ namespace composable #F2F2F2 {
     }
 
     note top of  handcrafted
-        Base profile for model elements that are manually generated.
+Base profile for model elements that are manually generated.
     end note
 
     class handcrafted_pretty_printable <<masd::variability::profile>> #DDECEC {
@@ -164,7 +171,7 @@ namespace composable #F2F2F2 {
 
     composable::handcrafted <|-- composable::handcrafted_typeable
     note top of  handcrafted_typeable
-        Configuration for model elements that are generated manually by the user.
+Configuration for model elements that are generated manually by the user.
     end note
 
     class header_only <<masd::variability::profile>> #DDECEC {
@@ -173,7 +180,7 @@ namespace composable #F2F2F2 {
 
     composable::handcrafted_typeable <|-- composable::header_only
     note top of  header_only
-        This element has only a types header file.
+This element has only a types header file.
     end note
 
     class inheritable <<masd::variability::profile>> #DDECEC {
@@ -188,7 +195,7 @@ namespace composable #F2F2F2 {
 
     composable::handcrafted_typeable <|-- composable::implementation_only
     note top of  implementation_only
-        This element has only a types implementation file.
+This element has only a types implementation file.
     end note
 
     class handcrafted_serializable <<masd::variability::profile>> #DDECEC {
@@ -206,7 +213,7 @@ namespace composable #F2F2F2 {
     }
 
     note top of  untestable
-        Model element will not be tested via generated tests.
+Model element will not be tested via generated tests.
     end note
 
     class untypable <<masd::variability::profile>> #DDECEC {
@@ -214,7 +221,7 @@ namespace composable #F2F2F2 {
     }
 
     note top of  untypable
-        The element does not have a types facet.
+The element does not have a types facet.
     end note
 
     class handcrafted_cmake <<masd::variability::profile>> #DDECEC {
@@ -227,17 +234,10 @@ namespace composable #F2F2F2 {
     }
 
     note top of  forward_declarable
-        Element has forward declarations.
+Element has forward declarations.
     end note
 
 }
-
-note top of  composable
-    The composable layer is made up of profiles that
-are meant to be applied on top of the base layer.
-These can be used to compose the final configuration
-for the element.
-end note
 
 class test_marker <<masd::decoration::generation_marker>> #E8D0C5 {
     +{field} add_date_time
@@ -247,7 +247,7 @@ class test_marker <<masd::decoration::generation_marker>> #E8D0C5 {
 }
 
 note top of  test_marker
-    
+
 
 end note
 

@@ -16,6 +16,10 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 namespace helpers #F2F2F2 {
+    note as helpers_1
+Helpers for the physical model.
+    end note
+
     class template_instantiation_domains_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -23,7 +27,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  building_error
-        An error occurred while the field factory was building.
+An error occurred while the field factory was building.
     end note
 
     class path_generator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -47,7 +51,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  validation_error
-        An error occurred during validation.
+An error occurred during validation.
     end note
 
     class header_guard_factory <<dogen::handcrafted::typeable>> #FFFACD {
@@ -55,11 +59,11 @@ namespace helpers #F2F2F2 {
 
 }
 
-note top of  helpers
-    Helpers for the physical model.
-end note
-
 namespace entities #F2F2F2 {
+    note as entities_1
+Defines the MASD physical space.
+    end note
+
     class meta_model <<ContainingMetaElement>> #F7E5FF {
         +{field} template_instantiation_domains std::unordered_map<std::string, std::vector<std::string>>
         +{field} backends std::list<backend>
@@ -67,7 +71,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  meta_model
-        Describes the geometry of physical space.
+Describes the geometry of physical space.
 
 Provides details of the backends available in the current instance of Dogen.
     end note
@@ -80,7 +84,7 @@ Provides details of the backends available in the current instance of Dogen.
     }
 
     note top of  backend
-        Represents a meta-region in physical space with archetypes for a primary technical
+Represents a meta-region in physical space with archetypes for a primary technical
 space, and associated secondary technical spaces.
     end note
 
@@ -92,7 +96,7 @@ space, and associated secondary technical spaces.
     }
 
     note top of  part
-        Represents a meta-region in physical space with archetypes for a given part of a
+Represents a meta-region in physical space with archetypes for a given part of a
 component in a backend.
     end note
 
@@ -104,7 +108,7 @@ component in a backend.
     }
 
     note top of  path_configuration
-        Describes how paths are handled within a part.
+Describes how paths are handled within a part.
     end note
 
     enum path_contribution_type <<masd::enumeration>> #F2DAFD {
@@ -114,7 +118,7 @@ component in a backend.
     }
 
     note top of  path_contribution_type
-        Different kinds of contributions that can be made to the final path computation.
+Different kinds of contributions that can be made to the final path computation.
     end note
 
     class facet <<ContainingMetaElement, Postfixable>> #F7E5FF {
@@ -124,7 +128,7 @@ component in a backend.
     }
 
     note top of  facet
-        Represents a meta-region in physical space with archetypes for a given theme.
+Represents a meta-region in physical space with archetypes for a given theme.
     end note
 
     class archetype <<MetaElement, Postfixable, Associatable, HasTechnicalSpace>> #F7E5FF {
@@ -135,7 +139,7 @@ component in a backend.
     }
 
     note top of  archetype
-        Represents a meta-artefact.
+Represents a meta-artefact.
     end note
 
     class archetype_kind <<Describable>> #F7E5FF {
@@ -144,7 +148,7 @@ component in a backend.
     }
 
     note top of  archetype_kind
-        Represents a type of archetypes.
+Represents a type of archetypes.
     end note
 
     class model <<Element>> #F7E5FF {
@@ -158,7 +162,7 @@ component in a backend.
     }
 
     note top of  model
-        Collection of entities representing objects in physical space.
+Collection of entities representing objects in physical space.
     end note
 
     class Describable <<masd::object_template>> #E3B6F6 {
@@ -170,7 +174,7 @@ component in a backend.
     }
 
     note top of  MetaNameable
-        Ability to have a meta-name.
+Ability to have a meta-name.
     end note
 
     class Labelable <<masd::object_template>> #E3B6F6 {
@@ -178,7 +182,7 @@ component in a backend.
     }
 
     note top of  Labelable
-        The ability to attach labels to an element.
+The ability to attach labels to an element.
     end note
 
     class MetaElement <<masd::object_template>> #E3B6F6 {
@@ -193,7 +197,7 @@ component in a backend.
 
     entities::MetaElement <|-- entities::ContainingMetaElement
     note top of  ContainingMetaElement
-        The meta-element can contain other meta-elements.
+The meta-element can contain other meta-elements.
     end note
 
     class Postfixable <<masd::object_template>> #E3B6F6 {
@@ -213,7 +217,7 @@ component in a backend.
     }
 
     note top of  artefact
-        Represents an entity in physical space.
+Represents an entity in physical space.
     end note
 
     class Configurable <<masd::object_template>> #E3B6F6 {
@@ -221,7 +225,7 @@ component in a backend.
     }
 
     note top of  Configurable
-        Ability to have meta-data associated.
+Ability to have meta-data associated.
     end note
 
     class Provenance <<masd::object_template>> #E3B6F6 {
@@ -229,7 +233,7 @@ component in a backend.
     }
 
     note top of  Provenance
-        Properties related to the origin of the modeling element.
+Properties related to the origin of the modeling element.
     end note
 
     class Nameable <<masd::object_template>> #E3B6F6 {
@@ -237,7 +241,7 @@ component in a backend.
     }
 
     note top of  Nameable
-        Ability to have a name.
+Ability to have a name.
     end note
 
     class LogicalPhysicalSpaceIdentity <<masd::object_template>> #E3B6F6 {
@@ -260,7 +264,7 @@ component in a backend.
     }
 
     note top of  outputting_properties
-        Properties related to outputting.
+Properties related to outputting.
     end note
 
     class operation #F7E5FF {
@@ -269,7 +273,7 @@ component in a backend.
     }
 
     note top of  operation
-        Operation to apply to an artefact.
+Operation to apply to an artefact.
     end note
 
     enum operation_type <<masd::enumeration>> #F2DAFD {
@@ -280,7 +284,7 @@ component in a backend.
     }
 
     note top of  operation_type
-        Operation to perform to a given artefact.
+Operation to perform to a given artefact.
     end note
 
     enum operation_reason <<masd::enumeration>> #F2DAFD {
@@ -296,7 +300,7 @@ component in a backend.
     }
 
     note top of  operation_reason
-        Reasons for performing an operation.
+Reasons for performing an operation.
     end note
 
     class Associatable <<masd::object_template>> #E3B6F6 {
@@ -306,7 +310,7 @@ component in a backend.
     }
 
     note top of  Associatable
-        The meta-element is associated with other meta-elements
+The meta-element is associated with other meta-elements
     end note
 
     class model_set <<Nameable>> #F7E5FF {
@@ -314,7 +318,7 @@ component in a backend.
     }
 
     note top of  model_set
-        Represents a set of related physical models.
+Represents a set of related physical models.
     end note
 
     enum relation_status <<masd::enumeration, dogen::convertible>> #F2DAFD {
@@ -324,7 +328,7 @@ component in a backend.
     }
 
     note top of  relation_status
-        Status of a given archetype with regards to being related to other archetypes.
+Status of a given archetype with regards to being related to other archetypes.
     end note
 
     class constant_relation <<Urnable, Labelable>> #F7E5FF {
@@ -332,7 +336,7 @@ component in a backend.
     }
 
     note top of  constant_relation
-        Represents a relation between archetypes, fixed to a logical model element.
+Represents a relation between archetypes, fixed to a logical model element.
     end note
 
     class variable_relation <<Urnable>> #F7E5FF {
@@ -355,7 +359,7 @@ component in a backend.
     }
 
     note top of  variable_relation_type
-        Lists all of the valid variable relation types.
+Lists all of the valid variable relation types.
     end note
 
     class relations #F7E5FF {
@@ -366,7 +370,7 @@ component in a backend.
     }
 
     note top of  relations
-        Models relationships between archetypes.
+Models relationships between archetypes.
     end note
 
     class hard_coded_relation #F7E5FF {
@@ -374,7 +378,7 @@ component in a backend.
     }
 
     note top of  hard_coded_relation
-        Relations against hard-coded values.
+Relations against hard-coded values.
     end note
 
     class region <<Configurable, Provenance>> #F7E5FF {
@@ -384,7 +388,7 @@ component in a backend.
     }
 
     note top of  region
-        Represents a region of logical-physical space fixed at one logical point.
+Represents a region of logical-physical space fixed at one logical point.
     end note
 
     class enablement_properties #F7E5FF {
@@ -397,7 +401,7 @@ component in a backend.
     }
 
     note top of  enablement_properties
-        Stores the properties related to the enablement.
+Stores the properties related to the enablement.
     end note
 
     class backend_properties <<MetaIdentifiable>> #F7E5FF {
@@ -410,7 +414,7 @@ component in a backend.
     }
 
     note top of  backend_properties
-        Properties related to the backend.
+Properties related to the backend.
     end note
 
     class archetype_kind_properties <<MetaNameable>> #F7E5FF {
@@ -427,7 +431,7 @@ component in a backend.
     }
 
     note top of  facet_properties
-        Properties related to the facet.
+Properties related to the facet.
     end note
 
     class archetype_properties <<MetaIdentifiable>> #F7E5FF {
@@ -441,7 +445,7 @@ component in a backend.
     }
 
     note top of  archetype_properties
-        Properties related to the archetype.
+Properties related to the archetype.
     end note
 
     class meta_model_properties #F7E5FF {
@@ -458,7 +462,7 @@ component in a backend.
     }
 
     note top of  meta_model_properties
-        Meta-model configuration supplied by this model.
+Meta-model configuration supplied by this model.
 
 The meta-model properties represent a set of variability overrides supplied on top
 of the existing physical meta-model. In addition, the properties also contain
@@ -473,7 +477,7 @@ computed values on the back of physical transforms.
     }
 
     note top of  part_properties
-        Properties related to the part.
+Properties related to the part.
     end note
 
     class path_properties #F7E5FF {
@@ -504,7 +508,7 @@ computed values on the back of physical transforms.
     }
 
     note top of  project_path_properties
-        Legacy type containing all proprties related to paths.
+Legacy type containing all proprties related to paths.
     end note
 
     class MetaIdentifiable <<masd::object_template>> #E3B6F6 {
@@ -528,7 +532,7 @@ computed values on the back of physical transforms.
     }
 
     note top of  legacy_archetype_kind
-        Kinds of archetypes available across all technical spaces.
+Kinds of archetypes available across all technical spaces.
     end note
 
     class relation_properties #F7E5FF {
@@ -542,7 +546,7 @@ computed values on the back of physical transforms.
     }
 
     note top of  inclusion_directives
-        Represents the group of inclusion directives associated with a name and an archetype.
+Represents the group of inclusion directives associated with a name and an archetype.
     end note
 
     class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
@@ -559,11 +563,11 @@ computed values on the back of physical transforms.
 
 }
 
-note top of  entities
-    Defines the MASD physical space.
-end note
-
 namespace features #F2F2F2 {
+    note as features_1
+Features for the MASD physical model.
+    end note
+
     class facet_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
         +{field} directory_name masd::variability::text
         +{field} postfix masd::variability::text
@@ -571,7 +575,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  facet_features
-        Physical features common to all facets.
+Physical features common to all facets.
     end note
 
     class archetype_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
@@ -580,7 +584,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  archetype_features
-        Features common to all archetypes.
+Features common to all archetypes.
     end note
 
     class initializer <<masd::variability::initializer>> #A9CDCD {
@@ -595,7 +599,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  filesystem
-        Features related to filesystem operations.
+Features related to filesystem operations.
     end note
 
     class enablement <<masd::variability::feature_template_bundle>> #CCE2E2 {
@@ -603,7 +607,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  enablement
-        Enablement related properties.
+Enablement related properties.
     end note
 
     class backend_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
@@ -611,7 +615,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  backend_features
-        Physical features common to all backends.
+Physical features common to all backends.
     end note
 
     class path_features <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -628,7 +632,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  path_features
-        Set of features related to path processing.
+Set of features related to path processing.
     end note
 
     class directive_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
@@ -642,11 +646,12 @@ namespace features #F2F2F2 {
 
 }
 
-note top of  features
-    Features for the MASD physical model.
-end note
-
 namespace transforms #F2F2F2 {
+    note as transforms_1
+Contains all of the transforms needed to produce
+models and meta-models for the physical model.
+    end note
+
     class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
         +{field} diffing_configuration boost::optional<diffing_configuration>
         +{field} reporting_configuration boost::optional<reporting_configuration>
@@ -707,7 +712,7 @@ namespace transforms #F2F2F2 {
     }
 
     note top of  minimal_context
-        Smallest possible context required for bootstrapping purposes.
+Smallest possible context required for bootstrapping purposes.
     end note
 
     class meta_model_assembly_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -741,11 +746,6 @@ namespace transforms #F2F2F2 {
     }
 
 }
-
-note top of  transforms
-    Contains all of the transforms needed to produce
-models and meta-models for the physical model.
-end note
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
 }

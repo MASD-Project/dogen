@@ -32,6 +32,10 @@ UML representation:
 end note
 
 namespace entities #F2F2F2 {
+    note as entities_1
+Entities that define the logical model.
+    end note
+
     class Parameterisable <<masd::object_template>> #E3B6F6 {
         +{field} type_parameters type_parameters
     }
@@ -51,7 +55,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Associatable
-        The element has the ability to associate itself with other elements.
+The element has the ability to associate itself with other elements.
     end note
 
     class Generalizable <<masd::object_template>> #E3B6F6 {
@@ -69,7 +73,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Generalizable
-        The element has the ability to be part of a generalization relationship.
+The element has the ability to be part of a generalization relationship.
     end note
 
     class Visitable <<masd::object_template>> #E3B6F6 {
@@ -80,7 +84,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Visitable
-        The ability to handle visitation.
+The ability to handle visitation.
     end note
 
     class Relatable <<masd::object_template>> #E3B6F6 {
@@ -91,7 +95,7 @@ namespace entities #F2F2F2 {
     entities::Associatable <|-- entities::Relatable
     entities::Generalizable <|-- entities::Relatable
     note top of  Relatable
-        Element has the ability to have relationships with other elements.
+Element has the ability to have relationships with other elements.
     end note
 
     class Containable <<masd::object_template>> #E3B6F6 {
@@ -100,7 +104,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Containable
-        The ability to be contained inside a module.
+The ability to be contained inside a module.
     end note
 
     class TechnicalSpaceRelationship <<masd::object_template>> #E3B6F6 {
@@ -112,7 +116,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Provenance
-        Details of the origin of this model element.
+Details of the origin of this model element.
     end note
 
     class Stereotypable <<masd::object_template>> #E3B6F6 {
@@ -129,7 +133,7 @@ namespace entities #F2F2F2 {
     stereotypes o-- static_stereotypes
 
     note top of  stereotypes
-        Stereotype information associated with this element.
+Stereotype information associated with this element.
     end note
 
     enum static_stereotypes <<masd::enumeration>> #F2DAFD {
@@ -174,7 +178,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  static_stereotypes
-        Lists all stereotypes defined in the masd UML profile.
+Lists all stereotypes defined in the masd UML profile.
     end note
 
     class Documentable <<masd::object_template>> #E3B6F6 {
@@ -182,7 +186,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Documentable
-        Ability to provide documentation.
+Ability to provide documentation.
     end note
 
     class Configurable <<masd::object_template>> #E3B6F6 {
@@ -190,7 +194,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Configurable
-        Ability to have meta-data associated.
+Ability to have meta-data associated.
     end note
 
     class MetaNameable <<masd::object_template>> #E3B6F6 {
@@ -198,7 +202,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  MetaNameable
-        Ability to have a meta-name.
+Ability to have a meta-name.
     end note
 
     class Nameable <<masd::object_template>> #E3B6F6 {
@@ -206,7 +210,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Nameable
-        Ability to have a name.
+Ability to have a name.
     end note
 
     class Generatable <<masd::object_template>> #E3B6F6 {
@@ -225,7 +229,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  generability_status
-        The status of this element with regards to generability.
+The status of this element with regards to generability.
     end note
 
     class Labelable <<masd::object_template>> #E3B6F6 {
@@ -233,7 +237,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  Labelable
-        The ability to attach labels to an element.
+The ability to attach labels to an element.
     end note
 
     class Stateful <<masd::object_template>> #E3B6F6 {
@@ -247,7 +251,7 @@ namespace entities #F2F2F2 {
     Stateful o-- attribute: stores state in
 
     note top of  Stateful
-        Ability to have a state.
+Ability to have a state.
     end note
 
     class attribute <<Documentable, Configurable, Nameable, Stereotypable>> #F7E5FF {
@@ -261,7 +265,7 @@ namespace entities #F2F2F2 {
     }
 
     note top of  attribute
-        Represents an attribute in an object.
+Represents an attribute in an object.
     end note
 
     class Element <<masd::object_template>> #E3B6F6 {
@@ -280,7 +284,7 @@ namespace entities #F2F2F2 {
     entities::Labelable <|-- entities::Element
     entities::Generatable <|-- entities::Element
     note top of  Element
-        A unit of coding that can be code generated.
+A unit of coding that can be code generated.
 
 We define the Element object template purely to make our life easier when
 creating the element class. It is not required for any other purpose.
@@ -294,7 +298,7 @@ creating the element class. It is not required for any other purpose.
     element o-- helper_properties
 
     note top of  element
-        Represents a generic logical construct.
+Represents a generic logical construct.
 
 An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
@@ -332,7 +336,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
     model o-- streaming_properties
 
     note top of  model
-        Intermediate representation of a masd model.
+Intermediate representation of a masd model.
     end note
 
     class assistant_properties #F7E5FF {
@@ -357,7 +361,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
     output_model_set o-- model: composed of
 
     note top of  output_model_set
-        Represents a set of related logical models produced as ouput of the logical
+Represents a set of related logical models produced as ouput of the logical
 model chains.
     end note
 
@@ -370,7 +374,7 @@ model chains.
     input_model_set o-- model: composed of
 
     note top of  input_model_set
-        Represents a set of related logical models used as an input to the logical model
+Represents a set of related logical models used as an input to the logical model
 chains.
     end note
 
@@ -385,17 +389,22 @@ chains.
     }
 
     note top of  Container
-        Has the ability to contain other elements.
+Has the ability to contain other elements.
     end note
 
     namespace decoration #F2F2F2 {
+        note as decoration_1
+Houses all of the meta-modeling elements and
+properties related to decorations.
+        end note
+
         class licence <<logical::meta_element>> #F7E5FF {
             +{field} short_form std::string
             +{field} long_form std::string
         }
 
         note top of  licence
-            Represents legal licence for software projects.
+Represents legal licence for software projects.
         end note
 
         class modeline_group <<logical::meta_element, Container>> #F7E5FF {
@@ -403,7 +412,7 @@ chains.
         }
 
         note top of  modeline_group
-            Group of modelines, logically associated.
+Group of modelines, logically associated.
 
 For example, one may choose to have a set of modelines for @e emacs , or for
 @e vi, etc.
@@ -417,7 +426,7 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         }
 
         note top of  modeline
-            Groups all the fields representing editor variables for emacs, vi, etc.
+Groups all the fields representing editor variables for emacs, vi, etc.
 
 A field is a key-value pair (KVP), where name is the first element and its value
 the second.
@@ -437,7 +446,7 @@ separator is @e ;.
         }
 
         note top of  editor
-            Supported editors for modelines.
+Supported editors for modelines.
         end note
 
         class modeline_field #F7E5FF {
@@ -451,7 +460,7 @@ separator is @e ;.
         }
 
         note top of  modeline_location
-            Location in the file to place the modeline.
+Location in the file to place the modeline.
         end note
 
         class generation_marker <<logical::meta_element>> #F7E5FF {
@@ -464,7 +473,7 @@ separator is @e ;.
         }
 
         note top of  generation_marker
-            Properties of the "generation marker" to add to generated files.
+Properties of the "generation marker" to add to generated files.
 
 These are also known as "location strings".
         end note
@@ -475,7 +484,7 @@ These are also known as "location strings".
         }
 
         note top of  element_properties
-            Decoration for this element.
+Decoration for this element.
         end note
 
         class element_repository #F7E5FF {
@@ -487,182 +496,13 @@ These are also known as "location strings".
 
     }
 
-    note top of  decoration
-        Houses all of the meta-modeling elements and
-properties related to decorations.
-    end note
-
     class meta_element <<masd::variability::profile>> #DDECEC {
         +{field} masd.generalization.parent
     }
 
     namespace variability #F2F2F2 {
-        class abstract_feature <<Documentable, Configurable, Nameable>> #F7E5FF {
-            +{field} original_key std::string
-            +{field} key std::string
-            +{field} identifiable_key std::string
-            +{field} unparsed_type std::string
-            +{field} mapped_type std::string
-            +{field} parsed_type identification::entities::logical_name_tree
-            +{field} default_value std::string
-            +{field} value_type variability::entities::value_type
-            +{field} binding_point boost::optional<variability::entities::binding_point>
-            +{field} is_optional bool
-            +{field} requires_optionality bool
-        }
-
-        note top of  abstract_feature
-            Contains all of the common attributes between features and feature templates.
-        end note
-
-        class feature_template #F7E5FF {
-            +{field} default_value_overrides std::list<default_value_override>
-        }
-
-        entities::variability::abstract_feature <|-- entities::variability::feature_template
-        note top of  feature_template
-            Represents a feature template in variability space.
-
-Feature templates are expanded into features within the variability model.
-        end note
-
-        class initializer <<logical::meta_element>> #F7E5FF {
-            +{field} feature_template_bundles std::list<identification::entities::logical_name>
-            +{field} feature_bundles std::list<identification::entities::logical_name>
-        }
-
-        note top of  initializer
-            Responsible for initialising features and feature templates.
-        end note
-
-        class element_repository #F7E5FF {
-            +{field} profile_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
-            +{field} profiles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
-            +{field} feature_template_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
-            +{field} feature_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
-            +{field} initializer boost::shared_ptr<initializer>
-        }
-
-        class abstract_bundle <<logical::meta_element, Associatable>> #F7E5FF {
-            +{field} key_prefix std::string
-            +{field} generate_registration bool
-            +{field} generate_static_configuration bool
-            +{field} requires_manual_default_constructor bool
-            +{field} default_binding_point boost::optional<variability::entities::binding_point>
-        }
-
-        note top of  abstract_bundle
-            A feature template bundle represents an aggregation of feature templates in a
-model.
-
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
-infrastructural code to ease the creation and subsequent processing of features.
-
-Generated code comprises of two aspects:
-
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration - if requested.
-        end note
-
-        class feature_bundle #F7E5FF {
-            +{field} features std::list<feature>
-        }
-
-        entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
-        note top of  feature_bundle
-            A feature bundle represents an aggregation of features in a model.
-
-The features should be "semantically related", that is, belong to a related
-topic. A feature bundle is used by code generation to generate infrastructural code
-to ease the creation and subsequent processing of features.
-
-Generated code comprises of two aspects:
-
-@li the registration of the feature for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
-
-Both of these aspects are optional, but at least one must be chosen.
-        end note
-
-        class feature #F7E5FF {
-        }
-
-        entities::variability::abstract_feature <|-- entities::variability::feature
-        note top of  feature
-            Represents a feature in variability space.
-        end note
-
-        class feature_template_bundle #F7E5FF {
-            +{field} feature_templates std::list<feature_template>
-            +{field} instantiation_domain_name std::string
-        }
-
-        entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
-        note top of  feature_template_bundle
-            A feature template bundle represents an aggregation of feature templates in a
-model.
-
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
-infrastructural code to ease the creation and subsequent processing of features.
-
-Generated code comprises of two aspects:
-
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
-
-Both of these aspects are optional, but at least one must be chosen.
-        end note
-
-        class abstract_profile <<logical::meta_element>> #F7E5FF {
-            +{field} stereotype std::string
-            +{field} parents std::list<identification::entities::logical_name>
-            +{field} key_prefix std::string
-        }
-
-        class profile_template #F7E5FF {
-            +{field} entries std::list<profile_template_entry>
-        }
-
-        entities::variability::abstract_profile <|-- entities::variability::profile_template
-        class profile #F7E5FF {
-            +{field} entries std::list<profile_entry>
-            +{field} binding_point std::string
-        }
-
-        entities::variability::abstract_profile <|-- entities::variability::profile
-        note top of  profile
-            Represents a profile from the variability subsystem.
-        end note
-
-        class abstract_profile_entry <<Documentable, Configurable, Nameable>> #F7E5FF {
-            +{field} original_key std::string
-            +{field} key std::string
-            +{field} value std::list<std::string>
-        }
-
-        class profile_entry #F7E5FF {
-        }
-
-        entities::variability::abstract_profile_entry <|-- entities::variability::profile_entry
-        class profile_template_entry #F7E5FF {
-            +{field} instantiation_domain_name std::string
-        }
-
-        entities::variability::abstract_profile_entry <|-- entities::variability::profile_template_entry
-        class default_value_override #F7E5FF {
-            +{field} key_ends_with std::string
-            +{field} default_value std::string
-        }
-
-    }
-
-    note top of  variability
-        Houses all of the meta-modeling elements related to variability.
+        note as variability_1
+Houses all of the meta-modeling elements related to variability.
 
 There are two "kinds" of entities in this namespace:
 
@@ -707,9 +547,178 @@ they already exist) so we need to disable feature registration. In the
 future we hope to simplify this by making the shapes align - though
 perhaps it will have the underisable side-effect of hiding all of this
 complexity.
-    end note
+        end note
+
+        class abstract_feature <<Documentable, Configurable, Nameable>> #F7E5FF {
+            +{field} original_key std::string
+            +{field} key std::string
+            +{field} identifiable_key std::string
+            +{field} unparsed_type std::string
+            +{field} mapped_type std::string
+            +{field} parsed_type identification::entities::logical_name_tree
+            +{field} default_value std::string
+            +{field} value_type variability::entities::value_type
+            +{field} binding_point boost::optional<variability::entities::binding_point>
+            +{field} is_optional bool
+            +{field} requires_optionality bool
+        }
+
+        note top of  abstract_feature
+Contains all of the common attributes between features and feature templates.
+        end note
+
+        class feature_template #F7E5FF {
+            +{field} default_value_overrides std::list<default_value_override>
+        }
+
+        entities::variability::abstract_feature <|-- entities::variability::feature_template
+        note top of  feature_template
+Represents a feature template in variability space.
+
+Feature templates are expanded into features within the variability model.
+        end note
+
+        class initializer <<logical::meta_element>> #F7E5FF {
+            +{field} feature_template_bundles std::list<identification::entities::logical_name>
+            +{field} feature_bundles std::list<identification::entities::logical_name>
+        }
+
+        note top of  initializer
+Responsible for initialising features and feature templates.
+        end note
+
+        class element_repository #F7E5FF {
+            +{field} profile_templates std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
+            +{field} profiles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
+            +{field} feature_template_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
+            +{field} feature_bundles std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
+            +{field} initializer boost::shared_ptr<initializer>
+        }
+
+        class abstract_bundle <<logical::meta_element, Associatable>> #F7E5FF {
+            +{field} key_prefix std::string
+            +{field} generate_registration bool
+            +{field} generate_static_configuration bool
+            +{field} requires_manual_default_constructor bool
+            +{field} default_binding_point boost::optional<variability::entities::binding_point>
+        }
+
+        note top of  abstract_bundle
+A feature template bundle represents an aggregation of feature templates in a
+model.
+
+The feature templates should be "semantically related", that is, belong to a related
+topic. A feature template bundle is used by code generation to generate
+infrastructural code to ease the creation and subsequent processing of features.
+
+Generated code comprises of two aspects:
+
+@li the registration of the feature template for the dynamic part of the processing;
+@li the generation of a static configuration class to  represent the feature once
+ read out from the dynamic configuration - if requested.
+        end note
+
+        class feature_bundle #F7E5FF {
+            +{field} features std::list<feature>
+        }
+
+        entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
+        note top of  feature_bundle
+A feature bundle represents an aggregation of features in a model.
+
+The features should be "semantically related", that is, belong to a related
+topic. A feature bundle is used by code generation to generate infrastructural code
+to ease the creation and subsequent processing of features.
+
+Generated code comprises of two aspects:
+
+@li the registration of the feature for the dynamic part of the processing;
+@li the generation of a static configuration class to  represent the feature once
+ read out from the dynamic configuration.
+
+Both of these aspects are optional, but at least one must be chosen.
+        end note
+
+        class feature #F7E5FF {
+        }
+
+        entities::variability::abstract_feature <|-- entities::variability::feature
+        note top of  feature
+Represents a feature in variability space.
+        end note
+
+        class feature_template_bundle #F7E5FF {
+            +{field} feature_templates std::list<feature_template>
+            +{field} instantiation_domain_name std::string
+        }
+
+        entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
+        note top of  feature_template_bundle
+A feature template bundle represents an aggregation of feature templates in a
+model.
+
+The feature templates should be "semantically related", that is, belong to a related
+topic. A feature template bundle is used by code generation to generate
+infrastructural code to ease the creation and subsequent processing of features.
+
+Generated code comprises of two aspects:
+
+@li the registration of the feature template for the dynamic part of the processing;
+@li the generation of a static configuration class to  represent the feature once
+ read out from the dynamic configuration.
+
+Both of these aspects are optional, but at least one must be chosen.
+        end note
+
+        class abstract_profile <<logical::meta_element>> #F7E5FF {
+            +{field} stereotype std::string
+            +{field} parents std::list<identification::entities::logical_name>
+            +{field} key_prefix std::string
+        }
+
+        class profile_template #F7E5FF {
+            +{field} entries std::list<profile_template_entry>
+        }
+
+        entities::variability::abstract_profile <|-- entities::variability::profile_template
+        class profile #F7E5FF {
+            +{field} entries std::list<profile_entry>
+            +{field} binding_point std::string
+        }
+
+        entities::variability::abstract_profile <|-- entities::variability::profile
+        note top of  profile
+Represents a profile from the variability subsystem.
+        end note
+
+        class abstract_profile_entry <<Documentable, Configurable, Nameable>> #F7E5FF {
+            +{field} original_key std::string
+            +{field} key std::string
+            +{field} value std::list<std::string>
+        }
+
+        class profile_entry #F7E5FF {
+        }
+
+        entities::variability::abstract_profile_entry <|-- entities::variability::profile_entry
+        class profile_template_entry #F7E5FF {
+            +{field} instantiation_domain_name std::string
+        }
+
+        entities::variability::abstract_profile_entry <|-- entities::variability::profile_template_entry
+        class default_value_override #F7E5FF {
+            +{field} key_ends_with std::string
+            +{field} default_value std::string
+        }
+
+    }
 
     namespace orm #F2F2F2 {
+        note as orm_1
+Houses all of the properties related to ORM
+support in Dogen.
+        end note
+
         class model_properties <<Schemable, Caseable>> #F7E5FF {
             +{field} database_systems std::vector<database_system>
         }
@@ -752,7 +761,7 @@ complexity.
         }
 
         note top of  Schemable
-            Model element can belong to a relational database schema.
+Model element can belong to a relational database schema.
         end note
 
         class Caseable <<masd::object_template>> #E3B6F6 {
@@ -760,7 +769,7 @@ complexity.
         }
 
         note top of  Caseable
-            The model element supports configuration related to casing.
+The model element supports configuration related to casing.
         end note
 
         class Mappeable <<masd::object_template>> #E3B6F6 {
@@ -828,19 +837,19 @@ complexity.
 
     }
 
-    note top of  orm
-        Houses all of the properties related to ORM
-support in Dogen.
-    end note
-
     namespace structural #F2F2F2 {
+        note as structural_1
+Houses all of the meta-modeling elements related
+to structural modeling.
+        end note
+
         class object_template <<logical::meta_element, Stateful>> #F7E5FF {
             +{field} parents std::list<identification::entities::logical_name>
             +{field} is_child bool
         }
 
         note top of  object_template
-            Represents a structural template for masd objects.
+Represents a structural template for masd objects.
         end note
 
         class object <<logical::meta_element, Stateful, Relatable, Parameterisable, TechnicalSpaceProperties>> #F7E5FF {
@@ -852,7 +861,7 @@ support in Dogen.
         }
 
         note top of  object
-            Representation of the class notion in the OOP paradigm.
+Representation of the class notion in the OOP paradigm.
 
 The @e object is equivalent to a meta-class, but we decided against this
 name because all elements should also have the prefix meta - after all, logical
@@ -868,14 +877,14 @@ decided instead to use the word object.
         }
 
         note top of  builtin
-            Represents a value type that is built-in at the hardware level.
+Represents a value type that is built-in at the hardware level.
         end note
 
         class exception <<logical::meta_element>> #F7E5FF {
         }
 
         note top of  exception
-            Represents an exception which can be thrown.
+Represents an exception which can be thrown.
         end note
 
         class visitor <<logical::meta_element>> #F7E5FF {
@@ -892,7 +901,7 @@ decided instead to use the word object.
         }
 
         note top of  primitive
-            Defines an element created by the user to wrap another element, most likely a built-in.
+Defines an element created by the user to wrap another element, most likely a built-in.
         end note
 
         class module <<logical::meta_element, Container>> #F7E5FF {
@@ -902,7 +911,7 @@ decided instead to use the word object.
         }
 
         note top of  module
-            Container for other logical elements.
+Container for other logical elements.
 
 Aggregates a group of logically related elements into a unit.
         end note
@@ -916,7 +925,7 @@ Aggregates a group of logically related elements into a unit.
         }
 
         note top of  enumeration
-            Defines a bounded set of logically related values for a built-in type
+Defines a bounded set of logically related values for a built-in type
 or a string.
         end note
 
@@ -925,7 +934,7 @@ or a string.
         }
 
         note top of  enumerator
-            One of a set of valid values that an enumeration can assume.
+One of a set of valid values that an enumeration can assume.
 
 The enumerator defines an element in the domain of the enumeration.
         end note
@@ -947,14 +956,14 @@ The enumerator defines an element in the domain of the enumeration.
         }
 
         note top of  entry_point
-            Represents an entry point to a binary.
+Represents an entry point to a binary.
         end note
 
         class assistant <<logical::meta_element>> #F7E5FF {
         }
 
         note top of  assistant
-            General type to provide helpers.
+General type to provide helpers.
         end note
 
         class technical_space_properties #F7E5FF {
@@ -970,18 +979,17 @@ The enumerator defines an element in the domain of the enumeration.
 
     }
 
-    note top of  structural
-        Houses all of the meta-modeling elements related
-to structural modeling.
-    end note
-
     namespace mapping #F2F2F2 {
+        note as mapping_1
+Meta-model elements related to mapping domains.
+        end note
+
         class extensible_mappable <<logical::meta_element>> #F7E5FF {
             +{field} destinations std::list<destination>
         }
 
         note top of  extensible_mappable
-            A mappable meta-model element for the general purpose of mapping.
+A mappable meta-model element for the general purpose of mapping.
 
 Mappables can be used to create a Platform Independent Model (PIM), which is then
 mapped to concrete types to form a Platform Specific Model (PSM). Users can
@@ -1003,7 +1011,7 @@ extend the mappings as required.
         }
 
         note top of  fixed_mappable
-            A mappable meta-model element for a special purpose.
+A mappable meta-model element for a special purpose.
 
 At present, the only fixed mappables used by Dogen are related to the mapping of
 variability types.
@@ -1011,17 +1019,17 @@ variability types.
 
     }
 
-    note top of  mapping
-        Meta-model elements related to mapping domains.
-    end note
-
     namespace templating #F2F2F2 {
+        note as templating_1
+Meta-model elements related to templating .
+        end note
+
         class logic_less_template <<logical::meta_element>> #F7E5FF {
             +{field} content std::string
         }
 
         note top of  logic_less_template
-            Represents a logic-less template.
+Represents a logic-less template.
 
 At present the system only supports wale templates.
         end note
@@ -1032,18 +1040,19 @@ At present the system only supports wale templates.
 
     }
 
-    note top of  templating
-        Meta-model elements related to templating .
-    end note
-
     namespace serialization #F2F2F2 {
+        note as serialization_1
+Houses all of the meta-modeling elements related
+to serialisation.
+        end note
+
         class type_registrar <<logical::meta_element>> #F7E5FF {
             +{field} leaves std::list<identification::entities::logical_name>
             +{field} registrar_dependencies std::list<identification::entities::logical_name>
         }
 
         note top of  type_registrar
-            Responsible for registering types for serialisation purposes.
+Responsible for registering types for serialisation purposes.
 
 Certain libraries in certain technical spaces - such as Boost Serialisation, in C++ -
 require types that are in an inheritance relationship to be made known to the
@@ -1058,12 +1067,12 @@ generates the registration code as needed.
 
     }
 
-    note top of  serialization
-        Houses all of the meta-modeling elements related
-to serialisation.
-    end note
-
     namespace visual_studio #F2F2F2 {
+        note as visual_studio_1
+Houses meta-model elements related to
+build systems.
+        end note
+
         class project <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
             +{field} type_guid std::string
             +{field} item_groups std::list<item_group>
@@ -1071,7 +1080,7 @@ to serialisation.
         }
 
         note top of  project
-            Represents a Visual Studio project.
+Represents a Visual Studio project.
         end note
 
         class element_repository #F7E5FF {
@@ -1085,7 +1094,7 @@ to serialisation.
         }
 
         note top of  item_group
-            Represents an MSBuild ItemGroup.
+Represents an MSBuild ItemGroup.
 
 Documented as follows: Contains a set of user-defined Item elements. Every item
 used in a MSBuild project must be specified as a child of an ItemGroup element.
@@ -1097,7 +1106,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.
         }
 
         note top of  item
-            Represents an MSBuild Item, used in Visual Studio projects.
+Represents an MSBuild Item, used in Visual Studio projects.
 
 Documentation:  Contains a user-defined item and its metadata. Every item that is
 used in a MSBuild project must be specified as a child of an ItemGroup element.
@@ -1123,12 +1132,13 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.
 
     }
 
-    note top of  visual_studio
-        Houses meta-model elements related to
-build systems.
-    end note
-
     namespace build #F2F2F2 {
+        note as build_1
+Houses all of the meta-modeling elements related
+to building, which don't have their own containing
+namespace.
+        end note
+
         class element_repository #F7E5FF {
             +{field} cmakelists std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
         }
@@ -1143,18 +1153,16 @@ build systems.
         }
 
         note top of  cmakelists
-            Represents build CMakeLists files.
+Represents build CMakeLists files.
         end note
 
     }
 
-    note top of  build
-        Houses all of the meta-modeling elements related
-to building, which don't have their own containing
-namespace.
-    end note
-
     namespace physical #F2F2F2 {
+        note as physical_1
+Logical representation of elements in the physical dimension.
+        end note
+
         class element_repository #F7E5FF {
             +{field} backends std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
             +{field} facets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
@@ -1174,7 +1182,7 @@ namespace.
         }
 
         note top of  archetype
-            Represents an archetype within a facet.
+Represents an archetype within a facet.
         end note
 
         class backend <<logical::meta_element, PhysicalElement, Container, HasTechnicalSpace>> #F7E5FF {
@@ -1185,7 +1193,7 @@ namespace.
         }
 
         note top of  backend
-            Represents a physical backend, targetting a major technical space such as C++ or C#.
+Represents a physical backend, targetting a major technical space such as C++ or C#.
         end note
 
         class facet <<logical::meta_element, PhysicalElement, Container>> #F7E5FF {
@@ -1196,7 +1204,7 @@ namespace.
         }
 
         note top of  facet
-            Represents a facet within a backend, such as type definitions.
+Represents a facet within a backend, such as type definitions.
         end note
 
         class part <<logical::meta_element, PhysicalElement>> #F7E5FF {
@@ -1210,7 +1218,7 @@ namespace.
         }
 
         note top of  part
-            Part whithin a backend.
+Part whithin a backend.
         end note
 
         class archetype_kind <<logical::meta_element, PhysicalElement>> #F7E5FF {
@@ -1256,7 +1264,7 @@ namespace.
         }
 
         note top of  text_templating
-            Contains all the properties related to the generation of archetypes themselves.
+Contains all the properties related to the generation of archetypes themselves.
         end note
 
         class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
@@ -1275,10 +1283,6 @@ namespace.
         }
 
     }
-
-    note top of  physical
-        Logical representation of elements in the physical dimension.
-    end note
 
     class helper_properties #F7E5FF {
         +{field} current helper_descriptor
@@ -1304,14 +1308,14 @@ namespace.
 
 }
 
-note top of  entities
-    Entities that define the logical model.
-end note
-
 class traits <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 namespace transforms #F2F2F2 {
+    note as transforms_1
+Houses all of the transformations supported by logical.
+    end note
+
     class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
         +{field} compatibility_mode bool
         +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
@@ -1322,7 +1326,7 @@ namespace transforms #F2F2F2 {
     }
 
     note top of  context
-        Context for all logical transformations.
+Context for all logical transformations.
 
 Contains all of the external data required for the transformations
 to execute. It's not ideal to have a huge "global" class, with lots
@@ -1392,7 +1396,7 @@ lot of repetitive code. The context gathers together all of these.
     }
 
     note top of  transformation_error
-        An error occurred whilst applying a transformation.
+An error occurred whilst applying a transformation.
     end note
 
     class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1472,10 +1476,6 @@ lot of repetitive code. The context gathers together all of these.
 
 }
 
-note top of  transforms
-    Houses all of the transformations supported by logical.
-end note
-
 namespace helpers #F2F2F2 {
     class decomposition_result #F7E5FF {
         +{field} names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
@@ -1493,7 +1493,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  validation_error
-        An error occurred during validation.
+An error occurred during validation.
     end note
 
     class pre_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1511,7 +1511,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  indexing_error
-        A fatal error has occurred while indexing.
+A fatal error has occurred while indexing.
     end note
 
     class indexer <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1524,14 +1524,14 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  resolution_error
-        An error occurred while trying to resolve a type.
+An error occurred while trying to resolve a type.
     end note
 
     class mapping_error <<masd::exception>> #E8C2F8 {
     }
 
     note top of  mapping_error
-        An error has occurred while mapping element names.
+An error has occurred while mapping element names.
     end note
 
     class mapper <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1550,7 +1550,7 @@ namespace helpers #F2F2F2 {
     }
 
     note top of  mapping_set
-        Consistent unit of mapping that can be used to translate a model from one technical
+Consistent unit of mapping that can be used to translate a model from one technical
 space to another.
     end note
 
@@ -1560,7 +1560,7 @@ space to another.
     }
 
     note top of  mapping_set_repository
-        Stores all available mapping sets.
+Stores all available mapping sets.
     end note
 
     class mappings_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1572,7 +1572,7 @@ space to another.
     }
 
     note top of  mapping
-        Stores the mapping of a key (the element id) to its values, organised by technical
+Stores the mapping of a key (the element id) to its values, organised by technical
 space.
     end note
 
@@ -1582,7 +1582,7 @@ space.
     }
 
     note top of  mapping_value
-        Value of a mapping.
+Value of a mapping.
     end note
 
     enum mapping_actions <<masd::enumeration>> #F2DAFD {
@@ -1632,12 +1632,16 @@ space.
     }
 
     note top of  building_error
-        An error has occurred in a factory.
+An error has occurred in a factory.
     end note
 
 }
 
 namespace features #F2F2F2 {
+    note as features_1
+Defines all features used by the logical model.
+    end note
+
     class type_parameters <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} variable_number_of_parameters masd::variability::boolean
         +{field} count masd::variability::number
@@ -1645,7 +1649,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  type_parameters
-        Parameters to configure generic types.
+Parameters to configure generic types.
     end note
 
     class initializer <<masd::variability::initializer>> #A9CDCD {
@@ -1659,7 +1663,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  enumeration
-        Parameters related to enumerations.
+Parameters related to enumerations.
     end note
 
     class enumerator <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1667,7 +1671,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  enumerator
-        Parameters related to enumerators.
+Parameters related to enumerators.
     end note
 
     class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1676,7 +1680,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  generalization
-        Features related to the generalization relationship.
+Features related to the generalization relationship.
     end note
 
     class origin <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1684,7 +1688,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  origin
-        Features related to the origin of the model.
+Features related to the origin of the model.
     end note
 
     class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1692,7 +1696,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  output_technical_space
-        Features related to the output technical space.
+Features related to the output technical space.
     end note
 
     class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1702,7 +1706,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  primitive
-        Features related to primitive elements.
+Features related to primitive elements.
     end note
 
     class orm <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1720,7 +1724,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  orm
-        Features related to ORM support.
+Features related to ORM support.
     end note
 
     class decoration_modeline <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1730,7 +1734,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  decoration_modeline
-        Modeline properties.
+Modeline properties.
     end note
 
     class variability_templates <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1742,7 +1746,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  variability_templates
-        Features related to the processing of variability for feature and profile templates.
+Features related to the processing of variability for feature and profile templates.
     end note
 
     class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1751,7 +1755,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  mapping
-        Meta-data related to element mapping.
+Meta-data related to element mapping.
     end note
 
     class variability_bundle <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1763,7 +1767,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  variability_bundle
-        Features related to the processing of variability for feature bundles.
+Features related to the processing of variability for feature bundles.
     end note
 
     class variability_entry <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1773,7 +1777,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  variability_entry
-        Features related to the processing of variability for profiles and profile templates.
+Features related to the processing of variability for profiles and profile templates.
     end note
 
     class variability_profile <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1783,7 +1787,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  variability_profile
-        Features related to the processing of variability for profile entries.
+Features related to the processing of variability for profile entries.
     end note
 
     class physical <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1798,7 +1802,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  physical
-        Features required for physical elements.
+Features required for physical elements.
     end note
 
     class wale <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1807,7 +1811,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  wale
-        Wale related features.
+Wale related features.
     end note
 
     class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1823,7 +1827,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  labelling
-        Features related to labels.
+Features related to labels.
     end note
 
     class physical_relations <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1833,7 +1837,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  physical_relations
-        Features related to relations at the physical level.
+Features related to relations at the physical level.
     end note
 
     class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1864,7 +1868,7 @@ namespace features #F2F2F2 {
     }
 
     note top of  physical_helpers
-        Features related to the helpers in physical domain.
+Features related to the helpers in physical domain.
     end note
 
     class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1878,10 +1882,6 @@ namespace features #F2F2F2 {
 
 }
 
-note top of  features
-    Defines all features used by the logical model.
-end note
-
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
 }
 
@@ -1892,6 +1892,10 @@ class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 
 }
 
 namespace formatters #F2F2F2 {
+    note as formatters_1
+Contains formatting classes for the logical model.
+    end note
+
     class decoration_formatter <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -1905,13 +1909,9 @@ namespace formatters #F2F2F2 {
     }
 
     note top of  formatting_error
-        An error has occurred while formatting.
+An error has occurred while formatting.
     end note
 
 }
-
-note top of  formatters
-    Contains formatting classes for the logical model.
-end note
 
 @enduml

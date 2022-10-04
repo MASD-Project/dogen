@@ -25,14 +25,14 @@ namespace filesystem #F2F2F2 {
     }
 
     note top of  file_not_found
-        File was not found.
+File was not found.
     end note
 
     class io_error <<masd::exception>> #E8C2F8 {
     }
 
     note top of  io_error
-        An error occurred whilst performing an IO operation.
+An error occurred whilst performing an IO operation.
     end note
 
     class path <<dogen::handcrafted::typeable>> #FFFACD {
@@ -118,14 +118,14 @@ namespace log #F2F2F2 {
     }
 
     note top of  logging_configuration
-        Options related to logging.
+Options related to logging.
     end note
 
     class invalid_logging_configuration <<masd::exception>> #E8C2F8 {
     }
 
     note top of  invalid_logging_configuration
-        The values supplied for the logging configuration are not valid.
+The values supplied for the logging configuration are not valid.
     end note
 
     class logging_configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
@@ -225,7 +225,7 @@ namespace test_data #F2F2F2 {
     }
 
     note top of  test_data_exception
-        An error occurred whilst obtaining the test data.
+An error occurred whilst obtaining the test data.
     end note
 
     class frozen_product <<dogen::handcrafted::typeable>> #FFFACD {
@@ -256,7 +256,7 @@ namespace environment #F2F2F2 {
     }
 
     note top of  environment_exception
-        There was an error reading an environment variable.
+There was an error reading an environment variable.
     end note
 
     class variable_reader <<dogen::handcrafted::typeable>> #FFFACD {
@@ -265,11 +265,17 @@ namespace environment #F2F2F2 {
 }
 
 namespace formatters #F2F2F2 {
+    note as formatters_1
+Contains all of the formatting primitives
+that are not associated with any particular
+model.
+    end note
+
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
 
     note top of  formatting_error
-        An error has occurred while formatting.
+An error has occurred while formatting.
     end note
 
     enum quote_type <<masd::enumeration>> #F2DAFD {
@@ -278,7 +284,7 @@ namespace formatters #F2F2F2 {
     }
 
     note top of  quote_type
-        Types of quotes that can be used in streaming.
+Types of quotes that can be used in streaming.
     end note
 
     enum spacing_type <<masd::enumeration>> #F2DAFD {
@@ -304,7 +310,7 @@ namespace formatters #F2F2F2 {
     }
 
     note top of  comment_style
-        Supported styles of comments.
+Supported styles of comments.
     end note
 
     class comment_formatter <<dogen::handcrafted::typeable>> #FFFACD {
@@ -321,16 +327,10 @@ namespace formatters #F2F2F2 {
     }
 
     note top of  infix_configuration
-        Configuration to use for a given infix in sequence formatter.
+Configuration to use for a given infix in sequence formatter.
     end note
 
 }
-
-note top of  formatters
-    Contains all of the formatting primitives
-that are not associated with any particular
-model.
-end note
 
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 }

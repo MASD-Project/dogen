@@ -257,6 +257,19 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
             os << " " << colour;
 
             os << " {" << std::endl;
+
+            bool has_documentation(!e.comment().documentation().empty());
+            if (has_documentation && is_module) {
+                /*
+                 * Note: not indenting the commentary text on purpose. PlantUML
+                 * uses the commentary verbatim, resulting in weird spacing if
+                 * we indent.
+                 */
+                os << inner_indent << "note as " << e.name().simple() << "_1"
+                   << std::endl  << e.comment().documentation() << std::endl
+                   << inner_indent << "end note" << std::endl << std::endl;
+            }
+
             for (const auto& attr : e.attributes()) {
                 os << inner_indent << "+{field} " << attr.name().simple();
 
@@ -294,9 +307,14 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                 }
             }
 
-            if (!e.comment().documentation().empty()) {
+            if (has_documentation && !is_module) {
+                /*
+                 * Note: not indenting the commentary text on purpose. PlantUML
+                 * uses the commentary verbatim, resulting in weird spacing if
+                 * we indent.
+                 */
                 os << indent << "note top of  " << e.name().simple() << std::endl
-                   << inner_indent << e.comment().documentation() << std::endl
+                   << e.comment().documentation() << std::endl
                    << indent << "end note" << std::endl << std::endl;
             }
         }
