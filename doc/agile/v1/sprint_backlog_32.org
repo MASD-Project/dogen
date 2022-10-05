@@ -13,36 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-05 Wed 19:08]
+#+CAPTION: Clock summary at [2022-10-05 Wed 19:41]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *45:52* |       |       | 100.0 |
+| *Total time*                                              | *46:24* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 45:52   |       |       | 100.0 |
-| Active                                                    |         | 45:52 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  22.3 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.6 |
+| Stories                                                   | 46:24   |       |       | 100.0 |
+| Active                                                    |         | 46:24 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  22.0 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.5 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.7 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.7 |
 | Sprint and product backlog grooming                       |         |       |  3:36 |   7.8 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.4 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   7.2 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   7.1 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   4.7 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   2.0 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.9 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   4.8 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   4.0 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.6 |
-| Model significant relations at a higher level             |         |       |  1:05 |   2.4 |
-| Create a mock configuration builder                       |         |       |  1:58 |   4.3 |
+| Model significant relations at a higher level             |         |       |  1:05 |   2.3 |
+| Create a mock configuration builder                       |         |       |  1:58 |   4.2 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.8 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.9 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.4 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.4 |
 | Windows package is broken                                 |         |       |  0:20 |   0.7 |
-| Warning on OSX build                                      |         |       |  2:23 |   5.2 |
-| Add PlantUML relationships to diagrams                    |         |       |  8:07 |  17.7 |
+| Warning on OSX build                                      |         |       |  2:23 |   5.1 |
+| Add PlantUML relationships to diagrams                    |         |       |  8:39 |  18.6 |
 #+end:
 
 Agenda:
@@ -1250,6 +1250,7 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-10-05 Wed 19:09]--[2022-10-05 Wed 19:41] =>  0:32
     CLOCK: [2022-10-05 Wed 18:45]--[2022-10-05 Wed 19:07] =>  0:22
     CLOCK: [2022-10-05 Wed 08:14]--[2022-10-05 Wed 08:56] =>  0:42
     CLOCK: [2022-10-01 Sat 16:39]--[2022-10-01 Sat 16:48] =>  0:09

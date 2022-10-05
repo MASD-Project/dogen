@@ -38,8 +38,8 @@ namespace dogen::logical::entities::decoration {
 /**
  * @brief Group of modelines, logically associated.
  *
- * For example, one may choose to have a set of modelines for @e emacs , or for
- * @e vi, etc.
+ * For example, one may choose to have a set of modelines for emacs, or for vi,
+ * etc.
  */
 class modeline_group final : public dogen::logical::entities::element {
 public:

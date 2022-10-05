@@ -37,14 +37,14 @@ namespace dogen::logical::entities::variability {
  * @brief A feature bundle represents an aggregation of features in a model.
  *
  * The features should be "semantically related", that is, belong to a related
- * topic. A feature bundle is used by code generation to generate infrastructural code
- * to ease the creation and subsequent processing of features.
+ * topic. A feature bundle is used by code generation to generate infrastructural
+ * code to ease the creation and subsequent processing of features.
  *
  * Generated code comprises of two aspects:
  *
- * @li the registration of the feature for the dynamic part of the processing;
- * @li the generation of a static configuration class to  represent the feature once
- *  read out from the dynamic configuration.
+ * - the registration of the feature for the dynamic part of the processing;
+ * - the generation of a static configuration class to represent the feature once
+ *   read out from the dynamic configuration.
  *
  * Both of these aspects are optional, but at least one must be chosen.
  */

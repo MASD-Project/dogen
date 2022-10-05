@@ -40,15 +40,16 @@ namespace dogen::logical::entities::variability {
  * @brief A feature template bundle represents an aggregation of feature templates in a
  * model.
  *
- * The feature templates should be "semantically related", that is, belong to a related
- * topic. A feature template bundle is used by code generation to generate
+ * The feature templates should be "semantically related", that is, belong to a
+ * related topic. A feature template bundle is used by code generation to generate
  * infrastructural code to ease the creation and subsequent processing of features.
  *
  * Generated code comprises of two aspects:
  *
- * @li the registration of the feature template for the dynamic part of the processing;
- * @li the generation of a static configuration class to  represent the feature once
- *  read out from the dynamic configuration - if requested.
+ * - the registration of the feature template for the dynamic part of the
+ *   processing;
+ * - the generation of a static configuration class to represent the feature once
+ *   read out from the dynamic configuration - if requested.
  */
 class abstract_bundle : public dogen::logical::entities::element {
 public:

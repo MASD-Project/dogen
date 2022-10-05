@@ -44,9 +44,9 @@ namespace dogen::logical::entities::decoration {
  *
  * Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * In this particular case, both prefix and postfix are @e -*-; @e mode is the first
- * field name and its value is @e c++; the KVP separator is @e : and the field
- * separator is @e ;.
+ * In this particular case, both prefix and postfix are "-*-"; mode is the first
+ * field name and its value is c++; the KVP separator is ":" and the field
+ * separator is ";".
  */
 class modeline final : public dogen::logical::entities::element {
 public:

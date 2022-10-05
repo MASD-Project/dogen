@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Houses all of the meta-modeling elements and
- * properties related to decorations.
+ * @brief Houses all of the meta-modeling elements and properties related to decorations.
  */
 namespace dogen::logical::entities::decoration {
 }

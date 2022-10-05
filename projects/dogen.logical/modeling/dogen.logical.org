@@ -564,10 +564,10 @@ All attributes associated with this type.
 
 This is a union of the following sets:
 
-@li the set of all attributes obtained via inheritance relationships;
-@li the set of all attributes obtained via instantiating object templates,
-    including their inheritance tree;
-@li the set of all attributes directly associated with the type (local).
+- the set of all attributes obtained via inheritance relationships;
+- the set of all attributes obtained via instantiating object templates,
+  including their inheritance tree;
+- the set of all attributes directly associated with the type (local).
 
 The first and third sets are cached in this object. The second isn't as we do
 not have a need for it.
@@ -1512,8 +1512,7 @@ If true, the value of this attribute is a composite value.
    :masd.codec.dia.comment: true
    :END:
 
-Houses all of the meta-modeling elements and
-properties related to decorations.
+Houses all of the meta-modeling elements and properties related to decorations.
 
 *** licence                                                         :element:
     :PROPERTIES:
@@ -1549,8 +1548,8 @@ Long form of the licence text, suitable for generation of LICENCE files.
 
 Group of modelines, logically associated.
 
-For example, one may choose to have a set of modelines for @e emacs , or for
-@e vi, etc.
+For example, one may choose to have a set of modelines for emacs, or for vi,
+etc.
 
 **** modelines                                                    :attribute:
      :PROPERTIES:
@@ -1572,9 +1571,9 @@ the second.
 
 Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 
-In this particular case, both prefix and postfix are @e -*-; @e mode is the first
-field name and its value is @e c++; the KVP separator is @e : and the field
-separator is @e ;.
+In this particular case, both prefix and postfix are "-*-"; mode is the first
+field name and its value is c++; the KVP separator is ":" and the field
+separator is ";".
 
 **** editor                                                       :attribute:
      :PROPERTIES:
@@ -1780,47 +1779,44 @@ Houses all of the meta-modeling elements related to variability.
 
 There are two "kinds" of entities in this namespace:
 
-@li those that are used to model the data required to code-generate
-dogen's implementation of variability. That is to say, none of these
-elements are directly involved in the processing of variability model
-data (i.e. the current user model we are processing), but instead they
-generate code that injects variability data once compiled and
-integrated into dogen. These types setup the geometry of variability
-space: feature bundle and feature bundle templates and related
-types.
+- those that are used to model the data required to code-generate dogen's
+  implementation of variability. That is to say, none of these elements are
+  directly involved in the processing of variability model data (i.e. the
+  current user model we are processing), but instead they generate code that
+  injects variability data once compiled and integrated into dogen. These types
+  setup the geometry of variability space: feature bundle and feature bundle
+  templates and related types.
 
-@li those that inject variability data as part of the processing of
-the current user model. These types are responsible for instantiating
-configurations, within the prevailing geometry of variability
-space. Example: profile and profile templates.
+- those that inject variability data as part of the processing of the current
+  user model. These types are responsible for instantiating configurations,
+  within the prevailing geometry of variability space. Example: profile and
+  profile templates.
 
-Now, it is a bit confusing how variability interacts with the
-variability meta-model elements, and it may appear that we repat
-ourselves quite a bit when declaring the variability feature
-bundles. This is a consequence of the two types of uses for
-variability types described above. Lets explore this in more detail.
+Now, it is a bit confusing how variability interacts with the variability
+meta-model elements, and it may appear that we repat ourselves quite a bit when
+declaring the variability feature bundles. This is a consequence of the two
+types of uses for variability types described above. Lets explore this in more
+detail.
 
-In general, we tend to declare (register) features and create the
-static configuration in the same place. This works for almost all
-cases because we normally declare the features where we consume
-them. Profiles are _different_: a profile is making use of a feature
-declared for a feature (simplifying somewhat). That is, at run time, a
-profile is the instantiation of a feature defined elsewhere. Remember
-that features are nothing more than a type system designed to give a
-"strongly typed" feel to the meta-data. Profiles are just an
+In general, we tend to declare (register) features and create the static
+configuration in the same place. This works for almost all cases because we
+normally declare the features where we consume them. Profiles are /different/: a
+profile is making use of a feature declared for a feature (simplifying
+somewhat). That is, at run time, a profile is the instantiation of a feature
+defined elsewhere. Remember that features are nothing more than a type system
+designed to give a "strongly typed" feel to the meta-data. Profiles are just an
 instantiation of those strong types.
 
-In theory, profile meta-data should already exist and match exactly
-what was defined for features; in practice there is a mismatch, and
-this is due to how we modeled features and feature bundles: to avoid
-repetition, we placed some features at the top-level and others in the
-features themselves. This approach does not match the shape required
-for profiles, so we need to redefine the bundle. However, of course,
-we do not want to register the features this time around (after all,
-they already exist) so we need to disable feature registration. In the
-future we hope to simplify this by making the shapes align - though
-perhaps it will have the underisable side-effect of hiding all of this
-complexity.
+In theory, profile meta-data should already exist and match exactly what was
+defined for features; in practice there is a mismatch, and this is due to how we
+modeled features and feature bundles: to avoid repetition, we placed some
+features at the top-level and others in the features themselves. This approach
+does not match the shape required for profiles, so we need to redefine the
+bundle. However, of course, we do not want to register the features this time
+around (after all, they already exist) so we need to disable feature
+registration. In the future we hope to simplify this by making the shapes
+align - though perhaps it will have the underisable side-effect of hiding all of
+this complexity.
 
 *** abstract feature                                                :element:
     :PROPERTIES:
@@ -1957,6 +1953,11 @@ Names of all the features that this initialiser will register.
 *** element repository                                              :element:
     :PROPERTIES:
     :custom_id: D58B304F-2FE8-20A4-E37B-9C6F8C0E2B3A
+    :masd.codec.plantuml: element_repository o-u- profile_template
+    :masd.codec.plantuml: element_repository o-u- profile
+    :masd.codec.plantuml: element_repository o-u- feature_template_bundle
+    :masd.codec.plantuml: element_repository o-u- feature_bundle
+    :masd.codec.plantuml: element_repository o-- initializer
     :END:
 
 **** profile templates                                            :attribute:
@@ -1993,15 +1994,16 @@ Names of all the features that this initialiser will register.
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
+The feature templates should be "semantically related", that is, belong to a
+related topic. A feature template bundle is used by code generation to generate
 infrastructural code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration - if requested.
+- the registration of the feature template for the dynamic part of the
+  processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration - if requested.
 
 **** key prefix                                                   :attribute:
      :PROPERTIES:
@@ -2048,19 +2050,20 @@ their individual binding points.
     :PROPERTIES:
     :custom_id: D5FB456E-ABCB-D9C4-C673-402AC59497AC
     :masd.codec.parent: entities::variability::abstract_bundle
+    :masd.codec.plantuml: feature_bundle o-- feature
     :END:
 
 A feature bundle represents an aggregation of features in a model.
 
 The features should be "semantically related", that is, belong to a related
-topic. A feature bundle is used by code generation to generate infrastructural code
-to ease the creation and subsequent processing of features.
+topic. A feature bundle is used by code generation to generate infrastructural
+code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
+- the registration of the feature for the dynamic part of the processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
 
@@ -2083,20 +2086,22 @@ Represents a feature in variability space.
     :PROPERTIES:
     :custom_id: 20855E30-DAE7-9D74-5423-E5979616906A
     :masd.codec.parent: entities::variability::abstract_bundle
+    :masd.codec.plantuml: feature_template_bundle o-- feature_template
     :END:
 
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
+The feature templates should be "semantically related", that is, belong to a
+related topic. A feature template bundle is used by code generation to generate
 infrastructural code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
+- the registration of the feature template for the dynamic part of the
+  processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
 
@@ -2141,6 +2146,7 @@ Prefix to use when composing the key, if any.
     :PROPERTIES:
     :custom_id: 15E2604B-23BD-E2E4-B13B-A3960900307C
     :masd.codec.parent: entities::variability::abstract_profile
+    :masd.codec.plantuml: profile_template o-- profile_template_entry
     :END:
 
 **** entries                                                      :attribute:
@@ -2152,6 +2158,7 @@ Prefix to use when composing the key, if any.
     :PROPERTIES:
     :custom_id: F08E95ED-100A-8054-302B-3F1BA37A4C67
     :masd.codec.parent: entities::variability::abstract_profile
+    :masd.codec.plantuml: profile o-- profile_entry
     :END:
 
 Represents a profile from the variability subsystem.
@@ -2229,23 +2236,9 @@ Key as it was originally provided by the user.
    :PROPERTIES:
    :custom_id: 1369137D-4163-0B24-A613-C87FEFE6C773
    :masd.codec.dia.comment: true
-   :masd.codec.plantuml: structural o-- object_template
-   :masd.codec.plantuml: structural o-- object
-   :masd.codec.plantuml: structural o-- builtin
-   :masd.codec.plantuml: structural o-- exception
-   :masd.codec.plantuml: structural o-- visitor
-   :masd.codec.plantuml: structural o-- primitive
-   :masd.codec.plantuml: structural o-- visitor
-   :masd.codec.plantuml: structural o-- module
-   :masd.codec.plantuml: structural o-- enumeration
-   :masd.codec.plantuml: structural o-- enumerator
-   :masd.codec.plantuml: structural o-- entry_point
-   :masd.codec.plantuml: structural o-- assistant
-   :masd.codec.plantuml: structural o-- assistant
    :END:
 
-Houses all of the meta-modeling elements related
-to structural modeling.
+Houses all of the meta-modeling elements related to structural modeling.
 
 *** object template                                                 :element:
     :PROPERTIES:
@@ -2277,9 +2270,9 @@ If true, the object template has at least one parent.
 
 Representation of the class notion in the OOP paradigm.
 
-The @e object is equivalent to a meta-class, but we decided against this
-name because all elements should also have the prefix meta - after all, logical
-is ameta-model. Since the word class cannot be used in c++ to name types, we
+The /object/ is equivalent to a meta-class, but we decided against this name
+because all elements should also have the prefix meta - after all, logical is
+ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.
 
 **** is associative container                                     :attribute:
@@ -2513,6 +2506,17 @@ It must be castable to instance of the type defined in the enumeration.
 *** element repository                                              :element:
     :PROPERTIES:
     :custom_id: C0811C97-86C7-4B14-415B-0470A1EFD74F
+    :masd.codec.plantuml: element_repository o-u- object_template
+    :masd.codec.plantuml: element_repository o-u- object
+    :masd.codec.plantuml: element_repository o-u- builtin
+    :masd.codec.plantuml: element_repository o-u- exception
+    :masd.codec.plantuml: element_repository o-u- primitive
+    :masd.codec.plantuml: element_repository o-l- visitor
+    :masd.codec.plantuml: element_repository o-r- module
+    :masd.codec.plantuml: element_repository o-- enumeration
+    :masd.codec.plantuml: element_repository o-- enumerator
+    :masd.codec.plantuml: element_repository o-- entry_point
+    :masd.codec.plantuml: element_repository o-- assistant
     :END:
 
 **** modules                                                      :attribute:

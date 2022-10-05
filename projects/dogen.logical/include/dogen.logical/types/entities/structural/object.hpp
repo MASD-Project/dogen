@@ -43,9 +43,9 @@ namespace dogen::logical::entities::structural {
 /**
  * @brief Representation of the class notion in the OOP paradigm.
  *
- * The @e object is equivalent to a meta-class, but we decided against this
- * name because all elements should also have the prefix meta - after all, logical
- * is ameta-model. Since the word class cannot be used in c++ to name types, we
+ * The /object/ is equivalent to a meta-class, but we decided against this name
+ * because all elements should also have the prefix meta - after all, logical is
+ * ameta-model. Since the word class cannot be used in c++ to name types, we
  * decided instead to use the word object.
  */
 class object final : public dogen::logical::entities::element {
@@ -122,10 +122,10 @@ public:
      *
      * This is a union of the following sets:
      *
-     * @li the set of all attributes obtained via inheritance relationships;
-     * @li the set of all attributes obtained via instantiating object templates,
-     *     including their inheritance tree;
-     * @li the set of all attributes directly associated with the type (local).
+     * - the set of all attributes obtained via inheritance relationships;
+     * - the set of all attributes obtained via instantiating object templates,
+     *   including their inheritance tree;
+     * - the set of all attributes directly associated with the type (local).
      *
      * The first and third sets are cached in this object. The second isn't as we do
      * not have a need for it.

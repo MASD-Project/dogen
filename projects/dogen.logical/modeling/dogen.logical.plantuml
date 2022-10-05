@@ -623,8 +623,7 @@ Model element can belong to a relational database schema.
 
     namespace entities::decoration #F2F2F2 {
         note as decoration_1
-Houses all of the meta-modeling elements and
-properties related to decorations.
+Houses all of the meta-modeling elements and properties related to decorations.
         end note
 
         class licence <<logical::meta_element>> #F7E5FF {
@@ -643,8 +642,8 @@ Represents legal licence for software projects.
         note top of modeline_group
 Group of modelines, logically associated.
 
-For example, one may choose to have a set of modelines for @e emacs , or for
-@e vi, etc.
+For example, one may choose to have a set of modelines for emacs, or for vi,
+etc.
         end note
 
         class modeline <<logical::meta_element>> #F7E5FF {
@@ -662,9 +661,9 @@ the second.
 
 Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 
-In this particular case, both prefix and postfix are @e -*-; @e mode is the first
-field name and its value is @e c++; the KVP separator is @e : and the field
-separator is @e ;.
+In this particular case, both prefix and postfix are "-*-"; mode is the first
+field name and its value is c++; the KVP separator is ":" and the field
+separator is ";".
         end note
 
         enum editor <<masd::enumeration, dogen::convertible>> #F2DAFD {
@@ -731,47 +730,44 @@ Houses all of the meta-modeling elements related to variability.
 
 There are two "kinds" of entities in this namespace:
 
-@li those that are used to model the data required to code-generate
-dogen's implementation of variability. That is to say, none of these
-elements are directly involved in the processing of variability model
-data (i.e. the current user model we are processing), but instead they
-generate code that injects variability data once compiled and
-integrated into dogen. These types setup the geometry of variability
-space: feature bundle and feature bundle templates and related
-types.
+- those that are used to model the data required to code-generate dogen's
+  implementation of variability. That is to say, none of these elements are
+  directly involved in the processing of variability model data (i.e. the
+  current user model we are processing), but instead they generate code that
+  injects variability data once compiled and integrated into dogen. These types
+  setup the geometry of variability space: feature bundle and feature bundle
+  templates and related types.
 
-@li those that inject variability data as part of the processing of
-the current user model. These types are responsible for instantiating
-configurations, within the prevailing geometry of variability
-space. Example: profile and profile templates.
+- those that inject variability data as part of the processing of the current
+  user model. These types are responsible for instantiating configurations,
+  within the prevailing geometry of variability space. Example: profile and
+  profile templates.
 
-Now, it is a bit confusing how variability interacts with the
-variability meta-model elements, and it may appear that we repat
-ourselves quite a bit when declaring the variability feature
-bundles. This is a consequence of the two types of uses for
-variability types described above. Lets explore this in more detail.
+Now, it is a bit confusing how variability interacts with the variability
+meta-model elements, and it may appear that we repat ourselves quite a bit when
+declaring the variability feature bundles. This is a consequence of the two
+types of uses for variability types described above. Lets explore this in more
+detail.
 
-In general, we tend to declare (register) features and create the
-static configuration in the same place. This works for almost all
-cases because we normally declare the features where we consume
-them. Profiles are _different_: a profile is making use of a feature
-declared for a feature (simplifying somewhat). That is, at run time, a
-profile is the instantiation of a feature defined elsewhere. Remember
-that features are nothing more than a type system designed to give a
-"strongly typed" feel to the meta-data. Profiles are just an
+In general, we tend to declare (register) features and create the static
+configuration in the same place. This works for almost all cases because we
+normally declare the features where we consume them. Profiles are /different/: a
+profile is making use of a feature declared for a feature (simplifying
+somewhat). That is, at run time, a profile is the instantiation of a feature
+defined elsewhere. Remember that features are nothing more than a type system
+designed to give a "strongly typed" feel to the meta-data. Profiles are just an
 instantiation of those strong types.
 
-In theory, profile meta-data should already exist and match exactly
-what was defined for features; in practice there is a mismatch, and
-this is due to how we modeled features and feature bundles: to avoid
-repetition, we placed some features at the top-level and others in the
-features themselves. This approach does not match the shape required
-for profiles, so we need to redefine the bundle. However, of course,
-we do not want to register the features this time around (after all,
-they already exist) so we need to disable feature registration. In the
-future we hope to simplify this by making the shapes align - though
-perhaps it will have the underisable side-effect of hiding all of this
-complexity.
+In theory, profile meta-data should already exist and match exactly what was
+defined for features; in practice there is a mismatch, and this is due to how we
+modeled features and feature bundles: to avoid repetition, we placed some
+features at the top-level and others in the features themselves. This approach
+does not match the shape required for profiles, so we need to redefine the
+bundle. However, of course, we do not want to register the features this time
+around (after all, they already exist) so we need to disable feature
+registration. In the future we hope to simplify this by making the shapes
+align - though perhaps it will have the underisable side-effect of hiding all of
+this complexity.
         end note
 
         class abstract_feature <<Documentable, Configurable, Nameable>> #F7E5FF {
@@ -820,6 +816,12 @@ Responsible for initialising features and feature templates.
             +{field} initializer boost::shared_ptr<initializer>
         }
 
+        element_repository o-u- profile_template
+        element_repository o-u- profile
+        element_repository o-u- feature_template_bundle
+        element_repository o-u- feature_bundle
+        element_repository o-- initializer
+
         class abstract_bundle <<logical::meta_element, Associatable>> #F7E5FF {
             +{field} key_prefix std::string
             +{field} generate_registration bool
@@ -832,34 +834,37 @@ Responsible for initialising features and feature templates.
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
+The feature templates should be "semantically related", that is, belong to a
+related topic. A feature template bundle is used by code generation to generate
 infrastructural code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration - if requested.
+- the registration of the feature template for the dynamic part of the
+  processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration - if requested.
         end note
 
         class feature_bundle #F7E5FF {
             +{field} features std::list<feature>
         }
 
+        feature_bundle o-- feature
+
         entities::variability::abstract_bundle <|-- entities::variability::feature_bundle
         note top of feature_bundle
 A feature bundle represents an aggregation of features in a model.
 
 The features should be "semantically related", that is, belong to a related
-topic. A feature bundle is used by code generation to generate infrastructural code
-to ease the creation and subsequent processing of features.
+topic. A feature bundle is used by code generation to generate infrastructural
+code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
+- the registration of the feature for the dynamic part of the processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
         end note
@@ -877,20 +882,23 @@ Represents a feature in variability space.
             +{field} instantiation_domain_name std::string
         }
 
+        feature_template_bundle o-- feature_template
+
         entities::variability::abstract_bundle <|-- entities::variability::feature_template_bundle
         note top of feature_template_bundle
 A feature template bundle represents an aggregation of feature templates in a
 model.
 
-The feature templates should be "semantically related", that is, belong to a related
-topic. A feature template bundle is used by code generation to generate
+The feature templates should be "semantically related", that is, belong to a
+related topic. A feature template bundle is used by code generation to generate
 infrastructural code to ease the creation and subsequent processing of features.
 
 Generated code comprises of two aspects:
 
-@li the registration of the feature template for the dynamic part of the processing;
-@li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration.
+- the registration of the feature template for the dynamic part of the
+  processing;
+- the generation of a static configuration class to represent the feature once
+  read out from the dynamic configuration.
 
 Both of these aspects are optional, but at least one must be chosen.
         end note
@@ -905,11 +913,15 @@ Both of these aspects are optional, but at least one must be chosen.
             +{field} entries std::list<profile_template_entry>
         }
 
+        profile_template o-- profile_template_entry
+
         entities::variability::abstract_profile <|-- entities::variability::profile_template
         class profile #F7E5FF {
             +{field} entries std::list<profile_entry>
             +{field} binding_point std::string
         }
+
+        profile o-- profile_entry
 
         entities::variability::abstract_profile <|-- entities::variability::profile
         note top of profile
@@ -940,8 +952,7 @@ Represents a profile from the variability subsystem.
 
     namespace entities::structural #F2F2F2 {
         note as structural_1
-Houses all of the meta-modeling elements related
-to structural modeling.
+Houses all of the meta-modeling elements related to structural modeling.
         end note
 
         class object_template <<logical::meta_element, Stateful>> #F7E5FF {
@@ -964,9 +975,9 @@ Represents a structural template for masd objects.
         note top of object
 Representation of the class notion in the OOP paradigm.
 
-The @e object is equivalent to a meta-class, but we decided against this
-name because all elements should also have the prefix meta - after all, logical
-is ameta-model. Since the word class cannot be used in c++ to name types, we
+The /object/ is equivalent to a meta-class, but we decided against this name
+because all elements should also have the prefix meta - after all, logical is
+ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.
         end note
 
@@ -1053,6 +1064,18 @@ The enumerator defines an element in the domain of the enumeration.
             +{field} assistants std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>
         }
 
+        element_repository o-u- object_template
+        element_repository o-u- object
+        element_repository o-u- builtin
+        element_repository o-u- exception
+        element_repository o-u- primitive
+        element_repository o-l- visitor
+        element_repository o-r- module
+        element_repository o-- enumeration
+        element_repository o-- enumerator
+        element_repository o-- entry_point
+        element_repository o-- assistant
+
         class entry_point <<logical::meta_element>> #F7E5FF {
         }
 
@@ -1081,20 +1104,6 @@ General type to provide helpers.
         TechnicalSpaceProperties o-- technical_space_properties
 
     }
-
-    structural o-- object_template
-    structural o-- object
-    structural o-- builtin
-    structural o-- exception
-    structural o-- visitor
-    structural o-- primitive
-    structural o-- visitor
-    structural o-- module
-    structural o-- enumeration
-    structural o-- enumerator
-    structural o-- entry_point
-    structural o-- assistant
-    structural o-- assistant
 
     namespace entities::mapping #F2F2F2 {
         note as mapping_1
