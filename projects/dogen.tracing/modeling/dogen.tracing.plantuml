@@ -31,7 +31,7 @@ class metrics_printer <<dogen::handcrafted::typeable>> #FFFACD {
 class tracing_error <<masd::exception>> #E8C2F8 {
 }
 
-note top of  tracing_error
+note top of tracing_error
 An error occurred when trying to generate tracing data.
 end note
 

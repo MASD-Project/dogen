@@ -25,7 +25,7 @@ other layers can then configure features.
         +{field} copyright_notice
     }
 
-    note top of  decoration
+    note top of decoration
 Configuration for the decoration elements.
     end note
 
@@ -34,7 +34,7 @@ Configuration for the decoration elements.
         +{field} delete_empty_directories
     }
 
-    note top of  extraction
+    note top of extraction
 Configuration for extraction.
     end note
 
@@ -42,7 +42,7 @@ Configuration for extraction.
         +{field} enabled
     }
 
-    note top of  csharp
+    note top of csharp
 Configures the main options for the C# backend.
     end note
 
@@ -52,7 +52,7 @@ Configures the main options for the C# backend.
         +{field} ignore_files_matching_regex
     }
 
-    note top of  ignores
+    note top of ignores
 Regexes to ignore.
 
 FIXME: we should remove all ignores related to tests and add a proper
@@ -77,7 +77,7 @@ facet for manual tests.
     }
 
     base::base <|-- base::base_profile
-    note top of  base_profile
+    note top of base_profile
 Configures the main options for the C++ backend.
     end note
 
@@ -85,7 +85,7 @@ Configures the main options for the C++ backend.
     }
 
     base::base_profile <|-- base::default_profile
-    note top of  default_profile
+    note top of default_profile
 Variability profile for a typical dogen model.
     end note
 
@@ -94,7 +94,7 @@ Variability profile for a typical dogen model.
     }
 
     base::base <|-- base::disable_all_facets
-    note top of  disable_all_facets
+    note top of disable_all_facets
 Disables all facets in the C++ backend.
     end note
 
@@ -125,7 +125,7 @@ for the element.
         +{field} masd.variability.profile
     }
 
-    note top of  typeable
+    note top of typeable
 Model element is defined as a type.
     end note
 
@@ -133,7 +133,7 @@ Model element is defined as a type.
         +{field} enabled
     }
 
-    note top of  pretty_printable
+    note top of pretty_printable
 The element has the ability to dump itself to a stream.
     end note
 
@@ -141,7 +141,7 @@ The element has the ability to dump itself to a stream.
         +{field} enabled
     }
 
-    note top of  hashable
+    note top of hashable
 The element has the ability to generate hashes.
     end note
 
@@ -153,7 +153,7 @@ The element has the ability to generate hashes.
         +{field} masd.variability.profile
     }
 
-    note top of  handcrafted
+    note top of handcrafted
 Base profile for model elements that are manually generated.
     end note
 
@@ -170,7 +170,7 @@ Base profile for model elements that are manually generated.
     }
 
     composable::handcrafted <|-- composable::handcrafted_typeable
-    note top of  handcrafted_typeable
+    note top of handcrafted_typeable
 Configuration for model elements that are generated manually by the user.
     end note
 
@@ -179,7 +179,7 @@ Configuration for model elements that are generated manually by the user.
     }
 
     composable::handcrafted_typeable <|-- composable::header_only
-    note top of  header_only
+    note top of header_only
 This element has only a types header file.
     end note
 
@@ -194,7 +194,7 @@ This element has only a types header file.
     }
 
     composable::handcrafted_typeable <|-- composable::implementation_only
-    note top of  implementation_only
+    note top of implementation_only
 This element has only a types implementation file.
     end note
 
@@ -212,7 +212,7 @@ This element has only a types implementation file.
         +{field} enabled
     }
 
-    note top of  untestable
+    note top of untestable
 Model element will not be tested via generated tests.
     end note
 
@@ -220,7 +220,7 @@ Model element will not be tested via generated tests.
         +{field} enabled
     }
 
-    note top of  untypable
+    note top of untypable
 The element does not have a types facet.
     end note
 
@@ -233,7 +233,7 @@ The element does not have a types facet.
         +{field} class_forward_declarations.enabled
     }
 
-    note top of  forward_declarable
+    note top of forward_declarable
 Element has forward declarations.
     end note
 
@@ -246,7 +246,7 @@ class test_marker <<masd::decoration::generation_marker>> #E8D0C5 {
     +{field} message
 }
 
-note top of  test_marker
+note top of test_marker
 
 
 end note

@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Houses all of the properties related to ORM
- * support in Dogen.
+ * @brief Houses all of the properties related to ORM support in Dogen.
  */
 namespace dogen::logical::entities::orm {
 }

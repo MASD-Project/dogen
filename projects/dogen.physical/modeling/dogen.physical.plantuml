@@ -26,7 +26,7 @@ Helpers for the physical model.
     class building_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  building_error
+    note top of building_error
 An error occurred while the field factory was building.
     end note
 
@@ -50,7 +50,7 @@ An error occurred while the field factory was building.
     class validation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  validation_error
+    note top of validation_error
 An error occurred during validation.
     end note
 
@@ -70,7 +70,7 @@ Defines the MASD physical space.
         +{field} indexed_names identification::entities::physical_meta_name_indices
     }
 
-    note top of  meta_model
+    note top of meta_model
 Describes the geometry of physical space.
 
 Provides details of the backends available in the current instance of Dogen.
@@ -83,7 +83,7 @@ Provides details of the backends available in the current instance of Dogen.
         +{field} archetype_kinds std::unordered_map<std::string, archetype_kind>
     }
 
-    note top of  backend
+    note top of backend
 Represents a meta-region in physical space with archetypes for a primary technical
 space, and associated secondary technical spaces.
     end note
@@ -95,7 +95,7 @@ space, and associated secondary technical spaces.
         +{field} requires_relative_path bool
     }
 
-    note top of  part
+    note top of part
 Represents a meta-region in physical space with archetypes for a given part of a
 component in a backend.
     end note
@@ -107,7 +107,7 @@ component in a backend.
         +{field} internal_modules path_contribution_type
     }
 
-    note top of  path_configuration
+    note top of path_configuration
 Describes how paths are handled within a part.
     end note
 
@@ -117,7 +117,7 @@ Describes how paths are handled within a part.
         +{field} as_path_components
     }
 
-    note top of  path_contribution_type
+    note top of path_contribution_type
 Different kinds of contributions that can be made to the final path computation.
     end note
 
@@ -127,7 +127,7 @@ Different kinds of contributions that can be made to the final path computation.
         +{field} default_archetype_for_logical_meta_model_id std::unordered_map<std::string, archetype>
     }
 
-    note top of  facet
+    note top of facet
 Represents a meta-region in physical space with archetypes for a given theme.
     end note
 
@@ -138,7 +138,7 @@ Represents a meta-region in physical space with archetypes for a given theme.
         +{field} relations relations
     }
 
-    note top of  archetype
+    note top of archetype
 Represents a meta-artefact.
     end note
 
@@ -147,7 +147,7 @@ Represents a meta-artefact.
         +{field} file_extension std::string
     }
 
-    note top of  archetype_kind
+    note top of archetype_kind
 Represents a type of archetypes.
     end note
 
@@ -161,7 +161,7 @@ Represents a type of archetypes.
         +{field} regions_by_logical_id std::unordered_map<identification::entities::logical_id, region>
     }
 
-    note top of  model
+    note top of model
 Collection of entities representing objects in physical space.
     end note
 
@@ -173,7 +173,7 @@ Collection of entities representing objects in physical space.
         +{field} meta_name identification::entities::physical_meta_name
     }
 
-    note top of  MetaNameable
+    note top of MetaNameable
 Ability to have a meta-name.
     end note
 
@@ -181,7 +181,7 @@ Ability to have a meta-name.
         +{field} labels std::list<identification::entities::label>
     }
 
-    note top of  Labelable
+    note top of Labelable
 The ability to attach labels to an element.
     end note
 
@@ -196,7 +196,7 @@ The ability to attach labels to an element.
     }
 
     entities::MetaElement <|-- entities::ContainingMetaElement
-    note top of  ContainingMetaElement
+    note top of ContainingMetaElement
 The meta-element can contain other meta-elements.
     end note
 
@@ -216,7 +216,7 @@ The meta-element can contain other meta-elements.
         +{field} relations relation_properties
     }
 
-    note top of  artefact
+    note top of artefact
 Represents an entity in physical space.
     end note
 
@@ -224,7 +224,7 @@ Represents an entity in physical space.
         +{field} configuration boost::shared_ptr<variability::entities::configuration>
     }
 
-    note top of  Configurable
+    note top of Configurable
 Ability to have meta-data associated.
     end note
 
@@ -232,7 +232,7 @@ Ability to have meta-data associated.
         +{field} provenance identification::entities::logical_provenance
     }
 
-    note top of  Provenance
+    note top of Provenance
 Properties related to the origin of the modeling element.
     end note
 
@@ -240,7 +240,7 @@ Properties related to the origin of the modeling element.
         +{field} name identification::entities::physical_name
     }
 
-    note top of  Nameable
+    note top of Nameable
 Ability to have a name.
     end note
 
@@ -263,7 +263,7 @@ Ability to have a name.
         +{field} delete_empty_directories bool
     }
 
-    note top of  outputting_properties
+    note top of outputting_properties
 Properties related to outputting.
     end note
 
@@ -272,7 +272,7 @@ Properties related to outputting.
         +{field} reason operation_reason
     }
 
-    note top of  operation
+    note top of operation
 Operation to apply to an artefact.
     end note
 
@@ -283,7 +283,7 @@ Operation to apply to an artefact.
         +{field} remove
     }
 
-    note top of  operation_type
+    note top of operation_type
 Operation to perform to a given artefact.
     end note
 
@@ -299,7 +299,7 @@ Operation to perform to a given artefact.
         +{field} ignore_regex
     }
 
-    note top of  operation_reason
+    note top of operation_reason
 Reasons for performing an operation.
     end note
 
@@ -309,7 +309,7 @@ Reasons for performing an operation.
         +{field} generated_by std::string
     }
 
-    note top of  Associatable
+    note top of Associatable
 The meta-element is associated with other meta-elements
     end note
 
@@ -317,7 +317,7 @@ The meta-element is associated with other meta-elements
         +{field} models std::list<model>
     }
 
-    note top of  model_set
+    note top of model_set
 Represents a set of related physical models.
     end note
 
@@ -327,7 +327,7 @@ Represents a set of related physical models.
         +{field} facet_default
     }
 
-    note top of  relation_status
+    note top of relation_status
 Status of a given archetype with regards to being related to other archetypes.
     end note
 
@@ -335,7 +335,7 @@ Status of a given archetype with regards to being related to other archetypes.
         +{field} logical_model_element_id std::string
     }
 
-    note top of  constant_relation
+    note top of constant_relation
 Represents a relation between archetypes, fixed to a logical model element.
     end note
 
@@ -358,7 +358,7 @@ Represents a relation between archetypes, fixed to a logical model element.
         +{field} visitation
     }
 
-    note top of  variable_relation_type
+    note top of variable_relation_type
 Lists all of the valid variable relation types.
     end note
 
@@ -369,7 +369,7 @@ Lists all of the valid variable relation types.
         +{field} hard_coded std::list<hard_coded_relation>
     }
 
-    note top of  relations
+    note top of relations
 Models relationships between archetypes.
     end note
 
@@ -377,7 +377,7 @@ Models relationships between archetypes.
         +{field} value std::string
     }
 
-    note top of  hard_coded_relation
+    note top of hard_coded_relation
 Relations against hard-coded values.
     end note
 
@@ -387,7 +387,7 @@ Relations against hard-coded values.
         +{field} is_generatable bool
     }
 
-    note top of  region
+    note top of region
 Represents a region of logical-physical space fixed at one logical point.
     end note
 
@@ -400,7 +400,7 @@ Represents a region of logical-physical space fixed at one logical point.
         +{field} archetype_overwrite boost::optional<bool>
     }
 
-    note top of  enablement_properties
+    note top of enablement_properties
 Stores the properties related to the enablement.
     end note
 
@@ -413,7 +413,7 @@ Stores the properties related to the enablement.
         +{field} computed_directory_name std::string
     }
 
-    note top of  backend_properties
+    note top of backend_properties
 Properties related to the backend.
     end note
 
@@ -430,7 +430,7 @@ Properties related to the backend.
         +{field} computed_postfix std::string
     }
 
-    note top of  facet_properties
+    note top of facet_properties
 Properties related to the facet.
     end note
 
@@ -444,7 +444,7 @@ Properties related to the facet.
         +{field} part_properties part_properties
     }
 
-    note top of  archetype_properties
+    note top of archetype_properties
 Properties related to the archetype.
     end note
 
@@ -461,7 +461,7 @@ Properties related to the archetype.
         +{field} project_path_properties project_path_properties
     }
 
-    note top of  meta_model_properties
+    note top of meta_model_properties
 Meta-model configuration supplied by this model.
 
 The meta-model properties represent a set of variability overrides supplied on top
@@ -476,7 +476,7 @@ computed values on the back of physical transforms.
         +{field} computed_directory_name std::string
     }
 
-    note top of  part_properties
+    note top of part_properties
 Properties related to the part.
     end note
 
@@ -507,7 +507,7 @@ Properties related to the part.
         +{field} templates_directory_full_path boost::filesystem::path
     }
 
-    note top of  project_path_properties
+    note top of project_path_properties
 Legacy type containing all proprties related to paths.
     end note
 
@@ -531,7 +531,7 @@ Legacy type containing all proprties related to paths.
         +{field} csharp_implementation
     }
 
-    note top of  legacy_archetype_kind
+    note top of legacy_archetype_kind
 Kinds of archetypes available across all technical spaces.
     end note
 
@@ -545,7 +545,7 @@ Kinds of archetypes available across all technical spaces.
         +{field} secondary std::list<std::string>
     }
 
-    note top of  inclusion_directives
+    note top of inclusion_directives
 Represents the group of inclusion directives associated with a name and an archetype.
     end note
 
@@ -574,7 +574,7 @@ Features for the MASD physical model.
         +{field} overwrite masd::variability::boolean
     }
 
-    note top of  facet_features
+    note top of facet_features
 Physical features common to all facets.
     end note
 
@@ -583,7 +583,7 @@ Physical features common to all facets.
         +{field} overwrite masd::variability::boolean
     }
 
-    note top of  archetype_features
+    note top of archetype_features
 Features common to all archetypes.
     end note
 
@@ -598,7 +598,7 @@ Features common to all archetypes.
         +{field} enable_backend_directories masd::variability::boolean
     }
 
-    note top of  filesystem
+    note top of filesystem
 Features related to filesystem operations.
     end note
 
@@ -606,7 +606,7 @@ Features related to filesystem operations.
         +{field} enabled masd::variability::boolean
     }
 
-    note top of  enablement
+    note top of enablement
 Enablement related properties.
     end note
 
@@ -614,7 +614,7 @@ Enablement related properties.
         +{field} directory_name masd::variability::text
     }
 
-    note top of  backend_features
+    note top of backend_features
 Physical features common to all backends.
     end note
 
@@ -631,7 +631,7 @@ Physical features common to all backends.
         +{field} disable_facet_directories masd::variability::boolean
     }
 
-    note top of  path_features
+    note top of path_features
 Set of features related to path processing.
     end note
 
@@ -711,7 +711,7 @@ models and meta-models for the physical model.
         +{field} tracer boost::shared_ptr<tracing::tracer>
     }
 
-    note top of  minimal_context
+    note top of minimal_context
 Smallest possible context required for bootstrapping purposes.
     end note
 

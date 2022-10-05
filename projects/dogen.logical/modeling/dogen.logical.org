@@ -489,7 +489,7 @@ Fully qualified name.
    :PROPERTIES:
    :custom_id: 559CD1AE-B7FC-5104-88F3-4A2CBD0944FE
    :masd.codec.stereotypes: masd::object_template
-   :masd.codec.plantuml: Generatable o-- generability_status
+   :masd.codec.plantuml: Generatable o-u- generability_status
    :END:
 
 *** generability status                                           :attribute:
@@ -550,7 +550,7 @@ All labels associated with this element.
    :PROPERTIES:
    :custom_id: D3BB6222-DA90-7F44-ADCB-EE9D1C89B845
    :masd.codec.stereotypes: masd::object_template
-   :masd.codec.plantuml: Stateful o-- attribute: stores state in
+   :masd.codec.plantuml: Stateful o-u- attribute: stores state in
    :END:
 
 Ability to have a state.
@@ -668,7 +668,7 @@ Name to use for getter and setter.
    :custom_id: FB7855FA-79DF-A9C4-51FB-C6977AD36BC6
    :masd.codec.parent: entities::Nameable, entities::Documentable, entities::Provenance, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable, entities::Generatable
    :masd.codec.stereotypes: masd::object_template
-   :masd.codec.plantuml: Element <|-- element
+   :masd.codec.plantuml: Element <|.. element
    :END:
 
 A unit of coding that can be code generated.
@@ -975,6 +975,537 @@ Has the ability to contain other elements.
 
 All elements contained by this element.
 
+** meta element                                                     :element:
+   :PROPERTIES:
+   :custom_id: A91F2216-2BA7-21E4-E55B-38B0A810A6A8
+   :masd.variability.binding_point: element
+   :masd.variability.stereotype: logical::meta_element
+   :masd.codec.stereotypes: masd::variability::profile
+   :END:
+
+*** masd.generalization.parent                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.value: dogen::logical::entities::element
+    :END:
+
+** build                                                             :module:
+   :PROPERTIES:
+   :custom_id: A7D3787F-3228-4A54-BF73-CC3CEEC95A23
+   :masd.codec.dia.comment: true
+   :END:
+
+Houses all of the meta-modeling elements related to building, which don't have
+their own containing namespace.
+
+*** element repository                                              :element:
+    :PROPERTIES:
+    :custom_id: EA65D802-7BB9-7984-BB03-028E28EC122B
+    :masd.codec.plantuml: element_repository o-- cmakelists
+    :END:
+
+**** cmakelists                                                   :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
+     :END:
+
+*** cmakelists                                                      :element:
+    :PROPERTIES:
+    :custom_id: AB772720-0DD9-E8A4-ED13-B497CF97D480
+    :masd.codec.stereotypes: logical::meta_element
+    :END:
+
+Represents build CMakeLists files.
+
+**** include directory path                                       :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** source directory name                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** header file extension                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** implementation file extension                                :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** odb targets                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: dogen::logical::entities::orm::odb_targets
+     :END:
+
+**** tests directory name                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+** serialization                                                     :module:
+   :PROPERTIES:
+   :custom_id: 42C6E19D-4921-B784-267B-9BAE81A3197B
+   :masd.codec.dia.comment: true
+   :END:
+
+Houses all of the meta-modeling elements related to serialisation.
+
+*** element repository                                              :element:
+    :PROPERTIES:
+    :custom_id: 3D683F25-BCF2-5714-9F4B-9710B68B1E2E
+    :masd.codec.plantuml: element_repository o-- type_registrar
+    :END:
+
+**** type registrars                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
+     :END:
+
+*** type registrar                                                  :element:
+    :PROPERTIES:
+    :custom_id: 48C3108D-4030-A234-37F3-C542091BCBF5
+    :masd.codec.stereotypes: logical::meta_element
+    :END:
+
+Responsible for registering types for serialisation purposes.
+
+Certain libraries in certain technical spaces - such as Boost Serialisation, in C++ -
+require types that are in an inheritance relationship to be made known to the
+serialisation infrastructure in order for the deserialisation of base and derived
+types to work. The type registrar is aware of all types with such requirements and
+generates the registration code as needed.
+
+**** leaves                                                       :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<identification::entities::logical_name>
+     :END:
+
+List of all concrete classes which are part of an inheritance tree.
+
+**** registrar dependencies                                       :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<identification::entities::logical_name>
+     :END:
+
+Registrars on other models this registrar depends on.
+
+** templating                                                        :module:
+   :PROPERTIES:
+   :custom_id: F29744B2-3D6D-0CC4-22DB-5EB3133C0B89
+   :masd.codec.dia.comment: true
+   :END:
+
+Meta-model elements related to templating .
+
+*** element repository                                              :element:
+    :PROPERTIES:
+    :custom_id: 17843251-EC6C-49C4-AF1B-4BDEE9D5E2C2
+    :masd.codec.plantuml: element_repository o-- logic_less_template
+    :END:
+
+**** logic less templates                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
+     :END:
+
+*** logic less template                                             :element:
+    :PROPERTIES:
+    :custom_id: B2563E21-6259-EAB4-AF63-2C8660A570B9
+    :masd.codec.stereotypes: logical::meta_element
+    :END:
+
+Represents a logic-less template.
+
+At present the system only supports wale templates.
+
+**** content                                                      :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+#+begin_src mustache
+Content of the logic-less template.
+#+end_src
+
+** orm                                                               :module:
+   :PROPERTIES:
+   :custom_id: 8397ACD5-165D-9A34-53B3-B2BE1B492758
+   :masd.codec.dia.comment: true
+   :END:
+
+Houses all of the properties related to ORM support in Dogen.
+
+*** element repository                                              :element:
+    :PROPERTIES:
+    :custom_id: 90C029A2-2590-9ED4-C4BB-C2240B13387C
+    :masd.codec.plantuml: element_repository o-- common_odb_options
+    :END:
+
+**** common odb options                                           :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
+     :END:
+
+*** Mappeable                                                       :element:
+    :PROPERTIES:
+    :custom_id: EE14939D-6A07-C624-937B-8CDE96DBEC5A
+    :masd.codec.stereotypes: masd::object_template
+    :END:
+
+**** generate mapping                                             :attribute:
+     :PROPERTIES:
+     :masd.codec.type: bool
+     :END:
+
+If true, object-relational mapping will be generated for this element.
+
+*** OrmElement                                                      :element:
+    :PROPERTIES:
+    :custom_id: 195741BD-A673-1DD4-A013-C0399D56D064
+    :masd.codec.parent: entities::orm::Schemable, entities::orm::Caseable, entities::orm::Mappeable, entities::orm::TypeMappable, entities::orm::OdbPragmable
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: OrmElement o-- odb_options
+    :masd.codec.plantuml: OrmElement <|-- object_properties
+    :masd.codec.plantuml: OrmElement <|-- primitive_properties
+    :END:
+
+**** odb options                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: odb_options
+     :END:
+
+*** OdbPragmable                                                    :element:
+    :PROPERTIES:
+    :custom_id: 499B8C62-AFFB-28C4-E003-34B94C21894E
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: OdbPragmable <|-- attribute_properties
+    :END:
+
+**** odb pragmas                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<std::string>
+     :END:
+
+Pragmas for the ODB ORM backend.
+
+*** TypeMappable                                                    :element:
+    :PROPERTIES:
+    :custom_id: 3C9A74E6-C2D1-DBC4-C04B-6B053ED0DF72
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: TypeMappable o-- type_mapping
+    :END:
+
+**** type mappings                                                :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<type_mapping>
+     :END:
+
+List of mappings of relational database types.
+
+*** type mapping                                                    :element:
+    :PROPERTIES:
+    :custom_id: 059C7D14-E843-B0F4-B95B-9BBB451BCA49
+    :masd.codec.plantuml: type_mapping o-- database_system
+    :END:
+
+**** source type                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Type which we intend to map from. Example: TEXT.
+
+**** destination type                                             :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Type we intend to map to. Example: JSONB.
+
+**** to source type                                               :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Function that converts into the source type.
+
+**** to destination type                                          :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Function that converts into the destination type.
+
+**** database                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: boost::optional<database_system>
+     :END:
+
+Database to which the mapping applies. If none is supplied, it will apply to all.
+
+*** database system                                                 :element:
+    :PROPERTIES:
+    :custom_id: 883A57FC-AC58-E2E4-395B-A623C0EB9904
+    :masd.codec.stereotypes: masd::enumeration, dogen::hashable, dogen::convertible
+    :END:
+
+**** mysql                                                        :attribute:
+
+**** postgresql                                                   :attribute:
+
+**** oracle                                                       :attribute:
+
+**** sql server                                                   :attribute:
+
+**** sqlite                                                       :attribute:
+
+*** Overridable                                                     :element:
+    :PROPERTIES:
+    :custom_id: 295554D9-7B9D-F7A4-D7BB-51DF542BCAAB
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: Overridable <|-- primitive_properties
+    :masd.codec.plantuml: Overridable <|-- attribute_properties
+    :END:
+
+**** type overrides                                               :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<database_system, std::string>
+     :END:
+
+Override the default type for this attribute for a given database system.
+
+*** Caseable                                                        :element:
+    :PROPERTIES:
+    :custom_id: 45A5EDEB-E293-CE64-C6B3-A2D1C962EAAE
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: Caseable o-- letter_case
+    :masd.codec.plantuml: Caseable <|.. model_properties
+    :masd.codec.plantuml: Caseable <|.. module_properties
+    :END:
+
+The model element supports configuration related to casing.
+
+**** letter case                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: boost::optional<letter_case>
+     :END:
+
+What case to use for the database identifiers.
+
+*** letter case                                                     :element:
+    :PROPERTIES:
+    :custom_id: 4C231572-A1D4-6384-049B-1743D3BD7258
+    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
+    :END:
+
+**** upper case                                                   :attribute:
+
+**** lower case                                                   :attribute:
+
+*** Schemable                                                       :element:
+    :PROPERTIES:
+    :custom_id: F3152A48-E3C6-3354-3F8B-BF5475F70F9C
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: Schemable <|-- model_properties
+    :masd.codec.plantuml: Schemable <|-- module_properties
+    :END:
+
+Model element can belong to a relational database schema.
+
+**** schema name                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the database schema in which to place this element.
+
+**** capitalised schema name                                      :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Schema name with the correct capitalisation.
+
+*** object properties                                               :element:
+    :PROPERTIES:
+    :custom_id: C6077E1C-DB3F-7584-1CB3-491E706D34B8
+    :masd.codec.stereotypes: OrmElement
+    :END:
+
+**** table name                                                   :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the table to map this element to.
+
+**** is value                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: bool
+     :END:
+
+If true, treat this object as a value type (e.g. simple type) rather than as an object.
+
+**** has primary key                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: bool
+     :END:
+
+True if the object has an attribute marked as a primary key, false otherwise.
+
+*** primitive properties                                            :element:
+    :PROPERTIES:
+    :custom_id: 0404277B-7E6A-3634-2B5B-06F90AF9BF39
+    :masd.codec.stereotypes: OrmElement, Overridable
+    :END:
+
+*** model properties                                                :element:
+    :PROPERTIES:
+    :custom_id: BE41A8FF-5970-0164-E34B-D1879CC503BA
+    :masd.codec.stereotypes: Schemable, Caseable
+    :END:
+
+**** database systems                                             :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::vector<database_system>
+     :END:
+
+*** module properties                                               :element:
+    :PROPERTIES:
+    :custom_id: B2F09482-E5D8-37F4-C6F3-21080CFBE61D
+    :masd.codec.stereotypes: Schemable, Caseable
+    :END:
+
+*** attribute properties                                            :element:
+    :PROPERTIES:
+    :custom_id: 39CF89D6-E294-6B14-8B6B-630831BD8143
+    :masd.codec.stereotypes: Overridable, OdbPragmable
+    :END:
+
+**** column name                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the column to use for this attribute. If populated, will override the attribute name.
+
+**** is primary key                                               :attribute:
+     :PROPERTIES:
+     :masd.codec.type: bool
+     :END:
+
+If true, this attribute is a primary key for the relation.
+
+**** is nullable                                                  :attribute:
+     :PROPERTIES:
+     :masd.codec.type: boost::optional<bool>
+     :END:
+
+If true, the attribute can be NULL.
+
+**** is composite                                                 :attribute:
+     :PROPERTIES:
+     :masd.codec.type: bool
+     :END:
+
+If true, the value of this attribute is a composite value.
+
+*** odb options                                                     :element:
+    :PROPERTIES:
+    :custom_id: F937B48E-1268-23B4-A043-0006B695F919
+    :END:
+
+**** epilogue                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** include regexes                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<std::string>
+     :END:
+
+**** header guard prefix                                          :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+*** common odb options                                              :element:
+    :PROPERTIES:
+    :custom_id: BB7EA719-F09A-0DE4-4213-B94CF058FB94
+    :masd.codec.stereotypes: logical::meta_element
+    :END:
+
+**** sql name case                                                :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** databases                                                    :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<std::string>
+     :END:
+
+*** odb targets                                                     :element:
+    :PROPERTIES:
+    :custom_id: 0CF1CF49-EBCB-BDF4-6163-03A849E26A60
+    :masd.codec.plantuml: odb_targets o-- odb_target
+    :END:
+
+**** main target name                                             :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** common odb options                                           :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** targets                                                      :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<odb_target>
+     :END:
+
+*** odb target                                                      :element:
+    :PROPERTIES:
+    :custom_id: A3DC5940-8684-8F64-AFB3-4B81B61F0CA5
+    :END:
+
+**** name                                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** comment                                                      :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** output directory                                             :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** types file                                                   :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+**** move parameters                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<std::pair<std::string, std::string>>
+     :END:
+
+**** object odb options                                           :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
 ** decoration                                                        :module:
    :PROPERTIES:
    :custom_id: B6AA1CC3-05E1-9F04-AD6B-C05216D76CB7
@@ -1238,19 +1769,6 @@ as a modeline.
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
      :END:
-
-** meta element                                                     :element:
-   :PROPERTIES:
-   :custom_id: A91F2216-2BA7-21E4-E55B-38B0A810A6A8
-   :masd.variability.binding_point: element
-   :masd.variability.stereotype: logical::meta_element
-   :masd.codec.stereotypes: masd::variability::profile
-   :END:
-
-*** masd.generalization.parent                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.value: dogen::logical::entities::element
-    :END:
 
 ** variability                                                       :module:
    :PROPERTIES:
@@ -1707,371 +2225,23 @@ Key as it was originally provided by the user.
      :masd.codec.type: std::string
      :END:
 
-** orm                                                               :module:
-   :PROPERTIES:
-   :custom_id: 8397ACD5-165D-9A34-53B3-B2BE1B492758
-   :masd.codec.dia.comment: true
-   :END:
-
-Houses all of the properties related to ORM
-support in Dogen.
-
-*** model properties                                                :element:
-    :PROPERTIES:
-    :custom_id: BE41A8FF-5970-0164-E34B-D1879CC503BA
-    :masd.codec.stereotypes: Schemable, Caseable
-    :END:
-
-**** database systems                                             :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::vector<database_system>
-     :END:
-
-*** database system                                                 :element:
-    :PROPERTIES:
-    :custom_id: 883A57FC-AC58-E2E4-395B-A623C0EB9904
-    :masd.codec.stereotypes: masd::enumeration, dogen::hashable, dogen::convertible
-    :END:
-
-**** mysql                                                        :attribute:
-
-**** postgresql                                                   :attribute:
-
-**** oracle                                                       :attribute:
-
-**** sql server                                                   :attribute:
-
-**** sqlite                                                       :attribute:
-
-*** letter case                                                     :element:
-    :PROPERTIES:
-    :custom_id: 4C231572-A1D4-6384-049B-1743D3BD7258
-    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
-    :END:
-
-**** upper case                                                   :attribute:
-
-**** lower case                                                   :attribute:
-
-*** object properties                                               :element:
-    :PROPERTIES:
-    :custom_id: C6077E1C-DB3F-7584-1CB3-491E706D34B8
-    :masd.codec.stereotypes: OrmElement
-    :END:
-
-**** table name                                                   :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Name of the table to map this element to.
-
-**** is value                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: bool
-     :END:
-
-If true, treat this object as a value type (e.g. simple type) rather than as an object.
-
-**** has primary key                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: bool
-     :END:
-
-True if the object has an attribute marked as a primary key, false otherwise.
-
-*** primitive properties                                            :element:
-    :PROPERTIES:
-    :custom_id: 0404277B-7E6A-3634-2B5B-06F90AF9BF39
-    :masd.codec.stereotypes: OrmElement, Overridable
-    :END:
-
-*** module properties                                               :element:
-    :PROPERTIES:
-    :custom_id: B2F09482-E5D8-37F4-C6F3-21080CFBE61D
-    :masd.codec.stereotypes: Schemable, Caseable
-    :END:
-
-*** attribute properties                                            :element:
-    :PROPERTIES:
-    :custom_id: 39CF89D6-E294-6B14-8B6B-630831BD8143
-    :masd.codec.stereotypes: Overridable, OdbPragmable
-    :END:
-
-**** column name                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Name of the column to use for this attribute. If populated, will override the attribute name.
-
-**** is primary key                                               :attribute:
-     :PROPERTIES:
-     :masd.codec.type: bool
-     :END:
-
-If true, this attribute is a primary key for the relation.
-
-**** is nullable                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: boost::optional<bool>
-     :END:
-
-If true, the attribute can be NULL.
-
-**** is composite                                                 :attribute:
-     :PROPERTIES:
-     :masd.codec.type: bool
-     :END:
-
-If true, the value of this attribute is a composite value.
-
-*** Schemable                                                       :element:
-    :PROPERTIES:
-    :custom_id: F3152A48-E3C6-3354-3F8B-BF5475F70F9C
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-Model element can belong to a relational database schema.
-
-**** schema name                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Name of the database schema in which to place this element.
-
-**** capitalised schema name                                      :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Schema name with the correct capitalisation.
-
-*** Caseable                                                        :element:
-    :PROPERTIES:
-    :custom_id: 45A5EDEB-E293-CE64-C6B3-A2D1C962EAAE
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-The model element supports configuration related to casing.
-
-**** letter case                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: boost::optional<letter_case>
-     :END:
-
-What case to use for the database identifiers.
-
-*** Mappeable                                                       :element:
-    :PROPERTIES:
-    :custom_id: EE14939D-6A07-C624-937B-8CDE96DBEC5A
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** generate mapping                                             :attribute:
-     :PROPERTIES:
-     :masd.codec.type: bool
-     :END:
-
-If true, object-relational mapping will be generated for this element.
-
-*** TypeMappable                                                    :element:
-    :PROPERTIES:
-    :custom_id: 3C9A74E6-C2D1-DBC4-C04B-6B053ED0DF72
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** type mappings                                                :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<type_mapping>
-     :END:
-
-List of mappings of relational database types.
-
-*** OdbPragmable                                                    :element:
-    :PROPERTIES:
-    :custom_id: 499B8C62-AFFB-28C4-E003-34B94C21894E
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** odb pragmas                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<std::string>
-     :END:
-
-Pragmas for the ODB ORM backend.
-
-*** OrmElement                                                      :element:
-    :PROPERTIES:
-    :custom_id: 195741BD-A673-1DD4-A013-C0399D56D064
-    :masd.codec.parent: entities::orm::Schemable, entities::orm::Caseable, entities::orm::Mappeable, entities::orm::TypeMappable, entities::orm::OdbPragmable
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** odb options                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: odb_options
-     :END:
-
-*** Overridable                                                     :element:
-    :PROPERTIES:
-    :custom_id: 295554D9-7B9D-F7A4-D7BB-51DF542BCAAB
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** type overrides                                               :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<database_system, std::string>
-     :END:
-
-Override the default type for this attribute for a given database system.
-
-*** type mapping                                                    :element:
-    :PROPERTIES:
-    :custom_id: 059C7D14-E843-B0F4-B95B-9BBB451BCA49
-    :END:
-
-**** source type                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Type which we intend to map from. Example: TEXT.
-
-**** destination type                                             :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Type we intend to map to. Example: JSONB.
-
-**** to source type                                               :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Function that converts into the source type.
-
-**** to destination type                                          :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Function that converts into the destination type.
-
-**** database                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: boost::optional<database_system>
-     :END:
-
-Database to which the mapping applies. If none is supplied, it will apply to all.
-
-*** odb options                                                     :element:
-    :PROPERTIES:
-    :custom_id: F937B48E-1268-23B4-A043-0006B695F919
-    :END:
-
-**** epilogue                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** include regexes                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<std::string>
-     :END:
-
-**** header guard prefix                                          :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-*** common odb options                                              :element:
-    :PROPERTIES:
-    :custom_id: BB7EA719-F09A-0DE4-4213-B94CF058FB94
-    :masd.codec.stereotypes: logical::meta_element
-    :END:
-
-**** sql name case                                                :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** databases                                                    :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<std::string>
-     :END:
-
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: 90C029A2-2590-9ED4-C4BB-C2240B13387C
-    :END:
-
-**** common odb options                                           :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
-     :END:
-
-*** odb targets                                                     :element:
-    :PROPERTIES:
-    :custom_id: 0CF1CF49-EBCB-BDF4-6163-03A849E26A60
-    :END:
-
-**** main target name                                             :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** common odb options                                           :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** targets                                                      :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<odb_target>
-     :END:
-
-*** odb target                                                      :element:
-    :PROPERTIES:
-    :custom_id: A3DC5940-8684-8F64-AFB3-4B81B61F0CA5
-    :END:
-
-**** name                                                         :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** comment                                                      :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** output directory                                             :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** types file                                                   :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** move parameters                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<std::pair<std::string, std::string>>
-     :END:
-
-**** object odb options                                           :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
 ** structural                                                        :module:
    :PROPERTIES:
    :custom_id: 1369137D-4163-0B24-A613-C87FEFE6C773
    :masd.codec.dia.comment: true
+   :masd.codec.plantuml: structural o-- object_template
+   :masd.codec.plantuml: structural o-- object
+   :masd.codec.plantuml: structural o-- builtin
+   :masd.codec.plantuml: structural o-- exception
+   :masd.codec.plantuml: structural o-- visitor
+   :masd.codec.plantuml: structural o-- primitive
+   :masd.codec.plantuml: structural o-- visitor
+   :masd.codec.plantuml: structural o-- module
+   :masd.codec.plantuml: structural o-- enumeration
+   :masd.codec.plantuml: structural o-- enumerator
+   :masd.codec.plantuml: structural o-- entry_point
+   :masd.codec.plantuml: structural o-- assistant
+   :masd.codec.plantuml: structural o-- assistant
    :END:
 
 Houses all of the meta-modeling elements related
@@ -2440,6 +2610,7 @@ General type to provide helpers.
     :PROPERTIES:
     :custom_id: 1FB7F044-60B7-C194-C55B-6B628744B701
     :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: TechnicalSpaceProperties o-- technical_space_properties
     :END:
 
 **** technical space properties                                   :attribute:
@@ -2518,90 +2689,6 @@ variability types.
 **** destination                                                  :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
-     :END:
-
-** templating                                                        :module:
-   :PROPERTIES:
-   :custom_id: F29744B2-3D6D-0CC4-22DB-5EB3133C0B89
-   :masd.codec.dia.comment: true
-   :END:
-
-Meta-model elements related to templating .
-
-*** logic less template                                             :element:
-    :PROPERTIES:
-    :custom_id: B2563E21-6259-EAB4-AF63-2C8660A570B9
-    :masd.codec.stereotypes: logical::meta_element
-    :END:
-
-Represents a logic-less template.
-
-At present the system only supports wale templates.
-
-**** content                                                      :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-#+begin_src mustache
-Content of the logic-less template.
-#+end_src
-
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: 17843251-EC6C-49C4-AF1B-4BDEE9D5E2C2
-    :END:
-
-**** logic less templates                                         :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
-     :END:
-
-** serialization                                                     :module:
-   :PROPERTIES:
-   :custom_id: 42C6E19D-4921-B784-267B-9BAE81A3197B
-   :masd.codec.dia.comment: true
-   :END:
-
-Houses all of the meta-modeling elements related
-to serialisation.
-
-*** type registrar                                                  :element:
-    :PROPERTIES:
-    :custom_id: 48C3108D-4030-A234-37F3-C542091BCBF5
-    :masd.codec.stereotypes: logical::meta_element
-    :END:
-
-Responsible for registering types for serialisation purposes.
-
-Certain libraries in certain technical spaces - such as Boost Serialisation, in C++ -
-require types that are in an inheritance relationship to be made known to the
-serialisation infrastructure in order for the deserialisation of base and derived
-types to work. The type registrar is aware of all types with such requirements and
-generates the registration code as needed.
-
-**** leaves                                                       :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<identification::entities::logical_name>
-     :END:
-
-List of all concrete classes which are part of an inheritance tree.
-
-**** registrar dependencies                                       :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<identification::entities::logical_name>
-     :END:
-
-Registrars on other models this registrar depends on.
-
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: 3D683F25-BCF2-5714-9F4B-9710B68B1E2E
-    :END:
-
-**** type registrars                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
      :END:
 
 ** visual studio                                                     :module:
@@ -2771,64 +2858,6 @@ GUID that uniquely identifies this element.
 **** odb targets                                                  :attribute:
      :PROPERTIES:
      :masd.codec.type: dogen::logical::entities::orm::odb_targets
-     :END:
-
-** build                                                             :module:
-   :PROPERTIES:
-   :custom_id: A7D3787F-3228-4A54-BF73-CC3CEEC95A23
-   :masd.codec.dia.comment: true
-   :END:
-
-Houses all of the meta-modeling elements related
-to building, which don't have their own containing
-namespace.
-
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: EA65D802-7BB9-7984-BB03-028E28EC122B
-    :END:
-
-**** cmakelists                                                   :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
-     :END:
-
-*** cmakelists                                                      :element:
-    :PROPERTIES:
-    :custom_id: AB772720-0DD9-E8A4-ED13-B497CF97D480
-    :masd.codec.stereotypes: logical::meta_element
-    :END:
-
-Represents build CMakeLists files.
-
-**** include directory path                                       :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** source directory name                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** header file extension                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** implementation file extension                                :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-**** odb targets                                                  :attribute:
-     :PROPERTIES:
-     :masd.codec.type: dogen::logical::entities::orm::odb_targets
-     :END:
-
-**** tests directory name                                         :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
      :END:
 
 ** physical                                                          :module:

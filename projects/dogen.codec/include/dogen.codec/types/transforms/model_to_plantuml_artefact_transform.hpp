@@ -57,7 +57,8 @@ private:
 
 private:
     static void walk_parent_to_child(std::ostream& os, const unsigned int level,
-        const std::string& id, const std::unordered_map<std::string,
+        const std::string& id, const std::string& path,
+        const std::unordered_map<std::string,
         std::list<entities::element>>& parent_to_child_map);
 
 public:

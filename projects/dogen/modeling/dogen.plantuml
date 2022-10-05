@@ -28,7 +28,7 @@ class diffing_configuration <<masd::fluent>> #F7E5FF {
 
 diffing_configuration o-- diffing_destination
 
-note top of  diffing_configuration
+note top of diffing_configuration
 Configuration for diff generation.
 end note
 
@@ -37,7 +37,7 @@ enum diffing_destination <<masd::enumeration>> #F2DAFD {
     +{field} console
 }
 
-note top of  diffing_destination
+note top of diffing_destination
 Where to place the diffing results.
 end note
 
@@ -57,7 +57,7 @@ tracing_configuration o-- tracing_level
 tracing_configuration o-- tracing_format
 tracing_configuration o-- tracing_backend
 
-note top of  tracing_configuration
+note top of tracing_configuration
 Configuration related to transform tracing.
 end note
 
@@ -66,7 +66,7 @@ enum tracing_level <<masd::enumeration>> #F2DAFD {
     +{field} summary
 }
 
-note top of  tracing_level
+note top of tracing_level
 Available levels for tracing transformation.
 end note
 
@@ -76,7 +76,7 @@ enum tracing_format <<masd::enumeration>> #F2DAFD {
     +{field} graphviz
 }
 
-note top of  tracing_format
+note top of tracing_format
 Available formats for tracing transformations.
 end note
 
@@ -84,7 +84,7 @@ enum tracing_backend <<masd::enumeration>> #F2DAFD {
     +{field} file
 }
 
-note top of  tracing_backend
+note top of tracing_backend
 Available backends to manage tracing information.
 end note
 
@@ -95,7 +95,7 @@ class reporting_configuration #F7E5FF {
 
 reporting_configuration o-- reporting_style
 
-note top of  reporting_configuration
+note top of reporting_configuration
 Configuration related to operational reports.
 end note
 
@@ -104,7 +104,7 @@ enum reporting_style <<masd::enumeration, dogen::convertible>> #F2DAFD {
     +{field} org_mode
 }
 
-note top of  reporting_style
+note top of reporting_style
 Available formats for operational reports.
 end note
 
@@ -115,7 +115,7 @@ class model_processing_configuration #F7E5FF {
     +{field} activity_timestamp boost::posix_time::ptime
 }
 
-note top of  model_processing_configuration
+note top of model_processing_configuration
 Configuration related to the behaviour of Dogen whilst processing models.
 end note
 
@@ -125,14 +125,14 @@ class configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
 configuration_validator o-- configuration: validates
 configuration_validator o-- invalid_configuration_exception: throws
 
-note top of  configuration_validator
+note top of configuration_validator
 Validates the Dogen configuration at the API level.
 end note
 
 class invalid_configuration_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  invalid_configuration_exception
+note top of invalid_configuration_exception
 The values supplied for the configuration are not valid.
 end note
 
@@ -141,7 +141,7 @@ class mock_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
 
 mock_configuration_factory o-- configuration: creates
 
-note top of  mock_configuration_factory
+note top of mock_configuration_factory
 Creates configurations for testing purposes.
 end note
 
@@ -151,14 +151,14 @@ class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 generator o-- configuration: configured by
 generator o-- generation_exception: throws
 
-note top of  generator
+note top of generator
 Generates code for a given target model.
 end note
 
 class generation_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  generation_exception
+note top of generation_exception
 Generation failures:
 
 - Unsupported model format (target, references).
@@ -176,14 +176,14 @@ class converter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
 converter o-- configuration: configured by
 converter o-- conversion_exception: throws
 
-note top of  converter
+note top of converter
 Converts a supported model type into another.
 end note
 
 class conversion_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  conversion_exception
+note top of conversion_exception
 Conversion failures:
 
 - Target could not be found, opened.
@@ -198,7 +198,7 @@ spec_dumper o-- configuration: configured by
 spec_dumper o-- dumping_exception: throws
 spec_dumper o-- specs: creates
 
-note top of  spec_dumper
+note top of spec_dumper
 Dumps internal information from Dogen.
 end note
 
@@ -208,7 +208,7 @@ class specs #F7E5FF {
 
 specs o-- spec_category
 
-note top of  specs
+note top of specs
 Describes details of the available functionality within this version of Dogen.
 end note
 
@@ -220,7 +220,7 @@ class spec_category #F7E5FF {
 
 spec_category o-- spec_entry
 
-note top of  spec_category
+note top of spec_category
 Describes a category of dogen specifications.
 end note
 
@@ -229,14 +229,14 @@ class spec_entry #F7E5FF {
     +{field} description std::string
 }
 
-note top of  spec_entry
+note top of spec_entry
 Unit of functionality within Dogen.
 end note
 
 class dumping_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  dumping_exception
+note top of dumping_exception
 An error ocurred when dumping dogen's specs.
 end note
 

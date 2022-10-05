@@ -48,7 +48,7 @@ with Masd.
     class element <<Element>> #F7E5FF {
     }
 
-    note top of  element
+    note top of element
 Represents an element modeling some aspect of variability.
     end note
 
@@ -57,7 +57,7 @@ Represents an element modeling some aspect of variability.
     }
 
     entities::element <|-- entities::feature
-    note top of  feature
+    note top of feature
 Unit of configuration within Dogen. Defines the domain of values.
     end note
 
@@ -69,7 +69,7 @@ Unit of configuration within Dogen. Defines the domain of values.
         +{field} operation
     }
 
-    note top of  binding_point
+    note top of binding_point
 Determines how a feature can be bound to a modeling element.
     end note
 
@@ -79,7 +79,7 @@ Determines how a feature can be bound to a modeling element.
         +{field} partially_matchable std::unordered_map<std::string, feature>
     }
 
-    note top of  feature_model
+    note top of feature_model
 Container of all available features, organised for querying.
     end note
 
@@ -88,7 +88,7 @@ Container of all available features, organised for querying.
     }
 
     entities::element <|-- entities::feature_template
-    note top of  feature_template
+    note top of feature_template
 Defines a template that can be used to instantiate features.
     end note
 
@@ -102,7 +102,7 @@ Defines a template that can be used to instantiate features.
         +{field} comma_separated_collection
     }
 
-    note top of  value_type
+    note top of value_type
 What values can a feature have.
     end note
 
@@ -111,7 +111,7 @@ What values can a feature have.
     }
 
     entities::element <|-- entities::profile_template
-    note top of  profile_template
+    note top of profile_template
 Holds a set of templates for configuration points.
     end note
 
@@ -123,7 +123,7 @@ Holds a set of templates for configuration points.
     class value <<masd::visitable>> #F7E5FF {
     }
 
-    note top of  value
+    note top of value
 Base class of all value types.
 
 Represents a value for a configuration point, a default value for a feature, etc.
@@ -134,7 +134,7 @@ Represents a value for a configuration point, a default value for a feature, etc
     }
 
     entities::value <|-- entities::number
-    note top of  number
+    note top of number
 Represents a numeric integral value.
     end note
 
@@ -143,7 +143,7 @@ Represents a numeric integral value.
     }
 
     entities::value <|-- entities::text
-    note top of  text
+    note top of text
 Represents a text value.
     end note
 
@@ -152,7 +152,7 @@ Represents a text value.
     }
 
     entities::value <|-- entities::text_collection
-    note top of  text_collection
+    note top of text_collection
 Represents a collection of text values.
     end note
 
@@ -161,7 +161,7 @@ Represents a collection of text values.
     }
 
     entities::value <|-- entities::boolean
-    note top of  boolean
+    note top of boolean
 Represents a boolean value.
     end note
 
@@ -170,7 +170,7 @@ Represents a boolean value.
     }
 
     entities::value <|-- entities::key_value_pair
-    note top of  key_value_pair
+    note top of key_value_pair
 Represents a pair of key and value.
     end note
 
@@ -186,7 +186,7 @@ Represents a pair of key and value.
     }
 
     entities::element <|-- entities::configuration_point
-    note top of  configuration_point
+    note top of configuration_point
 Maps a feature name to an instance value
     end note
 
@@ -194,7 +194,7 @@ Maps a feature name to an instance value
         +{field} name identification::entities::name
     }
 
-    note top of  Nameable
+    note top of Nameable
 Elements with the ability of being named.
     end note
 
@@ -255,7 +255,7 @@ Elements with the ability of being named.
         +{field} copy
     }
 
-    note top of  binding_action
+    note top of binding_action
 What action to take when binding.
     end note
 
@@ -282,7 +282,7 @@ What action to take when binding.
         +{field} realized bool
     }
 
-    note top of  potential_binding
+    note top of potential_binding
 Contains information about a potential binding.
     end note
 
@@ -290,7 +290,7 @@ Contains information about a potential binding.
         +{field} templates std::list<feature_template>
     }
 
-    note top of  feature_template_repository
+    note top of feature_template_repository
 Stores a set of feature templates.
     end note
 
@@ -298,7 +298,7 @@ Stores a set of feature templates.
         +{field} features std::list<feature>
     }
 
-    note top of  feature_repository
+    note top of feature_repository
 Stores a set of features.
     end note
 
@@ -307,7 +307,7 @@ Stores a set of features.
         +{field} default_value boost::shared_ptr<value>
     }
 
-    note top of  default_value_override
+    note top of default_value_override
 Stores an override for a default value.
     end note
 
@@ -330,7 +330,7 @@ Stores an override for a default value.
     }
 
     entities::value <|-- entities::comma_separated
-    note top of  comma_separated
+    note top of comma_separated
 Represents a CSV input that is split into a collection of text values.
     end note
 
@@ -339,7 +339,7 @@ Represents a CSV input that is split into a collection of text values.
     }
 
     entities::value <|-- entities::comma_separated_collection
-    note top of  comma_separated_collection
+    note top of comma_separated_collection
 Represents a collection of CSV input that is split into a collection of text values.
     end note
 
@@ -373,7 +373,7 @@ namespace helpers #F2F2F2 {
     class instantiation_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  instantiation_exception
+    note top of instantiation_exception
 An error occurred whilst instantiating templates.
     end note
 
@@ -388,7 +388,7 @@ An error occurred whilst instantiating templates.
     class enum_mapping_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  enum_mapping_exception
+    note top of enum_mapping_exception
 An error occurred whilst mapping enums to or from strings.
     end note
 
@@ -398,7 +398,7 @@ An error occurred whilst mapping enums to or from strings.
     class adaption_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  adaption_exception
+    note top of adaption_exception
 An error occurred whilst adapting a model.
     end note
 
@@ -408,7 +408,7 @@ An error occurred whilst adapting a model.
     class merging_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  merging_exception
+    note top of merging_exception
 An error occurred whilst merging.
     end note
 
@@ -439,7 +439,7 @@ namespace transforms #F2F2F2 {
         +{field} tracer boost::shared_ptr<tracing::tracer>
     }
 
-    note top of  context
+    note top of context
 Context for transformations.
     end note
 
@@ -449,7 +449,7 @@ Context for transformations.
     class transformation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  transformation_error
+    note top of transformation_error
 An error occurred whilst applying a transformation.
     end note
 
@@ -472,7 +472,7 @@ Features used by the variability model.
         +{field} profile masd::variability::text
     }
 
-    note top of  profile
+    note top of profile
 Features related to profile processing.
     end note
 

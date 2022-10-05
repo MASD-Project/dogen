@@ -16,7 +16,7 @@ class configuration #F7E5FF {
 
 configuration o-- cli_configuration
 
-note top of  configuration
+note top of configuration
 All of the configuration required by the command line application.
 end note
 
@@ -29,7 +29,7 @@ cli_configuration o-- generation_configuration
 cli_configuration o-- conversion_configuration
 cli_configuration o-- dumpspecs_configuration
 
-note top of  cli_configuration
+note top of cli_configuration
 Configuration specific to the CLI application.
 end note
 
@@ -39,7 +39,7 @@ class generation_configuration <<masd::fluent>> #F7E5FF {
     +{field} output_directory boost::filesystem::path
 }
 
-note top of  generation_configuration
+note top of generation_configuration
 Configuration related to code generation.
 end note
 
@@ -48,7 +48,7 @@ class conversion_configuration <<masd::fluent>> #F7E5FF {
     +{field} destination std::string
 }
 
-note top of  conversion_configuration
+note top of conversion_configuration
 Configuration for the model conversion.
 end note
 
@@ -56,7 +56,7 @@ class dumpspecs_configuration <<masd::fluent>> #F7E5FF {
     +{field} style reporting_style
 }
 
-note top of  dumpspecs_configuration
+note top of dumpspecs_configuration
 Dumps all the specs about this version of dogen.
 end note
 
@@ -71,14 +71,14 @@ class command_line_parser <<dogen::handcrafted::typeable::header_only>> #FFFACD 
 command_line_parser o-- parser_exception: throws
 command_line_parser o-- configuration: creates
 
-note top of  command_line_parser
+note top of command_line_parser
 Interface for a command-line parser of the dogen options.
 end note
 
 class parser_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  parser_exception
+note top of parser_exception
 A fatal error has occurred during option parsing.
 end note
 
@@ -88,14 +88,14 @@ class application <<dogen::handcrafted::typeable>> #FFFACD {
 application o-- application_exception: throws
 application o-- configuration: configured by
 
-note top of  application
+note top of application
 Entry point for the dogen command line application.
 end note
 
 class application_exception <<masd::exception>> #E8C2F8 {
 }
 
-note top of  application_exception
+note top of application_exception
 A fatal error has occurred whilst executing the application.
 end note
 
@@ -103,7 +103,7 @@ class program_options_parser <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 command_line_parser <|-- program_options_parser
-note top of  program_options_parser
+note top of program_options_parser
 Command-line parser implementation using boost program options.
 end note
 

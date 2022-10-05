@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Houses all of the meta-modeling elements related
- * to serialisation.
+ * @brief Houses all of the meta-modeling elements related to serialisation.
  */
 namespace dogen::logical::entities::serialization {
 }

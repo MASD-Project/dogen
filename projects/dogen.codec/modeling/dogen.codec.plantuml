@@ -45,7 +45,7 @@ Not all codecs will make use of all entities.
 
     Taggable <|.. comment
 
-    note top of  Taggable
+    note top of Taggable
 Ability to contain tagged values.
     end note
 
@@ -53,7 +53,7 @@ Ability to contain tagged values.
         +{field} tagged_values_overrides std::list<identification::entities::tagged_value>
     }
 
-    note top of  TaggableOverridable
+    note top of TaggableOverridable
 Ability to contain tagged values.
     end note
 
@@ -61,7 +61,7 @@ Ability to contain tagged values.
         +{field} name identification::entities::name
     }
 
-    note top of  Nameable
+    note top of Nameable
 Ability to have a name.
     end note
 
@@ -72,7 +72,7 @@ Ability to have a name.
     Commentable o-u- comment
     Commentable <|.. object
 
-    note top of  Commentable
+    note top of Commentable
 Has the ability to have an associated comment.
     end note
 
@@ -82,7 +82,7 @@ Has the ability to have an associated comment.
         +{field} documentation std::string
     }
 
-    note top of  comment
+    note top of comment
 Represents a comment block as read out from the codec representation.
     end note
 
@@ -90,7 +90,7 @@ Represents a comment block as read out from the codec representation.
         +{field} stereotypes std::list<identification::entities::stereotype>
     }
 
-    note top of  Stereotypable
+    note top of Stereotypable
 Ability to have stereotypes.
     end note
 
@@ -98,7 +98,7 @@ Ability to have stereotypes.
         +{field} configuration boost::shared_ptr<variability::entities::configuration>
     }
 
-    note top of  Configurable
+    note top of Configurable
 Ability to have meta-data associated.
     end note
 
@@ -106,7 +106,7 @@ Ability to have meta-data associated.
         +{field} provenance identification::entities::codec_provenance
     }
 
-    note top of  DeterminableOrigin
+    note top of DeterminableOrigin
 Properties related to the origin of the modeling element.
     end note
 
@@ -125,7 +125,7 @@ Properties related to the origin of the modeling element.
     entities::DeterminableOrigin <|-- entities::Element
     entities::TaggableOverridable <|-- entities::Element
     entities::Commentable <|-- entities::Element
-    note top of  Element
+    note top of Element
 Consolidates a number of related object templates.
     end note
 
@@ -145,7 +145,7 @@ Consolidates a number of related object templates.
 
     element o-- attribute: composed of
 
-    note top of  element
+    note top of element
 Represents an element from an external model.
     end note
 
@@ -166,7 +166,7 @@ Represents an element from an external model.
 
     object o-- attribute: composed of
 
-    note top of  object
+    note top of object
 Represents an "raw" codec object which may or may not contain a modeling element of interest.
     end note
 
@@ -179,7 +179,7 @@ Represents an "raw" codec object which may or may not contain a modeling element
 
     model o-- element: composed of
 
-    note top of  model
+    note top of model
 Represents an external model.
     end note
 
@@ -197,7 +197,7 @@ Represents an external model.
         +{field} edges_per_model std::unordered_map<std::string, std::list<std::string>>
     }
 
-    note top of  reference_graph_data
+    note top of reference_graph_data
 Contains all the data required to build the graph of references.
     end note
 
@@ -226,7 +226,7 @@ namespace transforms #F2F2F2 {
 
     context_bootstrapping_chain o-- context
 
-    note top of  context_bootstrapping_chain
+    note top of context_bootstrapping_chain
 Trivial transform that bootstraps the codec context.
     end note
 
@@ -240,7 +240,7 @@ Trivial transform that bootstraps the codec context.
     model_set_production_chain o-u- helpers::references_validator: validates references
     model_set_production_chain o-u- helpers::references_resolver: resolves references
 
-    note top of  model_set_production_chain
+    note top of model_set_production_chain
 Produces a codec model set.
 
 This chain loads every model and obtains their model set, and so forth,
@@ -270,7 +270,7 @@ it.
     model_production_chain o-- file_to_artefact_transform
     model_production_chain o-- artefact_to_model_chain
 
-    note top of  model_production_chain
+    note top of model_production_chain
 Given the location of a supported external model, it obtains it and transforms
 it into an codec model.
     end note
@@ -278,14 +278,14 @@ it into an codec model.
     class references_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  references_transform
+    note top of references_transform
 Reads the model references from the annotation.
     end note
 
     class configuration_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  configuration_transform
+    note top of configuration_transform
 Transforms the tagged values as read from the external model into a
 configuration. No profile binding is made at this point, just a type
 transformation into variability types.
@@ -296,7 +296,7 @@ Requires tagged values to have been populated by the decoding codec.
     class input_technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  input_technical_space_transform
+    note top of input_technical_space_transform
 Reads the input technical space from the model.
 
 Annotations transform must have been applied.
@@ -305,7 +305,7 @@ Annotations transform must have been applied.
     class provenance_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  provenance_transform
+    note top of provenance_transform
 Computes the SHA1 hash for a model content and updates the model with this
 value.
     end note
@@ -313,14 +313,14 @@ value.
     class meta_data_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  meta_data_transform
+    note top of meta_data_transform
 Reads assorted meta-data.
     end note
 
     class tagged_values_overrides_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  tagged_values_overrides_transform
+    note top of tagged_values_overrides_transform
 Uses the variability overrides to generate the tagged values overrides for the
 appropriate modeling elements.
     end note
@@ -328,7 +328,7 @@ appropriate modeling elements.
     class file_to_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  file_to_artefact_transform
+    note top of file_to_artefact_transform
 Reads a file at a given path and creates an artefact from it. The file extension
 is used to populate the artefact type.
     end note
@@ -340,7 +340,7 @@ is used to populate the artefact type.
     artefact_to_model_chain o-- json_artefact_to_model_transform
     artefact_to_model_chain o-- dia_artefact_to_model_transform
 
-    note top of  artefact_to_model_chain
+    note top of artefact_to_model_chain
 Applies the codec transform for the supplied artefact, if one exists.
 
 Transforms the external model in whatever supported external representation it
@@ -350,7 +350,7 @@ may be in - Dia, JSON, etc - into the internal representation of a codec model.
     class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  org_artefact_to_model_transform
+    note top of org_artefact_to_model_transform
 Processes the artefact as if encoded as an org-mode document, and converts it
 into an instance of the codec model.
     end note
@@ -358,7 +358,7 @@ into an instance of the codec model.
     class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  json_artefact_to_model_transform
+    note top of json_artefact_to_model_transform
 Processes the artefact as if encoded using JSON, converting it into an instance
 of the codec model.
     end note
@@ -369,7 +369,7 @@ of the codec model.
     dia_artefact_to_model_transform o-- helpers::grapher
     dia_artefact_to_model_transform o-- helpers::visitor
 
-    note top of  dia_artefact_to_model_transform
+    note top of dia_artefact_to_model_transform
 Unidirectional transformation model that transforms a Dia diagram into an codec
 model.
     end note
@@ -379,7 +379,7 @@ model.
 
     model_to_model_chain o-- file_to_file_chain
 
-    note top of  model_to_model_chain
+    note top of model_to_model_chain
 Applies the codec transform for the supplied artefact, if one exists.
 
 Transforms the external model in whatever supported external representation it
@@ -393,7 +393,7 @@ may be in - Dia, JSON, etc - into the internal representation of a codec model.
     file_to_file_chain o-- artefact_to_artefact_chain
     file_to_file_chain o-u- artefact_to_file_transform
 
-    note top of  file_to_file_chain
+    note top of file_to_file_chain
 Converts an external model of a given type into another external model of
 another type in the filesystem.
     end note
@@ -405,7 +405,7 @@ another type in the filesystem.
     artefact_to_artefact_chain o-u- documentation_trimming_transform
     artefact_to_artefact_chain o-- model_to_artefact_chain
 
-    note top of  artefact_to_artefact_chain
+    note top of artefact_to_artefact_chain
 Converts an external model of a given type into another external model of
 another type and writes it to the filesystem.
     end note
@@ -413,14 +413,14 @@ another type and writes it to the filesystem.
     class artefact_to_file_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  artefact_to_file_transform
+    note top of artefact_to_file_transform
 Writes the artefact to the filesystem.
     end note
 
     class documentation_trimming_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  documentation_trimming_transform
+    note top of documentation_trimming_transform
 Removes any leading and trailing whitespace from all the documentation.
     end note
 
@@ -431,21 +431,21 @@ Removes any leading and trailing whitespace from all the documentation.
     model_to_artefact_chain o-- model_to_org_artefact_transform
     model_to_artefact_chain o-- model_to_plantuml_artefact_transform
 
-    note top of  model_to_artefact_chain
+    note top of model_to_artefact_chain
 Transforms the supplied codec model into an artefact encoded using JSON.
     end note
 
     class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  model_to_json_artefact_transform
+    note top of model_to_json_artefact_transform
 Transforms the supplied codec model into an artefact encoded using JSON.
     end note
 
     class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  model_to_org_artefact_transform
+    note top of model_to_org_artefact_transform
 Processes the artefact as if encoded as a org-mode document, converting it into
 an instance of the codec model.
     end note
@@ -453,7 +453,7 @@ an instance of the codec model.
     class model_to_plantuml_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    note top of  model_to_plantuml_artefact_transform
+    note top of model_to_plantuml_artefact_transform
 Transforms a codec model into an artefact in PlantUML syntax.
     end note
 
@@ -465,14 +465,14 @@ namespace helpers #F2F2F2 {
 
     references_validator o-- reference_validation_error
 
-    note top of  references_validator
+    note top of references_validator
 Checks that there are no cycles in the references graph.
     end note
 
     class reference_validation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  reference_validation_error
+    note top of reference_validation_error
 A cycle was detected in the references graph.
     end note
 
@@ -481,7 +481,7 @@ A cycle was detected in the references graph.
 
     references_resolver o-- reference_resolution_exception
 
-    note top of  references_resolver
+    note top of references_resolver
 Trivial struct that records all the data we need for our little DFS excursion.
     end note
 
@@ -493,7 +493,7 @@ Trivial struct that records all the data we need for our little DFS excursion.
 
     building o-- building_error
 
-    note top of  builder
+    note top of builder
 Builds a codec model from objects.
     end note
 
@@ -510,14 +510,14 @@ Builds a codec model from objects.
 
     grapher o-- graphing_error
 
-    note top of  grapher
+    note top of grapher
 Graph of dependencies between objects.
     end note
 
     class graphing_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  graphing_error
+    note top of graphing_error
 An error has occurred while building the dia object graph.
     end note
 
@@ -526,14 +526,14 @@ An error has occurred while building the dia object graph.
 
     dia_to_codec_projector o-- projection_error
 
-    note top of  dia_to_codec_projector
+    note top of dia_to_codec_projector
 Projects dia objects into the codec space.
     end note
 
     class projection_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  projection_error
+    note top of projection_error
 An error occurred whilst projecting elements from one space to another.
     end note
 
@@ -542,14 +542,14 @@ An error occurred whilst projecting elements from one space to another.
 
     object_to_element_adapter o-- adaptation_error
 
-    note top of  object_to_element_adapter
+    note top of object_to_element_adapter
 Adapts objects into elements.
     end note
 
     class adaptation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  adaptation_error
+    note top of adaptation_error
 A fatal error has occurred while adapting an object into an element.
     end note
 
@@ -564,7 +564,7 @@ Defines all of the features and feature groups used by the codec model.
         +{field} input_technical_space masd::variability::text
     }
 
-    note top of  input_technical_space
+    note top of input_technical_space
 Feature bundle for the input technical space.
     end note
 
@@ -572,7 +572,7 @@ Feature bundle for the input technical space.
         +{field} reference masd::variability::text_collection
     }
 
-    note top of  reference
+    note top of reference
 Features related to model referencing.
     end note
 
@@ -583,7 +583,7 @@ Features related to model referencing.
         +{field} dia.comment masd::variability::boolean
     }
 
-    note top of  uml
+    note top of uml
 Features related to all UML injectors.
     end note
 
@@ -605,7 +605,7 @@ Features related to all UML injectors.
         +{field} plantuml masd::variability::text_collection
     }
 
-    note top of  meta_data
+    note top of meta_data
 Assorted meta-data.
     end note
 

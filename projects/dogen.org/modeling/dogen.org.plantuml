@@ -40,7 +40,7 @@ Represents entities from Emacs' org-mode.
         +{field} todo_keyword todo_keyword
     }
 
-    note top of  headline
+    note top of headline
 Represents a headline in org mode.
 
 Headlines and Sections
@@ -137,7 +137,7 @@ namespace transforms #F2F2F2 {
     class transformation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  transformation_error
+    note top of transformation_error
 An error occurred whilst transforming.
     end note
 
@@ -150,7 +150,7 @@ namespace helpers #F2F2F2 {
     class parsing_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  parsing_error
+    note top of parsing_error
 An error ocurred whilst parsing an org-mode document.
     end note
 
@@ -166,7 +166,7 @@ An error ocurred whilst parsing an org-mode document.
     class building_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  building_error
+    note top of building_error
 An error occurred whilst building.
     end note
 

@@ -13,7 +13,7 @@ namespace wale #F2F2F2 {
         +{field} content std::string
     }
 
-    note top of  text_template
+    note top of text_template
 Represents a wale text template.
     end note
 
@@ -29,14 +29,14 @@ Represents a wale text template.
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  formatting_error
+    note top of formatting_error
 An error occurred whilst formatting.
     end note
 
     class extraction_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  extraction_error
+    note top of extraction_error
 An error occurred whilst extracting a key.
     end note
 
@@ -56,7 +56,7 @@ namespace stitch #F2F2F2 {
         +{field} body text_template_body
     }
 
-    note top of  text_template
+    note top of text_template
 Domain representation of a stitch template.
     end note
 
@@ -66,14 +66,14 @@ Domain representation of a stitch template.
     class parsing_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  parsing_error
+    note top of parsing_error
 An error occurred whilst parsing.
     end note
 
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  formatting_error
+    note top of formatting_error
 An error occurred whilst formatting.
     end note
 
@@ -116,7 +116,7 @@ An error occurred whilst formatting.
         +{field} wale.kvp masd::variability::key_value_pair
     }
 
-    note top of  features
+    note top of features
 Stitch templating features.
     end note
 
@@ -127,7 +127,7 @@ class ConfigurableViaKvps <<masd::object_template>> #E3B6F6 {
     +{field} supplied_kvps std::unordered_map<std::string, std::string>
 }
 
-note top of  ConfigurableViaKvps
+note top of ConfigurableViaKvps
 Element has the ability to recieve configuration arguments as a set of KVPs.
 end note
 
@@ -138,7 +138,7 @@ namespace helpers #F2F2F2 {
     class validation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  validation_error
+    note top of validation_error
 An error occurred with the supplied KVPs.
     end note
 
@@ -148,7 +148,7 @@ An error occurred with the supplied KVPs.
     class resolution_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  resolution_error
+    note top of resolution_error
 An error occurred when trying to resolve a key.
     end note
 

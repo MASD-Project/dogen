@@ -217,7 +217,8 @@ stereotype_to_colour(const std::string& stereotypes, const bool is_module) {
 
 void model_to_plantuml_artefact_transform::walk_parent_to_child(
     std::ostream& os, const unsigned int level,
-    const std::string& id, const std::unordered_map<std::string,
+    const std::string& id, const std::string& path,
+    const std::unordered_map<std::string,
     std::list<entities::element>>& parent_to_child_map) {
     BOOST_LOG_SEV(lg, debug) << "Processing ID: '" << id << "'";
 
@@ -244,7 +245,7 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
             if (boost::contains(sts, masd_enumeration))
                 os << indent << "enum ";
             else if (e.fallback_element_type() == masd_module)
-                os << indent << "namespace ";
+                os << indent << "namespace " << path;
             else
                 os << indent << "class ";
             os << e.name().simple();
@@ -287,7 +288,9 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                 BOOST_THROW_EXCEPTION(
                     transformation_error(empty_id + e.name().qualified()));
             }
-            walk_parent_to_child(os, level + 1, inner_id, map);
+
+            const std::string inner_path(path + e.name().simple() + "::");
+            walk_parent_to_child(os, level + 1, inner_id, inner_path, map);
 
             os << indent << "}" << std::endl << std::endl;
 
@@ -313,7 +316,7 @@ void model_to_plantuml_artefact_transform::walk_parent_to_child(
                  * uses the commentary verbatim, resulting in weird spacing if
                  * we indent.
                  */
-                os << indent << "note top of  " << e.name().simple() << std::endl
+                os << indent << "note top of " << e.name().simple() << std::endl
                    << e.comment().documentation() << std::endl
                    << indent << "end note" << std::endl << std::endl;
             }
@@ -350,7 +353,7 @@ apply(const transforms::context& ctx, const boost::filesystem::path& p,
         n.push_back(e);
     }
 
-    walk_parent_to_child(os, 0, empty, parent_to_child_map);
+    walk_parent_to_child(os, 0, empty, empty, parent_to_child_map);
 
     os << "@enduml" << std::endl;
 

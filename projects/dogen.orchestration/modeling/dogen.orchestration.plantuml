@@ -31,7 +31,7 @@ the entry points to all transformations.
     class factory_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  factory_exception
+    note top of factory_exception
 An error occurred in the factory whilst making.
     end note
 
@@ -90,7 +90,7 @@ Helpers for the orchestration model.
     class projection_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  projection_error
+    note top of projection_error
 An error occurred whilst projecting elements from one space into another.
     end note
 
@@ -112,7 +112,7 @@ Features for the orchestration model.
         +{field} model_modules masd::variability::text
     }
 
-    note top of  model_location
+    note top of model_location
 Feature group for model location related features.
     end note
 

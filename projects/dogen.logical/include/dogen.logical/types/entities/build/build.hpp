@@ -26,9 +26,8 @@
 #endif
 
 /**
- * @brief Houses all of the meta-modeling elements related
- * to building, which don't have their own containing
- * namespace.
+ * @brief Houses all of the meta-modeling elements related to building, which don't have
+ * their own containing namespace.
  */
 namespace dogen::logical::entities::build {
 }

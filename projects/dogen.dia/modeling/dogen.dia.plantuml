@@ -22,7 +22,7 @@ editor.
     diagram o-- layer: composed of
     diagram o-- diagram_data: meta-data
 
-    note top of  diagram
+    note top of diagram
 Represents a diagram in Dia.
     end note
 
@@ -35,7 +35,7 @@ Represents a diagram in Dia.
 
     layer o-- object: composed of
 
-    note top of  layer
+    note top of layer
 Represents a layer in a Dia diagram.
     end note
 
@@ -45,7 +45,7 @@ Represents a layer in a Dia diagram.
 
     diagram_data o-- attribute
 
-    note top of  diagram_data
+    note top of diagram_data
 Represents a all the data associated with a diagram.
     end note
 
@@ -62,7 +62,7 @@ Represents a all the data associated with a diagram.
     object o-u- child_node
     object o-- attribute
 
-    note top of  object
+    note top of object
 Represents a Dia object.
     end note
 
@@ -72,7 +72,7 @@ Represents a Dia object.
         +{field} connection_slot std::string
     }
 
-    note top of  connection
+    note top of connection
 Connection between entities in a Dia diagram.
     end note
 
@@ -80,7 +80,7 @@ Connection between entities in a Dia diagram.
         +{field} parent std::string
     }
 
-    note top of  child_node
+    note top of child_node
 Represents a child_node in a diagram.
 
 Child nodes are used in Dia to represent the relationship between a package and the entities it contains.
@@ -104,7 +104,7 @@ pointing to O0.
     attribute o-- string
     attribute o-- rectangle
 
-    note top of  attribute
+    note top of attribute
 Attribute in a Dia diagram.
     end note
 
@@ -117,7 +117,7 @@ Attribute in a Dia diagram.
     composite o-- attribute
     composite o-- composite: recursive
 
-    note top of  composite
+    note top of composite
 Attribute value which is made up of other attributes.
     end note
 
@@ -127,7 +127,7 @@ Attribute value which is made up of other attributes.
         +{field} name std::string
     }
 
-    note top of  font
+    note top of font
 Represents a font in a diagram.
     end note
 
@@ -135,7 +135,7 @@ Represents a font in a diagram.
         +{field} value std::string
     }
 
-    note top of  color
+    note top of color
 Represents a color in a diagram.
     end note
 
@@ -143,7 +143,7 @@ Represents a color in a diagram.
         +{field} value std::string
     }
 
-    note top of  real
+    note top of real
 Represents a real value.
     end note
 
@@ -151,7 +151,7 @@ Represents a real value.
         +{field} value std::string
     }
 
-    note top of  integer
+    note top of integer
 Represents an integer value.
     end note
 
@@ -159,7 +159,7 @@ Represents an integer value.
         +{field} value std::string
     }
 
-    note top of  boolean
+    note top of boolean
 Represents a boolean value.
     end note
 
@@ -167,7 +167,7 @@ Represents a boolean value.
         +{field} value std::string
     }
 
-    note top of  point
+    note top of point
 Represents a point in a diagram.
     end note
 
@@ -175,7 +175,7 @@ Represents a point in a diagram.
         +{field} value std::string
     }
 
-    note top of  enumeration
+    note top of enumeration
 Represents a enumeration in a diagram.
     end note
 
@@ -183,7 +183,7 @@ Represents a enumeration in a diagram.
         +{field} value std::string
     }
 
-    note top of  string
+    note top of string
 Represents a string value.
     end note
 
@@ -191,7 +191,7 @@ Represents a string value.
         +{field} value std::string
     }
 
-    note top of  rectangle
+    note top of rectangle
 Represents a rectangle in a diagram.
     end note
 
@@ -207,7 +207,7 @@ namespace transforms #F2F2F2 {
     class transformation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  transformation_error
+    note top of transformation_error
 An error occurred whilst applying a transformation.
     end note
 

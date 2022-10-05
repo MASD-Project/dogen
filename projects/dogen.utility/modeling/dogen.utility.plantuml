@@ -24,14 +24,14 @@ namespace filesystem #F2F2F2 {
     class file_not_found <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  file_not_found
+    note top of file_not_found
 File was not found.
     end note
 
     class io_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  io_error
+    note top of io_error
 An error occurred whilst performing an IO operation.
     end note
 
@@ -117,14 +117,14 @@ namespace log #F2F2F2 {
         +{field} output_directory boost::filesystem::path
     }
 
-    note top of  logging_configuration
+    note top of logging_configuration
 Options related to logging.
     end note
 
     class invalid_logging_configuration <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  invalid_logging_configuration
+    note top of invalid_logging_configuration
 The values supplied for the logging configuration are not valid.
     end note
 
@@ -224,7 +224,7 @@ namespace test_data #F2F2F2 {
     class test_data_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  test_data_exception
+    note top of test_data_exception
 An error occurred whilst obtaining the test data.
     end note
 
@@ -255,7 +255,7 @@ namespace environment #F2F2F2 {
     class environment_exception <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  environment_exception
+    note top of environment_exception
 There was an error reading an environment variable.
     end note
 
@@ -274,7 +274,7 @@ model.
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  formatting_error
+    note top of formatting_error
 An error has occurred while formatting.
     end note
 
@@ -283,7 +283,7 @@ An error has occurred while formatting.
         +{field} double_quote
     }
 
-    note top of  quote_type
+    note top of quote_type
 Types of quotes that can be used in streaming.
     end note
 
@@ -309,7 +309,7 @@ Types of quotes that can be used in streaming.
         +{field} xml_style
     }
 
-    note top of  comment_style
+    note top of comment_style
 Supported styles of comments.
     end note
 
@@ -326,7 +326,7 @@ Supported styles of comments.
         +{field} last std::string
     }
 
-    note top of  infix_configuration
+    note top of infix_configuration
 Configuration to use for a given infix in sequence formatter.
     end note
 

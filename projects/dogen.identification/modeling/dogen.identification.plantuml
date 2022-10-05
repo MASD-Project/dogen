@@ -27,21 +27,21 @@ Stores all of the entities related to identification of Dogen elements.
     codec_provenance o-- model_id
     codec_provenance o-- model_type
 
-    note top of  codec_provenance
+    note top of codec_provenance
 Source of a model element in the codec dimension.
     end note
 
     class codec_id <<masd::primitive>> #EDCEFB {
     }
 
-    note top of  codec_id
+    note top of codec_id
 ID of the elment as sourced from the codec model, if any.
     end note
 
     class sha1_hash <<masd::primitive>> #EDCEFB {
     }
 
-    note top of  sha1_hash
+    note top of sha1_hash
 Stores a SHA1 hash.
     end note
 
@@ -50,14 +50,14 @@ Stores a SHA1 hash.
         +{field} line long
     }
 
-    note top of  codec_location
+    note top of codec_location
 Location of a modeling element in the codec dimension.
     end note
 
     class model_id <<masd::primitive>> #EDCEFB {
     }
 
-    note top of  model_id
+    note top of model_id
 ID for a model.
     end note
 
@@ -68,7 +68,7 @@ ID for a model.
         +{field} not_yet_determined
     }
 
-    note top of  model_type
+    note top of model_type
 Types of models with regards to the current generation taking place.
     end note
 
@@ -82,7 +82,7 @@ Types of models with regards to the current generation taking place.
     logical_provenance o-- logical_name
     logical_provenance o-- logical_meta_name
 
-    note top of  logical_provenance
+    note top of logical_provenance
 Source of a model element in the logical dimension.
     end note
 
@@ -90,14 +90,14 @@ Source of a model element in the logical dimension.
         +{field} qualified std::string
     }
 
-    note top of  name
+    note top of name
 General name for modeling elements which do not need any specialisation.
     end note
 
     class logical_id <<masd::primitive, dogen::hashable>> #EDCEFB {
     }
 
-    note top of  logical_id
+    note top of logical_id
 ID of the elment in the logical dimension.
     end note
 
@@ -110,7 +110,7 @@ ID of the elment in the logical dimension.
     logical_name o-- logical_id
     logical_name o-- logical_location
 
-    note top of  logical_name
+    note top of logical_name
 Name of an element in logical space.
 
 A name represents a point or a region in logical space, and this point or region
@@ -133,7 +133,7 @@ naming files, etc).
         +{field} element std::string
     }
 
-    note top of  logical_location
+    note top of logical_location
 Identifies a hierarchy of containment within the logical space.
     end note
 
@@ -148,7 +148,7 @@ Identifies a hierarchy of containment within the logical space.
 
     logical_name_tree o-- logical_name
 
-    note top of  logical_name_tree
+    note top of logical_name_tree
 Adds support for name composition as a tree-like structure.
 
 A logical name tree has the responsibility of representing an instantiation of a
@@ -160,14 +160,14 @@ type, in which case only the parent name is populated and there are no children.
     class physical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
     }
 
-    note top of  physical_meta_id
+    note top of physical_meta_id
 ID of the meta-element in the physical dimension.
     end note
 
     class logical_meta_id <<masd::primitive, dogen::hashable>> #EDCEFB {
     }
 
-    note top of  logical_meta_id
+    note top of logical_meta_id
 ID for a logical meta-element.
     end note
 
@@ -179,7 +179,7 @@ ID for a logical meta-element.
     logical_meta_physical_id o-- logical_id
     logical_meta_physical_id o-- physical_meta_id
 
-    note top of  logical_meta_physical_id
+    note top of logical_meta_physical_id
 ID in the logical-physical space.
     end note
 
@@ -190,7 +190,7 @@ ID in the logical-physical space.
 
     physical_meta_name o-- physical_meta_id
 
-    note top of  physical_meta_name
+    note top of physical_meta_name
 Name of an element in physical space.
 
 A name represents a point or a region in physical space. It can only be used by
@@ -211,7 +211,7 @@ space can only have one and only one name.
 
     physical_meta_location o-- physical_meta_name
 
-    note top of  physical_meta_location
+    note top of physical_meta_location
 Location of an entity or set of entities in the physical meta-model.
 
 These must be populated in order, e.g. in order to have a backend we must have a
@@ -240,7 +240,7 @@ a formatter we must have a facet. We may not have any.
 
     physical_meta_name_indices o-- archetype_name_set
 
-    note top of  physical_meta_name_indices
+    note top of physical_meta_name_indices
 Containing physical meta-names, indexed as required by use cases.
     end note
 
@@ -250,7 +250,7 @@ Containing physical meta-names, indexed as required by use cases.
 
     physical_name o-- physical_id
 
-    note top of  physical_name
+    note top of physical_name
 Name of a physical model element.
     end note
 
@@ -259,7 +259,7 @@ Name of a physical model element.
         +{field} value std::string
     }
 
-    note top of  label
+    note top of label
 A label is a key-value pair that can be used by the processing engine in a flexible way.
     end note
 
@@ -268,7 +268,7 @@ A label is a key-value pair that can be used by the processing engine in a flexi
         +{field} value std::string
     }
 
-    note top of  tagged_value
+    note top of tagged_value
 Represents a tagged value in a similar spirit to UMLs.
     end note
 
@@ -278,7 +278,7 @@ Represents a tagged value in a similar spirit to UMLs.
         +{field} identifiable std::string
     }
 
-    note top of  qualified_representations
+    note top of qualified_representations
 All available qualified representations of a name.
     end note
 
@@ -297,7 +297,7 @@ All available qualified representations of a name.
         +{field} mustache
     }
 
-    note top of  technical_space
+    note top of technical_space
 Models need to declare upfront the technical space they will target.
     end note
 
@@ -310,7 +310,7 @@ Models need to declare upfront the technical space they will target.
     Nameable <|-- physical_meta_name
     Nameable <|-- logical_name
 
-    note top of  Nameable
+    note top of Nameable
 Ability to have a name.
     end note
 
@@ -322,21 +322,21 @@ Ability to have a name.
     QualifiedRepresentations <|-- logical_name
     QualifiedRepresentations <|-- logical_name_tree
 
-    note top of  QualifiedRepresentations
+    note top of QualifiedRepresentations
 Name with multiple qualified representations.
     end note
 
     class physical_id <<masd::primitive>> #EDCEFB {
     }
 
-    note top of  physical_id
+    note top of physical_id
 ID for a physical element.
     end note
 
     class stereotype <<masd::primitive>> #EDCEFB {
     }
 
-    note top of  stereotype
+    note top of stereotype
 Stereotype.
     end note
 
@@ -347,7 +347,7 @@ Stereotype.
         +{field} cpp_17
     }
 
-    note top of  technical_space_version
+    note top of technical_space_version
 Version of the technical space to use.
     end note
 
@@ -376,7 +376,7 @@ Assorted helpers used to construct domain entities.
     class building_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  building_error
+    note top of building_error
 An error occurred whilst building.
     end note
 
@@ -400,7 +400,7 @@ An error occurred whilst building.
     class printing_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  printing_error
+    note top of printing_error
 An error occurred whilst pretty printing.
     end note
 
@@ -410,7 +410,7 @@ An error occurred whilst pretty printing.
         +{field} dots
     }
 
-    note top of  separators
+    note top of separators
 Available separators to be used by the pretty printer.
     end note
 
@@ -422,7 +422,7 @@ Available separators to be used by the pretty printer.
     class flattening_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  flattening_error
+    note top of flattening_error
 An error occurred whilst flattening a name.
     end note
 
@@ -447,7 +447,7 @@ An error occurred whilst flattening a name.
     class validation_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  validation_error
+    note top of validation_error
 An error occurred during validation.
     end note
 
@@ -481,7 +481,7 @@ An error occurred during validation.
         +{field} children std::list<boost::shared_ptr<node>>
     }
 
-    note top of  node
+    note top of node
 Node in a tree of logical names.
 
 Temporary data structure used to build trees of logical names.
@@ -490,7 +490,7 @@ Temporary data structure used to build trees of logical names.
     class parsing_error <<masd::exception>> #E8C2F8 {
     }
 
-    note top of  parsing_error
+    note top of parsing_error
 A fatal error has occurred while parsing.
     end note
 
