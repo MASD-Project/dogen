@@ -17401,29 +17401,6 @@ terms of development. The idea is that you can =git clone= the repo
 and then =vagrant up= it and you would be ready to start coding. This
 would make drive-by patches much easier.
 
-*** Use clang format to format the code base                          :story:
-
-It seems clang-format is being used by quite a lot of people to save
-time with the formatting of the code. More info:
-
-http://clang.llvm.org/docs/ClangFormat.html
-
-Emacs support:
-
-https://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format/clang-format.el
-
-Links:
-
-- [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-format][HPX clang format]]
-- [[https://engineering.mongodb.com/post/succeeding-with-clangformat-part-1-pitfalls-and-planning][Succeeding With ClangFormat, Part 1: Pitfalls And Planning]]
-- [[https://github.com/basiliscos/cpp-rotor/blob/master/.clang-format][example: clang format in rotor]]
-- [[https://github.com/jbapple-cloudera/clang-format-infer][clang-format-infer GH]]
-- [[https://zed0.co.uk/clang-format-configurator/][clang-format-configurator]]
-- http://clangformat.com/
-- [[https://github.com/johnmcfarlane/unformat][Unformat]]: Python3 utility to generate a .clang-format file from
-  example code-base.
-- [[https://www.reddit.com/r/cpp/comments/pnli5r/cc_precommit_hooks_for_static_analyzers_and/][C/C++ pre-commit hooks for static analyzers and linters]]
-
 *** Consider adding an emblem for clang's analysis checks             :story:
 
 NeoVim appears to have emblems for waffle as well as clang's analysis
@@ -17460,28 +17437,6 @@ We should consider hosting the documentation here:
 - https://readthedocs.org/
 
 This probably means we need to move to Mark Down.
-
-*** Consider adding support for clang-tidy                            :story:
-
-As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
-
-#+begin_quote
-clang-tidy is a clang-based C++ “linter” tool. Its purpose is to
-provide an extensible framework for diagnosing and fixing typical
-programming errors, like style violations, interface misuse, or bugs
-that can be deduced via static analysis. clang-tidy is modular and
-provides a convenient interface for writing new checks.
-#+end_quote
-
-As with clang-format, we should create a meta-model element to
-generate this file.
-
-See also:
-
-- [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
-- [[https://www.kdab.com/clang-tidy-part-1-modernize-source-code-using-c11c14/?utm_source%3DMaster%2520List%252006-16&utm_campaign%3Dd11fea20e3-EMAIL_CAMPAIGN_2017_03_23&utm_medium%3Demail&utm_term%3D0_bdde4cdc11-d11fea20e3-101553725&goal%3D0_bdde4cdc11-d11fea20e3-101553725][Clang-Tidy, part 1: Modernize your source code using C++11/C++14]]
-- [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-tidy][hpx clang tidy file]]
-- [[https://github.com/lballabio/QuantLib/pull/1369][Split .clang-tidy into one for fixes and one for checks #1369]]
 
 *** Add support for the =scan-build= static analyser                  :story:
 
