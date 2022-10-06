@@ -396,6 +396,28 @@ Has the ability to contain other elements.
         +{field} masd.generalization.parent
     }
 
+    class helper_properties #F7E5FF {
+        +{field} current helper_descriptor
+        +{field} direct_descendants std::list<helper_descriptor>
+        +{field} in_inheritance_relationship bool
+    }
+
+    helper_properties o-- helper_descriptor
+
+    class helper_descriptor #F7E5FF {
+        +{field} family std::string
+        +{field} namespaces std::list<std::string>
+        +{field} name_identifiable std::string
+        +{field} name_qualified std::string
+        +{field} name_tree_qualified std::string
+        +{field} name_tree_identifiable std::string
+        +{field} streaming_properties boost::optional<streaming_properties>
+        +{field} is_simple_type bool
+        +{field} requires_hashing_helper bool
+        +{field} is_circular_dependency bool
+        +{field} is_pointer bool
+    }
+
     namespace entities::build #F2F2F2 {
         note as build_1
 Houses all of the meta-modeling elements related to building, which don't have
@@ -626,18 +648,23 @@ Model element can belong to a relational database schema.
 Houses all of the meta-modeling elements and properties related to decorations.
         end note
 
-        class licence <<logical::meta_element>> #F7E5FF {
-            +{field} short_form std::string
-            +{field} long_form std::string
+        class element_repository #F7E5FF {
+            +{field} modeline_groups std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
+            +{field} modelines std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
+            +{field} licences std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
+            +{field} generation_markers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
         }
 
-        note top of licence
-Represents legal licence for software projects.
-        end note
+        element_repository o-- modeline_group
+        element_repository o-- modeline
+        element_repository o-u- licence
+        element_repository o-u- generation_marker
 
         class modeline_group <<logical::meta_element, Container>> #F7E5FF {
             +{field} modelines std::list<boost::shared_ptr<modeline>>
         }
+
+        modeline_group o-- modeline
 
         note top of modeline_group
 Group of modelines, logically associated.
@@ -653,18 +680,38 @@ etc.
             +{field} technical_space identification::entities::technical_space
         }
 
+        modeline o-- editor
+        modeline o-- modeline_location
+        modeline o-- modeline_field
+
         note top of modeline
 Groups all the fields representing editor variables for emacs, vi, etc.
 
 A field is a key-value pair (KVP), where name is the first element and its value
 the second.
 
-Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+Example:
+
+: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 
 In this particular case, both prefix and postfix are "-*-"; mode is the first
 field name and its value is c++; the KVP separator is ":" and the field
 separator is ";".
         end note
+
+        enum modeline_location <<masd::enumeration, dogen::convertible>> #F2DAFD {
+            +{field} top
+            +{field} bottom
+        }
+
+        note top of modeline_location
+Location in the file to place the modeline.
+        end note
+
+        class modeline_field #F7E5FF {
+            +{field} name std::string
+            +{field} value std::string
+        }
 
         enum editor <<masd::enumeration, dogen::convertible>> #F2DAFD {
             +{field} emacs
@@ -677,18 +724,13 @@ separator is ";".
 Supported editors for modelines.
         end note
 
-        class modeline_field #F7E5FF {
-            +{field} name std::string
-            +{field} value std::string
+        class licence <<logical::meta_element>> #F7E5FF {
+            +{field} short_form std::string
+            +{field} long_form std::string
         }
 
-        enum modeline_location <<masd::enumeration, dogen::convertible>> #F2DAFD {
-            +{field} top
-            +{field} bottom
-        }
-
-        note top of modeline_location
-Location in the file to place the modeline.
+        note top of licence
+Represents legal licence for software projects.
         end note
 
         class generation_marker <<logical::meta_element>> #F7E5FF {
@@ -714,13 +756,6 @@ These are also known as "location strings".
         note top of element_properties
 Decoration for this element.
         end note
-
-        class element_repository #F7E5FF {
-            +{field} modeline_groups std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
-            +{field} modelines std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
-            +{field} licences std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
-            +{field} generation_markers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
-        }
 
     }
 
@@ -1110,22 +1145,27 @@ General type to provide helpers.
 Meta-model elements related to mapping domains.
         end note
 
-        class extensible_mappable <<logical::meta_element>> #F7E5FF {
-            +{field} destinations std::list<destination>
-        }
-
-        note top of extensible_mappable
-A mappable meta-model element for the general purpose of mapping.
-
-Mappables can be used to create a Platform Independent Model (PIM), which is then
-mapped to concrete types to form a Platform Specific Model (PSM). Users can
-extend the mappings as required.
-        end note
-
         class element_repository #F7E5FF {
             +{field} extensible_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
             +{field} fixed_mappables std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
         }
+
+        element_repository o-- extensible_mappable
+        element_repository o-- fixed_mappable
+
+        class extensible_mappable <<logical::meta_element>> #F7E5FF {
+            +{field} destinations std::list<destination>
+        }
+
+        extensible_mappable o-- destination
+
+        note top of extensible_mappable
+A mappable meta-model element for the general purpose of mapping.
+
+Mappables can be used to create a Platform Independent Model (PIM), which is
+then mapped to concrete types to form a Platform Specific Model (PSM). Users can
+extend the mappings as required.
+        end note
 
         class destination #F7E5FF {
             +{field} name identification::entities::logical_name
@@ -1147,19 +1187,16 @@ variability types.
 
     namespace entities::visual_studio #F2F2F2 {
         note as visual_studio_1
-Houses meta-model elements related to
-build systems.
+Houses meta-model elements related to build systems.
         end note
 
-        class project <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
-            +{field} type_guid std::string
-            +{field} item_groups std::list<item_group>
-            +{field} project_name std::string
+        class UniquelyIdentifiable <<masd::object_template>> #E3B6F6 {
+            +{field} guid std::string
         }
 
-        note top of project
-Represents a Visual Studio project.
-        end note
+        UniquelyIdentifiable <|.. solution
+        UniquelyIdentifiable <|.. project
+        UniquelyIdentifiable <|.. project_persistence_block
 
         class element_repository #F7E5FF {
             +{field} solutions std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
@@ -1167,9 +1204,33 @@ Represents a Visual Studio project.
             +{field} msbuild_targets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
         }
 
+        element_repository o-u- solution
+        element_repository o-u- project
+        element_repository o-- msbuild_targets
+
+        class solution <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
+            +{field} project_persistence_blocks std::list<project_persistence_block>
+        }
+
+        solution o-- project_persistence_block
+
+        class project <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
+            +{field} type_guid std::string
+            +{field} item_groups std::list<item_group>
+            +{field} project_name std::string
+        }
+
+        project o-- item_group
+
+        note top of project
+Represents a Visual Studio project.
+        end note
+
         class item_group #F7E5FF {
             +{field} items std::list<item>
         }
+
+        item_group o-- item
 
         note top of item_group
 Represents an MSBuild ItemGroup.
@@ -1190,18 +1251,10 @@ Documentation:  Contains a user-defined item and its metadata. Every item that i
 used in a MSBuild project must be specified as a child of an ItemGroup element.
         end note
 
-        class solution <<logical::meta_element, UniquelyIdentifiable>> #F7E5FF {
-            +{field} project_persistence_blocks std::list<project_persistence_block>
-        }
-
         class project_persistence_block <<UniquelyIdentifiable>> #F7E5FF {
             +{field} name std::string
             +{field} relative_path boost::filesystem::path
             +{field} type_guid std::string
-        }
-
-        class UniquelyIdentifiable <<masd::object_template>> #E3B6F6 {
-            +{field} guid std::string
         }
 
         class msbuild_targets <<logical::meta_element>> #F7E5FF {
@@ -1215,6 +1268,33 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.
 Logical representation of elements in the physical dimension.
         end note
 
+        class PhysicalElement <<masd::object_template>> #E3B6F6 {
+            +{field} id std::string
+            +{field} major_technical_space identification::entities::technical_space
+            +{field} meta_model_name std::string
+            +{field} backend_name std::string
+        }
+
+        PhysicalElement <|.. archetype
+        PhysicalElement <|.. part
+        PhysicalElement <|.. facet
+        PhysicalElement <|.. backend
+        PhysicalElement <|.. helper
+
+        class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
+            +{field} technical_space std::string
+        }
+
+        HasTechnicalSpace <|.. archetype
+        HasTechnicalSpace <|.. backend
+
+        class Urnable <<masd::object_template>> #E3B6F6 {
+            +{field} original_urn std::string
+        }
+
+        Urnable <|.. variable_relation
+        Urnable <|.. constant_relation
+
         class element_repository #F7E5FF {
             +{field} backends std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
             +{field} facets std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
@@ -1223,6 +1303,13 @@ Logical representation of elements in the physical dimension.
             +{field} archetype_kinds std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
             +{field} helpers std::unordered_map<identification::entities::logical_id, boost::shared_ptr<helper>>
         }
+
+        element_repository o-u- backend
+        element_repository o-u- facet
+        element_repository o-u- archetype
+        element_repository o-u- part
+        element_repository o-- archetype_kind
+        element_repository o-- helper
 
         class archetype <<logical::meta_element, PhysicalElement, HasTechnicalSpace>> #F7E5FF {
             +{field} facet_name std::string
@@ -1233,9 +1320,48 @@ Logical representation of elements in the physical dimension.
             +{field} postfix std::string
         }
 
+        archetype o-- text_templating
+
         note top of archetype
 Represents an archetype within a facet.
         end note
+
+        class text_templating <<Configurable>> #F7E5FF {
+            +{field} stitch_template_content std::string
+            +{field} wale_template boost::optional<identification::entities::logical_name>
+            +{field} wale_template_content std::string
+            +{field} rendered_stitch_template std::string
+            +{field} relations relations
+        }
+
+        text_templating o-- relations
+
+        note top of text_templating
+Contains all the properties related to the generation of archetypes themselves.
+        end note
+
+        class relations #F7E5FF {
+            +{field} status std::string
+            +{field} constant std::list<constant_relation>
+            +{field} variable std::list<variable_relation>
+            +{field} hard_coded std::list<hard_coded_relation>
+        }
+
+        relations o-- constant_relation
+        relations o-- variable_relation
+        relations o-- hard_coded_relation
+
+        class variable_relation <<Urnable>> #F7E5FF {
+            +{field} type std::string
+        }
+
+        class constant_relation <<Urnable, Labelable>> #F7E5FF {
+            +{field} logical_model_element_id std::string
+        }
+
+        class hard_coded_relation #F7E5FF {
+            +{field} value std::string
+        }
 
         class backend <<logical::meta_element, PhysicalElement, Container, HasTechnicalSpace>> #F7E5FF {
             +{field} facets std::list<identification::entities::logical_name>
@@ -1277,52 +1403,6 @@ Part whithin a backend.
             +{field} file_extension std::string
         }
 
-        class PhysicalElement <<masd::object_template>> #E3B6F6 {
-            +{field} id std::string
-            +{field} major_technical_space identification::entities::technical_space
-            +{field} meta_model_name std::string
-            +{field} backend_name std::string
-        }
-
-        class variable_relation <<Urnable>> #F7E5FF {
-            +{field} type std::string
-        }
-
-        class constant_relation <<Urnable, Labelable>> #F7E5FF {
-            +{field} logical_model_element_id std::string
-        }
-
-        class Urnable <<masd::object_template>> #E3B6F6 {
-            +{field} original_urn std::string
-        }
-
-        class hard_coded_relation #F7E5FF {
-            +{field} value std::string
-        }
-
-        class relations #F7E5FF {
-            +{field} status std::string
-            +{field} constant std::list<constant_relation>
-            +{field} variable std::list<variable_relation>
-            +{field} hard_coded std::list<hard_coded_relation>
-        }
-
-        class text_templating <<Configurable>> #F7E5FF {
-            +{field} stitch_template_content std::string
-            +{field} wale_template boost::optional<identification::entities::logical_name>
-            +{field} wale_template_content std::string
-            +{field} rendered_stitch_template std::string
-            +{field} relations relations
-        }
-
-        note top of text_templating
-Contains all the properties related to the generation of archetypes themselves.
-        end note
-
-        class HasTechnicalSpace <<masd::object_template>> #E3B6F6 {
-            +{field} technical_space std::string
-        }
-
         class helper <<logical::meta_element, PhysicalElement>> #F7E5FF {
             +{field} part_id std::string
             +{field} facet_name std::string
@@ -1334,28 +1414,6 @@ Contains all the properties related to the generation of archetypes themselves.
             +{field} relations relations
         }
 
-    }
-
-    class helper_properties #F7E5FF {
-        +{field} current helper_descriptor
-        +{field} direct_descendants std::list<helper_descriptor>
-        +{field} in_inheritance_relationship bool
-    }
-
-    helper_properties o-- helper_descriptor
-
-    class helper_descriptor #F7E5FF {
-        +{field} family std::string
-        +{field} namespaces std::list<std::string>
-        +{field} name_identifiable std::string
-        +{field} name_qualified std::string
-        +{field} name_tree_qualified std::string
-        +{field} name_tree_identifiable std::string
-        +{field} streaming_properties boost::optional<streaming_properties>
-        +{field} is_simple_type bool
-        +{field} requires_hashing_helper bool
-        +{field} is_circular_dependency bool
-        +{field} is_pointer bool
     }
 
 }
@@ -1387,10 +1445,87 @@ arguments were being supplied across the call graph, resulting in a
 lot of repetitive code. The context gathers together all of these.
     end note
 
+    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_production_chain o-u- pre_assembly_chain
+    model_production_chain o-l- assembly_chain
+    model_production_chain o-d- post_assembly_chain
+
     class pre_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    pre_assembly_chain o-u- modules_transform
+    pre_assembly_chain o-u- containment_transform
+    pre_assembly_chain o-u- physical_entities_transform
+    pre_assembly_chain o-u- modelines_transform
+    pre_assembly_chain o-l- technical_space_transform
+    pre_assembly_chain o-l- origin_transform
+    pre_assembly_chain o-r- type_params_transform
+    pre_assembly_chain o-r- variability_profiles_transform
+    pre_assembly_chain o-d- visual_studio_transform
+    pre_assembly_chain o-d- labelling_transform
+    pre_assembly_chain o-d- aspect_properties_transform
+    pre_assembly_chain o-d- assistant_properties_transform
+    pre_assembly_chain o-d- streaming_properties_transform
+    pre_assembly_chain o-d- primitives_transform
+    pre_assembly_chain o-d- parsing_transform
+    pre_assembly_chain o-u- variability_profiles_chain
+    pre_assembly_chain o-u- dynamic_stereotypes_transform
+    pre_assembly_chain o-u- mapping_elements_transform
+
+    class modules_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class containment_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class physical_entities_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class modelines_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class origin_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class type_params_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class variability_profiles_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class visual_studio_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class labelling_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class aspect_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class assistant_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class streaming_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class primitives_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class parsing_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class variability_profiles_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class dynamic_stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class mapping_elements_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1400,24 +1535,6 @@ lot of repetitive code. The context gathers together all of these.
     }
 
     class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class modules_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class origin_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class technical_space_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class type_params_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class parsing_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class primitives_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class generalization_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1460,40 +1577,16 @@ An error occurred whilst applying a transformation.
     class meta_naming_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class modelines_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class containment_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class variability_features_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class mapping_elements_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class type_registrar_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class visual_studio_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class visual_studio_project_type_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class odb_options_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class variability_profiles_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class dynamic_stereotypes_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class variability_profiles_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class physical_entities_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class template_rendering_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1505,25 +1598,13 @@ An error occurred whilst applying a transformation.
     class all_technical_spaces_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class labelling_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class streaming_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class technical_space_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class helper_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class aspect_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class assistant_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
 }

@@ -26,8 +26,7 @@
 #endif
 
 /**
- * @brief Houses meta-model elements related to
- * build systems.
+ * @brief Houses meta-model elements related to build systems.
  */
 namespace dogen::logical::entities::visual_studio {
 }

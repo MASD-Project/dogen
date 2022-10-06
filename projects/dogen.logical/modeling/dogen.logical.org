@@ -988,6 +988,87 @@ All elements contained by this element.
     :masd.codec.value: dogen::logical::entities::element
     :END:
 
+** helper properties                                                :element:
+   :PROPERTIES:
+   :custom_id: C501CB9E-BC09-6A94-DF43-4C622140C276
+   :masd.codec.plantuml: helper_properties o-- helper_descriptor
+   :END:
+
+*** current                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: helper_descriptor
+    :END:
+
+*** direct descendants                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<helper_descriptor>
+    :END:
+
+*** in inheritance relationship                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+** helper descriptor                                                :element:
+   :PROPERTIES:
+   :custom_id: 518521BE-AF6B-2E64-3B23-9DC22077654C
+   :END:
+
+*** family                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** namespaces                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+*** name identifiable                                             :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** name qualified                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** name tree qualified                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** name tree identifiable                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** streaming properties                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<streaming_properties>
+    :END:
+
+*** is simple type                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** requires hashing helper                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** is circular dependency                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** is pointer                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
 ** build                                                             :module:
    :PROPERTIES:
    :custom_id: A7D3787F-3228-4A54-BF73-CC3CEEC95A23
@@ -1514,36 +1595,40 @@ If true, the value of this attribute is a composite value.
 
 Houses all of the meta-modeling elements and properties related to decorations.
 
-*** licence                                                         :element:
+*** element repository                                              :element:
     :PROPERTIES:
-    :custom_id: BB342BA6-2095-D2E4-81F3-BD8669298E13
-    :masd.codec.stereotypes: logical::meta_element
+    :custom_id: CA9787E3-9ED2-25B4-20FB-42DE30573E7C
+    :masd.codec.plantuml: element_repository o-- modeline_group
+    :masd.codec.plantuml: element_repository o-- modeline
+    :masd.codec.plantuml: element_repository o-u- licence
+    :masd.codec.plantuml: element_repository o-u- generation_marker
     :END:
 
-Represents legal licence for software projects.
-
-**** short form                                                   :attribute:
+**** modeline groups                                              :attribute:
      :PROPERTIES:
-     :masd.codec.type: std::string
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
      :END:
 
-#+begin_src fundamental
-Short version of the licence, for inclusion in project files.
-#+end_src
-
-**** long form                                                    :attribute:
+**** modelines                                                    :attribute:
      :PROPERTIES:
-     :masd.codec.type: std::string
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
      :END:
 
-#+begin_src fundamental
-Long form of the licence text, suitable for generation of LICENCE files.
-#+end_src
+**** licences                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
+     :END:
+
+**** generation markers                                           :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
+     :END:
 
 *** modeline group                                                  :element:
     :PROPERTIES:
     :custom_id: 8BF6CBD5-7C87-85C4-E043-61D564B364B0
     :masd.codec.stereotypes: logical::meta_element, Container
+    :masd.codec.plantuml: modeline_group o-- modeline
     :END:
 
 Group of modelines, logically associated.
@@ -1562,6 +1647,9 @@ Modelines that make up the group.
     :PROPERTIES:
     :custom_id: 850C2BE1-C757-6B94-9613-01A6D413437E
     :masd.codec.stereotypes: logical::meta_element
+    :masd.codec.plantuml: modeline o-- editor
+    :masd.codec.plantuml: modeline o-- modeline_location
+    :masd.codec.plantuml: modeline o-- modeline_field
     :END:
 
 Groups all the fields representing editor variables for emacs, vi, etc.
@@ -1569,7 +1657,9 @@ Groups all the fields representing editor variables for emacs, vi, etc.
 A field is a key-value pair (KVP), where name is the first element and its value
 the second.
 
-Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+Example:
+
+: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 
 In this particular case, both prefix and postfix are "-*-"; mode is the first
 field name and its value is c++; the KVP separator is ":" and the field
@@ -1603,6 +1693,41 @@ List of all the parameters in the preamble, in order of appearence.
 
 Technical space that this modeline targets.
 
+*** modeline location                                               :element:
+    :PROPERTIES:
+    :custom_id: D6998FD3-83B7-C8A4-7B6B-65991FA2203D
+    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
+    :END:
+
+Location in the file to place the modeline.
+
+**** top                                                          :attribute:
+
+Very first line in file.
+
+**** bottom                                                       :attribute:
+
+Very last line in file.
+
+*** modeline field                                                  :element:
+    :PROPERTIES:
+    :custom_id: E5888EDB-E965-AAE4-59C3-99BE001425B6
+    :END:
+
+**** name                                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the field.
+
+**** value                                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Value of the field.
+
 *** editor                                                          :element:
     :PROPERTIES:
     :custom_id: 0CA5084F-D12D-1434-C713-8D6B3B2B9C38
@@ -1627,40 +1752,31 @@ The vi-like editor vim.
 
 The old ex editor.
 
-*** modeline field                                                  :element:
+*** licence                                                         :element:
     :PROPERTIES:
-    :custom_id: E5888EDB-E965-AAE4-59C3-99BE001425B6
+    :custom_id: BB342BA6-2095-D2E4-81F3-BD8669298E13
+    :masd.codec.stereotypes: logical::meta_element
     :END:
 
-**** name                                                         :attribute:
+Represents legal licence for software projects.
+
+**** short form                                                   :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
 
-Name of the field.
+#+begin_src fundamental
+Short version of the licence, for inclusion in project files.
+#+end_src
 
-**** value                                                        :attribute:
+**** long form                                                    :attribute:
      :PROPERTIES:
      :masd.codec.type: std::string
      :END:
 
-Value of the field.
-
-*** modeline location                                               :element:
-    :PROPERTIES:
-    :custom_id: D6998FD3-83B7-C8A4-7B6B-65991FA2203D
-    :masd.codec.stereotypes: masd::enumeration, dogen::convertible
-    :END:
-
-Location in the file to place the modeline.
-
-**** top                                                          :attribute:
-
-Very first line in file.
-
-**** bottom                                                       :attribute:
-
-Very last line in file.
+#+begin_src fundamental
+Long form of the licence text, suitable for generation of LICENCE files.
+#+end_src
 
 *** generation marker                                               :element:
     :PROPERTIES:
@@ -1743,31 +1859,6 @@ Postamble for all artefacts created from this element.
 
 The postamble is located at the bottom of an artefact and includes elements such
 as a modeline.
-
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: CA9787E3-9ED2-25B4-20FB-42DE30573E7C
-    :END:
-
-**** modeline groups                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
-     :END:
-
-**** modelines                                                    :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
-     :END:
-
-**** licences                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
-     :END:
-
-**** generation markers                                           :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
-     :END:
 
 ** variability                                                       :module:
    :PROPERTIES:
@@ -2630,28 +2721,11 @@ General type to provide helpers.
 
 Meta-model elements related to mapping domains.
 
-*** extensible mappable                                             :element:
-    :PROPERTIES:
-    :custom_id: E4DF7B68-1886-4E34-9A83-3CB288E5479A
-    :masd.codec.stereotypes: logical::meta_element
-    :END:
-
-A mappable meta-model element for the general purpose of mapping.
-
-Mappables can be used to create a Platform Independent Model (PIM), which is then
-mapped to concrete types to form a Platform Specific Model (PSM). Users can
-extend the mappings as required.
-
-**** destinations                                                 :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<destination>
-     :END:
-
-All the destinations that this source has been mapped to.
-
 *** element repository                                              :element:
     :PROPERTIES:
     :custom_id: 396FD789-8380-8A04-5EAB-0F98C65616E7
+    :masd.codec.plantuml: element_repository o-- extensible_mappable
+    :masd.codec.plantuml: element_repository o-- fixed_mappable
     :END:
 
 **** extensible mappables                                         :attribute:
@@ -2663,6 +2737,26 @@ All the destinations that this source has been mapped to.
      :PROPERTIES:
      :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
      :END:
+
+*** extensible mappable                                             :element:
+    :PROPERTIES:
+    :custom_id: E4DF7B68-1886-4E34-9A83-3CB288E5479A
+    :masd.codec.stereotypes: logical::meta_element
+    :masd.codec.plantuml: extensible_mappable o-- destination
+    :END:
+
+A mappable meta-model element for the general purpose of mapping.
+
+Mappables can be used to create a Platform Independent Model (PIM), which is
+then mapped to concrete types to form a Platform Specific Model (PSM). Users can
+extend the mappings as required.
+
+**** destinations                                                 :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<destination>
+     :END:
+
+All the destinations that this source has been mapped to.
 
 *** destination                                                     :element:
     :PROPERTIES:
@@ -2701,13 +2795,70 @@ variability types.
    :masd.codec.dia.comment: true
    :END:
 
-Houses meta-model elements related to
-build systems.
+Houses meta-model elements related to build systems.
+
+*** UniquelyIdentifiable                                            :element:
+    :PROPERTIES:
+    :custom_id: 1D13488B-72A4-A564-E5FB-70BA5C44CE44
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: UniquelyIdentifiable <|.. solution
+    :masd.codec.plantuml: UniquelyIdentifiable <|.. project
+    :masd.codec.plantuml: UniquelyIdentifiable <|.. project_persistence_block
+    :END:
+
+**** guid                                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+GUID that uniquely identifies this element.
+
+*** element repository                                              :element:
+    :PROPERTIES:
+    :custom_id: 880329CD-30B5-B924-EE0B-54A34BBE10ED
+    :masd.codec.plantuml: element_repository o-u- solution
+    :masd.codec.plantuml: element_repository o-u- project
+    :masd.codec.plantuml: element_repository o-- msbuild_targets
+    :END:
+
+**** solutions                                                    :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
+     :END:
+
+All solutions in this model.
+
+**** projects                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
+     :END:
+
+All projects in this model.
+
+**** msbuild targets                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
+     :END:
+
+*** solution                                                        :element:
+    :PROPERTIES:
+    :custom_id: F8F70694-CE4B-A134-60CB-F93C5DF54C7F
+    :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
+    :masd.codec.plantuml: solution o-- project_persistence_block
+    :END:
+
+**** project persistence blocks                                   :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<project_persistence_block>
+     :END:
+
+Set of project persistence blocks in this solution.
 
 *** project                                                         :element:
     :PROPERTIES:
     :custom_id: 46C91019-88A6-8ED4-2DF3-881ECCE74075
     :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
+    :masd.codec.plantuml: project o-- item_group
     :END:
 
 Represents a Visual Studio project.
@@ -2733,33 +2884,10 @@ Set of item groups in the project.
 
 Formatted name of the project.
 
-*** element repository                                              :element:
-    :PROPERTIES:
-    :custom_id: 880329CD-30B5-B924-EE0B-54A34BBE10ED
-    :END:
-
-**** solutions                                                    :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
-     :END:
-
-All solutions in this model.
-
-**** projects                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
-     :END:
-
-All projects in this model.
-
-**** msbuild targets                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
-     :END:
-
 *** item group                                                      :element:
     :PROPERTIES:
     :custom_id: A4A0A072-963D-F594-554B-59CF3845AC0A
+    :masd.codec.plantuml: item_group o-- item
     :END:
 
 Represents an MSBuild ItemGroup.
@@ -2800,19 +2928,6 @@ Maps to a well known MSBuild target.
 
 Name of the file to include.
 
-*** solution                                                        :element:
-    :PROPERTIES:
-    :custom_id: F8F70694-CE4B-A134-60CB-F93C5DF54C7F
-    :masd.codec.stereotypes: logical::meta_element, UniquelyIdentifiable
-    :END:
-
-**** project persistence blocks                                   :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<project_persistence_block>
-     :END:
-
-Set of project persistence blocks in this solution.
-
 *** project persistence block                                       :element:
     :PROPERTIES:
     :custom_id: 442D6F60-7DEE-B4F4-EEFB-6D6625549AA4
@@ -2840,19 +2955,6 @@ Relative path to the project file.
 
 GUID used by Visual Studio to identify projects of this type.
 
-*** UniquelyIdentifiable                                            :element:
-    :PROPERTIES:
-    :custom_id: 1D13488B-72A4-A564-E5FB-70BA5C44CE44
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** guid                                                         :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-GUID that uniquely identifies this element.
-
 *** msbuild targets                                                 :element:
     :PROPERTIES:
     :custom_id: 571BB731-1FDC-EB14-20D3-278D53775C9F
@@ -2872,9 +2974,88 @@ GUID that uniquely identifies this element.
 
 Logical representation of elements in the physical dimension.
 
+*** PhysicalElement                                                 :element:
+    :PROPERTIES:
+    :custom_id: 5D9C7629-70B0-6D74-7AEB-6F18A83D2843
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: PhysicalElement <|.. archetype
+    :masd.codec.plantuml: PhysicalElement <|.. part
+    :masd.codec.plantuml: PhysicalElement <|.. facet
+    :masd.codec.plantuml: PhysicalElement <|.. backend
+    :masd.codec.plantuml: PhysicalElement <|.. helper
+    :END:
+
+**** id                                                           :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Unique identifier in physical space for this element.
+
+**** major technical space                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: identification::entities::technical_space
+     :END:
+
+Technical space to which this physical element belongs to.
+
+**** meta model name                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the physical meta-model containing this element.
+
+**** backend name                                                 :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Name of the backend containing this element.
+
+*** HasTechnicalSpace                                               :element:
+    :PROPERTIES:
+    :custom_id: 6C5A845F-BE71-3CD4-2A13-31B1DB1C8FA7
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: HasTechnicalSpace <|.. archetype
+    :masd.codec.plantuml: HasTechnicalSpace <|.. backend
+    :END:
+
+**** technical space                                              :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Technical space to which this physical element belongs to.
+
+*** Urnable                                                         :element:
+    :PROPERTIES:
+    :custom_id: 39A85836-E05F-0F14-F0CB-A75A3737A665
+    :masd.codec.stereotypes: masd::object_template
+    :masd.codec.plantuml: Urnable <|.. variable_relation
+    :masd.codec.plantuml: Urnable <|.. constant_relation
+    :END:
+
+**** original urn                                                 :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+URN pointing to an archetype or a label, as it was originally created by the user.
+
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if
+pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
+to a unique archetype.
+
 *** element repository                                              :element:
     :PROPERTIES:
     :custom_id: 82D70E99-CD94-8A94-1973-C3F0CD144EE0
+    :masd.codec.plantuml: element_repository o-u- backend
+    :masd.codec.plantuml: element_repository o-u- facet
+    :masd.codec.plantuml: element_repository o-u- archetype
+    :masd.codec.plantuml: element_repository o-u- part
+    :masd.codec.plantuml: element_repository o-- archetype_kind
+    :masd.codec.plantuml: element_repository o-- helper
     :END:
 
 **** backends                                                     :attribute:
@@ -2911,6 +3092,7 @@ Logical representation of elements in the physical dimension.
     :PROPERTIES:
     :custom_id: A1BD9C27-DAF5-B604-D6FB-CFD59B936B39
     :masd.codec.stereotypes: logical::meta_element, PhysicalElement, HasTechnicalSpace
+    :masd.codec.plantuml: archetype o-- text_templating
     :END:
 
 Represents an archetype within a facet.
@@ -2956,6 +3138,119 @@ Properties related to the text templating for this archetype.
      :END:
 
 Default postfix to use for this archetype.
+
+*** text templating                                                 :element:
+    :PROPERTIES:
+    :custom_id: 8AD011A7-DB37-BF84-6D3B-E439E3A5077F
+    :masd.codec.stereotypes: Configurable
+    :masd.codec.plantuml: text_templating o-- relations
+    :END:
+
+Contains all the properties related to the generation of archetypes themselves.
+
+**** stitch template content                                      :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+#+begin_src fundamental
+Content of the stitch template associated with this archetype, if any exists.
+#+end_src
+
+**** wale template                                                :attribute:
+     :PROPERTIES:
+     :masd.codec.type: boost::optional<identification::entities::logical_name>
+     :END:
+
+Parsed name of the wale template linked to this archetype, if any.
+
+**** wale template content                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Content of the wale template associated with this archetype, if any exists.
+
+**** rendered stitch template                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Contains the result of the stitch template after rendering.
+
+**** relations                                                    :attribute:
+     :PROPERTIES:
+     :masd.codec.type: relations
+     :END:
+
+Relation information for this archetype.
+
+*** relations                                                       :element:
+    :PROPERTIES:
+    :custom_id: CCDF33AC-A3D6-E724-DE9B-D674B22E45D4
+    :masd.codec.plantuml: relations o-- constant_relation
+    :masd.codec.plantuml: relations o-- variable_relation
+    :masd.codec.plantuml: relations o-- hard_coded_relation
+    :END:
+
+**** status                                                       :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Status of this archetype with regards to relations.
+
+**** constant                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<constant_relation>
+     :END:
+
+All archetypes this archetype is related to,  over a fixed logical meta-model
+element.
+
+**** variable                                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<variable_relation>
+     :END:
+
+**** hard coded                                                   :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::list<hard_coded_relation>
+     :END:
+
+*** variable relation                                               :element:
+    :PROPERTIES:
+    :custom_id: 6352B407-3EDE-0A44-80EB-5D29AFE31179
+    :masd.codec.stereotypes: Urnable
+    :END:
+
+**** type                                                         :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+Type of the variable relation.
+
+*** constant relation                                               :element:
+    :PROPERTIES:
+    :custom_id: DC3552F9-5097-5C44-247B-C1B7FE033A74
+    :masd.codec.stereotypes: Urnable, Labelable
+    :END:
+
+**** logical model element id                                     :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
+
+*** hard coded relation                                             :element:
+    :PROPERTIES:
+    :custom_id: 6669A7F3-F1C8-D6B4-0C33-E2CBB80BB0A1
+    :END:
+
+**** value                                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.type: std::string
+     :END:
 
 *** backend                                                         :element:
     :PROPERTIES:
@@ -3097,179 +3392,6 @@ Default directory name to use for this part.
 
 Extension to use for the files of this kind.
 
-*** PhysicalElement                                                 :element:
-    :PROPERTIES:
-    :custom_id: 5D9C7629-70B0-6D74-7AEB-6F18A83D2843
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** id                                                           :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Unique identifier in physical space for this element.
-
-**** major technical space                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.type: identification::entities::technical_space
-     :END:
-
-Technical space to which this physical element belongs to.
-
-**** meta model name                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Name of the physical meta-model containing this element.
-
-**** backend name                                                 :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Name of the backend containing this element.
-
-*** variable relation                                               :element:
-    :PROPERTIES:
-    :custom_id: 6352B407-3EDE-0A44-80EB-5D29AFE31179
-    :masd.codec.stereotypes: Urnable
-    :END:
-
-**** type                                                         :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Type of the variable relation.
-
-*** constant relation                                               :element:
-    :PROPERTIES:
-    :custom_id: DC3552F9-5097-5C44-247B-C1B7FE033A74
-    :masd.codec.stereotypes: Urnable, Labelable
-    :END:
-
-**** logical model element id                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-*** Urnable                                                         :element:
-    :PROPERTIES:
-    :custom_id: 39A85836-E05F-0F14-F0CB-A75A3737A665
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** original urn                                                 :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-URN pointing to an archetype or a label, as it was originally created by the user.
-
- It must have the form "archetype:" if pointing to an archetype, or  "label:" if
-pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
-to a unique archetype.
-
-*** hard coded relation                                             :element:
-    :PROPERTIES:
-    :custom_id: 6669A7F3-F1C8-D6B4-0C33-E2CBB80BB0A1
-    :END:
-
-**** value                                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-*** relations                                                       :element:
-    :PROPERTIES:
-    :custom_id: CCDF33AC-A3D6-E724-DE9B-D674B22E45D4
-    :END:
-
-**** status                                                       :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Status of this archetype with regards to relations.
-
-**** constant                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<constant_relation>
-     :END:
-
-All archetypes this archetype is related to,  over a fixed logical meta-model
-element.
-
-**** variable                                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<variable_relation>
-     :END:
-
-**** hard coded                                                   :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::list<hard_coded_relation>
-     :END:
-
-*** text templating                                                 :element:
-    :PROPERTIES:
-    :custom_id: 8AD011A7-DB37-BF84-6D3B-E439E3A5077F
-    :masd.codec.stereotypes: Configurable
-    :END:
-
-Contains all the properties related to the generation of archetypes themselves.
-
-**** stitch template content                                      :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-#+begin_src fundamental
-Content of the stitch template associated with this archetype, if any exists.
-#+end_src
-
-**** wale template                                                :attribute:
-     :PROPERTIES:
-     :masd.codec.type: boost::optional<identification::entities::logical_name>
-     :END:
-
-Parsed name of the wale template linked to this archetype, if any.
-
-**** wale template content                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Content of the wale template associated with this archetype, if any exists.
-
-**** rendered stitch template                                     :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Contains the result of the stitch template after rendering.
-
-**** relations                                                    :attribute:
-     :PROPERTIES:
-     :masd.codec.type: relations
-     :END:
-
-Relation information for this archetype.
-
-*** HasTechnicalSpace                                               :element:
-    :PROPERTIES:
-    :custom_id: 6C5A845F-BE71-3CD4-2A13-31B1DB1C8FA7
-    :masd.codec.stereotypes: masd::object_template
-    :END:
-
-**** technical space                                              :attribute:
-     :PROPERTIES:
-     :masd.codec.type: std::string
-     :END:
-
-Technical space to which this physical element belongs to.
-
 *** helper                                                          :element:
     :PROPERTIES:
     :custom_id: CCD052AF-1822-0B34-E923-68945D9CB073
@@ -3317,87 +3439,6 @@ Technical space to which this physical element belongs to.
      :END:
 
 Relation information for this helper.
-
-** helper properties                                                :element:
-   :PROPERTIES:
-   :custom_id: C501CB9E-BC09-6A94-DF43-4C622140C276
-   :masd.codec.plantuml: helper_properties o-- helper_descriptor
-   :END:
-
-*** current                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: helper_descriptor
-    :END:
-
-*** direct descendants                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<helper_descriptor>
-    :END:
-
-*** in inheritance relationship                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-** helper descriptor                                                :element:
-   :PROPERTIES:
-   :custom_id: 518521BE-AF6B-2E64-3B23-9DC22077654C
-   :END:
-
-*** family                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** namespaces                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-*** name identifiable                                             :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** name qualified                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** name tree qualified                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** name tree identifiable                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** streaming properties                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<streaming_properties>
-    :END:
-
-*** is simple type                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** requires hashing helper                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** is circular dependency                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** is pointer                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
 
 * traits                                                            :element:
   :PROPERTIES:
@@ -3462,15 +3503,144 @@ Meta-model for the physical dimension.
 
 Human readable timestamp of when the activity took place.
 
+** model production chain                                           :element:
+   :PROPERTIES:
+   :custom_id: D4086076-DE7D-1464-D0EB-62272F073369
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_production_chain o-u- pre_assembly_chain
+   :masd.codec.plantuml: model_production_chain o-l- assembly_chain
+   :masd.codec.plantuml: model_production_chain o-d- post_assembly_chain
+   :END:
+
 ** pre assembly chain                                               :element:
    :PROPERTIES:
    :custom_id: 3B578687-D7E5-4414-007B-15F09151A46F
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: pre_assembly_chain o-u- modules_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- containment_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- physical_entities_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- modelines_transform
+   :masd.codec.plantuml: pre_assembly_chain o-l- technical_space_transform
+   :masd.codec.plantuml: pre_assembly_chain o-l- origin_transform
+   :masd.codec.plantuml: pre_assembly_chain o-r- type_params_transform
+   :masd.codec.plantuml: pre_assembly_chain o-r- variability_profiles_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- visual_studio_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- labelling_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- aspect_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- assistant_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- streaming_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- primitives_transform
+   :masd.codec.plantuml: pre_assembly_chain o-d- parsing_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- variability_profiles_chain
+   :masd.codec.plantuml: pre_assembly_chain o-u- dynamic_stereotypes_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- mapping_elements_transform
    :END:
 
-** model production chain                                           :element:
+** modules transform                                                :element:
    :PROPERTIES:
-   :custom_id: D4086076-DE7D-1464-D0EB-62272F073369
+   :custom_id: 40A481CA-CE82-B614-7493-E33C91274B01
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** containment transform                                            :element:
+   :PROPERTIES:
+   :custom_id: 0A120B50-3026-7AF4-503B-8D61552B173D
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** physical entities transform                                      :element:
+   :PROPERTIES:
+   :custom_id: 463BE295-9ACC-D164-4EEB-6A118A25428C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** modelines transform                                              :element:
+   :PROPERTIES:
+   :custom_id: 91DB66DE-3EDF-71C4-57B3-582F409D3523
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** technical space transform                                        :element:
+   :PROPERTIES:
+   :custom_id: ED7CD6A4-CDF9-EAD4-F2AB-FBE4E6996D11
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** origin transform                                                 :element:
+   :PROPERTIES:
+   :custom_id: 04B0E3CD-B96C-F924-8093-F2933C138E1F
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** type params transform                                            :element:
+   :PROPERTIES:
+   :custom_id: 40879B63-650E-4754-DE2B-836F6855C81B
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** variability profiles transform                                   :element:
+   :PROPERTIES:
+   :custom_id: B69A94DD-A3F8-75A4-D6EB-E4BB6F6DC20E
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** visual studio transform                                          :element:
+   :PROPERTIES:
+   :custom_id: 2A33834A-1065-FAC4-A983-C90100EDA2B0
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** labelling transform                                              :element:
+   :PROPERTIES:
+   :custom_id: B25F7BFD-D504-C784-8BE3-97D26974ABAC
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** aspect properties transform                                      :element:
+   :PROPERTIES:
+   :custom_id: 9AC9DDC7-EB9C-EE24-132B-D368A435A2D5
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** assistant properties transform                                   :element:
+   :PROPERTIES:
+   :custom_id: B2254621-AD10-ACD4-8D93-2102877F23DE
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** streaming properties transform                                   :element:
+   :PROPERTIES:
+   :custom_id: 364B94FF-9A97-6FD4-0843-7353E5488FC3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** primitives transform                                             :element:
+   :PROPERTIES:
+   :custom_id: A799DFDA-CE3C-0B44-C853-5C98BCFE2A5E
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** parsing transform                                                :element:
+   :PROPERTIES:
+   :custom_id: B4D4FD7D-79A2-2FE4-FAEB-614C758D83A8
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** variability profiles chain                                       :element:
+   :PROPERTIES:
+   :custom_id: F11A6226-ADEE-7EE4-BCBB-FC430B2CF381
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** dynamic stereotypes transform                                    :element:
+   :PROPERTIES:
+   :custom_id: D180C96D-4E90-24C4-6AD3-9B737B8C32DB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** mapping elements transform                                       :element:
+   :PROPERTIES:
+   :custom_id: 58A42DDD-86BF-04A4-685B-4D5AA02CFD2A
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3489,42 +3659,6 @@ Human readable timestamp of when the activity took place.
 ** merge transform                                                  :element:
    :PROPERTIES:
    :custom_id: 5A17D1E6-C631-6FE4-9563-07B4C61247A0
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** modules transform                                                :element:
-   :PROPERTIES:
-   :custom_id: 40A481CA-CE82-B614-7493-E33C91274B01
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** origin transform                                                 :element:
-   :PROPERTIES:
-   :custom_id: 04B0E3CD-B96C-F924-8093-F2933C138E1F
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** technical space transform                                        :element:
-   :PROPERTIES:
-   :custom_id: ED7CD6A4-CDF9-EAD4-F2AB-FBE4E6996D11
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** type params transform                                            :element:
-   :PROPERTIES:
-   :custom_id: 40879B63-650E-4754-DE2B-836F6855C81B
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** parsing transform                                                :element:
-   :PROPERTIES:
-   :custom_id: B4D4FD7D-79A2-2FE4-FAEB-614C758D83A8
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** primitives transform                                             :element:
-   :PROPERTIES:
-   :custom_id: A799DFDA-CE3C-0B44-C853-5C98BCFE2A5E
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3602,39 +3736,15 @@ An error occurred whilst applying a transformation.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** modelines transform                                              :element:
-   :PROPERTIES:
-   :custom_id: 91DB66DE-3EDF-71C4-57B3-582F409D3523
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** containment transform                                            :element:
-   :PROPERTIES:
-   :custom_id: 0A120B50-3026-7AF4-503B-8D61552B173D
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** variability features transform                                   :element:
    :PROPERTIES:
    :custom_id: 75D62B25-31D1-7014-C1F3-ACEA1C2CA15B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** mapping elements transform                                       :element:
-   :PROPERTIES:
-   :custom_id: 58A42DDD-86BF-04A4-685B-4D5AA02CFD2A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** type registrar transform                                         :element:
    :PROPERTIES:
    :custom_id: C3964817-959F-42E4-2413-FAB6316068FD
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** visual studio transform                                          :element:
-   :PROPERTIES:
-   :custom_id: 2A33834A-1065-FAC4-A983-C90100EDA2B0
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3647,30 +3757,6 @@ An error occurred whilst applying a transformation.
 ** odb options transform                                            :element:
    :PROPERTIES:
    :custom_id: 42235508-2200-0A44-4183-BD97D57AD796
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** variability profiles chain                                       :element:
-   :PROPERTIES:
-   :custom_id: F11A6226-ADEE-7EE4-BCBB-FC430B2CF381
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** dynamic stereotypes transform                                    :element:
-   :PROPERTIES:
-   :custom_id: D180C96D-4E90-24C4-6AD3-9B737B8C32DB
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** variability profiles transform                                   :element:
-   :PROPERTIES:
-   :custom_id: B69A94DD-A3F8-75A4-D6EB-E4BB6F6DC20E
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** physical entities transform                                      :element:
-   :PROPERTIES:
-   :custom_id: 463BE295-9ACC-D164-4EEB-6A118A25428C
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3692,21 +3778,9 @@ An error occurred whilst applying a transformation.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** labelling transform                                              :element:
-   :PROPERTIES:
-   :custom_id: B25F7BFD-D504-C784-8BE3-97D26974ABAC
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** generability transform                                           :element:
    :PROPERTIES:
    :custom_id: B1AC92F6-D541-A044-456B-ECCA13BD486B
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** streaming properties transform                                   :element:
-   :PROPERTIES:
-   :custom_id: 364B94FF-9A97-6FD4-0843-7353E5488FC3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3719,18 +3793,6 @@ An error occurred whilst applying a transformation.
 ** helper properties transform                                      :element:
    :PROPERTIES:
    :custom_id: DDF798EE-2EA1-E6C4-21FB-94E377EAD580
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** aspect properties transform                                      :element:
-   :PROPERTIES:
-   :custom_id: 9AC9DDC7-EB9C-EE24-132B-D368A435A2D5
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** assistant properties transform                                   :element:
-   :PROPERTIES:
-   :custom_id: B2254621-AD10-ACD4-8D93-2102877F23DE
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 

@@ -42,7 +42,9 @@ namespace dogen::logical::entities::decoration {
  * A field is a key-value pair (KVP), where name is the first element and its value
  * the second.
  *
- * Example: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ * Example:
+ *
+ * : -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * In this particular case, both prefix and postfix are "-*-"; mode is the first
  * field name and its value is c++; the KVP separator is ":" and the field

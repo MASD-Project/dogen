@@ -36,8 +36,8 @@ namespace dogen::logical::entities::mapping {
 /**
  * @brief A mappable meta-model element for the general purpose of mapping.
  *
- * Mappables can be used to create a Platform Independent Model (PIM), which is then
- * mapped to concrete types to form a Platform Specific Model (PSM). Users can
+ * Mappables can be used to create a Platform Independent Model (PIM), which is
+ * then mapped to concrete types to form a Platform Specific Model (PSM). Users can
  * extend the mappings as required.
  */
 class extensible_mappable final : public dogen::logical::entities::element {
