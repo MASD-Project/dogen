@@ -35,8 +35,8 @@
 namespace dogen::logical::helpers {
 
 /**
- * @brief Stores the mapping of a key (the element id) to its values, organised by technical
- * space.
+ * @brief Stores the mapping of a key (the element id) to its values, organised by
+ * technical space.
  */
 class mapping final {
 public:

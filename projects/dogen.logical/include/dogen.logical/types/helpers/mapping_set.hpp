@@ -38,8 +38,8 @@
 namespace dogen::logical::helpers {
 
 /**
- * @brief Consistent unit of mapping that can be used to translate a model from one technical
- * space to another.
+ * @brief Consistent unit of mapping that can be used to translate a model from one
+ * technical space to another.
  */
 class mapping_set final {
 public:

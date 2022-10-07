@@ -3824,6 +3824,21 @@ An error occurred whilst applying a transformation.
   :custom_id: B5C943B5-ABBA-3404-D91B-20ADDDFBE822
   :END:
 
+** post assembly validator                                          :element:
+   :PROPERTIES:
+   :custom_id: 2562538C-2AEB-8D24-FD43-E0BBAF439EF7
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: post_assembly_validator o-- decomposer
+   :masd.codec.plantuml: post_assembly_validator o-- validation_error: throws
+   :END:
+
+** decomposer                                                       :element:
+   :PROPERTIES:
+   :custom_id: D53918CE-A8BC-4E04-B1F3-AA1F1AC7D7F2
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: decomposer o-- decomposition_result: generates
+   :END:
+
 ** decomposition result                                             :element:
    :PROPERTIES:
    :custom_id: 1CBB21AA-2685-6E54-515B-AAA4DA7F23FD
@@ -3844,18 +3859,6 @@ An error occurred whilst applying a transformation.
     :masd.codec.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
     :END:
 
-** decomposer                                                       :element:
-   :PROPERTIES:
-   :custom_id: D53918CE-A8BC-4E04-B1F3-AA1F1AC7D7F2
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** post assembly validator                                          :element:
-   :PROPERTIES:
-   :custom_id: 2562538C-2AEB-8D24-FD43-E0BBAF439EF7
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** validation error                                                 :element:
    :PROPERTIES:
    :custom_id: F7C40311-29C7-7E94-E7DB-238A2D73CA76
@@ -3868,6 +3871,15 @@ An error occurred during validation.
    :PROPERTIES:
    :custom_id: 23EC5A17-500E-4B74-3953-06E66F83345B
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: pre_assembly_validator o-- validation_error: throws
+   :END:
+
+** indexer                                                          :element:
+   :PROPERTIES:
+   :custom_id: D222A2E0-4A37-3C24-C113-9BB68609BDD4
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: indexer o-- indices: creates
+   :masd.codec.plantuml: indexer o-- indexing_error: throws
    :END:
 
 ** indices                                                          :element:
@@ -3908,16 +3920,11 @@ An error occurred during validation.
 
 A fatal error has occurred while indexing.
 
-** indexer                                                          :element:
-   :PROPERTIES:
-   :custom_id: D222A2E0-4A37-3C24-C113-9BB68609BDD4
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** resolver                                                         :element:
    :PROPERTIES:
    :custom_id: 69EDEF91-3404-27F4-4FEB-CEE68DB88857
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: resolver o-- resolution_error: throws
    :END:
 
 ** resolution error                                                 :element:
@@ -3928,18 +3935,13 @@ A fatal error has occurred while indexing.
 
 An error occurred while trying to resolve a type.
 
-** mapping error                                                    :element:
-   :PROPERTIES:
-   :custom_id: F320919E-890A-4714-CF3B-0C15A1CF6C16
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error has occurred while mapping element names.
-
 ** mapper                                                           :element:
    :PROPERTIES:
    :custom_id: 6B9A808A-F544-0E24-7FB3-5FEE47B90937
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: mapper o-- mapping_context
+   :masd.codec.plantuml: mapper o-- mapping_set_repository
+   :masd.codec.plantuml: mapper o-- mapping_error: throws
    :END:
 
 ** mapping context                                                  :element:
@@ -3962,13 +3964,39 @@ An error has occurred while mapping element names.
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
     :END:
 
+** mapping error                                                    :element:
+   :PROPERTIES:
+   :custom_id: F320919E-890A-4714-CF3B-0C15A1CF6C16
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error has occurred while mapping element names.
+
+** mapping set repository                                           :element:
+   :PROPERTIES:
+   :custom_id: D9955C36-B89D-01E4-3E43-69A98BA5D5AF
+   :masd.codec.plantuml: mapping_set_repository o-- mapping_set
+   :END:
+
+Stores all available mapping sets.
+
+*** default mapping set                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: mapping_set
+    :END:
+
+*** by name                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<std::string, mapping_set>
+    :END:
+
 ** mapping set                                                      :element:
    :PROPERTIES:
    :custom_id: 84251030-1CE8-0FB4-A963-3159D177511A
    :END:
 
-Consistent unit of mapping that can be used to translate a model from one technical
-space to another.
+Consistent unit of mapping that can be used to translate a model from one
+technical space to another.
 
 *** name                                                          :attribute:
     :PROPERTIES:
@@ -3985,36 +4013,22 @@ space to another.
     :masd.codec.type: std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
     :END:
 
-** mapping set repository                                           :element:
-   :PROPERTIES:
-   :custom_id: D9955C36-B89D-01E4-3E43-69A98BA5D5AF
-   :END:
-
-Stores all available mapping sets.
-
-*** default mapping set                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: mapping_set
-    :END:
-
-*** by name                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<std::string, mapping_set>
-    :END:
-
 ** mappings validator                                               :element:
    :PROPERTIES:
    :custom_id: A172D39C-446C-3934-5403-7E7EDB1F5949
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: mappings_validator o-- mapping: validates
+   :masd.codec.plantuml: mappings_validator o-- validation_error: throws
    :END:
 
 ** mapping                                                          :element:
    :PROPERTIES:
    :custom_id: C848708F-91DD-0A84-D183-604C657E87D0
+   :masd.codec.plantuml: mapping o-- mapping_value: maps LAM IDs to
    :END:
 
-Stores the mapping of a key (the element id) to its values, organised by technical
-space.
+Stores the mapping of a key (the element id) to its values, organised by
+technical space.
 
 *** agnostic id                                                   :attribute:
     :PROPERTIES:
@@ -4033,6 +4047,7 @@ Values of the mapping, by technical space.
 ** mapping value                                                    :element:
    :PROPERTIES:
    :custom_id: 02DDA0CF-9CB2-2924-C103-448113FFADC3
+   :masd.codec.plantuml: mapping_value o-- mapping_actions
    :END:
 
 Value of a mapping.
@@ -4061,24 +4076,50 @@ Value of a mapping.
    :PROPERTIES:
    :custom_id: 28DE36D6-6DC1-A594-E583-AADD428894A2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: mapper o-- mapping_error: throws
    :END:
 
 ** profile adapter                                                  :element:
    :PROPERTIES:
    :custom_id: F0E43A81-BFB9-7DE4-F7EB-E2E926E1EDD8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: profile_adapter o-- adaptation_exception: throws
    :END:
 
 ** configuration model set adapter                                  :element:
    :PROPERTIES:
    :custom_id: 284167F3-575E-AB04-1ABB-36181AB34034
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: configuration_model_set_adapter o-- adaptation_exception: throws
    :END:
 
 ** adaptation exception                                             :element:
    :PROPERTIES:
    :custom_id: 74DB8B92-97C3-6D94-917B-E49497B45841
    :masd.codec.stereotypes: masd::exception
+   :END:
+
+** decoration configuration factory                                 :element:
+   :PROPERTIES:
+   :custom_id: 80D85419-A415-31F4-F2EB-0689EFA33193
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: decoration_configuration_factory o-- decoration_configuration: builds
+   :END:
+
+** decoration factory                                               :element:
+   :PROPERTIES:
+   :custom_id: 844ED2D8-8B89-4FD4-6B2B-2DF8CB01CCEA
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: decoration_factory o-- decoration_configuration
+   :masd.codec.plantuml: decoration_factory o-- decoration_repository
+   :masd.codec.plantuml: decoration_factory o-- building_error
+   :END:
+
+** decoration repository factory                                    :element:
+   :PROPERTIES:
+   :custom_id: FA0338A2-7A74-A134-DEFB-BCBF746A0D33
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: decoration_repository_factory o-- decoration_repository
    :END:
 
 ** decoration repository                                            :element:
@@ -4100,12 +4141,6 @@ Value of a mapping.
     :PROPERTIES:
     :masd.codec.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
     :END:
-
-** decoration repository factory                                    :element:
-   :PROPERTIES:
-   :custom_id: FA0338A2-7A74-A134-DEFB-BCBF746A0D33
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 ** decoration configuration                                         :element:
    :PROPERTIES:
@@ -4136,18 +4171,6 @@ Value of a mapping.
     :PROPERTIES:
     :masd.codec.type: identification::entities::logical_id
     :END:
-
-** decoration configuration factory                                 :element:
-   :PROPERTIES:
-   :custom_id: 80D85419-A415-31F4-F2EB-0689EFA33193
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** decoration factory                                               :element:
-   :PROPERTIES:
-   :custom_id: 844ED2D8-8B89-4FD4-6B2B-2DF8CB01CCEA
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 ** stereotypes helper                                               :element:
    :PROPERTIES:

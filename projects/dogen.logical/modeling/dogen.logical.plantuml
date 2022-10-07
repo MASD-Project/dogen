@@ -1635,16 +1635,21 @@ An error occurred whilst applying a transformation.
 }
 
 namespace helpers #F2F2F2 {
-    class decomposition_result #F7E5FF {
-        +{field} names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
-        +{field} meta_names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
-        +{field} name_trees std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
+    class post_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    post_assembly_validator o-- decomposer
+    post_assembly_validator o-- validation_error: throws
 
     class decomposer <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class post_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    decomposer o-- decomposition_result: generates
+
+    class decomposition_result #F7E5FF {
+        +{field} names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
+        +{field} meta_names std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
+        +{field} name_trees std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
     }
 
     class validation_error <<masd::exception>> #E8C2F8 {
@@ -1656,6 +1661,14 @@ An error occurred during validation.
 
     class pre_assembly_validator <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    pre_assembly_validator o-- validation_error: throws
+
+    class indexer <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    indexer o-- indices: creates
+    indexer o-- indexing_error: throws
 
     class indices #F7E5FF {
         +{field} objects_always_in_heap std::unordered_set<identification::entities::logical_id>
@@ -1672,11 +1685,10 @@ An error occurred during validation.
 A fatal error has occurred while indexing.
     end note
 
-    class indexer <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class resolver <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    resolver o-- resolution_error: throws
 
     class resolution_error <<masd::exception>> #E8C2F8 {
     }
@@ -1685,6 +1697,19 @@ A fatal error has occurred while indexing.
 An error occurred while trying to resolve a type.
     end note
 
+    class mapper <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    mapper o-- mapping_context
+    mapper o-- mapping_set_repository
+    mapper o-- mapping_error: throws
+
+    class mapping_context #F7E5FF {
+        +{field} translations std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
+        +{field} erasures std::unordered_set<identification::entities::logical_id>
+        +{field} codecs std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
+    }
+
     class mapping_error <<masd::exception>> #E8C2F8 {
     }
 
@@ -1692,14 +1717,16 @@ An error occurred while trying to resolve a type.
 An error has occurred while mapping element names.
     end note
 
-    class mapper <<dogen::handcrafted::typeable>> #FFFACD {
+    class mapping_set_repository #F7E5FF {
+        +{field} default_mapping_set mapping_set
+        +{field} by_name std::unordered_map<std::string, mapping_set>
     }
 
-    class mapping_context #F7E5FF {
-        +{field} translations std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
-        +{field} erasures std::unordered_set<identification::entities::logical_id>
-        +{field} codecs std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
-    }
+    mapping_set_repository o-- mapping_set
+
+    note top of mapping_set_repository
+Stores all available mapping sets.
+    end note
 
     class mapping_set #F7E5FF {
         +{field} name std::string
@@ -1708,36 +1735,34 @@ An error has occurred while mapping element names.
     }
 
     note top of mapping_set
-Consistent unit of mapping that can be used to translate a model from one technical
-space to another.
-    end note
-
-    class mapping_set_repository #F7E5FF {
-        +{field} default_mapping_set mapping_set
-        +{field} by_name std::unordered_map<std::string, mapping_set>
-    }
-
-    note top of mapping_set_repository
-Stores all available mapping sets.
+Consistent unit of mapping that can be used to translate a model from one
+technical space to another.
     end note
 
     class mappings_validator <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    mappings_validator o-- mapping: validates
+    mappings_validator o-- validation_error: throws
 
     class mapping #F7E5FF {
         +{field} agnostic_id identification::entities::logical_id
         +{field} by_technical_space std::unordered_map<identification::entities::technical_space, mapping_value>
     }
 
+    mapping o-- mapping_value: maps LAM IDs to
+
     note top of mapping
-Stores the mapping of a key (the element id) to its values, organised by technical
-space.
+Stores the mapping of a key (the element id) to its values, organised by
+technical space.
     end note
 
     class mapping_value #F7E5FF {
         +{field} mapping_action mapping_actions
         +{field} default_name boost::optional<identification::entities::logical_name>
     }
+
+    mapping_value o-- mapping_actions
 
     note top of mapping_value
 Value of a mapping.
@@ -1751,22 +1776,42 @@ Value of a mapping.
     class visual_studio_project_type_mapper <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    mapper o-- mapping_error: throws
+
     class profile_adapter <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    profile_adapter o-- adaptation_exception: throws
 
     class configuration_model_set_adapter <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    configuration_model_set_adapter o-- adaptation_exception: throws
+
     class adaptation_exception <<masd::exception>> #E8C2F8 {
     }
+
+    class decoration_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    decoration_configuration_factory o-- decoration_configuration: builds
+
+    class decoration_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    decoration_factory o-- decoration_configuration
+    decoration_factory o-- decoration_repository
+    decoration_factory o-- building_error
+
+    class decoration_repository_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    decoration_repository_factory o-- decoration_repository
 
     class decoration_repository #F7E5FF {
         +{field} modelines_by_modeline_group_by_technical_space std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
         +{field} licences_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>
         +{field} generation_markers_by_name std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
-    }
-
-    class decoration_repository_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class decoration_configuration #F7E5FF {
@@ -1775,12 +1820,6 @@ Value of a mapping.
         +{field} licence_name identification::entities::logical_id
         +{field} modeline_group_name identification::entities::logical_id
         +{field} marker_name identification::entities::logical_id
-    }
-
-    class decoration_configuration_factory <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class decoration_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class stereotypes_helper <<dogen::handcrafted::typeable>> #FFFACD {
