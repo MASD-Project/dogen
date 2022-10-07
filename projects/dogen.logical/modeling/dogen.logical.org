@@ -3520,17 +3520,17 @@ Human readable timestamp of when the activity took place.
    :masd.codec.plantuml: pre_assembly_chain o-u- containment_transform
    :masd.codec.plantuml: pre_assembly_chain o-u- physical_entities_transform
    :masd.codec.plantuml: pre_assembly_chain o-u- modelines_transform
-   :masd.codec.plantuml: pre_assembly_chain o-l- technical_space_transform
-   :masd.codec.plantuml: pre_assembly_chain o-l- origin_transform
-   :masd.codec.plantuml: pre_assembly_chain o-r- type_params_transform
-   :masd.codec.plantuml: pre_assembly_chain o-r- variability_profiles_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- visual_studio_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- labelling_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- aspect_properties_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- assistant_properties_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- streaming_properties_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- primitives_transform
-   :masd.codec.plantuml: pre_assembly_chain o-d- parsing_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- technical_space_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- origin_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- type_params_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- variability_profiles_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- visual_studio_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- labelling_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- aspect_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- assistant_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- streaming_properties_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- primitives_transform
+   :masd.codec.plantuml: pre_assembly_chain o-u- parsing_transform
    :masd.codec.plantuml: pre_assembly_chain o-u- variability_profiles_chain
    :masd.codec.plantuml: pre_assembly_chain o-u- dynamic_stereotypes_transform
    :masd.codec.plantuml: pre_assembly_chain o-u- mapping_elements_transform
@@ -3648,17 +3648,58 @@ Human readable timestamp of when the activity took place.
    :PROPERTIES:
    :custom_id: 2F9D8BEE-C3E2-D3B4-F90B-30BF5B5D6C8D
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: assembly_chain o-u- merge_transform
+   :masd.codec.plantuml: assembly_chain o-l- extensible_mapping_transform
+   :END:
+
+** merge transform                                                  :element:
+   :PROPERTIES:
+   :custom_id: 5A17D1E6-C631-6FE4-9563-07B4C61247A0
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** extensible mapping transform                                     :element:
+   :PROPERTIES:
+   :custom_id: 2200CEAC-3FBD-8E54-4193-7EEB9CCE5918
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
 ** post assembly chain                                              :element:
    :PROPERTIES:
    :custom_id: 1CD6DC4E-D6A9-3394-9D1B-86C49854CB66
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: post_assembly_chain o-- visual_studio_project_type_transform
+   :masd.codec.plantuml: post_assembly_chain o-- enumerations_transform
+   :masd.codec.plantuml: post_assembly_chain o-- generalization_transform
+   :masd.codec.plantuml: post_assembly_chain o-- stereotypes_transform
+   :masd.codec.plantuml: post_assembly_chain o-- object_templates_transform
+   :masd.codec.plantuml: post_assembly_chain o-- global_module_transform
+   :masd.codec.plantuml: post_assembly_chain o-- generability_transform
+   :masd.codec.plantuml: post_assembly_chain o-- meta_naming_transform
+   :masd.codec.plantuml: post_assembly_chain o-- orm_transform
+   :masd.codec.plantuml: post_assembly_chain o-- odb_options_transform
+   :masd.codec.plantuml: post_assembly_chain o-- resolver_transform
+   :masd.codec.plantuml: post_assembly_chain o-- attributes_transform
+   :masd.codec.plantuml: post_assembly_chain o-- resolver_transform
+   :masd.codec.plantuml: post_assembly_chain o-- associations_transform
+   :masd.codec.plantuml: post_assembly_chain o-- type_registrar_transform
+   :masd.codec.plantuml: post_assembly_chain o-- all_technical_spaces_transform
+   :masd.codec.plantuml: post_assembly_chain o-- decoration_transform
+   :masd.codec.plantuml: post_assembly_chain o-- technical_space_properties_transform
+   :masd.codec.plantuml: post_assembly_chain o-- helper_properties_transform
+   :masd.codec.plantuml: post_assembly_chain o-- variability_features_transform
+   :masd.codec.plantuml: post_assembly_chain o-- template_rendering_transform
    :END:
 
-** merge transform                                                  :element:
+** visual studio project type transform                             :element:
    :PROPERTIES:
-   :custom_id: 5A17D1E6-C631-6FE4-9563-07B4C61247A0
+   :custom_id: 2FB731D9-9EDF-4D84-B6E3-50EF6F0BC1D3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** enumerations transform                                           :element:
+   :PROPERTIES:
+   :custom_id: 45F61725-F3C4-C4A4-A91B-5A53CEFC5540
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3686,9 +3727,27 @@ Human readable timestamp of when the activity took place.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
+** generability transform                                           :element:
+   :PROPERTIES:
+   :custom_id: B1AC92F6-D541-A044-456B-ECCA13BD486B
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** meta naming transform                                            :element:
+   :PROPERTIES:
+   :custom_id: 2CC7E8A6-90D3-D6C4-929B-478CBBEB6AB6
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
 ** orm transform                                                    :element:
    :PROPERTIES:
    :custom_id: 0C9E67A1-5889-E5C4-8A63-6EAA00B7F3AF
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** odb options transform                                            :element:
+   :PROPERTIES:
+   :custom_id: 42235508-2200-0A44-4183-BD97D57AD796
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3710,65 +3769,9 @@ Human readable timestamp of when the activity took place.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** transformation error                                             :element:
-   :PROPERTIES:
-   :custom_id: 6181CCAB-FEDA-2114-1E2B-3D4FFD7305EA
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred whilst applying a transformation.
-
-** enumerations transform                                           :element:
-   :PROPERTIES:
-   :custom_id: 45F61725-F3C4-C4A4-A91B-5A53CEFC5540
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** extensible mapping transform                                     :element:
-   :PROPERTIES:
-   :custom_id: 2200CEAC-3FBD-8E54-4193-7EEB9CCE5918
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** meta naming transform                                            :element:
-   :PROPERTIES:
-   :custom_id: 2CC7E8A6-90D3-D6C4-929B-478CBBEB6AB6
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** variability features transform                                   :element:
-   :PROPERTIES:
-   :custom_id: 75D62B25-31D1-7014-C1F3-ACEA1C2CA15B
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** type registrar transform                                         :element:
    :PROPERTIES:
    :custom_id: C3964817-959F-42E4-2413-FAB6316068FD
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** visual studio project type transform                             :element:
-   :PROPERTIES:
-   :custom_id: 2FB731D9-9EDF-4D84-B6E3-50EF6F0BC1D3
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** odb options transform                                            :element:
-   :PROPERTIES:
-   :custom_id: 42235508-2200-0A44-4183-BD97D57AD796
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** template rendering transform                                     :element:
-   :PROPERTIES:
-   :custom_id: 2056DCDC-0923-6754-B1AB-DDE30841724D
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** decoration transform                                             :element:
-   :PROPERTIES:
-   :custom_id: 62E0CEC5-90F1-D1D4-C8E3-3A6FD1A425DB
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3778,9 +3781,15 @@ An error occurred whilst applying a transformation.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** generability transform                                           :element:
+** decoration transform                                             :element:
    :PROPERTIES:
-   :custom_id: B1AC92F6-D541-A044-456B-ECCA13BD486B
+   :custom_id: 62E0CEC5-90F1-D1D4-C8E3-3A6FD1A425DB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** template rendering transform                                     :element:
+   :PROPERTIES:
+   :custom_id: 2056DCDC-0923-6754-B1AB-DDE30841724D
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -3795,6 +3804,20 @@ An error occurred whilst applying a transformation.
    :custom_id: DDF798EE-2EA1-E6C4-21FB-94E377EAD580
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
+** variability features transform                                   :element:
+   :PROPERTIES:
+   :custom_id: 75D62B25-31D1-7014-C1F3-ACEA1C2CA15B
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** transformation error                                             :element:
+   :PROPERTIES:
+   :custom_id: 6181CCAB-FEDA-2114-1E2B-3D4FFD7305EA
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred whilst applying a transformation.
 
 * helpers                                                            :module:
   :PROPERTIES:

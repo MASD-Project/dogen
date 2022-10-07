@@ -1459,17 +1459,17 @@ lot of repetitive code. The context gathers together all of these.
     pre_assembly_chain o-u- containment_transform
     pre_assembly_chain o-u- physical_entities_transform
     pre_assembly_chain o-u- modelines_transform
-    pre_assembly_chain o-l- technical_space_transform
-    pre_assembly_chain o-l- origin_transform
-    pre_assembly_chain o-r- type_params_transform
-    pre_assembly_chain o-r- variability_profiles_transform
-    pre_assembly_chain o-d- visual_studio_transform
-    pre_assembly_chain o-d- labelling_transform
-    pre_assembly_chain o-d- aspect_properties_transform
-    pre_assembly_chain o-d- assistant_properties_transform
-    pre_assembly_chain o-d- streaming_properties_transform
-    pre_assembly_chain o-d- primitives_transform
-    pre_assembly_chain o-d- parsing_transform
+    pre_assembly_chain o-u- technical_space_transform
+    pre_assembly_chain o-u- origin_transform
+    pre_assembly_chain o-u- type_params_transform
+    pre_assembly_chain o-u- variability_profiles_transform
+    pre_assembly_chain o-u- visual_studio_transform
+    pre_assembly_chain o-u- labelling_transform
+    pre_assembly_chain o-u- aspect_properties_transform
+    pre_assembly_chain o-u- assistant_properties_transform
+    pre_assembly_chain o-u- streaming_properties_transform
+    pre_assembly_chain o-u- primitives_transform
+    pre_assembly_chain o-u- parsing_transform
     pre_assembly_chain o-u- variability_profiles_chain
     pre_assembly_chain o-u- dynamic_stereotypes_transform
     pre_assembly_chain o-u- mapping_elements_transform
@@ -1531,10 +1531,44 @@ lot of repetitive code. The context gathers together all of these.
     class assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    assembly_chain o-u- merge_transform
+    assembly_chain o-l- extensible_mapping_transform
+
+    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class extensible_mapping_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
     class post_assembly_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    post_assembly_chain o-- visual_studio_project_type_transform
+    post_assembly_chain o-- enumerations_transform
+    post_assembly_chain o-- generalization_transform
+    post_assembly_chain o-- stereotypes_transform
+    post_assembly_chain o-- object_templates_transform
+    post_assembly_chain o-- global_module_transform
+    post_assembly_chain o-- generability_transform
+    post_assembly_chain o-- meta_naming_transform
+    post_assembly_chain o-- orm_transform
+    post_assembly_chain o-- odb_options_transform
+    post_assembly_chain o-- resolver_transform
+    post_assembly_chain o-- attributes_transform
+    post_assembly_chain o-- resolver_transform
+    post_assembly_chain o-- associations_transform
+    post_assembly_chain o-- type_registrar_transform
+    post_assembly_chain o-- all_technical_spaces_transform
+    post_assembly_chain o-- decoration_transform
+    post_assembly_chain o-- technical_space_properties_transform
+    post_assembly_chain o-- helper_properties_transform
+    post_assembly_chain o-- variability_features_transform
+    post_assembly_chain o-- template_rendering_transform
+
+    class visual_studio_project_type_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class generalization_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1549,7 +1583,16 @@ lot of repetitive code. The context gathers together all of these.
     class global_module_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class meta_naming_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
     class orm_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class odb_options_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class resolver_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1561,44 +1604,16 @@ lot of repetitive code. The context gathers together all of these.
     class associations_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class transformation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of transformation_error
-An error occurred whilst applying a transformation.
-    end note
-
-    class enumerations_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class extensible_mapping_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class meta_naming_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class variability_features_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class type_registrar_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class visual_studio_project_type_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class odb_options_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class template_rendering_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class decoration_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class all_technical_spaces_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    class decoration_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class template_rendering_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class technical_space_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -1606,6 +1621,16 @@ An error occurred whilst applying a transformation.
 
     class helper_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    class variability_features_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class transformation_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of transformation_error
+An error occurred whilst applying a transformation.
+    end note
 
 }
 
