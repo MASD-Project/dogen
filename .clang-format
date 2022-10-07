@@ -1,3 +1,4 @@
+# -*- mode: yaml; yaml-tab-width: 4; indent-tabs-mode: nil -*-
 ---
 Language:        Cpp
 Standard:        c++14
