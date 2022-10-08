@@ -13,39 +13,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-08 Sat 11:06]
-| <75>                                                      |         |       |       |       |
-| Headline                                                  | Time    |       |       |     % |
-|-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *50:05* |       |       | 100.0 |
-|-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 50:05   |       |       | 100.0 |
-| Active                                                    |         | 50:05 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  20.4 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.2 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   0.7 |
-| Improve diffing output in tests                           |         |       |  0:19 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  3:36 |   7.2 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.2 |
-| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   6.6 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   4.3 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.8 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   4.4 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   3.7 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   1.5 |
-| Model significant relations at a higher level             |         |       |  1:05 |   2.2 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.9 |
-| Enable CodeQL                                             |         |       |  0:21 |   0.7 |
-| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.6 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.3 |
-| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.4 |
-| Windows package is broken                                 |         |       |  0:20 |   0.7 |
-| Warning on OSX build                                      |         |       |  2:23 |   4.8 |
-| Add PlantUML relationships to diagrams                    |         |       | 10:16 |  20.5 |
-| Consider using a different layout engine in PlantUML      |         |       |  0:35 |   1.2 |
-| Use clang format to format the code base                  |         |       |  0:58 |   1.9 |
-| Upgrade PlantUML to latest                                |         |       |  0:31 |   1.0 |
+#+CAPTION: Clock summary at [2022-10-08 Sat 14:41]
+| <75>                                                      |           |         |       |       |
+| Headline                                                  | Time      |         |       |     % |
+|-----------------------------------------------------------+-----------+---------+-------+-------|
+| *Total time*                                              | *2d 2:18* |         |       | 100.0 |
+|-----------------------------------------------------------+-----------+---------+-------+-------|
+| Stories                                                   | 2d 2:18   |         |       | 100.0 |
+| Active                                                    |           | 2d 2:18 |       | 100.0 |
+| Edit release notes for previous sprint                    |           |         | 10:13 |  20.3 |
+| Create a demo and presentation for previous sprint        |           |         |  2:06 |   4.2 |
+| Update boost to latest in vcpg                            |           |         |  0:20 |   0.7 |
+| Improve diffing output in tests                           |           |         |  0:19 |   0.6 |
+| Sprint and product backlog grooming                       |           |         |  3:36 |   7.2 |
+| Nightly builds are failing due to missing environment var |           |         |  1:07 |   2.2 |
+| Remove deprecated uses of boost bind                      |           |         |  0:09 |   0.3 |
+| Full generation support in tests is incorrect             |           |         |  3:18 |   6.6 |
+| Tests failing with filesystem errors                      |           |         |  2:10 |   4.3 |
+| Remove uses of mock configuration factory                 |           |         |  0:54 |   1.8 |
+| Add continuous builds to C++ reference product            |           |         |  2:13 |   4.4 |
+| Add continuous builds to C# reference product             |           |         |  1:50 |   3.6 |
+| Remove ODB support from Dogen                             |           |         |  0:45 |   1.5 |
+| Model significant relations at a higher level             |           |         |  1:05 |   2.2 |
+| Create a mock configuration builder                       |           |         |  1:58 |   3.9 |
+| Enable CodeQL                                             |           |         |  0:21 |   0.7 |
+| Change namespaces note implementation in PlantUML         |           |         |  1:48 |   3.6 |
+| Consider using a different layout engine in PlantUML      |           |         |  0:35 |   1.2 |
+| Upgrade PlantUML to latest                                |           |         |  0:44 |   1.5 |
+| Gitter notifications for builds are not showing up        |           |         |  0:38 |   1.3 |
+| Ignore vcpkg path length warning                          |           |         |  0:12 |   0.4 |
+| Windows package is broken                                 |           |         |  0:20 |   0.7 |
+| Warning on OSX build                                      |           |         |  2:23 |   4.7 |
+| Add PlantUML relationships to diagrams                    |           |         | 10:16 |  20.4 |
+| Use clang format to format the code base                  |           |         |  0:58 |   1.9 |
 #+end:
 
 Agenda:
@@ -1062,6 +1062,34 @@ Links:
 - [[https://plantuml.com/smetana02][Context of the Smetana project]]
 - [[https://graphviz.org/docs/layouts/][graphviz: Layout Engines]]
 
+*** COMPLETED Upgrade PlantUML to latest                              :story:
+    :LOGBOOK:
+    CLOCK: [2022-10-08 Sat 14:26]--[2022-10-08 Sat 14:39] =>  0:13
+    CLOCK: [2022-10-08 Sat 09:30]--[2022-10-08 Sat 10:01] =>  0:31
+    :END:
+
+At present, when we add a relation between classes in inner namespaces, it
+crashes PlantUML. Before we submit a ticket we should update to latest and try
+to add the relation.
+
+It seems we did some kind of hack to get latest on Debian:
+
+#+begin_example
+$ cd /usr/share/plantuml/
+$ ls -l
+total 18251
+-rw-r--r--   1 root           root      8618641 2020-03-10  2020 plantuml-1.2020.02.jar
+-rw-r--r--   1 marco          marco    10070645 2022-04-09 09:47 plantuml-1.2022.3.jar
+lrwxrwxrwx   1 root           root           21 2022-04-09 09:49 plantuml.jar -> plantuml-1.2022.3.jar
+ #+end_example
+
+ We should follow the same pattern. We also need to update it in the laptop to
+ avoid oscillation between the two versions and rewriting diagrams each time.
+
+ Notes:
+
+ - updated to [[https://github.com/plantuml/plantuml/releases][v1.2022.10]]
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -1372,33 +1400,6 @@ Links:
 - [[https://www.reddit.com/r/cpp/comments/pnli5r/cc_precommit_hooks_for_static_analyzers_and/][C/C++ pre-commit hooks for static analyzers and linters]]
 - [[https://github.com/lballabio/QuantLib/blob/master/.clang-format][quant lib]] clang format.
 - [[https://github.com/OpenSourceRisk/Engine/blob/master/.clang-format][ORE clang format]]
-
-*** STARTED Upgrade PlantUML to latest                                :story:
-    :LOGBOOK:
-    CLOCK: [2022-10-08 Sat 09:30]--[2022-10-08 Sat 10:01] =>  0:31
-    :END:
-
-At present, when we add a relation between classes in inner namespaces, it
-crashes PlantUML. Before we submit a ticket we should update to latest and try
-to add the relation.
-
-It seems we did some kind of hack to get latest on Debian:
-
-#+begin_example
-$ cd /usr/share/plantuml/
-$ ls -l
-total 18251
--rw-r--r--   1 root           root      8618641 2020-03-10  2020 plantuml-1.2020.02.jar
--rw-r--r--   1 marco          marco    10070645 2022-04-09 09:47 plantuml-1.2022.3.jar
-lrwxrwxrwx   1 root           root           21 2022-04-09 09:49 plantuml.jar -> plantuml-1.2022.3.jar
- #+end_example
-
- We should follow the same pattern. We also need to update it in the laptop to
- avoid oscillation between the two versions and rewriting diagrams each time.
-
- Notes:
-
- - updated to [[https://github.com/plantuml/plantuml/releases][v1.2022.10]]
 
 *** Consider adding support for clang-tidy                            :story:
 
