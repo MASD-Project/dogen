@@ -13,37 +13,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-08 Sat 10:01]
+#+CAPTION: Clock summary at [2022-10-08 Sat 11:06]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *49:30* |       |       | 100.0 |
+| *Total time*                                              | *50:05* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 49:30   |       |       | 100.0 |
-| Active                                                    |         | 49:30 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  20.6 |
+| Stories                                                   | 50:05   |       |       | 100.0 |
+| Active                                                    |         | 50:05 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  20.4 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.2 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.7 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  3:36 |   7.3 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.3 |
+| Sprint and product backlog grooming                       |         |       |  3:36 |   7.2 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.2 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   6.7 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   4.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   6.6 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   4.3 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.8 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   4.5 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   4.4 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   3.7 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.5 |
 | Model significant relations at a higher level             |         |       |  1:05 |   2.2 |
-| Create a mock configuration builder                       |         |       |  1:58 |   4.0 |
+| Create a mock configuration builder                       |         |       |  1:58 |   3.9 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.7 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.6 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.3 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.4 |
 | Windows package is broken                                 |         |       |  0:20 |   0.7 |
 | Warning on OSX build                                      |         |       |  2:23 |   4.8 |
-| Add PlantUML relationships to diagrams                    |         |       | 10:16 |  20.7 |
-| Use clang format to format the code base                  |         |       |  0:58 |   2.0 |
+| Add PlantUML relationships to diagrams                    |         |       | 10:16 |  20.5 |
+| Consider using a different layout engine in PlantUML      |         |       |  0:35 |   1.2 |
+| Use clang format to format the code base                  |         |       |  0:58 |   1.9 |
 | Upgrade PlantUML to latest                                |         |       |  0:31 |   1.0 |
 #+end:
 
@@ -430,7 +431,7 @@ Notes:
   8h for a single build. This has now been fixed.
 - one of the tests is now timing out:
 
-  : dogen.logical.generated_tests/entities_input_model_set_tests/xml_roundtrip_produces_the_same_entity	Failed	10m 10ms	Completed (Timeout)
+  : dogen.logical.generated_tests/entities_input_model_set_tests/xml_roundtrip_produces_the_same_entity         Failed  10m 10ms        Completed (Timeout)
 
   We need to find out how to increase the timeout.
 - clang builds have the wrong DWARF2 format:
@@ -1007,6 +1008,59 @@ We should also use GUIDs here.
 Links:
 
 - [[https://stackoverflow.com/questions/59934882/plantuml-and-notes-on-packages][PlantUML and notes on packages]]
+
+*** COMPLETED Consider using a different layout engine in PlantUML    :story:
+    :LOGBOOK:
+    CLOCK: [2022-10-08 Sat 10:50]--[2022-10-08 Sat 11:05] =>  0:15
+    CLOCK: [2022-10-08 Sat 10:13]--[2022-10-08 Sat 10:23] =>  0:10
+    CLOCK: [2022-10-08 Sat 10:02]--[2022-10-08 Sat 10:12] =>  0:10
+    :END:
+
+At present PlantUML is rendering using the basic dot engine. This results in
+very horizontal diagrams. It also seems to crash in some cases (not sure if this
+is dot or not). It would be great to experiment with other layout engines, if
+they exist.
+
+#+begin_example
+COMMAND PLANTUML_LIMIT_SIZE=65536 ${PLANTUML_PROGRAM} -Playout=smetana
+#+end_example
+
+Smetana fails to generate the diagram, even without namespace to namespace
+relations:
+
+#+begin_example
+java.lang.ArrayIndexOutOfBoundsException: 3
+        at gen.lib.dotgen.mincross__c.left2right(mincross__c.java:369)
+        at gen.lib.dotgen.mincross__c.transpose_step(mincross__c.java:522)
+        at gen.lib.dotgen.mincross__c.transpose(mincross__c.java:571)
+        at gen.lib.dotgen.mincross__c.mincross_step(mincross__c.java:1645)
+        at gen.lib.dotgen.mincross__c.mincross_(mincross__c.java:627)
+        at gen.lib.dotgen.mincross__c.dot_mincross(mincross__c.java:194)
+        at gen.lib.dotgen.dotinit__c.dotLayout(dotinit__c.java:370)
+        at gen.lib.dotgen.dotinit__c.doDot(dotinit__c.java:492)
+        at gen.lib.dotgen.dotinit__c.dot_layout(dotinit__c.java:547)
+        at gen.lib.dotgen.dotinit__c$2.exe(dotinit__c.java:539)
+        at gen.lib.gvc.gvlayout__c.gvLayoutJobs(gvlayout__c.java:153)
+        at net.sourceforge.plantuml.sdot.CucaDiagramFileMakerSmetana.createFileLocked(CucaDiagramFileMakerSmetana.java:381)
+        at net.sourceforge.plantuml.sdot.CucaDiagramFileMakerSmetana.createFile(CucaDiagramFileMakerSmetana.java:336)
+        at net.sourceforge.plantuml.cucadiagram.CucaDiagram.exportDiagramInternal(CucaDiagram.java:620)
+        at net.sourceforge.plantuml.classdiagram.ClassDiagram.exportDiagramInternal(ClassDiagram.java:188)
+        at net.sourceforge.plantuml.UmlDiagram.exportDiagramNow(UmlDiagram.java:135)
+        at net.sourceforge.plantuml.AbstractPSystem.exportDiagram(AbstractPSystem.java:179)
+        at net.sourceforge.plantuml.PSystemUtils.exportDiagramsDefault(PSystemUtils.java:209)
+        at net.sourceforge.plantuml.PSystemUtils.exportDiagrams(PSystemUtils.java:93)
+        at net.sourceforge.plantuml.SourceFileReaderAbstract.getGeneratedImages(SourceFileReaderAbstract.java:186)
+        at net.sourceforge.plantuml.Run.manageFileInternal(Run.java:518)
+        at net.sourceforge.plantuml.Run.processArgs(Run.java:401)
+        at net.sourceforge.plantuml.Run.manageAllFiles(Run
+#+end_example
+
+Links:
+
+- [[https://github.com/plantuml/plantuml/issues/1110][GH: Alternative layout engines from graphviz #1110]]
+- [[https://github.com/plantuml/plantuml/issues/1078][GH: Allow Arrows in any direction #1078]]
+- [[https://plantuml.com/smetana02][Context of the Smetana project]]
+- [[https://graphviz.org/docs/layouts/][graphviz: Layout Engines]]
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
