@@ -4535,7 +4535,7 @@ If true, the modeling element requires stream manipulators.
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
    :masd.codec.plantuml: output_technical_space o-[hidden]d- aspect
-  :END:
+   :END:
 
 Features related to the output technical space.
 
@@ -5180,6 +5180,7 @@ Contains formatting classes for the logical model.
    :END:
 
 An error has occurred while formatting.
+
 * traits                                                            :element:
   :PROPERTIES:
   :custom_id: 71E13C4D-50FC-2C74-D053-CBD22EFACCF6
