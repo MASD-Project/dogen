@@ -38,7 +38,7 @@ class log::logger--><g id="elem_log::logger"><rect codeLine="100" fill="#FFFACD"
 class log::lifecycle_manager--><g id="elem_log::lifecycle_manager"><rect codeLine="103" fill="#FFFACD" height="56.2656" id="log::lifecycle_manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="3730" y="41"/><ellipse cx="3745" cy="61.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3747.9688,66.7734 Q3747.3906,67.0703 3746.75,67.2188 Q3746.1094,67.3672 3745.4063,67.3672 Q3742.9063,67.3672 3741.5859,65.7188 Q3740.2656,64.0703 3740.2656,60.9453 Q3740.2656,57.8203 3741.5859,56.1641 Q3742.9063,54.5078 3745.4063,54.5078 Q3746.1094,54.5078 3746.7578,54.6641 Q3747.4063,54.8203 3747.9688,55.1172 L3747.9688,57.8359 Q3747.3438,57.2578 3746.75,56.9844 Q3746.1563,56.7109 3745.5313,56.7109 Q3744.1875,56.7109 3743.5,57.7813 Q3742.8125,58.8516 3742.8125,60.9453 Q3742.8125,63.0391 3743.5,64.1094 Q3744.1875,65.1797 3745.5313,65.1797 Q3746.1563,65.1797 3746.75,64.9063 Q3747.3438,64.6328 3747.9688,64.0547 L3747.9688,66.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="3757" y="57.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="3788.5" y="72.9639">lifecycle_manager</text><line style="stroke:#181818;stroke-width:0.5;" x1="3731" x2="3951" y1="81.2656" y2="81.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="3731" x2="3951" y1="89.2656" y2="89.2656"/></g><!--MD5=[0bdb3546858800fab81c3297d0278399]
 class log::scoped_lifecycle_manager--><g id="elem_log::scoped_lifecycle_manager"><rect codeLine="106" fill="#FFFACD" height="56.2656" id="log::scoped_lifecycle_manager" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="3987" y="41"/><ellipse cx="4002" cy="61.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M4004.9688,66.7734 Q4004.3906,67.0703 4003.75,67.2188 Q4003.1094,67.3672 4002.4063,67.3672 Q3999.9063,67.3672 3998.5859,65.7188 Q3997.2656,64.0703 3997.2656,60.9453 Q3997.2656,57.8203 3998.5859,56.1641 Q3999.9063,54.5078 4002.4063,54.5078 Q4003.1094,54.5078 4003.7578,54.6641 Q4004.4063,54.8203 4004.9688,55.1172 L4004.9688,57.8359 Q4004.3438,57.2578 4003.75,56.9844 Q4003.1563,56.7109 4002.5313,56.7109 Q4001.1875,56.7109 4000.5,57.7813 Q3999.8125,58.8516 3999.8125,60.9453 Q3999.8125,63.0391 4000.5,64.1094 Q4001.1875,65.1797 4002.5313,65.1797 Q4003.1563,65.1797 4003.75,64.9063 Q4004.3438,64.6328 4004.9688,64.0547 L4004.9688,66.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="4014" y="57.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="4016.5" y="72.9639">scoped_lifecycle_manager</text><line style="stroke:#181818;stroke-width:0.5;" x1="3988" x2="4208" y1="81.2656" y2="81.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="3988" x2="4208" y1="89.2656" y2="89.2656"/></g><!--MD5=[cbe0540a1e84bc54cba39debefad3391]
 class log::severity_level--><g id="elem_log::severity_level"><rect codeLine="109" fill="#FFFACD" height="56.2656" id="log::severity_level" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="3513" y="204.5"/><ellipse cx="3528" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3530.9688,230.2734 Q3530.3906,230.5703 3529.75,230.7188 Q3529.1094,230.8672 3528.4063,230.8672 Q3525.9063,230.8672 3524.5859,229.2188 Q3523.2656,227.5703 3523.2656,224.4453 Q3523.2656,221.3203 3524.5859,219.6641 Q3525.9063,218.0078 3528.4063,218.0078 Q3529.1094,218.0078 3529.7578,218.1641 Q3530.4063,218.3203 3530.9688,218.6172 L3530.9688,221.3359 Q3530.3438,220.7578 3529.75,220.4844 Q3529.1563,220.2109 3528.5313,220.2109 Q3527.1875,220.2109 3526.5,221.2813 Q3525.8125,222.3516 3525.8125,224.4453 Q3525.8125,226.5391 3526.5,227.6094 Q3527.1875,228.6797 3528.5313,228.6797 Q3529.1563,228.6797 3529.75,228.4063 Q3530.3438,228.1328 3530.9688,227.5547 L3530.9688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="3540" y="220.6387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="3588.5" y="236.4639">severity_level</text><line style="stroke:#181818;stroke-width:0.5;" x1="3514" x2="3734" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="3514" x2="3734" y1="252.7656" y2="252.7656"/></g><!--MD5=[aab4b738f15907ab107f23364349938f]
-class log::logging_configuration--><g id="elem_log::logging_configuration"><rect codeLine="112" fill="#F7E5FF" height="121.4531" id="log::logging_configuration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="310" x="3168" y="172"/><ellipse cx="3241.25" cy="192.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3244.2188,197.7734 Q3243.6406,198.0703 3243,198.2188 Q3242.3594,198.3672 3241.6563,198.3672 Q3239.1563,198.3672 3237.8359,196.7188 Q3236.5156,195.0703 3236.5156,191.9453 Q3236.5156,188.8203 3237.8359,187.1641 Q3239.1563,185.5078 3241.6563,185.5078 Q3242.3594,185.5078 3243.0078,185.6641 Q3243.6563,185.8203 3244.2188,186.1172 L3244.2188,188.8359 Q3243.5938,188.2578 3243,187.9844 Q3242.4063,187.7109 3241.7813,187.7109 Q3240.4375,187.7109 3239.75,188.7813 Q3239.0625,189.8516 3239.0625,191.9453 Q3239.0625,194.0391 3239.75,195.1094 Q3240.4375,196.1797 3241.7813,196.1797 Q3242.4063,196.1797 3243,195.9063 Q3243.5938,195.6328 3244.2188,195.0547 L3244.2188,197.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="3294.25" y="188.1387">«masd::fluent»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="3261.75" y="203.9639">logging_configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="3169" x2="3477" y1="212.2656" y2="212.2656"/><ellipse cx="3179" cy="223.2656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="3188" y="229.2607">severity std::string</text><ellipse cx="3179" cy="239.5625" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="3188" y="245.5576">filename std::string</text><ellipse cx="3179" cy="255.8594" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="3188" y="261.8545">output_to_console bool</text><ellipse cx="3179" cy="272.1563" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="284" x="3188" y="278.1514">output_directory boost::filesystem::path</text><line style="stroke:#181818;stroke-width:0.5;" x1="3169" x2="3477" y1="285.4531" y2="285.4531"/></g><g id="elem_log::GMN42"><path d="M3244,56.5 L3244,81.6328 A0,0 0 0 0 3244,81.6328 L3335.71,81.6328 L3329.63,171.98 L3343.71,81.6328 L3438,81.6328 A0,0 0 0 0 3438,81.6328 L3438,66.5 L3428,56.5 L3244,56.5 A0,0 0 0 0 3244,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3428,56.5 L3428,66.5 L3438,66.5 L3428,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="173" x="3250" y="73.5669">Options related to logging.</text></g><!--MD5=[4ad6028ee76898343bdee119660a06b2]
+class log::logging_configuration--><g id="elem_log::logging_configuration"><rect codeLine="112" fill="#F7E5FF" height="121.4531" id="log::logging_configuration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="310" x="3168" y="172"/><ellipse cx="3241.25" cy="192.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3244.2188,197.7734 Q3243.6406,198.0703 3243,198.2188 Q3242.3594,198.3672 3241.6563,198.3672 Q3239.1563,198.3672 3237.8359,196.7188 Q3236.5156,195.0703 3236.5156,191.9453 Q3236.5156,188.8203 3237.8359,187.1641 Q3239.1563,185.5078 3241.6563,185.5078 Q3242.3594,185.5078 3243.0078,185.6641 Q3243.6563,185.8203 3244.2188,186.1172 L3244.2188,188.8359 Q3243.5938,188.2578 3243,187.9844 Q3242.4063,187.7109 3241.7813,187.7109 Q3240.4375,187.7109 3239.75,188.7813 Q3239.0625,189.8516 3239.0625,191.9453 Q3239.0625,194.0391 3239.75,195.1094 Q3240.4375,196.1797 3241.7813,196.1797 Q3242.4063,196.1797 3243,195.9063 Q3243.5938,195.6328 3244.2188,195.0547 L3244.2188,197.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="3294.25" y="188.1387">«masd::fluent»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="3261.75" y="203.9639">logging_configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="3169" x2="3477" y1="212.2656" y2="212.2656"/><ellipse cx="3179" cy="225.9141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="3188" y="229.2607">severity std::string</text><ellipse cx="3179" cy="242.2109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="3188" y="245.5576">filename std::string</text><ellipse cx="3179" cy="258.5078" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="3188" y="261.8545">output_to_console bool</text><ellipse cx="3179" cy="274.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="284" x="3188" y="278.1514">output_directory boost::filesystem::path</text><line style="stroke:#181818;stroke-width:0.5;" x1="3169" x2="3477" y1="285.4531" y2="285.4531"/></g><g id="elem_log::GMN42"><path d="M3244,56.5 L3244,81.6328 A0,0 0 0 0 3244,81.6328 L3335.71,81.6328 L3329.63,171.98 L3343.71,81.6328 L3438,81.6328 A0,0 0 0 0 3438,81.6328 L3438,66.5 L3428,56.5 L3244,56.5 A0,0 0 0 0 3244,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3428,56.5 L3428,66.5 L3438,66.5 L3428,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="173" x="3250" y="73.5669">Options related to logging.</text></g><!--MD5=[4ad6028ee76898343bdee119660a06b2]
 class log::invalid_logging_configuration--><g id="elem_log::invalid_logging_configuration"><rect codeLine="123" fill="#E8C2F8" height="56.2656" id="log::invalid_logging_configuration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="241" x="2873.5" y="204.5"/><ellipse cx="2888.5" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M2891.4688,230.2734 Q2890.8906,230.5703 2890.25,230.7188 Q2889.6094,230.8672 2888.9063,230.8672 Q2886.4063,230.8672 2885.0859,229.2188 Q2883.7656,227.5703 2883.7656,224.4453 Q2883.7656,221.3203 2885.0859,219.6641 Q2886.4063,218.0078 2888.9063,218.0078 Q2889.6094,218.0078 2890.2578,218.1641 Q2890.9063,218.3203 2891.4688,218.6172 L2891.4688,221.3359 Q2890.8438,220.7578 2890.25,220.4844 Q2889.6563,220.2109 2889.0313,220.2109 Q2887.6875,220.2109 2887,221.2813 Q2886.3125,222.3516 2886.3125,224.4453 Q2886.3125,226.5391 2887,227.6094 Q2887.6875,228.6797 2889.0313,228.6797 Q2889.6563,228.6797 2890.25,228.4063 Q2890.8438,228.1328 2891.4688,227.5547 L2891.4688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="114" x="2950" y="220.6387">«masd::exception»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="209" x="2902.5" y="236.4639">invalid_logging_configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="2874.5" x2="3113.5" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="2874.5" x2="3113.5" y1="252.7656" y2="252.7656"/></g><g id="elem_log::GMN46"><path d="M2779,56.5 L2779,81.6328 A0,0 0 0 0 2779,81.6328 L2990,81.6328 L2994,204.5 L2998,81.6328 L3209,81.6328 A0,0 0 0 0 3209,81.6328 L3209,66.5 L3199,56.5 L2779,56.5 A0,0 0 0 0 2779,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3199,56.5 L3199,66.5 L3209,66.5 L3199,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="409" x="2785" y="73.5669">The values supplied for the logging configuration are not valid.</text></g><!--MD5=[63ca45ec6dc1e4260b2c9749f9556f8e]
 class log::logging_configuration_validator--><g id="elem_log::logging_configuration_validator"><rect codeLine="130" fill="#FFFACD" height="56.2656" id="log::logging_configuration_validator" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="257" x="3770.5" y="204.5"/><ellipse cx="3785.5" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M3788.4688,230.2734 Q3787.8906,230.5703 3787.25,230.7188 Q3786.6094,230.8672 3785.9063,230.8672 Q3783.4063,230.8672 3782.0859,229.2188 Q3780.7656,227.5703 3780.7656,224.4453 Q3780.7656,221.3203 3782.0859,219.6641 Q3783.4063,218.0078 3785.9063,218.0078 Q3786.6094,218.0078 3787.2578,218.1641 Q3787.9063,218.3203 3788.4688,218.6172 L3788.4688,221.3359 Q3787.8438,220.7578 3787.25,220.4844 Q3786.6563,220.2109 3786.0313,220.2109 Q3784.6875,220.2109 3784,221.2813 Q3783.3125,222.3516 3783.3125,224.4453 Q3783.3125,226.5391 3784,227.6094 Q3784.6875,228.6797 3786.0313,228.6797 Q3786.6563,228.6797 3787.25,228.4063 Q3787.8438,228.1328 3788.4688,227.5547 L3788.4688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="3815" y="220.6387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="225" x="3799.5" y="236.4639">logging_configuration_validator</text><line style="stroke:#181818;stroke-width:0.5;" x1="3771.5" x2="4026.5" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="3771.5" x2="4026.5" y1="252.7656" y2="252.7656"/></g><!--MD5=[5555f22f278d0ddda59b1e5f6e6e88dd]
 class serialization::archive_types--><g id="elem_serialization::archive_types"><rect codeLine="136" fill="#FFFACD" height="56.2656" id="serialization::archive_types" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="788" y="368"/><ellipse cx="803" cy="388.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M805.9688,393.7734 Q805.3906,394.0703 804.75,394.2188 Q804.1094,394.3672 803.4063,394.3672 Q800.9063,394.3672 799.5859,392.7188 Q798.2656,391.0703 798.2656,387.9453 Q798.2656,384.8203 799.5859,383.1641 Q800.9063,381.5078 803.4063,381.5078 Q804.1094,381.5078 804.7578,381.6641 Q805.4063,381.8203 805.9688,382.1172 L805.9688,384.8359 Q805.3438,384.2578 804.75,383.9844 Q804.1563,383.7109 803.5313,383.7109 Q802.1875,383.7109 801.5,384.7813 Q800.8125,385.8516 800.8125,387.9453 Q800.8125,390.0391 801.5,391.1094 Q802.1875,392.1797 803.5313,392.1797 Q804.1563,392.1797 804.75,391.9063 Q805.3438,391.6328 805.9688,391.0547 L805.9688,393.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="815" y="384.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="863" y="399.9639">archive_types</text><line style="stroke:#181818;stroke-width:0.5;" x1="789" x2="1009" y1="408.2656" y2="408.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="789" x2="1009" y1="416.2656" y2="416.2656"/></g><!--MD5=[d5f74f20e8d260bc4a1639ca5b2b88cd]
@@ -77,14 +77,363 @@ class xml::text_reader_io--><g id="elem_xml::text_reader_io"><rect codeLine="248
 class environment::environment_exception--><g id="elem_environment::environment_exception"><rect codeLine="254" fill="#E8C2F8" height="56.2656" id="environment::environment_exception" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="200" x="7158" y="204.5"/><ellipse cx="7173" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M7175.9688,230.2734 Q7175.3906,230.5703 7174.75,230.7188 Q7174.1094,230.8672 7173.4063,230.8672 Q7170.9063,230.8672 7169.5859,229.2188 Q7168.2656,227.5703 7168.2656,224.4453 Q7168.2656,221.3203 7169.5859,219.6641 Q7170.9063,218.0078 7173.4063,218.0078 Q7174.1094,218.0078 7174.7578,218.1641 Q7175.4063,218.3203 7175.9688,218.6172 L7175.9688,221.3359 Q7175.3438,220.7578 7174.75,220.4844 Q7174.1563,220.2109 7173.5313,220.2109 Q7172.1875,220.2109 7171.5,221.2813 Q7170.8125,222.3516 7170.8125,224.4453 Q7170.8125,226.5391 7171.5,227.6094 Q7172.1875,228.6797 7173.5313,228.6797 Q7174.1563,228.6797 7174.75,228.4063 Q7175.3438,228.1328 7175.9688,227.5547 L7175.9688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="114" x="7214" y="220.6387">«masd::exception»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="7187" y="236.4639">environment_exception</text><line style="stroke:#181818;stroke-width:0.5;" x1="7159" x2="7357" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="7159" x2="7357" y1="252.7656" y2="252.7656"/></g><g id="elem_environment::GMN93"><path d="M7076,56.5 L7076,81.6328 A0,0 0 0 0 7076,81.6328 L7254,81.6328 L7258,204.5 L7262,81.6328 L7440,81.6328 A0,0 0 0 0 7440,81.6328 L7440,66.5 L7430,56.5 L7076,56.5 A0,0 0 0 0 7076,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M7430,56.5 L7430,66.5 L7440,66.5 L7430,56.5 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="343" x="7082" y="73.5669">There was an error reading an environment variable.</text></g><!--MD5=[5196c73ce5273597ea2b96801c3d558d]
 class environment::variable_reader--><g id="elem_environment::variable_reader"><rect codeLine="261" fill="#FFFACD" height="56.2656" id="environment::variable_reader" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="6819" y="41"/><ellipse cx="6834" cy="61.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6836.9688,66.7734 Q6836.3906,67.0703 6835.75,67.2188 Q6835.1094,67.3672 6834.4063,67.3672 Q6831.9063,67.3672 6830.5859,65.7188 Q6829.2656,64.0703 6829.2656,60.9453 Q6829.2656,57.8203 6830.5859,56.1641 Q6831.9063,54.5078 6834.4063,54.5078 Q6835.1094,54.5078 6835.7578,54.6641 Q6836.4063,54.8203 6836.9688,55.1172 L6836.9688,57.8359 Q6836.3438,57.2578 6835.75,56.9844 Q6835.1563,56.7109 6834.5313,56.7109 Q6833.1875,56.7109 6832.5,57.7813 Q6831.8125,58.8516 6831.8125,60.9453 Q6831.8125,63.0391 6832.5,64.1094 Q6833.1875,65.1797 6834.5313,65.1797 Q6835.1563,65.1797 6835.75,64.9063 Q6836.3438,64.6328 6836.9688,64.0547 L6836.9688,66.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="6846" y="57.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="6886.5" y="72.9639">variable_reader</text><line style="stroke:#181818;stroke-width:0.5;" x1="6820" x2="7040" y1="81.2656" y2="81.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="6820" x2="7040" y1="89.2656" y2="89.2656"/></g><g id="elem_formatters::formatters_1"><path d="M6693.5,648 L6693.5,703.3984 L6990.5,703.3984 L6990.5,658 L6980.5,648 L6693.5,648 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M6980.5,648 L6980.5,658 L6990.5,658 L6980.5,648 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="262" x="6699.5" y="665.0669">Contains all of the formatting primitives</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="276" x="6699.5" y="680.1997">that are not associated with any particular</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="45" x="6699.5" y="695.3325">model.</text></g><!--MD5=[ae177c095fa3da26ad921c16f9f290f0]
 class formatters::formatting_error--><g id="elem_formatters::formatting_error"><rect codeLine="273" fill="#E8C2F8" height="56.2656" id="formatters::formatting_error" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="6445" y="845"/><ellipse cx="6460" cy="865.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6462.9688,870.7734 Q6462.3906,871.0703 6461.75,871.2188 Q6461.1094,871.3672 6460.4063,871.3672 Q6457.9063,871.3672 6456.5859,869.7188 Q6455.2656,868.0703 6455.2656,864.9453 Q6455.2656,861.8203 6456.5859,860.1641 Q6457.9063,858.5078 6460.4063,858.5078 Q6461.1094,858.5078 6461.7578,858.6641 Q6462.4063,858.8203 6462.9688,859.1172 L6462.9688,861.8359 Q6462.3438,861.2578 6461.75,860.9844 Q6461.1563,860.7109 6460.5313,860.7109 Q6459.1875,860.7109 6458.5,861.7813 Q6457.8125,862.8516 6457.8125,864.9453 Q6457.8125,867.0391 6458.5,868.1094 Q6459.1875,869.1797 6460.5313,869.1797 Q6461.1563,869.1797 6461.75,868.9063 Q6462.3438,868.6328 6462.9688,868.0547 L6462.9688,870.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="114" x="6476" y="861.1387">«masd::exception»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="6474" y="876.9639">formatting_error</text><line style="stroke:#181818;stroke-width:0.5;" x1="6446" x2="6594" y1="885.2656" y2="885.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="6446" x2="6594" y1="893.2656" y2="893.2656"/></g><g id="elem_formatters::GMN100"><path d="M6382,663 L6382,688.1328 A0,0 0 0 0 6382,688.1328 L6516,688.1328 L6520,844.79 L6524,688.1328 L6658,688.1328 A0,0 0 0 0 6658,688.1328 L6658,673 L6648,663 L6382,663 A0,0 0 0 0 6382,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M6648,663 L6648,673 L6658,673 L6648,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="255" x="6388" y="680.0669">An error has occurred while formatting.</text></g><!--MD5=[8827349236e62713f58b315bab1a1220]
-class formatters::quote_type--><g id="elem_formatters::quote_type"><rect codeLine="280" fill="#F2DAFD" height="88.8594" id="formatters::quote_type" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="6103" y="828.5"/><ellipse cx="6118" cy="848.6328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6122.1094,854.6328 L6114.3906,854.6328 L6114.3906,842.2422 L6122.1094,842.2422 L6122.1094,844.3984 L6116.8438,844.3984 L6116.8438,847.0703 L6121.6094,847.0703 L6121.6094,849.2266 L6116.8438,849.2266 L6116.8438,852.4766 L6122.1094,852.4766 L6122.1094,854.6328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="6130" y="844.6387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="6156.5" y="860.4639">quote_type</text><line style="stroke:#181818;stroke-width:0.5;" x1="6104" x2="6262" y1="868.7656" y2="868.7656"/><ellipse cx="6114" cy="879.7656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="6123" y="885.7607">single_quote</text><ellipse cx="6114" cy="896.0625" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="6123" y="902.0576">double_quote</text><line style="stroke:#181818;stroke-width:0.5;" x1="6104" x2="6262" y1="909.3594" y2="909.3594"/></g><g id="elem_formatters::GMN104"><path d="M6019.5,663 L6019.5,688.1328 A0,0 0 0 0 6019.5,688.1328 L6179,688.1328 L6183,828.28 L6187,688.1328 L6346.5,688.1328 A0,0 0 0 0 6346.5,688.1328 L6346.5,673 L6336.5,663 L6019.5,663 A0,0 0 0 0 6019.5,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M6336.5,663 L6336.5,673 L6346.5,673 L6336.5,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="306" x="6025.5" y="680.0669">Types of quotes that can be used in streaming.</text></g><!--MD5=[e7bc48542f2062f40698931fd6e30935]
-class formatters::spacing_type--><g id="elem_formatters::spacing_type"><rect codeLine="289" fill="#F2DAFD" height="121.4531" id="formatters::spacing_type" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="7026" y="615"/><ellipse cx="7046.4" cy="635.1328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M7050.5094,641.1328 L7042.7906,641.1328 L7042.7906,628.7422 L7050.5094,628.7422 L7050.5094,630.8984 L7045.2438,630.8984 L7045.2438,633.5703 L7050.0094,633.5703 L7050.0094,635.7266 L7045.2438,635.7266 L7045.2438,638.9766 L7050.5094,638.9766 L7050.5094,641.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="7059.6" y="631.1387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="7079.1" y="646.9639">spacing_type</text><line style="stroke:#181818;stroke-width:0.5;" x1="7027" x2="7197" y1="655.2656" y2="655.2656"/><ellipse cx="7037" cy="666.2656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="7046" y="672.2607">no_space</text><ellipse cx="7037" cy="682.5625" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="7046" y="688.5576">left_space</text><ellipse cx="7037" cy="698.8594" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="7046" y="704.8545">right_space</text><ellipse cx="7037" cy="715.1563" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="7046" y="721.1514">left_and_right_space</text><line style="stroke:#181818;stroke-width:0.5;" x1="7027" x2="7197" y1="728.4531" y2="728.4531"/></g><!--MD5=[5f3a75d7cff5e1ee6c43dfa8f1979b13]
+class formatters::quote_type--><g id="elem_formatters::quote_type"><rect codeLine="280" fill="#F2DAFD" height="88.8594" id="formatters::quote_type" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="6103" y="828.5"/><ellipse cx="6118" cy="848.6328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6122.1094,854.6328 L6114.3906,854.6328 L6114.3906,842.2422 L6122.1094,842.2422 L6122.1094,844.3984 L6116.8438,844.3984 L6116.8438,847.0703 L6121.6094,847.0703 L6121.6094,849.2266 L6116.8438,849.2266 L6116.8438,852.4766 L6122.1094,852.4766 L6122.1094,854.6328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="6130" y="844.6387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="6156.5" y="860.4639">quote_type</text><line style="stroke:#181818;stroke-width:0.5;" x1="6104" x2="6262" y1="868.7656" y2="868.7656"/><ellipse cx="6114" cy="882.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="6123" y="885.7607">single_quote</text><ellipse cx="6114" cy="898.7109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="6123" y="902.0576">double_quote</text><line style="stroke:#181818;stroke-width:0.5;" x1="6104" x2="6262" y1="909.3594" y2="909.3594"/></g><g id="elem_formatters::GMN104"><path d="M6019.5,663 L6019.5,688.1328 A0,0 0 0 0 6019.5,688.1328 L6179,688.1328 L6183,828.28 L6187,688.1328 L6346.5,688.1328 A0,0 0 0 0 6346.5,688.1328 L6346.5,673 L6336.5,663 L6019.5,663 A0,0 0 0 0 6019.5,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M6336.5,663 L6336.5,673 L6346.5,673 L6336.5,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="306" x="6025.5" y="680.0669">Types of quotes that can be used in streaming.</text></g><!--MD5=[e7bc48542f2062f40698931fd6e30935]
+class formatters::spacing_type--><g id="elem_formatters::spacing_type"><rect codeLine="289" fill="#F2DAFD" height="121.4531" id="formatters::spacing_type" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172" x="7026" y="615"/><ellipse cx="7046.4" cy="635.1328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M7050.5094,641.1328 L7042.7906,641.1328 L7042.7906,628.7422 L7050.5094,628.7422 L7050.5094,630.8984 L7045.2438,630.8984 L7045.2438,633.5703 L7050.0094,633.5703 L7050.0094,635.7266 L7045.2438,635.7266 L7045.2438,638.9766 L7050.5094,638.9766 L7050.5094,641.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="7059.6" y="631.1387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="7079.1" y="646.9639">spacing_type</text><line style="stroke:#181818;stroke-width:0.5;" x1="7027" x2="7197" y1="655.2656" y2="655.2656"/><ellipse cx="7037" cy="668.9141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="7046" y="672.2607">no_space</text><ellipse cx="7037" cy="685.2109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="7046" y="688.5576">left_space</text><ellipse cx="7037" cy="701.5078" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="7046" y="704.8545">right_space</text><ellipse cx="7037" cy="717.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="7046" y="721.1514">left_and_right_space</text><line style="stroke:#181818;stroke-width:0.5;" x1="7027" x2="7197" y1="728.4531" y2="728.4531"/></g><!--MD5=[5f3a75d7cff5e1ee6c43dfa8f1979b13]
 class formatters::utility_formatter--><g id="elem_formatters::utility_formatter"><rect codeLine="296" fill="#FFFACD" height="56.2656" id="formatters::utility_formatter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="7233" y="647.5"/><ellipse cx="7248" cy="667.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M7250.9688,673.2734 Q7250.3906,673.5703 7249.75,673.7188 Q7249.1094,673.8672 7248.4063,673.8672 Q7245.9063,673.8672 7244.5859,672.2188 Q7243.2656,670.5703 7243.2656,667.4453 Q7243.2656,664.3203 7244.5859,662.6641 Q7245.9063,661.0078 7248.4063,661.0078 Q7249.1094,661.0078 7249.7578,661.1641 Q7250.4063,661.3203 7250.9688,661.6172 L7250.9688,664.3359 Q7250.3438,663.7578 7249.75,663.4844 Q7249.1563,663.2109 7248.5313,663.2109 Q7247.1875,663.2109 7246.5,664.2813 Q7245.8125,665.3516 7245.8125,667.4453 Q7245.8125,669.5391 7246.5,670.6094 Q7247.1875,671.6797 7248.5313,671.6797 Q7249.1563,671.6797 7249.75,671.4063 Q7250.3438,671.1328 7250.9688,670.5547 L7250.9688,673.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="7260" y="663.6387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114" x="7300" y="679.4639">utility_formatter</text><line style="stroke:#181818;stroke-width:0.5;" x1="7234" x2="7454" y1="687.7656" y2="687.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="7234" x2="7454" y1="695.7656" y2="695.7656"/></g><!--MD5=[93ecafbf46e095ffd7b72fbc786ec319]
 class formatters::indent_filter--><g id="elem_formatters::indent_filter"><rect codeLine="299" fill="#FFFACD" height="56.2656" id="formatters::indent_filter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="303" x="6637.5" y="845"/><ellipse cx="6652.5" cy="865.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6655.4688,870.7734 Q6654.8906,871.0703 6654.25,871.2188 Q6653.6094,871.3672 6652.9063,871.3672 Q6650.4063,871.3672 6649.0859,869.7188 Q6647.7656,868.0703 6647.7656,864.9453 Q6647.7656,861.8203 6649.0859,860.1641 Q6650.4063,858.5078 6652.9063,858.5078 Q6653.6094,858.5078 6654.2578,858.6641 Q6654.9063,858.8203 6655.4688,859.1172 L6655.4688,861.8359 Q6654.8438,861.2578 6654.25,860.9844 Q6653.6563,860.7109 6653.0313,860.7109 Q6651.6875,860.7109 6651,861.7813 Q6650.3125,862.8516 6650.3125,864.9453 Q6650.3125,867.0391 6651,868.1094 Q6651.6875,869.1797 6653.0313,869.1797 Q6653.6563,869.1797 6654.25,868.9063 Q6654.8438,868.6328 6655.4688,868.0547 L6655.4688,870.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="275" x="6664.5" y="861.1387">«dogen::handcrafted::typeable::header_only»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="6759.5" y="876.9639">indent_filter</text><line style="stroke:#181818;stroke-width:0.5;" x1="6638.5" x2="6939.5" y1="885.2656" y2="885.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="6638.5" x2="6939.5" y1="893.2656" y2="893.2656"/></g><!--MD5=[c4a2a224547e6ad9e9004d121706ebab]
-class formatters::comment_style--><g id="elem_formatters::comment_style"><rect codeLine="302" fill="#F2DAFD" height="154.0469" id="formatters::comment_style" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="5792" y="796"/><ellipse cx="5807" cy="816.1328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5811.1094,822.1328 L5803.3906,822.1328 L5803.3906,809.7422 L5811.1094,809.7422 L5811.1094,811.8984 L5805.8438,811.8984 L5805.8438,814.5703 L5810.6094,814.5703 L5810.6094,816.7266 L5805.8438,816.7266 L5805.8438,819.9766 L5811.1094,819.9766 L5811.1094,822.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="5819" y="812.1387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="5831" y="827.9639">comment_style</text><line style="stroke:#181818;stroke-width:0.5;" x1="5793" x2="5951" y1="836.2656" y2="836.2656"/><ellipse cx="5803" cy="847.2656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="5812" y="853.2607">c_style</text><ellipse cx="5803" cy="863.5625" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="5812" y="869.5576">cpp_style</text><ellipse cx="5803" cy="879.8594" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="5812" y="885.8545">csharp_style</text><ellipse cx="5803" cy="896.1563" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="5812" y="902.1514">shell_style</text><ellipse cx="5803" cy="912.4531" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="5812" y="918.4482">sql_style</text><ellipse cx="5803" cy="928.75" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="5812" y="934.7451">xml_style</text><line style="stroke:#181818;stroke-width:0.5;" x1="5793" x2="5951" y1="942.0469" y2="942.0469"/></g><g id="elem_formatters::GMN111"><path d="M5760,663 L5760,688.1328 A0,0 0 0 0 5760,688.1328 L5868,688.1328 L5872,795.85 L5876,688.1328 L5984,688.1328 A0,0 0 0 0 5984,688.1328 L5984,673 L5974,663 L5760,663 A0,0 0 0 0 5760,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M5974,663 L5974,673 L5984,673 L5974,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203" x="5766" y="680.0669">Supported styles of comments.</text></g><!--MD5=[037c65dc5cd7a19dc88e54035e9a4ad0]
+class formatters::comment_style--><g id="elem_formatters::comment_style"><rect codeLine="302" fill="#F2DAFD" height="154.0469" id="formatters::comment_style" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="5792" y="796"/><ellipse cx="5807" cy="816.1328" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5811.1094,822.1328 L5803.3906,822.1328 L5803.3906,809.7422 L5811.1094,809.7422 L5811.1094,811.8984 L5805.8438,811.8984 L5805.8438,814.5703 L5810.6094,814.5703 L5810.6094,816.7266 L5805.8438,816.7266 L5805.8438,819.9766 L5811.1094,819.9766 L5811.1094,822.1328 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="132" x="5819" y="812.1387">«masd::enumeration»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="5831" y="827.9639">comment_style</text><line style="stroke:#181818;stroke-width:0.5;" x1="5793" x2="5951" y1="836.2656" y2="836.2656"/><ellipse cx="5803" cy="849.9141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="5812" y="853.2607">c_style</text><ellipse cx="5803" cy="866.2109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="5812" y="869.5576">cpp_style</text><ellipse cx="5803" cy="882.5078" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="5812" y="885.8545">csharp_style</text><ellipse cx="5803" cy="898.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="5812" y="902.1514">shell_style</text><ellipse cx="5803" cy="915.1016" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="5812" y="918.4482">sql_style</text><ellipse cx="5803" cy="931.3984" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="5812" y="934.7451">xml_style</text><line style="stroke:#181818;stroke-width:0.5;" x1="5793" x2="5951" y1="942.0469" y2="942.0469"/></g><g id="elem_formatters::GMN111"><path d="M5760,663 L5760,688.1328 A0,0 0 0 0 5760,688.1328 L5868,688.1328 L5872,795.85 L5876,688.1328 L5984,688.1328 A0,0 0 0 0 5984,688.1328 L5984,673 L5974,663 L5760,663 A0,0 0 0 0 5760,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M5974,663 L5974,673 L5984,673 L5974,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203" x="5766" y="680.0669">Supported styles of comments.</text></g><!--MD5=[037c65dc5cd7a19dc88e54035e9a4ad0]
 class formatters::comment_formatter--><g id="elem_formatters::comment_formatter"><rect codeLine="315" fill="#FFFACD" height="56.2656" id="formatters::comment_formatter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="6976" y="845"/><ellipse cx="6991" cy="865.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M6993.9688,870.7734 Q6993.3906,871.0703 6992.75,871.2188 Q6992.1094,871.3672 6991.4063,871.3672 Q6988.9063,871.3672 6987.5859,869.7188 Q6986.2656,868.0703 6986.2656,864.9453 Q6986.2656,861.8203 6987.5859,860.1641 Q6988.9063,858.5078 6991.4063,858.5078 Q6992.1094,858.5078 6992.7578,858.6641 Q6993.4063,858.8203 6993.9688,859.1172 L6993.9688,861.8359 Q6993.3438,861.2578 6992.75,860.9844 Q6992.1563,860.7109 6991.5313,860.7109 Q6990.1875,860.7109 6989.5,861.7813 Q6988.8125,862.8516 6988.8125,864.9453 Q6988.8125,867.0391 6989.5,868.1094 Q6990.1875,869.1797 6991.5313,869.1797 Q6992.1563,869.1797 6992.75,868.9063 Q6993.3438,868.6328 6993.9688,868.0547 L6993.9688,870.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="7003" y="861.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="7028.5" y="876.9639">comment_formatter</text><line style="stroke:#181818;stroke-width:0.5;" x1="6977" x2="7197" y1="885.2656" y2="885.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="6977" x2="7197" y1="893.2656" y2="893.2656"/></g><!--MD5=[a6e4038cb9ea9eb09d3677a533d54f67]
 class formatters::sequence_formatter--><g id="elem_formatters::sequence_formatter"><rect codeLine="318" fill="#FFFACD" height="56.2656" id="formatters::sequence_formatter" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="7233" y="845"/><ellipse cx="7248" cy="865.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M7250.9688,870.7734 Q7250.3906,871.0703 7249.75,871.2188 Q7249.1094,871.3672 7248.4063,871.3672 Q7245.9063,871.3672 7244.5859,869.7188 Q7243.2656,868.0703 7243.2656,864.9453 Q7243.2656,861.8203 7244.5859,860.1641 Q7245.9063,858.5078 7248.4063,858.5078 Q7249.1094,858.5078 7249.7578,858.6641 Q7250.4063,858.8203 7250.9688,859.1172 L7250.9688,861.8359 Q7250.3438,861.2578 7249.75,860.9844 Q7249.1563,860.7109 7248.5313,860.7109 Q7247.1875,860.7109 7246.5,861.7813 Q7245.8125,862.8516 7245.8125,864.9453 Q7245.8125,867.0391 7246.5,868.1094 Q7247.1875,869.1797 7248.5313,869.1797 Q7249.1563,869.1797 7249.75,868.9063 Q7250.3438,868.6328 7250.9688,868.0547 L7250.9688,870.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="194" x="7260" y="861.1387">«dogen::handcrafted::typeable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="7285" y="876.9639">sequence_formatter</text><line style="stroke:#181818;stroke-width:0.5;" x1="7234" x2="7454" y1="885.2656" y2="885.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="7234" x2="7454" y1="893.2656" y2="893.2656"/></g><!--MD5=[065652f277f239168cda690a0f6e446a]
-class formatters::infix_configuration--><g id="elem_formatters::infix_configuration"><rect codeLine="321" fill="#F7E5FF" height="121.4531" id="formatters::infix_configuration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="164" x="5437" y="812.5"/><ellipse cx="5452" cy="832.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5454.9688,838.2734 Q5454.3906,838.5703 5453.75,838.7188 Q5453.1094,838.8672 5452.4063,838.8672 Q5449.9063,838.8672 5448.5859,837.2188 Q5447.2656,835.5703 5447.2656,832.4453 Q5447.2656,829.3203 5448.5859,827.6641 Q5449.9063,826.0078 5452.4063,826.0078 Q5453.1094,826.0078 5453.7578,826.1641 Q5454.4063,826.3203 5454.9688,826.6172 L5454.9688,829.3359 Q5454.3438,828.7578 5453.75,828.4844 Q5453.1563,828.2109 5452.5313,828.2109 Q5451.1875,828.2109 5450.5,829.2813 Q5449.8125,830.3516 5449.8125,832.4453 Q5449.8125,834.5391 5450.5,835.6094 Q5451.1875,836.6797 5452.5313,836.6797 Q5453.1563,836.6797 5453.75,836.4063 Q5454.3438,836.1328 5454.9688,835.5547 L5454.9688,838.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="5487" y="828.6387">«masd::fluent»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5466" y="844.4639">infix_configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="5438" x2="5600" y1="852.7656" y2="852.7656"/><ellipse cx="5448" cy="863.7656" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="5457" y="869.7607">first std::string</text><ellipse cx="5448" cy="880.0625" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5457" y="886.0576">not_first std::string</text><ellipse cx="5448" cy="896.3594" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="5457" y="902.3545">not_last std::string</text><ellipse cx="5448" cy="912.6563" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="5457" y="918.6514">last std::string</text><line style="stroke:#181818;stroke-width:0.5;" x1="5438" x2="5600" y1="925.9531" y2="925.9531"/></g><g id="elem_formatters::GMN117"><path d="M5313,663 L5313,688.1328 A0,0 0 0 0 5313,688.1328 L5515,688.1328 L5519,812.18 L5523,688.1328 L5725,688.1328 A0,0 0 0 0 5725,688.1328 L5725,673 L5715,663 L5313,663 A0,0 0 0 0 5313,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M5715,663 L5715,673 L5725,673 L5715,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="391" x="5319" y="680.0669">Configuration to use for a given infix in sequence formatter.</text></g><g id="elem_N1"><path d="M6,26 L6,111.6641 L370,111.6641 L370,36 L360,26 L6,26 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M360,26 L360,36 L370,36 L360,26 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="215" x="12" y="43.0669">Assorted utilities used by Dogen.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="12" y="58.1997"> </text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="131" x="12" y="73.3325">UML representation:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="12" y="88.4653"> </text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="343" x="12" y="103.5981">\image html dogen.utility/modeling/dogen.utility.svg</text></g><!--MD5=[4520fda4e10d4d791ce48fe025810cd4]
+class formatters::infix_configuration--><g id="elem_formatters::infix_configuration"><rect codeLine="321" fill="#F7E5FF" height="121.4531" id="formatters::infix_configuration" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="164" x="5437" y="812.5"/><ellipse cx="5452" cy="832.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M5454.9688,838.2734 Q5454.3906,838.5703 5453.75,838.7188 Q5453.1094,838.8672 5452.4063,838.8672 Q5449.9063,838.8672 5448.5859,837.2188 Q5447.2656,835.5703 5447.2656,832.4453 Q5447.2656,829.3203 5448.5859,827.6641 Q5449.9063,826.0078 5452.4063,826.0078 Q5453.1094,826.0078 5453.7578,826.1641 Q5454.4063,826.3203 5454.9688,826.6172 L5454.9688,829.3359 Q5454.3438,828.7578 5453.75,828.4844 Q5453.1563,828.2109 5452.5313,828.2109 Q5451.1875,828.2109 5450.5,829.2813 Q5449.8125,830.3516 5449.8125,832.4453 Q5449.8125,834.5391 5450.5,835.6094 Q5451.1875,836.6797 5452.5313,836.6797 Q5453.1563,836.6797 5453.75,836.4063 Q5454.3438,836.1328 5454.9688,835.5547 L5454.9688,838.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="90" x="5487" y="828.6387">«masd::fluent»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5466" y="844.4639">infix_configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="5438" x2="5600" y1="852.7656" y2="852.7656"/><ellipse cx="5448" cy="866.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="5457" y="869.7607">first std::string</text><ellipse cx="5448" cy="882.7109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="5457" y="886.0576">not_first std::string</text><ellipse cx="5448" cy="899.0078" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="5457" y="902.3545">not_last std::string</text><ellipse cx="5448" cy="915.3047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="5457" y="918.6514">last std::string</text><line style="stroke:#181818;stroke-width:0.5;" x1="5438" x2="5600" y1="925.9531" y2="925.9531"/></g><g id="elem_formatters::GMN117"><path d="M5313,663 L5313,688.1328 A0,0 0 0 0 5313,688.1328 L5515,688.1328 L5519,812.18 L5523,688.1328 L5725,688.1328 A0,0 0 0 0 5725,688.1328 L5725,673 L5715,663 L5313,663 A0,0 0 0 0 5313,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M5715,663 L5715,673 L5725,673 L5715,663 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="391" x="5319" y="680.0669">Configuration to use for a given infix in sequence formatter.</text></g><g id="elem_N1"><path d="M6,26 L6,111.6641 L370,111.6641 L370,36 L360,26 L6,26 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M360,26 L360,36 L370,36 L360,26 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="215" x="12" y="43.0669">Assorted utilities used by Dogen.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="12" y="58.1997"> </text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="131" x="12" y="73.3325">UML representation:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="12" y="88.4653"> </text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="343" x="12" y="103.5981">\image html dogen.utility/modeling/dogen.utility.svg</text></g><!--MD5=[4520fda4e10d4d791ce48fe025810cd4]
 class main--><g id="elem_main"><rect codeLine="334" fill="#DDA9F3" height="56.2656" id="main" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="267" x="405.5" y="41"/><ellipse cx="420.5" cy="61.1328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M423.4688,66.7734 Q422.8906,67.0703 422.25,67.2188 Q421.6094,67.3672 420.9063,67.3672 Q418.4063,67.3672 417.0859,65.7188 Q415.7656,64.0703 415.7656,60.9453 Q415.7656,57.8203 417.0859,56.1641 Q418.4063,54.5078 420.9063,54.5078 Q421.6094,54.5078 422.2578,54.6641 Q422.9063,54.8203 423.4688,55.1172 L423.4688,57.8359 Q422.8438,57.2578 422.25,56.9844 Q421.6563,56.7109 421.0313,56.7109 Q419.6875,56.7109 419,57.7813 Q418.3125,58.8516 418.3125,60.9453 Q418.3125,63.0391 419,64.1094 Q419.6875,65.1797 421.0313,65.1797 Q421.6563,65.1797 422.25,64.9063 Q422.8438,64.6328 423.4688,64.0547 L423.4688,66.7734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="239" x="432.5" y="57.1387">«masd::entry_point, dogen::untypable»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="534" y="72.9639">main</text><line style="stroke:#181818;stroke-width:0.5;" x1="406.5" x2="671.5" y1="81.2656" y2="81.2656"/><line style="stroke:#181818;stroke-width:0.5;" x1="406.5" x2="671.5" y1="89.2656" y2="89.2656"/></g><!--MD5=[ba83386d426114557685538e96aa6f68]
-class CMakeLists--><g id="elem_CMakeLists"><rect codeLine="337" fill="#99CB99" height="56.2656" id="CMakeLists" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="360" x="8" y="204.5"/><ellipse cx="23" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.9688,230.2734 Q25.3906,230.5703 24.75,230.7188 Q24.1094,230.8672 23.4063,230.8672 Q20.9063,230.8672 19.5859,229.2188 Q18.2656,227.5703 18.2656,224.4453 Q18.2656,221.3203 19.5859,219.6641 Q20.9063,218.0078 23.4063,218.0078 Q24.1094,218.0078 24.7578,218.1641 Q25.4063,218.3203 25.9688,218.6172 L25.9688,221.3359 Q25.3438,220.7578 24.75,220.4844 Q24.1563,220.2109 23.5313,220.2109 Q22.1875,220.2109 21.5,221.2813 Q20.8125,222.3516 20.8125,224.4453 Q20.8125,226.5391 21.5,227.6094 Q22.1875,228.6797 23.5313,228.6797 Q24.1563,228.6797 24.75,228.4063 Q25.3438,228.1328 25.9688,227.5547 L25.9688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="332" x="35" y="220.6387">«masd::build::cmakelists, dogen::handcrafted::cmake»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="161.5" y="236.4639">CMakeLists</text><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="367" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="367" y1="252.7656" y2="252.7656"/></g><!--MD5=[2559f8586bed6994aaff5fccfe2e1961]
-link N1 to main--></g></svg>
+class CMakeLists--><g id="elem_CMakeLists"><rect codeLine="337" fill="#99CB99" height="56.2656" id="CMakeLists" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="360" x="8" y="204.5"/><ellipse cx="23" cy="224.6328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.9688,230.2734 Q25.3906,230.5703 24.75,230.7188 Q24.1094,230.8672 23.4063,230.8672 Q20.9063,230.8672 19.5859,229.2188 Q18.2656,227.5703 18.2656,224.4453 Q18.2656,221.3203 19.5859,219.6641 Q20.9063,218.0078 23.4063,218.0078 Q24.1094,218.0078 24.7578,218.1641 Q25.4063,218.3203 25.9688,218.6172 L25.9688,221.3359 Q25.3438,220.7578 24.75,220.4844 Q24.1563,220.2109 23.5313,220.2109 Q22.1875,220.2109 21.5,221.2813 Q20.8125,222.3516 20.8125,224.4453 Q20.8125,226.5391 21.5,227.6094 Q22.1875,228.6797 23.5313,228.6797 Q24.1563,228.6797 24.75,228.4063 Q25.3438,228.1328 25.9688,227.5547 L25.9688,230.2734 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="332" x="35" y="220.6387">«masd::build::cmakelists, dogen::handcrafted::cmake»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="161.5" y="236.4639">CMakeLists</text><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="367" y1="244.7656" y2="244.7656"/><line style="stroke:#181818;stroke-width:0.5;" x1="9" x2="367" y1="252.7656" y2="252.7656"/></g><!--MD5=[d926a6738259c4451be076ee212ba4c9]
+@startuml
+set namespaceSeparator ::
+note as N1
+Assorted utilities used by Dogen.
+
+UML representation:
+
+\image html dogen.utility/modeling/dogen.utility.svg
+end note
+
+namespace exception #F2F2F2 {
+    class invalid_enum_value <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class utility_exception <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+}
+
+namespace filesystem #F2F2F2 {
+    class file <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class file_not_found <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of file_not_found
+File was not found.
+    end note
+
+    class io_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of io_error
+An error occurred whilst performing an IO operation.
+    end note
+
+    class path <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace hash #F2F2F2 {
+    class combine <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class list_hash <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class sha1_hasher <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace io #F2F2F2 {
+    class array_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class forward_list_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class jsonify_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class list_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class map_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class memory_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class optional_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class pair_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class set_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class shared_ptr_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class typeindex_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class unordered_map_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class unordered_set_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class vector_io <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+}
+
+namespace log #F2F2F2 {
+    class logger <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class lifecycle_manager <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class scoped_lifecycle_manager <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class severity_level <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class logging_configuration <<masd::fluent>> #F7E5FF {
+        +{field} severity std::string
+        +{field} filename std::string
+        +{field} output_to_console bool
+        +{field} output_directory boost::filesystem::path
+    }
+
+    note top of logging_configuration
+Options related to logging.
+    end note
+
+    class invalid_logging_configuration <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of invalid_logging_configuration
+The values supplied for the logging configuration are not valid.
+    end note
+
+    class logging_configuration_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace serialization #F2F2F2 {
+    class archive_types <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class xml_helper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class path <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+}
+
+namespace string #F2F2F2 {
+    class splitter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class differ <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace test #F2F2F2 {
+    class asserter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class bytewise_file_asserter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class file_asserter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class logging <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class xml_serialization_helper <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class exception_checkers <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class fixture <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class macros <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+}
+
+namespace test_data #F2F2F2 {
+    class filesystem_tests <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class generate_container <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class generator <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class northwind <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class resolver <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class sequence <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class tds_test_good <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class test_data <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class validating_resolver <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class xml_reader <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class dogen_product <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class cpp_ref_impl_product <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class csharp_ref_impl_product <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class test_data_exception <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of test_data_exception
+An error occurred whilst obtaining the test data.
+    end note
+
+    class frozen_product <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace xml #F2F2F2 {
+    class exception <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class node_types <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    class node_types_io <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class text_reader <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class text_reader_io <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace environment #F2F2F2 {
+    class environment_exception <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of environment_exception
+There was an error reading an environment variable.
+    end note
+
+    class variable_reader <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
+namespace formatters #F2F2F2 {
+    note as formatters_1
+Contains all of the formatting primitives
+that are not associated with any particular
+model.
+    end note
+
+    class formatting_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of formatting_error
+An error has occurred while formatting.
+    end note
+
+    enum quote_type <<masd::enumeration>> #F2DAFD {
+        +{field} single_quote
+        +{field} double_quote
+    }
+
+    note top of quote_type
+Types of quotes that can be used in streaming.
+    end note
+
+    enum spacing_type <<masd::enumeration>> #F2DAFD {
+        +{field} no_space
+        +{field} left_space
+        +{field} right_space
+        +{field} left_and_right_space
+    }
+
+    class utility_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class indent_filter <<dogen::handcrafted::typeable::header_only>> #FFFACD {
+    }
+
+    enum comment_style <<masd::enumeration>> #F2DAFD {
+        +{field} c_style
+        +{field} cpp_style
+        +{field} csharp_style
+        +{field} shell_style
+        +{field} sql_style
+        +{field} xml_style
+    }
+
+    note top of comment_style
+Supported styles of comments.
+    end note
+
+    class comment_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class sequence_formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class infix_configuration <<masd::fluent>> #F7E5FF {
+        +{field} first std::string
+        +{field} not_first std::string
+        +{field} not_last std::string
+        +{field} last std::string
+    }
+
+    note top of infix_configuration
+Configuration to use for a given infix in sequence formatter.
+    end note
+
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+@enduml
+
+PlantUML version 1.2022.9(Tue Sep 27 17:10:06 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>
