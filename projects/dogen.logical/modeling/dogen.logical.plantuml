@@ -334,6 +334,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
     model o-- assistant_properties
     model o-- aspect_properties
     model o-- streaming_properties
+    model o-- entities::build::element_repository
 
     note top of model
 Intermediate representation of a masd model.
