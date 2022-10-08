@@ -1418,9 +1418,6 @@ Part whithin a backend.
 
 }
 
-class traits <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
 namespace transforms #F2F2F2 {
     note as transforms_1
 Houses all of the transformations supported by logical.
@@ -1839,71 +1836,25 @@ namespace features #F2F2F2 {
 Defines all features used by the logical model.
     end note
 
-    class type_parameters <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} variable_number_of_parameters masd::variability::boolean
-        +{field} count masd::variability::number
-        +{field} always_in_heap masd::variability::boolean
-    }
-
-    note top of type_parameters
-Parameters to configure generic types.
-    end note
-
-    class initializer <<masd::variability::initializer>> #A9CDCD {
-    }
-
-    class enumeration <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} use_implementation_defined_underlying_element masd::variability::boolean
-        +{field} underlying_element masd::variability::text
-        +{field} use_implementation_defined_enumerator_values masd::variability::boolean
-        +{field} add_invalid_enumerator masd::variability::boolean
-    }
-
-    note top of enumeration
-Parameters related to enumerations.
-    end note
-
     class enumerator <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} value masd::variability::text
     }
+
+    enumerator o-[hidden]d- mapping
 
     note top of enumerator
 Parameters related to enumerators.
     end note
 
-    class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} is_final masd::variability::boolean
-        +{field} parent masd::variability::text
+    class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} target masd::variability::text
+        +{field} destination masd::variability::text
     }
 
-    note top of generalization
-Features related to the generalization relationship.
-    end note
+    mapping o-[hidden]d- orm
 
-    class origin <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} masd.codec.is_proxy_model masd::variability::boolean
-    }
-
-    note top of origin
-Features related to the origin of the model.
-    end note
-
-    class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} output_technical_space masd::variability::text_collection
-    }
-
-    note top of output_technical_space
-Features related to the output technical space.
-    end note
-
-    class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} underlying_element masd::variability::text
-        +{field} is_nullable masd::variability::boolean
-        +{field} use_type_aliasing masd::variability::boolean
-    }
-
-    note top of primitive
-Features related to primitive elements.
+    note top of mapping
+Meta-data related to element mapping.
     end note
 
     class orm <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1924,14 +1875,144 @@ Features related to primitive elements.
 Features related to ORM support.
     end note
 
+    class labelling <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} masd.label masd::variability::key_value_pair
+    }
+
+    orm  o-[hidden]d- labelling
+
+    note top of labelling
+Features related to labels.
+    end note
+
+    class wale <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} text_template masd::variability::text
+        +{field} kvp masd::variability::key_value_pair
+    }
+
+    labelling  o-[hidden]d- wale
+
+    note top of wale
+Wale related features.
+    end note
+
+    class initializer <<masd::variability::initializer>> #A9CDCD {
+    }
+
+    initializer o-[hidden]d- type_parameters
+
+    class type_parameters <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} variable_number_of_parameters masd::variability::boolean
+        +{field} count masd::variability::number
+        +{field} always_in_heap masd::variability::boolean
+    }
+
+    type_parameters o-[hidden]d- enumeration
+
+    note top of type_parameters
+Parameters to configure generic types.
+    end note
+
+    class enumeration <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} use_implementation_defined_underlying_element masd::variability::boolean
+        +{field} underlying_element masd::variability::text
+        +{field} use_implementation_defined_enumerator_values masd::variability::boolean
+        +{field} add_invalid_enumerator masd::variability::boolean
+    }
+
+    enumeration o-[hidden]d- technical_space_version
+
+    note top of enumeration
+Parameters related to enumerations.
+    end note
+
+    class technical_space_version <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} standard masd::variability::text
+    }
+
+    technical_space_version o-[hidden]d- technical_space_properties
+
+    class technical_space_properties <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} cpp.aspect.requires_manual_default_constructor masd::variability::boolean
+        +{field} cpp.aspect.requires_manual_move_constructor masd::variability::boolean
+        +{field} cpp.aspect.requires_stream_manipulators masd::variability::boolean
+    }
+
+    technical_space_properties o-[hidden]d- output_technical_space
+
+    class output_technical_space <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} output_technical_space masd::variability::text_collection
+    }
+
+    output_technical_space o-[hidden]d- aspect
+
+    note top of output_technical_space
+Features related to the output technical space.
+    end note
+
+    class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} requires_static_reference_equals masd::variability::boolean
+    }
+
+    class generalization <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} is_final masd::variability::boolean
+        +{field} parent masd::variability::text
+    }
+
+    generalization o-[hidden]d- decoration_modeline
+
+    note top of generalization
+Features related to the generalization relationship.
+    end note
+
     class decoration_modeline <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} editor masd::variability::text
         +{field} location masd::variability::text
         +{field} technical_space masd::variability::text
     }
 
+    decoration_modeline o-[hidden]d- decoration
+
     note top of decoration_modeline
 Modeline properties.
+    end note
+
+    class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} enabled masd::variability::boolean
+        +{field} copyright_notice masd::variability::text_collection
+        +{field} licence_name masd::variability::text
+        +{field} modeline_group_name masd::variability::text
+        +{field} marker_name masd::variability::text
+    }
+
+    decoration o-[hidden]d- streaming
+
+    class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} string_conversion_method masd::variability::text
+        +{field} requires_quoting masd::variability::boolean
+        +{field} remove_unprintable_characters masd::variability::boolean
+    }
+
+    streaming o-[hidden]d- origin
+
+    class origin <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} masd.codec.is_proxy_model masd::variability::boolean
+    }
+
+    origin o-[hidden]d- primitive
+
+    note top of origin
+Features related to the origin of the model.
+    end note
+
+    class primitive <<masd::variability::feature_bundle>> #BAD7D7 {
+        +{field} underlying_element masd::variability::text
+        +{field} is_nullable masd::variability::boolean
+        +{field} use_type_aliasing masd::variability::boolean
+    }
+
+    note top of primitive
+Features related to primitive elements.
     end note
 
     class variability_templates <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1942,17 +2023,10 @@ Modeline properties.
         +{field} default_value_override masd::variability::key_value_pair
     }
 
+    variability_templates o-[hidden]d- variability_bundle
+
     note top of variability_templates
 Features related to the processing of variability for feature and profile templates.
-    end note
-
-    class mapping <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} target masd::variability::text
-        +{field} destination masd::variability::text
-    }
-
-    note top of mapping
-Meta-data related to element mapping.
     end note
 
     class variability_bundle <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -1962,6 +2036,8 @@ Meta-data related to element mapping.
         +{field} instantiation_domain_name masd::variability::text
         +{field} key_prefix masd::variability::text
     }
+
+    variability_bundle o-[hidden]d- variability_entry
 
     note top of variability_bundle
 Features related to the processing of variability for feature bundles.
@@ -1973,6 +2049,8 @@ Features related to the processing of variability for feature bundles.
         +{field} instantiation_domain_name masd::variability::text
     }
 
+    variability_entry o-[hidden]d- variability_profile
+
     note top of variability_entry
 Features related to the processing of variability for profiles and profile templates.
     end note
@@ -1982,6 +2060,8 @@ Features related to the processing of variability for profiles and profile templ
         +{field} key_prefix masd::variability::text
         +{field} binding_point masd::variability::text
     }
+
+    variability_profile o-[hidden]d- physical
 
     note top of variability_profile
 Features related to the processing of variability for profile entries.
@@ -1998,33 +2078,10 @@ Features related to the processing of variability for profile entries.
         +{field} postfix masd::variability::text
     }
 
+    physical o-[hidden]d- physical_relations
+
     note top of physical
 Features required for physical elements.
-    end note
-
-    class wale <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} text_template masd::variability::text
-        +{field} kvp masd::variability::key_value_pair
-    }
-
-    note top of wale
-Wale related features.
-    end note
-
-    class decoration <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} enabled masd::variability::boolean
-        +{field} copyright_notice masd::variability::text_collection
-        +{field} licence_name masd::variability::text
-        +{field} modeline_group_name masd::variability::text
-        +{field} marker_name masd::variability::text
-    }
-
-    class labelling <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} masd.label masd::variability::key_value_pair
-    }
-
-    note top of labelling
-Features related to labels.
     end note
 
     class physical_relations <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -2033,29 +2090,17 @@ Features related to labels.
         +{field} constant_relation masd::variability::comma_separated_collection
     }
 
+    physical_relations o-[hidden]d- helpers
+
     note top of physical_relations
 Features related to relations at the physical level.
     end note
 
-    class streaming <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} string_conversion_method masd::variability::text
-        +{field} requires_quoting masd::variability::boolean
-        +{field} remove_unprintable_characters masd::variability::boolean
-    }
-
-    class technical_space_version <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} standard masd::variability::text
-    }
-
-    class technical_space_properties <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} cpp.aspect.requires_manual_default_constructor masd::variability::boolean
-        +{field} cpp.aspect.requires_manual_move_constructor masd::variability::boolean
-        +{field} cpp.aspect.requires_stream_manipulators masd::variability::boolean
-    }
-
     class helpers <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} helper.family masd::variability::text
     }
+
+    helpers o-[hidden]d- physical_helpers
 
     class physical_helpers <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} family masd::variability::text
@@ -2064,28 +2109,17 @@ Features related to relations at the physical level.
         +{field} wale_template_reference masd::variability::text
     }
 
+    physical_helpers o-[hidden]d- assistant
+
     note top of physical_helpers
 Features related to the helpers in physical domain.
     end note
-
-    class aspect <<masd::variability::feature_bundle>> #BAD7D7 {
-        +{field} requires_static_reference_equals masd::variability::boolean
-    }
 
     class assistant <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} requires_assistance masd::variability::boolean
         +{field} method_postfix masd::variability::text
     }
 
-}
-
-class registrar <<masd::serialization::type_registrar>> #00FF00 {
-}
-
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
-}
-
-class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
 
 namespace formatters #F2F2F2 {
@@ -2096,11 +2130,17 @@ Contains formatting classes for the logical model.
     class decoration_formatter <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    decoration_formatter o-l- formatting_error: throws
+
     class generation_marker_formatter <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    generation_marker_formatter o-r- formatting_error: throws
+
     class modeline_formatter <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    modeline_formatter o-- formatting_error: throws
 
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
@@ -2109,6 +2149,18 @@ Contains formatting classes for the logical model.
 An error has occurred while formatting.
     end note
 
+}
+
+class traits <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+class registrar <<masd::serialization::type_registrar>> #00FF00 {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
 
 @enduml

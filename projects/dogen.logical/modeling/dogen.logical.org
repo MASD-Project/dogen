@@ -3440,12 +3440,6 @@ Extension to use for the files of this kind.
 
 Relation information for this helper.
 
-* traits                                                            :element:
-  :PROPERTIES:
-  :custom_id: 71E13C4D-50FC-2C74-D053-CBD22EFACCF6
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: DB93F2E9-DC61-DF44-B453-FD72DFFF20B2
@@ -4194,89 +4188,13 @@ An error has occurred in a factory.
 
 Defines all features used by the logical model.
 
-** type parameters                                                  :element:
-   :PROPERTIES:
-   :custom_id: 689689EA-B2A5-4B64-8ED3-949A3FC6CEA4
-   :masd.variability.default_binding_point: element
-   :masd.variability.key_prefix: masd.type_parameters
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Parameters to configure generic types.
-
-*** variable number of parameters                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-*** count                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::number
-    :masd.codec.value: "0"
-    :END:
-
-*** always in heap                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-** initializer                                                      :element:
-   :PROPERTIES:
-   :custom_id: D2E3FF6C-F16A-2CA4-FC83-8998A02E8368
-   :masd.codec.stereotypes: masd::variability::initializer
-   :END:
-
-** enumeration                                                      :element:
-   :PROPERTIES:
-   :custom_id: 60A7765B-3CE2-F404-BD0B-E27BC195D496
-   :masd.variability.default_binding_point: element
-   :masd.variability.key_prefix: masd.enumeration
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Parameters related to enumerations.
-
-*** use implementation defined underlying element                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, it uses the default implementation defined underlying element for the
-technical space targeted.
-
-*** underlying element                                            :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Name of the underlying element to use for the enumeration.
-
-*** use implementation defined enumerator values                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, uses the enumeration values supplied by the underlying technical space.
-
-*** add invalid enumerator                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "true"
-    :END:
-
-If true, adds an enumerator to represent an invalid choice.
-
 ** enumerator                                                       :element:
    :PROPERTIES:
    :custom_id: 29191532-9827-A164-D513-AF1087D1644D
    :masd.variability.default_binding_point: property
    :masd.variability.key_prefix: masd.enumerator
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: enumerator o-[hidden]d- mapping
    :END:
 
 Parameters related to enumerators.
@@ -4289,101 +4207,32 @@ Parameters related to enumerators.
 
 Value to use for this enumerator. Must be unique for an enumeration.
 
-** generalization                                                   :element:
+** mapping                                                          :element:
    :PROPERTIES:
-   :custom_id: FA5544B8-16D1-C344-399B-C8D4E6847AFE
-   :masd.variability.default_binding_point: element
-   :masd.variability.key_prefix: masd.generalization
+   :custom_id: 3E3A3036-2786-E534-BF43-B1C3A47BD8AA
+   :masd.variability.default_binding_point: any
+   :masd.variability.key_prefix: masd.mapping
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: mapping o-[hidden]d- orm
    :END:
 
-Features related to the generalization relationship.
+Meta-data related to element mapping.
 
-*** is final                                                      :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::boolean
-    :END:
-
-Whether to mark a type as final or not.
-
-*** parent                                                        :attribute:
+*** target                                                        :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
     :END:
 
-Name of the parent of the current element.
+Type that is the source of the mapping.
 
-** origin                                                           :element:
-   :PROPERTIES:
-   :custom_id: 17D778FE-4DCA-64E4-9FEB-3DF52E090156
-   :masd.variability.default_binding_point: global
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Features related to the origin of the model.
-
-*** masd.codec.is proxy model                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, sets the origin of the model to "proxy model".
-
-** output technical space                                           :element:
-   :PROPERTIES:
-   :custom_id: 14D792E3-609E-0164-6B4B-DBEC8168F3C0
-   :masd.variability.default_binding_point: global
-   :masd.variability.key_prefix: masd.physical
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Features related to the output technical space.
-
-*** output technical space                                        :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text_collection
-    :END:
-
-Set of output technical spaces that this model targets.
-
-** primitive                                                        :element:
-   :PROPERTIES:
-   :custom_id: 7551BABE-F5ED-2FD4-C453-191E892F1239
-   :masd.variability.default_binding_point: element
-   :masd.variability.key_prefix: masd.primitive
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Features related to primitive elements.
-
-*** underlying element                                            :attribute:
+*** destination                                                   :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true
     :masd.codec.type: masd::variability::text
     :END:
 
-Name of the underlying element to use for the primitive.
-
-*** is nullable                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, the primitive can be null.
-
-*** use type aliasing                                             :attribute:
-    :PROPERTIES:
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, use type aliasing to implement the primitive if the technical space supports
-it.
+Type that is the destination of the mapping.
 
 ** orm                                                              :element:
    :PROPERTIES:
@@ -4502,12 +4351,250 @@ Raw ODB pragmas that are applied as-is by the system.
 Use these when you need some functionality which is not natively supported by
 ORM in Dogen.
 
+** labelling                                                        :element:
+   :PROPERTIES:
+   :custom_id: F072CD7C-314E-D6A4-2B93-AB44966893EB
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: orm  o-[hidden]d- labelling
+   :END:
+
+Features related to labels.
+
+*** masd.label                                                    :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::key_value_pair
+    :END:
+
+Labels to attach to modeling elements. Key must be unique.
+
+** wale                                                             :element:
+   :PROPERTIES:
+   :custom_id: A0285AE5-4C68-D624-1FCB-89CA9C7BEA47
+   :masd.variability.default_binding_point: any
+   :masd.variability.key_prefix: masd.wale
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: labelling  o-[hidden]d- wale
+   :END:
+
+Wale related features.
+
+*** text template                                                 :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the wale text template to instantiate, if any.
+
+*** kvp                                                           :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::key_value_pair
+    :END:
+
+Array of wale KVPs to use in template instantiation.
+
+** initializer                                                      :element:
+   :PROPERTIES:
+   :custom_id: D2E3FF6C-F16A-2CA4-FC83-8998A02E8368
+   :masd.codec.stereotypes: masd::variability::initializer
+   :masd.codec.plantuml: initializer o-[hidden]d- type_parameters
+   :END:
+
+** type parameters                                                  :element:
+   :PROPERTIES:
+   :custom_id: 689689EA-B2A5-4B64-8ED3-949A3FC6CEA4
+   :masd.variability.default_binding_point: element
+   :masd.variability.key_prefix: masd.type_parameters
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: type_parameters o-[hidden]d- enumeration
+   :END:
+
+Parameters to configure generic types.
+
+*** variable number of parameters                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+*** count                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::number
+    :masd.codec.value: "0"
+    :END:
+
+*** always in heap                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+** enumeration                                                      :element:
+   :PROPERTIES:
+   :custom_id: 60A7765B-3CE2-F404-BD0B-E27BC195D496
+   :masd.variability.default_binding_point: element
+   :masd.variability.key_prefix: masd.enumeration
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: enumeration o-[hidden]d- technical_space_version
+   :END:
+
+Parameters related to enumerations.
+
+*** use implementation defined underlying element                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, it uses the default implementation defined underlying element for the
+technical space targeted.
+
+*** underlying element                                            :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the underlying element to use for the enumeration.
+
+*** use implementation defined enumerator values                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, uses the enumeration values supplied by the underlying technical space.
+
+*** add invalid enumerator                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "true"
+    :END:
+
+If true, adds an enumerator to represent an invalid choice.
+
+** technical space version                                          :element:
+   :PROPERTIES:
+   :custom_id: 2751BB2B-E3E8-8AF4-B59B-40FD6C70C08E
+   :masd.variability.key_prefix: masd.cpp
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: technical_space_version o-[hidden]d- technical_space_properties
+   :END:
+
+*** standard                                                      :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: global
+    :masd.codec.type: masd::variability::text
+    :masd.codec.value: "c++-14"
+    :END:
+
+Which version of C++ to use.
+
+** technical space properties                                       :element:
+   :PROPERTIES:
+   :custom_id: 99FEB954-4D99-0684-9153-1211494B2245
+   :masd.variability.key_prefix: masd
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: technical_space_properties o-[hidden]d- output_technical_space
+   :END:
+
+*** cpp.aspect.requires manual default constructor                :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, the modeling element requires a manual defaul constructor.
+
+*** cpp.aspect.requires manual move constructor                   :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, the modeling element requires a manual move constructor.
+
+*** cpp.aspect.requires stream manipulators                       :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, the modeling element requires stream manipulators.
+
+** output technical space                                           :element:
+   :PROPERTIES:
+   :custom_id: 14D792E3-609E-0164-6B4B-DBEC8168F3C0
+   :masd.variability.default_binding_point: global
+   :masd.variability.key_prefix: masd.physical
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: output_technical_space o-[hidden]d- aspect
+  :END:
+
+Features related to the output technical space.
+
+*** output technical space                                        :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text_collection
+    :END:
+
+Set of output technical spaces that this model targets.
+
+** aspect                                                           :element:
+   :PROPERTIES:
+   :custom_id: E9D31ABD-19C4-6A94-F9DB-868B89907197
+   :masd.variability.key_prefix: masd.csharp.aspect
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :END:
+
+*** requires static reference equals                              :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "true"
+    :END:
+
+** generalization                                                   :element:
+   :PROPERTIES:
+   :custom_id: FA5544B8-16D1-C344-399B-C8D4E6847AFE
+   :masd.variability.default_binding_point: element
+   :masd.variability.key_prefix: masd.generalization
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: generalization o-[hidden]d- decoration_modeline
+   :END:
+
+Features related to the generalization relationship.
+
+*** is final                                                      :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::boolean
+    :END:
+
+Whether to mark a type as final or not.
+
+*** parent                                                        :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the parent of the current element.
+
 ** decoration modeline                                              :element:
    :PROPERTIES:
    :custom_id: 811695B9-A29C-6544-C6EB-0E0B33993010
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.decoration.modeline
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: decoration_modeline o-[hidden]d- decoration
    :END:
 
 Modeline properties.
@@ -4536,11 +4623,149 @@ Where to place the modeline.
 
 Technical space targeted by the modeline.
 
+** decoration                                                       :element:
+   :PROPERTIES:
+   :custom_id: 3C43259E-793C-2784-28E3-D3D9B6AFEFB3
+   :masd.variability.default_binding_point: any
+   :masd.variability.key_prefix: masd.decoration
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: decoration o-[hidden]d- streaming
+   :END:
+
+*** enabled                                                       :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::boolean
+    :END:
+
+If true, decorations are enabled on this modeling element.
+
+*** copyright notice                                              :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text_collection
+    :END:
+
+Copyright notices for this modeling element.
+
+*** licence name                                                  :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the licence to use for this modeling element.
+
+*** modeline group name                                           :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the modeline group for this modeling element.
+
+*** marker name                                                   :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the decoration marker to use for this modeling element.
+
+** streaming                                                        :element:
+   :PROPERTIES:
+   :custom_id: 33CB2465-AC69-2124-40C3-801486F226AE
+   :masd.variability.key_prefix: masd.cpp.streaming
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: streaming o-[hidden]d- origin
+   :END:
+
+*** string conversion method                                      :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::text
+    :masd.codec.value: ""
+    :END:
+
+Which conversion method to use to convert strings.
+
+*** requires quoting                                              :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, streaming this type must be preceeded by quoting.
+
+*** remove unprintable characters                                 :attribute:
+    :PROPERTIES:
+    :masd.variability.binding_point: element
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, streaming this type requires removing unprintable characters.
+
+** origin                                                           :element:
+   :PROPERTIES:
+   :custom_id: 17D778FE-4DCA-64E4-9FEB-3DF52E090156
+   :masd.variability.default_binding_point: global
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: origin o-[hidden]d- primitive
+   :END:
+
+Features related to the origin of the model.
+
+*** masd.codec.is proxy model                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, sets the origin of the model to "proxy model".
+
+** primitive                                                        :element:
+   :PROPERTIES:
+   :custom_id: 7551BABE-F5ED-2FD4-C453-191E892F1239
+   :masd.variability.default_binding_point: element
+   :masd.variability.key_prefix: masd.primitive
+   :masd.codec.stereotypes: masd::variability::feature_bundle
+   :END:
+
+Features related to primitive elements.
+
+*** underlying element                                            :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::text
+    :END:
+
+Name of the underlying element to use for the primitive.
+
+*** is nullable                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, the primitive can be null.
+
+*** use type aliasing                                             :attribute:
+    :PROPERTIES:
+    :masd.codec.type: masd::variability::boolean
+    :masd.codec.value: "false"
+    :END:
+
+If true, use type aliasing to implement the primitive if the technical space supports
+it.
+
 ** variability templates                                            :element:
    :PROPERTIES:
    :custom_id: 72F426E7-B3F7-CA24-2643-8F49D48699AB
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: variability_templates o-[hidden]d- variability_bundle
    :END:
 
 Features related to the processing of variability for feature and profile templates.
@@ -4595,37 +4820,12 @@ Default values to override the "default" default value.
 
 These match on keys ending with the specified string.
 
-** mapping                                                          :element:
-   :PROPERTIES:
-   :custom_id: 3E3A3036-2786-E534-BF43-B1C3A47BD8AA
-   :masd.variability.default_binding_point: any
-   :masd.variability.key_prefix: masd.mapping
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Meta-data related to element mapping.
-
-*** target                                                        :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Type that is the source of the mapping.
-
-*** destination                                                   :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Type that is the destination of the mapping.
-
 ** variability bundle                                               :element:
    :PROPERTIES:
    :custom_id: B58A5B70-CC2F-C9A4-8113-37BCBD84E6AC
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: variability_bundle o-[hidden]d- variability_entry
    :END:
 
 Features related to the processing of variability for feature bundles.
@@ -4683,6 +4883,7 @@ Prefix to apply to construct the qualified name, if any.
    :masd.variability.generate_registration: false
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: variability_entry o-[hidden]d- variability_profile
    :END:
 
 Features related to the processing of variability for profiles and profile templates.
@@ -4723,6 +4924,7 @@ Template instantiation domain name to use when instantiating template.
    :masd.variability.generate_registration: false
    :masd.variability.key_prefix: masd.variability
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: variability_profile o-[hidden]d- physical
    :END:
 
 Features related to the processing of variability for profile entries.
@@ -4760,6 +4962,7 @@ Where does this profile or profile template bind to.
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: physical o-[hidden]d- physical_relations
    :END:
 
 Features required for physical elements.
@@ -4834,103 +5037,13 @@ Name of the directory to use for this physical element.
 
 Postfix to use for this physical element.
 
-** wale                                                             :element:
-   :PROPERTIES:
-   :custom_id: A0285AE5-4C68-D624-1FCB-89CA9C7BEA47
-   :masd.variability.default_binding_point: any
-   :masd.variability.key_prefix: masd.wale
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Wale related features.
-
-*** text template                                                 :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Name of the wale text template to instantiate, if any.
-
-*** kvp                                                           :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::key_value_pair
-    :END:
-
-Array of wale KVPs to use in template instantiation.
-
-** decoration                                                       :element:
-   :PROPERTIES:
-   :custom_id: 3C43259E-793C-2784-28E3-D3D9B6AFEFB3
-   :masd.variability.default_binding_point: any
-   :masd.variability.key_prefix: masd.decoration
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-*** enabled                                                       :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::boolean
-    :END:
-
-If true, decorations are enabled on this modeling element.
-
-*** copyright notice                                              :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text_collection
-    :END:
-
-Copyright notices for this modeling element.
-
-*** licence name                                                  :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Name of the licence to use for this modeling element.
-
-*** modeline group name                                           :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Name of the modeline group for this modeling element.
-
-*** marker name                                                   :attribute:
-    :PROPERTIES:
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::text
-    :END:
-
-Name of the decoration marker to use for this modeling element.
-
-** labelling                                                        :element:
-   :PROPERTIES:
-   :custom_id: F072CD7C-314E-D6A4-2B93-AB44966893EB
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-Features related to labels.
-
-*** masd.label                                                    :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.variability.is_optional: true
-    :masd.codec.type: masd::variability::key_value_pair
-    :END:
-
-Labels to attach to modeling elements. Key must be unique.
-
 ** physical relations                                               :element:
    :PROPERTIES:
    :custom_id: 770498E7-8F6E-F764-6BA3-32278EEB5A85
    :masd.variability.default_binding_point: any
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: physical_relations o-[hidden]d- helpers
    :END:
 
 Features related to relations at the physical level.
@@ -4959,95 +5072,12 @@ Define a variable relation between the current archetype and another archetype.
 
 Define a fixed relation between the current archetype and another archetype.
 
-** streaming                                                        :element:
-   :PROPERTIES:
-   :custom_id: 33CB2465-AC69-2124-40C3-801486F226AE
-   :masd.variability.key_prefix: masd.cpp.streaming
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-*** string conversion method                                      :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::text
-    :masd.codec.value: ""
-    :END:
-
-Which conversion method to use to convert strings.
-
-*** requires quoting                                              :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, streaming this type must be preceeded by quoting.
-
-*** remove unprintable characters                                 :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, streaming this type requires removing unprintable characters.
-
-** technical space version                                          :element:
-   :PROPERTIES:
-   :custom_id: 2751BB2B-E3E8-8AF4-B59B-40FD6C70C08E
-   :masd.variability.key_prefix: masd.cpp
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-*** standard                                                      :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: global
-    :masd.codec.type: masd::variability::text
-    :masd.codec.value: "c++-14"
-    :END:
-
-Which version of C++ to use.
-
-** technical space properties                                       :element:
-   :PROPERTIES:
-   :custom_id: 99FEB954-4D99-0684-9153-1211494B2245
-   :masd.variability.key_prefix: masd
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-*** cpp.aspect.requires manual default constructor                :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, the modeling element requires a manual defaul constructor.
-
-*** cpp.aspect.requires manual move constructor                   :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, the modeling element requires a manual move constructor.
-
-*** cpp.aspect.requires stream manipulators                       :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "false"
-    :END:
-
-If true, the modeling element requires stream manipulators.
-
 ** helpers                                                          :element:
    :PROPERTIES:
    :custom_id: E6A0167E-7E43-85E4-B5FB-1D0740239790
    :masd.variability.key_prefix: masd
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: helpers o-[hidden]d- physical_helpers
    :END:
 
 *** helper.family                                                 :attribute:
@@ -5065,6 +5095,7 @@ Which family of helpers to use for this modeling element.
    :masd.variability.default_binding_point: element
    :masd.variability.key_prefix: masd.physical.helpers
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: physical_helpers o-[hidden]d- assistant
    :END:
 
 Features related to the helpers in physical domain.
@@ -5093,20 +5124,6 @@ Features related to the helpers in physical domain.
     :masd.codec.type: masd::variability::text
     :END:
 
-** aspect                                                           :element:
-   :PROPERTIES:
-   :custom_id: E9D31ABD-19C4-6A94-F9DB-868B89907197
-   :masd.variability.key_prefix: masd.csharp.aspect
-   :masd.codec.stereotypes: masd::variability::feature_bundle
-   :END:
-
-*** requires static reference equals                              :attribute:
-    :PROPERTIES:
-    :masd.variability.binding_point: element
-    :masd.codec.type: masd::variability::boolean
-    :masd.codec.value: "true"
-    :END:
-
 ** assistant                                                        :element:
    :PROPERTIES:
    :custom_id: 0B27AD1B-2C04-5154-8CA3-881049956CE5
@@ -5127,6 +5144,48 @@ Features related to the helpers in physical domain.
     :masd.codec.type: masd::variability::text
     :END:
 
+* formatters                                                         :module:
+  :PROPERTIES:
+  :custom_id: 6B874033-5D63-CEB4-9093-275D74BD7283
+  :masd.codec.dia.comment: true
+  :END:
+
+Contains formatting classes for the logical model.
+
+** decoration formatter                                             :element:
+   :PROPERTIES:
+   :custom_id: B079F62B-881A-56D4-1493-F0C8D680D44E
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: decoration_formatter o-l- formatting_error: throws
+   :END:
+
+** generation marker formatter                                      :element:
+   :PROPERTIES:
+   :custom_id: 40839C05-8527-93D4-853B-2D9DC3B0D378
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: generation_marker_formatter o-r- formatting_error: throws
+   :END:
+
+** modeline formatter                                               :element:
+   :PROPERTIES:
+   :custom_id: B5D3CC34-3C68-E8D4-868B-BCD75EA23156
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: modeline_formatter o-- formatting_error: throws
+   :END:
+
+** formatting error                                                 :element:
+   :PROPERTIES:
+   :custom_id: 75AF90E7-B703-C614-4F5B-27863B5B2C17
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error has occurred while formatting.
+* traits                                                            :element:
+  :PROPERTIES:
+  :custom_id: 71E13C4D-50FC-2C74-D053-CBD22EFACCF6
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
+
 * registrar                                                         :element:
   :PROPERTIES:
   :custom_id: 2B993B05-8401-CCE4-950B-64260EA15EC7
@@ -5144,37 +5203,3 @@ Features related to the helpers in physical domain.
   :custom_id: 0738A142-AA2E-07F4-F633-350630258F01
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
-
-* formatters                                                         :module:
-  :PROPERTIES:
-  :custom_id: 6B874033-5D63-CEB4-9093-275D74BD7283
-  :masd.codec.dia.comment: true
-  :END:
-
-Contains formatting classes for the logical model.
-
-** decoration formatter                                             :element:
-   :PROPERTIES:
-   :custom_id: B079F62B-881A-56D4-1493-F0C8D680D44E
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** generation marker formatter                                      :element:
-   :PROPERTIES:
-   :custom_id: 40839C05-8527-93D4-853B-2D9DC3B0D378
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** modeline formatter                                               :element:
-   :PROPERTIES:
-   :custom_id: B5D3CC34-3C68-E8D4-868B-BCD75EA23156
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** formatting error                                                 :element:
-   :PROPERTIES:
-   :custom_id: 75AF90E7-B703-C614-4F5B-27863B5B2C17
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error has occurred while formatting.
