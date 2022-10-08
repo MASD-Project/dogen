@@ -45,9 +45,9 @@ if (DOGEN_CLI_EXECUTABLE)
     #
     # Input models for generation
     #
-    set(prefix "dogen")
-    set(models "")
-    set(models ${models} ${prefix}.profiles)
+    # set(prefix "dogen")
+    # set(models "")
+    # set(models ${models} ${prefix}.profiles)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/org)

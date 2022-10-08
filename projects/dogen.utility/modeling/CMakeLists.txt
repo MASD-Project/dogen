@@ -59,8 +59,8 @@ if (DOGEN_CLI_EXECUTABLE)
         add_custom_target(generate_${target_ext}
             COMMENT "Generating UML for ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND PLANTUML_LIMIT_SIZE=65536 ${PLANTUML_PROGRAM}
-            ${target_path} -tsvg)
+            COMMAND ${PLANTUML_ENVIRONMENT} ${PLANTUML_PROGRAM}
+            ${PLANTUML_OPTIONS} ${target_path})
         add_dependencies(generate_all_${frontend} generate_${target_ext})
     endif()
 

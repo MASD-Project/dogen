@@ -34,5 +34,4 @@ if (DOGEN_CLI_EXECUTABLE)
         --source ${source} --destination ${destination}
         ${DOGEN_COMMON_OPTIONS})
     add_dependencies(convert_all_org convert_${target_ext}_org)
-
 endif()

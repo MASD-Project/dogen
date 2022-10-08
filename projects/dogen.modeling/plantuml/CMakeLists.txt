@@ -21,14 +21,19 @@ set(models_dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
 if (WITH_PLANTUML)
     foreach(model ${models})
-        set(target ${model})
+        set(model_name "")
+        get_filename_component(model_name ${model} NAME)
+        string(REGEX REPLACE ".org$" "" model_name
+            ${model_name})
+
+        set(target ${model_name})
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
         add_custom_target(generate_${target_ext}_${frontend}
             COMMENT "Generating UML for ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND PLANTUML_LIMIT_SIZE=65536 ${PLANTUML_PROGRAM}
-            ${target_path} -tsvg)
+            COMMAND ${PLANTUML_ENVIRONMENT} ${PLANTUML_PROGRAM}
+            ${PLANTUML_OPTIONS} ${target_path})
         add_dependencies(generate_all_${frontend} generate_${target_ext}_${frontend})
     endforeach()
 endif()
