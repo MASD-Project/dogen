@@ -50,11 +50,6 @@ jobs:
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
 
-      - name: Setup coverage
-        run: |
-          sudo apt update
-          sudo apt install -y lcov llvm-cov
-
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v10
         with:
