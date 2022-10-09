@@ -50,14 +50,18 @@ jobs:
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
 
+      - name: Setup coverage
+        run: |
+          sudo apt update
+          sudo apt install -y lcov llvm-cov
+
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v10
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
       - name: Setup test data
-        run: |
-          ./build/scripts/github.setup.${{matrix.family}}.sh
+        run: ./build/scripts/github.setup.${{matrix.family}}.sh
 
       - name: Run CTest workflow
         run: |
