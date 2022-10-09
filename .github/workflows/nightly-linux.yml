@@ -41,6 +41,9 @@ jobs:
           key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           max-size: 1000M
 
+      - name: Install Valgrind
+        run: sudo apt install valgrind
+
       - name: Get latest CMake
         uses: lukka/get-cmake@latest
 
@@ -67,13 +70,13 @@ jobs:
 
       - name: Run CTest workflow
         env:
-          DOGEN_BUILD_PROVIDER: github
-          DOGEN_BUILD_COMMIT: ${GITHUB_SHA}
-          DOGEN_BUILD_NUMBER: ${GITHUB_RUN_NUMBER}
-          DOGEN_BUILD_TIMESTAMP: "`date "+%Y/%m/%d %H:%M:%S"`"
           WITH_FULL_GENERATION: ON
           preset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
         run: |
+          export DOGEN_BUILD_PROVIDER="github"
+          export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
+          export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+          export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
           export cmake_args="build_group=Nightly,build_name=${preset},with_presets=ON"
           cmake_args="${cmake_args},code_coverage=1"
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
