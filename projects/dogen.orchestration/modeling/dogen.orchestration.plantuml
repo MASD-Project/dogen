@@ -8,14 +8,41 @@ UML representation:
 \image html dogen.orchestration/modeling/dogen.orchestration.svg
 end note
 
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+main o-- generator: generates code using
+main o-- spec_dumper: dumps specs using
+main o-- converter: converts models using
+main o-- initializer: initialises using
+
+class generator <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+generator o-- transforms::code_generation_chain
+generator o-- transforms::context
+generator o-- transforms::context_bootstrapping_chain: bootstraps using
+
+class spec_dumper <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+spec_dumper o-- transforms::context
+spec_dumper o-- transforms::context_bootstrapping_chain: bootstraps using
+
+class converter <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
+converter o-- transforms::context
+converter o-- transforms::context_bootstrapping_chain: bootstraps using
+
+class initializer <<dogen::handcrafted::typeable>> #FFFACD {
+}
+
 namespace transforms #F2F2F2 {
     note as transforms_1
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
     end note
-
-    class code_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
 
     class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
         +{field} variability_context variability::transforms::context
@@ -25,55 +52,77 @@ the entry points to all transformations.
         +{field} physical_context physical::transforms::context
     }
 
+    class code_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    code_generation_chain o-- physical_model_production_chain
+
+    class physical_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    physical_model_production_chain o-- text_model_production_chain
+    physical_model_production_chain o-- text_model_to_physical_model_transform
+    physical_model_production_chain o-- codec_model_to_logical_model_transform
+
+    class text_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class text_model_to_physical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    text_model_to_physical_model_transform o-- logical_model_to_text_model_chain
+
+    class codec_model_set_to_logical_input_model_set_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    codec_model_set_to_logical_input_model_set_chain o-- codec_model_to_logical_model_transform
+
+    class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    codec_model_to_logical_model_transform o-- helpers::codec_to_logical_projector
+
+    class logical_model_to_text_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    logical_model_to_text_model_chain o-- elements_removal_transform
+    logical_model_to_text_model_chain o-- physical_to_logical_population_transform
+    logical_model_to_text_model_chain o-- legacy_dependencies_transform
+    logical_model_to_text_model_chain o-- helpers::codec_to_logical_projector
+
+    class physical_to_logical_population_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class legacy_dependencies_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    legacy_dependencies_transform o-- helpers::dependencies_builder
+
     class context_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    context_factory o-- context: builds
+    context_factory o-- factory_exception: throws
+
+    class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    context_bootstrapping_chain o-- context: bootstraps
+    context_bootstrapping_chain o-- context_factory: makes contexts using
+
+    class elements_removal_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     class factory_exception <<masd::exception>> #E8C2F8 {
     }
 
     note top of factory_exception
-An error occurred in the factory whilst making.
+An error occurred in the factory whilst building.
     end note
-
-    class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class codec_model_set_to_logical_input_model_set_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
 
     class transform_exception <<masd::exception>> #E8C2F8 {
     }
 
-    class logical_model_to_text_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class physical_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class text_model_to_physical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class text_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class legacy_dependencies_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class physical_to_logical_population_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class elements_removal_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-}
-
-class generator <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class converter <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 namespace helpers #F2F2F2 {
@@ -84,8 +133,12 @@ Helpers for the orchestration model.
     class codec_to_logical_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    codec_to_logical_projector o-- projection_error
+
     class logical_to_physical_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    logical_to_physical_projector o-- projection_error
 
     class projection_error <<masd::exception>> #E8C2F8 {
     }
@@ -96,6 +149,8 @@ An error occurred whilst projecting elements from one space into another.
 
     class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    dependencies_builder o-- building_error
 
     class building_error <<masd::exception>> #E8C2F8 {
     }
@@ -121,16 +176,7 @@ Feature group for model location related features.
 
 }
 
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
-}
-
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
-}
-
-class spec_dumper <<dogen::handcrafted::typeable>> #FFFACD {
-}
-
-class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
 @enduml

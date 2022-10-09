@@ -31,7 +31,7 @@
 namespace dogen::orchestration::transforms {
 
 /**
- * @brief An error occurred in the factory whilst making.
+ * @brief An error occurred in the factory whilst building.
  */
 class factory_exception : public virtual std::exception, public virtual boost::exception {
 public:

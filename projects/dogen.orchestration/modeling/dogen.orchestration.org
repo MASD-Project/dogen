@@ -27,6 +27,50 @@ UML representation:
 
 \image html dogen.orchestration/modeling/dogen.orchestration.svg
 
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: 99013329-FA4A-0F24-91A3-FA54DA22534E
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :masd.codec.plantuml: main o-- generator: generates code using
+  :masd.codec.plantuml: main o-- spec_dumper: dumps specs using
+  :masd.codec.plantuml: main o-- converter: converts models using
+  :masd.codec.plantuml: main o-- initializer: initialises using
+  :END:
+
+* generator                                                         :element:
+  :PROPERTIES:
+  :custom_id: D3772627-95A6-1424-8E4B-58E9CE8DB199
+  :masd.generalization.parent: dogen::generator
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: generator o-- transforms::code_generation_chain
+  :masd.codec.plantuml: generator o-- transforms::context
+  :masd.codec.plantuml: generator o-- transforms::context_bootstrapping_chain: bootstraps using
+  :END:
+
+* spec dumper                                                       :element:
+  :PROPERTIES:
+  :custom_id: 07AB9A43-C19A-9424-7CD3-7584D553C37F
+  :masd.generalization.parent: dogen::spec_dumper
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: spec_dumper o-- transforms::context
+  :masd.codec.plantuml: spec_dumper o-- transforms::context_bootstrapping_chain: bootstraps using
+  :END:
+
+* converter                                                         :element:
+  :PROPERTIES:
+  :custom_id: F1D138F7-E5BD-7554-9D83-6F1BDF1C71AE
+  :masd.generalization.parent: dogen::converter
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :masd.codec.plantuml: converter o-- transforms::context
+  :masd.codec.plantuml: converter o-- transforms::context_bootstrapping_chain: bootstraps using
+  :END:
+
+* initializer                                                       :element:
+  :PROPERTIES:
+  :custom_id: E6DEBA52-6C0C-D434-885B-9E1E5127C47B
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
+
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: CF66B108-611C-10A4-876B-33CFB2961F5F
@@ -35,12 +79,6 @@ UML representation:
 
 Top-level transforms for Dogen. These are
 the entry points to all transformations.
-
-** code generation chain                                            :element:
-   :PROPERTIES:
-   :custom_id: 25789245-475D-32C4-3CF3-3464BB162C85
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 ** context                                                          :element:
    :PROPERTIES:
@@ -74,9 +112,91 @@ the entry points to all transformations.
     :masd.codec.type: physical::transforms::context
     :END:
 
+** code generation chain                                            :element:
+   :PROPERTIES:
+   :custom_id: 25789245-475D-32C4-3CF3-3464BB162C85
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: code_generation_chain o-- physical_model_production_chain
+   :END:
+
+** physical model production chain                                  :element:
+   :PROPERTIES:
+   :custom_id: 305222EF-553A-CD44-E993-49CDB85C8EA4
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: physical_model_production_chain o-- text_model_production_chain
+   :masd.codec.plantuml: physical_model_production_chain o-- text_model_to_physical_model_transform
+   :masd.codec.plantuml: physical_model_production_chain o-- codec_model_to_logical_model_transform
+   :END:
+
+** text model production chain                                      :element:
+   :PROPERTIES:
+   :custom_id: DAA1A9B6-BB82-1DC4-7C83-C4B8AA00AD5F
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** text model to physical model transform                           :element:
+   :PROPERTIES:
+   :custom_id: 9B50C506-2345-E064-A09B-4F76D67BC44C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: text_model_to_physical_model_transform o-- logical_model_to_text_model_chain
+   :END:
+
+** codec model set to logical input model set chain                 :element:
+   :PROPERTIES:
+   :custom_id: 10AD07C0-B668-65A4-E56B-8A2E10AB3FC1
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: codec_model_set_to_logical_input_model_set_chain o-- codec_model_to_logical_model_transform
+   :END:
+
+** codec model to logical model transform                           :element:
+   :PROPERTIES:
+   :custom_id: 29C0F449-60E9-36F4-728B-B67C2740BBEB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: codec_model_to_logical_model_transform o-- helpers::codec_to_logical_projector
+   :END:
+
+** logical model to text model chain                                :element:
+   :PROPERTIES:
+   :custom_id: 88E1D23A-0D64-8794-54BB-846CF86A7EA3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_model_to_text_model_chain o-- elements_removal_transform
+   :masd.codec.plantuml: logical_model_to_text_model_chain o-- physical_to_logical_population_transform
+   :masd.codec.plantuml: logical_model_to_text_model_chain o-- legacy_dependencies_transform
+   :masd.codec.plantuml: logical_model_to_text_model_chain o-- helpers::codec_to_logical_projector
+   :END:
+
+** physical to logical population transform                         :element:
+   :PROPERTIES:
+   :custom_id: 775465C6-38F1-BE44-5CAB-8DAF93C733B3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** legacy dependencies transform                                    :element:
+   :PROPERTIES:
+   :custom_id: 42F68971-6956-7224-12AB-C39F32187E9F
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: legacy_dependencies_transform o-- helpers::dependencies_builder
+   :END:
+
 ** context factory                                                  :element:
    :PROPERTIES:
    :custom_id: DF4D361C-DF00-1D44-DA9B-FC14387D09CF
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: context_factory o-- context: builds
+   :masd.codec.plantuml: context_factory o-- factory_exception: throws
+   :END:
+
+** context bootstrapping chain                                      :element:
+   :PROPERTIES:
+   :custom_id: 637058A8-DE55-1F64-304B-3E61656CA711
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: context_bootstrapping_chain o-- context: bootstraps
+   :masd.codec.plantuml: context_bootstrapping_chain o-- context_factory: makes contexts using
+   :END:
+
+** elements removal transform                                       :element:
+   :PROPERTIES:
+   :custom_id: D8940F16-A063-A7E4-33DB-AECF5DBB0A4F
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -86,87 +206,13 @@ the entry points to all transformations.
    :masd.codec.stereotypes: masd::exception
    :END:
 
-An error occurred in the factory whilst making.
-
-** codec model to logical model transform                           :element:
-   :PROPERTIES:
-   :custom_id: 29C0F449-60E9-36F4-728B-B67C2740BBEB
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** codec model set to logical input model set chain                 :element:
-   :PROPERTIES:
-   :custom_id: 10AD07C0-B668-65A4-E56B-8A2E10AB3FC1
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
+An error occurred in the factory whilst building.
 
 ** transform exception                                              :element:
    :PROPERTIES:
    :custom_id: 40DE4EEC-32E1-D4C4-D853-D58A2CAC7901
    :masd.codec.stereotypes: masd::exception
    :END:
-
-** logical model to text model chain                                :element:
-   :PROPERTIES:
-   :custom_id: 88E1D23A-0D64-8794-54BB-846CF86A7EA3
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** physical model production chain                                  :element:
-   :PROPERTIES:
-   :custom_id: 305222EF-553A-CD44-E993-49CDB85C8EA4
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** text model to physical model transform                           :element:
-   :PROPERTIES:
-   :custom_id: 9B50C506-2345-E064-A09B-4F76D67BC44C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** context bootstrapping chain                                      :element:
-   :PROPERTIES:
-   :custom_id: 637058A8-DE55-1F64-304B-3E61656CA711
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** text model production chain                                      :element:
-   :PROPERTIES:
-   :custom_id: DAA1A9B6-BB82-1DC4-7C83-C4B8AA00AD5F
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** legacy dependencies transform                                    :element:
-   :PROPERTIES:
-   :custom_id: 42F68971-6956-7224-12AB-C39F32187E9F
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** physical to logical population transform                         :element:
-   :PROPERTIES:
-   :custom_id: 775465C6-38F1-BE44-5CAB-8DAF93C733B3
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** elements removal transform                                       :element:
-   :PROPERTIES:
-   :custom_id: D8940F16-A063-A7E4-33DB-AECF5DBB0A4F
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-* generator                                                         :element:
-  :PROPERTIES:
-  :custom_id: D3772627-95A6-1424-8E4B-58E9CE8DB199
-  :masd.generalization.parent: dogen::generator
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* converter                                                         :element:
-  :PROPERTIES:
-  :custom_id: F1D138F7-E5BD-7554-9D83-6F1BDF1C71AE
-  :masd.generalization.parent: dogen::converter
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
 
 * helpers                                                            :module:
   :PROPERTIES:
@@ -180,12 +226,14 @@ Helpers for the orchestration model.
    :PROPERTIES:
    :custom_id: 04BCDBB0-51CB-BC24-ECEB-0B80C5454860
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: codec_to_logical_projector o-- projection_error
    :END:
 
 ** logical to physical projector                                    :element:
    :PROPERTIES:
    :custom_id: 701B1373-DC04-12A4-9CDB-7DF9869A8566
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: logical_to_physical_projector o-- projection_error
    :END:
 
 ** projection error                                                 :element:
@@ -200,6 +248,7 @@ An error occurred whilst projecting elements from one space into another.
    :PROPERTIES:
    :custom_id: FE527358-6A13-E0E4-07CB-020850372874
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: dependencies_builder o-- building_error
    :END:
 
 ** building error                                                   :element:
@@ -252,27 +301,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
    :masd.codec.stereotypes: masd::variability::initializer
    :END:
 
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: 99013329-FA4A-0F24-91A3-FA54DA22534E
-  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
-  :END:
-
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: A55B9364-74CF-5DB4-80FB-31B934F59869
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
-
-* spec dumper                                                       :element:
-  :PROPERTIES:
-  :custom_id: 07AB9A43-C19A-9424-7CD3-7584D553C37F
-  :masd.generalization.parent: dogen::spec_dumper
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* initializer                                                       :element:
-  :PROPERTIES:
-  :custom_id: E6DEBA52-6C0C-D434-885B-9E1E5127C47B
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
   :END:
