@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-08 Sat 21:07]
+#+CAPTION: Clock summary at [2022-10-09 Sun 09:17]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *51:55* |       |       | 100.0 |
+| *Total time*                                              | *52:10* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 51:55   |       |       | 100.0 |
-| Active                                                    |         | 51:55 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  19.7 |
+| Stories                                                   | 52:10   |       |       | 100.0 |
+| Active                                                    |         | 52:10 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  19.6 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   4.0 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.6 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.6 |
 | Sprint and product backlog grooming                       |         |       |  3:36 |   6.9 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.2 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   2.1 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   6.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   6.3 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   4.2 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.7 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   4.3 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   4.2 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   3.5 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.4 |
 | Model significant relations at a higher level             |         |       |  1:05 |   2.1 |
@@ -44,8 +44,9 @@
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.4 |
 | Windows package is broken                                 |         |       |  0:20 |   0.6 |
 | Warning on OSX build                                      |         |       |  2:23 |   4.6 |
-| Add PlantUML relationships to diagrams                    |         |       | 10:57 |  21.1 |
+| Add PlantUML relationships to diagrams                    |         |       | 10:57 |  21.0 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.9 |
+| Investigate nightly issues                                |         |       |  0:15 |   0.5 |
 #+end:
 
 Agenda:
@@ -372,6 +373,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-10-09 Sun 11:35]--[2022-10-09 Sun 11:47] =>  0:12
     CLOCK: [2022-10-04 Tue 08:21]--[2022-10-04 Tue 08:29] =>  0:08
     CLOCK: [2022-10-03 Mon 19:41]--[2022-10-03 Mon 19:51] =>  0:10
     CLOCK: [2022-10-03 Mon 18:30]--[2022-10-03 Mon 18:47] =>  0:17
@@ -1345,6 +1347,7 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-10-09 Sun 09:17]--[2022-10-09 Sun 09:25] =>  0:08
     CLOCK: [2022-10-08 Sat 17:46]--[2022-10-08 Sat 18:12] =>  0:26
     CLOCK: [2022-10-08 Sat 17:30]--[2022-10-08 Sat 17:45] =>  0:15
     CLOCK: [2022-10-06 Thu 19:20]--[2022-10-06 Thu 20:04] =>  0:44
@@ -1378,7 +1381,8 @@ to make diagrams more readable. Models:
 - dogen.cli: done
 - dogen.codec: done
 - dogen.identification: done
-- dogen.logical
+- dogen.logical: done
+
 
 *** STARTED Use clang format to format the code base                  :story:
     :LOGBOOK:
@@ -1413,6 +1417,58 @@ Links:
 - [[https://www.reddit.com/r/cpp/comments/pnli5r/cc_precommit_hooks_for_static_analyzers_and/][C/C++ pre-commit hooks for static analyzers and linters]]
 - [[https://github.com/lballabio/QuantLib/blob/master/.clang-format][quant lib]] clang format.
 - [[https://github.com/OpenSourceRisk/Engine/blob/master/.clang-format][ORE clang format]]
+
+*** STARTED Investigate nightly issues                                :story:
+    :LOGBOOK:
+    CLOCK: [2022-10-09 Sun 09:15]--[2022-10-09 Sun 09:17] =>  0:02
+    CLOCK: [2022-10-09 Sun 09:02]--[2022-10-09 Sun 09:15] =>  0:13
+    :END:
+
+First we started to have very strange errors in the nightly: 3816 failed tests,
+with errors such as:
+
+#+begin_example
+valgrind:  Fatal error at startup: a function redirection
+valgrind:  which is mandatory for this platform-tool combination
+valgrind:  cannot be set up.  Details of the redirection are:
+valgrind:
+valgrind:  A must-be-redirected function
+valgrind:  whose name matches the pattern:      strlen
+valgrind:  in an object with soname matching:   ld-linux-x86-64.so.2
+valgrind:  was not found whilst processing
+valgrind:  symbols from the object with soname: ld-linux-x86-64.so.2
+valgrind:
+valgrind:  Possible fixes: (1, short term): install glibc's debuginfo
+valgrind:  package on this machine.  (2, longer term): ask the packagers
+valgrind:  for your Linux distribution to please in future ship a non-
+valgrind:  stripped ld.so (or whatever the dynamic linker .so is called)
+valgrind:  that exports the above-named function using the standard
+valgrind:  calling conventions for this platform.  The package you need
+valgrind:  to install for fix (1) is called
+valgrind:
+valgrind:    On Debian, Ubuntu:                 libc6-dbg
+valgrind:    On SuSE, openSuSE, Fedora, RHEL:   glibc-debuginfo
+valgrind:
+valgrind:  Note that if you are debugging a 32 bit process on a
+valgrind:  64 bit system, you will need a corresponding 32 bit debuginfo
+valgrind:  package (e.g. libc6-dbg:i386).
+valgrind:
+valgrind:  Cannot continue -- exiting now.  Sorry.
+#+end_example
+
+This is likely related to some =dist-upgrade=. However, the biggest problem is
+that the nightly has now gone missing altogether. Nothing in the logs, no email
+in cron. Checked job, looks fine. Will try again next day.
+
+*** Create a nightly github workflow                                  :story:
+
+It seems we have all that is required to run nightlies in github. Its better to
+do it there because it avoids issues with local PC such as PC is off, cron
+issues etc.
+
+Links:
+
+- [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
 
 *** Consider adding support for clang-tidy                            :story:
 
