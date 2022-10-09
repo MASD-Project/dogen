@@ -1460,7 +1460,10 @@ This is likely related to some =dist-upgrade=. However, the biggest problem is
 that the nightly has now gone missing altogether. Nothing in the logs, no email
 in cron. Checked job, looks fine. Will try again next day.
 
-*** Create a nightly github workflow                                  :story:
+*** STARTED Create a nightly github workflow                          :story:
+    :LOGBOOK:
+    CLOCK: [2022-10-09 Sun 16:00]--[2022-10-09 Sun 16:27] =>  0:27
+    :END:
 
 It seems we have all that is required to run nightlies in github. Its better to
 do it there because it avoids issues with local PC such as PC is off, cron
@@ -1469,6 +1472,10 @@ issues etc.
 Links:
 
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** Code coverage in CDash has disappeared                            :story:
+
+We do not seem to have code coverage any longer.
 
 *** Consider adding support for clang-tidy                            :story:
 
