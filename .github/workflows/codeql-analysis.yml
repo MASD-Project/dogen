@@ -55,8 +55,7 @@ jobs:
         appendedCacheKey: linux-clang-debug-codeql
 
     - name: Setup test data
-      run: |
-        ./build/scripts/github.setup.linux.sh
+      run: ./build/scripts/github.setup.linux.sh
 
     - name: Build
       run: |

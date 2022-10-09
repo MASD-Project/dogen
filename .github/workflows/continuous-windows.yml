@@ -48,8 +48,7 @@ jobs:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
       - name: Setup test data
-        run: |
-          ./build/scripts/github.setup.${{matrix.family}}.ps1
+        run: ./build/scripts/github.setup.${{matrix.family}}.ps1
 
       - name: Run CTest workflow
         run: |
