@@ -42,8 +42,8 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Represents a meta-region in physical space with archetypes for a primary technical
- * space, and associated secondary technical spaces.
+ * @brief Represents a meta-region in physical space with archetypes for a primary
+ * technical space, and associated secondary technical spaces.
  */
 class backend final {
 public:

@@ -11,20 +11,50 @@ UML representation:
 \image html dogen.org/modeling/dogen.org.svg
 end note
 
+class registrar <<masd::serialization::type_registrar>> #00FF00 {
+}
+
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
 namespace entities #F2F2F2 {
     note as entities_1
 Represents entities from Emacs' org-mode.
     end note
-
-    class section #F7E5FF {
-        +{field} blocks std::list<block>
-    }
 
     class document #F7E5FF {
         +{field} affiliated_keywords std::list<affiliated_keyword>
         +{field} drawers std::list<drawer>
         +{field} section section
         +{field} headlines std::list<headline>
+    }
+
+    document o-- drawer
+    document o-- headline
+    document o-- affiliated_keyword
+    document o-- section
+    document o-- headline
+
+    class drawer #F7E5FF {
+        +{field} name std::string
+        +{field} type drawer_type
+        +{field} contents std::list<drawer_content>
+    }
+
+    drawer o-- drawer_content
+    drawer o-- drawer_type
+
+    class drawer_content #F7E5FF {
+        +{field} key std::string
+        +{field} value std::string
+    }
+
+    enum drawer_type <<masd::enumeration>> #F2DAFD {
+        +{field} regular
+        +{field} property_drawer
     }
 
     class headline #F7E5FF {
@@ -39,6 +69,12 @@ Represents entities from Emacs' org-mode.
         +{field} tags std::list<tag>
         +{field} todo_keyword todo_keyword
     }
+
+    headline o-- drawer
+    headline o-- priority_cookie
+    headline o-- tag
+    headline o-- todo_keyword
+    headline o-- affiliated_keyword
 
     note top of headline
 Represents a headline in org mode.
@@ -71,21 +107,13 @@ underscore, at sign, hash sign or percent sign, and separated with
 colons.
     end note
 
+    class priority_cookie <<masd::primitive>> #EDCEFB {
+    }
+
     class tag <<masd::primitive>> #EDCEFB {
     }
 
     class todo_keyword <<masd::primitive>> #EDCEFB {
-    }
-
-    class drawer #F7E5FF {
-        +{field} name std::string
-        +{field} type drawer_type
-        +{field} contents std::list<drawer_content>
-    }
-
-    class drawer_content #F7E5FF {
-        +{field} key std::string
-        +{field} value std::string
     }
 
     class affiliated_keyword #F7E5FF {
@@ -93,13 +121,11 @@ colons.
         +{field} value std::string
     }
 
-    enum drawer_type <<masd::enumeration>> #F2DAFD {
-        +{field} regular
-        +{field} property_drawer
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
     }
 
-    class priority_cookie <<masd::primitive>> #EDCEFB {
-    }
+    section o-- block
 
     class block #F7E5FF {
         +{field} name std::string
@@ -107,6 +133,9 @@ colons.
         +{field} contents std::string
         +{field} type block_type
     }
+
+    block o-- block_type
+    block o-- parameter
 
     enum block_type <<masd::enumeration>> #F2DAFD {
         +{field} text_block
@@ -118,21 +147,28 @@ colons.
 
 }
 
-class registrar <<masd::serialization::type_registrar>> #00FF00 {
-}
-
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
-}
-
-class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
-}
-
 namespace transforms #F2F2F2 {
     class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    string_to_document_transform o-- entities::document
+    string_to_document_transform o-- helpers::document_factory
+    string_to_document_transform o-- transformation_error
+
+    note top of string_to_document_transform
+Converts a string containing a org-mode document into the dogen domain model
+org-mode representation.
+    end note
+
     class document_to_string_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    document_to_string_transform o-- entities::document
+    document_to_string_transform o-- transformation_error
+
+    note top of document_to_string_transform
+Converts an org model document into a string.
+    end note
 
     class transformation_error <<masd::exception>> #E8C2F8 {
     }
@@ -144,23 +180,17 @@ An error occurred whilst transforming.
 }
 
 namespace helpers #F2F2F2 {
-    class parser <<dogen::handcrafted::typeable>> #FFFACD {
+    class builder <<dogen::handcrafted::typeable>> #FFFACD {
+        +{field} root boost::shared_ptr<node>
     }
 
-    class parsing_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of parsing_error
-An error ocurred whilst parsing an org-mode document.
-    end note
+    builder o-- node: builds
+    builder o-- building_error: throws
+    builder o-- parser
 
     class node <<dogen::untestable>> #ED8181 {
         +{field} data entities::headline
         +{field} children std::list<boost::shared_ptr<node>>
-    }
-
-    class builder <<dogen::handcrafted::typeable>> #FFFACD {
-        +{field} root boost::shared_ptr<node>
     }
 
     class building_error <<masd::exception>> #E8C2F8 {
@@ -170,8 +200,22 @@ An error ocurred whilst parsing an org-mode document.
 An error occurred whilst building.
     end note
 
+    class parser <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    parser o-- parsing_error: throws
+
+    class parsing_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of parsing_error
+An error ocurred whilst parsing an org-mode document.
+    end note
+
     class document_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    document_factory o-- builder
 
 }
 

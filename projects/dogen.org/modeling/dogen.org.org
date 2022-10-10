@@ -24,6 +24,24 @@ UML representation:
 
 \image html dogen.org/modeling/dogen.org.svg
 
+* registrar                                                         :element:
+  :PROPERTIES:
+  :custom_id: A562E2EF-4661-B124-B5F3-0F91C2C9735E
+  :masd.codec.stereotypes: masd::serialization::type_registrar
+  :END:
+
+* CMakeLists                                                        :element:
+  :PROPERTIES:
+  :custom_id: 180139E8-6BDF-5B34-78BB-A1923B493721
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:
+
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: E6202653-E0AE-7044-2A5B-502A4EDBF40A
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :END:
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 20E948A4-80F2-5874-8B23-4FA51E0611E8
@@ -32,19 +50,14 @@ UML representation:
 
 Represents entities from Emacs' org-mode.
 
-** section                                                          :element:
-   :PROPERTIES:
-   :custom_id: 3B68E17F-9CC3-C644-908B-EE5B890386E2
-   :END:
-
-*** blocks                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<block>
-    :END:
-
 ** document                                                         :element:
    :PROPERTIES:
    :custom_id: FF5E7EC4-54D0-8D54-9AD3-D51AD1FC5DD7
+   :masd.codec.plantuml: document o-- drawer
+   :masd.codec.plantuml: document o-- headline
+   :masd.codec.plantuml: document o-- affiliated_keyword
+   :masd.codec.plantuml: document o-- section
+   :masd.codec.plantuml: document o-- headline
    :END:
 
 *** affiliated keywords                                           :attribute:
@@ -71,9 +84,63 @@ Top-level section in document.
 
 Top-level headlines in document.
 
+** drawer                                                           :element:
+   :PROPERTIES:
+   :custom_id: 96FF2304-3ADD-7C44-1F03-C84C2C9F5BAD
+   :masd.codec.plantuml: drawer o-- drawer_content
+   :masd.codec.plantuml: drawer o-- drawer_type
+   :END:
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Original name used by the property.
+
+*** type                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: drawer_type
+    :END:
+
+*** contents                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<drawer_content>
+    :END:
+
+** drawer content                                                   :element:
+   :PROPERTIES:
+   :custom_id: 9B50B5D9-71B9-71E4-B58B-EDAA46E7E479
+   :END:
+
+*** key                                                           :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** value                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+** drawer type                                                      :element:
+   :PROPERTIES:
+   :custom_id: C70A41FC-3384-A254-9F3B-32259431BC7D
+   :masd.codec.stereotypes: masd::enumeration
+   :END:
+
+*** regular                                                       :attribute:
+
+*** property drawer                                               :attribute:
+
 ** headline                                                         :element:
    :PROPERTIES:
    :custom_id: 69AFEF06-7AD4-7EA4-5F1B-C67F09E2A4F2
+   :masd.codec.plantuml: headline o-- drawer
+   :masd.codec.plantuml: headline o-- priority_cookie
+   :masd.codec.plantuml: headline o-- tag
+   :masd.codec.plantuml: headline o-- todo_keyword
+   :masd.codec.plantuml: headline o-- affiliated_keyword
    :END:
 
 Represents a headline in org mode.
@@ -169,6 +236,13 @@ Headline's tags, if any.
 
 Headline's TODO keyword.
 
+** priority cookie                                                  :element:
+   :PROPERTIES:
+   :custom_id: 8052B6A5-ACA3-E364-5113-02016F0377B1
+   :masd.primitive.underlying_element: std::string
+   :masd.codec.stereotypes: masd::primitive
+   :END:
+
 ** tag                                                              :element:
    :PROPERTIES:
    :custom_id: D9C49E71-D6A2-24E4-D2C3-7AB76EE9AB08
@@ -182,43 +256,6 @@ Headline's TODO keyword.
    :masd.primitive.underlying_element: std::string
    :masd.codec.stereotypes: masd::primitive
    :END:
-
-** drawer                                                           :element:
-   :PROPERTIES:
-   :custom_id: 96FF2304-3ADD-7C44-1F03-C84C2C9F5BAD
-   :END:
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Original name used by the property.
-
-*** type                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: drawer_type
-    :END:
-
-*** contents                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<drawer_content>
-    :END:
-
-** drawer content                                                   :element:
-   :PROPERTIES:
-   :custom_id: 9B50B5D9-71B9-71E4-B58B-EDAA46E7E479
-   :END:
-
-*** key                                                           :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-*** value                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
 
 ** affiliated keyword                                               :element:
    :PROPERTIES:
@@ -235,26 +272,22 @@ Original name used by the property.
     :masd.codec.type: std::string
     :END:
 
-** drawer type                                                      :element:
+** section                                                          :element:
    :PROPERTIES:
-   :custom_id: C70A41FC-3384-A254-9F3B-32259431BC7D
-   :masd.codec.stereotypes: masd::enumeration
+   :custom_id: 3B68E17F-9CC3-C644-908B-EE5B890386E2
+   :masd.codec.plantuml: section o-- block
    :END:
 
-*** regular                                                       :attribute:
-
-*** property drawer                                               :attribute:
-
-** priority cookie                                                  :element:
-   :PROPERTIES:
-   :custom_id: 8052B6A5-ACA3-E364-5113-02016F0377B1
-   :masd.primitive.underlying_element: std::string
-   :masd.codec.stereotypes: masd::primitive
-   :END:
+*** blocks                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<block>
+    :END:
 
 ** block                                                            :element:
    :PROPERTIES:
    :custom_id: 746719EA-CA81-E704-D6AB-FD338BBF526E
+   :masd.codec.plantuml: block o-- block_type
+   :masd.codec.plantuml: block o-- parameter
    :END:
 
 *** name                                                          :attribute:
@@ -294,24 +327,6 @@ Original name used by the property.
    :masd.codec.stereotypes: masd::primitive
    :END:
 
-* registrar                                                         :element:
-  :PROPERTIES:
-  :custom_id: A562E2EF-4661-B124-B5F3-0F91C2C9735E
-  :masd.codec.stereotypes: masd::serialization::type_registrar
-  :END:
-
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: E6202653-E0AE-7044-2A5B-502A4EDBF40A
-  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
-  :END:
-
-* CMakeLists                                                        :element:
-  :PROPERTIES:
-  :custom_id: 180139E8-6BDF-5B34-78BB-A1923B493721
-  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
-
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: D54D258E-9769-EFD4-35A3-2FF92FA595DC
@@ -321,13 +336,23 @@ Original name used by the property.
    :PROPERTIES:
    :custom_id: 15F33F7E-F4BE-A854-7953-DE8257D2389E
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: string_to_document_transform o-- entities::document
+   :masd.codec.plantuml: string_to_document_transform o-- helpers::document_factory
+   :masd.codec.plantuml: string_to_document_transform o-- transformation_error
    :END:
+
+Converts a string containing a org-mode document into the dogen domain model
+org-mode representation.
 
 ** document to string transform                                     :element:
    :PROPERTIES:
    :custom_id: E7020AFA-2C14-E694-CC4B-B31E3919C9CE
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: document_to_string_transform o-- entities::document
+   :masd.codec.plantuml: document_to_string_transform o-- transformation_error
    :END:
+
+Converts an org model document into a string.
 
 ** transformation error                                             :element:
    :PROPERTIES:
@@ -342,19 +367,19 @@ An error occurred whilst transforming.
   :custom_id: B20B40F1-7F38-1B64-35DB-2F028D406586
   :END:
 
-** parser                                                           :element:
+** builder                                                          :element:
    :PROPERTIES:
-   :custom_id: 0120EF5E-81AD-5B14-FBB3-4B1C5ED10F47
+   :custom_id: 9A14EF64-B4EA-1674-7903-62412683B9C2
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: builder o-- node: builds
+   :masd.codec.plantuml: builder o-- building_error: throws
+   :masd.codec.plantuml: builder o-- parser
    :END:
 
-** parsing error                                                    :element:
-   :PROPERTIES:
-   :custom_id: FC6DD25D-66F1-05A4-B5A3-07266AB7971D
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error ocurred whilst parsing an org-mode document.
+*** root                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<node>
+    :END:
 
 ** node                                                             :element:
    :PROPERTIES:
@@ -372,17 +397,6 @@ An error ocurred whilst parsing an org-mode document.
     :masd.codec.type: std::list<boost::shared_ptr<node>>
     :END:
 
-** builder                                                          :element:
-   :PROPERTIES:
-   :custom_id: 9A14EF64-B4EA-1674-7903-62412683B9C2
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-*** root                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<node>
-    :END:
-
 ** building error                                                   :element:
    :PROPERTIES:
    :custom_id: BC644074-F05B-E224-79B3-7590F8756340
@@ -391,8 +405,24 @@ An error ocurred whilst parsing an org-mode document.
 
 An error occurred whilst building.
 
+** parser                                                           :element:
+   :PROPERTIES:
+   :custom_id: 0120EF5E-81AD-5B14-FBB3-4B1C5ED10F47
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: parser o-- parsing_error: throws
+   :END:
+
+** parsing error                                                    :element:
+   :PROPERTIES:
+   :custom_id: FC6DD25D-66F1-05A4-B5A3-07266AB7971D
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error ocurred whilst parsing an org-mode document.
+
 ** document factory                                                 :element:
    :PROPERTIES:
    :custom_id: 751D8EBF-3C49-7E14-A9DB-CA1BBC9D11E8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: document_factory o-- builder
    :END:

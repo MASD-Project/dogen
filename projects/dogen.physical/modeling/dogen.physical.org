@@ -36,81 +36,11 @@ UML representation:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
-* helpers                                                            :module:
+* registrar                                                         :element:
   :PROPERTIES:
-  :custom_id: 07F73046-A81F-0664-5CBB-F4F79A6F273A
-  :masd.codec.dia.comment: true
+  :custom_id: E410B7DE-5AE8-0864-D51B-35C4EBEA7E20
+  :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
-
-Helpers for the physical model.
-
-** template instantiation domains factory                           :element:
-   :PROPERTIES:
-   :custom_id: 7D90FC4D-B34C-B9C4-78CB-D27456AFD06A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** building error                                                   :element:
-   :PROPERTIES:
-   :custom_id: C621FA96-2566-7AA4-D7BB-82559421917A
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred while the field factory was building.
-
-** path generator                                                   :element:
-   :PROPERTIES:
-   :custom_id: 345B379E-4E18-8CB4-CF73-D5601B52A0BB
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** file status collector                                            :element:
-   :PROPERTIES:
-   :custom_id: BD87EBFD-97BE-BFE4-725B-28CAD0526E30
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** files by status                                                  :element:
-   :PROPERTIES:
-   :custom_id: 443600DB-FD59-2EA4-4DD3-7710619DE58B
-   :END:
-
-*** unexpected                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<boost::filesystem::path>
-    :END:
-
-*** ignored                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<boost::filesystem::path>
-    :END:
-
-** unified differ                                                   :element:
-   :PROPERTIES:
-   :custom_id: 21106227-3FEF-AA64-C78B-5FAC0B73A6D0
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** meta model validator                                             :element:
-   :PROPERTIES:
-   :custom_id: 6C974170-68E9-A154-7E9B-B12A4863BE6A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** validation error                                                 :element:
-   :PROPERTIES:
-   :custom_id: 4610A2C7-6023-B804-0A63-C976F25083A2
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred during validation.
-
-** header guard factory                                             :element:
-   :PROPERTIES:
-   :custom_id: 564DE5A3-5E2C-5844-CB23-9A19281414E9
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: BF4942E6-FEC0-6934-5803-B4C5B253211D
@@ -119,10 +49,259 @@ An error occurred during validation.
 
 Defines the MASD physical space.
 
+** Element                                                          :element:
+   :PROPERTIES:
+   :custom_id: 29324758-FC90-7C74-4DD3-49B580299CAB
+   :masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable, entities::LogicalPhysicalSpaceIdentity
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Element <|.. artefact
+   :masd.codec.plantuml: Element <|.. model
+   :END:
+
+** Labelable                                                        :element:
+   :PROPERTIES:
+   :custom_id: B250B60F-DCDD-DAE4-571B-BEE57DE11F72
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+The ability to attach labels to an element.
+
+*** labels                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::label>
+    :END:
+
+All labels associated with this element.
+
+** Describable                                                      :element:
+   :PROPERTIES:
+   :custom_id: 6BD20BEC-DC7A-16D4-E6F3-8ED18B97F7FF
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Describable o-- archetype_kind
+   :END:
+
+*** description                                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Human readable description of the entity.
+
+** MetaNameable                                                     :element:
+   :PROPERTIES:
+   :custom_id: 3F2AF83F-3FAD-3114-EE73-11B6B1E7AF99
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: MetaNameable <|.. archetype_kind_properties
+   :END:
+
+Ability to have a meta-name.
+
+*** meta name                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::physical_meta_name
+    :END:
+
+Meta-name for this meta-element.
+
+** Provenance                                                       :element:
+   :PROPERTIES:
+   :custom_id: DFB309F5-B837-7784-84B3-D000942F89F3
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Provenance <|.. region
+   :END:
+
+Properties related to the origin of the modeling element.
+
+*** provenance                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_provenance
+    :END:
+
+Details of the provenance of this model element.
+
+** Configurable                                                     :element:
+   :PROPERTIES:
+   :custom_id: 3DBB268C-1CC5-E874-0443-E8572D5F05CC
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Configurable <|.. region
+   :END:
+
+Ability to have meta-data associated.
+
+*** configuration                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
+    :END:
+
+Configuration for this element.
+
+** Nameable                                                         :element:
+   :PROPERTIES:
+   :custom_id: AA362810-6732-F754-7003-BA2A6C0FE40F
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Nameable <|.. model_set
+   :END:
+
+Ability to have a name.
+
+*** name                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::physical_name
+    :END:
+
+Name of the physical element.
+
+** MetaIdentifiable                                                 :element:
+   :PROPERTIES:
+   :custom_id: B58206BB-D9A7-D0B4-2A03-16AD6BD84FC9
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: MetaIdentifiable <|.. facet_properties
+   :masd.codec.plantuml: MetaIdentifiable <|.. part_properties
+   :masd.codec.plantuml: MetaIdentifiable <|.. backend_properties
+   :masd.codec.plantuml: MetaIdentifiable <|.. archetype_properties
+   :END:
+
+*** meta id                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::physical_meta_id
+    :END:
+
+Meta-id of the physical meta-element.
+
+** LogicalPhysicalSpaceIdentity                                     :element:
+   :PROPERTIES:
+   :custom_id: BCC47C43-7C8F-68D4-A00B-F4BF38FF33E4
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+*** id                                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_meta_physical_id
+    :END:
+
+Point in logical-physical space represented by this element.
+
+** MetaElement                                                      :element:
+   :PROPERTIES:
+   :custom_id: 5DE42D37-6B77-19D4-DE9B-8A8C68CDDB7B
+   :masd.codec.parent: entities::Describable, entities::MetaNameable, entities::Labelable
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: MetaElement <|.. helper
+   :masd.codec.plantuml: MetaElement <|.. archetype
+   :END:
+
+** ContainingMetaElement                                            :element:
+   :PROPERTIES:
+   :custom_id: 0D7CDC3C-8D15-1F44-620B-9F6B88E08D58
+   :masd.codec.parent: entities::MetaElement
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: ContainingMetaElement <|.. facet
+   :masd.codec.plantuml: ContainingMetaElement <|.. backend
+   :masd.codec.plantuml: ContainingMetaElement <|.. meta_model
+   :masd.codec.plantuml: ContainingMetaElement <|.. part
+   :END:
+
+The meta-element can contain other meta-elements.
+
+*** directory name                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Default name to use for the directory in the file-system representing this element.
+
+** Postfixable                                                      :element:
+   :PROPERTIES:
+   :custom_id: A96D03A3-173D-2724-FC43-4FC1C392DE10
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Postfixable <|.. facet
+   :masd.codec.plantuml: Postfixable <|.. archetype
+   :END:
+
+*** postfix                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Postfix to apply to artefacts within this element, if any.
+
+** Urnable                                                          :element:
+   :PROPERTIES:
+   :custom_id: EFD4A41C-77B6-E1D4-7BCB-5F3227DB7EC7
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+*** original urn                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+URN which may or may not be an archetype URN.
+
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if
+pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
+to a unique archetype.
+
+*** resolved urn                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+URN pointing to the archetype.
+
+ It must have the form "archetype:".
+
+** HasTechnicalSpace                                                :element:
+   :PROPERTIES:
+   :custom_id: 7CE703ED-95AF-7AF4-9533-C46E31343BA1
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: HasTechnicalSpace <|.. helper
+   :masd.codec.plantuml: HasTechnicalSpace <|.. archetype
+   :END:
+
+*** technical space                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::technical_space
+    :END:
+
+Technical space to which this physical element belongs to.
+
+** Associatable                                                     :element:
+   :PROPERTIES:
+   :custom_id: C122F449-9440-2C54-48A3-0F112BF1470F
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Associatable <|.. helper
+   :masd.codec.plantuml: Associatable <|.. archetype
+   :END:
+
+The meta-element is associated with other meta-elements
+
+*** depends                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+List of meta-elements this meta-element depends upon, if any.
+
+*** generates                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+List of meta-elements this meta-element is used to generate, if any.
+
+*** generated by                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+Meta-element used to generate this meta-element, if any.
+
 ** meta model                                                       :element:
    :PROPERTIES:
    :custom_id: 27FE1ED7-62E0-0934-EF4B-C7C06CA9B0A6
    :masd.codec.stereotypes: ContainingMetaElement
+   :masd.codec.plantuml: meta_model o-- backend
    :END:
 
 Describes the geometry of physical space.
@@ -158,10 +337,14 @@ Repository with all the meta-names in this meta-model, indexed appropriately.
    :PROPERTIES:
    :custom_id: 9C1EFFEF-7BB0-F9D4-9C83-7E9212256A45
    :masd.codec.stereotypes: ContainingMetaElement, HasTechnicalSpace
+   :masd.codec.plantuml: backend o-- facet
+   :masd.codec.plantuml: backend o-- part
+   :masd.codec.plantuml: backend o-- archetype
+   :masd.codec.plantuml: backend o-u- archetype_kind
    :END:
 
-Represents a meta-region in physical space with archetypes for a primary technical
-space, and associated secondary technical spaces.
+Represents a meta-region in physical space with archetypes for a primary
+technical space, and associated secondary technical spaces.
 
 *** parts                                                         :attribute:
     :PROPERTIES:
@@ -191,10 +374,77 @@ Archetypes by archetype ID.
 
 Archetype kinds by ID.
 
+** facet                                                            :element:
+   :PROPERTIES:
+   :custom_id: 3281835E-C520-97B4-9653-E2FC5955950B
+   :masd.codec.stereotypes: ContainingMetaElement, Postfixable
+   :masd.codec.plantuml: facet o-- helper
+   :END:
+
+Represents a meta-region in physical space with archetypes for a given theme.
+
+*** archetypes                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
+    :END:
+
+*** helpers                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, helper>
+    :END:
+
+*** default archetype for logical meta model id                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<std::string, archetype>
+    :END:
+
+Maps the logical model element ID to the default archetype for this facet.
+
+Used to obtain the default archetype for referencing.
+
+** helper                                                           :element:
+   :PROPERTIES:
+   :custom_id: 459E3E13-5552-BCB4-0CC3-D15CDE560416
+   :masd.codec.stereotypes: MetaElement, Associatable, HasTechnicalSpace
+   :masd.codec.plantuml: helper o-- relations
+   :END:
+
+*** relations                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: relations
+    :END:
+
+Properties of this helper with regards to relations.
+
+*** part                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::physical_meta_id
+    :END:
+
+Part in which we are located.
+
+*** family                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+*** owning formatters                                             :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::physical_meta_id>
+    :END:
+
+*** owning facets                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::physical_meta_id>
+    :END:
+
 ** part                                                             :element:
    :PROPERTIES:
    :custom_id: B77C4DF2-06D8-BF74-896B-82EDD94928AC
    :masd.codec.stereotypes: ContainingMetaElement
+   :masd.codec.plantuml: part o-- path_configuration
+   :masd.codec.plantuml: part o-- facet
+   :masd.codec.plantuml: part o-- archetype
    :END:
 
 Represents a meta-region in physical space with archetypes for a given part of a
@@ -225,6 +475,7 @@ If true, this part needs a path relative to its root.
 ** path configuration                                               :element:
    :PROPERTIES:
    :custom_id: 74303C4A-CB7B-1AD4-095B-2AED06020DFF
+   :masd.codec.plantuml: path_configuration o-- path_contribution_type
    :END:
 
 Describes how paths are handled within a part.
@@ -277,37 +528,11 @@ The item contributes folders to the path.
 
 The item contributes a single folder to the path, as a delimited string.
 
-** facet                                                            :element:
-   :PROPERTIES:
-   :custom_id: 3281835E-C520-97B4-9653-E2FC5955950B
-   :masd.codec.stereotypes: ContainingMetaElement, Postfixable
-   :END:
-
-Represents a meta-region in physical space with archetypes for a given theme.
-
-*** archetypes                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
-    :END:
-
-*** helpers                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, helper>
-    :END:
-
-*** default archetype for logical meta model id                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<std::string, archetype>
-    :END:
-
-Maps the logical model element ID to the default archetype for this facet.
-
-Used to obtain the default archetype for referencing.
-
 ** archetype                                                        :element:
    :PROPERTIES:
    :custom_id: F86D0910-FECA-3974-B71B-E32ABEA6A1E0
    :masd.codec.stereotypes: MetaElement, Postfixable, Associatable, HasTechnicalSpace
+   :masd.codec.plantuml: archetype o-- relations
    :END:
 
 Represents a meta-artefact.
@@ -340,6 +565,124 @@ Part in which we are located.
 
 Properties of this archetype with regards to relations.
 
+** relations                                                        :element:
+   :PROPERTIES:
+   :custom_id: 40D1B362-03EF-E544-BF93-96A8D88D5AF6
+   :masd.codec.plantuml: relations o-- hard_coded_relation
+   :masd.codec.plantuml: relations o-- variable_relation
+   :masd.codec.plantuml: relations o-- constant_relation
+   :masd.codec.plantuml: relations o-- relation_status
+   :END:
+
+Models relationships between archetypes.
+
+*** status                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: relation_status
+    :END:
+
+Status of this archetype with regards to being related to archetypes.
+
+*** constant                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<constant_relation>
+    :END:
+
+All archetypes this archetype is related to,  over a fixed logical meta-model
+element.
+
+*** variable                                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<variable_relation>
+    :END:
+
+All archetypes this archetype is related to,  over a variable logical meta-model
+element.
+
+*** hard coded                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<hard_coded_relation>
+    :END:
+
+** hard coded relation                                              :element:
+   :PROPERTIES:
+   :custom_id: ACBCC61D-C939-4F94-C8AB-A4D8FABF9C8A
+   :END:
+
+Relations against hard-coded values.
+
+*** value                                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+** variable relation                                                :element:
+   :PROPERTIES:
+   :custom_id: 12DD54B6-AED6-FA44-6B0B-7E119CC2271D
+   :masd.codec.stereotypes: Urnable
+   :masd.codec.plantuml: variable_relation o-- variable_relation_type
+   :END:
+
+*** type                                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: variable_relation_type
+    :END:
+
+How these archetypes are related.
+
+** variable relation type                                           :element:
+   :PROPERTIES:
+   :custom_id: D845498B-FF81-2BB4-53BB-138CCB5F031A
+   :masd.codec.stereotypes: masd::enumeration
+   :END:
+
+Lists all of the valid variable relation types.
+
+*** self                                                          :attribute:
+
+Logical element is related to itself across different projections.
+
+*** parent                                                        :attribute:
+
+Parent of logical element.
+
+*** child                                                         :attribute:
+
+Child of logical element.
+
+*** transparent                                                   :attribute:
+
+The relation with another logical element requires the element's full definition.
+
+*** opaque                                                        :attribute:
+
+The relation with another logical element does not requires its full definition.
+
+*** associative key                                               :attribute:
+
+The associated element is used as an associative key.
+
+*** visitation                                                    :attribute:
+
+The associated element visits or is visited by the current element.
+
+** constant relation                                                :element:
+   :PROPERTIES:
+   :custom_id: 4CA21E20-F5E9-7F14-2203-EE39C0FDAA0C
+   :masd.codec.stereotypes: Urnable, Labelable
+   :END:
+
+Represents a relation between archetypes, fixed to a logical model element.
+
+*** logical model element id                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+ID of the logical model element that the relation is fixed against.
+
+Element must exist in the current loaded models.
+
 ** archetype kind                                                   :element:
    :PROPERTIES:
    :custom_id: 4F6F3004-B819-0F84-04FB-A305F8DF039B
@@ -358,10 +701,30 @@ Represents a type of archetypes.
     :masd.codec.type: std::string
     :END:
 
+** model set                                                        :element:
+   :PROPERTIES:
+   :custom_id: 9DAB95C3-F754-B2E4-84CB-BECB4A36046C
+   :masd.codec.stereotypes: Nameable
+   :masd.codec.plantuml: model_set o-- model
+   :END:
+
+Represents a set of related physical models.
+
+*** models                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<model>
+    :END:
+
+All models that are a member of this set.
+
 ** model                                                            :element:
    :PROPERTIES:
    :custom_id: 6E49B221-E8F7-8E94-9FBB-95E36C9F2B98
    :masd.codec.stereotypes: Element
+   :masd.codec.plantuml: model o-- region
+   :masd.codec.plantuml: model o-- artefact
+   :masd.codec.plantuml: model o-- meta_model_properties
+   :masd.codec.plantuml: model o-- outputting_properties
    :END:
 
 Collection of entities representing objects in physical space.
@@ -385,7 +748,7 @@ Primary technical space that this model belongs to.
 
 *** orphan artefacts                                              :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::list<boost::shared_ptr<physical::entities::artefact>>
+    :masd.codec.type: std::list<boost::shared_ptr<artefact>>
     :END:
 
 Artefacts that exist in the physical dimension only.
@@ -411,89 +774,44 @@ If true the repository has at least one generable artefact, false otherwise.
 
 All physical regions in  this model, by logical ID.
 
-** Describable                                                      :element:
+** region                                                           :element:
    :PROPERTIES:
-   :custom_id: 6BD20BEC-DC7A-16D4-E6F3-8ED18B97F7FF
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: B08A6DE6-2DF6-9614-25DB-F2DA6139DC6D
+   :masd.codec.stereotypes: Configurable, Provenance
+   :masd.codec.plantuml: region o-- artefact
    :END:
 
-*** description                                                   :attribute:
+Represents a region of logical-physical space fixed at one logical point.
+
+*** artefacts by archetype                                        :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::string
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<artefact>>
     :END:
 
-Human readable description of the entity.
+All artefacts that are contained within this set, organised by archetype.
 
-** MetaNameable                                                     :element:
-   :PROPERTIES:
-   :custom_id: 3F2AF83F-3FAD-3114-EE73-11B6B1E7AF99
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a meta-name.
-
-*** meta name                                                     :attribute:
+*** archetype for role                                            :attribute:
     :PROPERTIES:
-    :masd.codec.type: identification::entities::physical_meta_name
+    :masd.codec.type: std::unordered_map<std::string, identification::entities::physical_meta_id>
     :END:
 
-Meta-name for this meta-element.
+Resolves a role into a concrete archetype, in the context of this logical element.
 
-** Labelable                                                        :element:
-   :PROPERTIES:
-   :custom_id: B250B60F-DCDD-DAE4-571B-BEE57DE11F72
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-The ability to attach labels to an element.
-
-*** labels                                                        :attribute:
+*** is generatable                                                :attribute:
     :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::label>
+    :masd.codec.type: bool
     :END:
 
-All labels associated with this element.
-
-** MetaElement                                                      :element:
-   :PROPERTIES:
-   :custom_id: 5DE42D37-6B77-19D4-DE9B-8A8C68CDDB7B
-   :masd.codec.parent: entities::Describable, entities::MetaNameable, entities::Labelable
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-** ContainingMetaElement                                            :element:
-   :PROPERTIES:
-   :custom_id: 0D7CDC3C-8D15-1F44-620B-9F6B88E08D58
-   :masd.codec.parent: entities::MetaElement
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-The meta-element can contain other meta-elements.
-
-*** directory name                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Default name to use for the directory in the file-system representing this element.
-
-** Postfixable                                                      :element:
-   :PROPERTIES:
-   :custom_id: A96D03A3-173D-2724-FC43-4FC1C392DE10
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** postfix                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Postfix to apply to artefacts within this element, if any.
+If false, the entire artefact set is not generatable.
 
 ** artefact                                                         :element:
    :PROPERTIES:
    :custom_id: CE39E6C4-8AF4-1C14-017B-B61FED2848B6
    :masd.codec.stereotypes: Element, HasTechnicalSpace
+   :masd.codec.plantuml: artefact o-- relation_properties
+   :masd.codec.plantuml: artefact o-- operation
+   :masd.codec.plantuml: artefact o-- path_properties
+   :masd.codec.plantuml: artefact o-- enablement_properties
    :END:
 
 Represents an entity in physical space.
@@ -561,101 +879,30 @@ Template used as input in order to generate the artefact's content, if any.
     :masd.codec.type: relation_properties
     :END:
 
-** Configurable                                                     :element:
+** relation properties                                              :element:
    :PROPERTIES:
-   :custom_id: 3DBB268C-1CC5-E874-0443-E8572D5F05CC
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: E40AAB5E-5322-E974-709B-575153802629
    :END:
 
-Ability to have meta-data associated.
-
-*** configuration                                                 :attribute:
+*** status                                                        :attribute:
     :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<variability::entities::configuration>
+    :masd.codec.type: relation_status
     :END:
 
-Configuration for this element.
-
-** Provenance                                                       :element:
-   :PROPERTIES:
-   :custom_id: DFB309F5-B837-7784-84B3-D000942F89F3
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Properties related to the origin of the modeling element.
-
-*** provenance                                                    :attribute:
+*** relations                                                     :attribute:
     :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_provenance
+    :masd.codec.type: std::list<std::string>
     :END:
 
-Details of the provenance of this model element.
+Artefacts that this artefact depends on.
 
-** Nameable                                                         :element:
-   :PROPERTIES:
-   :custom_id: AA362810-6732-F754-7003-BA2A6C0FE40F
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Ability to have a name.
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::physical_name
-    :END:
-
-Name of the physical element.
-
-** LogicalPhysicalSpaceIdentity                                     :element:
-   :PROPERTIES:
-   :custom_id: BCC47C43-7C8F-68D4-A00B-F4BF38FF33E4
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** id                                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_meta_physical_id
-    :END:
-
-Point in logical-physical space represented by this element.
-
-** Element                                                          :element:
-   :PROPERTIES:
-   :custom_id: 29324758-FC90-7C74-4DD3-49B580299CAB
-   :masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable, entities::LogicalPhysicalSpaceIdentity
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-** outputting properties                                            :element:
-   :PROPERTIES:
-   :custom_id: A7C9320A-8CED-0E04-1D0B-1D72418F70E5
-   :END:
-
-Properties related to outputting.
-
-*** force write                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** delete extra files                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** ignore files matching regex                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::vector<std::string>
-    :END:
-
-*** delete empty directories                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
+The format used is dependent on the technical space the artefact belongs to.
 
 ** operation                                                        :element:
    :PROPERTIES:
    :custom_id: 0BA619C8-6ED2-4424-8A7B-CB605BBB7253
+   :masd.codec.plantuml: operation o-- operation_type
+   :masd.codec.plantuml: operation o-- operation_reason
    :END:
 
 Operation to apply to an artefact.
@@ -740,237 +987,104 @@ File is unexpected but the user asked us not to delete it.
 
 File is unexpected but the user asked us to ignore it via regexes.
 
-** Associatable                                                     :element:
+** outputting properties                                            :element:
    :PROPERTIES:
-   :custom_id: C122F449-9440-2C54-48A3-0F112BF1470F
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: A7C9320A-8CED-0E04-1D0B-1D72418F70E5
    :END:
 
-The meta-element is associated with other meta-elements
+Properties related to outputting.
 
-*** depends                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-List of meta-elements this meta-element depends upon, if any.
-
-*** generates                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-List of meta-elements this meta-element is used to generate, if any.
-
-*** generated by                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Meta-element used to generate this meta-element, if any.
-
-** model set                                                        :element:
-   :PROPERTIES:
-   :custom_id: 9DAB95C3-F754-B2E4-84CB-BECB4A36046C
-   :masd.codec.stereotypes: Nameable
-   :END:
-
-Represents a set of related physical models.
-
-*** models                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<model>
-    :END:
-
-All models that are a member of this set.
-
-** relation status                                                  :element:
-   :PROPERTIES:
-   :custom_id: 03EC10A4-F887-1184-3E3B-473B68970C6E
-   :masd.codec.stereotypes: masd::enumeration, dogen::convertible
-   :END:
-
-Status of a given archetype with regards to being related to other archetypes.
-
-*** not relatable                                                 :attribute:
-
-Archertype cannot be legally related to other archetypes.
-
-*** relatable                                                     :attribute:
-
-Archetype can be related to archetypes.
-
-*** facet default                                                 :attribute:
-
-FIXME: hack for now
-
-** constant relation                                                :element:
-   :PROPERTIES:
-   :custom_id: 4CA21E20-F5E9-7F14-2203-EE39C0FDAA0C
-   :masd.codec.stereotypes: Urnable, Labelable
-   :END:
-
-Represents a relation between archetypes, fixed to a logical model element.
-
-*** logical model element id                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-ID of the logical model element that the relation is fixed against.
-
-Element must exist in the current loaded models.
-
-** variable relation                                                :element:
-   :PROPERTIES:
-   :custom_id: 12DD54B6-AED6-FA44-6B0B-7E119CC2271D
-   :masd.codec.stereotypes: Urnable
-   :END:
-
-*** type                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: variable_relation_type
-    :END:
-
-How these archetypes are related.
-
-** Urnable                                                          :element:
-   :PROPERTIES:
-   :custom_id: EFD4A41C-77B6-E1D4-7BCB-5F3227DB7EC7
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** original urn                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-URN which may or may not be an archetype URN.
-
- It must have the form "archetype:" if pointing to an archetype, or  "label:" if
-pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
-to a unique archetype.
-
-*** resolved urn                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-URN pointing to the archetype.
-
- It must have the form "archetype:".
-
-** variable relation type                                           :element:
-   :PROPERTIES:
-   :custom_id: D845498B-FF81-2BB4-53BB-138CCB5F031A
-   :masd.codec.stereotypes: masd::enumeration
-   :END:
-
-Lists all of the valid variable relation types.
-
-*** self                                                          :attribute:
-
-Logical element is related to itself across different projections.
-
-*** parent                                                        :attribute:
-
-Parent of logical element.
-
-*** child                                                         :attribute:
-
-Child of logical element.
-
-*** transparent                                                   :attribute:
-
-The relation with another logical element requires the element's full definition.
-
-*** opaque                                                        :attribute:
-
-The relation with another logical element does not requires its full definition.
-
-*** associative key                                               :attribute:
-
-The associated element is used as an associative key.
-
-*** visitation                                                    :attribute:
-
-The associated element visits or is visited by the current element.
-
-** relations                                                        :element:
-   :PROPERTIES:
-   :custom_id: 40D1B362-03EF-E544-BF93-96A8D88D5AF6
-   :END:
-
-Models relationships between archetypes.
-
-*** status                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: relation_status
-    :END:
-
-Status of this archetype with regards to being related to archetypes.
-
-*** constant                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<constant_relation>
-    :END:
-
-All archetypes this archetype is related to,  over a fixed logical meta-model
-element.
-
-*** variable                                                      :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<variable_relation>
-    :END:
-
-All archetypes this archetype is related to,  over a variable logical meta-model
-element.
-
-*** hard coded                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<hard_coded_relation>
-    :END:
-
-** hard coded relation                                              :element:
-   :PROPERTIES:
-   :custom_id: ACBCC61D-C939-4F94-C8AB-A4D8FABF9C8A
-   :END:
-
-Relations against hard-coded values.
-
-*** value                                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-** region                                                           :element:
-   :PROPERTIES:
-   :custom_id: B08A6DE6-2DF6-9614-25DB-F2DA6139DC6D
-   :masd.codec.stereotypes: Configurable, Provenance
-   :END:
-
-Represents a region of logical-physical space fixed at one logical point.
-
-*** artefacts by archetype                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
-    :END:
-
-All artefacts that are contained within this set, organised by archetype.
-
-*** archetype for role                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<std::string, identification::entities::physical_meta_id>
-    :END:
-
-Resolves a role into a concrete archetype, in the context of this logical element.
-
-*** is generatable                                                :attribute:
+*** force write                                                   :attribute:
     :PROPERTIES:
     :masd.codec.type: bool
     :END:
 
-If false, the entire artefact set is not generatable.
+*** delete extra files                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** ignore files matching regex                                   :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::vector<std::string>
+    :END:
+
+*** delete empty directories                                      :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+** path properties                                                  :element:
+   :PROPERTIES:
+   :custom_id: E0CDE7FB-29B0-8124-A893-541D3FFD246A
+   :masd.codec.plantuml: path_properties o-- inclusion_directives
+   :END:
+
+*** file path                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the file corresponding to this artefact.
+
+*** header guard                                                  :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+C++ header guard for this artefact, if any,
+
+*** inclusion path                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Path for inclusion for this artefact, computed from the path.
+
+Note that this is will not necessarily be used for the inclusion directive.
+
+*** inclusion directives                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: inclusion_directives
+    :END:
+
+*** inclusion dependencies                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+C++ Inlusion dependencies for this artefact.
+
+*** using dependencies                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+*** relative path                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+** inclusion directives                                             :element:
+   :PROPERTIES:
+   :custom_id: 777801D0-CCA9-4C04-05AB-CAA09A81A3FD
+   :END:
+
+Represents the group of inclusion directives associated with a name and an archetype.
+
+*** primary                                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::string
+    :END:
+
+The main inclusion directive needed for this element.
+
+*** secondary                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<std::string>
+    :END:
+
+Any other directives that are also needed for this element.
 
 ** enablement properties                                            :element:
    :PROPERTIES:
@@ -1025,6 +1139,26 @@ If supplied and true, the facet will have overwrite on.
 
 If supplied and true, the archetype will have overwrite on.
 
+** relation status                                                  :element:
+   :PROPERTIES:
+   :custom_id: 03EC10A4-F887-1184-3E3B-473B68970C6E
+   :masd.codec.stereotypes: masd::enumeration, dogen::convertible
+   :END:
+
+Status of a given archetype with regards to being related to other archetypes.
+
+*** not relatable                                                 :attribute:
+
+Archertype cannot be legally related to other archetypes.
+
+*** relatable                                                     :attribute:
+
+Archetype can be related to archetypes.
+
+*** facet default                                                 :attribute:
+
+FIXME: hack for now
+
 ** backend properties                                               :element:
    :PROPERTIES:
    :custom_id: A35EA82B-BE08-96B4-EC1B-11D8F42D0259
@@ -1074,6 +1208,77 @@ Directory name as read out from the configuration.
     :END:
 
 Name of the directory to use for the backend, computed from configuration.
+
+** meta model properties                                            :element:
+   :PROPERTIES:
+   :custom_id: A86B50AC-9A58-2F14-B3EB-AD3585177E57
+   :masd.codec.plantuml: meta_model_properties o-- project_path_properties
+   :masd.codec.plantuml: meta_model_properties o-- part_properties
+   :masd.codec.plantuml: meta_model_properties o-- archetype_kind_properties
+   :masd.codec.plantuml: meta_model_properties o-- archetype_properties
+   :END:
+
+Meta-model configuration supplied by this model.
+
+The meta-model properties represent a set of variability overrides supplied on top
+of the existing physical meta-model. In addition, the properties also contain
+computed values on the back of physical transforms.
+
+*** output directory path                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the output directory chosen by the user.
+
+*** file path                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the component.
+
+*** backend properties                                            :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
+    :END:
+
+*** facet properties                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
+    :END:
+
+*** archetype properties                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
+    :END:
+
+*** archetype kind properties                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>
+    :END:
+
+*** part properties                                               :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part_properties>
+    :END:
+
+*** enabled backends                                              :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_set<identification::entities::physical_meta_id>
+    :END:
+
+Contains the IDs of all of the backends which are enabled.
+
+*** enabled archetype for element                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
+    :END:
+
+*** project path properties                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: project_path_properties
+    :END:
 
 ** archetype kind properties                                        :element:
    :PROPERTIES:
@@ -1140,6 +1345,9 @@ Computed postfix to apply to all artefacts in this facet.
    :PROPERTIES:
    :custom_id: 94A73F9D-6105-8F94-28EB-2FBB05072713
    :masd.codec.stereotypes: MetaIdentifiable
+   :masd.codec.plantuml: archetype_properties o-- part_properties
+   :masd.codec.plantuml: archetype_properties o-- facet_properties
+   :masd.codec.plantuml: archetype_properties o-- backend_properties
    :END:
 
 Properties related to the archetype.
@@ -1187,73 +1395,6 @@ Computed postfix to apply to all artefacts of this archetype.
     :masd.codec.type: part_properties
     :END:
 
-** meta model properties                                            :element:
-   :PROPERTIES:
-   :custom_id: A86B50AC-9A58-2F14-B3EB-AD3585177E57
-   :END:
-
-Meta-model configuration supplied by this model.
-
-The meta-model properties represent a set of variability overrides supplied on top
-of the existing physical meta-model. In addition, the properties also contain
-computed values on the back of physical transforms.
-
-*** output directory path                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Full path to the output directory chosen by the user.
-
-*** file path                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Full path to the component.
-
-*** backend properties                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
-    :END:
-
-*** facet properties                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
-    :END:
-
-*** archetype properties                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
-    :END:
-
-*** archetype kind properties                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>
-    :END:
-
-*** part properties                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part_properties>
-    :END:
-
-*** enabled backends                                              :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_set<identification::entities::physical_meta_id>
-    :END:
-
-Contains the IDs of all of the backends which are enabled.
-
-*** enabled archetype for element                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
-    :END:
-
-*** project path properties                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: project_path_properties
-    :END:
-
 ** part properties                                                  :element:
    :PROPERTIES:
    :custom_id: 3873AF72-50E1-72D4-CAA3-D1E523B47D1E
@@ -1291,56 +1432,6 @@ Directory name as read out from the configuration.
     :END:
 
 Computed name of the directory to use for the part.
-
-** path properties                                                  :element:
-   :PROPERTIES:
-   :custom_id: E0CDE7FB-29B0-8124-A893-541D3FFD246A
-   :END:
-
-*** file path                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Full path to the file corresponding to this artefact.
-
-*** header guard                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-C++ header guard for this artefact, if any,
-
-*** inclusion path                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Path for inclusion for this artefact, computed from the path.
-
-Note that this is will not necessarily be used for the inclusion directive.
-
-*** inclusion directives                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: inclusion_directives
-    :END:
-
-*** inclusion dependencies                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-C++ Inlusion dependencies for this artefact.
-
-*** using dependencies                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-*** relative path                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
 
 ** project path properties                                          :element:
    :PROPERTIES:
@@ -1423,19 +1514,6 @@ If true, backends should have backend-specific directories to store their artefa
     :masd.codec.type: boost::filesystem::path
     :END:
 
-** MetaIdentifiable                                                 :element:
-   :PROPERTIES:
-   :custom_id: B58206BB-D9A7-D0B4-2A03-16AD6BD84FC9
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-*** meta id                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::physical_meta_id
-    :END:
-
-Meta-id of the physical meta-element.
-
 ** legacy archetype kind                                            :element:
    :PROPERTIES:
    :custom_id: 96D5FCC4-67B7-A2E4-88CB-08A3CBF3F9A9
@@ -1470,93 +1548,80 @@ Kinds of archetypes available across all technical spaces.
 
 *** csharp implementation                                         :attribute:
 
-** relation properties                                              :element:
+* helpers                                                            :module:
+  :PROPERTIES:
+  :custom_id: 07F73046-A81F-0664-5CBB-F4F79A6F273A
+  :masd.codec.dia.comment: true
+  :END:
+
+Helpers for the physical model.
+
+** template instantiation domains factory                           :element:
    :PROPERTIES:
-   :custom_id: E40AAB5E-5322-E974-709B-575153802629
+   :custom_id: 7D90FC4D-B34C-B9C4-78CB-D27456AFD06A
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-*** status                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: relation_status
-    :END:
-
-*** relations                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-Artefacts that this artefact depends on.
-
-The format used is dependent on the technical space the artefact belongs to.
-
-** inclusion directives                                             :element:
+** building error                                                   :element:
    :PROPERTIES:
-   :custom_id: 777801D0-CCA9-4C04-05AB-CAA09A81A3FD
+   :custom_id: C621FA96-2566-7AA4-D7BB-82559421917A
+   :masd.codec.stereotypes: masd::exception
    :END:
 
-Represents the group of inclusion directives associated with a name and an archetype.
+An error occurred while the field factory was building.
 
-*** primary                                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-The main inclusion directive needed for this element.
-
-*** secondary                                                     :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<std::string>
-    :END:
-
-Any other directives that are also needed for this element.
-
-** HasTechnicalSpace                                                :element:
+** path generator                                                   :element:
    :PROPERTIES:
-   :custom_id: 7CE703ED-95AF-7AF4-9533-C46E31343BA1
-   :masd.codec.stereotypes: masd::object_template
+   :custom_id: 345B379E-4E18-8CB4-CF73-D5601B52A0BB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-*** technical space                                               :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::technical_space
-    :END:
-
-Technical space to which this physical element belongs to.
-
-** helper                                                           :element:
+** file status collector                                            :element:
    :PROPERTIES:
-   :custom_id: 459E3E13-5552-BCB4-0CC3-D15CDE560416
-   :masd.codec.stereotypes: MetaElement, Associatable, HasTechnicalSpace
+   :custom_id: BD87EBFD-97BE-BFE4-725B-28CAD0526E30
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-*** relations                                                     :attribute:
+** files by status                                                  :element:
+   :PROPERTIES:
+   :custom_id: 443600DB-FD59-2EA4-4DD3-7710619DE58B
+   :END:
+
+*** unexpected                                                    :attribute:
     :PROPERTIES:
-    :masd.codec.type: relations
+    :masd.codec.type: std::list<boost::filesystem::path>
     :END:
 
-Properties of this helper with regards to relations.
-
-*** part                                                          :attribute:
+*** ignored                                                       :attribute:
     :PROPERTIES:
-    :masd.codec.type: identification::entities::physical_meta_id
+    :masd.codec.type: std::list<boost::filesystem::path>
     :END:
 
-Part in which we are located.
+** unified differ                                                   :element:
+   :PROPERTIES:
+   :custom_id: 21106227-3FEF-AA64-C78B-5FAC0B73A6D0
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 
-*** family                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
+** meta model validator                                             :element:
+   :PROPERTIES:
+   :custom_id: 6C974170-68E9-A154-7E9B-B12A4863BE6A
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 
-*** owning formatters                                             :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::physical_meta_id>
-    :END:
+** validation error                                                 :element:
+   :PROPERTIES:
+   :custom_id: 4610A2C7-6023-B804-0A63-C976F25083A2
+   :masd.codec.stereotypes: masd::exception
+   :END:
 
-*** owning facets                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<identification::entities::physical_meta_id>
-    :END:
+An error occurred during validation.
+
+** header guard factory                                             :element:
+   :PROPERTIES:
+   :custom_id: 564DE5A3-5E2C-5844-CB23-9A19281414E9
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
 
 * features                                                           :module:
   :PROPERTIES:
@@ -2113,9 +2178,3 @@ Smallest possible context required for bootstrapping purposes.
    :custom_id: 112B9D0F-431B-6654-23E3-695F37B575C8
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-
-* registrar                                                         :element:
-  :PROPERTIES:
-  :custom_id: E410B7DE-5AE8-0864-D51B-35C4EBEA7E20
-  :masd.codec.stereotypes: masd::serialization::type_registrar
-  :END:
