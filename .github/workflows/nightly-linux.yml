@@ -65,6 +65,8 @@ jobs:
           cmake --build --preset ${preset} --target dogen.cli
           cmake -DWITH_FULL_GENERATION=ON --preset ${preset}
           cmake --build --preset ${preset} --target gao
+          git config --global user.email "temporary.commit@example.com"
+          git config --global user.name "Temporary Commit"
           git add -A 1>/dev/null
           git commit -m "Generated code."
 
