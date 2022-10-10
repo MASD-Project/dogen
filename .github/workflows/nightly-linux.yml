@@ -1,4 +1,4 @@
-name: Continuous Linux
+name: Nightly Linux
 
 on:
   schedule:
