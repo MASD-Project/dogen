@@ -46,11 +46,11 @@ namespace dogen::orchestration::transforms {
  * @li @e implicit: these are known as the @e system models. They are
  * added automatically. Examples are built-ins, boost, std, etc.
  *
- * Collectively, all implicit and explicit models are referred to as
- * the @e input models. The input models read the front-end are
- * converted into the middle end representation - models. They are
- * then merged it into a single, unified Yarn model, called the @e
- * merged model; all dependencies are resolved and validated.
+ * Collectively, all implicit and explicit models are referred to as the @e
+ * input models. The input models read the front-end are converted into the
+ * middle end representation - logical models. They are then merged it into a
+ * single, unified Yarn model, called the @e merged model; all dependencies are
+ * resolved and validated.
  *
  * The transform then instantiates all backends requested by the
  * options passed in. They use the merged model to generate source

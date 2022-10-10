@@ -40,8 +40,8 @@ class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 
 namespace transforms #F2F2F2 {
     note as transforms_1
-Top-level transforms for Dogen. These are
-the entry points to all transformations.
+Top-level transforms for Dogen. These are the entry points to all
+transformations.
     end note
 
     class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
@@ -57,6 +57,30 @@ the entry points to all transformations.
 
     code_generation_chain o-- physical_model_production_chain
 
+    note top of code_generation_chain
+Responsible for transforming a high-level representation of a domain into code,
+in one or more primary technical spaces.
+
+The model which one intends to transform is known as the target model. The
+transform starts by invoking the correct front-end to read in the target model
+and all of its dependencies. There are two types of dependencies:
+
+- explicit: specified by the options passed in; these are models created by the
+  user and any models that they, in turn, depend on.
+- implicit: these are known as the system models. They are added automatically.
+  Examples are built-ins, boost, std, etc.
+
+Collectively, all implicit and explicit models are referred to as the input
+models. The input models read the front-end are converted into the middle end
+representation - logical models. They are then merged it into a single, unified
+Yarn model, called the merged model; all dependencies are resolved and
+validated.
+
+The transform then instantiates all backends requested by the options passed in.
+They use the merged model to generate source code, and then outputted it to the
+desired destination.
+    end note
+
     class physical_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -67,20 +91,38 @@ the entry points to all transformations.
     class text_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    note top of text_model_production_chain
+Produces a text model.
+    end note
+
     class text_model_to_physical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     text_model_to_physical_model_transform o-- logical_model_to_text_model_chain
+
+    note top of text_model_to_physical_model_transform
+Converts text models into physical models.
+    end note
 
     class codec_model_set_to_logical_input_model_set_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     codec_model_set_to_logical_input_model_set_chain o-- codec_model_to_logical_model_transform
 
+    note top of codec_model_set_to_logical_input_model_set_chain
+Converts an codec model set into a logical model set.
+
+All codec transforms must have been applied to the codec model set.
+    end note
+
     class codec_model_to_logical_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     codec_model_to_logical_model_transform o-- helpers::codec_to_logical_projector
+
+    note top of codec_model_to_logical_model_transform
+Converts an codec model into an logical representation.
+    end note
 
     class logical_model_to_text_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -90,13 +132,27 @@ the entry points to all transformations.
     logical_model_to_text_model_chain o-- legacy_dependencies_transform
     logical_model_to_text_model_chain o-- helpers::codec_to_logical_projector
 
+    note top of logical_model_to_text_model_chain
+Transforms a logical model representation into a text representation, performing
+an expansion into physical space.
+    end note
+
     class physical_to_logical_population_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    note top of physical_to_logical_population_transform
+Populate logical elements that require information from the physical dimension.
+    end note
 
     class legacy_dependencies_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     legacy_dependencies_transform o-- helpers::dependencies_builder
+
+    note top of legacy_dependencies_transform
+Finds all inclusion directives in the model, and indexes them to
+logical-physical points.
+    end note
 
     class context_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
@@ -104,14 +160,29 @@ the entry points to all transformations.
     context_factory o-- context: builds
     context_factory o-- factory_exception: throws
 
+    note top of context_factory
+Factory that creates the transformation context.
+    end note
+
     class context_bootstrapping_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     context_bootstrapping_chain o-- context: bootstraps
     context_bootstrapping_chain o-- context_factory: makes contexts using
 
+    note top of context_bootstrapping_chain
+Bootstraps the transforms sub-system.
+
+This transform is responsible for running all of the first stage chains needed
+by the remaining chains, and producing the top-level transform context.
+    end note
+
     class elements_removal_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    note top of elements_removal_transform
+Remove all elements which are not required for code generation.
+    end note
 
     class factory_exception <<masd::exception>> #E8C2F8 {
     }
@@ -133,12 +204,12 @@ Helpers for the orchestration model.
     class codec_to_logical_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    codec_to_logical_projector o-- projection_error
+    codec_to_logical_projector o-- projection_error: throws
 
     class logical_to_physical_projector <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    logical_to_physical_projector o-- projection_error
+    logical_to_physical_projector o-- projection_error: throws
 
     class projection_error <<masd::exception>> #E8C2F8 {
     }
@@ -150,7 +221,7 @@ An error occurred whilst projecting elements from one space into another.
     class dependencies_builder <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    dependencies_builder o-- building_error
+    dependencies_builder o-- building_error: throws
 
     class building_error <<masd::exception>> #E8C2F8 {
     }

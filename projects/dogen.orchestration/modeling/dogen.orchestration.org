@@ -77,8 +77,8 @@ UML representation:
   :masd.codec.dia.comment: true
   :END:
 
-Top-level transforms for Dogen. These are
-the entry points to all transformations.
+Top-level transforms for Dogen. These are the entry points to all
+transformations.
 
 ** context                                                          :element:
    :PROPERTIES:
@@ -119,6 +119,28 @@ the entry points to all transformations.
    :masd.codec.plantuml: code_generation_chain o-- physical_model_production_chain
    :END:
 
+Responsible for transforming a high-level representation of a domain into code,
+in one or more primary technical spaces.
+
+The model which one intends to transform is known as the target model. The
+transform starts by invoking the correct front-end to read in the target model
+and all of its dependencies. There are two types of dependencies:
+
+- explicit: specified by the options passed in; these are models created by the
+  user and any models that they, in turn, depend on.
+- implicit: these are known as the system models. They are added automatically.
+  Examples are built-ins, boost, std, etc.
+
+Collectively, all implicit and explicit models are referred to as the input
+models. The input models read the front-end are converted into the middle end
+representation - logical models. They are then merged it into a single, unified
+Yarn model, called the merged model; all dependencies are resolved and
+validated.
+
+The transform then instantiates all backends requested by the options passed in.
+They use the merged model to generate source code, and then outputted it to the
+desired destination.
+
 ** physical model production chain                                  :element:
    :PROPERTIES:
    :custom_id: 305222EF-553A-CD44-E993-49CDB85C8EA4
@@ -134,12 +156,16 @@ the entry points to all transformations.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
+Produces a text model.
+
 ** text model to physical model transform                           :element:
    :PROPERTIES:
    :custom_id: 9B50C506-2345-E064-A09B-4F76D67BC44C
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :masd.codec.plantuml: text_model_to_physical_model_transform o-- logical_model_to_text_model_chain
    :END:
+
+Converts text models into physical models.
 
 ** codec model set to logical input model set chain                 :element:
    :PROPERTIES:
@@ -148,12 +174,18 @@ the entry points to all transformations.
    :masd.codec.plantuml: codec_model_set_to_logical_input_model_set_chain o-- codec_model_to_logical_model_transform
    :END:
 
+Converts an codec model set into a logical model set.
+
+All codec transforms must have been applied to the codec model set.
+
 ** codec model to logical model transform                           :element:
    :PROPERTIES:
    :custom_id: 29C0F449-60E9-36F4-728B-B67C2740BBEB
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :masd.codec.plantuml: codec_model_to_logical_model_transform o-- helpers::codec_to_logical_projector
    :END:
+
+Converts an codec model into an logical representation.
 
 ** logical model to text model chain                                :element:
    :PROPERTIES:
@@ -165,11 +197,16 @@ the entry points to all transformations.
    :masd.codec.plantuml: logical_model_to_text_model_chain o-- helpers::codec_to_logical_projector
    :END:
 
+Transforms a logical model representation into a text representation, performing
+an expansion into physical space.
+
 ** physical to logical population transform                         :element:
    :PROPERTIES:
    :custom_id: 775465C6-38F1-BE44-5CAB-8DAF93C733B3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
+Populate logical elements that require information from the physical dimension.
 
 ** legacy dependencies transform                                    :element:
    :PROPERTIES:
@@ -177,6 +214,9 @@ the entry points to all transformations.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :masd.codec.plantuml: legacy_dependencies_transform o-- helpers::dependencies_builder
    :END:
+
+Finds all inclusion directives in the model, and indexes them to
+logical-physical points.
 
 ** context factory                                                  :element:
    :PROPERTIES:
@@ -186,6 +226,8 @@ the entry points to all transformations.
    :masd.codec.plantuml: context_factory o-- factory_exception: throws
    :END:
 
+Factory that creates the transformation context.
+
 ** context bootstrapping chain                                      :element:
    :PROPERTIES:
    :custom_id: 637058A8-DE55-1F64-304B-3E61656CA711
@@ -194,11 +236,18 @@ the entry points to all transformations.
    :masd.codec.plantuml: context_bootstrapping_chain o-- context_factory: makes contexts using
    :END:
 
+Bootstraps the transforms sub-system.
+
+This transform is responsible for running all of the first stage chains needed
+by the remaining chains, and producing the top-level transform context.
+
 ** elements removal transform                                       :element:
    :PROPERTIES:
    :custom_id: D8940F16-A063-A7E4-33DB-AECF5DBB0A4F
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
+
+Remove all elements which are not required for code generation.
 
 ** factory exception                                                :element:
    :PROPERTIES:
@@ -226,14 +275,14 @@ Helpers for the orchestration model.
    :PROPERTIES:
    :custom_id: 04BCDBB0-51CB-BC24-ECEB-0B80C5454860
    :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: codec_to_logical_projector o-- projection_error
+   :masd.codec.plantuml: codec_to_logical_projector o-- projection_error: throws
    :END:
 
 ** logical to physical projector                                    :element:
    :PROPERTIES:
    :custom_id: 701B1373-DC04-12A4-9CDB-7DF9869A8566
    :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: logical_to_physical_projector o-- projection_error
+   :masd.codec.plantuml: logical_to_physical_projector o-- projection_error: throws
    :END:
 
 ** projection error                                                 :element:
@@ -248,7 +297,7 @@ An error occurred whilst projecting elements from one space into another.
    :PROPERTIES:
    :custom_id: FE527358-6A13-E0E4-07CB-020850372874
    :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: dependencies_builder o-- building_error
+   :masd.codec.plantuml: dependencies_builder o-- building_error: throws
    :END:
 
 ** building error                                                   :element:
