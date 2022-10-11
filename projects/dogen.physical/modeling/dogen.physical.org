@@ -41,6 +41,7 @@ UML representation:
   :custom_id: E410B7DE-5AE8-0864-D51B-35C4EBEA7E20
   :masd.codec.stereotypes: masd::serialization::type_registrar
   :END:
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: BF4942E6-FEC0-6934-5803-B4C5B253211D
