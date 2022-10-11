@@ -51,3 +51,6 @@ org-roam.db
 
 # vcpkg
 vcpkg_installed
+
+# github
+.sccache
