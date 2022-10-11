@@ -26,8 +26,8 @@
 #endif
 
 /**
- * @brief Contains all of the transforms needed to produce
- * models and meta-models for the physical model.
+ * @brief Contains all of the transforms needed to produce models and meta-models for the
+ * physical model.
  */
 namespace dogen::physical::transforms {
 }

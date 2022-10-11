@@ -12,8 +12,12 @@ end note
 class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 }
 
+main o-[hidden]- CMakeLists
+
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
+
+CMakeLists o-[hidden]- registrar
 
 class registrar <<masd::serialization::type_registrar>> #00FF00 {
 }
@@ -611,13 +615,171 @@ Kinds of archetypes available across all technical spaces.
 
 }
 
+namespace transforms #F2F2F2 {
+    note as transforms_1
+Contains all of the transforms needed to produce models and meta-models for the
+physical model.
+    end note
+
+    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} diffing_configuration boost::optional<diffing_configuration>
+        +{field} reporting_configuration boost::optional<reporting_configuration>
+        +{field} dry_run_mode_enabled bool
+        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
+        +{field} meta_model boost::shared_ptr<entities::meta_model>
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+        +{field} output_directory_path boost::filesystem::path
+    }
+
+    class minimal_context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
+        +{field} tracer boost::shared_ptr<tracing::tracer>
+    }
+
+    note top of minimal_context
+Smallest possible context required for bootstrapping purposes.
+    end note
+
+    class transform_exception <<masd::exception>> #E8C2F8 {
+    }
+
+    class meta_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    meta_model_production_chain o-u- entities::meta_model
+    meta_model_production_chain o-u- meta_model_assembly_transform
+    meta_model_production_chain o-- compute_name_indices_transform
+    meta_model_production_chain o-- compute_template_instantiation_domains
+
+    class meta_model_assembly_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class compute_name_indices_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class compute_template_instantiation_domains <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class model_post_processing_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_post_processing_chain o-- entities::model
+    model_post_processing_chain o-u- update_outputting_properties_transform
+    model_post_processing_chain o-u- mock_content_filler_transform
+    model_post_processing_chain o-u- gather_external_artefacts_transform
+    model_post_processing_chain o-l- generate_report_transform
+    model_post_processing_chain o-r- generate_patch_transform
+    model_post_processing_chain o-- generate_diffs_transform
+    model_post_processing_chain o-- remove_regions_transform
+    model_post_processing_chain o-- merge_transform
+    model_post_processing_chain o-- operation_transform
+
+    class update_outputting_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class mock_content_filler_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class gather_external_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class generate_report_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class generate_patch_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class generate_diffs_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class remove_regions_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class operation_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class model_population_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    model_population_chain o-- entities::model
+    model_population_chain o-- meta_model_properties_transform
+    model_population_chain o-- paths_transform
+    model_population_chain o-- relations_transform
+    model_population_chain o-- enablement_transform
+    model_population_chain o-- legacy_paths_transform
+    model_population_chain o-- generability_transform
+
+    class meta_model_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class relations_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class enablement_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class legacy_paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class file_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    file_generation_chain o-- entities::model
+    file_generation_chain o-- write_artefacts_transform
+    file_generation_chain o-- remove_files_transform
+
+    class write_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    class remove_files_transform <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+}
+
 namespace helpers #F2F2F2 {
     note as helpers_1
 Helpers for the physical model.
     end note
 
+    class file_status_collector <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    file_status_collector o-- files_by_status
+
+    class files_by_status #F7E5FF {
+        +{field} unexpected std::list<boost::filesystem::path>
+        +{field} ignored std::list<boost::filesystem::path>
+    }
+
+    class meta_model_validator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    meta_model_validator o-- validation_error
+
+    class validation_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of validation_error
+An error occurred during validation.
+    end note
+
     class template_instantiation_domains_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    template_instantiation_domains_factory o-- building_error
+
+    class header_guard_factory <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    header_guard_factory o-- building_error
 
     class building_error <<masd::exception>> #E8C2F8 {
     }
@@ -629,28 +791,7 @@ An error occurred while the field factory was building.
     class path_generator <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class file_status_collector <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class files_by_status #F7E5FF {
-        +{field} unexpected std::list<boost::filesystem::path>
-        +{field} ignored std::list<boost::filesystem::path>
-    }
-
     class unified_differ <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class meta_model_validator <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class validation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of validation_error
-An error occurred during validation.
-    end note
-
-    class header_guard_factory <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
 }
@@ -660,11 +801,16 @@ namespace features #F2F2F2 {
 Features for the MASD physical model.
     end note
 
+    class initializer <<masd::variability::initializer>> #A9CDCD {
+    }
+
     class facet_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
         +{field} directory_name masd::variability::text
         +{field} postfix masd::variability::text
         +{field} overwrite masd::variability::boolean
     }
+
+    facet_features o-[hidden]d- archetype_features
 
     note top of facet_features
 Physical features common to all facets.
@@ -675,12 +821,11 @@ Physical features common to all facets.
         +{field} overwrite masd::variability::boolean
     }
 
+    archetype_features o-[hidden]d- filesystem
+
     note top of archetype_features
 Features common to all archetypes.
     end note
-
-    class initializer <<masd::variability::initializer>> #A9CDCD {
-    }
 
     class filesystem <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} force_write masd::variability::boolean
@@ -689,6 +834,8 @@ Features common to all archetypes.
         +{field} delete_empty_directories masd::variability::boolean
         +{field} enable_backend_directories masd::variability::boolean
     }
+
+    filesystem o-[hidden]d- enablement
 
     note top of filesystem
 Features related to filesystem operations.
@@ -705,6 +852,8 @@ Enablement related properties.
     class backend_features <<masd::variability::feature_template_bundle>> #CCE2E2 {
         +{field} directory_name masd::variability::text
     }
+
+    backend_features o-[hidden]d- path_features
 
     note top of backend_features
 Physical features common to all backends.
@@ -723,6 +872,8 @@ Physical features common to all backends.
         +{field} disable_facet_directories masd::variability::boolean
     }
 
+    path_features o-[hidden]d- directive_features
+
     note top of path_features
 Set of features related to path processing.
     end note
@@ -732,109 +883,10 @@ Set of features related to path processing.
         +{field} secondary_inclusion_directive masd::variability::text_collection
     }
 
+    directive_features o-[hidden]d- inclusion_features
+
     class inclusion_features <<masd::variability::feature_bundle>> #BAD7D7 {
         +{field} inclusion_required masd::variability::boolean
-    }
-
-}
-
-namespace transforms #F2F2F2 {
-    note as transforms_1
-Contains all of the transforms needed to produce
-models and meta-models for the physical model.
-    end note
-
-    class context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-        +{field} diffing_configuration boost::optional<diffing_configuration>
-        +{field} reporting_configuration boost::optional<reporting_configuration>
-        +{field} dry_run_mode_enabled bool
-        +{field} feature_model boost::shared_ptr<variability::entities::feature_model>
-        +{field} meta_model boost::shared_ptr<entities::meta_model>
-        +{field} tracer boost::shared_ptr<tracing::tracer>
-        +{field} output_directory_path boost::filesystem::path
-    }
-
-    class transform_exception <<masd::exception>> #E8C2F8 {
-    }
-
-    class file_generation_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class write_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class update_outputting_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class remove_files_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class generate_report_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_post_processing_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class generate_diffs_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class gather_external_artefacts_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class generate_patch_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class mock_content_filler_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class operation_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class merge_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class meta_model_production_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class compute_name_indices_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class minimal_context <<dogen::typeable, dogen::pretty_printable>> #F7E5FF {
-        +{field} tracer boost::shared_ptr<tracing::tracer>
-    }
-
-    note top of minimal_context
-Smallest possible context required for bootstrapping purposes.
-    end note
-
-    class meta_model_assembly_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class compute_template_instantiation_domains <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class model_population_chain <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class meta_model_properties_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class enablement_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class generability_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class remove_regions_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class legacy_paths_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class relations_transform <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
 }

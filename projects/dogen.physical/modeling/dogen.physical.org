@@ -28,12 +28,14 @@ UML representation:
   :PROPERTIES:
   :custom_id: B7B8F16A-7F50-F224-CD63-1433211A1850
   :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :masd.codec.plantuml: main o-[hidden]- CMakeLists
   :END:
 
 * CMakeLists                                                        :element:
   :PROPERTIES:
   :custom_id: 8EA39AB5-14C7-1234-32E3-904F932A1F4B
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :masd.codec.plantuml: CMakeLists o-[hidden]- registrar
   :END:
 
 * registrar                                                         :element:
@@ -1549,6 +1551,248 @@ Kinds of archetypes available across all technical spaces.
 
 *** csharp implementation                                         :attribute:
 
+* transforms                                                         :module:
+  :PROPERTIES:
+  :custom_id: 852F723F-2064-55A4-79A3-42212A76C536
+  :masd.codec.dia.comment: true
+  :END:
+
+Contains all of the transforms needed to produce models and meta-models for the
+physical model.
+
+** context                                                          :element:
+   :PROPERTIES:
+   :custom_id: B0CC01F6-A960-82A4-6593-C4C5F40CCE09
+   :masd.cpp.types.class_forward_declarations.enabled: true
+   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+   :END:
+
+*** diffing configuration                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<diffing_configuration>
+    :END:
+
+*** reporting configuration                                       :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::optional<reporting_configuration>
+    :END:
+
+*** dry run mode enabled                                          :attribute:
+    :PROPERTIES:
+    :masd.codec.type: bool
+    :END:
+
+*** feature model                                                 :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
+    :END:
+
+*** meta model                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<entities::meta_model>
+    :END:
+
+Meta-model for the physical dimension.
+
+*** tracer                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<tracing::tracer>
+    :END:
+
+*** output directory path                                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::filesystem::path
+    :END:
+
+Full path to the output directory chosen by the user.
+
+** minimal context                                                  :element:
+   :PROPERTIES:
+   :custom_id: 0F6A8523-E784-5194-5FCB-41BE12E735C8
+   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+   :END:
+
+Smallest possible context required for bootstrapping purposes.
+
+*** tracer                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: boost::shared_ptr<tracing::tracer>
+    :END:
+
+** transform exception                                              :element:
+   :PROPERTIES:
+   :custom_id: CC555BEA-EA23-83E4-3773-AB55348ACA09
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+** meta model production chain                                      :element:
+   :PROPERTIES:
+   :custom_id: 78D8F3ED-BA0A-D0C4-C933-977F8B41FC67
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: meta_model_production_chain o-u- entities::meta_model
+   :masd.codec.plantuml: meta_model_production_chain o-u- meta_model_assembly_transform
+   :masd.codec.plantuml: meta_model_production_chain o-- compute_name_indices_transform
+   :masd.codec.plantuml: meta_model_production_chain o-- compute_template_instantiation_domains
+   :END:
+
+** meta model assembly transform                                    :element:
+   :PROPERTIES:
+   :custom_id: B157E308-82A1-6E44-31A3-4405DDE354A6
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** compute name indices transform                                   :element:
+   :PROPERTIES:
+   :custom_id: B1EC5042-A78F-86E4-331B-6A6F8D7A1897
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** compute template instantiation domains                           :element:
+   :PROPERTIES:
+   :custom_id: 6AB66855-27C9-CC74-D0CB-AAED5FDC0385
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** model post processing chain                                      :element:
+   :PROPERTIES:
+   :custom_id: 7CB457EC-11A6-8D24-28F3-4129CC604844
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_post_processing_chain o-- entities::model
+   :masd.codec.plantuml: model_post_processing_chain o-u- update_outputting_properties_transform
+   :masd.codec.plantuml: model_post_processing_chain o-u- mock_content_filler_transform
+   :masd.codec.plantuml: model_post_processing_chain o-u- gather_external_artefacts_transform
+   :masd.codec.plantuml: model_post_processing_chain o-l- generate_report_transform
+   :masd.codec.plantuml: model_post_processing_chain o-r- generate_patch_transform
+   :masd.codec.plantuml: model_post_processing_chain o-- generate_diffs_transform
+   :masd.codec.plantuml: model_post_processing_chain o-- remove_regions_transform
+   :masd.codec.plantuml: model_post_processing_chain o-- merge_transform
+   :masd.codec.plantuml: model_post_processing_chain o-- operation_transform
+   :END:
+
+** update outputting properties transform                           :element:
+   :PROPERTIES:
+   :custom_id: D1D7C612-3F48-4C64-B403-565E31485D36
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** mock content filler transform                                    :element:
+   :PROPERTIES:
+   :custom_id: FA4C9E4D-A314-FEB4-6E7B-F3D852713837
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** gather external artefacts transform                              :element:
+   :PROPERTIES:
+   :custom_id: 0787CF81-4D82-0044-89BB-80330D0BDD97
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** generate report transform                                        :element:
+   :PROPERTIES:
+   :custom_id: F15AFBB8-710E-6D44-C8FB-36B9C4003B4C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** generate patch transform                                         :element:
+   :PROPERTIES:
+   :custom_id: 09D44BC1-5BE0-0C14-E6AB-C80AFFF71AB3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** generate diffs transform                                         :element:
+   :PROPERTIES:
+   :custom_id: D57806CD-3F67-4354-F38B-7DFE96BDEC5C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** remove regions transform                                         :element:
+   :PROPERTIES:
+   :custom_id: 72900B1C-4A41-6E24-F65B-DDE0DA4CDB6C
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** merge transform                                                  :element:
+   :PROPERTIES:
+   :custom_id: 957E7498-3EE5-8D24-505B-B774C1B9076D
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** operation transform                                              :element:
+   :PROPERTIES:
+   :custom_id: D675A4CD-A11D-E6D4-9C9B-478272367BEF
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** model population chain                                           :element:
+   :PROPERTIES:
+   :custom_id: 78F3F27D-C700-51A4-5B43-0F1D1835E459
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: model_population_chain o-- entities::model
+   :masd.codec.plantuml: model_population_chain o-- meta_model_properties_transform
+   :masd.codec.plantuml: model_population_chain o-- paths_transform
+   :masd.codec.plantuml: model_population_chain o-- relations_transform
+   :masd.codec.plantuml: model_population_chain o-- enablement_transform
+   :masd.codec.plantuml: model_population_chain o-- legacy_paths_transform
+   :masd.codec.plantuml: model_population_chain o-- generability_transform
+   :END:
+
+** meta model properties transform                                  :element:
+   :PROPERTIES:
+   :custom_id: 6E56F57B-DF14-8604-6733-2495973C5DF2
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** paths transform                                                  :element:
+   :PROPERTIES:
+   :custom_id: 3DDF8071-FC16-6764-7AFB-CB512AAA3D70
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** relations transform                                              :element:
+   :PROPERTIES:
+   :custom_id: 112B9D0F-431B-6654-23E3-695F37B575C8
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** enablement transform                                             :element:
+   :PROPERTIES:
+   :custom_id: 2DE2BB5E-33AC-BCE4-CDEB-5EA21C59985D
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** legacy paths transform                                           :element:
+   :PROPERTIES:
+   :custom_id: 31E6E9DF-6ED9-CED4-BE33-C7D97A830A03
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** generability transform                                           :element:
+   :PROPERTIES:
+   :custom_id: E1F687B1-DAF7-1834-FDBB-551A4B3A8D75
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** file generation chain                                            :element:
+   :PROPERTIES:
+   :custom_id: A309413C-4902-EA74-A173-D3DCE7865323
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: file_generation_chain o-- entities::model
+   :masd.codec.plantuml: file_generation_chain o-- write_artefacts_transform
+   :masd.codec.plantuml: file_generation_chain o-- remove_files_transform
+   :END:
+
+** write artefacts transform                                        :element:
+   :PROPERTIES:
+   :custom_id: EFFE80AA-C3A4-5714-7283-3C2DFAF92A55
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** remove files transform                                           :element:
+   :PROPERTIES:
+   :custom_id: 061ABD9A-A470-5FE4-C64B-3C9057399C19
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: 07F73046-A81F-0664-5CBB-F4F79A6F273A
@@ -1557,30 +1801,11 @@ Kinds of archetypes available across all technical spaces.
 
 Helpers for the physical model.
 
-** template instantiation domains factory                           :element:
-   :PROPERTIES:
-   :custom_id: 7D90FC4D-B34C-B9C4-78CB-D27456AFD06A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** building error                                                   :element:
-   :PROPERTIES:
-   :custom_id: C621FA96-2566-7AA4-D7BB-82559421917A
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred while the field factory was building.
-
-** path generator                                                   :element:
-   :PROPERTIES:
-   :custom_id: 345B379E-4E18-8CB4-CF73-D5601B52A0BB
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** file status collector                                            :element:
    :PROPERTIES:
    :custom_id: BD87EBFD-97BE-BFE4-725B-28CAD0526E30
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: file_status_collector o-- files_by_status
    :END:
 
 ** files by status                                                  :element:
@@ -1598,16 +1823,11 @@ An error occurred while the field factory was building.
     :masd.codec.type: std::list<boost::filesystem::path>
     :END:
 
-** unified differ                                                   :element:
-   :PROPERTIES:
-   :custom_id: 21106227-3FEF-AA64-C78B-5FAC0B73A6D0
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** meta model validator                                             :element:
    :PROPERTIES:
    :custom_id: 6C974170-68E9-A154-7E9B-B12A4863BE6A
    :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: meta_model_validator o-- validation_error
    :END:
 
 ** validation error                                                 :element:
@@ -1618,9 +1838,37 @@ An error occurred while the field factory was building.
 
 An error occurred during validation.
 
+** template instantiation domains factory                           :element:
+   :PROPERTIES:
+   :custom_id: 7D90FC4D-B34C-B9C4-78CB-D27456AFD06A
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: template_instantiation_domains_factory o-- building_error
+   :END:
+
 ** header guard factory                                             :element:
    :PROPERTIES:
    :custom_id: 564DE5A3-5E2C-5844-CB23-9A19281414E9
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :masd.codec.plantuml: header_guard_factory o-- building_error
+   :END:
+
+** building error                                                   :element:
+   :PROPERTIES:
+   :custom_id: C621FA96-2566-7AA4-D7BB-82559421917A
+   :masd.codec.stereotypes: masd::exception
+   :END:
+
+An error occurred while the field factory was building.
+
+** path generator                                                   :element:
+   :PROPERTIES:
+   :custom_id: 345B379E-4E18-8CB4-CF73-D5601B52A0BB
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** unified differ                                                   :element:
+   :PROPERTIES:
+   :custom_id: 21106227-3FEF-AA64-C78B-5FAC0B73A6D0
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
@@ -1632,11 +1880,18 @@ An error occurred during validation.
 
 Features for the MASD physical model.
 
+** initializer                                                      :element:
+   :PROPERTIES:
+   :custom_id: A802788B-C3FD-F4A4-E843-42BBAC3650F5
+   :masd.codec.stereotypes: masd::variability::initializer
+   :END:
+
 ** facet features                                                   :element:
    :PROPERTIES:
    :custom_id: E34FE9D5-E253-9D94-B763-8A67CD9352C6
    :masd.variability.instantiation_domain_name: masd.facet
    :masd.codec.stereotypes: masd::variability::feature_template_bundle
+   :masd.codec.plantuml: facet_features o-[hidden]d- archetype_features
    :END:
 
 Physical features common to all facets.
@@ -1694,6 +1949,7 @@ If true, the generated files will overwrite existing files.
    :custom_id: B82A3450-0322-A164-B1F3-B6D77BE7E8FA
    :masd.variability.instantiation_domain_name: masd.archetype
    :masd.codec.stereotypes: masd::variability::feature_template_bundle
+   :masd.codec.plantuml: archetype_features o-[hidden]d- filesystem
    :END:
 
 Features common to all archetypes.
@@ -1719,18 +1975,13 @@ Postfix to use for all files that belong to this facet.
 
 If true, the generated files will overwrite existing files.
 
-** initializer                                                      :element:
-   :PROPERTIES:
-   :custom_id: A802788B-C3FD-F4A4-E843-42BBAC3650F5
-   :masd.codec.stereotypes: masd::variability::initializer
-   :END:
-
 ** filesystem                                                       :element:
    :PROPERTIES:
    :custom_id: 086B08D2-8C15-6334-4283-A0BE29375A49
    :masd.variability.default_binding_point: global
    :masd.variability.key_prefix: masd.physical
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: filesystem o-[hidden]d- enablement
    :END:
 
 Features related to filesystem operations.
@@ -1812,6 +2063,7 @@ If true, decorations are enabled on this modeling element.
    :custom_id: 96AC14DD-142E-6834-6CBB-BCA79B8E11BA
    :masd.variability.instantiation_domain_name: masd.backend
    :masd.codec.stereotypes: masd::variability::feature_template_bundle
+   :masd.codec.plantuml: backend_features o-[hidden]d- path_features
    :END:
 
 Physical features common to all backends.
@@ -1833,6 +2085,7 @@ Directory in which to place this backend.
    :masd.variability.generate_static_configuration: true
    :masd.variability.key_prefix: masd.cpp
    :masd.codec.stereotypes: masd::variability::feature_bundle
+   :masd.codec.plantuml: path_features o-[hidden]d- directive_features
    :END:
 
 Set of features related to path processing.
@@ -1933,6 +2186,7 @@ If true, facet directories will not be used.
    :masd.variability.default_binding_point: element
    :masd.variability.instantiation_domain_name: masd.cpp.archetype
    :masd.codec.stereotypes: masd::variability::feature_template_bundle
+   :masd.codec.plantuml: directive_features o-[hidden]d- inclusion_features
    :END:
 
 *** primary inclusion directive                                   :attribute:
@@ -1961,221 +2215,3 @@ If true, facet directories will not be used.
     :END:
 
 If true, inclusion is required for this modeling element.
-
-* transforms                                                         :module:
-  :PROPERTIES:
-  :custom_id: 852F723F-2064-55A4-79A3-42212A76C536
-  :masd.codec.dia.comment: true
-  :END:
-
-Contains all of the transforms needed to produce
-models and meta-models for the physical model.
-
-** context                                                          :element:
-   :PROPERTIES:
-   :custom_id: B0CC01F6-A960-82A4-6593-C4C5F40CCE09
-   :masd.cpp.types.class_forward_declarations.enabled: true
-   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
-   :END:
-
-*** diffing configuration                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<diffing_configuration>
-    :END:
-
-*** reporting configuration                                       :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<reporting_configuration>
-    :END:
-
-*** dry run mode enabled                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: bool
-    :END:
-
-*** feature model                                                 :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
-    :END:
-
-*** meta model                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<entities::meta_model>
-    :END:
-
-Meta-model for the physical dimension.
-
-*** tracer                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<tracing::tracer>
-    :END:
-
-*** output directory path                                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::filesystem::path
-    :END:
-
-Full path to the output directory chosen by the user.
-
-** transform exception                                              :element:
-   :PROPERTIES:
-   :custom_id: CC555BEA-EA23-83E4-3773-AB55348ACA09
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-** file generation chain                                            :element:
-   :PROPERTIES:
-   :custom_id: A309413C-4902-EA74-A173-D3DCE7865323
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** write artefacts transform                                        :element:
-   :PROPERTIES:
-   :custom_id: EFFE80AA-C3A4-5714-7283-3C2DFAF92A55
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** update outputting properties transform                           :element:
-   :PROPERTIES:
-   :custom_id: D1D7C612-3F48-4C64-B403-565E31485D36
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** remove files transform                                           :element:
-   :PROPERTIES:
-   :custom_id: 061ABD9A-A470-5FE4-C64B-3C9057399C19
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** generate report transform                                        :element:
-   :PROPERTIES:
-   :custom_id: F15AFBB8-710E-6D44-C8FB-36B9C4003B4C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model post processing chain                                      :element:
-   :PROPERTIES:
-   :custom_id: 7CB457EC-11A6-8D24-28F3-4129CC604844
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** generate diffs transform                                         :element:
-   :PROPERTIES:
-   :custom_id: D57806CD-3F67-4354-F38B-7DFE96BDEC5C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** gather external artefacts transform                              :element:
-   :PROPERTIES:
-   :custom_id: 0787CF81-4D82-0044-89BB-80330D0BDD97
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** generate patch transform                                         :element:
-   :PROPERTIES:
-   :custom_id: 09D44BC1-5BE0-0C14-E6AB-C80AFFF71AB3
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** mock content filler transform                                    :element:
-   :PROPERTIES:
-   :custom_id: FA4C9E4D-A314-FEB4-6E7B-F3D852713837
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** operation transform                                              :element:
-   :PROPERTIES:
-   :custom_id: D675A4CD-A11D-E6D4-9C9B-478272367BEF
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** merge transform                                                  :element:
-   :PROPERTIES:
-   :custom_id: 957E7498-3EE5-8D24-505B-B774C1B9076D
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** meta model production chain                                      :element:
-   :PROPERTIES:
-   :custom_id: 78D8F3ED-BA0A-D0C4-C933-977F8B41FC67
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** compute name indices transform                                   :element:
-   :PROPERTIES:
-   :custom_id: B1EC5042-A78F-86E4-331B-6A6F8D7A1897
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** minimal context                                                  :element:
-   :PROPERTIES:
-   :custom_id: 0F6A8523-E784-5194-5FCB-41BE12E735C8
-   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
-   :END:
-
-Smallest possible context required for bootstrapping purposes.
-
-*** tracer                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::shared_ptr<tracing::tracer>
-    :END:
-
-** meta model assembly transform                                    :element:
-   :PROPERTIES:
-   :custom_id: B157E308-82A1-6E44-31A3-4405DDE354A6
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** compute template instantiation domains                           :element:
-   :PROPERTIES:
-   :custom_id: 6AB66855-27C9-CC74-D0CB-AAED5FDC0385
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** model population chain                                           :element:
-   :PROPERTIES:
-   :custom_id: 78F3F27D-C700-51A4-5B43-0F1D1835E459
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** meta model properties transform                                  :element:
-   :PROPERTIES:
-   :custom_id: 6E56F57B-DF14-8604-6733-2495973C5DF2
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** enablement transform                                             :element:
-   :PROPERTIES:
-   :custom_id: 2DE2BB5E-33AC-BCE4-CDEB-5EA21C59985D
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** generability transform                                           :element:
-   :PROPERTIES:
-   :custom_id: E1F687B1-DAF7-1834-FDBB-551A4B3A8D75
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** paths transform                                                  :element:
-   :PROPERTIES:
-   :custom_id: 3DDF8071-FC16-6764-7AFB-CB512AAA3D70
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** remove regions transform                                         :element:
-   :PROPERTIES:
-   :custom_id: 72900B1C-4A41-6E24-F65B-DDE0DA4CDB6C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** legacy paths transform                                           :element:
-   :PROPERTIES:
-   :custom_id: 31E6E9DF-6ED9-CED4-BE33-C7D97A830A03
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** relations transform                                              :element:
-   :PROPERTIES:
-   :custom_id: 112B9D0F-431B-6654-23E3-695F37B575C8
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
