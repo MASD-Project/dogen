@@ -29,19 +29,19 @@ jobs:
             os: ubuntu
             compiler: clang
     steps:
-      - uses: actions/checkout@latest
+      - uses: actions/checkout@v3
         with:
           submodules: true
 
       - name: Setup Clang
-        uses: egor-tensin/setup-clang@latest
+        uses: egor-tensin/setup-clang@v1
         if: ${{matrix.compiler}} == clang
         with:
           version: latest
           platform: x64
 
       - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@latest
+        uses: hendrikmuhs/ccache-action@v1.2
         with:
           variant: sccache
           key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
@@ -51,7 +51,7 @@ jobs:
         uses: lukka/get-cmake@latest
 
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@latest
+        uses: lukka/run-vcpkg@v10
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
@@ -77,13 +77,13 @@ jobs:
         run: ./build/scripts/test_package.linux.sh ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact@v1
         with:
           name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/dogen_1.0.32_amd64-applications.deb
 
       # - name: Gitter
-      #   uses: juztcode/gitter-github-action@latest
+      #   uses: juztcode/gitter-github-action@v1
       #   with:
       #     room-id: ${{secrets.GITTER_ROOM_ID}}
       #     token: ${{secrets.GITTER_TOKEN}}

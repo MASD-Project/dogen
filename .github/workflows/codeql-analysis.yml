@@ -24,23 +24,23 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@latest
+      uses: actions/checkout@v3
       with:
           submodules: true
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@latest
+      uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
 
     - name: Setup Clang
-      uses: egor-tensin/setup-clang@latest
+      uses: egor-tensin/setup-clang@v1
       with:
         version: latest
         platform: x64
 
     - name: Setup ccache
-      uses: hendrikmuhs/ccache-action@latest
+      uses: hendrikmuhs/ccache-action@v1.2
       with:
         variant: sccache
         key: linux-clang-debug-codeql
