@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-11 Tue 22:17]
+#+CAPTION: Clock summary at [2022-10-12 Wed 08:59]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *57:58* |       |       | 100.0 |
+| *Total time*                                              | *58:53* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 57:58   |       |       | 100.0 |
-| Active                                                    |         | 57:58 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  17.6 |
+| Stories                                                   | 58:53   |       |       | 100.0 |
+| Active                                                    |         | 58:53 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  17.4 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.6 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.6 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  3:48 |   6.6 |
+| Sprint and product backlog grooming                       |         |       |  3:48 |   6.5 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.9 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.3 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.7 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   5.6 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   3.7 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.6 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.5 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.8 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   3.2 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   3.1 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.3 |
-| Model significant relations at a higher level             |         |       |  1:05 |   1.9 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.4 |
+| Model significant relations at a higher level             |         |       |  1:05 |   1.8 |
+| Create a mock configuration builder                       |         |       |  1:58 |   3.3 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.6 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.1 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.6 |
-| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.3 |
+| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.2 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.7 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.1 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.6 |
-| Warning on OSX build                                      |         |       |  2:23 |   4.1 |
-| Use clang format to format the code base                  |         |       |  0:58 |   1.7 |
-| Add PlantUML relationships to diagrams                    |         |       | 14:45 |  25.4 |
-| Create a nightly github workflow                          |         |       |  1:25 |   2.4 |
+| Warning on OSX build                                      |         |       |  2:23 |   4.0 |
+| Use clang format to format the code base                  |         |       |  0:58 |   1.6 |
+| Add PlantUML relationships to diagrams                    |         |       | 14:45 |  25.0 |
+| Create a nightly github workflow                          |         |       |  2:20 |   4.0 |
 #+end:
 
 Agenda:
@@ -1488,12 +1488,10 @@ to make diagrams more readable. Models:
 - dogen.org: done
 - dogen.physical:
 
-*** Consider replacing assembly with weaving                          :story:
-
-Weaving is the MDE term.
-
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
+    CLOCK: [2022-10-12 Wed 08:18]--[2022-10-12 Wed 08:59] =>  0:41
+    CLOCK: [2022-10-12 Wed 07:41]--[2022-10-12 Wed 07:55] =>  0:14
     CLOCK: [2022-10-11 Tue 07:43]--[2022-10-11 Tue 08:28] =>  0:45
     CLOCK: [2022-10-10 Mon 07:50]--[2022-10-10 Mon 08:03] =>  0:13
     CLOCK: [2022-10-09 Sun 16:00]--[2022-10-09 Sun 16:27] =>  0:27
@@ -1507,10 +1505,18 @@ Notes:
 
 - For some reason we are not setting up vcpkg path in the includes, Try merging
   steps to see if that makes any difference.
+- new warning: "Node.js 12 actions are deprecated. For more information see:
+  https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/.
+  Please update the following actions to use Node.js 16: lukka/get-cmake,
+  lukka/run-vcpkg, lukka/run-vcpkg". Bump versions to latest.
 
 Links:
 
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** Consider replacing assembly with weaving                          :story:
+
+Weaving is the MDE term.
 
 *** Consider adding support for clang-tidy                            :story:
 
