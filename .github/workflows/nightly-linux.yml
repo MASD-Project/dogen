@@ -23,19 +23,19 @@ jobs:
             os: ubuntu
             compiler: clang
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@latest
         with:
           submodules: true
 
       - name: Setup Clang
-        uses: egor-tensin/setup-clang@v1
+        uses: egor-tensin/setup-clang@latest
         if: ${{matrix.compiler}} == clang
         with:
           version: latest
           platform: x64
 
       - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@v1.2
+        uses: hendrikmuhs/ccache-action@latest
         with:
           variant: sccache
           key: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
@@ -48,7 +48,7 @@ jobs:
         uses: lukka/get-cmake@latest
 
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@v10
+        uses: lukka/run-vcpkg@latest
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
