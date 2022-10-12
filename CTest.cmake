@@ -140,7 +140,6 @@ else()
 endif()
 
 set(CTEST_BUILD_NAME "${preset}")
-set(CTEST_BUILD_TARGET "package")
 
 # Set the generator. This will override the presets, but we have no option as
 # CTest refuses to configure unless there is a generator.
@@ -280,7 +279,23 @@ endif()
 #
 # Step: build.
 #
+if(${build_group} MATCHES Nightly)
+    # first, we need to build the code generator.
+    set(CTEST_BUILD_TARGET "dogen.cli")
+    ctest_build(PARALLEL_LEVEL ${nproc})
+
+    # generate code for all facets.
+    set(CTEST_BUILD_TARGET "gao")
+    ctest_build(PARALLEL_LEVEL ${nproc})
+
+    # Now generate code for all facets.
+    set(CTEST_BUILD_TARGET "commit_all_changes")
+    ctest_build(PARALLEL_LEVEL ${nproc})
+endif()
+
+set(CTEST_BUILD_TARGET "package")
 ctest_build(PARALLEL_LEVEL ${nproc})
+
 
 #
 # Step: test.
