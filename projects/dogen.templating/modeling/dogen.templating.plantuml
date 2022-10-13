@@ -8,23 +8,46 @@ UML representation:
 \image html dogen.templating/modeling/dogen.templating.svg
 end note
 
-namespace wale #F2F2F2 {
-    class text_template <<ConfigurableViaKvps>> #F7E5FF {
-        +{field} content std::string
-    }
+class ConfigurableViaKvps <<masd::object_template>> #E3B6F6 {
+    +{field} expected_keys std::unordered_set<std::string>
+    +{field} supplied_kvps std::unordered_map<std::string, std::string>
+}
 
-    note top of text_template
-Represents a wale text template.
-    end note
+ConfigurableViaKvps o-[hidden]- CMakeLists
 
-    class key_extractor <<dogen::handcrafted::typeable>> #FFFACD {
-    }
+note top of ConfigurableViaKvps
+Element has the ability to recieve configuration arguments as a set of KVPs.
+end note
 
+class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
+}
+
+CMakeLists o-[hidden]- initializer
+
+class initializer <<masd::variability::initializer>> #A9CDCD {
+}
+
+initializer o-[hidden]- main
+
+class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
+}
+
+namespace stitch #F2F2F2 {
     class instantiator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    instantiator o-- formatter
+    instantiator o-u- instantiation_error: throws
+    instantiator o-- parser: generates body using
+
+    class instantiation_error <<masd::exception>> #E8C2F8 {
     }
 
     class formatter <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    formatter o-u- formatting_error: throws
+    formatter o-- text_template: creates
 
     class formatting_error <<masd::exception>> #E8C2F8 {
     }
@@ -33,35 +56,11 @@ Represents a wale text template.
 An error occurred whilst formatting.
     end note
 
-    class extraction_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of extraction_error
-An error occurred whilst extracting a key.
-    end note
-
-}
-
-namespace stitch #F2F2F2 {
     class parser <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class block #F7E5FF {
-        +{field} type block_types
-        +{field} content std::string
-    }
-
-    class text_template <<ConfigurableViaKvps>> #F7E5FF {
-        +{field} properties properties
-        +{field} body text_template_body
-    }
-
-    note top of text_template
-Domain representation of a stitch template.
-    end note
-
-    class formatter <<dogen::handcrafted::typeable>> #FFFACD {
-    }
+    parser o-- parsing_error: throws
+    parser o-- text_template_body: parses a string into
 
     class parsing_error <<masd::exception>> #E8C2F8 {
     }
@@ -70,24 +69,26 @@ Domain representation of a stitch template.
 An error occurred whilst parsing.
     end note
 
-    class formatting_error <<masd::exception>> #E8C2F8 {
+    class text_template_body #F7E5FF {
+        +{field} tagged_values std::list<identification::entities::tagged_value>
+        +{field} lines std::list<line>
     }
 
-    note top of formatting_error
-An error occurred whilst formatting.
-    end note
-
-    class properties #F7E5FF {
-        +{field} stream_variable_name std::string
-        +{field} inclusion_dependencies std::list<std::string>
-        +{field} containing_namespaces std::list<std::string>
-        +{field} wale_template std::string
-        +{field} wale_kvps std::unordered_map<std::string, std::string>
-    }
+    text_template_body o-- line
+    text_template_body o-- text_template
 
     class line #F7E5FF {
         +{field} blocks std::list<block>
     }
+
+    line o-- block
+
+    class block #F7E5FF {
+        +{field} type block_types
+        +{field} content std::string
+    }
+
+    block o-- block_types
 
     enum block_types <<masd::enumeration>> #F2DAFD {
         +{field} text_block
@@ -96,15 +97,23 @@ An error occurred whilst formatting.
         +{field} variable_block
     }
 
-    class instantiator <<dogen::handcrafted::typeable>> #FFFACD {
+    class text_template <<ConfigurableViaKvps>> #F7E5FF {
+        +{field} properties properties
+        +{field} body text_template_body
     }
 
-    class text_template_body #F7E5FF {
-        +{field} tagged_values std::list<identification::entities::tagged_value>
-        +{field} lines std::list<line>
-    }
+    text_template o-- properties
 
-    class instantiation_error <<masd::exception>> #E8C2F8 {
+    note top of text_template
+Domain representation of a stitch template.
+    end note
+
+    class properties #F7E5FF {
+        +{field} stream_variable_name std::string
+        +{field} inclusion_dependencies std::list<std::string>
+        +{field} containing_namespaces std::list<std::string>
+        +{field} wale_template std::string
+        +{field} wale_kvps std::unordered_map<std::string, std::string>
     }
 
     class features <<masd::variability::feature_bundle>> #BAD7D7 {
@@ -122,18 +131,53 @@ Stitch templating features.
 
 }
 
-class ConfigurableViaKvps <<masd::object_template>> #E3B6F6 {
-    +{field} expected_keys std::unordered_set<std::string>
-    +{field} supplied_kvps std::unordered_map<std::string, std::string>
-}
+namespace wale #F2F2F2 {
+    class instantiator <<dogen::handcrafted::typeable>> #FFFACD {
+    }
 
-note top of ConfigurableViaKvps
-Element has the ability to recieve configuration arguments as a set of KVPs.
-end note
+    instantiator o-- key_extractor
+    instantiator o-- formatter
+
+    class key_extractor <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    key_extractor o-u- extraction_error: throws
+
+    class extraction_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of extraction_error
+An error occurred whilst extracting a key.
+    end note
+
+    class formatter <<dogen::handcrafted::typeable>> #FFFACD {
+    }
+
+    formatter o-u- formatting_error: throws
+    formatter o-- text_template
+
+    class formatting_error <<masd::exception>> #E8C2F8 {
+    }
+
+    note top of formatting_error
+An error occurred whilst formatting.
+    end note
+
+    class text_template <<ConfigurableViaKvps>> #F7E5FF {
+        +{field} content std::string
+    }
+
+    note top of text_template
+Represents a wale text template.
+    end note
+
+}
 
 namespace helpers #F2F2F2 {
     class kvp_validator <<dogen::handcrafted::typeable>> #FFFACD {
     }
+
+    kvp_validator o-- validation_error: throws
 
     class validation_error <<masd::exception>> #E8C2F8 {
     }
@@ -145,6 +189,8 @@ An error occurred with the supplied KVPs.
     class kvp_resolver <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
+    kvp_resolver o-- resolution_error: throws
+
     class resolution_error <<masd::exception>> #E8C2F8 {
     }
 
@@ -152,15 +198,6 @@ An error occurred with the supplied KVPs.
 An error occurred when trying to resolve a key.
     end note
 
-}
-
-class initializer <<masd::variability::initializer>> #A9CDCD {
-}
-
-class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
-}
-
-class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
 
 @enduml
