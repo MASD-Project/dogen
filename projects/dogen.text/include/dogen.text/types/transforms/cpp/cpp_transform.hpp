@@ -32,9 +32,9 @@ namespace dogen::text::transforms::cpp {
 /**
  * @brief Text transforms that implement the C++ backend.
  *
- * Provides a set of M2T transforms that convert logical
- * model elements into a physical representation in the
- * C++ technical space, or associated minor technical spaces.
+ * Provides a set of M2T transforms that convert logical model elements into a
+ * physical representation in the C++ technical space, or associated minor
+ * technical spaces.
  */
 class cpp_backend_chain final {
 public:

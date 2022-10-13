@@ -24,15 +24,282 @@ UML representation:
 
 \image html dogen.text/modeling/dogen.text.svg
 
+* registrar                                                         :element:
+  :PROPERTIES:
+  :custom_id: B931722F-9408-EA74-F5BB-64E6EB2630ED
+  :masd.codec.stereotypes: masd::serialization::type_registrar
+  :END:
+
+* main                                                              :element:
+  :PROPERTIES:
+  :custom_id: 27A3ADDB-879C-4C64-3C23-231434FDFC7E
+  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
+  :END:
+
+* CMakeLists                                                        :element:
+  :PROPERTIES:
+  :custom_id: 2A3A366E-D7ED-D9D4-FF53-5D74147084CD
+  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+  :END:
+
+* cpp artefact transform implementation                             :element:
+  :PROPERTIES:
+  :custom_id: 69B1F93C-7797-4824-0F5B-C27E74F0AC5F
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
+    static auto r({{archetype.simple_name}}_factory::make());
+    return r;
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
+    return static_archetype();
+}
+#+end_src
+
+* initializer                                                       :element:
+  :PROPERTIES:
+  :custom_id: 86D0154D-1617-1904-67FB-66E56D675115
+  :masd.codec.stereotypes: dogen::handcrafted::typeable
+  :END:
+
+* csharp transform implementation                                   :element:
+  :PROPERTIES:
+  :custom_id: D2373040-518D-1DA4-280B-BF11A66A7C9A
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
+    static auto r({{archetype.simple_name}}_factory::make());
+    return r;
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
+    return static_archetype();
+}
+#+end_src
+
+* csharp helper transform implementation                            :element:
+  :PROPERTIES:
+  :custom_id: F855285A-0001-6A44-2123-B91BE996FEBE
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("<{{facet.qualified_name}}>") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}.class",
+        "{{facet.qualified_name}}.primitive"
+    });
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}"
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+    return true;
+}
+#+end_src
+
+* cpp helper transform implementation                               :element:
+  :PROPERTIES:
+  :custom_id: B5BD06E8-C37C-34F4-6D63-8AD4CF884C39
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("<{{facet.qualified_name}}>") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}.class_implementation",
+        "{{facet.qualified_name}}.primitive_implementation",
+        "masd.cpp.types.class_implementation",
+        "masd.cpp.types.primitive_implementation"
+    });
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}", "masd.cpp.types"
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& m,
+    const logical::entities::element& e,
+    const physical::entities::artefact& a,
+    const logical::entities::helper_properties& hp) const {
+    return is_streaming_enabled(m, e, a, hp);
+}
+#+end_src
+
+* cpp helper transform implementation enabled                       :element:
+  :PROPERTIES:
+  :custom_id: 727646BA-EF4A-0124-F883-58BAFC755ED3
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("<{{facet.qualified_name}}>") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}.class_implementation",
+        "{{facet.qualified_name}}.primitive_implementation"
+    });
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list<std::string> {
+        "{{facet.qualified_name}}"
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+bool {{class.simple_name}}::is_enabled(
+    const physical::entities::model& /*m*/,
+    const logical::entities::element& /*e*/,
+    const physical::entities::artefact& /*a*/,
+    const logical::entities::helper_properties& /*hp*/) const {
+    return true;
+}
+#+end_src
+
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 36D1B683-1A24-BF14-C2EB-2AEAC89565AB
   :END:
 
+** Provenance                                                       :element:
+   :PROPERTIES:
+   :custom_id: D438AC49-0057-2C24-E353-90E04F9456A7
+   :masd.codec.stereotypes: masd::object_template
+   :END:
+
+Details of the origin of this model element.
+
+*** provenance                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: identification::entities::logical_provenance
+    :END:
+
+Details of the provenance of this model element.
+
+** model set                                                        :element:
+   :PROPERTIES:
+   :custom_id: 22914D01-5045-3D14-9643-10BA74314A83
+   :masd.codec.stereotypes: Provenance
+   :masd.codec.plantuml: model_set o-- model
+   :END:
+
+Represents a set of related models.
+
+*** models                                                        :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<model>
+    :END:
+
+Models that belong to this set.
+
 ** model                                                            :element:
    :PROPERTIES:
    :custom_id: A9F38CAA-8733-A584-323B-92F41830B694
    :masd.codec.stereotypes: Provenance
+   :masd.codec.plantuml: model_set o-- logical_physical_region
    :END:
 
 Represents the combined logical-physical space.
@@ -59,21 +326,6 @@ The physical model representation in the logical-physical space.
 Contains all of the logical-physical regions that make up the logical physical space
 for this model.
 
-** Provenance                                                       :element:
-   :PROPERTIES:
-   :custom_id: D438AC49-0057-2C24-E353-90E04F9456A7
-   :masd.codec.stereotypes: masd::object_template
-   :END:
-
-Details of the origin of this model element.
-
-*** provenance                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: identification::entities::logical_provenance
-    :END:
-
-Details of the provenance of this model element.
-
 ** logical physical region                                          :element:
    :PROPERTIES:
    :custom_id: 8E656B50-4D25-E2B4-7BDB-9D3DC7002AC3
@@ -95,21 +347,6 @@ Logical element that gives rise to the artefact.
     :END:
 
 Physical artefacts that will be produced from the logical element.
-
-** model set                                                        :element:
-   :PROPERTIES:
-   :custom_id: 22914D01-5045-3D14-9643-10BA74314A83
-   :masd.codec.stereotypes: Provenance
-   :END:
-
-Represents a set of related models.
-
-*** models                                                        :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<model>
-    :END:
-
-Models that belong to this set.
 
 * transforms                                                         :module:
   :PROPERTIES:
@@ -185,6 +422,69 @@ An error occurred whilst applying a transformation.
    :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
    :END:
 
+** helper transform                                                 :element:
+   :PROPERTIES:
+   :custom_id: 2D97EBB0-4AD8-B7B4-A373-D8C0FE7C9996
+   :masd.cpp.types.class_forward_declarations.enabled: true
+   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+   :END:
+
+** helper chain                                                     :element:
+   :PROPERTIES:
+   :custom_id: 31D61356-E633-8F74-088B-17D9CFA83F03
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+*** physical model                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: physical::entities::meta_model
+    :END:
+
+** helper repository                                                :element:
+   :PROPERTIES:
+   :custom_id: A55F68C8-4188-AE84-6AAB-31213B9D0D95
+   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+   :END:
+
+*** helpers by family                                             :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<std::string, std::unordered_map<identification::entities::physical_meta_id, std::list<std::shared_ptr<helper_transform>>>>
+    :END:
+
+** helper registrar                                                 :element:
+   :PROPERTIES:
+   :custom_id: 1F275ABE-316C-16E4-72C3-253EF9A819E3
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+*** repository                                                    :attribute:
+    :PROPERTIES:
+    :masd.codec.type: helper_repository
+    :END:
+
+** initializer                                                      :element:
+   :PROPERTIES:
+   :custom_id: 824F920A-D295-49E4-505B-B85ACA73BEC0
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
+** text transform repository                                        :element:
+   :PROPERTIES:
+   :custom_id: 2D0F012C-47A5-AEE4-20AB-677B89F5188B
+   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+   :END:
+
+*** model to text transforms by meta name                         :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::unordered_map<identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<model_to_text_transform>>>
+    :END:
+
+** text transform registrar                                         :element:
+   :PROPERTIES:
+   :custom_id: 3D26720B-081B-12A4-80EB-C03EA15B4A50
+   :masd.codec.stereotypes: dogen::handcrafted::typeable
+   :END:
+
 ** cpp                                                               :module:
    :PROPERTIES:
    :custom_id: 52204566-EAB7-C774-2FBB-019FD66043AC
@@ -199,14 +499,15 @@ An error occurred whilst applying a transformation.
 
 Text transforms that implement the C++ backend.
 
-Provides a set of M2T transforms that convert logical
-model elements into a physical representation in the
-C++ technical space, or associated minor technical spaces.
+Provides a set of M2T transforms that convert logical model elements into a
+physical representation in the C++ technical space, or associated minor
+technical spaces.
 
 *** implementation                                                  :element:
     :PROPERTIES:
     :custom_id: 808B5A49-5565-F624-6D93-27D169322EC3
     :masd.codec.stereotypes: masd::physical::part
+    :masd.codec.plantuml: implementation o-l- public_headers
     :END:
 
 Contains the implementation files.
@@ -240,6 +541,7 @@ Contains the implementation files.
     :PROPERTIES:
     :custom_id: D35CCD39-748D-F244-910B-6E524CCFE049
     :masd.codec.stereotypes: masd::physical::part
+    :masd.codec.plantuml: public_headers o-l- testing
     :END:
 
 Contains the header files that are publicly visible.
@@ -273,6 +575,7 @@ Contains the header files that are publicly visible.
     :PROPERTIES:
     :custom_id: 72B4CD0B-94E6-4CC4-A9A3-507E19D91D39
     :masd.codec.stereotypes: masd::physical::part
+    :masd.codec.plantuml: testing o-l- standard_header_file
     :END:
 
 Contains the generated test files.
@@ -315,6 +618,247 @@ Header file generated by Dogen.
      :masd.codec.value: hpp
      :END:
 
+*** base archetype configuration                                    :element:
+    :PROPERTIES:
+    :custom_id: 6240D403-325B-67D4-694B-CA32EA24F9ED
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all archetypes.
+
+**** masd.physical.technical space                                :attribute:
+     :PROPERTIES:
+     :masd.codec.value: cpp
+     :END:
+
+*** tests configuration                                             :element:
+    :PROPERTIES:
+    :custom_id: 90CDD415-C908-5764-BCD3-0C3CDD8A07E7
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::tests_configuration
+    :masd.codec.parent: transforms::cpp::base_archetype_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to most archetypes in tests.
+
+**** masd.physical.part id                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: masd.cpp.testing
+     :END:
+
+**** masd.physical.wale template reference                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: cpp_artefact_transform_implementation
+     :END:
+
+**** masd.physical.relation status                                :attribute:
+     :PROPERTIES:
+     :masd.codec.value: not_relatable
+     :END:
+
+*** header configuration                                            :element:
+    :PROPERTIES:
+    :custom_id: 5D3B8AF4-A3A7-3854-C183-5B64D55E1E28
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::header_configuration
+    :masd.codec.parent: transforms::cpp::base_archetype_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all c++ header archetypes.
+
+**** masd.physical.part id                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: masd.cpp.public_headers
+     :END:
+
+**** masd.physical.wale template reference                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: cpp_artefact_transform_implementation
+     :END:
+
+*** header facet default configuration                              :element:
+    :PROPERTIES:
+    :custom_id: 7BED6243-7757-4E34-463B-57092DAFF312
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::header_facet_default_configuration
+    :masd.codec.parent: transforms::cpp::header_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+**** masd.physical.relation status                                :attribute:
+     :PROPERTIES:
+     :masd.codec.value: facet_default
+     :END:
+
+*** enumeration header configuration                                :element:
+    :PROPERTIES:
+    :custom_id: 2DDA0542-CC0B-1714-9A2B-9C115255550C
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::enumeration_header_configuration
+    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all enumeration header archetypes.
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.enumeration
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: enum_header
+     :END:
+
+*** object header configuration                                     :element:
+    :PROPERTIES:
+    :custom_id: 4C80276B-358A-02F4-F0A3-351A369624A1
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::object_header_configuration
+    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all object header archetypes.
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.object
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: class_header
+     :END:
+
+*** primitive header configuration                                  :element:
+    :PROPERTIES:
+    :custom_id: 9D9FC9B2-0956-16A4-299B-59BA84C8579C
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::primitive_header_configuration
+    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all built header archetypes.
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.primitive
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: primitive_header
+     :END:
+
+*** builtin header configuration                                    :element:
+    :PROPERTIES:
+    :custom_id: 187B79A3-BAFA-38E4-844B-077BCE5602FE
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::builtin_header_configuration
+    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all built header archetypes.
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.builtin
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: builtin_header
+     :END:
+
+*** implementation configuration                                    :element:
+    :PROPERTIES:
+    :custom_id: EB745EB4-EBAD-17F4-C05B-4C9C7AE8FABE
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::implementation_configuration
+    :masd.codec.parent: transforms::cpp::base_archetype_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+Contains the configuration common to all c++ implementation archetypes.
+
+**** masd.physical.part id                                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: masd.cpp.implementation
+     :END:
+
+**** masd.physical.wale template reference                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: cpp_artefact_transform_implementation
+     :END:
+
+**** masd.physical.relation status                                :attribute:
+     :PROPERTIES:
+     :masd.codec.value: not_relatable
+     :END:
+
+*** object implementation configuration                             :element:
+    :PROPERTIES:
+    :custom_id: 697F947B-CC1F-3124-176B-2DFC1B465535
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::object_implementation_configuration
+    :masd.codec.parent: transforms::cpp::implementation_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.object
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: class_implementation
+     :END:
+
+*** primitive implementation configuration                          :element:
+    :PROPERTIES:
+    :custom_id: 276ACF17-F7D2-5C04-986B-585EF678F74E
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::primitive_implementation_configuration
+    :masd.codec.parent: transforms::cpp::implementation_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.primitive
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: primitive_implementation
+     :END:
+
+*** enumeration implementation configuration                        :element:
+    :PROPERTIES:
+    :custom_id: A9DC0438-815E-C2F4-A303-5AEB66F75A79
+    :masd.variability.binding_point: entity
+    :masd.variability.stereotype: dogen::enumeration_implementation_configuration
+    :masd.codec.parent: transforms::cpp::implementation_configuration
+    :masd.codec.stereotypes: masd::variability::profile
+    :END:
+
+**** masd.physical.logical meta element id                        :attribute:
+     :PROPERTIES:
+     :masd.codec.value: dogen.logical.entities.enumeration
+     :END:
+
+**** masd.wale.kvp.archetype.simple name                          :attribute:
+     :PROPERTIES:
+     :masd.codec.value: enum_implementation
+     :END:
+
 *** types                                                            :module:
     :PROPERTIES:
     :custom_id: 05FE5231-1263-E074-E5C3-EAE33E60D1AB
@@ -331,6 +875,7 @@ C++ technical space.
      :PROPERTIES:
      :custom_id: 488D3D4B-D645-10A4-93C3-09C03675F34B
      :masd.codec.stereotypes: dogen::handcrafted::typeable
+     :masd.codec.plantuml: initializer o-d- smart_pointer_helper
      :END:
 
 **** smart pointer helper                                           :element:
@@ -345,6 +890,7 @@ C++ technical space.
      :masd.physical.helpers.owning_formatters: masd.cpp.types.primitive_implementation
      :masd.physical.helpers.owning_facets: masd.cpp.types
      :masd.codec.stereotypes: masd::physical::helper
+     :masd.codec.plantuml: smart_pointer_helper o-d- archetype_class_header_transform
      :END:
 
 ***** stitch template content                                     :attribute:
@@ -390,6 +936,7 @@ const <#= qn #>& rhs) {
      :masd.physical.constant_relation: dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+     :masd.codec.plantuml: archetype_class_header_transform o-d- archetype_class_implementation_transform
      :END:
 
 Generates header files for archetypes.
@@ -462,6 +1009,7 @@ void apply(const text::transforms::context& ctx, const text::entities::model& lp
      :masd.wale.kvp.containing_namespace: text.transforms.types
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+     :masd.codec.plantuml: archetype_class_implementation_transform o-d- archetype_class_header_factory
      :END:
 
 Generates implementation files for archetypes.
@@ -514,6 +1062,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
      :masd.physical.constant_relation: dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
+     :masd.codec.plantuml: archetype_class_header_factory o-d- archetype_class_implementation_factory
      :END:
 
 Generates header files for archetype factories.
@@ -590,6 +1139,7 @@ public:
      :masd.physical.variable_relation: self,archetype:masd.cpp.types.archetype_class_header_factory
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+     :masd.codec.plantuml: archetype_class_implementation_factory  o-d- facet_class_header_transform
      :END:
 
 Generates implementation files for archetype factories.
@@ -726,6 +1276,7 @@ physical::entities::archetype <#= sn #>::make() {
      :masd.physical.constant_relation: dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+     :masd.codec.plantuml: facet_class_header_transform o-d- facet_class_implementation_transform
      :END:
 
 Generates header files for facet transforms.
@@ -802,6 +1353,7 @@ public:
      :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+     :masd.codec.plantuml: facet_class_implementation_transform o-d- facet_class_header_factory
      :END:
 
 Generates implementation files for facet transforms.
@@ -5101,247 +5653,6 @@ register_entities(variability::helpers::registrar& rg) {
 
 #>
 #+end_src
-
-*** base archetype configuration                                    :element:
-    :PROPERTIES:
-    :custom_id: 6240D403-325B-67D4-694B-CA32EA24F9ED
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all archetypes.
-
-**** masd.physical.technical space                                :attribute:
-     :PROPERTIES:
-     :masd.codec.value: cpp
-     :END:
-
-*** tests configuration                                             :element:
-    :PROPERTIES:
-    :custom_id: 90CDD415-C908-5764-BCD3-0C3CDD8A07E7
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::tests_configuration
-    :masd.codec.parent: transforms::cpp::base_archetype_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to most archetypes in tests.
-
-**** masd.physical.part id                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: masd.cpp.testing
-     :END:
-
-**** masd.physical.wale template reference                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: cpp_artefact_transform_implementation
-     :END:
-
-**** masd.physical.relation status                                :attribute:
-     :PROPERTIES:
-     :masd.codec.value: not_relatable
-     :END:
-
-*** header configuration                                            :element:
-    :PROPERTIES:
-    :custom_id: 5D3B8AF4-A3A7-3854-C183-5B64D55E1E28
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::header_configuration
-    :masd.codec.parent: transforms::cpp::base_archetype_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all c++ header archetypes.
-
-**** masd.physical.part id                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: masd.cpp.public_headers
-     :END:
-
-**** masd.physical.wale template reference                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: cpp_artefact_transform_implementation
-     :END:
-
-*** header facet default configuration                              :element:
-    :PROPERTIES:
-    :custom_id: 7BED6243-7757-4E34-463B-57092DAFF312
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::header_facet_default_configuration
-    :masd.codec.parent: transforms::cpp::header_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-**** masd.physical.relation status                                :attribute:
-     :PROPERTIES:
-     :masd.codec.value: facet_default
-     :END:
-
-*** enumeration header configuration                                :element:
-    :PROPERTIES:
-    :custom_id: 2DDA0542-CC0B-1714-9A2B-9C115255550C
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::enumeration_header_configuration
-    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all enumeration header archetypes.
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.enumeration
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: enum_header
-     :END:
-
-*** object header configuration                                     :element:
-    :PROPERTIES:
-    :custom_id: 4C80276B-358A-02F4-F0A3-351A369624A1
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::object_header_configuration
-    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all object header archetypes.
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.object
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: class_header
-     :END:
-
-*** primitive header configuration                                  :element:
-    :PROPERTIES:
-    :custom_id: 9D9FC9B2-0956-16A4-299B-59BA84C8579C
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::primitive_header_configuration
-    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all built header archetypes.
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.primitive
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: primitive_header
-     :END:
-
-*** builtin header configuration                                    :element:
-    :PROPERTIES:
-    :custom_id: 187B79A3-BAFA-38E4-844B-077BCE5602FE
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::builtin_header_configuration
-    :masd.codec.parent: transforms::cpp::header_facet_default_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all built header archetypes.
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.builtin
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: builtin_header
-     :END:
-
-*** implementation configuration                                    :element:
-    :PROPERTIES:
-    :custom_id: EB745EB4-EBAD-17F4-C05B-4C9C7AE8FABE
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::implementation_configuration
-    :masd.codec.parent: transforms::cpp::base_archetype_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-Contains the configuration common to all c++ implementation archetypes.
-
-**** masd.physical.part id                                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: masd.cpp.implementation
-     :END:
-
-**** masd.physical.wale template reference                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: cpp_artefact_transform_implementation
-     :END:
-
-**** masd.physical.relation status                                :attribute:
-     :PROPERTIES:
-     :masd.codec.value: not_relatable
-     :END:
-
-*** object implementation configuration                             :element:
-    :PROPERTIES:
-    :custom_id: 697F947B-CC1F-3124-176B-2DFC1B465535
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::object_implementation_configuration
-    :masd.codec.parent: transforms::cpp::implementation_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.object
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: class_implementation
-     :END:
-
-*** primitive implementation configuration                          :element:
-    :PROPERTIES:
-    :custom_id: 276ACF17-F7D2-5C04-986B-585EF678F74E
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::primitive_implementation_configuration
-    :masd.codec.parent: transforms::cpp::implementation_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.primitive
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: primitive_implementation
-     :END:
-
-*** enumeration implementation configuration                        :element:
-    :PROPERTIES:
-    :custom_id: A9DC0438-815E-C2F4-A303-5AEB66F75A79
-    :masd.variability.binding_point: entity
-    :masd.variability.stereotype: dogen::enumeration_implementation_configuration
-    :masd.codec.parent: transforms::cpp::implementation_configuration
-    :masd.codec.stereotypes: masd::variability::profile
-    :END:
-
-**** masd.physical.logical meta element id                        :attribute:
-     :PROPERTIES:
-     :masd.codec.value: dogen.logical.entities.enumeration
-     :END:
-
-**** masd.wale.kvp.archetype.simple name                          :attribute:
-     :PROPERTIES:
-     :masd.codec.value: enum_implementation
-     :END:
 
 *** hash                                                             :module:
     :PROPERTIES:
@@ -12064,46 +12375,6 @@ FIXME: to be removed.
      :masd.codec.value: false
      :END:
 
-** helper transform                                                 :element:
-   :PROPERTIES:
-   :custom_id: 2D97EBB0-4AD8-B7B4-A373-D8C0FE7C9996
-   :masd.cpp.types.class_forward_declarations.enabled: true
-   :masd.codec.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
-   :END:
-
-** helper chain                                                     :element:
-   :PROPERTIES:
-   :custom_id: 31D61356-E633-8F74-088B-17D9CFA83F03
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-*** physical model                                                :attribute:
-    :PROPERTIES:
-    :masd.codec.type: physical::entities::meta_model
-    :END:
-
-** helper repository                                                :element:
-   :PROPERTIES:
-   :custom_id: A55F68C8-4188-AE84-6AAB-31213B9D0D95
-   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
-   :END:
-
-*** helpers by family                                             :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<std::string, std::unordered_map<identification::entities::physical_meta_id, std::list<std::shared_ptr<helper_transform>>>>
-    :END:
-
-** helper registrar                                                 :element:
-   :PROPERTIES:
-   :custom_id: 1F275ABE-316C-16E4-72C3-253EF9A819E3
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-*** repository                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: helper_repository
-    :END:
-
 ** csharp                                                            :module:
    :PROPERTIES:
    :custom_id: 03427E17-29FA-83F4-849B-18A4A3FC83DF
@@ -14930,29 +15201,6 @@ EndGlobal
     :masd.codec.stereotypes: dogen::handcrafted::typeable
     :END:
 
-** initializer                                                      :element:
-   :PROPERTIES:
-   :custom_id: 824F920A-D295-49E4-505B-B85ACA73BEC0
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** text transform repository                                        :element:
-   :PROPERTIES:
-   :custom_id: 2D0F012C-47A5-AEE4-20AB-677B89F5188B
-   :masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
-   :END:
-
-*** model to text transforms by meta name                         :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::unordered_map<identification::entities::logical_meta_id, std::forward_list<std::shared_ptr<model_to_text_transform>>>
-    :END:
-
-** text transform registrar                                         :element:
-   :PROPERTIES:
-   :custom_id: 3D26720B-081B-12A4-80EB-C03EA15B4A50
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 * formatters                                                         :module:
   :PROPERTIES:
   :custom_id: 1ED921D8-3C3C-4684-6E33-55B9E9D451CC
@@ -15047,238 +15295,3 @@ An error has occurred while formatting.
    :custom_id: 64406C36-46C7-82D4-111B-690062F6E4A3
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
-
-* registrar                                                         :element:
-  :PROPERTIES:
-  :custom_id: B931722F-9408-EA74-F5BB-64E6EB2630ED
-  :masd.codec.stereotypes: masd::serialization::type_registrar
-  :END:
-
-* main                                                              :element:
-  :PROPERTIES:
-  :custom_id: 27A3ADDB-879C-4C64-3C23-231434FDFC7E
-  :masd.codec.stereotypes: masd::entry_point, dogen::untypable
-  :END:
-
-* CMakeLists                                                        :element:
-  :PROPERTIES:
-  :custom_id: 2A3A366E-D7ED-D9D4-FF53-5D74147084CD
-  :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-  :END:
-
-* cpp artefact transform implementation                             :element:
-  :PROPERTIES:
-  :custom_id: 69B1F93C-7797-4824-0F5B-C27E74F0AC5F
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-namespace {
-
-const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
-
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
-    static auto r({{archetype.simple_name}}_factory::make());
-    return r;
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
-    return static_archetype();
-}
-#+end_src
-
-* initializer                                                       :element:
-  :PROPERTIES:
-  :custom_id: 86D0154D-1617-1904-67FB-66E56D675115
-  :masd.codec.stereotypes: dogen::handcrafted::typeable
-  :END:
-
-* csharp transform implementation                                   :element:
-  :PROPERTIES:
-  :custom_id: D2373040-518D-1DA4-280B-BF11A66A7C9A
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-namespace {
-
-const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
-
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
-    static auto r({{archetype.simple_name}}_factory::make());
-    return r;
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
-    return static_archetype();
-}
-#+end_src
-
-* csharp helper transform implementation                            :element:
-  :PROPERTIES:
-  :custom_id: F855285A-0001-6A44-2123-B91BE996FEBE
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("<{{facet.qualified_name}}>") +
-        std::string("<") + helper_name() + std::string(">"));
-    return r;
-}
-
-std::string {{class.simple_name}}::family() const {
-    static std::string r("{{helper.family}}");
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_formatters() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}.class",
-        "{{facet.qualified_name}}.primitive"
-    });
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_facets() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}"
-    });
-    return r;
-}
-
-std::string {{class.simple_name}}::helper_name() const {
-    static std::string r("{{class.simple_name}}");
-    return r;
-}
-
-bool {{class.simple_name}}::is_enabled(
-    const physical::entities::model& /*m*/,
-    const logical::entities::element& /*e*/,
-    const physical::entities::artefact& /*a*/,
-    const logical::entities::helper_properties& /*hp*/) const {
-    return true;
-}
-#+end_src
-
-* cpp helper transform implementation                               :element:
-  :PROPERTIES:
-  :custom_id: B5BD06E8-C37C-34F4-6D63-8AD4CF884C39
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("<{{facet.qualified_name}}>") +
-        std::string("<") + helper_name() + std::string(">"));
-    return r;
-}
-
-std::string {{class.simple_name}}::family() const {
-    static std::string r("{{helper.family}}");
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_formatters() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}.class_implementation",
-        "{{facet.qualified_name}}.primitive_implementation",
-        "masd.cpp.types.class_implementation",
-        "masd.cpp.types.primitive_implementation"
-    });
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_facets() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}", "masd.cpp.types"
-    });
-    return r;
-}
-
-std::string {{class.simple_name}}::helper_name() const {
-    static std::string r("{{class.simple_name}}");
-    return r;
-}
-
-bool {{class.simple_name}}::is_enabled(
-    const physical::entities::model& m,
-    const logical::entities::element& e,
-    const physical::entities::artefact& a,
-    const logical::entities::helper_properties& hp) const {
-    return is_streaming_enabled(m, e, a, hp);
-}
-#+end_src
-
-* cpp helper transform implementation enabled                       :element:
-  :PROPERTIES:
-  :custom_id: 727646BA-EF4A-0124-F883-58BAFC755ED3
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("<{{facet.qualified_name}}>") +
-        std::string("<") + helper_name() + std::string(">"));
-    return r;
-}
-
-std::string {{class.simple_name}}::family() const {
-    static std::string r("{{helper.family}}");
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_formatters() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}.class_implementation",
-        "{{facet.qualified_name}}.primitive_implementation"
-    });
-    return r;
-}
-
-std::list<std::string>
-{{class.simple_name}}::owning_facets() const {
-    static auto r(std::list<std::string> {
-        "{{facet.qualified_name}}"
-    });
-    return r;
-}
-
-std::string {{class.simple_name}}::helper_name() const {
-    static std::string r("{{class.simple_name}}");
-    return r;
-}
-
-bool {{class.simple_name}}::is_enabled(
-    const physical::entities::model& /*m*/,
-    const logical::entities::element& /*e*/,
-    const physical::entities::artefact& /*a*/,
-    const logical::entities::helper_properties& /*hp*/) const {
-    return true;
-}
-#+end_src
