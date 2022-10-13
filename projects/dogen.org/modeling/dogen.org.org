@@ -349,7 +349,7 @@ org-mode representation.
    :custom_id: E7020AFA-2C14-E694-CC4B-B31E3919C9CE
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :masd.codec.plantuml: document_to_string_transform o-- entities::document
-   :masd.codec.plantuml: document_to_string_transform o-- transformation_error
+   :masd.codec.plantuml: document_to_string_transform o-- transformation_error: throws
    :END:
 
 Converts an org model document into a string.

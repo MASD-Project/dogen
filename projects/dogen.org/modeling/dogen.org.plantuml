@@ -164,7 +164,7 @@ org-mode representation.
     }
 
     document_to_string_transform o-- entities::document
-    document_to_string_transform o-- transformation_error
+    document_to_string_transform o-- transformation_error: throws
 
     note top of document_to_string_transform
 Converts an org model document into a string.
