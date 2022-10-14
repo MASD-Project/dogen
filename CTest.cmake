@@ -284,11 +284,17 @@ if(${build_group} MATCHES Nightly)
     set(CTEST_BUILD_TARGET "dogen.cli")
     ctest_build(PARALLEL_LEVEL ${nproc})
 
-    # generate code for all facets.
+    # need to reconfigure to pick-up the newly build code generator.
+    ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
+    if(configure_result)
+        message(FATAL_ERROR "Failed to configure")
+    endif()
+
+    # now generate code for all facets.
     set(CTEST_BUILD_TARGET "gao")
     ctest_build(PARALLEL_LEVEL ${nproc})
 
-    # Now generate code for all facets.
+    # Finally commit all generated code so that CDash does not moan.
     set(CTEST_BUILD_TARGET "commit_all_changes")
     ctest_build(PARALLEL_LEVEL ${nproc})
 endif()
