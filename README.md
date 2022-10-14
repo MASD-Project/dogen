@@ -150,18 +150,19 @@ make use of [CMake](https://cmake.org/). Older compilers may work, but we try to
 always use the most recent releases in MASD. So, if you can, please try using to
 those.
 
-Dogen has the following additional dependencies, across all operative systems:
+Dogen has the following dependencies, across all operative systems:
 
-| Name   | Type      | Version                | Description                             |
-|--------|-----------|------------------------|-----------------------------------------|
-| [CMake](https://cmake.org/)  | Mandatory | 3.23 or later.  | Required to generate the build files.Earlier versions may also work.  |
-| [Boost](https://boost.org)  | Mandatory | 1.80 or later. | Earlier versions may also work, but patches may be needed. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
-| [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
-| [DTL](https://github.com/cubicdaiya/dtl) | Mandatory | 1.19 | Earlier versions may work but haven't been tested.|
+| Name                                     | Type      | Version          |
+|------------------------------------------|-----------|------------------|
+| [CMake](https://cmake.org/)              | Mandatory | 3.23 or greater. |
+| [Boost](https://boost.org)               | Mandatory | 1.80 or greater. |
+| [LibXml2](http://xmlsoft.org/)           | Mandatory | 2.9.4            |
+| [DTL](https://github.com/cubicdaiya/dtl) | Mandatory | 1.19             |
 
-Though Dogen should build fine with package manager supplied libraries - or even
-with hand-built dependencies - the recommended way to setup a development
-environment on all supported platforms is by using
+Note that earlier versions may work but haven't been tested. Also, though Dogen
+should build fine with package manager supplied libraries - or even with
+hand-built dependencies - the recommended way to setup a development environment
+on all supported platforms is by using
 [vcpkg](https://github.com/Microsoft/vcpkg), which is what we will describe in
 this document. Dogen uses the "sub-module setup", whereby vcpkg is a submodule
 of Dogen. All of the dependencies are declared on
@@ -193,7 +194,7 @@ For the remainder of this document we shall assume ```linux-clang-release```,
 which is our preferred preset. If its not yours, remember to update the preset
 name to match your desired build.
 
-To checkout Dogen clone as follows:
+To checkout Dogen, clone as follows:
 
 ```
 git clone https://github.com/MASD-Project/dogen.git --recurse-submodules
