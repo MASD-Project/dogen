@@ -464,6 +464,7 @@ if (DOGEN_CLI_EXECUTABLE)
         set(profile "dogen.profiles.base.test_all_facets")
         set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
             --variability-override masd.variability.profile,${profile})
+        message(STATUS "Using profile: ${profile}")
 
         # need to fix the activity timestamp to the value used in tests.
         set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
@@ -526,5 +527,5 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
 #
 add_custom_target(commit_all_changes
     COMMAND git add -A 1>/dev/null
-    COMMAND git commit --author="Temporary temporary@example.com" -m "Generated code."
+    COMMAND git commit --author="Temporary Author temporary.author@example.com" -m "Generated code."
 )
