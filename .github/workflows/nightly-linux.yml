@@ -55,7 +55,7 @@ jobs:
       - name: Setup test data
         run: ./build/scripts/github.setup.${{matrix.family}}.sh
 
-      - name: Full generation
+      - name: Run CTest workflow
         env:
           WITH_FULL_GENERATION: ON
           preset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
