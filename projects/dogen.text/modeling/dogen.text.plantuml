@@ -312,12 +312,6 @@ C++ technical space.
 
             initializer o-d- smart_pointer_helper
 
-            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
-                +{field} stitch_template_content
-            }
-
-            smart_pointer_helper o-d- archetype_class_header_transform
-
             class archetype_class_header_transform <<masd::physical::archetype, dogen::header_facet_default_configuration>> #68D799 {
                 +{field} stitch_template_content
             }
@@ -457,6 +451,12 @@ Generates header files for helper factories.
             note top of archetype_kind_class_header_factory
 Generates header files for archetype_kind factories.
             end note
+
+            class smart_pointer_helper <<masd::physical::helper>> #68D7BB {
+                +{field} stitch_template_content
+            }
+
+            smart_pointer_helper o-d- archetype_class_header_transform
 
             class backend_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
                 +{field} stitch_template_content

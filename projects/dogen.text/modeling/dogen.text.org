@@ -878,54 +878,6 @@ C++ technical space.
      :masd.codec.plantuml: initializer o-d- smart_pointer_helper
      :END:
 
-**** smart pointer helper                                           :element:
-     :PROPERTIES:
-     :custom_id: 4AC35697-70C5-9304-7473-674F9F15D3A5
-     :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
-     :masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
-     :masd.wale.kvp.helper.family: SmartPointer
-     :masd.wale.kvp.facet.qualified_name: masd.cpp.types
-     :masd.physical.helpers.family: SmartPointer
-     :masd.physical.helpers.owning_formatters: masd.cpp.types.class_implementation
-     :masd.physical.helpers.owning_formatters: masd.cpp.types.primitive_implementation
-     :masd.physical.helpers.owning_facets: masd.cpp.types
-     :masd.codec.stereotypes: masd::physical::helper
-     :masd.codec.plantuml: smart_pointer_helper o-d- archetype_class_header_transform
-     :END:
-
-***** stitch template content                                     :attribute:
-
-#+begin_src fundamental
-<#@ masd.stitch.stream_variable_name=os #>
-<#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
-<#$ stitch.wale.template_instantiation_result #>
-<#+
-
-void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
-    const logical::entities::helper_properties& hp) const {
-    {
-        const auto d(hp.current());
-        const auto qn(d.name_tree_qualified());
-        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
-#>
-
-inline bool operator==(const <#= qn #>& lhs,
-const <#= qn #>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-<#+
-    }
-#>
-
-<#+
-}
-
-#>
-#+end_src
-
 **** archetype class header transform                               :element:
      :PROPERTIES:
      :custom_id: 004CF3C5-2072-F424-5C0B-88577F905525
@@ -2259,6 +2211,54 @@ public:
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
+}
+
+#>
+#+end_src
+
+**** smart pointer helper                                           :element:
+     :PROPERTIES:
+     :custom_id: 4AC35697-70C5-9304-7473-674F9F15D3A5
+     :masd.physical.wale_template_reference: cpp_helper_transform_implementation_enabled
+     :masd.wale.kvp.class.simple_name: smart_pointer_helper_transform
+     :masd.wale.kvp.helper.family: SmartPointer
+     :masd.wale.kvp.facet.qualified_name: masd.cpp.types
+     :masd.physical.helpers.family: SmartPointer
+     :masd.physical.helpers.owning_formatters: masd.cpp.types.class_implementation
+     :masd.physical.helpers.owning_formatters: masd.cpp.types.primitive_implementation
+     :masd.physical.helpers.owning_facets: masd.cpp.types
+     :masd.codec.stereotypes: masd::physical::helper
+     :masd.codec.plantuml: smart_pointer_helper o-d- archetype_class_header_transform
+     :END:
+
+***** stitch template content                                     :attribute:
+
+#+begin_src fundamental
+<#@ masd.stitch.stream_variable_name=os #>
+<#@ masd.stitch.containing_namespaces=dogen::text::transforms::cpp::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.text/types/transforms/cpp/types/smart_pointer_helper_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/helper_properties.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper_transform::apply(std::ostream& os, const logical::entities::model& m,
+    const logical::entities::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(make_scoped_namespace_formatter(os, m, d.namespaces()));
+#>
+
+inline bool operator==(const <#= qn #>& lhs,
+const <#= qn #>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+<#+
+    }
+#>
+
+<#+
 }
 
 #>
