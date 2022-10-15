@@ -294,6 +294,12 @@ if(${build_group} MATCHES Nightly)
     set(CTEST_BUILD_TARGET "gao")
     ctest_build(PARALLEL_LEVEL ${nproc})
 
+    # need to reconfigure once more to pick-up the newly generated code.
+    ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
+    if(configure_result)
+        message(FATAL_ERROR "Failed to configure")
+    endif()
+
     # Finally commit all generated code so that CDash does not moan.
     set(CTEST_BUILD_TARGET "commit_all_changes")
     ctest_build(PARALLEL_LEVEL ${nproc})
