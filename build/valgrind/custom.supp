@@ -332,3 +332,13 @@
    fun:_ZN5boost11this_thread14at_thread_exitINS_3_bi6bind_tINS2_11unspecifiedENS_15checked_deleterImEENS2_5list1INS2_5valueIPmEEEEEEEEvT_
    ...
 }
+
+{
+   CMake
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/home/runner/work/_temp/-1647216998/cmake-3.23.2-linux-x86_64/bin/cmake
+   obj:/home/runner/work/_temp/-1647216998/cmake-3.23.2-linux-x86_64/bin/cmake
+   fun:(below main)
+}
