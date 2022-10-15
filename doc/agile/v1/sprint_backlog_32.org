@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-14 Fri 08:09]
+#+CAPTION: Clock summary at [2022-10-15 Sat 11:05]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *60:07* |       |       | 100.0 |
+| *Total time*                                              | *60:42* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 60:07   |       |       | 100.0 |
-| Active                                                    |         | 60:07 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  17.0 |
+| Stories                                                   | 60:42   |       |       | 100.0 |
+| Active                                                    |         | 60:42 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  16.8 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.5 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   0.6 |
+| Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
 | Sprint and product backlog grooming                       |         |       |  3:48 |   6.3 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.9 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.8 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.5 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   5.4 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   3.6 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.5 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.7 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   3.0 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.2 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.8 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.3 |
+| Create a mock configuration builder                       |         |       |  1:58 |   3.2 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.6 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.0 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.5 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   1.2 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.1 |
+| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.0 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
-| Windows package is broken                                 |         |       |  0:20 |   0.6 |
-| Warning on OSX build                                      |         |       |  2:23 |   4.0 |
+| Windows package is broken                                 |         |       |  0:20 |   0.5 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.9 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.6 |
-| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  26.3 |
-| Create a nightly github workflow                          |         |       |  2:29 |   4.1 |
+| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  26.1 |
+| Create a nightly github workflow                          |         |       |  3:04 |   5.1 |
 #+end:
 
 Agenda:
@@ -1492,6 +1492,7 @@ to make diagrams more readable. Models:
 
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
+    CLOCK: [2022-10-15 Sat 10:30]--[2022-10-15 Sat 11:05] =>  0:35
     CLOCK: [2022-10-14 Fri 08:00]--[2022-10-14 Fri 08:09] =>  0:09
     CLOCK: [2022-10-12 Wed 08:18]--[2022-10-12 Wed 08:59] =>  0:41
     CLOCK: [2022-10-12 Wed 07:41]--[2022-10-12 Wed 07:55] =>  0:14
@@ -1520,6 +1521,19 @@ Notes:
 Links:
 
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** Consider creating nightly branches                                :story:
+
+It may be useful to commit and push all of the generated code on a nightly. That
+way we can look at the code when there are problems. The downsides are:
+
+- we need to delete these branches.
+- CI is both building and pushing into git, which is not ideal.
+
+Notes:
+
+ Perhaps a better way would be to have 2 separate workflows: one just for full
+generation and one for building that branch.
 
 *** Consider replacing assembly with weaving                          :story:
 
