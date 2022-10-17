@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-16 Sun 18:44]
+#+CAPTION: Clock summary at [2022-10-17 Mon 20:09]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *60:56* |       |       | 100.0 |
+| *Total time*                                              | *61:14* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 60:56   |       |       | 100.0 |
-| Active                                                    |         | 60:56 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  16.8 |
+| Stories                                                   | 61:14   |       |       | 100.0 |
+| Active                                                    |         | 61:14 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  16.7 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.4 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
@@ -29,7 +29,7 @@
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.8 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
 | Full generation support in tests is incorrect             |         |       |  3:18 |   5.4 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   3.6 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   3.5 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.5 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.6 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   3.0 |
@@ -37,7 +37,7 @@
 | Model significant relations at a higher level             |         |       |  1:05 |   1.8 |
 | Create a mock configuration builder                       |         |       |  1:58 |   3.2 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.6 |
-| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   3.0 |
+| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.9 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.5 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   1.2 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
@@ -47,8 +47,8 @@
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
 | Warning on OSX build                                      |         |       |  2:23 |   3.9 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.6 |
-| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  26.0 |
-| Create a nightly github workflow                          |         |       |  3:18 |   5.4 |
+| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  25.9 |
+| Create a nightly github workflow                          |         |       |  3:36 |   5.9 |
 #+end:
 
 Agenda:
@@ -1492,6 +1492,7 @@ to make diagrams more readable. Models:
 
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
+    CLOCK: [2022-10-17 Mon 19:51]--[2022-10-17 Mon 20:09] =>  0:18
     CLOCK: [2022-10-16 Sun 18:30]--[2022-10-16 Sun 18:44] =>  0:14
     CLOCK: [2022-10-15 Sat 10:30]--[2022-10-15 Sat 11:05] =>  0:35
     CLOCK: [2022-10-14 Fri 08:00]--[2022-10-14 Fri 08:09] =>  0:09
@@ -1526,6 +1527,7 @@ Notes:
 
 Links:
 
+- [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
 
 *** Consider creating nightly branches                                :story:
