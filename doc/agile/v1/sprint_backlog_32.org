@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-12 Sat 14:42]
+#+CAPTION: Clock summary at [2022-11-12 Sat 18:42]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *62:32* |       |       | 100.0 |
+| *Total time*                                              | *64:01* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 62:32   |       |       | 100.0 |
-| Active                                                    |         | 62:32 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  16.3 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.4 |
+| Stories                                                   | 64:01   |       |       | 100.0 |
+| Active                                                    |         | 64:01 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  16.0 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.3 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  3:48 |   6.1 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.8 |
+| Sprint and product backlog grooming                       |         |       |  3:48 |   5.9 |
+| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.3 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   3.5 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   5.2 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   3.4 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.4 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.5 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   2.9 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.2 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.7 |
 | Create a mock configuration builder                       |         |       |  1:58 |   3.1 |
-| Enable CodeQL                                             |         |       |  0:21 |   0.6 |
-| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.9 |
+| Enable CodeQL                                             |         |       |  0:21 |   0.5 |
+| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.8 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.4 |
-| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.2 |
+| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.1 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.0 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.8 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.7 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.5 |
-| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  25.3 |
-| Create a nightly github workflow                          |         |       |  4:54 |   7.8 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  27.1 |
+| Create a nightly github workflow                          |         |       |  4:54 |   7.7 |
 #+end:
 
 Agenda:
@@ -1437,6 +1437,7 @@ Links:
 
 *** STARTED Add PlantUML relationships to diagrams                    :story:
     :LOGBOOK:
+    CLOCK: [2022-11-12 Sat 17:11]--[2022-11-12 Sat 18:40] =>  1:29
     CLOCK: [2022-10-13 Thu 08:00]--[2022-10-13 Thu 08:13] =>  0:13
     CLOCK: [2022-10-12 Wed 19:33]--[2022-10-12 Wed 20:25] =>  0:52
     CLOCK: [2022-10-11 Tue 21:50]--[2022-10-11 Tue 22:17] =>  0:27
@@ -1488,7 +1489,18 @@ to make diagrams more readable. Models:
 - dogen.modeling: no changes
 - dogen.orchestration: done
 - dogen.org: done
-- dogen.physical:
+- dogen.physical: done
+- dogen.text: done
+
+Links:
+
+- [[https://github.com/plantuml/plantuml/issues/1187][Class diagrams: attaining a more "square-like" use of space in large diagrams
+  #1187]]
+- [[https://plantuml.com/class-diagram][Section "Help on layout" in manual]]
+- [[https://plantuml.com/elk][Using ELK layout engine]]
+- [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html]["The Hitchhiker's Guide to PlantUML", section 6. "Layout"]]
+- [[https://www.augmentedmind.de/2021/01/17/plantuml-layout-tutorial-styles/]["PlantUML layout and styles tutorial"]]
+- [[https://isgb.otago.ac.nz/infosci/mark.george/Wiki/wiki/PlantUML%20GraphViz%20Layout]["PlantUML GraphViz Layout"]]
 
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
@@ -1532,6 +1544,39 @@ Links:
 
 - [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** Consider adding support for archimate                             :story:
+
+#+begin_quote
+ArchiMate is an open and independent enterprise architecture modeling language
+to support the description, analysis and visualization of architecture within
+and across business domains in an unambiguous way.
+
+ArchiMate offers a common language for describing the construction and operation
+of business processes, organizational structures, information flows, IT systems,
+and technical infrastructure. This is just like an architectural drawing in
+classical building where the architecture describes the various aspects of the
+construction and use of a building. This insight helps the different
+stakeholders to design, assess, and communicate the consequences of decisions
+and changes within and between these business domains.
+#+end_quote
+
+Links:
+
+- [[https://plantuml.com/archimate-diagram][PlantUML: Archimate Diagram]]
+- [[https://github.com/plantuml-stdlib/Archimate-PlantUML][GH: Archimate-PlantUML]]
+
+*** Add links to PlantUML diagrams                                    :story:
+
+PlantUML supports org-mode style links in diagrams, e.g.:
+
+#+begin_src
+[[http://plantuml.com]]
+#+end_src
+
+Links:
+
+- [[https://plantuml.com/link][PlantUML: Format definition]]
 
 *** Consider creating nightly branches                                :story:
 
