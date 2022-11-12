@@ -62,7 +62,7 @@ jobs:
           {
               $build_group = "Experimental"
           }
-          $cmake_args="build_group=$build_group,build_name=$preset,with_presets=ON"
+          $cmake_args="build_group=$build_group,build_name=$preset"
           ctest -VV --preset $preset --script "CTest.cmake,$cmake_args"
 
       - name: Upload artifact

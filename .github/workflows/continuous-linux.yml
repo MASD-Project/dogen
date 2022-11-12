@@ -65,7 +65,7 @@ jobs:
           export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          export cmake_args="build_group=Continuous,build_name=${preset},with_presets=ON"
+          export cmake_args="build_group=Continuous,build_name=${preset}"
           if [[ "${{matrix.buildtype}}" == "debug" ]]; then
               cmake_args="${cmake_args},code_coverage=1"
           else
