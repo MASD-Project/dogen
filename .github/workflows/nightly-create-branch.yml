@@ -1,13 +1,13 @@
 name: Nightly Create Branch
 
+# on:
+#   schedule:
+#     - cron: '0 0 * * *'
+
 on:
   push:
     branches:
       - master
-
-# on:
-#   schedule:
-#     - cron: '0 0 * * *'
 
 jobs:
   build:
