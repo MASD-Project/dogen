@@ -1,10 +1,9 @@
-name: Nightly Linux
+name: Nightly Build
 
 on:
-  workflow_run:
-    workflows: ["Nightly Create Branch"]
-    types:
-      - completed
+  push:
+    branches:
+      - nightly
 
 jobs:
   build:
