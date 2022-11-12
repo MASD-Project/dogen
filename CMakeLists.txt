@@ -521,11 +521,3 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/share)
 add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
-
-#
-# Special targets for nightlies. Commit current set of files.
-#
-add_custom_target(commit_all_changes
-    COMMAND git add -A 1>/dev/null
-    COMMAND git commit --author="Temporary Author temporary.author@example.com" -m "Generated code."
-)
