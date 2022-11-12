@@ -56,6 +56,11 @@ if(NOT DEFINED build_group)
     message(FATAL_ERROR "Parameter build_group not defined.")
 endif()
 
+if(NOT DEFINED with_full_generation)
+    set(with_full_generation OFF)
+endif()
+message(STATUS "Full generation: ${with_full_generation}")
+
 #
 # Parse the build name to extract input parameters, and validate them.
 #
@@ -262,8 +267,8 @@ endif()
 # Setup the preset for configuration.
 set(cmake_args ${cmake_args} "--preset ${preset}")
 
-# For nightlies, we want to force full generation.
-if(${build_group} MATCHES Nightly)
+# Setup full generation if requested.
+if(with_full_generation)
     message(STATUS "Full generation is ON.")
     set(cmake_args ${cmake_args} "-DWITH_FULL_GENERATION=ON")
 else()
@@ -279,7 +284,7 @@ endif()
 #
 # Step: build.
 #
-if(${build_group} MATCHES Nightly)
+if (with_full_generation)
     # first, we need to build the code generator.
     set(CTEST_BUILD_TARGET "dogen.cli")
     ctest_build(PARALLEL_LEVEL ${nproc})
@@ -293,50 +298,39 @@ if(${build_group} MATCHES Nightly)
     # now generate code for all facets.
     set(CTEST_BUILD_TARGET "gao")
     ctest_build(PARALLEL_LEVEL ${nproc})
+else()
+    set(CTEST_BUILD_TARGET "package")
+    ctest_build(PARALLEL_LEVEL ${nproc})
 
-    # need to reconfigure once more to pick-up the newly generated code.
-    ctest_configure(OPTIONS "${cmake_args}" RETURN_VALUE configure_result)
-    if(configure_result)
-        message(FATAL_ERROR "Failed to configure")
+    #
+    # Step: test.
+    #
+    # Note: because we are doing nothing with the return value, the build will
+    # be green even when tests fail. This is OK because we rely on CDash to see
+    # the testing status. Travis/AppVeyor just tells us weather the build and
+    # packaging steps have worked or failed.
+    #
+    ctest_test(PARALLEL_LEVEL ${nproc} QUIET)
+
+    #
+    # Step: code coverage
+    #
+    if(WITH_COVERAGE)
+        set(cov_result "")
+        set(cov_capture_result "")
+        ctest_coverage(RETURN_VALUE cov_result
+            CAPTURE_CMAKE_ERROR cov_capture_result
+            QUIET)
+        message(STATUS "Result: ${cov_result}")
+        message(STATUS "Cov capture result: ${cov_capture_result}")
     endif()
 
-    # Finally commit all generated code so that CDash does not moan.
-    set(CTEST_BUILD_TARGET "commit_all_changes")
-    ctest_build(PARALLEL_LEVEL ${nproc})
-endif()
-
-set(CTEST_BUILD_TARGET "package")
-ctest_build(PARALLEL_LEVEL ${nproc})
-
-
-#
-# Step: test.
-#
-# Note: because we are doing nothing with the return value, the build will be
-# green even when tests fail. This is OK because we rely on CDash to see the
-# testing status. Travis/AppVeyor just tells us weather the build and packaging
-# steps have worked or failed.
-#
-ctest_test(PARALLEL_LEVEL ${nproc} QUIET)
-
-#
-# Step: code coverage
-#
-if(WITH_COVERAGE)
-    set(cov_result "")
-    set(cov_capture_result "")
-    ctest_coverage(RETURN_VALUE cov_result
-        CAPTURE_CMAKE_ERROR cov_capture_result
-        QUIET)
-    message(STATUS "Result: ${cov_result}")
-    message(STATUS "Cov capture result: ${cov_capture_result}")
-endif()
-
-#
-# Step: memcheck.
-#
-if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
-    ctest_memcheck(PARALLEL_LEVEL ${nproc})
+    #
+    # Step: memcheck.
+    #
+    if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
+        ctest_memcheck(PARALLEL_LEVEL ${nproc})
+    endif()
 endif()
 
 #
