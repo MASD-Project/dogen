@@ -43,6 +43,9 @@ jobs:
         with:
           appendedCacheKey: ${{matrix.name}}${{matrix.buildtype}}
 
+      - name: Setup test data
+        run: ./build/scripts/github.setup.${{matrix.family}}.sh
+
       - name: Run CTest workflow
         env:
           WITH_FULL_GENERATION: ON
