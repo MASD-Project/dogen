@@ -1,0 +1,11 @@
+* Gitter
+
+** Example request                                                     :verb:
+
+template https://api.gitter.im/v1
+
+*** Get
+
+GET /rooms
+Accept: application/json
+Authorization: Bearer XXX
