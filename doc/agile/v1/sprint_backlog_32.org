@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-10-17 Mon 20:09]
+#+CAPTION: Clock summary at [2022-11-12 Sat 14:42]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *61:14* |       |       | 100.0 |
+| *Total time*                                              | *62:32* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 61:14   |       |       | 100.0 |
-| Active                                                    |         | 61:14 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  16.7 |
+| Stories                                                   | 62:32   |       |       | 100.0 |
+| Active                                                    |         | 62:32 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  16.3 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.4 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  3:48 |   6.2 |
+| Sprint and product backlog grooming                       |         |       |  3:48 |   6.1 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.8 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   5.3 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   3.5 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.5 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.6 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   3.0 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.4 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.5 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   2.9 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.2 |
-| Model significant relations at a higher level             |         |       |  1:05 |   1.8 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.2 |
+| Model significant relations at a higher level             |         |       |  1:05 |   1.7 |
+| Create a mock configuration builder                       |         |       |  1:58 |   3.1 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.6 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.9 |
-| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.5 |
+| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.4 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   1.2 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
 | Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.0 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.9 |
-| Use clang format to format the code base                  |         |       |  0:58 |   1.6 |
-| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  25.9 |
-| Create a nightly github workflow                          |         |       |  3:36 |   5.9 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.8 |
+| Use clang format to format the code base                  |         |       |  0:58 |   1.5 |
+| Add PlantUML relationships to diagrams                    |         |       | 15:50 |  25.3 |
+| Create a nightly github workflow                          |         |       |  4:54 |   7.8 |
 #+end:
 
 Agenda:
@@ -1492,6 +1492,9 @@ to make diagrams more readable. Models:
 
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
+    CLOCK: [2022-11-12 Sat 13:42]--[2022-11-12 Sat 14:03] =>  0:21
+    CLOCK: [2022-11-12 Sat 13:00]--[2022-11-12 Sat 13:12] =>  0:12
+    CLOCK: [2022-11-12 Sat 10:55]--[2022-11-12 Sat 11:40] =>  0:45
     CLOCK: [2022-10-17 Mon 19:51]--[2022-10-17 Mon 20:09] =>  0:18
     CLOCK: [2022-10-16 Sun 18:30]--[2022-10-16 Sun 18:44] =>  0:14
     CLOCK: [2022-10-15 Sat 10:30]--[2022-10-15 Sat 11:05] =>  0:35
