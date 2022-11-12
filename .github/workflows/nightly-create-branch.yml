@@ -66,4 +66,4 @@ jobs:
           git checkout -b nightly/${DOGEN_BUILD_DATE}
           git add -A 1>/dev/null
           git commit -m 'Generated code.' 1>/dev/null
-          git push git push nightly/${DOGEN_BUILD_DATE}
+          git push origin nightly/${DOGEN_BUILD_DATE}
