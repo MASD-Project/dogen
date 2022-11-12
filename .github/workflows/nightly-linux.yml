@@ -26,8 +26,8 @@ jobs:
             compiler: clang
     steps:
       - uses: actions/checkout@v3
-        ref: nightly
         with:
+          ref: nightly
           submodules: true
 
       - name: Setup Clang
