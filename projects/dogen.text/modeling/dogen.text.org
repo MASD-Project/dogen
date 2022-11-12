@@ -888,7 +888,6 @@ C++ technical space.
      :masd.physical.constant_relation: dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
-     :masd.codec.plantuml: archetype_class_header_transform o-d- archetype_class_implementation_transform
      :END:
 
 Generates header files for archetypes.
@@ -961,7 +960,7 @@ void apply(const text::transforms::context& ctx, const text::entities::model& lp
      :masd.wale.kvp.containing_namespace: text.transforms.types
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
-     :masd.codec.plantuml: archetype_class_implementation_transform o-d- archetype_class_header_factory
+     :masd.codec.plantuml: archetype_class_implementation_transform o-d- archetype_class_header_transform
      :END:
 
 Generates implementation files for archetypes.
@@ -1014,7 +1013,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
      :masd.physical.constant_relation: dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
-     :masd.codec.plantuml: archetype_class_header_factory o-d- archetype_class_implementation_factory
+     :masd.codec.plantuml: archetype_class_header_factory o-d- archetype_class_header_transform
      :END:
 
 Generates header files for archetype factories.
@@ -1091,7 +1090,7 @@ public:
      :masd.physical.variable_relation: self,archetype:masd.cpp.types.archetype_class_header_factory
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
-     :masd.codec.plantuml: archetype_class_implementation_factory  o-d- facet_class_header_transform
+     :masd.codec.plantuml: archetype_class_implementation_factory  o-d- archetype_class_header_transform
      :END:
 
 Generates implementation files for archetype factories.
@@ -1228,7 +1227,6 @@ physical::entities::archetype <#= sn #>::make() {
      :masd.physical.constant_relation: dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
-     :masd.codec.plantuml: facet_class_header_transform o-d- facet_class_implementation_transform
      :END:
 
 Generates header files for facet transforms.
@@ -1305,7 +1303,7 @@ public:
      :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: transform
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
-     :masd.codec.plantuml: facet_class_implementation_transform o-d- facet_class_header_factory
+     :masd.codec.plantuml: facet_class_implementation_transform o-d- facet_class_header_transform
      :END:
 
 Generates implementation files for facet transforms.
@@ -1400,6 +1398,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
      :masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
+     :masd.codec.plantuml: facet_class_header_factory o-d- facet_class_header_transform
      :END:
 
 Generates header files for facet factories.
@@ -1476,6 +1475,7 @@ public:
      :masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
      :masd.physical.postfix: factory
      :masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+     :masd.codec.plantuml: facet_class_implementation_factory o-d- facet_class_header_transform
      :END:
 
 Generates implementation files for facet factory.

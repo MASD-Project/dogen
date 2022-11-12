@@ -316,8 +316,6 @@ C++ technical space.
                 +{field} stitch_template_content
             }
 
-            archetype_class_header_transform o-d- archetype_class_implementation_transform
-
             note top of archetype_class_header_transform
 Generates header files for archetypes.
             end note
@@ -326,7 +324,7 @@ Generates header files for archetypes.
                 +{field} stitch_template_content
             }
 
-            archetype_class_implementation_transform o-d- archetype_class_header_factory
+            archetype_class_implementation_transform o-d- archetype_class_header_transform
 
             note top of archetype_class_implementation_transform
 Generates implementation files for archetypes.
@@ -336,7 +334,7 @@ Generates implementation files for archetypes.
                 +{field} stitch_template_content
             }
 
-            archetype_class_header_factory o-d- archetype_class_implementation_factory
+            archetype_class_header_factory o-d- archetype_class_header_transform
 
             note top of archetype_class_header_factory
 Generates header files for archetype factories.
@@ -346,7 +344,7 @@ Generates header files for archetype factories.
                 +{field} stitch_template_content
             }
 
-            archetype_class_implementation_factory  o-d- facet_class_header_transform
+            archetype_class_implementation_factory  o-d- archetype_class_header_transform
 
             note top of archetype_class_implementation_factory
 Generates implementation files for archetype factories.
@@ -356,8 +354,6 @@ Generates implementation files for archetype factories.
                 +{field} stitch_template_content
             }
 
-            facet_class_header_transform o-d- facet_class_implementation_transform
-
             note top of facet_class_header_transform
 Generates header files for facet transforms.
             end note
@@ -366,7 +362,7 @@ Generates header files for facet transforms.
                 +{field} stitch_template_content
             }
 
-            facet_class_implementation_transform o-d- facet_class_header_factory
+            facet_class_implementation_transform o-d- facet_class_header_transform
 
             note top of facet_class_implementation_transform
 Generates implementation files for facet transforms.
@@ -376,6 +372,8 @@ Generates implementation files for facet transforms.
                 +{field} stitch_template_content
             }
 
+            facet_class_header_factory o-d- facet_class_header_transform
+
             note top of facet_class_header_factory
 Generates header files for facet factories.
             end note
@@ -383,6 +381,8 @@ Generates header files for facet factories.
             class facet_class_implementation_factory <<masd::physical::archetype, dogen::implementation_configuration>> #68D799 {
                 +{field} stitch_template_content
             }
+
+            facet_class_implementation_factory o-d- facet_class_header_transform
 
             note top of facet_class_implementation_factory
 Generates implementation files for facet factory.
