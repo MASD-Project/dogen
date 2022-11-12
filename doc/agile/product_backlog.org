@@ -11161,6 +11161,20 @@ Stories that have not yet been allocated a release, by broad themes.
 
 Ideas to improve the code base.
 
+*** Consider adding support for sougou workflow                       :story:
+
+#+begin_quote
+As Sogou`s C++ server engine, Sogou C++ Workflow supports almost all back-end
+C++ online services of Sogou, including all search services, cloud input method,
+online advertisements, etc., handling more than 10 billion requests every day.
+This is an enterprise-level programming engine in light and elegant design which
+can satisfy most C++ back-end development requirements.
+#+end_quote
+
+Links:
+
+- [[https://github.com/sogou/workflow][Sogou C++ Workflow]]
+
 *** Add support for temporal entities                                 :story:
 
 It would be nice to declare an entity "temporal" and then have
@@ -17561,6 +17575,22 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for DuckDB                                :story:
+
+#+begin_quote
+DuckDB is a high-performance analytical database system. It is designed to be
+fast, reliable and easy to use. DuckDB provides a rich SQL dialect, with support
+far beyond basic SQL. DuckDB supports arbitrary and nested correlated
+subqueries, window functions, collations, complex types (arrays, structs), and
+more. For more information on the goals of DuckDB, please refer to the Why
+DuckDB page on our website.
+#+end_quote
+
+Links:
+
+- [[https://github.com/duckdb/duckdb][GH: duckdb]]
+- [[https://duckdb.org/docs/api/cpp][C++ API]]
 
 *** Consider adding support for C++ container generation              :story:
 

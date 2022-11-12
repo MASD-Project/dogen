@@ -13,42 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-12 Sat 18:42]
+#+CAPTION: Clock summary at [2022-11-12 Sat 22:52]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *64:01* |       |       | 100.0 |
+| *Total time*                                              | *64:56* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 64:01   |       |       | 100.0 |
-| Active                                                    |         | 64:01 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  16.0 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.3 |
+| Stories                                                   | 64:56   |       |       | 100.0 |
+| Active                                                    |         | 64:56 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  15.7 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.2 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  3:48 |   5.9 |
+| Sprint and product backlog grooming                       |         |       |  4:17 |   6.6 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.2 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   3.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   5.1 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   3.3 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.4 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.5 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   2.9 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.4 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   2.8 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.2 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.7 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.1 |
+| Create a mock configuration builder                       |         |       |  1:58 |   3.0 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.5 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.8 |
-| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.4 |
+| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.3 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   1.1 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
-| Gitter notifications for builds are not showing up        |         |       |  0:38 |   1.0 |
+| Gitter notifications for builds are not showing up        |         |       |  1:04 |   1.6 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
 | Warning on OSX build                                      |         |       |  2:23 |   3.7 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.5 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  27.1 |
-| Create a nightly github workflow                          |         |       |  4:54 |   7.7 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  26.7 |
+| Create a nightly github workflow                          |         |       |  4:54 |   7.5 |
 #+end:
 
 Agenda:
@@ -375,6 +375,9 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-11-12 Sat 22:46]--[2022-11-12 Sat 22:52] =>  0:06
+    CLOCK: [2022-11-12 Sat 22:28]--[2022-11-12 Sat 22:44] =>  0:16
+    CLOCK: [2022-11-12 Sat 21:54]--[2022-11-12 Sat 22:01] =>  0:29
     CLOCK: [2022-10-09 Sun 11:35]--[2022-10-09 Sun 11:47] =>  0:12
     CLOCK: [2022-10-04 Tue 08:21]--[2022-10-04 Tue 08:29] =>  0:08
     CLOCK: [2022-10-03 Mon 19:41]--[2022-10-03 Mon 19:51] =>  0:10
@@ -1159,8 +1162,23 @@ Builds are missing because since the last dist-upgrade our PC switches off into
 sleep mode. However, the right fix is to move nightlies to github (separate
 story).
 
+*** COMPLETED Consider creating nightly branches                      :story:
+
+It may be useful to commit and push all of the generated code on a nightly. That
+way we can look at the code when there are problems. The downsides are:
+
+- we need to delete these branches.
+- CI is both building and pushing into git, which is not ideal.
+
+Notes:
+
+ Perhaps a better way would be to have 2 separate workflows: one just for full
+generation and one for building that branch.
+
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-12 Sat 22:44]--[2022-11-12 Sat 22:45] =>  0:01
+    CLOCK: [2022-11-12 Sat 22:02]--[2022-11-12 Sat 22:27] =>  0:25
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
     CLOCK: [2022-09-18 Sun 07:20]--[2022-09-18 Sun 07:29] =>  0:09
     CLOCK: [2022-09-17 Sat 21:29]--[2022-09-17 Sat 21:48] =>  0:19
@@ -1180,6 +1198,8 @@ Links:
 - [[https://gitlab.com/gitterHQ/webapp/-/blob/develop/docs/integrations.md][Gitter: github integrations]]
 - [[https://github.com/juztcode/gitter-github-action][Gitter notify - Github action]]
 - [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
+- [[https://developer.gitter.im/docs/rest-api][REST API]]
+- [[https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment][GH: Using an environment]]
 
 *** STARTED Ignore vcpkg path length warning                          :story:
     :LOGBOOK:
@@ -1490,7 +1510,7 @@ to make diagrams more readable. Models:
 - dogen.orchestration: done
 - dogen.org: done
 - dogen.physical: done
-- dogen.text: done
+- dogen.text: started
 
 Links:
 
@@ -1545,6 +1565,39 @@ Links:
 - [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
 
+*** Add grouping for top-level classes in PlantUML                    :story:
+
+It is possible to group classes that have no relationship with =together=.
+Experiment with this to see if it improves the layout for top-level classes.
+
+#+begin_src plantuml
+together {
+  class Together1
+  class Together2
+  class Together3
+}
+#+end_src
+
+Links:
+
+- [[https://plantuml.com/class-diagram][See "Help on layout" section]]
+
+Merged stories:
+
+*Consider creating a "top-level" group in PlantUML*
+
+There are a number of classes that always show up at the top:
+
+- registrar
+- cmakelists
+- main
+- etc
+
+These could also be part of a top-level group.
+
+We could also have a group for logic-less templates if they are at the
+top-level.
+
 *** Consider adding support for archimate                             :story:
 
 #+begin_quote
@@ -1578,22 +1631,11 @@ Links:
 
 - [[https://plantuml.com/link][PlantUML: Format definition]]
 
-*** Consider creating nightly branches                                :story:
+*** Consider renaming assemblers with weavers                         :story:
 
-It may be useful to commit and push all of the generated code on a nightly. That
-way we can look at the code when there are problems. The downsides are:
-
-- we need to delete these branches.
-- CI is both building and pushing into git, which is not ideal.
-
-Notes:
-
- Perhaps a better way would be to have 2 separate workflows: one just for full
-generation and one for building that branch.
-
-*** Consider replacing assembly with weaving                          :story:
-
-Weaving is the MDE term.
+Weaving is the MDE term. We have a few transforms with "assembly" on the name,
+we should rename these or at least clarify the difference between assembling and
+weaving.
 
 *** Consider adding support for clang-tidy                            :story:
 
@@ -1924,20 +1966,6 @@ then later on be extended for merging code generation.
 One simple way of adding operations is to extend verbatim to support inside
 class. This can easily be achieved via =.before=, =.inside= and =.after= fields.
 The =.inside= can be replaced by operations later.
-
-*** Consider creating a "top-level" group in PlantUML                 :story:
-
-There are a number of classes that always show up at the top:
-
-- registrar
-- cmakelists
-- main
-- etc
-
-These could also be part of a top-level group.
-
-We could also have a group for logic-less templates if they are at the
-top-level.
 
 *** Empty classes do not need brackets in PlantUML                    :story:
 
