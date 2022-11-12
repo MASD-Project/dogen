@@ -1,9 +1,10 @@
 name: Nightly Build
 
 on:
-  push:
-    branches:
-      - nightly
+  workflow_run:
+    workflows: ["Nightly Create Branch"]
+    types:
+      - completed
 
 jobs:
   build:
@@ -25,6 +26,7 @@ jobs:
             compiler: clang
     steps:
       - uses: actions/checkout@v3
+        ref: nightly
         with:
           submodules: true
 
