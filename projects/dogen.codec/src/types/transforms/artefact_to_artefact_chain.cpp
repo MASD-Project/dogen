@@ -21,6 +21,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
+#include "dogen.codec/types/transforms/meta_data_transform.hpp"
+#include "dogen.codec/types/transforms/configuration_transform.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/model_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/documentation_trimming_transform.hpp"
@@ -47,19 +49,28 @@ apply(const transforms::context& ctx, const entities::artefact& input,
     /*
      * Convert the source artefact into a model.
      */
-    auto input_model(artefact_to_model_chain::apply(ctx, input));
+    auto m(artefact_to_model_chain::apply(ctx, input));
 
     /*
      * Trim all the unnecessary white space.
      */
-    documentation_trimming_transform::apply(ctx, input_model);
+    documentation_trimming_transform::apply(ctx, m);
+
+    /*
+     * Generate the configuration from tagged values.
+     */
+    // configuration_transform::apply(ctx, m);
+
+    /*
+     * Read all meta-data for elements and attributes.
+     */
+    // meta_data_transform::apply(ctx, m);
 
     /*
      * Convert the source model into the destination model. Note that
      * we infer the codec to use from the requested path.
      */
-    const auto r(model_to_artefact_chain::apply(ctx, output_path, input_model));
-
+    auto r(model_to_artefact_chain::apply(ctx, output_path, m));
     stp.end_chain(r);
     return r;
 }
