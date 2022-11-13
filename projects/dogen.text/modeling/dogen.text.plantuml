@@ -729,7 +729,7 @@ Generates header files for objects.
 Generates implementation files for objects.
             end note
 
-            class enum_header <<masd::physical::archetype, dogen::enumeration_header_configuration>> #68D799 {
+            class enum_header <<masd::physical::archetype>> #68D799 {
                 +{field} stitch_template_content
             }
 

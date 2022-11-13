@@ -6455,7 +6455,8 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
      :PROPERTIES:
      :custom_id: F2245764-7133-55D4-84AB-A718C66777E0
      :masd.wale.kvp.containing_namespace: text.transforms.hash
-     :masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+     :masd.codec.stereotypes: masd::physical::archetype
+     :masd.codec.configurations: dogen::enumeration_header_configuration
      :END:
 
 Generates header files for enumerations.
