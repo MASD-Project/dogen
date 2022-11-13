@@ -31,7 +31,7 @@ namespace {
 const std::string transform_id("codec.transforms.meta_data_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(transform_id));
+logger lg(logger_factory(transform_id));
 
 }
 
@@ -44,7 +44,13 @@ apply(const features::meta_data::feature_group& fg, entities::element& e) {
 
     const auto scfg(meta_data::make_static_configuration(fg, e));
     for (const auto& s : scfg.stereotypes)
-        e.stereotypes().push_back(stereotype(s));
+        e.stereotypes().emplace_back(s);
+
+    for (const auto& t : scfg.templates)
+        e.templates().emplace_back(t);
+
+    for (const auto& c : scfg.configurations)
+        e.stereotypes().emplace_back(c);
 
     for (const auto& p : scfg.parent)
         e.parents().push_back(p);
