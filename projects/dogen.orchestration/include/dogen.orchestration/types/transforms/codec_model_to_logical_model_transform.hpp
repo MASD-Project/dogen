@@ -21,6 +21,7 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CODEC_MODEL_TO_LOGICAL_MODEL_TRANSFORM_HPP
 #define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CODEC_MODEL_TO_LOGICAL_MODEL_TRANSFORM_HPP
 
+#include "dogen.codec/types/entities/element.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -32,9 +33,10 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.identification/types/entities/logical_location.hpp"
 #include "dogen.codec/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.orchestration/types/transforms/context_fwd.hpp"
 #include "dogen.orchestration/types/helpers/codec_to_logical_projector.hpp"
 
@@ -45,6 +47,12 @@ namespace dogen::orchestration::transforms {
  */
 class codec_model_to_logical_model_transform final {
 private:
+    /**
+     * @brief Obtains the set of stereotypes associated with this element.
+     */
+    static logical::entities::stereotypes
+    obtain_stereotypes(const codec::entities::element& e);
+
     static identification::entities::logical_location
     create_location(const context& ctx, const codec::entities::model& m);
 

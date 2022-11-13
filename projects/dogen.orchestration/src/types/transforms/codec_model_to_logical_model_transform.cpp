@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/io/entities/stereotype_io.hpp"
@@ -56,7 +57,7 @@ const std::string transform_id(
     "orchestration.transforms.codec_model_to_logical_model_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(transform_id));
+logger lg(logger_factory(transform_id));
 
 const std::string cpp_technical_space("cpp");
 const std::string csharp_technical_space("csharp");
@@ -108,6 +109,21 @@ to_technical_space(const std::string& s) {
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
 }
 
+logical::entities::stereotypes
+codec_model_to_logical_model_transform::
+obtain_stereotypes(const codec::entities::element& e) {
+    auto ss { e.stereotypes() };
+    for (const auto& t : e.templates())
+        ss.emplace_back(t);
+
+    for (const auto& c : e.configurations())
+        ss.emplace_back(c);
+
+    BOOST_LOG_SEV(lg, debug) << "Codec stereotypes: " << ss;
+    logical::helpers::stereotypes_helper h;
+    return h.from_primitives(ss);
+}
+
 identification::entities::logical_location
 codec_model_to_logical_model_transform::
 create_location(const context& ctx, const codec::entities::model& m) {
@@ -119,7 +135,7 @@ create_location(const context& ctx, const codec::entities::model& m) {
     b.external_modules(scfg.external_modules);
     b.model_modules(scfg.model_modules);
 
-    const auto r(b.build());
+    auto r(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
     return r;
 }
@@ -167,9 +183,7 @@ process_element(const helpers::codec_to_logical_projector& p,
     const identification::entities::logical_location& l,
     const codec::entities::element& e, logical::entities::model& m) {
 
-    BOOST_LOG_SEV(lg, debug) << "Codec stereotypes: " << e.stereotypes();
-    logical::helpers::stereotypes_helper h;
-    const auto scr(h.from_primitives(e.stereotypes()));
+    const auto scr(obtain_stereotypes(e));
     const auto& st(scr.static_stereotypes());
     BOOST_LOG_SEV(lg, debug) << "Static stereotypes: " << st;
 
