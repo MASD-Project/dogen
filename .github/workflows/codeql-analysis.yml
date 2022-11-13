@@ -12,6 +12,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    environment: CI
     permissions:
       actions: read
       contents: read

@@ -14,6 +14,7 @@ jobs:
   windows:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
     runs-on: ${{matrix.os}}-latest
+    environment: CI
     strategy:
       fail-fast: false
       matrix:
