@@ -24,11 +24,13 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
+#include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/meta_data_transform.hpp"
 
 namespace {
 
 const std::string transform_id("codec.transforms.meta_data_transform");
+const std::string mssing_feature_model("Feature model not supplied.");
 
 using namespace dogen::utility::log;
 logger lg(logger_factory(transform_id));
@@ -92,6 +94,11 @@ apply(const features::meta_data::feature_group& fg, entities::attribute& attr) {
 void meta_data_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta-data",
         transform_id, m.name().simple(), *ctx.tracer(), m);
+
+    if (ctx.feature_model() == nullptr) {
+        BOOST_LOG_SEV(lg, error) << mssing_feature_model;
+        BOOST_THROW_EXCEPTION(transformation_error(mssing_feature_model));
+    }
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::meta_data::make_feature_group(fm));

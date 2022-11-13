@@ -24,14 +24,16 @@
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/types/transforms/context.hpp"
+#include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/configuration_transform.hpp"
 
 namespace {
 
 const std::string transform_id("codec.transforms.configuration_transform");
+const std::string mssing_feature_model("Feature model not supplied.");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(transform_id));
+logger lg(logger_factory(transform_id));
 
 }
 
@@ -55,6 +57,11 @@ apply(const transforms::context& ctx, entities::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().simple()
                              << "Total elements: " << m.elements().size();
+
+    if (ctx.feature_model() == nullptr) {
+        BOOST_LOG_SEV(lg, error) << mssing_feature_model;
+        BOOST_THROW_EXCEPTION(transformation_error(mssing_feature_model));
+    }
 
     const auto& fm(*ctx.feature_model());
     const auto& cm(ctx.compatibility_mode());
