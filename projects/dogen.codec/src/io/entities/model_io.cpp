@@ -130,6 +130,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::codec::entities::model\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"templates\": " << v.templates() << ", "
+      << "\"configurations\": " << v.configurations() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "

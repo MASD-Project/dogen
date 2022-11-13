@@ -87,6 +87,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"__type__\": " << "\"dogen::codec::entities::attribute\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"templates\": " << v.templates() << ", "
+      << "\"configurations\": " << v.configurations() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "

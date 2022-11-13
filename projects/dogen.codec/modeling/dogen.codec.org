@@ -166,6 +166,16 @@ Ability to have stereotypes.
     :masd.codec.type: std::list<identification::entities::stereotype>
     :END:
 
+*** templates                                                     :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::stereotype>
+    :END:
+
+*** configurations                                                :attribute:
+    :PROPERTIES:
+    :masd.codec.type: std::list<identification::entities::stereotype>
+    :END:
+
 ** Configurable                                                     :element:
    :PROPERTIES:
    :custom_id: FE4C25B9-6795-7EB4-3BF3-06257A0AA166

@@ -56,6 +56,8 @@ public:
     element(
         const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const std::list<dogen::identification::entities::stereotype>& stereotypes,
+        const std::list<dogen::identification::entities::stereotype>& templates,
+        const std::list<dogen::identification::entities::stereotype>& configurations,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::codec_provenance& provenance,
@@ -83,6 +85,16 @@ public:
     std::list<dogen::identification::entities::stereotype>& stereotypes();
     void stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
     void stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
+
+    const std::list<dogen::identification::entities::stereotype>& templates() const;
+    std::list<dogen::identification::entities::stereotype>& templates();
+    void templates(const std::list<dogen::identification::entities::stereotype>& v);
+    void templates(const std::list<dogen::identification::entities::stereotype>&& v);
+
+    const std::list<dogen::identification::entities::stereotype>& configurations() const;
+    std::list<dogen::identification::entities::stereotype>& configurations();
+    void configurations(const std::list<dogen::identification::entities::stereotype>& v);
+    void configurations(const std::list<dogen::identification::entities::stereotype>&& v);
 
     /**
      * @brief Name of the codec element.
@@ -207,6 +219,8 @@ public:
 private:
     std::list<dogen::identification::entities::tagged_value> tagged_values_;
     std::list<dogen::identification::entities::stereotype> stereotypes_;
+    std::list<dogen::identification::entities::stereotype> templates_;
+    std::list<dogen::identification::entities::stereotype> configurations_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::codec_provenance provenance_;

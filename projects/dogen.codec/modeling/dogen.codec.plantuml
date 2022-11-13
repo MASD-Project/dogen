@@ -88,6 +88,8 @@ Represents a comment block as read out from the codec representation.
 
     class Stereotypable <<masd::object_template>> #E3B6F6 {
         +{field} stereotypes std::list<identification::entities::stereotype>
+        +{field} templates std::list<identification::entities::stereotype>
+        +{field} configurations std::list<identification::entities::stereotype>
     }
 
     note top of Stereotypable
