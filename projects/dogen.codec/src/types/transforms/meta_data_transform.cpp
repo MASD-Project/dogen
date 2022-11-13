@@ -55,6 +55,9 @@ apply(const features::meta_data::feature_group& fg, entities::element& e) {
     for (const auto& p : scfg.parent)
         e.parents().push_back(p);
 
+    if (!scfg.plantuml.empty())
+        e.plantuml(scfg.plantuml);
+
     if (scfg.can_be_primitive_underlier)
         e.can_be_primitive_underlier(*scfg.can_be_primitive_underlier);
 
