@@ -68,4 +68,4 @@ jobs:
         with:
           room-id: ${{secrets.GITTER_ROOM_ID}}
           token: ${{secrets.GITTER_TOKEN}}
-          text: ${{jobs.build.name}} - ${{job.status}}
+          text: ${{github.workflow}} - ${{job.status}}
