@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-12 Sat 22:52]
+#+CAPTION: Clock summary at [2022-11-12 Sat 23:06]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *64:56* |       |       | 100.0 |
+| *Total time*                                              | *65:09* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 64:56   |       |       | 100.0 |
-| Active                                                    |         | 64:56 |       | 100.0 |
+| Stories                                                   | 65:09   |       |       | 100.0 |
+| Active                                                    |         | 65:09 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       | 10:13 |  15.7 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.2 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  4:17 |   6.6 |
+| Sprint and product backlog grooming                       |         |       |  4:30 |   6.9 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
 | Full generation support in tests is incorrect             |         |       |  3:18 |   5.1 |
@@ -47,7 +47,7 @@
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
 | Warning on OSX build                                      |         |       |  2:23 |   3.7 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.5 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  26.7 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  26.6 |
 | Create a nightly github workflow                          |         |       |  4:54 |   7.5 |
 #+end:
 
@@ -375,6 +375,8 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 08:27]--[2022-11-13 Sun 08:30] =>  0:03
+    CLOCK: [2022-11-12 Sat 22:53]--[2022-11-12 Sat 23:06] =>  0:13
     CLOCK: [2022-11-12 Sat 22:46]--[2022-11-12 Sat 22:52] =>  0:06
     CLOCK: [2022-11-12 Sat 22:28]--[2022-11-12 Sat 22:44] =>  0:16
     CLOCK: [2022-11-12 Sat 21:54]--[2022-11-12 Sat 22:01] =>  0:29
@@ -1177,6 +1179,8 @@ generation and one for building that branch.
 
 *** STARTED Gitter notifications for builds are not showing up        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 08:31]--[2022-11-13 Sun 08:35] =>  0:04
+    CLOCK: [2022-11-12 Sat 23:07]--[2022-11-12 Sat 23:22] =>  0:15
     CLOCK: [2022-11-12 Sat 22:44]--[2022-11-12 Sat 22:45] =>  0:01
     CLOCK: [2022-11-12 Sat 22:02]--[2022-11-12 Sat 22:27] =>  0:25
     CLOCK: [2022-09-18 Sun 08:05]--[2022-09-18 Sun 08:15] =>  0:10
@@ -1192,6 +1196,20 @@ Notes:
 
 - it seems the settings have an option for this in webhooks. Redo the hook to
   see if it helps.
+- its now working, but the problem is we are posting as ourselves rather than a
+  BOT. This is very confusing. Also, the details are not very useful:
+
+#+begin_quote
+Marco Craveiro @mcraveiro 22:59
+Ref: refs/heads/master
+Event: push
+Action: https://github.com/MASD-Project/dogen/commit/17e2909dcdbec19753b72c1669dd7dd02497396f/checks
+Message: - success
+Ref: refs/heads/master
+Event: push
+Action: https://github.com/MASD-Project/dogen/commit/17e2909dcdbec19753b72c1669dd7dd02497396f/checks
+Message: - success
+#+end_quote
 
 Links:
 
@@ -1524,6 +1542,8 @@ Links:
 
 *** STARTED Create a nightly github workflow                          :story:
     :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 08:11]--[2022-11-13 Sun 08:26] =>  0:15
+    CLOCK: [2022-11-13 Sun 08:10]--[2022-11-13 Sun 08:22] =>  0:12
     CLOCK: [2022-11-12 Sat 13:42]--[2022-11-12 Sat 14:03] =>  0:21
     CLOCK: [2022-11-12 Sat 13:00]--[2022-11-12 Sat 13:12] =>  0:12
     CLOCK: [2022-11-12 Sat 10:55]--[2022-11-12 Sat 11:40] =>  0:45
@@ -1559,11 +1579,36 @@ Notes:
   : projects/dogen/generated_tests/configuration_tests.cpp:29:10: fatal error: boost/test/unit_test.hpp: No such file or directory
 
   The best thing may be to split the nightly into two workflow steps.
+- deleted the existing nightly/YYYYMMDD branch which was causing issues:
+
+  : Switched to a new branch 'nightly'
+  : To https://github.com/MASD-Project/dogen
+  : ! [remote rejected] nightly -> nightly (cannot lock ref 'refs/heads/nightly': 'refs/heads/nightly/20221112' exists; cannot create 'refs/heads/nightly')
+  : error: failed to push some refs to 'https://github.com/MASD-Project/dogen'
 
 Links:
 
 - [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
 - [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** Create a GitHub account for MASD BOT                              :story:
+
+At present we are sending gitter out notifications as ourselves, which is very
+confusing. We need a separate BOT account for this. Unfortunately, this entails
+creating a new email account, a new GitHub account etc.
+
+Links:
+
+- [[https://stackoverflow.com/questions/29177623/what-is-a-bot-account-on-github][What is a "bot account" on github?]]
+
+*** Configuration as stereotype causes noise                          :story:
+
+At present we have very large classes (in terms of width) because they have
+configuration associated with them as stereotypes. This is a particular problem
+in the text model. Nothing stops us from having a separate way of handling
+configuration - for example a different property which is not a stereotype. It
+could be expressed differently in PlantUML - perhaps a separate section as per
+"Advanced class body". We could name the section "Configuration" or "Profiles".
 
 *** Add grouping for top-level classes in PlantUML                    :story:
 

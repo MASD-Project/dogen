@@ -66,3 +66,10 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
+
+    - name: Gitter
+      uses: juztcode/gitter-github-action@v2
+      with:
+        room-id: ${{secrets.GITTER_ROOM_ID}}
+        token: ${{secrets.GITTER_TOKEN}}
+        text: ${{github.workflow}} - ${{job.status}}
