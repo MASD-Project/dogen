@@ -592,6 +592,8 @@ Features related to all UML injectors.
         +{field} aggregation masd::variability::comma_separated_collection
         +{field} composition masd::variability::comma_separated_collection
         +{field} stereotypes masd::variability::comma_separated
+        +{field} templates masd::variability::comma_separated
+        +{field} configurations masd::variability::comma_separated
         +{field} type masd::variability::text
         +{field} value masd::variability::text
         +{field} parent masd::variability::comma_separated

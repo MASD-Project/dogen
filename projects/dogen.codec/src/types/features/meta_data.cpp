@@ -80,6 +80,32 @@ make_masd_codec_stereotypes() {
 }
 
 dogen::variability::entities::feature
+make_masd_codec_templates() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("templates");
+    r.name().qualified("masd.codec.templates");
+    r.description(R"(Object templates associated with this element.)");
+    const auto vt(value_type::comma_separated);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_codec_configurations() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("configurations");
+    r.name().qualified("masd.codec.configurations");
+    r.description(R"(Configurations associated with this element or attribute.)");
+    const auto vt(value_type::comma_separated);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
 make_masd_codec_type() {
     using namespace dogen::variability::entities;
     feature r;
@@ -234,6 +260,8 @@ meta_data::make_feature_group(const dogen::variability::entities::feature_model&
     r.aggregation = s.get_by_name("masd.codec.aggregation");
     r.composition = s.get_by_name("masd.codec.composition");
     r.stereotypes = s.get_by_name("masd.codec.stereotypes");
+    r.templates = s.get_by_name("masd.codec.templates");
+    r.configurations = s.get_by_name("masd.codec.configurations");
     r.type = s.get_by_name("masd.codec.type");
     r.value = s.get_by_name("masd.codec.value");
     r.parent = s.get_by_name("masd.codec.parent");
@@ -263,6 +291,10 @@ meta_data::static_configuration meta_data::make_static_configuration(
         r.composition = s.get_comma_separated_collection_content(fg.composition);
     if (s.has_configuration_point(fg.stereotypes))
         r.stereotypes = s.get_comma_separated_content(fg.stereotypes);
+    if (s.has_configuration_point(fg.templates))
+        r.templates = s.get_comma_separated_content(fg.templates);
+    if (s.has_configuration_point(fg.configurations))
+        r.configurations = s.get_comma_separated_content(fg.configurations);
     if (s.has_configuration_point(fg.type))
         r.type = s.get_text_content(fg.type);
     if (s.has_configuration_point(fg.value))
@@ -296,6 +328,8 @@ meta_data::make_features() {
     r.push_back(make_masd_codec_aggregation());
     r.push_back(make_masd_codec_composition());
     r.push_back(make_masd_codec_stereotypes());
+    r.push_back(make_masd_codec_templates());
+    r.push_back(make_masd_codec_configurations());
     r.push_back(make_masd_codec_type());
     r.push_back(make_masd_codec_value());
     r.push_back(make_masd_codec_parent());

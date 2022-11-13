@@ -983,6 +983,22 @@ Element which forms a composition relationship  with this element.
 
 Stereotypes associated with this element or attribute.
 
+*** templates                                                     :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::comma_separated
+    :END:
+
+Object templates associated with this element.
+
+*** configurations                                                :attribute:
+    :PROPERTIES:
+    :masd.variability.is_optional: true
+    :masd.codec.type: masd::variability::comma_separated
+    :END:
+
+Configurations associated with this element or attribute.
+
 *** type                                                          :attribute:
     :PROPERTIES:
     :masd.variability.is_optional: true

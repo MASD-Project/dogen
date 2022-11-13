@@ -44,6 +44,8 @@ public:
         variability::entities::feature aggregation;
         variability::entities::feature composition;
         variability::entities::feature stereotypes;
+        variability::entities::feature templates;
+        variability::entities::feature configurations;
         variability::entities::feature type;
         variability::entities::feature value;
         variability::entities::feature parent;
@@ -66,6 +68,8 @@ public:
         std::list<std::list<std::string> > aggregation;
         std::list<std::list<std::string> > composition;
         std::list<std::string> stereotypes;
+        std::list<std::string> templates;
+        std::list<std::string> configurations;
         std::string type;
         std::string value;
         std::list<std::string> parent;
