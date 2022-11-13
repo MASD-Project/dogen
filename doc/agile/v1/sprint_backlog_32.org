@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-13 Sun 14:13]
+#+CAPTION: Clock summary at [2022-11-13 Sun 20:37]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *66:37* |       |       | 100.0 |
+| *Total time*                                              | *66:53* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 66:37   |       |       | 100.0 |
-| Active                                                    |         | 66:37 |       | 100.0 |
+| Stories                                                   | 66:53   |       |       | 100.0 |
+| Active                                                    |         | 66:53 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       | 10:13 |  15.3 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.2 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.1 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
 | Sprint and product backlog grooming                       |         |       |  4:33 |   6.8 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.7 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   5.0 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   3.3 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.4 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   4.9 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   3.2 |
+| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.3 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.3 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   2.8 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   2.7 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.1 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.6 |
-| Create a mock configuration builder                       |         |       |  1:58 |   3.0 |
+| Create a mock configuration builder                       |         |       |  1:58 |   2.9 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.5 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.7 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.3 |
@@ -46,10 +46,10 @@
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
 | Warning on OSX build                                      |         |       |  2:23 |   3.6 |
-| Use clang format to format the code base                  |         |       |  0:58 |   1.5 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  26.0 |
+| Use clang format to format the code base                  |         |       |  0:58 |   1.4 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  25.9 |
 | Create a nightly github workflow                          |         |       |  5:21 |   8.0 |
-| Configuration as stereotype causes noise                  |         |       |  0:21 |   0.5 |
+| Configuration as stereotype causes noise                  |         |       |  0:37 |   0.9 |
 #+end:
 
 Agenda:
@@ -1597,6 +1597,7 @@ Links:
 
 *** STARTED Configuration as stereotype causes noise                  :story:
     :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 20:21]--[2022-11-13 Sun 20:37] =>  0:16
     CLOCK: [2022-11-13 Sun 10:02]--[2022-11-13 Sun 10:23] =>  0:21
     :END:
 
@@ -1625,6 +1626,9 @@ Notes:
 - we could express the type of an enumeration, if supplied.
 - we could express the type of a primitive, if supplied.
 - meta information could appear in a group called "meta-information".
+- consider using =struct= or =entity= for =masd::object= and =annotation= for
+  =masd::object_template=.
+- if class is abstract, use =abstract=.
 
 *** Create a GitHub account for MASD BOT                              :story:
 
