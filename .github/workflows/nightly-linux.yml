@@ -73,6 +73,7 @@ jobs:
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
       - name: Gitter
+        if: always()
         uses: juztcode/gitter-github-action@v2
         with:
           room-id: ${{secrets.GITTER_ROOM_ID}}

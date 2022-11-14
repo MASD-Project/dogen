@@ -65,6 +65,7 @@ jobs:
           path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/DOGEN-1.0.32-Darwin-x86_64.dmg
 
       - name: Gitter
+        if: always()
         uses: juztcode/gitter-github-action@v2
         with:
           room-id: ${{secrets.GITTER_ROOM_ID}}

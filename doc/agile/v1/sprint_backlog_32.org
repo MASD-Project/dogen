@@ -1180,6 +1180,7 @@ generation and one for building that branch.
 
 *** COMPLETED Gitter notifications for builds are not showing up      :story:
     :LOGBOOK:
+    CLOCK: [2022-11-14 Mon 08:40]--[2022-11-14 Mon 08:51] =>  0:11
     CLOCK: [2022-11-13 Sun 14:02]--[2022-11-13 Sun 14:09] =>  0:07
     CLOCK: [2022-11-13 Sun 09:49]--[2022-11-13 Sun 09:56] =>  0:07
     CLOCK: [2022-11-13 Sun 09:25]--[2022-11-13 Sun 09:29] =>  0:04
@@ -1222,6 +1223,8 @@ Links:
 - [[https://developer.gitter.im/docs/authentication][GitHub Developer - Authentication]]
 - [[https://developer.gitter.im/docs/rest-api][REST API]]
 - [[https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment][GH: Using an environment]]
+- [[https://stackoverflow.com/questions/58858429/how-to-run-a-github-actions-step-even-if-the-previous-step-fails-while-still-f][How to run a github-actions step, even if the previous step fails, while still
+  failing the job]]
 
 *** STARTED Ignore vcpkg path length warning                          :story:
     :LOGBOOK:

@@ -65,6 +65,7 @@ jobs:
           git push origin nightly
 
       - name: Gitter
+        if: always()
         uses: juztcode/gitter-github-action@v2
         with:
           room-id: ${{secrets.GITTER_ROOM_ID}}

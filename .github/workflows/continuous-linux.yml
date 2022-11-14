@@ -84,6 +84,7 @@ jobs:
           path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/dogen_1.0.32_amd64-applications.deb
 
       - name: Gitter
+        if: always()
         uses: juztcode/gitter-github-action@v2
         with:
           room-id: ${{secrets.GITTER_ROOM_ID}}
