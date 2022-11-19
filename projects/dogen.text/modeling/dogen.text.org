@@ -42,34 +42,6 @@ UML representation:
   :masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
   :END:
 
-* cpp artefact transform implementation                             :element:
-  :PROPERTIES:
-  :custom_id: 69B1F93C-7797-4824-0F5B-C27E74F0AC5F
-  :masd.codec.stereotypes: masd::templating::logic_less_templates
-  :END:
-
-** content                                                        :attribute:
-
-#+begin_src mustache
-namespace {
-
-const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
-
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
-    static auto r({{archetype.simple_name}}_factory::make());
-    return r;
-}
-
-const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
-    return static_archetype();
-}
-#+end_src
-
 * initializer                                                       :element:
   :PROPERTIES:
   :custom_id: 86D0154D-1617-1904-67FB-66E56D675115
@@ -152,6 +124,34 @@ bool {{class.simple_name}}::is_enabled(
     const physical::entities::artefact& /*a*/,
     const logical::entities::helper_properties& /*hp*/) const {
     return true;
+}
+#+end_src
+
+* cpp artefact transform implementation                             :element:
+  :PROPERTIES:
+  :custom_id: 69B1F93C-7797-4824-0F5B-C27E74F0AC5F
+  :masd.codec.stereotypes: masd::templating::logic_less_templates
+  :END:
+
+** content                                                        :attribute:
+
+#+begin_src mustache
+namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{archetype.simple_name}}_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::static_archetype() {
+    static auto r({{archetype.simple_name}}_factory::make());
+    return r;
+}
+
+const physical::entities::archetype& {{archetype.simple_name}}_transform::archetype() const {
+    return static_archetype();
 }
 #+end_src
 

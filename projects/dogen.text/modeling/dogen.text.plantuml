@@ -17,10 +17,6 @@ class main <<masd::entry_point, dogen::untypable>> #DDA9F3 {
 class CMakeLists <<masd::build::cmakelists, dogen::handcrafted::cmake>> #99CB99 {
 }
 
-class cpp_artefact_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
-    +{field} content
-}
-
 class initializer <<dogen::handcrafted::typeable>> #FFFACD {
 }
 
@@ -29,6 +25,10 @@ class csharp_transform_implementation <<masd::templating::logic_less_templates>>
 }
 
 class csharp_helper_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
+    +{field} content
+}
+
+class cpp_artefact_transform_implementation <<masd::templating::logic_less_templates>> #FFC072 {
     +{field} content
 }
 
