@@ -767,23 +767,6 @@ then extract those and map them to the codec ID. We should also make
 the codec ID mandatory and use a map for the codec elements. The
 orchestration model is responsible for stitching the information.
 
-*** org-model and links to references                                 :story:
-
-At present we are adding links as part of the drawers in
-org-models. However, this is not ideal. We want to use regular
-org-mode constructs. There are several use cases for links:
-
-- we want org-mode links so that we can make use of tools such as
-  org-roam.
-- we need to use the links for dogen to resolve the model. Both of
-  these use cases happen whilst the code is in its normal shape in the
-  git repository.
-- when we generate doxygen documentation we need links that can work
-  when the site has been published. At this point the models have all
-  been copied to a different location by doxygen.
-
-We need to find out a way to make links work for all of these use cases.
-
 *** PlantUML and hyperlinks                                           :story:
 
 Apparently it is possible to embed HTTP links in SVG diagrams. This
@@ -1784,15 +1767,6 @@ Notes:
 - is the project file not a model projection?
 - look for a similar story on this.
 
-*** Add references as links to org documents                          :story:
-
-Try adding a =references= tag. Content is a list of links to org
-models. However, because of the way our referencing works in dogen, we
-need to do some kind of hack. Perhaps the "text" of the link could be
-the simple path to the file and the link the relative path. To start
-off with, it can be ignored and managed manually. This will be spun
-into its own story for the future.
-
 *** Empty model generation produces no diffs                          :story:
 
 At present if we do not generate any files at all, the diffing system
@@ -1809,19 +1783,6 @@ have nothing to diff. Logs:
 
 We need to look at the actual files and report all of those that
 exist but have not match in the generated files collection.
-
-*** Generated CMakefiles do not take tests into account               :story:
-
-At present most models have:
-
-: masd::build::cmakelists, dogen::handcrafted::cmake
-
-One of the reasons is because the template is not taking generated
-tests into account. It should have:
-
-: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-: endif()
 
 *** Consider creating a "combined" template                           :story:
 
@@ -2540,36 +2501,35 @@ region of physical space.
   refer to a model that has more than one backend for now from a model
   that only has a backend.
 
-*** Improve support for references                                    :story:
+*** Improve support for references and variability                    :story:
 
 At present we have limited support for references in the presence of
-variability. This is because once we start changing configuration
-points such as the backend directory, facet directories etc, in a
-model which is referenced from another model then the path resolution
-will start to fail. This is because we expect all models to have the
-same configuration for all configuration elements that affect file
-paths. Since they do at present we never noticed this problem.
+variability. This is because once we start changing configuration points such as
+the backend directory, facet directories etc, in a model which is referenced
+from another model then the path resolution will start to fail. This is because
+we expect all models to have the same configuration for all configuration
+elements that affect file paths. Since they do at present we never noticed this
+problem.
 
-The correct solution is to introduce reference models and reference
-elements. These just need to have a small number of properties:
+The correct solution is to introduce reference models and reference elements.
+These just need to have a small number of properties:
 
 - configuration of root module;
 - model and element logical name, as well as meta-element name.
 
-With this we could also stop creating elements for referenced models
-which would probably result on a major reduction of processing
-time. Then we have two ways of introducing these models:
+With this we could also stop creating elements for referenced models which would
+probably result on a major reduction of processing time. Then we have two ways
+of introducing these models:
 
-1. "the best way": do not fully parse reference models at all, just
-   extract the reference properties. This will require a lot of
-   changes on the pipeline.
-2. "the quick hack": for all references, load the codec model into the
-   logical model and then convert it into a reference model. We do a
-   lot of unnecessary processing but it should be easier.
+1. "the best way": do not fully parse reference models at all, just extract the
+   reference properties. This will require a lot of changes on the pipeline.
+2. "the quick hack": for all references, load the codec model into the logical
+   model and then convert it into a reference model. We do a lot of unnecessary
+   processing but it should be easier.
 
-We could even start by taking approach 2 and then eventually move to
-approach 1. Either way we need to do this once we move to the new
-world of dependency generation.
+We could even start by taking approach 2 and then eventually move to approach 1.
+Either way we need to do this once we move to the new world of dependency
+generation.
 
 *** Replace =facet_default= with labels                               :story:
 
@@ -3372,63 +3332,56 @@ UML and see which one is more appropriate for MASD.
 *** Private and public includes                                       :story:
 
 #+begin_quote
-*Story*: As a dogen user, I want to hide some internal types from
-users so that I don't increase coupling for no reason.
+*Story*: As a dogen user, I want to hide some internal types from users so that
+I don't increase coupling for no reason.
 #+end_quote
 
-NOTE: We should use the terms =internal= and =external= to avoid
-confusion with C++ scopes. This follows Microsoft terminology for C#
-assemblies.
+NOTE: We should use the terms =internal= and =external= to avoid confusion with
+C++ scopes. This follows Microsoft terminology for C# assemblies.
 
-At present we are making all headers in a model public. However, for
-models such as cpp this doesn't make any sense since only one type
-should be available to the outside world. What we really need is a
-separation between public and private headers, a functionality similar
-to =internal= in C#. In conjunction with using shared objects, this
-should improve build times.
+At present we are making all headers in a model public. However, for models such
+as cpp this doesn't make any sense since only one type should be available to
+the outside world. What we really need is a separation between public and
+private headers, a functionality similar to =internal= in C#. In conjunction
+with using shared objects, this should improve build times.
 
 In order to do this:
 
 - add a new config parameter: default visibility to private or default
-  visibility to public. This is just so we don't have to mark all
-  types manually - instead we just need to mark the exceptions.
+  visibility to public. This is just so we don't have to mark all types
+  manually - instead we just need to mark the exceptions.
 - add two new stereotypes: =public= and =private=.
-- add enum to sml: =visibility_type= (check with .Net for
-  names). Valid values are =public=, =private=. Objects, enumerations,
-  etc will have this enum.
-- locator will now respect this value when producing an absolute file
-  path. If public files go under =include/public=, if private files go
-  under =include/private=.
-- CMakelists for the component will add to the include path the
-  private directory. Same for the spec CMakelists. Need to check that
-  this not add to the global include path.
-- CMakelists for the include files will only package the public
-  headers.
-- mark all the types accordingly in all our models. fix all the
-  ensuing breakage. we will probably need to move forward on the IoC
-  front in order for this to work as we don't want to expose
-  implementations - e.g. =workflow_interface= will be public but
-  =workflow= will be private; this means we need some kind of factory
-  to generate =workflow_interface=.
+- add enum to sml: =visibility_type= (check with .Net for names). Valid values
+  are =public=, =private=. Objects, enumerations, etc will have this enum.
+- locator will now respect this value when producing an absolute file path. If
+  public files go under =include/public=, if private files go under
+  =include/private=.
+- CMakelists for the component will add to the include path the private
+  directory. Same for the spec CMakelists. Need to check that this not add to
+  the global include path.
+- CMakelists for the include files will only package the public headers.
+- mark all the types accordingly in all our models. fix all the ensuing
+  breakage. we will probably need to move forward on the IoC front in order for
+  this to work as we don't want to expose implementations - e.g.
+  =workflow_interface= will be public but =workflow= will be private; this means
+  we need some kind of factory to generate =workflow_interface=.
 
 More thoughts on this:
 
-- we don't really need to have different directories for this; we
-  could just put all the include files in the same directory. At
-  packaging time, we should only package the public files (this would
-  have to be done using CPack).
-- also the GCC/MSVC visibility pragmas should take into account these
-  options and only export public types.
-- the slight problem with this is that we need some tests to ensure
-  the packages we create are actually exporting all public types; we
-  could easily have a public type that depends on a private type
-  etc. We should also validate yarn to ensure this does not
-  happen. This can be done by ensuring that a type marked as external
-  only depends on types also marked as external and so forth.
-- this could also just be a packaging artefact - we would only package
-  public headers. Layout of source code would remain the same.
-- when module support is available, we could use this to determine
-  what is exported on the module interfaces.
+- we don't really need to have different directories for this; we could just put
+  all the include files in the same directory. At packaging time, we should only
+  package the public files (this would have to be done using CPack).
+- also the GCC/MSVC visibility pragmas should take into account these options
+  and only export public types.
+- the slight problem with this is that we need some tests to ensure the packages
+  we create are actually exporting all public types; we could easily have a
+  public type that depends on a private type etc. We should also validate yarn
+  to ensure this does not happen. This can be done by ensuring that a type
+  marked as external only depends on types also marked as external and so forth.
+- this could also just be a packaging artefact - we would only package public
+  headers. Layout of source code would remain the same.
+- when module support is available, we could use this to determine what is
+  exported on the module interfaces.
 
 *** Associate includes with model elements                            :story:
 
@@ -3806,12 +3759,11 @@ This will not throw.
 
 *** Consider adding valgrind suppressions to PDMs                     :story:
 
-We have a number of suppressions that are coming from boost log. Its a
-bit painful to have to add the same suppressions to all products. It
-would be nice if we could supply the suppressions as part of the
-utility PDM and then have all products that depend on utility
-automatically include it. Valgrind supports multiple suppression
-files:
+We have a number of suppressions that are coming from boost log. Its a bit
+painful to have to add the same suppressions to all products. It would be nice
+if we could supply the suppressions as part of the utility PDM and then have all
+products that depend on utility automatically include it. Valgrind supports
+multiple suppression files:
 
 : --suppressions=/path/to/file.supp one or more times.
 
@@ -4655,137 +4607,6 @@ to multiple facets. For now we just hacked it and used one of the
 facets. It means that if you disable CMake but enable testing you'll
 still end up with the testing CMake file.
 
-*** Model "types" and element binding                                 :story:
-
-It seems clear that we will have different "types" of models:
-
-- product models, describing entire products.
-- component models, which at present we call "models". These describe
-  a given component type such as a library or an executable. Thus,
-  they themselves have sub-types.
-- profile models: useful to keep the configuration separate. However,
-  it may make more sense to place them in the product model, since its
-  shared across components?
-- PDMs: these describe platforms.
-- generative models: generate extensions to code generators.
-
-At present there is no concept of model types, so any meta-model
-element can be placed in any model. This is convenient, but in the
-future it may make things too complicated: users may end up placing
-types in PDMs when they didn't meant to do so, etc. What seems to
-emerge from here is that, just as with variability, there is a concept
-of a binding point at the model level too. That is, meta-model
-elements are associated with specific model types (binding element?).
-
-In an ideal world, we should have a class in the meta-model that
-represents each model type. We then instantiate this class within one
-of the dogen models to register the different model types. Its
-code-generation representation is the registration. It also binds to
-all the meta-model elements it binds to. This can be done simply by
-creating a feature that lists the stereotypes of the elements
-(remember that these are then registered too, because we will generate
-the meta-class information as we generate the assets model). Then, we
-can ask the model type if a given element is valid (check a set of
-stereotypes).
-
-Formatters are themselves meta-model elements, and they bind to other
-meta-model elements (which raises the question: which meta-model
-elements are bindable? we can't allow a formatter to bind to a
-formatter...). Perhaps we need another type of model, which is a
-"generation model". This is where we can either declare new technical
-spaces or add to existing technical spaces; and declare new facets and
-formatters. We should be able to add to existing facets and TSs by
-allowing users to specify the TS/facet when declaring the
-formatter. If not specified, then the user must declare a facet in the
-package containing the formatter. Similarly with TSs.
-
-Note also that the formatter binding code is "inserted" directly
-during generation into the CPP file. Its not possible to change
-it. Same with the includes. This ensures the user cannot bypass the
-model type system by mistake. Also, by having a formatter meta-model
-type, we can now declare the header file as we please, and ensure the
-shape of the implementation. Now, the stitch template can be
-restricted to only the formatting function itself; the rest is
-code-generated. We no longer need wale templates. This will of course
-require the move to PDMs and the removal of the helper code. This also
-means that anyone can declare new meta-model elements; they will
-register themselves, and correctly expand across archetype
-space. However, we do not have the adaption code nor do we have
-containers for these modeling elements. We need a separate story for
-this use case.
-
-Destinations are meta-model elements too. In the generation.cpp model
-we will declare all the available destinations:
-
-- global
-- src
-- include
-- tests
-
-etc. The formaters bind into destinations. Formatters belong to facets
-in the archetype space, which express themselves as directories in the
-artefact path when we project from archetype space into artefact
-space. More generally: assets in asset space are projected into the
-multidimensional archetype space. Archetypes are projected into
-artefact space, but the dimensions of archetype space are flattened
-into the hierarchy of the filesystem.
-
-We also need a concept of artefact types. These mainly are needed for
-file extensions, but conceivably could also be used for other
-purposes.
-
-Notes:
-
-- the binding should be done at the streotype level, not model
-  element.
-
-Merged stories:
-
-*Model types and element binding*
-
-Once we introduce the concept of model types (e.g. product, component,
-possibly different types of components), we should also take into
-account that some model types don't support some model elements. It
-should be possible to declare which model types support which element
-types such that if a user tries to use an invalid model type, we get a
-sensible error. In effect, this is a binding problem at the meta-model
-level.
-
-One of the component model types should be "generative
-components". These are used to augment the code generator. We need to
-look at the thesis on generative development to look for terminology.
-
-We should also have model types for terraform, etc.
-
-One way to implement this is to add a feature at the element (once we
-have a way of expressing dogen meta-elements) that lists the supported
-model types for a given element.
-
-*logical models could have a model classification*
-
-Consider creating an enumeration for model classification (e.g. type
-of the model):
-
-- relational model
-- core domain model
-- generic sub-domain model
-- segregated core model
-
-This still requires a lot of analysis work. This is kind of a model
-level stereotype which can be used by the code generator for example
-to determine which models are compatible. It could also be used to
-determine what facets can be enabled/disabled.
-
-*Merged with modes of operation story:*
-
-Create "modes" of operation: relational, object-oriented and
-procedural. they limit the types available in yarn. relational only
-allows built-ins plus relational commands (FK and PK; FK is when
-using a model type, PK is a marker on a property). procedural only
-allows built-ins plus model types. we will need pointer support for
-this. object oriented is the current mode. the modes are validated in
-the middle end.
-
 *** Project layout analysis                                           :story:
 
 We should probably look at the layout of a few projects and see if our
@@ -5123,44 +4944,23 @@ Use cases:
 - meta-model names.
 - formatter names.
 
-*** Add additional reference directories                              :story:
-     CLOSED: [2020-04-07 Tue 08:51]
+*** Consider renaming =reference-directory=                           :story:
 
- At present we expect the reference models to be either on the data
- directory (for system models) or on the same directory as the
- target. Presumably, users may also want to have models on other
- directories. For example, if one were to extend Dogen with a different
- project, it would be required to load models from the dogen
- directory.
+At present we are adding references using
 
- We could simply add a command line argument for reference directories;
- if the reference is not found in the target model directory, we would
- then try all available reference directories.
+: --reference-directory
 
- We should implement this as a =-I= parameter akin to compilers. We
- should also have a command to output the current include path - check
- GCC to see what command they use for this.
+Since compilers use =-I= and other standard options, we should probably try to
+follow these, /e.g./:
 
- This will be a requirement in order to support PDMs because we shall
- have many directories with models. We will need the concept of "system
- include directories" for this. We need to look into how compilers do
- this. We must also dump these in dumpspecs.
+: -I dir
+: -iquote dir
+: -isystem dir
+: -idirafter dir
 
- Merged Stories:
+Links:
 
- *Add additional data files directories*
-
- #+begin_quote
- *Story*: As a dogen user, I want dogen to use my own private data
- libraries so that I don't have to supply them as diagrams.
- #+end_quote
-
- Users should be able to provide directories for their own JSON
- models. We just need to add a new parameter to the knitter and
- transport it all the way to OM's workflow.
-
- In the future, when everything is a model, data file directories and
- reference directories will become one and the same.
+- [[https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html][GCC: Options for Directory Search]]
 
 *** Add version support                                               :story:
 
@@ -5722,18 +5522,17 @@ populate the opaque properties.
 
 *** Consider creating a "variant" meta-model type                     :story:
 
-Variants are a pain in the backside to define because they result in
-really large elements. It would be much nicer to have a meta-model
-element that encapsulates the definition of the variant, where each
-attribute is a valid value of the variant (say
-=masd::structural::variant=). We could then take one of several
-approaches:
+Variants are a pain in the backside to define because they result in really
+large elements. It would be much nicer to have a meta-model element that
+encapsulates the definition of the variant, where each attribute is a valid
+value of the variant (say =masd::structural::variant=). We could then take one
+of several approaches:
 
-- generate a "typedef" for the variant as a file. This is the easiest
-  way to fit in the existing framework. It could even include support
-  for serialisation, etc.
-- "convert" the variant into a name tree and replace the existing
-  mentions with it. This is not as nice.
+- generate a "typedef" for the variant as a file. This is the easiest way to fit
+  in the existing framework. It could even include support for serialisation,
+  etc.
+- "convert" the variant into a name tree and replace the existing mentions with
+  it. This is not as nice.
 
 Notes:
 
@@ -5994,139 +5793,6 @@ references. However, if model A (the target) is using types of say
 model C, it should reference it directly rather than via B. If B
 changes, A will break. It would be nice to have a warning for these
 types of referencing.
-
-*** Mapping of third-party dependencies (PDMs)                        :story:
-
-System models should follow the physical structure of
-dependencies. That is, we should not have a "boost" system model, but
-instead a boost-test etc. Each of these can then have mappings
-(e.g. vcpkg name, build2 name, etc). Users must declare these
-references just like they do with user models. Dogen can then create
-code for:
-
-- cmake targets, properly linking against libraries;
-- vcpkg install, at product level, by de-duplicating component
-  dependencies;
-- possibly distro dependencies.
-
-We should only have a mandatory dependency, which is the STL. In
-addition, we need different models for each version (e.g. c++ 03,
-etc). This makes it easier to include the right types.
-
-Note that each model must have an associated version. The version
-should be part of the file name. However, maybe we need to distinguish
-between TS version (11, 17, etc) from library version.
-
-One way of solving this regularity problem (e.g. having
-masd::std::string is the real name but its annoying to have to have
-users typing this) is to support "using" statements at the model
-level. If a user could type something like =using masd= and this would
-allow us to find all types as if we had typed =masd::= then users
-could still type =std::string= and find =masd::std::string=. We'd
-solve both the regularity and the "look and feel". The downside is
-that this could have important ramifications in resolution:
-
-- how does this work in the presence of merged models? do we merge
-  usings? will this find types we're not supposed to find?
-
-Needs some more thinking.
-
-Notes:
-
-- utility model must be split into multiple models: the PDMs should go
-  with their own models. The real utilities should stay on a utility
-  product. This can then be reused by dogen (for example, if logging
-  is enabled it uses the logging setup from this model). Users should
-  be able to switch it off though.
-
-Merged stories:
-
-*Platform description models*
-
-We should consider integrating all of the information regarding
-"platforms" into platform description models (PDMs). These include:
-
-- all types available in a library (proxy models) and their mapping in
-  terms of aspects. We could make the mapping a bit clearer by
-  designing platform description models that are not part of
-  modeling. We don't really need support for attributes, operations
-  etc. However, we need some kind of "adaptor" that extracts all the
-  type information (or some other way of making resolution work across
-  different model types).
-- name of the library, supported language (e.g. for Boost, C++ etc),
-  versions of the library. We must associate the types with a version
-  (e.g. introduced on version X, deprecated on version Y) so that when
-  the user is using a given version it errors if a type is not
-  available.
-- packaging support: mapping to the name used on most common packaging
-  systems such as DEB, RPM etc. Also, mapping on language specific
-  package managers such as build2, vcpkg, conan, nuget, etc. User can
-  decide what package manager to use overall or for a specific library
-  (e.g. possible to mix-and-match package manager). It should also
-  have a mapping for CMake support that includes "in CMake library
-  from version X" and "available on an external source" with a URL. If
-  the user selects the latter, Dogen can download the CMake file (or
-  maybe Dogen should include the external CMake files to guarantee a
-  stable behaviour).
-
-Notes:
-
-- with this we can now move away from the bad modeling used with proxy
-  models, where it was not quite clear what they were. We can create
-  a different file format (e.g. *.pdm* )that can share some
-  similarities with existing JSON models but is not stuck with all the
-  baggage needed to represent user models.
-- however, PDMs are just regular models. Users should be able to make
-  use of the PDM stereotypes to define PDM types in a regular UML
-  model. Interestingly, a PDM from this perspective is similar to a
-  named configuration. The difference is that it introduces a new type
-  into the type system rather than a new stereotype. But with this we
-  can now make use of named configurations, making PDMs a lot less
-  verbose (e.g. define a named config and share it across multiple
-  types, like SmartPointer etc). We could even share it across
-  multiple platform models!
-- PDMs should be organised by language (e.g. folder for cpp, etc). Top
-  level directory is PDM rather than library.
-- users declare references to PDMs just like normal models. PDMs have
-  an attribute for "auto-loading". If on, we load regardless. Else it
-  must be referenced. This is useful for say STL, hardware types.
-- users can supply their own PDMs, although they are encouraged to
-  submit them if they are general enough.
-- if users choose CMake as the build system, we automatically add all
-  the boilerplate required to add the library to CMake. In an ideal
-  world, the PDM should contain the CMake snippets, with "macros"
-  where required (e.g. version, etc). This would mean we wouldn't have
-  to change templates when new libraries are added. We could also have
-  a "standard" CMake snippet that works for most libraries.
-- different libraries may have different types of support (e.g. a
-  library may not exist in a package manager, etc)
-- we could now create an installation script that sets up all
-  dependencies (e.g. DEB/RPM). It cannot be a target because the build
-  would fail (e.g. CMake would not find all dependencies).
-- now that =library= can be renamed to =pdm=, we could call the
-  top-level directory =library=.
-
-*Adding linking libraries is not handled*
-
-#+begin_quote
-*Story*: As a dogen user, I want to link against libraries without
-having to manually generate CMakeFiles.
-#+end_quote
-
-At present whenever a model requires additional link library targets
-we need to disable CMake generation and do it by hand. However:
-
-- for well-known dependencies such as boost we could create a
-  convention (e.g. assume/require that the CMake boost libraries flags
-  are set via find boost). Alternatively, the types should contain
-  meta-data that has information about linking requirements; e.g. if
-  you use a type from a boost model, it should provide you with
-  linking information in its meta-data. Each boost type could have
-  different information depending on which boost library they come
-  from.
-- for user level dependencies we should add dynamic extensions at the
-  model level. Also, references provide sufficient information to link
-  against other dogen models.
 
 *** Add support for object templates that work cross-model            :story:
 
@@ -8793,34 +8459,6 @@ At present we can force a class not to be final:
 However, this still does not create the methods for a parent such as
 virtual destructor, equals etc. We need something to trigger those
 methods as well.
-
-*** =CMakeFiles= do not reference dogen models                        :story:
-
-At present we cannot test cross-model referencing because our
-CMakeFiles are not adding the linking references to these models. This
-needs to be fixed before we can test cross model serialisation.
-
-Notes:
-
-- in order to map references to models, we need to create a modeling
-  element for a reference. For this we have two cases: for proxy
-  models/PDMs, we need to read from the meta-data the name of the lib
-  the model generates. For dogen models we can create it from the
-  model name.
-- this is a variation of the "exports and imports" pattern: we import
-  a set of libraries (these can either be macros or actual library
-  names) and we export (for now) a single library. When we support
-  facets in libraries, we may need to export more than one, so we
-  should cope with this scenario now. We need to keep track of the
-  exports for a reference, and then use those as the imports for the
-  model.
-- in an ideal world, all imports come via this mechanism. However,
-  this means we now have to create PDMs/proxies just to setup the
-  imports. For example, for LibXML we will not need to define any of
-  the types, but we need the import. However, If we do force the
-  definition of the PDM, the advantage is that we now have the right
-  place to put the definition, and is done only once and shared by all
-  models.
 
 *** Cannot create classes with pointers to base                       :story:
 
@@ -15372,123 +15010,134 @@ Some other tidbits:
 
 *** Create a PDM for the utility model                                :story:
 
-We need to create a PDM for the utility model that only includes
-utilities. To call it PDM may not be strictly correct as it is not
-doing any mapping. Perhaps it is just a simple, stand-alone
-product. We need to remove any "helper" code for other models - it
-should be placed on the corresponding PDM (e.g. =boot=, =std=, etc).
+We need to create a PDM for the utility model that only includes utilities. To
+call it PDM may not be strictly correct as it is not doing any mapping. Perhaps
+it is just a simple, stand-alone product. We need to remove any "helper" code
+for other models - it should be placed on the corresponding PDM (e.g. =boost=,
+=std=, etc).
+
+Actually the correct thing to do is to add helper types (e.g. adapters) to the
+PDM's themselves. Depending on how much helper code we need, this could be just
+a simple template which is instantiated or full-blown CPP/HPP files. For the
+latter case, the PDM will require its own git project, etc. That is, the PDM
+becomes more like a product. The only slight problem is, if its a template,
+where will it be instantiated? Perhaps the PDM should always be a product, in
+which case we need to wait until Dogen has proper product support so we can
+easily create new products. A PDM just happens to be a light-weight product
+whose job is to adapt a non-dogen product. In this scenario, boost would be the
+product, and we'd have a number of components. The component may or may not have
+any code associated with it. Ideally the components have vcpkg support so that
+we can vcpkg install the component and that then pulls in the adapted code. This
+can be done via registries:
+
+- [[https://devblogs.microsoft.com/cppblog/registries-bring-your-own-libraries-to-vcpkg/][Registries: Bring your own libraries to vcpkg]]
+- [[https://devblogs.microsoft.com/cppblog/how-to-start-using-registries-with-vcpkg/][How to start using registries with vcpkg]]
+- [[https://github.com/northwindtraders/vcpkg-registry][northwindtraders registry]]: "This is the vcpkg registry for North Wind Traders,
+  a made-up example company for a blog post about vcpkg's new registries
+  feature."
 
 *Previous Understanding*
 
-We need to create a library with support code that is used by the
-models. At present it is needed for =io= and =test_data=. However, we
-ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of difficulties]] when we tried to implement it for =io=
-using templates.
+We need to create a library with support code that is used by the models. At
+present it is needed for =io= and =test_data=. However, we ran into [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_67.org#update-legacy-formatters-to-use-needle-for-io][a lot of
+difficulties]] when we tried to implement it for =io= using templates.
 
 For the previous attempt to create the needle library see this commit:
 
 feb4750 * integration needle: remove project and includes
 
-We have analysed this idea from many angles. The key trade-offs we
-have are as follows:
+We have analysed this idea from many angles. The key trade-offs we have are as
+follows:
 
-- original idea was to create models with zero dependencies; users
-  should be able to code generate and compile. This would make the
-  barrier to entry very low.
+- original idea was to create models with zero dependencies; users should be
+  able to code generate and compile. This would make the barrier to entry very
+  low.
 - however, there are downsides to this approach:
-  - utility is needed on pretty much every product (logging, IO,
-    etc). This means we still need some kind of hack to get things to
-    work. The present solution was to somehow code generate utility
-    itself. Whilst this could work, it is non-trivial because we now
-    have "moving references" to utility types. This means a) we cannot
-    add logging to tests because of it b) in order to solve this
-    problem, we will have to add a lot of complexity to dogen.
-  - helpers: we need to generate helpers for types that are sourced
-    from PDMs. This means that every time you add a new type to Dogen
-    which is not directly supported, you need to extend the code
-    generator. It is very hard to add new types this way. In addition,
-    the logic for assistants (families, etc) is very complex and
-    complicates the code base quite a lot. In addition, there is a lot
-    of duplication because we generate code specific to each use of a
-    container in a model; if you have a list of strings and a list of
-    ints in two types you end up with two helper methods per type. In
-    reality this could all be compressed to one helper method across
-    the two types.
-  - the problem is only going to get worse going forward as we add
-    more functionality that needs this kind of support. For example,
-    data fountains would require lots of helpers per type.
+  - utility is needed on pretty much every product (logging, IO, etc). This
+    means we still need some kind of hack to get things to work. The present
+    solution was to somehow code generate utility itself. Whilst this could
+    work, it is non-trivial because we now have "moving references" to utility
+    types. This means a) we cannot add logging to tests because of it b) in
+    order to solve this problem, we will have to add a lot of complexity to
+    dogen.
+  - helpers: we need to generate helpers for types that are sourced from PDMs.
+    This means that every time you add a new type to Dogen which is not directly
+    supported, you need to extend the code generator. It is very hard to add new
+    types this way. In addition, the logic for assistants (families, etc) is
+    very complex and complicates the code base quite a lot. In addition, there
+    is a lot of duplication because we generate code specific to each use of a
+    container in a model; if you have a list of strings and a list of ints in
+    two types you end up with two helper methods per type. In reality this could
+    all be compressed to one helper method across the two types.
+  - the problem is only going to get worse going forward as we add more
+    functionality that needs this kind of support. For example, data fountains
+    would require lots of helpers per type.
 
-In summary, it seems that the engineering trade-offs are clearly
-tipping towards having a shared model for this functionality. This
-being the case we could look at it as a product: =masd::core=. We
-could then add types for the PDMs in a sensible way: in types we'd
-create namespaces for each model, e.g. =std=, =boost=, etc. We'd then
-disable types facet for these types and set all other (required)
-facets to override. For example:
+In summary, it seems that the engineering trade-offs are clearly tipping towards
+having a shared model for this functionality. This being the case we could look
+at it as a product: =masd::core=. We could then add types for the PDMs in a
+sensible way: in types we'd create namespaces for each model, e.g. =std=,
+=boost=, etc. We'd then disable types facet for these types and set all other
+(required) facets to override. For example:
 
 - =masd/core/io/std/list_io.hpp=: std::list IO support.
 - =masd/core/test_data/std/list_td.hpp=: std::list test data support.
 
-And so forth. It would still be a peculiar product in that we'd only
-have a single dogen model. In addition, it is a "strange" model in
-that users are not expected to reference it; if you did, you'd end up
-being able to create a type like =masd::core::std::list=, which is
-just a mapping type. Perhaps we should have a way of identifying these
-types as "mapping only types"? This is important because we may want
-to reference other types.
+And so forth. It would still be a peculiar product in that we'd only have a
+single dogen model. In addition, it is a "strange" model in that users are not
+expected to reference it; if you did, you'd end up being able to create a type
+like =masd::core::std::list=, which is just a mapping type. Perhaps we should
+have a way of identifying these types as "mapping only types"? This is important
+because we may want to reference other types.
 
-The core model would also contain the data fountains. It seems like
-=core= is a product, made up of models:
+The core model would also contain the data fountains. It seems like =core= is a
+product, made up of models:
 
-- PDM extensions: IO, test data, serialisation, hash. Name: ext,
-  extensions, etc.
+- PDM extensions: IO, test data, serialisation, hash. Name: ext, extensions,
+  etc.
 - fountain: all data fountains.
 - utility: logging, file, string, XML, environment, testing.
 
-This would also mean that we can now have "model types" such as PDM
-extensions, which are not "referrable" - e.g. we can throw if the user
-attempts to reference it. Or, better yet, why have two PDM models?
-Applying this approach naively would mean we'd need the =std= model to
-define the types, and then the core model to provide the mappings. But
-why have two models? Why not define a model in the namespace of the
-original model? For example, if we had a =std= model defined in core
-(and violating the principles around product and model naming), we
-could place all the =std= types in it, set types to disabled and other
-facets to enabled as required (e.g. IO). Then it would generate say
-=std/io/list_io.hpp=. We would still keep all of the dependency
-machinery we have at present so that we can point to say =<list>=
-instead of =std/types/list.hpp=. We may also need some kind of hackery
-around enablement because we do not want to generate a types file but
-we do want users to be able to reference the overriden type. This
-approach is *very* regular:
+This would also mean that we can now have "model types" such as PDM extensions,
+which are not "referrable" - e.g. we can throw if the user attempts to reference
+it. Or, better yet, why have two PDM models? Applying this approach naively
+would mean we'd need the =std= model to define the types, and then the core
+model to provide the mappings. But why have two models? Why not define a model
+in the namespace of the original model? For example, if we had a =std= model
+defined in core (and violating the principles around product and model naming),
+we could place all the =std= types in it, set types to disabled and other facets
+to enabled as required (e.g. IO). Then it would generate say
+=std/io/list_io.hpp=. We would still keep all of the dependency machinery we
+have at present so that we can point to say =<list>= instead of
+=std/types/list.hpp=. We may also need some kind of hackery around enablement
+because we do not want to generate a types file but we do want users to be able
+to reference the overriden type. This approach is *very* regular:
 
-- PDMs now become very similar to dogen models. Interestingly, this
-  also means we do not need the =library= folder any longer. This is
-  because dogen will not work without the code that comes with the
-  PDMs so you will need to git clone it anyway. In effect, the PDMs
-  become just like any other Dogen model, so you'll have to install
-  them and then point to them in order to code generate.
-- we need PDMs per technical space: C++, C#, etc. Each would have its
-  own product, etc.
-- PDMs can contain all the required linking information. However, we
-  probably should have a PDM per linking library (e.g. one for each
-  linkable boost library). Else it will be hard to know what libraries
-  to link against depending on usage.
-- users can add a new PDM with very little knownledge of Dogen: add a
-  new model following the existing pattern (copy and paste).
-- no changes are required to dogen itself: it would automatically pick
-  up the new PDMs (just need to git update core).
-- all PDM code could have tests in the core model to ensure it all
-  works in isolation (test data, IO, etc). We may even be able to
-  reuse the generated tests for these types.
+- PDMs now become very similar to dogen models. Interestingly, this also means
+  we do not need the =library= folder any longer. This is because dogen will not
+  work without the code that comes with the PDMs so you will need to git clone
+  it anyway. In effect, the PDMs become just like any other Dogen model, so
+  you'll have to install them and then point to them in order to code generate.
+- we need PDMs per technical space: C++, C#, etc. Each would have its own
+  product, etc.
+- PDMs can contain all the required linking information. However, we probably
+  should have a PDM per linking library (e.g. one for each linkable boost
+  library). Else it will be hard to know what libraries to link against
+  depending on usage.
+- users can add a new PDM with very little knownledge of Dogen: add a new model
+  following the existing pattern (copy and paste).
+- no changes are required to dogen itself: it would automatically pick up the
+  new PDMs (just need to git update core).
+- all PDM code could have tests in the core model to ensure it all works in
+  isolation (test data, IO, etc). We may even be able to reuse the generated
+  tests for these types.
 
-This approach is very elegant, but its not very nice to start creating
-types in the =std= namespace. Perhaps we should instead to have "name
-mapping" or alisaing? A way to associate a name with a type. Then the
-PDM would follow the usual dogen naming rules, but when you load up
-the model for referencing, it would export the aliases. The crux
-though is that we just want a single model for both exporting the PDM
-types and implementing the glue code.
+This approach is very elegant, but its not very nice to start creating types in
+the =std= namespace. Perhaps we should instead to have "name mapping" or
+alisaing? A way to associate a name with a type. Then the PDM would follow the
+usual dogen naming rules, but when you load up the model for referencing, it
+would export the aliases. The crux though is that we just want a single model
+for both exporting the PDM types and implementing the glue code.
 
 *** Concepts, immutability and fluency                                :story:
 

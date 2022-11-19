@@ -13,43 +13,44 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-18 Fri 19:15]
+#+CAPTION: Clock summary at [2022-11-19 Sat 15:00]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *68:51* |       |       | 100.0 |
+| *Total time*                                              | *70:14* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 68:51   |       |       | 100.0 |
-| Active                                                    |         | 68:51 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  14.8 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.1 |
+| Stories                                                   | 70:14   |       |       | 100.0 |
+| Active                                                    |         | 70:14 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  14.5 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.0 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  4:33 |   6.6 |
+| Sprint and product backlog grooming                       |         |       |  5:11 |   7.4 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.6 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   4.8 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   4.7 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   3.1 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.3 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   3.2 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   2.7 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   2.6 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.1 |
-| Model significant relations at a higher level             |         |       |  1:05 |   1.6 |
-| Create a mock configuration builder                       |         |       |  1:58 |   2.9 |
+| Model significant relations at a higher level             |         |       |  1:05 |   1.5 |
+| Create a mock configuration builder                       |         |       |  1:58 |   2.8 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.5 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.6 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.2 |
-| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.1 |
-| Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.6 |
+| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.0 |
+| Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.4 |
-| Gitter notifications for builds are not showing up        |         |       |  2:07 |   3.1 |
+| Gitter notifications for builds are not showing up        |         |       |  2:07 |   3.0 |
+| Create a nightly github workflow                          |         |       |  5:21 |   7.6 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.5 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.4 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.4 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  25.2 |
-| Create a nightly github workflow                          |         |       |  5:21 |   7.8 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  24.7 |
 | Configuration as stereotype causes noise                  |         |       |  2:09 |   3.1 |
+| Update CMakeLists to match latest                         |         |       |  0:45 |   1.1 |
 #+end:
 
 Agenda:
@@ -376,6 +377,9 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-11-19 Sat 14:31]--[2022-11-19 Sat 14:59] =>  0:28
+    CLOCK: [2022-11-19 Sat 14:06]--[2022-11-19 Sat 14:07] =>  0:01
+    CLOCK: [2022-11-19 Sat 13:57]--[2022-11-19 Sat 14:06] =>  0:09
     CLOCK: [2022-11-13 Sun 08:27]--[2022-11-13 Sun 08:30] =>  0:03
     CLOCK: [2022-11-12 Sat 22:53]--[2022-11-12 Sat 23:06] =>  0:13
     CLOCK: [2022-11-12 Sat 22:46]--[2022-11-12 Sat 22:52] =>  0:06
@@ -1229,6 +1233,114 @@ Links:
 - [[https://stackoverflow.com/questions/58858429/how-to-run-a-github-actions-step-even-if-the-previous-step-fails-while-still-f][How to run a github-actions step, even if the previous step fails, while still
   failing the job]]
 
+*** COMPLETED Create a nightly github workflow                        :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 08:11]--[2022-11-13 Sun 08:26] =>  0:15
+    CLOCK: [2022-11-13 Sun 08:10]--[2022-11-13 Sun 08:22] =>  0:12
+    CLOCK: [2022-11-12 Sat 13:42]--[2022-11-12 Sat 14:03] =>  0:21
+    CLOCK: [2022-11-12 Sat 13:00]--[2022-11-12 Sat 13:12] =>  0:12
+    CLOCK: [2022-11-12 Sat 10:55]--[2022-11-12 Sat 11:40] =>  0:45
+    CLOCK: [2022-10-17 Mon 19:51]--[2022-10-17 Mon 20:09] =>  0:18
+    CLOCK: [2022-10-16 Sun 18:30]--[2022-10-16 Sun 18:44] =>  0:14
+    CLOCK: [2022-10-15 Sat 10:30]--[2022-10-15 Sat 11:05] =>  0:35
+    CLOCK: [2022-10-14 Fri 08:00]--[2022-10-14 Fri 08:09] =>  0:09
+    CLOCK: [2022-10-12 Wed 08:18]--[2022-10-12 Wed 08:59] =>  0:41
+    CLOCK: [2022-10-12 Wed 07:41]--[2022-10-12 Wed 07:55] =>  0:14
+    CLOCK: [2022-10-11 Tue 07:43]--[2022-10-11 Tue 08:28] =>  0:45
+    CLOCK: [2022-10-10 Mon 07:50]--[2022-10-10 Mon 08:03] =>  0:13
+    CLOCK: [2022-10-09 Sun 16:00]--[2022-10-09 Sun 16:27] =>  0:27
+    :END:
+
+It seems we have all that is required to run nightlies in github. Its better to
+do it there because it avoids issues with local PC such as PC is off, cron
+issues etc.
+
+Notes:
+
+- For some reason we are not setting up vcpkg path in the includes, Try merging
+  steps to see if that makes any difference.
+- new warning: "Node.js 12 actions are deprecated. For more information see:
+  https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/.
+  Please update the following actions to use Node.js 16: lukka/get-cmake,
+  lukka/run-vcpkg, lukka/run-vcpkg". Bump versions to latest.
+- build is now failing because we need to reconfigure to find the code
+  generator:
+
+  : 2022-10-14T02:12:45.8641079Z ninja: error: unknown target 'gao', did you mean 'rat'?
+- we still have the problem of linking:
+
+  : projects/dogen/generated_tests/configuration_tests.cpp:29:10: fatal error: boost/test/unit_test.hpp: No such file or directory
+
+  The best thing may be to split the nightly into two workflow steps.
+- deleted the existing nightly/YYYYMMDD branch which was causing issues:
+
+  : Switched to a new branch 'nightly'
+  : To https://github.com/MASD-Project/dogen
+  : ! [remote rejected] nightly -> nightly (cannot lock ref 'refs/heads/nightly': 'refs/heads/nightly/20221112' exists; cannot create 'refs/heads/nightly')
+  : error: failed to push some refs to 'https://github.com/MASD-Project/dogen'
+
+- nightly builds are failing to compile because the generated tests are using a
+  CMakeLists with globals:
+
+  #+begin_src cmake
+  target_link_libraries(${tests_target_name}
+    ${lib_target_name}
+    ${CMAKE_REQUIRED_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES})
+  #+end_src
+
+  This means we can only fix the nightlies by updating CMake templates to take
+  into account dependencies. However, since we managed to compile the nightly
+  locally, this means the main story is complete. We need a separate story to
+  get the nightly to go green.
+
+Links:
+
+- [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
+- [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
+
+*** COMPLETED Add additional reference directories                    :story:
+
+*Rationale*: already implemented.
+
+ At present we expect the reference models to be either on the data directory
+ (for system models) or on the same directory as the target. Presumably, users
+ may also want to have models on other directories. For example, if one were to
+ extend Dogen with a different project, it would be required to load models from
+ the dogen directory.
+
+ We could simply add a command line argument for reference directories; if the
+ reference is not found in the target model directory, we would then try all
+ available reference directories.
+
+ We should implement this as a =-I= parameter akin to compilers. We should also
+ have a command to output the current include path - check GCC to see what
+ command they use for this.
+
+ This will be a requirement in order to support PDMs because we shall have many
+ directories with models. We will need the concept of "system include
+ directories" for this. We need to look into how compilers do this. We must also
+ dump these in dumpspecs.
+
+ Merged Stories:
+
+ *Add additional data files directories*
+
+ #+begin_quote
+ *Story*: As a dogen user, I want dogen to use my own private data libraries so
+ that I don't have to supply them as diagrams.
+ #+end_quote
+
+ Users should be able to provide directories for their own JSON models. We just
+ need to add a new parameter to the knitter and transport it all the way to OM's
+ workflow.
+
+ In the future, when everything is a model, data file directories and reference
+ directories will become one and the same.
+
+
+
 *** STARTED Ignore vcpkg path length warning                          :story:
     :LOGBOOK:
     CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
@@ -1550,73 +1662,6 @@ Links:
 - [[https://www.augmentedmind.de/2021/01/17/plantuml-layout-tutorial-styles/]["PlantUML layout and styles tutorial"]]
 - [[https://isgb.otago.ac.nz/infosci/mark.george/Wiki/wiki/PlantUML%20GraphViz%20Layout]["PlantUML GraphViz Layout"]]
 
-*** STARTED Create a nightly github workflow                          :story:
-    :LOGBOOK:
-    CLOCK: [2022-11-13 Sun 08:11]--[2022-11-13 Sun 08:26] =>  0:15
-    CLOCK: [2022-11-13 Sun 08:10]--[2022-11-13 Sun 08:22] =>  0:12
-    CLOCK: [2022-11-12 Sat 13:42]--[2022-11-12 Sat 14:03] =>  0:21
-    CLOCK: [2022-11-12 Sat 13:00]--[2022-11-12 Sat 13:12] =>  0:12
-    CLOCK: [2022-11-12 Sat 10:55]--[2022-11-12 Sat 11:40] =>  0:45
-    CLOCK: [2022-10-17 Mon 19:51]--[2022-10-17 Mon 20:09] =>  0:18
-    CLOCK: [2022-10-16 Sun 18:30]--[2022-10-16 Sun 18:44] =>  0:14
-    CLOCK: [2022-10-15 Sat 10:30]--[2022-10-15 Sat 11:05] =>  0:35
-    CLOCK: [2022-10-14 Fri 08:00]--[2022-10-14 Fri 08:09] =>  0:09
-    CLOCK: [2022-10-12 Wed 08:18]--[2022-10-12 Wed 08:59] =>  0:41
-    CLOCK: [2022-10-12 Wed 07:41]--[2022-10-12 Wed 07:55] =>  0:14
-    CLOCK: [2022-10-11 Tue 07:43]--[2022-10-11 Tue 08:28] =>  0:45
-    CLOCK: [2022-10-10 Mon 07:50]--[2022-10-10 Mon 08:03] =>  0:13
-    CLOCK: [2022-10-09 Sun 16:00]--[2022-10-09 Sun 16:27] =>  0:27
-    :END:
-
-It seems we have all that is required to run nightlies in github. Its better to
-do it there because it avoids issues with local PC such as PC is off, cron
-issues etc.
-
-Notes:
-
-- For some reason we are not setting up vcpkg path in the includes, Try merging
-  steps to see if that makes any difference.
-- new warning: "Node.js 12 actions are deprecated. For more information see:
-  https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/.
-  Please update the following actions to use Node.js 16: lukka/get-cmake,
-  lukka/run-vcpkg, lukka/run-vcpkg". Bump versions to latest.
-- build is now failing because we need to reconfigure to find the code
-  generator:
-
-  : 2022-10-14T02:12:45.8641079Z ninja: error: unknown target 'gao', did you mean 'rat'?
-- we still have the problem of linking:
-
-  : projects/dogen/generated_tests/configuration_tests.cpp:29:10: fatal error: boost/test/unit_test.hpp: No such file or directory
-
-  The best thing may be to split the nightly into two workflow steps.
-- deleted the existing nightly/YYYYMMDD branch which was causing issues:
-
-  : Switched to a new branch 'nightly'
-  : To https://github.com/MASD-Project/dogen
-  : ! [remote rejected] nightly -> nightly (cannot lock ref 'refs/heads/nightly': 'refs/heads/nightly/20221112' exists; cannot create 'refs/heads/nightly')
-  : error: failed to push some refs to 'https://github.com/MASD-Project/dogen'
-
-- nightly builds are failing to compile because the generated tests are using a
-  CMakeLists with globals:
-
-  #+begin_src cmake
-  target_link_libraries(${tests_target_name}
-    ${lib_target_name}
-    ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
-    ${Boost_LIBRARIES})
-  #+end_src
-
-  This means we can only fix the nightlies by updating CMake templates to take
-  into account dependencies. However, since we managed to compile the nightly
-  locally, this means the main story is complete. We need a separate story to
-  get the nightly to go green.
-
-Links:
-
-- [[https://unix.stackexchange.com/questions/49053/how-do-i-add-x-days-to-date-and-get-new-date][How do I add X days to date and get new date?]]
-- [[https://iramykytyn.dev/how-to-integrate-valgrind-into-github-actions][How To Integrate Valgrind into GitHub Actions?]]
-
 *** STARTED Configuration as stereotype causes noise                  :story:
     :LOGBOOK:
     CLOCK: [2022-11-13 Sun 21:24]--[2022-11-13 Sun 22:44] =>  1:20
@@ -1656,7 +1701,12 @@ Notes:
 - check why feature model is not available on codec to codec transform and see
   how hard it is to get it.
 
-*** Update CMakeLists to match latest                                 :story:
+*** STARTED Update CMakeLists to match latest                         :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-19 Sat 14:59]--[2022-11-19 Sat 15:00] =>  0:01
+    CLOCK: [2022-11-19 Sat 14:07]--[2022-11-19 Sat 14:30] =>  0:23
+    CLOCK: [2022-11-19 Sat 12:13]--[2022-11-19 Sat 12:34] =>  0:21
+    :END:
 
 We have modified locally the CMakeLists to match the modern approach, but we
 never updated the templates. As part of doing this, we should remove ODB
@@ -1665,6 +1715,369 @@ support. This is because:
 - we don't use ODB at present;
 - when we do look into ODB again, it will be done as part of a cartridge
   framework rather than via build files.
+
+Actually this is a big ask. We have a lot of missing requirements in order to do
+this:
+
+- component type: library or executable. However, if its executable, we are
+  still building a library and we need to supply dependencies for both.
+- missing parts: we need a part for modeling and another for generated tests.
+- features: we need a templatised feature which expands across the parts. The
+  feature will carry dependencies.
+- the dependency needs to have the following information:
+  - include: public or private
+  - standard dogen model or exogenous?
+  - link
+- official location for generated files:
+  : PRIVATE ${stage_inc_dir}/ # generated header files
+
+One possible approach is to create a model element for references which contains
+all of the required information. Example:
+
+: * some reference                                      :reference:
+:   :PROPERTIES:
+:   :masd.codec.reference: dogen.tracing
+:   :masd.logical.reference.type: public
+:   :masd.logical.reference.link: boost::boost
+:   :END:
+:
+: [[../../dogen.tracing/modeling/dogen.tracing.org]]
+
+Notes:
+
+- we do not want to handle transitive references in this way; from a dogen
+  perspective we want to load these models, but from a code generation
+  perspective we do not want to add references recursively. We want instead to
+  rely on transitivity.
+
+*** Mapping of third-party dependencies (PDMs)                        :story:
+
+System models should follow the physical structure of dependencies. That is, we
+should not have a "boost" system model, but instead a boost-test etc. Each of
+these can then have mappings (e.g. vcpkg name, build2 name, etc). Users must
+declare these references just like they do with user models. Dogen can then
+create code for:
+
+- cmake targets, properly linking against libraries;
+- vcpkg install, at product level, by de-duplicating component dependencies;
+- possibly distro dependencies.
+
+We should only have a mandatory dependency, which is the STL. In addition, we
+need different models for each version (e.g. c++ 03, etc). This makes it easier
+to include the right types.
+
+Note that each model must have an associated version. The version should be part
+of the file name. However, maybe we need to distinguish between TS version (11,
+17, etc) from library version.
+
+One way of solving this regularity problem (e.g. having masd::std::string is the
+real name but its annoying to have to have users typing this) is to support
+"using" statements at the model level. If a user could type something like
+=using masd= and this would allow us to find all types as if we had typed
+=masd::= then users could still type =std::string= and find =masd::std::string=.
+We'd solve both the regularity and the "look and feel". The downside is that
+this could have important ramifications in resolution:
+
+- how does this work in the presence of merged models? do we merge usings? will
+  this find types we're not supposed to find?
+
+Needs some more thinking.
+
+Notes:
+
+- utility model must be split into multiple models: the PDMs should go with
+  their own models. The real utilities should stay on a utility product. This
+  can then be reused by dogen (for example, if logging is enabled it uses the
+  logging setup from this model). Users should be able to switch it off though.
+
+Merged stories:
+
+*Platform description models*
+
+We should consider integrating all of the information regarding "platforms" into
+platform description models (PDMs). These include:
+
+- all types available in a library (proxy models) and their mapping in terms of
+  aspects. We could make the mapping a bit clearer by designing platform
+  description models that are not part of modeling. We don't really need support
+  for attributes, operations etc. However, we need some kind of "adaptor" that
+  extracts all the type information (or some other way of making resolution work
+  across different model types).
+- name of the library, supported language (e.g. for Boost, C++ etc), versions of
+  the library. We must associate the types with a version (e.g. introduced on
+  version X, deprecated on version Y) so that when the user is using a given
+  version it errors if a type is not available.
+- packaging support: mapping to the name used on most common packaging systems
+  such as DEB, RPM etc. Also, mapping on language specific package managers such
+  as build2, vcpkg, conan, nuget, etc. User can decide what package manager to
+  use overall or for a specific library (e.g. possible to mix-and-match package
+  manager). It should also have a mapping for CMake support that includes "in
+  CMake library from version X" and "available on an external source" with a
+  URL. If the user selects the latter, Dogen can download the CMake file (or
+  maybe Dogen should include the external CMake files to guarantee a stable
+  behaviour).
+
+Notes:
+
+- with this we can now move away from the bad modeling used with proxy models,
+  where it was not quite clear what they were. We can create a different file
+  format (e.g. *.pdm* )that can share some similarities with existing JSON
+  models but is not stuck with all the baggage needed to represent user models.
+- however, PDMs are just regular models. Users should be able to make use of the
+  PDM stereotypes to define PDM types in a regular UML model. Interestingly, a
+  PDM from this perspective is similar to a named configuration. The difference
+  is that it introduces a new type into the type system rather than a new
+  stereotype. But with this we can now make use of named configurations, making
+  PDMs a lot less verbose (e.g. define a named config and share it across
+  multiple types, like SmartPointer etc). We could even share it across multiple
+  platform models!
+- PDMs should be organised by language (e.g. folder for cpp, etc). Top level
+  directory is PDM rather than library.
+- users declare references to PDMs just like normal models. PDMs have an
+  attribute for "auto-loading". If on, we load regardless. Else it must be
+  referenced. This is useful for say STL, hardware types.
+- users can supply their own PDMs, although they are encouraged to submit them
+  if they are general enough.
+- if users choose CMake as the build system, we automatically add all the
+  boilerplate required to add the library to CMake. In an ideal world, the PDM
+  should contain the CMake snippets, with "macros" where required (e.g. version,
+  etc). This would mean we wouldn't have to change templates when new libraries
+  are added. We could also have a "standard" CMake snippet that works for most
+  libraries.
+- different libraries may have different types of support (e.g. a library may
+  not exist in a package manager, etc)
+- we could now create an installation script that sets up all dependencies (e.g.
+  DEB/RPM). It cannot be a target because the build would fail (e.g. CMake would
+  not find all dependencies).
+- now that =library= can be renamed to =pdm=, we could call the top-level
+  directory =library=.
+
+*Adding linking libraries is not handled*
+
+#+begin_quote
+*Story*: As a dogen user, I want to link against libraries without having to
+manually generate CMakeFiles.
+#+end_quote
+
+At present whenever a model requires additional link library targets we need to
+disable CMake generation and do it by hand. However:
+
+- for well-known dependencies such as boost we could create a convention (e.g.
+  assume/require that the CMake boost libraries flags are set via find boost).
+  Alternatively, the types should contain meta-data that has information about
+  linking requirements; e.g. if you use a type from a boost model, it should
+  provide you with linking information in its meta-data. Each boost type could
+  have different information depending on which boost library they come from.
+- for user level dependencies we should add dynamic extensions at the model
+  level. Also, references provide sufficient information to link against other
+  dogen models.
+
+
+*** Model "types" and element binding                                 :story:
+
+It seems clear that we will have different "types" of models:
+
+- product models, describing entire products.
+- component models, which at present we call "models". These describe a given
+  component type such as a library or an executable. Thus, they themselves have
+  sub-types.
+- profile models: useful to keep the configuration separate. However, it may
+  make more sense to place them in the product model, since its shared across
+  components?
+- PDMs: these describe platforms.
+- generative models: generate extensions to code generators.
+
+At present there is no concept of model types, so any meta-model element can be
+placed in any model. This is convenient, but in the future it may make things
+too complicated: users may end up placing types in PDMs when they didn't meant
+to do so, etc. What seems to emerge from here is that, just as with variability,
+there is a concept of a binding point at the model level too. That is,
+meta-model elements are associated with specific model types (binding element?).
+
+In an ideal world, we should have a class in the meta-model that represents each
+model type. We then instantiate this class within one of the dogen models to
+register the different model types. Its code-generation representation is the
+registration. It also binds to all the meta-model elements it binds to. This can
+be done simply by creating a feature that lists the stereotypes of the elements
+(remember that these are then registered too, because we will generate the
+meta-class information as we generate the assets model). Then, we can ask the
+model type if a given element is valid (check a set of stereotypes).
+
+Formatters are themselves meta-model elements, and they bind to other meta-model
+elements (which raises the question: which meta-model elements are bindable? we
+can't allow a formatter to bind to a formatter...). Perhaps we need another type
+of model, which is a "generation model". This is where we can either declare new
+technical spaces or add to existing technical spaces; and declare new facets and
+formatters. We should be able to add to existing facets and TSs by allowing
+users to specify the TS/facet when declaring the formatter. If not specified,
+then the user must declare a facet in the package containing the formatter.
+Similarly with TSs.
+
+Note also that the formatter binding code is "inserted" directly during
+generation into the CPP file. Its not possible to change it. Same with the
+includes. This ensures the user cannot bypass the model type system by mistake.
+Also, by having a formatter meta-model type, we can now declare the header file
+as we please, and ensure the shape of the implementation. Now, the stitch
+template can be restricted to only the formatting function itself; the rest is
+code-generated. We no longer need wale templates. This will of course require
+the move to PDMs and the removal of the helper code. This also means that anyone
+can declare new meta-model elements; they will register themselves, and
+correctly expand across archetype space. However, we do not have the adaption
+code nor do we have containers for these modeling elements. We need a separate
+story for this use case.
+
+Destinations are meta-model elements too. In the generation.cpp model we will
+declare all the available destinations:
+
+- global
+- src
+- include
+- tests
+
+etc. The formaters bind into destinations. Formatters belong to facets in the
+archetype space, which express themselves as directories in the artefact path
+when we project from archetype space into artefact space. More generally: assets
+in asset space are projected into the multidimensional archetype space.
+Archetypes are projected into artefact space, but the dimensions of archetype
+space are flattened into the hierarchy of the filesystem.
+
+We also need a concept of artefact types. These mainly are needed for file
+extensions, but conceivably could also be used for other purposes.
+
+Notes:
+
+- the binding should be done at the streotype level, not model element.
+
+Merged stories:
+
+*Model types and element binding*
+
+Once we introduce the concept of model types (e.g. product, component, possibly
+different types of components), we should also take into account that some model
+types don't support some model elements. It should be possible to declare which
+model types support which element types such that if a user tries to use an
+invalid model type, we get a sensible error. In effect, this is a binding
+problem at the meta-model level.
+
+One of the component model types should be "generative components". These are
+used to augment the code generator. We need to look at the thesis on generative
+development to look for terminology.
+
+We should also have model types for terraform, etc.
+
+One way to implement this is to add a feature at the element (once we have a way
+of expressing dogen meta-elements) that lists the supported model types for a
+given element.
+
+*logical models could have a model classification*
+
+Consider creating an enumeration for model classification (e.g. type of the
+model):
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work. This is kind of a model level
+stereotype which can be used by the code generator for example to determine
+which models are compatible. It could also be used to determine what facets can
+be enabled/disabled.
+
+*Merged with modes of operation story:*
+
+Create "modes" of operation: relational, object-oriented and procedural. they
+limit the types available in yarn. relational only allows built-ins plus
+relational commands (FK and PK; FK is when using a model type, PK is a marker on
+a property). procedural only allows built-ins plus model types. we will need
+pointer support for this. object oriented is the current mode. the modes are
+validated in the middle end.
+
+*** Make executable a trivial target                                  :story:
+
+In order to simplify the make targets, we should make the executable just a
+simple invocation of a class within the library; this would then mean we just
+need to link against the library for the component, making CMake infrastructure
+trivial.
+
+*** Create a standard directory for generated files                   :story:
+
+Dogen projects will require at least one generated file for the version. We
+should have a standard way of referring to that directory, e.g.:
+
+: DOGEN_GENERATED_HEADER_DIR
+
+This directory should be private.
+
+Notes:
+
+- how do we know which components need access to this directory?
+
+*** org-model and links to references                                 :story:
+
+At present we are adding links as part of the drawers in org-models. However,
+this is not ideal. We want to use regular org-mode constructs. There are several
+use cases for links:
+
+- we want org-mode links so that we can make use of tools such as org-roam.
+- we need to use the links for dogen to resolve the model. Both of these use
+  cases happen whilst the code is in its normal shape in the git repository.
+- when we generate doxygen documentation we need links that can work when the
+  site has been published. At this point the models have all been copied to a
+  different location by doxygen.
+
+We need to find out a way to make links work for all of these use cases.
+
+Merged stories
+
+*Add references as links to org documents*
+
+Try adding a =references= tag. Content is a list of links to org models.
+However, because of the way our referencing works in dogen, we need to do some
+kind of hack. Perhaps the "text" of the link could be the simple path to the
+file and the link the relative path. To start off with, it can be ignored and
+managed manually. This will be spun into its own story for the future.
+
+*** Generated CMakefiles do not take tests into account               :story:
+
+At present most models have:
+
+: masd::build::cmakelists, dogen::handcrafted::cmake
+
+One of the reasons is because the template is not taking generated
+tests into account. It should have:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** =CMakeFiles= do not reference dogen models                        :story:
+
+At present we cannot test cross-model referencing because our
+CMakeFiles are not adding the linking references to these models. This
+needs to be fixed before we can test cross model serialisation.
+
+Notes:
+
+- in order to map references to models, we need to create a modeling
+  element for a reference. For this we have two cases: for proxy
+  models/PDMs, we need to read from the meta-data the name of the lib
+  the model generates. For dogen models we can create it from the
+  model name.
+- this is a variation of the "exports and imports" pattern: we import
+  a set of libraries (these can either be macros or actual library
+  names) and we export (for now) a single library. When we support
+  facets in libraries, we may need to export more than one, so we
+  should cope with this scenario now. We need to keep track of the
+  exports for a reference, and then use those as the imports for the
+  model.
+- in an ideal world, all imports come via this mechanism. However,
+  this means we now have to create PDMs/proxies just to setup the
+  imports. For example, for LibXML we will not need to define any of
+  the types, but we need the import. However, If we do force the
+  definition of the PDM, the advantage is that we now have the right
+  place to put the definition, and is done only once and shared by all
+  models.
 
 *** Add operations to PlantUML diagrams                               :story:
 
