@@ -15036,6 +15036,8 @@ can be done via registries:
   a made-up example company for a blog post about vcpkg's new registries
   feature."
 
+We should also generate the VCPKG files from Dogen itself.
+
 *Previous Understanding*
 
 We need to create a library with support code that is used by the models. At

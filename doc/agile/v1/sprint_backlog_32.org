@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-19 Sat 15:00]
+#+CAPTION: Clock summary at [2022-11-19 Sat 15:11]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *70:14* |       |       | 100.0 |
+| *Total time*                                              | *70:19* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 70:14   |       |       | 100.0 |
-| Active                                                    |         | 70:14 |       | 100.0 |
+| Stories                                                   | 70:19   |       |       | 100.0 |
+| Active                                                    |         | 70:19 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       | 10:13 |  14.5 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   3.0 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.5 |
-| Sprint and product backlog grooming                       |         |       |  5:11 |   7.4 |
+| Sprint and product backlog grooming                       |         |       |  5:16 |   7.5 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.6 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
 | Full generation support in tests is incorrect             |         |       |  3:18 |   4.7 |
@@ -48,7 +48,7 @@
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
 | Warning on OSX build                                      |         |       |  2:23 |   3.4 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.4 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  24.7 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  24.6 |
 | Configuration as stereotype causes noise                  |         |       |  2:09 |   3.1 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   1.1 |
 #+end:
@@ -377,6 +377,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-11-19 Sat 15:06]--[2022-11-19 Sat 15:11] =>  0:05
     CLOCK: [2022-11-19 Sat 14:31]--[2022-11-19 Sat 14:59] =>  0:28
     CLOCK: [2022-11-19 Sat 14:06]--[2022-11-19 Sat 14:07] =>  0:01
     CLOCK: [2022-11-19 Sat 13:57]--[2022-11-19 Sat 14:06] =>  0:09
@@ -1235,6 +1236,7 @@ Links:
 
 *** COMPLETED Create a nightly github workflow                        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-20 Sun 18:41]--[2022-11-20 Sun 18:59] =>  0:18
     CLOCK: [2022-11-13 Sun 08:11]--[2022-11-13 Sun 08:26] =>  0:15
     CLOCK: [2022-11-13 Sun 08:10]--[2022-11-13 Sun 08:22] =>  0:12
     CLOCK: [2022-11-12 Sat 13:42]--[2022-11-12 Sat 14:03] =>  0:21
