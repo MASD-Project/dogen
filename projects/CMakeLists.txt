@@ -214,6 +214,11 @@ include_directories(
 )
 
 #
+# FIXME: boost hack needed for linking generated tests.
+#
+set(Boost_LIBRARIES "Boost::unit_test_framework")
+
+#
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen)
