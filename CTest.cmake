@@ -61,6 +61,11 @@ if(NOT DEFINED with_full_generation)
 endif()
 message(STATUS "Full generation: ${with_full_generation}")
 
+if(NOT DEFINED with_memcheck)
+    set(with_memcheck OFF)
+endif()
+message(STATUS "Memory Check: ${with_memcheck}")
+
 #
 # Parse the build name to extract input parameters, and validate them.
 #
@@ -215,30 +220,27 @@ else()
     message(STATUS "Coverage not enabled.")
 endif()
 
-# only run these for Nightly.
-set(WITH_MEMCHECK false)
-
 #
 # Step: start the build
 #
 ctest_start(${build_group})
 
 #
-# Nightly
+# Memory Checks
 #
-if(${build_group} MATCHES Nightly)
+set(USE_MEMCHECK OFF)
+if(with_memcheck)
     # setup valgrind
     find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
     if(NOT CTEST_MEMORYCHECK_COMMAND)
         message("valgrind not found, disabling it.")
-        set(WITH_MEMCHECK false)
     else()
         message("Found valgrind (${CTEST_MEMORYCHECK_COMMAND})...")
-        set(WITH_MEMCHECK true)
+        set(USE_MEMCHECK ON)
 
         set(valgrind_options "--trace-children=yes")
         set(valgrind_options "${valgrind_options} --quiet")
-        set(valgrind_options "${valgrind_options} --tool=memcheck")
+        set(valgrind_option(OPT "docstring" value)ions "${valgrind_options} --tool=memcheck")
         set(valgrind_options "${valgrind_options} --leak-check=full")
         set(valgrind_options "${valgrind_options} --show-reachable=yes")
         set(valgrind_options "${valgrind_options} --num-callers=50")
@@ -328,7 +330,7 @@ else()
     #
     # Step: memcheck.
     #
-    if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
+    if(USE_MEMCHECK)
         ctest_memcheck(PARALLEL_LEVEL ${nproc})
     endif()
 endif()
