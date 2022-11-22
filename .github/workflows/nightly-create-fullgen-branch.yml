@@ -1,4 +1,4 @@
-name: Nightly Create Branch
+name: Nightly Create Fullgen Branch
 
 on:
    schedule:
@@ -57,12 +57,12 @@ jobs:
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
           git config user.name 'GitHub Actions'
           git config user.email noreply@github.com
-          git branch -d nightly || true
-          git push origin --delete nightly || true
-          git checkout -b nightly
+          git branch -d fullgen || true
+          git push origin --delete fullgen || true
+          git checkout -b fullgen
           git add -A 1>/dev/null
           git commit -m 'Generated code.' 1>/dev/null
-          git push origin nightly
+          git push origin fullgen
 
       - name: Gitter
         if: always()

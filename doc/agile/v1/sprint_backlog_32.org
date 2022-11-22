@@ -1755,6 +1755,8 @@ Notes:
 
 *** STARTED Nightly builds are taking too long                        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-22 Tue 08:49]--[2022-11-22 Tue 08:59] =>  0:10
+    CLOCK: [2022-11-22 Tue 08:31]--[2022-11-22 Tue 08:49] =>  0:18
     CLOCK: [2022-11-21 Mon 22:40]--[2022-11-21 Mon 22:47] =>  0:07
     CLOCK: [2022-11-21 Mon 07:49]--[2022-11-21 Mon 08:14] =>  0:25
     :END:
@@ -1768,6 +1770,16 @@ The solution is to have 2 nightlies:
 - a normal build from master which only runs the ~600 tests.
 
 In order to support this use case we just need a flag to disable memcheck.
+
+*** Run nightlies only when there are changes                         :story:
+
+We should not need to run nightlies every night if there are no commits.
+
+Links:
+
+- [[https://github.com/sunglasses-ai/classy/blob/main/.github/workflows/ci.yml#L10][GH: ci.yml]] Example action with check.
+- [[https://stackoverflow.com/questions/63014786/how-to-schedule-a-github-actions-nightly-build-but-run-it-only-when-there-where][SO: How to schedule a GitHub Actions nightly build, but run it only when there
+  where recent code changes?]]
 
 *** Mapping of third-party dependencies (PDMs)                        :story:
 

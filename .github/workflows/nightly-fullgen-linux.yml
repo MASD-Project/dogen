@@ -1,8 +1,10 @@
-name: Nightly Build
+name: Nightly Fullgen Build
 
 on:
-   schedule:
-     - cron: '0 0 * * *'
+  workflow_run:
+    workflows: ["Nightly Create Fullgen Branch"]
+    types:
+      - completed
 
 jobs:
   build:
@@ -26,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: master
+          ref: fullgen
           submodules: true
 
       - name: Setup Clang
@@ -58,14 +60,16 @@ jobs:
         run: ./build/scripts/github.setup.${{matrix.family}}.sh
 
       - name: Run CTest workflow
+        env:
+          WITH_FULL_GENERATION: ON
+          preset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
         run: |
           export DOGEN_BUILD_PROVIDER="github"
           export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
           export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
-          export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           export cmake_args="build_group=Nightly,build_name=${preset}"
-          cmake_args="${cmake_args},code_coverage=1,with_memcheck=1"
+          cmake_args="${cmake_args},code_coverage=1"
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
       - name: Gitter
