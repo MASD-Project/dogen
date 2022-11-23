@@ -334,11 +334,10 @@
 }
 
 {
-   CMake
    Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
-   obj:/home/runner/work/_temp/-1647216998/cmake-3.23.2-linux-x86_64/bin/cmake
-   obj:/home/runner/work/_temp/-1647216998/cmake-3.23.2-linux-x86_64/bin/cmake
+   obj:/home/runner/work/_temp/412950619/cmake-3.24.3-linux-x86_64/bin/cmake
+   obj:/home/runner/work/_temp/412950619/cmake-3.24.3-linux-x86_64/bin/cmake
    fun:(below main)
 }
