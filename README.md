@@ -12,7 +12,7 @@
 [![Continuous Windows](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml)
 [![Continuous MacOS](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml)
 [![Nightly FG Branch](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml)
-[![Nightly FG](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml)
+[![Nightly FG](https://github.com/MASD-Project/dogen/actions/workflows/nightly-fullgen-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-fullgen-linux.yml)
 [![Nightly Linux](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml)
 [![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/g/DomainDrivenConsulting/dogen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DomainDrivenConsulting/dogen/context:cpp)
 [![CDash](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
