@@ -149,7 +149,11 @@ else()
     set(CTEST_SITE "${APP_SITE}")
 endif()
 
-set(CTEST_BUILD_NAME "${preset}")
+if(with_full_generation)
+    set(CTEST_BUILD_NAME "${preset}-fg")
+else()
+    set(CTEST_BUILD_NAME "${preset}")
+endif()
 
 # Set the generator. This will override the presets, but we have no option as
 # CTest refuses to configure unless there is a generator.
