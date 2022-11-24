@@ -11779,6 +11779,16 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Consider serialising to JSON PlantUML                             :story:
+
+It would be nice to be able to dump JSON documents which are in PlantUML JSON
+diagram format.
+
+Links:
+
+- [[https://plantuml.com/json][PlantUML JSON]]
+- [[https://github.com/AykutSarac/jsoncrack.com][jsoncrack.com]]
+
 *** Consider adding support for zip serialisation                     :story:
 
 #+begin_quote

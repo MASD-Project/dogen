@@ -13,15 +13,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-23 Wed 08:29]
+#+CAPTION: Clock summary at [2022-11-24 Thu 08:00]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *72:05* |       |       | 100.0 |
+| *Total time*                                              | *72:16* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 72:05   |       |       | 100.0 |
-| Active                                                    |         | 72:05 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  14.2 |
+| Stories                                                   | 72:16   |       |       | 100.0 |
+| Active                                                    |         | 72:16 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  14.1 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.9 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
@@ -51,7 +51,7 @@
 | Add PlantUML relationships to diagrams                    |         |       | 17:19 |  24.0 |
 | Configuration as stereotype causes noise                  |         |       |  2:09 |   3.0 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   1.0 |
-| Nightly builds are taking too long                        |         |       |  1:28 |   2.0 |
+| Nightly builds are taking too long                        |         |       |  1:39 |   2.3 |
 #+end:
 
 Agenda:
@@ -1755,6 +1755,7 @@ Notes:
 
 *** STARTED Nightly builds are taking too long                        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-24 Thu 07:49]--[2022-11-24 Thu 08:00] =>  0:11
     CLOCK: [2022-11-23 Wed 08:01]--[2022-11-23 Wed 08:29] =>  0:28
     CLOCK: [2022-11-22 Tue 08:49]--[2022-11-22 Tue 08:59] =>  0:10
     CLOCK: [2022-11-22 Tue 08:31]--[2022-11-22 Tue 08:49] =>  0:18
@@ -1805,6 +1806,11 @@ This is because the unit tests need the environment variable to pass and the
 code generator needs the CMake parameter. However, it does not make sense to use
 these in isolation. We should probably export the environment variable from
 within CTest or CMake.
+
+Actually the situation is even more confusing:
+
+- we need to run =with_full_generation=ON= for the original build;
+- but it must be =OFF= for the fullgen build, else we just recreate the branch.
 
 *** Run nightlies only when there are changes                         :story:
 
