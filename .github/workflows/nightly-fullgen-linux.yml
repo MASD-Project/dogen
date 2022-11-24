@@ -68,7 +68,7 @@ jobs:
           export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
           export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
-          export cmake_args="build_group=Nightly,build_name=${preset},with_full_generation=ON"
+          export cmake_args="build_group=Nightly,build_name=${preset}"
           cmake_args="${cmake_args},code_coverage=1"
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
