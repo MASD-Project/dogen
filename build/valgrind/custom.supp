@@ -334,6 +334,7 @@
 }
 
 {
+   CMake Leak
    Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
