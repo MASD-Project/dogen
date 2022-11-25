@@ -270,7 +270,7 @@
    fun:_Znwm
    fun:_ZN5boost3log12v2s_mt_posix3aux11this_thread6get_idEv
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation11thread_data15get_random_seedEv
-   fun:_ZN5boost3log12v2s_mt_posix4core14implementation11thread_dataC1Ev
+   fun:_ZN5boost3log12v2s_mt_posix4core14implementation11thread_dataC2Ev
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation16init_thread_dataEv
    fun:_ZN5boost3log12v2s_mt_posix4core14implementation15get_thread_dataEv
   ...
