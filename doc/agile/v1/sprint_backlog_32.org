@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-25 Fri 17:59]
+#+CAPTION: Clock summary at [2022-11-26 Sat 12:09]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *72:33* |       |       | 100.0 |
+| *Total time*                                              | *73:21* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 72:33   |       |       | 100.0 |
-| Active                                                    |         | 72:33 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  14.1 |
+| Stories                                                   | 73:21   |       |       | 100.0 |
+| Active                                                    |         | 73:21 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  13.9 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.9 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.5 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
-| Sprint and product backlog grooming                       |         |       |  5:16 |   7.3 |
+| Sprint and product backlog grooming                       |         |       |  5:16 |   7.2 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.5 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
 | Full generation support in tests is incorrect             |         |       |  3:18 |   4.5 |
 | Tests failing with filesystem errors                      |         |       |  2:10 |   3.0 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.2 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.1 |
+| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.0 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   2.5 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   1.0 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.5 |
@@ -43,15 +43,15 @@
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.3 |
 | Gitter notifications for builds are not showing up        |         |       |  2:07 |   2.9 |
-| Create a nightly github workflow                          |         |       |  5:39 |   7.8 |
+| Create a nightly github workflow                          |         |       |  5:39 |   7.7 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.5 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.3 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.2 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.3 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  23.9 |
-| Configuration as stereotype causes noise                  |         |       |  2:09 |   3.0 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  23.6 |
+| Configuration as stereotype causes noise                  |         |       |  2:09 |   2.9 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   1.0 |
-| Nightly builds are taking too long                        |         |       |  1:56 |   2.7 |
+| Nightly builds are taking too long                        |         |       |  2:44 |   3.7 |
 #+end:
 
 Agenda:
@@ -1755,6 +1755,7 @@ Notes:
 
 *** STARTED Nightly builds are taking too long                        :story:
     :LOGBOOK:
+    CLOCK: [2022-11-26 Sat 11:21]--[2022-11-26 Sat 12:09] =>  0:48
     CLOCK: [2022-11-25 Fri 08:23]--[2022-11-25 Fri 08:40] =>  0:17
     CLOCK: [2022-11-24 Thu 07:49]--[2022-11-24 Thu 08:00] =>  0:11
     CLOCK: [2022-11-23 Wed 08:01]--[2022-11-23 Wed 08:29] =>  0:28
@@ -1780,6 +1781,64 @@ Notes:
   builds. This will also help with coverage.
 - issues with badges.
 - valgrind fails due to CMake version update.
+
+**** CDash Issue
+
+#+begin_src markdown
+Hi CDash developers,
+
+Thanks very much for a great tool, which I have relied on daily for more than a decade. I have a strange problem, and not quite sure how to debug it further. My open source project  [1] makes use of the community CDash instance [2]. In general, all my builds have worked just fine but of late I am having a strange problem with a new set of builds. To the layperson, the CTest submission logs look normal, e.g. [3]:
+
+```
+SetCTestConfiguration:BuildDirectory:/home/runner/work/dogen/dogen/build/output/linux-clang-debug
+SetCTestConfiguration:SourceDirectory:/home/runner/work/dogen/dogen
+SetCTestConfigurationFromCMakeVariable:DropMethod:CTEST_DROP_METHOD
+SetCTestConfiguration:DropMethod:http
+SetCTestConfigurationFromCMakeVariable:DropSite:CTEST_DROP_SITE
+SetCTestConfiguration:DropSite:my.cdash.org
+SetCTestConfigurationFromCMakeVariable:DropLocation:CTEST_DROP_LOCATION
+SetCTestConfiguration:DropLocation:/submit.php?project=MASD+Project+-+Dogen
+Submit files
+   SubmitURL: http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Update.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=56f692fc3ddcd82bf709978b14f82f8d Size: 553
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Configure.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=6ccfef78f7a4fa53aff8bcb633109666 Size: 20947
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Build.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=bbf8a77fc3c9de8f93be2f2ce769714d Size: 1120
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Test.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=10192675e22f3562805fa0e8e4eb2981 Size: 8212762
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Done.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=c8da7710474223551534d3969a8c4d98 Size: 107
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml
+   Submission successful
+```
+
+However, nothing comes up in the dashboard. Other builds (both nightly and continuous) display just fine.
+
+[1] https://github.com/MASD-Project/dogen
+[2] https://my.cdash.org/index.php?project=MASD+Project+-+Dogen
+[3] https://github.com/MASD-Project/dogen/actions/runs/3551520273/jobs/5965773135
+#+end_src
+
+*** Add support for MSVC with CL                                      :story:
+
+At present this build is broken and GitHub does not support allow failures. The
+following was removed from the workflow:
+
+#+begin_src yaml
+          # FIXME: can't use this until allow_failures is added to github.
+          # See https://github.com/actions/toolkit/issues/399
+          # - name: windows-msvc-clang-cl
+          #   os: windows
+          #   family: windows
+          #   compiler: msvc-clang-cl
+          #   experimental: true
+          ...
+          if ("${{matrix.experimental}}" -eq "true")
+          {
+              $build_group = "Experimental"
+          }
+#+end_src
 
 *** Consider exporting =WITH_FULL_GENERATION= in CMakeFile            :story:
 
