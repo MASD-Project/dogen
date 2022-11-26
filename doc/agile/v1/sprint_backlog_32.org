@@ -1784,6 +1784,8 @@ Notes:
 
 **** CDash Issue
 
+Submit issue to CDash project: https://github.com/Kitware/CDash/issues
+
 #+begin_src markdown
 Hi CDash developers,
 

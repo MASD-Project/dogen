@@ -55,7 +55,7 @@ message(STATUS "CDash preset: ${preset}")
 
 set(build_name ${preset})
 if(DEFINED build_postfix)
-    set(build_name ${build_name}-${build_postfix}
+    set(build_name ${build_name}-${build_postfix})
 endif()
 message(STATUS "CDash build name: ${build_name}")
 
