@@ -64,7 +64,7 @@ separate git repo:
   Models available
   [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/CSharpRefImpl.Models).
 
-These are designed to give you a feel for how the generated code will look like,
+These are intended to give you a feel for how the generated code will look like,
 and they attempt to exercise all of Dogen's functionality. Note that these
 reference products still use older codecs rather than org-model.
 
@@ -83,11 +83,10 @@ want to go ahead and use it, bear in mind the following:
   (_Domain Architecture_). We will continue to refactor the code internally
   until it is consistent with the conceptual model. It may take a long while to
   get there. This means that adding new features is not a priority for Dogen
-  development (though of course we are gathering a long list of ideas in our
-  [product
+  development (though we are gathering a long list of ideas in our [product
   backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org)).
-- in our quest for the conceptual model, we have broken and _we shall continue_
-  to break the API many times. This will manifest itself in having to update
+- in our quest for the conceptual model, we have broken and _we shall continue
+  to break_ the API many times. This will manifest itself in having to update
   user models or in changes in the generated code. Features that have been
   working thus far may also be deprecated. We provide no guarantees of forward
   or backward compatibility; there isn't even an effort not to break these - in
@@ -165,10 +164,10 @@ Note that earlier versions may work but haven't been tested. Also, though Dogen
 should build fine with package manager supplied libraries - or even with
 hand-built dependencies - the recommended way to setup a development environment
 on all supported platforms is by using
-[vcpkg](https://github.com/Microsoft/vcpkg), which is what we will describe in
-this document. Dogen uses the "sub-module setup", whereby vcpkg is a submodule
-of Dogen. All of the dependencies are declared on
-[vcpkg.json](https://github.com/MASD-Project/dogen/blob/master/vcpkg.json).
+[vcpkg](https://github.com/Microsoft/vcpkg), which is what this document
+describes. Dogen uses the "sub-module setup", whereby vcpkg is a submodule of
+Dogen. All of the dependencies are declared in the
+[vcpkg.json](https://github.com/MASD-Project/dogen/blob/master/vcpkg.json) file.
 
 Before we proceed, please note that Dogen makes use of [CMake
 Presets](https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html). You
@@ -193,7 +192,7 @@ Available configure presets:
 ```
 
 For the remainder of this document we shall assume ```linux-clang-release```,
-which is our preferred preset. If its not yours, remember to update the preset
+which is our preferred preset. If it isn't yours, remember to update the preset
 name to match your desired build.
 
 To checkout Dogen, clone as follows:
@@ -209,7 +208,7 @@ cd dogen
 cmake --preset linux-clang-release
 ```
 
-You can build Dogen on all platforms as follows:
+You can build Dogen on all platforms (modulus preset) as follows:
 
 ```
 cmake --build --preset linux-clang-release
