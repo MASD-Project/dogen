@@ -65,7 +65,7 @@ jobs:
           export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
           export preset=${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
           export cmake_args="build_group=Nightly,preset=${preset}"
-          cmake_args="${cmake_args},build_postfix=fg,code_coverage=1,with_memcheck=1"
+          cmake_args="${cmake_args},code_coverage=1,with_memcheck=1"
           ctest -VV --timeout 12000 --preset ${preset} --script "CTest.cmake,${cmake_args}"
 
       - name: Gitter
