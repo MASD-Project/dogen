@@ -242,16 +242,6 @@
 }
 
 {
-   CMake
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
-   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
-   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
-}
-
-{
    Boost Log 4
    Memcheck:Leak
    match-leak-kinds: reachable
