@@ -13,7 +13,7 @@ on:
 jobs:
   windows:
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-    runs-on: ${{matrix.os}}-latest
+    runs-on: windows-latest
     environment: CI
     strategy:
       fail-fast: false
@@ -22,7 +22,6 @@ jobs:
         buildtype: [debug, release]
         include:
           - name: windows-msvc
-            os: windows
             family: windows
             compiler: msvc
     steps:
