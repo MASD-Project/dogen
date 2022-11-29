@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-29 Tue 18:37]
+#+CAPTION: Clock summary at [2022-11-29 Tue 18:44]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *75:28* |       |       | 100.0 |
+| *Total time*                                              | *76:32* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 75:28   |       |       | 100.0 |
-| Active                                                    |         | 75:28 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  13.5 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.8 |
+| Stories                                                   | 76:32   |       |       | 100.0 |
+| Active                                                    |         | 76:32 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  13.3 |
+| Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.7 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.4 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
-| Sprint and product backlog grooming                       |         |       |  5:16 |   7.0 |
+| Sprint and product backlog grooming                       |         |       |  5:30 |   7.2 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.5 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   4.4 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   2.9 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   4.3 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   2.8 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.2 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   2.9 |
 | Add continuous builds to C# reference product             |         |       |  1:50 |   2.4 |
@@ -43,16 +43,17 @@
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.3 |
 | Gitter notifications for builds are not showing up        |         |       |  2:07 |   2.8 |
-| Create a nightly github workflow                          |         |       |  5:39 |   7.5 |
-| Nightly builds are taking too long                        |         |       |  4:43 |   6.2 |
+| Create a nightly github workflow                          |         |       |  5:39 |   7.4 |
+| Nightly builds are taking too long                        |         |       |  5:04 |   6.6 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.4 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.2 |
+| Warning on OSX build                                      |         |       |  2:23 |   3.1 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.3 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  22.9 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  22.6 |
 | Configuration as stereotype causes noise                  |         |       |  2:09 |   2.8 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   1.0 |
 | Thoughts on refactoring variability                       |         |       |  0:08 |   0.2 |
+| Consider using meta-data within codec model               |         |       |  0:29 |   0.6 |
 #+end:
 
 Agenda:
@@ -379,6 +380,7 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-11-29 Tue 18:30]--[2022-11-29 Tue 18:44] =>  0:14
     CLOCK: [2022-11-19 Sat 15:06]--[2022-11-19 Sat 15:11] =>  0:05
     CLOCK: [2022-11-19 Sat 14:31]--[2022-11-19 Sat 14:59] =>  0:28
     CLOCK: [2022-11-19 Sat 14:06]--[2022-11-19 Sat 14:07] =>  0:01
@@ -1343,8 +1345,6 @@ Links:
  In the future, when everything is a model, data file directories and reference
  directories will become one and the same.
 
-
-
 *** COMPLETED Run nightlies only when there are changes               :story:
 
 *Rationale*: implemented.
@@ -1373,6 +1373,8 @@ Links:
     :LOGBOOK:
     CLOCK: [2022-11-29 Tue 08:54]--[2022-11-29 Tue 09:16] =>  0:22
     CLOCK: [2022-11-29 Tue 08:30]--[2022-11-29 Tue 08:53] =>  0:23
+    CLOCK: [2022-11-28 Mon 08:17]--[2022-11-28 Mon 08:30] =>  0:13
+    CLOCK: [2022-11-27 Sun 11:00]--[2022-11-27 Sun 11:08] =>  0:08
     CLOCK: [2022-11-27 Sun 10:11]--[2022-11-27 Sun 10:26] =>  0:15
     CLOCK: [2022-11-27 Sun 10:00]--[2022-11-27 Sun 10:10] =>  0:10
     CLOCK: [2022-11-26 Sat 14:01]--[2022-11-26 Sat 14:50] =>  0:49
@@ -1412,6 +1414,9 @@ Links:
 **** CDash Issue
 
 Submit issue to CDash project: https://github.com/Kitware/CDash/issues
+
+Actually it was not needed, the problem was with the build name: we can't have
+two nightlies with the same name as they overwite each other.
 
 #+begin_src markdown
 Hi CDash developers,
@@ -1886,6 +1891,25 @@ Notes:
 - remove all Dia support. Delete frozen.
 - remove all JSON support.
 - update all reference products to use org-mode only.
+
+*** STARTED Consider using meta-data within codec model              :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-27 Sun 18:01]--[2022-11-27 Sun 18:30] =>  0:29
+    :END:
+
+At present we are hooking directly into the tags within the codec model in order
+to access meta-data. This is because we only read in profiles etc later on in
+the transform graph. In fact the problem is somewhat recursive: the fundamental
+problem is that we did not expect to bootstrap a full context at the codec
+level; instead we relied on a "minimal context" bootstrapped within the codec
+model itself, allowing us to run the conversions without needing orchestration.
+However, this has now proven to be incorrect: we need meta-data in the codec
+model therefore we should bootstrap a full context before we perform conversion.
+This requires a fair bit of surgery.
+
+Notes:
+
+- we need to move the conversion tests back to orchestration.
 
 *** Add support for MSVC with CL                                      :story:
 

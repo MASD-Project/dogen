@@ -3960,80 +3960,70 @@ because user space is also about modeling.
 
 *** Integration of configuration and variability                      :story:
 
-There are several threads going on in different stories that can be
-unified. These are related to variability and configuration. We need
-to find all of these stories and merge them at some point. The key
-finding seems to be that the variability we are experiencing in dogen
-as configuration is the same as the configuration all applications
-require - e.g. app.config, INI files, etc. Because Dogen has
-configuration embedded into models, its not very obvious that we are
-doing the same thing. What this means is the following:
+There are several threads going on in different stories that can be unified.
+These are related to variability and configuration. We need to find all of these
+stories and merge them at some point. The key finding seems to be that the
+variability we are experiencing in dogen as configuration is the same as the
+configuration all applications require - e.g. app.config, INI files, etc.
+Because Dogen has configuration embedded into models, its not very obvious that
+we are doing the same thing. What this means is the following:
 
-- we could, very easily, create a serialisation format for
-  features. These would look a bit like the JSON format we had some
-  sprints ago. However the key difference is that this time /we would
-  generate the JSON files from models/. We would have a new part for
-  Dogen: =configuration=. Under this part, we would store the
-  serialised format for feature models. Note that these are the
-  features, not their instances. The file names could be something
-  really simple such as =[MODEL_name].features.[FORMAT]=,
-  e.g. =dogen.variability.features.json= or
-  =dogen.variability.features.ini= (probably not INI as I think its
-  not rich enough to carry the features). We could then aggregate all
-  of these files and place them in the dogen package. At start up
-  Dogen would look for this directory and if found would load all of
-  the features from there. This is exactly the same as having the
-  features in code.
+- we could, very easily, create a serialisation format for features. These would
+  look a bit like the JSON format we had some sprints ago. However the key
+  difference is that this time /we would generate the JSON files from models/.
+  We would have a new part for Dogen: =configuration=. Under this part, we would
+  store the serialised format for feature models. Note that these are the
+  features, not their instances. The file names could be something really simple
+  such as =[MODEL_name].features.[FORMAT]=, e.g.
+  =dogen.variability.features.json= or =dogen.variability.features.ini=
+  (probably not INI as I think its not rich enough to carry the features). We
+  could then aggregate all of these files and place them in the dogen package.
+  At start up Dogen would look for this directory and if found would load all of
+  the features from there. This is exactly the same as having the features in
+  code.
 - the second aspect is access to configurations. Now, for dogen, the
-  configurations live in dynamic instances of variability
-  objects. This is fine. We could create a wrapper, very similar to
-  what we are doing at present, that reads data from these objects and
-  presents the developer with a c++ object. However, the key thing is
-  that this is a very special case. In almost all cases, what we
-  really have is a config file such as =app.config=, INI etc. The
-  profile (as we call it at present) is the instance of the config
-  file. The feature model is the type information required to generate
-  a class that can read the config file and present an idiomatic
-  object to the consuming user. Nothing stops us from allowing users
-  to define feature bundles, then using those to generate classes that
-  know how to read those features from config sources; and then
-  serialising profiles into config sources. Finally, at run time, the
-  code would merely read the serialised config source.
-- all of this, of course, sounds extremely convoluted for the simple
-  case. But the power of it is the more complex cases. We can now
-  quite trivially create a consul loader that takes a config file and
-  populates the KVP store. Similarly, we could also create a consul
-  client that retrieves the config from the KVP store, always getting
-  latest. We could even support both, depending on environment
-  variables.
-- configuration sources allow us to support many configuration
-  backends: boost property tree, environment variables, etc. However,
-  we can't have these as facets. We probably need to define an
-  interface and then multiple implementations, with associated
-  factories.
-- note that the generation of JSON/INI files for the features is also
-  only a dogen requirement. For the "userspace" cases we can define
-  the features in a diagram and then create the instantiations in the
-  same diagram as profiles and then code-generate the profiles as both
-  INI files and c++ code to read the files (e.g. we only need to code
-  generate the configuration). However, for dogen this is not possible
-  (by design).
-- while we're at it, we should also create the notion of
-  "configuration sets". These are multiple instantiations of the
-  feature model and could be used to model environments.
-- one way to flatten and aggregate both features and profiles to make
-  them suitable for code generation on a single file is the creation
-  of a meta-model element that gathers them. We could create a
-  transform that finds all features in a model and populates the new
-  meta-model elements with them (like say a feature initialiser at
-  present). This would also allow for a clean way to distinguish
-  between models that use features without code generation and models
-  that require code generation.
-- configuration is strictly a KVP model. It should not support object
-  graphs.
+  configurations live in dynamic instances of variability objects. This is fine.
+  We could create a wrapper, very similar to what we are doing at present, that
+  reads data from these objects and presents the developer with a c++ object.
+  However, the key thing is that this is a very special case. In almost all
+  cases, what we really have is a config file such as =app.config=, INI etc. The
+  profile (as we call it at present) is the instance of the config file. The
+  feature model is the type information required to generate a class that can
+  read the config file and present an idiomatic object to the consuming user.
+  Nothing stops us from allowing users to define feature bundles, then using
+  those to generate classes that know how to read those features from config
+  sources; and then serialising profiles into config sources. Finally, at run
+  time, the code would merely read the serialised config source.
+- all of this, of course, sounds extremely convoluted for the simple case. But
+  the power of it is the more complex cases. We can now quite trivially create a
+  consul loader that takes a config file and populates the KVP store. Similarly,
+  we could also create a consul client that retrieves the config from the KVP
+  store, always getting latest. We could even support both, depending on
+  environment variables.
+- configuration sources allow us to support many configuration backends: boost
+  property tree, environment variables, etc. However, we can't have these as
+  facets. We probably need to define an interface and then multiple
+  implementations, with associated factories.
+- note that the generation of JSON/INI files for the features is also only a
+  dogen requirement. For the "userspace" cases we can define the features in a
+  diagram and then create the instantiations in the same diagram as profiles and
+  then code-generate the profiles as both INI files and c++ code to read the
+  files (e.g. we only need to code generate the configuration). However, for
+  dogen this is not possible (by design).
+- while we're at it, we should also create the notion of "configuration sets".
+  These are multiple instantiations of the feature model and could be used to
+  model environments.
+- one way to flatten and aggregate both features and profiles to make them
+  suitable for code generation on a single file is the creation of a meta-model
+  element that gathers them. We could create a transform that finds all features
+  in a model and populates the new meta-model elements with them (like say a
+  feature initialiser at present). This would also allow for a clean way to
+  distinguish between models that use features without code generation and
+  models that require code generation.
+- configuration is strictly a KVP model. It should not support object graphs.
 
-With this approach we can finally unify the world of code generation
-variability with the world of application variability.
+With this approach we can finally unify the world of code generation variability
+with the world of application variability.
 
 Links:
 
@@ -10149,6 +10139,19 @@ Links:
   can be stored/retrieved
 - [[https://github.com/rxi/fe][fe GH]]: "A tiny, embeddable language implemented in ANSI C"
 
+*** Embedding support                                                 :story:
+
+It would be really nice to be able to generate code to export C++ APIs to an
+embedding language such as lisp or javascript.
+
+Links:
+
+- [[https://github.com/arichel/PicoScheme][PicoScheme]]: embeddable lisp.
+- [[https://github.com/drunderscore/Cosmo][GH Cosmo]]: embeds libjs.
+- [[https://clisp.sourceforge.io/][clisp]]
+- [[https://stackoverflow.com/questions/1716456/lisp-as-a-scripting-language-in-a-c-app][SO: Lisp as a Scripting Language in a C++ app]]
+- [[https://ecl.common-lisp.dev/][ECL: Embeddable Common-Lisp]]
+- [[https://lambdafaktorie.com/embedding-lisp-in-c-a-recipe/][Embedding Lisp in C++ – A Recipe]]
 
 *** User interface generation                                          :epic:
 
