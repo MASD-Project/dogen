@@ -70,8 +70,8 @@ void report_exception(const bool can_log, const std::exception& e) {
      * would not have access to the what() method and thus could not provide the
      * exception message to the console.
      */
-    const auto be(dynamic_cast<const boost::exception* const>(&e));
-    if (!be)
+    const auto *const be(dynamic_cast<const boost::exception* const>(&e));
+    if (be == nullptr)
         return;
 
     using boost::diagnostic_information;
