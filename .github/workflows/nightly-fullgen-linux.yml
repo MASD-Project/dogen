@@ -29,7 +29,6 @@ jobs:
   build:
     if: ${{ needs.check_changes.outputs.should_run != 'false' }}
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-    name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
     runs-on: ubuntu-latest
     environment: CI
     strategy:
