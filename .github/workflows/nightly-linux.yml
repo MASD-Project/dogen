@@ -37,7 +37,6 @@ jobs:
         include:
           - name: linux-gcc
             family: linux
-            os: ubuntu
             compiler: gcc
           - name: linux-clang
             family: linux
