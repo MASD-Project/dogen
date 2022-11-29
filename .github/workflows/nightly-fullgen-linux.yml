@@ -7,9 +7,30 @@ on:
       - completed
 
 jobs:
+  check_changes:
+    runs-on: ubuntu-latest
+    name: Check latest commit
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: fullgen
+          submodules: true
+
+      - name: Print latest commit
+        run: echo ${{ github.sha }}
+
+      - id: should_run
+        continue-on-error: true
+        name: check latest commit is less than a day
+        run: test -z $(git rev-list --after="24 hours" ${{ github.sha }}) && echo "::set-output name=should_run::false"
+
   build:
+    if: ${{ needs.check_changes.outputs.should_run != 'false' }}
     name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-    runs-on: ${{matrix.os}}-latest
+    name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+    runs-on: ubuntu-latest
     environment: CI
     strategy:
       fail-fast: false
@@ -19,11 +40,9 @@ jobs:
         include:
           - name: linux-gcc
             family: linux
-            os: ubuntu
             compiler: gcc
           - name: linux-clang
             family: linux
-            os: ubuntu
             compiler: clang
     steps:
       - uses: actions/checkout@v3
