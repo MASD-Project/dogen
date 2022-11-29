@@ -13,45 +13,46 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-27 Sun 10:26]
-| <75>                                                      |         |       |       |       |
-| Headline                                                  | Time    |       |       |     % |
-|-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *74:35* |       |       | 100.0 |
-|-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 74:35   |       |       | 100.0 |
-| Active                                                    |         | 74:35 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  13.7 |
-| Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.8 |
-| Update boost to latest in vcpg                            |         |       |  0:20 |   0.4 |
-| Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
-| Sprint and product backlog grooming                       |         |       |  5:16 |   7.1 |
-| Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.5 |
-| Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   4.4 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   2.9 |
-| Remove uses of mock configuration factory                 |         |       |  0:54 |   1.2 |
-| Add continuous builds to C++ reference product            |         |       |  2:13 |   3.0 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   2.5 |
-| Remove ODB support from Dogen                             |         |       |  0:45 |   1.0 |
-| Model significant relations at a higher level             |         |       |  1:05 |   1.5 |
-| Create a mock configuration builder                       |         |       |  1:58 |   2.6 |
-| Enable CodeQL                                             |         |       |  0:21 |   0.5 |
-| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.4 |
-| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.0 |
-| Upgrade PlantUML to latest                                |         |       |  0:44 |   1.0 |
-| Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
-| Investigate nightly issues                                |         |       |  0:15 |   0.3 |
-| Gitter notifications for builds are not showing up        |         |       |  2:07 |   2.8 |
-| Create a nightly github workflow                          |         |       |  5:39 |   7.6 |
-| Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
-| Windows package is broken                                 |         |       |  0:20 |   0.4 |
-| Warning on OSX build                                      |         |       |  2:23 |   3.2 |
-| Use clang format to format the code base                  |         |       |  0:58 |   1.3 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  23.2 |
-| Configuration as stereotype causes noise                  |         |       |  2:09 |   2.9 |
-| Update CMakeLists to match latest                         |         |       |  0:45 |   1.0 |
-| Nightly builds are taking too long                        |         |       |  3:58 |   5.3 |
+#+CAPTION: Clock summary at [2022-11-29 Tue 09:16]
+| <75>                                                      |           |         |       |       |
+| Headline                                                  | Time      |         |       |     % |
+|-----------------------------------------------------------+-----------+---------+-------+-------|
+| *Total time*                                              | *3d 3:20* |         |       | 100.0 |
+|-----------------------------------------------------------+-----------+---------+-------+-------|
+| Stories                                                   | 3d 3:20   |         |       | 100.0 |
+| Active                                                    |           | 3d 3:20 |       | 100.0 |
+| Edit release notes for previous sprint                    |           |         | 10:13 |  13.6 |
+| Create a demo and presentation for previous sprint        |           |         |  2:06 |   2.8 |
+| Update boost to latest in vcpg                            |           |         |  0:20 |   0.4 |
+| Improve diffing output in tests                           |           |         |  0:19 |   0.4 |
+| Sprint and product backlog grooming                       |           |         |  5:16 |   7.0 |
+| Nightly builds are failing due to missing environment var |           |         |  1:07 |   1.5 |
+| Remove deprecated uses of boost bind                      |           |         |  0:09 |   0.2 |
+| Full generation support in tests is incorrect             |           |         |  3:18 |   4.4 |
+| Tests failing with filesystem errors                      |           |         |  2:10 |   2.9 |
+| Remove uses of mock configuration factory                 |           |         |  0:54 |   1.2 |
+| Add continuous builds to C++ reference product            |           |         |  2:13 |   2.9 |
+| Add continuous builds to C# reference product             |           |         |  1:50 |   2.4 |
+| Remove ODB support from Dogen                             |           |         |  0:45 |   1.0 |
+| Model significant relations at a higher level             |           |         |  1:05 |   1.4 |
+| Create a mock configuration builder                       |           |         |  1:58 |   2.6 |
+| Enable CodeQL                                             |           |         |  0:21 |   0.5 |
+| Change namespaces note implementation in PlantUML         |           |         |  1:48 |   2.4 |
+| Consider using a different layout engine in PlantUML      |           |         |  1:31 |   2.0 |
+| Upgrade PlantUML to latest                                |           |         |  0:44 |   1.0 |
+| Code coverage in CDash has disappeared                    |           |         |  0:23 |   0.5 |
+| Investigate nightly issues                                |           |         |  0:15 |   0.3 |
+| Gitter notifications for builds are not showing up        |           |         |  2:07 |   2.8 |
+| Create a nightly github workflow                          |           |         |  5:39 |   7.5 |
+| Nightly builds are taking too long                        |           |         |  4:21 |   5.8 |
+| Ignore vcpkg path length warning                          |           |         |  0:12 |   0.3 |
+| Windows package is broken                                 |           |         |  0:20 |   0.4 |
+| Warning on OSX build                                      |           |         |  2:23 |   3.2 |
+| Use clang format to format the code base                  |           |         |  0:58 |   1.3 |
+| Add PlantUML relationships to diagrams                    |           |         | 17:19 |  23.0 |
+| Configuration as stereotype causes noise                  |           |         |  2:09 |   2.9 |
+| Update CMakeLists to match latest                         |           |         |  0:45 |   1.0 |
+| Thoughts on refactoring variability                       |           |         |  0:22 |   0.5 |
 #+end:
 
 Agenda:
@@ -1344,6 +1345,102 @@ Links:
 
 
 
+*** COMPLETED Run nightlies only when there are changes               :story:
+
+*Rationale*: implemented.
+
+We should not need to run nightlies every night if there are no commits.
+
+Links:
+
+- [[https://github.com/sunglasses-ai/classy/blob/main/.github/workflows/ci.yml#L10][GH: ci.yml]] Example action with check.
+- [[https://stackoverflow.com/questions/63014786/how-to-schedule-a-github-actions-nightly-build-but-run-it-only-when-there-where][SO: How to schedule a GitHub Actions nightly build, but run it only when there
+  where recent code changes?]]
+
+*** COMPLETED Create a GitHub account for MASD BOT                    :story:
+
+*Rationale*: implemented.
+
+At present we are sending gitter out notifications as ourselves, which is very
+confusing. We need a separate BOT account for this. Unfortunately, this entails
+creating a new email account, a new GitHub account etc.
+
+Links:
+
+- [[https://stackoverflow.com/questions/29177623/what-is-a-bot-account-on-github][What is a "bot account" on github?]]
+
+*** COMPLETED Nightly builds are taking too long                      :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-29 Tue 08:30]--[2022-11-29 Tue 08:53] =>  0:23
+    CLOCK: [2022-11-27 Sun 10:11]--[2022-11-27 Sun 10:26] =>  0:15
+    CLOCK: [2022-11-27 Sun 10:00]--[2022-11-27 Sun 10:10] =>  0:10
+    CLOCK: [2022-11-26 Sat 14:01]--[2022-11-26 Sat 14:50] =>  0:49
+    CLOCK: [2022-11-26 Sat 11:21]--[2022-11-26 Sat 12:09] =>  0:48
+    CLOCK: [2022-11-25 Fri 08:23]--[2022-11-25 Fri 08:40] =>  0:17
+    CLOCK: [2022-11-24 Thu 07:49]--[2022-11-24 Thu 08:00] =>  0:11
+    CLOCK: [2022-11-23 Wed 08:01]--[2022-11-23 Wed 08:29] =>  0:28
+    CLOCK: [2022-11-22 Tue 08:49]--[2022-11-22 Tue 08:59] =>  0:10
+    CLOCK: [2022-11-22 Tue 08:31]--[2022-11-22 Tue 08:49] =>  0:18
+    CLOCK: [2022-11-21 Mon 22:40]--[2022-11-21 Mon 22:47] =>  0:07
+    CLOCK: [2022-11-21 Mon 07:49]--[2022-11-21 Mon 08:14] =>  0:25
+    :END:
+
+It seems we are bursting the 6h limit for nightlies now. We are running around
+900 tests in 6h. We need to reduce the total number of tests run under valgrind.
+
+The solution is to have 2 nightlies:
+
+- a full generation build which runs all tests (e.g. 3.6k).
+- a normal build from master which only runs the ~600 tests.
+
+In order to support this use case we just need a flag to disable memcheck.
+
+Notes:
+
+- all builds pass but the fullgen ones did not make it into CTest. Rename
+  builds. This will also help with coverage.
+- issues with badges.
+- valgrind fails due to CMake version update.
+
+**** CDash Issue
+
+Submit issue to CDash project: https://github.com/Kitware/CDash/issues
+
+#+begin_src markdown
+Hi CDash developers,
+
+Thanks very much for a great tool, which I have relied on daily for more than a decade. I have a strange problem, and not quite sure how to debug it further. My open source project  [1] makes use of the community CDash instance [2]. In general, all my builds have worked just fine but of late I am having a strange problem with a new set of builds. To the layperson, the CTest submission logs look normal, e.g. [3]:
+
+```
+SetCTestConfiguration:BuildDirectory:/home/runner/work/dogen/dogen/build/output/linux-clang-debug
+SetCTestConfiguration:SourceDirectory:/home/runner/work/dogen/dogen
+SetCTestConfigurationFromCMakeVariable:DropMethod:CTEST_DROP_METHOD
+SetCTestConfiguration:DropMethod:http
+SetCTestConfigurationFromCMakeVariable:DropSite:CTEST_DROP_SITE
+SetCTestConfiguration:DropSite:my.cdash.org
+SetCTestConfigurationFromCMakeVariable:DropLocation:CTEST_DROP_LOCATION
+SetCTestConfiguration:DropLocation:/submit.php?project=MASD+Project+-+Dogen
+Submit files
+   SubmitURL: http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Update.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=56f692fc3ddcd82bf709978b14f82f8d Size: 553
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Configure.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=6ccfef78f7a4fa53aff8bcb633109666 Size: 20947
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Build.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=bbf8a77fc3c9de8f93be2f2ce769714d Size: 1120
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Test.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=10192675e22f3562805fa0e8e4eb2981 Size: 8212762
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml
+   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Done.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=c8da7710474223551534d3969a8c4d98 Size: 107
+   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml
+   Submission successful
+```
+
+However, nothing comes up in the dashboard. Other builds (both nightly and continuous) display just fine.
+
+[1] https://github.com/MASD-Project/dogen
+[2] https://my.cdash.org/index.php?project=MASD+Project+-+Dogen
+[3] https://github.com/MASD-Project/dogen/actions/runs/3551520273/jobs/5965773135
+#+end_src
 *** STARTED Ignore vcpkg path length warning                          :story:
     :LOGBOOK:
     CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
@@ -1753,77 +1850,34 @@ Notes:
   perspective we do not want to add references recursively. We want instead to
   rely on transitivity.
 
-*** STARTED Nightly builds are taking too long                        :story:
+*** STARTED Thoughts on refactoring variability                       :story:
     :LOGBOOK:
-    CLOCK: [2022-11-27 Sun 10:11]--[2022-11-27 Sun 10:26] =>  0:15
-    CLOCK: [2022-11-27 Sun 10:00]--[2022-11-27 Sun 10:10] =>  0:10
-    CLOCK: [2022-11-26 Sat 14:01]--[2022-11-26 Sat 14:50] =>  0:49
-    CLOCK: [2022-11-26 Sat 11:21]--[2022-11-26 Sat 12:09] =>  0:48
-    CLOCK: [2022-11-25 Fri 08:23]--[2022-11-25 Fri 08:40] =>  0:17
-    CLOCK: [2022-11-24 Thu 07:49]--[2022-11-24 Thu 08:00] =>  0:11
-    CLOCK: [2022-11-23 Wed 08:01]--[2022-11-23 Wed 08:29] =>  0:28
-    CLOCK: [2022-11-22 Tue 08:49]--[2022-11-22 Tue 08:59] =>  0:10
-    CLOCK: [2022-11-22 Tue 08:31]--[2022-11-22 Tue 08:49] =>  0:18
-    CLOCK: [2022-11-21 Mon 22:40]--[2022-11-21 Mon 22:47] =>  0:07
-    CLOCK: [2022-11-21 Mon 07:49]--[2022-11-21 Mon 08:14] =>  0:25
+    CLOCK: [2022-11-29 Tue 08:54]--[2022-11-29 Tue 09:16] =>  0:22
     :END:
 
-It seems we are bursting the 6h limit for nightlies now. We are running around
-900 tests in 6h. We need to reduce the total number of tests run under valgrind.
+Originally, we introduced tagged values in Dia because we needed to add
+meta-data to types which was not directly supported by the tool. We soon
+extended it to all sorts of annotations. But now that we are no longer
+constrained to Dia, we need to revisit this decision. Fundamentally, there are
+two kinds of datum modeled as features:
 
-The solution is to have 2 nightlies:
+- data which has a functional dependency on the geometry of physical space; and
+- data which does not.
 
-- a full generation build which runs all tests (e.g. 3.6k).
-- a normal build from master which only runs the ~600 tests.
-
-In order to support this use case we just need a flag to disable memcheck.
+The first case involves the use of templates which expand over physical space,
+and this cannot be avoided (e.g. whether a facet is =enabled= or not). The
+second case however is quite trivial. In fact, org-mode does not suffer from the
+same limitations as Dia; one can add all necessary properties as tags, and these
+can be deserialised (manually?) into what we call the codec model at present. In
+this particular case, variability is a bit of an overkill: we know precisely
+what needs to be read, and where to put it. We could simply add logic around
+codec object creation to read these properties in.
 
 Notes:
 
-- all builds pass but the fullgen ones did not make it into CTest. Rename
-  builds. This will also help with coverage.
-- issues with badges.
-- valgrind fails due to CMake version update.
-
-**** CDash Issue
-
-Submit issue to CDash project: https://github.com/Kitware/CDash/issues
-
-#+begin_src markdown
-Hi CDash developers,
-
-Thanks very much for a great tool, which I have relied on daily for more than a decade. I have a strange problem, and not quite sure how to debug it further. My open source project  [1] makes use of the community CDash instance [2]. In general, all my builds have worked just fine but of late I am having a strange problem with a new set of builds. To the layperson, the CTest submission logs look normal, e.g. [3]:
-
-```
-SetCTestConfiguration:BuildDirectory:/home/runner/work/dogen/dogen/build/output/linux-clang-debug
-SetCTestConfiguration:SourceDirectory:/home/runner/work/dogen/dogen
-SetCTestConfigurationFromCMakeVariable:DropMethod:CTEST_DROP_METHOD
-SetCTestConfiguration:DropMethod:http
-SetCTestConfigurationFromCMakeVariable:DropSite:CTEST_DROP_SITE
-SetCTestConfiguration:DropSite:my.cdash.org
-SetCTestConfigurationFromCMakeVariable:DropLocation:CTEST_DROP_LOCATION
-SetCTestConfiguration:DropLocation:/submit.php?project=MASD+Project+-+Dogen
-Submit files
-   SubmitURL: http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen
-   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Update.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=56f692fc3ddcd82bf709978b14f82f8d Size: 553
-   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Update.xml
-   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Configure.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=6ccfef78f7a4fa53aff8bcb633109666 Size: 20947
-   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Configure.xml
-   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Build.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=bbf8a77fc3c9de8f93be2f2ce769714d Size: 1120
-   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Build.xml
-   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Test.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=10192675e22f3562805fa0e8e4eb2981 Size: 8212762
-   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Test.xml
-   Upload file: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=github___linux-clang-debug___20221126-0000-Nightly___XML___Done.xml&build=linux-clang-debug&site=github&stamp=20221126-0000-Nightly&MD5=c8da7710474223551534d3969a8c4d98 Size: 107
-   Uploaded: /home/runner/work/dogen/dogen/build/output/linux-clang-debug/Testing/20221126-0000/Done.xml
-   Submission successful
-```
-
-However, nothing comes up in the dashboard. Other builds (both nightly and continuous) display just fine.
-
-[1] https://github.com/MASD-Project/dogen
-[2] https://my.cdash.org/index.php?project=MASD+Project+-+Dogen
-[3] https://github.com/MASD-Project/dogen/actions/runs/3551520273/jobs/5965773135
-#+end_src
+- remove all Dia support. Delete frozen.
+- remove all JSON support.
+- update all reference products to use org-mode only.
 
 *** Add support for MSVC with CL                                      :story:
 
@@ -1876,16 +1930,6 @@ Actually the situation is even more confusing:
 
 - we need to run =with_full_generation=ON= for the original build;
 - but it must be =OFF= for the fullgen build, else we just recreate the branch.
-
-*** Run nightlies only when there are changes                         :story:
-
-We should not need to run nightlies every night if there are no commits.
-
-Links:
-
-- [[https://github.com/sunglasses-ai/classy/blob/main/.github/workflows/ci.yml#L10][GH: ci.yml]] Example action with check.
-- [[https://stackoverflow.com/questions/63014786/how-to-schedule-a-github-actions-nightly-build-but-run-it-only-when-there-where][SO: How to schedule a GitHub Actions nightly build, but run it only when there
-  where recent code changes?]]
 
 *** Mapping of third-party dependencies (PDMs)                        :story:
 
@@ -2233,16 +2277,6 @@ Merged stories:
 We don't need full operation support for it to be useful. We could
 have minimal support and use it to update the UML diagrams. It would
 then later on be extended for merging code generation.
-
-*** Create a GitHub account for MASD BOT                              :story:
-
-At present we are sending gitter out notifications as ourselves, which is very
-confusing. We need a separate BOT account for this. Unfortunately, this entails
-creating a new email account, a new GitHub account etc.
-
-Links:
-
-- [[https://stackoverflow.com/questions/29177623/what-is-a-bot-account-on-github][What is a "bot account" on github?]]
 
 *** Add grouping for top-level classes in PlantUML                    :story:
 
