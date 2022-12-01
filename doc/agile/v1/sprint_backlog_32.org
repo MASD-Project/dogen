@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-11-29 Tue 18:44]
+#+CAPTION: Clock summary at [2022-12-01 Thu 08:44]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *76:32* |       |       | 100.0 |
+| *Total time*                                              | *76:41* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 76:32   |       |       | 100.0 |
-| Active                                                    |         | 76:32 |       | 100.0 |
+| Stories                                                   | 76:41   |       |       | 100.0 |
+| Active                                                    |         | 76:41 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       | 10:13 |  13.3 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.7 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.4 |
@@ -37,13 +37,14 @@
 | Model significant relations at a higher level             |         |       |  1:05 |   1.4 |
 | Create a mock configuration builder                       |         |       |  1:58 |   2.6 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.5 |
-| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.4 |
+| Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.3 |
 | Consider using a different layout engine in PlantUML      |         |       |  1:31 |   2.0 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   1.0 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.3 |
 | Gitter notifications for builds are not showing up        |         |       |  2:07 |   2.8 |
 | Create a nightly github workflow                          |         |       |  5:39 |   7.4 |
+| Run nightlies only when there are changes                 |         |       |  0:09 |   0.2 |
 | Nightly builds are taking too long                        |         |       |  5:04 |   6.6 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.3 |
 | Windows package is broken                                 |         |       |  0:20 |   0.4 |
@@ -1346,6 +1347,9 @@ Links:
  directories will become one and the same.
 
 *** COMPLETED Run nightlies only when there are changes               :story:
+    :LOGBOOK:
+    CLOCK: [2022-12-01 Thu 08:35]--[2022-12-01 Thu 08:44] =>  0:09
+    :END:
 
 *Rationale*: implemented.
 
