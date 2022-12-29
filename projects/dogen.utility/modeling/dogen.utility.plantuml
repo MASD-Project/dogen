@@ -209,9 +209,6 @@ namespace test_data #F2F2F2 {
     class validating_resolver <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    class xml_reader <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
     class dogen_product <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -227,24 +224,6 @@ namespace test_data #F2F2F2 {
     note top of test_data_exception
 An error occurred whilst obtaining the test data.
     end note
-
-}
-
-namespace xml #F2F2F2 {
-    class exception <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-    }
-
-    class node_types <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-    }
-
-    class node_types_io <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class text_reader <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    class text_reader_io <<dogen::handcrafted::typeable>> #FFFACD {
-    }
 
 }
 

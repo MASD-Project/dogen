@@ -416,12 +416,6 @@ The values supplied for the logging configuration are not valid.
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :END:
 
-** xml reader                                                       :element:
-   :PROPERTIES:
-   :custom_id: 35316072-32FF-9C74-3053-D15DC1351855
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 ** dogen product                                                    :element:
    :PROPERTIES:
    :custom_id: 74452FA6-0A46-2024-0983-A8FA332CB819
@@ -447,41 +441,6 @@ The values supplied for the logging configuration are not valid.
    :END:
 
 An error occurred whilst obtaining the test data.
-
-* xml                                                                :module:
-  :PROPERTIES:
-  :custom_id: F7AFC72F-A202-D734-2E1B-2B0E24702884
-  :END:
-
-** exception                                                        :element:
-   :PROPERTIES:
-   :custom_id: D6449709-8A0B-1DA4-7E0B-BCFCC88930A8
-   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-   :END:
-
-** node types                                                       :element:
-   :PROPERTIES:
-   :custom_id: E69DC3B8-A399-D924-C7D3-247AF2A6D9C6
-   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-   :END:
-
-** node types io                                                    :element:
-   :PROPERTIES:
-   :custom_id: 3FF45B72-872A-AF14-2D13-0CC441AE9241
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** text reader                                                      :element:
-   :PROPERTIES:
-   :custom_id: 8CE1997A-D840-62C4-B4AB-6770AB7CE3F9
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-** text reader io                                                   :element:
-   :PROPERTIES:
-   :custom_id: 532D79D6-CD60-8264-7FCB-876F84504471
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
 
 * environment                                                        :module:
   :PROPERTIES:

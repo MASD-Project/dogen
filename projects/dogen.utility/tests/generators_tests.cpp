@@ -24,7 +24,6 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/test/logging.hpp"
-#include "dogen.utility/types/test_data/xml_reader.hpp"
 #include "dogen.utility/types/test_data/test_data.hpp"
 #include "dogen.utility/types/test_data/generate_container.hpp"
 #include "dogen.utility/types/test_data/generator.hpp"
