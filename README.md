@@ -199,7 +199,8 @@ To checkout Dogen, clone as follows:
 git clone https://github.com/MASD-Project/dogen.git --recurse-submodules
 ```
 
-This takes into account the vcpkg submodule setup. For the configure step:
+This takes into account the vcpkg submodule setup, as well as test data
+(explained below). For the configure step:
 
 ```
 cd dogen
@@ -215,43 +216,39 @@ cmake --build --preset linux-clang-release
 ## Testing
 
 If you'd like to run the project tests, execute the target ```run_all_tests```
-or its abbreviation ```rat```. This is sufficient if you just need to gain some
-confidence on the code generator as we perform tests against Dogen's own models.
-However, if you are trying to submit a PR that changes the behaviour of the code
-generator, you must also run the tests against the C++ and C# reference
-implementation models. For this you need to download the zips or clone the
-repositories locally:
+or its abbreviation ```rat```. Note that the tests check code generation against
+both Dogen, as well as the reference products:
 
 - [C++ Reference Implementation](https://github.com/MASD-Project/cpp_ref_impl)
 - [C# Reference Implementation](https://github.com/MASD-Project/csharp_ref_impl)
 
-Due to our use of presets, the expected location of these files is baked in, as
-follows:
+Reference products are checked out as git sub-modules under ```test_data``` and
+pointed to in the presets file, _e.g._:
 
-``` bash
-"CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
-"CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
+``` json
+            "environment": {
+                "DOGEN_PROJECTS_DIRECTORY": "${sourceDir}/projects",
+                "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/test_data/cpp_ref_impl/projects",
+                "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/test_data/csharp_ref_impl/Src"
+            },
 ```
 
-If you can, please follow this directory structure. If you would like a
-different structure then you will need to create your own preset configuration
-for CMake.
-
+If you see any errors running CMake - _e.g._ "DOGEN_PROJECTS_DIRECTORY not
+found.", _etc._ - please make sure the sub-modules were checked out correctly.
 If all has gone according to plan, you should then see that Dogen correctly
 recognises the additional models (where ```DIR``` is the top-level directory for
 Dogen):
 
 ```
 ...
--- CMake Version: 3.22.2
+-- CMake Version: 3.24.2
 -- DOGEN_PROJECTS_DIRECTORY=${DIR}/projects
--- CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/../../cpp_ref_impl/master/projects
--- CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/../../csharp_ref_impl/master/Src
+-- CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/test_data/cpp_ref_impl/projects
+-- CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/test_data/csharp_ref_impl/Src
 ...
 
 ```
 
-Running all tests will now also include the tests for reference implementations.
 You can run all tests as follows:
 
 ```
@@ -281,6 +278,8 @@ cmake --build --preset linux-clang-release --target gao
 ```
 
 Replacing ```linux-clang-release``` with your platform and compiler.
+
+**Important**: Please note that this does not regenerate the reference models.
 
 # Documentation
 
