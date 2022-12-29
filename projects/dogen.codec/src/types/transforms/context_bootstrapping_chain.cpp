@@ -44,10 +44,9 @@ boost::shared_ptr<tracing::tracer>
 context_bootstrapping_chain::create_and_setup_tracer(
     const configuration& cfg, const std::string& activity) {
     /*
-     * Setup the tracer. Note that we do it regardless of whether
-     * tracing is enabled or not - its the tracer job to handle
-     * that. Also, we start tracing here so that all transforms can
-     * make use of it.
+     * Setup the tracer. Note that we do it regardless of whether tracing is
+     * enabled or not - it's the tracer job to handle that. Also, we start
+     * tracing here so that all transforms can make use of it.
      */
     using namespace transforms;
     const auto r(boost::make_shared<tracing::tracer>(cfg, activity));
