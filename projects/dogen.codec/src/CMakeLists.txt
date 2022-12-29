@@ -43,7 +43,6 @@ target_include_directories(${lib_target_name}
     PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include)
 
 target_link_libraries(${lib_target_name} PRIVATE
-    dogen.dia.lib
     dogen.identification.lib
     dogen.lib
     dogen.org.lib

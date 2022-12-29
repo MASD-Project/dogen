@@ -76,6 +76,1457 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Add support for MSVC with CL                                      :story:
+
+At present this build is broken and GitHub does not support allow failures. The
+following was removed from the workflow:
+
+#+begin_src yaml
+          # FIXME: can't use this until allow_failures is added to github.
+          # See https://github.com/actions/toolkit/issues/399
+          # - name: windows-msvc-clang-cl
+          #   os: windows
+          #   family: windows
+          #   compiler: msvc-clang-cl
+          #   experimental: true
+          ...
+          if ("${{matrix.experimental}}" -eq "true")
+          {
+              $build_group = "Experimental"
+          }
+#+end_src
+
+*** Consider exporting =WITH_FULL_GENERATION= in CMakeFile            :story:
+
+At present we have to do two things for full generation:
+
+#+begin_src yaml
+      - name: Run CTest workflow
+        env:
+          WITH_FULL_GENERATION: ON
+          preset: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
+#+end_src
+
+And:
+
+#+begin_src yaml
+        run: |
+          export DOGEN_BUILD_PROVIDER="github"
+          export DOGEN_BUILD_COMMIT="${GITHUB_SHA}"
+          export DOGEN_BUILD_NUMBER="${GITHUB_RUN_NUMBER}"
+          export DOGEN_BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
+          export cmake_args="build_group=Nightly,build_name=${preset},with_full_generation=ON"
+#+end_src
+
+This is because the unit tests need the environment variable to pass and the
+code generator needs the CMake parameter. However, it does not make sense to use
+these in isolation. We should probably export the environment variable from
+within CTest or CMake.
+
+Actually the situation is even more confusing:
+
+- we need to run =with_full_generation=ON= for the original build;
+- but it must be =OFF= for the fullgen build, else we just recreate the branch.
+
+*** Mapping of third-party dependencies (PDMs)                        :story:
+
+System models should follow the physical structure of dependencies. That is, we
+should not have a "boost" system model, but instead a boost-test etc. Each of
+these can then have mappings (e.g. vcpkg name, build2 name, etc). Users must
+declare these references just like they do with user models. Dogen can then
+create code for:
+
+- cmake targets, properly linking against libraries;
+- vcpkg install, at product level, by de-duplicating component dependencies;
+- possibly distro dependencies.
+
+We should only have a mandatory dependency, which is the STL. In addition, we
+need different models for each version (e.g. c++ 03, etc). This makes it easier
+to include the right types.
+
+Note that each model must have an associated version. The version should be part
+of the file name. However, maybe we need to distinguish between TS version (11,
+17, etc) from library version.
+
+One way of solving this regularity problem (e.g. having masd::std::string is the
+real name but its annoying to have to have users typing this) is to support
+"using" statements at the model level. If a user could type something like
+=using masd= and this would allow us to find all types as if we had typed
+=masd::= then users could still type =std::string= and find =masd::std::string=.
+We'd solve both the regularity and the "look and feel". The downside is that
+this could have important ramifications in resolution:
+
+- how does this work in the presence of merged models? do we merge usings? will
+  this find types we're not supposed to find?
+
+Needs some more thinking.
+
+Notes:
+
+- utility model must be split into multiple models: the PDMs should go with
+  their own models. The real utilities should stay on a utility product. This
+  can then be reused by dogen (for example, if logging is enabled it uses the
+  logging setup from this model). Users should be able to switch it off though.
+
+Merged stories:
+
+*Platform description models*
+
+We should consider integrating all of the information regarding "platforms" into
+platform description models (PDMs). These include:
+
+- all types available in a library (proxy models) and their mapping in terms of
+  aspects. We could make the mapping a bit clearer by designing platform
+  description models that are not part of modeling. We don't really need support
+  for attributes, operations etc. However, we need some kind of "adaptor" that
+  extracts all the type information (or some other way of making resolution work
+  across different model types).
+- name of the library, supported language (e.g. for Boost, C++ etc), versions of
+  the library. We must associate the types with a version (e.g. introduced on
+  version X, deprecated on version Y) so that when the user is using a given
+  version it errors if a type is not available.
+- packaging support: mapping to the name used on most common packaging systems
+  such as DEB, RPM etc. Also, mapping on language specific package managers such
+  as build2, vcpkg, conan, nuget, etc. User can decide what package manager to
+  use overall or for a specific library (e.g. possible to mix-and-match package
+  manager). It should also have a mapping for CMake support that includes "in
+  CMake library from version X" and "available on an external source" with a
+  URL. If the user selects the latter, Dogen can download the CMake file (or
+  maybe Dogen should include the external CMake files to guarantee a stable
+  behaviour).
+
+Notes:
+
+- with this we can now move away from the bad modeling used with proxy models,
+  where it was not quite clear what they were. We can create a different file
+  format (e.g. *.pdm* )that can share some similarities with existing JSON
+  models but is not stuck with all the baggage needed to represent user models.
+- however, PDMs are just regular models. Users should be able to make use of the
+  PDM stereotypes to define PDM types in a regular UML model. Interestingly, a
+  PDM from this perspective is similar to a named configuration. The difference
+  is that it introduces a new type into the type system rather than a new
+  stereotype. But with this we can now make use of named configurations, making
+  PDMs a lot less verbose (e.g. define a named config and share it across
+  multiple types, like SmartPointer etc). We could even share it across multiple
+  platform models!
+- PDMs should be organised by language (e.g. folder for cpp, etc). Top level
+  directory is PDM rather than library.
+- users declare references to PDMs just like normal models. PDMs have an
+  attribute for "auto-loading". If on, we load regardless. Else it must be
+  referenced. This is useful for say STL, hardware types.
+- users can supply their own PDMs, although they are encouraged to submit them
+  if they are general enough.
+- if users choose CMake as the build system, we automatically add all the
+  boilerplate required to add the library to CMake. In an ideal world, the PDM
+  should contain the CMake snippets, with "macros" where required (e.g. version,
+  etc). This would mean we wouldn't have to change templates when new libraries
+  are added. We could also have a "standard" CMake snippet that works for most
+  libraries.
+- different libraries may have different types of support (e.g. a library may
+  not exist in a package manager, etc)
+- we could now create an installation script that sets up all dependencies (e.g.
+  DEB/RPM). It cannot be a target because the build would fail (e.g. CMake would
+  not find all dependencies).
+- now that =library= can be renamed to =pdm=, we could call the top-level
+  directory =library=.
+
+*Adding linking libraries is not handled*
+
+#+begin_quote
+*Story*: As a dogen user, I want to link against libraries without having to
+manually generate CMakeFiles.
+#+end_quote
+
+At present whenever a model requires additional link library targets we need to
+disable CMake generation and do it by hand. However:
+
+- for well-known dependencies such as boost we could create a convention (e.g.
+  assume/require that the CMake boost libraries flags are set via find boost).
+  Alternatively, the types should contain meta-data that has information about
+  linking requirements; e.g. if you use a type from a boost model, it should
+  provide you with linking information in its meta-data. Each boost type could
+  have different information depending on which boost library they come from.
+- for user level dependencies we should add dynamic extensions at the model
+  level. Also, references provide sufficient information to link against other
+  dogen models.
+
+
+*** Model "types" and element binding                                 :story:
+
+It seems clear that we will have different "types" of models:
+
+- product models, describing entire products.
+- component models, which at present we call "models". These describe a given
+  component type such as a library or an executable. Thus, they themselves have
+  sub-types.
+- profile models: useful to keep the configuration separate. However, it may
+  make more sense to place them in the product model, since its shared across
+  components?
+- PDMs: these describe platforms.
+- generative models: generate extensions to code generators.
+
+At present there is no concept of model types, so any meta-model element can be
+placed in any model. This is convenient, but in the future it may make things
+too complicated: users may end up placing types in PDMs when they didn't meant
+to do so, etc. What seems to emerge from here is that, just as with variability,
+there is a concept of a binding point at the model level too. That is,
+meta-model elements are associated with specific model types (binding element?).
+
+In an ideal world, we should have a class in the meta-model that represents each
+model type. We then instantiate this class within one of the dogen models to
+register the different model types. Its code-generation representation is the
+registration. It also binds to all the meta-model elements it binds to. This can
+be done simply by creating a feature that lists the stereotypes of the elements
+(remember that these are then registered too, because we will generate the
+meta-class information as we generate the assets model). Then, we can ask the
+model type if a given element is valid (check a set of stereotypes).
+
+Formatters are themselves meta-model elements, and they bind to other meta-model
+elements (which raises the question: which meta-model elements are bindable? we
+can't allow a formatter to bind to a formatter...). Perhaps we need another type
+of model, which is a "generation model". This is where we can either declare new
+technical spaces or add to existing technical spaces; and declare new facets and
+formatters. We should be able to add to existing facets and TSs by allowing
+users to specify the TS/facet when declaring the formatter. If not specified,
+then the user must declare a facet in the package containing the formatter.
+Similarly with TSs.
+
+Note also that the formatter binding code is "inserted" directly during
+generation into the CPP file. Its not possible to change it. Same with the
+includes. This ensures the user cannot bypass the model type system by mistake.
+Also, by having a formatter meta-model type, we can now declare the header file
+as we please, and ensure the shape of the implementation. Now, the stitch
+template can be restricted to only the formatting function itself; the rest is
+code-generated. We no longer need wale templates. This will of course require
+the move to PDMs and the removal of the helper code. This also means that anyone
+can declare new meta-model elements; they will register themselves, and
+correctly expand across archetype space. However, we do not have the adaption
+code nor do we have containers for these modeling elements. We need a separate
+story for this use case.
+
+Destinations are meta-model elements too. In the generation.cpp model we will
+declare all the available destinations:
+
+- global
+- src
+- include
+- tests
+
+etc. The formaters bind into destinations. Formatters belong to facets in the
+archetype space, which express themselves as directories in the artefact path
+when we project from archetype space into artefact space. More generally: assets
+in asset space are projected into the multidimensional archetype space.
+Archetypes are projected into artefact space, but the dimensions of archetype
+space are flattened into the hierarchy of the filesystem.
+
+We also need a concept of artefact types. These mainly are needed for file
+extensions, but conceivably could also be used for other purposes.
+
+Notes:
+
+- the binding should be done at the streotype level, not model element.
+
+Merged stories:
+
+*Model types and element binding*
+
+Once we introduce the concept of model types (e.g. product, component, possibly
+different types of components), we should also take into account that some model
+types don't support some model elements. It should be possible to declare which
+model types support which element types such that if a user tries to use an
+invalid model type, we get a sensible error. In effect, this is a binding
+problem at the meta-model level.
+
+One of the component model types should be "generative components". These are
+used to augment the code generator. We need to look at the thesis on generative
+development to look for terminology.
+
+We should also have model types for terraform, etc.
+
+One way to implement this is to add a feature at the element (once we have a way
+of expressing dogen meta-elements) that lists the supported model types for a
+given element.
+
+*logical models could have a model classification*
+
+Consider creating an enumeration for model classification (e.g. type of the
+model):
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work. This is kind of a model level
+stereotype which can be used by the code generator for example to determine
+which models are compatible. It could also be used to determine what facets can
+be enabled/disabled.
+
+*Merged with modes of operation story:*
+
+Create "modes" of operation: relational, object-oriented and procedural. they
+limit the types available in yarn. relational only allows built-ins plus
+relational commands (FK and PK; FK is when using a model type, PK is a marker on
+a property). procedural only allows built-ins plus model types. we will need
+pointer support for this. object oriented is the current mode. the modes are
+validated in the middle end.
+
+*** Make executable a trivial target                                  :story:
+
+In order to simplify the make targets, we should make the executable just a
+simple invocation of a class within the library; this would then mean we just
+need to link against the library for the component, making CMake infrastructure
+trivial.
+
+*** Create a standard directory for generated files                   :story:
+
+Dogen projects will require at least one generated file for the version. We
+should have a standard way of referring to that directory, e.g.:
+
+: DOGEN_GENERATED_HEADER_DIR
+
+This directory should be private.
+
+Notes:
+
+- how do we know which components need access to this directory?
+
+*** org-model and links to references                                 :story:
+
+At present we are adding links as part of the drawers in org-models. However,
+this is not ideal. We want to use regular org-mode constructs. There are several
+use cases for links:
+
+- we want org-mode links so that we can make use of tools such as org-roam.
+- we need to use the links for dogen to resolve the model. Both of these use
+  cases happen whilst the code is in its normal shape in the git repository.
+- when we generate doxygen documentation we need links that can work when the
+  site has been published. At this point the models have all been copied to a
+  different location by doxygen.
+
+We need to find out a way to make links work for all of these use cases.
+
+Merged stories
+
+*Add references as links to org documents*
+
+Try adding a =references= tag. Content is a list of links to org models.
+However, because of the way our referencing works in dogen, we need to do some
+kind of hack. Perhaps the "text" of the link could be the simple path to the
+file and the link the relative path. To start off with, it can be ignored and
+managed manually. This will be spun into its own story for the future.
+
+*** Generated CMakefiles do not take tests into account               :story:
+
+At present most models have:
+
+: masd::build::cmakelists, dogen::handcrafted::cmake
+
+One of the reasons is because the template is not taking generated
+tests into account. It should have:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** =CMakeFiles= do not reference dogen models                        :story:
+
+At present we cannot test cross-model referencing because our
+CMakeFiles are not adding the linking references to these models. This
+needs to be fixed before we can test cross model serialisation.
+
+Notes:
+
+- in order to map references to models, we need to create a modeling
+  element for a reference. For this we have two cases: for proxy
+  models/PDMs, we need to read from the meta-data the name of the lib
+  the model generates. For dogen models we can create it from the
+  model name.
+- this is a variation of the "exports and imports" pattern: we import
+  a set of libraries (these can either be macros or actual library
+  names) and we export (for now) a single library. When we support
+  facets in libraries, we may need to export more than one, so we
+  should cope with this scenario now. We need to keep track of the
+  exports for a reference, and then use those as the imports for the
+  model.
+- in an ideal world, all imports come via this mechanism. However,
+  this means we now have to create PDMs/proxies just to setup the
+  imports. For example, for LibXML we will not need to define any of
+  the types, but we need the import. However, If we do force the
+  definition of the PDM, the advantage is that we now have the right
+  place to put the definition, and is done only once and shared by all
+  models.
+
+*** Add operations to PlantUML diagrams                               :story:
+
+At present its not possible to add operations to PlantUML diagrams. This means
+the diagrams are not as useful as the Dia representation. We could add basic
+support for operations and then dump these in PlantUML.
+
+This can be done by adding operations all the way to the logical model, but then
+not expressing them. Or we can just stop at the codec model and then create a
+story for the rest of the work.
+
+Merged stories:
+
+*Consider adding operations for PlantUML*
+
+We don't need full operation support for it to be useful. We could
+have minimal support and use it to update the UML diagrams. It would
+then later on be extended for merging code generation.
+
+*** Add grouping for top-level classes in PlantUML                    :story:
+
+It is possible to group classes that have no relationship with =together=.
+Experiment with this to see if it improves the layout for top-level classes.
+
+#+begin_src plantuml
+together {
+  class Together1
+  class Together2
+  class Together3
+}
+#+end_src
+
+Links:
+
+- [[https://plantuml.com/class-diagram][See "Help on layout" section]]
+
+Merged stories:
+
+*Consider creating a "top-level" group in PlantUML*
+
+There are a number of classes that always show up at the top:
+
+- registrar
+- cmakelists
+- main
+- etc
+
+These could also be part of a top-level group.
+
+We could also have a group for logic-less templates if they are at the
+top-level.
+
+*** Consider adding support for archimate                             :story:
+
+#+begin_quote
+ArchiMate is an open and independent enterprise architecture modeling language
+to support the description, analysis and visualization of architecture within
+and across business domains in an unambiguous way.
+
+ArchiMate offers a common language for describing the construction and operation
+of business processes, organizational structures, information flows, IT systems,
+and technical infrastructure. This is just like an architectural drawing in
+classical building where the architecture describes the various aspects of the
+construction and use of a building. This insight helps the different
+stakeholders to design, assess, and communicate the consequences of decisions
+and changes within and between these business domains.
+#+end_quote
+
+Links:
+
+- [[https://plantuml.com/archimate-diagram][PlantUML: Archimate Diagram]]
+- [[https://github.com/plantuml-stdlib/Archimate-PlantUML][GH: Archimate-PlantUML]]
+
+*** Add links to PlantUML diagrams                                    :story:
+
+PlantUML supports org-mode style links in diagrams, e.g.:
+
+#+begin_src
+[[http://plantuml.com]]
+#+end_src
+
+Links:
+
+- [[https://plantuml.com/link][PlantUML: Format definition]]
+
+*** Consider renaming assemblers with weavers                         :story:
+
+Weaving is the MDE term. We have a few transforms with "assembly" on the name,
+we should rename these or at least clarify the difference between assembling and
+weaving.
+
+*** Consider adding support for clang-tidy                            :story:
+
+As [[http://clang.llvm.org/extra/clang-tidy/][per docs]]:
+
+#+begin_quote
+clang-tidy is a clang-based C++ “linter” tool. Its purpose is to provide an
+extensible framework for diagnosing and fixing typical programming errors, like
+style violations, interface misuse, or bugs that can be deduced via static
+analysis. clang-tidy is modular and provides a convenient interface for writing
+new checks.
+#+end_quote
+
+As with clang-format, we should create a meta-model element to generate this
+file.
+
+See also:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.github/workflows/tidy.yml][QL clang tidy GH workflow]]
+- [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
+- [[https://www.kdab.com/clang-tidy-part-1-modernize-source-code-using-c11c14/?utm_source%3DMaster%2520List%252006-16&utm_campaign%3Dd11fea20e3-EMAIL_CAMPAIGN_2017_03_23&utm_medium%3Demail&utm_term%3D0_bdde4cdc11-d11fea20e3-101553725&goal%3D0_bdde4cdc11-d11fea20e3-101553725][Clang-Tidy, part 1: Modernize your source code using C++11/C++14]]
+- [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-tidy][hpx clang tidy file]]
+- [[https://github.com/lballabio/QuantLib/pull/1369][Split .clang-tidy into one for fixes and one for checks #1369]]
+
+*** Split pre-assembly chain                                          :story:
+
+We have several chains inside a massive chain. Notes:
+
+- initial steps (variability, mappings, dynamic stereotypes). This is a chain on
+  its own right.
+- a top-level chain that processes model sets.
+- the pre-assembly chain then calls these two sub-chains.
+
+*** Add support for titles in PlantUML                                :story:
+
+As per docs:
+
+#+begin_quote
+Title
+
+The title keywords is used to put a title. You can add newline using \n in the
+title description.
+#+end_quote
+
+Consider also:
+
+#+begin_quote
+Footer and header
+
+You can use the commands header or footer to add a footer or a header on any
+generated diagram.
+
+Legend the diagram
+
+The legend and end legend are keywords is used to put a legend.
+#+end_quote
+
+Links:
+
+- https://plantuml.com/commons
+
+*** Allow moving PlantUML documentation                               :story:
+
+At present the documentation is always generated at the top of an element:
+
+#+begin_src plantuml
+    note top of references_resolver
+Trivial struct that records all the data we need for our little DFS excursion.
+    end note
+#+end_src
+
+However, in many cases, there are better places to put the docs. It would be
+nice if we could supply a hint to the codec.
+
+*** Codec ID validation                                               :story:
+
+We are now relying on the codec ID for a lot of things. We need to make sure:
+
+- it has been supplied for all elements;
+- it is unique across a model.
+
+In the future we should also check its unique across all loaded models.
+
+*** Core generation rules                                             :story:
+
+These are some ideas that need further work. We seem to have figured out a
+couple of core principles related to generation:
+
+- all artefacts must be modeled. We should not ignore anything. If it requires
+  ignoring, we must ignore it at the model level - e.g. we should not use things
+  such as ignore regexes. Corollary: dogen models must be modeled.
+- do not have more than one representation of the same data. For example, take
+  protected regions; we can't have these on the output files and on the model
+  itself. This is because if we do we now have a synchronisation problem. The
+  use case is to edit the protected region from the file itself. The only
+  problem with this approach is that one cannot take the model and regenerate
+  everything. For this we could have a rule - the region in the model always
+  reflects the last run. That is, the region in the model is read-only and will
+  be updated with generation.
+- it would be extremely useful to have a list of files in the model which is
+  updated after each generation. This would allow us to jump quickly from model
+  elements to files. It would also allow us to use org-roam.
+- models should refer to documentation for detailed explanation, via org-roam.
+- there should only be one generation pass. At present we rely on a multi-pass
+  approach for generation. For example, we may generate some code using Dogen,
+  then use ODB to generate more code and so on. The right approach is to have a
+  cartridge for ODB and a way to model the expected artefacts coming out of ODB
+  (or perhaps detect them post-facto?). This means the build system only has to
+  call Dogen. Note that cartridges can call cartridges and so on. We need a way
+  to model this chain of calls as a model element. A cartridge such as protobuf
+  may generate many files. We need a way to capture this.
+- a model element may be associated with a directory which then has a model:
+  product models make use of this feature to contain component models. This
+  should also allow for adding new component models: dogen creates the directory
+  structure and the empty component model.
+ - models have an associated "type" which determines the valid set of logical
+   entities that can be instantiated within the model, and by implication the
+   set of projections onto physical space.
+- it should be possible to generate a model either at the product level or at
+  the component level.
+- when working at a higher level than the product, org-roam is used to weave
+  knowledge across the product set. But should there be a higher-level model
+  above product? This would allow for the creation of the correct filesystem
+  structure for products, as well as cater for documentation specific to this
+  higher level entity.
+
+*** Consider using templates for codec conversion                     :story:
+
+At present we are generating org-mode and PlantUML output by hand. It seems
+likely using templates would be an improvement. However, we should probably do
+this after we move away from stitch and into mustache. This will also make life
+easier because stitch may pull in unnecessary dependencies.
+
+*** Ignorable headlines in org-mode                                   :story:
+
+It should be possible to add documents that do not get expressed as source code
+in models, but still come out in the documentation. At present it seems any
+headline which does not have a MASD attribute is ignored.
+
+There are two use cases:
+
+- adding content that is intended only for documentation purposes. For this we
+  can make use of the MASD attributes (or its absence).
+- ignoring a MASD element temporarily. For this we can remove manually the
+  attribute?
+
+Notes:
+
+- apparently org-mode supports headlines marked with =COMMENT=.
+
+Links:
+
+- [[https://www.reddit.com/r/emacs/comments/lxwo61/quick_tip_for_those_with_a_literate_emacs_config/][reddit: Quick tip for those with a literate emacs config]]
+
+*** Add support for notes and comments in models                      :story:
+
+In dia we used to use UML notes to add additional commentary in diagrams. We can
+still do that in PlantUML:
+
+#+begin_src plantuml
+@startuml
+class Foo
+note left: On last defined class
+
+note top of Object
+  In java, <size:18>every</size> <u>class</u>
+  <b>extends</b>
+  <i>this</i> one.
+end note
+
+note as N1
+  This note is <u>also</u>
+  <b><color:royalBlue>on several</color>
+  <s>words</s> lines
+  And this is hosted by <img:sourceforge.jpg>
+end note
+@enduml
+#+end_src
+
+We just need a model element that propagates into the logical model and gets
+converted into PlantUML output:
+
+#+begin_example
+ * object note :note:
+
+  In java, <size:18>every</size> <u>class</u>
+  <b>extends</b>
+  <i>this</i> one.
+#+end_example
+
+Links:
+
+- [[https://plantuml.com/class-diagram#59c91a18bcc97bb0][Class diagram: notes]]
+
+*** Upload release to github on tags                                  :story:
+
+At present we are manually uploading binaries on a release to github. It would
+be nice to integrate this with CI.
+
+This has been added to workflow, check at the end of the sprint if it works.
+
+Links:
+
+- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
+- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
+
+
+*** Add model name as title in PlantUML diagram                       :story:
+
+At present its not possible to know the name of the model by looking at the SVG.
+We should have a comment with the title. It could be added to the existing model
+level comment with documentation.
+
+*** Fix PlantUML indentation                                          :story:
+
+At present if we indent a diagram in emacs we get a different
+indentation compared to the generated one. We need to either get emacs
+to indent correctly, or copy the emacs indentation. The main problem
+at present is that we are indenting classes correctly in generated
+code:
+
+#+begin_src plantuml
+namespace entities #F2F2F2 {
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
+    }
+}
+#+end_src
+
+Whereas emacs does not:
+
+#+begin_src plantuml
+@startuml
+
+namespace entities #F2F2F2 {
+    class section #F7E5FF {
+        +{field} blocks std::list<block>
+    }
+}
+@enduml
+#+end_src
+
+Note that the behaviour seems different in org-babel. Note also that
+notes have incorrect indentation (text model, inside a namespace):
+
+#+begin_src plantuml
+note top of  transformation_error
+An error occurred whilst applying a transformation.
+end note
+#+end_src
+
+Note also the extra space before exception name, as well as the
+missing indentation inside the note.
+
+Actually what is causing the problem with emacs indentation is the use
+of top-level notes:
+
+#+begin_src plantuml
+note as N1
+Contains all of the M2T transforms for all supported backends.
+end note
+#+end_src
+
+We need to investigate why this causes indentation problems. Seems
+like its valid syntax.
+
+Note also that all comments are not indented correctly.
+
+*** Create a local resolver in codec to support PlantUML use case     :story:
+
+We can create most of the links in PlantUML via local resolution. We
+could create a local resolver, which only looks at types for the
+current model. It lives inside of codec. For those types, if it
+resolves, we can create the PlantUML link. In addition, we could also
+resolve operations in the same way (once they have been
+modeled).
+
+Ideally, we should implement this resolve in such a way that it can be
+used for merged models and stand alone models. We created a story on
+the new approach for the resolver; we need to have a look at that and
+see if it can be implemented as part of this work. For example, we
+could flatten all names prior to calling resolver; use a GUID against
+each type, read from custom ID in org mode.
+
+The resolver needs to be primed with all of the existing model names
+and namespaces, without depending on the qualified names data
+structure. It should have its own data structures. It could live in
+=identification=. The output of the resolver should be the GUID of the
+type the name points to, or nothing if it could not resolve.
+
+In the calling models, we need a transform that decomposes a type into
+the names it references. Then, for each name, we call the resolver.
+
+Notes:
+
+- we could also create two step resolution. We could resolve all local
+  names first, and mark them as resolved (for example by adding the
+  UUID of the resolved type to the name) and leaving unresolved types
+  unmarked. Then, the second merged model resolution would only
+  resolve types which are not yet resolved. This would probably speed
+  things up because we may end up with smaller containers.
+
+*** Fix PlantUML namespace comments                                   :story:
+
+At present the comments appear as a link to the namespace. We should
+try to do whatever it is we did for the model comment, which looks
+like a regular note at the top of the namespace.
+
+In addition, sub-namespaces seem to generate both a class with the
+comment as well as the namespace itself (see text model).
+
+*** Consider adding PlantUML verbatim inside element                  :story:
+
+One simple way of adding operations is to extend verbatim to support inside
+class. This can easily be achieved via =.before=, =.inside= and =.after= fields.
+The =.inside= can be replaced by operations later.
+
+*** Empty classes do not need brackets in PlantUML                    :story:
+
+At present we are still adding start and end brackets to empty classes:
+
+#+begin_src plantuml
+class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
+}
+#+end_src
+
+This takes space for no reason. We could just not print those brackets.
+
+
+
+*** Make use of association relationships                             :story:
+
+When we start having to create elements such as visitor etc., it would
+be nice to rely on the association between visitor and visitable to
+figure out what the visitor is visiting. This and other simple cases
+can be inferred simply by looking at the end points of the
+association. However, we should still allow supplying this
+meta-parameter as meta-data because it may not be practical to have
+the association. And we need a way to express this in JSON as well.
+
+*** Consider replacing the associations against object templates      :story:
+
+Object templates are really a higher level concept when compared to
+objects, etc. We should not be using associations to denote the notion
+of an object instantiating an object template. Perhaps the "implements
+an interface" relationship is more appropriate. Check the UML books.
+
+*** Make =parent= feature a CSV collection                            :story:
+
+At present we declare multiple parents like so:
+
+:    :masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin, entities::TaggableOverridable, entities::Commentable
+
+This is a remnant of the Dia stereotypes field, which was one long CSV string.
+However, in the Dia world it makes more sense for us to have:
+
+:    :masd.codec.parent: entities::Taggable
+:    :masd.codec.parent: entities::Stereotypable
+:    :masd.codec.parent: entities::Nameable
+:    :masd.codec.parent: entities::Configurable
+: ...
+
+This would make the org-mode document more readable. For this to work, we
+probably just need to:
+
+- make the field a CSV collection to allow for the transition without breaking
+  anything.
+- add processing in codec to handle the collection.
+
+
+
+*** Consider renaming plantuml property                               :story:
+
+In the previous sprint we introduced =masd.codec.plantuml=. this name is
+questionable, given that the codec name is =plantum=. Consider renaming it.
+Suggestions:
+
+: masd.codec.plantuml.verbatim
+
+*** Add full and relative path processing to PM                       :story:
+
+We need to be able to generate full paths in the PM. This will require access to
+the file extensions. For this we will need new decoration elements. This must be
+done as part of the logical model to physical model conversion. While we're at
+it, we should also generate the relative paths. Once we have relative paths we
+should compute the header guards from them. These could be generalised to
+"unique identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we cannot locate
+  the extensions. Also we did not create all of the required archetype kinds in
+  the text models. The populating should be done via profiles.
+- we must first figure out the number of enabled backends. The meta-model
+  properties will always contain all backends, but not all of them are enabled.
+- we need to populate the part directories. For this we need to know what parts
+  are available for each backend (PMM), and then ensure the part properties have
+  been created. We also need a directory for the part in variability. It is not
+  clear we have support for this in the template instantiation domains - we
+  probably only have backend, facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space and its
+  instances in the file-system.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We may need
+to treat certain labels more specially than others - its not clear. We need a
+container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*Implement locator in physical model*
+
+Use PMM entities to generate artefact paths, within =m2t=.
+
+*Create a archetypes locator*
+
+We need to move all functionality which is not kernel specific into yarn for the
+locator. This will exist in the helpers namespace. We then need to implement the
+C++ locator as a composite of yarn locator.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit ad-hoc. We could
+potentially create a pattern. Say for C++, we have the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine the
+  placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or "natural"
+  location inside of facet.
+- archetype location: used to determine the facet and archetype postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location (a given
+artefact has a fixed placement). So a naive approach to this seems to imply one
+could create a data driven locator, that works for all languages if supplied
+suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project sub-directories". There is a
+  mapping between the artefact location and a project sub-directory.
+- there is a mapping between the artefact location and the facet and artefact
+  postfixes.
+- extensions are a slight complication: a) we want to allow users to override
+  header/implementation extensions, but to do it so for the entire project
+  (except maybe for ODB files). However, what yarn's locator needs is a mapping
+  of artefact location to extension. It would be a tad cumbersome to have to
+  specify extensions one artefact location at a time. So someone has to read a
+  kernel level configuration parameter with the artefact extensions and expand
+  it to the required mappings. Whilst dealing with this we also have the issue
+  of elements which have extension in their names such as visual studio projects
+  and solutions. The correct solution is to implement these using element
+  extensions, and to remove the extension from the element name.
+- each kernel can supply its configuration to yarn's locator via the kernel
+  interface. This is fairly static so it can be supplied early on during
+  initialisation.
+- there is still something not quite right. We are performing a mapping between
+  some logical space (the modeling space) and the physical space (paths in the
+  filesystem). Some modeling elements such as the various CMakeLists.txt do not
+  have enough information at the logical level to tell us about their location;
+  at present the formatter itself gives us this hint ("include cmakelists" or
+  "source cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the archetype
+  location and the physical space. Although, if this is the only case of a
+  modeling element not mapping uniquely, perhaps we should do exactly this.
+- However, we still have inclusion paths to worry about. As we done with the
+  source/include directories, we need to somehow create a concept of inclusion
+  path which is not language specific; "relative path" and "requires relative
+  path" perhaps? These could be a function of archetype location.
+
+Merged stories:
+
+*Generate file paths as a transform*
+
+We need to understand how file paths are being generated at present; they should
+be a transform inside generation.
+
+*Create the notion of project destinations*
+
+At present we have conflated the notion of a facet, which is a logical concept,
+with the notion of the folders in which files are placed - a physical concept.
+We started thinking about addressing this problem by adding the "intra-backend
+segment properties", but as the name indicates, we were not thinking about this
+the right way. In truth, what we really need is to map facets (better: archetype
+locations) to "destinations".
+
+For example, we could define a few project destinations:
+
+: masd.generation.destination.name="types_headers"
+: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
+: masd.generation.destination.name=top_level (global?)
+: masd.generation.destination.folder=""
+: masd.generation.destination.name="types_src"
+: masd.generation.destination.folder="src/types"
+: masd.generation.destination.name="tests"
+: masd.generation.destination.folder="tests"
+
+And so on. Then we can associate each formatter with a destination:
+
+: masd.generation.cpp.types.class_header.destination=types_headers
+
+Notes:
+
+- these should be in archetypes models.
+- with this we can now map any formatter to any folder, particularly if this is
+  done at the element level. That is, you can easily define a global mapping for
+  all formatters, and then override it locally. This solves the long standing
+  problem of creating say types in tests and so forth. With this approach you
+  can create anything anywhere.
+- we need to have some tests that ensure we don't end up with multiple files
+  with the same name at the same destination. This is a particular problem for
+  CMake. One alternative is to allow the merging of CMake files, but we don't
+  yet have a use case for this. The solution would be to have a "merged file
+  flag" and then disable all other facets.
+- this will work very nicely with profiles: we can create a few out of the box
+  profiles for users such as flat project, common facets and so on. Users can
+  simply apply the stereotype to their models. These are akin to "destination
+  themes". However, we will also need some kind of "variable replacement" so we
+  can support cases like =include/masd.cpp_ref_impl.northwind/types=. In fact,
+  we also have the same problem when it comes to modules. A proper path is
+  something like:
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
+
+  This is *extremely* flexible. The user can now create a folder structure that
+  depends on package names etc or choose to flatten it and can do so for one or
+  all facets. This means for example that we could use nested folders for
+  =include=, not use model modules for =src= and then flatten it all for
+  =tests=.
+- actually it is a bit of a mistake to think of these destinations as purely
+  physical. In reality, we may also need them to contribute to namespaces. For
+  example, in java the folders and namespaces must match. We could solve this by
+  having a "module contribution" in the destination. These would then be used to
+  construct the namespace for a given facet. Look for java story on backlog for
+  this.
+- this also addresses the issue of having multiple serialisation formats and
+  choosing one, but having sensible folder names. For example, we could have
+  boost serialisation mapped to a destination called =serialisation=. Or we
+  could map it to say RapidJSON serialisation. Or we could support two methods
+  of serialisation for the same project. The user chooses where to place them.
+
+*** Update github actions to build from tags                          :story:
+
+At present it seems we only build from master. We need to build from tags for
+releases.
+
+*** Assorted improvements to CMake files                               :epic:
+
+#+begin_src cmake
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+  set_target_properties(foo PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
+LINK_WHAT_YOU_USE
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy" "-checks=*")
+<LANG>_CLANG_TIDY: CMake 3.6+
+<LANG>_CPPCHECK
+<LANG>_CPPLINT
+<LANG>_INCLUDE_WHAT_YOU_USE
+
+install(TARGETS MyLib
+        EXPORT MyLibTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+        )
+#+end_src
+
+*Previous understanding*
+
+It seems we are not using proper CMake idioms to pick up compiler features, as
+explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.dsscale.org/wp-content/uploads/2016/06/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
+- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
+- [[https://github.com/sblumentritt/cmake_modules][GH cmake_modules]]: "This repository provides a wide range of CMake
+  helper files."
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to repeat the
+  same flags; this could be avoided by passing in a variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is
+  the modern method for setting general compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested aliasing for
+  =dogen::test_models=. Ensure all linking is done against qualified names.
+- use target include directories for each target and only add the required
+  include directories to each target. Mark them with the appropriate visibility,
+  including using =interface=. We should then remove all duplication of
+  libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature detection. We need
+  to create a list of all C++-14 features we're using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type support to
+  our builds, but as a result, the binaries moved from =stage/bin= to =bin=.
+  There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage to use.
+  We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake directories. This will
+  also fix the problems we have with BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
+*** Capitalise titles in models correctly                             :story:
+
+We still have models with lower case titles:
+
+: * initializer                                                       :element:
+
+Capitalise these correctly.
+
+When we tried to do this to the dogen model, generation failed with the
+following error:
+
+: Error: Object has attribute with undefined type: spec_category
+
+We are probably not normalising to lower case.
+
+In addition
+
+Merged stories:
+
+*Capitalise model headers correctly*
+
+At present most models still use the "all lower case" notation, copied from Dia.
+We need to capitalise headers correctly so that when we generate documentation
+they come out correctly.
+
+*** Consider creating a small paper summarising MASD                  :story:
+
+At present we have the thesis, that explains the entire methodology and its
+rationale in great detail. This is not suitable for new users. We should have a
+small paper, 3 or 4 pages long, that summarises the argument.
+
+*** Missing PlantUML features                                         :story:
+
+This story keeps track of features that we need to implement when
+exporting into PlantUML.
+
+- generalisation via meta-data does not work. This would be very
+  complicated: we need to resolve =masd.generalization.parent= into
+  the value and then look for all classes with the stereotype of the
+  concept (e.g. =meta_element= for logical model).
+- we need to unpack all properties and resolve those into types for
+  the current model in order to model associations. Also, we need a
+  simple resolver to find the types in the right namespaces. The
+  logic would be very similar to the existing resolver. One possible
+  solution is to move name trees into the codec model and perform
+  these transforms earlier in the pipeline.
+- add tests to check that PlantUML output has not changed. We need to
+  have support for diffing on conversion, which we may not yet
+  have. Also the existing tests do not take into account the action.
+- add plantuml representations to reference models.
+- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
+  PlantUML]]
+- add comments on relations:
+
+: someclass o-- otherclass : a description of the relation
+
+  This means the org-mode model must contain the comment. We could
+  either use the comment on the association itself, or have a field in
+  properties:
+
+: :masd.codec.relation_comment: a description of the relation
+
+  This is then copied as is into the UML diagram. By separating the
+  two means we can still make "proper" comments at the attribute
+  level.
+- there should be meta-data to determine if a comment will show up in
+  the diagram as a note or not. It should apply to both classes and
+  methods.
+- we should allow users to set the location of the comment for classes
+  etc (bottom, top, left, right).
+- we should allow enabling comments on methods and attributes, with
+  direction (left or right).
+- notes are not indented at present.
+- we are not leaving a space after inheritance.
+- empty classes still have brackets.
+- no top-level namespace for model. We didn't have this in Dia either.
+- inner modules have incorrect names, as documentation is appearing at the
+  top-level namespace. See logical model for an example.
+
+Notes:
+
+- we need to move features such as name trees and generalisation into
+  the codec model.
+- actually perhaps we need to allow users to "tweak" the
+  relationships. We probably don't want every single relationship to
+  become a link in UML because then we can't see the wood for the
+  trees. A better approach may be to force users to declare the
+  relationships as meta-data, like we suggested above for comments,
+  and then transport those annotations to the UML diagram. This also
+  means we could add a full reference to the types, which solves the
+  issue of having to merge models. Finally, it means we can declare
+  any kind of relation, as per the plant uml syntax - in fact we
+  should probably expose the plant UML syntax directly, e.g. the user
+  is expected to declare a native plantuml relation:
+
+: :masd.codec.plantuml_relation: AS_IS_RELATION
+
+  We could perhaps default to the current class, but that's about
+  it. This would also allow for things like hidden links, etc. In
+  effect the only relation you get for free is inheritance. Actually
+  we should also have a "raw" way of inserting relations in a
+  namespace. These are placed at the end of the namespace.
+- logical model namespaces are not documented correctly.
+
+Links:
+
+- [[https://forum.plantuml.net/8770/how-to-force-vertical-arrangement-of-packages][How to force vertical arrangement of packages?]]
+
+*** Consider standardising all templates as mustache templates        :story:
+
+At present we have a somewhat complex story with regards to templating:
+
+1. we use a mustache-like approach called wale, built in-house. It is used for
+   some header files such as the M2T transforms.
+2. we use a t4-like approach called stitch, also in-house. It is used for the
+   implementation of the M2T transforms.
+
+What would be really nice is if we could use the same approach for both, and if
+that approach was not part of Dogen. The purpose of this story is to explore the
+possibility of replacing both with a standard implementation of mustache,
+ideally available on vcpkg. We already have a story for replacing wale with
+mustache in the backlog, so see that for the choice of implementation. This
+story concerns itself mainly with the second item in the above list; that is,
+can we replace stitch with mustache.
+
+In order to answer this question we first must try to figure out what the
+differences between T4 and mustache are. T4 is a "generator generator". That is,
+the text template generates C# code that generates the ultimate target of the
+template. This means it is possible to embed any logic within the T4 template as
+required, to do complex processing. It also means the processing is "fast"
+because we generate C# code rather than try to introspect at run time. Stitch
+uses the same approach. However, after many years of using both T4 and Stitch,
+the general conclusion has been that the templates should be kept as simple as
+possible. The main reason is that "debugging" through the templates is
+non-trivial, even though it is simple C++ code (in the case of stitch).
+
+Mustache on the other hand puts forward an approach of logic-less templates.
+That is, the templates are evaluated dynamically by the templating engine, and
+the engine only allows for a very limited number of constructs. In some
+implementations, the so called "template hash", that is the input to the
+template, is a JSON object. All the template can do is refer to entries in the
+JSON object and replace tokens with the values of those entries.
+
+Until recently we deemed mustache to be too simple for our needs because Dogen
+templates were very complex. However, several things have changed:
+
+- we do not want the templates to have any indentation at all; this should be
+  left to clang-format as a subsequent T2T transform. This removes a lot of
+  functionality we had in Stitch.
+- we do not want the logical model objects to be processed any further in the
+  template. As explained above this leads to a lot of complications. We want the
+  object to be in its final form.
+- we want all relationships etc to be encoded in the logical model object prior
+  to M2T transformation.
+
+In other words, we have slowly been converging towards logic-less templates,
+though we are not yet there. The main stumbling blocks are:
+
+- epilogue and prologue are at present handled by assistants:
+
+#+begin_src
+    text::formatters::assistant ast(lps, e, a, true/*requires_header_guard*/);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= o.name().simple() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+
+#+end_src
+
+   Ideally we should just have a way to ask for the values of these fields.
+- we need to investigate all templates and see if a JSON representation of a
+  logical model element is sufficient to capture all required information.
+  However the best way to do this is to have an incremental approach: provide a
+  mustache based M2T and then incrementally move each M2T at a time.
+
+If we do move to mustache, there are lots of advantages:
+
+- remove all of templating code.
+- we could allow users to supply their own mustache templates in a model. We can
+  even allow for the dynamic creation of PMM elements and then the association
+  of those elements with templates. End users cannot of course extend the LMM,
+  but even just extending the LMM gives them a lot of power.
+- we could create a stand alone tool that allows users to play with templates.
+  All they need is a dump of the JSON representation of the objects in their
+  model (this could be an option in Dogen). Then the tool can take the template
+  and the JSON and render it to =std::out=. This makes template development much
+  easier. If we integrate it with Emacs, we could even have a view where we
+  do: 1) JSON 2) template 3) output. Users can then change 1) and 2) and see the
+  results in 3). We don't even have to extend emacs for this, we could just use
+  the compilation command.
+
+Notes:
+
+- if we could create JSON schemas for the LMM, we could then allow users to
+  create their own JSON representations. Not sure how useful this would be.
+- we need JSON support in Dogen for this.
+- we need to measure how much slower Dogen would be with this approach.
+  Presumably mustache is a lot slower that Stitch.
+- from this perspective, the PMM is fixed but the PM then becomes a dynamic
+  entity. We can supply a PM model with Dogen but that is just Dogen's
+  interpretation of the physical space; users could supply their own PM's as
+  required. The PMs need to bind to the PMM: either the user supplies its own
+  TS, part etc or it must bind (via meta-data) to existing parts, TS etc. We
+  also need to support two styles of declaring PM entities: inline (e.g. nested)
+  or outline (e.g. we want to bind a given facet, part etc to an already
+  existing TS, etc).
+- we could hash both the mustache template and the JSON object used as input,
+  and save those two hashes in the generated file. If the hashes match, don't
+  bother regenerating.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Text_Template_Transformation_Toolkit][wikipedia: Text Template Transformation Toolkit]]
+
+Merged stories:
+
+*Implement wale in terms of existing template libraries*
+
+Originally we implemented wale as a quick hack, but we stated:
+
+#+begin_quote
+A second point is the use of [[https://github.com/jamboree/bustache][bustache]] vs rolling our own trivial mustache-like
+implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+#+end_quote
+
+We should really move to one of these mustache implementations. Inja
+seems to be the most sensible one, even though it depends on a JSON
+library. We will need JSON internally anyway, so it may be the time to
+add a dependency. We should also have a way to associate an arbitrary
+JSON document with a formatter so that users can create their own
+templates with their own parameters and the model is merely used for
+pass-through.
+
+We should also start to create a standard set of variables that dogen
+exports into inja such as object name, namespaces, etc. These are
+"system variables" and do not require any action from the user. In
+fact, if we use the JSON based approach, we could define a JSON schema
+for meta-model elements which is MASD specific. These are used by the
+templates.
+
+Note that stitch only makes sense when we are creating a code
+generator (at least given the use cases we have so far) whereas inja
+makes sense even for regular models and can be applied to items in any
+technical space.
+
+Links:
+
+- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
+- [[https://github.com/no1msd/mstch][mstch]]
+- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
+- [[https://github.com/melpon/ginger][ginger]]
+- [[https://github.com/qicosmos/render][render]]
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library. [[https://github.com/paradoxxxzero/jinja2-mode][Emacs mode]]. "Inja is a template engine for
+  modern C++, loosely inspired by jinja for python. It has an easy and yet
+  powerful template syntax with all variables, loops, conditions, includes,
+  callbacks, and comments you need, nested and combined as you like. Inja uses
+  the wonderful json library by nlohmann for data input."
+- [[https://github.com/jrziviani/amps][amps]]
+- [[https://github.com/OlafvdSpek/ctemplate][ctemplate]]: This library provides an easy to use and lightning fast
+  text templating system to use with C++ programs. It was originally
+  called Google Templates, due to its origin as the template system
+  used for Google search result pages.
+- [[https://github.com/moneymanagerex/ctpp][ctpp GH]]: See also [[http://ctpp.havoc.ru/en/][homepage]]. Seems a bit unmaintained but may have
+  some good ideas. See [[http://ctpp.havoc.ru/en/whatis.html][What is CTPP?]]
+- [[https://github.com/blockspacer/CXXCTP][CXXCTP GH]]: "Add custom features to C++ language, like metaclasses,
+  Rust-like traits, reflection and many more. A fully open source,
+  powerful solution for modification and generation of C++ source
+  code. Reduce the amount of boilerplate code in your C++ projects."
+- [[https://github.com/flexferrum/autoprogrammer][autoprogrammer GH]]: "Welcome to Autoprogrammer, the C++ code
+  generation tool! This tool helps you dramatically reduce the amount
+  of boilerplate code in your C++ projects. Based on clang frontend,
+  the 'autoprogrammer' parses your C++ source files and generates new
+  set C++ sources. For instance, it generates enum-to-string
+  converting functions for you. Instead of you."
+- [[https://github.com/TheLongRunSmoke/utility-boilerplate-qt][utility-boilerplate-qt GH]]: "Template for creating simple
+  cross-platform application with GUI based on Qt."
+
+*Consider renaming =wale= to =mustache=*
+
+We need to rename all of the wale templates to mustache.
+
+*Consider renaming =wale= to =tangle=*
+
+Wale and stitch are remnant from the sewing days. Whilst stitch is
+still vaguely appropriate, we can't even remember what wale stands
+for. We should use a more domain-specific term such as weave or
+tangle. In fact, we probably should rename =stitch= to =weave= given
+it weaves text with code, and find a better name for wale. Its not
+"tangling" (given tangling, as we understand it from org-mode, is just
+another name for weaving). We need to look into logic-less templates
+terminology.
+
+Actually this is a mistake. Wale is just a poor-person's mustache and
+will be replaced by a proper implementation of mustache as soon as we
+can. We should instead start calling it mustache and explain this is
+just a temporary fix.
+
+*Consider renaming logic-less templates*
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means.
+
+In addition, the templates should be specific to their types; we need
+to know if its a mustache template or a stitch template because the
+processing will be very different. The templates should be named after
+their type in the logical model. Rename these to wale templates.
+
+Actually its not yet clear if the existing logic could not be extended
+to other template types. We should wait until we implement it front to
+back and then make a decision.
+
+The most obvious thing is just to call the templates after their
+actual name: mustache.
+
+
 *** Model significant relations at a higher level                     :story:
 
 In sprint 31 we added the PlantUML verbatim property, /i.e./:
@@ -11694,6 +13145,23 @@ Links:
 
 ** Unclassified
 
+*** Auto-updating                                                     :story:
+
+It would be nice to be able to add "auto-updating" to an application just by
+enabling it.
+
+Links:
+
+- [[https://github.com/vslavik/winsparkle][GH winsparkle]]: "WinSparkle is a plug-and-forget software update library for
+  Windows applications. It is heavily inspired by the Sparkle framework for OS X
+  written by Andy Matuschak and others, to the point of sharing the same updates
+  format (appcasts) and having very similar user interface." See also [[https://winsparkle.org/][site]].
+- [[https://github.com/google/omaha][omaha]]: "Omaha is the open-source version of Google Update, a program to
+  install requested software and keep it up to date. The Google-branded version
+  of Omaha is used to support software patching (both background updating, and
+  on-demand update checks) for Google Chrome, Earth, and a variety of other
+  Google products on Windows 7, 8, and 10."
+
 *** Consider adding support for Click House                           :story:
 
 #+begin_quote
@@ -20435,230 +21903,6 @@ still work.
 Allow users to supply coordinates to transforms in some form so that
 we only dump a subset of the transform data. This could be the ID of
 the transform.
-
-*** Add support for UML profiles and XMI                               :epic:
-
-In order to communicate with external tools, we should try to support
-XMI as an injector. For this we could use the XSD for XMI as the basis
-for the injector. We also need to create the MASD UML profile with
-full support for all of the logical model elements.
-
-Previous understanding:
-
-We now understand most of the picture of how UML is related to
-Dogen. eCore is an implementation of UML's meta-model - it diverges
-from UML slightly, but for our purposes we can think of it as
-equivalent to UML's meta-model. At the meta-model level, it is
-possible to extend UML: this is done via profiles and
-stereotypes. Profiles are basically a collection of types which make
-use of UML stereotypes to extend the UML meta-model. So it is possible
-to inherit from say =Class= and create a new meta-class that extends
-=Class= in some way (in eCore terms, =eClass=).
-
-For instance, we could create a meta-class called =visitor=. In fact,
-all meta-types in =masd= can be redone as extensions to the UML
-meta-model (e.g. MASD profile). It just so happens that we did not
-understand the UML meta-model properly so we created a completely
-separate meta-model and then we mapped the Dia representation of the
-UML meta-model into yarn. But this muddles things because we are using
-Dia's diagram meta-model, which contains an incomplete representation
-of UML's meta-model (since it exists purely for drawing diagrams). A
-better way to go about this is:
-
-- create a c++ implementation of the ecore model. Use exactly the same
-  terminology - e.g. =eclass= etc.
-- create a dia to XMI exporter. This would have obtained the essence
-  of the UML diagram required for code-generation, removing all of the
-  "diagramatic" aspects of the model. [[https://www.ibm.com/developerworks/library/x-wxxm24/][XMI example]]:
-
-#+begin_src xml
-<?xml version="1.0"?>
-<XMI xmi.version="1.2" xmlns:UML="org.omg/UML/1.4">
- <XMI.header>
-  <XMI.documentation>
-   <XMI.exporter>ananas.org stylesheet</XMI.exporter>
-  </XMI.documentation>
-  <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
- </XMI.header>
- <XMI.content>
-  <UML:Model xmi.id="M.1" name="address" visibility="public"
-              isSpecification="false" isRoot="false"
-              isLeaf="false" isAbstract="false">
-   <UML:Namespace.ownedElement>
-    <UML:Class xmi.id="C.1" name="address" visibility="public"
-               isSpecification="false" namespace="M.1" isRoot="true"
-               isLeaf="true" isAbstract="false" isActive="false">
-     <UML:Classifier.feature>
-      <UML:Attribute xmi.id="A.1" name="name" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-      <UML:Attribute xmi.id="A.2" name="street" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-      <UML:Attribute xmi.id="A.3" name="zip" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-      <UML:Attribute xmi.id="A.4" name="region" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-      <UML:Attribute xmi.id="A.5" name="city" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-      <UML:Attribute xmi.id="A.6" name="country" visibility="private"
-                     isSpecification="false" ownerScope="instance"/>
-     </UML:Classifier.feature>
-    </UML:Class>
-   </UML:Namespace.ownedElement>
-  </UML:Model>
- </XMI.content>
-</XMI>
-#+end_src
-
-- note that the dia to XMI exporter would have to make use of some
-  "extensions" to dia such as the =yarn.dia.comment=. But the key
-  thing is we would end up with a UML meta-model description of the
-  diagram (XMI is roughly speaking an XML representation of the UML
-  meta-model).
-- create a UML profile for =yarn= describing all of the meta-model
-  elements in terms of the UML meta-model. This could be the exact
-  same diagram we have for =yarn= right now, except all the meta-model
-  entities would be marked as =stereotypes= (i.e. with a UML
-  stereotype of =stereotype=) and would have to inherit from =ecore=
-  classes such as =eclass=.
-- create a =ecore= XMI reader.
-- create a =yarn.ecore= transformer. The transformer outputs a =yarn=
-  model, just like the current =yarn= frontends would. The remaining
-  of the processing is done as it is for the current =yarn= models.
-- in the main =yarn= workflows: whenever it encounters a class with a
-  stereotype of =stereotype= it knows it must inherit from the
-  appropriate meta-model. It effectively expands these
-  meta-stereotypes into inheritance relationships from the meta-model.
-- create a UML profile for =quilt.cpp= (and =quilt.csharp=). Again,
-  this could be the exact same =quilt.cpp= model we have, except all
-  of the meta-model entities are described as meta-stereotypes, and
-  inherit from the =yarn= meta-model entities. This means that instead
-  of extending the =yarn= types via composition, we would have to use
-  inheritance. This is somewhat non-trivial because we need to extend
-  the base class =element= since all =quilt.cpp= elements have common
-  properties.
-- note: it is important to note that we're not interested in eCore
-  models per se. To generate an eCore model requires having the eCore
-  model at run-time as well. This is a completely separate kernel from
-  =quilt=. The kind of models we'd be generating would be very
-  different from the =quilt= models (generated types would inherit
-  from =eObject=, they would have reflection support and so forth -
-  all features that we are not interested in at present). However,
-  eCore as a plain meta-model is useful because it is directly related
-  to XMI and to UML profiles (since its just UML meta-model in
-  disguise).
-- proxy models now become just regular XMI models (either JSON or XML)
-  with suitably annotated models indicating its a proxy model.
-- the total set of expanders are our implementation of meta-model to
-  meta-model transformation. Some of these expanders are replaceable
-  by generated code: all that are simply reading meta-data. Others
-  must remain. This task will be tricky because we have mixed the
-  meta-data expansion with additional logic in the expanders. We now
-  need to decouple the two.
-- we will lose scoping on the tagged values. We can still have some
-  kind of hierarchical structure, perhaps =MODEL.CLASS.ATTRIBUTE= but
-  this is now limited to the meta-model structure because we must be
-  able to mechanically map from a tag value to a class and
-  attribute. We should also read the UML spec on valid tagged values
-  in case they forbid some characters such as dots.
-- up to now we have extended the dia format to perform yarn-like
-  operations; for example, we read stereotypes in the =yarn.dia=
-  frontend and convert them into =yarn= types. In an XMI world this
-  will no longer happen. We must pass-through the dia stereotypes into
-  a XMI class. All changes to dia must be seen as XMI extensions.
-
-Advantages of this approach:
-
-- we'd be relying on standards: any tool that can output XMI can be
-  used as a front-end, and all the extensions used for Dogen are part
-  of XMI/UML. Nothing is proprietary.
-- since all extensions to meta-model elements are done via profiles,
-  we are able to figure out where the meta-data is (all tagged values
-  in the profile are annotations). It is still not totally clear how
-  one would map the =annotation= types (e.g. =text=, =number= etc) to
-  programming language types, but the gist is we should be able to
-  generate the factories that read meta-data and instantiate
-  objects. Not all mappings are trivial of course.
-- we can create arbitrary extensions to the meta-model just by using
-  the meta-stereotype. Users can create their own on their diagrams,
-  and because of the stitch integration, they can already add their
-  own templates. This makes the system arbitrarily extensible. Of
-  course, we still need to plug in the new meta-model items to the
-  pipeline (how would they get populated?).
-
-High-level tasks to get us there:
-
-- create a =ecore= =yarn= model.
-- add a =ecore.xmi= model that reads XMI and instantiates
-  =ecore=. Actually we should probably create an =xmi= model that
-  reads XML and JSON and then use that model as input for the
-  =ecore.xmi= transformer.
-- change the =yarn= model to inherit from the appropriate =ecore=
-  entities. This will be a bit problematic if there is use of
-  reflection (e.g. eObject etc).
-- transform =quilt.cpp= and =quilt.csharp= into =yarn=
-  extensions. Instead of composition we need to use inheritance
-  somehow. Composition is possible of course, but basically we need to
-  be able to express it as a UML profile.
-- add a =yarn.ecore= model that converts =ecore= into =yarn=.
-- update =yarn= to understands meta-stereotypes. When it sees a
-  stereotype of =stereotype= it looks for a tagged value for
-  inheritance and instantiates the inheritance relationship of
-  meta-model items. In practice we can support this right now in yarn,
-  there is no dependency on anything else for this. Users just need to
-  add the meta-model to their list of referenced models, add a
-  stereotype of =stereotype= and the appropriate generalisation
-  relationship. The =stereotype= is just for cosmetic purposes, =yarn=
-  workflows would already inherit correctly.
-- create a =dia.xmi= model that outputs XMI documents, possibly in
-  [[https://github.com/dsevilla/xmi-to-json][JSON as well]]. Delete the current =yarn.dia= frontend and rewrite it
-  in terms of =dia.xmi= and =yarn.xmi=.
-
-Note:
-
-- it is interesting to notice that in practice we don't actually need
-  to link =ecore= to =yarn= (inheritance, etc), provided that we
-  support interoperability between the two: stereotypes, tagged
-  values, etc. As long as the mapping results in the correct
-  instantiation of the =yarn= model, this is semantically equivalent
-  to making =yarn= a proper specialisation of the UML
-  meta-model. Problems start when users try to make use of UML
-  meta-model types for their own templates though.
-- it seems there is no publicly available XMI XSD for UML. Actually it
-  seems there is no proper UML support in XMI and each vendor has
-  created incompatible extensions. See:
-  - https://bugs.kde.org/show_bug.cgi?id=56184
-  - http://plantuml.com/xmi
-  - https://github.com/plantuml/plantuml
-  The only solution for this problem is to create a "libxmi" that has
-  many frontends and supports a single object model that covers all of
-  UML as per OMG UML XMI. Then manually create XMI XSD schemas for
-  each variant of UML, use the XSD tool to create C++ representations
-  of these and manually create mappings between these dialects and the
-  standard UML object model. One should try to make the mappings
-  bidirectional so that the library could be used to create a
-  converter between XMI formats. However, this is a very large task
-  and its not clear its worth it. Actually we probably want a "libuml"
-  product which contains the XMI adapters. It should also contain
-  other adapters such as Dot/GraphViz, Dia, etc. It should also define
-  its own libuml XMI with XSD. It should also include OCL parsing. It
-  could share code with umbrello.
-
-Links:
-
-- [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]] (see also https://github.com/mdoerfel/emf4cpp/tree/v2)
-- [[https://github.com/MDE4CPP][MDE4CPP]]
-- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
-- [[https://www.omg.org/spec/XMI/20131001/XMI.xsd][XMI XSD v2.5.1]]
-- [[http://www.omg.org/spec/xmi/2.5.1/][XMI specification v2.5.1]]
-- [[https://wiki.eclipse.org/images/f/f0/OMCW_chapter04_IntroductionToXMI.SINTEF.pdf][slides: Introduction to XML Metadata Interchange]]
-
-*Previous Understanding*
-
-It would be nice to be able to read an eCore model and generate code
-from it. This would be particularly useful if we could generate java
-code. We would require a mapping layer of eCore types into LAM.
-
-- [[http://eclipsesource.com/blogs/tutorials/emf-tutorial/][What every Eclipse developer should know about EMF]]
 
 *** Reducing the overhead of other facets in types                     :epic:
 

@@ -71,16 +71,6 @@ BOOST_AUTO_TEST_CASE(dogen_cli_org_produces_expected_model) {
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_dia_org_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_dia_org_produces_expected_model");
-    const auto t(dogen_product::input_dogen_dia_org());
-    const auto od(dogen_product::project_directory());
-    const auto rds(dogen_product::reference_directories());
-    model_producer mp(true/*read_environment_variables*/);
-    const auto m(mp.apply_physical_model_production(t, rds, od));
-    BOOST_CHECK(mp.check_for_differences(od, m));
-}
-
 BOOST_AUTO_TEST_CASE(dogen_org_org_produces_expected_model) {
     SETUP_TEST_LOG("dogen_org_org_produces_expected_model");
     const auto t(dogen_product::input_dogen_org_org());

@@ -11,7 +11,6 @@
 :masd.codec.reference: dogen.variability
 :masd.codec.reference: dogen.tracing
 :masd.codec.reference: dogen.org
-:masd.codec.reference: dogen.dia
 :masd.codec.reference: masd
 :masd.codec.reference: masd.variability
 :masd.codec.reference: dogen.profiles

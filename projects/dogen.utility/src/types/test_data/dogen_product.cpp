@@ -40,7 +40,6 @@ const std::string output_dir("dogen.code_generation_test_output");
 const std::string path_dogen("dogen");
 const std::string path_dogen_cli("dogen.cli");
 const std::string path_dogen_physical("dogen.physical");
-const std::string path_dogen_dia("dogen.dia");
 const std::string path_dogen_org("dogen.org");
 const std::string path_dogen_tracing("dogen.tracing");
 const std::string path_dogen_codec("dogen.codec");
@@ -83,8 +82,6 @@ void dogen_product::initialize() {
         push_back(project_directory_ / path_dogen_cli / "modeling");
     reference_directories_.
         push_back(project_directory_ / path_dogen_physical / "modeling");
-    reference_directories_.
-        push_back(project_directory_ / path_dogen_dia / "modeling");
     reference_directories_.
         push_back(project_directory_ / path_dogen_org / "modeling");
     reference_directories_.
@@ -152,12 +149,6 @@ path dogen_product::input_dogen_cli_org() {
     ensure_initialized();
     const std::string fn(path_dogen_cli + ".org");
     return project_directory_ / path_dogen_cli / "modeling" / fn;
-}
-
-path dogen_product::input_dogen_dia_org() {
-    ensure_initialized();
-    const std::string fn(path_dogen_dia + ".org");
-    return project_directory_ / path_dogen_dia / "modeling" / fn;
 }
 
 path dogen_product::input_dogen_org_org() {

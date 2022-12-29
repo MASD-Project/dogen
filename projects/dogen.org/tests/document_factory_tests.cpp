@@ -1287,12 +1287,6 @@ BOOST_AUTO_TEST_CASE(dogen_cli_org_does_not_throw) {
     BOOST_CHECK(!document.headlines().empty());
 }
 
-BOOST_AUTO_TEST_CASE(dogen_dia_org_does_not_throw) {
-    SETUP_TEST_LOG_SOURCE("dogen_dia_org_does_not_throw");
-    const auto document(make(dogen_product::input_dogen_dia_org()));
-    BOOST_CHECK(!document.headlines().empty());
-}
-
 BOOST_AUTO_TEST_CASE(dogen_org_org_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("dogen_org_org_does_not_throw");
     const auto document(make(dogen_product::input_dogen_org_org()));

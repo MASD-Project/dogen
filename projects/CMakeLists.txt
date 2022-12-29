@@ -173,7 +173,6 @@ set(reference_prefix --reference-directory ${CMAKE_CURRENT_SOURCE_DIR})
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.cli/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.physical/modeling)
-list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.dia/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.org/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.tracing/modeling)
 list(APPEND DOGEN_REFERENCE_OPTIONS ${reference_prefix}/dogen.codec/modeling)
@@ -204,7 +203,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.org/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.codec/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.logical/include
@@ -228,7 +226,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.variability)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.org)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.logical)
