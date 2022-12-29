@@ -39,16 +39,16 @@ MDE-Based Software Development
 Methodology](https://uhra.herts.ac.uk/handle/2299/25708).
 
 In lay terms, Dogen's objective is to automate the development process as much
-as possible: the user creates _models_ in one of the supported codecs and
-respecting a set of predefined restrictions; Dogen then uses this input to
-generate a source code representation of the model. Though we support several
-codecs, the preferred one is an extension to [Org Mode](https://orgmode.org/)
-which we call _org-model_. In the future we plan to deprecate other codecs and
-rely on an [XMI](https://en.wikipedia.org/wiki/XML_Metadata_Interchange)-based
-input format.
+as possible: the user creates _models_ using [Org Mode](https://orgmode.org/),
+though these must respect a set of predefined restrictions. Dogen uses this
+input to generate a source code representation of the model. Unlike traditional
+modeling techniques like
+[UML](https://en.wikipedia.org/wiki/Unified_Modeling_Language), Dogen focuses
+instead on literate modeling - an approach based on Knuth's [Literate
+programming](https://en.wikipedia.org/wiki/Literate_programming).
 
 The generated code contains most of the functionality required from a typical
-C++ domain object such as serialisation, hashing, streaming and so on. Whilst we
+domain object such as serialisation, hashing, streaming and so on. Whilst we
 intend for the application to be useful out of the box for most use cases, our
 end goal is to enable users to extend Dogen, adapting it to the vagaries of
 their specific needs. Note that Dogen has experimental C# support, but it is not
