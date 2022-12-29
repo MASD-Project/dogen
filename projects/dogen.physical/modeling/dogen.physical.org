@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.physical
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -47,7 +46,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: BF4942E6-FEC0-6934-5803-B4C5B253211D
-  :masd.codec.dia.comment: true
   :END:
 
 Defines the MASD physical space.
@@ -1554,7 +1552,6 @@ Kinds of archetypes available across all technical spaces.
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: 852F723F-2064-55A4-79A3-42212A76C536
-  :masd.codec.dia.comment: true
   :END:
 
 Contains all of the transforms needed to produce models and meta-models for the
@@ -1796,7 +1793,6 @@ Smallest possible context required for bootstrapping purposes.
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: 07F73046-A81F-0664-5CBB-F4F79A6F273A
-  :masd.codec.dia.comment: true
   :END:
 
 Helpers for the physical model.
@@ -1875,7 +1871,6 @@ An error occurred while the field factory was building.
 * features                                                           :module:
   :PROPERTIES:
   :custom_id: 840A5A33-7369-2EF4-A473-F26189BFF780
-  :masd.codec.dia.comment: true
   :END:
 
 Features for the MASD physical model.

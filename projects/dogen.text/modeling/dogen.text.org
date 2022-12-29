@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.text
 :masd.codec.reference: cpp.builtins
 :masd.codec.reference: cpp.boost
@@ -351,7 +350,6 @@ Physical artefacts that will be produced from the logical element.
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: 2C620A65-7B14-C784-2ABB-C79AC07845F8
-  :masd.codec.dia.comment: true
   :END:
 
 Contains all of the text transforms available.
@@ -488,7 +486,6 @@ An error occurred whilst applying a transformation.
 ** cpp                                                               :module:
    :PROPERTIES:
    :custom_id: 52204566-EAB7-C774-2FBB-019FD66043AC
-   :masd.codec.dia.comment: true
    :masd.physical.backend_name: cpp
    :masd.physical.directory_name: cpp
    :masd.physical.major_technical_space: cpp
@@ -862,7 +859,6 @@ Contains the configuration common to all c++ implementation archetypes.
 *** types                                                            :module:
     :PROPERTIES:
     :custom_id: 05FE5231-1263-E074-E5C3-EAE33E60D1AB
-    :masd.codec.dia.comment: true
     :masd.label.test: some_label
     :masd.physical.directory_name: types
     :masd.codec.stereotypes: masd::physical::facet
@@ -5657,7 +5653,6 @@ register_entities(variability::helpers::registrar& rg) {
 *** hash                                                             :module:
     :PROPERTIES:
     :custom_id: 5AEC83CC-CF9F-60B4-F083-48F5A44094EC
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: hash
     :masd.physical.postfix: hash
     :masd.codec.stereotypes: masd::physical::facet
@@ -6725,7 +6720,6 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 *** build                                                            :module:
     :PROPERTIES:
     :custom_id: 2586B163-9DB4-D954-D43B-D3E8DCF8A30D
-    :masd.codec.dia.comment: true
     :masd.codec.stereotypes: masd::physical::facet
     :END:
 
@@ -6966,7 +6960,6 @@ endif()
 *** io                                                               :module:
     :PROPERTIES:
     :custom_id: 4F96B661-47B4-5314-52DB-68D7AE7BE7BA
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: io
     :masd.physical.postfix: io
     :masd.codec.stereotypes: masd::physical::facet
@@ -7951,7 +7944,6 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 *** visual studio                                                    :module:
     :PROPERTIES:
     :custom_id: 158F19B9-C59E-68B4-A283-F7CFBC9CCBE2
-    :masd.codec.dia.comment: true
     :masd.codec.stereotypes: masd::physical::facet
     :END:
 
@@ -8273,7 +8265,6 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 *** serialization                                                    :module:
     :PROPERTIES:
     :custom_id: E2DA3C94-CBD0-7494-4A73-A53476F4AA1D
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: serialization
     :masd.physical.postfix: ser
     :masd.codec.stereotypes: masd::physical::facet
@@ -9148,7 +9139,6 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 *** test data                                                        :module:
     :PROPERTIES:
     :custom_id: 3ABBA6C8-17B8-7084-F04B-A7CBD96CCA73
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: test_data
     :masd.physical.postfix: td
     :masd.codec.stereotypes: masd::physical::facet
@@ -10619,7 +10609,6 @@ populate(const unsigned int position, result_type& v) {
 *** tests                                                            :module:
     :PROPERTIES:
     :custom_id: 9F721FFB-3CC3-E214-66F3-6A891A2E7EAE
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: generated_tests
     :masd.physical.postfix: tests
     :masd.codec.stereotypes: masd::physical::facet
@@ -11602,7 +11591,6 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 *** odb                                                              :module:
     :PROPERTIES:
     :custom_id: A8E60B77-8030-4484-9BA3-69D01D3FE916
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: odb
     :masd.physical.postfix: odb
     :masd.codec.stereotypes: masd::physical::facet
@@ -12212,7 +12200,6 @@ apply(const text::transforms::context& ctx, const text::entities::model& lps,
 *** lexical cast                                                     :module:
     :PROPERTIES:
     :custom_id: 45E30B3D-A7CC-7E94-176B-4EE77E3E8A13
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: lexical_cast
     :masd.physical.postfix: lx
     :masd.codec.stereotypes: masd::physical::facet
@@ -12379,7 +12366,6 @@ FIXME: to be removed.
 ** csharp                                                            :module:
    :PROPERTIES:
    :custom_id: 03427E17-29FA-83F4-849B-18A4A3FC83DF
-   :masd.codec.dia.comment: true
    :masd.physical.backend_name: csharp
    :masd.physical.directory_name: cs
    :masd.physical.major_technical_space: csharp
@@ -12559,7 +12545,6 @@ Contains the implementation files.
 *** types                                                            :module:
     :PROPERTIES:
     :custom_id: FA24318D-DBCC-91C4-4543-5213A0E9D381
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: Types
     :masd.codec.stereotypes: masd::physical::facet
     :END:
@@ -13281,7 +13266,6 @@ using System;
 *** io                                                               :module:
     :PROPERTIES:
     :custom_id: C1B8A64F-631E-C934-1B93-E300FBC8949A
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: Dumpers
     :masd.physical.postfix: Dumper
     :masd.codec.stereotypes: masd::physical::facet
@@ -14238,7 +14222,6 @@ using System.Collections;
 *** test data                                                        :module:
     :PROPERTIES:
     :custom_id: FA9517C1-E9BB-5B04-B973-49713B58F1BF
-    :masd.codec.dia.comment: true
     :masd.physical.directory_name: SequenceGenerators
     :masd.physical.postfix: SequenceGenerator
     :masd.codec.stereotypes: masd::physical::facet
@@ -15038,7 +15021,6 @@ using System.Collections.Generic;
 *** visual studio                                                    :module:
     :PROPERTIES:
     :custom_id: 82F38408-9366-A8C4-CDB3-C89FF9BF1DF6
-    :masd.codec.dia.comment: true
     :masd.codec.stereotypes: masd::physical::facet
     :END:
 

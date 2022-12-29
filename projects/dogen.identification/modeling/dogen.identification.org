@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.identification
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -23,7 +22,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 26AD9BBB-D426-39F4-B083-B895205B8B51
-  :masd.codec.dia.comment: true
   :END:
 
 Stores all of the entities related to identification of Dogen elements.
@@ -763,7 +761,6 @@ Version of the technical space to use.
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: 06C5284F-121D-B7E4-75CB-A85F85D87106
-  :masd.codec.dia.comment: true
   :END:
 
 Assorted helpers used to construct domain entities.

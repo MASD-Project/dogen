@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.hello_world
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.std

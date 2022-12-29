@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.utility
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -464,7 +463,6 @@ There was an error reading an environment variable.
 * formatters                                                         :module:
   :PROPERTIES:
   :custom_id: 38BF9D5A-D501-B424-CE8B-6C1127B626DB
-  :masd.codec.dia.comment: true
   :END:
 
 Contains all of the formatting primitives

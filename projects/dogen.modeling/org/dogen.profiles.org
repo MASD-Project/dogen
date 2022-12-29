@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.profiles
 :masd.codec.reference: masd
 :masd.codec.input_technical_space: agnostic
@@ -23,7 +22,6 @@ space; keep it technical space agnostic.
 * base                                                               :module:
   :PROPERTIES:
   :custom_id: 1F22CACC-1414-CE34-498B-8694D795AE74
-  :masd.codec.dia.comment: true
   :END:
 
 The base layer profiles are designed to be applied first.
@@ -237,7 +235,6 @@ Disables all facets in the C++ backend.
 * composable                                                         :module:
   :PROPERTIES:
   :custom_id: A70DFF9F-9B22-5344-4DB3-1888A7B8E9EA
-  :masd.codec.dia.comment: true
   :END:
 
 The composable layer is made up of profiles that

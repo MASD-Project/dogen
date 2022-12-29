@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.orchestration
 :masd.codec.reference: cpp.builtins
 :masd.codec.reference: cpp.boost
@@ -74,7 +73,6 @@ UML representation:
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: CF66B108-611C-10A4-876B-33CFB2961F5F
-  :masd.codec.dia.comment: true
   :END:
 
 Top-level transforms for Dogen. These are the entry points to all
@@ -266,7 +264,6 @@ An error occurred in the factory whilst building.
 * helpers                                                            :module:
   :PROPERTIES:
   :custom_id: C4519C27-6987-F524-92AB-82E989A7B5A9
-  :masd.codec.dia.comment: true
   :END:
 
 Helpers for the orchestration model.
@@ -309,7 +306,6 @@ An error occurred whilst projecting elements from one space into another.
 * features                                                           :module:
   :PROPERTIES:
   :custom_id: 585CB280-08C4-6604-91DB-33223C8D2C20
-  :masd.codec.dia.comment: true
   :END:
 
 Features for the orchestration model.

@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.org
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -45,7 +44,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 20E948A4-80F2-5874-8B23-4FA51E0611E8
-  :masd.codec.dia.comment: true
   :END:
 
 Represents entities from Emacs' org-mode.

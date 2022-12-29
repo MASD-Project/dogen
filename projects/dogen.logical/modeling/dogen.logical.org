@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.logical
 :masd.codec.reference: cpp.builtins
 :masd.codec.reference: cpp.std
@@ -51,7 +50,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 4703EF8B-72BF-A854-42E3-3E2A036C5FE9
-  :masd.codec.dia.comment: true
   :END:
 
 Entities that define the logical model.
@@ -1072,7 +1070,6 @@ All elements contained by this element.
 ** build                                                             :module:
    :PROPERTIES:
    :custom_id: A7D3787F-3228-4A54-BF73-CC3CEEC95A23
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the meta-modeling elements related to building, which don't have
@@ -1130,7 +1127,6 @@ Represents build CMakeLists files.
 ** serialization                                                     :module:
    :PROPERTIES:
    :custom_id: 42C6E19D-4921-B784-267B-9BAE81A3197B
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the meta-modeling elements related to serialisation.
@@ -1177,7 +1173,6 @@ Registrars on other models this registrar depends on.
 ** templating                                                        :module:
    :PROPERTIES:
    :custom_id: F29744B2-3D6D-0CC4-22DB-5EB3133C0B89
-   :masd.codec.dia.comment: true
    :END:
 
 Meta-model elements related to templating .
@@ -1215,7 +1210,6 @@ Content of the logic-less template.
 ** orm                                                               :module:
    :PROPERTIES:
    :custom_id: 8397ACD5-165D-9A34-53B3-B2BE1B492758
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the properties related to ORM support in Dogen.
@@ -1590,7 +1584,6 @@ If true, the value of this attribute is a composite value.
 ** decoration                                                        :module:
    :PROPERTIES:
    :custom_id: B6AA1CC3-05E1-9F04-AD6B-C05216D76CB7
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the meta-modeling elements and properties related to decorations.
@@ -1863,7 +1856,6 @@ as a modeline.
 ** variability                                                       :module:
    :PROPERTIES:
    :custom_id: 0058CE7E-87BA-9C04-731B-ABBA51ADB686
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the meta-modeling elements related to variability.
@@ -2326,7 +2318,6 @@ Key as it was originally provided by the user.
 ** structural                                                        :module:
    :PROPERTIES:
    :custom_id: 1369137D-4163-0B24-A613-C87FEFE6C773
-   :masd.codec.dia.comment: true
    :END:
 
 Houses all of the meta-modeling elements related to structural modeling.
@@ -2716,7 +2707,6 @@ General type to provide helpers.
 ** mapping                                                           :module:
    :PROPERTIES:
    :custom_id: 66B5F400-B314-29A4-404B-F4B791DEB8AE
-   :masd.codec.dia.comment: true
    :END:
 
 Meta-model elements related to mapping domains.
@@ -2792,7 +2782,6 @@ variability types.
 ** visual studio                                                     :module:
    :PROPERTIES:
    :custom_id: 5F698698-B652-A674-E9AB-8187A7E6C2DC
-   :masd.codec.dia.comment: true
    :END:
 
 Houses meta-model elements related to build systems.
@@ -2969,7 +2958,6 @@ GUID used by Visual Studio to identify projects of this type.
 ** physical                                                          :module:
    :PROPERTIES:
    :custom_id: 5555EE8F-1B4E-8D94-681B-FBAAEAA7B98F
-   :masd.codec.dia.comment: true
    :END:
 
 Logical representation of elements in the physical dimension.
@@ -3443,7 +3431,6 @@ Relation information for this helper.
 * transforms                                                         :module:
   :PROPERTIES:
   :custom_id: DB93F2E9-DC61-DF44-B453-FD72DFFF20B2
-  :masd.codec.dia.comment: true
   :END:
 
 Houses all of the transformations supported by logical.
@@ -4183,7 +4170,6 @@ An error has occurred in a factory.
 * features                                                           :module:
   :PROPERTIES:
   :custom_id: A669E847-7FA7-C994-F70B-0722157C2FA3
-  :masd.codec.dia.comment: true
   :END:
 
 Defines all features used by the logical model.
@@ -5147,7 +5133,6 @@ Features related to the helpers in physical domain.
 * formatters                                                         :module:
   :PROPERTIES:
   :custom_id: 6B874033-5D63-CEB4-9093-275D74BD7283
-  :masd.codec.dia.comment: true
   :END:
 
 Contains formatting classes for the logical model.

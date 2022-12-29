@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.variability
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -56,7 +55,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: 46DA526D-03E4-27B4-C52B-AD758B9C20B2
-  :masd.codec.dia.comment: true
   :END:
 
 Contains all of the types describing variability
@@ -915,7 +913,6 @@ An error occurred whilst applying a transformation.
 * features                                                           :module:
   :PROPERTIES:
   :custom_id: FB4C3D05-B57A-8D34-65B3-7D34546BD038
-  :masd.codec.dia.comment: true
   :END:
 
 Features used by the variability model.

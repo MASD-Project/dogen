@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: dogen.codec
 :masd.codec.input_technical_space: cpp
 :masd.codec.reference: cpp.builtins
@@ -49,7 +48,6 @@ UML representation:
 * entities                                                           :module:
   :PROPERTIES:
   :custom_id: AF505F72-F592-27F4-A2DB-21759E2D64C3
-  :masd.codec.dia.comment: true
   :END:
 
 Object model that is codec-agnostic but aims to provide
@@ -715,7 +713,6 @@ Trivial struct that records all the data we need for our little DFS excursion.
 * features                                                           :module:
   :PROPERTIES:
   :custom_id: 2F4D10AA-1B1B-CB24-A6A3-544E2F84C530
-  :masd.codec.dia.comment: true
   :END:
 
 Defines all of the features and feature groups used by the codec model.
