@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-12-29 Thu 19:13]
+#+CAPTION: Clock summary at [2022-12-29 Thu 19:55]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *81:09* |       |       | 100.0 |
+| *Total time*                                              | *81:47* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 81:09   |       |       | 100.0 |
-| Active                                                    |         | 81:09 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  12.6 |
+| Stories                                                   | 81:47   |       |       | 100.0 |
+| Active                                                    |         | 81:47 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  12.5 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.6 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.4 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
-| Sprint and product backlog grooming                       |         |       |  6:10 |   7.6 |
+| Sprint and product backlog grooming                       |         |       |  6:10 |   7.5 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.4 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
-| Full generation support in tests is incorrect             |         |       |  3:18 |   4.1 |
-| Tests failing with filesystem errors                      |         |       |  2:10 |   2.7 |
+| Full generation support in tests is incorrect             |         |       |  3:18 |   4.0 |
+| Tests failing with filesystem errors                      |         |       |  2:10 |   2.6 |
 | Remove uses of mock configuration factory                 |         |       |  0:54 |   1.1 |
 | Add continuous builds to C++ reference product            |         |       |  2:13 |   2.7 |
-| Add continuous builds to C# reference product             |         |       |  1:50 |   2.3 |
+| Add continuous builds to C# reference product             |         |       |  1:50 |   2.2 |
 | Remove ODB support from Dogen                             |         |       |  0:45 |   0.9 |
 | Model significant relations at a higher level             |         |       |  1:05 |   1.3 |
 | Create a mock configuration builder                       |         |       |  1:58 |   2.4 |
@@ -43,19 +43,20 @@
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.3 |
 | Gitter notifications for builds are not showing up        |         |       |  2:07 |   2.6 |
-| Create a nightly github workflow                          |         |       |  5:39 |   7.0 |
+| Create a nightly github workflow                          |         |       |  5:39 |   6.9 |
 | Run nightlies only when there are changes                 |         |       |  0:09 |   0.2 |
 | Nightly builds are taking too long                        |         |       |  5:04 |   6.2 |
 | Add support for UML profiles and XMI                      |         |       |  0:11 |   0.2 |
-| Remove Dia and JSON support from Dogen                    |         |       |  3:23 |   4.2 |
+| Remove Dia and JSON support from Dogen                    |         |       |  3:23 |   4.1 |
+| Make reference products git sub-modules                   |         |       |  0:38 |   0.8 |
 | Ignore vcpkg path length warning                          |         |       |  0:12 |   0.2 |
 | Windows package is broken                                 |         |       |  0:20 |   0.4 |
 | Warning on OSX build                                      |         |       |  2:23 |   2.9 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.2 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  21.3 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  21.2 |
 | Configuration as stereotype causes noise                  |         |       |  2:09 |   2.6 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   0.9 |
-| Thoughts on refactoring variability                       |         |       |  0:22 |   0.5 |
+| Thoughts on refactoring variability                       |         |       |  0:22 |   0.4 |
 | Consider using meta-data within codec model               |         |       |  0:29 |   0.6 |
 #+end:
 
@@ -1736,6 +1737,25 @@ Notes:
   envision adding large numbers of injectors and extractors in the future.
 - remove =:masd.codec.dia.comment: true=
 
+*** COMPLETED Make reference products git sub-modules                 :story:
+    :LOGBOOK:
+    CLOCK: [2022-12-29 Thu 19:47]--[2022-12-29 Thu 19:55] =>  0:08
+    CLOCK: [2022-12-29 Thu 19:16]--[2022-12-29 Thu 19:46] =>  0:30
+    :END:
+
+We can keep the existing structure in terms of coding for the reference
+products, but as far as testing goes we should make these git sub-modules just
+like we do for VCPKG. This has a lot of advantages:
+
+- code will work for all users when they do the clone.
+- no need for special cases in the CMake presets.
+- no need to force users to follow a Dogen specific layout just to build and run
+  Dogen's tests.
+
+Notes:
+
+- always enable tests, do not make it optional.
+
 *** STARTED Ignore vcpkg path length warning                          :story:
     :LOGBOOK:
     CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
@@ -2209,21 +2229,6 @@ This requires a fair bit of surgery.
 Notes:
 
 - we need to move the conversion tests back to orchestration.
-
-*** Make reference products git sub-modules                           :story:
-
-We can keep the existing structure in terms of coding for the reference
-products, but as far as testing goes we should make these git sub-modules just
-like we do for VCPKG. This has a lot of advantages:
-
-- code will work for all users when they do the clone.
-- no need for special cases in the CMake presets.
-- no need to force users to follow a Dogen specific layout just to build and run
-  Dogen's tests.
-
-Notes:
-
-- always enable tests, do not make it optional.
 
 ** Deprecated
 *** CANCELLED Add nightly builds to C# reference product              :story:
