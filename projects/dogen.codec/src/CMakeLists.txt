@@ -35,7 +35,6 @@ set_target_properties(${lib_target_name}
 
 target_include_directories(${lib_target_name}
     PUBLIC ${CMAKE_SOURCE_DIR}/projects/${name}/include
-    PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
     PUBLIC ${CMAKE_SOURCE_DIR}/projects/dogen.identification/include
     PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen/include
     PRIVATE ${CMAKE_SOURCE_DIR}/projects/dogen.org/include

@@ -116,13 +116,6 @@ BOOST_AUTO_TEST_CASE(dogen_cli_org_conversion_has_no_diffs) {
     BOOST_CHECK(diff.empty());
 }
 
-BOOST_AUTO_TEST_CASE(dogen_dia_org_conversion_has_no_diffs) {
-    SETUP_TEST_LOG("dogen_dia_org_conversion_has_no_diffs");
-    const auto t(dogen_product::input_dogen_dia_org());
-    const auto diff(apply_artefact_to_artefact_chain(t));
-    BOOST_CHECK(diff.empty());
-}
-
 BOOST_AUTO_TEST_CASE(dogen_org_org_conversion_has_no_diffs) {
     SETUP_TEST_LOG("dogen_org_org_conversion_has_no_diffs");
     const auto t(dogen_product::input_dogen_org_org());
