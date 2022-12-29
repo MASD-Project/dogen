@@ -59,7 +59,7 @@ public:
 private:
     /**
      * @brief Updates the parenting information for the given object
-     * identified by the dia ID.
+     * 1identified by the dia ID.
      */
     void update_parentage(const std::string& id, const std::string& n);
 

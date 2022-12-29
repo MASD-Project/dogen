@@ -26,14 +26,11 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
-#include "dogen.codec/types/helpers/dia_to_codec_projector.hpp"
 #include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.utility/types/string/differ.hpp"
-#include "dogen.dia/test/mock_object_factory.hpp"
-
 
 namespace  {
 

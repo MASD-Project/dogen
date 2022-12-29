@@ -365,17 +365,6 @@ Processes the artefact as if encoded using JSON, converting it into an instance
 of the codec model.
     end note
 
-    class dia_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    dia_artefact_to_model_transform o-- helpers::grapher
-    dia_artefact_to_model_transform o-- helpers::visitor
-
-    note top of dia_artefact_to_model_transform
-Unidirectional transformation model that transforms a Dia diagram into an codec
-model.
-    end note
-
     class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
@@ -489,71 +478,6 @@ Trivial struct that records all the data we need for our little DFS excursion.
 
     class reference_resolution_exception <<masd::exception>> #E8C2F8 {
     }
-
-    class builder <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    building o-- building_error
-
-    note top of builder
-Builds a codec model from objects.
-    end note
-
-    class building_error <<masd::exception>> #E8C2F8 {
-    }
-
-    class visitor <<dogen::handcrafted::typeable::header_only>> #FFFACD {
-    }
-
-    visitor o-- builder
-
-    class grapher <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    grapher o-- graphing_error
-
-    note top of grapher
-Graph of dependencies between objects.
-    end note
-
-    class graphing_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of graphing_error
-An error has occurred while building the dia object graph.
-    end note
-
-    class dia_to_codec_projector <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    dia_to_codec_projector o-- projection_error
-
-    note top of dia_to_codec_projector
-Projects dia objects into the codec space.
-    end note
-
-    class projection_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of projection_error
-An error occurred whilst projecting elements from one space to another.
-    end note
-
-    class object_to_element_adapter <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    object_to_element_adapter o-- adaptation_error
-
-    note top of object_to_element_adapter
-Adapts objects into elements.
-    end note
-
-    class adaptation_error <<masd::exception>> #E8C2F8 {
-    }
-
-    note top of adaptation_error
-A fatal error has occurred while adapting an object into an element.
-    end note
 
 }
 

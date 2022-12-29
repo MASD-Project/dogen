@@ -672,17 +672,6 @@ into an instance of the codec model.
 Processes the artefact as if encoded using JSON, converting it into an instance
 of the codec model.
 
-** dia artefact to model transform                                  :element:
-   :PROPERTIES:
-   :custom_id: A0452FBC-C303-3BE4-FA6B-FB25AE415C40
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: dia_artefact_to_model_transform o-- helpers::grapher
-   :masd.codec.plantuml: dia_artefact_to_model_transform o-- helpers::visitor
-   :END:
-
-Unidirectional transformation model that transforms a Dia diagram into an codec
-model.
-
 ** model to model chain                                             :element:
    :PROPERTIES:
    :custom_id: 1D7B118A-1A52-1B74-4D83-D6841DFB15FE
@@ -807,79 +796,6 @@ Trivial struct that records all the data we need for our little DFS excursion.
    :custom_id: 194308BD-D1D8-BDB4-6EDB-F23A0816A8D7
    :masd.codec.stereotypes: masd::exception
    :END:
-
-** builder                                                          :element:
-   :PROPERTIES:
-   :custom_id: 57CC0031-D3FB-5434-3F7B-5B0D0061DE0A
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: building o-- building_error
-   :END:
-
-Builds a codec model from objects.
-
-** building error                                                   :element:
-   :PROPERTIES:
-   :custom_id: BE7125CB-6BB0-A724-5B23-51FBA6A6535C
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-** visitor                                                          :element:
-   :PROPERTIES:
-   :custom_id: 0CDB7417-8FFA-C6E4-1223-B609673C23CA
-   :masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
-   :masd.codec.plantuml: visitor o-- builder
-   :END:
-
-** grapher                                                          :element:
-   :PROPERTIES:
-   :custom_id: 6CD46615-BE95-0374-54A3-9A4566DE86CE
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: grapher o-- graphing_error
-   :END:
-
-Graph of dependencies between objects.
-
-** graphing error                                                   :element:
-   :PROPERTIES:
-   :custom_id: C065F05A-5E89-C264-A2D3-D0DF8D978218
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error has occurred while building the dia object graph.
-
-** dia to codec projector                                           :element:
-   :PROPERTIES:
-   :custom_id: 60995885-DF5F-8EA4-28BB-EFC52115A0CD
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: dia_to_codec_projector o-- projection_error
-   :END:
-
-Projects dia objects into the codec space.
-
-** projection error                                                 :element:
-   :PROPERTIES:
-   :custom_id: 75236572-5B26-3A34-568B-F7B8A9CCCA68
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-An error occurred whilst projecting elements from one space to another.
-
-** object to element adapter                                        :element:
-   :PROPERTIES:
-   :custom_id: 399A7827-B17E-5F24-774B-A5D15A9ABDEC
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: object_to_element_adapter o-- adaptation_error
-   :END:
-
-Adapts objects into elements.
-
-** adaptation error                                                 :element:
-   :PROPERTIES:
-   :custom_id: 14AF9284-70DE-2CF4-9DDB-E1E4DA31DB8D
-   :masd.codec.stereotypes: masd::exception
-   :END:
-
-A fatal error has occurred while adapting an object into an element.
 
 * features                                                           :module:
   :PROPERTIES:
