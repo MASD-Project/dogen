@@ -38,29 +38,16 @@ enable_testing()
 add_definitions(-DBOOST_BIND_GLOBAL_PLACEHOLDERS)
 
 #
-# Check environment
+# Setup locations for the test data of reference products. First Dogen itself.
 #
 if (DEFINED ENV{DOGEN_PROJECTS_DIRECTORY})
     message(STATUS
         "DOGEN_PROJECTS_DIRECTORY=$ENV{DOGEN_PROJECTS_DIRECTORY}")
+    if(NOT EXISTS $ENV{DOGEN_PROJECTS_DIRECTORY})
+        message(FATAL_ERROR "DOGEN_PROJECTS_DIRECTORY not found.")
+    endif()
 else()
-    #
-    # If the user did not set the projects directory for dogen, we default it to
-    # the well-known projects directory. In truth, the handling of the projects
-    # directory is a bit messy: it must be set externally for cases such as
-    # running tests for coverage because we do not go via CMake. At the same
-    # time, we do not want users to have to deal with setting the variable if
-    # all they want to do is build dogen from git - they may not even want to
-    # run the system tests, so it seems a bit excessive to ask them to figure
-    # out how to set it. Due to, this we have this defaulting here.
-    #
-    set(ENV{DOGEN_PROJECTS_DIRECTORY} "${CMAKE_SOURCE_DIR}/projects")
-    message(STATUS
-        "DOGEN_PROJECTS_DIRECTORY=$ENV{DOGEN_PROJECTS_DIRECTORY} (default)")
-endif()
-
-if(NOT EXISTS $ENV{DOGEN_PROJECTS_DIRECTORY})
-    message(FATAL_ERROR "DOGEN_PROJECTS_DIRECTORY not found.")
+    message(FATAL_ERROR "DOGEN_PROJECTS_DIRECTORY not defined.")
 endif()
 
 #
@@ -74,8 +61,8 @@ if (DEFINED ENV{CPP_REF_IMPL_PROJECTS_DIRECTORY})
     endif()
     add_compile_definitions(ENABLE_CPP_REF_IMPL_TESTS)
 else()
-    message(STATUS
-        "CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
+    message(FATAL_ERROR
+        "CPP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined.")
 endif()
 
 #
@@ -89,8 +76,8 @@ if (DEFINED ENV{CSHARP_REF_IMPL_PROJECTS_DIRECTORY})
     endif()
     add_compile_definitions(ENABLE_CSHARP_REF_IMPL_TESTS)
 else()
-    message(STATUS
-        "CSHARP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined, disabling reference implementation tests.")
+    message(FATAL_ERROR
+        "CSHARP_REF_IMPL_PROJECTS_DIRECTORY env variable not defined.")
 endif()
 
 #
