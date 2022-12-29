@@ -145,8 +145,6 @@ find_package(Boost 1.80 REQUIRED COMPONENTS
     unit_test_framework)
 
 # Other packages
-find_package(LibXml2 CONFIG REQUIRED)
-find_package(ZLIB REQUIRED)
 find_package(DTL REQUIRED)
 
 # packaging type

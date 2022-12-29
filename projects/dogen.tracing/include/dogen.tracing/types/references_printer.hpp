@@ -21,7 +21,6 @@
 #ifndef DOGEN_TRACING_TYPES_REFERENCES_PRINTER_HPP
 #define DOGEN_TRACING_TYPES_REFERENCES_PRINTER_HPP
 
-#include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif

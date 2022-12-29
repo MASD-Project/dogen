@@ -38,8 +38,6 @@ target_include_directories(${lib_target_name}
     PRIVATE ${stage_inc_dir}/) # generated header files
 
 target_link_libraries(${lib_target_name} PRIVATE
-    ZLIB::ZLIB
-    LibXml2::LibXml2
     Boost::boost
     Boost::date_time
     Boost::exception
