@@ -1,7 +1,0 @@
-<root-name>
-    <positive-double-with-decimal-point>3.14159</positive-double-with-decimal-point>
-    <negative-double-with-decimal-point>-12345.6789</negative-double-with-decimal-point>
-    <positive-double-without-decimal-point>3</positive-double-without-decimal-point>
-    <negative-double-without-decimal-point>-12345</negative-double-without-decimal-point>
-    <invalid-double>this is a string</invalid-double>
-</root-name>

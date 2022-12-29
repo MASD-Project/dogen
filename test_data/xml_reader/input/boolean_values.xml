@@ -1,6 +1,0 @@
-<root-name>
-    <true-boolean>true</true-boolean>
-    <false-boolean>false</false-boolean>
-    <invalid-boolean-numeric>3.14159</invalid-boolean-numeric>
-    <invalid-boolean-string>this is a string</invalid-boolean-string>
-</root-name>

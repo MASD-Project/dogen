@@ -1,7 +1,0 @@
-<root-name>
-    <true-boolean>true</true-boolean>
-    <positive-double-with-decimal-point>3.14159</positive-double-with-decimal-point>
-    <positive-int>3</positive-int>
-    <negative-long>-12345</negative-long>
-    <string>text info goes here</string>
-</root-name>

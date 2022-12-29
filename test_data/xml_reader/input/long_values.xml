@@ -1,8 +1,0 @@
-<root-name>
-    <positive-long>3</positive-long>
-    <negative-long>-12345</negative-long>
-    <positive-double-with-decimal-point>3.14159</positive-double-with-decimal-point>
-    <negative-double-with-decimal-point>-12345.6789</negative-double-with-decimal-point>
-    <long-too-large>922337203685477580834343</long-too-large>
-    <invalid-long>this is a string</invalid-long>
-</root-name>

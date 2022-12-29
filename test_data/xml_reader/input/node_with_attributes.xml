@@ -1,7 +1,0 @@
-<root-name>
-    <one-attribute first-attribute0="some value 1">true</one-attribute>
-    <two-attribute first-attribute1="some value 2" second-attribute1="some value 3">3.14159</two-attribute>
-    <three-attribute first-attribute2="true" second-attribute2="false" third-attribute2="invalid">3.14159</three-attribute>
-    <four-attribute first-attribute3="13" second-attribute3="-15" third-attribute3="invalid">3.14159</four-attribute>
-    <no-attributes></no-attributes>
-</root-name>

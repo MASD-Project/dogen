@@ -1,8 +1,0 @@
-<root-name>
-    <positive-int>3</positive-int>
-    <negative-int>-12345</negative-int>
-    <positive-double-with-decimal-point>3.14159</positive-double-with-decimal-point>
-    <negative-double-with-decimal-point>-12345.6789</negative-double-with-decimal-point>
-    <int-too-large>922337203685477580834343</int-too-large>
-    <invalid-int>this is a string</invalid-int>
-</root-name>
