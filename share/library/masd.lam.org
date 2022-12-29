@@ -2,7 +2,6 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 :PROPERTIES:
-:masd.codec.dia.comment: true
 :masd.codec.model_modules: masd.lam
 :masd.codec.input_technical_space: agnostic
 :masd.codec.is_proxy_model: true
@@ -26,7 +25,6 @@ space; keep it technical space agnostic.
 * core                                                               :module:
   :PROPERTIES:
   :custom_id: bb71fdc0-5099-486f-86fe-95f21564e62f
-  :masd.codec.dia.comment: true
   :END:
 
 Types that don't belong to any of the more
@@ -59,7 +57,6 @@ specific buckets.
 * text                                                               :module:
   :PROPERTIES:
   :custom_id: 8c7a5d91-eb66-4bd3-ab2f-d9bc52313d47
-  :masd.codec.dia.comment: true
   :END:
 
 Types related to text.
@@ -79,7 +76,6 @@ Types related to text.
 * numeric                                                            :module:
   :PROPERTIES:
   :custom_id: 1baac5de-1dac-4e02-b88c-0d7e9fbaea38
-  :masd.codec.dia.comment: true
   :END:
 
 Types that represent numeric quantities.
@@ -135,7 +131,6 @@ Types that represent numeric quantities.
 * chrono                                                             :module:
   :PROPERTIES:
   :custom_id: 754cf605-5e8c-45b5-ab7b-469df83c54fc
-  :masd.codec.dia.comment: true
   :END:
 
 Types related to time representation.
@@ -161,7 +156,6 @@ Types related to time representation.
 * container                                                          :module:
   :PROPERTIES:
   :custom_id: 4f194767-2deb-4028-be36-8fb31fe86e2e
-  :masd.codec.dia.comment: true
   :END:
 
 Types that contain other types.
