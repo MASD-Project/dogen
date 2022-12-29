@@ -1,3 +1,9 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/Microsoft/vcpkg
+[submodule "test_data/cpp_ref_impl"]
+	path = test_data/cpp_ref_impl
+	url = https://github.com/MASD-Project/cpp_ref_impl.git
+[submodule "test_data/csharp_ref_impl"]
+	path = test_data/csharp_ref_impl
+	url = https://github.com/MASD-Project/csharp_ref_impl
