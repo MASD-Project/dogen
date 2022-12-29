@@ -20,11 +20,10 @@
 
 Provides support for encoding and decoding of external models.
 
-An external model is defined as:
+There are only two formats supported as external models:
 
-- a third-party format that is not owned or controlled by Dogen, such as Dia or
-  org-mode.
-- a Dogen format designed for interoperability (JSON).
+- org-mode, the main format used by Dogen;
+- PlantUML, used to generate UML diagrams.
 
 External models are converted into an intermediate format called the codec
 model, because it is the original entry point into the dogen processing
@@ -37,7 +36,7 @@ A codec must be created for each external model that is to be injected,
 providing a transformation between the native formats and the codec model. The
 codecs are created as transforms in the present model, and should reuse common
 infrastructure where possible. There should also be a "native" model
-representing the original codec format as much as possible (e.g. "dogen.dia").
+representing the original codec format as much as possible (e.g. "dogen.org").
 The idea for those models is just to provide a faithful representation of the
 native codec domain model (though it may not necessarily be complete).
 
@@ -584,14 +583,12 @@ is used to populate the artefact type.
    :custom_id: 7F18AA6C-08F0-AFE4-0B0B-86D3A5618A6E
    :masd.codec.stereotypes: dogen::handcrafted::typeable
    :masd.codec.plantuml: artefact_to_model_chain o-- org_artefact_to_model_transform
-   :masd.codec.plantuml: artefact_to_model_chain o-- json_artefact_to_model_transform
-   :masd.codec.plantuml: artefact_to_model_chain o-- dia_artefact_to_model_transform
    :END:
 
 Applies the codec transform for the supplied artefact, if one exists.
 
 Transforms the external model in whatever supported external representation it
-may be in - Dia, JSON, etc - into the internal representation of a codec model.
+may be in into the internal representation of a codec model.
 
 ** org artefact to model transform                                  :element:
    :PROPERTIES:
@@ -602,15 +599,6 @@ may be in - Dia, JSON, etc - into the internal representation of a codec model.
 Processes the artefact as if encoded as an org-mode document, and converts it
 into an instance of the codec model.
 
-** json artefact to model transform                                 :element:
-   :PROPERTIES:
-   :custom_id: 7B51B78D-9F73-F564-4E83-6439CEBBAFA6
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-Processes the artefact as if encoded using JSON, converting it into an instance
-of the codec model.
-
 ** model to model chain                                             :element:
    :PROPERTIES:
    :custom_id: 1D7B118A-1A52-1B74-4D83-D6841DFB15FE
@@ -618,10 +606,7 @@ of the codec model.
    :masd.codec.plantuml: model_to_model_chain o-- file_to_file_chain
    :END:
 
-Applies the codec transform for the supplied artefact, if one exists.
-
-Transforms the external model in whatever supported external representation it
-may be in - Dia, JSON, etc - into the internal representation of a codec model.
+Applies the codec transform for the supplied model, if one exists.
 
 ** file to file chain                                               :element:
    :PROPERTIES:
@@ -667,20 +652,11 @@ Removes any leading and trailing whitespace from all the documentation.
    :PROPERTIES:
    :custom_id: 41B43B03-08A0-C534-EBC3-797E822658A4
    :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :masd.codec.plantuml: model_to_artefact_chain o-- model_to_json_artefact_transform
    :masd.codec.plantuml: model_to_artefact_chain o-- model_to_org_artefact_transform
    :masd.codec.plantuml: model_to_artefact_chain o-- model_to_plantuml_artefact_transform
    :END:
 
-Transforms the supplied codec model into an artefact encoded using JSON.
-
-** model to json artefact transform                                 :element:
-   :PROPERTIES:
-   :custom_id: 07CCDF84-F2F3-3B24-7763-05AC088C7E9C
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
-Transforms the supplied codec model into an artefact encoded using JSON.
+Transforms the supplied codec model into an artefact.
 
 ** model to org artefact transform                                  :element:
    :PROPERTIES:

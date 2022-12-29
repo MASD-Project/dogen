@@ -212,7 +212,7 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_fla
      */
     using dogen::utility::test_data::cpp_ref_impl_product;
     const auto t(cpp_ref_impl_product::
-        input_cpp_ref_impl_do_not_delete_empty_dirs_json());
+        input_cpp_ref_impl_do_not_delete_empty_dirs_org());
     const auto od(top_level_dir / "skip_empty_folders");
     recreate_directory(od);
 

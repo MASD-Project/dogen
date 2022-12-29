@@ -28,11 +28,10 @@
 /**
  * @brief Provides support for encoding and decoding of external models.
  *
- * An external model is defined as:
+ * There are only two formats supported as external models:
  *
- * - a third-party format that is not owned or controlled by Dogen, such as Dia or
- *   org-mode.
- * - a Dogen format designed for interoperability (JSON).
+ * - org-mode, the main format used by Dogen;
+ * - PlantUML, used to generate UML diagrams.
  *
  * External models are converted into an intermediate format called the codec
  * model, because it is the original entry point into the dogen processing
@@ -45,7 +44,7 @@
  * providing a transformation between the native formats and the codec model. The
  * codecs are created as transforms in the present model, and should reuse common
  * infrastructure where possible. There should also be a "native" model
- * representing the original codec format as much as possible (e.g. "dogen.dia").
+ * representing the original codec format as much as possible (e.g. "dogen.org").
  * The idea for those models is just to provide a faithful representation of the
  * native codec domain model (though it may not necessarily be complete).
  *

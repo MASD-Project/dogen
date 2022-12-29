@@ -24,7 +24,6 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
 #include "dogen.codec/io/entities/artefact_io.hpp"
-#include "dogen.codec/types/transforms/model_to_json_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/model_to_org_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/model_to_plantuml_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
@@ -38,7 +37,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const char dot('.');
-const std::string json_codec_name("json");
 const std::string org_codec_name("org");
 const std::string plantuml_codec_name("plantuml");
 
@@ -66,11 +64,7 @@ apply(const context& ctx, const boost::filesystem::path& p,
         transform_id, m.name().qualified(), *ctx.tracer());
 
     const auto codec_name(path_to_codec_name(p));
-    if (codec_name == json_codec_name) {
-        const auto r(model_to_json_artefact_transform::apply(ctx, p, m));
-        stp.end_chain(r);
-        return r;
-    } else if (codec_name == org_codec_name) {
+    if (codec_name == org_codec_name) {
         const auto r(model_to_org_artefact_transform::apply(ctx, p, m));
         stp.end_chain(r);
         return r;

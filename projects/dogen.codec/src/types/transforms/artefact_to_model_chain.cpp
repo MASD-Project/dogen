@@ -22,7 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.codec/io/entities/model_io.hpp"
-#include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/org_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
@@ -34,9 +33,7 @@ const std::string transform_id("codec.transforms.artefact_to_model_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string json_codec_name("json");
 const std::string org_codec_name("org");
-
 const std::string unsupported_codec("No transform are available for codec: ");
 
 }
@@ -49,11 +46,7 @@ apply(const context& ctx, const entities::artefact& a) {
     tracing::scoped_chain_tracer stp(lg, "artefact to model",
         transform_id, model_name, *ctx.tracer());
 
-    if (a.codec_name() == json_codec_name) {
-        const auto r(json_artefact_to_model_transform::apply(ctx, a));
-        stp.end_chain(r);
-        return r;
-    } else if (a.codec_name() == org_codec_name) {
+    if (a.codec_name() == org_codec_name) {
         const auto r(org_artefact_to_model_transform::apply(ctx, a));
         stp.end_chain(r);
         return r;

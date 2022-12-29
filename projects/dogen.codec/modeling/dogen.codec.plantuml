@@ -3,11 +3,10 @@ set namespaceSeparator ::
 note as N1
 Provides support for encoding and decoding of external models.
 
-An external model is defined as:
+There are only two formats supported as external models:
 
-- a third-party format that is not owned or controlled by Dogen, such as Dia or
-  org-mode.
-- a Dogen format designed for interoperability (JSON).
+- org-mode, the main format used by Dogen;
+- PlantUML, used to generate UML diagrams.
 
 External models are converted into an intermediate format called the codec
 model, because it is the original entry point into the dogen processing
@@ -20,7 +19,7 @@ A codec must be created for each external model that is to be injected,
 providing a transformation between the native formats and the codec model. The
 codecs are created as transforms in the present model, and should reuse common
 infrastructure where possible. There should also be a "native" model
-representing the original codec format as much as possible (e.g. "dogen.dia").
+representing the original codec format as much as possible (e.g. "dogen.org").
 The idea for those models is just to provide a faithful representation of the
 native codec domain model (though it may not necessarily be complete).
 
@@ -321,14 +320,12 @@ is used to populate the artefact type.
     }
 
     artefact_to_model_chain o-- org_artefact_to_model_transform
-    artefact_to_model_chain o-- json_artefact_to_model_transform
-    artefact_to_model_chain o-- dia_artefact_to_model_transform
 
     note top of artefact_to_model_chain
 Applies the codec transform for the supplied artefact, if one exists.
 
 Transforms the external model in whatever supported external representation it
-may be in - Dia, JSON, etc - into the internal representation of a codec model.
+may be in into the internal representation of a codec model.
     end note
 
     class org_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
@@ -339,24 +336,13 @@ Processes the artefact as if encoded as an org-mode document, and converts it
 into an instance of the codec model.
     end note
 
-    class json_artefact_to_model_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    note top of json_artefact_to_model_transform
-Processes the artefact as if encoded using JSON, converting it into an instance
-of the codec model.
-    end note
-
     class model_to_model_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
     model_to_model_chain o-- file_to_file_chain
 
     note top of model_to_model_chain
-Applies the codec transform for the supplied artefact, if one exists.
-
-Transforms the external model in whatever supported external representation it
-may be in - Dia, JSON, etc - into the internal representation of a codec model.
+Applies the codec transform for the supplied model, if one exists.
     end note
 
     class file_to_file_chain <<dogen::handcrafted::typeable>> #FFFACD {
@@ -400,19 +386,11 @@ Removes any leading and trailing whitespace from all the documentation.
     class model_to_artefact_chain <<dogen::handcrafted::typeable>> #FFFACD {
     }
 
-    model_to_artefact_chain o-- model_to_json_artefact_transform
     model_to_artefact_chain o-- model_to_org_artefact_transform
     model_to_artefact_chain o-- model_to_plantuml_artefact_transform
 
     note top of model_to_artefact_chain
-Transforms the supplied codec model into an artefact encoded using JSON.
-    end note
-
-    class model_to_json_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
-    note top of model_to_json_artefact_transform
-Transforms the supplied codec model into an artefact encoded using JSON.
+Transforms the supplied codec model into an artefact.
     end note
 
     class model_to_org_artefact_transform <<dogen::handcrafted::typeable>> #FFFACD {

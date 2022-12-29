@@ -29,7 +29,6 @@
 #include "dogen.codec/types/transforms/configuration_transform.hpp"
 #include "dogen.codec/types/transforms/tagged_values_overrides_transform.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
-#include "dogen.codec/types/transforms/json_artefact_to_model_transform.hpp"
 #include "dogen.codec/types/transforms/transformation_error.hpp"
 #include "dogen.codec/types/transforms/artefact_to_model_chain.hpp"
 #include "dogen.codec/types/transforms/meta_data_transform.hpp"
@@ -43,7 +42,6 @@ const std::string transform_id("codec.transforms.model_production_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string json_codec_name("json");
 const std::string unsupported_codec("No transform are available for codec: ");
 
 }
