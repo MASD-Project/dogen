@@ -221,19 +221,16 @@ or its abbreviation ```rat```. This is sufficient if you just need to gain some
 confidence on the code generator as we perform tests against Dogen's own models.
 However, if you are trying to submit a PR that changes the behaviour of the code
 generator, you must also run the tests against the C++ and C# reference
-implementation models, as well as a ["Frozen" version of
-Dogen](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30). For this you
-need to download the zips or clone the repositories locally:
+implementation models. For this you need to download the zips or clone the
+repositories locally:
 
 - [C++ Reference Implementation](https://github.com/MASD-Project/cpp_ref_impl)
 - [C# Reference Implementation](https://github.com/MASD-Project/csharp_ref_impl)
-- [Frozen](https://github.com/MASD-Project/frozen)
 
 Due to our use of presets, the expected location of these files is baked in, as
 follows:
 
 ``` bash
-"FROZEN_PROJECTS_DIRECTORY": "${sourceDir}/../../frozen/master/projects",
 "CPP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../cpp_ref_impl/master/projects",
 "CSHARP_REF_IMPL_PROJECTS_DIRECTORY":"${sourceDir}/../../csharp_ref_impl/master/Src"
 ```
@@ -250,7 +247,6 @@ Dogen):
 ...
 -- CMake Version: 3.22.2
 -- DOGEN_PROJECTS_DIRECTORY=${DIR}/projects
--- FROZEN_PROJECTS_DIRECTORY=${DIR}/../../frozen/master/projects
 -- CPP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/../../cpp_ref_impl/master/projects
 -- CSHARP_REF_IMPL_PROJECTS_DIRECTORY=${DIR}/../../csharp_ref_impl/master/Src
 ...

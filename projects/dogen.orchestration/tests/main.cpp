@@ -23,7 +23,6 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
-#include "dogen.utility/types/test_data/frozen_product.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
 #include "dogen.orchestration/types/initializer.hpp"
@@ -54,9 +53,6 @@ struct initializer {
 #endif
         dogen::orchestration::initializer::initialize();
         dogen::utility::test_data::dogen_product::initialize();
-#ifdef ENABLE_FROZEN_TESTS
-        dogen::utility::test_data::frozen_product::initialize();
-#endif // ENABLE_FROZEN_TESTS
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
         dogen::utility::test_data::cpp_ref_impl_product::initialize();
 #endif // ENABLE_CPP_REF_IMPL_TESTS

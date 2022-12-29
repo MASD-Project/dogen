@@ -448,12 +448,6 @@ The values supplied for the logging configuration are not valid.
 
 An error occurred whilst obtaining the test data.
 
-** frozen product                                                   :element:
-   :PROPERTIES:
-   :custom_id: E10B8C28-B4AF-3B94-D3A3-6FB73E5C4F39
-   :masd.codec.stereotypes: dogen::handcrafted::typeable
-   :END:
-
 * xml                                                                :module:
   :PROPERTIES:
   :custom_id: F7AFC72F-A202-D734-2E1B-2B0E24702884

@@ -228,9 +228,6 @@ namespace test_data #F2F2F2 {
 An error occurred whilst obtaining the test data.
     end note
 
-    class frozen_product <<dogen::handcrafted::typeable>> #FFFACD {
-    }
-
 }
 
 namespace xml #F2F2F2 {
