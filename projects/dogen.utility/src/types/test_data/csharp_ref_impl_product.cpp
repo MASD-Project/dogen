@@ -38,8 +38,6 @@ const std::string project_dir_not_found(
 const std::string not_initialized("Test data set is not initialized");
 const std::string output_dir("masd.csharp_ref_impl.code_generation_test_output");
 
-const std::string models_dia_dir("CSharpRefImpl.Models/dia");
-const std::string models_json_dir("CSharpRefImpl.Models/json");
 const std::string models_org_dir("CSharpRefImpl.Models/org");
 
 const std::string path_csharprefimpl_csharpmodel_dia(
@@ -70,8 +68,6 @@ using boost::filesystem::path;
 namespace dogen::utility::test_data {
 
 path csharp_ref_impl_product::project_directory_;
-path csharp_ref_impl_product::dia_models_directory_;
-path csharp_ref_impl_product::json_models_directory_;
 path csharp_ref_impl_product::org_models_directory_;
 path csharp_ref_impl_product::output_directory_;
 
@@ -90,14 +86,9 @@ void csharp_ref_impl_product::initialize() {
         BOOST_THROW_EXCEPTION(
             test_data_exception(project_dir_not_found + proj_dir_env));
     }
-
-    dia_models_directory_ = project_directory_ / models_dia_dir;
-    json_models_directory_ = project_directory_ / models_json_dir;
     org_models_directory_ = project_directory_ / models_org_dir;
-    BOOST_LOG_SEV(lg, debug) << "Dia models: "
-                             << dia_models_directory_.generic_string()
-                             << " JSON models: "
-                             << json_models_directory_.generic_string();
+    BOOST_LOG_SEV(lg, debug) << "Org models: "
+                             << org_models_directory_.generic_string();
 
     output_directory_ = boost::filesystem::absolute(output_dir);
 }
@@ -115,40 +106,6 @@ path csharp_ref_impl_product::project_directory() {
 path csharp_ref_impl_product::output_directory() {
     ensure_initialized();
     return output_directory_;
-}
-
-path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_dia() {
-    ensure_initialized();
-    return dia_models_directory_ / path_csharprefimpl_csharpmodel_dia;
-}
-
-path csharp_ref_impl_product::
-input_csharprefimpl_directory_settings_dia() {
-    ensure_initialized();
-    return dia_models_directory_ /
-        path_csharprefimpl_directory_settings_dia;
-}
-
-path csharp_ref_impl_product::input_csharprefimpl_lammodel_dia() {
-    ensure_initialized();
-    return dia_models_directory_ / path_csharprefimpl_lammodel_dia;
-}
-
-path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_json() {
-    ensure_initialized();
-    return json_models_directory_ / path_csharprefimpl_csharpmodel_json;
-}
-
-path csharp_ref_impl_product::
-input_csharprefimpl_directory_settings_json() {
-    ensure_initialized();
-    return json_models_directory_ /
-        path_csharprefimpl_directory_settings_json;
-}
-
-path csharp_ref_impl_product::input_csharprefimpl_lammodel_json() {
-    ensure_initialized();
-    return json_models_directory_ / path_csharprefimpl_lammodel_json;
 }
 
 path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_org() {

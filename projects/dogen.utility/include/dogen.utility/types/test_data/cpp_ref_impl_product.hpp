@@ -48,56 +48,6 @@ public:
     static boost::filesystem::path output_directory();
 
 public:
-    static boost::filesystem::path input_cpp_ref_impl_boost_model_dia();
-    static boost::filesystem::path input_cpp_ref_impl_colours_dia();
-    static boost::filesystem::path input_cpp_ref_impl_compressed_dia();
-    static boost::filesystem::path input_cpp_ref_impl_cpp_98_dia();
-    static boost::filesystem::path input_cpp_ref_impl_cpp_model_dia();
-    static boost::filesystem::path input_cpp_ref_impl_directory_settings_dia();
-    static boost::filesystem::path input_cpp_ref_impl_disable_cmakelists_dia();
-    static boost::filesystem::path input_cpp_ref_impl_disable_facet_folders_dia();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_hash_dia();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_io_dia();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_serialization_dia();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_types_dia();
-    static boost::filesystem::path input_cpp_ref_impl_flat_directory_mode_dia();
-    static boost::filesystem::path input_cpp_ref_impl_lam_model_dia();
-    static boost::filesystem::path input_cpp_ref_impl_northwind_dia();
-    static boost::filesystem::path input_cpp_ref_impl_split_project_dia();
-    static boost::filesystem::path input_cpp_ref_impl_std_model_dia();
-    static boost::filesystem::path input_cpp_ref_impl_two_layers_with_objects_dia();
-    static boost::filesystem::path input_cpp_ref_impl_delete_extra_dia();
-    static boost::filesystem::path input_cpp_ref_impl_ignore_extra_dia();
-    static boost::filesystem::path input_cpp_ref_impl_force_write_dia();
-    static boost::filesystem::path input_cpp_ref_impl_out_of_sync_dia();
-    static boost::filesystem::path input_cpp_ref_impl_do_not_delete_empty_dirs_dia();
-
-public:
-    static boost::filesystem::path input_cpp_ref_impl_boost_model_json();
-    static boost::filesystem::path input_cpp_ref_impl_colours_json();
-    static boost::filesystem::path input_cpp_ref_impl_compressed_json();
-    static boost::filesystem::path input_cpp_ref_impl_cpp_98_json();
-    static boost::filesystem::path input_cpp_ref_impl_cpp_model_json();
-    static boost::filesystem::path input_cpp_ref_impl_directory_settings_json();
-    static boost::filesystem::path input_cpp_ref_impl_disable_cmakelists_json();
-    static boost::filesystem::path input_cpp_ref_impl_disable_facet_folders_json();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_hash_json();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_io_json();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_serialization_json();
-    static boost::filesystem::path input_cpp_ref_impl_enable_facet_types_json();
-    static boost::filesystem::path input_cpp_ref_impl_flat_directory_mode_json();
-    static boost::filesystem::path input_cpp_ref_impl_lam_model_json();
-    static boost::filesystem::path input_cpp_ref_impl_northwind_json();
-    static boost::filesystem::path input_cpp_ref_impl_split_project_json();
-    static boost::filesystem::path input_cpp_ref_impl_std_model_json();
-    static boost::filesystem::path input_cpp_ref_impl_two_layers_with_objects_json();
-    static boost::filesystem::path input_cpp_ref_impl_delete_extra_json();
-    static boost::filesystem::path input_cpp_ref_impl_ignore_extra_json();
-    static boost::filesystem::path input_cpp_ref_impl_force_write_json();
-    static boost::filesystem::path input_cpp_ref_impl_out_of_sync_json();
-    static boost::filesystem::path input_cpp_ref_impl_do_not_delete_empty_dirs_json();
-
-public:
     static boost::filesystem::path input_cpp_ref_impl_boost_model_org();
     static boost::filesystem::path input_cpp_ref_impl_colours_org();
     static boost::filesystem::path input_cpp_ref_impl_cpp_98_org();
@@ -123,8 +73,6 @@ public:
 
 private:
     static boost::filesystem::path project_directory_;
-    static boost::filesystem::path dia_models_directory_;
-    static boost::filesystem::path json_models_directory_;
     static boost::filesystem::path org_models_directory_;
     static boost::filesystem::path output_directory_;
 };

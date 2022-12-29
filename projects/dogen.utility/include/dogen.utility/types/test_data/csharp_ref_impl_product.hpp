@@ -48,22 +48,12 @@ public:
     static boost::filesystem::path output_directory();
 
 public:
-    static boost::filesystem::path input_csharprefimpl_csharpmodel_dia();
-    static boost::filesystem::path input_csharprefimpl_directory_settings_dia();
-    static boost::filesystem::path input_csharprefimpl_lammodel_dia();
-
-    static boost::filesystem::path input_csharprefimpl_csharpmodel_json();
-    static boost::filesystem::path input_csharprefimpl_directory_settings_json();
-    static boost::filesystem::path input_csharprefimpl_lammodel_json();
-
     static boost::filesystem::path input_csharprefimpl_csharpmodel_org();
     static boost::filesystem::path input_csharprefimpl_directory_settings_org();
     static boost::filesystem::path input_csharprefimpl_lammodel_org();
 
 private:
     static boost::filesystem::path project_directory_;
-    static boost::filesystem::path dia_models_directory_;
-    static boost::filesystem::path json_models_directory_;
     static boost::filesystem::path org_models_directory_;
     static boost::filesystem::path output_directory_;
 };
