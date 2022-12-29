@@ -40,8 +40,6 @@ using dogen::utility::test_data::csharp_ref_impl_product;
 
 BOOST_AUTO_TEST_SUITE(csharp_ref_impl_org_tests)
 
-#ifdef ENABLE_CSHARP_REF_IMPL_TESTS
-
 BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_org_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_csharpmodel_org_produces_expected_model");
     const auto t(csharp_ref_impl_product::input_csharprefimpl_csharpmodel_org());
@@ -68,7 +66,5 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_org_produces_expected_model) {
     const auto m(mp.apply_physical_model_production(t, od));
     BOOST_CHECK(mp.check_for_differences(od, m));
 }
-
-#endif // ENABLE_CSHARP_REF_IMPL_TESTS
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -35,8 +35,6 @@ const std::string test_suite("cpp_ref_impl_org_tests");
 
 }
 
-#ifdef ENABLE_CPP_REF_IMPL_TESTS
-
 using dogen::orchestration::tests::model_producer;
 using dogen::utility::test_data::cpp_ref_impl_product;
 
@@ -223,5 +221,3 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_out_of_sync_org_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-#endif // ENABLE_CPP_REF_IMPL_TESTS

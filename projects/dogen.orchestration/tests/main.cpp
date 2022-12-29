@@ -53,12 +53,8 @@ struct initializer {
 #endif
         dogen::orchestration::initializer::initialize();
         dogen::utility::test_data::dogen_product::initialize();
-#ifdef ENABLE_CPP_REF_IMPL_TESTS
         dogen::utility::test_data::cpp_ref_impl_product::initialize();
-#endif // ENABLE_CPP_REF_IMPL_TESTS
-#ifdef ENABLE_CSHARP_REF_IMPL_TESTS
         dogen::utility::test_data::csharp_ref_impl_product::initialize();
-#endif // ENABLE_CSHARP_REF_IMPL_TESTS
         BOOST_LOG_SEV(lg, debug) << "Finished initialisation.";
     }
 };
