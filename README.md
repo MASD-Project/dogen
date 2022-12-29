@@ -261,6 +261,15 @@ You can also use CTest to run the tests, _e.g._:
 ctest --preset linux-clang-release
 ```
 
+Or, the slightly more verbose incantation which has the same result:
+
+```
+cmake --build --preset linux-clang-release --target test
+```
+
+Though in the CTest form, the tests take slightly longer to run and the output
+is a bit more verbose.
+
 ## Generation
 
 If you'd like to run Dogen to regenerate all of its models, you can do so by
