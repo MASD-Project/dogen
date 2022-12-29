@@ -70,7 +70,6 @@ Ability to have a name.
     }
 
     Commentable o-u- comment
-    Commentable <|.. object
 
     note top of Commentable
 Has the ability to have an associated comment.
@@ -117,7 +116,6 @@ Properties related to the origin of the modeling element.
 
     Element <|.. element
     Element <|.. attribute
-    Element <|.. object
     Element <|.. model
 
     entities::Taggable <|-- entities::Element
@@ -155,22 +153,6 @@ Represents an element from an external model.
         +{field} type std::string
         +{field} value std::string
     }
-
-    class object <<Commentable>> #F7E5FF {
-        +{field} id std::string
-        +{field} name std::string
-        +{field} object_type std::string
-        +{field} stereotypes std::string
-        +{field} container_id std::string
-        +{field} connection boost::optional<std::pair<std::string,std::string>>
-        +{field} attributes std::list<attribute>
-    }
-
-    object o-- attribute: composed of
-
-    note top of object
-Represents an "raw" codec object which may or may not contain a modeling element of interest.
-    end note
 
     class model <<Element>> #F7E5FF {
         +{field} elements std::list<element>

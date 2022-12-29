@@ -27,8 +27,6 @@
 #include "dogen.utility/types/string/differ.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
-#include "dogen.codec/types/entities/object.hpp"
-#include "dogen.codec/io/entities/object_io.hpp"
 #include "dogen.codec/types/transforms/artefact_to_artefact_chain.hpp"
 #include "dogen.codec/types/transforms/file_to_artefact_transform.hpp"
 #include "dogen.codec/types/transforms/context_bootstrapping_chain.hpp"

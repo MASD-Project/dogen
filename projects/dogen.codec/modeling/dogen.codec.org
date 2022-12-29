@@ -108,7 +108,6 @@ Name of the codec element.
    :custom_id: CEC37E59-A723-5EE4-16B3-E5A3D218DCCD
    :masd.codec.stereotypes: masd::object_template
    :masd.codec.plantuml: Commentable o-u- comment
-   :masd.codec.plantuml: Commentable <|.. object
    :END:
 
 Has the ability to have an associated comment.
@@ -213,7 +212,6 @@ Provenance details of this codec element.
    :masd.codec.stereotypes: masd::object_template
    :masd.codec.plantuml: Element <|.. element
    :masd.codec.plantuml: Element <|.. attribute
-   :masd.codec.plantuml: Element <|.. object
    :masd.codec.plantuml: Element <|.. model
    :END:
 
@@ -308,64 +306,6 @@ definition.
     :END:
 
 Default value for this attribute, if any.
-
-** object                                                           :element:
-   :PROPERTIES:
-   :custom_id: 8E2A0AE2-9028-0E94-C653-88AD5E2DD15E
-   :masd.codec.stereotypes: Commentable
-   :masd.codec.plantuml: object o-- attribute: composed of
-   :END:
-
-Represents an "raw" codec object which may or may not contain a modeling element of interest.
-
-*** id                                                            :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Original ID available in the codec representation, if any.
-
-*** name                                                          :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Original name in codec representation. May be qualified or simple; its nature is codec dependent.
-
-*** object type                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Native codec representation for the object type. Its interpretation is codec dependent.
-
-*** stereotypes                                                   :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Original steoreotypes assigned to the object, if any.
-
-*** container id                                                  :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::string
-    :END:
-
-Codec ID of the container of this object, if any.
-
-*** connection                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: boost::optional<std::pair<std::string,std::string>>
-    :END:
-
-Connections this object may have with other objects, if any.
-
-*** attributes                                                    :attribute:
-    :PROPERTIES:
-    :masd.codec.type: std::list<attribute>
-    :END:
-
-All attributes associated with this object.
 
 ** model                                                            :element:
    :PROPERTIES:
