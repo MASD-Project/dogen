@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-12-29 Thu 19:59]
+#+CAPTION: Clock summary at [2022-12-30 Fri 11:16]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *81:50* |       |       | 100.0 |
+| *Total time*                                              | *82:09* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 81:50   |       |       | 100.0 |
-| Active                                                    |         | 81:50 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       | 10:13 |  12.5 |
+| Stories                                                   | 82:09   |       |       | 100.0 |
+| Active                                                    |         | 82:09 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       | 10:13 |  12.4 |
 | Create a demo and presentation for previous sprint        |         |       |  2:06 |   2.6 |
 | Update boost to latest in vcpg                            |         |       |  0:20 |   0.4 |
 | Improve diffing output in tests                           |         |       |  0:19 |   0.4 |
-| Sprint and product backlog grooming                       |         |       |  6:10 |   7.5 |
+| Sprint and product backlog grooming                       |         |       |  6:29 |   7.9 |
 | Nightly builds are failing due to missing environment var |         |       |  1:07 |   1.4 |
 | Remove deprecated uses of boost bind                      |         |       |  0:09 |   0.2 |
 | Full generation support in tests is incorrect             |         |       |  3:18 |   4.0 |
@@ -38,7 +38,7 @@
 | Create a mock configuration builder                       |         |       |  1:58 |   2.4 |
 | Enable CodeQL                                             |         |       |  0:21 |   0.4 |
 | Change namespaces note implementation in PlantUML         |         |       |  1:48 |   2.2 |
-| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   1.9 |
+| Consider using a different layout engine in PlantUML      |         |       |  1:31 |   1.8 |
 | Upgrade PlantUML to latest                                |         |       |  0:44 |   0.9 |
 | Code coverage in CDash has disappeared                    |         |       |  0:23 |   0.5 |
 | Investigate nightly issues                                |         |       |  0:15 |   0.3 |
@@ -53,11 +53,11 @@
 | Windows package is broken                                 |         |       |  0:20 |   0.4 |
 | Warning on OSX build                                      |         |       |  2:23 |   2.9 |
 | Use clang format to format the code base                  |         |       |  0:58 |   1.2 |
-| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  21.2 |
-| Configuration as stereotype causes noise                  |         |       |  2:09 |   2.6 |
+| Add PlantUML relationships to diagrams                    |         |       | 17:19 |  21.1 |
 | Update CMakeLists to match latest                         |         |       |  0:45 |   0.9 |
-| Thoughts on refactoring variability                       |         |       |  0:22 |   0.4 |
+| Configuration as stereotype causes noise                  |         |       |  2:09 |   2.6 |
 | Consider using meta-data within codec model               |         |       |  0:29 |   0.6 |
+| Thoughts on refactoring variability                       |         |       |  0:22 |   0.4 |
 #+end:
 
 Agenda:
@@ -384,6 +384,9 @@ generation overrides the decoration settings.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2022-12-30 Fri 11:10]--[2022-12-30 Fri 11:16] =>  0:06
+    CLOCK: [2022-12-29 Thu 20:05]--[2022-12-29 Thu 20:14] =>  0:09
+    CLOCK: [2022-12-29 Thu 20:00]--[2022-12-29 Thu 20:04] =>  0:04
     CLOCK: [2022-12-29 Thu 15:52]--[2022-12-29 Thu 16:03] =>  0:11
     CLOCK: [2022-12-29 Thu 15:49]--[2022-12-29 Thu 15:51] =>  0:02
     CLOCK: [2022-12-29 Thu 15:21]--[2022-12-29 Thu 15:36] =>  0:15
@@ -1757,7 +1760,7 @@ Notes:
 
 - always enable tests, do not make it optional.
 
-*** STARTED Ignore vcpkg path length warning                          :story:
+*** POSTPONED Ignore vcpkg path length warning                        :story:
     :LOGBOOK:
     CLOCK: [2022-09-29 Thu 19:45]--[2022-09-29 Thu 19:57] =>  0:12
     :END:
@@ -1791,7 +1794,7 @@ Links:
 - [[https://learn.microsoft.com/en-gb/windows/win32/fileio/maximum-file-path-limitation?tabs=registry][Maximum Path Length Limitation]]
 - [[https://github.com/actions/runner-images/issues/1052][MAX_PATH lengths on Windows environment #1052]]
 
-*** STARTED Windows package is broken                                 :story:
+*** POSTPONED Windows package is broken                               :story:
     :LOGBOOK:
     CLOCK: [2022-09-20 Tue 08:21]--[2022-09-20 Tue 08:33] =>  0:12
     CLOCK: [2022-09-18 Sun 07:39]--[2022-09-18 Sun 07:47] =>  0:08
@@ -1828,7 +1831,7 @@ Links:
 - [[https://gitlab.kitware.com/cmake/cmake/-/issues/20228][IRSL should install MSVCP140_CODECVT_IDS.dll]]: CMake versions after 3.16 should
   install this DLL.
 
-*** STARTED Warning on OSX build                                      :story:
+*** POSTPONED Warning on OSX build                                    :story:
     :LOGBOOK:
     CLOCK: [2022-09-30 Fri 10:43]--[2022-09-30 Fri 11:00] =>  0:17
     CLOCK: [2022-09-30 Fri 10:30]--[2022-09-30 Fri 10:37] =>  0:07
@@ -1977,7 +1980,7 @@ Links:
 - [[https://github.com/Microsoft/vcpkg/issues/4497][Boost linker warnings on OSX #4497]]
 - [[https://github.com/boostorg/serialization/issues/265][Strange "direct access" warning on OSX for basic_text_oprimitive #265]]
 
-*** STARTED Use clang format to format the code base                  :story:
+*** POSTPONED Use clang format to format the code base                :story:
     :LOGBOOK:
     CLOCK: [2022-10-07 Fri 08:01]--[2022-10-07 Fri 08:49] =>  0:48
     CLOCK: [2022-10-06 Thu 20:11]--[2022-10-06 Thu 20:16] =>  0:05
@@ -2011,7 +2014,7 @@ Links:
 - [[https://github.com/lballabio/QuantLib/blob/master/.clang-format][quant lib]] clang format.
 - [[https://github.com/OpenSourceRisk/Engine/blob/master/.clang-format][ORE clang format]]
 
-*** STARTED Add PlantUML relationships to diagrams                    :story:
+*** POSTPONED Add PlantUML relationships to diagrams                  :story:
     :LOGBOOK:
     CLOCK: [2022-11-12 Sat 17:11]--[2022-11-12 Sat 18:40] =>  1:29
     CLOCK: [2022-10-13 Thu 08:00]--[2022-10-13 Thu 08:13] =>  0:13
@@ -2078,46 +2081,7 @@ Links:
 - [[https://www.augmentedmind.de/2021/01/17/plantuml-layout-tutorial-styles/]["PlantUML layout and styles tutorial"]]
 - [[https://isgb.otago.ac.nz/infosci/mark.george/Wiki/wiki/PlantUML%20GraphViz%20Layout]["PlantUML GraphViz Layout"]]
 
-*** STARTED Configuration as stereotype causes noise                  :story:
-    :LOGBOOK:
-    CLOCK: [2022-11-13 Sun 21:24]--[2022-11-13 Sun 22:44] =>  1:20
-    CLOCK: [2022-11-13 Sun 20:58]--[2022-11-13 Sun 21:10] =>  0:12
-    CLOCK: [2022-11-13 Sun 20:21]--[2022-11-13 Sun 20:37] =>  0:16
-    CLOCK: [2022-11-13 Sun 10:02]--[2022-11-13 Sun 10:23] =>  0:21
-    :END:
-
-At present we have very large classes (in terms of width) because they have
-configuration associated with them as stereotypes. This is a particular problem
-in the text model. Nothing stops us from having a separate way of handling
-configuration - for example a different property which is not a stereotype. It
-could be expressed differently in PlantUML - perhaps a separate section as per
-"Advanced class body". We could name the section "Configuration" or "Profiles".
-
-Notes:
-
-- at present we have several different "kinds" of information in the stereotypes
-  field:
-  - the meta-type (e.g. enumeration, object, etc). This is probably the most in
-    keeping with UML's notion of stereotypes.
-  - the associated object templates used by the class.
-  - the associated configurations.
-
-  We could have two fields for each of these (e.g. templates, configurations)
-  and then combine them all as stereotypes in logical model. This allows us to
-  express them as different groups within PlantUML.
-- we should express =masd::object= in the UML diagrams even though its the
-  default. This would make diagrams clearer.
-- we could create a named section for enumerators, fields, etc.
-- we could express the type of an enumeration, if supplied.
-- we could express the type of a primitive, if supplied.
-- meta information could appear in a group called "meta-information".
-- consider using =struct= or =entity= for =masd::object= and =annotation= for
-  =masd::object_template=.
-- if class is abstract, use =abstract=.
-- check why feature model is not available on codec to codec transform and see
-  how hard it is to get it.
-
-*** STARTED Update CMakeLists to match latest                         :story:
+*** POSTPONED Update CMakeLists to match latest                       :story:
     :LOGBOOK:
     CLOCK: [2022-11-19 Sat 14:59]--[2022-11-19 Sat 15:00] =>  0:01
     CLOCK: [2022-11-19 Sat 14:07]--[2022-11-19 Sat 14:30] =>  0:23
@@ -2166,6 +2130,64 @@ Notes:
   perspective we do not want to add references recursively. We want instead to
   rely on transitivity.
 
+*** STARTED Configuration as stereotype causes noise                  :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-13 Sun 21:24]--[2022-11-13 Sun 22:44] =>  1:20
+    CLOCK: [2022-11-13 Sun 20:58]--[2022-11-13 Sun 21:10] =>  0:12
+    CLOCK: [2022-11-13 Sun 20:21]--[2022-11-13 Sun 20:37] =>  0:16
+    CLOCK: [2022-11-13 Sun 10:02]--[2022-11-13 Sun 10:23] =>  0:21
+    :END:
+
+At present we have very large classes (in terms of width) because they have
+configuration associated with them as stereotypes. This is a particular problem
+in the text model. Nothing stops us from having a separate way of handling
+configuration - for example a different property which is not a stereotype. It
+could be expressed differently in PlantUML - perhaps a separate section as per
+"Advanced class body". We could name the section "Configuration" or "Profiles".
+
+Notes:
+
+- at present we have several different "kinds" of information in the stereotypes
+  field:
+  - the meta-type (e.g. enumeration, object, etc). This is probably the most in
+    keeping with UML's notion of stereotypes.
+  - the associated object templates used by the class.
+  - the associated configurations.
+
+  We could have two fields for each of these (e.g. templates, configurations)
+  and then combine them all as stereotypes in logical model. This allows us to
+  express them as different groups within PlantUML.
+- we should express =masd::object= in the UML diagrams even though its the
+  default. This would make diagrams clearer.
+- we could create a named section for enumerators, fields, etc.
+- we could express the type of an enumeration, if supplied.
+- we could express the type of a primitive, if supplied.
+- meta information could appear in a group called "meta-information".
+- consider using =struct= or =entity= for =masd::object= and =annotation= for
+  =masd::object_template=.
+- if class is abstract, use =abstract=.
+- check why feature model is not available on codec to codec transform and see
+  how hard it is to get it.
+
+*** STARTED Consider using meta-data within codec model              :story:
+    :LOGBOOK:
+    CLOCK: [2022-11-27 Sun 18:01]--[2022-11-27 Sun 18:30] =>  0:29
+    :END:
+
+At present we are hooking directly into the tags within the codec model in order
+to access meta-data. This is because we only read in profiles etc later on in
+the transform graph. In fact the problem is somewhat recursive: the fundamental
+problem is that we did not expect to bootstrap a full context at the codec
+level; instead we relied on a "minimal context" bootstrapped within the codec
+model itself, allowing us to run the conversions without needing orchestration.
+However, this has now proven to be incorrect: we need meta-data in the codec
+model therefore we should bootstrap a full context before we perform conversion.
+This requires a fair bit of surgery.
+
+Notes:
+
+- we need to move the conversion tests back to orchestration.
+
 *** STARTED Thoughts on refactoring variability                       :story:
     :LOGBOOK:
     CLOCK: [2022-12-28 Wed 17:51]--[2022-12-28 Wed 18:05] =>  0:14
@@ -2208,28 +2230,34 @@ model into the codec model. There are two cases:
 
 Notes:
 
-- remove all Dia support. Delete frozen.
-- remove all JSON support.
-- update all reference products to use org-mode only.
+- update the existing workflow for conversion to bootstrap a complete context.
 
-*** STARTED Consider using meta-data within codec model              :story:
-    :LOGBOOK:
-    CLOCK: [2022-11-27 Sun 18:01]--[2022-11-27 Sun 18:30] =>  0:29
-    :END:
+*** Conversion as code generation                                     :story:
 
-At present we are hooking directly into the tags within the codec model in order
-to access meta-data. This is because we only read in profiles etc later on in
-the transform graph. In fact the problem is somewhat recursive: the fundamental
-problem is that we did not expect to bootstrap a full context at the codec
-level; instead we relied on a "minimal context" bootstrapped within the codec
-model itself, allowing us to run the conversions without needing orchestration.
-However, this has now proven to be incorrect: we need meta-data in the codec
-model therefore we should bootstrap a full context before we perform conversion.
-This requires a fair bit of surgery.
+We may have made a modeling error when we created a distinction between
+"generation" and "conversion". Generation was the full blown code generation of
+a project and conversion was taking a model file in one representation and
+writing it as another (/e.g./ Dia to JSON, org to JSON /etc/). That then
+resulted in a "conversion" workflow inside of codec, which made things strange -
+it was as if we were duplicating functionality. In reality, conversion is
+generation, we just modeled it wrong. We should have an entity that represents a
+PlantUML diagram and another for org-mode documents inside the LPS. When we read
+in a model, we must use it to generate these entities. We then need to create a
+template that generates these files.
 
 Notes:
 
-- we need to move the conversion tests back to orchestration.
+- now that we do not need to convert (org files are final) we can probably get
+  rid of the org-to-org conversion. Having said that, it may be useful to
+  regenerate the org file for other purposes. Round-tripping was considered
+  important in the past, but the reasons for it have been lost in the mists of
+  time. Since we do not have a use case for it yet, maybe we should just remove
+  it.
+- once this is done for PlantUML, the codec model is now clean from all
+  codec-related responsibilities and becomes a true "intermediate
+  representation".
+- we no longer need the CMake targets to generate PlantUML, two steps to run
+  tests, etc. which seems to imply we are going in the right direction.
 
 ** Deprecated
 *** CANCELLED Add nightly builds to C# reference product              :story:
