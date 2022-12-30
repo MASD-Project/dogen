@@ -382,8 +382,9 @@ There are problems with this:
 Something went wrong with full generation. The problem appears to be that full
 generation overrides the decoration settings.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
     :LOGBOOK:
+    CLOCK: [2022-12-30 Fri 12:02]--[2022-12-30 Fri 12:12] =>  0:10
     CLOCK: [2022-12-30 Fri 11:10]--[2022-12-30 Fri 11:16] =>  0:06
     CLOCK: [2022-12-29 Thu 20:05]--[2022-12-29 Thu 20:14] =>  0:09
     CLOCK: [2022-12-29 Thu 20:00]--[2022-12-29 Thu 20:04] =>  0:04
@@ -2130,7 +2131,7 @@ Notes:
   perspective we do not want to add references recursively. We want instead to
   rely on transitivity.
 
-*** STARTED Configuration as stereotype causes noise                  :story:
+*** POSTPONED Configuration as stereotype causes noise                :story:
     :LOGBOOK:
     CLOCK: [2022-11-13 Sun 21:24]--[2022-11-13 Sun 22:44] =>  1:20
     CLOCK: [2022-11-13 Sun 20:58]--[2022-11-13 Sun 21:10] =>  0:12
@@ -2169,7 +2170,7 @@ Notes:
 - check why feature model is not available on codec to codec transform and see
   how hard it is to get it.
 
-*** STARTED Consider using meta-data within codec model              :story:
+*** POSTPONED Consider using meta-data within codec model             :story:
     :LOGBOOK:
     CLOCK: [2022-11-27 Sun 18:01]--[2022-11-27 Sun 18:30] =>  0:29
     :END:
@@ -2188,7 +2189,7 @@ Notes:
 
 - we need to move the conversion tests back to orchestration.
 
-*** STARTED Thoughts on refactoring variability                       :story:
+*** COMPLETED Thoughts on refactoring variability                     :story:
     :LOGBOOK:
     CLOCK: [2022-12-28 Wed 17:51]--[2022-12-28 Wed 18:05] =>  0:14
     CLOCK: [2022-11-27 Sun 11:00]--[2022-11-27 Sun 11:08] =>  0:08
@@ -2231,33 +2232,6 @@ model into the codec model. There are two cases:
 Notes:
 
 - update the existing workflow for conversion to bootstrap a complete context.
-
-*** Conversion as code generation                                     :story:
-
-We may have made a modeling error when we created a distinction between
-"generation" and "conversion". Generation was the full blown code generation of
-a project and conversion was taking a model file in one representation and
-writing it as another (/e.g./ Dia to JSON, org to JSON /etc/). That then
-resulted in a "conversion" workflow inside of codec, which made things strange -
-it was as if we were duplicating functionality. In reality, conversion is
-generation, we just modeled it wrong. We should have an entity that represents a
-PlantUML diagram and another for org-mode documents inside the LPS. When we read
-in a model, we must use it to generate these entities. We then need to create a
-template that generates these files.
-
-Notes:
-
-- now that we do not need to convert (org files are final) we can probably get
-  rid of the org-to-org conversion. Having said that, it may be useful to
-  regenerate the org file for other purposes. Round-tripping was considered
-  important in the past, but the reasons for it have been lost in the mists of
-  time. Since we do not have a use case for it yet, maybe we should just remove
-  it.
-- once this is done for PlantUML, the codec model is now clean from all
-  codec-related responsibilities and becomes a true "intermediate
-  representation".
-- we no longer need the CMake targets to generate PlantUML, two steps to run
-  tests, etc. which seems to imply we are going in the right direction.
 
 ** Deprecated
 *** CANCELLED Add nightly builds to C# reference product              :story:
