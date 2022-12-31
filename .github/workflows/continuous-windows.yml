@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: ${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}
-          path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/DOGEN-1.0.32-Windows-AMD64.msi
+          path: ./build/output/${{matrix.family}}-${{matrix.compiler}}-${{matrix.buildtype}}/stage/pkg/DOGEN-1.0.33-Windows-AMD64.msi
 
       - name: Gitter
         if: always()

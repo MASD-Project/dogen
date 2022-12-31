@@ -16,7 +16,7 @@
 [![Nightly Linux](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml)
 [![CDash](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
-[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.31.svg)](https://github.com/MASD-Project/dogen/commits/master)
+[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.32.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)](https://mcraveiro.github.io/dogen/doxygen/index.html)
 [![Language](https://img.shields.io/badge/Language-C++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-C++17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
@@ -133,7 +133,7 @@ currently under development (see badges above).
 /Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
 ```
 
-  Where ```${VERSION}``` is your Dogen version such as ```1.0.31```.
+  Where ```${VERSION}``` is your Dogen version such as ```1.0.32```.
 
 ----
 
