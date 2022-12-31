@@ -1,30 +1,31 @@
-#+title: Sprint Backlog 32
+#+title: Sprint Backlog 33
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
 
 * Sprint Goals
 
-- Finish restoring support for CI/CD.
-- Get PlantUML diagrams into a usable state.
+- Finnish getting PlantUML diagrams into a usable state.
+- PMM refactoring
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-12-31 Sat 13:11]
+#+CAPTION: Clock summary at [2022-12-31 Sat 17:26]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *4:27* |      |      | 100.0 |
+| *Total time*                           | *7:50* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 4:27   |      |      | 100.0 |
-| Active                                 |        | 4:27 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 3:25 |  76.8 |
-| Sprint and product backlog grooming    |        |      | 0:10 |   3.7 |
-| Nightlies failing with valgrind errors |        |      | 0:27 |  10.1 |
-| Fullgen build is not running           |        |      | 0:25 |   9.4 |
+| Stories                                | 7:50   |      |      | 100.0 |
+| Active                                 |        | 7:50 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 6:19 |  80.6 |
+| Sprint and product backlog refinement  |        |      | 0:10 |   2.1 |
+| Nightlies failing with valgrind errors |        |      | 0:27 |   5.7 |
+| Fullgen build is not running           |        |      | 0:43 |   9.1 |
+| Update vcpkg to latest                 |        |      | 0:11 |   2.3 |
 #+end:
 
 Agenda:
@@ -35,6 +36,10 @@ Agenda:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2022-12-31 Sat 16:12]--[2022-12-31 Sat 17:26] =>  1:14
+    CLOCK: [2022-12-31 Sat 14:07]--[2022-12-31 Sat 15:22] =>  1:15
+    CLOCK: [2022-12-31 Sat 13:57]--[2022-12-31 Sat 14:06] =>  0:09
+    CLOCK: [2022-12-31 Sat 13:39]--[2022-12-31 Sat 13:55] =>  0:16
     CLOCK: [2022-12-30 Fri 16:47]--[2022-12-30 Fri 17:49] =>  1:02
     CLOCK: [2022-12-30 Fri 12:11]--[2022-12-30 Fri 14:34] =>  2:23
     :END:
@@ -61,7 +66,7 @@ Time spent creating the demo and presentation.
     Domain Driven Development
     Released on 30th December 2022
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** STARTED Sprint and product backlog refinement                     :story:
     :LOGBOOK:
     CLOCK: [2022-12-31 Sat 10:39]--[2022-12-31 Sat 10:49] =>  0:10
     :END:
@@ -103,6 +108,7 @@ Links:
 
 *** STARTED Fullgen build is not running                              :story:
     :LOGBOOK:
+    CLOCK: [2022-12-31 Sat 13:12]--[2022-12-31 Sat 13:30] =>  0:18
     CLOCK: [2022-12-31 Sat 13:10]--[2022-12-31 Sat 13:11] =>  0:01
     CLOCK: [2022-12-31 Sat 12:45]--[2022-12-31 Sat 13:09] =>  0:24
     :END:
@@ -129,7 +135,13 @@ Links:
 
 - [[https://docs.github.com/en/actions/learn-github-actions/contexts#github-context][github context]]
 
-*** Update vcpkg to latest                                            :story:
+*** STARTED Update vcpkg to latest                                    :story:
+    :LOGBOOK:
+    CLOCK: [2022-12-31 Sat 14:06]--[2022-12-31 Sat 14:07] =>  0:01
+    CLOCK: [2022-12-31 Sat 13:55]--[2022-12-31 Sat 13:57] =>  0:02
+    CLOCK: [2022-12-31 Sat 13:37]--[2022-12-31 Sat 13:39] =>  0:02
+    CLOCK: [2022-12-31 Sat 13:30]--[2022-12-31 Sat 13:36] =>  0:06
+    :END:
 
 Boost 1.81 is now available, check to see if its in vcpkg.
 
