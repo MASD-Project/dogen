@@ -7,7 +7,7 @@ on:
 jobs:
   check_changes:
     runs-on: ubuntu-latest
-    name: Check latest commit
+    name: Check latest master commit
     outputs:
       should_run: ${{ steps.should_run.outputs.should_run }}
     steps:
@@ -16,12 +16,12 @@ jobs:
           submodules: true
 
       - name: Print latest commit
-        run: echo ${{ github.sha }}
+        run: echo "latest_commit=`git log -1 --format='%H'`" >> $GITHUB_ENV
 
-      - id: should_run
+      - name: check latest commit is less than a day
+        id: should_run
         continue-on-error: true
-        name: check latest commit is less than a day
-        run: test -z $(git rev-list --after="24 hours" ${{ github.sha }}) && echo "::set-output name=should_run::false"
+        run: test -z $(git rev-list --after="24 hours" ${{ env.latest-commit }}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
   build:
     needs: [check_changes]
@@ -71,8 +71,8 @@ jobs:
           export cmake_args="build_group=Nightly,preset=${preset},with_full_generation=ON"
           cmake_args="${cmake_args},build_postfix=fg,code_coverage=1"
           ctest -VV --preset ${preset} --script "CTest.cmake,${cmake_args}"
-          git config user.name 'GitHub Actions'
-          git config user.email noreply@github.com
+          git config user.name 'MASD bot'
+          git config user.email marco.craveiro+masdbot@gmail.com
           git branch -d fullgen || true
           git push origin --delete fullgen || true
           git checkout -b fullgen
