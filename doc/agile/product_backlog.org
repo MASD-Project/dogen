@@ -18708,6 +18708,17 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for SBCL                                  :story:
+
+#+begin_quote
+SGCL is a real-time garbage collector for C++. Provides fully tracked smart
+pointers, similar in use to shared_ptr.
+#+end_quote
+
+Links:
+
+- [[https://github.com/pebal/sgcl][GH sgcl]]
+
 *** Consider adding support for DuckDB                                :story:
 
 #+begin_quote

@@ -326,7 +326,7 @@ Time spent creating the demo and presentation.
     Domain Driven Development
     Released on 4th September 2022
 
-*** COMPLETED Update boost to latest in vcpg                          :story:
+*** COMPLETED Update boost to latest in vcpkg                         :story:
     :LOGBOOK:
     CLOCK: [2022-09-17 Sat 13:00]--[2022-09-17 Sat 13:20] =>  0:20
     :END:
