@@ -96,6 +96,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     # enable as many warnings as possible
     set(warning_flags "-Wall -Wextra -Wconversion")
 
+    # force DWARF version to 4 in order to keep Valgrind happy.
+    set(warning_flags "${warning_flags} -gdwarf-4")
+
     if (CMAKE_COMPILER_IS_GNUCXX)
         set(warning_flags "${warning_flags} -Wno-maybe-uninitialized")
     endif()
@@ -105,8 +108,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
         # make it a bit useless.
         set(warning_flags "${warning_flags} -Wno-mismatched-tags")
 
-        # force DWARF version to 4 in order to keep Valgrind happy.
-        set(warning_flags "${warning_flags} -gdwarf-4")
         if(CCACHE_PROGRAM)
             # CCache and Clang don't seem to play nice when it comes
             # to unused arguments.
