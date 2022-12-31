@@ -120,7 +120,7 @@ set(Boost_USE_MULTITHREADED ON)
 
 # Note: it is possible to build with older versions of boost, but
 # these require patches.
-find_package(Boost 1.80 REQUIRED COMPONENTS
+find_package(Boost 1.81 REQUIRED COMPONENTS
     date_time
     exception
     filesystem

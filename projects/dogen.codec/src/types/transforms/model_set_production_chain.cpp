@@ -63,7 +63,7 @@ model_set_production_chain::transform(const context& ctx,
     const boost::filesystem::path& p,
     std::unordered_set<std::string>& processed_models) {
 
-    BOOST_LOG_SEV(lg, trace) << "Processing: " << p.generic();
+    BOOST_LOG_SEV(lg, trace) << "Processing: " << p.generic_path();
 
     std::list<entities::model> r;
     r.push_back(model_production_chain::apply(ctx, p));
@@ -77,7 +77,7 @@ model_set_production_chain::transform(const context& ctx,
         }
 
         const auto rp(res.resolve(ref));
-        BOOST_LOG_SEV(lg, trace) << "Resolved to path: " << rp.generic();
+        BOOST_LOG_SEV(lg, trace) << "Resolved to path: " << rp.generic_path();
         r.splice(r.end(), transform(ctx, res, rp, processed_models));
         BOOST_LOG_SEV(lg, trace) << "Processed reference.";
     }

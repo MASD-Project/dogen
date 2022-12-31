@@ -156,7 +156,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
     using namespace dogen::utility::log;
     if (!exists(cfg.byproduct_directory())) {
         BOOST_LOG_SEV(lg, error) << "Could not find byproduct directory: "
-                                 << cfg.byproduct_directory().generic();
+                                 << cfg.byproduct_directory().generic_path();
         return false;
     }
 

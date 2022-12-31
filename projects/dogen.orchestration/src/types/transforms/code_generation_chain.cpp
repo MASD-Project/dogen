@@ -41,7 +41,7 @@ namespace dogen::orchestration::transforms {
 void code_generation_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
-    BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
+    BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_path();
 
     const auto model_name(target.filename().string());
     tracing::scoped_chain_tracer stp(lg, "code generation chain",

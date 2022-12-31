@@ -38,7 +38,7 @@ void compose_header(const boost::filesystem::path& base_path,
     std::ostream& s) {
 
     auto rp(actual_path.lexically_relative(base_path));
-    const auto gs(rp.generic().generic_string());
+    const auto gs(rp.generic_path().generic_string());
     s << "diff -u " << gs << " " << gs << std::endl
       << info << std::endl
       << "---  " << gs << std::endl
@@ -55,7 +55,7 @@ std::string unified_differ::diff(const std::string& actual,
     const boost::filesystem::path& actual_path,
     const std::string& info) {
 
-    BOOST_LOG_SEV(lg, debug) << "Diffing: " << actual_path.generic();
+    BOOST_LOG_SEV(lg, debug) << "Diffing: " << actual_path.generic_path();
 
     std::ostringstream s;
     compose_header(base_path, actual_path, info, s);

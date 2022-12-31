@@ -92,7 +92,7 @@ handle_patch(const dogen::diffing_configuration& cfg,
         boost::filesystem::path p(cfg.output_directory());
         p /= model_name + ".patch";
 
-        BOOST_LOG_SEV(lg, debug) << "Writing patch file: " << p.generic()
+        BOOST_LOG_SEV(lg, debug) << "Writing patch file: " << p.generic_path()
                                  << ". Size: " << content.size();
         using dogen::utility::filesystem::write_file_content;
         write_file_content(p, content);

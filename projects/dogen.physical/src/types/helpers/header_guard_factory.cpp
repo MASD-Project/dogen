@@ -40,7 +40,7 @@ namespace dogen::physical::helpers {
 
 std::string header_guard_factory::make(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Creating header guard from path: "
-                             << p.generic();
+                             << p.generic_path();
 
     bool is_first(true);
     std::ostringstream ss;

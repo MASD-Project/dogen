@@ -92,7 +92,7 @@ references_resolver::resolve(const std::string& ref) const {
                 boost::filesystem::is_regular_file(p)) {
                 resolved.push_back(p);
             } else
-                BOOST_LOG_SEV(lg, trace) << "Failed to resolve:" <<p.generic();
+                BOOST_LOG_SEV(lg, trace) << "Failed to resolve:" <<p.generic_path();
         }
     }
 
@@ -111,7 +111,7 @@ references_resolver::resolve(const std::string& ref) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found user reference: "
-                             << resolved.front().generic();
+                             << resolved.front().generic_path();
     return resolved.front();
 }
 

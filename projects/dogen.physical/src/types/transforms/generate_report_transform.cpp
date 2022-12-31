@@ -247,7 +247,7 @@ void write_report(const std::string& contents, const std::string& model_name,
     boost::filesystem::path p(output_directory);
     p /= model_name + "_report" + extension;
 
-    BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic()
+    BOOST_LOG_SEV(lg, debug) << "Writing report file: " << p.generic_path()
                              << ". Size: " << contents.size();
 
     using dogen::utility::filesystem::write_file_content;

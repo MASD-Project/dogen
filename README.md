@@ -155,7 +155,7 @@ Dogen has the following dependencies, across all operative systems:
 | Name                                     | Type      | Version          |
 |------------------------------------------|-----------|------------------|
 | [CMake](https://cmake.org/)              | Mandatory | 3.23 or greater. |
-| [Boost](https://boost.org)               | Mandatory | 1.80 or greater. |
+| [Boost](https://boost.org)               | Mandatory | 1.81 or greater. |
 | [DTL](https://github.com/cubicdaiya/dtl) | Mandatory | 1.19             |
 
 Note that earlier versions may work but haven't been tested. Also, though Dogen

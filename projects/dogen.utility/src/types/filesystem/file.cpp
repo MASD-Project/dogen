@@ -56,7 +56,7 @@ std::string read_file_content(std::istream& s) {
 
 std::string read_file_content(const boost::filesystem::path& path) {
     BOOST_LOG_SEV(lg, trace) << "Reading content for path:"
-                             << path.generic();
+                             << path.generic_path();
 
     if (!boost::filesystem::exists(path)) {
         const auto gs(path.generic_string());

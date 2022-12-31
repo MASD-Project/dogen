@@ -46,7 +46,7 @@ physical::entities::model
 physical_model_production_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting physical model production.";
-    BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
+    BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_path();
 
     const auto model_name(target.filename().string());
     const auto& tracer(*ctx.codec_context().tracer());
