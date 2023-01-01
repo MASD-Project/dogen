@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string>
+#include <vector>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
