@@ -16,12 +16,16 @@ jobs:
           submodules: true
 
       - name: Print latest commit
-        run: echo "latest_commit=`git log -1 --format='%H'`" >> $GITHUB_ENV
+        run: |
+          echo "latest_commit=`git log -1 --format='%H'`" >> $GITHUB_ENV
+          echo "COMMIT: ${{ env.latest-commit }}"
 
       - name: check latest commit is less than a day
         id: should_run
         continue-on-error: true
-        run: test -z $(git rev-list --after="24 hours" ${{ env.latest-commit }}) && echo "should_run=false" >> $GITHUB_OUTPUT
+        run: |
+          echo "COMMIT: ${{ env.latest-commit }}"
+          test -z $(git rev-list --after="24 hours" ${{ env.latest-commit }}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
   build:
     needs: [check_changes]

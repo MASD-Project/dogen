@@ -13,19 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2022-12-31 Sat 17:26]
+#+CAPTION: Clock summary at [2023-01-01 Sun 23:38]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *7:50* |      |      | 100.0 |
+| *Total time*                           | *9:17* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 7:50   |      |      | 100.0 |
-| Active                                 |        | 7:50 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 6:19 |  80.6 |
-| Sprint and product backlog refinement  |        |      | 0:10 |   2.1 |
-| Nightlies failing with valgrind errors |        |      | 0:27 |   5.7 |
-| Fullgen build is not running           |        |      | 0:43 |   9.1 |
-| Update vcpkg to latest                 |        |      | 0:11 |   2.3 |
+| Stories                                | 9:17   |      |      | 100.0 |
+| Active                                 |        | 9:17 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 6:19 |  68.0 |
+| Sprint and product backlog refinement  |        |      | 0:10 |   1.8 |
+| Nightlies failing with valgrind errors |        |      | 0:27 |   4.8 |
+| Fullgen build is not running           |        |      | 0:43 |   7.7 |
+| Update vcpkg to latest                 |        |      | 0:11 |   2.0 |
+| Update emacs to latest                 |        |      | 0:54 |   9.7 |
+| OSX build is failing                   |        |      | 0:19 |   3.4 |
+| Check last commit is broken            |        |      | 0:14 |   2.5 |
 #+end:
 
 Agenda:
@@ -135,7 +138,7 @@ Links:
 
 - [[https://docs.github.com/en/actions/learn-github-actions/contexts#github-context][github context]]
 
-*** STARTED Update vcpkg to latest                                    :story:
+*** COMPLETED Update vcpkg to latest                                  :story:
     :LOGBOOK:
     CLOCK: [2022-12-31 Sat 14:06]--[2022-12-31 Sat 14:07] =>  0:01
     CLOCK: [2022-12-31 Sat 13:55]--[2022-12-31 Sat 13:57] =>  0:02
@@ -144,6 +147,43 @@ Links:
     :END:
 
 Boost 1.81 is now available, check to see if its in vcpkg.
+
+*** STARTED Update emacs to latest                                    :story:
+    :LOGBOOK:
+    CLOCK: [2023-01-01 Sun 19:30]--[2023-01-01 Sun 20:24] =>  1:14
+    :END:
+
+We should try to update all packages, the emacs version etc to latest version.
+
+*** STARTED OSX build is failing                                      :story:
+    :LOGBOOK:
+    CLOCK: [2023-01-01 Sun 20:25]--[2023-01-01 Sun 20:44] =>  0:19
+    :END:
+
+Error:
+
+: [347/1212] Building CXX object projects/dogen.variability/src/CMakeFiles/dogen.variability.lib.dir/types/helpers/template_instantiator.cpp.o
+: FAILED: projects/dogen.variability/src/CMakeFiles/dogen.variability.lib.dir/types/helpers/template_instantiator.cpp.o
+: /usr/local/bin/sccache /Applications/Xcode_14.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DBOOST_BIND_GLOBAL_PLACEHOLDERS -I/.../dogen/build/output/macos-clang-debug/stage/include -I/.../dogen/projects/dogen/include : -I/.../dogen/projects/dogen.identification/include -I/.../dogen/projects/dogen.physical/include -I/.../dogen/projects/dogen.cli/include -I/.../dogen/projects/dogen.utility/include -I/.../dogen/projects/dogen.variability/include -I/.../dogen/projects/dogen.org/include -I/.../dogen/projects/dogen.codec/include -I/.../dogen/projects/dogen.tracing/include -I/.../dogen/projects/dogen.logical/include -I/.../dogen/projects/dogen.orchestration/include -I/.../dogen/projects/dogen.templating/include -I/.../dogen/projects/dogen.text/include -isystem /.../dogen/build/output/macos-clang-debug/vcpkg_installed/x64-osx/include -fprofile-arcs -ftest-coverage -Wall -Wextra -Wconversion -gdwarf-4 -Wno-mismatched-tags -Qunused-arguments -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility=default  -g -isysroot /Applications/Xcode_14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -std=c++17 -MD -MT projects/dogen.variability/src/CMakeFiles/dogen.variability.lib.dir/types/helpers/template_instantiator.cpp.o -MF projects/dogen.variability/src/CMakeFiles/dogen.variability.lib.dir/types/helpers/template_instantiator.cpp.o.d -o projects/dogen.variability/src/CMakeFiles/dogen.variability.lib.dir/types/helpers/template_instantiator.cpp.o -c /.../dogen/projects/dogen.variability/src/types/helpers/template_instantiator.cpp
+: In file included from projects/dogen.variability/src/types/helpers/template_instantiator.cpp:21:
+: In file included from build/output/macos-clang-debug/vcpkg_installed/x64-osx/include/boost/lexical_cast.hpp:30:
+: In file included from build/output/macos-clang-debug/vcpkg_installed/x64-osx/include/boost/range/iterator_range_core.hpp:26:
+: In file included from build/output/macos-clang-debug/vcpkg_installed/x64-osx/include/boost/iterator/iterator_traits.hpp:10:
+: In file included from /Applications/Xcode_14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/iterator:5: 78:
+: In file included from /Applications/Xcode_14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__functional_base:26:
+: In file included from /Applications/Xcode_14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/utility:221:
+: /Applications/Xcode_14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__utility/pair.h:51:9: error: implicit instantiation of undefined template 'std::vector<std::string>'
+
+This seems to be an OSX specific problem. Add includes to these classes prior to
+boost lexical and see if it fixes the problem.
+
+*** STARTED Check last commit is broken                               :story:
+    :LOGBOOK:
+    CLOCK: [2023-01-01 Sun 23:25]--[2023-01-01 Sun 23:38] =>  0:13
+    CLOCK: [2023-01-01 Sun 20:46]--[2023-01-01 Sun 20:47] =>  0:01
+    :END:
+
+At present we are not checking the last commit correctly.
 
 *** Ignore vcpkg path length warning                                  :story:
 
