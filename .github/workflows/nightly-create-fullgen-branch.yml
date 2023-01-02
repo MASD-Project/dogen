@@ -17,14 +17,20 @@ jobs:
 
       - name: Print latest commit
         run: |
+          echo "`git log -1 --format='%H'`"
+          echo "GITHUB_ENV: $GITHUB_ENV"
+          export abc=`git log -1 --format='%H'`
           echo "latest_commit=`git log -1 --format='%H'`" >> $GITHUB_ENV
           echo "COMMIT: ${{ env.latest-commit }}"
+          echo "COMMIT abc: $abc"
 
       - name: check latest commit is less than a day
         id: should_run
         continue-on-error: true
         run: |
           echo "COMMIT: ${{ env.latest-commit }}"
+          echo "COMMIT abc: $abc"
+          echo "GITHUB_ENV: $GITHUB_ENV"
           test -z $(git rev-list --after="24 hours" ${{ env.latest-commit }}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
   build:
