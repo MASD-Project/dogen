@@ -13145,6 +13145,15 @@ Links:
 
 ** Unclassified
 
+*** PQXX Facet                                                        :story:
+
+Given the issues we've had with ODB, we should probably consider a way to use
+liqpqxx directly for simple use cases.
+
+Links:
+
+- [[https://github.com/jtv/libpqxx/issues/610][Mapping rows/tables to objects using libpqxx #610]]
+
 *** Auto-updating                                                     :story:
 
 It would be nice to be able to add "auto-updating" to an application just by

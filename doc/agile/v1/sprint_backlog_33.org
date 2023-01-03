@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2023-01-02 Mon 08:01]
+#+CAPTION: Clock summary at [2023-01-03 Tue 23:46]
 | <75>                                   |         |       |       |       |
 | Headline                               | Time    |       |       |     % |
 |----------------------------------------+---------+-------+-------+-------|
-| *Total time*                           | *22:23* |       |       | 100.0 |
+| *Total time*                           | *24:13* |       |       | 100.0 |
 |----------------------------------------+---------+-------+-------+-------|
-| Stories                                | 22:23   |       |       | 100.0 |
-| Active                                 |         | 22:23 |       | 100.0 |
-| Edit release notes for previous sprint |         |       | 19:25 |  86.7 |
+| Stories                                | 24:13   |       |       | 100.0 |
+| Active                                 |         | 24:13 |       | 100.0 |
+| Edit release notes for previous sprint |         |       | 20:38 |  85.2 |
 | Sprint and product backlog refinement  |         |       |  0:10 |   0.7 |
-| Nightlies failing with valgrind errors |         |       |  0:27 |   2.0 |
-| Fullgen build is not running           |         |       |  0:43 |   3.2 |
+| Nightlies failing with valgrind errors |         |       |  0:27 |   1.9 |
+| Fullgen build is not running           |         |       |  0:43 |   3.0 |
 | Update vcpkg to latest                 |         |       |  0:11 |   0.8 |
-| Update emacs to latest                 |         |       |  0:54 |   4.0 |
-| OSX build is failing                   |         |       |  0:19 |   1.4 |
-| Check last commit is broken            |         |       |  0:14 |   1.0 |
+| Update emacs to latest                 |         |       |  0:54 |   3.7 |
+| OSX build is failing                   |         |       |  0:19 |   1.3 |
+| Check last commit is broken            |         |       |  0:51 |   3.5 |
 #+end:
 
 Agenda:
@@ -39,7 +39,8 @@ Agenda:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
-    CLOCK: [2023-01-02 Mon 07:50]--[2023-01-02 Mon 08:01] =>  0:11
+    CLOCK: [2023-01-03 Tue 22:02]--[2023-01-03 Tue 23:20] =>  1:18
+    CLOCK: [2023-01-02 Mon 08:02]--[2023-01-02 Mon 08:08] =>  0:06
     CLOCK: [2023-01-01 Sun 23:40]--[2023-01-02 Mon 12:35] => 12:55
     CLOCK: [2022-12-31 Sat 16:12]--[2022-12-31 Sat 17:26] =>  1:14
     CLOCK: [2022-12-31 Sat 14:07]--[2022-12-31 Sat 15:22] =>  1:15
@@ -181,11 +182,23 @@ boost lexical and see if it fixes the problem.
 
 *** STARTED Check last commit is broken                               :story:
     :LOGBOOK:
+    CLOCK: [2023-01-03 Tue 23:20]--[2023-01-03 Tue 23:46] =>  0:26
+    CLOCK: [2023-01-02 Mon 07:50]--[2023-01-02 Mon 08:01] =>  0:11
     CLOCK: [2023-01-01 Sun 23:25]--[2023-01-01 Sun 23:38] =>  0:13
     CLOCK: [2023-01-01 Sun 20:46]--[2023-01-01 Sun 20:47] =>  0:01
     :END:
 
 At present we are not checking the last commit correctly.
+
+Notes:
+
+- remove the use of two steps, retrieve and use the latest commit in a single
+  step.
+
+Links:
+
+- [[https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs][jobs.<job_id>.outputs]]
+- [[https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files][Environment files]]
 
 *** Ignore vcpkg path length warning                                  :story:
 
