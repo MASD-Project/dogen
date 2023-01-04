@@ -22,7 +22,7 @@ jobs:
         id: should_run
         continue-on-error: true
         run: |
-          export "latest_commit=`git log -1 --format='%H'`
+          export latest_commit="`git log -1 --format='%H'`"
           echo "Latest commit: ${latest_commit}"
           test -z $(git rev-list --after="24 hours" ${latest_commit}) && echo "should_run=false" >> $GITHUB_OUTPUT
 
