@@ -18717,6 +18717,21 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for OpenDHT                               :story:
+
+#+begin_quote
+A lightweight C++17 Distributed Hash Table implementation.
+
+OpenDHT provides an easy to use distributed in-memory data store. Every node in
+the network can read and write values to the store. Values are distributed over
+the network, with redundancy.
+#+end_quote
+
+Links:
+
+- [[https://github.com/savoirfairelinux/opendht][opendht]]: "A lightweight C++17 Distributed Hash Table implementation."
+- [[https://github.com/arvidn/libtorrent/blob/master/tools/dht_put.cpp][dht_put]]
+
 *** Consider adding support for SBCL                                  :story:
 
 #+begin_quote
@@ -18961,7 +18976,8 @@ system programs and built-in operations [...]
 Links:
 
 - [[https://github.com/cybertec-postgresql/pg_timetable][GH]]
-- [[https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-cron-like-scheduler-released/][pg_timetable: Advanced PostgreSQL cron-like scheduler released!]]
+- [[https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-cron-like-scheduler-released/][pg_timetable:
+  Advanced PostgreSQL cron-like scheduler released!]]
 - [[https://www.cybertec-postgresql.com/en/pg_timetable-advanced-postgresql-job-scheduling/][pg_timetable: advanced postgresql scheduling]]
 
 *** Context provider                                                  :story:
