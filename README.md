@@ -64,8 +64,7 @@ separate git repo:
   [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/CSharpRefImpl.Models).
 
 These are intended to give you a feel for how the generated code will look like,
-and they attempt to exercise all of Dogen's functionality. Note that these
-reference products still use older codecs rather than org-model.
+and they attempt to exercise all of Dogen's functionality.
 
 # Status
 
@@ -104,7 +103,7 @@ want to go ahead and use it, bear in mind the following:
   good working knowledge of
   [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering). You can make
   use of our companion notes to get up to speed: [Notes on Model Driven
-  Engineering](https://zenodo.org/record/5812017#.YkmlftDMKXI)
+  Engineering](https://zenodo.org/record/5812017#.YkmlftDMKXI).
 
 These warnings can probably best summarised as follows: "if it breaks, you get
 to keep the pieces; and it will break, often". But if you find such things fun,
@@ -267,8 +266,8 @@ Or, the slightly more verbose incantation which has the same result:
 cmake --build --preset linux-clang-release --target test
 ```
 
-Though in the CTest form, the tests take slightly longer to run and the output
-is a bit more verbose.
+Note that tests take slightly longer to run in the CTest incantation, and the
+output is a tad more verbose.
 
 ## Generation
 
@@ -293,19 +292,21 @@ Replacing ```linux-clang-release``` with your platform and compiler.
 # Documentation
 
 Whilst we do not have a huge amount of documentation aimed at end users, there
-is plenty of assorted material discussing Dogen. Most of the material is more
-suitable for researchers.
+is plenty of assorted material discussing Dogen. Most of the material targets
+developers and/or researchers.
 
 ## Videos
 
 A number of videos are available discussing Dogen, gathered under "themed"
 playlists:
 
-- [MASD - Dogen Coding: PMM
-  Refactor](https://www.youtube.com/playlist?list=PLwfrwe216gF0_1KPp_ir7ZCYLwnhdmBGJ):
-  Series of coding videos on refactoring the Physical MetaModel. However, it
-  beings where the previous series left off (MASD - Dogen Coding: Move to GitHub
-  CI), _e.g._ on getting our CI and nightlies to work again.
+- [MASD - Dogen Coding: Move to GitHub
+  Actions](https://www.youtube.com/playlist?list=PLwfrwe216gF0_1KPp_ir7ZCYLwnhdmBGJ):
+  Slightly messy video series that continues where the previous series left off
+  (MASD - Dogen Coding: Move to GitHub CI), _e.g._ on getting our CI and
+  nightlies to work again. It was meant to be about refactoring the PMM but we
+  still had a number of CI issues. In addition, due to sound-related problems we
+  had to abandon the series mid-way through.
 - [MASD: An introduction to Model Assisted Software
   Development](https://youtube.com/playlist?list=PLwfrwe216gF3Qamk0YOSo5Csx1R_LplG0):
   Series of lectures on Model Assisted Software Development (MASD), the
@@ -335,9 +336,10 @@ playlists:
 - [MASD - MDE Paper of the
   Week](https://www.youtube.com/playlist?list=PLwfrwe216gF0wbLBkiOmpCpdaeAU66634):
   Series of relevant
-  [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) papers that have
-  been read to get a better understanding of the field. We try to read one of
-  these a week, but we don't always succeed.
+  [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) papers that
+  we've read to get a better understanding of the field. The main thrust of this
+  series was during research, but we may occasionally update it when an
+  interesting paper appears.
 
 ## Posts
 
