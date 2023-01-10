@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2023-01-10 Tue 07:55]
+#+CAPTION: Clock summary at [2023-01-10 Tue 21:10]
 | <75>                                   |         |       |      |       |
 | Headline                               | Time    |       |      |     % |
 |----------------------------------------+---------+-------+------+-------|
-| *Total time*                           | *15:58* |       |      | 100.0 |
+| *Total time*                           | *16:58* |       |      | 100.0 |
 |----------------------------------------+---------+-------+------+-------|
-| Stories                                | 15:58   |       |      | 100.0 |
-| Active                                 |         | 15:58 |      | 100.0 |
-| Edit release notes for previous sprint |         |       | 8:12 |  51.4 |
-| Sprint and product backlog refinement  |         |       | 0:10 |   1.0 |
-| Fullgen build is not running           |         |       | 0:43 |   4.5 |
+| Stories                                | 16:58   |       |      | 100.0 |
+| Active                                 |         | 16:58 |      | 100.0 |
+| Edit release notes for previous sprint |         |       | 8:12 |  48.3 |
+| Sprint and product backlog refinement  |         |       | 1:10 |   6.9 |
+| Fullgen build is not running           |         |       | 0:43 |   4.2 |
 | Update vcpkg to latest                 |         |       | 0:11 |   1.1 |
-| OSX build is failing                   |         |       | 0:19 |   2.0 |
-| Update emacs to latest                 |         |       | 0:54 |   5.6 |
-| Nightlies failing with valgrind errors |         |       | 0:45 |   4.7 |
-| Check last commit is broken            |         |       | 1:12 |   7.5 |
-| Rename codec model                     |         |       | 3:32 |  22.1 |
+| OSX build is failing                   |         |       | 0:19 |   1.9 |
+| Update emacs to latest                 |         |       | 0:54 |   5.3 |
+| Nightlies failing with valgrind errors |         |       | 0:45 |   4.4 |
+| Check last commit is broken            |         |       | 1:12 |   7.1 |
+| Rename codec model                     |         |       | 3:32 |  20.8 |
 #+end:
 
 Agenda:
@@ -375,10 +375,16 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog refinement                     :story:
     :LOGBOOK:
+    CLOCK: [2023-01-10 Tue 20:10]--[2023-01-10 Tue 21:10] =>  1:00
     CLOCK: [2022-12-31 Sat 10:39]--[2022-12-31 Sat 10:49] =>  0:10
     :END:
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Update github actions to build from tags                :story:
+
+At present it seems we only build from master. We need to build from tags for
+releases.
 
 *** COMPLETED Fullgen build is not running                            :story:
     :LOGBOOK:
@@ -953,3 +959,191 @@ Notes:
   tests, etc. which seems to imply we are going in the right direction.
 
 ** Deprecated
+*** CANCELLED Create a local resolver in codec to support PlantUML use case :story:
+
+*Rationale*: PlantUML output will eventually work in the same way as all Dogen
+output, out of the LPS.
+
+We can create most of the links in PlantUML via local resolution. We could
+create a local resolver, which only looks at types for the current model. It
+lives inside of codec. For those types, if it resolves, we can create the
+PlantUML link. In addition, we could also resolve operations in the same way
+(once they have been modeled).
+
+Ideally, we should implement this resolve in such a way that it can be used for
+merged models and stand alone models. We created a story on the new approach for
+the resolver; we need to have a look at that and see if it can be implemented as
+part of this work. For example, we could flatten all names prior to calling
+resolver; use a GUID against each type, read from custom ID in org mode.
+
+The resolver needs to be primed with all of the existing model names and
+namespaces, without depending on the qualified names data structure. It should
+have its own data structures. It could live in =identification=. The output of
+the resolver should be the GUID of the type the name points to, or nothing if it
+could not resolve.
+
+In the calling models, we need a transform that decomposes a type into the names
+it references. Then, for each name, we call the resolver.
+
+Notes:
+
+- we could also create two step resolution. We could resolve all local names
+  first, and mark them as resolved (for example by adding the UUID of the
+  resolved type to the name) and leaving unresolved types unmarked. Then, the
+  second merged model resolution would only resolve types which are not yet
+  resolved. This would probably speed things up because we may end up with
+  smaller containers.
+
+*** CANCELLED Codec classification                                    :story:
+
+*Rationale*: codecs are being decommissioned.
+
+It seems we have three types of codecs:
+
+- input only, Dia
+- output only: PlantUML
+- roundtrip: org-mode, JSON.
+
+We should make this explicit in the listing of
+
+*** CANCELLED Look at warnings in lgtm                                :story:
+
+*Rationale*: lgtm was deprecated.
+
+We seem to have a number of code quality warnings, check them and fix the
+important ones.
+
+Links:
+
+- [[https://lgtm.com/projects/g/MASD-Project/dogen/alerts/?mode=list][lgtm warnings]]
+
+*** CANCELLED org-to-org transform removes custom id's from attributes :story:
+
+*Rationale*: org-to-org transform is likely going to be removed.
+
+Diff of =share/library/masd.org= after transform:
+
+:
+:  *** mode                                                          :attribute:
+:      :PROPERTIES:
+: -    :custom_id: 4e770d9b-44b4-4a6d-8504-49629f4d29c1
+:      :masd.codec.value: c++
+:      :END:
+
+We should always preserve all attributes.
+
+*** CANCELLED org-to-org transform creates mustache templates incorrectly :story:
+
+*Rationale*: org-to-org transform is likely going to be removed.
+
+At present we determine the language for the block by looking at the name of the
+property. If its called =content= we use =mustache=. However, if a user creates
+a field called =content= this should not kick in. We should have a configuration
+option at the model level that enables this "intelligent" behaviour, and enable
+it only for the =dogen.text= model.
+
+: *** content                                                       :attribute:
+:    :PROPERTIES:
+:    :masd.codec.type: std::string
+:    :END:
+:
+: #+begin_src mustache
+: Contents of the artefact.
+: #+end_src
+
+*** Limitations of the current org-mode approach                      :story:
+
+*Rationale*: there is no one format which supports all of the required
+functionality for Dogen. org-mode is the closest.
+
+At present we decided to implement org-mode support directly in Dogen, which has
+some advantages:
+
+- we can process org-mode documents without having Emacs - e.g. you can create
+  documents in other editors and still benefit from Dogen support.
+
+However, there are also problems:
+
+- org-mode is very complex. We don't want to support only a partial subset of
+  the format; we want users to create regular org-mode documents with all of the
+  org-mode functionality and then have them exported into code. This means our
+  parser has to be very clever.
+- we want to be able to export the model to other formats such as HTML / PDF
+  etc. This means the document may contain all sorts of weird and wonderful
+  config for those formats which we do not care about.
+- we want users to add sections for documentation purposes such as images, etc.
+  These won't necessarily be used for Dogen.
+
+All of this makes us think we may have taken the wrong approach. We should
+instead support some well-defined intermediary format which can be understood by
+Dogen unequivocally, and which has a "trivial" parsing implementation, similar
+to Dia XML. Then:
+
+- we can then create an org-mode exporter in elisp which uses the existing
+  org-mode functionality to determine what should be converted and what should
+  be ignored.
+- with this we can be confident that the org-mode document is handled correctly.
+
+There are downsides though:
+
+- third-party editors will no longer be supported - they will require their own
+  exporter code, and most do not support this.
+- there are more steps to the process, which is particularly annoying when you
+  have several models. You now need to ensure you have exported them all, else
+  you may get strange errors.
+- the format must support mapping to the original locations so that we can still
+  support LSP with proper errors, etc.
+
+*** Org roundtrip does not add blank line at the end of document      :story:
+
+*Rationale*: org-to-org transform is likely going to be removed.
+
+Errors:
+
+#+begin_src
+FAILED: projects/dogen.orchestration/tests/CMakeFiles/run_dogen.orchestration.tests
+cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin/dogen.orchestration.tests --log_level=error
+Running 156 test cases...
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/modeling/dogen.org"
+@@ -494,3 +494,4 @@
+   :END:
+
+ An error ocurred when dumping dogen's specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(188): error: in "dogen_product_org_tests/dogen_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.cli/modeling/dogen.cli.org"
+@@ -181,3 +181,4 @@
+    :END:
+
+ Which style to use when dumping the specs.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(202): error: in "dogen_product_org_tests/dogen_cli_org_conversion_has_no_diffs": check diff.empty() has failed
+Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.logical/modeling/dogen.logical.org"
+@@ -4668,3 +4668,4 @@
+    :END:
+
+ An error has occurred while formatting.
++
+
+../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(244): error: in "dogen_product_org_tests/dogen_logical_org_conversion_has_no_diffs": check diff.empty() has failed
+
+3 failures are detected in the test module "dogen.orchestration.tests"
+ninja: build stopped: subcommand failed.
+Error running CMake.
+
+Compilation exited abnormally with code 1 at Sun Apr 11 20:15:01
+Elapsed: 00:00:13.738
+#+end_src
+
+*** Partial information extraction from logical model                 :story:
+
+*Rationale*: the codec model is going to become a simple injector.
+
+Since we just need generalisation and association information, we could probably
+create a specialised chain in the logical model that gives us the bare minimum
+to populate the relevant properties; we can then extract those and map them to
+the codec ID. We should also make the codec ID mandatory and use a map for the
+codec elements. The orchestration model is responsible for stitching the
+information.

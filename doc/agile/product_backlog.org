@@ -7,26 +7,26 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 * Product Vision
 
-Here we define what we consider to be the [[http://www.scaledagileframework.com/vision/][the vision]] for Dogen; what
-guides us when we think about the product and what can and cannot go
-into the product backlog.
+Here we define what we consider to be the [[http://www.scaledagileframework.com/vision/][the vision]] for Dogen; what guides us
+when we think about the product and what can and cannot go into the product
+backlog.
 
 ** Vision Statement
 
 The vision for Dogen is:
 
-- to create a suite of code generation tools targeting component and
-  product generation, according to a well-specified product line;
-- for these tools to have the potential to be useful to developers in
-  multiple programming languages, and to be designed to be integrated
-  with IDEs and text editors;
-- to make the suite extensible, such that users can come up with
-  modifications suited to their particular domain.
+- to create a suite of code generation tools targeting component and product
+  generation, according to a well-specified product line;
+- for these tools to have the potential to be useful to developers in multiple
+  programming languages, and to be designed to be integrated with IDEs and text
+  editors;
+- to make the suite extensible, such that users can come up with modifications
+  suited to their particular domain.
 
 ** Vision Quotes
 
-- code that can be reduced to an heuristic must be codegened; code
-  that cannot, must be helped.
+- code that can be reduced to an heuristic must be codegened; code that cannot,
+  must be helped.
 
 * Release Checklist
 
@@ -36,13 +36,13 @@ Steps to create a new release.
 
 To be done on the last Sunday of the sprint.
 
-1. Make a copy of current sprint backlog and name it current
-   sprint + 1 but don't check it in.
+1. Make a copy of current sprint backlog and name it current sprint + 1 but
+   don't check it in.
 2. Move all untouched stories into product backlog.
-3. Close current sprint: close all open tasks, delete tasks we did not
-   work on, update clocks.
-4. Push commit and wait for builds. This ensures that if there are any
-   failures you can fix them before the release tag.
+3. Close current sprint: close all open tasks, delete tasks we did not work on,
+   update clocks.
+4. Push commit and wait for builds. This ensures that if there are any failures
+   you can fix them before the release tag.
 4. Tag commit and sign it with key.
 5. Push tag. You can generate new builds overnight.
 
@@ -53,10 +53,9 @@ To be done on the Monday morning of the new sprint.
 1. Open new sprint, updating CMake version, README, GitHub, and decoration
    formatter tests. Build all and run tests (some will fail). This should all be
    in one commit. *DO NOT PUSH*.
-2. Regenerate the LAM models for C# and C++ with the new version, and
-   commit the changed files. Push the commit. (Ensure there are no
-   pending builds still running or tests will fail due to version
-   change).
+2. Regenerate the LAM models for C# and C++ with the new version, and commit the
+   changed files. Push the commit. (Ensure there are no pending builds still
+   running or tests will fail due to version change).
 3. Create a demo. Publish it on youtube.
 4. Write up release notes, publish them in github.
 5. When tag build is finished, unpack and copy binaries into release, announce
@@ -66,17 +65,17 @@ To be done on the Monday morning of the new sprint.
 
 Release goals:
 
-- finish the dogen API and implement all functionality in terms of
-  metamodel elements - e.g. no special cases such as profiles,
-  licences etc.
-- we also expected to define the LPS (Logical-Physical Space).
+- update source code to match the Domain Architecture defined by the PhD thesis.
 
 ** Core work
 
-The most significant stories needed by v2. These are either features
-or refactoring that must go in.
+The most significant stories needed by v2. These are either features or
+refactoring that must go in.
 
 *** Add support for MSVC with CL                                      :story:
+    :PROPERTIES:
+    :CUSTOM_ID: 8CF1E48A-E643-E534-F05B-639E459C8C1B
+    :END:
 
 At present this build is broken and GitHub does not support allow failures. The
 following was removed from the workflow:
@@ -95,6 +94,31 @@ following was removed from the workflow:
               $build_group = "Experimental"
           }
 #+end_src
+
+Merged stories:
+
+*Clang-cl windows build is broken*
+
+We are failing to link:
+
+: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
+
+Notes:
+
+- at present we are picking up the LLVM clang-cl, not the visual studio one. It
+  means we are using LLD to link. Its not entirely obvious how to change it to
+  use VS without losing ninja.
+- GitHub does not support allow failures in the build matrix. See this
+  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
+  job]]. Added our use case to that discussion.
+- for now, commented out clang-cl build.
+
+Links:
+
+- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
+- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
+  paths?]]
+- [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
 *** Consider exporting =WITH_FULL_GENERATION= in CMakeFile            :story:
 
@@ -422,8 +446,8 @@ At present most models have:
 
 : masd::build::cmakelists, dogen::handcrafted::cmake
 
-One of the reasons is because the template is not taking generated
-tests into account. It should have:
+One of the reasons is because the template is not taking generated tests into
+account. It should have:
 
 : if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
 :    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
@@ -431,31 +455,28 @@ tests into account. It should have:
 
 *** =CMakeFiles= do not reference dogen models                        :story:
 
-At present we cannot test cross-model referencing because our
-CMakeFiles are not adding the linking references to these models. This
-needs to be fixed before we can test cross model serialisation.
+At present we cannot test cross-model referencing because our CMakeFiles are not
+adding the linking references to these models. This needs to be fixed before we
+can test cross model serialisation.
 
 Notes:
 
-- in order to map references to models, we need to create a modeling
-  element for a reference. For this we have two cases: for proxy
-  models/PDMs, we need to read from the meta-data the name of the lib
-  the model generates. For dogen models we can create it from the
-  model name.
-- this is a variation of the "exports and imports" pattern: we import
-  a set of libraries (these can either be macros or actual library
-  names) and we export (for now) a single library. When we support
-  facets in libraries, we may need to export more than one, so we
-  should cope with this scenario now. We need to keep track of the
-  exports for a reference, and then use those as the imports for the
-  model.
-- in an ideal world, all imports come via this mechanism. However,
-  this means we now have to create PDMs/proxies just to setup the
-  imports. For example, for LibXML we will not need to define any of
-  the types, but we need the import. However, If we do force the
-  definition of the PDM, the advantage is that we now have the right
-  place to put the definition, and is done only once and shared by all
-  models.
+- in order to map references to models, we need to create a modeling element for
+  a reference. For this we have two cases: for proxy models/PDMs, we need to
+  read from the meta-data the name of the lib the model generates. For dogen
+  models we can create it from the model name.
+- this is a variation of the "exports and imports" pattern: we import a set of
+  libraries (these can either be macros or actual library names) and we export
+  (for now) a single library. When we support facets in libraries, we may need
+  to export more than one, so we should cope with this scenario now. We need to
+  keep track of the exports for a reference, and then use those as the imports
+  for the model.
+- in an ideal world, all imports come via this mechanism. However, this means we
+  now have to create PDMs/proxies just to setup the imports. For example, for
+  LibXML we will not need to define any of the types, but we need the import.
+  However, If we do force the definition of the PDM, the advantage is that we
+  now have the right place to put the definition, and is done only once and
+  shared by all models.
 
 *** Add operations to PlantUML diagrams                               :story:
 
@@ -507,27 +528,6 @@ These could also be part of a top-level group.
 
 We could also have a group for logic-less templates if they are at the
 top-level.
-
-*** Consider adding support for archimate                             :story:
-
-#+begin_quote
-ArchiMate is an open and independent enterprise architecture modeling language
-to support the description, analysis and visualization of architecture within
-and across business domains in an unambiguous way.
-
-ArchiMate offers a common language for describing the construction and operation
-of business processes, organizational structures, information flows, IT systems,
-and technical infrastructure. This is just like an architectural drawing in
-classical building where the architecture describes the various aspects of the
-construction and use of a building. This insight helps the different
-stakeholders to design, assess, and communicate the consequences of decisions
-and changes within and between these business domains.
-#+end_quote
-
-Links:
-
-- [[https://plantuml.com/archimate-diagram][PlantUML: Archimate Diagram]]
-- [[https://github.com/plantuml-stdlib/Archimate-PlantUML][GH: Archimate-PlantUML]]
 
 *** Add links to PlantUML diagrams                                    :story:
 
@@ -607,6 +607,14 @@ Links:
 
 - https://plantuml.com/commons
 
+Merged stories:
+
+*Add model name as title in PlantUML diagram*
+
+At present its not possible to know the name of the model by looking at the SVG.
+We should have a comment with the title. It could be added to the existing model
+level comment with documentation.
+
 *** Allow moving PlantUML documentation                               :story:
 
 At present the documentation is always generated at the top of an element:
@@ -678,6 +686,10 @@ At present we are generating org-mode and PlantUML output by hand. It seems
 likely using templates would be an improvement. However, we should probably do
 this after we move away from stitch and into mustache. This will also make life
 easier because stitch may pull in unnecessary dependencies.
+
+As per sprint 32, it has now become clear that we should be generating PlantUML
+output in the same manner as we generate all source code. We need to implement
+it as a template off of the logical model.
 
 *** Ignorable headlines in org-mode                                   :story:
 
@@ -753,19 +765,12 @@ Links:
 - [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
 
 
-*** Add model name as title in PlantUML diagram                       :story:
-
-At present its not possible to know the name of the model by looking at the SVG.
-We should have a comment with the title. It could be added to the existing model
-level comment with documentation.
-
 *** Fix PlantUML indentation                                          :story:
 
-At present if we indent a diagram in emacs we get a different
-indentation compared to the generated one. We need to either get emacs
-to indent correctly, or copy the emacs indentation. The main problem
-at present is that we are indenting classes correctly in generated
-code:
+At present if we indent a diagram in emacs we get a different indentation
+compared to the generated one. We need to either get emacs to indent correctly,
+or copy the emacs indentation. The main problem at present is that we are
+indenting classes correctly in generated code:
 
 #+begin_src plantuml
 namespace entities #F2F2F2 {
@@ -788,8 +793,8 @@ namespace entities #F2F2F2 {
 @enduml
 #+end_src
 
-Note that the behaviour seems different in org-babel. Note also that
-notes have incorrect indentation (text model, inside a namespace):
+Note that the behaviour seems different in org-babel. Note also that notes have
+incorrect indentation (text model, inside a namespace):
 
 #+begin_src plantuml
 note top of  transformation_error
@@ -797,11 +802,11 @@ An error occurred whilst applying a transformation.
 end note
 #+end_src
 
-Note also the extra space before exception name, as well as the
-missing indentation inside the note.
+Note also the extra space before exception name, as well as the missing
+indentation inside the note.
 
-Actually what is causing the problem with emacs indentation is the use
-of top-level notes:
+Actually what is causing the problem with emacs indentation is the use of
+top-level notes:
 
 #+begin_src plantuml
 note as N1
@@ -809,53 +814,19 @@ Contains all of the M2T transforms for all supported backends.
 end note
 #+end_src
 
-We need to investigate why this causes indentation problems. Seems
-like its valid syntax.
+We need to investigate why this causes indentation problems. Seems like its
+valid syntax.
 
 Note also that all comments are not indented correctly.
 
-*** Create a local resolver in codec to support PlantUML use case     :story:
-
-We can create most of the links in PlantUML via local resolution. We
-could create a local resolver, which only looks at types for the
-current model. It lives inside of codec. For those types, if it
-resolves, we can create the PlantUML link. In addition, we could also
-resolve operations in the same way (once they have been
-modeled).
-
-Ideally, we should implement this resolve in such a way that it can be
-used for merged models and stand alone models. We created a story on
-the new approach for the resolver; we need to have a look at that and
-see if it can be implemented as part of this work. For example, we
-could flatten all names prior to calling resolver; use a GUID against
-each type, read from custom ID in org mode.
-
-The resolver needs to be primed with all of the existing model names
-and namespaces, without depending on the qualified names data
-structure. It should have its own data structures. It could live in
-=identification=. The output of the resolver should be the GUID of the
-type the name points to, or nothing if it could not resolve.
-
-In the calling models, we need a transform that decomposes a type into
-the names it references. Then, for each name, we call the resolver.
-
-Notes:
-
-- we could also create two step resolution. We could resolve all local
-  names first, and mark them as resolved (for example by adding the
-  UUID of the resolved type to the name) and leaving unresolved types
-  unmarked. Then, the second merged model resolution would only
-  resolve types which are not yet resolved. This would probably speed
-  things up because we may end up with smaller containers.
-
 *** Fix PlantUML namespace comments                                   :story:
 
-At present the comments appear as a link to the namespace. We should
-try to do whatever it is we did for the model comment, which looks
-like a regular note at the top of the namespace.
+At present the comments appear as a link to the namespace. We should try to do
+whatever it is we did for the model comment, which looks like a regular note at
+the top of the namespace.
 
-In addition, sub-namespaces seem to generate both a class with the
-comment as well as the namespace itself (see text model).
+In addition, sub-namespaces seem to generate both a class with the comment as
+well as the namespace itself (see text model).
 
 *** Consider adding PlantUML verbatim inside element                  :story:
 
@@ -874,24 +845,21 @@ class string_to_document_transform <<dogen::handcrafted::typeable>> #FFFACD {
 
 This takes space for no reason. We could just not print those brackets.
 
-
-
 *** Make use of association relationships                             :story:
 
-When we start having to create elements such as visitor etc., it would
-be nice to rely on the association between visitor and visitable to
-figure out what the visitor is visiting. This and other simple cases
-can be inferred simply by looking at the end points of the
-association. However, we should still allow supplying this
-meta-parameter as meta-data because it may not be practical to have
-the association. And we need a way to express this in JSON as well.
+When we start having to create elements such as visitor etc., it would be nice
+to rely on the association between visitor and visitable to figure out what the
+visitor is visiting. This and other simple cases can be inferred simply by
+looking at the end points of the association. However, we should still allow
+supplying this meta-parameter as meta-data because it may not be practical to
+have the association. And we need a way to express this in JSON as well.
 
 *** Consider replacing the associations against object templates      :story:
 
-Object templates are really a higher level concept when compared to
-objects, etc. We should not be using associations to denote the notion
-of an object instantiating an object template. Perhaps the "implements
-an interface" relationship is more appropriate. Check the UML books.
+Object templates are really a higher level concept when compared to objects,
+etc. We should not be using associations to denote the notion of an object
+instantiating an object template. Perhaps the "implements an interface"
+relationship is more appropriate. Check the UML books.
 
 *** Make =parent= feature a CSV collection                            :story:
 
@@ -914,8 +882,6 @@ probably just need to:
 - make the field a CSV collection to allow for the transition without breaking
   anything.
 - add processing in codec to handle the collection.
-
-
 
 *** Consider renaming plantuml property                               :story:
 
@@ -1099,11 +1065,6 @@ Notes:
   could map it to say RapidJSON serialisation. Or we could support two methods
   of serialisation for the same project. The user chooses where to place them.
 
-*** Update github actions to build from tags                          :story:
-
-At present it seems we only build from master. We need to build from tags for
-releases.
-
 *** Assorted improvements to CMake files                               :epic:
 
 #+begin_src cmake
@@ -1201,8 +1162,6 @@ following error:
 
 We are probably not normalising to lower case.
 
-In addition
-
 Merged stories:
 
 *Capitalise model headers correctly*
@@ -1211,53 +1170,42 @@ At present most models still use the "all lower case" notation, copied from Dia.
 We need to capitalise headers correctly so that when we generate documentation
 they come out correctly.
 
-*** Consider creating a small paper summarising MASD                  :story:
+*** Missing PlantUML features                                        :story:
 
-At present we have the thesis, that explains the entire methodology and its
-rationale in great detail. This is not suitable for new users. We should have a
-small paper, 3 or 4 pages long, that summarises the argument.
+This story keeps track of features that we need to implement when exporting into
+PlantUML.
 
-*** Missing PlantUML features                                         :story:
-
-This story keeps track of features that we need to implement when
-exporting into PlantUML.
-
-- generalisation via meta-data does not work. This would be very
-  complicated: we need to resolve =masd.generalization.parent= into
-  the value and then look for all classes with the stereotype of the
-  concept (e.g. =meta_element= for logical model).
-- we need to unpack all properties and resolve those into types for
-  the current model in order to model associations. Also, we need a
-  simple resolver to find the types in the right namespaces. The
-  logic would be very similar to the existing resolver. One possible
-  solution is to move name trees into the codec model and perform
-  these transforms earlier in the pipeline.
-- add tests to check that PlantUML output has not changed. We need to
-  have support for diffing on conversion, which we may not yet
-  have. Also the existing tests do not take into account the action.
+- generalisation via meta-data does not work. This would be very complicated: we
+  need to resolve =masd.generalization.parent= into the value and then look for
+  all classes with the stereotype of the concept (e.g. =meta_element= for
+  logical model).
+- we need to unpack all properties and resolve those into types for the current
+  model in order to model associations. Also, we need a simple resolver to find
+  the types in the right namespaces. The logic would be very similar to the
+  existing resolver. One possible solution is to move name trees into the codec
+  model and perform these transforms earlier in the pipeline.
+- add tests to check that PlantUML output has not changed. We need to have
+  support for diffing on conversion, which we may not yet have. Also the
+  existing tests do not take into account the action.
 - add plantuml representations to reference models.
-- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in
-  PlantUML]]
+- improve layout: [[https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html][layout]]. See also [[https://stackoverflow.com/questions/61639970/align-packages-vertically-in-plantuml][SO: Align packages vertically in PlantUML]]
 - add comments on relations:
 
 : someclass o-- otherclass : a description of the relation
 
-  This means the org-mode model must contain the comment. We could
-  either use the comment on the association itself, or have a field in
-  properties:
+  This means the org-mode model must contain the comment. We could either use
+  the comment on the association itself, or have a field in properties:
 
 : :masd.codec.relation_comment: a description of the relation
 
-  This is then copied as is into the UML diagram. By separating the
-  two means we can still make "proper" comments at the attribute
-  level.
-- there should be meta-data to determine if a comment will show up in
-  the diagram as a note or not. It should apply to both classes and
-  methods.
-- we should allow users to set the location of the comment for classes
-  etc (bottom, top, left, right).
-- we should allow enabling comments on methods and attributes, with
-  direction (left or right).
+  This is then copied as is into the UML diagram. By separating the two means we
+  can still make "proper" comments at the attribute level.
+- there should be meta-data to determine if a comment will show up in the
+  diagram as a note or not. It should apply to both classes and methods.
+- we should allow users to set the location of the comment for classes etc
+  (bottom, top, left, right).
+- we should allow enabling comments on methods and attributes, with direction
+  (left or right).
 - notes are not indented at present.
 - we are not leaving a space after inheritance.
 - empty classes still have brackets.
@@ -1267,27 +1215,26 @@ exporting into PlantUML.
 
 Notes:
 
-- we need to move features such as name trees and generalisation into
-  the codec model.
-- actually perhaps we need to allow users to "tweak" the
-  relationships. We probably don't want every single relationship to
-  become a link in UML because then we can't see the wood for the
-  trees. A better approach may be to force users to declare the
-  relationships as meta-data, like we suggested above for comments,
-  and then transport those annotations to the UML diagram. This also
-  means we could add a full reference to the types, which solves the
-  issue of having to merge models. Finally, it means we can declare
-  any kind of relation, as per the plant uml syntax - in fact we
-  should probably expose the plant UML syntax directly, e.g. the user
-  is expected to declare a native plantuml relation:
+- we need to move features such as name trees and generalisation into the codec
+  model.
+- actually perhaps we need to allow users to "tweak" the relationships. We
+  probably don't want every single relationship to become a link in UML because
+  then we can't see the wood for the trees. A better approach may be to force
+  users to declare the relationships as meta-data, like we suggested above for
+  comments, and then transport those annotations to the UML diagram. This also
+  means we could add a full reference to the types, which solves the issue of
+  having to merge models. Finally, it means we can declare any kind of relation,
+  as per the plant uml syntax - in fact we should probably expose the plant UML
+  syntax directly, e.g. the user is expected to declare a native plantuml
+  relation:
 
 : :masd.codec.plantuml_relation: AS_IS_RELATION
 
-  We could perhaps default to the current class, but that's about
-  it. This would also allow for things like hidden links, etc. In
-  effect the only relation you get for free is inheritance. Actually
-  we should also have a "raw" way of inserting relations in a
-  namespace. These are placed at the end of the namespace.
+  We could perhaps default to the current class, but that's about it. This would
+  also allow for things like hidden links, etc. In effect the only relation you
+  get for free is inheritance. Actually we should also have a "raw" way of
+  inserting relations in a namespace. These are placed at the end of the
+  namespace.
 - logical model namespaces are not documented correctly.
 
 Links:
@@ -1651,45 +1598,38 @@ Links:
 
 Assorted notes on org-roam:
 
-- org-roam v2 now forces all entries to have an ID. We can use these
-  as element identifiers. These are just GUIDs associated with
-  org-mode headlines. We care about both the "model" level ID as well
-  as the element level IDs.
-- we need to introduce a model element called "reference" (we must
-  already have some analysis on this). The reference will contain the
-  org-roam ID for the model we are referencing. This will ensure we
-  see the backlinks when we open models and facilitate navigation.
-- org-roam must have a path on which to search files. We need to make
-  sure we can see across products. For example, if we have product A
-  referencing product B, both directories with all org-files must be
-  in the path.
-- by writing the ID into the file as a comment, we can now handle
-  moves. This is done as follows: first, get a list of all files in a
-  component and their IDs. Then, as a step on the physical model, for
-  all files where overwrite is disabled, load up the previous content
-  and set the current content to be the previous content. With this
-  the file will move to its new location. Alternatively, if this
-  increases generation time too much we can only load files based on
-  the file name. But first try the easy approach.
-- we can make a really simple "format" for references, just a
-  meta-model element annotation as an org-tag (e.g. =reference=) and
-  the contents of the reference must be an org-link
-  (e.g. =[[file:x.org][some link]]=. It should be trivial to parse
-  this. The org-link is actually an org-roam link. This means we need
-  to have the directories where the models are stored in some path
-  lookup in Dogen. We need to find all org-mode documents, open them
-  and get their IDs.
-- we need to allow adding elements which do not contribute to
-  code. This is so we can add random notes in models. They can be seen
-  as UML notes. We could simply add a "note" metatype to the logical
-  model.
-- with this approach, if the agile stores have links to the org-models
-  we should also see them in org-roam. However, over time we'll
-  probably end up with too many links. But it would be nice to open a
-  model and see a list of stories done against it. We may need a way
-  to enable / disable this.
-- when we add build2 support, we need to be able to package the models
-  with the header files.
+- org-roam v2 now forces all entries to have an ID. We can use these as element
+  identifiers. These are just GUIDs associated with org-mode headlines. We care
+  about both the "model" level ID as well as the element level IDs.
+- we need to introduce a model element called "reference" (we must already have
+  some analysis on this). The reference will contain the org-roam ID for the
+  model we are referencing. This will ensure we see the backlinks when we open
+  models and facilitate navigation.
+- org-roam must have a path on which to search files. We need to make sure we
+  can see across products. For example, if we have product A referencing product
+  B, both directories with all org-files must be in the path.
+- by writing the ID into the file as a comment, we can now handle moves. This is
+  done as follows: first, get a list of all files in a component and their IDs.
+  Then, as a step on the physical model, for all files where overwrite is
+  disabled, load up the previous content and set the current content to be the
+  previous content. With this the file will move to its new location.
+  Alternatively, if this increases generation time too much we can only load
+  files based on the file name. But first try the easy approach.
+- we can make a really simple "format" for references, just a meta-model element
+  annotation as an org-tag (e.g. =reference=) and the contents of the reference
+  must be an org-link (e.g. =[[file:x.org][some link]]=. It should be trivial to
+  parse this. The org-link is actually an org-roam link. This means we need to
+  have the directories where the models are stored in some path lookup in Dogen.
+  We need to find all org-mode documents, open them and get their IDs.
+- we need to allow adding elements which do not contribute to code. This is so
+  we can add random notes in models. They can be seen as UML notes. We could
+  simply add a "note" metatype to the logical model.
+- with this approach, if the agile stores have links to the org-models we should
+  also see them in org-roam. However, over time we'll probably end up with too
+  many links. But it would be nice to open a model and see a list of stories
+  done against it. We may need a way to enable / disable this.
+- when we add build2 support, we need to be able to package the models with the
+  header files.
 
 Links:
 
@@ -1733,42 +1673,6 @@ For now as a quick hack we reintroduced global includes.
 *** Investigate why codec object is =Commentable=                     :story:
 
 Most other types are =Element=.
-
-*** Codec classification                                              :story:
-
-It seems we have three types of codecs:
-
-- input only, Dia
-- output only: PlantUML
-- roundtrip: org-mode, JSON.
-
-We should make this explicit in the listing of
-
-*** Clang-cl windows build is broken                                  :story:
-    :PROPERTIES:
-    :CUSTOM_ID: 8CF1E48A-E643-E534-F05B-639E459C8C1B
-    :END:
-
-We are failing to link:
-
-: lld-link: error: undefined symbol: __declspec(dllimport) public: void __cdecl boost::archive::archive_exception::`vbase dtor'(void)
-
-Notes:
-
-- at present we are picking up the LLVM clang-cl, not the visual studio one. It
-  means we are using LLD to link. Its not entirely obvious how to change it to
-  use VS without losing ninja.
-- GitHub does not support allow failures in the build matrix. See this
-  discussion: [[https://github.com/actions/toolkit/issues/399][#399: Please support something like "allow-failure" for a given
-  job]]. Added our use case to that discussion.
-- for now, commented out clang-cl build.
-
-Links:
-
-- [[https://github.com/mlpack/mlpack/issues/1630][undefined reference to boost::archive... when building using cmake #1630]]
-- [[https://stackoverflow.com/questions/71457208/how-to-build-with-clang-on-github-actions-for-windows-without-hardcoding-paths][How to build with clang on Github Actions for Windows without hardcoding
-  paths?]]
-- [[https://gitlab.kitware.com/cmake/cmake/-/issues/19174][How to use clang-cl and lld-link with Visual Studio generator]]
 
 *** Consider making features dynamic elements                         :story:
 
@@ -1864,6 +1768,7 @@ We should instead:
   site story.
 - add a workflow that generates the doxygen docs and does nothing else. We need
   one for the tags and one for the commits.
+- this should be done once we have a site for Dogen.
 
 Links:
 
@@ -1894,43 +1799,20 @@ Links:
 
 *** Improve vcpkg integration for generated code                      :story:
 
-If the user requests, we should also generate a vcpkg project that is
-a clone of vcpkg but builds all of the base dependencies and pushes
-them to a known location (e.g. GCS). Then, the build steps should
-first download from that known location and put it on the path. It
-should be trivial to update the vcpkg clone, e.g.: user adds new vcpkg
-dependency to the model; dogen updates the data file, user commits the
-update, new vcpkg build is triggered and generates new vcpkg zip, with
-a stamp. User updates model to point to the new stamp and pushes. Next
-build will use new vcpkg libraries. Ideally vcpkg builds for all
-supported platforms (this is requested in the product model).
+If the user requests, we should also generate a vcpkg project that is a clone of
+vcpkg but builds all of the base dependencies and pushes them to a known
+location (e.g. GCS). Then, the build steps should first download from that known
+location and put it on the path. It should be trivial to update the vcpkg clone,
+e.g.: user adds new vcpkg dependency to the model; dogen updates the data file,
+user commits the update, new vcpkg build is triggered and generates new vcpkg
+zip, with a stamp. User updates model to point to the new stamp and pushes. Next
+build will use new vcpkg libraries. Ideally vcpkg builds for all supported
+platforms (this is requested in the product model).
 
 Links:
 
 - [[https://devblogs.microsoft.com/cppblog/vcpkg-accelerate-your-team-development-environment-with-binary-caching-and-manifests/][vcpkg: Accelerate your team development environment with binary
   caching and manifests]]
-
-*** Look at warnings in lgtm                                          :story:
-
-We seem to have a number of code quality warnings, check them and fix the
-important ones.
-
-Links:
-
-- [[https://lgtm.com/projects/g/MASD-Project/dogen/alerts/?mode=list][lgtm warnings]]
-
-*** org-to-org transform removes custom id's from attributes          :story:
-
-Diff of =share/library/masd.org= after transform:
-
-:
-:  *** mode                                                          :attribute:
-:      :PROPERTIES:
-: -    :custom_id: 4e770d9b-44b4-4a6d-8504-49629f4d29c1
-:      :masd.codec.value: c++
-:      :END:
-
-We should always preserve all attributes.
 
 *** Process org-mode image links                                      :story:
 
@@ -1951,23 +1833,6 @@ Links:
 
 - [[https://orgmode.org/manual/Images.html][org-mode manual: images]]
 
-*** org-to-org transform creates mustache templates incorrectly       :story:
-
-At present we determine the language for the block by looking at the name of the
-property. If its called =content= we use =mustache=. However, if a user creates
-a field called =content= this should not kick in. We should have a configuration
-option at the model level that enables this "intelligent" behaviour, and enable
-it only for the =dogen.text= model.
-
-: *** content                                                       :attribute:
-:    :PROPERTIES:
-:    :masd.codec.type: std::string
-:    :END:
-:
-: #+begin_src mustache
-: Contents of the artefact.
-: #+end_src
-
 *** Change file format of tracing dumps according to codec            :story:
 
 At present we always dump the transform inputs and outputs as =.json=. However,
@@ -1980,86 +1845,42 @@ These should all have been removed, but its still there:
 
 : #include "dogen.logical/types/traits.hpp"
 
-O*** Rename merger to model compiler or weaver                         :story:
+*** Rename merger to model compiler or weaver                         :story:
 
-What we call "merging" is really the job of the "model compiler". We
-should rename these transforms accordingly. The model compiler weaves
-the models together. We can just rename the merger to these
-terms. Literature:
+What we call "merging" is really the job of the "model compiler". We should
+rename these transforms accordingly. The model compiler weaves the models
+together. We can just rename the merger to these terms. Literature:
 
 #+begin_quote
-A model compiler takes a set of executable UML models and weaves them
-together according to a /consistent set of rules/. This task involves
-executing the mapping functions between the various source and target
-models to produce a single all-encompassing metamodel [...] that
-includes all the structure, behavior and logic --- everything --- in
-the \marginpar{Weaving, model compilers} system. [...] Weaving the
-models together at once addresses the problem of architectural
-mismatch, a term coined by David Garlan to refer to components that do
-not fit together without the addition of tubes and tubes of glue code,
-the very problem MDA is intended to avoid! A model compiler imposes a
+A model compiler takes a set of executable UML models and weaves them together
+according to a /consistent set of rules/. This task involves executing the
+mapping functions between the various source and target models to produce a
+single all-encompassing metamodel [...] that includes all the structure,
+behavior and logic --- everything --- in the \marginpar{Weaving, model
+compilers} system. [...] Weaving the models together at once addresses the
+problem of architectural mismatch, a term coined by David Garlan to refer to
+components that do not fit together without the addition of tubes and tubes of
+glue code, the very problem MDA is intended to avoid! A model compiler imposes a
 single architectural structure on the system as a whole.
 #+end_quote
 
-*** Limitations of the current org-mode approach                      :story:
-
-At present we decided to implement org-mode support directly in Dogen,
-which has some advantages:
-
-- we can process org-mode documents without having Emacs - e.g. you
-  can create documents in other editors and still benefit from
-  Dogen support.
-
-However, there are also problems:
-
-- org-mode is very complex. We don't want to support only a partial
-  subset of the format; we want users to create regular org-mode
-  documents with all of the org-mode functionality and then have them
-  exported into code. This means our parser has to be very clever.
-- we want to be able to export the model to other formats such as HTML
-  / PDF etc. This means the document may contain all sorts of weird
-  and wonderful config for those formats which we do not care about.
-- we want users to add sections for documentation purposes such as
-  images, etc. These won't necessarily be used for Dogen.
-
-All of this makes us think we may have taken the wrong approach. We
-should instead support some well-defined intermediary format which can
-be understood by Dogen unequivocally, and which has a "trivial"
-parsing implementation, similar to Dia XML. Then:
-
-- we can then create an org-mode exporter in elisp which uses the
-  existing org-mode functionality to determine what should be
-  converted and what should be ignored.
-- with this we can be confident that the org-mode document is handled
-  correctly.
-
-There are downsides though:
-
-- third-party editors will no longer be supported - they will require
-  their own exporter code, and most do not support this.
-- there are more steps to the process, which is particularly annoying
-  when you have several models. You now need to ensure you have exported
-  them all, else you may get strange errors.
-- the format must support mapping to the original locations so that we
-  can still support LSP with proper errors, etc.
-
 *** Add minor mode in emacs that finds element location               :story:
 
-It would be nice to be able to run a command in emacs that opens the
-model element associated with the current file.
+It would be nice to be able to run a command in emacs that opens the model
+element associated with the current file.
 
 *** Allow setting colours and visibility on PlantUML relations        :story:
 
-When we start to model all relations on diagrams, they will become
-quite confusing. However, we could probably make things easier by
-allowing users to decide what colour to add to a relation and also if
-they should be visible or not. These can be supplied as meta-data.
+When we start to model all relations on diagrams, they will become quite
+confusing. However, we could probably make things easier by allowing users to
+decide what colour to add to a relation and also if they should be visible or
+not. These can be supplied as meta-data.
 
 From [[https://plantuml.com/class-diagram#8dfb3b05fc895d2b][PlantUML docs]]:
 
 #+begin_quote
-You can change the color or style of individual relation or arrows
-using the inline following notation:
+You can change the color or style of individual relation or arrows using the
+inline following notation:
 
 : #color;line.[bold|dashed|dotted];text:color
 #+end_quote
@@ -2079,104 +1900,58 @@ foo --> bar3 #blue;line.dotted;text:blue   : blue dotted
 
 Notes:
 
-- we need to have an additional property to model the comments on the
-  link, supplied by meta-data.
+- we need to have an additional property to model the comments on the link,
+  supplied by meta-data.
 - we could also have different colours for each comment type:
   - source comments.
   - user comments for diagram only (not supported yet).
 
 *** Add support for "diagram-only" comments                           :story:
 
-We may want to add documentation for the purposes of the model that we
-do not want expressed in code. It would be nice to be able to mark
-some comments as "diagram-only".
+We may want to add documentation for the purposes of the model that we do not
+want expressed in code. It would be nice to be able to mark some comments as
+"diagram-only".
 
 *** Parse org-mode syntax in comment                                  :story:
 
-At present we are expecting users to use doxygen mark up in the
-model. This is not ideal:
+At present we are expecting users to use doxygen mark up in the model. This is
+not ideal:
 
 - if we generate say C++ and C# the markup is invalid in one.
 - if we generate HTML/PDFs the markup looks weird.
 
-We should expect documents to have org markup only and then interpret
-it in the generation. We probably only need a few items:
+We should expect documents to have org markup only and then interpret it in the
+generation. We probably only need a few items:
 
 - lists
 - =code variables=
 - /italics/ and _underscores_
 - links.
 
-*** Org roundtrip does not add blank line at the end of document      :story:
-
-Errors:
-
-#+begin_src
-FAILED: projects/dogen.orchestration/tests/CMakeFiles/run_dogen.orchestration.tests
-cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang11/Release/stage/bin/dogen.orchestration.tests --log_level=error
-Running 156 test cases...
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen/modeling/dogen.org"
-@@ -494,3 +494,4 @@
-   :END:
-
- An error ocurred when dumping dogen's specs.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(188): error: in "dogen_product_org_tests/dogen_org_conversion_has_no_diffs": check diff.empty() has failed
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.cli/modeling/dogen.cli.org"
-@@ -181,3 +181,4 @@
-    :END:
-
- Which style to use when dumping the specs.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(202): error: in "dogen_product_org_tests/dogen_cli_org_conversion_has_no_diffs": check diff.empty() has failed
-Conversion generated differences: "/work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.logical/modeling/dogen.logical.org"
-@@ -4668,3 +4668,4 @@
-    :END:
-
- An error has occurred while formatting.
-+
-
-../../../../projects/dogen.orchestration/tests/dogen_org_product_tests.cpp(244): error: in "dogen_product_org_tests/dogen_logical_org_conversion_has_no_diffs": check diff.empty() has failed
-
-3 failures are detected in the test module "dogen.orchestration.tests"
-ninja: build stopped: subcommand failed.
-Error running CMake.
-
-Compilation exited abnormally with code 1 at Sun Apr 11 20:15:01
-Elapsed: 00:00:13.738
-#+end_src
-
 *** Simplistic renaming based on GUIDs                                :story:
 
-One really simple way of renaming classes would be to have the UUID in
-the comments (ideally the boilerplate) of each file. We could then
-have a pre-generation step that reads in all the files and maps them
-to an ID. Then, if a file is handcrafted, we could use the contents
-instead of creating a blank file.
+One really simple way of renaming classes would be to have the UUID in the
+comments (ideally the boilerplate) of each file. We could then have a
+pre-generation step that reads in all the files and maps them to an ID. Then, if
+a file is handcrafted, we could use the contents instead of creating a blank
+file.
 
 Notes:
 
-- we could possibly also do some minor hackery such as search /
-  replace the old namespace with the new namespace, and the old class
-  name with the new class name though that would be much more
-  dangerous. On the plus side, git would likely detect the rename
-  which would mean we could then diff.
-- we could possibly also issue the git rename commands for the
-  affected files.
-- note that generated files would not be part of this simplistic
-  renaming.
+- we could possibly also do some minor hackery such as search / replace the old
+  namespace with the new namespace, and the old class name with the new class
+  name though that would be much more dangerous. On the plus side, git would
+  likely detect the rename which would mean we could then diff.
+- we could possibly also issue the git rename commands for the affected files.
+- note that generated files would not be part of this simplistic renaming.
 - most of the work could be carried out in the physical model.
-- one assumption here is that all handcrafted files are originally
-  generated with their GUIDs and users must not delete them.
-- this makes one wonder if we should not create a type of files that
-  are "partially generated". That is, we could allow users freedom
-  within some bounds but the "header" and "footer" of the file must
-  always be generated by Dogen. This would guarantee the correct
-  namespaces, header guards, etc. Perhaps we could make this an
-  option:
-
+- one assumption here is that all handcrafted files are originally generated
+  with their GUIDs and users must not delete them.
+- this makes one wonder if we should not create a type of files that are
+  "partially generated". That is, we could allow users freedom within some
+  bounds but the "header" and "footer" of the file must always be generated by
+  Dogen. This would guarantee the correct namespaces, header guards, etc.
+  Perhaps we could make this an option:
   - fully generated
   - header and footer generation
   - skeleton generation as a one-off.
@@ -2184,8 +1959,8 @@ Notes:
 *** Generation statistics                                             :story:
 
 It would be very useful to know percentages of generated code versus
-hand-crafted code. We already have a report which groups files, we can
-add to that report.
+hand-crafted code. We already have a report which groups files, we can add to
+that report.
 
 *** Remove commas from PlantUML enums                                 :story:
 
@@ -2193,38 +1968,20 @@ We don't need to add commas to separate PlantUML enums.
 
 *** Generate PNGs for PlantUML models                                 :story:
 
-At present we are generating SVGs for the Plant UML models. This is
-not ideal because emacs does not process them very well. Also, we are
-checking in the SVG. We probably don't need to do that, nor do we need
-to check in the Plant UML source, but it does offer an easy way to
-check for regressions. At any rate, we should just have a CMake target
-that creates the PNGs in the build output directory, and open those in
-emacs with tabs and scroll bars.
-
-*** Consider creating a product PlantUML diagram                      :story:
-
-Once we have support for product models, we should be able to create a
-composite Plant UML diagram of the entire product, with linkages for
-all types within the product. This means we should keep this use case
-in mind when we resolve the problems we currently have with
-associations intra-model.
-
-*** Partial information extraction from logical model                 :story:
-
-Since we just need generalisation and association information, we
-could probably create a specialised chain in the logical model that
-gives us the bare minimum to populate the relevant properties; we can
-then extract those and map them to the codec ID. We should also make
-the codec ID mandatory and use a map for the codec elements. The
-orchestration model is responsible for stitching the information.
+At present we are generating SVGs for the Plant UML models. This is not ideal
+because emacs does not process them very well. Also, we are checking in the SVG.
+We probably don't need to do that, nor do we need to check in the Plant UML
+source, but it does offer an easy way to check for regressions. At any rate, we
+should just have a CMake target that creates the PNGs in the build output
+directory, and open those in emacs with tabs and scroll bars.
 
 *** PlantUML and hyperlinks                                           :story:
 
-Apparently it is possible to embed HTTP links in SVG diagrams. This
-means it may also be possible to supply these as inputs in the
-PlantUML model. If so, it would be nice to be able to find the model
-definition of an element by clicking on the element. Its not clear if
-this would work in the SVG support we have in Emacs.
+Apparently it is possible to embed HTTP links in SVG diagrams. This means it may
+also be possible to supply these as inputs in the PlantUML model. If so, it
+would be nice to be able to find the model definition of an element by clicking
+on the element. Its not clear if this would work in the SVG support we have in
+Emacs.
 
 Links:
 
@@ -2236,22 +1993,22 @@ In org-mode headline we seem to be including the headline itself:
 
 : #include "dogen.org/types/entities/headline.hpp"
 
-In the associations transform, we could do a quick check: if a type
-references itself, the remove the association.
+In the associations transform, we could do a quick check: if a type references
+itself, the remove the association.
 
 *** Use a Dogen drawer instead of properties                          :story:
 
-Its possible users will want to add their own drawers to Dogen
-documents. For example, maybe you want to clock against model items or
-use org-brain. We need to preserve all of these entries when
-roundtripping. The easiest way to achieve that is to try to separate
-the Dogen information from the non-Dogen one. If we had our own
-drawers it would be much easier, we could simply state that you are
-not allowed to add any non-Dogen stuff there and copy across the Dogen
-drawer into the original document.
+<REFINEMENT>
+Its possible users will want to add their own drawers to Dogen documents. For
+example, maybe you want to clock against model items or use org-brain. We need
+to preserve all of these entries when roundtripping. The easiest way to achieve
+that is to try to separate the Dogen information from the non-Dogen one. If we
+had our own drawers it would be much easier, we could simply state that you are
+not allowed to add any non-Dogen stuff there and copy across the Dogen drawer
+into the original document.
 
-We could keep the element ID as a =CUSTOM_ID= in the =PROPERTIES=
-drawer though as that is a org concept.
+We could keep the element ID as a =CUSTOM_ID= in the =PROPERTIES= drawer though
+as that is a org concept.
 
 *** Org Roundtripping is lossy at present                             :story:
 
@@ -13147,6 +12904,40 @@ Links:
 - [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
 
 ** Unclassified
+
+*** Consider creating a product PlantUML diagram                      :story:
+
+Once we have support for product models, we should be able to create a composite
+Plant UML diagram of the entire product, with linkages for all types within the
+product. This means we should keep this use case in mind when we resolve the
+problems we currently have with associations intra-model.
+
+*** Consider creating a small paper summarising MASD                  :story:
+
+At present we have the thesis, that explains the entire methodology and its
+rationale in great detail. This is not suitable for new users. We should have a
+small paper, 3 or 4 pages long, that summarises the argument.
+
+*** Consider adding support for archimate                             :story:
+
+#+begin_quote
+ArchiMate is an open and independent enterprise architecture modeling language
+to support the description, analysis and visualization of architecture within
+and across business domains in an unambiguous way.
+
+ArchiMate offers a common language for describing the construction and operation
+of business processes, organizational structures, information flows, IT systems,
+and technical infrastructure. This is just like an architectural drawing in
+classical building where the architecture describes the various aspects of the
+construction and use of a building. This insight helps the different
+stakeholders to design, assess, and communicate the consequences of decisions
+and changes within and between these business domains.
+#+end_quote
+
+Links:
+
+- [[https://plantuml.com/archimate-diagram][PlantUML: Archimate Diagram]]
+- [[https://github.com/plantuml-stdlib/Archimate-PlantUML][GH: Archimate-PlantUML]]
 
 *** Consider adding support for clang-uml                             :story:
 
