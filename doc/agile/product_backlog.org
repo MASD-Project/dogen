@@ -6358,7 +6358,10 @@ Notes:
 Links:
 
 - [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
-- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
+- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas: "cmake-init is an opinionated CMake project
+  initializer that generates CMake projects which are FetchContent ready,
+  separate consumer and developer targets, provide install rules with proper
+  relocatable CMake packages and use modern CMake (3.14+)."
 - [[https://github.com/premake/premake-core][Premake: powerfully simple build configuration.]]
 - [[https://jgcoded.github.io/CMakeStarter/][CMake Starter]]: "This website is a simple tool to help C++ developers
   quickly start new CMake-based projects. The tool generates an entire
@@ -13145,6 +13148,29 @@ Links:
 
 ** Unclassified
 
+*** Consider adding support for clang-uml                             :story:
+
+#+begin_quote
+clang-uml is an automatic C++ to UML class, sequence, package and include
+diagram generator, driven by YAML configuration files. The main idea behind the
+project is to easily maintain up-to-date diagrams within a code-base or document
+legacy code. The configuration file or files for clang-uml define the type and
+contents of each generated diagram. Currently, the diagrams are generated in
+PlantUML format.
+#+end_quote
+
+Links:
+
+- [[https://github.com/bkryza/clang-uml][clang-uml]]
+
+*** Consider adding support for OpenAI                                :story:
+
+Links:
+
+- [[https://github.com/D7EAD/liboai][liboai]]: "liboai is a simple, unofficial C++17 library for the OpenAI API. It
+  allows developers to access OpenAI endpoints through a simple collection of
+  methods and classes."
+
 *** PQXX Facet                                                        :story:
 
 Given the issues we've had with ODB, we should probably consider a way to use
@@ -14218,6 +14244,10 @@ that use coroutines.
   standalone and boost versions of ASIO are supported. See the
   installing section on how to install and select the ASIO
   distribution used."
+- [[https://github.com/ashtum/oneshot][oneshot]]: "oneshot is a single-header Asio based scheduler aware and
+  thread-safe channel that does not block a whole thread if you want to wait on
+  receiver side. instead it cooperates with Asio's executor like other Asio
+  based io_objects (e.g. asio::steady_timer)."
 - [[https://github.com/bloomberg/quantum][quantum GH]]: "Quantum is a full-featured and powerful C++ framework
   build on top of the Boost coroutine library. The framework allows
   users to dispatch units of work (a.k.a. tasks) as coroutines and

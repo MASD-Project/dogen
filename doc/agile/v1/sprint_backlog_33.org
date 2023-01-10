@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2023-01-06 Fri 23:06]
+#+CAPTION: Clock summary at [2023-01-10 Tue 07:55]
 | <75>                                   |         |       |      |       |
 | Headline                               | Time    |       |      |     % |
 |----------------------------------------+---------+-------+------+-------|
-| *Total time*                           | *12:26* |       |      | 100.0 |
+| *Total time*                           | *15:58* |       |      | 100.0 |
 |----------------------------------------+---------+-------+------+-------|
-| Stories                                | 12:26   |       |      | 100.0 |
-| Active                                 |         | 12:26 |      | 100.0 |
-| Edit release notes for previous sprint |         |       | 8:12 |  66.0 |
-| Sprint and product backlog refinement  |         |       | 0:10 |   1.3 |
-| Fullgen build is not running           |         |       | 0:43 |   5.8 |
-| Update vcpkg to latest                 |         |       | 0:11 |   1.5 |
-| OSX build is failing                   |         |       | 0:19 |   2.5 |
-| Update emacs to latest                 |         |       | 0:54 |   7.2 |
-| Nightlies failing with valgrind errors |         |       | 0:45 |   6.0 |
-| Check last commit is broken            |         |       | 1:12 |   9.7 |
+| Stories                                | 15:58   |       |      | 100.0 |
+| Active                                 |         | 15:58 |      | 100.0 |
+| Edit release notes for previous sprint |         |       | 8:12 |  51.4 |
+| Sprint and product backlog refinement  |         |       | 0:10 |   1.0 |
+| Fullgen build is not running           |         |       | 0:43 |   4.5 |
+| Update vcpkg to latest                 |         |       | 0:11 |   1.1 |
+| OSX build is failing                   |         |       | 0:19 |   2.0 |
+| Update emacs to latest                 |         |       | 0:54 |   5.6 |
+| Nightlies failing with valgrind errors |         |       | 0:45 |   4.7 |
+| Check last commit is broken            |         |       | 1:12 |   7.5 |
+| Rename codec model                     |         |       | 3:32 |  22.1 |
 #+end:
 
 Agenda:
@@ -59,7 +60,306 @@ Release announcements:
 - [[https://www.linkedin.com/posts/marco-craveiro-phd-%F0%9F%87%A6%F0%9F%87%B4%F0%9F%87%B5%F0%9F%87%B9-31558919_release-dogen-v1031-exeunt-academia-activity-6976618358418886656-FRBE][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-#+begin_src markdown#+end_src
+#+begin_src markdown
+![Baía Azul](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/Baia.Azul.Benguela.Angola.Dezembro.2022.jpeg)
+_Baía Azul, Benguela, Angola. (C) 2022 Casal  Sampaio._
+
+**DRAFT: Release notes under construction**
+
+# Introduction
+
+As expected, going back into full time employment has had a measurable impact on our open source throughput. If to this one adds the rather noticeable PhD hangover — there were far too many celebratory events to recount — it is perhaps easier to understand why it took nearly four months to nail down the present release. That said, it was a productive effort when measured against its goals. Our primary goal was to finish the CI/CD work commenced [the previous sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.31). This we duly completed, though you won't be surprised to find out it was _far more involved_ than anticipated. So much so that the, ahem, _final touches_, have spilled over to the next sprint. Our secondary goal was to resume tidying up the LPS (Logical-Physical Space), but here too we soon bumped into a hurdle: Dogen's PlantUML output was not fit for purpose, so the goal quickly morphed into diagram improvement. Great strides were made in this new front but, as always, progress was hardly linear; to cut a very long story short, when we were half-way through the ask, we got lost on _yet another_ architectural rabbit hole.  A veritable Christmas Tale of a sprint it was, though we are not entirely sure on the moral of the story. Anyway, grab yourself that coffee and let's dive deep into the weeds.
+
+# User visible changes
+
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. Given the stories do not require that much of a demo, we discuss their implications in terms fo the Domain Architecture.
+
+[![Sprint 1.0.32 Demo](https://img.youtube.com/vi/ei8B1Pine34/0.jpg)](https://youtu.be/ei8B1Pine34)
+_Video 1_: Sprint 32 Demo.
+
+## Remove Dia and JSON support
+
+The major user facing story this sprint is the deprecation of two of our three codecs, Dia and JSON, and, somewhat more dramatically, the eradication of the _entire_ notion of "codec" as it stood thus far. Such a drastic turn of events demands an explanation, so please bear with. It wasn't _that_ long ago that "codecs" [took the place](https://github.com/MASD-Project/dogen/releases/tag/v1.0.27) of the better-known "injectors". Going further back in time, injectors themselves emerged from [a refactor](https://github.com/MASD-Project/dogen/releases/tag/v1.0.12) of the original "frontends", a legacy of the days when we viewed Dogen more like a traditional compiler. "Frontend" implies a unidirectional transformation, and it belongs to the compiler domain rather than MDE, so the move to injectors was undoubtedly a step in the right direction. Alas, as the release notes [tried to explain then](https://github.com/MASD-Project/dogen/releases/tag/v1.0.27) (section "Rename injection to codec"), we could not settle on this term because Dogen's injectors did not behave like "proper" MDE injectors. Now that the thesis and associated material has been published, this reasoning can be explained in more detail via the  [MDE companion notes](https://zenodo.org/record/5812017#.Y7v_3dLP2XJ) (p. 32):
+
+> In [Béz+03], Bézivin et al. outlines their motivation [for the creation of Technical Spaces (TS)]: ”The notion of TS  allows us to deal more efficiently with the ever-increasing complexity of evolving technologies. There is no uniformly superior technology and each one has its strong and weak points.” The idea is then to engineer bridges between technical spaces, allowing the importing and exporting of artefacts across them. These bridges take the form of adaptors called ”projectors”, as Bézivin explains (emphasis ours):
+>
+> > _The responsibility to build projectors lies in one space_. The rationale to define them is quite simple: when one facility is available in another space and that building it in a given space is economically too costly, then the decision may be taken to build a projector in that given space. There are two kinds of projectors according to the direction: _injectors_ and _extractors_. Very often we need a couple of injector/extractor [(_sic._)] to solve a given problem. [Béz05a]
+
+In other words, injectors are meant to be  transforms responsible from projecting elements from one TS into another. Our "injectors" behaved like real injectors sometimes (_e.g._ Dia), other times like extractors (_e.g._ PlantUML), but also like "injector-extractors" too (_e.g._ JSON, org-mode). Calling them "injectors" seemed therefore a way to mislead domain experts, which is not ideal since the objective of the Domain Architecture clean up is, _specifically_, to align terminology with MDE. "Codec" is an improvement on both of these but it's not entirely satisfying because the term is close to the Audio/Video domain , as [Wikipedia explains](https://en.wikipedia.org/wiki/Codec):
+
+> A codec is a device or computer program that encodes or decodes a data stream or signal. Codec is a portmanteau [a blend of words in which parts of multiple words are combined into a new word] of coder/decoder.
+
+Nevertheless, we could not think of a better of way of saying "injection and extraction" in one word, nor had anyone defined the appropriate _portemanteau_ within the MDE canon, so we went with the term until something better came along. Unfortunately, the conceptual rigmarole does not end there.
+
+What is even more significant is that the _very notion_ of "injection from multiple sources" was set in stone in MASD theory via the _pervasive integration_ principle, the second of the methodology's six core values. I shan't bother you too much with the remaining five principles, but it is worth reading Principle 2 in full to contextualise our decision making. The [PhD thesis](https://uhra.herts.ac.uk/handle/2299/25708) (p. 61) states:
+
+> **Principle 2**: MASD adapts to users’ tools and workflows, not the converse. Adaptation is achieved via a strategy of pervasive integration.
+>
+> MASD promotes tooling integration: developers preferred tools and workflows must be leveraged and integrated with rather than replaced or subverted. First and foremost, MASD’s integration efforts are directly aligned with its mission statement (_cf._ Section 5.2.2 [Mission Statement]) because integration infrastructure is understood to be a key source of SRPPs [Schematic and Repetitive Physical Patterns]. Secondly, integration efforts must be subservient to MASD’s narrow focus [Principle 1]; that is, MASD is designed with the specific purpose of being continually extended, but only across a fixed set of dimensions. For the purposes of integration, these dimensions are the projections in and out of MASD’s TS [Technical Spaces], as Figure 5.2 illustrates.
+
+![MASD Pervasive Integration](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_pervasive_integration.png)
+_Figure 1_ [orginaly 5.2]: MASD Pervasive integration strategy.
+
+> Within these boundaries, MASD’s integration strategy is one of pervasive integration. MASD encourages mappings from any tools and to any programming languages used by developers — provided there is sufficient information publicly available to create and maintain those mappings, and sufficient interest from the developer community to make use of the functionality. Significantly, the onus of integration is placed on MASD rather than on the external tools, with the objective of imposing minimal changes to the tools themselves. To demonstrate how the approach is to be put in practice, MASD’s research includes both the integration of org-mode (cf. Chapter 7), as well as a survey on the integration strategies of special purpose code generators (Craveiro, 2021d [available [here](https://zenodo.org/record/5790875#.YkoSutDMKXI)]); subsequent analysis generalised these findings so that MASD tooling can benefit from these integration strategies. Undertakings of a similar nature are expected as the tooling coverage progresses.
+
+Whilst _in theory_ this principle sounds great, and whilst we still agree wholeheartedly with it _in spirit_, there are a few practical problems in terms of its current implementation. The first, which to be fair is already hinted at above, is that you need to have an _interested community_ maintaining the injectors into MASD's TS (Technical Space). That is because, even with decent test coverage, it's very easy to break existing workflows when adding new functionality, and the continued maintenance of the tests is costly. Secondly, many of these formats evolve over time, so one needs to keep up-to-date with tooling to remain relevant. Thirdly, as we add formats we will inevitably pickup more and more external dependencies, resulting in a bulking up of Dogen's core only to satisfy some possibly peripheral use case. Finally, each injector adds a large cognitive load because, as we do changes, we now need to revisit _all injectors_ and see how they map to each representation. Advanced mathematics is not required to see that the velocity of coding will decrease as the number of injectors increases; simple extrapolation shows a future where complexity goes through the roof and development slows down to a crawl. The obviousness of this conclusion does leave one wondering why it wasn't spotted earlier. Turns out we had looked into this but the analysis was naively hand-waved away during our PhD research by means of one key assumption: we posited the existence of a "native" format for modeling, whose scope would be a super-set of all functionality required by MASD. [XMI](https://en.wikipedia.org/wiki/XML_Metadata_Interchange) was the main contender, and we even acquired [Mastering XMI: Java Programming with the XMI Toolkit, XML and UML (OMG)](https://www.wiley.com/en-us/Mastering+XMI:+Java+Programming+with+XMI,+XML+and+UML-p-9780471384298) for this purpose.  In this light, mappings were seen as trivial-ish functions to well defined structural patterns, rather than an exploration of an open-ended space.Turns out this assumption was misplaced.
+
+To make matters worse, the more we used org-mode in anger, the more we compared its plasticity to all other formats. Soon, a very important question emerged: what if org-mode is _the_ native format for MASD? That is to say, given our experience with the myriad of input formats (including Dia, JSON, XMI and others), what if org-mode is _the format_ which best embodies MASD's approach to [Literate Modeling](https://discovery.ucl.ac.uk/id/eprint/933/1/10.0_Literate_Modelling.pdf)? Thus far, it certainly has proven to be the format with the lowest impedance mismatch to our conceptual model. And we could already see how the future would play out by looking at some of the stories in this release: there were obvious ways in which to simplify the org-mode representation (with the objective of improving PlantUML output), but these changes lacked an obvious mapping to other codecs such as Dia and JSON. They could of course be done, but in ways that would increase complexity across the board for other codecs. If to this you add resourcing constraints, then it makes sense to refocus the mission and choose a single format as _the_ native MASD input format. Note that it does not mean we are abandoning Principle 2 altogether; one can envision separate repos for tools with mapping code that translates from a specific input format into org-mode, and these can even be loaded into the Dogen binary as shared objects via a plugin interface _a-la_ [Boost.DLL](https://www.boost.org/doc/libs/1_81_0/doc/html/boost_dll.html). In this framework, each format becomes the responsibility of a specific maintainer with its own plugin and set of tests, all of which exogenous to the set of Dogen's core responsibilities, but still falling under the broader MASD umbrella. And most important of all, they can safely be ignored until such time concrete use cases arrive.
+
+![Dia's last stand](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_dia_last_stand.png)
+_Figure 2_: After being used continuously for a decade and a half, Dia stands down, for now.
+
+Whilst the analysis required its fair share of white-boarding, the resulting action items did not and were swiftly dealt with at the sprint's end. Post implementation, we could not help but notice its benefits are even broader than originally envisioned because a lot of the complexity in the codec model was related to supporting bits of functionality for disparate codecs. In addition, we trimmed down dependencies to ```libxml``` and ```zlib```, and removed  a lot of testing infrastructure, including the deletion of the infamous frozen repo [described in Sprint 30](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30). It was painful to see Dia going away, having used it for over a decade, but one cannot afford to be sentimental with code bases or else they rot and become unmaintainable. The dust has barely settled, but it already appears we are converging closer to the original vision of injection (Figure 2); next sprint we'll continue to workout the implications of this change, such as moving PlantUML output to regular code generation.
+
+![Dogen pipeline](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/orchestration_pipeline.png)
+_Figure 2_: The Dogen pipeline, circa Sprint 12.
+
+The observant reader will not fail to notice that, as it is for injectors, so it is for extractors. In other words, as we increase Dogen's coverage across TS — adding more and more languages, and more and more functionality in each language — we will suffer from a similar complexity explosion to what was described above for injection. However, several mitigating factors come to our rescue, or so we hope. First, whilst injectors are at the mercy of the tooling, which changes often, extractors depend on programming language specifications, idioms and libraries. These change too but not quite as often. The problem is worse for libraries, of course, as these do get released often, but not quite as bad for the programming language itself. Secondly, there is an expectation of backwards compatibility when programming languages change, meaning we can get away with being stale for longer; and for libraries, we should clearly state which versions we support. Existing versions will not bit-rot, though we may be a bit stale with regards to latest-and-greatest. I guess, as it was with injectors, time will tell how well these assumptions hold up.
+
+## Improve note placement in PlantUML for namespaces
+
+A minor user facing change was the improvement on how we generate PlantUML notes for namespaces. In the past these were generated as follows:
+
+```plantuml
+namespace entities #F2F2F2 {
+    note top of variability
+        Houses all of the meta-modeling elements related to variability.
+    end note
+```
+
+The problem with this approach is that the notes end up floating above the namespace with an arrow, making it hard to read. A better approach is a floating note:
+
+```plantuml
+namespace entities #F2F2F2 {
+    note variability_1
+        Houses all of the meta-modeling elements related to variability.
+    end note
+```
+
+The note is now declared inside the namespace. To  ensure the note has a unique name, we simply append the note count.
+
+## Try a different layout engine in PlantUML
+
+This change is strictly speaking not user facing in the sense that nothing has changed for users, unless they follow the same approach as Dogen. But since it has had an impact in improving our PlantUML diagrams, it is certainly worth shouting about it. As part of our efforts in making PlantUML diagrams more readable, we played a bit with different [layout engines](https://graphviz.org/docs/layouts/). In the end we settled on ELK, the [Eclipse Layout Kernel](https://plantuml.com/elk). If you are interested, we were greatly assisted in our endeavours by the PlantUML community:
+
+- [Alternative layout engines from graphviz #1110](https://github.com/plantuml/plantuml/issues/1110)
+- [Class diagrams: how to make best use of space in large diagrams #1187](https://github.com/plantuml/plantuml/issues/1187)
+
+The change itself is fairly minor from a Dogen perspective, _e.g._ in CMake we added:
+
+```cmake
+    message(STATUS "Found PlantUML: ${PLANTUML_PROGRAM}")
+    set(WITH_PLANTUML "on")
+    set(PLANTUML_ENVIRONMENT PLANTUML_LIMIT_SIZE=65536 PLANTUML_SECURITY_PROFILE=UNSECURE)
+    set(PLANTUML_OPTIONS -Playout=elk -tsvg)
+```
+
+The operative part being ```-Playout=elk```.  Whilst it did not solve all of our woes, it certainly made diagrams a tad neater as Figure 3 shows.
+
+![Codec model](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/codec_plantuml_diagram.png)
+_Figure 3_: Codec model in PlantUML with the ELK layout.
+
+Note also that you need to install the ELK jar, as per instructions in the PlantUML site.
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the sprint log. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_32.org).
+
+## Milestones and Éphémérides
+
+There were no particular events to celebrate.
+
+## Significant Internal Stories
+
+This was yet another sprint focused on internal engineering work, completing the move to the new CI environment that was started in [Sprint 31](https://github.com/MASD-Project/dogen/releases/tag/v1.0.31). This work can be split into three distinct epics: continuous builds, nightly builds and general improvements. Finally, we also spent a fair bit of time improving PlantUML diagrams.
+
+### CI Epic 1: Continuous Builds
+
+The main task this sprint was to get the Reference Products up to speed in terms of Continuous builds. We also spent some time ironing out messaging coming out of CI.
+
+![Continuous reference model](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_continuous_reference.png)
+_Figure 4_: Continuous builds for the C++ Reference Product.
+
+The key stories under this epic can be summarised as follows:
+
+- **Add continuous builds to C++ reference product**: CI has been restored to the C++ reference product, via [github workflows](https://github.com/MASD-Project/cpp_ref_impl/actions).
+- **Add continuous builds to C# reference product**: CI has been restored to the C# reference product, via [github workflows](https://github.com/MASD-Project/csharp_ref_impl/actions).
+- **Gitter notifications for builds are not showing up**: some work was required to reinstate basic Gitter support for GitHub workflows. It the end it was worth it, especially because we can see everything from within Emacs!
+- **Create a GitHub account for MASD BOT**: closely related to the previous story, it was a bit annoying to have the GitHub account writing messages to gitter as oneself because you would not see these (presumably the idea being that you send the message so you don't need to see it). Turns out its really easy to create a github account for a bot, just use your existent email address and add ```+something```, for example ```+masd-bot```. With this we now see the messages as coming from the MASD bot.
+
+### CI Epic 2: Nightly Builds
+
+This sprint was focused on bringing Nightly builds up-to-speed. The work was difficult due to the strange nature of our nightly builds. We basically do two types things with our nightlies:
+
+- run valgrind on the existing CI, to check for any memory issues. In the future one can imagine adding fuzzing etc and other long running tasks that are not suitable for every commit.
+- perform a "full generation" for all Dogen code, called internally "fullgen". This is a setup whereby we generate all facets across physical space, even though many of them are disabled for regular use. It serves as a way to validate that we generate good code. We also generate tests for these facets. Ideally we'd like to valgrind all of this code too.
+
+At the start of this sprint we were in a bad state because all of the changes done to support CI in GitHub didn't work too well with our current setup. In addition, because nightlies took too long to run on Travis, we were running them on our own PC. Our first stab was to simply move nightlies into GitHub workflow. We soon found out that a naive approach would burst GitHub limits, generous as they are, because fullgen plus valgrind equal a long time running tests. Eventually we settled on the final approach of splitting fullgen from the plain nightly. This, plus the deprecation of vast  swathes of the Dogen codebase meant that we could run fullgen.
+
+![Nightly Dogen builds](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_nightly_fullgen.png)
+_Figure 5_: Nightly builds for Dogen. ```fg``` stands for ```fullgen```.
+
+In terms of detail, the following stories were implemented to get to the bottom of this epic:
+
+- **Improve diffing output in tests**: It was not particularly clear why some tests were failing on nightlies but passing on continuous builds. We spent some time making it clearer.
+- **Nightly builds are failing due to missing environment var**: A ridiculously large amount of time was spent in understanding why the locations of the reference products were not showing up in nightly builds. In the end, we ended up changing the way reference products are managed altogether, making life easier for all types of builds. See this story under "General Improvements".
+- **Full generation support in tests is incorrect**: Nightly builds require "full generation"; that is to say, generating all facets across physical space. However, there were inconsistencies on how this was done because our unit tests relied on "regular generation".
+- **Tests failing with filesystem errors**:  yet another fallout of the complicated way in which we used to do nightlies, with lots of copying and moving of files around. We somehow managed to end up in a complex race condition when recreating the product directories and initialising the test setup. The race condition was cleaned up and we are more careful now in how we recreate the test data directories.
+- **Add nightly builds to C++ reference product**: We are finally building the C++ reference implementation once more.
+- **Investigate nightly issues**: this was an hilarious problem: we were still running nightlies on our desktop PC, and after a Debian update they stopped appearing. Reason: for some reason sleep mode was set to a different default and the PC was now falling asleep after a certain time without use. However, the correct solution is to move to GitHub and not depend on local PCs so we merely deprecated local nightlies. It also saves us on electricity bills!
+- **Create a nightly github workflow**: as per the previous story, all nightlies are now in GitHub! this is both for ["plain" nightlies](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml) as well as ["fullgen" builds](https://github.com/MASD-Project/dogen/actions/workflows/nightly-fullgen-linux.yml), with full CDash integration.
+- **Run nightlies only when there are changes**: we now only build nightlies if there was a commit in the previous 24 hours, which hopefully will keep GitHub happy.
+- **Consider creating nightly branches**: with the move to GitHub actions, it made sense to create a real branch that is persisted in GitHub rather than a temporary throw away one. This is because its very painful to investigate issues: one has to recreate the "fullgen" code first, then redo the build, etc. With the new approach, the branch for the current nightly is created and pushed into GitHub, and then the nightly runs off of it. This means that, if the nightly fails, one simply has to pull the branch and build it locally. Quality of life improved dramatically.
+- **Nightly builds are taking too long**: unfortunately, we burst the GitHub limits when running fullgen builds under valgrind. This was a bit  annoying because we really wanted to see if all of the generated code was introducing some memory issues, but alas it just takes too long. Anyways, as a result of this, and as alluded to in other stories, we split "plain" nightlies from "fullgen" nightlies, and used valgrind only on plain nightlies.
+
+### CI Epic 3: General Improvements
+
+Some of the work did not fall under Continuous or Nightly builds, so we are detailing it here:
+
+- **Update boost to latest in vcpkg**: Dogen is now using Boost [v1.80](https://www.boost.org/users/history/version_1_80_0.html). In addition, given how trivial it is to update dependencies, we shall now perform an update at the start of every new sprint.
+- **Remove deprecated uses of boost bind**: Minor tidy-up to get rid of annoying warnings that resulted from using latest Boost.
+- **Remove` uses of mock configuration factory**: as part of the tidy-up around configuration, we rationalised some of the infrastructure to create configurations.
+- **Cannot access binaries from release notes**: annoyingly it seems the binaries generated on each workflow are only visible to certain GitHub users. As a mitigation strategy, for now we are appending the packages directly to the release note. A more lasting solution is required, but it will be backlogged.
+- **Enable CodeQL**: now that LGTM [is no more](https://github.blog/2022-08-15-the-next-step-for-lgtm-com-github-code-scanning), we started looking into its next iteration. First bits of support have been added via [GitHub actions](https://github.com/MASD-Project/dogen/actions/workflows/codeql-analysis.yml), but it seems more is required in order to visualise its output. Sadly, as this is not urgent, it will remain on the backlog.
+- **Code coverage in CDash has disappeared**: as part of the CI work, we seemed to have lost code coverage. It is still not clear why this was happening, but after some other changes, the code coverage came back. Not ideal, clearly there is something stochastic somewhere on our CTest setup but, hey-ho, nothing we can do until the problem resurfaces.
+- **Make reference products git sub-modules**: in the past we had a complicated set of scripts that downloaded the reference products, copied them to well-known locations and so on. It was... not ideal. As we had already mentioned in [the previous release](https://github.com/MASD-Project/dogen/releases/tag/v1.0.31), it also meant we had to expose end users to our quirky directory structure because the CMake presets are used by all. With this release we had a moment of enlightenment: what if the reference products were moved to git submodules? We've had such success with vcpkg in the previous sprint that it seemed like a no-brainer. And indeed it was. We are now not exposing any of the complexities of our own personal choices in directory structures, and due to the magic of git, the specific version of the reference product is pinned on the commit and commited into git. This is a much better approach altogether.
+
+![Submodules](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_test_data_submodules.png)
+_Figure 6_: Reference products are now git sub-modules of Dogen.
+
+###  PlantUML Epic: Improvements to diagrams of Dogen models
+
+We were hoping to start the PMM refactor this sprint, but once we tried using the PlantUML diagrams in anger, it became clear we could not see the woods for the trees. Some smaller diagrams such as the identification model were fairly straightforward, and could be understood. However, key diagrams such as the logical model, or the text model were in an unusable state. It became clear that, before we could get on with real coding, we had to make the diagrams at least "barely usable", to borrow an expression from Ambler [Ambler, Scott W (2007). “Agile Model driven development (AMDD)". In the previous sprint we had already added a simple way to express relationships, like so:
+
+```org-mode
+ ** Taggable                                                         :element:
+   :PROPERTIES:
+   :custom_id: 8BBB51CE-C129-C3D4-BA7B-7F6CB7C07D64
+   :masd.codec.stereotypes: masd::object_template
+   :masd.codec.plantuml: Taggable <|.. comment
+   :END:
+```
+
+Any expression under ```masd.codec.plantuml``` is transported verbatim to the PlantUML diagram. We decided to annotate all Dogen models with such expressions to see how that would impact diagrams in terms of readability. Of course, the right thing would be to automate such relationships but, as per [previous sprint's discussions](https://github.com/MASD-Project/dogen/releases/tag/v1.0.31), this is easier said than done: you'd move from a world of no relationships to a world of far too many relationships, making the diagram equally unusable. So hand-holding it was. This, plus the move to ELK as explained above allowed us to successfully update a large chunk of Dogen models:
+
+- ```dogen```
+- ```dogen.cli```
+- ```dogen.codec```
+- ```dogen.identification```
+- ```dogen.logical```
+- ```dogen.modeling```
+- ```dogen.orchestration```
+- ```dogen.org```
+- ```dogen.physical```
+
+However, we hit a limitation with ```dogen.text```. The model is just too unwieldy in its present form. Part of the problem stems from the fact that there are just no relations to add: templates are not related to anything. So, by default, PlantUML makes one long (and I do mean _long_) line. Here is a small fragment of the model:
+
+![Text Model](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_text_model.png)
+_Figure 7_: Partial representation of Dogen's text model in PlantUML.
+
+Tried as we might we could not get this model to work. Then we noticed something interesting: some parts of the model where classes are slightly smaller were being rendered in a more optimal way, as you can see in the picture above; smaller classes cluster around a circular area whereas very long classes are lined up horizontally. We took our findings to PlantUML:
+
+- [Class diagrams: how to make best use of space in large diagrams #1187](https://github.com/plantuml/plantuml/issues/1187)
+
+We are still investigating what can be done from a PlantUML perspective, but it seems having very long stereotypes is confusing the layout engine. Reflecting on this, it seems this is also less readable for humans too. For example:
+
+```org-mode
+**** builtin header                                                 :element:
+     :PROPERTIES:
+     :custom_id: ED36860B-162A-BB54-7A4B-4B157F8F7846
+     :masd.wale.kvp.containing_namespace: text.transforms.hash
+     :masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+     :END:
+```
+
+Using ```stereotypes``` in this manner is a legacy from Dia, because that is what is expected of a UML diagram. However, since org-mode does not suffer from these constraints, it seemed logical to create different properties to convey different kinds of information. For instance, we could split out configurations into its own entry:
+
+```org-mode
+**** enum header                                                    :element:
+     :PROPERTIES:
+     :custom_id: F2245764-7133-55D4-84AB-A718C66777E0
+     :masd.wale.kvp.containing_namespace: text.transforms.hash
+     :masd.codec.stereotypes: masd::physical::archetype
+     :masd.codec.configurations: dogen::enumeration_header_configuration
+     :END:
+```
+
+And with this, the mapping into PlantUML is also simplified, since perhaps the configurations are not needed from a UML perspective. Figure 6 shows side by side both of these approaches:
+
+![Long stereotypes](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/masd_long_stereotypes.png)
+_Figure 8_: Removal of some stereotypes.
+
+Next sprint we need to update all models with this approach and see if this improves diagram generation.
+
+This epic was composed of a number of stories, as follows:
+
+- **Add PlantUML relationships to diagrams**: manually adding each relationship to each model was a lengthy (and somewhat boring) operation, but improved the generated diagrams dramatically.
+- **Upgrade PlantUML to latest**: it seems latest is always greatest with PlantUML, so we spent some time understanding how we can manually update it rather than depend on the slightly older version in Debian. We ended up settling on a massive hack, just drop the JAR in the same directory as the packaged version and then symlink it. Not great, but it works.
+- **Change namespaces note implementation in PlantUML**: See user visible stories above.
+- **Consider using a different layout engine in PlantUML**: See user visible stories above.
+
+### Video series of Dogen coding
+
+We have been working on a long standing series of videos on the PMM refactor. However, as you probably guessed, they have had nothing to do with refactoring with the PMM so far, because the CI/CD work has dominated all our time for several months now. To make matters more confusing, we had recorded a series of videos on CI previously ([MASD - Dogen Coding: Move to GitHub CI](https://www.youtube.com/playlist?list=PLwfrwe216gF2qlIWKsBrL7UEsrEg8dXC0), but in an extremely optimistic step, we concluded that series because we thought the work that was left was fairly trivial - famous last words hey. If that wasn't enough, our Debian PC has been upgraded to Pipewire which - whilst a possibly superior option to Pulse Audio - lacks a noise filter that we can work with.
+
+To cut a long and somewhat depressing story short, our videos were in a big mess and we didn't quite know how to get out of it. So this sprint we decided to start from a clean slate:
+
+- the existing series on PMM refactor was renamed to "MASD - Dogen Coding: Move to GitHub Actions". It seems best rather than append these 3 videos to the existing "MASD - Dogen Coding: Move to GitHub CI" playlist because it would probably make it even more confusing.
+- we well, "completed it" as is, even though it missed all of the work in the previous sprint. This is just so we can get it out of the way.
+I guess once noise-free sound is working again we could add an addendum and do a quick tour of our new CI/CD infrastructure, but given our present time constraints it is hard to tell when that will be.
+
+Anyways, hopefully all of that makes some sense. Here are the videos we recorded so far.
+
+[![Move to GitHub Actions](https://img.youtube.com/vi/WeUBvf_SLSU/0.jpg)](https://www.youtube.com/playlist?list=PLwfrwe216gF0_1KPp_ir7ZCYLwnhdmBGJ)
+_Video 2_: Playlist for  "MASD - Dogen Coding: Move to GitHub Actions".
+
+The next table shows the individual parts of the video series.
+
+|Video | Description |
+|---------|-----------------|
+| [Part 1](https://www.youtube.com/watch?v=WeUBvf_SLSU)|In this video we start off with some boring tasks left over from the previous sprint. In particular, we need to get nightlies to go green before we can get on with real work.|
+| [Part 2](https://www.youtube.com/watch?v=wTGTcSz1vgM)|This video continues the boring work of sorting out the issues with nightlies and continuous builds. We start by revising what had been done offline to address the problems with failing tests in the nightlies and then move on to remove the mock configuration builder that had been added recently.|
+| [Part 3](https://www.youtube.com/watch?v=1VmGUEN-6eI)|With this video we finally address the remaining CI problems by adding GitHub Actions support for the C# Reference Product.|
+
+_Table 1_: Video series for "MASD - Dogen Coding: Move to GitHub Actions".
+
+## Resourcing
+
+The resourcing picture is, shall we say, _nuanced_. On the plus side, utilisation is down significantly when compared to the previous sprint — we did take four months this time round instead of a couple of years, so that undoubtedly helped. On the less positive side, we still find ourselves well outside the expected bounds for this particular metric; given a sprint is _circa_ 80 hours, one would expect to clock that much time in a month or two of side-coding. We are hoping next sprint will compress some of the insane variability we have experienced of late with regards to the cadence of our sprints.
+
+![Sprint 32 stories](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/sprint_32_pie_chart.jpg)
+_Figure 9_: Cost of stories for sprint 32.
+
+The per-story data forms an ever so slightly flatterer picture. Around 23% of the overall spend was allocated towards non-coding tasks such as writing the release notes (~12.5%), backlog refinement (~8%) and demo related activities. Worrying, it was up around 5% from the previous  sprint, which was itself already an extremely high number historically. Given the resource constraints, it would be wise to compress time spent on management activities such as these to free up time for _actual_ work, and buck the trend of these two or three sprints. Engineering activities where bucketed into three main topics, with CI/CD taking around 30% of the total ask (22% for Nightlies and 10% for Continuous), roughly 30% taken on PlantUML work and the remaining 15% used in miscellaneous engineering activities — including  a fair portion of analysis on the "native" format for MASD.
+
+## Roadmap
+
+With Sprint 32 we decided to decommission the Project Roadmap. It had served us well up to the end of the PhD thesis, as it was a useful — if albeit vague — way to see what was was coming up the road. Now that we have finished commitments with firm dead lines we can rely on a pure agile approach and see where each sprint takes us. Besides, it is one less task to worry about when writing up the release notes.
+
+## Binaries
+
+| Operative System | Binaries|
+|--------------------------|------------|
+| Linux Debian/Ubuntu | [dogen_1.0.32_amd64-applications.deb](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/dogen_1.0.32_amd64-applications.deb) |
+| Windows | [DOGEN-1.0.32-Windows-AMD64.msi](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/DOGEN-1.0.32-Windows-AMD64.msi) |
+| Mac OSX | [DOGEN-1.0.32-Darwin-x86_64.dmg](https://github.com/MASD-Project/dogen/releases/download/v1.0.32/DOGEN-1.0.32-Darwin-x86_64.dmg) |
+
+_Table 2_: Binary packages for Dogen.
+
+A few important notes:
+
+- **Linux**: the Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
+- **OSX and Windows**: we are not testing the OSX and Windows builds (_e.g._ validating the packages install, the binaries run, _etc._). If you find any problems with them, please report an issue.
+- **64-bit**: as before, all binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.30.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.30.tar.gz) format.
+- **Assets on release note**: these are just pictures and other items needed by the release note itself. We found that referring to links on the internet is not a particularly good idea as we now have lots of 404s for older releases. Therefore, from now on, the release notes will be self contained. Assets are otherwise not used.
+
+# Next Sprint
+
+Now that we are finally out of the woods of CI/CD engineering work, expectations for the next sprint are running high. We may actually be able to devote most of the resourcing towards real coding. Having said that, we still need to mop things up with the PlantUML representation, which will probably not be the most exciting of tasks.
+
+That's all for this release. Happy Modeling!
+#+end_src
+
 
 *** Create a demo and presentation for previous sprint                :story:
 
@@ -204,6 +504,36 @@ Links:
 
 - [[https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idoutputs][jobs.<job_id>.outputs]]
 - [[https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files][Environment files]]
+
+*** STARTED Rename codec model                                        :story:
+    :LOGBOOK:
+    CLOCK: [2023-01-09 Mon 19:20]--[2023-01-09 Mon 19:50] =>  0:30
+    CLOCK: [2023-01-07 Sat 16:25]--[2023-01-07 Sat 16:50] =>  0:25
+    CLOCK: [2023-01-07 Sat 15:02]--[2023-01-07 Sat 15:23] =>  0:21
+    CLOCK: [2023-01-07 Sat 14:16]--[2023-01-07 Sat 14:31] =>  0:15
+    CLOCK: [2023-01-07 Sat 13:12]--[2023-01-07 Sat 14:00] =>  0:48
+    CLOCK: [2023-01-07 Sat 13:00]--[2023-01-07 Sat 13:12] =>  0:12
+    CLOCK: [2023-01-07 Sat 12:54]--[2023-01-07 Sat 13:00] =>  0:06
+    CLOCK: [2023-01-07 Sat 12:16]--[2023-01-07 Sat 12:40] =>  0:24
+    CLOCK: [2023-01-07 Sat 11:44]--[2023-01-07 Sat 12:15] =>  0:31
+    :END:
+
+Now that we no longer support codecs, we should rename the model appropriately.
+The model is now responsible for the following:
+
+- loading files from the filesystem.
+- converting org-mode representation into an intermediate representation.
+- find references to other models and loading them.
+- performing any initial transformations required in order to do the loading.
+
+Notes:
+
+- actually come to think about it, we now have a proper set of injectors because
+  its only responsibility is to inject elements into Dogen.
+
+
+ Ever since org-mode support was productionised in [Sprint 30](https://github.com/MASD-Project/dogen/releases/tag/v1.0.30), we've been reflecting and rethinking
+
 
 *** Ignore vcpkg path length warning                                  :story:
 
