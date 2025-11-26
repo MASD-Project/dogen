@@ -1,5 +1,6 @@
 ![Dogen Logo](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/images/new_logo_with_message.png)
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 [![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/MASD-Project/dogen/master/LICENCE)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen?ref=badge_shield)
 [![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/MASD-Project/dogen/pulse/monthly)
@@ -8,13 +9,6 @@
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs%20-welcome-brightgreen.svg)](https://github.com/MASD-Project/dogen/blob/master/CONTRIBUTING.md)
 [![Github All Releases](https://img.shields.io/github/downloads/MASD-Project/dogen/total.svg)](https://github.com/MASD-Project/dogen/releases)
-[![Continuous Linux](https://github.com/MASD-Project/dogen/actions/workflows/continuous-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-linux.yml)
-[![Continuous Windows](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-windows.yml)
-[![Continuous MacOS](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/continuous-macos.yml)
-[![Nightly FG Branch](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-create-fullgen-branch.yml)
-[![Nightly FG](https://github.com/MASD-Project/dogen/actions/workflows/nightly-fullgen-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-fullgen-linux.yml)
-[![Nightly Linux](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml/badge.svg)](https://github.com/MASD-Project/dogen/actions/workflows/nightly-linux.yml)
-[![CDash](https://img.shields.io/badge/cdash-dashboard-00cc00.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.32.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Documentation](https://github.com/MASD-Project/dogen/blob/master/assets/doxygen_badge.svg)](https://mcraveiro.github.io/dogen/doxygen/index.html)
@@ -24,7 +18,19 @@
 [![clang-14](https://img.shields.io/badge/CLANG-14-blue.svg)](https://releases.llvm.org/14.0.0/tools/clang/docs/ReleaseNotes.html)
 [![msvc2022](https://img.shields.io/badge/MSVC-2022-blue.svg)](https://visualstudio.microsoft.com/vs/whatsnew/)
 [![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/MASD-Project/dogen)](https://www.tickgit.com/browse?repo=github.com/MASD-Project/dogen)
-[![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
+
+# This project has been abandoned
+
+After many years of working on Dogen, I now feel this architecture has reached a
+dead-end. I am now working on a new architecture that takes forward the lessons
+learned with Dogen but is a significant break in the approach. You can find more
+details here:
+
+- [progen](https://github.com/MASD-Project/progen): The product generator.
+
+The remaining content of the repository is untouched and is left as is from is
+last release. A /memento mori/, if you'd like, for all the many years of joy we
+have spent working in the Dogen codebase.
 
 # Overview
 
