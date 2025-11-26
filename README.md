@@ -28,6 +28,10 @@ details here:
 
 - [progen](https://github.com/MASD-Project/progen): The product generator.
 
+The remaining content of the repository is untouched and is left as is from is
+last release. A /memento mori/, if you'd like, for all the many years of joy we
+have spent working in the Dogen codebase.
+
 # Overview
 
 **Dogen** is the reference implementation of the _MASD Project_ code generator.
